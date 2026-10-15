@@ -59,7 +59,7 @@ def expand_local_includes(path, root, visited=None):
     content = path.read_text(encoding="utf-8")
     lines = []
     for line in content.splitlines(keepends=True):
-        found = re.match(r'^\\s*#\\s*include\\s+"(species_info/[^"]+)"', line)
+        found = re.match(r'^\s*#\s*include\s+"(species_info/[^"]+)"', line)
         if found:
             child = (path.parent / found.group(1)).resolve()
             if not child.is_relative_to(root):
