@@ -55,6 +55,47 @@ jobs:
           else
             echo "Executed $checked independent test modules."
           fi
+      - name: Verify sidequest overlay against Codex's current maps
+        if: github.event_name == 'pull_request' && github.head_ref == 'chatgpt/early-quests-and-world-progression'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          import sys
+          from tempfile import TemporaryDirectory
+          from urllib.parse import quote
+          from urllib.request import urlopen
+
+          # Fetch only files read by the overlay installer; do not clone the
+          # large engine again and do not generate or publish any game ROM.
+          repo = 'kioconnor24-sketch/PokemonGame'
+          ref = 'codex/first-gym-verification'
+          required = [
+              'include/constants/flags.h',
+              'data/event_scripts.s',
+              'data/layouts/layouts.json',
+          ]
+          for name in ['Alderfield', 'CoastalBluffs', 'Windrow', 'CoastalMeadow']:
+              required.append('data/maps/' + name + '/map.json')
+              required.append('data/layouts/' + name + '/map.bin')
+          with TemporaryDirectory() as directory:
+              engine = Path(directory) / 'engine'
+              for rel in required:
+                  source = ('https://raw.githubusercontent.com/' + repo + '/' + ref
+                            + '/Pokemon%20Game/engine/' + quote(rel, safe='/'))
+                  target = engine / rel
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  with urlopen(source, timeout=30) as response:
+                      target.write_bytes(response.read())
+              subprocess.run([
+                  sys.executable, 'Pokemon Game/scripts/build-averon-sidequests.py',
+                  '--engine', str(engine),
+              ], check=True)
+              print('PASS: current first-Gym source maps and flag slots accept sidequest overlay.')
+          PY
       - name: Planned route graph validation
         shell: bash
         run: |
