@@ -145,6 +145,12 @@ jobs:
             sleep 0.15
             if (( i % 5 == 0 )); then capture "post-name-a-$i"; fi
           done
+          # Continue past post-naming professor dialogue toward actual field play.
+          for i in $(seq 1 80); do
+            press x
+            sleep 0.15
+            if (( i % 10 == 0 )); then capture "opening-after-name-$i"; fi
+          done
           press Return
           sleep 2
           capture "start-menu-check"
