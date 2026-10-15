@@ -1,0 +1,67 @@
+name: Averon source checks
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/**"
+      - "Pokemon Game/Averon_Codex_Handoff/data/**"
+      - "Pokemon Game/Averon_Codex_Handoff/qa/**"
+      - ".github/workflows/averon-source-checks.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Pokemon Game/scripts/**"
+      - "Pokemon Game/Averon_Codex_Handoff/data/**"
+      - ".github/workflows/averon-source-checks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: averon-source-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-source-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python syntax checks (no compilation or ROM assets)
+        run: python3 -m compileall -q "Pokemon Game/scripts"
+      - name: Independent Averon source regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          checked=0
+          for name in \
+            test-audit-averon-species.py \
+            test-audit-averon-map-encounters.py \
+            test-audit-averon-evolution-reach.py \
+            test-averon-sidequests.py \
+            test-averon-quest-flow.py \
+            test-audit-averon-progression.py
+          do
+            file="Pokemon Game/scripts/$name"
+            if test -f "$file"; then
+              printf '\n=== %s ===\n' "$name"
+              python3 "$file"
+              checked=$((checked + 1))
+            fi
+          done
+          if test "$checked" -eq 0; then
+            echo "No independent regression tests found; source compilation only."
+          else
+            echo "Executed $checked independent test modules."
+          fi
+      - name: Planned route graph validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          script="Pokemon Game/scripts/audit-averon-progression.py"
+          if test -f "$script"; then
+            python3 "$script" --project "Pokemon Game"
+          else
+            echo "Route graph audit not included in this branch; skipping."
+          fi
