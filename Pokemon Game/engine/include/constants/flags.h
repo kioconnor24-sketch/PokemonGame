@@ -67,17 +67,17 @@
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
+#define FLAG_AVERON_SINNOH_BADGE01 0x30 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE02 0x31 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE03 0x32 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE04 0x33 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE05 0x34 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE06 0x35 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE07 0x36 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_BADGE08 0x37 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_SINNOH_CHAMPION 0x38 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_POSTGAME_EPILOGUE 0x39 // Averon Sinnoh / endgame persistent progress
+#define FLAG_AVERON_RED_ACCESS 0x3A // Averon Sinnoh / endgame persistent progress
 #define FLAG_UNUSED_0x03B    0x3B // Unused Flag
 #define FLAG_UNUSED_0x03C    0x3C // Unused Flag
 #define FLAG_UNUSED_0x03D    0x3D // Unused Flag
