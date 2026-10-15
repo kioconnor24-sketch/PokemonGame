@@ -1,0 +1,299 @@
+# Averon expected native test failures. Format: STATUS | reason | test name
+# Names drop the per-parameter suffix ("1/2", "(1/?)"). Checked by
+# check-averon-native-baseline.py. Recorded 2026-10-15 from a full
+# `make -j20 -O check` on main 36cb7ca9 (WSL, arm-none-eabi-gcc 14.2.1).
+#
+# Reasons:
+#   gimmick-disabled  Averon disables Z-Moves, Dynamax, Terastallization and
+#                     Ultra Burst (AGENTS.md); these upstream tests need them.
+#   level-cap         EXP_CAP_HARD with no badges caps levels at 15
+#                     (src/caps.c); see the Issue #15 FINDING on EXP.
+#   runner-self-test  KNOWN_CRASHING tests in test/test_test_runner.c.
+
+# --- level-cap (5)
+FAIL | level-cap | Both opponent's Pokemon give experience in battle against two opponents
+FAIL | level-cap | Both player Pokemon gain experience in double battles
+FAIL | level-cap | Exp Share(held) gives Experience to mons which did not participate in battle
+FAIL | level-cap | Higher leveled Pokemon give more exp
+FAIL | level-cap | Large exp gains are supported
+
+# --- runner-self-test (2)
+CRASH | runner-self-test | fatalf counts as CRASH
+CRASH | runner-self-test | Tests resume after CRASH
+
+# --- gimmick-disabled (275)  (Purifying Salt: uses Tera Blast with GIMMICK_TERA)
+INVALID | gimmick-disabled | (DYNAMAX) Dynamaxed Pokemon are immune to Encore
+FAIL | gimmick-disabled | (DYNAMAX) Dynamaxed Pokemon are not affected by Destiny Bond
+FAIL | gimmick-disabled | (DYNAMAX) Dynamaxed Pokemon can be encored immediately after reverting
+FAIL | gimmick-disabled | (DYNAMAX) Dynamaxed Pokemon can have their base moves copied by Copycat
+FAIL | gimmick-disabled | (TERA) Adaptability does not increase non-Tera base STAB beyond 1.5x
+FAIL | gimmick-disabled | (TERA) Burn Up does not remove a user's Fire type after Terastallizing into Fire
+FAIL | gimmick-disabled | (TERA) Conversion fails if used by a Terastallized Pokemon
+FAIL | gimmick-disabled | (TERA) Double Shock does not remove the user's Electric type while Terastallized, and changes STAB modifier depending on when it is used
+FAIL | gimmick-disabled | (TERA) Every battler can use Terastalization - 1v2
+FAIL | gimmick-disabled | (TERA) Every battler can use Terastalization - 2v1
+FAIL | gimmick-disabled | (TERA) Every battler can use Terastalization - Doubles
+FAIL | gimmick-disabled | (TERA) Every battler can use Terastalization - Multi
+FAIL | gimmick-disabled | (TERA) Every battler can use Terastalization - Singles
+FAIL | gimmick-disabled | (TERA) Illusion breaks if the Pokémon Terastallizes when illusioned as a mon that changes forms by Terastallizing
+FAIL | gimmick-disabled | (TERA) Pokemon with Tera forms change upon Terastallizing
+FAIL | gimmick-disabled | (TERA) Protean/Libero cannot change the type of a Terastallized Pokemon
+FAIL | gimmick-disabled | (TERA) Reflect Type copies a Terastallized Pokemon's Tera Type
+FAIL | gimmick-disabled | (TERA) Reflect Type fails if used by a Terastallized Pokemon
+FAIL | gimmick-disabled | (TERA) Revelation Dance uses a Terastallized Pokemon's Tera Type
+FAIL | gimmick-disabled | (TERA) Roost does not remove Flying-type ground immunity when Terastallized into the Stellar type
+FAIL | gimmick-disabled | (TERA) Roost does not remove the user's Flying type while Terastallized
+FAIL | gimmick-disabled | (TERA) Soak/Magic Powder's type change is overwritten if the target Terastalizes
+FAIL | gimmick-disabled | (TERA) Status moves don't expend Stellar's one-time type boost
+FAIL | gimmick-disabled | (TERA) Stellar type's one-time boost factors in dynamically-typed moves
+FAIL | gimmick-disabled | (TERA) Synchronoise uses a Terastallized Pokemon's Tera Type
+FAIL | gimmick-disabled | (TERA) Terapagos retains its base defensive profile when Terastalizing
+FAIL | gimmick-disabled | (TERA) Terastallization changes the effect of Curse
+FAIL | gimmick-disabled | (TERA) Terastallization changes type effectiveness
+FAIL | gimmick-disabled | (TERA) Terastallization persists across switches
+FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor does not apply to multi-hit moves
+FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor does not apply to priority moves
+FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor occurs after Technician
+FAIL | gimmick-disabled | (TERA) Terastallizing boosts moves of the same type to 60 BP
+FAIL | gimmick-disabled | (TERA) Terastallizing into a different type gives that type 1.5x STAB
+FAIL | gimmick-disabled | (TERA) Terastallizing into a different type with Adaptability gives 2.0x STAB
+FAIL | gimmick-disabled | (TERA) Terastallizing into the same type gives that type 2x STAB
+FAIL | gimmick-disabled | (TERA) Terastallizing into the same type with Adaptability gives 2.25x STAB
+FAIL | gimmick-disabled | (TERA) Terastallizing into the Stellar type boosts all moves up to 60 BP once per type
+FAIL | gimmick-disabled | (TERA) Terastallizing into the Stellar-type provides a one-time 1.2x boost to non-STAB moves
+FAIL | gimmick-disabled | (TERA) Terastallizing into the Stellar-type provides a one-time 2.0x boost to STAB moves
+FAIL | gimmick-disabled | (TERA) Transform does not copy the target's Tera Type, and if the user is Terastallized it keeps its own Tera Type
+FAIL | gimmick-disabled | (TERA) Type-changing moves fail against a Terastallized Pokemon
+FAIL | gimmick-disabled | (Z-MOVE) 10,000,000 Volt Thunderbolt has an increased critical hit ratio
+FAIL | gimmick-disabled | (Z-MOVE) Clangorous Soulblaze boosts all the user's stats by one stage
+FAIL | gimmick-disabled | (Z-MOVE) Dancer does not use a Z-Move if the battler has used a Z-Move the same turn
+FAIL | gimmick-disabled | (Z-MOVE) Every battler can use Z-Moves - 1v2
+FAIL | gimmick-disabled | (Z-MOVE) Every battler can use Z-Moves - 2v1
+FAIL | gimmick-disabled | (Z-MOVE) Every battler can use Z-Moves - Doubles
+FAIL | gimmick-disabled | (Z-MOVE) Every battler can use Z-Moves - Multi
+FAIL | gimmick-disabled | (Z-MOVE) Every battler can use Z-Moves - Singles
+FAIL | gimmick-disabled | (Z-MOVE) Extreme Evoboost boosts all the user's stats by two stages
+FAIL | gimmick-disabled | (Z-MOVE) Genesis Supernova sets up psychic terrain
+FAIL | gimmick-disabled | (Z-MOVE) Genesis Supernova sets up psychic terrain when the target is behind a Substitute
+FAIL | gimmick-disabled | (Z-MOVE) Guardian of Alola deals 75% of the target's current HP
+FAIL | gimmick-disabled | (Z-MOVE) Instruct fails if the target last used a Z-Move
+FAIL | gimmick-disabled | (Z-MOVE) Light That Burns the Sky uses the battler's highest attacking stat
+FAIL | gimmick-disabled | (Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move)
+FAIL | gimmick-disabled | (Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of maximum HP to the user
+FAIL | gimmick-disabled | (Z-MOVE) Powder blocks Fire type Z-Moves but not boosts granted
+FAIL | gimmick-disabled | (Z-MOVE) Searing Sunraze Smash ignores the target's abilities
+FAIL | gimmick-disabled | (Z-MOVE) Splintered Stormshards removes terrain
+FAIL | gimmick-disabled | (Z-MOVE) Splintered Stormshards removes terrain when the target is behind a Substitute
+FAIL | gimmick-disabled | (Z-MOVE) Stoked Sparksurfer paralyzes the target
+FAIL | gimmick-disabled | (Z-MOVE) Z-Copycat raises the user's accuracy by one stage and copies the last used non-status move as a Z-Move
+FAIL | gimmick-disabled | (Z-MOVE) Z-Hidden Power always transforms into Breakneck Blitz
+FAIL | gimmick-disabled | (Z-MOVE) Z-Me First raises the user's speed by two stages and copies the last used non-status move as a Z-Move with boosted damage
+FAIL | gimmick-disabled | (Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used non-status move as a Z-Move
+FAIL | gimmick-disabled | (Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used status move regularly
+FAIL | gimmick-disabled | (Z-MOVE) Z-Moves are affected by Ion Deluge
+FAIL | gimmick-disabled | (Z-MOVE) Z-Moves are not affected by -ate abilities
+FAIL | gimmick-disabled | (Z-MOVE) Z-Moves deal 1/4 damage through protect
+FAIL | gimmick-disabled | (Z-MOVE) Z-Moves do not retain priority
+FAIL | gimmick-disabled | (Z-MOVE) Z-Nature Power transforms into different Z-Moves based on the current terrain
+FAIL | gimmick-disabled | (Z-MOVE) Z-Revelation Dance always transforms into Breakneck Blitz
+FAIL | gimmick-disabled | (Z-MOVE) Z-Sleep Talk transforms a used non-status move into a Z-Move
+FAIL | gimmick-disabled | (Z-MOVE) Z-Sleep Talk turns Weather Ball into Breakneck Blitz even under rain
+FAIL | gimmick-disabled | (Z-MOVE) Z-Weather Ball transforms into different Z-Moves based on current weather
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_ALL_STATS_UP raises all of a battler's stat stages by one
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_BOOST_CRITS raises a battler's critical hit ratio by 2 stages
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_CURSE activates Z_EFFECT_RECOVER_HP or Z_EFFECT_ATK_UP_1 depending on the type of the battler
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_RESET_STATS clears a battler's negative stat stages
+FAIL | gimmick-disabled | (Z-MOVE) Z_EFFECT_RESTORE_REPLACEMENT_HP fully heals the replacement battler's HP
+FAIL | gimmick-disabled | Aerilate doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Aerilate doesn't change Tera Blast's type when Terastallized
+FAIL | gimmick-disabled | AI only Dynamaxes once per trainer in 2v1 multi battles
+FAIL | gimmick-disabled | AI uses Dynamax
+FAIL | gimmick-disabled | AI uses the best Max Move
+FAIL | gimmick-disabled | AI uses the best Z-Moves.
+FAIL | gimmick-disabled | AI uses Z-Moves -- 10,000,000 Volt Thunderbolt
+FAIL | gimmick-disabled | AI uses Z-Moves -- conserves Z-move if target will faint anyway.
+FAIL | gimmick-disabled | AI uses Z-Moves -- Extreme Evoboost
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Conversion
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Destiny Bond is used when about to die
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Detect
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Happy Hour
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Nature Power
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Splash
+FAIL | gimmick-disabled | AI uses Z-Moves -- Z-Transform
+FAIL | gimmick-disabled | AI uses Z-Moves to bypass move limitations
+FAIL | gimmick-disabled | AI uses Z-Moves to ensure a low-accuracy KO.
+FAIL | gimmick-disabled | AI uses Z-Moves.
+INVALID | gimmick-disabled | AI_FLAG_SMART_TERA: AI might tera if it gets saved from a ko
+FAIL | gimmick-disabled | AI_FLAG_SMART_TERA: AI will tera if it enables a ko
+FAIL | gimmick-disabled | Camouflage fails if the user is Terastallized
+FAIL | gimmick-disabled | Conversion 2 fails if last hit by a Stellar-type move (Gen 1-4)
+FAIL | gimmick-disabled | Conversion 2 fails if the targeted move is Stellar Type
+FAIL | gimmick-disabled | Conversion 2 fails if used by a Terastallized Pokemon
+FAIL | gimmick-disabled | Court Change used by the player swaps G-Max Steelsurge
+FAIL | gimmick-disabled | Court Change used by the player swaps G-Max Vine Lash, G-Max Wildfire, G-Max Cannonade
+ERROR | gimmick-disabled | Cursed Body disables damaging Z-Moves, but not the base move
+FAIL | gimmick-disabled | Cursed Body disables the base move of a status Z-Move
+FAIL | gimmick-disabled | Cursed Body does not trigger on Max Moves
+FAIL | gimmick-disabled | Dancer copies a status Z-Move's base move without gaining an additional Z-Power effect
+FAIL | gimmick-disabled | Dazzling, Queenly Majesty and Armor Tail do not block a move's Z-Status effect
+FAIL | gimmick-disabled | Dragonize doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Dragonize doesn't change Tera Blast's type when Terastallized
+FAIL | gimmick-disabled | Dusk Mane Necrozma can Ultra Burst holding Ultranecrozium Z
+FAIL | gimmick-disabled | Dynamax Cannon causes double damage to Dynamaxed Pokemon
+FAIL | gimmick-disabled | Dynamax stat lowering moves don't make stat-changing abilities apply to partner
+FAIL | gimmick-disabled | Dynamax stat raising moves don't make stat-changing abilities apply to partner
+INVALID | gimmick-disabled | Dynamax: Baton Pass passes G-Max Terror's escape prevention effect
+FAIL | gimmick-disabled | Dynamax: Dynamax expires after three turns
+FAIL | gimmick-disabled | Dynamax: Dynamax expires after three turns and correctly converts HP according to Dynamax Level
+FAIL | gimmick-disabled | Dynamax: Dynamax expires when fainted
+FAIL | gimmick-disabled | Dynamax: Dynamax increases HP and max HP by 1.5x
+FAIL | gimmick-disabled | Dynamax: Dynamax Level increases HP and max HP multipliers by 0.05 for each level
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon are affected by Grudge
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon are immune to Instruct
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon are immune to Torment
+INVALID | gimmick-disabled | Dynamax: Dynamaxed Pokemon are not affected by Choice items
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon are not affected by phazing moves but no block message is printed if they faint
+ERROR | gimmick-disabled | Dynamax: Dynamaxed Pokemon are not affected by phazing moves, but still take damage
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon are not immune to Knock Off
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon can be switched out by Eject Button
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon can have base moves disabled on their first turn
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon can have their ability changed or suppressed
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon cannot be flinched
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon cannot be hit by OHKO moves
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon cannot be hit by weight-based moves
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon cannot have their ability swapped to another Pokemon's
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon cannot use Max Guard while holding Assault Vest
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon lose their substitutes
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon that changes forms does not gain HP
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon that changes forms does not gain HP unless the new form gains Max HP
+FAIL | gimmick-disabled | Dynamax: Dynamaxed Pokemon's Max Moves cannot be disabled
+FAIL | gimmick-disabled | Dynamax: Feint bypasses Max Guard but doesn't break it
+FAIL | gimmick-disabled | Dynamax: G-Max Befuddle paralyzes, poisons, or sleeps both opponents
+FAIL | gimmick-disabled | Dynamax: G-Max Centiferno traps both opponents in Fire Spin
+FAIL | gimmick-disabled | Dynamax: G-Max Chi Strike boosts allies' crit chance by 1 stage
+FAIL | gimmick-disabled | Dynamax: G-Max Cuddle infatuates both opponents, if possible
+FAIL | gimmick-disabled | Dynamax: G-Max Depletion takes away 2 PP from the target's last move
+FAIL | gimmick-disabled | Dynamax: G-Max Finale heals allies by 1/6 of their health
+FAIL | gimmick-disabled | Dynamax: G-Max Finale heals allies by 1/6 of their health, even if it faints the foe
+FAIL | gimmick-disabled | Dynamax: G-Max Gold Rush confuses both opponents and generates money
+FAIL | gimmick-disabled | Dynamax: G-Max Hydrosnipe has fixed power and ignores abilities
+FAIL | gimmick-disabled | Dynamax: G-Max Meltdown torments both opponents for 3 turns
+FAIL | gimmick-disabled | Dynamax: G-Max One Blow bypasses Max Guard for full damage
+INVALID | gimmick-disabled | Dynamax: G-Max Replenish recycles allies' berries 50% of the time
+INVALID | gimmick-disabled | Dynamax: G-Max Replenish recycles allies' berries 50% of the time, even if it faints the foe
+FAIL | gimmick-disabled | Dynamax: G-Max Smite confuses both opponents
+INVALID | gimmick-disabled | Dynamax: G-Max Snooze makes only the target drowsy
+FAIL | gimmick-disabled | Dynamax: G-Max Steelsurge sets up sharp steel
+FAIL | gimmick-disabled | Dynamax: G-Max Stonesurge sets up Stealth Rocks
+FAIL | gimmick-disabled | Dynamax: G-Max Stun Shock chooses statuses before considering immunities
+FAIL | gimmick-disabled | Dynamax: G-Max Stun Shock paralyzes or poisons both opponents
+FAIL | gimmick-disabled | Dynamax: G-Max Sweetness cures allies' status conditions
+FAIL | gimmick-disabled | Dynamax: G-Max Terror traps both opponents
+FAIL | gimmick-disabled | Dynamax: G-Max Volt Crash paralyzes both opponents
+FAIL | gimmick-disabled | Dynamax: G-Max Volt Crash paralyzes other opponent even if its target faints
+FAIL | gimmick-disabled | Dynamax: G-Max Wildfire sets a field effect that damages non-Fire types
+FAIL | gimmick-disabled | Dynamax: Grassy Glide's priority does not increase for the Max Move it becomes
+INVALID | gimmick-disabled | Dynamax: Gravity does not prevent a Max Move derived from a Gravity-banned damaging move
+INVALID | gimmick-disabled | Dynamax: Gravity does not prevent Max Guard derived from a Gravity-banned status move
+FAIL | gimmick-disabled | Dynamax: Max Attacks prints a message when hitting into Max Guard
+FAIL | gimmick-disabled | Dynamax: Max Flare sets up sunlight
+FAIL | gimmick-disabled | Dynamax: Max Geyser sets up heavy rain
+FAIL | gimmick-disabled | Dynamax: Max Hailstorm sets up hail
+FAIL | gimmick-disabled | Dynamax: Max Knuckle raises both allies' attack
+FAIL | gimmick-disabled | Dynamax: Max Lightning sets up Electric Terrain
+FAIL | gimmick-disabled | Dynamax: Max Mindstorm sets up Psychic Terrain
+FAIL | gimmick-disabled | Dynamax: max move against semi-invulnerable target prints the correct message
+FAIL | gimmick-disabled | Dynamax: Max Moves deal 1/4 damage through protect
+FAIL | gimmick-disabled | Dynamax: Max Moves don't execute effects on fainted battlers
+FAIL | gimmick-disabled | Dynamax: Max Overgrowth sets up Grassy Terrain
+FAIL | gimmick-disabled | Dynamax: Max Rockfall sets up a sandstorm
+FAIL | gimmick-disabled | Dynamax: Max Starfall sets up Misty Terrain
+FAIL | gimmick-disabled | Dynamax: Max Strike lowers both opponents' speed
+FAIL | gimmick-disabled | Dynamax: Max Strike lowers single opponent's speed
+FAIL | gimmick-disabled | Dynamax: Pokemon with Gigantamax forms change upon Dynamaxing
+FAIL | gimmick-disabled | Eerie Spell reduces the PP of a Max Move's base move by 3
+FAIL | gimmick-disabled | Embargo doesn't prevent the usage of Z-Moves
+FAIL | gimmick-disabled | Entrainment fails on Dynamaxed Pokémon
+FAIL | gimmick-disabled | Extreme Evoboost does not raise a stat beyond its maximum stage
+FAIL | gimmick-disabled | Flower Gift does not transform Cherrim back to normal when suppressed if Cherrim is Dynamaxed
+FAIL | gimmick-disabled | Flower Gift reverts Cherrim back after Teraform Zero clears weather
+FAIL | gimmick-disabled | Forecast reverts Castform back after Teraform Zero clears weather
+FAIL | gimmick-disabled | Galvanize doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Galvanize doesn't change Tera Blast's type when Terastallized
+TIMEOUT | gimmick-disabled | Gimmick Form Change animations work
+FAIL | gimmick-disabled | Gorilla Tactics does not boost damage while Dynamaxed
+INVALID | gimmick-disabled | Gorilla Tactics does not lock moves while Dynamaxed
+FAIL | gimmick-disabled | Grudge depletes all PP from a Max Move's base move
+FAIL | gimmick-disabled | Grudge does not deplete PP of a Z-Move
+FAIL | gimmick-disabled | Guardian of Alola does 75% damage to the target's current HP
+FAIL | gimmick-disabled | Hunger Switch does not switch Morpeko's form after switching out while Terastallized
+FAIL | gimmick-disabled | Hunger Switch does not switch Morpeko's form when Terastallized
+FAIL | gimmick-disabled | Mental Herb clears the Torment timer set by G-Max Meltdown (Gen 5+)
+FAIL | gimmick-disabled | Necrozma returns its proper Form upon battle end after Ultra Bursting
+INVALID | gimmick-disabled | Necrozma returns its proper Form upon fainting after Ultra Bursting
+FAIL | gimmick-disabled | Normalize doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Normalize doesn't change Tera Blast's type when Terastallized
+FAIL | gimmick-disabled | Pixilate doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Pixilate doesn't change Tera Blast's type when Terastallized
+FAIL | gimmick-disabled | Plasma Fists turns normal type dynamax-moves into electric type moves
+FAIL | gimmick-disabled | Purifying Salt halves damage from dynamic Ghost-type moves
+FAIL | gimmick-disabled | Pursuit user terastalizes before attacking a switching foe and gets the damage boost from the tera type
+FAIL | gimmick-disabled | Red Card does not let a switched-out attacker reuse its Z-Move
+FAIL | gimmick-disabled | Reflect Type fails if the user is Terastallized
+FAIL | gimmick-disabled | Reflect Type succeeds against a Terastallized target and copies its Tera type
+FAIL | gimmick-disabled | Refrigerate doesn't affect damaging Z-Move types
+FAIL | gimmick-disabled | Refrigerate doesn't change Tera Blast's type when Terastallized
+FAIL | gimmick-disabled | Sleep Clause: G-Max Befuddle can only sleep one opposing mon if sleep clause is active
+FAIL | gimmick-disabled | Sleep Clause: Sleep clause is deactivated when a sleeping mon is woken up with G-Max Sweetness
+FAIL | gimmick-disabled | Stealth Rock damage terastalized mons with the correct amount of damage
+FAIL | gimmick-disabled | Stealth Rock: Rock from G-Max Stonesurge are set up before any ability activation
+FAIL | gimmick-disabled | Stellar-type Tera Blast activates a Stellar-type Pokemon's Weakness Policy
+FAIL | gimmick-disabled | Stellar-type Tera Blast has 100 BP and a one-time 1.2x boost
+FAIL | gimmick-disabled | Stellar-type Tera Blast is super-effective on Stellar-type Pokemon
+FAIL | gimmick-disabled | Stellar-type Tera Blast lowers both offensive stats
+FAIL | gimmick-disabled | Tar Shot does not affect Pokemon that are Terastallized
+FAIL | gimmick-disabled | Tera Blast animations work
+FAIL | gimmick-disabled | Tera Blast becomes a physical move if the user is Terastallized and has a higher Attack stat
+FAIL | gimmick-disabled | Tera Blast changes from Normal-type to the user's Tera Type
+FAIL | gimmick-disabled | Tera Blast has correct effectiveness for every Tera Type
+FAIL | gimmick-disabled | Tera Starstorm becomes a physical move if the user is Terapagos-Stellar, is Terastallized, and has a higher Attack stat
+FAIL | gimmick-disabled | Teraform Zero clears weather and terrain upon activation
+FAIL | gimmick-disabled | Teraform Zero doesn't activate if there is no weather or terrain
+FAIL | gimmick-disabled | Teraform Zero doesn't reactivate when Terapagos-Stellar switches back in
+FAIL | gimmick-disabled | Teraform Zero fails if overworld weather is present (Gen9)
+FAIL | gimmick-disabled | Teraform Zero removes terrain but not overworld weather (Gen9)
+FAIL | gimmick-disabled | Teraform Zero shouldn't cause Neutralizing Gas to show it's popup when trying to activate
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Attacker Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Attacker Tera
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Attacker Z Move
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Opponent Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Opponent Tera
+FAIL | gimmick-disabled | Trainer Slide: Doubles: Opponent Z Move
+FAIL | gimmick-disabled | Trainer Slide: Multi: Attacker Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Multi: Attacker Tera
+FAIL | gimmick-disabled | Trainer Slide: Multi: Attacker Z Move
+FAIL | gimmick-disabled | Trainer Slide: Multi: Opponent Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Multi: Opponent Tera
+FAIL | gimmick-disabled | Trainer Slide: Multi: Opponent Z Move
+FAIL | gimmick-disabled | Trainer Slide: Singles: Attacker Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Singles: Attacker Tera
+FAIL | gimmick-disabled | Trainer Slide: Singles: Attacker Z Move
+FAIL | gimmick-disabled | Trainer Slide: Singles: Opponent Dynamax
+FAIL | gimmick-disabled | Trainer Slide: Singles: Opponent Tera
+FAIL | gimmick-disabled | Trainer Slide: Singles: Opponent Z Move
+FAIL | gimmick-disabled | Ultra Burst affects turn order
+FAIL | gimmick-disabled | Ultra Burst and Mega Evolution can happen on the same turn
+FAIL | gimmick-disabled | Ultra Burst happens after switching, but before Focus Punch-like Moves
+FAIL | gimmick-disabled | Ultra Burst's order is determined by Speed - opponent faster
+FAIL | gimmick-disabled | Ultra Burst's order is determined by Speed - player faster
+INVALID | gimmick-disabled | Z-Move: Z-Belch can be selected without eating a Berry
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected and executed under Throat Chop
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected under Gravity but Gravity still prevents execution
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected under Heal Block
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected under Taunt
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Disabled
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Encored
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Imprisoned
+INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Tormented
+FAIL | gimmick-disabled | Z-Moves animations work
