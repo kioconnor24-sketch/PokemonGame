@@ -72,11 +72,13 @@ Every session leaves pushed recoverable work or an exact blocker, not a mysterio
 See [AGENT_ROLES.md](AGENT_ROLES.md) and the live [team coordination issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) for current names, claims, and priorities; these supersede older Codex-only assignment descriptions.
 
 - **User:** creative map/locations, final level curve, final story, major design approvals and release/Delta acceptance.
-- **Codex — co-lead developer:** primary owner of current QUEST PR #14 and subsequent TWO-REGION engine/save/progression work; default shared-backend integration coordinator, not Claude's manager.
+- **Codex — co-lead developer:** primary owner of QUEST #14 **code, builds, native/automated checks, fixes and integration preparation**, and subsequent TWO-REGION engine/save/progression work; **not responsible for manual mGBA/graphical playtesting right now**. Default shared-backend integration coordinator, not Claude's manager.
 - **Claude — co-lead developer:** equal authority to implement substantial independent game systems, tests and engine improvements; owns its explicitly claimed file-disjoint work. May lead major scripted battle, legendary or other backend milestones after coordinated handoff.
-- **ChatGPT QA:** actual gameplay/emulator acceptance when authorized execution access is confirmed; otherwise evidence review and reproducible test plans, with honest blocked status.
+- **ChatGPT QA:** **designated owner of manual gameplay/mGBA graphical acceptance**, including QUEST #14, after actual emulator execution access is confirmed; otherwise post the exact access blocker and reproducible test plans. Codex fixes reported defects. The user alone may reassign fallback manual playtesting.
 - **ChatGPT architecture/review:** read-only PR, dependency, regression and resource analysis by default, plus scoped validation/docs changes when claimed.
 - **Other contributors:** specifically scoped code/assets/tests with verified permission and nonoverlapping files.
+
+**QA gate:** Codex need not manually playtest while an assigned independent QA agent is being established. An unverified visual/interactive milestone remains `EMULATOR-TESTED: PENDING`; keep its PR unmerged until an actual tester supplies required runtime evidence or the owner explicitly changes the gate. Continue nonconflicting work instead of duplicating QA.
 
 Do not presume direct AI-to-AI communication, shared local files, or automatic invocation by GitHub comments. GitHub is the durable claim, PR, bug and handoff surface. Two developers may work concurrently only on nonoverlapping files or agreed independent interfaces; serialize high-risk shared source.
 
