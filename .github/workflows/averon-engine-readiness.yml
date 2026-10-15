@@ -45,5 +45,5 @@ jobs:
           name: averon-engine-readiness
           if-no-files-found: warn
           path: |
-            \${{ runner.temp }}/averon-engine-readiness.json
-            \${{ runner.temp }}/averon-engine-readiness.md
+            ${{ runner.temp }}/averon-engine-readiness.json
+            ${{ runner.temp }}/averon-engine-readiness.md
