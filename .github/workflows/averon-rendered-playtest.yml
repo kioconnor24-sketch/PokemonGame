@@ -112,6 +112,34 @@ jobs:
             sleep 0.65
           done
           capture continued
+          # Exploratory control sequence with visual checkpoints only; no test passes inferred.
+          # mGBA default A=Z, B=X, Start=Return. Both A and B are exercised.
+          for i in $(seq 1 120); do
+            press z
+            sleep 0.12
+            if (( i % 15 == 0 )); then
+              capture "intro-a-$i"
+            fi
+          done
+          press Return
+          sleep 2
+          capture "start-menu-check"
+          press x
+          sleep 1
+          capture "start-menu-dismiss"
+          xdotool keydown Up
+          sleep 1
+          xdotool keyup Up
+          sleep 1
+          capture "move-up"
+          xdotool keydown Right
+          sleep 1
+          xdotool keyup Right
+          sleep 1
+          capture "move-right"
+          press z
+          sleep 2
+          capture "interact-check"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
