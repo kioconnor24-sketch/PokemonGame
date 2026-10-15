@@ -8,6 +8,8 @@ on:
       - "Pokemon Game/engine/include/constants/flags.h"
       - "Pokemon Game/engine/src/caps.c"
       - "Pokemon Game/engine/tools/compresSmol/**"
+      - "Pokemon Game/scripts/check-averon-resource-budget.py"
+      - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
   workflow_dispatch:
 
 jobs:
@@ -16,6 +18,8 @@ jobs:
     timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
+      - name: Verify budget parser fixtures
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_resource_budget.py" -v
       - name: Install engine toolchain documented by pinned source
         run: |
           sudo apt-get update -qq
@@ -32,6 +36,7 @@ jobs:
           test -s pokeemerald.gba
           sha256sum pokeemerald.gba
           du -h pokeemerald.gba
+          python3 "../scripts/check-averon-resource-budget.py" --log "$RUNNER_TEMP/averon-build.log" --rom pokeemerald.gba --json "$RUNNER_TEMP/averon-memory-budget.json"
           tail -30 "$RUNNER_TEMP/averon-build.log"
       - name: Do not distribute full copyrighted ROM
         run: echo "Build output remains ephemeral in CI; only textual logs are uploaded."
@@ -41,4 +46,6 @@ jobs:
         with:
           name: averon-native-build-log
           if-no-files-found: warn
-          path: ${{ runner.temp }}/averon-build.log
+          path: |
+            ${{ runner.temp }}/averon-build.log
+            ${{ runner.temp }}/averon-memory-budget.json
