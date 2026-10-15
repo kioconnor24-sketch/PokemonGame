@@ -15,6 +15,6 @@ Do not overwrite unfinished work or force-push shared branches.
 Native EXP/cap/Mega/Set and starter state/gift regressions pass. Actual Gym
 dialogue/reward/whiteout/save and overall traversal acceptance remain pending.
 Current implementation includes optional doubles and the harvest-fair errand.
-Next: finish Task2 Dive/Waterfall/Fly fixtures and runtime acceptance;
+Next: finish Task2 Fly destination fixture and field-effect/follower runtime acceptance;
 prepare the next local test binary for external gameplay feedback.
 Natural early-game balance remains separate from controlled developer tests.

@@ -5,31 +5,28 @@
 - Direction: BACKEND FIRST. User owns world design. Do not create final towns,
   routes, Gym puzzles, legendary locations, encounters or cap numbers.
 - Branch: codex/field-licenses, PR10 targeting codex/backend-integration (PR9).
-  Current field source d1395442f3e11efcd539c14590d6fda67aa4ad85 pushed; remote verified.
+  Current field source a25755fb8870c73d6ff6605998a5312e6af731ce pushed; remote verified.
   Main unchanged; opening/Gym1 preserved. PR2/3/4/5/6/7/8 contributor heads
   integrated with original history. No direct developer messaging occurred.
 - Task1: integrated baseline BUILT / NATIVE-TESTED locally and in clean CI. Root cause of PR5 No tests found: runner Permission denied (Git
   mode100644); restored100755 and added test-x guard. No tests skipped.
 - Task1 clean CI38696580924 passed native compilation and headless tests on
   baseline3318b59c. Other source/graphics/evolution/economy checks also green.
-- Task2 IN PROGRESS: native permissions for all seven field licenses, saved
-  flags0x30–0x36, healthy non-egg partner selection without learned HMs,
-  contextual script/Surf integration and a party FIELD KIT submenu.
-  Native29/29 and layout4/4 PASS at evidence/builds/20261015T070904Z/.
-  Developer-only field lab added with Cut/Rock Smash/Strength and Surf pool;
-  debug Script4 entry, grant/revoke controls and return to Saltmere. No new
-  final-world locations. Release preprocessing excludes its entry/grant code.
-  Latest lab normal build exit0 at evidence/builds/20261015T071739Z/; no
-  redundant native rerun after map-only changes. Static15 maps,201 lines and
- 75-file authoring PASS. Menu/obstacle/animation traversal NOT playtested.
-  Stable integrated ROM preserved separately; Task2 is not marked complete.
-- Tests:26 named Averon native tests PASS, including new Linking Cord resolver
-  checks for Karrablast/Shelmet and incomplete-save backup/recovery; four native
-  save-layout tests PASS. Contributor source/host fixtures PASS (log
-  evidence/backend-source-tests.log). Static14 maps,196 dialogue lines and
- 70-file repeated authoring PASS. Optional quest overlay survives regeneration.
+- Task2 IN PROGRESS: all seven license permissions, FIELD KIT menu and saved
+  flags0x30–0x36 compiled. Current fixture extension is complete: native Cut,
+  Rock Smash, Strength, Surf, Waterfall and paired Dive/underwater room, via
+  debug Script4. Native30/30 and layout4/4 PASS; make-j12-Oall exit0, logs
+  evidence/builds/20261015T073022Z/. New native Dive round-trip test executes
+  actual map warp functions, preserving coordinates, party and licenses.
+  Static16 maps/201 lines/79-file authoring PASS; native map renders reviewed.
+  No final world geography changed. Release entry/grant stubs retained.
+  Fly destination prototype and actual menu/field-effect/follower traversal
+  still pending. These native tests do not demonstrate animation/scene behavior.
+  Stable integration and clinic ROMs remain preserved separately.
+- Baseline evidence:26 native tests and4 layout tests passed before Task2.
+  Contributor host/source fixtures pass; optional quests survive regeneration.
 - Build: make-j12-Oall exit0. Local build-output/Pokemon-Averon-Test-Build.gba,
- 33554432 bytes, SHA256 ea651ca5feb9e03ad06902e594841591818498b92292dbf13434d49e405db5c0.
+ 33554432 bytes, SHA256 1a7414dc408ced396eedeba0267a19c8caaeff0fb2ceed90d6359636c0a10a41.
   Stable copy: evidence/backend/averon-integrated-baseline.gba. Prior clinic
   ROM retained: evidence/m2/averon-clinic-stable.gba (b1ef8077…f5a7a8).
 - Runtime limits: full first-Gym natural walkthrough, new clinic/quest UI,
@@ -38,9 +35,9 @@
 - Ownership: Codex integration/field licenses/events/quests/scripted battles/
   region persistence; ChatGPT battle/species/evolution/forms/followers; friend
   assets/support. No overlapping species edits beyond reviewed PR7 integration.
-- Next: (1) Task2 paired Dive/Waterfall fixtures and Fly destination coverage;
-  (2) focused native/overworld tests for menu, cancel, follower and traversal;
-  (3) Task3 reusable quest templates after Task2 acceptance. Do not invent maps.
+- Next: finish Task2 Fly destination fixture, then focused menu/cancel/field
+  animation/follower acceptance; Task3 quest templates follow Task2 acceptance.
+  Do not invent final maps or claim unverified UI behavior works.
 - Existing continuation ACTIVE Oct15 07:30 EDT, then every5½hours. Automation
   prompt now carries this backend-first order. Computer/app must remain awake.
 - Numeric caps, including former League76, remain provisional/unapproved.

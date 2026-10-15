@@ -1,30 +1,28 @@
 # Current compiled field-license build
 
-Local file: build-output/Pokemon-Averon-Field-Licenses-d1395442.gba
-Also available as build-output/Pokemon-Averon-Test-Build.gba.
-Source d1395442f3e11efcd539c14590d6fda67aa4ad85 on codex/field-licenses (PR10).
-Size33554432bytes; SHA256 ea651ca5feb9e03ad06902e594841591818498b92292dbf13434d49e405db5c0.
-Normal incremental build exit0; logs evidence/builds/20261015T071739Z/.
+Local file: build-output/Pokemon-Averon-Field-Licenses-a25755fb.gba
+Also: build-output/Pokemon-Averon-Test-Build.gba.
+Source a25755fb8870c73d6ff6605998a5312e6af731ce on codex/field-licenses (PR10).
+Size33554432bytes; SHA256 1a7414dc408ced396eedeba0267a19c8caaeff0fb2ceed90d6359636c0a10a41.
+Normal build exit0; native30/30 and save-layout4/4 PASS.
+Logs: evidence/builds/20261015T073022Z/.
 
-Field licenses gate Cut/Rock Smash/Strength/Surf/Waterfall/Dive/Fly without
-teaching moves. Party FIELD KIT exposes the existing native callbacks.
-Native29/29 and save-layout4/4 PASS for the license core at
- evidence/builds/20261015T070904Z/. Later developer-map-only changes were
-statically checked and normal-compiled; the native suite was not rerun.
+Native checks cover seven independent move-free license permissions, unusable
+parties, flash persistence and actual bidirectional Dive map warp functions
+preserving coordinates, party and licenses. Static16 maps/201 lines/79-file
+authoring PASS. These checks do not demonstrate field-effect animations.
 
-Developer R+START -> Scripts -> Script4 enters the isolated field lab.
-Use a backed-up test save. Left scientist asks before granting all licenses;
-next scientist revokes them; right NPC returns to Saltmere. Obstacles: Cut
- tree, Rock Smash rock, Strength boulder and Surf pool. No party is overwritten.
-Release preprocessing excludes entry/grant implementation and emits stubs.
+Developer R+START -> Scripts -> Script4 enters the isolated lab. Use a backed-up
+test save. Left scientist confirms before granting licenses; next revokes them;
+right NPC returns to Saltmere. Native Cut tree, Rock Smash rock, Strength boulder,
+Surf pool, Waterfall column and a deep-water patch with a matching underwater
+room are available. No party is overwritten. Release entry/grant code is inert.
 
-Task2 IN PROGRESS: paired Dive/Waterfall fixtures, Fly destination coverage,
-actual menu/cancel/follower/obstacle/animation traversal and Delta pending.
-The implemented license core/menu are BUILT — RUNTIME TEST PENDING, not PLAYTESTED.
-Existing opening/Gym1 natural walkthrough is also incomplete.
-Stable integration baseline preserved at evidence/backend/averon-integrated-baseline.gba;
-clean GitHub build +26 native tests pass in run38696580924 on baseline3318b59c.
-Generated ROMs and saves remain local and ignored; never publish full binaries.
+Task2 IN PROGRESS: Fly destination fixture and actual menu/cancel/follower/
+obstacle/animation traversal remain. Delta and the natural Gym1 walkthrough
+are unverified. Compiled features: BUILT — RUNTIME TEST PENDING.
+The integrated baseline and previous clinic ROM remain preserved locally.
+Generated ROMs/saves must never be published on public GitHub.
 The user can upload this file directly into the ChatGPT testing conversation
 where sharing is appropriate. Do not publish the full binary on public GitHub
 or Releases. No direct transfer to another conversation has occurred.
