@@ -69,3 +69,19 @@ TEST("Averon Elio generates the approved team with Work Up and a healing berry")
     EXPECT(knowsWorkUp);
     Free(party);
 }
+
+TEST("Averon coast trainer reuses the unused slot without expanding save flags")
+{
+    const struct Trainer *trainer=&sAveronProductionTrainers[DIFFICULTY_NORMAL][TRAINER_AVERON_COAST];
+    struct Pokemon *party=AllocZeroed(PARTY_SIZE*sizeof(struct Pokemon));
+    EXPECT(party != NULL);
+    EXPECT_EQ(TRAINER_AVERON_COAST,568);
+    EXPECT_EQ(MAX_TRAINERS_COUNT_EMERALD,864);
+    EXPECT_EQ((u32)trainer->partySize,2);
+    CreateNPCTrainerPartyFromTrainer(party,trainer);
+    EXPECT_EQ(GetMonData(&party[0],MON_DATA_SPECIES),SPECIES_WINGULL);
+    EXPECT_EQ(GetMonData(&party[0],MON_DATA_LEVEL),14);
+    EXPECT_EQ(GetMonData(&party[1],MON_DATA_SPECIES),SPECIES_ROOKIDEE);
+    EXPECT_EQ(GetMonData(&party[1],MON_DATA_LEVEL),15);
+    Free(party);
+}

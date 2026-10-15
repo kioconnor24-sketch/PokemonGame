@@ -5,7 +5,7 @@ Repository project prefix: `Pokemon Game/`.
 
 | Owner | Branch | Scope | State |
 |---|---|---|---|
-| Codex | codex/first-gym-verification | Opening fixes, Alderfield events, battle configuration, developer QA fixtures, build/test records | Active; runtime M2 acceptance incomplete |
+| Codex | codex/first-gym-verification | Opening/Alderfield fixes, battle rules, native tests, bounded R03 coastal preview and build pipeline | Active; full gameplay acceptance pending |
 | ChatGPT | To be selected by contributor | Independent dialogue or side quests outside Codex scope | No assignment or branch observed; do not imply direct communication |
 
 Before editing, fetch and inspect open PRs and this record. Claim a separate

@@ -17,7 +17,7 @@ for line in (root/'engine/charmap.txt').read_text(encoding='utf-8').splitlines()
         if len(glyph)==1:charmap[glyph]=int(match[2],16)
 max_letter=max('ABCDEFGHIJKLMNOPQRSTUVWXYZ',key=lambda c:widths[charmap[c]])
 errors=[];count=0;widest=(0,'')
-for name in ('averon-opening.inc','averon-first-gym.inc'):
+for name in ('averon-opening.inc','averon-first-gym.inc','averon-coast.inc'):
     label=''
     for number,line in enumerate((root/'scripts'/name).read_text().splitlines(),1):
         if re.match(r'^\w+:',line):label=line.split(':')[0]

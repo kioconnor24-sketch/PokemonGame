@@ -1,4 +1,6 @@
-# Upstream checkout has its own Git history. Record its pin in ENVIRONMENT.md.
+# Keep local tooling, isolated publishing checkout and generated artifacts local.
+/shared-repo/
+/build-output/
 /tools/*
 !/tools/setup-wsl.ps1
 *.gba
@@ -6,3 +8,4 @@
 *.sav
 *.ss0
 *.ss1
+*.ss[0-9]

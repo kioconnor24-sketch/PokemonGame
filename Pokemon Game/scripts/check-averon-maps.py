@@ -66,6 +66,11 @@ for n,m in maps.items():
         if not crossing:errors.append(f'{n}: no walkable border crossing toward {target["name"]}')
         seeds.update(crossing)
     if n=='Saltmere':seeds.add((18,18))
+    if n=='Alderfield' and any(c['map']=='MAP_COASTALBLUFFS' for c in m['connections'] or []):
+        gate={(e['x'],e['y']) for e in m['coord_events'] if e.get('script')=='CoastalBluffs_BadgeGate'}
+        for y in range(h):
+            if walk(w-1,y) and (w-2,y) not in gate:
+                errors.append(f'{n}: coastal exit can bypass its badge trigger at y={y}')
     occupied={(o['x'],o['y']) for o in m['object_events']}
     valid_seeds=sorted(q for q in seeds if walk(*q) and q not in occupied)
     points=set(valid_seeds[:1]);pending=deque(points)

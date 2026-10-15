@@ -1764,3 +1764,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/AlderfieldClinic/scripts.inc"
 
 	.include "data/maps/AlderfieldSupply/scripts.inc"
+
+	.include "data/maps/CoastalBluffs/scripts.inc"

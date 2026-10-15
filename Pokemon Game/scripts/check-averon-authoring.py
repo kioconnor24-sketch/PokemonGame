@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib, json, subprocess, sys
 root=Path(__file__).resolve().parents[1]
-author=root/'scripts/build-averon-first-gym.py'
+author=root/'scripts/build-averon-coast.py'
 def generate():subprocess.run([sys.executable,str(author)],check=True,capture_output=True)
 def snapshot():
     engine=root/'engine'

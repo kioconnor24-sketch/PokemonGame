@@ -42,7 +42,12 @@ new = ['scripts/averon-first-gym.inc', 'scripts/build-averon-first-gym.py',
        'engine/test/averon_candy.c',
        'engine/test/averon_gym_reward.c',
        'scripts/check-averon-dialogue.py', 'scripts/check-averon-authoring.py',
+       'scripts/build-averon.ps1',
+       'scripts/build-averon-coast.py', 'scripts/averon-coast.inc',
+       'engine/data/maps/CoastalBluffs/map.json', 'engine/data/maps/CoastalBluffs/scripts.inc',
+       'engine/data/layouts/CoastalBluffs/map.bin', 'engine/data/layouts/CoastalBluffs/border.bin',
        'Averon_Codex_Handoff/development/FIRST_GYM_IMPLEMENTATION.md',
+       'Averon_Codex_Handoff/development/COASTAL_ROUTE_IMPLEMENTATION.md',
        'Averon_Codex_Handoff/development/TASKS.md',
        'Averon_Codex_Handoff/qa/OPENING_TEST_RESULTS.md']
 for rel in new:

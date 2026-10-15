@@ -1,10 +1,16 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_gimmick.h"
+#include "event_data.h"
+#include "item.h"
 
 SINGLE_BATTLE_TEST("Averon permits a legal held-stone Mega Evolution")
 {
     GIVEN {
+        FlagSet(FLAG_BADGE01_GET);
+        FlagSet(FLAG_BADGE02_GET);
+        FlagSet(FLAG_BADGE03_GET);
+        AddBagItem(ITEM_MEGA_RING,1);
         PLAYER(SPECIES_CHARIZARD) { Level(36); Item(ITEM_CHARIZARDITE_X); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
