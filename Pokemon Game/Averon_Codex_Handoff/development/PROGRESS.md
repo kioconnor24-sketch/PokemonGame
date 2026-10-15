@@ -1,10 +1,11 @@
 # Engineering progress
 
-## Current checkpoint — 2026-10-14
+## Current checkpoint — 2026-10-15
 
-- Latest source checkpoint: `cf3920b7b3950cf34f9d6ae6ca742b29b19fe393`, pushed
+- Latest source checkpoint: `0466c38240335c1e152897eae3360bcd5deeec41`, pushed
   and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
   is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
+- Clinic now calls the native nurse prompt/animation/follower flow; compiled, UI runtime pending. A native flash test verifies previous-slot recovery after an incomplete newest save and successful subsequent saving.
 - Implemented: opening gift guards, optional Gym doubles, visible rules statue,
   harvest-fair errand/reward retry, Gen5 EXP allocation, native Rare Candy cap,
   Elio Work Up/Oran Berry/status-aware AI, safe one-time Gym TM claim.
@@ -15,8 +16,8 @@
   exit0; timestamped logs in `evidence/builds/`. Full authoring command is now
   `python scripts/build-averon-coast.py`; see COASTAL_ROUTE_IMPLEMENTATION.md.
   Latest local `build-output/Pokemon-Averon-Test-Build.gba`, 33,554,432 bytes,
-  SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
-- Tested: **24 named Averon tests PASS** through bundled headless mGBA
+  SHA256 `b1ef8077ff5b282c7fe2eef4d60e14b53fd5684058cb9a3dbfed9a1c16f5a7a8`.
+- Tested: **25 named Averon tests PASS** through bundled headless mGBA
   (`make check -j12 TESTS="Averon"`), plus four save-layout tests. Covers
   actual errand/gift/reward scripts, party and pocket limits/retry, healing,
   whiteout target selection, cap crossing/candy, EXP allocation, legal Mega,
@@ -29,7 +30,7 @@
   This is real native flash execution, not a menu/reset walkthrough.
   Build wrapper now rejects missing/zero/incomplete test summaries before
   publishing the ROM and records passed/total counts automatically in its manifest.
-  Latest successful logs: `evidence/builds/20261015T033436Z/`.
+  Latest successful logs: `evidence/builds/20261015T063026Z/`.
 - Static: all 14 maps' door/border entries and NPC/sign interactions connect;
   water requiring Surf excluded, counters handled; Gym gate states checked.
   Regeneration stable across 68 source/map files; 166 dialogue lines fit.
@@ -40,10 +41,11 @@
   address external gameplay feedback for Gym/save/coastal gate; continue bounded
   Breakwater approach/town source after foundational acceptance is available.
   No manual emulator navigation by default. Preserve story/geography/style.
-- Latest allowance observation: five-hour allowance98% used; saving toward
-  the user's requested1% remaining threshold. No credits purchased or reset.
-  Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
-  every5½hours anchored at09:00. Computer/app must remain available.
+- Current direction: stabilize Gym1, then playable Breakwater/Gym2. All existing
+  numeric caps are provisional; League76 and Sinnoh caps are not approved.
+  Keep level100 maximum; balance both regions before locking the curve.
+- Existing recurring continuation moved to Oct15 07:30 EDT, then every5½hours.
+  Updated via automation tool and verified. Local computer/app must stay awake.
 
 ## Historical checkpoints (superseded by the current record above)
 
@@ -51,6 +53,7 @@
   fetched successfully. No other branch or open PR observed at inspection.
 - Active branch: `codex/first-gym-verification`; repository project prefix
   `Pokemon Game/`. Shared ownership is in `TASKS.md`.
+- Clinic now calls the native nurse prompt/animation/follower flow; compiled, UI runtime pending. A native flash test verifies previous-slot recovery after an incomplete newest save and successful subsequent saving.
 - Implemented: Saltmere/Coastal Meadow/Windrow opening; Orchard Lane,
   Alderfield clinic/shop/irrigation Gym; Set, badge caps and Mega-only gating.
 - Built: M2 `make -j$(nproc) -O all`, exit 0; `evidence/m2/build.log`.

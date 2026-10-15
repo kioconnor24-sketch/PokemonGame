@@ -29,3 +29,8 @@ Focused follow-up: GetEvolutionTargetSpecies, native flash save/load and normal
 bag pointers. Ordinary bags point into SaveBlock1; SavePlayerBag restores a
 link-room backup, so do not call that helper in ordinary save regression tests.
 Two actual flash save/load cycles now pass, including the Gym TM claim script.
+
+Focused clinic follow-up: Oldale nurse wrapper and shared nurse script; native
+Pokemon Center effect uses the existing layout. Preserve nurse local ID1.
+Save fallback selects the previous complete slot when a newer slot is partial;
+SAVE_STATUS_ERROR reports the damaged slot even when old data was recovered.
