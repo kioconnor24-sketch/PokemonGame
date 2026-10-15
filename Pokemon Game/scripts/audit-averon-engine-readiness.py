@@ -138,8 +138,8 @@ def render_markdown(report):
              "This is **not** a compilation, emulator or National Pokédex verification.", "",
              "| Setting | Actual | Required | Result |", "|---|---|---|---|"]
     for check in report["checks"]:
-        lines.append(f"| {check['file']} / \`{check['macro']}\` | "
-                     f"\`{check['actual']}\` | \`{check['expected']}\` | "
+        lines.append(f"| {check['file']} / `{check['macro']}` | "
+                     f"`{check['actual']}` | `{check['expected']}` | "
                      f"{'PASS' if check['passed'] else 'BLOCKED'} |")
     lines += ["", "## Issues", ""]
     for issue in report["issues"]:
