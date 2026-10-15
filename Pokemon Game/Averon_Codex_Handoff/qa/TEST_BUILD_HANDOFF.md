@@ -1,26 +1,120 @@
-# Compiled build handoff
+# Current FIELD fixture: native and mGBA acceptance recorded
 
-Local upload file: `build-output/Pokemon-Averon-Test-Build.gba` from the
-working project directory. This is the latest successful developer QA build,
-not a final release. Generated ROMs remain local and ignored by Git.
+The developer field-license fixture has now been executed in mGBA 0.10.5:
+all seven traversal actions, follower water/land recovery, Fly cancellation,
+actual Saltmere flight, native save/reset/Continue and restored Fly access.
+See [FIELD_LICENSE_RUNTIME_RESULTS.md](FIELD_LICENSE_RUNTIME_RESULTS.md) for
+exact scope, local screenshot/log paths, source and ROM SHA256. Native43/43,
+save-layout4/4 and clean GitHub native43/43 pass. Delta remains NOT TESTED.
+Earlier runtime-pending statements below are historical checkpoints.
 
-Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
-`make -j12 -O all`; exit 0. SHA256:
-`bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0`.
-Source checkpoint: `b6ab100e5d62fefdf4326abc86894530fbce34dc` on
-`codex/backend-integration`. Latest fixes redraw the live Gym gate and
-use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
-these do not replace native runtime acceptance.
-Includes optional Gym doubles, harvest fair, full-party starter guards, native
-Rare Candy cap and Gym TM retry. A bounded Badge1-gated coastal road preview
-is included. **26 named native Averon tests and four save-layout tests pass**.
-New executed checks cover starter evolutions/Everstone and two actual flash
-save/load cycles, including Work Up persistence and duplicate-claim protection.
-Breakwater town/Gym2 are not implemented. The integrated source builds a new ROM; earlier test-only changes left the normal
-ROM byte-for-byte unchanged from the prior build.
-Full conversational gameplay/save walkthrough and new coastal traversal pending.
-Size: 33,554,432 bytes. Build source metadata is in the adjacent local manifest.
+---
+# Expanded native traversal acceptance — 2026-10-15
 
+Latest source `5c92e6ff`; local `build-output/Pokemon-Averon-Field-Menu-5c92e6ff.gba`.
+Size 33,554,432; SHA256 `86800da9ec7531feabe5ef59fc0ceec0b4d2a188ac01d088567b3e3568e3dada`.
+Native **43/43**, save-layout **4/4**, normal `make -j12 -O all` PASS.
+The ROM hash matches the prior menu build because additional harness/test code
+is excluded from normal game compilation; no production source changed in this
+second test extension. Logs are recorded by the local BUILD-MANIFEST.json.
+
+Added real-map Surf/Waterfall terrain and direction checks, native Dive/emerge
+preparation from actual tiles, Pokemon follower water/land visibility policy,
+actual Fly-cursor rejection of an unvisited destination and selection of the
+Saltmere landing, Fly cancellation preserving second-party-slot selection,
+and all seven licensed actions rejecting unusable contexts without trapping
+controls. Test driving explicitly stops before initializing an unrelated
+full overworld scene. These are NATIVE-TESTED semantics, not rendered traversal.
+
+Focused Windows mGBA acceptance is being attempted on an isolated ROM/save in
+`evidence/field-runtime/`; original saves are unchanged. No field gameplay
+acceptance or Delta verification is claimed by this note.
+
+---
+# Latest native Field Kit acceptance — 2026-10-15
+
+Source: `54432345` on `codex/field-licenses` (PR #10). Local artifact:
+`build-output/Pokemon-Averon-Field-Menu-54432345.gba`, 33,554,432 bytes,
+SHA256 `86800da9ec7531feabe5ef59fc0ceec0b4d2a188ac01d088567b3e3568e3dada`.
+
+- `scripts/build-averon.ps1 -Sync ... -NativeTests -SaveLayoutTests -Jobs 12`:
+  38/38 named native tests, 4/4 save-layout tests; normal build exit 0.
+- New integration harness drives real native party/Fly callbacks, input tasks,
+  windows, sprites and fades in headless mGBA. Tested all seven locked actions,
+  Back/B, party selection/exit, Fly-map cancellation/reopening, nine-action
+  capacity, fainted/egg eligibility and three obstacle target preparations.
+- Guarded the native missing-object sentinel before reading obstacle graphics.
+- NPC follower restriction test initially failed because the optional human
+  NPC follower feature is disabled. Preserved that production configuration;
+  tested its current policy and outdoor/indoor Fly rules. Did not enable a new
+  save structure. Pokemon followers are a separate enabled system.
+- Evidence: SOURCE / BUILD / NATIVE-TESTED. No manual emulator or Delta check.
+  Full rendered movement/obstacle effects/Surf/Waterfall/Dive and Pokemon
+  follower transitions remain pending; FIELD is not merged or complete.
+- Test seams are under `#if TESTING`; release menu behavior is unchanged.
+  Stable baseline ROMs are preserved. No ROM or save is published to GitHub.
+
+The first menu run passed 34/34 before adding four more tests. The intermediate
+38-test run failed one incorrect NPC-feature assumption; it was not counted as
+passing or published. The corrected final run passed 38/38. Exact logs are in
+`build-output/BUILD-MANIFEST.json`'s local `logs` directory.
+
+---
+# Current field-license checkpoint — Fly fixture
+
+Branch: `codex/field-licenses`, PR #10. Exact pushed commit and evidence are
+recorded in the latest PR HANDOFF comment. Field licenses remain IN PROGRESS.
+
+The lab scientist at (5,16) confirms before enabling the native test Fly
+destination. It sets only the visited flag; a Fly license and healthy non-Egg
+partner are still required. Select LITTLEROOT TOWN on the placeholder Hoenn Fly
+map to land at the existing Saltmere home point (18,18). Both player genders
+are covered by the native destination/warp test. Debug Script4 returns to the
+lab. Release builds stub this preparation control. This is a developer fixture,
+not final Averon geography or a license earning location.
+
+Fixed: Fly formerly selected vanilla ground-floor home destinations, escaping
+into unused Hoenn. It now uses the existing Averon home/initial respawn entries.
+No save IDs or structures changed.
+
+SOURCE / BUILD / NATIVE-TESTED: `make -j4 -O all` passed; `make -j4 -O check
+TESTS='Averon'` passed 31/31 named tests, including both gender parameters in
+the new Fly regression; `make -j4 -O check TESTS='test/save.c'` passed 4/4.
+Repeated authoring (79 files), map checks (16 maps), dialogue (207 lines),
+design integrity and persistent event-ID audit passed. The new regression
+failed against the old resolver before passing with the fix.
+
+EMULATOR gameplay / DELTA: NOT VERIFIED. Native tests execute through the
+bundled headless mGBA runner; they do not prove rendered menus or animations.
+Next: exercise Field Kit locked actions, B/CANCEL, Fly-map cancellation and
+return to ordinary movement, then obstacle effects, follower interactions and
+Surf/Waterfall/Dive gameplay. Keep all full ROMs and saves out of Git.
+
+# Archived compiled build — a25755fb
+
+Local file: build-output/Pokemon-Averon-Field-Licenses-a25755fb.gba
+Also: build-output/Pokemon-Averon-Test-Build.gba.
+Source a25755fb8870c73d6ff6605998a5312e6af731ce on codex/field-licenses (PR10).
+Size33554432bytes; SHA256 1a7414dc408ced396eedeba0267a19c8caaeff0fb2ceed90d6359636c0a10a41.
+Normal build exit0; native30/30 and save-layout4/4 PASS.
+Logs: evidence/builds/20261015T073022Z/.
+
+Native checks cover seven independent move-free license permissions, unusable
+parties, flash persistence and actual bidirectional Dive map warp functions
+preserving coordinates, party and licenses. Static16 maps/201 lines/79-file
+authoring PASS. These checks do not demonstrate field-effect animations.
+
+Developer R+START -> Scripts -> Script4 enters the isolated lab. Use a backed-up
+test save. Left scientist confirms before granting licenses; next revokes them;
+right NPC returns to Saltmere. Native Cut tree, Rock Smash rock, Strength boulder,
+Surf pool, Waterfall column and a deep-water patch with a matching underwater
+room are available. No party is overwritten. Release entry/grant code is inert.
+
+Task2 IN PROGRESS: Fly destination fixture and actual menu/cancel/follower/
+obstacle/animation traversal remain. Delta and the natural Gym1 walkthrough
+are unverified. Compiled features: BUILT — RUNTIME TEST PENDING.
+The integrated baseline and previous clinic ROM remain preserved locally.
+Generated ROMs/saves must never be published on public GitHub.
 The user can upload this file directly into the ChatGPT testing conversation
 where sharing is appropriate. Do not publish the full binary on public GitHub
 or Releases. No direct transfer to another conversation has occurred.

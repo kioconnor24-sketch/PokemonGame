@@ -1,5 +1,7 @@
 #include "global.h"
 #include "event_data.h"
+#include "battle.h"
+#include "pokemon.h"
 #include "field_move.h"
 #include "fldeff.h"
 #include "fldeff_misc.h"
@@ -24,6 +26,34 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
     return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
 }
 
+static bool32 HasFieldLicense(enum FieldMove fieldMove)
+{
+    return FlagGet(FLAG_AVERON_LICENSE_CUT + gFieldMoveInfo[fieldMove].arg);
+}
+
+static const u8 sText_FieldLicenseRequired[] = _("A field license is needed.");
+
+// Licensed traversal borrows a usable partner for the existing animation;
+// the partner never needs to learn or consume a move. Other field moves
+// retain their original learned-move behavior.
+u32 FieldMove_GetPartyMember(enum FieldMove fieldMove)
+{
+    if (fieldMove >= FIELD_MOVES_COUNT)
+        return PARTY_SIZE;
+    bool32 licensed = gFieldMoveInfo[fieldMove].unlockType == FIELD_LICENSE_UNLOCK;
+    if (licensed && !IsFieldMoveUnlocked(fieldMove))
+        return PARTY_SIZE;
+    for (u32 i = 0; i < PARTY_SIZE; ++i)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        if (licensed ? GetMonData(mon, MON_DATA_HP) != 0 : MonKnowsMove(mon, FieldMove_GetMoveId(fieldMove)))
+            return i;
+    }
+    return PARTY_SIZE;
+}
+
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 {
     [CANT_UNLOCK] =
@@ -41,6 +71,11 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
         .isUnlockedFunc = HasBadgeForFieldMove,
         .lockedMessage = gText_CantUseUntilNewBadge,
     },
+    [FIELD_LICENSE_UNLOCK] =
+    {
+        .isUnlockedFunc = HasFieldLicense,
+        .lockedMessage = sText_FieldLicenseRequired,
+    },
 };
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
@@ -50,10 +85,10 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_CUT] =
     {
         .fieldMoveFunc = SetUpFieldMove_Cut,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_CUT,
         .partyMsgID = PARTY_MSG_NOTHING_TO_CUT,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE02_GET) : FLAG_TO_BADGE(FLAG_BADGE01_GET),
+        .arg = FLAG_AVERON_LICENSE_CUT - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_FLASH] =
@@ -68,55 +103,55 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_ROCK_SMASH] =
     {
         .fieldMoveFunc = SetUpFieldMove_RockSmash,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_ROCK_SMASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE06_GET) : FLAG_TO_BADGE(FLAG_BADGE03_GET),
+        .arg = FLAG_AVERON_LICENSE_ROCK_SMASH - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_STRENGTH] =
     {
         .fieldMoveFunc = SetUpFieldMove_Strength,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_STRENGTH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE04_GET),
+        .arg = FLAG_AVERON_LICENSE_STRENGTH - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_SURF] =
     {
         .fieldMoveFunc = SetUpFieldMove_Surf,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_SURF,
         .partyMsgID = PARTY_MSG_CANT_SURF_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE05_GET),
+        .arg = FLAG_AVERON_LICENSE_SURF - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_FLY] =
     {
         .fieldMoveFunc = SetUpFieldMove_Fly,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_FLY,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE03_GET) : FLAG_TO_BADGE(FLAG_BADGE06_GET),
+        .arg = FLAG_AVERON_LICENSE_FLY - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_DIVE] =
     {
         .fieldMoveFunc = SetUpFieldMove_Dive,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_DIVE,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE07_GET),
+        .arg = FLAG_AVERON_LICENSE_DIVE - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_WATERFALL] =
     {
         .fieldMoveFunc = SetUpFieldMove_Waterfall,
-        .unlockType = BADGE_UNLOCK,
+        .unlockType = FIELD_LICENSE_UNLOCK,
         .moveID = MOVE_WATERFALL,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE07_GET) : FLAG_TO_BADGE(FLAG_BADGE08_GET),
+        .arg = FLAG_AVERON_LICENSE_WATERFALL - FLAG_AVERON_LICENSE_CUT,
     },
 
     [FIELD_MOVE_TELEPORT] =

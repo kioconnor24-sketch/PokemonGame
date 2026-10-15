@@ -45,7 +45,7 @@ for n,m in maps.items():
         # Door behavior can be entered from the tile immediately below.
         if not walk(warp['x'],warp['y']) and not walk(warp['x'],warp['y']+1):errors.append(f'{n} warp {i}: blocked door approach')
     for connection in m['connections'] or []:
-        opposite={'up':'down','down':'up','left':'right','right':'left'}[connection['direction']]
+        opposite={'up':'down','down':'up','left':'right','right':'left','dive':'emerge','emerge':'dive'}[connection['direction']]
         target=ids[connection['map']]
         if not any(c['map']==m['id'] and c['direction']==opposite for c in target['connections'] or []):errors.append(f'{n}: missing reverse connection')
     for npc in m['object_events']:
@@ -56,6 +56,7 @@ for n,m in maps.items():
         q=(warp['x'],warp['y'])
         seeds.add(q if walk(*q) else (q[0],q[1]+1))
     for c in m['connections'] or []:
+        if c['direction'] in ('dive','emerge'):continue
         target=ids[c['map']];grid=grids[target['name']];tw,th,_,_=grid
         offset=int(c['offset']);direction=c['direction'];pairs=[]
         if direction=='up':pairs=[((x,0),(x-offset,th-1)) for x in range(w)]
@@ -66,6 +67,8 @@ for n,m in maps.items():
         if not crossing:errors.append(f'{n}: no walkable border crossing toward {target["name"]}')
         seeds.update(crossing)
     if n=='Saltmere':seeds.add((18,18))
+    if n=='AveronFieldLab':seeds.add((4,4))
+    if n=='AveronFieldLabUnderwater':seeds.add((18,11))
     if n=='Alderfield' and any(c['map']=='MAP_COASTALBLUFFS' for c in m['connections'] or []):
         gate={(e['x'],e['y']) for e in m['coord_events'] if e.get('script')=='CoastalBluffs_BadgeGate'}
         for y in range(h):
@@ -125,6 +128,25 @@ for n,m in maps.items():
             errors.append(f'{n}: missing native nurse call or message/release cleanup')
         if 'setrespawn HEAL_LOCATION_ALDERFIELD' not in (root/f'data/maps/{n}/scripts.inc').read_text():
             errors.append(f'{n}: missing local whiteout registration')
+    if n=='AveronFieldLab':
+        if m['warp_events'] or any(c['map']!='MAP_AVERONFIELDLABUNDERWATER' or c['direction']!='dive' for c in m['connections'] or []):
+            errors.append(f'{n}: developer fixture must not connect to the story world')
+        expected={'EventScript_CutTree','EventScript_RockSmash','EventScript_StrengthBoulder'}
+        if not expected.issubset({o['script'] for o in m['object_events']}):
+            errors.append(f'{n}: missing native obstacle scripts')
+        water=sum(behavior(l,v) in surfable for v in data)
+        if water<40:errors.append(f'{n}: missing substantial native Surf pool')
+        if not any(behavior(l,v)==behavior_ids['MB_WATERFALL'] for v in data):errors.append(f'{n}: missing native waterfall')
+    if n=='AveronFieldLabUnderwater':
+        surface=grids['AveronFieldLab'];sw,sh,tiles,sl=surface
+        diveable={behavior_ids[k] for k in ('MB_DEEP_WATER','MB_INTERIOR_DEEP_WATER','MB_SOOTOPOLIS_DEEP_WATER')}
+        for y in range(h):
+            for x in range(w):
+                if walk(x,y):
+                    if behavior(l,data[y*w+x]) in {behavior_ids[k] for k in ('MB_NO_SURFACING','MB_SEAWEED_NO_SURFACING','MB_WATER_DOOR')}:
+                        errors.append(f'{n}: walkable cell prevents safe emergence at {x},{y}')
+                    if x>=sw or y>=sh or behavior(sl,tiles[y*sw+x]) not in diveable:
+                        errors.append(f'{n}: emergence outside the surface dive pool at {x},{y}')
     if n=='CoastalMeadow':
         attrs=struct.unpack('<512H',(root/'data/tilesets/primary/general/metatile_attributes.bin').read_bytes())
         grass=sum(1 for v in data if (v&1023)<512 and (attrs[v&1023]&255)==2 and ((v>>10)&3)==0)

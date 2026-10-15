@@ -154,3 +154,37 @@ without a trade partner and rejects a wrong item. Animation/acquisition unverifi
 Contributor host/source fixtures pass;70-file authoring,14 maps,196 lines pass.
 CI failure38690746607 diagnosed: permission denied for runner100644, not missing
 tests. Git mode100755 restored with an explicit executable guard; new CI pending.
+
+Task2 native field-license checkpoint25b0c4c2:29/29 native and4/4 layout PASS
+at evidence/builds/20261015T070904Z/. Actual checkfieldmove bytecode covers
+seven flags, badges/learned moves cannot bypass a missing license, no HM needed
+when licensed, empty/fainted/egg-only parties refused, flags persist via flash.
+FIELD KIT menu compiles; UI/animations are not inferred from these tests.
+Field lab map-only extensiond1395442: normal build exit0,15-map connectivity,
+75-file repeated authoring,201 dialogue-line checks PASS. Release preprocessing
+excludes entry/grant code. Cut/Rock Smash/Strength/Surf developer fixtures BUILT;
+Dive/Waterfall fixtures and actual traversal still pending. Source WSL heal JSON
+was malformed; broken copy preserved locally and valid authored JSON restored.
+Latest ROMea651ca5feb9e03ad06902e594841591818498b92292dbf13434d49e405db5c0.
+Task1 fresh CI38696580924 is now SUCCESS: clean compile and26 named native tests
+pass after fixing runner execute permission. This baseline remains preserved.
+
+Dive/Waterfall developer fixture extension (2026-10-15):
+- Surface lab now has native Route119 Waterfall and Route124 deep-water tiles.
+- An enclosed native-underwater room occupies the same coordinates as the dive
+  patch. Matching dive/emerge connections preserve coordinates. Static checks
+  reject underwater walkable cells outside deep water or with no-surfacing behavior.
+- Used normal underwater floor, rather than the common seaweed-no-surfacing tile;
+  the latter would prevent return to the surface. No native tileset was altered.
+- Native map renders reviewed at evidence/maps/field-lab.png and
+  field-lab-underwater.png. These are source renders, not emulator screenshots.
+- Exact build/native results and source SHA are recorded in PROGRESS.md after
+  the pending build finishes. Actual field-effect animation/traversal still pending.
+
+Final fixture result: sourcea25755fb8870c73d6ff6605998a5312e6af731ce, native30/30 and layout4/4 PASS;
+normal incremental build exit0. Native Dive test executes SetDiveWarpDive,
+WarpIntoMap, SetDiveWarpEmerge and the return WarpIntoMap; exact coordinates,
+map destinations, party and license remain correct. Logs20261015T073022Z.
+ROM33554432bytes SHA2561a7414dc408ced396eedeba0267a19c8caaeff0fb2ceed90d6359636c0a10a41. Static16 maps/201lines/79files PASS.
+No animation/menu traversal claim; Fly destination fixture remains next.
+All fixture source and test changes are prepared for the requested GitHub push.
