@@ -1,5 +1,26 @@
 #include "averon_region_fixture.h"
 
+enum AveronFixtureRegion AveronRegionFixture_ResolveMap(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t mapGroup, uint32_t mapNum)
+{
+    enum AveronFixtureRegion found = AVERON_FIXTURE_UNKNOWN;
+    int matched = 0;
+    if (!bindings || mapGroup > UINT8_MAX || mapNum > UINT8_MAX)
+        return AVERON_FIXTURE_UNKNOWN;
+    for (size_t i = 0; i < bindingCount; ++i)
+    {
+        if (bindings[i].mapGroup != mapGroup || bindings[i].mapNum != mapNum)
+            continue;
+        if (matched || (bindings[i].region != AVERON_FIXTURE_AVERON
+                     && bindings[i].region != AVERON_FIXTURE_SINNOH))
+            return AVERON_FIXTURE_UNKNOWN;
+        matched = 1;
+        found = bindings[i].region;
+    }
+    return found;
+}
+
 static uint8_t GetBadgeMask(const struct AveronFixtureBadges *badges,
                             enum AveronFixtureRegion region)
 {

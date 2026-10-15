@@ -4,6 +4,7 @@ Run in WSL: python3 scripts/test-averon-region-fixture.py
 No engine/global header shim, save writes, persistent IDs or third-party packages.
 """
 import ctypes
+import itertools
 import os
 from pathlib import Path
 import shlex
@@ -19,6 +20,10 @@ class Badges(ctypes.Structure):
     _fields_ = [('averon', ctypes.c_uint8), ('sinnoh', ctypes.c_uint8)]
 
 
+class MapBinding(ctypes.Structure):
+    _fields_ = [('map_group', ctypes.c_uint8), ('map_num', ctypes.c_uint8), ('region', ctypes.c_int)]
+
+
 class RegionFixtureTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -26,7 +31,9 @@ class RegionFixtureTests(unittest.TestCase):
         cls.addClassCleanup(cls.temporary.cleanup)
         library = Path(cls.temporary.name) / 'region-fixture.so'
         compiler = shlex.split(os.environ.get('CC', 'cc'))
-        subprocess.run([*compiler, '-std=c11', '-Wall', '-Wextra', '-Werror', '-pedantic',
+        # ctypes MapBinding uses c_int for enums. Pin only this host-library ABI;
+        # ARM native tests independently compile with the engine's own ABI.
+        subprocess.run([*compiler, '-std=c11', '-fno-short-enums', '-Wall', '-Wextra', '-Werror', '-pedantic',
                         '-O2', '-shared', '-fPIC', '-I', str(ROOT / 'engine/include'),
                         str(ROOT / 'engine/src/averon_region_fixture.c'), '-o', str(library)], check=True)
         cls.lib = ctypes.CDLL(str(library))
@@ -34,6 +41,45 @@ class RegionFixtureTests(unittest.TestCase):
         cls.lib.AveronRegionFixture_HasBadge.restype = ctypes.c_int
         cls.lib.AveronRegionFixture_CountBadges.argtypes = [ctypes.POINTER(Badges), ctypes.c_int]
         cls.lib.AveronRegionFixture_CountBadges.restype = ctypes.c_uint32
+        cls.lib.AveronRegionFixture_ResolveMap.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
+                                                         ctypes.c_uint32, ctypes.c_uint32]
+        cls.lib.AveronRegionFixture_ResolveMap.restype = ctypes.c_int
+
+    def test_map_lookup_checks_every_group_number_pair(self):
+        expected = {(0, 0): AVERON, (0, 1): SINNOH, (1, 0): SINNOH, (255, 255): AVERON}
+        maps = (MapBinding * len(expected))(*(MapBinding(group, number, region)
+                                               for (group, number), region in expected.items()))
+        before = bytes(maps)
+        for group in range(256):
+            for number in range(256):
+                self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, len(maps), group, number),
+                                 expected.get((group, number), 0))
+        self.assertEqual(bytes(maps), before)
+
+    def test_map_order_does_not_change_identity(self):
+        fixtures = [(4, 7, AVERON), (5, 7, SINNOH), (4, 8, SINNOH), (255, 254, AVERON)]
+        for order in itertools.permutations(fixtures):
+            maps = (MapBinding * len(order))(*(MapBinding(*entry) for entry in order))
+            for group, number, region in fixtures:
+                self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, len(maps), group, number), region)
+
+    def test_ambiguous_and_unknown_regions_fail_closed(self):
+        for left in (AVERON, SINNOH, 0, -1, 99):
+            for right in (AVERON, SINNOH, 0, -1, 99):
+                maps = (MapBinding * 2)(MapBinding(3, 7, left), MapBinding(3, 7, right))
+                self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 2, 3, 7), 0)
+        for region in (0, -1, 3, 255):
+            maps = (MapBinding * 1)(MapBinding(3, 7, region))
+            self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 1, 3, 7), 0)
+
+    def test_null_empty_and_oversized_map_identity_fail_closed(self):
+        maps = (MapBinding * 1)(MapBinding(0, 0, AVERON))
+        self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(None, 0, 0, 0), 0)
+        self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(None, 2**32 - 1, 0, 0), 0)
+        self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 0, 0, 0), 0)
+        for value in (256, 65536, 2**32 - 1):
+            self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 1, value, 0), 0)
+            self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 1, 0, value), 0)
 
     def test_every_pair_of_badge_masks_has_independent_counts(self):
         for averon in range(256):
