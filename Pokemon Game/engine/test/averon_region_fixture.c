@@ -7,6 +7,7 @@
 #include "averon_region_fixture.h"
 #include "constants/maps.h"
 #include "heal_location.h"
+#include "overworld.h"
 #include "constants/heal_locations.h"
 
 // Opaque test-only handle, outside the engine's healer registry. Never saved.
@@ -483,4 +484,55 @@ TEST("Averon region fixture queries preserve legacy badges and licenses through 
         EXPECT_EQ(FlagGet(FLAG_AVERON_LICENSE_CUT + i), (licenseMask & (1u << i)) != 0);
     EXPECT_EQ(badges.averon, badgeMask);
     EXPECT_EQ(badges.sinnoh, 0x80); // Local fixture only; no Sinnoh persistence claim.
+}
+
+TEST("Averon region fixture revalidates restored healer metadata without changing saved progression")
+{
+    u32 healId = HEAL_LOCATION_ALDERFIELD;
+    PARAMETRIZE { healId = HEAL_LOCATION_ALDERFIELD; }
+    PARAMETRIZE { healId = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; }
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    SetLastHealLocationWarp(healId);
+    struct WarpData expected;
+    memcpy(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected));
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (i & 1)
+            FlagSet(FLAG_BADGE01_GET + i);
+        else
+            FlagClear(FLAG_BADGE01_GET + i);
+    }
+    EXPECT_EQ(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation), healId);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    memset(&gSaveBlock1Ptr->lastHealLocation, 0x7F, sizeof(expected));
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (i & 1)
+            FlagClear(FLAG_BADGE01_GET + i);
+        else
+            FlagSet(FLAG_BADGE01_GET + i);
+    }
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(memcmp(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected)), 0);
+    u32 restoredId = GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation);
+    EXPECT_EQ(restoredId, healId);
+    struct HealReadFixture reader = {0};
+    u32 selected = 0xDEADBEEF;
+    EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+        MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), restoredId, 0,
+        ReadHealFixture, &reader, &selected), TRUE);
+    EXPECT_EQ(selected, healId);
+    EXPECT_EQ(reader.calls, 1);
+    selected = 0xDEADBEEF;
+    EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+        255, 1, restoredId, 0, ReadHealFixture, &reader, &selected), FALSE);
+    EXPECT_EQ(selected, 0xDEADBEEF);
+    EXPECT_EQ(memcmp(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected)), 0);
+    for (u32 i = 0; i < 8; ++i)
+        EXPECT_EQ(FlagGet(FLAG_BADGE01_GET + i), (i & 1) != 0);
 }
