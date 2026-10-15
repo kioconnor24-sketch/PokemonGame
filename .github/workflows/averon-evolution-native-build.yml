@@ -1,10 +1,7 @@
 name: Averon trade evolution native compile
 
+# Manual regression: general native build already handles evolution engine files.
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/averon-evolution-native-build.yml"
-      - "Pokemon Game/engine/src/data/pokemon/species_info/gen_5_families.h"
   workflow_dispatch:
 
 jobs:
@@ -13,16 +10,8 @@ jobs:
     timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch original graphics build tool at the pinned upstream revision
-        uses: actions/checkout@v4
-        with:
-          repository: rh-hideout/pokeemerald-expansion
-          ref: 73b3fbeb574327cd9420c89e56bef5aa3c08fead
-          path: pinned-upstream-tools
-          sparse-checkout: |
-            tools/compresSmol
-      - name: Restore upstream tool only (no modified engine code)
-        run: cp -a pinned-upstream-tools/tools/compresSmol "Pokemon Game/engine/tools/"
+      - name: Verify tracked compression tool
+        run: test -f "Pokemon Game/engine/tools/compresSmol/Makefile"
       - name: Install build dependencies
         run: |
           sudo apt-get update -qq

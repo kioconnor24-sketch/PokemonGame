@@ -1,3 +1,5 @@
+> **Current session authority (2026-10-15):** Read `development/TASKS.md`, the **top** of `development/PROGRESS.md`, and `development/WORKFLOW.md` first. The older M0–M2 milestone and WSL instructions below are historical. `main` now has PRs #1 and #9; unfinished field-license PR #10 belongs to Codex. User still owns final maps and level caps. Optional Nuzlocke mechanics remain paused until approved.
+
 # Codex instructions for Pokémon Averon
 
 You are the implementation engineer for a **real Pokémon Emerald-derived Game Boy Advance ROM**, built from `rh-hideout/pokeemerald-expansion`. The initial design/data/QA review is recorded in `development/READING_LOG.md`. On resume, read the concise progress checkpoint and task ownership; revisit only relevant sections or changed requirements. This file governs every future coding session in this project.

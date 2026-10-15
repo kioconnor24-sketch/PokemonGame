@@ -1,0 +1,32 @@
+name: Averon PR hygiene
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: averon-hygiene-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  file-guard:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Reject ROM/save commits and warn on oversized PRs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner, repo, pull_number: context.issue.number, per_page: 100
+            });
+            const bad = files.filter(f =>
+              f.status !== 'removed' && /\.(gba|gbc|gb|nds|sav|srm)$/i.test(f.filename)
+            );
+            for (const file of bad) core.error('ROM/save file must not be tracked: ' + file.filename);
+            if (bad.length) core.setFailed('Remove complete ROM/save binaries');
+            if (files.length > 70) core.warning('PR touches ' + files.length + ' files; confirm scope and generated files');
+            core.info('Validated ' + files.length + ' tracked changed paths');

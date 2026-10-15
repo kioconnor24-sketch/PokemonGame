@@ -4,13 +4,24 @@ on:
   pull_request:
     paths:
       - ".github/workflows/averon-native-build.yml"
-      - "Pokemon Game/engine/include/config/**"
-      - "Pokemon Game/engine/include/constants/flags.h"
-      - "Pokemon Game/engine/src/caps.c"
-      - "Pokemon Game/engine/tools/compresSmol/**"
+      - "Pokemon Game/engine/**"
+      - "Pokemon Game/scripts/check-averon-resource-budget.py"
+      - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/averon-native-build.yml"
+      - "Pokemon Game/engine/**"
       - "Pokemon Game/scripts/check-averon-resource-budget.py"
       - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: averon-native-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   native-build:
@@ -47,6 +58,10 @@ jobs:
             exit 1
           }
           tail -60 "$RUNNER_TEMP/averon-native-tests.log"
+          if grep -Eq 'No tests found|0 tests (run|executed)' "$RUNNER_TEMP/averon-native-tests.log"; then
+            echo "Native tests were not discovered/executed"
+            exit 1
+          fi
       - name: Do not distribute full copyrighted ROM
         run: echo "Build output remains ephemeral in CI; only textual logs are uploaded."
       - name: Attach build log, not ROM
