@@ -7,6 +7,9 @@ on:
       - "Pokemon Game/scripts/audit-averon-engine-readiness.py"
       - "Pokemon Game/scripts/tests/test_averon_engine_readiness.py"
       - "Pokemon Game/scripts/audit-averon-event-ids.py"
+      - "Pokemon Game/scripts/install-averon-sinnoh-caps.py"
+      - "Pokemon Game/scripts/tests/test_averon_sinnoh_caps.py"
+      - "Pokemon Game/engine/src/caps.c"
       - "Pokemon Game/scripts/tests/test_averon_event_ids.py"
       - "Pokemon Game/engine/include/constants/flags.h"
       - "Pokemon Game/engine/include/constants/vars.h"
@@ -31,6 +34,10 @@ jobs:
           python3 "Pokemon Game/scripts/audit-averon-event-ids.py" \
             --engine "Pokemon Game/engine" \
             --json "$RUNNER_TEMP/averon-event-ids.json"
+      - name: Sinnoh progression unit tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_sinnoh_caps.py" -v
+      - name: Verify native Sinnoh cap definitions
+        run: python3 "Pokemon Game/scripts/install-averon-sinnoh-caps.py" --engine "Pokemon Game/engine"
       - name: Verify pinned Averon game configuration
         shell: bash
         run: |
