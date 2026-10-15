@@ -1,3 +1,5 @@
+> **Current navigation / owner freeze:** Start with the [development index](Pokemon%20Game/Averon_Codex_Handoff/development/INDEX.md), the [current task queue](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md) and live [team Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). Owner has frozen **all** new map creation (including temporary map JSON/layouts) and unresolved story, Gyms, encounters, characters and level decisions. Backend fixtures may use symbolic/in-memory map identifiers or existing unmodified maps only. This freeze overrides any older 'build temporary maps' instruction, earlier handoff/design packet or conditional future backlog. Claim exact paths and coordinate shared files before editing; don't assume a GitHub comment wakes another agent.
+
 # Pokémon Averon — instructions for every AI developer
 
 Apply these rules to **both co-lead developers (Codex and Claude)**, both ChatGPT agents (playtesting QA and architecture/review), and any future contributor, regardless of model or conversation history.
