@@ -20,7 +20,7 @@ Release preprocessing excludes entry/grant implementation and emits stubs.
 
 Task2 IN PROGRESS: paired Dive/Waterfall fixtures, Fly destination coverage,
 actual menu/cancel/follower/obstacle/animation traversal and Delta pending.
-The complete field toolkit is BUILT — RUNTIME TEST PENDING, not PLAYTESTED.
+The implemented license core/menu are BUILT — RUNTIME TEST PENDING, not PLAYTESTED.
 Existing opening/Gym1 natural walkthrough is also incomplete.
 Stable integration baseline preserved at evidence/backend/averon-integrated-baseline.gba;
 clean GitHub build +26 native tests pass in run38696580924 on baseline3318b59c.
@@ -53,4 +53,3 @@ progression balance. The fixture code is built but has not been runtime tested.
 Bug reports should include source SHA, ROM SHA, map/event, expected and actual
 behavior, reproduction steps, and relevant screenshots/logs. Do not label
 untested features as passed. Use **BUILT — RUNTIME TEST PENDING**.
-
