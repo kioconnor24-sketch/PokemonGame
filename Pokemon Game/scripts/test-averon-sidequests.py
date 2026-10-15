@@ -101,8 +101,8 @@ class SideQuestInstallerTests(unittest.TestCase):
             ('additem ITEM_GREAT_BALL, 2', 'FLAG_AVERON_NOTES_REWARDED', 'Averon_NotesBagFull'),
             ('additem ITEM_ORAN_BERRY, 3', 'FLAG_AVERON_SKETCH_REWARDED', 'Averon_SketchBagFull'),
         ]:
-            segment = content.split(command, 1)[1].split('release', 1)[0]
-            self.assertLess(segment.index(f'goto_if_eq VAR_RESULT, FALSE, {full_label}'),
+            segment = content.split(command, 1)[1].split('return', 1)[0]
+            self.assertLess(segment.index('goto_if_eq VAR_RESULT, FALSE, Averon_EventRewardReturn'),
                             segment.index('setflag ' + reward_flag))
             self.assertIn(full_label + ':', content)
             self.assertIn('goto_if_set ' + reward_flag, content)

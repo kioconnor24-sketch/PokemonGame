@@ -49,6 +49,7 @@ class QuestVM:
         pc = self.labels[speaker]
         result = True
         inventory_change = {}
+        stack = []
         for _ in range(100):
             if pc >= len(self.lines):
                 raise RuntimeError('Event ran past end of file')
@@ -61,6 +62,20 @@ class QuestVM:
             arg = parts[1] if len(parts) == 2 else ''
             if op == 'end':
                 return inventory_change
+            if op == 'call':
+                stack.append(pc)
+                pc = self.labels[arg]
+                continue
+            if op == 'return':
+                if not stack:
+                    return inventory_change
+                pc = stack.pop()
+                continue
+            if op == 'setvar':
+                if arg != 'VAR_RESULT, FALSE':
+                    raise RuntimeError('Unsupported variable assignment: ' + arg)
+                result = False
+                continue
             if op in {'lock', 'faceplayer', 'release', 'playfanfare', 'waitfanfare'}:
                 continue
             if op == 'msgbox':

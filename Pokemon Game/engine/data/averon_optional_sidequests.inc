@@ -20,9 +20,8 @@ Averon_NotesDeclined:
     release
     end
 Averon_NotesReward:
-    additem ITEM_GREAT_BALL, 2
+    call Averon_FieldNotes_TryReward
     goto_if_eq VAR_RESULT, FALSE, Averon_NotesBagFull
-    setflag FLAG_AVERON_NOTES_REWARDED
     msgbox Averon_Text_NotesReward, MSGBOX_DEFAULT
     playfanfare MUS_OBTAIN_ITEM
     waitfanfare
@@ -66,9 +65,8 @@ Averon_SketchDeclined:
     release
     end
 Averon_SketchReward:
-    additem ITEM_ORAN_BERRY, 3
+    call Averon_BerrySketch_TryReward
     goto_if_eq VAR_RESULT, FALSE, Averon_SketchBagFull
-    setflag FLAG_AVERON_SKETCH_REWARDED
     msgbox Averon_Text_SketchReward, MSGBOX_DEFAULT
     playfanfare MUS_OBTAIN_ITEM
     waitfanfare
@@ -93,6 +91,29 @@ Averon_SketchViewOnly:
     msgbox Averon_Text_SketchViewOnly, MSGBOX_DEFAULT
     release
     end
+
+@ Callable, UI-free reward boundaries shared by NPCs and native regression tests.
+@ A failed claim leaves all saved state and inventory untouched.
+Averon_FieldNotes_TryReward::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_AVERON_NOTES_STARTED, Averon_EventRewardReturn
+    goto_if_unset FLAG_AVERON_NOTES_RECORDED, Averon_EventRewardReturn
+    goto_if_set FLAG_AVERON_NOTES_REWARDED, Averon_EventRewardReturn
+    additem ITEM_GREAT_BALL, 2
+    goto_if_eq VAR_RESULT, FALSE, Averon_EventRewardReturn
+    setflag FLAG_AVERON_NOTES_REWARDED
+    return
+
+Averon_BerrySketch_TryReward::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_AVERON_SKETCH_STARTED, Averon_EventRewardReturn
+    goto_if_unset FLAG_AVERON_SKETCH_FOUND, Averon_EventRewardReturn
+    goto_if_set FLAG_AVERON_SKETCH_REWARDED, Averon_EventRewardReturn
+    additem ITEM_ORAN_BERRY, 3
+    goto_if_eq VAR_RESULT, FALSE, Averon_EventRewardReturn
+    setflag FLAG_AVERON_SKETCH_REWARDED
+Averon_EventRewardReturn:
+    return
 
 Averon_Text_NotesAsk:
     .string "I'm logging the coast's bird calls.\nCould you check the bluffs for me?$"
