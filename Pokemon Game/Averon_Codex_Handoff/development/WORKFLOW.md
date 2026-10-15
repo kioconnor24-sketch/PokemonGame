@@ -1,6 +1,6 @@
 # Pokémon Averon — permanent GitHub operations handbook
 
-**Goal:** keep the repository organized with tiny cleanup at every coding session, not periodic major cleanups. Applies to ChatGPT, scheduled Codex Cloud, local Codex, and other AI contributors. This is the only active *process* manual.
+**Goal:** keep the repository organized with tiny cleanup at every coding session, not periodic major cleanups. Applies to Codex and Claude as peer co-lead developers, both ChatGPT agents, and other contributors. This is the only active *process* manual. For the division of responsibilities, read [AGENT_ROLES.md](AGENT_ROLES.md) and the live [team hub #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
 
 ## 1. Only one authority for each kind of information
 
@@ -20,9 +20,9 @@
 
 1. Preserve dirty checkout first. Fetch latest `main` and remote PR state, inspect checks, compare relevant changed files. Local/cloud instances do not share filesystem or chat history.
 2. If your own PR is open, resume it. Read its latest HANDOFF and fix applicable red CI. Don't create another PR for the same task merely because a session ended.
-3. Otherwise read TASKS.md in priority order; take the first READY task with satisfied dependencies and no file overlap with an active PR. Don't steal the Codex field-license scope while PR #10 is open.
+3. Otherwise read TASKS.md in priority order; take the first READY task with satisfied dependencies and no file overlap with an active PR. Respect the currently claimed Codex and Claude scopes; check current PRs and the shared claim thread before modifying any overlapping source. Old branch/ownership references elsewhere in this file are historical.
 4. Define a single executable target: expected player behavior, source files, test assertions, and known blockers. Claim by opening a draft PR after the first meaningful commit. Larger independent features may use a GitHub engineering Issue template, but Issues aren't mandatory for tiny fixes.
-5. Branch from fresh `main`: `codex/<feature>`, `chatgpt/<feature>`, or `contrib/<feature>`. Continue an existing PR on its existing branch. Avoid stacked PRs unless a real technical dependency makes them necessary.
+5. Branch from fresh `main`: `codex/<feature>`, `claude/<feature>`, `chatgpt/<feature>`, or `contrib/<feature>`. Continue an existing PR on its existing branch. Avoid stacked PRs unless a real technical dependency makes them necessary.
 6. If no task is READY and nonoverlapping, report the exact blocker instead of inventing geography/story, making extra plans, or silently interfering.
 
 **WIP limit:** one coding PR per agent and at most one integration/operations PR. Two agents needing the same `flags.h`, save code, event scripts, or shared asset file must **serialize** the work and communicate in the PR.
@@ -69,10 +69,16 @@ Every session leaves pushed recoverable work or an exact blocker, not a mysterio
 
 ## 6. Ownership, schedules and maintenance
 
-- User: creative map/locations, final level curve, final story and release/Delta acceptance.
-- Codex Cloud/local: field license PR #10 first, then quest events, legendary templates, special scripted battles and two-region persistence/transport.
-- ChatGPT: CI/integration, and explicitly unclaimed data/battle/evolution/follower tasks with disjoint paths. It cannot continue coding after this ordinary chat closes.
-- Guest Codex: separately scoped asset/test tasks with verified permissions. No implicit AI-to-AI communication; GitHub is the handoff.
+See [AGENT_ROLES.md](AGENT_ROLES.md) and the live [team coordination issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) for current names, claims, and priorities; these supersede older Codex-only assignment descriptions.
+
+- **User:** creative map/locations, final level curve, final story, major design approvals and release/Delta acceptance.
+- **Codex — co-lead developer:** primary owner of current QUEST PR #14 and subsequent TWO-REGION engine/save/progression work; default shared-backend integration coordinator, not Claude's manager.
+- **Claude — co-lead developer:** equal authority to implement substantial independent game systems, tests and engine improvements; owns its explicitly claimed file-disjoint work. May lead major scripted battle, legendary or other backend milestones after coordinated handoff.
+- **ChatGPT QA:** actual gameplay/emulator acceptance when authorized execution access is confirmed; otherwise evidence review and reproducible test plans, with honest blocked status.
+- **ChatGPT architecture/review:** read-only PR, dependency, regression and resource analysis by default, plus scoped validation/docs changes when claimed.
+- **Other contributors:** specifically scoped code/assets/tests with verified permission and nonoverlapping files.
+
+Do not presume direct AI-to-AI communication, shared local files, or automatic invocation by GitHub comments. GitHub is the durable claim, PR, bug and handoff surface. Two developers may work concurrently only on nonoverlapping files or agreed independent interfaces; serialize high-risk shared source.
 
 **At each session end:** push, verify SHA, update PR handoff, check generated/secret files absent. **At each merge:** confirm builds, release claim and close truly redundant PR. **Weekly:** the read-only `averon-repo-hygiene.yml` checks last main build, inactive PRs and branch protection; it reports warnings in GitHub Actions. It doesn't merge, delete or self-fix code. Run repository maintenance only on a concrete warning; no weekly mass refactors or extra docs.
 
