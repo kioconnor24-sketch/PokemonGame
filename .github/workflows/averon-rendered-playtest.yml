@@ -151,41 +151,55 @@ jobs:
             sleep 0.15
             if (( i % 10 == 0 )); then capture "opening-after-name-$i"; fi
           done
-          # Saltmere map transition is established by previous graphical run.
-          # Clear the on-frame two-page Fenwick welcome before testing controls.
-          # One confirmed A press dismisses the final welcome page; repeated A
-          # opens a NEW Fenwick conversation and invalidates movement probes.
+          # QUEST locator: use the GAME'S BUILT-IN developer map-warp menu.
+          # This never edits event flags, party or inventory, but reaching Alderfield
+          # through debug warp is labeled FIXTURE ACCESS (not normal progression).
+          capture "Q1-pre-debug"
+          xdotool keydown s
+          xdotool keydown Return
+          sleep 0.4
+          xdotool keyup Return
+          xdotool keyup s
+          sleep 1.5
+          capture "Q1-debug-main"
+          press x
+          sleep 0.8
+          capture "Q1-utilities-menu"
+          press Down
           press x
           sleep 1
-          capture "Q0-welcome-cleared"
-          press Return
-          sleep 2
-          capture "Q0-start-menu"
-          press z
-          sleep 1
-          capture "Q0-start-dismiss"
-          # Distinct held directions and per-step captures enable visual movement check.
-          xdotool keydown Left
+          capture "Q1-warp-group-before"
+          # Actual debug.c numeric editor: tDigit=0 starts ones, Right=tens.
+          # Map group gMapGroup_AveronOpening=76 (map_groups.json).
+          press Right
+          for i in $(seq 1 7); do press Up; sleep 0.12; done
+          press Left
+          for i in $(seq 1 6); do press Up; sleep 0.12; done
+          capture "Q1-warp-group-76"
+          press x
+          sleep 0.8
+          # The existing Alderfield map is local map number 9 in group 76.
+          for i in $(seq 1 9); do press Up; sleep 0.12; done
+          capture "Q1-warp-map-9"
+          press x
+          sleep 0.8
+          # Existing Alderfield clinic door is warp index 1.
+          press Up
+          capture "Q1-warp-index-1"
+          press x
+          sleep 3
+          capture "Q1-alderfield-after-warp"
+          # Best-effort visual navigation toward researcher (12,16):
+          # inspect screenshots; do not infer a successful interaction from x presses.
+          xdotool keydown Left; sleep 0.8; xdotool keyup Left
           sleep 0.7
-          xdotool keyup Left
-          sleep 1
-          capture "Q0-left"
-          xdotool keydown Down
+          capture "Q1-alderfield-left"
+          xdotool keydown Down; sleep 0.8; xdotool keyup Down
           sleep 0.7
-          xdotool keyup Down
+          capture "Q1-alderfield-down"
+          press x
           sleep 1
-          capture "Q0-down"
-          xdotool keydown Right
-          sleep 0.7
-          xdotool keyup Right
-          sleep 1
-          capture "Q0-right"
-          press Return
-          sleep 1
-          capture "Q0-start-after-walk"
-          press z
-          sleep 1
-          capture "Q0-back-to-field"
+          capture "Q1-researcher-attempt"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
