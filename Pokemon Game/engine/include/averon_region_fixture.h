@@ -21,6 +21,14 @@ struct AveronFixtureBadges
     uint8_t sinnoh;
 };
 
+typedef int (*AveronFixtureBadgeReader)(uint32_t region, uint32_t badgeNumber, void *context);
+
+// Read both banks using only valid region IDs and badge numbers 1..8.
+// Reader returns exactly 0/1; any other result aborts without changing output.
+// Context may be NULL or alias output. No saved IDs/format are assigned here.
+int AveronRegionFixture_CaptureBadges(AveronFixtureBadgeReader reader, void *context,
+                                    struct AveronFixtureBadges *badges);
+
 struct AveronFixtureMapBinding
 {
     uint8_t mapGroup;

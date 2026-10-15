@@ -20,6 +20,9 @@ class Badges(ctypes.Structure):
     _fields_ = [('averon', ctypes.c_uint8), ('sinnoh', ctypes.c_uint8)]
 
 
+BadgeReader = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_void_p)
+
+
 class MapBinding(ctypes.Structure):
     _fields_ = [('map_group', ctypes.c_uint8), ('map_num', ctypes.c_uint8), ('region', ctypes.c_uint32)]
 
@@ -44,6 +47,67 @@ class RegionFixtureTests(unittest.TestCase):
         cls.lib.AveronRegionFixture_ResolveMap.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
                                                          ctypes.c_uint32, ctypes.c_uint32]
         cls.lib.AveronRegionFixture_ResolveMap.restype = ctypes.c_int
+        cls.lib.AveronRegionFixture_CaptureBadges.argtypes = [BadgeReader, ctypes.c_void_p, ctypes.POINTER(Badges)]
+        cls.lib.AveronRegionFixture_CaptureBadges.restype = ctypes.c_int
+
+    def test_capture_reads_both_banks_once_and_allows_aliasing(self):
+        for averon, sinnoh in ((0, 255), (255, 0), (0x55, 0xAA), (0xA5, 0x81)):
+            source = Badges(averon, sinnoh)
+            output = Badges(0xAA, 0x55)
+            requests = []
+
+            @BadgeReader
+            def read(region, number, context):
+                requests.append((region, number))
+                if not context or region not in (AVERON, SINNOH) or not 1 <= number <= 8:
+                    return -1
+                state = ctypes.cast(context, ctypes.POINTER(Badges)).contents
+                mask = state.averon if region == AVERON else state.sinnoh
+                return int(bool(mask & (1 << (number - 1))))
+
+            self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(read, ctypes.byref(source), ctypes.byref(output)), 1)
+            self.assertEqual(bytes(output), bytes((averon, sinnoh)))
+            self.assertEqual(bytes(source), bytes((averon, sinnoh)))
+            self.assertEqual(len(requests), 16)
+            for region in (AVERON, SINNOH):
+                for number in range(1, 9):
+                    self.assertEqual(requests.count((region, number)), 1)
+            requests.clear()
+            self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(read, ctypes.byref(output), ctypes.byref(output)), 1)
+            self.assertEqual(bytes(output), bytes((averon, sinnoh)))
+            self.assertEqual(len(requests), 16)
+
+    def test_capture_failure_is_atomic_at_every_read_boundary(self):
+        for fail_at in range(1, 17):
+            for bad_value in (-1, 2):
+                calls = []
+
+                @BadgeReader
+                def read(region, number, context):
+                    calls.append((region, number))
+                    return bad_value if len(calls) == fail_at else 1
+
+                output = Badges(0xA5, 0x81)
+                self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(read, None, ctypes.byref(output)), 0)
+                self.assertEqual(bytes(output), bytes((0xA5, 0x81)))
+                self.assertEqual(len(calls), fail_at)
+
+    def test_capture_checks_required_arguments_but_accepts_null_context(self):
+        calls = []
+
+        @BadgeReader
+        def read(region, number, context):
+            calls.append((region, number))
+            return 1
+
+        output = Badges(0xA5, 0x81)
+        self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(BadgeReader(), None, ctypes.byref(output)), 0)
+        self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(read, None, None), 0)
+        self.assertEqual(calls, [])
+        self.assertEqual(bytes(output), bytes((0xA5, 0x81)))
+        self.assertEqual(self.lib.AveronRegionFixture_CaptureBadges(read, None, ctypes.byref(output)), 1)
+        self.assertEqual(len(calls), 16)
+        self.assertEqual(bytes(output), bytes((255, 255)))
 
     def test_map_lookup_checks_every_group_number_pair(self):
         expected = {(0, 0): AVERON, (0, 1): SINNOH, (1, 0): SINNOH, (255, 255): AVERON}

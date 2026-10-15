@@ -44,6 +44,16 @@ class RegionMutationTests(unittest.TestCase):
         self.assert_detected('1u << (badgeNumber - 1)', '1u << badgeNumber',
                              'test_every_mask_and_badge_position')
 
+    def test_detects_partial_snapshot_commit_on_read_failure(self):
+        self.assert_detected('if (value != 0 && value != 1)\n                return 0;',
+                             'if (value != 0 && value != 1) { *badges = snapshot; return 0; }',
+                             'test_capture_failure_is_atomic_at_every_read_boundary')
+
+    def test_detects_reading_the_wrong_region_bank(self):
+        self.assert_detected('reader(regions[i], number, context)',
+                             'reader(AVERON_FIXTURE_AVERON, number, context)',
+                             'test_capture_reads_both_banks_once_and_allows_aliasing')
+
     def test_detects_ignoring_map_group(self):
         self.assert_detected('bindings[i].mapGroup != mapGroup || bindings[i].mapNum != mapNum',
                              'bindings[i].mapNum != mapNum',

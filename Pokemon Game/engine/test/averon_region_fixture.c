@@ -7,6 +7,105 @@
 #include "averon_region_fixture.h"
 #include "constants/maps.h"
 
+struct BadgeReadFixture
+{
+    u32 calls;
+    u32 failAt;
+    int failure;
+    u8 sinnoh;
+    u8 reads[2][8];
+};
+
+static int ReadBadgeFixture(uint32_t region, uint32_t number, void *context)
+{
+    struct BadgeReadFixture *fixture = context;
+    if (!fixture || number < 1 || number > 8
+        || (region != AVERON_FIXTURE_AVERON && region != AVERON_FIXTURE_SINNOH))
+        return -1;
+    fixture->calls++;
+    fixture->reads[region == AVERON_FIXTURE_AVERON ? 0 : 1][number - 1]++;
+    if (fixture->calls == fixture->failAt)
+        return fixture->failure;
+    if (region == AVERON_FIXTURE_AVERON)
+        return FlagGet(gBadgeFlags[number - 1]);
+    return (fixture->sinnoh & (1u << (number - 1))) != 0;
+}
+
+static int ReadAllBadges(uint32_t region, uint32_t number, void *context)
+{
+    (void) context;
+    return (region == AVERON_FIXTURE_AVERON || region == AVERON_FIXTURE_SINNOH)
+        && number >= 1 && number <= 8;
+}
+
+static int ReadBadgeSnapshot(uint32_t region, uint32_t number, void *context)
+{
+    return AveronRegionFixture_HasBadge(context, region, number);
+}
+
+TEST("Averon region fixture captures legacy badge flags without allocating saved state")
+{
+    struct BadgeReadFixture reader = {.sinnoh = 0x81};
+    struct AveronFixtureBadges badges = {0xFF, 0xFF};
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (0xA5 & (1u << i))
+            FlagSet(gBadgeFlags[i]);
+        else
+            FlagClear(gBadgeFlags[i]);
+    }
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadBadgeFixture, &reader, &badges), TRUE);
+    EXPECT_EQ(badges.averon, 0xA5);
+    EXPECT_EQ(badges.sinnoh, 0x81);
+    EXPECT_EQ(reader.calls, 16);
+    for (u32 i = 0; i < 8; ++i)
+    {
+        EXPECT_EQ(reader.reads[0][i], 1);
+        EXPECT_EQ(reader.reads[1][i], 1);
+        EXPECT_EQ(FlagGet(gBadgeFlags[i]), (0xA5 & (1u << i)) != 0);
+    }
+}
+
+TEST("Averon region fixture failed badge reads never partially replace a snapshot")
+{
+    u32 failAt = 1;
+    int failure = -1;
+    PARAMETRIZE { failAt = 1; failure = -1; }
+    PARAMETRIZE { failAt = 9; failure = -1; }
+    PARAMETRIZE { failAt = 16; failure = -1; }
+    PARAMETRIZE { failAt = 1; failure = 2; }
+    PARAMETRIZE { failAt = 9; failure = 2; }
+    PARAMETRIZE { failAt = 16; failure = 2; }
+    struct BadgeReadFixture reader = {.failAt = failAt, .failure = failure};
+    struct AveronFixtureBadges badges = {0xA5, 0x81};
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadBadgeFixture, &reader, &badges), FALSE);
+    EXPECT_EQ(reader.calls, failAt);
+    EXPECT_EQ(badges.averon, 0xA5);
+    EXPECT_EQ(badges.sinnoh, 0x81);
+}
+
+TEST("Averon region fixture capture validates required arguments before reading")
+{
+    struct BadgeReadFixture reader = {0};
+    struct AveronFixtureBadges badges = {0xA5, 0x81};
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(NULL, &reader, &badges), FALSE);
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadBadgeFixture, &reader, NULL), FALSE);
+    EXPECT_EQ(reader.calls, 0);
+    EXPECT_EQ(badges.averon, 0xA5);
+    EXPECT_EQ(badges.sinnoh, 0x81);
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadAllBadges, NULL, &badges), TRUE);
+    EXPECT_EQ(badges.averon, 0xFF);
+    EXPECT_EQ(badges.sinnoh, 0xFF);
+}
+
+TEST("Averon region fixture capture allows its reader context to alias output")
+{
+    struct AveronFixtureBadges badges = {0xA5, 0x81};
+    EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadBadgeSnapshot, &badges, &badges), TRUE);
+    EXPECT_EQ(badges.averon, 0xA5);
+    EXPECT_EQ(badges.sinnoh, 0x81);
+}
+
 TEST("Averon region fixture resolves explicit map group and number pairs")
 {
     const struct AveronFixtureMapBinding maps[] = {
