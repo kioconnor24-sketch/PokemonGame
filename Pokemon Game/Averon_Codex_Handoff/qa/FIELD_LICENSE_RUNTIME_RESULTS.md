@@ -64,3 +64,12 @@ regional destination registry and production progression remain separate tasks.
 The Fly-map Hoenn label is an explicit temporary fixture, not final geography.
 Broader game balance, first-Gym natural walkthrough and long-term gameplay QA
 remain outside these field-license results.
+## Additional native bike regression
+
+After the rendered fixture pass, both Mach and Acro Bike modes were checked
+in the real native terrain fixture: unlocked Surf preparation and Fly remain
+available, a missing Surf license is refused, the Pokemon follower is hidden
+on the bike and visible again on foot. Final local suite: **44/44 native**
+and **4/4 save-layout**, normal compilation PASS with the same ROM SHA256.
+These are native bike context/policy checks; bike-to-Surf animation itself
+was not separately observed in the Windows emulator pass.

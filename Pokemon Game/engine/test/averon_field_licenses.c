@@ -385,6 +385,29 @@ TEST("Averon Pokemon follower visibility recovers on land after water traversal 
     // check; it specifically prevents conflating Pokemon and human followers.
 }
 
+TEST("Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower")
+{
+    u32 bike = PLAYER_AVATAR_FLAG_MACH_BIKE;
+    PARAMETRIZE { bike = PLAYER_AVATAR_FLAG_MACH_BIKE; }
+    PARAMETRIZE { bike = PLAYER_AVATAR_FLAG_ACRO_BIKE; }
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_SURF);
+    FlagSet(FLAG_AVERON_LICENSE_FLY);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 16, 6, DIR_EAST, bike);
+    EXPECT_EQ(PartyHasMonWithSurf(), TRUE);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_SURF), TRUE);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_FLY), TRUE);
+    EXPECT_EQ(IsFollowerVisible(), FALSE);
+    EXPECT_EQ(gPlayerAvatar.flags, bike);
+    FlagClear(FLAG_AVERON_LICENSE_SURF);
+    EXPECT_EQ(PartyHasMonWithSurf(), FALSE);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_SURF), FALSE);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gObjectEvents[0].previousMetatileBehavior = MB_NORMAL;
+    gObjectEvents[0].currentMetatileBehavior = MB_NORMAL;
+    EXPECT_EQ(IsFollowerVisible(), TRUE);
+}
+
 static void MoveFlyCursorTo(mapsec_u16_t mapsec)
 {
     u32 x = gRegionMapEntries[mapsec].x + 1;
