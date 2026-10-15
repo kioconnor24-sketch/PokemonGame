@@ -21,7 +21,7 @@ class Badges(ctypes.Structure):
 
 
 class MapBinding(ctypes.Structure):
-    _fields_ = [('map_group', ctypes.c_uint8), ('map_num', ctypes.c_uint8), ('region', ctypes.c_int)]
+    _fields_ = [('map_group', ctypes.c_uint8), ('map_num', ctypes.c_uint8), ('region', ctypes.c_uint32)]
 
 
 class RegionFixtureTests(unittest.TestCase):
@@ -31,15 +31,15 @@ class RegionFixtureTests(unittest.TestCase):
         cls.addClassCleanup(cls.temporary.cleanup)
         library = Path(cls.temporary.name) / 'region-fixture.so'
         compiler = shlex.split(os.environ.get('CC', 'cc'))
-        # ctypes MapBinding uses c_int for enums. Pin only this host-library ABI;
+        # ctypes uses c_int for the returned enum. Pin only this host-library ABI;
         # ARM native tests independently compile with the engine's own ABI.
         subprocess.run([*compiler, '-std=c11', '-fno-short-enums', '-Wall', '-Wextra', '-Werror', '-pedantic',
                         '-O2', '-shared', '-fPIC', '-I', str(ROOT / 'engine/include'),
                         str(ROOT / 'engine/src/averon_region_fixture.c'), '-o', str(library)], check=True)
         cls.lib = ctypes.CDLL(str(library))
-        cls.lib.AveronRegionFixture_HasBadge.argtypes = [ctypes.POINTER(Badges), ctypes.c_int, ctypes.c_uint32]
+        cls.lib.AveronRegionFixture_HasBadge.argtypes = [ctypes.POINTER(Badges), ctypes.c_uint32, ctypes.c_uint32]
         cls.lib.AveronRegionFixture_HasBadge.restype = ctypes.c_int
-        cls.lib.AveronRegionFixture_CountBadges.argtypes = [ctypes.POINTER(Badges), ctypes.c_int]
+        cls.lib.AveronRegionFixture_CountBadges.argtypes = [ctypes.POINTER(Badges), ctypes.c_uint32]
         cls.lib.AveronRegionFixture_CountBadges.restype = ctypes.c_uint32
         cls.lib.AveronRegionFixture_ResolveMap.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
                                                          ctypes.c_uint32, ctypes.c_uint32]
@@ -68,7 +68,7 @@ class RegionFixtureTests(unittest.TestCase):
             for right in (AVERON, SINNOH, 0, -1, 99):
                 maps = (MapBinding * 2)(MapBinding(3, 7, left), MapBinding(3, 7, right))
                 self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 2, 3, 7), 0)
-        for region in (0, -1, 3, 255):
+        for region in (0, -1, 3, 255, 257, 258, 65537, 2**32 - 1):
             maps = (MapBinding * 1)(MapBinding(3, 7, region))
             self.assertEqual(self.lib.AveronRegionFixture_ResolveMap(maps, 1, 3, 7), 0)
 
@@ -113,7 +113,7 @@ class RegionFixtureTests(unittest.TestCase):
 
     def test_invalid_regions_fail_closed(self):
         badges = Badges(255, 255)
-        for region in (0, -1, 3, 255, 2**31 - 1):
+        for region in (0, -1, 3, 255, 257, 258, 65537, 2**31 - 1):
             self.assertEqual(self.lib.AveronRegionFixture_HasBadge(ctypes.byref(badges), region, 1), 0)
             self.assertEqual(self.lib.AveronRegionFixture_CountBadges(ctypes.byref(badges), region), 0)
 
@@ -121,6 +121,41 @@ class RegionFixtureTests(unittest.TestCase):
         for region in (AVERON, SINNOH, 0):
             self.assertEqual(self.lib.AveronRegionFixture_HasBadge(None, region, 1), 0)
             self.assertEqual(self.lib.AveronRegionFixture_CountBadges(None, region), 0)
+
+    def test_short_enums_reject_large_region_inputs_before_truncation(self):
+        probe = Path(self.temporary.name) / 'short-enum-probe.c'
+        executable = probe.with_suffix('')
+        probe.write_text('''#include <stdio.h>
+#include "averon_region_fixture.h"
+int main(void)
+{
+    struct AveronFixtureBadges badges = {255, 255};
+    struct AveronFixtureMapBinding map = {3, 7, AVERON_FIXTURE_UNKNOWN};
+    const uint32_t invalid[] = {257, 258, 65537, UINT32_MAX};
+    for (size_t i = 0; i < sizeof(invalid) / sizeof(invalid[0]); ++i)
+    {
+        if (AveronRegionFixture_HasBadge(&badges, invalid[i], 1)
+            || AveronRegionFixture_CountBadges(&badges, invalid[i]))
+        {
+            fprintf(stderr, "Region %u aliased a badge bank\\n", invalid[i]);
+            return 1;
+        }
+        map.region = invalid[i];
+        if (AveronRegionFixture_ResolveMap(&map, 1, 3, 7) != AVERON_FIXTURE_UNKNOWN)
+        {
+            fprintf(stderr, "Region %u aliased a map identity\\n", invalid[i]);
+            return 2;
+        }
+    }
+    return 0;
+}
+''', encoding='utf-8')
+        compiler = shlex.split(os.environ.get('CC', 'cc'))
+        subprocess.run([*compiler, '-std=c11', '-fshort-enums', '-Wall', '-Wextra', '-Werror',
+                        '-I', str(ROOT / 'engine/include'), str(probe),
+                        str(ROOT / 'engine/src/averon_region_fixture.c'), '-o', str(executable)], check=True)
+        result = subprocess.run([str(executable)], capture_output=True, text=True, check=False)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
 if __name__ == '__main__':

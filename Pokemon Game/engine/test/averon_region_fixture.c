@@ -32,6 +32,10 @@ TEST("Averon region fixture rejects unknown empty and ambiguous map bindings")
     EXPECT_EQ(AveronRegionFixture_ResolveMap(maps, ARRAY_COUNT(maps), 3, 7), AVERON_FIXTURE_UNKNOWN);
     maps[0].region = (enum AveronFixtureRegion) 99;
     EXPECT_EQ(AveronRegionFixture_ResolveMap(maps, 1, 3, 7), AVERON_FIXTURE_UNKNOWN);
+    maps[0].region = 257;
+    EXPECT_EQ(AveronRegionFixture_ResolveMap(maps, 1, 3, 7), AVERON_FIXTURE_UNKNOWN);
+    maps[0].region = 258;
+    EXPECT_EQ(AveronRegionFixture_ResolveMap(maps, 1, 3, 7), AVERON_FIXTURE_UNKNOWN);
 }
 
 TEST("Averon region fixture preserves existing Averon map identities and inputs")
@@ -109,7 +113,7 @@ TEST("Averon region fixture rejects null snapshots and invalid badge queries")
 {
     struct AveronFixtureBadges badges = {.averon = 0xFF, .sinnoh = 0xFF};
     const u32 invalidNumbers[] = {0, 9, 32, 0xFFFFFFFF};
-    const enum AveronFixtureRegion invalidRegions[] = {AVERON_FIXTURE_UNKNOWN, -1, 3, 0x7FFFFFFF};
+    const u32 invalidRegions[] = {AVERON_FIXTURE_UNKNOWN, 3, 257, 258, 65537, 0xFFFFFFFF};
     for (u32 i = 0; i < ARRAY_COUNT(invalidNumbers); ++i)
         EXPECT_EQ(AveronRegionFixture_HasBadge(&badges, AVERON_FIXTURE_AVERON, invalidNumbers[i]), FALSE);
     for (u32 i = 0; i < ARRAY_COUNT(invalidRegions); ++i)

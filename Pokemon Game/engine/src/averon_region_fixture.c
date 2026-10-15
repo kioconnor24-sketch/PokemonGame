@@ -16,13 +16,13 @@ enum AveronFixtureRegion AveronRegionFixture_ResolveMap(
                      && bindings[i].region != AVERON_FIXTURE_SINNOH))
             return AVERON_FIXTURE_UNKNOWN;
         matched = 1;
-        found = bindings[i].region;
+        found = (enum AveronFixtureRegion) bindings[i].region;
     }
     return found;
 }
 
 static uint8_t GetBadgeMask(const struct AveronFixtureBadges *badges,
-                            enum AveronFixtureRegion region)
+                            uint32_t region)
 {
     if (!badges)
         return 0;
@@ -38,7 +38,7 @@ static uint8_t GetBadgeMask(const struct AveronFixtureBadges *badges,
 }
 
 int AveronRegionFixture_HasBadge(const struct AveronFixtureBadges *badges,
-                               enum AveronFixtureRegion region, uint32_t badgeNumber)
+                               uint32_t region, uint32_t badgeNumber)
 {
     if (badgeNumber == 0 || badgeNumber > AVERON_FIXTURE_BADGES_PER_REGION)
         return 0;
@@ -46,7 +46,7 @@ int AveronRegionFixture_HasBadge(const struct AveronFixtureBadges *badges,
 }
 
 uint32_t AveronRegionFixture_CountBadges(const struct AveronFixtureBadges *badges,
-                                       enum AveronFixtureRegion region)
+                                       uint32_t region)
 {
     uint8_t mask = GetBadgeMask(badges, region);
     uint32_t count = 0;

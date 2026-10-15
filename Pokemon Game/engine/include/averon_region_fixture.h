@@ -25,7 +25,7 @@ struct AveronFixtureMapBinding
 {
     uint8_t mapGroup;
     uint8_t mapNum;
-    enum AveronFixtureRegion region;
+    uint32_t region;
 };
 
 // The caller supplies an array of bindingCount valid entries. A missing,
@@ -36,10 +36,12 @@ enum AveronFixtureRegion AveronRegionFixture_ResolveMap(
     uint32_t mapGroup, uint32_t mapNum);
 
 // Badge numbers are 1..8, with bit 0 representing Badge 1 in each bank.
+// Full-width region inputs reject invalid values before -fshort-enums can
+// truncate them into a valid bank. This struct is not a persistent format.
 // Null snapshots, unknown regions and invalid numbers fail closed.
 int AveronRegionFixture_HasBadge(const struct AveronFixtureBadges *badges,
-                               enum AveronFixtureRegion region, uint32_t badgeNumber);
+                               uint32_t region, uint32_t badgeNumber);
 uint32_t AveronRegionFixture_CountBadges(const struct AveronFixtureBadges *badges,
-                                       enum AveronFixtureRegion region);
+                                       uint32_t region);
 
 #endif

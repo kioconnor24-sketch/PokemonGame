@@ -50,7 +50,7 @@ class RegionMutationTests(unittest.TestCase):
                              'test_map_lookup_checks_every_group_number_pair')
 
     def test_detects_first_duplicate_wins(self):
-        self.assert_detected('found = bindings[i].region;', 'return bindings[i].region;',
+        self.assert_detected('found = (enum AveronFixtureRegion) bindings[i].region;', 'return bindings[i].region;',
                              'test_ambiguous_and_unknown_regions_fail_closed')
 
 
