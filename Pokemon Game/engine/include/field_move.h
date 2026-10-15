@@ -15,6 +15,7 @@ enum FieldMoveUnlockType
     CANT_UNLOCK,
     ALWAYS_UNLOCKED,
     BADGE_UNLOCK,
+    FIELD_LICENSE_UNLOCK,
     FIELD_MOVE_UNLOCK_COUNT
 };
 
@@ -31,6 +32,7 @@ struct FieldMoveInfo
 
 extern const struct FieldMoveInfo gFieldMoveInfo[];
 extern const struct FieldMoveUnlock gFieldMoveUnlocks[];
+u32 FieldMove_GetPartyMember(enum FieldMove fieldMove);
 
 static inline bool32 SetUpFieldMove(enum FieldMove fieldMove)
 {

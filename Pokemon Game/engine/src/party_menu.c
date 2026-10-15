@@ -110,6 +110,8 @@ enum {
     MENU_CATALOG_MOWER,
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
+    MENU_FIELD_TOOLKIT,
+    MENU_FIELD_BACK,
     MENU_FIELD_MOVES
 };
 
@@ -185,7 +187,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9]; // Four learned actions + toolkit + summary/switch/item/cancel.
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -457,6 +459,8 @@ static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Cancel1(u8);
+static void CursorCb_FieldToolkit(u8);
+static void CursorCb_FieldToolkitBack(u8);
 static void CursorCb_Item(u8);
 static void CursorCb_Give(u8);
 static void CursorCb_TakeItem(u8);
@@ -2959,7 +2963,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     {
         for (j = 0; j != FIELD_MOVES_COUNT; j++)
         {
-            if (!FieldMove_IsVisible(j))
+            if (!FieldMove_IsVisible(j) || gFieldMoveInfo[j].unlockType == FIELD_LICENSE_UNLOCK)
                 continue;
 
             if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == FieldMove_GetMoveId(j))
@@ -2969,6 +2973,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
             }
         }
     }
+
+    if (GetMonData(&mons[slotId], MON_DATA_HP) != 0)
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_FIELD_TOOLKIT);
 
     if (!InBattlePike())
     {
@@ -3438,6 +3445,28 @@ static void FinishTwoMonAction(u8 taskId)
 #undef tSlot2Offset
 #undef tSlot1SlideDir
 #undef tSlot2SlideDir
+
+static void CursorCb_FieldToolkit(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    sPartyMenuInternal->numActions = 0;
+    for (u32 field = 0; field < FIELD_MOVES_COUNT; ++field)
+        if (gFieldMoveInfo[field].unlockType == FIELD_LICENSE_UNLOCK)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, field + MENU_FIELD_MOVES);
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_FIELD_BACK);
+    DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void CursorCb_FieldToolkitBack(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    SetPartyMonFieldSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId);
+    DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
 
 static void CursorCb_Cancel1(u8 taskId)
 {

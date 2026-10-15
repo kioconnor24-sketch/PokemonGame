@@ -67,13 +67,13 @@
 #define FLAG_AVERON_SKETCH_STARTED    0x2D // Unused Flag
 #define FLAG_AVERON_SKETCH_FOUND    0x2E // Unused Flag
 #define FLAG_AVERON_SKETCH_REWARDED    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
+#define FLAG_AVERON_LICENSE_CUT          0x30
+#define FLAG_AVERON_LICENSE_ROCK_SMASH   0x31
+#define FLAG_AVERON_LICENSE_STRENGTH     0x32
+#define FLAG_AVERON_LICENSE_SURF         0x33
+#define FLAG_AVERON_LICENSE_WATERFALL    0x34
+#define FLAG_AVERON_LICENSE_DIVE         0x35
+#define FLAG_AVERON_LICENSE_FLY          0x36
 #define FLAG_UNUSED_0x037    0x37 // Unused Flag
 #define FLAG_UNUSED_0x038    0x38 // Unused Flag
 #define FLAG_UNUSED_0x039    0x39 // Unused Flag
