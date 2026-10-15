@@ -5,6 +5,9 @@ on:
     paths:
       - "Pokemon Game/scripts/audit-averon-graphics.py"
       - "Pokemon Game/scripts/tests/test_averon_graphics.py"
+      - "Pokemon Game/scripts/audit-averon-asset-paths.py"
+      - "Pokemon Game/scripts/tests/test_averon_asset_paths.py"
+      - "Pokemon Game/engine/graphics/pokemon/**"
       - "Pokemon Game/engine/src/data/pokemon/species_info/**"
       - "Pokemon Game/engine/src/data/pokemon/species_info.h"
       - "Pokemon Game/engine/include/constants/species.h"
@@ -21,6 +24,14 @@ jobs:
           python-version: "3.11"
       - name: Unit tests
         run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_graphics.py" -v
+      - name: Asset file tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_asset_paths.py" -v
+      - name: Check actual graphic paths and follower files
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-asset-paths.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-asset-files.json" \
+            --csv "$RUNNER_TEMP/averon-asset-files.csv"
       - name: Audit actual engine species definitions
         run: |
           python3 "Pokemon Game/scripts/audit-averon-graphics.py" \
@@ -43,3 +54,5 @@ jobs:
           path: |
             ${{ runner.temp }}/averon-graphics.json
             ${{ runner.temp }}/averon-graphics.csv
+            ${{ runner.temp }}/averon-asset-files.json
+            ${{ runner.temp }}/averon-asset-files.csv
