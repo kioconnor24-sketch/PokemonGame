@@ -112,19 +112,43 @@ jobs:
             sleep 0.65
           done
           capture continued
-          # Exploratory control sequence with visual checkpoints only; no test passes inferred.
-          # mGBA default A=Z, B=X, Start=Return. Both A and B are exercised.
-          for i in $(seq 1 120); do
+          # Verified mapping in prior screenshots: x selects a menu entry,
+          # z advances text but does not select BOY/GIRL.
+          # The same quest source/ROM will be rebuilt and retested.
+          for i in $(seq 1 40); do
             press z
-            sleep 0.12
-            if (( i % 15 == 0 )); then
-              capture "intro-a-$i"
-            fi
+            sleep 0.08
+          done
+          capture "gender-selection"
+          press x
+          sleep 1
+          capture "chosen-boy"
+          press z
+          sleep 1
+          capture "naming-screen"
+          press x
+          sleep 0.8
+          capture "name-letter"
+          press Return
+          sleep 1
+          capture "name-start"
+          press x
+          sleep 1
+          capture "name-confirm"
+          for i in $(seq 1 45); do
+            press z
+            sleep 0.1
+            if (( i % 15 == 0 )); then capture "post-name-b-$i"; fi
+          done
+          for i in $(seq 1 20); do
+            press x
+            sleep 0.15
+            if (( i % 5 == 0 )); then capture "post-name-a-$i"; fi
           done
           press Return
           sleep 2
           capture "start-menu-check"
-          press x
+          press z
           sleep 1
           capture "start-menu-dismiss"
           xdotool keydown Up
@@ -137,7 +161,7 @@ jobs:
           xdotool keyup Right
           sleep 1
           capture "move-right"
-          press z
+          press x
           sleep 2
           capture "interact-check"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
