@@ -78,3 +78,33 @@ AI_SINGLE_BATTLE_TEST("Averon an ordinary loss after a scripted battle whites ou
         EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("Averon scripted battle ended by the player's Explosion still counts as a safe defeat")
+{
+    u32 scripted;
+    PARAMETRIZE { scripted = FALSE; }
+    PARAMETRIZE { scripted = TRUE; }
+    GIVEN {
+        ASSUME(IsExplosionMove(MOVE_EXPLOSION));
+        if (scripted)
+            FLAG_SET(B_FLAG_NO_WHITEOUT);
+        SetMoney(&gSaveBlock1Ptr->money, START_MONEY);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_EXPLOSION); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); Moves(MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_EXPLOSION); EXPECT_MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Explosion!");
+        if (scripted)
+            NOT MESSAGE("You have no more Pokémon that can fight!\p");
+        else
+            MESSAGE("You have no more Pokémon that can fight!\p");
+    } THEN {
+        EXPECT(gBattleOutcome == B_OUTCOME_LOST || gBattleOutcome == B_OUTCOME_DREW);
+        EXPECT_EQ(AveronScriptedBattle_IsPlayerDefeated(gBattleOutcome), TRUE);
+        if (scripted)
+            EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), START_MONEY);
+        else
+            EXPECT_LT(GetMoney(&gSaveBlock1Ptr->money), START_MONEY);
+    }
+}
