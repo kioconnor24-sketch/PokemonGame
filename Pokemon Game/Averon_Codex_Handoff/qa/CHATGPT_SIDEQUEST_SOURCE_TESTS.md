@@ -32,13 +32,34 @@ prove that the compiled Emerald virtual machine behaves identically.
 
 ## Not verified and required before game merge
 
-1. Run full coast/base authoring, then overlay installer with actual
-   current layouts and flag constants; guard may intentionally stop.
-2. Add new overlay step to reproducible authoring pipeline.
-3. Regenerate maps, run existing map and dialogue checks, compile the GBA game.
-4. Add engine-level event/save tests for both quest chains and failure states.
-5. Run focused mGBA smoke test, including save/reload and rewards.
-6. Test compatibility with Delta later.
+1. Add new overlay step to reproducible authoring pipeline after coast generation.
+2. Regenerate maps, run existing map and dialogue checks, compile the GBA game.
+3. Add engine-level event/save tests for both quest chains and failure states.
+4. Run focused mGBA smoke test, including save/reload and rewards.
+5. Test compatibility with Delta later.
 
 Do not mark the quests built or playable until the above is actually
 verified. Current status: **AUTHORED SOURCE; COMPILATION/RUNTIME PENDING**.
+
+## Verified on GitHub Actions
+
+Workflow: https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38681796403
+
+GitHub Actions passed Python syntax and fixture tests, the actual route design
+audit, **and** a focused cross-branch integration check: it fetched the current
+Codex `codex/first-gym-verification` engine map JSON, native layout binaries,
+layout registry, constants/flags.h and event_scripts.s. It then successfully
+ran the proposed sidequest installer against those real source assets in a
+temporary, isolated checkout.
+
+This confirms (for that Codex branch snapshot) the four NPC placement tiles
+were accepted as walkable and unoccupied; all six proposed saved flag slots
+were available; and adding the quest script included no source-preflight
+conflict. The check did **not** compile the modified project, execute native
+event scripts, test actual character interaction, or modify the Codex branch.
+This is source integration evidence only.
+
+The GitHub Actions quality gate is defined in
+`.github/workflows/averon-source-checks.yml` on this development branch.
+It will not automatically protect all work until the workflow is merged
+into the base branch and branch protection is configured if desired.
