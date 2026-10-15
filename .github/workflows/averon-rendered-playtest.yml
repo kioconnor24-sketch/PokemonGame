@@ -167,16 +167,32 @@ jobs:
             echo "DIALOGUE_PROBE mean=$mean" >&2
             awk -v n="$mean" 'BEGIN {exit !(n > 0.67)}'
           }
-          for i in $(seq 1 12); do
+          seen=0
+          cleared=0
+          # Do NOT exit while still waiting for the deferred opening script.
+          # B is harmless in the overworld here; advance dialogue only when
+          # the screen positively contains the message panel.
+          for i in $(seq 1 35); do
             if dialogue_open; then
+              seen=1
               capture "Q1-welcome-page-$i"
               press x
-              sleep 0.8
+              sleep 0.75
             else
-              sleep 0.9
-              if ! dialogue_open; then break; fi
+              if (( seen == 1 )); then
+                sleep 0.7
+                if ! dialogue_open; then cleared=1; break; fi
+              else
+                press z
+                sleep 0.85
+              fi
             fi
           done
+          if (( seen != 1 || cleared != 1 )); then
+            echo "QA_ACCESS_BLOCKED: Fenwick welcome did not visibly appear and finish; no Q1 warp test is claimed."
+            capture "Q1-opening-access-blocker"
+            exit 2
+          fi
           capture "Q1-field-ready"
           # Verify that field input is unlocked (ordinary Start -> menu -> B).
           press Return
