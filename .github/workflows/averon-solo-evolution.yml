@@ -25,6 +25,12 @@ jobs:
             --engine "Pokemon Game/engine" \
             --json "$RUNNER_TEMP/averon-solo-evolutions.json" \
             --csv "$RUNNER_TEMP/averon-solo-evolutions.csv"
+          python3 - "$RUNNER_TEMP/averon-solo-evolutions.json" <<'PY'
+          import json, sys
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          if report["summary"]["trade_only_source_routes"]:
+              raise SystemExit("Unresolved trade-only evolution source paths remain")
+          PY
       - name: Attach findings
         if: always()
         uses: actions/upload-artifact@v4
