@@ -3466,6 +3466,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
     bool8 didLevelUp = FALSE;
     bool8 isLevelUpItem;
 
+    // Enforce the player cap here too, so scripts cannot bypass the menu guard.
+    if (!usedByAI && B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD
+        && item == ITEM_RARE_CANDY && GetMonData(mon, MON_DATA_LEVEL) >= GetCurrentLevelCap())
+        return TRUE;
+
     // Determine the EV cap to use
     u32 maxAllowedEVs = !B_EV_ITEMS_CAP ? MAX_TOTAL_EVS : GetCurrentEVCap();
 

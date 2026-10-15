@@ -58,14 +58,31 @@ Alderfield_ElioNotReady:
     end
 Alderfield_ElioAfter:
     goto_if_set FLAG_AVERON_GYM1_TM, Alderfield_ElioAdvice
-    giveitem ITEM_TM_WORK_UP
-    goto_if_eq VAR_RESULT, FALSE, Alderfield_Release
-    setflag FLAG_AVERON_GYM1_TM
+    call Alderfield_ClaimGymTM
+    setvar VAR_0x8000, ITEM_TM_WORK_UP
+    setvar VAR_0x8001, 1
+    setvar VAR_0x8006, ITEM_TM_WORK_UP
+    copyvar VAR_0x8007, VAR_RESULT
+    call EventScript_ObtainItemMessage
+    goto_if_eq VAR_RESULT, FALSE, Alderfield_TMBagFull
 Alderfield_ElioAdvice:
     msgbox Alderfield_Text_Advice, MSGBOX_DEFAULT
 Alderfield_Release:
     release
     end
+Alderfield_TMBagFull:
+    msgbox Alderfield_Text_TMBagFull, MSGBOX_DEFAULT
+    release
+    end
+Alderfield_ClaimGymTM::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_BADGE01_GET, Alderfield_TMReturn
+    goto_if_set FLAG_AVERON_GYM1_TM, Alderfield_TMReturn
+    additem ITEM_TM_WORK_UP, 1
+    goto_if_eq VAR_RESULT, FALSE, Alderfield_TMReturn
+    setflag FLAG_AVERON_GYM1_TM
+Alderfield_TMReturn:
+    return
 Alderfield_GymTrainer::
     trainerbattle_double TRAINER_AVERON_GYM1, Alderfield_Text_Nico, Alderfield_Text_NicoDefeat, Alderfield_Text_NicoNeedTwo
     msgbox Alderfield_Text_NicoAfter, MSGBOX_AUTOCLOSE
@@ -194,6 +211,8 @@ Alderfield_Text_Badge:
     .string "ELIO: Here's your first Badge!\nYou can now train up to Lv. 23.$"
 Alderfield_Text_Advice:
     .string "Work Up gives your team a boost.\nTry it when you've got room to set up.$"
+Alderfield_Text_TMBagFull:
+    .string "That TM pocket's full.\nI'll keep Work Up here for you.$"
 Alderfield_Text_Nico:
     .string "Two at a time, like the farm chores.\nWant to see how our team works?$"
 Alderfield_Text_NicoNeedTwo:

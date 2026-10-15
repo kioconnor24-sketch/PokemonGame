@@ -63,3 +63,30 @@ Latest ROM SHA256 `f333ca782f09875095c5de28ca3052ac615066212ce27f26d2e8d16be328f
 
 Static authoring and dialogue checks pass: 63 files stable across repeated
 regeneration; 151 normal-font dialogue lines fit a conservative 208px margin.
+
+## Healing, respawn, cap and Gym reward checkpoint
+
+All **19 named Averon tests PASS**, exit 0 (`automated-split-check.log`). New
+checks execute healing through the native script special (HP/status/PP restored,
+species/items preserved); actual whiteout target selection for home/clinic;
+large EXP rewards clamped at Lv15 without banking excess; native Dark physical
+versus Ghost special move damage; and badge-gated, one-time Gym TM delivery
+with full-pocket retry. Actual whiteout scene/warps, not just target selection,
+remain a separate gameplay check.
+
+Elio's generated team stays Bunnelby12/Lechonk13/Lillipup15. His ace holds an
+Oran Berry and knows naturally learned Work Up. Check Viability AI is enabled;
+the production trainer has no Omniscient flag. Team-generation assertions pass;
+natural battle difficulty has not been tuned or declared passed.
+
+Direct native Rare Candy regression first FAILED: the menu guard existed but
+the underlying item effect still accepted a capped Pokemon. A player-only
+guard in PokemonUseItemEffects fixes this path. The same test now PASSES:
+14→15 succeeds, another candy is rejected, and after Badge1, 15→16 succeeds.
+Before/after logs: `automated-candy-before.log`, `automated-candy-after.log`.
+Normal build exit0: `gym-reward-build.log`; ROM SHA256
+`dced4e3cf19cc5c440ef54b4342cb43fc8eaed6ea939259134f67fc7d96b9491`.
+
+Existing `make check -j12 TESTS="test/save.c"` also passed all four save-layout
+tests (SaveBlock1/2/3 and PokemonStorage). This is structural compatibility
+evidence, not a replacement for a native save/reset walkthrough.

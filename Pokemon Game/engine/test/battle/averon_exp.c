@@ -51,3 +51,18 @@ WILD_BATTLE_TEST("Averon six-member party respects held EXP Share and the first 
         EXPECT_GT(results[0].leadExp, results[1].leadExp);
     }
 }
+
+WILD_BATTLE_TEST("Averon a large EXP reward stops exactly at the cap without banking excess")
+{
+    GIVEN {
+        FlagClear(FLAG_BADGE01_GET);
+        PLAYER(SPECIES_WOBBUFFET) { Level(14); Speed(1000); }
+        OPPONENT(SPECIES_CHANSEY) { Level(100); HP(1); Speed(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 15);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP),
+                  gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][15]);
+    }
+}

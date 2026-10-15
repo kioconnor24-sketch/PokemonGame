@@ -18,6 +18,25 @@ SINGLE_BATTLE_TEST("Averon permits a legal held-stone Mega Evolution")
     }
 }
 
+SINGLE_BATTLE_TEST("Averon Dark physical and Ghost special moves use separate attack stats", s16 damage)
+{
+    enum Move move=MOVE_BITE;
+    PARAMETRIZE { move=MOVE_BITE; }
+    PARAMETRIZE { move=MOVE_SHADOW_BALL; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Attack(200); SpAttack(20); Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Defense(100); SpDefense(100); HP(400); MaxHP(400); Speed(1); }
+    } WHEN {
+        TURN { MOVE(player,move); }
+    } SCENE {
+        HP_BAR(opponent,captureDamage: &results[i].damage);
+    } FINALLY {
+        // Under the old type split, Dark used Sp. Atk and Ghost used Attack.
+        // Here Bite uses the high Attack while Shadow Ball uses low Sp. Atk.
+        EXPECT_GT(results[0].damage,results[1].damage*3);
+    }
+}
+
 SINGLE_BATTLE_TEST("Averon rejects all excluded gimmicks for both battlers")
 {
     GIVEN {

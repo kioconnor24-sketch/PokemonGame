@@ -89,9 +89,12 @@ tp=ROOT/'src/data/trainers.party';t=tp.read_text(encoding='utf-8');marker='/* AV
 if marker in t:t=t[:t.index(marker)]
 t=t.rstrip()+'\n\n'+marker+'\n'
 for id,name,cl,pic,mons in teams:
-    t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: Check Bad Move / Try To Faint\n'
+    ai='Check Bad Move / Check Viability / Try To Faint' if id=='ELIO' else 'Check Bad Move / Try To Faint'
+    t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: {ai}\n'
     if id=='GYM1':t+='Double Battle: Yes\n'
-    for mon,level in mons:t+=f'\n{mon}\nLevel: {level}\nIVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe\n'
+    for mon,level in mons:
+        held=' @ Oran Berry' if id=='ELIO' and mon=='Lillipup' else ''
+        t+=f'\n{mon}{held}\nLevel: {level}\nIVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe\n'
 tp.write_text(t,encoding='utf-8')
 replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859','''#define TRAINER_AVERON_FARMER 859
 #define TRAINER_AVERON_PICNIC 860
@@ -125,6 +128,14 @@ static void BattleStyle_DrawChoices''')
 replace('include/config/caps.h','B_EXP_CAP_TYPE                  EXP_CAP_NONE','B_EXP_CAP_TYPE                  EXP_CAP_HARD')
 replace('include/config/caps.h','B_LEVEL_CAP_TYPE                LEVEL_CAP_NONE','B_LEVEL_CAP_TYPE                LEVEL_CAP_FLAG_LIST')
 replace('include/config/caps.h','B_RARE_CANDY_CAP                FALSE','B_RARE_CANDY_CAP                TRUE')
+replace('src/pokemon.c','''    // Determine the EV cap to use
+    u32 maxAllowedEVs''','''    // Enforce the player cap here too, so scripts cannot bypass the menu guard.
+    if (!usedByAI && B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD
+        && item == ITEM_RARE_CANDY && GetMonData(mon, MON_DATA_LEVEL) >= GetCurrentLevelCap())
+        return TRUE;
+
+    // Determine the EV cap to use
+    u32 maxAllowedEVs''')
 for flag,old,new in [(2,19,23),(3,24,31),(4,29,39),(5,31,47),(6,33,55),(7,42,62),(8,46,69)]:replace('src/caps.c',f'{{FLAG_BADGE0{flag}_GET, {old}}}',f'{{FLAG_BADGE0{flag}_GET, {new}}}')
 replace('src/caps.c','{FLAG_IS_CHAMPION, 58}', '{FLAG_AVERON_ASSAULT_COMPLETE, 72},\n        {FLAG_IS_CHAMPION, 76}')
 replace('src/battle_gimmick.c','return gGimmicksInfo[gimmick].CanActivate != NULL', 'if (gimmick != GIMMICK_MEGA)\n        return FALSE;\n    return gGimmicksInfo[gimmick].CanActivate != NULL')

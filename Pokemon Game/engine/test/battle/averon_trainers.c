@@ -45,3 +45,27 @@ TEST("Averon Gym TM01 reward resolves to Work Up")
     EXPECT_EQ(GetItemTMHMMoveId(ITEM_TM01), MOVE_WORK_UP);
     EXPECT_EQ(GetItemPocket(ITEM_TM_WORK_UP), POCKET_TM_HM);
 }
+
+TEST("Averon Elio generates the approved team with Work Up and a healing berry")
+{
+    const struct Trainer *trainer=&sAveronProductionTrainers[DIFFICULTY_NORMAL][TRAINER_AVERON_ELIO];
+    struct Pokemon *party=AllocZeroed(PARTY_SIZE*sizeof(struct Pokemon));
+    bool32 knowsWorkUp=FALSE;
+    EXPECT(party != NULL);
+    EXPECT_EQ((u32)trainer->partySize, 3);
+    EXPECT(trainer->aiFlags & AI_FLAG_CHECK_VIABILITY);
+    EXPECT_EQ(trainer->aiFlags & AI_FLAG_OMNISCIENT, 0);
+    CreateNPCTrainerPartyFromTrainer(party,trainer);
+    EXPECT_EQ(GetMonData(&party[0],MON_DATA_SPECIES),SPECIES_BUNNELBY);
+    EXPECT_EQ(GetMonData(&party[0],MON_DATA_LEVEL),12);
+    EXPECT_EQ(GetMonData(&party[1],MON_DATA_SPECIES),SPECIES_LECHONK);
+    EXPECT_EQ(GetMonData(&party[1],MON_DATA_LEVEL),13);
+    EXPECT_EQ(GetMonData(&party[2],MON_DATA_SPECIES),SPECIES_LILLIPUP);
+    EXPECT_EQ(GetMonData(&party[2],MON_DATA_LEVEL),15);
+    EXPECT_EQ(GetMonData(&party[2],MON_DATA_HELD_ITEM),ITEM_ORAN_BERRY);
+    for (u32 move=0;move<MAX_MON_MOVES;++move)
+        if (GetMonData(&party[2],MON_DATA_MOVE1+move)==MOVE_WORK_UP)
+            knowsWorkUp=TRUE;
+    EXPECT(knowsWorkUp);
+    Free(party);
+}
