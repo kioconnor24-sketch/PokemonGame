@@ -1,0 +1,32 @@
+# Codex instructions for Pokémon Averon
+
+You are the implementation engineer for a **real Pokémon Emerald-derived Game Boy Advance ROM**, built from `rh-hideout/pokeemerald-expansion`. Read `START_HERE.md`, `CODEX_WORK_ORDER.md`, and every file in `design/`, `data/`, and `qa/` before altering game code. This file governs every future coding session in this project.
+
+## The non-negotiable deliverable
+Produce a bootable, playable, saveable **`.gba`** that passes mGBA smoke tests and a separate user-run Delta iOS acceptance test. Project `.md`, HTML, PNG, fake `.gba` extensions, empty stubs, and structural header checks **are not a substitute** for an executed ROM. Do not report a feature as working merely because it is designed or compiles. Never claim the entire game is finished without a complete walkthrough, save/reload and progression test.
+
+## Source, build, and legality
+- Use the official `rh-hideout/pokeemerald-expansion` source, not the earlier broken White 2/DS prototype. Pin the starting commit and record it in `development/ENVIRONMENT.md`. Verify instructions against that exact commit.
+- Work only with legitimately obtained original game assets/ROM where the toolchain requires them. Don't solicit or redistribute Nintendo's original ROM, copyrighted sound recordings, or third-party artwork whose license is unverified. Distribute a patch and original project work by default; a full custom `.gba` binary must remain in the authorized owner's local build environment.
+- Keep borrowed assets in an attribution/permission ledger. Never silently scrape sprites from a fan game and assume re-use rights.
+- Install and validate the actual toolchain before building game content. Use documented `make` commands and emulator tests. Do not invent commands, repo branches, or C symbols; inspect the checked-out source.
+
+## Implementation principles
+1. **Do not random-generate mediocre overworld maps.** Each map needs topological planning, natural transitions, consistent tilesets/palettes, collision/warp tests, landmarks, legibility, and human review against the reference layout. Geographic variation and exploration matter more than raw map count.
+2. Preserve **normal Pokémon tone**. Most gameplay is catching, walking, battling, friendly characters, side quests, and humor. The conspiracy unfolds sparsely; not every conversation hints at it. The late game gets dramatic, not every hour.
+3. Exactly 8 original Averon Gyms: 1 western farm, 2 coast, 3 forest/waterfalls, 4 foothills, 5 desert, 6 and 7 **northern mountains**, 8 **southern volcanic islands**. **Vesper has no Gym**, separate Victory Isle League. Full Sinnoh second region. Red is the ultimate last canonical trainer boss; the Champions' Circuit is optional and repeatable.
+4. Government Threshold / Team Vantage public purpose / leader's secret genocidal weapon are **three different layers**. See `design/STORY_BIBLE.md` for strict event logic. Vantage's one public goal: **End humanity's dependence on Pokémon**. Its inner leader wants to eradicate Pokémon using weaponized feedback from Threshold's original malfunction. The true motive and technical limits become known late. Don't rewrite this into another generic dimensional-energy generator plot.
+5. One challenging battle difficulty; permanent Set battle behavior; hard level caps; final absolute max level 100; original **Gen 5 held-item** EXP Share; full physical-special split; Fairy/modern supported types; Gen IX data audit; Mega Evolution; following party leader; no Z-Moves/Dynamax/Terastallization, and no extra battle gimmicks such as Primal Reversion/Ultra Burst by default unless the user later approves them. Optional Nuzlocke rules if implementation passes thorough tests.
+6. Every required legendary and mythical encounter must be reachable without trades, gifts from an event server, or real-world events. Important Pokémon get tailored locations; some use linked quest chains; avoid one giant legendary room. Existing Pokémon's unique forms/alternate evolutions must be accounted for.
+7. Story battles must handle losses and save/reload safely. **Renn's forced-loss encounter is exempt from Nuzlocke penalties**. The Gym 5 ambush cannot strip the earned badge. Ten one-Pokémon operative battles occur before a scripted allied full heal, followed by two corrupt-Gym-Leader rematches, Threshold incident and dimensional final battle.
+8. Friends' portraits/sprites are placeholders until the user explicitly supplies images; do not fabricate personal likenesses. Cynthia's recognizable original battle song is not automatically licensed; commission/import only permissible music or write a distinct original theme, and document the change.
+
+## Work cadence
+- Make small reviewable increments. At each milestone provide changed paths, exact command/test output, an emulator screenshot or recording when available, and remaining blockers.
+- Track status in `development/PROGRESS.md` using **Not started / In progress / Built / Tested / Blocked**. "Built" requires compiled code, "Tested" requires an executed emulator test. Don't check off unfinished work.
+- Before adding new data, run `python3 scripts/validate_design.py`. Add checks for map warps, event conditions, save flags, species data, evolutions, graphics, captures, item behavior and dialogue text overflow as the engine grows.
+- If tools/assets are unavailable, stop at that specific boundary and report it. Continue independent documentation, code review and fixture work where possible; never fake a ROM or bypass a missing validation stage.
+- Keep design intent intact. Technical compromises should be documented in `development/DECISIONS.md`, with implications for quality, rather than silently deleting features.
+
+## Initial work order
+Start with tasks M0–M2 in `CODEX_WORK_ORDER.md`: establish a reproducible Emerald Expansion build, implement a small playable Saltmere→Windrow→Alderfield slice with battle/save/level-cap/following Pokémon, and validate it in a real emulator. Do not start by scattering hundreds of empty maps or writing the complete final story before a vertical slice boots.

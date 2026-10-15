@@ -1,0 +1,1825 @@
+From 02c3cf5839d0f5a844e35adb2ea347f7e1f80e14 Mon Sep 17 00:00:00 2001
+From: Codex <codex@local.invalid>
+Date: Wed, 14 Oct 2026 16:09:30 -0400
+Subject: [PATCH 1/2] Implement native Saltmere opening and Windrow route
+ prototype
+
+---
+ data/event_scripts.s                         |  16 +
+ data/layouts/CoastalMeadow/border.bin        | Bin 0 -> 8 bytes
+ data/layouts/CoastalMeadow/map.bin           | Bin 0 -> 2560 bytes
+ data/layouts/Saltmere/border.bin             | Bin 0 -> 8 bytes
+ data/layouts/Saltmere/map.bin                | Bin 0 -> 2720 bytes
+ data/layouts/SaltmereGreenhouse/border.bin   | Bin 0 -> 8 bytes
+ data/layouts/SaltmereGreenhouse/map.bin      | Bin 0 -> 180 bytes
+ data/layouts/SaltmereHarbor/border.bin       | Bin 0 -> 8 bytes
+ data/layouts/SaltmereHarbor/map.bin          | Bin 0 -> 180 bytes
+ data/layouts/SaltmereHome/border.bin         | Bin 0 -> 8 bytes
+ data/layouts/SaltmereHome/map.bin            | Bin 0 -> 180 bytes
+ data/layouts/SaltmereWorkshop/border.bin     | Bin 0 -> 8 bytes
+ data/layouts/SaltmereWorkshop/map.bin        | Bin 0 -> 180 bytes
+ data/layouts/Windrow/border.bin              | Bin 0 -> 8 bytes
+ data/layouts/Windrow/map.bin                 | Bin 0 -> 2080 bytes
+ data/layouts/WindrowCooperative/border.bin   | Bin 0 -> 8 bytes
+ data/layouts/WindrowCooperative/map.bin      | Bin 0 -> 180 bytes
+ data/layouts/layouts.json                    |  88 +++++
+ data/maps/CoastalMeadow/map.json             |  59 +++
+ data/maps/CoastalMeadow/scripts.inc          |   2 +
+ data/maps/Saltmere/map.json                  | 163 +++++++++
+ data/maps/Saltmere/scripts.inc               | 362 +++++++++++++++++++
+ data/maps/SaltmereGreenhouse/map.json        |  59 +++
+ data/maps/SaltmereGreenhouse/scripts.inc     |   2 +
+ data/maps/SaltmereHarbor/map.json            |  50 +++
+ data/maps/SaltmereHarbor/scripts.inc         |   2 +
+ data/maps/SaltmereHome/map.json              |  50 +++
+ data/maps/SaltmereHome/scripts.inc           |   2 +
+ data/maps/SaltmereWorkshop/map.json          |  59 +++
+ data/maps/SaltmereWorkshop/scripts.inc       |   2 +
+ data/maps/Windrow/map.json                   |  62 ++++
+ data/maps/Windrow/scripts.inc                |   2 +
+ data/maps/WindrowCooperative/map.json        |  50 +++
+ data/maps/WindrowCooperative/scripts.inc     |   2 +
+ data/maps/map_groups.json                    |  13 +-
+ include/config/overworld.h                   |   2 +-
+ include/constants/flags.h                    |   6 +-
+ include/constants/opponents.h                |   6 +-
+ include/constants/vars.h                     |  14 +-
+ src/data/heal_locations.json                 |  28 +-
+ src/data/region_map/region_map_sections.json |  30 +-
+ src/data/trainers.party                      |  60 +++
+ src/data/wild_encounters.json                |  69 ++++
+ src/new_game.c                               |   4 +-
+ 44 files changed, 1232 insertions(+), 32 deletions(-)
+ create mode 100644 data/layouts/CoastalMeadow/border.bin
+ create mode 100644 data/layouts/CoastalMeadow/map.bin
+ create mode 100644 data/layouts/Saltmere/border.bin
+ create mode 100644 data/layouts/Saltmere/map.bin
+ create mode 100644 data/layouts/SaltmereGreenhouse/border.bin
+ create mode 100644 data/layouts/SaltmereGreenhouse/map.bin
+ create mode 100644 data/layouts/SaltmereHarbor/border.bin
+ create mode 100644 data/layouts/SaltmereHarbor/map.bin
+ create mode 100644 data/layouts/SaltmereHome/border.bin
+ create mode 100644 data/layouts/SaltmereHome/map.bin
+ create mode 100644 data/layouts/SaltmereWorkshop/border.bin
+ create mode 100644 data/layouts/SaltmereWorkshop/map.bin
+ create mode 100644 data/layouts/Windrow/border.bin
+ create mode 100644 data/layouts/Windrow/map.bin
+ create mode 100644 data/layouts/WindrowCooperative/border.bin
+ create mode 100644 data/layouts/WindrowCooperative/map.bin
+ create mode 100644 data/maps/CoastalMeadow/map.json
+ create mode 100644 data/maps/CoastalMeadow/scripts.inc
+ create mode 100644 data/maps/Saltmere/map.json
+ create mode 100644 data/maps/Saltmere/scripts.inc
+ create mode 100644 data/maps/SaltmereGreenhouse/map.json
+ create mode 100644 data/maps/SaltmereGreenhouse/scripts.inc
+ create mode 100644 data/maps/SaltmereHarbor/map.json
+ create mode 100644 data/maps/SaltmereHarbor/scripts.inc
+ create mode 100644 data/maps/SaltmereHome/map.json
+ create mode 100644 data/maps/SaltmereHome/scripts.inc
+ create mode 100644 data/maps/SaltmereWorkshop/map.json
+ create mode 100644 data/maps/SaltmereWorkshop/scripts.inc
+ create mode 100644 data/maps/Windrow/map.json
+ create mode 100644 data/maps/Windrow/scripts.inc
+ create mode 100644 data/maps/WindrowCooperative/map.json
+ create mode 100644 data/maps/WindrowCooperative/scripts.inc
+
+diff --git a/data/event_scripts.s b/data/event_scripts.s
+index bc9688b6ac..470164aa6b 100644
+--- a/data/event_scripts.s
++++ b/data/event_scripts.s
+@@ -1738,3 +1738,19 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
+ 	.include "data/scripts/battle_frontier.inc"
+ 	.include "data/scripts/apricorn_tree.inc"
+ 	.include "data/scripts/wild_encounter.inc"
++
++	.include "data/maps/Saltmere/scripts.inc"
++
++	.include "data/maps/SaltmereGreenhouse/scripts.inc"
++
++	.include "data/maps/SaltmereWorkshop/scripts.inc"
++
++	.include "data/maps/SaltmereHarbor/scripts.inc"
++
++	.include "data/maps/SaltmereHome/scripts.inc"
++
++	.include "data/maps/CoastalMeadow/scripts.inc"
++
++	.include "data/maps/Windrow/scripts.inc"
++
++	.include "data/maps/WindrowCooperative/scripts.inc"
+diff --git a/data/layouts/CoastalMeadow/border.bin b/data/layouts/CoastalMeadow/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..03bcafef11c023f00c3224c266e39a2dfd4aaa44
+GIT binary patch
+literal 8
+Pcmcb@c$M)E<6TAo5a0u6
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/CoastalMeadow/map.bin b/data/layouts/CoastalMeadow/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..e63dc536e9e7c9d7f2e2d5ed5e00dfddafc2f3fb
+GIT binary patch
+literal 2560
+zcmds%OAf*?3`EsM_B~2DGPgjSqb!hM$vt2cjqGvUv<eF(6h)3dd6_tcwcN_unbUGV
+zVf1Qz?opnlH_7YO_?%~FYx1&O7W3?EO<tDEVmM=3riB)3^=tpyI3s4kz!`|pGHbr_
+zEY3=^$Wa$9v*s($;;b}_9M7X=)_m|T^Z7Hbb9)cg!+L%2Uqwf)Ri57;wR(LcJi9|Z
+z<zMy1zOkpVe~hbb-y`;o^|619t8IC|)YqO3eS4$cDC=L_n>`ltm6!EzOkX7)(}%O|
+z_p5IOuj<Dt)7RD`a*U_?VxK(u7*F*b=lOpjf8SAkTRhe0?-$p4-z}c%QwDMxF>j04
+t(}$c9bhX7B)u;6K`vW&lYLD^g^L-h|zHcUZWRN>*$>V-<M=g2W{|1}*^u+)G
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/Saltmere/border.bin b/data/layouts/Saltmere/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..03bcafef11c023f00c3224c266e39a2dfd4aaa44
+GIT binary patch
+literal 8
+Pcmcb@c$M)E<6TAo5a0u6
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/Saltmere/map.bin b/data/layouts/Saltmere/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..d8810864b3763467a8ccb27e7873fe2581fb454f
+GIT binary patch
+literal 2720
+zcmeH|Jr2S!429L9nR}GB=K>~R;%7lHa)us(m2<#Q3GM=s^+=vcXroGn0Y$A7<M+jJ
+zYS9$UYn+R$yyVwB^=YfNg2vIB!t!qUJx_fs4;szGJ}Gw0{IW82*zDR0Dt%t~<91R{
+zpJP@d0z6xxtPJtA0!p!Svv`iBffqb`BVnFaKq+=*wq|WMZ@hSZTEV=XIhdo_zwzSv
+zX$AAL(yza)y6%G&zr>T<N`K=F`g=(yiDE1s_HmZ?cmD89pVvlle+=hwe+=hwfAr<W
+z`;Gg9d0Y#>hVg#mj$$6y!smta6R%|;mU&zY#8?~7PrPv+*TUz?Tz@Z;pC8BhaV`9~
+z5KsR1gurj7^mBJ!%p^b7hE|C0mtTm$KF9k!)Ajot-TkZ2Yl_q0!My+K+ZA{K#d-*u
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereGreenhouse/border.bin b/data/layouts/SaltmereGreenhouse/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f496f458ecf2897514c7ef858e657bf062c57506
+GIT binary patch
+literal 8
+LcmZQ%U<5+|02}}X
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereGreenhouse/map.bin b/data/layouts/SaltmereGreenhouse/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea185484d6c64c15c0f6a5d479d5bc3541207bcd
+GIT binary patch
+literal 180
+zcmZo;YiFxut72niV+Udg>|^U^Yh-I;<7MLqVqUfhMiY#t8BI6pH0m-^fx;PVGuSMR
+zOpVOo(A-EF2rZ3lnLNxq%^n%q0iiuyEWj)fP0ZEE4G!I*>OdwSLnWYjAU+2ZClgFu
+G%M1Yf3M38y
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereHarbor/border.bin b/data/layouts/SaltmereHarbor/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f496f458ecf2897514c7ef858e657bf062c57506
+GIT binary patch
+literal 8
+LcmZQ%U<5+|02}}X
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereHarbor/map.bin b/data/layouts/SaltmereHarbor/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea185484d6c64c15c0f6a5d479d5bc3541207bcd
+GIT binary patch
+literal 180
+zcmZo;YiFxut72niV+Udg>|^U^Yh-I;<7MLqVqUfhMiY#t8BI6pH0m-^fx;PVGuSMR
+zOpVOo(A-EF2rZ3lnLNxq%^n%q0iiuyEWj)fP0ZEE4G!I*>OdwSLnWYjAU+2ZClgFu
+G%M1Yf3M38y
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereHome/border.bin b/data/layouts/SaltmereHome/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f496f458ecf2897514c7ef858e657bf062c57506
+GIT binary patch
+literal 8
+LcmZQ%U<5+|02}}X
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereHome/map.bin b/data/layouts/SaltmereHome/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea185484d6c64c15c0f6a5d479d5bc3541207bcd
+GIT binary patch
+literal 180
+zcmZo;YiFxut72niV+Udg>|^U^Yh-I;<7MLqVqUfhMiY#t8BI6pH0m-^fx;PVGuSMR
+zOpVOo(A-EF2rZ3lnLNxq%^n%q0iiuyEWj)fP0ZEE4G!I*>OdwSLnWYjAU+2ZClgFu
+G%M1Yf3M38y
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereWorkshop/border.bin b/data/layouts/SaltmereWorkshop/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f496f458ecf2897514c7ef858e657bf062c57506
+GIT binary patch
+literal 8
+LcmZQ%U<5+|02}}X
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/SaltmereWorkshop/map.bin b/data/layouts/SaltmereWorkshop/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea185484d6c64c15c0f6a5d479d5bc3541207bcd
+GIT binary patch
+literal 180
+zcmZo;YiFxut72niV+Udg>|^U^Yh-I;<7MLqVqUfhMiY#t8BI6pH0m-^fx;PVGuSMR
+zOpVOo(A-EF2rZ3lnLNxq%^n%q0iiuyEWj)fP0ZEE4G!I*>OdwSLnWYjAU+2ZClgFu
+G%M1Yf3M38y
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/Windrow/border.bin b/data/layouts/Windrow/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..03bcafef11c023f00c3224c266e39a2dfd4aaa44
+GIT binary patch
+literal 8
+Pcmcb@c$M)E<6TAo5a0u6
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/Windrow/map.bin b/data/layouts/Windrow/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f82bc6cfdcbad72963f3a81923104f9b4d6317d1
+GIT binary patch
+literal 2080
+zcmd^-I}XAy5JZ*2d!CSU0Tod3X%LiLE)+;`7cz=Q@=lycwoHXq&U(Dg%Q)UXJVRe`
+zyu&Bd95uaxRnr?-U^eYiyjF;%9jwtGG`X6a*7LMZ4Myw_bFRf%dGq^5PptDhnw6(@
+zYI>k1SF`f8P7NMd)Z}Vbp4O@V-5<`67`rX!$v1ufaW#kJJKf)J4IX+WzHc&pRu{e+
+zE3nvq@w%TYZ{2N%*miywRGGh>?T0wnlvn2OXcs%#Il(LQceT4c?3Un_`5Sw5dfL+e
+UH_!Wpzm#vkrv2ip`6`e11q<jTF8}}l
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/WindrowCooperative/border.bin b/data/layouts/WindrowCooperative/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..f496f458ecf2897514c7ef858e657bf062c57506
+GIT binary patch
+literal 8
+LcmZQ%U<5+|02}}X
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/WindrowCooperative/map.bin b/data/layouts/WindrowCooperative/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..ea185484d6c64c15c0f6a5d479d5bc3541207bcd
+GIT binary patch
+literal 180
+zcmZo;YiFxut72niV+Udg>|^U^Yh-I;<7MLqVqUfhMiY#t8BI6pH0m-^fx;PVGuSMR
+zOpVOo(A-EF2rZ3lnLNxq%^n%q0iiuyEWj)fP0ZEE4G!I*>OdwSLnWYjAU+2ZClgFu
+G%M1Yf3M38y
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/layouts.json b/data/layouts/layouts.json
+index 2b25587ac1..fdd0cffd92 100644
+--- a/data/layouts/layouts.json
++++ b/data/layouts/layouts.json
+@@ -9323,6 +9323,94 @@
+       "border_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/border.bin",
+       "blockdata_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/map.bin",
+       "layout_version": "frlg"
++    },
++    {
++      "id": "LAYOUT_SALTMERE",
++      "name": "Saltmere_Layout",
++      "width": 40,
++      "height": 34,
++      "primary_tileset": "gTileset_General",
++      "secondary_tileset": "gTileset_Petalburg",
++      "border_filepath": "data/layouts/Saltmere/border.bin",
++      "blockdata_filepath": "data/layouts/Saltmere/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_SALTMEREGREENHOUSE",
++      "name": "SaltmereGreenhouse_Layout",
++      "width": 10,
++      "height": 9,
++      "primary_tileset": "gTileset_Building",
++      "secondary_tileset": "gTileset_GenericBuilding",
++      "border_filepath": "data/layouts/SaltmereGreenhouse/border.bin",
++      "blockdata_filepath": "data/layouts/SaltmereGreenhouse/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_SALTMEREWORKSHOP",
++      "name": "SaltmereWorkshop_Layout",
++      "width": 10,
++      "height": 9,
++      "primary_tileset": "gTileset_Building",
++      "secondary_tileset": "gTileset_GenericBuilding",
++      "border_filepath": "data/layouts/SaltmereWorkshop/border.bin",
++      "blockdata_filepath": "data/layouts/SaltmereWorkshop/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_SALTMEREHARBOR",
++      "name": "SaltmereHarbor_Layout",
++      "width": 10,
++      "height": 9,
++      "primary_tileset": "gTileset_Building",
++      "secondary_tileset": "gTileset_GenericBuilding",
++      "border_filepath": "data/layouts/SaltmereHarbor/border.bin",
++      "blockdata_filepath": "data/layouts/SaltmereHarbor/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_SALTMEREHOME",
++      "name": "SaltmereHome_Layout",
++      "width": 10,
++      "height": 9,
++      "primary_tileset": "gTileset_Building",
++      "secondary_tileset": "gTileset_GenericBuilding",
++      "border_filepath": "data/layouts/SaltmereHome/border.bin",
++      "blockdata_filepath": "data/layouts/SaltmereHome/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_COASTALMEADOW",
++      "name": "CoastalMeadow_Layout",
++      "width": 40,
++      "height": 32,
++      "primary_tileset": "gTileset_General",
++      "secondary_tileset": "gTileset_Petalburg",
++      "border_filepath": "data/layouts/CoastalMeadow/border.bin",
++      "blockdata_filepath": "data/layouts/CoastalMeadow/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_WINDROW",
++      "name": "Windrow_Layout",
++      "width": 40,
++      "height": 26,
++      "primary_tileset": "gTileset_General",
++      "secondary_tileset": "gTileset_Petalburg",
++      "border_filepath": "data/layouts/Windrow/border.bin",
++      "blockdata_filepath": "data/layouts/Windrow/map.bin",
++      "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_WINDROWCOOPERATIVE",
++      "name": "WindrowCooperative_Layout",
++      "width": 10,
++      "height": 9,
++      "primary_tileset": "gTileset_Building",
++      "secondary_tileset": "gTileset_GenericBuilding",
++      "border_filepath": "data/layouts/WindrowCooperative/border.bin",
++      "blockdata_filepath": "data/layouts/WindrowCooperative/map.bin",
++      "layout_version": "emerald"
+     }
+   ]
+ }
+diff --git a/data/maps/CoastalMeadow/map.json b/data/maps/CoastalMeadow/map.json
+new file mode 100644
+index 0000000000..073b1276aa
+--- /dev/null
++++ b/data/maps/CoastalMeadow/map.json
+@@ -0,0 +1,59 @@
++{
++  "id": "MAP_COASTALMEADOW",
++  "name": "CoastalMeadow",
++  "layout": "LAYOUT_COASTALMEADOW",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_COASTAL_MEADOW",
++  "requires_flash": false,
++  "weather": "WEATHER_SUNNY",
++  "map_type": "MAP_TYPE_TOWN",
++  "allow_cycling": true,
++  "allow_escaping": false,
++  "allow_running": true,
++  "show_map_name": true,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": [
++    {
++      "map": "MAP_SALTMERE",
++      "offset": 0,
++      "direction": "down"
++    },
++    {
++      "map": "MAP_WINDROW",
++      "offset": 0,
++      "direction": "up"
++    }
++  ],
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
++      "x": 16,
++      "y": 12,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Averon_MeadowTrainer",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
++      "x": 6,
++      "y": 22,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Averon_Lookout",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/CoastalMeadow/scripts.inc b/data/maps/CoastalMeadow/scripts.inc
+new file mode 100644
+index 0000000000..4c6fd2f5b2
+--- /dev/null
++++ b/data/maps/CoastalMeadow/scripts.inc
+@@ -0,0 +1,2 @@
++CoastalMeadow_MapScripts::
++	.byte 0
+diff --git a/data/maps/Saltmere/map.json b/data/maps/Saltmere/map.json
+new file mode 100644
+index 0000000000..ade3ea6af7
+--- /dev/null
++++ b/data/maps/Saltmere/map.json
+@@ -0,0 +1,163 @@
++{
++  "id": "MAP_SALTMERE",
++  "name": "Saltmere",
++  "layout": "LAYOUT_SALTMERE",
++  "music": "MUS_LITTLEROOT",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_SALTMERE",
++  "requires_flash": false,
++  "weather": "WEATHER_SUNNY",
++  "map_type": "MAP_TYPE_TOWN",
++  "allow_cycling": true,
++  "allow_escaping": false,
++  "allow_running": true,
++  "show_map_name": true,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": [
++    {
++      "map": "MAP_COASTALMEADOW",
++      "offset": 0,
++      "direction": "up"
++    }
++  ],
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
++      "x": 18,
++      "y": 16,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_Fenwick",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
++      "x": 10,
++      "y": 25,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_Pip",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
++      "x": 28,
++      "y": 25,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_Dockhand",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
++      "x": 32,
++      "y": 7,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_Renn",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
++      "x": 20,
++      "y": 14,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_Mira",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
++      "x": 14,
++      "y": 26,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_PipScrew",
++      "flag": "FLAG_AVERON_PIP_SCREW"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 11,
++      "y": 9,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMEREGREENHOUSE",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 26,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMEREWORKSHOP",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 25,
++      "y": 22,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMEREHARBOR",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 11,
++      "y": 19,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMEREHOME",
++      "dest_warp_id": "0"
++    }
++  ],
++  "coord_events": [
++    {
++      "type": "trigger",
++      "x": 33,
++      "y": 1,
++      "elevation": 0,
++      "var": "VAR_TEMP_1",
++      "var_value": "0",
++      "script": "Saltmere_ExitGate"
++    },
++    {
++      "type": "trigger",
++      "x": 34,
++      "y": 1,
++      "elevation": 0,
++      "var": "VAR_TEMP_1",
++      "var_value": "0",
++      "script": "Saltmere_ExitGate"
++    },
++    {
++      "type": "trigger",
++      "x": 35,
++      "y": 1,
++      "elevation": 0,
++      "var": "VAR_TEMP_1",
++      "var_value": "0",
++      "script": "Saltmere_ExitGate"
++    }
++  ],
++  "bg_events": []
++}
+diff --git a/data/maps/Saltmere/scripts.inc b/data/maps/Saltmere/scripts.inc
+new file mode 100644
+index 0000000000..3a70e5832a
+--- /dev/null
++++ b/data/maps/Saltmere/scripts.inc
+@@ -0,0 +1,362 @@
++Saltmere_MapScripts::
++    map_script MAP_SCRIPT_ON_TRANSITION, Saltmere_OnTransition
++    map_script MAP_SCRIPT_ON_FRAME_TABLE, Saltmere_OnFrame
++    .byte 0
++
++Saltmere_OnTransition:
++    setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
++    end
++
++Saltmere_OnFrame:
++    map_script_2 VAR_AVERON_INTRO, 0, Saltmere_Welcome
++    .2byte 0
++
++Saltmere_Welcome:
++    lockall
++    setvar VAR_AVERON_INTRO, 1
++    setflag FLAG_SYS_B_DASH
++    msgbox Saltmere_Text_Welcome, MSGBOX_DEFAULT
++    releaseall
++    end
++
++Saltmere_ExitGate::
++    goto_if_set FLAG_AVERON_STARTER, Saltmere_End
++    lockall
++    msgbox Saltmere_Text_PartnerFirst, MSGBOX_DEFAULT
++    applymovement LOCALID_PLAYER, Saltmere_StepBack
++    waitmovement 0
++    releaseall
++Saltmere_End:
++    end
++
++Saltmere_StepBack:
++    walk_down
++    step_end
++
++Saltmere_GreenhouseKeeper::
++    lock
++    faceplayer
++    goto_if_ne VAR_AVERON_GREENHOUSE, 0, Saltmere_GreenhouseRepeat
++    msgbox Saltmere_Text_GreenhouseAsk, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
++    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstGreenhouse
++    setvar VAR_AVERON_GREENHOUSE, 1
++Saltmere_GreenhouseRepeat:
++    msgbox Saltmere_Text_TrayBench, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_FirstGreenhouse:
++    setvar VAR_AVERON_FIRST_HOUSE, 1
++    return
++Saltmere_Tray::
++    lockall
++    goto_if_eq VAR_AVERON_GREENHOUSE, 0, Saltmere_TrayEmpty
++    setvar VAR_AVERON_GREENHOUSE, 2
++    msgbox Saltmere_Text_TrayDone, MSGBOX_DEFAULT
++    releaseall
++    end
++Saltmere_TrayEmpty:
++    msgbox Saltmere_Text_Seedlings, MSGBOX_DEFAULT
++    releaseall
++    end
++
++Saltmere_WorkshopKeeper::
++    lock
++    faceplayer
++    goto_if_ne VAR_AVERON_WORKSHOP, 0, Saltmere_WorkshopRepeat
++    msgbox Saltmere_Text_WorkshopAsk, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
++    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstWorkshop
++    setvar VAR_AVERON_WORKSHOP, 1
++Saltmere_WorkshopRepeat:
++    msgbox Saltmere_Text_ScrewShelf, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_FirstWorkshop:
++    setvar VAR_AVERON_FIRST_HOUSE, 2
++    return
++Saltmere_WorkshopScrew::
++    lockall
++    goto_if_eq VAR_AVERON_WORKSHOP, 0, Saltmere_ScrewEmpty
++    setvar VAR_AVERON_WORKSHOP, 2
++    msgbox Saltmere_Text_ScrewDone, MSGBOX_DEFAULT
++    releaseall
++    end
++Saltmere_ScrewEmpty:
++    msgbox Saltmere_Text_ToolShelf, MSGBOX_DEFAULT
++    releaseall
++    end
++
++Saltmere_HarborKeeper::
++    lock
++    faceplayer
++    goto_if_ne VAR_AVERON_HARBOR, 0, Saltmere_HarborRepeat
++    msgbox Saltmere_Text_HarborAsk, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
++    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstHarbor
++    setvar VAR_AVERON_HARBOR, 1
++Saltmere_HarborRepeat:
++    msgbox Saltmere_Text_ParcelDock, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_FirstHarbor:
++    setvar VAR_AVERON_FIRST_HOUSE, 3
++    return
++Saltmere_DeclineErrand:
++    msgbox Saltmere_Text_NoRush, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_Dockhand::
++    lock
++    faceplayer
++    goto_if_ne VAR_AVERON_HARBOR, 1, Saltmere_DockSmallTalk
++    setvar VAR_AVERON_HARBOR, 2
++    msgbox Saltmere_Text_ParcelDone, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_DockSmallTalk:
++    msgbox Saltmere_Text_Dock, MSGBOX_DEFAULT
++    release
++    end
++
++Saltmere_Fenwick::
++    lock
++    faceplayer
++    goto_if_set FLAG_AVERON_STARTER, Saltmere_ProfessorAfter
++    switch VAR_AVERON_FIRST_HOUSE
++    case 1, Saltmere_OfferSnivy
++    case 2, Saltmere_OfferFennekin
++    case 3, Saltmere_OfferPiplup
++    msgbox Saltmere_Text_HelpFirst, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_OfferSnivy:
++    goto_if_ne VAR_AVERON_GREENHOUSE, 2, Saltmere_FinishErrand
++    bufferspeciesname STR_VAR_1, SPECIES_SNIVY
++    msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
++    specialvar VAR_RESULT, CalculatePlayerPartyCount
++    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
++    givemon SPECIES_SNIVY, 5
++    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
++    setvar VAR_AVERON_MIRA_STARTER, SPECIES_PIPLUP
++    goto Saltmere_StarterReceived
++Saltmere_OfferFennekin:
++    goto_if_ne VAR_AVERON_WORKSHOP, 2, Saltmere_FinishErrand
++    bufferspeciesname STR_VAR_1, SPECIES_FENNEKIN
++    msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
++    specialvar VAR_RESULT, CalculatePlayerPartyCount
++    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
++    givemon SPECIES_FENNEKIN, 5
++    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
++    setvar VAR_AVERON_MIRA_STARTER, SPECIES_SNIVY
++    goto Saltmere_StarterReceived
++Saltmere_OfferPiplup:
++    goto_if_ne VAR_AVERON_HARBOR, 2, Saltmere_FinishErrand
++    bufferspeciesname STR_VAR_1, SPECIES_PIPLUP
++    msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
++    specialvar VAR_RESULT, CalculatePlayerPartyCount
++    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
++    givemon SPECIES_PIPLUP, 5
++    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
++    setvar VAR_AVERON_MIRA_STARTER, SPECIES_FENNEKIN
++Saltmere_StarterReceived:
++    setflag FLAG_AVERON_STARTER
++    setflag FLAG_SYS_POKEMON_GET
++    setflag FLAG_SYS_POKEDEX_GET
++    special HealPlayerParty
++    msgbox Saltmere_Text_StarterReceived, MSGBOX_DEFAULT
++    giveitem ITEM_POKE_BALL, 5
++    msgbox Saltmere_Text_RennWaiting, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_FinishErrand:
++    msgbox Saltmere_Text_FinishErrand, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_DeclineStarter:
++    msgbox Saltmere_Text_NoRush, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_PartyFull:
++    msgbox Saltmere_Text_PartyFull, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_ProfessorAfter:
++    msgbox Saltmere_Text_ProfessorAfter, MSGBOX_DEFAULT
++    release
++    end
++
++Saltmere_Renn::
++    lock
++    faceplayer
++    goto_if_unset FLAG_AVERON_STARTER, Saltmere_RennBefore
++    goto_if_ne VAR_AVERON_RENN, 0, Saltmere_RennAfter
++    msgbox Saltmere_Text_RennAsk, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
++    setvar VAR_AVERON_RENN, 1
++    switch VAR_AVERON_FIRST_HOUSE
++    case 1, Saltmere_RennFennekin
++    case 2, Saltmere_RennPiplup
++    case 3, Saltmere_RennSnivy
++    release
++    end
++Saltmere_RennFennekin:
++    trainerbattle_earlyrival TRAINER_AVERON_RENN_FENNEKIN, TRUE, Saltmere_Text_RennLose, Saltmere_Text_RennWin
++    goto Saltmere_RennAfter
++Saltmere_RennPiplup:
++    trainerbattle_earlyrival TRAINER_AVERON_RENN_PIPLUP, TRUE, Saltmere_Text_RennLose, Saltmere_Text_RennWin
++    goto Saltmere_RennAfter
++Saltmere_RennSnivy:
++    trainerbattle_earlyrival TRAINER_AVERON_RENN_SNIVY, TRUE, Saltmere_Text_RennLose, Saltmere_Text_RennWin
++Saltmere_RennAfter:
++    msgbox Saltmere_Text_RennAfter, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_RennBefore:
++    msgbox Saltmere_Text_RennBefore, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_Mira::
++    lock
++    faceplayer
++    goto_if_unset FLAG_AVERON_STARTER, Saltmere_MiraBefore
++    bufferspeciesname STR_VAR_1, VAR_AVERON_MIRA_STARTER
++    msgbox Saltmere_Text_MiraAfter, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_MiraBefore:
++    msgbox Saltmere_Text_MiraBefore, MSGBOX_DEFAULT
++    release
++    end
++Saltmere_HomeHeal::
++    lock
++    faceplayer
++    msgbox Saltmere_Text_Heal, MSGBOX_DEFAULT
++    special HealPlayerParty
++    playfanfare MUS_HEAL
++    waitfanfare
++    release
++    end
++Saltmere_Pip::
++    msgbox Saltmere_Text_Pip, MSGBOX_NPC
++    end
++Saltmere_PipScrew::
++    lockall
++    goto_if_set FLAG_AVERON_PIP_SCREW, Saltmere_PipDone
++    msgbox Saltmere_Text_PipFound, MSGBOX_DEFAULT
++    giveitem ITEM_POTION
++    goto_if_eq VAR_RESULT, FALSE, Saltmere_ReleaseAll
++    setflag FLAG_AVERON_PIP_SCREW
++Saltmere_PipDone:
++    msgbox Saltmere_Text_PipDone, MSGBOX_DEFAULT
++Saltmere_ReleaseAll:
++    releaseall
++    end
++Windrow_Berries::
++    lock
++    faceplayer
++    goto_if_set FLAG_AVERON_BERRIES, Windrow_BerriesDone
++    msgbox Windrow_Text_Berries, MSGBOX_YESNO
++    goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
++    giveitem ITEM_ORAN_BERRY, 3
++    goto_if_eq VAR_RESULT, FALSE, Saltmere_Release
++    setflag FLAG_AVERON_BERRIES
++Windrow_BerriesDone:
++    msgbox Windrow_Text_BerriesDone, MSGBOX_DEFAULT
++Saltmere_Release:
++    release
++    end
++Windrow_RoadAhead::
++    msgbox Windrow_Text_RoadAhead, MSGBOX_NPC
++    end
++Averon_Lookout::
++    msgbox Averon_Text_Lookout, MSGBOX_NPC
++    end
++Averon_MeadowTrainer::
++    trainerbattle_single TRAINER_AVERON_MEADOW, Averon_Text_MeadowChallenge, Averon_Text_MeadowDefeat
++    msgbox Averon_Text_MeadowAfter, MSGBOX_AUTOCLOSE
++    end
++
++Saltmere_Text_Welcome:
++    .string "FENWICK: Morning, {PLAYER}!\nThe pier's already busy.\pOur neighbors could use a hand.\nCome see me when you're done.$"
++Saltmere_Text_PartnerFirst:
++    .string "Better find a partner before\nheading into the long grass.$"
++Saltmere_Text_GreenhouseAsk:
++    .string "Mind carrying that tray over?\nThe little ones need more light.$"
++Saltmere_Text_TrayBench:
++    .string "The sunny bench is by the bookcase.\nJust set the tray there.$"
++Saltmere_Text_TrayDone:
++    .string "You set the seedlings in the light.\nKEEPER: Perfect. That's better!$"
++Saltmere_Text_Seedlings:
++    .string "Tiny seedlings lean toward the sun.$"
++Saltmere_Text_WorkshopAsk:
++    .string "Could you check the tool shelf?\nI'm one screw short of a boat.$"
++Saltmere_Text_ScrewShelf:
++    .string "Left shelf. Small brass screw.\nTry not to bring me a nail!$"
++Saltmere_Text_ScrewDone:
++    .string "You find the screw on the shelf.\nThe keeper fixes it into place.\pThere! This boat might even float.$"
++Saltmere_Text_ToolShelf:
++    .string "Tools of every size fill the shelf.$"
++Saltmere_Text_HarborAsk:
++    .string "Could you take this parcel down\nto the dockhand by the water?$"
++Saltmere_Text_ParcelDock:
++    .string "He's east of the little pier.\nYou'll hear him complaining.$"
++Saltmere_Text_ParcelDone:
++    .string "My lunch! I thought I'd packed\na whole bag of fishing line.\pThanks. You saved my afternoon.$"
++Saltmere_Text_Dock:
++    .string "Wingull got my sandwich yesterday.\nToday I'm watching the sky.$"
++Saltmere_Text_NoRush:
++    .string "No rush. I'll be right here.$"
++Saltmere_Text_HelpFirst:
++    .string "The greenhouse, workshop, and\nharbor house all need a hand.\pPick somewhere to start.\nI'll keep these three company.$"
++Saltmere_Text_StarterOffer:
++    .string "{STR_VAR_1} took quite a shine to you.\nWant to set off together?$"
++Saltmere_Text_StarterReceived:
++    .string "{STR_VAR_1} joined your party!\nFENWICK: Take care of each other.$"
++Saltmere_Text_RennWaiting:
++    .string "RENN's waiting by the north path.\nWINDROW is just past the meadow.$"
++Saltmere_Text_FinishErrand:
++    .string "Finish the errand you started.\nThen we'll get you ready to go.$"
++Saltmere_Text_PartyFull:
++    .string "Your party needs a free space.\nCome back when there's room.$"
++Saltmere_Text_ProfessorAfter:
++    .string "Try the meadow grass for a catch.\nYour family can heal your team.$"
++Saltmere_Text_RennAsk:
++    .string "We made it farther than the pier.\nOne battle before we go?$"
++Saltmere_Text_RennLose:
++    .string "Okay, okay. I should've seen\nthat coming!$"
++Saltmere_Text_RennWin:
++    .string "Ha! You picked a bad time\nto try that move.$"
++Saltmere_Text_RennAfter:
++    .string "I've got supplies for both of us.\nSee you in WINDROW!$"
++Saltmere_Text_RennBefore:
++    .string "FENWICK has our partners ready.\nI hope mine likes boat rides.$"
++Saltmere_Text_MiraBefore:
++    .string "I'm checking the tide pools first.\nBadges can wait till after lunch.$"
++Saltmere_Text_MiraAfter:
++    .string "{STR_VAR_1} and I are taking our time.\nThere's a whole coast to explore.$"
++Saltmere_Text_Heal:
++    .string "Put your feet up for a moment.\nI'll look after your team.$"
++Saltmere_Text_Pip:
++    .string "Don't step on that screw.\nI dropped it somewhere by the pier.$"
++Saltmere_Text_PipFound:
++    .string "You find PIP's missing screw!\nPIP: I was about to blame Wingull.\pHere. Take this for the road.$"
++Saltmere_Text_PipDone:
++    .string "PIP's tackle box is fixed.\nFor now, anyway.$"
++Windrow_Text_Berries:
++    .string "We've picked too many Oran Berries.\nWant to sort a few for the road?$"
++Windrow_Text_BerriesDone:
++    .string "The best ones are firm and blue.\nThe squashed ones go in the pie.$"
++Windrow_Text_RoadAhead:
++    .string "ALDERFIELD is our next stop.\nThe north farm lane isn't open yet.$"
++Averon_Text_Lookout:
++    .string "You can see SALTMERE from here.\nThat pier looks tiny now!$"
++Averon_Text_MeadowChallenge:
++    .string "My Lechonk found the best grass.\nLet's see how it does in a battle!$"
++Averon_Text_MeadowDefeat:
++    .string "Maybe it was just hungry.$"
++Averon_Text_MeadowAfter:
++    .string "WINDROW's growers can help you\nfind Berries for your team.$"
+diff --git a/data/maps/SaltmereGreenhouse/map.json b/data/maps/SaltmereGreenhouse/map.json
+new file mode 100644
+index 0000000000..c44a096ae0
+--- /dev/null
++++ b/data/maps/SaltmereGreenhouse/map.json
+@@ -0,0 +1,59 @@
++{
++  "id": "MAP_SALTMEREGREENHOUSE",
++  "name": "SaltmereGreenhouse",
++  "layout": "LAYOUT_SALTMEREGREENHOUSE",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_SALTMERE",
++  "requires_flash": false,
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
++      "x": 6,
++      "y": 4,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_GreenhouseKeeper",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 3,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 4,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "0"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": [
++    {
++      "type": "sign",
++      "x": 2,
++      "y": 1,
++      "elevation": 0,
++      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
++      "script": "Saltmere_Tray"
++    }
++  ]
++}
+diff --git a/data/maps/SaltmereGreenhouse/scripts.inc b/data/maps/SaltmereGreenhouse/scripts.inc
+new file mode 100644
+index 0000000000..d9fd158b4f
+--- /dev/null
++++ b/data/maps/SaltmereGreenhouse/scripts.inc
+@@ -0,0 +1,2 @@
++SaltmereGreenhouse_MapScripts::
++	.byte 0
+diff --git a/data/maps/SaltmereHarbor/map.json b/data/maps/SaltmereHarbor/map.json
+new file mode 100644
+index 0000000000..310972e410
+--- /dev/null
++++ b/data/maps/SaltmereHarbor/map.json
+@@ -0,0 +1,50 @@
++{
++  "id": "MAP_SALTMEREHARBOR",
++  "name": "SaltmereHarbor",
++  "layout": "LAYOUT_SALTMEREHARBOR",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_SALTMERE",
++  "requires_flash": false,
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
++      "x": 6,
++      "y": 4,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_HarborKeeper",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 3,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "2"
++    },
++    {
++      "x": 4,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "2"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/SaltmereHarbor/scripts.inc b/data/maps/SaltmereHarbor/scripts.inc
+new file mode 100644
+index 0000000000..0ec1254f49
+--- /dev/null
++++ b/data/maps/SaltmereHarbor/scripts.inc
+@@ -0,0 +1,2 @@
++SaltmereHarbor_MapScripts::
++	.byte 0
+diff --git a/data/maps/SaltmereHome/map.json b/data/maps/SaltmereHome/map.json
+new file mode 100644
+index 0000000000..1cd3630727
+--- /dev/null
++++ b/data/maps/SaltmereHome/map.json
+@@ -0,0 +1,50 @@
++{
++  "id": "MAP_SALTMEREHOME",
++  "name": "SaltmereHome",
++  "layout": "LAYOUT_SALTMEREHOME",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_SALTMERE",
++  "requires_flash": false,
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_MOM",
++      "x": 6,
++      "y": 4,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_HomeHeal",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 3,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "3"
++    },
++    {
++      "x": 4,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "3"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/SaltmereHome/scripts.inc b/data/maps/SaltmereHome/scripts.inc
+new file mode 100644
+index 0000000000..95d3c0634d
+--- /dev/null
++++ b/data/maps/SaltmereHome/scripts.inc
+@@ -0,0 +1,2 @@
++SaltmereHome_MapScripts::
++	.byte 0
+diff --git a/data/maps/SaltmereWorkshop/map.json b/data/maps/SaltmereWorkshop/map.json
+new file mode 100644
+index 0000000000..ffc64d751a
+--- /dev/null
++++ b/data/maps/SaltmereWorkshop/map.json
+@@ -0,0 +1,59 @@
++{
++  "id": "MAP_SALTMEREWORKSHOP",
++  "name": "SaltmereWorkshop",
++  "layout": "LAYOUT_SALTMEREWORKSHOP",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_SALTMERE",
++  "requires_flash": false,
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_MAN_1",
++      "x": 6,
++      "y": 4,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_WorkshopKeeper",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 3,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "1"
++    },
++    {
++      "x": 4,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_SALTMERE",
++      "dest_warp_id": "1"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": [
++    {
++      "type": "sign",
++      "x": 1,
++      "y": 1,
++      "elevation": 0,
++      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
++      "script": "Saltmere_WorkshopScrew"
++    }
++  ]
++}
+diff --git a/data/maps/SaltmereWorkshop/scripts.inc b/data/maps/SaltmereWorkshop/scripts.inc
+new file mode 100644
+index 0000000000..c5dc2da28d
+--- /dev/null
++++ b/data/maps/SaltmereWorkshop/scripts.inc
+@@ -0,0 +1,2 @@
++SaltmereWorkshop_MapScripts::
++	.byte 0
+diff --git a/data/maps/Windrow/map.json b/data/maps/Windrow/map.json
+new file mode 100644
+index 0000000000..d9dca0f817
+--- /dev/null
++++ b/data/maps/Windrow/map.json
+@@ -0,0 +1,62 @@
++{
++  "id": "MAP_WINDROW",
++  "name": "Windrow",
++  "layout": "LAYOUT_WINDROW",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_WINDROW",
++  "requires_flash": false,
++  "weather": "WEATHER_SUNNY",
++  "map_type": "MAP_TYPE_TOWN",
++  "allow_cycling": true,
++  "allow_escaping": false,
++  "allow_running": true,
++  "show_map_name": true,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": [
++    {
++      "map": "MAP_COASTALMEADOW",
++      "offset": 0,
++      "direction": "down"
++    }
++  ],
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
++      "x": 15,
++      "y": 14,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Windrow_Berries",
++      "flag": "0"
++    },
++    {
++      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
++      "x": 22,
++      "y": 14,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Windrow_RoadAhead",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 26,
++      "y": 20,
++      "elevation": 0,
++      "dest_map": "MAP_WINDROWCOOPERATIVE",
++      "dest_warp_id": "0"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/Windrow/scripts.inc b/data/maps/Windrow/scripts.inc
+new file mode 100644
+index 0000000000..08c9eb182f
+--- /dev/null
++++ b/data/maps/Windrow/scripts.inc
+@@ -0,0 +1,2 @@
++Windrow_MapScripts::
++	.byte 0
+diff --git a/data/maps/WindrowCooperative/map.json b/data/maps/WindrowCooperative/map.json
+new file mode 100644
+index 0000000000..b418f51f22
+--- /dev/null
++++ b/data/maps/WindrowCooperative/map.json
+@@ -0,0 +1,50 @@
++{
++  "id": "MAP_WINDROWCOOPERATIVE",
++  "name": "WindrowCooperative",
++  "layout": "LAYOUT_WINDROWCOOPERATIVE",
++  "music": "MUS_OLDALE",
++  "region": "REGION_HOENN",
++  "region_map_section": "MAPSEC_WINDROW",
++  "requires_flash": false,
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
++      "x": 6,
++      "y": 4,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "Saltmere_HomeHeal",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 3,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_WINDROW",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 4,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_WINDROW",
++      "dest_warp_id": "0"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/WindrowCooperative/scripts.inc b/data/maps/WindrowCooperative/scripts.inc
+new file mode 100644
+index 0000000000..8bed8c197e
+--- /dev/null
++++ b/data/maps/WindrowCooperative/scripts.inc
+@@ -0,0 +1,2 @@
++WindrowCooperative_MapScripts::
++	.byte 0
+diff --git a/data/maps/map_groups.json b/data/maps/map_groups.json
+index d6320f485b..aa23dd5744 100644
+--- a/data/maps/map_groups.json
++++ b/data/maps/map_groups.json
+@@ -74,7 +74,8 @@
+     "gMapGroup_IndoorFiveIslandRoute_Frlg",
+     "gMapGroup_IndoorTwoIslandRoute_Frlg",
+     "gMapGroup_IndoorSixIslandRoute_Frlg",
+-    "gMapGroup_IndoorSevenIslandRoute_Frlg"
++    "gMapGroup_IndoorSevenIslandRoute_Frlg",
++    "gMapGroup_AveronOpening"
+   ],
+   "gMapGroup_TownsAndRoutes": [
+     "PetalburgCity",
+@@ -1160,5 +1161,15 @@
+   ],
+   "gMapGroup_IndoorSevenIslandRoute_Frlg": [
+     "SevenIsland_SevaultCanyon_House_Frlg"
++  ],
++  "gMapGroup_AveronOpening": [
++    "Saltmere",
++    "SaltmereGreenhouse",
++    "SaltmereWorkshop",
++    "SaltmereHarbor",
++    "SaltmereHome",
++    "CoastalMeadow",
++    "Windrow",
++    "WindrowCooperative"
+   ]
+ }
+diff --git a/include/config/overworld.h b/include/config/overworld.h
+index 08d0fc3037..f16d8fd54e 100644
+--- a/include/config/overworld.h
++++ b/include/config/overworld.h
+@@ -58,7 +58,7 @@
+                                                   // 16x32, 32x32, 64x64 etc are fine
+ #define OW_MON_WANDER_WALK             TRUE       // If true, OW Pokémon with MOVEMENT_TYPE_WANDER will walk-in-place in between steps.
+ // Follower Pokémon
+-#define OW_FOLLOWERS_ENABLED           FALSE      // Enables follower Pokémon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
++#define OW_FOLLOWERS_ENABLED           TRUE      // Enables follower Pokémon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
+ #define OW_FOLLOWERS_BOBBING           TRUE       // If TRUE, follower Pokémon will bob up and down during their idle & walking animations
+ #define OW_FOLLOWERS_POKEBALLS         TRUE       // If TRUE, follower Pokémon will emerge from the Poké Ball they are stored in, instead of a normal Poké Ball
+ #define OW_FOLLOWERS_WEATHER_FORMS     FALSE      // If TRUE, Castform and Cherrim gain FORM_CHANGE_OVERWORLD_WEATHER, which will make them transform in the overworld based on the weather.
+diff --git a/include/constants/flags.h b/include/constants/flags.h
+index d7a0231178..437740f8e1 100644
+--- a/include/constants/flags.h
++++ b/include/constants/flags.h
+@@ -51,9 +51,9 @@
+ 
+ #else
+ 
+-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
+-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
+-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
++#define FLAG_AVERON_STARTER    0x20 // Unused Flag
++#define FLAG_AVERON_PIP_SCREW    0x21 // Unused Flag
++#define FLAG_AVERON_BERRIES    0x22 // Unused Flag
+ #define FLAG_UNUSED_0x023    0x23 // Unused Flag
+ #define FLAG_UNUSED_0x024    0x24 // Unused Flag
+ #define FLAG_UNUSED_0x025    0x25 // Unused Flag
+diff --git a/include/constants/opponents.h b/include/constants/opponents.h
+index 0724da5486..81d24b9df9 100644
+--- a/include/constants/opponents.h
++++ b/include/constants/opponents.h
+@@ -864,7 +864,11 @@
+ //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
+ //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
+ 
+-#define TRAINERS_COUNT_EMERALD     855
++#define TRAINER_AVERON_RENN_FENNEKIN 855
++#define TRAINER_AVERON_RENN_PIPLUP 856
++#define TRAINER_AVERON_RENN_SNIVY 857
++#define TRAINER_AVERON_MEADOW 858
++#define TRAINERS_COUNT_EMERALD     859
+ #define MAX_TRAINERS_COUNT_EMERALD 864
+ 
+ #if IS_FRLG
+diff --git a/include/constants/vars.h b/include/constants/vars.h
+index 7992ae09a4..412ebfb530 100644
+--- a/include/constants/vars.h
++++ b/include/constants/vars.h
+@@ -97,7 +97,7 @@
+ #define VAR_POKELOT_RND1                                 0x404B // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
+ #define VAR_POKELOT_RND2                                 0x404C // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
+ #define VAR_POKELOT_PRIZE_PLACE                          0x404D
+-#define VAR_UNUSED_0x404E                                0x404E // Unused Var
++#define VAR_AVERON_FIRST_HOUSE                                0x404E // Unused Var
+ #define VAR_LOTAD_SIZE_RECORD                            0x404F
+ #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
+ #define VAR_OLDALE_TOWN_STATE                            0x4051
+@@ -150,7 +150,7 @@
+ #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
+ #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
+ #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
+-#define VAR_UNUSED_0x4083                                0x4083 // Unused Var
++#define VAR_AVERON_GREENHOUSE                                0x4083 // Unused Var
+ #define VAR_BIRCH_LAB_STATE                              0x4084
+ #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
+ #define VAR_CONTEST_HALL_STATE                           0x4086
+@@ -158,13 +158,13 @@
+ #define VAR_CONTEST_TYPE                                 0x4088
+ #define VAR_SECRET_BASE_INITIALIZED                      0x4089
+ #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
+-#define VAR_UNUSED_0x408B                                0x408B // Unused Var
++#define VAR_AVERON_WORKSHOP                                0x408B // Unused Var
+ #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
+ #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
+ #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
+ #define VAR_DEVON_CORP_3F_STATE                          0x408F
+ #define VAR_BRINEY_HOUSE_STATE                           0x4090
+-#define VAR_UNUSED_0x4091                                0x4091 // Unused Var
++#define VAR_AVERON_HARBOR                                0x4091 // Unused Var
+ #define VAR_LITTLEROOT_INTRO_STATE                       0x4092
+ #define VAR_MAUVILLE_GYM_STATE                           0x4093
+ #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094
+@@ -174,13 +174,13 @@
+ #define VAR_PETALBURG_WOODS_STATE                        0x4098
+ #define VAR_LILYCOVE_CONTEST_LOBBY_STATE                 0x4099
+ #define VAR_RUSTURF_TUNNEL_STATE                         0x409A
+-#define VAR_UNUSED_0x409B                                0x409B // Unused Var
++#define VAR_AVERON_RENN                                0x409B // Unused Var
+ #define VAR_ELITE_4_STATE                                0x409C
+-#define VAR_UNUSED_0x409D                                0x409D // Unused Var
++#define VAR_AVERON_MIRA_STARTER                                0x409D // Unused Var
+ #define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE      0x409E
+ #define VAR_MOSSDEEP_SPACE_CENTER_STATE                  0x409F
+ #define VAR_SLATEPORT_HARBOR_STATE                       0x40A0
+-#define VAR_UNUSED_0x40A1                                0x40A1 // Unused var
++#define VAR_AVERON_INTRO                                0x40A1 // Unused var
+ #define VAR_SEAFLOOR_CAVERN_STATE                        0x40A2
+ #define VAR_CABLE_CAR_STATION_STATE                      0x40A3
+ #define VAR_SAFARI_ZONE_STATE                            0x40A4  // 0: In or out of SZ, 1: Player exiting SZ, 2: Player entering SZ
+diff --git a/src/data/heal_locations.json b/src/data/heal_locations.json
+index ad1e5f1d20..4d5e239794 100644
+--- a/src/data/heal_locations.json
++++ b/src/data/heal_locations.json
+@@ -2,23 +2,23 @@
+   "heal_locations": [
+     {
+       "id": "HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+-      "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+-      "x": 4,
+-      "y": 2,
+-      "respawn_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+-      "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+-      "respawn_x": 2,
+-      "respawn_y": 7
++      "map": "MAP_SALTMERE",
++      "x": 18,
++      "y": 18,
++      "respawn_map": "MAP_SALTMEREHOME",
++      "respawn_npc": "1",
++      "respawn_x": 6,
++      "respawn_y": 5
+     },
+     {
+       "id": "HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+-      "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+-      "x": 4,
+-      "y": 2,
+-      "respawn_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+-      "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+-      "respawn_x": 8,
+-      "respawn_y": 7
++      "map": "MAP_SALTMERE",
++      "x": 18,
++      "y": 18,
++      "respawn_map": "MAP_SALTMEREHOME",
++      "respawn_npc": "1",
++      "respawn_x": 6,
++      "respawn_y": 5
+     },
+     {
+       "id": "HEAL_LOCATION_PETALBURG_CITY",
+diff --git a/src/data/region_map/region_map_sections.json b/src/data/region_map/region_map_sections.json
+index e17033838d..ee979d757e 100644
+--- a/src/data/region_map/region_map_sections.json
++++ b/src/data/region_map/region_map_sections.json
+@@ -1072,7 +1072,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_MANSION",
+-      "name": "POKéMON MANSION",
++      "name": "POK\u00c3\u00a9MON MANSION",
+       "x": 4,
+       "y": 14,
+       "width": 1,
+@@ -1088,7 +1088,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_LEAGUE",
+-      "name": "POKéMON LEAGUE",
++      "name": "POK\u00c3\u00a9MON LEAGUE",
+       "x": 2,
+       "y": 3,
+       "width": 1,
+@@ -1112,7 +1112,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_TOWER",
+-      "name": "POKéMON TOWER",
++      "name": "POK\u00c3\u00a9MON TOWER",
+       "x": 18,
+       "y": 6,
+       "width": 1,
+@@ -1630,6 +1630,30 @@
+       "y": 4,
+       "width": 1,
+       "height": 1
++    },
++    {
++      "id": "MAPSEC_SALTMERE",
++      "name": "SALTMERE",
++      "x": 3,
++      "y": 11,
++      "width": 1,
++      "height": 1
++    },
++    {
++      "id": "MAPSEC_COASTAL_MEADOW",
++      "name": "COASTAL MEADOW",
++      "x": 3,
++      "y": 10,
++      "width": 1,
++      "height": 1
++    },
++    {
++      "id": "MAPSEC_WINDROW",
++      "name": "WINDROW HAMLET",
++      "x": 3,
++      "y": 9,
++      "width": 1,
++      "height": 1
+     }
+   ]
+ }
+diff --git a/src/data/trainers.party b/src/data/trainers.party
+index fbe4a37f6d..736a4cf7ac 100644
+--- a/src/data/trainers.party
++++ b/src/data/trainers.party
+@@ -16877,3 +16877,63 @@ Double Battle: No
+ Kyogre
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
++
++
++
++
++/* AVERON OPENING TEAMS */
++
++=== TRAINER_AVERON_RENN_FENNEKIN ===
++Name: RENN
++Class: Pkmn Trainer 1
++Pic: Brendan
++Gender: Male
++Music: Male
++AI: Check Bad Move
++
++Fennekin
++Level: 5
++IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
++- Scratch
++- Tail Whip
++
++=== TRAINER_AVERON_RENN_PIPLUP ===
++Name: RENN
++Class: Pkmn Trainer 1
++Pic: Brendan
++Gender: Male
++Music: Male
++AI: Check Bad Move
++
++Piplup
++Level: 5
++IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
++- Pound
++- Growl
++
++=== TRAINER_AVERON_RENN_SNIVY ===
++Name: RENN
++Class: Pkmn Trainer 1
++Pic: Brendan
++Gender: Male
++Music: Male
++AI: Check Bad Move
++
++Snivy
++Level: 5
++IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
++- Tackle
++- Leer
++
++=== TRAINER_AVERON_MEADOW ===
++Name: FINN
++Class: Youngster
++Pic: Youngster
++Gender: Male
++Music: Male
++AI: Check Bad Move
++
++Lechonk
++Level: 4
++- Tackle
++- Tail Whip
+diff --git a/src/data/wild_encounters.json b/src/data/wild_encounters.json
+index ac4c8a1f56..1b3be8620c 100755
+--- a/src/data/wild_encounters.json
++++ b/src/data/wild_encounters.json
+@@ -36577,6 +36577,75 @@
+               }
+             ]
+           }
++        },
++        {
++          "map": "MAP_COASTALMEADOW",
++          "base_label": "gCoastalMeadow",
++          "land_mons": {
++            "encounter_rate": 20,
++            "mons": [
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_FLETCHLING"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_LECHONK"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_BUNNELBY"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_SMOLIV"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_PAWMI"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_SENTRET"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_HOPPIP"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_FLETCHLING"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_LECHONK"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_SMOLIV"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_PAWMI"
++              },
++              {
++                "min_level": 2,
++                "max_level": 4,
++                "species": "SPECIES_HOPPIP"
++              }
++            ]
++          }
+         }
+       ]
+     },
+diff --git a/src/new_game.c b/src/new_game.c
+index 89a2bf4cf8..39b2e9b96e 100644
+--- a/src/new_game.c
++++ b/src/new_game.c
+@@ -100,7 +100,7 @@ static void InitPlayerTrainerId(void)
+ // L=A isnt set here for some reason.
+ static void SetDefaultOptions(void)
+ {
+-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
++    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+     gSaveBlock2Ptr->optionsWindowFrameType = 0;
+     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
+     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
+@@ -138,7 +138,7 @@ static void WarpToTruck(void)
+     if (IS_FRLG)
+         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+     else
+-        SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
++        SetWarpDestination(MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), WARP_ID_NONE, 18, 18);
+     WarpIntoMap();
+ }
+ 
+-- 
+2.53.0.windows.3
+

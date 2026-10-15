@@ -1,0 +1,143 @@
+From c7c3b258bf5f5936b4dbafdcb0c7da899766b45e Mon Sep 17 00:00:00 2001
+From: Codex <codex@local.invalid>
+Date: Wed, 14 Oct 2026 16:16:56 -0400
+Subject: [PATCH 2/2] Fix opening build integration and starter supply recovery
+
+---
+ data/maps/CoastalMeadow/map.json             |  4 ++--
+ data/maps/Saltmere/scripts.inc               | 16 ++++++++++++++++
+ include/constants/flags.h                    |  2 +-
+ src/data/region_map/region_map_sections.json |  6 +++---
+ src/data/trainers.party                      |  2 ++
+ 5 files changed, 24 insertions(+), 6 deletions(-)
+
+diff --git a/data/maps/CoastalMeadow/map.json b/data/maps/CoastalMeadow/map.json
+index 073b1276aa..78e76b3d2c 100644
+--- a/data/maps/CoastalMeadow/map.json
++++ b/data/maps/CoastalMeadow/map.json
+@@ -2,12 +2,12 @@
+   "id": "MAP_COASTALMEADOW",
+   "name": "CoastalMeadow",
+   "layout": "LAYOUT_COASTALMEADOW",
+-  "music": "MUS_OLDALE",
++  "music": "MUS_ROUTE101",
+   "region": "REGION_HOENN",
+   "region_map_section": "MAPSEC_COASTAL_MEADOW",
+   "requires_flash": false,
+   "weather": "WEATHER_SUNNY",
+-  "map_type": "MAP_TYPE_TOWN",
++  "map_type": "MAP_TYPE_ROUTE",
+   "allow_cycling": true,
+   "allow_escaping": false,
+   "allow_running": true,
+diff --git a/data/maps/Saltmere/scripts.inc b/data/maps/Saltmere/scripts.inc
+index 3a70e5832a..51d058c93b 100644
+--- a/data/maps/Saltmere/scripts.inc
++++ b/data/maps/Saltmere/scripts.inc
+@@ -4,6 +4,7 @@ Saltmere_MapScripts::
+     .byte 0
+ 
+ Saltmere_OnTransition:
++    clearflag FLAG_HIDE_MAP_NAME_POPUP
+     setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
+     end
+ 
+@@ -169,6 +170,7 @@ Saltmere_StarterReceived:
+     special HealPlayerParty
+     msgbox Saltmere_Text_StarterReceived, MSGBOX_DEFAULT
+     giveitem ITEM_POKE_BALL, 5
++    call_if_eq VAR_RESULT, TRUE, Saltmere_MarkSupplies
+     msgbox Saltmere_Text_RennWaiting, MSGBOX_DEFAULT
+     release
+     end
+@@ -185,9 +187,21 @@ Saltmere_PartyFull:
+     release
+     end
+ Saltmere_ProfessorAfter:
++    goto_if_set FLAG_AVERON_SUPPLIES, Saltmere_ProfessorReady
++    giveitem ITEM_POKE_BALL, 5
++    goto_if_eq VAR_RESULT, FALSE, Saltmere_SuppliesFull
++    setflag FLAG_AVERON_SUPPLIES
++Saltmere_ProfessorReady:
+     msgbox Saltmere_Text_ProfessorAfter, MSGBOX_DEFAULT
+     release
+     end
++Saltmere_MarkSupplies:
++    setflag FLAG_AVERON_SUPPLIES
++    return
++Saltmere_SuppliesFull:
++    msgbox Saltmere_Text_SuppliesFull, MSGBOX_DEFAULT
++    release
++    end
+ 
+ Saltmere_Renn::
+     lock
+@@ -324,6 +338,8 @@ Saltmere_Text_PartyFull:
+     .string "Your party needs a free space.\nCome back when there's room.$"
+ Saltmere_Text_ProfessorAfter:
+     .string "Try the meadow grass for a catch.\nYour family can heal your team.$"
++Saltmere_Text_SuppliesFull:
++    .string "Make some room in your BAG.\nI'll keep your Poke Balls here.$"
+ Saltmere_Text_RennAsk:
+     .string "We made it farther than the pier.\nOne battle before we go?$"
+ Saltmere_Text_RennLose:
+diff --git a/include/constants/flags.h b/include/constants/flags.h
+index 437740f8e1..5e5f180129 100644
+--- a/include/constants/flags.h
++++ b/include/constants/flags.h
+@@ -54,7 +54,7 @@
+ #define FLAG_AVERON_STARTER    0x20 // Unused Flag
+ #define FLAG_AVERON_PIP_SCREW    0x21 // Unused Flag
+ #define FLAG_AVERON_BERRIES    0x22 // Unused Flag
+-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
++#define FLAG_AVERON_SUPPLIES    0x23 // Unused Flag
+ #define FLAG_UNUSED_0x024    0x24 // Unused Flag
+ #define FLAG_UNUSED_0x025    0x25 // Unused Flag
+ #define FLAG_UNUSED_0x026    0x26 // Unused Flag
+diff --git a/src/data/region_map/region_map_sections.json b/src/data/region_map/region_map_sections.json
+index ee979d757e..f183b09859 100644
+--- a/src/data/region_map/region_map_sections.json
++++ b/src/data/region_map/region_map_sections.json
+@@ -1072,7 +1072,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_MANSION",
+-      "name": "POK\u00c3\u00a9MON MANSION",
++      "name": "POK\u00e9MON MANSION",
+       "x": 4,
+       "y": 14,
+       "width": 1,
+@@ -1088,7 +1088,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_LEAGUE",
+-      "name": "POK\u00c3\u00a9MON LEAGUE",
++      "name": "POK\u00e9MON LEAGUE",
+       "x": 2,
+       "y": 3,
+       "width": 1,
+@@ -1112,7 +1112,7 @@
+     },
+     {
+       "id": "MAPSEC_POKEMON_TOWER",
+-      "name": "POK\u00c3\u00a9MON TOWER",
++      "name": "POK\u00e9MON TOWER",
+       "x": 18,
+       "y": 6,
+       "width": 1,
+diff --git a/src/data/trainers.party b/src/data/trainers.party
+index 736a4cf7ac..2a5c1574cf 100644
+--- a/src/data/trainers.party
++++ b/src/data/trainers.party
+@@ -16881,6 +16881,8 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ 
+ 
+ 
++
++
+ /* AVERON OPENING TEAMS */
+ 
+ === TRAINER_AVERON_RENN_FENNEKIN ===
+-- 
+2.53.0.windows.3
+

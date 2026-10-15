@@ -1,0 +1,172 @@
+{
+  "name": "Pokemon Averon Codex Handoff",
+  "version": "1.0",
+  "date": "2026-10-14",
+  "status": "Design and Codex instructions only; not a compiled GBA ROM",
+  "base_engine": "rh-hideout/pokeemerald-expansion",
+  "target_format": ".gba",
+  "target_emulator": "Delta iOS (to be tested)",
+  "planned_regions": [
+    "Averon",
+    "Sinnoh"
+  ],
+  "planned_content": {
+    "averon_gym_count": 8,
+    "location_nodes": 24,
+    "route_links": 36,
+    "legendary_quest_arcs": 33,
+    "max_level": 100
+  },
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 6137,
+      "sha256": "2d7c4308d2e672fd31b9dd70a5c0b83e93f153b41d83e61d20ba94547a9e0de2"
+    },
+    {
+      "path": "CODEX_START_PROMPT.txt",
+      "bytes": 1777,
+      "sha256": "c97215858faf7206c0a4952162a096404f41b3e0ec33d8f3da81108976e88d50"
+    },
+    {
+      "path": "CODEX_WORK_ORDER.md",
+      "bytes": 9162,
+      "sha256": "34c8f8117f651901a46e5af539b7099a4e758fcbc26f6f2b01776a9e6a1259ec"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 5187,
+      "sha256": "f37643d9f7e86763e3b6411e6e206e2ea3ead706de2f4adf45b1a7e3a1d7171e"
+    },
+    {
+      "path": "data/DATA_DICTIONARY.md",
+      "bytes": 2253,
+      "sha256": "8df58471b21e5d7f1e2a65ddad9c6be8be5a0a7893a26ab8692e412dfe4c0ca6"
+    },
+    {
+      "path": "data/asset_license_ledger.csv",
+      "bytes": 106,
+      "sha256": "cce6ad3527a5f2d93c77bcb0e88eab0a9da5604047fd63ff09f4fcf90a7741e7"
+    },
+    {
+      "path": "data/final_gauntlet_blueprints.csv",
+      "bytes": 1009,
+      "sha256": "c92d81491efd700cf9df1df7b3b237024a3be77e2cfe9619c842138b4ddd9816"
+    },
+    {
+      "path": "data/gym_team_blueprints.csv",
+      "bytes": 1396,
+      "sha256": "13d5e57471d276af2e1fb2a1c494562118ab38917d697fb7ada83a0e2dc5a0b6"
+    },
+    {
+      "path": "data/gyms.csv",
+      "bytes": 957,
+      "sha256": "14e26c4a3c483b798afed1677602fe17cf3edf002d37e0200b30d57ca89ab445"
+    },
+    {
+      "path": "data/habitat_examples.csv",
+      "bytes": 1690,
+      "sha256": "8c60daa5cc3299cff6bdc1655190498512ff941310002378e33da5aa23d536e7"
+    },
+    {
+      "path": "data/legendary_quests.csv",
+      "bytes": 5546,
+      "sha256": "10ec18e3fd510fa7f9dc209d7ad15852542da4ba5bbb7d8677a2812b80467923"
+    },
+    {
+      "path": "data/level_curve.csv",
+      "bytes": 487,
+      "sha256": "a80b91f88cc8c3fe33c127275ac9676c09b158c4e3cf4e34649e0a019c1982e0"
+    },
+    {
+      "path": "data/locations.csv",
+      "bytes": 3501,
+      "sha256": "f9495314a196a62d612d411b408dee2671ecbd3dfeb3828b86d2a01ba124c762"
+    },
+    {
+      "path": "data/route_network.csv",
+      "bytes": 3452,
+      "sha256": "de061aa9c3c3f15e04dd38bfd60c0cd3ce819e9b6467d3e12b91eb8227f17bb8"
+    },
+    {
+      "path": "design/CREATIVE_LOCKS_AND_OPEN_CHOICES.md",
+      "bytes": 4261,
+      "sha256": "6f14df6ae9d6f4e9d1b09be7ba231207fffce3d6594338ce8a199c9cb65e1929"
+    },
+    {
+      "path": "design/DIALOGUE_GUIDE.md",
+      "bytes": 11496,
+      "sha256": "e0b337b992c390e246b3a204e89e3abc405bd0479b9df79ff5b7454224d8fff8"
+    },
+    {
+      "path": "design/GAMEPLAY_AND_CONTENT.md",
+      "bytes": 11348,
+      "sha256": "fc2de3b61d094807c99c107f2815b32cc1b36ad578544a7dde4d84707138be42"
+    },
+    {
+      "path": "design/QUEST_AND_EVENT_MATRIX.md",
+      "bytes": 6587,
+      "sha256": "3d38f169a0d06f3909fb1b352a0679d06b781462074a0c70ccd12cb6e0901106"
+    },
+    {
+      "path": "design/REGION_ATLAS.md",
+      "bytes": 11737,
+      "sha256": "f0838ea1413fdddeab00d7d7396ddc3ec2f3f563a227240ddfce617752216cda"
+    },
+    {
+      "path": "design/SINNOH_AND_POSTGAME.md",
+      "bytes": 5920,
+      "sha256": "fdab81eee3be216b3e1d8430e411e675e132f1c67c5a543d8f416e760a56e65b"
+    },
+    {
+      "path": "design/SPRITES_AND_AUDIO.md",
+      "bytes": 3199,
+      "sha256": "ee036307de68796b5adfd50f8b2f0d66b80ad53c7a075bcafdbd9ae8c35f1520"
+    },
+    {
+      "path": "design/STORY_BIBLE.md",
+      "bytes": 18789,
+      "sha256": "e30dee2ce87306222786d1e1e73f1a94153a90adf5f725b659fd589d33b3273c"
+    },
+    {
+      "path": "development/DECISIONS.md",
+      "bytes": 1045,
+      "sha256": "5f20f6c1cb1afb055c06abf65c4640964acb6b0a2a0799125c52615b9a025351"
+    },
+    {
+      "path": "development/ENGINE_RESEARCH.md",
+      "bytes": 3020,
+      "sha256": "c5200b55ae0afb31eaf0979c4af037ffd23d31b7e0c8a13112358e846cc3b14a"
+    },
+    {
+      "path": "development/ENVIRONMENT.md",
+      "bytes": 625,
+      "sha256": "cddf83560409e5ad4f0396b8167df96814f8757182c0757a924f79abbdbbd2dc"
+    },
+    {
+      "path": "development/PROGRESS.md",
+      "bytes": 1414,
+      "sha256": "dee8558b9a7344ee1fcd24ca94f4142bbb032f941f2812780ef810b1d02823d9"
+    },
+    {
+      "path": "qa/QA_MATRIX.md",
+      "bytes": 6309,
+      "sha256": "fca8a830a65c5ff6c40a9652fd9110138cb6de44bc6043dfcf681ba55e98682d"
+    },
+    {
+      "path": "reference_maps/Averon_Master_Map_v1.png",
+      "bytes": 381261,
+      "sha256": "7d9f17a02ea4d8ee7c6f5b780dd04fdf8509653bc35fbe6d65a088a059e43713"
+    },
+    {
+      "path": "reference_maps/Averon_Travel_Network_v2.png",
+      "bytes": 684018,
+      "sha256": "4d27a6b8b97f350e3c955ba7bac4b500038048018aadd283054d8fb0351da982"
+    },
+    {
+      "path": "scripts/validate_design.py",
+      "bytes": 5436,
+      "sha256": "6872835aaf47c7a5de638a7722db88ae997b8fdebc94d26233cf127155254322"
+    }
+  ]
+}
