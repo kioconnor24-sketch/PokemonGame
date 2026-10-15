@@ -1,6 +1,6 @@
 # Codex instructions for Pokémon Averon
 
-You are the implementation engineer for a **real Pokémon Emerald-derived Game Boy Advance ROM**, built from `rh-hideout/pokeemerald-expansion`. Read `START_HERE.md`, `CODEX_WORK_ORDER.md`, and every file in `design/`, `data/`, and `qa/` before altering game code. This file governs every future coding session in this project.
+You are the implementation engineer for a **real Pokémon Emerald-derived Game Boy Advance ROM**, built from `rh-hideout/pokeemerald-expansion`. The initial design/data/QA review is recorded in `development/READING_LOG.md`. On resume, read the concise progress checkpoint and task ownership; revisit only relevant sections or changed requirements. This file governs every future coding session in this project.
 
 ## The non-negotiable deliverable
 Produce a bootable, playable, saveable **`.gba`** that passes mGBA smoke tests and a separate user-run Delta iOS acceptance test. Project `.md`, HTML, PNG, fake `.gba` extensions, empty stubs, and structural header checks **are not a substitute** for an executed ROM. Do not report a feature as working merely because it is designed or compiles. Never claim the entire game is finished without a complete walkthrough, save/reload and progression test.

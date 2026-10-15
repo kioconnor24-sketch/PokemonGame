@@ -1,4 +1,40 @@
-# Engineering progress (accurate as of design handoff)
+# Engineering progress
+
+## Authoritative checkpoint — GitHub migration, 2026-10-14
+
+- Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;
+  fetched successfully. No other branch or open PR observed at inspection.
+- Active branch: `codex/first-gym-verification`; repository project prefix
+  `Pokemon Game/`. Shared ownership is in `TASKS.md`.
+- Implemented: Saltmere/Coastal Meadow/Windrow opening; Orchard Lane,
+  Alderfield clinic/shop/irrigation Gym; Set, badge caps and Mega-only gating.
+- Built: M2 `make -j$(nproc) -O all`, exit 0; `evidence/m2/build.log`.
+  Local ROM SHA256 `6c037b81d10e9ef14517bdac033bffef399b7268be6f437a4406cd25fe20f983`.
+- Tested in mGBA 0.10.5: Snivy errand/decline/award; native save/reload;
+  follower; corrected Renn Fennekin battle; Bunnelby capture; Windrow berries;
+  Orchard Lane transition; Exp. Share gift and native assignment to Bunnelby;
+  Oran Berry assignment to Snivy. See `qa/OPENING_TEST_RESULTS.md`.
+- Unverified: other starter branches/edge cases; M2 battle EXP/caps, Gym
+  puzzle/badge/TM, clinic whiteout/PC, Mega runtime, natural balance, Delta.
+- New developer fixtures replace upstream debug Script 1/2/3 with cap,
+  legal Mega and six-member EXP parties. Incremental build exited 0; runtime
+  tests pending. QA SHA256 `0ce5bab776eb44adab514e0589ea38b7ab9b477ddb97e640a2032fcfee22e62f`.
+  Preserve the
+  natural native save before selecting them; never count fixtures as balance.
+- WSL `/root/averon/engine` retains local source changes and working build
+  caches; no toolchain reinstall needed. Windows source and backups preserved.
+- Next three tasks: build fixtures and test EXP/cap; test Gym and recovery;
+  run legal Mega test. Finish these before expanding production geography.
+- GitHub push verification is recorded with the resulting feature commit;
+  a local commit alone does not mean remotely backed up.
+- Workflow update: source coding/static checks/compilation take priority;
+  manual emulator testing is deferred by user instruction. ChatGPT may attempt
+  runtime tests with the local compiled artifact; capability is not established.
+- Continuation scheduled in this chat for October 15 at 02:25 and 09:00 EDT.
+  Local computer must be awake with app running. Later cadence awaiting user
+  clarification. No paid reload, credit purchase or manual usage reset allowed.
+
+Older entries below are historical; they do not override this checkpoint.
 
 | Milestone | State | Evidence required |
 |---|---|---|
@@ -13,7 +49,8 @@
 | M8 Visual/audio polishing, credits, localization | Not started | Asset ledger, screenshots, licensed/allowed audio |
 | M9 Complete QA, Delta test and patch release | Not started | Emulator + iPhone Delta results and release checklist |
 
-**Truthfulness guard:** untouched base ROM compiled and booted in mGBA. Averon content is not implemented yet; gameplay/save acceptance is in progress.
+**Truthfulness guard:** base and custom content compiled and ran in mGBA;
+partial acceptance passed. The complete game and Delta acceptance are unfinished.
 
 ### Current execution checkpoint
 
