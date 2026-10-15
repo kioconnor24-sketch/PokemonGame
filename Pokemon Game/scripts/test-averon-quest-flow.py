@@ -72,11 +72,11 @@ class QuestVM:
                 pc = stack.pop()
                 continue
             if op == 'setvar':
-                if arg != 'VAR_RESULT, FALSE':
+                if arg not in {'VAR_RESULT, FALSE', 'VAR_RESULT, TRUE'}:
                     raise RuntimeError('Unsupported variable assignment: ' + arg)
-                result = False
+                result = arg.endswith('TRUE')
                 continue
-            if op in {'lock', 'faceplayer', 'release', 'playfanfare', 'waitfanfare'}:
+            if op in {'lock', 'lockall', 'faceplayer', 'release', 'releaseall', 'playfanfare', 'waitfanfare'}:
                 continue
             if op == 'msgbox':
                 if 'MSGBOX_YESNO' in arg:
@@ -145,6 +145,8 @@ class NativeQuestFlowTests(unittest.TestCase):
         self.assertNotIn('FLAG_AVERON_SKETCH_FOUND', game.flags)
         game.talk('Averon_BerrySketch_Artist')
         game.talk('Averon_BerrySketch_Observer')
+        self.assertNotIn('FLAG_AVERON_SKETCH_FOUND', game.flags)
+        game.talk('Averon_BerrySketch_Tree')
         self.assertIn('FLAG_AVERON_SKETCH_FOUND', game.flags)
         game.talk('Averon_BerrySketch_Artist', capacity=False)
         self.assertNotIn('FLAG_AVERON_SKETCH_REWARDED', game.flags)
@@ -160,8 +162,22 @@ class NativeQuestFlowTests(unittest.TestCase):
         self.assertFalse(any(f.startswith('FLAG_AVERON_SKETCH_') for f in game.flags))
         game.talk('Averon_BerrySketch_Artist')
         game.talk('Averon_BerrySketch_Observer')
+        game.talk('Averon_BerrySketch_Tree')
         game.talk('Averon_BerrySketch_Artist')
         self.assertEqual(game.bag, {'ITEM_GREAT_BALL': 2, 'ITEM_ORAN_BERRY': 3})
+
+    def test_tree_before_artist_and_decline_do_not_start_event(self):
+        game = QuestVM()
+        game.talk('Averon_BerrySketch_Tree')
+        game.talk('Averon_BerrySketch_Artist', accept=False)
+        game.talk('Averon_BerrySketch_Observer')
+        game.talk('Averon_BerrySketch_Tree')
+        self.assertEqual(game.flags, set())
+        game.talk('Averon_BerrySketch_Artist')
+        game.talk('Averon_BerrySketch_Tree')
+        flags = game.flags.copy()
+        game.talk('Averon_BerrySketch_Tree')
+        self.assertEqual(game.flags, flags)
 
     def test_source_uses_only_six_reserved_persistent_flags(self):
         self.assertEqual(set(FLAG.findall(SOURCE)), {

@@ -19,7 +19,9 @@ class SideQuestInstallerTests(unittest.TestCase):
         self.engine = Path(self.temp.name)
         self.layout = self.engine / 'data/layouts/Test/map.bin'
         self.layout.parent.mkdir(parents=True)
-        self.layout.write_bytes(struct.pack('<' + 'H' * (60 * 40), *([0x3001] * (60 * 40))))
+        cells = [0x3001] * (60 * 40)
+        cells[27 * 60 + 12] = 0x05D4
+        self.layout.write_bytes(struct.pack('<' + 'H' * len(cells), *cells))
         self.put_json('data/layouts/layouts.json', {'layouts': [
             {'id': f'LAYOUT_{name.upper()}', 'width': 60, 'height': 40,
              'blockdata_filepath': 'data/layouts/Test/map.bin'}
@@ -93,6 +95,28 @@ class SideQuestInstallerTests(unittest.TestCase):
     def test_missing_target_map_rejected(self):
         (self.engine / 'data/maps/Alderfield/map.json').unlink()
         with self.assertRaises(FileNotFoundError):
+            quest.apply(self.engine, self.script)
+
+    def test_tree_requires_unchanged_landmark_and_walkable_approach(self):
+        cells = list(struct.unpack('<2400H', self.layout.read_bytes()))
+        cells[27 * 60 + 11] = 0x3401
+        self.layout.write_bytes(struct.pack('<2400H', *cells))
+        with self.assertRaisesRegex(ValueError, 'west approach changed'):
+            quest.apply(self.engine, self.script)
+        self.assertNotIn(quest.INCLUDE, self.events.read_text())
+
+    def test_tree_event_is_installed_once(self):
+        quest.apply(self.engine, self.script)
+        quest.apply(self.engine, self.script)
+        meadow = quest.load_json(self.engine / 'data/maps/CoastalMeadow/map.json')
+        self.assertEqual(meadow['bg_events'], [quest.SKETCH_TREE])
+
+    def test_existing_flag_cannot_silently_move_to_another_save_bit(self):
+        quest.apply(self.engine, self.script)
+        content = self.flags.read_text().replace('FLAG_AVERON_NOTES_STARTED 0x02A',
+                                                'FLAG_AVERON_NOTES_STARTED 0x080')
+        self.flags.write_text(content)
+        with self.assertRaisesRegex(ValueError, 'saved slot'):
             quest.apply(self.engine, self.script)
 
     def test_reward_flags_set_only_after_success_and_have_retry(self):

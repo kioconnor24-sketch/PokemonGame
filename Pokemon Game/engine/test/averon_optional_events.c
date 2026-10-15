@@ -6,6 +6,13 @@
 #include "save.h"
 #include "load_save.h"
 #include "gba/flash_internal.h"
+#include "pokemon.h"
+#include "pokemon_storage_system.h"
+#include "battle.h"
+#include "overworld.h"
+#include "constants/heal_locations.h"
+#include "constants/maps.h"
+#include "global.fieldmap.h"
 
 static void ResetOptionalEvents(void)
 {
@@ -75,6 +82,19 @@ TEST("Averon optional event full pocket keeps the real script reward retryable")
     EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
     EXPECT_EQ(FlagGet(rewarded), FALSE);
     EXPECT_EQ(CountTotalItemQuantityInBag(reward), 0);
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    ResetOptionalEvents();
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(FlagGet(first), TRUE);
+    EXPECT_EQ(FlagGet(objective), TRUE);
+    EXPECT_EQ(FlagGet(rewarded), FALSE);
+    EXPECT_EQ(CheckBagHasSpace(reward, sketch ? 3 : 2), FALSE);
     EXPECT(RemoveBagItem(removable, 1));
     ClaimOptionalReward(sketch);
     EXPECT_EQ(VarGet(VAR_RESULT), TRUE);
@@ -115,8 +135,13 @@ TEST("Averon optional event stages survive native flash and transient field rese
         FlagClear(FLAG_BADGE01_GET);
         FlagClear(FLAG_AVERON_LICENSE_CUT);
         EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
-        // This is the native transient cleanup used by field reentry;
-        // the complete rendered whiteout/return sequence is separate evidence.
+        // Exercise the actual native whiteout reset/heal/warp, then field
+        // transient cleanup. Rendered nurse dialogue remains separate evidence.
+        SetLastHealLocationWarp(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
+        DoWhiteOut();
+        EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_SALTMERE));
+        EXPECT(gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SALTMERE)
+            || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SALTMEREHOME));
         ClearTempFieldEventData();
         EXPECT_EQ(FlagGet(FLAG_AVERON_NOTES_STARTED), stage >= 1);
         EXPECT_EQ(FlagGet(FLAG_AVERON_SKETCH_STARTED), stage >= 1);
@@ -129,5 +154,80 @@ TEST("Averon optional event stages survive native flash and transient field rese
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), stage == 3 ? 2 : 0);
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), stage == 3 ? 3 : 0);
     }
+}
+
+TEST("Averon tree observation needs the artist and cannot reset recorded progress")
+{
+    ResetOptionalEvents();
+    RUN_OVERWORLD_SCRIPT(call Averon_BerrySketch_ObserveTree;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_SKETCH_FOUND), FALSE);
+    FlagSet(FLAG_AVERON_SKETCH_STARTED);
+    RUN_OVERWORLD_SCRIPT(call Averon_BerrySketch_ObserveTree;);
+    EXPECT_EQ(VarGet(VAR_RESULT), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_SKETCH_FOUND), TRUE);
+    RUN_OVERWORLD_SCRIPT(call Averon_BerrySketch_ObserveTree;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_SKETCH_FOUND), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_NOTES_RECORDED), FALSE);
+}
+
+TEST("Averon developer gift rejects missing prerequisite and full party without PC delivery")
+{
+    ZeroPlayerPartyMons();
+    CalculatePlayerPartyCount();
+    FlagClear(FLAG_AVERON_DEV_GIFT_RECEIVED);
+    FlagClear(FLAG_AVERON_SKETCH_REWARDED);
+    RUN_OVERWORLD_SCRIPT(call AveronFieldLab_TryGift;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 0);
+    FlagSet(FLAG_AVERON_SKETCH_REWARDED);
+    for (u32 slot = 0; slot < PARTY_SIZE; ++slot)
+        CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][slot], SPECIES_BUNNELBY, 4, 0);
+    CalculatePlayerPartyCount();
+    u32 boxed = 0;
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; ++box)
+        boxed += CountMonsInBox(box);
+    RUN_OVERWORLD_SCRIPT(call AveronFieldLab_TryGift;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_DEV_GIFT_RECEIVED), FALSE);
+    EXPECT_EQ(CalculatePlayerPartyCount(), PARTY_SIZE);
+    u32 boxedAfter = 0;
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; ++box)
+        boxedAfter += CountMonsInBox(box);
+    EXPECT_EQ(boxedAfter, boxed);
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    ZeroPlayerPartyMons();
+    FlagClear(FLAG_AVERON_SKETCH_REWARDED);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(CalculatePlayerPartyCount(), PARTY_SIZE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_SKETCH_REWARDED), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_DEV_GIFT_RECEIVED), FALSE);
+    ZeroMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1]);
+    CalculatePlayerPartyCount();
+    RUN_OVERWORLD_SCRIPT(call AveronFieldLab_TryGift;);
+    EXPECT_EQ(VarGet(VAR_RESULT), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_DEV_GIFT_RECEIVED), TRUE);
+    EXPECT_EQ(CalculatePlayerPartyCount(), PARTY_SIZE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], MON_DATA_LEVEL), 5);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    ZeroPlayerPartyMons();
+    FlagClear(FLAG_AVERON_DEV_GIFT_RECEIVED);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    ClearTempFieldEventData();
+    EXPECT_EQ(FlagGet(FLAG_AVERON_DEV_GIFT_RECEIVED), TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    RUN_OVERWORLD_SCRIPT(call AveronFieldLab_TryGift;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(CalculatePlayerPartyCount(), PARTY_SIZE);
+    for (u32 slot = 0; slot < PARTY_SIZE - 1; ++slot)
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), SPECIES_BUNNELBY);
 }
 

@@ -1785,4 +1785,8 @@ AveronFieldLab_Exit::
 	end
 AveronFieldLab_PrepareFly::
 	end
+AveronFieldLab_Gift::
+	end
+AveronFieldLab_TryGift::
+	end
 #endif
