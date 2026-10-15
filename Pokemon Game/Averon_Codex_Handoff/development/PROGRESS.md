@@ -1,3 +1,18 @@
+# CURRENT INTEGRATION STATUS — 2026-10-15 (newer than all checkpoints below)
+
+> **Snapshot only:** consult [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls), live claims in [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), the [current TASKS](TASKS.md) and [ROADMAP](ROADMAP.md) for active status. Older entries below are preserved **verbatim as historical evidence**, even if their headings say CURRENT or call FIELD PR #10 active.
+
+- Integrated `main` checked at `36cb7ca9039f4203642a44d7bf147a15ac515a3f`. **FIELD PR #10 merged**; older snapshots below that say it is open are superseded. The opening/first Gym and field-license infrastructure are source-integrated, not automatically graphical/Delta-accepted.
+- **QUEST #14 (Codex):** draft/unmerged; native CI 49/49 verified on `7bff0349`; independent QA recorded **Q0-C Saltmere movement/menu PASS** for one fixture, but Q1–Q5 graphical event and reward/save/whiteout cases remain pending.
+- **SCRIPTED-BATTLE #25 (Claude):** draft/unmerged, technical native/script primitives; real release flag, registered scripts, integrated encounters and graphical QA still pending.
+- **TWO-REGION:** experimental non-map groundwork on `codex/two-region-groundwork` (not on main), with recorded host/mutation checks; a complete two-region playable game has **not** been demonstrated.
+- **Docs/tooling:** #18 and #19 are open review PRs, not merged systems. QA workflow #20 is independent and not proof that unexecuted gameplay cases passed.
+- **Owner hard freeze:** no production or temporary map layouts, world geography, final story/Gym/encounter placements, trainer rosters, art or numeric level curves without explicit owner authorization. Use synthetic in-memory fixtures for allowed engine logic.
+
+---
+
+# ARCHIVED INTEGRATION CHECKPOINTS (original wording retained)
+
 # CURRENT CHECKPOINT — 2026-10-15 (overrides historical notes below)
 
 - `main` integrated PR #1 and PR #9 at `b1c56a501fd20a3cf84ef6269e9a812b879218d1`. PR #9 contains prior PR #2–#8 commit histories; PR #5–#8 were closed as duplicates with preservation comments. Do not remerge them. Historical branches remain.
