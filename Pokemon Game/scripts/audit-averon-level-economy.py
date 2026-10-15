@@ -129,6 +129,8 @@ def required_experience(growth_rate, level):
     """
     if not 1 <= level <= 100:
         raise ValueError("Level outside 1..100")
+    if level == 1:
+        return 1  # Tables explicitly initialize every growth group at level one.
     n = level
     n3 = n * n * n
     formulas = {
