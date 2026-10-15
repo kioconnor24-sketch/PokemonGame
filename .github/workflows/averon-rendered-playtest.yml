@@ -170,6 +170,26 @@ jobs:
           press x
           sleep 2
           capture "interact-check"
+          # Clear just-observed Professor Fenwick dialogue before testing movement.
+          press x
+          sleep 1
+          capture "professor-conversation-dismissed"
+          xdotool keydown Right
+          sleep 2
+          xdotool keyup Right
+          sleep 1
+          capture "field-right-after-dialogue"
+          xdotool keydown Down
+          sleep 2
+          xdotool keyup Down
+          sleep 1
+          capture "field-down-after-dialogue"
+          press Return
+          sleep 1
+          capture "field-start-menu"
+          press z
+          sleep 1
+          capture "field-start-menu-closed"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
