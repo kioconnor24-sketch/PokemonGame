@@ -73,12 +73,12 @@ def scan(source, namespace, occupied_prefix):
     issues = []
     for key, value in chosen.items():
         candidates = sorted(name for name in by_number[value]
-                            if name.startswith(namespace) and name != key)
+                            if name.startswith(occupied_prefix) and name != key)
         if candidates:
             issues.append({"severity": "blocker", "name": key,
                            "value": hex(value), "detail": "Same-value Averon alias: " + ", ".join(candidates)})
         others = sorted(name for name in by_number[value]
-                        if not name.startswith(namespace) and name != key)
+                        if not name.startswith(occupied_prefix) and name != key)
         if others:
             issues.append({"severity": "warning", "name": key,
                            "value": hex(value), "detail": "Shared ID with non-Averon definitions (may be intentional): " + ", ".join(others)})
