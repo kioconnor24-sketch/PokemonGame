@@ -151,45 +151,38 @@ jobs:
             sleep 0.15
             if (( i % 10 == 0 )); then capture "opening-after-name-$i"; fi
           done
+          # Saltmere map transition is established by previous graphical run.
+          # Clear the on-frame two-page Fenwick welcome before testing controls.
+          for i in $(seq 1 5); do press x; sleep 0.45; done
+          capture "Q0-welcome-cleared"
           press Return
           sleep 2
-          capture "start-menu-check"
+          capture "Q0-start-menu"
           press z
           sleep 1
-          capture "start-menu-dismiss"
-          xdotool keydown Up
+          capture "Q0-start-dismiss"
+          # Distinct held directions and per-step captures enable visual movement check.
+          xdotool keydown Left
+          sleep 0.7
+          xdotool keyup Left
           sleep 1
-          xdotool keyup Up
-          sleep 1
-          capture "move-up"
-          xdotool keydown Right
-          sleep 1
-          xdotool keyup Right
-          sleep 1
-          capture "move-right"
-          press x
-          sleep 2
-          capture "interact-check"
-          # Clear just-observed Professor Fenwick dialogue before testing movement.
-          press x
-          sleep 1
-          capture "professor-conversation-dismissed"
-          xdotool keydown Right
-          sleep 2
-          xdotool keyup Right
-          sleep 1
-          capture "field-right-after-dialogue"
+          capture "Q0-left"
           xdotool keydown Down
-          sleep 2
+          sleep 0.7
           xdotool keyup Down
           sleep 1
-          capture "field-down-after-dialogue"
+          capture "Q0-down"
+          xdotool keydown Right
+          sleep 0.7
+          xdotool keyup Right
+          sleep 1
+          capture "Q0-right"
           press Return
           sleep 1
-          capture "field-start-menu"
+          capture "Q0-start-after-walk"
           press z
           sleep 1
-          capture "field-start-menu-closed"
+          capture "Q0-back-to-field"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
