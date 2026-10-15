@@ -1,14 +1,16 @@
 # Pokémon Averon
 
-Source for the Pokémon Emerald Expansion-based **Pokémon Averon** Game Boy Advance project. The eventual owner-tested `.gba` targets Delta iOS; do not publish complete copyrighted ROMs. Native source lives in [Pokemon Game/engine/](Pokemon%20Game/engine/).
+Source project for a playable, saveable Pokémon Emerald Expansion Game Boy Advance game. The eventual `.gba` is for owner's Delta iOS testing; don't upload or redistribute copyrighted full ROMs.
 
-## Live development entry points
-- [Task queue / ownership](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md) — which task to work on next, and who owns it.
-- [Current progress checkpoint](Pokemon%20Game/Averon_Codex_Handoff/development/PROGRESS.md) — read latest section at **top**, not historical entries.
-- [Codex + ChatGPT workflow](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md) — branches, handoffs, CI, merges, and daily hygiene.
-- [Backend-first roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/AUTHORITATIVE_BACKEND_FIRST_ROADMAP.md) — engineering requirements and longer-term stages.
-- [Instructions for coding agents](AGENTS.md).
+## Start here
 
-`main` includes the early playable content / Gym 1 and integrated backend contributions (PRs #1 and #9). **PR #10 is unfinished, Codex-owned field-license development** and should remain separate until tested. Recheck GitHub: these references may be superseded by newer work.
+- **Every AI, first:** [Agent instructions](AGENTS.md)
+- **How GitHub runs automatically and stays tidy:** [Operations handbook](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md)
+- **What to code next:** [Stable task order](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md)
+- **What is active right now:** [Open PRs and latest agent handoffs](../../pulls)
+- **What was verified and integrated:** [Progress checkpoint](Pokemon%20Game/Averon_Codex_Handoff/development/PROGRESS.md)
+- **Full backend vision:** [Backend-first roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/AUTHORITATIVE_BACKEND_FIRST_ROADMAP.md)
+- **Game engine:** [Pokemon Game/engine](Pokemon%20Game/engine/)
+- **Automated safety and build checks:** [GitHub Actions](../../actions)
 
-**Scope:** full original Averon plus full second-region Sinnoh; lively traditional Pokémon adventure, reusable quests and events, modern mechanics and following Pokémon. The user is designing the geography; agents must not invent or lock final towns, level caps or legendary placement.
+`main` is the integrated baseline. Each agent works on an independently claimed task/PR, pushes recoverable results, and records the exact next step in the *same* PR; the shared tracking docs change only when a milestone really changes. The user controls Averon map design, final locations, story approvals and leveling.
