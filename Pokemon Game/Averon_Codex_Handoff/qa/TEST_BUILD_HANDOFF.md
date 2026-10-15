@@ -1,3 +1,25 @@
+# Expanded native traversal acceptance — 2026-10-15
+
+Latest source `5c92e6ff`; local `build-output/Pokemon-Averon-Field-Menu-5c92e6ff.gba`.
+Size 33,554,432; SHA256 `86800da9ec7531feabe5ef59fc0ceec0b4d2a188ac01d088567b3e3568e3dada`.
+Native **43/43**, save-layout **4/4**, normal `make -j12 -O all` PASS.
+The ROM hash matches the prior menu build because additional harness/test code
+is excluded from normal game compilation; no production source changed in this
+second test extension. Logs are recorded by the local BUILD-MANIFEST.json.
+
+Added real-map Surf/Waterfall terrain and direction checks, native Dive/emerge
+preparation from actual tiles, Pokemon follower water/land visibility policy,
+actual Fly-cursor rejection of an unvisited destination and selection of the
+Saltmere landing, Fly cancellation preserving second-party-slot selection,
+and all seven licensed actions rejecting unusable contexts without trapping
+controls. Test driving explicitly stops before initializing an unrelated
+full overworld scene. These are NATIVE-TESTED semantics, not rendered traversal.
+
+Focused Windows mGBA acceptance is being attempted on an isolated ROM/save in
+`evidence/field-runtime/`; original saves are unchanged. No field gameplay
+acceptance or Delta verification is claimed by this note.
+
+---
 # Latest native Field Kit acceptance — 2026-10-15
 
 Source: `54432345` on `codex/field-licenses` (PR #10). Local artifact:
