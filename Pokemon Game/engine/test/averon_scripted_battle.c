@@ -5,9 +5,12 @@
 #include "battle.h"
 #include "event_data.h"
 #include "heal_location.h"
+#include "load_save.h"
 #include "money.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "save.h"
+#include "gba/flash_internal.h"
 #include "constants/heal_locations.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
@@ -180,4 +183,27 @@ TEST("Averon scripted battle natives tolerate a repeated Begin and a Finish with
     RUN_OVERWORLD_SCRIPT(callnative AveronScriptedBattle_Finish, requests_effects=1;);
     EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
     EXPECT_EQ(gSpecialVar_Result, FALSE);
+}
+
+// Integration candidate for the release B_FLAG_NO_WHITEOUT (needs Codex's
+// handoff before config/battle.h changes): a special flag lives in RAM only,
+// so a set flag can never be restored from a save, while badges are.
+TEST("Averon RAM-only special flag is not restored from a save but the badge is")
+{
+    const u32 candidate = FLAG_SPECIAL_FLAG_UNUSED_0x4003;
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(candidate);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    FlagClear(FLAG_BADGE01_GET);
+    FlagClear(candidate);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(FlagGet(FLAG_BADGE01_GET), TRUE);
+    EXPECT_EQ(FlagGet(candidate), FALSE);
+    FlagClear(FLAG_BADGE01_GET);
 }
