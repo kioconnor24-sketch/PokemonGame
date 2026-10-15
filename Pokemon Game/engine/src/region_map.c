@@ -2445,6 +2445,11 @@ bool32 Test_FlyMenuReady(void)
 {
     return sFlyMap != NULL && sFlyMap->callback == CB_HandleFlyMapInput;
 }
+
+const struct RegionMap *Test_FlyMenuState(void)
+{
+    return sFlyMap == NULL ? NULL : &sFlyMap->regionMap;
+}
 #endif
 
 static void CB_HandleFlyMapInput(void)

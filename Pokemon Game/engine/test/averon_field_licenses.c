@@ -16,6 +16,10 @@
 #include "follower_npc.h"
 #include "fldeff.h"
 #include "constants/event_objects.h"
+#include "event_object_movement.h"
+#include "field_effect.h"
+#include "fieldmap.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/heal_locations.h"
@@ -69,7 +73,7 @@ static void OpenToolkit(void)
 TEST("Averon Field Kit B returns to actions then party selection and exits cleanly")
 {
     CreatePartner();
-    Test_FieldMenuBegin();
+    Test_FieldMenuBegin(0);
     WaitForActions();
     u32 ordinaryCount = Test_FieldMenuActionCount();
     OpenToolkit();
@@ -105,7 +109,7 @@ TEST("Averon locked Field Kit actions return safely without changing map or lice
     FlagClear(FLAG_AVERON_LICENSE_CUT + which);
     SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
     WarpIntoMap();
-    Test_FieldMenuBegin();
+    Test_FieldMenuBegin(0);
     OpenToolkit();
     s32 index = Test_FieldMenuMoveIndex(sLicensedMoves[which]);
     EXPECT(index >= 0);
@@ -127,11 +131,13 @@ TEST("Averon locked Field Kit actions return safely without changing map or lice
 TEST("Averon Fly map B returns to the same party and Field Kit can reopen")
 {
     CreatePartner();
+    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_PIPLUP, 5, 0);
+    CalculatePlayerPartyCount();
     FlagSet(FLAG_AVERON_LICENSE_FLY);
     FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
     SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
     WarpIntoMap();
-    Test_FieldMenuBegin();
+    Test_FieldMenuBegin(1);
     OpenToolkit();
     SelectAction(Test_FieldMenuMoveIndex(FIELD_MOVE_FLY));
     for (u32 i = 0; i < 240 && !Test_FlyMenuReady(); ++i)
@@ -142,7 +148,7 @@ TEST("Averon Fly map B returns to the same party and Field Kit can reopen")
     for (u32 i = 0; i < 240 && !Test_FieldMenuChoosingMon(); ++i)
         Test_FieldMenuStep(0);
     EXPECT_EQ(Test_FieldMenuChoosingMon(), TRUE);
-    EXPECT_EQ(gPartyMenu.slotId, 0);
+    EXPECT_EQ(gPartyMenu.slotId, 1);
     EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
     EXPECT_EQ(gSaveBlock1Ptr->pos.x, 4);
     EXPECT_EQ(gSaveBlock1Ptr->pos.y, 4);
@@ -161,7 +167,7 @@ TEST("Averon Field Kit fits alongside four learned actions and survives Back")
     const u16 moves[] = {MOVE_FLASH, MOVE_TELEPORT, MOVE_DIG, MOVE_SWEET_SCENT};
     for (u32 i = 0; i < ARRAY_COUNT(moves); ++i)
         SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1 + i, &moves[i]);
-    Test_FieldMenuBegin();
+    Test_FieldMenuBegin(0);
     WaitForActions();
     EXPECT_EQ(Test_FieldMenuActionCount(), 9);
     OpenToolkit();
@@ -188,7 +194,7 @@ TEST("Averon Field Kit is unavailable on fainted partners and eggs")
         SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG, &egg);
     else
         SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
-    Test_FieldMenuBegin();
+    Test_FieldMenuBegin(0);
     WaitForActions();
     EXPECT_EQ(Test_FieldMenuToolkitIndex(), -1);
     Test_FieldMenuEnd();
@@ -264,6 +270,171 @@ TEST("Averon native obstacle preparation selects the facing object without learn
     // an actual object or preserve the previous obstacle as a usable target.
     gObjectEvents[1].active = FALSE;
     EXPECT_EQ(CheckObjectGraphicsInFrontOfPlayer(graphics[which]), FALSE);
+}
+
+static void PlaceWaterTestPlayer(u32 map, s16 x, s16 y, enum Direction direction, u8 flags)
+{
+    SetWarpDestination(MAP_GROUP(map), MAP_NUM(map), WARP_ID_NONE, x, y);
+    WarpIntoMap();
+    InitMap();
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    gPlayerAvatar.objectEventId = 0;
+    gPlayerAvatar.flags = flags;
+    struct ObjectEvent *player = &gObjectEvents[0];
+    player->active = TRUE;
+    player->isPlayer = TRUE;
+    player->currentCoords.x = x + MAP_OFFSET;
+    player->currentCoords.y = y + MAP_OFFSET;
+    player->previousCoords = player->currentCoords;
+    player->facingDirection = direction;
+    player->movementDirection = direction;
+    player->currentElevation = player->previousElevation = ELEVATION_DEFAULT;
+}
+
+TEST("Averon licensed Field Kit refuses unusable terrain without trapping the party menu")
+{
+    u32 which = 0;
+    PARAMETRIZE { which = 0; }
+    PARAMETRIZE { which = 1; }
+    PARAMETRIZE { which = 2; }
+    PARAMETRIZE { which = 3; }
+    PARAMETRIZE { which = 4; }
+    PARAMETRIZE { which = 5; }
+    PARAMETRIZE { which = 6; }
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_CUT + which);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 4, 4, DIR_NORTH, PLAYER_AVATAR_FLAG_ON_FOOT);
+    // Fly is unavailable indoors; the other six actions have no usable object
+    // or water at this position. This changes only the test's loaded header.
+    gMapHeader.mapType = MAP_TYPE_INDOOR;
+    gPostMenuFieldCallback = NULL;
+    gFieldCallback2 = NULL;
+    UnlockPlayerFieldControls();
+    Test_FieldMenuBegin(0);
+    OpenToolkit();
+    SelectAction(Test_FieldMenuMoveIndex(sLicensedMoves[which]));
+    for (u32 i = 0; i < 240 && !Test_FieldMenuChoosingMon(); ++i)
+        Test_FieldMenuStep(A_BUTTON);
+    EXPECT_EQ(Test_FieldMenuChoosingMon(), TRUE);
+    EXPECT_EQ(IsFieldMoveUnlocked(sLicensedMoves[which]), TRUE);
+    EXPECT_EQ(gPostMenuFieldCallback == NULL, TRUE);
+    EXPECT_EQ(gFieldCallback2 == NULL, TRUE);
+    EXPECT_EQ(ArePlayerFieldControlsLocked(), FALSE);
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x, 4);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y, 4);
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction")
+{
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_SURF);
+    FlagSet(FLAG_AVERON_LICENSE_WATERFALL);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 16, 6, DIR_EAST, PLAYER_AVATAR_FLAG_ON_FOOT);
+    EXPECT_EQ(PartyHasMonWithSurf(), TRUE);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_SURF), TRUE);
+    gObjectEvents[0].facingDirection = DIR_WEST;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_SURF), FALSE);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 20, 10, DIR_NORTH, PLAYER_AVATAR_FLAG_SURFING);
+    EXPECT_EQ(PartyHasMonWithSurf(), FALSE);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_WATERFALL), TRUE);
+    gObjectEvents[0].movementDirection = DIR_EAST;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_WATERFALL), FALSE);
+    gObjectEvents[0].movementDirection = DIR_NORTH;
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_WATERFALL), FALSE);
+    EXPECT_EQ(MonKnowsMove(&gParties[B_TRAINER_PLAYER][0], MOVE_SURF), FALSE);
+    EXPECT_EQ(MonKnowsMove(&gParties[B_TRAINER_PLAYER][0], MOVE_WATERFALL), FALSE);
+}
+
+TEST("Averon native Dive preparation uses real surface and underwater tiles and refuses land")
+{
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_DIVE);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 20, 12, DIR_NORTH, PLAYER_AVATAR_FLAG_SURFING);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_DIVE), TRUE);
+    EXPECT_EQ(gFieldEffectArguments[1], 2);
+    EXPECT_EQ(GetDestinationWarpMapHeader()->mapType, MAP_TYPE_UNDERWATER);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLABUNDERWATER, 20, 12, DIR_NORTH, PLAYER_AVATAR_FLAG_UNDERWATER);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_DIVE), TRUE);
+    EXPECT_EQ(gFieldEffectArguments[1], 1);
+    EXPECT_EQ(GetDestinationWarpMapHeader()->mapType, MAP_TYPE_TOWN);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 4, 4, DIR_NORTH, PLAYER_AVATAR_FLAG_ON_FOOT);
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_DIVE), FALSE);
+    EXPECT_EQ(gFieldEffectArguments[1], 0);
+}
+
+TEST("Averon Pokemon follower visibility recovers on land after water traversal modes")
+{
+    CreatePartner();
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 4, 4, DIR_NORTH, PLAYER_AVATAR_FLAG_ON_FOOT);
+    gObjectEvents[0].previousMetatileBehavior = MB_NORMAL;
+    gObjectEvents[0].currentMetatileBehavior = MB_NORMAL;
+    EXPECT_EQ(IsFollowerVisible(), TRUE);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_SURFING;
+    EXPECT_EQ(IsFollowerVisible(), FALSE);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_UNDERWATER;
+    EXPECT_EQ(IsFollowerVisible(), FALSE);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gObjectEvents[0].previousMetatileBehavior = MB_POND_WATER;
+    EXPECT_EQ(IsFollowerVisible(), FALSE);
+    gObjectEvents[0].previousMetatileBehavior = MB_NORMAL;
+    EXPECT_EQ(IsFollowerVisible(), TRUE);
+    // No follower spawning or rendered transition is inferred from this policy
+    // check; it specifically prevents conflating Pokemon and human followers.
+}
+
+static void MoveFlyCursorTo(mapsec_u16_t mapsec)
+{
+    u32 x = gRegionMapEntries[mapsec].x + 1;
+    u32 y = gRegionMapEntries[mapsec].y + 2;
+    for (u32 i = 0; i < 50; ++i)
+    {
+        const struct RegionMap *state = Test_FlyMenuState();
+        if (state == NULL || (state->cursorPosX == x && state->cursorPosY == y))
+            break;
+        u16 keys = state->cursorPosX < x ? DPAD_RIGHT : state->cursorPosX > x ? DPAD_LEFT
+            : state->cursorPosY < y ? DPAD_DOWN : DPAD_UP;
+        Test_FieldMenuStep(keys);
+        for (u32 frame = 0; frame < 8; ++frame)
+            Test_FieldMenuStep(0);
+    }
+    EXPECT(Test_FlyMenuState() != NULL);
+    if (Test_FlyMenuState() != NULL)
+        EXPECT_EQ(Test_FlyMenuState()->mapSecId, mapsec);
+}
+
+TEST("Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing")
+{
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_FLY);
+    FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+    FlagClear(FLAG_VISITED_OLDALE_TOWN);
+    PlaceWaterTestPlayer(MAP_AVERONFIELDLAB, 4, 4, DIR_NORTH, PLAYER_AVATAR_FLAG_ON_FOOT);
+    Test_FieldMenuBegin(0);
+    OpenToolkit();
+    SelectAction(Test_FieldMenuMoveIndex(FIELD_MOVE_FLY));
+    for (u32 i = 0; i < 240 && !Test_FlyMenuReady(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FlyMenuReady(), TRUE);
+    MoveFlyCursorTo(MAPSEC_OLDALE_TOWN);
+    Test_FieldMenuStep(A_BUTTON);
+    for (u32 i = 0; i < 40; ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FlyMenuReady(), TRUE);
+    EXPECT_EQ(Test_FieldMenuAtFieldBoundary(), FALSE);
+    MoveFlyCursorTo(MAPSEC_LITTLEROOT_TOWN);
+    Test_FieldMenuStep(A_BUTTON);
+    for (u32 i = 0; i < 120 && !Test_FieldMenuAtFieldBoundary(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FieldMenuAtFieldBoundary(), TRUE);
+    EXPECT_EQ(Test_FlyMenuState() == NULL, TRUE);
+    EXPECT_EQ(gFieldCallback == FieldCallback_UseFly, TRUE);
+    EXPECT_EQ(GetDestinationWarpMapHeader()->regionMapSectionId, MAPSEC_SALTMERE);
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
+    Test_FieldMenuEnd();
+    gFieldCallback = NULL;
 }
 
 TEST("Averon field licenses gate all seven native script actions without learned HMs")

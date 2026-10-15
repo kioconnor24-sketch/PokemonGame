@@ -8648,13 +8648,14 @@ static void Test_FieldMenuExitCallback(void)
 {
 }
 
-void Test_FieldMenuBegin(void)
+void Test_FieldMenuBegin(u8 slotId)
 {
     sTestFieldMenuReturnCallback = gMain.callback2;
     sTestFieldMenuVBlank = gMain.vblankCallback;
     sTestFieldMenuHBlank = gMain.hblankCallback;
+    gPartyMenu.slotId = slotId;
     InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE,
-        PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_DO_WHAT_WITH_MON,
+        PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_DO_WHAT_WITH_MON,
         Task_TryCreateSelectionWindow, Test_FieldMenuExitCallback);
 }
 
@@ -8665,7 +8666,7 @@ void Test_FieldMenuStep(u16 keys)
     gMain.newAndRepeatedKeys = keys;
     // Stop at the overworld boundary: the harness must never initialize an
     // unrelated map scene or replace the test runner's own main loop.
-    if (gMain.callback2 != Test_FieldMenuExitCallback)
+    if (gMain.callback2 != Test_FieldMenuExitCallback && !Test_FieldMenuAtFieldBoundary())
         gMain.callback2();
     TransferPlttBuffer();
     ProcessSpriteCopyRequests();
@@ -8702,6 +8703,12 @@ bool32 Test_FieldMenuChoosingMon(void)
 bool32 Test_FieldMenuExited(void)
 {
     return gMain.callback2 == Test_FieldMenuExitCallback;
+}
+
+bool32 Test_FieldMenuAtFieldBoundary(void)
+{
+    return gMain.callback2 == CB2_ReturnToField
+        || gMain.callback2 == CB2_ReturnToFieldWithOpenMenu;
 }
 
 u32 Test_FieldMenuActionCount(void)
