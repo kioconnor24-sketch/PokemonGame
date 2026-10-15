@@ -134,3 +134,11 @@ passed/total counts into BUILD-MANIFEST.json before publishing a successful ROM.
 Build summary parser negative checks: empty, zero-test and partial-pass logs
 were rejected; the actual ANSI-colored23/23 log was accepted. Normal ROM
 hash was rechecked unchanged after these checks. Logs: evidence/builds/parser-checks/.
+
+Follow-up full-pocket persistence regression passes for both Work Up and the
+harvest Super Potion. Save with a full pocket, reload, confirm claim remains
+unfulfilled, remove an item, collect, save/load again, confirm no duplicate.
+The two-cycle party regression now covers Snivy/Fennekin/Piplup with one and
+six members, including every occupied party slot's species and level.
+Latest logs: evidence/builds/20261015T033305Z/. Native24/24, layout4/4,
+normal build exit0. ROM hash unchanged0646a372…718861. Gameplay acceptance pending.

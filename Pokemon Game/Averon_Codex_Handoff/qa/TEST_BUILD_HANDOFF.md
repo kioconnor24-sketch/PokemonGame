@@ -13,7 +13,7 @@ use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
 these do not replace native runtime acceptance.
 Includes optional Gym doubles, harvest fair, full-party starter guards, native
 Rare Candy cap and Gym TM retry. A bounded Badge1-gated coastal road preview
-is included. **23 named native Averon tests and four save-layout tests pass**.
+is included. **24 named native Averon tests and four save-layout tests pass**.
 New executed checks cover starter evolutions/Everstone and two actual flash
 save/load cycles, including Work Up persistence and duplicate-claim protection.
 Breakwater town/Gym2 are not implemented. Test-only changes leave the normal

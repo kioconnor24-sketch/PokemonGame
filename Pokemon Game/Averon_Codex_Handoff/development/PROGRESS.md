@@ -16,7 +16,7 @@
   `python scripts/build-averon-coast.py`; see COASTAL_ROUTE_IMPLEMENTATION.md.
   Latest local `build-output/Pokemon-Averon-Test-Build.gba`, 33,554,432 bytes,
   SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
-- Tested: **23 named Averon tests PASS** through bundled headless mGBA
+- Tested: **24 named Averon tests PASS** through bundled headless mGBA
   (`make check -j12 TESTS="Averon"`), plus four save-layout tests. Covers
   actual errand/gift/reward scripts, party and pocket limits/retry, healing,
   whiteout target selection, cap crossing/candy, EXP allocation, legal Mega,
@@ -24,10 +24,12 @@
   New tests cover all three starter evolutions after Badge1, Everstone removal,
   and two actual flash save/load cycles. Starter/held item, errands, sluices,
   badge and reward flags persist; Work Up survives reload and cannot be reclaimed.
+  Full-pocket Gym/fair reward retries persist across flash loads and cannot be duplicated.
+  Party serialization passes for all three starters with one and six members.
   This is real native flash execution, not a menu/reset walkthrough.
   Build wrapper now rejects missing/zero/incomplete test summaries before
   publishing the ROM and records passed/total counts automatically in its manifest.
-  Latest successful logs: `evidence/builds/20261015T032656Z/`.
+  Latest successful logs: `evidence/builds/20261015T033305Z/`.
 - Static: all 14 maps' door/border entries and NPC/sign interactions connect;
   water requiring Surf excluded, counters handled; Gym gate states checked.
   Regeneration stable across 68 source/map files; 166 dialogue lines fit.
@@ -38,8 +40,8 @@
   address external gameplay feedback for Gym/save/coastal gate; continue bounded
   Breakwater approach/town source after foundational acceptance is available.
   No manual emulator navigation by default. Preserve story/geography/style.
-- Latest allowance observation: five-hour allowance95% used; saving toward
-  the user's requested4% remaining threshold. No credits purchased or reset.
+- Latest allowance observation: five-hour allowance97% used; saving toward
+  the user's requested1% remaining threshold. No credits purchased or reset.
   Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
   every5½hours anchored at09:00. Computer/app must remain available.
 

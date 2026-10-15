@@ -10,6 +10,13 @@
 
 TEST("Averon opening and Gym progression survive two native flash save and load cycles")
 {
+    u32 starter=SPECIES_SNIVY, partySize=1;
+    PARAMETRIZE { starter=SPECIES_SNIVY; partySize=1; }
+    PARAMETRIZE { starter=SPECIES_FENNEKIN; partySize=1; }
+    PARAMETRIZE { starter=SPECIES_PIPLUP; partySize=1; }
+    PARAMETRIZE { starter=SPECIES_SNIVY; partySize=6; }
+    PARAMETRIZE { starter=SPECIES_FENNEKIN; partySize=6; }
+    PARAMETRIZE { starter=SPECIES_PIPLUP; partySize=6; }
     CheckForFlashMemory();
     EXPECT_EQ(gFlashMemoryPresent, TRUE);
     if (!gFlashMemoryPresent)
@@ -18,7 +25,9 @@ TEST("Averon opening and Gym progression survive two native flash save and load 
     Save_ResetSaveCounters();
     ClearBag();
     ZeroPlayerPartyMons();
-    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_SNIVY, 15, 0);
+    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], starter, 15, 0);
+    for (u32 slot=1; slot<partySize; ++slot)
+        CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][slot], SPECIES_BUNNELBY, 3+slot, 0);
     CalculatePlayerPartyCount();
     u16 heldItem = ITEM_EXP_SHARE;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &heldItem);
@@ -42,7 +51,13 @@ TEST("Averon opening and Gym progression survive two native flash save and load 
     FlagSet(FLAG_AVERON_EAST_SLUICE);
     FlagSet(FLAG_BADGE01_GET);
     EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_SNIVY);
+    EXPECT_EQ(CalculatePlayerPartyCount(), partySize);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), starter);
+    for (u32 slot=1; slot<partySize; ++slot)
+    {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), SPECIES_BUNNELBY);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL), 3+slot);
+    }
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 15);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_EXP_SHARE);
     EXPECT_EQ(VarGet(VAR_AVERON_FIRST_HOUSE), 1);
