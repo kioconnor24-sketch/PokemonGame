@@ -50,7 +50,7 @@ def validate(root: Path, docs: tuple[str, ...] = ACTIVE_DOCS) -> list[str]:
                 continue
             if in_fence:
                 continue
-            for match in INLINE_LINK.finditer(line):
+            for match in INLINE_LINK.finditer(re.sub(r"`[^`]*`", "", line)):
                 link = match.group(1).strip("<>")
                 if link.startswith("#"):
                     continue
