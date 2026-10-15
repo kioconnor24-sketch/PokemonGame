@@ -43,6 +43,35 @@ def entries(source):
         yield match.group(1), source[start:i - 1], source.count("\n", 0, match.start()) + 1
 
 
+def expand_local_includes(path, root, visited=None):
+    """Resolve quoted C includes under the species_info directory, once each.
+
+    Keep source and engine trees read-only. Refuse path traversal outside root.
+    """
+    root = root.resolve()
+    path = path.resolve()
+    if not path.is_relative_to(root):
+        raise ValueError("Include escapes species source directory: " + str(path))
+    visited = set() if visited is None else visited
+    if path in visited:
+        return ""
+    visited.add(path)
+    content = path.read_text(encoding="utf-8")
+    lines = []
+    for line in content.splitlines(keepends=True):
+        found = re.match(r'^\\s*#\\s*include\\s+"(species_info/[^"]+)"', line)
+        if found:
+            child = (path.parent / found.group(1)).resolve()
+            if not child.is_relative_to(root):
+                raise ValueError("Include escapes species source directory: " + str(child))
+            if not child.is_file():
+                raise FileNotFoundError("Missing species family include: " + str(child))
+            lines.append(expand_local_includes(child, root, visited))
+        else:
+            lines.append(line)
+    return "".join(lines)
+
+
 def audit(source, species_header):
     declared = {name for name in SPECIES.findall(strip_comments(species_header))
                 if name not in {"SPECIES_NONE"}}
@@ -94,7 +123,7 @@ def main():
     header = root / "include/constants/species.h"
     if not source.is_file() or not header.is_file():
         parser.error("Expected real engine source files: " + str(source) + " and " + str(header))
-    report = audit(source.read_text(encoding="utf-8"), header.read_text(encoding="utf-8"))
+    report = audit(expand_local_includes(source, source.parent), header.read_text(encoding="utf-8"))
     for output in (args.json, args.csv):
         output.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
