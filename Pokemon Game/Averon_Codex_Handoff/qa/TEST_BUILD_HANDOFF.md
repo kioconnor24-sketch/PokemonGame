@@ -1,3 +1,14 @@
+# Current FIELD fixture: native and mGBA acceptance recorded
+
+The developer field-license fixture has now been executed in mGBA 0.10.5:
+all seven traversal actions, follower water/land recovery, Fly cancellation,
+actual Saltmere flight, native save/reset/Continue and restored Fly access.
+See [FIELD_LICENSE_RUNTIME_RESULTS.md](FIELD_LICENSE_RUNTIME_RESULTS.md) for
+exact scope, local screenshot/log paths, source and ROM SHA256. Native43/43,
+save-layout4/4 and clean GitHub native43/43 pass. Delta remains NOT TESTED.
+Earlier runtime-pending statements below are historical checkpoints.
+
+---
 # Expanded native traversal acceptance — 2026-10-15
 
 Latest source `5c92e6ff`; local `build-output/Pokemon-Averon-Field-Menu-5c92e6ff.gba`.
