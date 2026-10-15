@@ -1,6 +1,9 @@
 #include "global.h"
 #include "test/test.h"
 #include "event_data.h"
+#include "load_save.h"
+#include "save.h"
+#include "gba/flash_internal.h"
 #include "averon_region_fixture.h"
 #include "constants/maps.h"
 
@@ -147,4 +150,61 @@ TEST("Averon region fixture preserves the existing Averon badge flag ordering")
     }
     EXPECT_EQ(badges.averon, 0xAA);
     EXPECT_EQ(AveronRegionFixture_CountBadges(&badges, AVERON_FIXTURE_AVERON), 4);
+}
+
+TEST("Averon region fixture queries preserve legacy badges and licenses through flash")
+{
+    u32 badgeMask = 0x55, licenseMask = 0x2A;
+    PARAMETRIZE { badgeMask = 0; licenseMask = 0; }
+    PARAMETRIZE { badgeMask = 0x55; licenseMask = 0x2A; }
+    PARAMETRIZE { badgeMask = 0xFF; licenseMask = 0x7F; }
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    struct AveronFixtureBadges badges = {.averon = 0, .sinnoh = 0x80};
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (badgeMask & (1u << i))
+            FlagSet(FLAG_BADGE01_GET + i);
+        else
+            FlagClear(FLAG_BADGE01_GET + i);
+        badges.averon |= FlagGet(FLAG_BADGE01_GET + i) << i;
+    }
+    for (u32 i = 0; i < 7; ++i)
+    {
+        if (licenseMask & (1u << i))
+            FlagSet(FLAG_AVERON_LICENSE_CUT + i);
+        else
+            FlagClear(FLAG_AVERON_LICENSE_CUT + i);
+    }
+    for (u32 number = 1; number <= 8; ++number)
+    {
+        EXPECT_EQ(AveronRegionFixture_HasBadge(&badges, AVERON_FIXTURE_AVERON, number), (badgeMask & (1u << (number - 1))) != 0);
+        EXPECT_EQ(AveronRegionFixture_HasBadge(&badges, AVERON_FIXTURE_SINNOH, number), number == 8);
+    }
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (badgeMask & (1u << i))
+            FlagClear(FLAG_BADGE01_GET + i);
+        else
+            FlagSet(FLAG_BADGE01_GET + i);
+    }
+    for (u32 i = 0; i < 7; ++i)
+    {
+        if (licenseMask & (1u << i))
+            FlagClear(FLAG_AVERON_LICENSE_CUT + i);
+        else
+            FlagSet(FLAG_AVERON_LICENSE_CUT + i);
+    }
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    for (u32 i = 0; i < 8; ++i)
+        EXPECT_EQ(FlagGet(FLAG_BADGE01_GET + i), (badgeMask & (1u << i)) != 0);
+    for (u32 i = 0; i < 7; ++i)
+        EXPECT_EQ(FlagGet(FLAG_AVERON_LICENSE_CUT + i), (licenseMask & (1u << i)) != 0);
+    EXPECT_EQ(badges.averon, badgeMask);
+    EXPECT_EQ(badges.sinnoh, 0x80); // Local fixture only; no Sinnoh persistence claim.
 }
