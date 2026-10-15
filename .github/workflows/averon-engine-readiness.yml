@@ -7,6 +7,8 @@ on:
       - "Pokemon Game/scripts/audit-averon-engine-readiness.py"
       - "Pokemon Game/scripts/tests/test_averon_engine_readiness.py"
       - "Pokemon Game/scripts/audit-averon-event-ids.py"
+      - "Pokemon Game/scripts/verify-averon-native-caps.py"
+      - "Pokemon Game/engine/src/caps.c"
       - "Pokemon Game/scripts/tests/test_averon_event_ids.py"
       - "Pokemon Game/engine/include/constants/flags.h"
       - "Pokemon Game/engine/include/constants/vars.h"
@@ -31,6 +33,8 @@ jobs:
           python3 "Pokemon Game/scripts/audit-averon-event-ids.py" \
             --engine "Pokemon Game/engine" \
             --json "$RUNNER_TEMP/averon-event-ids.json"
+      - name: Exercise actual native C level-cap and EXP functions
+        run: python3 "Pokemon Game/scripts/verify-averon-native-caps.py" --engine "Pokemon Game/engine"
       - name: Verify pinned Averon game configuration
         shell: bash
         run: |
