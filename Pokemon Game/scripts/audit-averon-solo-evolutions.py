@@ -104,6 +104,10 @@ def main():
         writer.writeheader()
         writer.writerows(report["rows"])
     print(json.dumps(report["summary"], indent=2))
+    if report["unresolved"]:
+        print("Source trade routes with no parsed nontrade target alternative:")
+        for row in report["unresolved"]:
+            print(f"  {row['origin']} -> {row['target']} ({row['source_file']})")
     if not report["rows"]:
         raise SystemExit("No trade evolutions identified: likely parser breakage")
 
