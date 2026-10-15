@@ -153,7 +153,10 @@ jobs:
           done
           # Saltmere map transition is established by previous graphical run.
           # Clear the on-frame two-page Fenwick welcome before testing controls.
-          for i in $(seq 1 5); do press x; sleep 0.45; done
+          # One confirmed A press dismisses the final welcome page; repeated A
+          # opens a NEW Fenwick conversation and invalidates movement probes.
+          press x
+          sleep 1
           capture "Q0-welcome-cleared"
           press Return
           sleep 2
