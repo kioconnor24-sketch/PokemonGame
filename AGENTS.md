@@ -13,3 +13,7 @@ Apply these rules to **both co-lead developers (Codex and Claude)**, both ChatGP
 **Each coding session:** implement an actual scoped change, run appropriate positive-count tests and real GBA builds for engine changes, push/verify remote SHA, and leave a concise HANDOFF comment on the same PR. Do not repeatedly edit shared `TASKS.md`/`PROGRESS.md` as session logs. For major release claims, distinguish BUILD / NATIVE-TESTED / EMULATOR-TESTED / DELTA-VERIFIED.
 
 **Safety:** no routine direct `main` pushes, no force-rewriting shared history, no silent merge of unfinished work, no uploaded ROM/save binaries, tokens or unlicensed sprites/music. CI/native tests are not graphical emulator or Delta acceptance. GitHub comments don't themselves awaken other agents. User decisions supersede old documents.
+
+This branch preserves an unmerged Codex tooling trial for comparison only.
+PR #19 is the recommended canonical skill set; do not merge this competing set.
+See [preserved trial results](Pokemon%20Game/Averon_Codex_Handoff/development/CODEX_TOOLING_TRIAL.md).
