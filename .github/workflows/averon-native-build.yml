@@ -38,6 +38,14 @@ jobs:
           du -h pokeemerald.gba
           python3 "../scripts/check-averon-resource-budget.py" --log "$RUNNER_TEMP/averon-build.log" --rom pokeemerald.gba --json "$RUNNER_TEMP/averon-memory-budget.json"
           tail -30 "$RUNNER_TEMP/averon-build.log"
+      - name: Run native Averon regression tests through the bundled headless runner
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O check TESTS="Averon" > "$RUNNER_TEMP/averon-native-tests.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/averon-native-tests.log"
+            exit 1
+          }
+          tail -60 "$RUNNER_TEMP/averon-native-tests.log"
       - name: Do not distribute full copyrighted ROM
         run: echo "Build output remains ephemeral in CI; only textual logs are uploaded."
       - name: Attach build log, not ROM
@@ -49,3 +57,4 @@ jobs:
           path: |
             ${{ runner.temp }}/averon-build.log
             ${{ runner.temp }}/averon-memory-budget.json
+            ${{ runner.temp }}/averon-native-tests.log
