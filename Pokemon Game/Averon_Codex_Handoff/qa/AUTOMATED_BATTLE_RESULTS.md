@@ -96,3 +96,11 @@ real door/border entries, blocks NPC occupancy and Surf-only water, handles
 counter interactions, and checks every current NPC/sign approach. All 13 maps
 pass. This is a static walking model; elevation/ledge events and actual camera,
 warps, input, scripts and saves still require full gameplay acceptance.
+
+Coastal preview checkpoint `19e5072e2589968981530f29a40fa4e4624d84cd`:
+all20 native tests and four save-layout tests PASS through build-averon.ps1.
+New production trainer test verifies reused slot568, unchanged MAX864, and
+Wingull14/Rookidee15. All14 native maps and166 dialogue lines pass static
+checks;68 authored files are stable across regeneration. Bounded route gameplay
+and repaired north terminus remain pending; no Breakwater implementation claim.
+Current ROM SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.

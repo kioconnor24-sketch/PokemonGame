@@ -2,29 +2,38 @@
 
 ## Current checkpoint — 2026-10-14
 
-- Latest game source: `14aded35657fbcb8e78e9feb6d7607f091bbf8ca`, pushed
+- Latest game source: `19e5072e2589968981530f29a40fa4e4624d84cd`, pushed
   and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
   is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
 - Implemented: opening gift guards, optional Gym doubles, visible rules statue,
   harvest-fair errand/reward retry, Gen5 EXP allocation, native Rare Candy cap,
   Elio Work Up/Oran Berry/status-aware AI, safe one-time Gym TM claim.
-- Built: `make -j20 -O all`, exit0; `evidence/m2/gym-reward-build.log`.
+  Added one bounded Badge1-gated CoastalBluffs route preview (R03), beach fork,
+  pickup and trainer. Breakwater town/Gym2 are not implemented. Prior working
+  M2 ROM retained at `evidence/m2/averon-m2-stable.gba` (SHA dced4e3c…9491).
+- Built: `scripts/build-averon.ps1`, native/save checks and incremental make,
+  exit0; timestamped logs in `evidence/builds/`. Full authoring command is now
+  `python scripts/build-averon-coast.py`; see COASTAL_ROUTE_IMPLEMENTATION.md.
   Latest local `build-output/Pokemon-Averon-Test-Build.gba`, 33,554,432 bytes,
-  SHA256 `dced4e3cf19cc5c440ef54b4342cb43fc8eaed6ea939259134f67fc7d96b9491`.
-- Tested: **19 named Averon tests PASS** through bundled headless mGBA
+  SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
+- Tested: **20 named Averon tests PASS** through bundled headless mGBA
   (`make check -j12 TESTS="Averon"`), plus four save-layout tests. Covers
   actual errand/gift/reward scripts, party and pocket limits/retry, healing,
   whiteout target selection, cap crossing/candy, EXP allocation, legal Mega,
   excluded gimmicks, old-save Set mode, physical/special damage and real teams.
-- Static: all 13 maps' door/border entries and NPC/sign interactions connect;
+- Static: all 14 maps' door/border entries and NPC/sign interactions connect;
   water requiring Surf excluded, counters handled; Gym gate states checked.
-  Regeneration stable across 64 source/map files; 153 dialogue lines fit.
+  Regeneration stable across 68 source/map files; 166 dialogue lines fit.
 - Unverified: full first-Gym conversation/win/reload/whiteout walkthrough,
   dialogue choices and native saves after new features, natural balance, Delta.
   **BUILT — FULL GAMEPLAY ACCEPTANCE PENDING**; M2 not marked complete.
-- Next: review/integrate this coherent branch; address external gameplay bugs;
-  implement independent first-slice improvements before mass map expansion.
+- Next three tasks: preserve/review PR #1 and check for other contributors;
+  address external gameplay feedback for Gym/save/coastal gate; continue bounded
+  Breakwater approach/town source after foundational acceptance is available.
   No manual emulator navigation by default. Preserve story/geography/style.
+- Stop checkpoint: five-hour allowance86% used; no credits purchased or reset.
+  Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
+  every5½hours anchored at09:00. Computer/app must remain available.
 
 ## Historical checkpoints (superseded by the current record above)
 
