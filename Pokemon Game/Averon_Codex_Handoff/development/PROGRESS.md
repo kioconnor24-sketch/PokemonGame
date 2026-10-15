@@ -2,7 +2,7 @@
 
 ## Current checkpoint — 2026-10-14
 
-- Latest source checkpoint: `96d2ced6a122b2f43201ce26000a222e46cee0d4`, pushed
+- Latest source checkpoint: `f1372cac94c3b2950c9dd57ccd06134672bfd951`, pushed
   and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
   is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
 - Implemented: opening gift guards, optional Gym doubles, visible rules statue,
@@ -29,18 +29,18 @@
   This is real native flash execution, not a menu/reset walkthrough.
   Build wrapper now rejects missing/zero/incomplete test summaries before
   publishing the ROM and records passed/total counts automatically in its manifest.
-  Latest successful logs: `evidence/builds/20261015T033305Z/`.
+  Latest successful logs: `evidence/builds/20261015T033436Z/`.
 - Static: all 14 maps' door/border entries and NPC/sign interactions connect;
   water requiring Surf excluded, counters handled; Gym gate states checked.
   Regeneration stable across 68 source/map files; 166 dialogue lines fit.
 - Unverified: full first-Gym conversation/win/reload/whiteout walkthrough,
-  dialogue choices and native saves after new features, natural balance, Delta.
+  dialogue choices, native menu/reset saves, natural balance, Delta.
   **BUILT — FULL GAMEPLAY ACCEPTANCE PENDING**; M2 not marked complete.
 - Next three tasks: preserve/review PR #1 and check for other contributors;
   address external gameplay feedback for Gym/save/coastal gate; continue bounded
   Breakwater approach/town source after foundational acceptance is available.
   No manual emulator navigation by default. Preserve story/geography/style.
-- Latest allowance observation: five-hour allowance97% used; saving toward
+- Latest allowance observation: five-hour allowance98% used; saving toward
   the user's requested1% remaining threshold. No credits purchased or reset.
   Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
   every5½hours anchored at09:00. Computer/app must remain available.

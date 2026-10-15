@@ -51,6 +51,7 @@ TEST("Averon opening and Gym progression survive two native flash save and load 
     FlagSet(FLAG_AVERON_EAST_SLUICE);
     FlagSet(FLAG_BADGE01_GET);
     EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], partySize);
     EXPECT_EQ(CalculatePlayerPartyCount(), partySize);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), starter);
     for (u32 slot=1; slot<partySize; ++slot)

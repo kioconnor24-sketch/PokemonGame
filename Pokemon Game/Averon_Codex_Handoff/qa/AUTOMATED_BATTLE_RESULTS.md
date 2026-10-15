@@ -142,3 +142,7 @@ The two-cycle party regression now covers Snivy/Fennekin/Piplup with one and
 six members, including every occupied party slot's species and level.
 Latest logs: evidence/builds/20261015T033305Z/. Native24/24, layout4/4,
 normal build exit0. ROM hash unchanged0646a372…718861. Gameplay acceptance pending.
+
+Final party-count assertion verifies the loaded gPartiesCount before recalculation.
+All24 native tests and four layout tests PASS again; normal build exit0; unchanged
+ROM hash. Final logs: evidence/builds/20261015T033436Z/.
