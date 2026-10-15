@@ -1,6 +1,7 @@
 """Fixture tests for the conservative source graphics inventory."""
 import importlib.util
 import unittest
+import tempfile
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / "audit-averon-graphics.py"
@@ -53,6 +54,30 @@ class GraphicsAuditTests(unittest.TestCase):
         report = mod.audit(text, "SPECIES_A,\nSPECIES_B,")
         self.assertEqual([row["species"] for row in report["rows"]],
                          ["SPECIES_A", "SPECIES_B"])
+
+    def test_expand_species_family_includes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "species_info").mkdir()
+            (root / "species_info.h").write_text(
+                '#include "species_info/gen_1_families.h"\\n'
+                '[SPECIES_EGG] = {},\\n', encoding="utf-8")
+            (root / "species_info/gen_1_families.h").write_text(
+                '[SPECIES_BULBASAUR] = { .frontPic = gFront },\\n',
+                encoding="utf-8")
+            expanded = mod.expand_local_includes(root / "species_info.h", root)
+            self.assertIn("[SPECIES_BULBASAUR]", expanded)
+            self.assertIn("[SPECIES_EGG]", expanded)
+            self.assertEqual(len(list(mod.entries(expanded))), 2)
+
+    def test_missing_family_include_is_error(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = root / "species_info.h"
+            source.write_text('#include "species_info/not_found.h"\\n',
+                              encoding="utf-8")
+            with self.assertRaises(FileNotFoundError):
+                mod.expand_local_includes(source, root)
 
     def test_unclosed_species_entry(self):
         with self.assertRaisesRegex(ValueError, "Unclosed species"):
