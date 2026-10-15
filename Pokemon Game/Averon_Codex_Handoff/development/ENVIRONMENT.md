@@ -14,6 +14,16 @@ ROM SHA256: 4ac97b2d70cbb550f1f912303f441b0a6f66a81816ea0b5dc824933aa5e06e1e
 ROM size: 33554432 bytes; evidence/m0/base-emerald.gba (workspace-relative)
 Linux build checkout: /root/averon/engine, detached at pinned SHA
 
+GitHub feature publishing checkout: workspace `shared-repo/`, branch
+`codex/first-gym-verification`; project prefix `Pokemon Game/`. Root workspace
+retains the pre-migration history and active authoring source at `engine/`.
+Use `scripts/reconcile-shared-checkout.py` for changed-source synchronization;
+do not commit the old workspace tree directly over the differently laid-out
+remote. WSL remains the persistent incremental build/test environment. Only
+changed source files are copied there, retaining its compiler/build caches.
+Native automated battle/script testing now executes through bundled
+mgba-rom-test-hydra/mgba-rom-test, independently of the Windows GUI emulator.
+
 Windows restart completed 2026-10-14 15:27. Ubuntu installed with
 `wsl --install -d Ubuntu --no-launch`. Documented packages installed with
 apt-get as the distribution root user; exit 0. Actual package log and versions

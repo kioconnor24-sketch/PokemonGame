@@ -78,6 +78,7 @@ if not any(h['id']=='HEAL_LOCATION_ALDERFIELD' for h in heals['heal_locations'])
     heals['heal_locations'].append(dict(id='HEAL_LOCATION_ALDERFIELD',map='MAP_ALDERFIELD',x=17,y=13,respawn_map='MAP_ALDERFIELDCLINIC',respawn_npc='1',respawn_x=7,respawn_y=4))
 write('src/data/heal_locations.json',heals)
 for number,name in [('024','ASSAULT_COMPLETE'),('025','WEST_SLUICE'),('026','EAST_SLUICE'),('027','EXP_SHARE'),('028','GYM1_TM')]:replace('include/constants/flags.h','FLAG_UNUSED_0x'+number,'FLAG_AVERON_'+name)
+replace('include/constants/vars.h','VAR_UNUSED_0x40A8','VAR_AVERON_HARVEST_FAIR')
 
 wild=read('src/data/wild_encounters.json');e=copy.deepcopy(next(e for e in wild['wild_encounter_groups'][0]['encounters'] if e['map']=='MAP_COASTALMEADOW'));e.update(map='MAP_ORCHARDLANE',base_label='gOrchardLane')
 for mon in e['land_mons']['mons']:mon.update(min_level=5,max_level=7)
@@ -86,7 +87,7 @@ wild['wild_encounter_groups'][0]['encounters']=[x for x in wild['wild_encounter_
 teams=[('FARMER','SAM','Youngster','Youngster',[('Sentret',7),('Bunnelby',8)]),('PICNIC','LINA','Picnicker','Picnicker',[('Hoppip',8),('Smoliv',9)]),('GYM1','NICO','Youngster','Youngster',[('Bunnelby',10),('Lillipup',11)]),('ELIO','ELIO','Leader','Leader Norman',[('Bunnelby',12),('Lechonk',13),('Lillipup',15)]),('ORCHARD','MILO','Youngster','Youngster',[('Pawmi',9),('Lechonk',10)])]
 tp=ROOT/'src/data/trainers.party';t=tp.read_text(encoding='utf-8');marker='/* AVERON ALDERFIELD TEAMS */'
 if marker in t:t=t[:t.index(marker)]
-t+='\n'+marker+'\n'
+t=t.rstrip()+'\n\n'+marker+'\n'
 for id,name,cl,pic,mons in teams:
     t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: Check Bad Move / Try To Faint\n'
     if id=='GYM1':t+='Double Battle: Yes\n'

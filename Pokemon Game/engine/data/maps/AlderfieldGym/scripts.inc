@@ -112,11 +112,64 @@ Alderfield_Items:
     .2byte ITEM_AWAKENING
     pokemartlistend
 Alderfield_Market::
-    msgbox Alderfield_Text_Market, MSGBOX_NPC
+    lock
+    faceplayer
+    goto_if_eq VAR_AVERON_HARVEST_FAIR, 3, Alderfield_FairDone
+    goto_if_eq VAR_AVERON_HARVEST_FAIR, 2, Alderfield_FairReward
+    goto_if_eq VAR_AVERON_HARVEST_FAIR, 1, Alderfield_FairWaiting
+    msgbox Alderfield_Text_FairAsk, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, Alderfield_FairNoRush
+    call Alderfield_AcceptFair
+Alderfield_FairWaiting:
+    msgbox Alderfield_Text_FairWaiting, MSGBOX_DEFAULT
+    release
+    end
+Alderfield_FairNoRush:
+    msgbox Alderfield_Text_Market, MSGBOX_DEFAULT
+    release
+    end
+Alderfield_FairReward:
+    call Alderfield_ClaimFairReward
+    goto_if_eq VAR_RESULT, FALSE, Alderfield_FairBagFull
+    msgbox Alderfield_Text_FairReward, MSGBOX_DEFAULT
+    playfanfare MUS_OBTAIN_ITEM
+    waitfanfare
+Alderfield_FairDone:
+    msgbox Alderfield_Text_FairDone, MSGBOX_DEFAULT
+    release
+    end
+Alderfield_FairBagFull:
+    msgbox Alderfield_Text_FairBagFull, MSGBOX_DEFAULT
+    release
     end
 Alderfield_Canal::
-    msgbox Alderfield_Text_Canal, MSGBOX_NPC
+    lock
+    faceplayer
+    goto_if_ne VAR_AVERON_HARVEST_FAIR, 1, Alderfield_CanalSmallTalk
+    call Alderfield_CollectFairCrate
+    msgbox Alderfield_Text_FairCrate, MSGBOX_DEFAULT
+    release
     end
+Alderfield_CanalSmallTalk:
+    msgbox Alderfield_Text_Canal, MSGBOX_DEFAULT
+    release
+    end
+Alderfield_AcceptFair::
+    goto_if_ne VAR_AVERON_HARVEST_FAIR, 0, Alderfield_FairReturn
+    setvar VAR_AVERON_HARVEST_FAIR, 1
+    return
+Alderfield_CollectFairCrate::
+    goto_if_ne VAR_AVERON_HARVEST_FAIR, 1, Alderfield_FairReturn
+    setvar VAR_AVERON_HARVEST_FAIR, 2
+    return
+Alderfield_ClaimFairReward::
+    setvar VAR_RESULT, FALSE
+    goto_if_ne VAR_AVERON_HARVEST_FAIR, 2, Alderfield_FairReturn
+    additem ITEM_SUPER_POTION, 1
+    goto_if_eq VAR_RESULT, FALSE, Alderfield_FairReturn
+    setvar VAR_AVERON_HARVEST_FAIR, 3
+Alderfield_FairReturn:
+    return
 Alderfield_Field::
     msgbox Alderfield_Text_Field, MSGBOX_NPC
     end
@@ -148,7 +201,7 @@ Alderfield_Text_NicoNeedTwo:
 Alderfield_Text_NicoDefeat:
     .string "Right. Now for the chores.$"
 Alderfield_Text_NicoAfter:
-    .string "ELIO likes a team that works\ntogether. Normal types can surprise you.$"
+    .string "ELIO likes a team that works\ntogether. Normal types have surprises.$"
 Alderfield_Text_Sam:
     .string "My Sentret keeps watch for me.\nLet's give it something to do!$"
 Alderfield_Text_SamDefeat:
@@ -173,6 +226,18 @@ Alderfield_Text_ExpAdvice:
     .string "Have a Pokemon hold it.\nThat Pokemon shares battle EXP.$"
 Alderfield_Text_Market:
     .string "Apple pie, Berry pie, plain old pie.\nWe've been busy since sunrise.$"
+Alderfield_Text_FairAsk:
+    .string "The harvest fair's nearly ready.\nCould you fetch our apple crate?\pThe canal keeper has it.\nMy hands are full of flour!$"
+Alderfield_Text_FairWaiting:
+    .string "Ask the keeper by the canal.\nHe'll know which crate is ours.$"
+Alderfield_Text_FairCrate:
+    .string "Oh, the apples! Here you go.\nMind the one with the wobbly handle.\pYou take the apple crate.\nTime to head back to the stall.$"
+Alderfield_Text_FairReward:
+    .string "Just in time! Here's a little thanks.\nYou received a Super Potion!$"
+Alderfield_Text_FairDone:
+    .string "First pie's for the fair judges.\nSecond one's for the cook. Fair's fair!$"
+Alderfield_Text_FairBagFull:
+    .string "I've got a Super Potion for you.\nMake some room and come back.$"
 Alderfield_Text_Canal:
     .string "The locks keep our fields watered.\nMy boots keep the mud inside.$"
 Alderfield_Text_Field:

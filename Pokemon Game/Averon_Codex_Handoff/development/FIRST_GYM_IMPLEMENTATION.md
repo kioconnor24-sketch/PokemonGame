@@ -63,3 +63,27 @@ the existing `make check TESTS="Averon"` framework and headless mGBA runner.
 Executed successfully: one parameterized test, six scenarios, PASS; command
 exit 0. Evidence: `evidence/m2/automated-exp-check.log`. The runner operates
 headlessly and does not verify overworld traversal, Gym events or native saves.
+
+## Harvest fair and starter follow-up
+
+The market vendor and canal keeper now provide the atlas's ordinary harvest
+fair errand. Accept, collect the apple crate, return to the stall, receive one
+Super Potion. VAR_AVERON_HARVEST_FAIR reuses unused 0x40A8 with states 0–3.
+Bag-full reward failure leaves state 2, allowing a later claim. Native script
+tests execute delivery/reward ordering, duplicate protection and full-pocket
+retry successfully. Conversation UI and save persistence remain pending.
+
+Optional Nico double battle uses Bunnelby 10/Lillipup 11 and the native
+two-usable-Pokemon refusal. Production trainer generation and TM01 Work Up
+mapping pass automated checks. A visible Gym statue marks the rules.
+
+Starter acceptance and gift operations are small native subroutines shared by
+the actual dialogue flows and isolated script tests. They preserve the first
+accepted errand, refuse full parties without committing Mira/claimed state,
+and prevent duplicate starter awards. All three gifts at 0/5/6 occupied slots
+pass, along with all six household orders and active/completed reacceptance.
+
+Authoring regeneration is deterministic across 63 checked source/map files.
+Dialogue uses actual normal-font widths, with an 8px reading margin in the
+216px message window; all 151 authored lines fit. Rendering/width checks do
+not replace gameplay or final art review. Native tests now total 11 PASS.

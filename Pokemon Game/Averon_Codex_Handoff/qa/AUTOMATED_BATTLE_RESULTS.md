@@ -52,3 +52,14 @@ Mira assignment. Native award logic is shared by the actual confirmation flow
 and the isolated script tests. Dialogue choice UI and persistence still pending.
 A visible Gym statue now marks the cap/Set rules; native collision checks pass
 and the layout was rendered for visual review. No manual emulator navigation.
+
+Harvest fair and reward mapping checkpoint: all **11** named native tests PASS,
+exit 0, through `make check -j12 TESTS="Averon"`. New tests cover real fair
+script order/one-time reward, full-pocket failure and later claim, and actual
+TM01/Work Up item mapping. Fair content is compiled and isolated state/reward
+logic tested; conversation UI, whiteout and native-save walkthrough remain
+pending. The latest full game compilation exits 0 (`evidence/m2/fair-final-build.log`).
+Latest ROM SHA256 `f333ca782f09875095c5de28ca3052ac615066212ce27f26d2e8d16be328f0bc`.
+
+Static authoring and dialogue checks pass: 63 files stable across repeated
+regeneration; 151 normal-font dialogue lines fit a conservative 208px margin.

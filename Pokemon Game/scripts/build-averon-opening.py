@@ -187,7 +187,7 @@ write('data/maps/Saltmere/map.json',saltmap)
 trainers=ROOT/'src/data/trainers.party'; trainertext=trainers.read_text(encoding='utf-8')
 marker='/* AVERON OPENING TEAMS */'
 if marker in trainertext: trainertext=trainertext[:trainertext.index(marker)]
-trainertext+='\n'+marker+'\n'
+trainertext=trainertext.rstrip()+'\n\n'+marker+'\n'
 for species,moves in [('FENNEKIN',['Scratch','Tail Whip']),('PIPLUP',['Pound','Growl']),('SNIVY',['Tackle','Leer'])]:
     trainertext+=f'\n=== TRAINER_AVERON_RENN_{species} ===\nName: RENN\nClass: Pkmn Trainer 1\nPic: Brendan\nGender: Male\nMusic: Male\nAI: Check Bad Move\n\n{species.title()}\nLevel: 5\nIVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe\n'+''.join('- '+m+'\n' for m in moves)
 trainertext+='\n=== TRAINER_AVERON_MEADOW ===\nName: FINN\nClass: Youngster\nPic: Youngster\nGender: Male\nMusic: Male\nAI: Check Bad Move\n\nLechonk\nLevel: 4\n- Tackle\n- Tail Whip\n'

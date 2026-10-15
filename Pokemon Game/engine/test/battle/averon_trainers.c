@@ -4,6 +4,7 @@
 #include "battle_setup.h"
 #include "data.h"
 #include "malloc.h"
+#include "item.h"
 #include "trainer_pools.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -35,4 +36,12 @@ TEST("Averon Gym preview generates two normal Pokemon for a double battle")
     EXPECT_GT(GetMonData(&party[1], MON_DATA_HP), 0);
     EXPECT_EQ(GetMonData(&party[2], MON_DATA_SPECIES), SPECIES_NONE);
     Free(party);
+}
+
+TEST("Averon Gym TM01 reward resolves to Work Up")
+{
+    EXPECT_EQ(GetItemTMHMIndex(ITEM_TM_WORK_UP), 1);
+    EXPECT_EQ(GetItemTMHMMoveId(ITEM_TM_WORK_UP), MOVE_WORK_UP);
+    EXPECT_EQ(GetItemTMHMMoveId(ITEM_TM01), MOVE_WORK_UP);
+    EXPECT_EQ(GetItemPocket(ITEM_TM_WORK_UP), POCKET_TM_HM);
 }
