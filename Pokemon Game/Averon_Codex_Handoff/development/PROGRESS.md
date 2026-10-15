@@ -2,7 +2,7 @@
 
 ## Current checkpoint — 2026-10-14
 
-- Latest source checkpoint: `f1372cac94c3b2950c9dd57ccd06134672bfd951`, pushed
+- Latest source checkpoint: `cf3920b7b3950cf34f9d6ae6ca742b29b19fe393`, pushed
   and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
   is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
 - Implemented: opening gift guards, optional Gym doubles, visible rules statue,

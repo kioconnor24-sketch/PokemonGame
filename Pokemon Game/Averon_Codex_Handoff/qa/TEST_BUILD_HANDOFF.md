@@ -7,7 +7,7 @@ not a final release. Generated ROMs remain local and ignored by Git.
 Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
 `make -j12 -O all`; exit 0. SHA256:
 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
-Source checkpoint: `f1372cac94c3b2950c9dd57ccd06134672bfd951` on
+Source checkpoint: `cf3920b7b3950cf34f9d6ae6ca742b29b19fe393` on
 `codex/first-gym-verification`. Latest fixes redraw the live Gym gate and
 use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
 these do not replace native runtime acceptance.
