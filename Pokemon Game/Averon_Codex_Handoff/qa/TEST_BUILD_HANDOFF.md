@@ -1,3 +1,32 @@
+# Latest native Field Kit acceptance — 2026-10-15
+
+Source: `54432345` on `codex/field-licenses` (PR #10). Local artifact:
+`build-output/Pokemon-Averon-Field-Menu-54432345.gba`, 33,554,432 bytes,
+SHA256 `86800da9ec7531feabe5ef59fc0ceec0b4d2a188ac01d088567b3e3568e3dada`.
+
+- `scripts/build-averon.ps1 -Sync ... -NativeTests -SaveLayoutTests -Jobs 12`:
+  38/38 named native tests, 4/4 save-layout tests; normal build exit 0.
+- New integration harness drives real native party/Fly callbacks, input tasks,
+  windows, sprites and fades in headless mGBA. Tested all seven locked actions,
+  Back/B, party selection/exit, Fly-map cancellation/reopening, nine-action
+  capacity, fainted/egg eligibility and three obstacle target preparations.
+- Guarded the native missing-object sentinel before reading obstacle graphics.
+- NPC follower restriction test initially failed because the optional human
+  NPC follower feature is disabled. Preserved that production configuration;
+  tested its current policy and outdoor/indoor Fly rules. Did not enable a new
+  save structure. Pokemon followers are a separate enabled system.
+- Evidence: SOURCE / BUILD / NATIVE-TESTED. No manual emulator or Delta check.
+  Full rendered movement/obstacle effects/Surf/Waterfall/Dive and Pokemon
+  follower transitions remain pending; FIELD is not merged or complete.
+- Test seams are under `#if TESTING`; release menu behavior is unchanged.
+  Stable baseline ROMs are preserved. No ROM or save is published to GitHub.
+
+The first menu run passed 34/34 before adding four more tests. The intermediate
+38-test run failed one incorrect NPC-feature assumption; it was not counted as
+passing or published. The corrected final run passed 38/38. Exact logs are in
+`build-output/BUILD-MANIFEST.json`'s local `logs` directory.
+
+---
 # Current field-license checkpoint — Fly fixture
 
 Branch: `codex/field-licenses`, PR #10. Exact pushed commit and evidence are
