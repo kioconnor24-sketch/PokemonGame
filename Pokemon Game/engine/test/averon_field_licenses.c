@@ -9,8 +9,11 @@
 #include "save.h"
 #include "script.h"
 #include "overworld.h"
+#include "region_map.h"
 #include "constants/maps.h"
 #include "constants/map_types.h"
+#include "constants/heal_locations.h"
+#include "constants/region_map_sections.h"
 
 static const enum FieldMove sLicensedMoves[] = {
     FIELD_MOVE_CUT, FIELD_MOVE_ROCK_SMASH, FIELD_MOVE_STRENGTH,
@@ -129,4 +132,43 @@ TEST("Averon field lab Dive connections preserve coordinates party and licenses 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0],MON_DATA_SPECIES),SPECIES_WOBBUFFET);
     EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER],1);
     EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_DIVE),TRUE);
+}
+
+TEST("Averon developer Fly destination lands both player genders safely in Saltmere")
+{
+    u32 gender = MALE;
+    PARAMETRIZE { gender = MALE; }
+    PARAMETRIZE { gender = FEMALE; }
+    struct RegionMap destination = { .mapSecId = MAPSEC_LITTLEROOT_TOWN };
+    CreatePartner();
+    gSaveBlock2Ptr->playerGender = gender;
+    // The debug destination control only enables the visited destination. It
+    // must not substitute for a traversal license, even with a usable partner.
+    FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+    FlagClear(FLAG_AVERON_LICENSE_FLY);
+    EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_FLY), PARTY_SIZE);
+    FlagSet(FLAG_AVERON_LICENSE_FLY);
+    EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_FLY), 0);
+    EXPECT_EQ(MonKnowsMove(&gParties[B_TRAINER_PLAYER][0], MOVE_FLY), FALSE);
+    EXPECT_EQ(FilterFlyDestination(&destination), gender == MALE
+        ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
+        : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
+    WarpIntoMap();
+    SetFlyDestination(&destination);
+    WarpIntoMap();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_SALTMERE));
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_SALTMERE));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x, 18);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y, 18);
+    EXPECT_EQ(gMapHeader.mapType, MAP_TYPE_TOWN);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLY), TRUE);
+    // Return uses the same destination as debug Script4, without touching the
+    // player's respawn point or inventing any final-world travel connection.
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
+    WarpIntoMap();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_FLY), 0);
 }

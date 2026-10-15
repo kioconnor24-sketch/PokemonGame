@@ -31,11 +31,23 @@ AveronFieldLab_Revoke::
     msgbox AveronFieldLab_TextRevoked, MSGBOX_DEFAULT
     releaseall
     end
+AveronFieldLab_PrepareFly::
+    lockall
+    msgbox AveronFieldLab_TextFlyConfirm, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, AveronFieldLab_Release
+    setflag FLAG_VISITED_LITTLEROOT_TOWN
+    msgbox AveronFieldLab_TextFlyReady, MSGBOX_DEFAULT
+    releaseall
+    end
 AveronFieldLab_Exit::
     lockall
     warp MAP_SALTMERE, 18, 18
     waitstate
     end
+AveronFieldLab_TextFlyConfirm:
+    .string "DEV: Enable a test Fly destination?\nUse a backed-up test save.$"
+AveronFieldLab_TextFlyReady:
+    .string "DEV: Fly to LITTLEROOT TOWN.\nIts landing point is SALTMERE.\pThe Fly license is still required.\nScript4 returns to this lab.$"
 AveronFieldLab_TextGranted:
     .string "DEV: All field licenses granted.\nBack up your save before testing.$"
 AveronFieldLab_TextRevoked:

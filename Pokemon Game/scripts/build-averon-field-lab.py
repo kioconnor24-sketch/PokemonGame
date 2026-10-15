@@ -28,7 +28,8 @@ def apply(ns):
              ns['npc'](13,3,'OBJ_EVENT_GFX_MAN_1','AveronFieldLab_Exit'),
              ns['npc'](5,9,'OBJ_EVENT_GFX_CUTTABLE_TREE','EventScript_CutTree'),
              ns['npc'](9,9,'OBJ_EVENT_GFX_BREAKABLE_ROCK','EventScript_RockSmash'),
-             ns['npc'](13,9,'OBJ_EVENT_GFX_PUSHABLE_BOULDER','EventScript_StrengthBoulder')]
+             ns['npc'](13,9,'OBJ_EVENT_GFX_PUSHABLE_BOULDER','EventScript_StrengthBoulder'),
+             ns['npc'](5,16,'OBJ_EVENT_GFX_SCIENTIST_1','AveronFieldLab_PrepareFly')]
     objects[3]['flag']='FLAG_TEMP_11'; objects[4]['flag']='FLAG_TEMP_12'
     objects[5].update(flag='FLAG_TEMP_13',movement_type='MOVEMENT_TYPE_LOOK_AROUND')
     ns['mapfile']('AveronFieldLab',ns['layout']('AveronFieldLab',cells),'MAPSEC_SALTMERE',objects)
@@ -68,7 +69,16 @@ def apply(ns):
     for name in ('CUT','ROCK_SMASH','STRENGTH','SURF','WATERFALL','DIVE','FLY'):
         lines.append('    clearflag FLAG_AVERON_LICENSE_'+name)
     lines+=['    clearflag FLAG_SYS_USE_STRENGTH','    msgbox AveronFieldLab_TextRevoked, MSGBOX_DEFAULT','    releaseall','    end',
+            'AveronFieldLab_PrepareFly::','    lockall',
+            '    msgbox AveronFieldLab_TextFlyConfirm, MSGBOX_YESNO',
+            '    goto_if_eq VAR_RESULT, NO, AveronFieldLab_Release',
+            '    setflag FLAG_VISITED_LITTLEROOT_TOWN',
+            '    msgbox AveronFieldLab_TextFlyReady, MSGBOX_DEFAULT','    releaseall','    end',
             'AveronFieldLab_Exit::','    lockall','    warp MAP_SALTMERE, 18, 18','    waitstate','    end',
+            'AveronFieldLab_TextFlyConfirm:',
+            '    .string "DEV: Enable a test Fly destination?\\nUse a backed-up test save.$"',
+            'AveronFieldLab_TextFlyReady:',
+            '    .string "DEV: Fly to LITTLEROOT TOWN.\\nIts landing point is SALTMERE.\\pThe Fly license is still required.\\nScript4 returns to this lab.$"',
             'AveronFieldLab_TextGranted:','    .string "DEV: All field licenses granted.\\nBack up your save before testing.$"',
             'AveronFieldLab_TextRevoked:','    .string "DEV: Field licenses revoked.$"',
             'AveronFieldLab_Release:','    releaseall','    end',
@@ -81,7 +91,7 @@ def apply(ns):
     if marker in content:content=content[:content.index(marker)].rstrip()+'\n'
     content+='\n'+marker+'\n\t.include "data/maps/AveronFieldLabUnderwater/scripts.inc"\n#ifndef RELEASE\n\t.include "data/maps/AveronFieldLab/scripts.inc"\n#else\n'
     content+='AveronFieldLab_MapScripts::\n\t.byte 0\n'
-    for label in ('Enter','Grant','Revoke','Exit'):
+    for label in ('Enter','Grant','Revoke','Exit','PrepareFly'):
         content+='AveronFieldLab_'+label+'::\n\tend\n'
     content+='#endif\n';events.write_text(content,encoding='utf-8')
     debug=root/'data/scripts/debug.inc'; content=debug.read_text(encoding='utf-8')

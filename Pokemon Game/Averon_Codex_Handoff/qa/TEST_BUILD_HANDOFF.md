@@ -1,4 +1,34 @@
-# Current compiled field-license build
+# Current field-license checkpoint — Fly fixture
+
+Branch: `codex/field-licenses`, PR #10. Exact pushed commit and evidence are
+recorded in the latest PR HANDOFF comment. Field licenses remain IN PROGRESS.
+
+The lab scientist at (5,16) confirms before enabling the native test Fly
+destination. It sets only the visited flag; a Fly license and healthy non-Egg
+partner are still required. Select LITTLEROOT TOWN on the placeholder Hoenn Fly
+map to land at the existing Saltmere home point (18,18). Both player genders
+are covered by the native destination/warp test. Debug Script4 returns to the
+lab. Release builds stub this preparation control. This is a developer fixture,
+not final Averon geography or a license earning location.
+
+Fixed: Fly formerly selected vanilla ground-floor home destinations, escaping
+into unused Hoenn. It now uses the existing Averon home/initial respawn entries.
+No save IDs or structures changed.
+
+SOURCE / BUILD / NATIVE-TESTED: `make -j4 -O all` passed; `make -j4 -O check
+TESTS='Averon'` passed 31/31 named tests, including both gender parameters in
+the new Fly regression; `make -j4 -O check TESTS='test/save.c'` passed 4/4.
+Repeated authoring (79 files), map checks (16 maps), dialogue (207 lines),
+design integrity and persistent event-ID audit passed. The new regression
+failed against the old resolver before passing with the fix.
+
+EMULATOR gameplay / DELTA: NOT VERIFIED. Native tests execute through the
+bundled headless mGBA runner; they do not prove rendered menus or animations.
+Next: exercise Field Kit locked actions, B/CANCEL, Fly-map cancellation and
+return to ordinary movement, then obstacle effects, follower interactions and
+Surf/Waterfall/Dive gameplay. Keep all full ROMs and saves out of Git.
+
+# Archived compiled build — a25755fb
 
 Local file: build-output/Pokemon-Averon-Field-Licenses-a25755fb.gba
 Also: build-output/Pokemon-Averon-Test-Build.gba.

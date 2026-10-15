@@ -1,32 +1,35 @@
-# Engineering progress
+# CURRENT CHECKPOINT — 2026-10-15 (overrides historical notes below)
+
+- `main` integrated PR #1 and PR #9 at `b1c56a501fd20a3cf84ef6269e9a812b879218d1`. PR #9 contains prior PR #2–#8 commit histories; PR #5–#8 were closed as duplicates with preservation comments. Do not remerge them. Historical branches remain.
+- **BUILD / NATIVE-TESTED:** Integrated PR #9 head CI native compile and 26 named regression tests passed ([CI run 38696580924](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38696580924)). This is **not** a complete early Gym playthrough or Delta verification.
+- **CODEx ACTIVE:** [PR #10](https://github.com/kioconnor24-sketch/PokemonGame/pull/10), `codex/field-licenses`, retargeted to `main`. At checked SHA `008b530f06aa7a43dbc9abfb59fe3d2ecb1634e5`, GitHub build/source/readiness checks passed (run `38700573968`). Codex reports 30 native license tests and four save-layout tests; field menu/animation/follower gameplay and Delta still not fully verified. Codex owns this branch.
+- **REPOSITORY OPERATIONS:** GitHub PR #11 was merged into `main` at `6f7acb0ec3222573a5ca5cda512a07f27b191d1b`, adding agent instructions, task/PR templates and CI safeguards without changing gameplay source. The current team workflow is in `WORKFLOW.md`; session-by-session details now live in the working PR's HANDOFF comment to avoid overlapping changes to this file.
+- **Next specific work:** Codex finishes field-license Fly/menu/obstacle and appropriate native validation, then moves to reusable quest system. ChatGPT avoids owned gameplay files and may work on disjoint validation/integration.
+- The user controls finished world geography, level curve and final encounter placement. Absolute max level 100; old first-region League-76 proposal rejected. No inventing numerical caps.
+- Old WSL/cloud schedule statements and superseded progress below are **historical**. Re-fetch remote state each session; do not assume any SHA remains current.
+
+---
+
+# ARCHIVED engineering progress
 
 ## Current checkpoint — 2026-10-15
 
 - Direction: BACKEND FIRST. User owns world design. Do not create final towns,
   routes, Gym puzzles, legendary locations, encounters or cap numbers.
-- Branch: codex/field-licenses, PR10 targeting codex/backend-integration (PR9).
-  Current field source a25755fb8870c73d6ff6605998a5312e6af731ce pushed; remote verified.
+- Branch: codex/backend-integration, PR9 targeting codex/first-gym-verification.
+  Source b6ab100e5d62fefdf4326abc86894530fbce34dc pushed; remote SHA verified.
   Main unchanged; opening/Gym1 preserved. PR2/3/4/5/6/7/8 contributor heads
   integrated with original history. No direct developer messaging occurred.
-- Task1: integrated baseline BUILT / NATIVE-TESTED locally and in clean CI. Root cause of PR5 No tests found: runner Permission denied (Git
+- Task1: coherent integrated baseline BUILT / NATIVE-TESTED locally. Fresh CI
+  pending. Root cause of PR5 No tests found: runner Permission denied (Git
   mode100644); restored100755 and added test-x guard. No tests skipped.
-- Task1 clean CI38696580924 passed native compilation and headless tests on
-  baseline3318b59c. Other source/graphics/evolution/economy checks also green.
-- Task2 IN PROGRESS: all seven license permissions, FIELD KIT menu and saved
-  flags0x30–0x36 compiled. Current fixture extension is complete: native Cut,
-  Rock Smash, Strength, Surf, Waterfall and paired Dive/underwater room, via
-  debug Script4. Native30/30 and layout4/4 PASS; make-j12-Oall exit0, logs
-  evidence/builds/20261015T073022Z/. New native Dive round-trip test executes
-  actual map warp functions, preserving coordinates, party and licenses.
-  Static16 maps/201 lines/79-file authoring PASS; native map renders reviewed.
-  No final world geography changed. Release entry/grant stubs retained.
-  Fly destination prototype and actual menu/field-effect/follower traversal
-  still pending. These native tests do not demonstrate animation/scene behavior.
-  Stable integration and clinic ROMs remain preserved separately.
-- Baseline evidence:26 native tests and4 layout tests passed before Task2.
-  Contributor host/source fixtures pass; optional quests survive regeneration.
+- Tests:26 named Averon native tests PASS, including new Linking Cord resolver
+  checks for Karrablast/Shelmet and incomplete-save backup/recovery; four native
+  save-layout tests PASS. Contributor source/host fixtures PASS (log
+  evidence/backend-source-tests.log). Static14 maps,196 dialogue lines and
+ 70-file repeated authoring PASS. Optional quest overlay survives regeneration.
 - Build: make-j12-Oall exit0. Local build-output/Pokemon-Averon-Test-Build.gba,
- 33554432 bytes, SHA256 1a7414dc408ced396eedeba0267a19c8caaeff0fb2ceed90d6359636c0a10a41.
+ 33554432 bytes, SHA256 bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0.
   Stable copy: evidence/backend/averon-integrated-baseline.gba. Prior clinic
   ROM retained: evidence/m2/averon-clinic-stable.gba (b1ef8077…f5a7a8).
 - Runtime limits: full first-Gym natural walkthrough, new clinic/quest UI,
@@ -35,23 +38,13 @@
 - Ownership: Codex integration/field licenses/events/quests/scripted battles/
   region persistence; ChatGPT battle/species/evolution/forms/followers; friend
   assets/support. No overlapping species edits beyond reviewed PR7 integration.
-- Next: finish Task2 Fly destination fixture, then focused menu/cancel/field
-  animation/follower acceptance; Task3 quest templates follow Task2 acceptance.
-  Do not invent final maps or claim unverified UI behavior works.
+- Next: (1) start Task2 native field licenses and move-free context actions,
+  then temporary developer fixture/menu; (2) verify new CI and complete Task2
+  permissions/persistence/animations; (3) Task3 reusable quest templates.
 - Existing continuation ACTIVE Oct15 07:30 EDT, then every5½hours. Automation
   prompt now carries this backend-first order. Computer/app must remain awake.
 - Numeric caps, including former League76, remain provisional/unapproved.
   Preserve level100 maximum; no new cap guesses. Do not repeat setup/audits.
-- Wrap-up requested by user: no partial Fly implementation was started. Source
-  remains a25755fb; last pushed documentation checkpoint was 86df98cf. The
-  authoring checkout and published branch were clean before this handoff note.
-  Rechecked the saved 32 MiB test ROM SHA256 against its manifest: matching.
-  Existing 30/30 native and 4/4 save-layout results remain the latest evidence;
-  no new build or emulator session was needed for this documentation-only wrap.
-  Resume at native Fly destination selection/callbacks in region_map.c, using
-  temporary developer destinations; do not route the player into vanilla Hoenn
-  or assign final Averon geography. Then validate and compile Task2 changes.
-  Status: BUILT — RUNTIME TEST PENDING. Task2 remains incomplete.
 ## Historical checkpoints (superseded by the current record above)
 
 - Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;

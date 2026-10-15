@@ -1783,4 +1783,6 @@ AveronFieldLab_Revoke::
 	end
 AveronFieldLab_Exit::
 	end
+AveronFieldLab_PrepareFly::
+	end
 #endif
