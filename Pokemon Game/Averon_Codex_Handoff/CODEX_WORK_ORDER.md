@@ -1,3 +1,5 @@
+> **Original long-term work order; not the current task assignment.** Read `development/TASKS.md` and `development/WORKFLOW.md` for today's code tasks. Do not repeat completed M0 installation or restart map production. Preserve existing Gym 1; finish Codex field-license PR #10, then approved backend quest/encounter/event systems.
+
 # CODEX WORK ORDER — Pokémon Averon
 
 Read `AGENTS.md` and `START_HERE.md` first. Take this as a multi-month-scale engineering project, **not** a request to print imaginary `.gba` bytes. Design is authored; implementation and tests are not done. All milestone records must contain source commit, commands and outputs, screenshot/log proof, regressions and open blockers.
