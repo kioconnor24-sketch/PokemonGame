@@ -53,3 +53,19 @@ TEST("Averon starter evolution can be postponed with Everstone and resumes after
     EXPECT_EQ(GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO), evolved);
     EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), species);
 }
+
+TEST("Averon Linking Cord evolves Karrablast and Shelmet without a trade partner")
+{
+    u32 species=SPECIES_KARRABLAST, evolved=SPECIES_ESCAVALIER;
+    PARAMETRIZE { species=SPECIES_KARRABLAST; evolved=SPECIES_ESCAVALIER; }
+    PARAMETRIZE { species=SPECIES_SHELMET; evolved=SPECIES_ACCELGOR; }
+    struct Pokemon *mon=&gParties[B_TRAINER_PLAYER][0];
+    ZeroPlayerPartyMons();
+    CreateRandomMonWithIVs(mon, species, 10, 0);
+    CalculatePlayerPartyCount();
+    EXPECT_EQ(GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_CHECK, ITEM_LINKING_CORD, NULL, NULL, CHECK_EVO), evolved);
+    EXPECT_EQ(GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, ITEM_LINKING_CORD, NULL, NULL, CHECK_EVO), evolved);
+    EXPECT_EQ(GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, ITEM_WATER_STONE, NULL, NULL, CHECK_EVO), SPECIES_NONE);
+    EXPECT_EQ(GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO), SPECIES_NONE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), species);
+}

@@ -82,3 +82,7 @@ events=ROOT/'data/event_scripts.s';content=events.read_text(encoding='utf-8');in
 if inc not in content:events.write_text(content+'\n'+inc+'\n',encoding='utf-8')
 text('data/maps/CoastalBluffs/scripts.inc',Path(__file__).with_name('averon-coast.inc').read_text(encoding='utf-8'))
 print('Authored one badge-gated coastal route preview, beach fork and trainer in a reused save-compatible slot. Breakwater is not implemented.')
+
+# Apply contributor quests after all base maps, so regeneration preserves NPCs.
+quests=runpy.run_path(str(Path(__file__).with_name('build-averon-sidequests.py')))
+quests['apply'](ROOT,Path(__file__).with_name('averon-optional-sidequests.inc'))

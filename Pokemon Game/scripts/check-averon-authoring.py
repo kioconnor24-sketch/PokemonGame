@@ -12,6 +12,7 @@ def snapshot():
         'src/data/trainers.party','src/data/wild_encounters.json','src/data/heal_locations.json',
         'src/data/region_map/region_map_sections.json','data/specials.inc',
         'src/new_game.c','src/battle_main.c','src/pokemon.c','include/constants/vars.h',
+        'data/event_scripts.s','data/averon_optional_sidequests.inc',
         'include/constants/flags.h','include/constants/opponents.h','include/config/battle.h')]
     for name in names:
         paths.extend([engine/f'data/maps/{name}/map.json',engine/f'data/maps/{name}/scripts.inc'])

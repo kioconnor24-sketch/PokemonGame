@@ -41,6 +41,7 @@ jobs:
       - name: Run native Averon regression tests through the bundled headless runner
         working-directory: "Pokemon Game/engine"
         run: |
+          test -x tools/mgba/mgba-rom-test || { echo "Bundled mGBA runner is not executable"; exit 1; }
           make -j4 -O check TESTS="Averon" > "$RUNNER_TEMP/averon-native-tests.log" 2>&1 || {
             tail -100 "$RUNNER_TEMP/averon-native-tests.log"
             exit 1
