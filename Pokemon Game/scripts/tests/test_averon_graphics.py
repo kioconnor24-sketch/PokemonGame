@@ -60,10 +60,10 @@ class GraphicsAuditTests(unittest.TestCase):
             root = Path(temp)
             (root / "species_info").mkdir()
             (root / "species_info.h").write_text(
-                '#include "species_info/gen_1_families.h"\\n'
-                '[SPECIES_EGG] = {},\\n', encoding="utf-8")
+                '#include "species_info/gen_1_families.h"\n'
+                '[SPECIES_EGG] = {},\n', encoding="utf-8")
             (root / "species_info/gen_1_families.h").write_text(
-                '[SPECIES_BULBASAUR] = { .frontPic = gFront },\\n',
+                '[SPECIES_BULBASAUR] = { .frontPic = gFront },\n',
                 encoding="utf-8")
             expanded = mod.expand_local_includes(root / "species_info.h", root)
             self.assertIn("[SPECIES_BULBASAUR]", expanded)
@@ -74,7 +74,7 @@ class GraphicsAuditTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             source = root / "species_info.h"
-            source.write_text('#include "species_info/not_found.h"\\n',
+            source.write_text('#include "species_info/not_found.h"\n',
                               encoding="utf-8")
             with self.assertRaises(FileNotFoundError):
                 mod.expand_local_includes(source, root)
