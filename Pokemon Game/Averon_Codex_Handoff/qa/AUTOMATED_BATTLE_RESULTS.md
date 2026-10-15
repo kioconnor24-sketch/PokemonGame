@@ -130,3 +130,7 @@ no production bag code was changed. Failed log:20261015T032625Z/native-tests.log
 The build wrapper rejected that failure and preserved the prior published ROM.
 It now also rejects missing/zero/partial result summaries and writes actual
 passed/total counts into BUILD-MANIFEST.json before publishing a successful ROM.
+
+Build summary parser negative checks: empty, zero-test and partial-pass logs
+were rejected; the actual ANSI-colored23/23 log was accepted. Normal ROM
+hash was rechecked unchanged after these checks. Logs: evidence/builds/parser-checks/.

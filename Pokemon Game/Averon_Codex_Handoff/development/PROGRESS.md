@@ -38,7 +38,7 @@
   address external gameplay feedback for Gym/save/coastal gate; continue bounded
   Breakwater approach/town source after foundational acceptance is available.
   No manual emulator navigation by default. Preserve story/geography/style.
-- Latest allowance observation: five-hour allowance94% used; saving toward
+- Latest allowance observation: five-hour allowance95% used; saving toward
   the user's requested4% remaining threshold. No credits purchased or reset.
   Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
   every5½hours anchored at09:00. Computer/app must remain available.
