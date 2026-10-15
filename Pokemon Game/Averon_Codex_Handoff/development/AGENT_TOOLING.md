@@ -10,12 +10,13 @@ Status words: **installed** (software present), **configured** (project files ex
 | --- | --- | --- |
 | GitHub coordination (claims, PRs, CI read) | connected, tested by Claude | CLAIM posted in issue #15; PR and check-run data read via REST |
 | `CLAUDE.md` (`@AGENTS.md` import + Claude notes) | configured | Claude Code docs: a `CLAUDE.md` that imports `AGENTS.md` is read with it. Not yet observed in a fresh session |
-| Project skills (4) in `.claude/skills/` | configured | Claude Code loads `.claude/skills/` per its docs. Not yet observed. **Codex discovery path unverified**: its docs page redirected to an unverified domain and was not followed |
+| Project skills | moved to PR #19 | Per the Issue #22 decision, PR #19 is the shared canonical skill set, after comparison with Codex's `codex/shared-agent-tooling` claim. This PR no longer adds skills |
 | Graphify (local, `graphifyy`) | not installed | Cloud sandbox has no PyPI/npm access. Needs the owner's machine (below). Provenance verified |
 | Graphify hosted (`api.graphify.com/mcp`) | not evaluated | Needs OAuth sign-in. Pricing not stated on the pages read. ChatGPT is not listed as a supported integration. Not recommended now |
 | Ponytail | not installed | Source cloned and read, not run. Deferred (see below) |
 | OmniRoute | deferred | Per owner instruction |
 | ARM toolchain / mGBA in cloud sandbox | unavailable | apt and PyPI unreachable. CI is the build and native-test run |
+| Claude local WSL clone (owner's host) | tested | `/root/claude-dev/PokemonGame` on 2026-10-15: clean build of `main` `36cb7ca9` OK; `TESTS=Averon` 44/44 and `test/save.c` 4/4 pass; push verified via a deleted temporary branch; mGBA 0.10.5 boot smoke only (see Issue #15) |
 | ChatGPT access to graphs/skills | untested | Use GitHub as the handoff layer |
 
 ## Provenance notes
@@ -25,7 +26,7 @@ Status words: **installed** (software present), **configured** (project files ex
 - **Bundled runner:** `engine/tools/mgba/mgba-rom-test` is a prebuilt Linux ELF from upstream pokeemerald-expansion; its README lists the mGBA source commits. Hash recorded: `4304688a0b44007cca23c9e887af17c44530fd602ee3d1e57a232da397bec769`. Not rebuilt from source here.
 
 ## Recommended minimal setup
-1. **Skills + `CLAUDE.md`** (this PR). One canonical copy in `.claude/skills/`; no per-agent duplicates until Codex discovery is verified, then add a sync check rather than hand-maintained copies.
+1. **`CLAUDE.md`** (this PR) and **shared skills** (PR #19, one canonical set). Add a sync check instead of hand-maintained per-agent copies.
 2. **Graphify local, only if the owner wants it**, on the owner's machine (WSL, where the toolchain already lives):
    ```bash
    uv tool install graphifyy     # or: pipx install graphifyy
@@ -38,7 +39,7 @@ Status words: **installed** (software present), **configured** (project files ex
 ## New-session setup (any agent)
 1. Fetch `main`, open PRs, issue #15 comments, and newest `HANDOFF`.
 2. Read root `AGENTS.md`, `AGENT_ROLES.md`, `WORKFLOW.md`, `TASKS.md`.
-3. Claude Code: skills under `.claude/skills/` load automatically; check with `/context` that `CLAUDE.md` is listed.
+3. Claude Code: check with `/context` that `CLAUDE.md` is listed. Shared skills load once PR #19 is merged.
 4. Claim in issue #15 before touching shared files. Branch `claude/*` or `codex/*`.
 5. After a merge, nothing to "refresh" for skills (they are files). If Graphify is adopted, rebuild the graph from the merged commit; the graph is a navigation aid, never the source of truth.
 
@@ -46,7 +47,7 @@ Status words: **installed** (software present), **configured** (project files ex
 | Check | Result |
 | --- | --- |
 | Claude can retrieve project knowledge | PASS (GitHub + repo files). Codex: UNTESTED |
-| Skills discoverable | UNTESTED (frontmatter validated locally only) |
+| Skills discoverable | Moved to PR #19 |
 | Shared instructions consistent | PARTIAL: the owner's setup brief calls Claude "technical lead" and counts three agents; merged `AGENT_ROLES.md` has four agents with Claude and Codex as peers. Merged file kept; owner to confirm |
 | A finding recorded by one agent and located by another | UNTESTED (only one agent has acted) |
 | Sample handoff without conflicting edits | UNTESTED |
