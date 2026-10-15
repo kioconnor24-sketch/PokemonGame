@@ -9,9 +9,15 @@
 #include "overworld.h"
 #include "pokemon.h"
 #include "constants/heal_locations.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
+#include "constants/opponents.h"
+#include "constants/script_commands.h"
 
-asm(".include \"data/scripts/averon_scripted_battle.inc\"\n");
+asm(".set NULL, 0\n"
+    ".set LOCALID_NONE, " STR(LOCALID_NONE) "\n"
+    ".set TRAINER_NONE, " STR(TRAINER_NONE) "\n"
+    ".include \"data/scripts/averon_scripted_battle.inc\"\n");
 
 #define START_MONEY 5000
 
@@ -39,6 +45,16 @@ static void ExpectPartyFullyHealed(void)
 }
 
 // Natives and macros from data/scripts/averon_scripted_battle.inc.
+
+TEST("Averon scripted battle tests run with a real no-whiteout flag")
+{
+    // config/test.h maps B_FLAG_NO_WHITEOUT to a test-only flag. Without it the
+    // flag is 0, FlagSet does nothing and the leak checks would pass vacuously.
+    EXPECT_NE(B_FLAG_NO_WHITEOUT, 0);
+    FlagSet(B_FLAG_NO_WHITEOUT);
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), TRUE);
+    FlagClear(B_FLAG_NO_WHITEOUT);
+}
 
 TEST("Averon scripted battle outcomes count losses, draws and forfeits as defeats")
 {
@@ -95,7 +111,10 @@ TEST("Averon story loss recovers in place with the party healed and money kept")
 
 TEST("Averon ambush loss respawns at the last heal location and keeps the badge")
 {
-    const struct HealLocation *heal = GetHealLocation(HEAL_LOCATION_ALDERFIELD);
+    u32 location = HEAL_LOCATION_ALDERFIELD, expectedMap = MAP_ALDERFIELDCLINIC;
+    PARAMETRIZE { location = HEAL_LOCATION_ALDERFIELD; expectedMap = MAP_ALDERFIELDCLINIC; }
+    PARAMETRIZE { location = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; expectedMap = MAP_SALTMEREHOME; }
+    const struct HealLocation *heal = GetHealLocation(location);
     SetUpFaintedParty();
     SetMoney(&gSaveBlock1Ptr->money, START_MONEY);
     FlagSet(FLAG_BADGE01_GET);
@@ -111,7 +130,7 @@ TEST("Averon ambush loss respawns at the last heal location and keeps the badge"
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), START_MONEY);
     EXPECT_EQ(FlagGet(FLAG_BADGE01_GET), TRUE);
     EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
-    EXPECT(GetDestinationWarpMapHeader() == Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ALDERFIELDCLINIC), MAP_NUM(MAP_ALDERFIELDCLINIC)));
+    EXPECT(GetDestinationWarpMapHeader() == Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(expectedMap), MAP_NUM(expectedMap)));
     FlagClear(FLAG_BADGE01_GET);
 }
 
@@ -120,4 +139,45 @@ TEST("Averon stale no-whiteout state is cleared before ordinary battles")
     FlagSet(B_FLAG_NO_WHITEOUT);
     AveronScriptedBattle_ClearStaleNoWhiteout();
     EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
+}
+
+static bool32 ScriptCallsNative(const u8 *script, u32 length, void (*native)(struct ScriptContext *))
+{
+    u32 target = (u32)native + 0x2000000, word; // callnative ..., requests_effects=1 adds ROM_SIZE
+    for (u32 i = 0; i + 5 <= length; i++)
+    {
+        memcpy(&word, &script[i + 1], sizeof(word));
+        if (script[i] == SCR_OP_CALLNATIVE && word == target)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+TEST("Averon scripted battle macro wraps one trainer battle between Begin and Finish")
+{
+    const u8 *script = OVERWORLD_SCRIPT(averon_scripted_battle 1, 0;);
+    const u8 *battle = script + 5;
+    u32 rest = 64;
+    EXPECT(ScriptCallsNative(script, 5, AveronScriptedBattle_Begin));
+    EXPECT_EQ(battle[0], SCR_OP_TRAINERBATTLE);
+    EXPECT(!ScriptCallsNative(battle, rest, AveronScriptedBattle_Begin));
+    EXPECT(ScriptCallsNative(battle, rest, AveronScriptedBattle_Finish));
+}
+
+TEST("Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin")
+{
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    gBattleOutcome = B_OUTCOME_LOST;
+    RUN_OVERWORLD_SCRIPT(callnative AveronScriptedBattle_Finish, requests_effects=1;);
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    RUN_OVERWORLD_SCRIPT(
+        callnative AveronScriptedBattle_Begin, requests_effects=1;
+        callnative AveronScriptedBattle_Begin, requests_effects=1;
+    );
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), TRUE);
+    gBattleOutcome = B_OUTCOME_WON;
+    RUN_OVERWORLD_SCRIPT(callnative AveronScriptedBattle_Finish, requests_effects=1;);
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
 }

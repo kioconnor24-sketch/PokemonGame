@@ -1,6 +1,8 @@
 #include "global.h"
 #include "test/battle.h"
+#include "averon_scripted_battle.h"
 #include "money.h"
+#include "script.h"
 
 // Real trainer battles through the engine's lost-battle script. Natives and
 // script macros are covered in averon_scripted_battle.c.
@@ -51,5 +53,28 @@ AI_SINGLE_BATTLE_TEST("Averon chain battle damage and status carry back into the
         EXPECT_LT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), startHP);
         EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), 0);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS), STATUS1_POISON);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Averon an ordinary loss after a scripted battle whites out and pays money again")
+{
+    struct ScriptContext ctx = {0};
+    GIVEN {
+        // A scripted battle that the player won: Begin set the flag, Finish cleared it.
+        AveronScriptedBattle_Begin(&ctx);
+        gBattleOutcome = B_OUTCOME_WON;
+        AveronScriptedBattle_Finish(&ctx);
+        SetMoney(&gSaveBlock1Ptr->money, START_MONEY);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPLASH); EXPECT_MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("You have no more Pokémon that can fight!\p");
+    } THEN {
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_LOST);
+        EXPECT_LT(GetMoney(&gSaveBlock1Ptr->money), START_MONEY);
+        EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
     }
 }
