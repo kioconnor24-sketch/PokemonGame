@@ -1,23 +1,23 @@
-## Goal / linked task
-Task ID:
-Single testable outcome:
+## Task and claim
+Task ID from TASKS.md or linked issue:
+Agent/owner:
+**Single testable outcome:**
+Files/subsystems owned:
+Other open PRs checked for overlapping files:
 
-## Scope and ownership
-Owner / files touched:
-Branch from updated `main`? If not, why:
-Save/flags/maps/encounters/assets impacted:
+## Results — mark only if VERIFIED
+- [ ] Static/source tests (commands/results below)
+- [ ] Actual native GBA build (SHA/result below)
+- [ ] Native regression suite with **nonzero executed count** (# pass/fail/skip)
+- [ ] Save/reload/backwards-compatibility tests, if persistent state changed
+- [ ] Real emulator gameplay (exact coverage below)
+- [ ] Owner Delta iOS acceptance (independent)
+- [ ] No complete ROMs, saves, secrets, build outputs or unlicensed media tracked
 
-## Evidence (check only if actually verified)
-- [ ] Relevant source/static tests — commands and results below
-- [ ] Native ROM build — result below (engine code changes)
-- [ ] Native tests with **nonzero executed count** — passed/failed/skipped below
-- [ ] Manual emulator acceptance (optional; exact coverage)
-- [ ] Delta iOS acceptance (separate owner test)
-- [ ] No full ROM/save/secret or unlicensed artwork tracked
-- [ ] Updated `development/TASKS.md` / `PROGRESS.md` if ownership/status changed
+**Commands, evidence, commit SHA:**
 
-Commands, results, source SHA:
+**Unverified behaviors/risks:**
 
-## Unverified items and next handoff
-What is still pending:
-Exact next action:
+**Next executable subtask:**
+
+At each session end post a HANDOFF comment with remote SHA/test counts/next step. Avoid routine modifications to TASKS.md and PROGRESS.md from a still-open gameplay PR.

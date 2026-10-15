@@ -1,27 +1,20 @@
-# LIVE TASK QUEUE — ownership and next implementation
+# Averon — stable prioritized task queue
 
-This file is the authoritative **task/owner roster**. `main` includes PR #1 and PR #9 as of October 15, 2026. Earlier contributor PRs #2–#8 are incorporated through PR #9; do not remerge their changes. Fetch latest remote refs before assuming these statements are current.
+**This file is for order and dependencies, not daily status updates.** Actual ownership/current progress live in OPEN pull requests and their latest HANDOFF comment. Check current GitHub before taking a task; update this file only when a new task is approved, priorities/dependencies change, a block becomes permanent, or a milestone merges.
 
-## Work in progress — exclusive scopes
+**CURRENT RESERVED WORK:** Codex owns [PR #10 — field licenses and Field Kit](https://github.com/kioconnor24-sketch/PokemonGame/pull/10), `codex/field-licenses`, while the PR remains open. Do not touch its source, flags, map fixture, field menu or related code unless Codex transfers the claim. It has partial native verification; emulator and Delta coverage are not automatically established. `main` already integrates the opening/Gym 1 and contributor backend via PRs #1/#9 and repository hygiene PR #11. Never remerge old contributor PRs.
 
-| Task | Owner | PR / branch | Current state |
+| Priority | ID | Readiness | Acceptance goal |
 | --- | --- | --- | --- |
-| FIELD | **Codex Cloud/local** | [PR #10](https://github.com/kioconnor24-sketch/PokemonGame/pull/10) / `codex/field-licenses` | IN PROGRESS. Existing Cut/Rock Smash/Strength/Surf/Waterfall/Dive field licenses, Field Kit, dev lab; 30 native tests + 4 save-layout tests reported passing. **Finish Fly fixture, actual menu/cancel/animation/obstacle/follower interactions, save verification**. Gameplay/Delta acceptance not yet established. |
-| HYGIENE | **ChatGPT** | `chatgpt/repository-workflow-hygiene` | Separate documentation, root entry, PR template and GitHub Actions scope/cost safeguards only. No FIELD gameplay source edits; release after merge. |
+| 1 | FIELD | ACTIVE Codex | Finish existing Fly destination, menu/cancel, field effects, follower/obstacle and persistence checks; clean compilation, native test counts; record emulator gaps |
+| 2 | QUEST | READY after FIELD | Reusable multi-stage native event scripts with one-time reward, prerequisites, full inventory and save/reload developer fixture |
+| 3 | LEGEND | READY after QUEST | Unique encounter prereqs, capture/flee/defeat/retry state and saved quest progression on fixture |
+| 4 | SCRIPTED-BATTLE | READY after QUEST | Safe forced Renn loss, sequential ten-operative battles with party carryover, allied heal, corrupt Gym no-heal rematch tests |
+| 5 | TWO-REGION | READY after core events | Separate badge/transport/Fly/whiteout and save compatibility on two **temporary** region maps; no production Sinnoh map |
+| 6 | DATA-GAPS | READY if file-disjoint | ChatGPT/guest: verify actual Gen I–IX species/form, evolution, battle rule or follower defect and fix with regression tests |
+| 7 | LEVEL-ECONOMY | PARTIALLY READY | Source-driven EXP modeling without choosing final numerical Gym caps; final curves wait on geography/trainer density |
+| 8 | AVERON-MAPS | PAUSED user | Author-approved geography, routes, Gym placements, encounters, level progression |
+| 9 | SINNOH-CONTENT | PAUSED | Complete second region after two-region proof + established world production |
+| 10 | POSTGAME | PAUSED | Legendary quests, Champions' Circuit, Cynthia, Red final, long-form QA and Delta |
 
-## Ordered backend queue
-
-| Priority | Task | Owner when claimed | Acceptance condition |
-| --- | --- | --- | --- |
-| 1 | Finish FIELD | Codex | Successful native tests and build; verified Fly/test fixtures; mark unplaytested visual behaviors honestly |
-| 2 | QUEST: reusable native quest scripting | Codex after FIELD, unless disjoint source ownership explicitly agreed | Staged progress, prereqs, one-time reward, full bag/party edge, save/reload tested in dev fixture |
-| 3 | LEGEND: reusable unique legendary encounters | Codex after QUEST | Capture/defeat/flee/retry, prerequisites and save persistence; no final locations |
-| 4 | BATTLES: scripted loss / gauntlet / heal / no-heal ambush | Codex | Test Renn loss without penalties; carry party health/status across battles; heal; save/recovery |
-| 5 | REGIONS: two-region save and transport fixture | Codex; consider Sol High for save architecture | Separate badges, flags, Fly and whiteout, stable save/reload between test regions; no final Sinnoh maps |
-| 6 | DATA: modern rules/species/followers/evolution gaps | ChatGPT only when explicitly claimed | Reproduce concrete gap, modify disjoint files, add native tests, document what was not emulator tested |
-| 7 | BALANCE: source-driven two-region progression math | ChatGPT after user supplies needed topology | Compare growth/economy for multiple party sizes without guessing cap values |
-| 8 | WORLD MAP, location-specific encounters, final trainer teams | **PAUSED — user owns geography** | User-approved map and progression before world content implementation |
-
-**Rule:** One active programming PR per agent + at most one integration PR. Do not simultaneously edit shared event scripts, flags, save schema, global species tables or FIELD-specific files. To claim, record owner, branch, paths and acceptance here in a PR and notify existing owners through GitHub PR comments. If a task is blocked, specify why and take the next independent READY assignment rather than inventing geography.
-
-A task is not DONE until remote PR/commit and actual evidence are linked. Source, build, native test, emulator and Delta are **different** statuses. Preserve history and never delete unmerged branches as a tidying shortcut.
+**Priority algorithm:** Continue your open PR; otherwise take the first READY nonoverlapping item with prerequisites. If all coding tasks are claimed/blocked, report rather than inventing world design. One coding PR per agent, one integration/ops PR at most. Changes to `TASKS.md` and `PROGRESS.md` belong to integration milestones, not each cloud session.
