@@ -10,6 +10,13 @@ Alderfield_CheckEast:
 Alderfield_OpenGate:
     setmetatile 4, 9, AV_GYM_FLOOR, FALSE
     return
+Alderfield_ClinicNurse::
+    setvar VAR_0x800B, 1
+    call Common_EventScript_PkmnCenterNurse
+    waitmessage
+    waitbuttonpress
+    release
+    end
 Alderfield_GymRules::
     lockall
     specialvar VAR_RESULT, GetCurrentLevelCap

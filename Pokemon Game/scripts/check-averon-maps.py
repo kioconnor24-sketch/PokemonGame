@@ -113,6 +113,18 @@ for n,m in maps.items():
                 if can_talk(closed,obj):errors.append(f'{n}: leader reachable through closed gate')
                 if not can_talk(opened,obj):errors.append(f'{n}: leader unreachable after opening gate')
         if (5,15) not in opened:errors.append(f'{n}: second exit unreachable')
+    if n=='AlderfieldClinic':
+        template=json.loads((root/'data/maps/OldaleTown_PokemonCenter_1F/map.json').read_text())
+        if m['layout']!=template['layout']:
+            errors.append(f'{n}: native healing animation requires the Pokemon Center layout')
+        nurses=[(o.get('local_id',i+1),o['x'],o['y']) for i,o in enumerate(m['object_events']) if o.get('script')=='Alderfield_ClinicNurse']
+        if nurses!=[(1,7,2)]:
+            errors.append(f'{n}: nurse local ID/position does not match native healing flow')
+        script=(root/'data/maps/AlderfieldGym/scripts.inc').read_text()
+        if not re.search(r'Alderfield_ClinicNurse::\s+setvar VAR_0x800B, 1\s+call Common_EventScript_PkmnCenterNurse\s+waitmessage\s+waitbuttonpress\s+release\s+end',script):
+            errors.append(f'{n}: missing native nurse call or message/release cleanup')
+        if 'setrespawn HEAL_LOCATION_ALDERFIELD' not in (root/f'data/maps/{n}/scripts.inc').read_text():
+            errors.append(f'{n}: missing local whiteout registration')
     if n=='CoastalMeadow':
         attrs=struct.unpack('<512H',(root/'data/tilesets/primary/general/metatile_attributes.bin').read_bytes())
         grass=sum(1 for v in data if (v&1023)<512 and (attrs[v&1023]&255)==2 and ((v>>10)&3)==0)

@@ -7,6 +7,7 @@
 #include "load_save.h"
 #include "pokemon.h"
 #include "save.h"
+#include "gba/flash_internal.h"
 
 TEST("Averon opening and Gym progression survive two native flash save and load cycles")
 {
@@ -153,4 +154,47 @@ TEST("Averon unclaimed rewards survive saving with a full pocket and remain retr
         RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimFairReward;);
     EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
     EXPECT_EQ(CountTotalItemQuantityInBag(reward), 1);
+}
+
+TEST("Averon recovers the previous progression when the newest flash slot is incomplete")
+{
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    ClearBag();
+    FlagClear(FLAG_BADGE01_GET);
+    FlagClear(FLAG_AVERON_GYM1_TM);
+    VarSet(VAR_AVERON_HARVEST_FAIR, 2);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    u32 previousCounter = gSaveCounter;
+
+    FlagSet(FLAG_BADGE01_GET);
+    RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimGymTM;);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_TM_WORK_UP), 1);
+    VarSet(VAR_AVERON_HARVEST_FAIR, 3);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    // Only the isolated test runner's flash is touched. Erase one sector
+    // of the newest slot to model an incomplete save, leaving its backup intact.
+    u16 sector = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
+    EXPECT_EQ(EraseFlashSector(sector), 0);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_ERROR);
+    // The error reports the damaged slot; the native loader still restores
+    // the previous valid slot and its mutually consistent quest/bag state.
+    EXPECT_EQ(gSaveCounter, previousCounter);
+    EXPECT_EQ(FlagGet(FLAG_BADGE01_GET), FALSE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_GYM1_TM), FALSE);
+    EXPECT_EQ(VarGet(VAR_AVERON_HARVEST_FAIR), 2);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_TM_WORK_UP), 0);
+
+    FlagSet(FLAG_BADGE01_GET);
+    RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimGymTM;);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_TM_WORK_UP), 1);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(FlagGet(FLAG_BADGE01_GET), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_GYM1_TM), TRUE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_TM_WORK_UP), 1);
 }

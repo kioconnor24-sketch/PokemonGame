@@ -60,7 +60,7 @@ mapfile('AlderfieldGym',layout('AlderfieldGym',gc,gymtemplate),'MAPSEC_ALDERFIEL
 gm=read('data/maps/AlderfieldGym/map.json');gm['music']='MUS_GYM';write('data/maps/AlderfieldGym/map.json',gm)
 gm['bg_events']=[bg(1,13,'Alderfield_GymRules')];write('data/maps/AlderfieldGym/map.json',gm)
 clinic=read('data/maps/OldaleTown_PokemonCenter_1F/map.json')
-clinic.update(id='MAP_ALDERFIELDCLINIC',name='AlderfieldClinic',region_map_section='MAPSEC_ALDERFIELD',connections=None,object_events=[npc(7,2,'OBJ_EVENT_GFX_NURSE','Saltmere_HomeHeal',1)],warp_events=[warp(7,8,'Alderfield',1),warp(6,8,'Alderfield',1)],coord_events=[],bg_events=[])
+clinic.update(id='MAP_ALDERFIELDCLINIC',name='AlderfieldClinic',region_map_section='MAPSEC_ALDERFIELD',connections=None,object_events=[npc(7,2,'OBJ_EVENT_GFX_NURSE','Alderfield_ClinicNurse',1)],warp_events=[warp(7,8,'Alderfield',1),warp(6,8,'Alderfield',1)],coord_events=[],bg_events=[])
 write('data/maps/AlderfieldClinic/map.json',clinic)
 text('data/maps/AlderfieldClinic/scripts.inc','AlderfieldClinic_MapScripts::\n\tmap_script MAP_SCRIPT_ON_TRANSITION, AlderfieldClinic_OnTransition\n\t.byte 0\nAlderfieldClinic_OnTransition:\n\tsetrespawn HEAL_LOCATION_ALDERFIELD\n\tend\n')
 mapfile('AlderfieldSupply',layout('AlderfieldSupply',copy.deepcopy(housecells),house),'MAPSEC_ALDERFIELD',[npc(6,4,'OBJ_EVENT_GFX_MAN_1','Alderfield_Shop',1)],[warp(3,8,'Alderfield',2),warp(4,8,'Alderfield',2)],indoor=True)
