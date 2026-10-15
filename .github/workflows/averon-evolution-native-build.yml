@@ -1,0 +1,49 @@
+name: Averon trade evolution native compile
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-evolution-native-build.yml"
+      - "Pokemon Game/engine/src/data/pokemon/species_info/gen_5_families.h"
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch original graphics build tool at the pinned upstream revision
+        uses: actions/checkout@v4
+        with:
+          repository: rh-hideout/pokeemerald-expansion
+          ref: 73b3fbeb574327cd9420c89e56bef5aa3c08fead
+          path: pinned-upstream-tools
+          sparse-checkout: |
+            tools/compresSmol
+      - name: Restore upstream tool only (no modified engine code)
+        run: cp -a pinned-upstream-tools/tools/compresSmol "Pokemon Game/engine/tools/"
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3
+      - name: Compile modified evolution source into native GBA ROM
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O all > "$RUNNER_TEMP/evolution-build.log" 2>&1 || {
+            grep -nEi 'fatal error:|error:|No such file|Stop\.' "$RUNNER_TEMP/evolution-build.log" | tail -70 || true
+            tail -70 "$RUNNER_TEMP/evolution-build.log"
+            exit 1
+          }
+          test -s pokeemerald.gba
+          sha256sum pokeemerald.gba
+          grep -A3 "Memory region" "$RUNNER_TEMP/evolution-build.log" | tail -4
+      - name: Attach log only; never upload ROM
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trade-evolution-native-build-log
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/evolution-build.log
