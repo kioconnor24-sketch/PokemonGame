@@ -80,3 +80,61 @@ TEST("Averon opening and Gym progression survive two native flash save and load 
     EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_TM_WORK_UP), 1);
 }
+
+TEST("Averon unclaimed rewards survive saving with a full pocket and remain retryable")
+{
+    bool32 gym = TRUE;
+    PARAMETRIZE { gym=TRUE; }
+    PARAMETRIZE { gym=FALSE; }
+    enum Item reward = gym ? ITEM_TM_WORK_UP : ITEM_SUPER_POTION;
+    enum Item removable = ITEM_NONE;
+    enum Pocket pocket = GetItemPocket(reward);
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    ClearBag();
+    for (enum Item item=ITEM_NONE+1; item<ITEMS_COUNT; ++item)
+        if (item != reward && GetItemPocket(item)==pocket && AddBagItem(item, 1))
+            removable=item;
+    EXPECT(removable != ITEM_NONE);
+    EXPECT_EQ(CheckBagHasSpace(reward, 1), FALSE);
+    FlagSet(FLAG_BADGE01_GET);
+    FlagClear(FLAG_AVERON_GYM1_TM);
+    VarSet(VAR_AVERON_HARVEST_FAIR, 2);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    ClearBag();
+    FlagSet(FLAG_AVERON_GYM1_TM);
+    VarSet(VAR_AVERON_HARVEST_FAIR, 3);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(CheckBagHasSpace(reward, 1), FALSE);
+    EXPECT_EQ(FlagGet(FLAG_BADGE01_GET), TRUE);
+    EXPECT_EQ(FlagGet(FLAG_AVERON_GYM1_TM), FALSE);
+    EXPECT_EQ(VarGet(VAR_AVERON_HARVEST_FAIR), 2);
+    if (gym)
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimGymTM;);
+    else
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimFairReward;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(reward), 0);
+    EXPECT(RemoveBagItem(removable, 1));
+    if (gym)
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimGymTM;);
+    else
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimFairReward;);
+    EXPECT_EQ(VarGet(VAR_RESULT), TRUE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(reward), 1);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    ClearBag();
+    FlagClear(FLAG_AVERON_GYM1_TM);
+    VarSet(VAR_AVERON_HARVEST_FAIR, 0);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    if (gym)
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimGymTM;);
+    else
+        RUN_OVERWORLD_SCRIPT(call Alderfield_ClaimFairReward;);
+    EXPECT_EQ(VarGet(VAR_RESULT), FALSE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(reward), 1);
+}
