@@ -38,10 +38,12 @@ void AveronScriptedBattle_ClearStaleNoWhiteout(void)
     FlagClear(B_FLAG_NO_WHITEOUT);
 }
 
+// Clears the previous outcome so Finish can never report a stale defeat.
 void AveronScriptedBattle_Begin(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
     FlagSet(B_FLAG_NO_WHITEOUT);
+    gBattleOutcome = 0;
 }
 
 // Reports the result in VAR_RESULT (TRUE = player lost) and always clears the

@@ -163,8 +163,25 @@ TEST("Averon scripted battle macro wraps one trainer battle between Begin and Fi
     u32 rest = 64;
     EXPECT(ScriptCallsNative(script, 5, AveronScriptedBattle_Begin));
     EXPECT_EQ(battle[0], SCR_OP_TRAINERBATTLE);
+    // Flags byte: always fight (skip the beaten-trainer check), continue the
+    // script afterwards, single battle, not a rematch.
+    EXPECT(battle[1] & (1 << 7));
+    EXPECT(battle[1] & (1 << 4));
+    EXPECT(!(battle[1] & (1 << 0)));
+    EXPECT(!(battle[1] & (1 << 1)));
     EXPECT(!ScriptCallsNative(battle, rest, AveronScriptedBattle_Begin));
     EXPECT(ScriptCallsNative(battle, rest, AveronScriptedBattle_Finish));
+}
+
+TEST("Averon scripted battle never reports a stale defeat from an earlier battle")
+{
+    gBattleOutcome = B_OUTCOME_LOST;
+    RUN_OVERWORLD_SCRIPT(
+        callnative AveronScriptedBattle_Begin, requests_effects=1;
+        callnative AveronScriptedBattle_Finish, requests_effects=1;
+    );
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
 }
 
 TEST("Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin")
