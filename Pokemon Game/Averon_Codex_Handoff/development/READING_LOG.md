@@ -24,3 +24,8 @@ Subsequent focused reads: native script testing DSL; production trainer
 generation versus synthetic test tables; item-effect/candy cap paths; heal and
 whiteout target selection; normal-font widths. Native automated battle/script
 execution is working in WSL through the bundled headless mGBA test runner.
+
+Focused follow-up: GetEvolutionTargetSpecies, native flash save/load and normal
+bag pointers. Ordinary bags point into SaveBlock1; SavePlayerBag restores a
+link-room backup, so do not call that helper in ordinary save regression tests.
+Two actual flash save/load cycles now pass, including the Gym TM claim script.

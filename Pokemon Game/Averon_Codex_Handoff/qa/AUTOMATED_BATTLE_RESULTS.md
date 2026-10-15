@@ -104,3 +104,29 @@ Wingull14/Rookidee15. All14 native maps and166 dialogue lines pass static
 checks;68 authored files are stable across regeneration. Bounded route gameplay
 and repaired north terminus remain pending; no Breakwater implementation claim.
 Current ROM SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
+
+Evolution and native flash checkpoint (2026-10-14 EDT):
+`make check -j12 TESTS=Averon`: 23/23 PASS; save-layout check:4/4 PASS.
+`make -j12 -O all`: exit0, normal ROM hash unchanged0646a372…718861.
+Logs: evidence/builds/20261015T032656Z/{native-tests,save-layout-tests,build}.log.
+
+All three starters are blocked from crossing cap15 with Rare Candy; after
+Badge1 the actual native evolution resolver selects Braixen/Prinplup at16
+and Servine at17. Everstone blocks these evolutions; removing it permits them.
+The evolution animation, confirmation/cancel and post-evolution moves remain
+unverified in ordinary gameplay.
+
+Native flash regression initializes actual detected flash, erases only the
+isolated test runner save, saves and reloads twice. It verifies party species,
+level, held EXP Share, errand and harvest progress, sluices, badge, coastal pickup
+and Gym TM flags. The actual Gym claim script grants Work Up; its bag entry
+survives the second load and a repeat script call cannot duplicate it. No user
+playthrough save is opened. This is not a power-loss or menu/reset test.
+
+An intermediate expanded fixture failed because it wrongly called SavePlayerBag,
+a link-room backup restore helper. Inspection confirmed ordinary bag pointers
+already reference SaveBlock1. Removing that fixture error restores23/23 PASS;
+no production bag code was changed. Failed log:20261015T032625Z/native-tests.log.
+The build wrapper rejected that failure and preserved the prior published ROM.
+It now also rejects missing/zero/partial result summaries and writes actual
+passed/total counts into BUILD-MANIFEST.json before publishing a successful ROM.
