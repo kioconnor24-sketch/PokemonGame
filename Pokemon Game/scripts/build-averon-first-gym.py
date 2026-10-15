@@ -52,6 +52,8 @@ gc[8]=copy.deepcopy(g[6]) # replace the original room separator with walkable fl
 gc[15]=copy.deepcopy(g[111]);floor=g[6][4];wall=g[1][0]
 for x in range(9):gc[9][x]=wall
 gc[9][4]=0x3624 # existing Petalburg Gym door, elevation 3 + collision
+gc[12][1]=g[109][1] # existing Gym statue top, visible rules landmark
+gc[13][1]=g[110][1] # statue base; read from the walkable tile below
 mapfile('AlderfieldGym',layout('AlderfieldGym',gc,gymtemplate),'MAPSEC_ALDERFIELD',[
  npc(4,4,'OBJ_EVENT_GFX_MAN_1','Alderfield_Elio',1),npc(2,12,'OBJ_EVENT_GFX_MAN_1','Alderfield_WestSluice',2),npc(6,12,'OBJ_EVENT_GFX_WOMAN_1','Alderfield_EastSluice',3),npc(7,6,'OBJ_EVENT_GFX_YOUNGSTER','Alderfield_GymTrainer',4),
 ], [warp(4,15,'Alderfield',0),warp(5,15,'Alderfield',0)],indoor=True)

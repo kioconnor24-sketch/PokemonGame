@@ -43,3 +43,12 @@ Nico now offers the optional doubles preview specified in the Gym design:
 Bunnelby Lv10 and Lillipup Lv11. Native trainerbattle_double supplies the
 fewer-than-two-usable-Pokemon refusal path. Actual NPC interaction still pending.
 Latest incremental game build exited 0; `evidence/m2/starter-build.log`.
+
+Starter gift follow-up: all eight named native tests PASS, exit 0. Nine gift
+cases cover Snivy/Fennekin/Piplup with 0, 5 or 6 occupied slots; successful
+awards are Lv5, assign Mira the third species, preserve existing party members,
+and reject repeated awards. Full parties preserve the unclaimed reward and
+Mira assignment. Native award logic is shared by the actual confirmation flow
+and the isolated script tests. Dialogue choice UI and persistence still pending.
+A visible Gym statue now marks the cap/Set rules; native collision checks pass
+and the layout was rendered for visual review. No manual emulator navigation.

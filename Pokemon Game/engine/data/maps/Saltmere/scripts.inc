@@ -149,33 +149,24 @@ Saltmere_OfferSnivy:
     bufferspeciesname STR_VAR_1, SPECIES_SNIVY
     msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
-    specialvar VAR_RESULT, CalculatePlayerPartyCount
-    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
-    givemon SPECIES_SNIVY, 5
+    call Saltmere_GiveSnivy
     goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
-    setvar VAR_AVERON_MIRA_STARTER, SPECIES_PIPLUP
     goto Saltmere_StarterReceived
 Saltmere_OfferFennekin:
     goto_if_ne VAR_AVERON_WORKSHOP, 2, Saltmere_FinishErrand
     bufferspeciesname STR_VAR_1, SPECIES_FENNEKIN
     msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
-    specialvar VAR_RESULT, CalculatePlayerPartyCount
-    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
-    givemon SPECIES_FENNEKIN, 5
+    call Saltmere_GiveFennekin
     goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
-    setvar VAR_AVERON_MIRA_STARTER, SPECIES_SNIVY
     goto Saltmere_StarterReceived
 Saltmere_OfferPiplup:
     goto_if_ne VAR_AVERON_HARBOR, 2, Saltmere_FinishErrand
     bufferspeciesname STR_VAR_1, SPECIES_PIPLUP
     msgbox Saltmere_Text_StarterOffer, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineStarter
-    specialvar VAR_RESULT, CalculatePlayerPartyCount
-    goto_if_ge VAR_RESULT, 6, Saltmere_PartyFull
-    givemon SPECIES_PIPLUP, 5
+    call Saltmere_GivePiplup
     goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_PartyFull
-    setvar VAR_AVERON_MIRA_STARTER, SPECIES_FENNEKIN
 Saltmere_StarterReceived:
     setflag FLAG_AVERON_STARTER
     setflag FLAG_SYS_POKEMON_GET
@@ -190,6 +181,41 @@ Saltmere_StarterReceived:
     msgbox Saltmere_Text_RennWaiting, MSGBOX_DEFAULT
     release
     end
+Saltmere_CheckStarterSpace:
+    setvar VAR_RESULT, MON_CANT_GIVE
+    goto_if_set FLAG_AVERON_STARTER, Saltmere_GiftReturn
+    specialvar VAR_RESULT, CalculatePlayerPartyCount
+    goto_if_ge VAR_RESULT, PARTY_SIZE, Saltmere_GiftFull
+    setvar VAR_RESULT, MON_GIVEN_TO_PARTY
+    return
+Saltmere_GiftFull:
+    setvar VAR_RESULT, MON_CANT_GIVE
+Saltmere_GiftReturn:
+    return
+Saltmere_GiveSnivy::
+    call Saltmere_CheckStarterSpace
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    givemon SPECIES_SNIVY, 5
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    setvar VAR_AVERON_MIRA_STARTER, SPECIES_PIPLUP
+    setflag FLAG_AVERON_STARTER
+    return
+Saltmere_GiveFennekin::
+    call Saltmere_CheckStarterSpace
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    givemon SPECIES_FENNEKIN, 5
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    setvar VAR_AVERON_MIRA_STARTER, SPECIES_SNIVY
+    setflag FLAG_AVERON_STARTER
+    return
+Saltmere_GivePiplup::
+    call Saltmere_CheckStarterSpace
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    givemon SPECIES_PIPLUP, 5
+    goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Saltmere_GiftReturn
+    setvar VAR_AVERON_MIRA_STARTER, SPECIES_FENNEKIN
+    setflag FLAG_AVERON_STARTER
+    return
 Saltmere_FinishErrand:
     msgbox Saltmere_Text_FinishErrand, MSGBOX_DEFAULT
     release
