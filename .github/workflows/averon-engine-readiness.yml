@@ -1,0 +1,53 @@
+name: Averon engine readiness
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-engine-readiness.yml"
+      - "Pokemon Game/scripts/audit-averon-engine-readiness.py"
+      - "Pokemon Game/scripts/tests/test_averon_engine_readiness.py"
+      - "Pokemon Game/scripts/audit-averon-event-ids.py"
+      - "Pokemon Game/scripts/verify-averon-native-caps.py"
+      - "Pokemon Game/engine/src/caps.c"
+      - "Pokemon Game/scripts/tests/test_averon_event_ids.py"
+      - "Pokemon Game/engine/include/constants/flags.h"
+      - "Pokemon Game/engine/include/constants/vars.h"
+      - "Pokemon Game/engine/include/config/**"
+  workflow_dispatch:
+
+jobs:
+  engine-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Static audit unit tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_engine_readiness.py" -v
+      - name: Event namespace fixture tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_event_ids.py" -v
+      - name: Inspect actual native event identifiers
+        shell: bash
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-event-ids.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-event-ids.json"
+      - name: Exercise actual native C level-cap and EXP functions
+        run: python3 "Pokemon Game/scripts/verify-averon-native-caps.py" --engine "Pokemon Game/engine"
+      - name: Verify pinned Averon game configuration
+        shell: bash
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-engine-readiness.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-engine-readiness.json" \
+            --markdown "$RUNNER_TEMP/averon-engine-readiness.md"
+      - name: Preserve evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-engine-readiness
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-engine-readiness.json
+            ${{ runner.temp }}/averon-engine-readiness.md

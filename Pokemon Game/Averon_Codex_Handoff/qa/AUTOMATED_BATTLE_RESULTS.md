@@ -146,3 +146,11 @@ normal build exit0. ROM hash unchanged0646a372…718861. Gameplay acceptance pen
 Final party-count assertion verifies the loaded gPartiesCount before recalculation.
 All24 native tests and four layout tests PASS again; normal build exit0; unchanged
 ROM hash. Final logs: evidence/builds/20261015T033436Z/.
+
+Backend baseline b6ab100e5d62fefdf4326abc86894530fbce34dc: integrated PR2–8
+source. Native26/26 and layout4/4 PASS; make-j12-Oall exit0; ROM bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0,33554432bytes.
+New native resolver test verifies Karrablast/Shelmet Linking Cord item check/use
+without a trade partner and rejects a wrong item. Animation/acquisition unverified.
+Contributor host/source fixtures pass;70-file authoring,14 maps,196 lines pass.
+CI failure38690746607 diagnosed: permission denied for runner100644, not missing
+tests. Git mode100755 restored with an explicit executable guard; new CI pending.

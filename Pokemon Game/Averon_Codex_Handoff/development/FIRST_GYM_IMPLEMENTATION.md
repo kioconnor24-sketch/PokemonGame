@@ -87,3 +87,21 @@ Authoring regeneration is deterministic across 63 checked source/map files.
 Dialogue uses actual normal-font widths, with an 8px reading margin in the
 216px message window; all 151 authored lines fit. Rendering/width checks do
 not replace gameplay or final art review. Native tests now total 11 PASS.
+
+## Clinic integration — 2026-10-15
+
+AlderfieldClinic now uses Alderfield_ClinicNurse, which sets native nurse local
+ID1 and calls Common_EventScript_PkmnCenterNurse. This replaces its former
+Saltmere home-healing shortcut with the ordinary yes/no rest prompt, native
+machine animation and follower hide/refresh behavior. The wrapper waits for
+the final message/button and releases the player, matching the upstream nurse.
+The existing Pokemon Center layout, nurse7,2, PC and Alderfield respawn remain.
+No new save flags, map IDs, imported assets or dialogue strings are introduced.
+
+Static map validation now checks that this nurse wiring retains the matching
+layout/local ID and respawn registration. Negative fixtures with the wrong
+layout, nurse ID or home shortcut were each rejected; originals restored.
+All14 maps,166 authored dialogue lines and68-file regeneration pass.
+Animation, decline/accept, follower restoration and the whiteout scene are
+BUILT — RUNTIME TEST PENDING after compilation; do not infer these from the
+existing native HealPlayerParty or respawn-target tests.

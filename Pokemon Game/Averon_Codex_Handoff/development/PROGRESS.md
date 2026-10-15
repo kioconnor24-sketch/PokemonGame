@@ -1,56 +1,45 @@
 # Engineering progress
 
-## Current checkpoint — 2026-10-14
+## Current checkpoint — 2026-10-15
 
-- Latest source checkpoint: `cf3920b7b3950cf34f9d6ae6ca742b29b19fe393`, pushed
-  and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
-  is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
-- Implemented: opening gift guards, optional Gym doubles, visible rules statue,
-  harvest-fair errand/reward retry, Gen5 EXP allocation, native Rare Candy cap,
-  Elio Work Up/Oran Berry/status-aware AI, safe one-time Gym TM claim.
-  Added one bounded Badge1-gated CoastalBluffs route preview (R03), beach fork,
-  pickup and trainer. Breakwater town/Gym2 are not implemented. Prior working
-  M2 ROM retained at `evidence/m2/averon-m2-stable.gba` (SHA dced4e3c…9491).
-- Built: `scripts/build-averon.ps1`, native/save checks and incremental make,
-  exit0; timestamped logs in `evidence/builds/`. Full authoring command is now
-  `python scripts/build-averon-coast.py`; see COASTAL_ROUTE_IMPLEMENTATION.md.
-  Latest local `build-output/Pokemon-Averon-Test-Build.gba`, 33,554,432 bytes,
-  SHA256 `0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
-- Tested: **24 named Averon tests PASS** through bundled headless mGBA
-  (`make check -j12 TESTS="Averon"`), plus four save-layout tests. Covers
-  actual errand/gift/reward scripts, party and pocket limits/retry, healing,
-  whiteout target selection, cap crossing/candy, EXP allocation, legal Mega,
-  excluded gimmicks, old-save Set mode, physical/special damage and real teams.
-  New tests cover all three starter evolutions after Badge1, Everstone removal,
-  and two actual flash save/load cycles. Starter/held item, errands, sluices,
-  badge and reward flags persist; Work Up survives reload and cannot be reclaimed.
-  Full-pocket Gym/fair reward retries persist across flash loads and cannot be duplicated.
-  Party serialization passes for all three starters with one and six members.
-  This is real native flash execution, not a menu/reset walkthrough.
-  Build wrapper now rejects missing/zero/incomplete test summaries before
-  publishing the ROM and records passed/total counts automatically in its manifest.
-  Latest successful logs: `evidence/builds/20261015T033436Z/`.
-- Static: all 14 maps' door/border entries and NPC/sign interactions connect;
-  water requiring Surf excluded, counters handled; Gym gate states checked.
-  Regeneration stable across 68 source/map files; 166 dialogue lines fit.
-- Unverified: full first-Gym conversation/win/reload/whiteout walkthrough,
-  dialogue choices, native menu/reset saves, natural balance, Delta.
-  **BUILT — FULL GAMEPLAY ACCEPTANCE PENDING**; M2 not marked complete.
-- Next three tasks: preserve/review PR #1 and check for other contributors;
-  address external gameplay feedback for Gym/save/coastal gate; continue bounded
-  Breakwater approach/town source after foundational acceptance is available.
-  No manual emulator navigation by default. Preserve story/geography/style.
-- Latest allowance observation: five-hour allowance98% used; saving toward
-  the user's requested1% remaining threshold. No credits purchased or reset.
-  Existing local continuations remain active: Oct15 02:25 and 09:00 EDT, then
-  every5½hours anchored at09:00. Computer/app must remain available.
-
+- Direction: BACKEND FIRST. User owns world design. Do not create final towns,
+  routes, Gym puzzles, legendary locations, encounters or cap numbers.
+- Branch: codex/backend-integration, PR9 targeting codex/first-gym-verification.
+  Source b6ab100e5d62fefdf4326abc86894530fbce34dc pushed; remote SHA verified.
+  Main unchanged; opening/Gym1 preserved. PR2/3/4/5/6/7/8 contributor heads
+  integrated with original history. No direct developer messaging occurred.
+- Task1: coherent integrated baseline BUILT / NATIVE-TESTED locally. Fresh CI
+  pending. Root cause of PR5 No tests found: runner Permission denied (Git
+  mode100644); restored100755 and added test-x guard. No tests skipped.
+- Tests:26 named Averon native tests PASS, including new Linking Cord resolver
+  checks for Karrablast/Shelmet and incomplete-save backup/recovery; four native
+  save-layout tests PASS. Contributor source/host fixtures PASS (log
+  evidence/backend-source-tests.log). Static14 maps,196 dialogue lines and
+ 70-file repeated authoring PASS. Optional quest overlay survives regeneration.
+- Build: make-j12-Oall exit0. Local build-output/Pokemon-Averon-Test-Build.gba,
+ 33554432 bytes, SHA256 bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0.
+  Stable copy: evidence/backend/averon-integrated-baseline.gba. Prior clinic
+  ROM retained: evidence/m2/averon-clinic-stable.gba (b1ef8077…f5a7a8).
+- Runtime limits: full first-Gym natural walkthrough, new clinic/quest UI,
+  evolution animation/item acquisition and Delta remain unverified. Source
+  and native resolver tests do not prove these interactions. M2 not complete.
+- Ownership: Codex integration/field licenses/events/quests/scripted battles/
+  region persistence; ChatGPT battle/species/evolution/forms/followers; friend
+  assets/support. No overlapping species edits beyond reviewed PR7 integration.
+- Next: (1) start Task2 native field licenses and move-free context actions,
+  then temporary developer fixture/menu; (2) verify new CI and complete Task2
+  permissions/persistence/animations; (3) Task3 reusable quest templates.
+- Existing continuation ACTIVE Oct15 07:30 EDT, then every5½hours. Automation
+  prompt now carries this backend-first order. Computer/app must remain awake.
+- Numeric caps, including former League76, remain provisional/unapproved.
+  Preserve level100 maximum; no new cap guesses. Do not repeat setup/audits.
 ## Historical checkpoints (superseded by the current record above)
 
 - Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;
   fetched successfully. No other branch or open PR observed at inspection.
 - Active branch: `codex/first-gym-verification`; repository project prefix
   `Pokemon Game/`. Shared ownership is in `TASKS.md`.
+- Clinic now calls the native nurse prompt/animation/follower flow; compiled, UI runtime pending. A native flash test verifies previous-slot recovery after an incomplete newest save and successful subsequent saving.
 - Implemented: Saltmere/Coastal Meadow/Windrow opening; Orchard Lane,
   Alderfield clinic/shop/irrigation Gym; Set, badge caps and Mega-only gating.
 - Built: M2 `make -j$(nproc) -O all`, exit 0; `evidence/m2/build.log`.
@@ -158,3 +147,4 @@ development/ENVIRONMENT.md, ENGINE_FINDINGS.md, READING_LOG.md, DECISIONS.md;
 data/asset_license_ledger.csv; evidence/m0/. Original creative documents preserved.
 
 Readiness recheck: WSL still cannot start; no Ubuntu distribution installed. Windows reports a pending component restart. Last boot was 2026-10-14 05:36:20, before the recorded WSL installation at 15:22. M0 remains blocked pending restart; no build or ROM test claimed.
+

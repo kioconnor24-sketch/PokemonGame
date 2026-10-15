@@ -1,0 +1,37 @@
+name: Averon source-level economy
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/audit-averon-level-economy.py"
+      - "Pokemon Game/scripts/tests/test_averon_level_economy.py"
+      - "Pokemon Game/engine/src/data/trainers.party"
+      - "Pokemon Game/engine/src/data/pokemon/species_info/**"
+      - ".github/workflows/averon-level-economy.yml"
+  workflow_dispatch:
+
+jobs:
+  level-economy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Unit tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_level_economy.py" -v
+      - name: Audit real trainer party and Pokémon sources
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-level-economy.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-level-economy.json" \
+            --csv "$RUNNER_TEMP/averon-level-economy.csv"
+      - name: Export source reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-level-economy
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-level-economy.json
+            ${{ runner.temp }}/averon-level-economy.csv

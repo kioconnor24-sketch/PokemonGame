@@ -6,17 +6,17 @@ not a final release. Generated ROMs remain local and ignored by Git.
 
 Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
 `make -j12 -O all`; exit 0. SHA256:
-`0646a37269e04c09ad873e69d98deb8d791924c492eebd17501306fc6c718861`.
-Source checkpoint: `cf3920b7b3950cf34f9d6ae6ca742b29b19fe393` on
-`codex/first-gym-verification`. Latest fixes redraw the live Gym gate and
+`bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0`.
+Source checkpoint: `b6ab100e5d62fefdf4326abc86894530fbce34dc` on
+`codex/backend-integration`. Latest fixes redraw the live Gym gate and
 use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
 these do not replace native runtime acceptance.
 Includes optional Gym doubles, harvest fair, full-party starter guards, native
 Rare Candy cap and Gym TM retry. A bounded Badge1-gated coastal road preview
-is included. **24 named native Averon tests and four save-layout tests pass**.
+is included. **26 named native Averon tests and four save-layout tests pass**.
 New executed checks cover starter evolutions/Everstone and two actual flash
 save/load cycles, including Work Up persistence and duplicate-claim protection.
-Breakwater town/Gym2 are not implemented. Test-only changes leave the normal
+Breakwater town/Gym2 are not implemented. The integrated source builds a new ROM; earlier test-only changes left the normal
 ROM byte-for-byte unchanged from the prior build.
 Full conversational gameplay/save walkthrough and new coastal traversal pending.
 Size: 33,554,432 bytes. Build source metadata is in the adjacent local manifest.
