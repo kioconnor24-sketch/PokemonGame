@@ -154,3 +154,17 @@ without a trade partner and rejects a wrong item. Animation/acquisition unverifi
 Contributor host/source fixtures pass;70-file authoring,14 maps,196 lines pass.
 CI failure38690746607 diagnosed: permission denied for runner100644, not missing
 tests. Git mode100755 restored with an explicit executable guard; new CI pending.
+
+Task2 native field-license checkpoint25b0c4c2:29/29 native and4/4 layout PASS
+at evidence/builds/20261015T070904Z/. Actual checkfieldmove bytecode covers
+seven flags, badges/learned moves cannot bypass a missing license, no HM needed
+when licensed, empty/fainted/egg-only parties refused, flags persist via flash.
+FIELD KIT menu compiles; UI/animations are not inferred from these tests.
+Field lab map-only extensiond1395442: normal build exit0,15-map connectivity,
+75-file repeated authoring,201 dialogue-line checks PASS. Release preprocessing
+excludes entry/grant code. Cut/Rock Smash/Strength/Surf developer fixtures BUILT;
+Dive/Waterfall fixtures and actual traversal still pending. Source WSL heal JSON
+was malformed; broken copy preserved locally and valid authored JSON restored.
+Latest ROMea651ca5feb9e03ad06902e594841591818498b92292dbf13434d49e405db5c0.
+Task1 fresh CI38696580924 is now SUCCESS: clean compile and26 named native tests
+pass after fixing runner execute permission. This baseline remains preserved.

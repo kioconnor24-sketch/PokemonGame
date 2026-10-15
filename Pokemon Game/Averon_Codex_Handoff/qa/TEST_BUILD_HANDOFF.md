@@ -1,26 +1,30 @@
-# Compiled build handoff
+# Current compiled field-license build
 
-Local upload file: `build-output/Pokemon-Averon-Test-Build.gba` from the
-working project directory. This is the latest successful developer QA build,
-not a final release. Generated ROMs remain local and ignored by Git.
+Local file: build-output/Pokemon-Averon-Field-Licenses-d1395442.gba
+Also available as build-output/Pokemon-Averon-Test-Build.gba.
+Source d1395442f3e11efcd539c14590d6fda67aa4ad85 on codex/field-licenses (PR10).
+Size33554432bytes; SHA256 ea651ca5feb9e03ad06902e594841591818498b92292dbf13434d49e405db5c0.
+Normal incremental build exit0; logs evidence/builds/20261015T071739Z/.
 
-Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
-`make -j12 -O all`; exit 0. SHA256:
-`bba2ba134d109ed7aab0d6d3f8551b5d717d213a656a1a28d481004939d90ef0`.
-Source checkpoint: `b6ab100e5d62fefdf4326abc86894530fbce34dc` on
-`codex/backend-integration`. Latest fixes redraw the live Gym gate and
-use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
-these do not replace native runtime acceptance.
-Includes optional Gym doubles, harvest fair, full-party starter guards, native
-Rare Candy cap and Gym TM retry. A bounded Badge1-gated coastal road preview
-is included. **26 named native Averon tests and four save-layout tests pass**.
-New executed checks cover starter evolutions/Everstone and two actual flash
-save/load cycles, including Work Up persistence and duplicate-claim protection.
-Breakwater town/Gym2 are not implemented. The integrated source builds a new ROM; earlier test-only changes left the normal
-ROM byte-for-byte unchanged from the prior build.
-Full conversational gameplay/save walkthrough and new coastal traversal pending.
-Size: 33,554,432 bytes. Build source metadata is in the adjacent local manifest.
+Field licenses gate Cut/Rock Smash/Strength/Surf/Waterfall/Dive/Fly without
+teaching moves. Party FIELD KIT exposes the existing native callbacks.
+Native29/29 and save-layout4/4 PASS for the license core at
+ evidence/builds/20261015T070904Z/. Later developer-map-only changes were
+statically checked and normal-compiled; the native suite was not rerun.
 
+Developer R+START -> Scripts -> Script4 enters the isolated field lab.
+Use a backed-up test save. Left scientist asks before granting all licenses;
+next scientist revokes them; right NPC returns to Saltmere. Obstacles: Cut
+ tree, Rock Smash rock, Strength boulder and Surf pool. No party is overwritten.
+Release preprocessing excludes entry/grant implementation and emits stubs.
+
+Task2 IN PROGRESS: paired Dive/Waterfall fixtures, Fly destination coverage,
+actual menu/cancel/follower/obstacle/animation traversal and Delta pending.
+The complete field toolkit is BUILT — RUNTIME TEST PENDING, not PLAYTESTED.
+Existing opening/Gym1 natural walkthrough is also incomplete.
+Stable integration baseline preserved at evidence/backend/averon-integrated-baseline.gba;
+clean GitHub build +26 native tests pass in run38696580924 on baseline3318b59c.
+Generated ROMs and saves remain local and ignored; never publish full binaries.
 The user can upload this file directly into the ChatGPT testing conversation
 where sharing is appropriate. Do not publish the full binary on public GitHub
 or Releases. No direct transfer to another conversation has occurred.
@@ -49,3 +53,4 @@ progression balance. The fixture code is built but has not been runtime tested.
 Bug reports should include source SHA, ROM SHA, map/event, expected and actual
 behavior, reproduction steps, and relevant screenshots/logs. Do not label
 untested features as passed. Use **BUILT — RUNTIME TEST PENDING**.
+
