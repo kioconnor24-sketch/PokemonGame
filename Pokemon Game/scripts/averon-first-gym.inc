@@ -24,6 +24,7 @@ Alderfield_WestSluice::
     goto_if_eq VAR_RESULT, NO, Alderfield_Release
     setflag FLAG_AVERON_WEST_SLUICE
     call Alderfield_CheckEast
+    special DrawWholeMapView
     msgbox Alderfield_Text_WestDone, MSGBOX_DEFAULT
     release
     end
@@ -34,6 +35,7 @@ Alderfield_EastSluice::
     goto_if_eq VAR_RESULT, NO, Alderfield_Release
     setflag FLAG_AVERON_EAST_SLUICE
     call_if_set FLAG_AVERON_WEST_SLUICE, Alderfield_OpenGate
+    special DrawWholeMapView
     msgbox Alderfield_Text_EastDone, MSGBOX_DEFAULT
     release
     end
@@ -41,12 +43,19 @@ Alderfield_Elio::
     lock
     faceplayer
     goto_if_set FLAG_BADGE01_GET, Alderfield_ElioAfter
+    goto_if_unset FLAG_AVERON_WEST_SLUICE, Alderfield_ElioNotReady
+    goto_if_unset FLAG_AVERON_EAST_SLUICE, Alderfield_ElioNotReady
     msgbox Alderfield_Text_ElioIntro, MSGBOX_DEFAULT
     trainerbattle_no_intro TRAINER_AVERON_ELIO, Alderfield_Text_ElioDefeat
     setflag FLAG_BADGE01_GET
     msgbox Alderfield_Text_Badge, MSGBOX_DEFAULT
     playfanfare MUS_OBTAIN_BADGE
     waitfanfare
+    goto Alderfield_ElioAfter
+Alderfield_ElioNotReady:
+    msgbox Alderfield_Text_NotReady, MSGBOX_DEFAULT
+    release
+    end
 Alderfield_ElioAfter:
     goto_if_set FLAG_AVERON_GYM1_TM, Alderfield_ElioAdvice
     giveitem ITEM_TM_WORK_UP
@@ -124,6 +133,8 @@ Alderfield_Text_EastDone:
     .string "The east ditch fills with water.\nThat's one happy field.$"
 Alderfield_Text_ElioIntro:
     .string "ELIO: Nice work with those sluices.\nWe've got a battle to fit in, too!$"
+Alderfield_Text_NotReady:
+    .string "ELIO: Could you help with the water?\nBoth sluices need opening first.$"
 Alderfield_Text_ElioDefeat:
     .string "A good team, and a good day's work.$"
 Alderfield_Text_Badge:

@@ -21,6 +21,9 @@ the engine flag list with approved Averon ceilings, plus candy cap. Badge 1
 raises the ceiling from 15 to 23. No Sinnoh cap chain implemented yet.
 Mega is the only usable battle gimmick; Primal/Ultra Burst forms disabled.
 Held-item EXP Share remains GEN_5 with party-wide sharing flag 0.
+EXP allocation now also uses B_SPLIT_EXP GEN_5: participants share one half
+when a holder exists, holders share the other half. Modern full-participant
+EXP allocation no longer applies. Runtime six-member checks remain pending.
 These are source changes, not runtime passes. Mega/cap/EXP edge cases pending.
 
 Build corrections: use upstream `Leader Norman` portrait identifier for Elio's
@@ -37,3 +40,23 @@ Opening follow-ups included: PC tiles in home/cooperative, National Dex enable
 on starter receipt, walkable route grass, immediate follower refresh. Preserve
 all old local ROM builds and save evidence. Source maps/dynamic saved viewport
 data can differ after edits; clean new-game tests are required for final QA.
+
+## Gate/EXP follow-up
+
+Both live sluice interactions redraw the map after changing gate tiles, as in
+upstream's Petalburg puzzle. Elio also checks both sluice flags before offering
+his first battle. On-load tile restoration remains separate and persistent.
+The native checker flood-fills the actual collision grid with NPC obstruction:
+both workers reachable while closed, leader unreachable before and reachable
+after opening, and both exit tiles accessible afterward. These static checks
+do not establish animation, save reload or battle behavior in an emulator.
+
+`scripts/test-averon-caps.py` compiles the actual first two caps.c functions
+with mocked save flags using the host C compiler. All 11 progression ceilings
+and EXP below/at/above each ceiling pass. Rare Candy configuration is checked;
+actual item use is still a runtime test.
+
+`engine/test/battle/averon_exp.c` adds four automated native battle scenarios:
+six-member party, held item present/absent, lead below/at first cap. These use
+the existing `make check TESTS="Averon"` framework and headless mGBA runner.
+Record execution results before claiming those automated battle tests passed.

@@ -97,6 +97,7 @@ replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859'
 #define TRAINERS_COUNT_EMERALD     864''')
 
 # Enforce the user-selected battle rules at the engine boundary.
+replace('include/config/battle.h','B_SPLIT_EXP                 GEN_LATEST','B_SPLIT_EXP                 GEN_5')
 replace('src/new_game.c','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/battle_main.c','gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/option_menu.c','gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gTasks[taskId].tBattleStyle = OPTIONS_BATTLE_STYLE_SET;')

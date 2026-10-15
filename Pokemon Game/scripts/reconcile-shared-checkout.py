@@ -14,7 +14,7 @@ paths = subprocess.check_output(['git', '-C', str(shared), 'ls-files', '-z']).de
 upstream = '73b3fbeb574327cd9420c89e56bef5aa3c08fead'
 modified = set(subprocess.check_output([
     'wsl', '-d', 'Ubuntu', '-u', 'root', '--exec', 'bash', '-lc',
-    f'cd /root/averon/engine; git diff --name-only {upstream}'
+    f'cd /root/averon/engine; git -c core.safecrlf=false diff --name-only {upstream}; git ls-files --others --exclude-standard'
 ]).decode().splitlines())
 changed = []
 for name in paths:
@@ -33,6 +33,7 @@ for name in paths:
 new = ['scripts/averon-first-gym.inc', 'scripts/build-averon-first-gym.py',
        'scripts/install-averon-debug-tests.py', 'scripts/send-mgba-input.ps1',
        'scripts/reconcile-shared-checkout.py',
+       'scripts/test-averon-caps.py', 'engine/test/battle/averon_exp.c',
        'Averon_Codex_Handoff/development/FIRST_GYM_IMPLEMENTATION.md',
        'Averon_Codex_Handoff/development/TASKS.md',
        'Averon_Codex_Handoff/qa/OPENING_TEST_RESULTS.md']

@@ -25,6 +25,28 @@ for n,m in maps.items():
         if not any(c['map']==m['id'] and c['direction']==opposite for c in target['connections'] or []):errors.append(f'{n}: missing reverse connection')
     for npc in m['object_events']:
         if not walk(npc['x'],npc['y']):errors.append(f'{n}: NPC on collision tile at {npc["x"]},{npc["y"]}')
+    if n=='AlderfieldGym':
+        blocked={(o['x'],o['y']) for o in m['object_events']}
+        def reached(gate_open):
+            found={(4,15)};pending=deque(found)
+            while pending:
+                x,y=pending.popleft()
+                for q in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+                    if q in found or q in blocked:continue
+                    if q==(4,9) and gate_open or walk(*q):
+                        found.add(q);pending.append(q)
+            return found
+        closed,opened=reached(False),reached(True)
+        def can_talk(points,obj):
+            x,y=obj['x'],obj['y']
+            return any(q in points for q in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)))
+        for obj in m['object_events']:
+            if 'Sluice' in obj['script'] and not can_talk(closed,obj):
+                errors.append(f'{n}: sluice unreachable before opening gate')
+            if obj['script']=='Alderfield_Elio':
+                if can_talk(closed,obj):errors.append(f'{n}: leader reachable through closed gate')
+                if not can_talk(opened,obj):errors.append(f'{n}: leader unreachable after opening gate')
+        if (5,15) not in opened:errors.append(f'{n}: second exit unreachable')
     if n=='CoastalMeadow':
         attrs=struct.unpack('<512H',(root/'data/tilesets/primary/general/metatile_attributes.bin').read_bytes())
         grass=sum(1 for v in data if (v&1023)<512 and (attrs[v&1023]&255)==2 and ((v>>10)&3)==0)
@@ -32,4 +54,4 @@ for n,m in maps.items():
     print(f'{n}: {w}x{h}, {len(m["warp_events"])} warps, {len(m["object_events"])} NPCs')
 if errors:
     print('\n'.join(errors));raise SystemExit(1)
-print('PASS: native warp targets, reciprocal map connections, and door/NPC approach collision. Runtime tests still required.')
+print('PASS: native warp targets, reciprocal connections, door/NPC collision and closed/open Gym gate reachability. Runtime tests still required.')
