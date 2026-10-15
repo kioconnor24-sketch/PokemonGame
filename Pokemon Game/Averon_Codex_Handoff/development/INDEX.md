@@ -7,7 +7,7 @@ This is the **navigation page**, not an independent source of gameplay requireme
 | Purpose | Where | Authority |
 | --- | --- | --- |
 | Owner instructions and creative freeze | [Team hub #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [active assignments #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24) | Current owner instructions override historical plans |
-| Agent responsibilities | [AGENT_ROLES.md](AGENT_ROLES.md), [root AGENTS.md](../../../../AGENTS.md) | Standing operating rules |
+| Agent responsibilities | [AGENT_ROLES.md](AGENT_ROLES.md), [root AGENTS.md](../../../AGENTS.md) | Standing operating rules |
 | Collaboration, commits and acceptance | [WORKFLOW.md](WORKFLOW.md) | Process |
 | Current working code | [main and open pull requests](https://github.com/kioconnor24-sketch/PokemonGame/pulls) | Actual source and head-specific tests |
 | Next unblocked work | [TASKS.md](TASKS.md), latest claims in [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) | Stable priorities; newest PR claim wins when files overlap |
@@ -27,7 +27,7 @@ This is the **navigation page**, not an independent source of gameplay requireme
 | [Averon_Codex_Handoff/design/](../design/) | Earlier creative drafts and possible future references | **Not approved production instructions** |
 | [Averon_Codex_Handoff/data/](../data/) | Historical planning CSVs and asset ledger | Do **not** use provisional geography/rosters as final data |
 | [Averon_Codex_Handoff/reference_maps/](../reference_maps/) | Old conceptual designs | Frozen; no generation or implementation |
-| [.github/workflows/](../../../../.github/workflows/) | Build, source and hygiene CI | No full ROM/save uploads |
+| [.github/workflows/](../../../.github/workflows/) | Build, source and hygiene CI | No full ROM/save uploads |
 | [evidence/](../../evidence/) | Recorded source/test evidence where available | Verify exact source SHA; never assume older evidence validates a new head |
 
 ## Historical material — preserve, do not silently execute
