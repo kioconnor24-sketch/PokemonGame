@@ -1,0 +1,129 @@
+name: Averon rendered emulator smoke playtest
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-rendered-playtest.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rendered-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install GBA build and graphical emulator tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3 \
+            mgba-sdl xvfb xdotool openbox imagemagick xauth
+      - name: Compile ROM for isolated test (never upload ROM or save)
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O all > "$RUNNER_TEMP/playtest-build.log" 2>&1 || {
+            tail -120 "$RUNNER_TEMP/playtest-build.log"
+            exit 1
+          }
+          test -s pokeemerald.gba
+          sha256sum pokeemerald.gba
+          stat -c 'ROM bytes: %s' pokeemerald.gba
+      - name: Launch actual graphical mGBA and capture controller milestones
+        shell: bash
+        env:
+          SDL_AUDIODRIVER: dummy
+          SDL_VIDEODRIVER: x11
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/averon-playtest"
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1024x768x24 -nolisten tcp > "$RUNNER_TEMP/averon-playtest/xvfb.log" 2>&1 &
+          xvfb_pid=$!
+          sleep 2
+          openbox > "$RUNNER_TEMP/averon-playtest/window-manager.log" 2>&1 &
+          sleep 2
+          mgba -2 "Pokemon Game/engine/pokeemerald.gba" > "$RUNNER_TEMP/averon-playtest/mgba.log" 2>&1 &
+          emu_pid=$!
+          cleanup() { kill "$emu_pid" "$xvfb_pid" 2>/dev/null || true; }
+          trap cleanup EXIT
+          win=""
+          for i in $(seq 1 25); do
+            win=$(xdotool search --onlyvisible --name "mGBA" 2>/dev/null | head -1 || true)
+            if [ -n "$win" ]; then break; fi
+            if ! kill -0 "$emu_pid" 2>/dev/null; then
+              echo "Emulator exited prematurely:"
+              cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+              exit 1
+            fi
+            sleep 1
+          done
+          if [ -z "$win" ]; then
+            echo "No mGBA window after 25 seconds"
+            xdotool search --onlyvisible --name '.*' getwindowname || true
+            cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+            exit 1
+          fi
+          xdotool windowactivate --sync "$win" || true
+          echo "mGBA WINDOW=$win"
+          mgba --version 2>&1 || true
+          capture() {
+            local stage="$1"
+            local filename="$RUNNER_TEMP/averon-playtest/$stage.png"
+            import -window "$win" "$filename"
+            convert "$filename" -resize 240x160 -colors 96 PNG8:"$RUNNER_TEMP/averon-playtest/$stage-small.png"
+            python3 - "$filename" "$stage" <<'PY'
+          import subprocess, sys
+          p, label=sys.argv[1:]
+          out=subprocess.check_output(['identify','-format','%wx%h %[colors]c',p],text=True)
+          print('SCREENSHOT',label,out,flush=True)
+          PY
+            echo "IMAGE_BASE64_BEGIN:$stage"
+            base64 -w 0 "$RUNNER_TEMP/averon-playtest/$stage-small.png"
+            echo
+            echo "IMAGE_BASE64_END:$stage"
+          }
+          press() {
+            xdotool windowactivate "$win" || true
+            xdotool key --clearmodifiers --delay 80 "$1"
+          }
+          sleep 9
+          capture boot
+          press Return
+          sleep 4
+          capture title-start
+          press x
+          sleep 8
+          capture new-game
+          for i in $(seq 1 12); do
+            press x
+            sleep 0.65
+          done
+          capture dialogue-advance
+          press Return
+          sleep 3
+          capture after-start
+          for i in $(seq 1 12); do
+            press x
+            sleep 0.65
+          done
+          capture continued
+          if ! kill -0 "$emu_pid" 2>/dev/null; then
+            echo "Emulator exited unexpectedly"
+            cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+            exit 1
+          fi
+      - name: Attach only screenshots and logs (NO ROM or save)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-rendered-smoke-evidence
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-playtest/*.png
+            ${{ runner.temp }}/averon-playtest/*.log
+            ${{ runner.temp }}/playtest-build.log
