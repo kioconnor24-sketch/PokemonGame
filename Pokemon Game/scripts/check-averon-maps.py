@@ -66,6 +66,7 @@ for n,m in maps.items():
         if not crossing:errors.append(f'{n}: no walkable border crossing toward {target["name"]}')
         seeds.update(crossing)
     if n=='Saltmere':seeds.add((18,18))
+    if n=='AveronFieldLab':seeds.add((4,4))
     if n=='Alderfield' and any(c['map']=='MAP_COASTALBLUFFS' for c in m['connections'] or []):
         gate={(e['x'],e['y']) for e in m['coord_events'] if e.get('script')=='CoastalBluffs_BadgeGate'}
         for y in range(h):
@@ -125,6 +126,14 @@ for n,m in maps.items():
             errors.append(f'{n}: missing native nurse call or message/release cleanup')
         if 'setrespawn HEAL_LOCATION_ALDERFIELD' not in (root/f'data/maps/{n}/scripts.inc').read_text():
             errors.append(f'{n}: missing local whiteout registration')
+    if n=='AveronFieldLab':
+        if m['connections'] or m['warp_events']:
+            errors.append(f'{n}: developer fixture must not connect to the story world')
+        expected={'EventScript_CutTree','EventScript_RockSmash','EventScript_StrengthBoulder'}
+        if not expected.issubset({o['script'] for o in m['object_events']}):
+            errors.append(f'{n}: missing native obstacle scripts')
+        water=sum(behavior(l,v) in surfable for v in data)
+        if water<40:errors.append(f'{n}: missing substantial native Surf pool')
     if n=='CoastalMeadow':
         attrs=struct.unpack('<512H',(root/'data/tilesets/primary/general/metatile_attributes.bin').read_bytes())
         grass=sum(1 for v in data if (v&1023)<512 and (attrs[v&1023]&255)==2 and ((v>>10)&3)==0)

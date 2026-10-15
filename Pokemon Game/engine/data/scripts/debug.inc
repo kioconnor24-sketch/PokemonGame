@@ -244,8 +244,7 @@ Debug_EventScript_Script_3::
 	end
 
 Debug_EventScript_Script_4::
-	release
-	end
+	goto AveronFieldLab_Enter
 
 Debug_EventScript_Script_5::
 	release

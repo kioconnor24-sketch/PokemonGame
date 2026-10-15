@@ -86,3 +86,5 @@ print('Authored one badge-gated coastal route preview, beach fork and trainer in
 # Apply contributor quests after all base maps, so regeneration preserves NPCs.
 quests=runpy.run_path(str(Path(__file__).with_name('build-averon-sidequests.py')))
 quests['apply'](ROOT,Path(__file__).with_name('averon-optional-sidequests.inc'))
+lab=runpy.run_path(str(Path(__file__).with_name('build-averon-field-lab.py')))
+lab['apply'](globals())

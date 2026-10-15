@@ -1767,3 +1767,19 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/CoastalBluffs/scripts.inc"
 	.include "data/averon_optional_sidequests.inc"
+
+@ AVERON FIELD LAB
+#ifndef RELEASE
+	.include "data/maps/AveronFieldLab/scripts.inc"
+#else
+AveronFieldLab_MapScripts::
+	.byte 0
+AveronFieldLab_Enter::
+	end
+AveronFieldLab_Grant::
+	end
+AveronFieldLab_Revoke::
+	end
+AveronFieldLab_Exit::
+	end
+#endif
