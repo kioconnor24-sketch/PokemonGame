@@ -510,6 +510,19 @@ TEST("Averon region fixture revalidates restored healer metadata without changin
     EXPECT_EQ(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation), healId);
     EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
     memset(&gSaveBlock1Ptr->lastHealLocation, 0x7F, sizeof(expected));
+    u32 invalidId = GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation);
+    EXPECT_EQ(invalidId, HEAL_LOCATION_NONE);
+    struct HealReadFixture invalidReader = {0};
+    u32 fallback = 0xDEADBEEF;
+    struct WarpData corrupted;
+    memcpy(&corrupted, &gSaveBlock1Ptr->lastHealLocation, sizeof(corrupted));
+    EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+        MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), invalidId,
+        HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,
+        ReadHealFixture, &invalidReader, &fallback), TRUE);
+    EXPECT_EQ(fallback, HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
+    EXPECT_EQ(invalidReader.calls, 1); // Zero is rejected without a metadata read.
+    EXPECT_EQ(memcmp(&corrupted, &gSaveBlock1Ptr->lastHealLocation, sizeof(corrupted)), 0);
     for (u32 i = 0; i < 8; ++i)
     {
         if (i & 1)
