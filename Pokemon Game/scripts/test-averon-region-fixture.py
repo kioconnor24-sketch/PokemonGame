@@ -49,6 +49,40 @@ class RegionFixtureTests(unittest.TestCase):
         cls.lib.AveronRegionFixture_ResolveMap.restype = ctypes.c_int
         cls.lib.AveronRegionFixture_CaptureBadges.argtypes = [BadgeReader, ctypes.c_void_p, ctypes.POINTER(Badges)]
         cls.lib.AveronRegionFixture_CaptureBadges.restype = ctypes.c_int
+        cls.lib.AveronRegionFixture_IsFlyDestinationEligible.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
+            ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_int]
+        cls.lib.AveronRegionFixture_IsFlyDestinationEligible.restype = ctypes.c_int
+
+    def test_fly_destination_policy_truth_table_and_immutable_inputs(self):
+        entries = [(3, 1, AVERON), (3, 2, AVERON), (4, 1, SINNOH), (4, 2, SINNOH)]
+        maps = (MapBinding * 4)(*(MapBinding(*entry) for entry in entries))
+        before = bytes(maps)
+        for current in entries:
+            for destination in entries:
+                for visited in (-1, 0, 1, 2):
+                    actual = self.lib.AveronRegionFixture_IsFlyDestinationEligible(
+                        maps, 4, *current[:2], *destination[:2], visited)
+                    self.assertEqual(actual, visited == 1 and current[2] == destination[2])
+        self.assertEqual(bytes(maps), before)
+
+    def test_fly_destination_policy_rejects_invalid_current_or_target(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(None, 1, 3, 7, 3, 7, 1), 0)
+        self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(maps, 0, 3, 7, 3, 7, 1), 0)
+        for invalid in ((3, 8), (259, 7), (3, 263), (2**32 - 1, 7), (3, 2**32 - 1)):
+            self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(maps, 1, *invalid, 3, 7, 1), 0)
+            self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 7, *invalid, 1), 0)
+
+    def test_fly_destination_policy_rejects_ambiguous_or_unknown_regions(self):
+        entries = [(3, 7, AVERON), (3, 8, AVERON)]
+        for duplicate in entries:
+            maps = (MapBinding * 3)(*(MapBinding(*entry) for entry in (*entries, duplicate)))
+            self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(maps, 3, 3, 7, 3, 8, 1), 0)
+        for index in (0, 1):
+            for region in (0, 3, 257, 258, 2**32 - 1):
+                maps = (MapBinding * 2)(*(MapBinding(*entry) for entry in entries))
+                maps[index].region = region
+                self.assertEqual(self.lib.AveronRegionFixture_IsFlyDestinationEligible(maps, 2, 3, 7, 3, 8, 1), 0)
 
     def test_capture_reads_both_banks_once_and_allows_aliasing(self):
         for averon, sinnoh in ((0, 255), (255, 0), (0x55, 0xAA), (0xA5, 0x81)):

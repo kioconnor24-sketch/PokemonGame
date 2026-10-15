@@ -54,6 +54,14 @@ class RegionMutationTests(unittest.TestCase):
                              'reader(AVERON_FIXTURE_AVERON, number, context)',
                              'test_capture_reads_both_banks_once_and_allows_aliasing')
 
+    def test_detects_ignoring_destination_discovery(self):
+        self.assert_detected('if (destinationVisited != 1)', 'if (destinationVisited < 0)',
+                             'test_fly_destination_policy_truth_table_and_immutable_inputs')
+
+    def test_detects_cross_region_fly_leak(self):
+        self.assert_detected('return currentRegion == destinationRegion;', 'return 1;',
+                             'test_fly_destination_policy_truth_table_and_immutable_inputs')
+
     def test_detects_ignoring_map_group(self):
         self.assert_detected('bindings[i].mapGroup != mapGroup || bindings[i].mapNum != mapNum',
                              'bindings[i].mapNum != mapNum',

@@ -43,6 +43,14 @@ enum AveronFixtureRegion AveronRegionFixture_ResolveMap(
     const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
     uint32_t mapGroup, uint32_t mapNum);
 
+// Region/discovery policy only. The engine must separately enforce its
+// existing license, partner and source-map restrictions before starting Fly.
+// No destination/visited flags, transport routes or map content are created.
+int AveronRegionFixture_IsFlyDestinationEligible(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t currentGroup, uint32_t currentNum,
+    uint32_t destinationGroup, uint32_t destinationNum, int destinationVisited);
+
 // Badge numbers are 1..8, with bit 0 representing Badge 1 in each bank.
 // Full-width region inputs reject invalid values before -fshort-enums can
 // truncate them into a valid bank. This struct is not a persistent format.

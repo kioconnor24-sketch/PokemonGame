@@ -106,6 +106,55 @@ TEST("Averon region fixture capture allows its reader context to alias output")
     EXPECT_EQ(badges.sinnoh, 0x81);
 }
 
+TEST("Averon region fixture Fly policy requires visited destinations in the current region")
+{
+    const struct AveronFixtureMapBinding maps[] = {
+        {MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), AVERON_FIXTURE_AVERON},
+        {MAP_GROUP(MAP_ALDERFIELD), MAP_NUM(MAP_ALDERFIELD), AVERON_FIXTURE_AVERON},
+        {255, 0, AVERON_FIXTURE_SINNOH},
+        {255, 1, AVERON_FIXTURE_SINNOH},
+    };
+    struct AveronFixtureMapBinding before[ARRAY_COUNT(maps)];
+    memcpy(before, maps, sizeof(maps));
+    for (u32 current = 0; current < ARRAY_COUNT(maps); ++current)
+        for (u32 destination = 0; destination < ARRAY_COUNT(maps); ++destination)
+            for (int visited = 0; visited <= 1; ++visited)
+                EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, ARRAY_COUNT(maps),
+                    maps[current].mapGroup, maps[current].mapNum,
+                    maps[destination].mapGroup, maps[destination].mapNum, visited),
+                    visited && maps[current].region == maps[destination].region);
+    EXPECT_EQ(memcmp(before, maps, sizeof(maps)), 0);
+}
+
+TEST("Averon region fixture Fly policy rejects invalid source destination and discovery state")
+{
+    const struct AveronFixtureMapBinding maps[] = {{3, 7, AVERON_FIXTURE_AVERON}};
+    const int invalidVisited[] = {-1, 2, 0x7FFFFFFF};
+    for (u32 i = 0; i < ARRAY_COUNT(invalidVisited); ++i)
+        EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 7, 3, 7, invalidVisited[i]), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(NULL, 1, 3, 7, 3, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 0, 3, 7, 3, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 8, 3, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 7, 3, 8, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 259, 7, 3, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 7, 259, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 263, 3, 7, TRUE), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 1, 3, 7, 3, 263, TRUE), FALSE);
+}
+
+TEST("Averon region fixture Fly policy rejects ambiguous or invalid region bindings")
+{
+    struct AveronFixtureMapBinding maps[] = {
+        {3, 7, AVERON_FIXTURE_AVERON}, {3, 8, AVERON_FIXTURE_AVERON}, {3, 7, AVERON_FIXTURE_AVERON},
+    };
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 3, 3, 7, 3, 8, TRUE), FALSE);
+    maps[2].mapNum = 8;
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 3, 3, 7, 3, 8, TRUE), FALSE);
+    maps[2].mapNum = 9;
+    maps[1].region = 257;
+    EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(maps, 3, 3, 7, 3, 8, TRUE), FALSE);
+}
+
 TEST("Averon region fixture resolves explicit map group and number pairs")
 {
     const struct AveronFixtureMapBinding maps[] = {

@@ -44,6 +44,20 @@ enum AveronFixtureRegion AveronRegionFixture_ResolveMap(
     return found;
 }
 
+int AveronRegionFixture_IsFlyDestinationEligible(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t currentGroup, uint32_t currentNum,
+    uint32_t destinationGroup, uint32_t destinationNum, int destinationVisited)
+{
+    if (destinationVisited != 1)
+        return 0;
+    uint32_t currentRegion = AveronRegionFixture_ResolveMap(bindings, bindingCount, currentGroup, currentNum);
+    uint32_t destinationRegion = AveronRegionFixture_ResolveMap(bindings, bindingCount, destinationGroup, destinationNum);
+    if (currentRegion == AVERON_FIXTURE_UNKNOWN || destinationRegion == AVERON_FIXTURE_UNKNOWN)
+        return 0;
+    return currentRegion == destinationRegion;
+}
+
 static uint8_t GetBadgeMask(const struct AveronFixtureBadges *badges,
                             uint32_t region)
 {
