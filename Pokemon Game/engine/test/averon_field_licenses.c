@@ -8,6 +8,9 @@
 #include "party_menu.h"
 #include "save.h"
 #include "script.h"
+#include "overworld.h"
+#include "constants/maps.h"
+#include "constants/map_types.h"
 
 static const enum FieldMove sLicensedMoves[] = {
     FIELD_MOVE_CUT, FIELD_MOVE_ROCK_SMASH, FIELD_MOVE_STRENGTH,
@@ -97,4 +100,33 @@ TEST("Averon independent field licenses persist through actual flash save and lo
     EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
     for (u32 i=0; i<ARRAY_COUNT(sLicensedMoves); ++i)
         EXPECT_EQ(IsFieldMoveUnlocked(sLicensedMoves[i]), i%2==0);
+}
+
+TEST("Averon field lab Dive connections preserve coordinates party and licenses in both directions")
+{
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_DIVE);
+    const struct MapHeader *surface=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_AVERONFIELDLAB),MAP_NUM(MAP_AVERONFIELDLAB));
+    const struct MapHeader *underwater=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_AVERONFIELDLABUNDERWATER),MAP_NUM(MAP_AVERONFIELDLABUNDERWATER));
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB),MAP_NUM(MAP_AVERONFIELDLAB),WARP_ID_NONE,4,4);
+    WarpIntoMap();
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x,4);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y,4);
+    EXPECT_EQ(SetDiveWarpDive(20,12),TRUE);
+    EXPECT(GetDestinationWarpMapHeader()==underwater);
+    WarpIntoMap();
+    EXPECT_EQ(gMapHeader.mapType,MAP_TYPE_UNDERWATER);
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum,MAP_NUM(MAP_AVERONFIELDLABUNDERWATER));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x,20);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y,12);
+    EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_DIVE),0);
+    EXPECT_EQ(SetDiveWarpEmerge(20,12),TRUE);
+    EXPECT(GetDestinationWarpMapHeader()==surface);
+    WarpIntoMap();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum,MAP_NUM(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x,20);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y,12);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0],MON_DATA_SPECIES),SPECIES_WOBBUFFET);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER],1);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_DIVE),TRUE);
 }

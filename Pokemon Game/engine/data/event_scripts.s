@@ -1769,6 +1769,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/averon_optional_sidequests.inc"
 
 @ AVERON FIELD LAB
+	.include "data/maps/AveronFieldLabUnderwater/scripts.inc"
 #ifndef RELEASE
 	.include "data/maps/AveronFieldLab/scripts.inc"
 #else
