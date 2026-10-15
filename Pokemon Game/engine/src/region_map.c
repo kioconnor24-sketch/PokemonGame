@@ -2439,6 +2439,14 @@ static void CB_FadeInFlyMap(void)
     }
 }
 
+#if TESTING
+#include "test/field_menu.h"
+bool32 Test_FlyMenuReady(void)
+{
+    return sFlyMap != NULL && sFlyMap->callback == CB_HandleFlyMapInput;
+}
+#endif
+
 static void CB_HandleFlyMapInput(void)
 {
     if (sFlyMap->state == 0)

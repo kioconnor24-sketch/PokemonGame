@@ -1,5 +1,7 @@
 #include "global.h"
 #include "test/test.h"
+#include "test/field_menu.h"
+#include "main.h"
 #include "battle.h"
 #include "event_data.h"
 #include "field_move.h"
@@ -10,6 +12,10 @@
 #include "script.h"
 #include "overworld.h"
 #include "region_map.h"
+#include "field_player_avatar.h"
+#include "follower_npc.h"
+#include "fldeff.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/heal_locations.h"
@@ -28,6 +34,236 @@ static void CreatePartner(void)
     for (u32 i=0; i<MAX_MON_MOVES; ++i)
         SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1+i, &move);
     CalculatePlayerPartyCount();
+}
+
+static void WaitForActions(void)
+{
+    for (u32 i = 0; i < 240 && !Test_FieldMenuActionsReady(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FieldMenuActionsReady(), TRUE);
+}
+
+static void SelectAction(u32 index)
+{
+    for (u32 i = 0; i < index; ++i)
+    {
+        Test_FieldMenuStep(DPAD_DOWN);
+        Test_FieldMenuStep(0);
+    }
+    Test_FieldMenuStep(A_BUTTON);
+    Test_FieldMenuStep(0);
+}
+
+static void OpenToolkit(void)
+{
+    WaitForActions();
+    s32 index = Test_FieldMenuToolkitIndex();
+    EXPECT(index >= 0);
+    if (index < 0)
+        return;
+    SelectAction(index);
+    WaitForActions();
+    EXPECT_EQ(Test_FieldMenuActionCount(), 8);
+}
+
+TEST("Averon Field Kit B returns to actions then party selection and exits cleanly")
+{
+    CreatePartner();
+    Test_FieldMenuBegin();
+    WaitForActions();
+    u32 ordinaryCount = Test_FieldMenuActionCount();
+    OpenToolkit();
+    for (u32 i = 0; i < ARRAY_COUNT(sLicensedMoves); ++i)
+        EXPECT(Test_FieldMenuMoveIndex(sLicensedMoves[i]) >= 0);
+    Test_FieldMenuStep(B_BUTTON);
+    Test_FieldMenuStep(0);
+    WaitForActions();
+    EXPECT_EQ(Test_FieldMenuActionCount(), ordinaryCount);
+    EXPECT(Test_FieldMenuToolkitIndex() >= 0);
+    Test_FieldMenuStep(B_BUTTON);
+    Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FieldMenuChoosingMon(), TRUE);
+    Test_FieldMenuStep(B_BUTTON);
+    for (u32 i = 0; i < 120 && !Test_FieldMenuExited(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FieldMenuExited(), TRUE);
+    EXPECT_EQ(gPartyMenu.slotId, PARTY_SIZE + 1);
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon locked Field Kit actions return safely without changing map or licenses")
+{
+    u32 which = 0;
+    PARAMETRIZE { which = 0; }
+    PARAMETRIZE { which = 1; }
+    PARAMETRIZE { which = 2; }
+    PARAMETRIZE { which = 3; }
+    PARAMETRIZE { which = 4; }
+    PARAMETRIZE { which = 5; }
+    PARAMETRIZE { which = 6; }
+    CreatePartner();
+    FlagClear(FLAG_AVERON_LICENSE_CUT + which);
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
+    WarpIntoMap();
+    Test_FieldMenuBegin();
+    OpenToolkit();
+    s32 index = Test_FieldMenuMoveIndex(sLicensedMoves[which]);
+    EXPECT(index >= 0);
+    if (index >= 0)
+        SelectAction(index);
+    for (u32 i = 0; i < 240 && !Test_FieldMenuChoosingMon(); ++i)
+        Test_FieldMenuStep(A_BUTTON);
+    EXPECT_EQ(Test_FieldMenuChoosingMon(), TRUE);
+    EXPECT_EQ(IsFieldMoveUnlocked(sLicensedMoves[which]), FALSE);
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x, 4);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y, 4);
+    EXPECT_EQ(gPartyMenu.slotId, 0);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_TACKLE);
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon Fly map B returns to the same party and Field Kit can reopen")
+{
+    CreatePartner();
+    FlagSet(FLAG_AVERON_LICENSE_FLY);
+    FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
+    WarpIntoMap();
+    Test_FieldMenuBegin();
+    OpenToolkit();
+    SelectAction(Test_FieldMenuMoveIndex(FIELD_MOVE_FLY));
+    for (u32 i = 0; i < 240 && !Test_FlyMenuReady(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FlyMenuReady(), TRUE);
+    Test_FieldMenuStep(B_BUTTON);
+    Test_FieldMenuStep(0);
+    for (u32 i = 0; i < 240 && !Test_FieldMenuChoosingMon(); ++i)
+        Test_FieldMenuStep(0);
+    EXPECT_EQ(Test_FieldMenuChoosingMon(), TRUE);
+    EXPECT_EQ(gPartyMenu.slotId, 0);
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
+    EXPECT_EQ(gSaveBlock1Ptr->pos.x, 4);
+    EXPECT_EQ(gSaveBlock1Ptr->pos.y, 4);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLY), TRUE);
+    Test_FieldMenuStep(A_BUTTON);
+    Test_FieldMenuStep(0);
+    OpenToolkit();
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon Field Kit fits alongside four learned actions and survives Back")
+{
+    CreatePartner();
+    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_PIPLUP, 5, 0);
+    CalculatePlayerPartyCount();
+    const u16 moves[] = {MOVE_FLASH, MOVE_TELEPORT, MOVE_DIG, MOVE_SWEET_SCENT};
+    for (u32 i = 0; i < ARRAY_COUNT(moves); ++i)
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1 + i, &moves[i]);
+    Test_FieldMenuBegin();
+    WaitForActions();
+    EXPECT_EQ(Test_FieldMenuActionCount(), 9);
+    OpenToolkit();
+    // Select the actual last BACK entry with A, separately from the B test.
+    SelectAction(Test_FieldMenuActionCount() - 1);
+    WaitForActions();
+    EXPECT_EQ(Test_FieldMenuActionCount(), 9);
+    EXPECT(Test_FieldMenuToolkitIndex() >= 0);
+    EXPECT(Test_FieldMenuMoveIndex(FIELD_MOVE_FLASH) >= 0);
+    EXPECT(Test_FieldMenuMoveIndex(FIELD_MOVE_TELEPORT) >= 0);
+    EXPECT(Test_FieldMenuMoveIndex(FIELD_MOVE_DIG) >= 0);
+    EXPECT(Test_FieldMenuMoveIndex(FIELD_MOVE_SWEET_SCENT) >= 0);
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon Field Kit is unavailable on fainted partners and eggs")
+{
+    u32 egg = FALSE;
+    PARAMETRIZE { egg = FALSE; }
+    PARAMETRIZE { egg = TRUE; }
+    CreatePartner();
+    u16 hp = 0;
+    if (egg)
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG, &egg);
+    else
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+    Test_FieldMenuBegin();
+    WaitForActions();
+    EXPECT_EQ(Test_FieldMenuToolkitIndex(), -1);
+    Test_FieldMenuEnd();
+}
+
+TEST("Averon traversal respects configured follower policy and Fly map-type rules")
+{
+    CreatePartner();
+#if FNPC_ENABLE_NPC_FOLLOWERS
+    SetFollowerNPCData(FNPC_DATA_IN_PROGRESS, TRUE);
+    SetFollowerNPCData(FNPC_DATA_FOLLOWER_FLAGS, 0);
+    EXPECT_EQ(PlayerHasFollowerNPC(), TRUE);
+    const enum FieldMove moves[] = {FIELD_MOVE_SURF, FIELD_MOVE_WATERFALL, FIELD_MOVE_DIVE, FIELD_MOVE_FLY};
+    for (u32 i = 0; i < ARRAY_COUNT(moves); ++i)
+    {
+        FlagSet(FLAG_AVERON_LICENSE_CUT + gFieldMoveInfo[moves[i]].arg);
+        EXPECT_EQ(IsFieldMoveUnlocked(moves[i]), TRUE);
+        EXPECT_EQ(FieldMove_GetPartyMember(moves[i]), 0);
+        EXPECT_EQ(SetUpFieldMove(moves[i]), FALSE);
+    }
+    SetFollowerNPCData(FNPC_DATA_FOLLOWER_FLAGS, FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE);
+#else
+    // Averon enables following Pokemon, not the optional human NPC follower
+    // save structure. Do not enable that structure merely to make a test pass.
+    EXPECT_EQ(PlayerHasFollowerNPC(), FALSE);
+    EXPECT_EQ(CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE), TRUE);
+    EXPECT_EQ(CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF), TRUE);
+    EXPECT_EQ(CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_WATERFALL), TRUE);
+    EXPECT_EQ(CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE), TRUE);
+#endif
+    gMapHeader.mapType = MAP_TYPE_ROUTE;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_FLY), TRUE);
+    gMapHeader.mapType = MAP_TYPE_INDOOR;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_FLY), FALSE);
+    SetFollowerNPCData(FNPC_DATA_IN_PROGRESS, FALSE);
+    gMapHeader.mapType = MAP_TYPE_TOWN;
+    EXPECT_EQ(SetUpFieldMove(FIELD_MOVE_FLY), TRUE);
+}
+
+TEST("Averon native obstacle preparation selects the facing object without learned HMs")
+{
+    u32 which = 0;
+    PARAMETRIZE { which = 0; }
+    PARAMETRIZE { which = 1; }
+    PARAMETRIZE { which = 2; }
+    const enum FieldMove moves[] = {FIELD_MOVE_CUT, FIELD_MOVE_ROCK_SMASH, FIELD_MOVE_STRENGTH};
+    const u16 graphics[] = {OBJ_EVENT_GFX_CUTTABLE_TREE, OBJ_EVENT_GFX_BREAKABLE_ROCK, OBJ_EVENT_GFX_PUSHABLE_BOULDER};
+    CreatePartner();
+    SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
+    WarpIntoMap();
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    gPlayerAvatar.objectEventId = 0;
+    gObjectEvents[0].active = TRUE;
+    gObjectEvents[0].currentCoords.x = 12;
+    gObjectEvents[0].currentCoords.y = 12;
+    gObjectEvents[0].facingDirection = DIR_NORTH;
+    gObjectEvents[0].currentElevation = 3;
+    gObjectEvents[0].previousElevation = 3;
+    gObjectEvents[1].active = TRUE;
+    gObjectEvents[1].currentCoords.x = 12;
+    gObjectEvents[1].currentCoords.y = 11;
+    gObjectEvents[1].currentElevation = 3;
+    gObjectEvents[1].graphicsId = graphics[which];
+    gObjectEvents[1].localId = 7;
+    gPartyMenu.slotId = 0;
+    FlagSet(FLAG_AVERON_LICENSE_CUT + gFieldMoveInfo[moves[which]].arg);
+    EXPECT_EQ(FieldMove_GetPartyMember(moves[which]), 0);
+    EXPECT_EQ(MonKnowsMove(&gParties[B_TRAINER_PLAYER][0], FieldMove_GetMoveId(moves[which])), FALSE);
+    EXPECT_EQ(SetUpFieldMove(moves[which]), TRUE);
+    EXPECT_EQ(gSpecialVar_LastTalked, 7);
+    EXPECT(gPostMenuFieldCallback != NULL);
+    // Removing the object must not read the OBJECT_EVENTS_COUNT sentinel as
+    // an actual object or preserve the previous obstacle as a usable target.
+    gObjectEvents[1].active = FALSE;
+    EXPECT_EQ(CheckObjectGraphicsInFrontOfPlayer(graphics[which]), FALSE);
 }
 
 TEST("Averon field licenses gate all seven native script actions without learned HMs")

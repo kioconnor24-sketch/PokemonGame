@@ -8638,6 +8638,93 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler)
 }
 
 #if TESTING
+#include "test/field_menu.h"
+
+static MainCallback sTestFieldMenuReturnCallback;
+static IntrCallback sTestFieldMenuVBlank;
+static IntrCallback sTestFieldMenuHBlank;
+
+static void Test_FieldMenuExitCallback(void)
+{
+}
+
+void Test_FieldMenuBegin(void)
+{
+    sTestFieldMenuReturnCallback = gMain.callback2;
+    sTestFieldMenuVBlank = gMain.vblankCallback;
+    sTestFieldMenuHBlank = gMain.hblankCallback;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE,
+        PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_DO_WHAT_WITH_MON,
+        Task_TryCreateSelectionWindow, Test_FieldMenuExitCallback);
+}
+
+void Test_FieldMenuStep(u16 keys)
+{
+    gMain.newKeys = gMain.newKeysRaw = keys;
+    gMain.heldKeys = gMain.heldKeysRaw = keys;
+    gMain.newAndRepeatedKeys = keys;
+    // Stop at the overworld boundary: the harness must never initialize an
+    // unrelated map scene or replace the test runner's own main loop.
+    if (gMain.callback2 != Test_FieldMenuExitCallback)
+        gMain.callback2();
+    TransferPlttBuffer();
+    ProcessSpriteCopyRequests();
+}
+
+void Test_FieldMenuEnd(void)
+{
+    SetVBlankHBlankCallbacksToNull();
+    if (gMain.callback2 == CB2_InitPartyMenu || gMain.callback2 == CB2_UpdatePartyMenu)
+        FreePartyPointers();
+    ResetPartyMenu();
+    ResetTasks();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    SetMainCallback2(sTestFieldMenuReturnCallback);
+    SetVBlankCallback(sTestFieldMenuVBlank);
+    SetHBlankCallback(sTestFieldMenuHBlank);
+    gMain.newKeys = gMain.newKeysRaw = gMain.heldKeys = gMain.heldKeysRaw = 0;
+    gMain.newAndRepeatedKeys = 0;
+}
+
+bool32 Test_FieldMenuActionsReady(void)
+{
+    return gMain.callback2 == CB2_UpdatePartyMenu && !gPaletteFade.active
+        && FuncIsActiveTask(Task_HandleSelectionMenuInput);
+}
+
+bool32 Test_FieldMenuChoosingMon(void)
+{
+    return gMain.callback2 == CB2_UpdatePartyMenu && !gPaletteFade.active
+        && FuncIsActiveTask(Task_HandleChooseMonInput);
+}
+
+bool32 Test_FieldMenuExited(void)
+{
+    return gMain.callback2 == Test_FieldMenuExitCallback;
+}
+
+u32 Test_FieldMenuActionCount(void)
+{
+    return sPartyMenuInternal->numActions;
+}
+
+s32 Test_FieldMenuToolkitIndex(void)
+{
+    for (u32 i = 0; i < sPartyMenuInternal->numActions; ++i)
+        if (sPartyMenuInternal->actions[i] == MENU_FIELD_TOOLKIT)
+            return i;
+    return -1;
+}
+
+s32 Test_FieldMenuMoveIndex(enum FieldMove fieldMove)
+{
+    for (u32 i = 0; i < sPartyMenuInternal->numActions; ++i)
+        if (sPartyMenuInternal->actions[i] == MENU_FIELD_MOVES + fieldMove)
+            return i;
+    return -1;
+}
+
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot)
 {
     struct PartyMenuInternal internal = {0};
