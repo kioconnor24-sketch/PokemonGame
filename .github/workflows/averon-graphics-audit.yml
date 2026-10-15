@@ -1,0 +1,58 @@
+name: Averon graphics source audit
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/audit-averon-graphics.py"
+      - "Pokemon Game/scripts/tests/test_averon_graphics.py"
+      - "Pokemon Game/scripts/audit-averon-asset-paths.py"
+      - "Pokemon Game/scripts/tests/test_averon_asset_paths.py"
+      - "Pokemon Game/engine/graphics/pokemon/**"
+      - "Pokemon Game/engine/src/data/pokemon/species_info/**"
+      - "Pokemon Game/engine/src/data/pokemon/species_info.h"
+      - "Pokemon Game/engine/include/constants/species.h"
+      - ".github/workflows/averon-graphics-audit.yml"
+  workflow_dispatch:
+
+jobs:
+  graphics-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Unit tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_graphics.py" -v
+      - name: Asset file tests
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_asset_paths.py" -v
+      - name: Check actual graphic paths and follower files
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-asset-paths.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-asset-files.json" \
+            --csv "$RUNNER_TEMP/averon-asset-files.csv"
+      - name: Audit actual engine species definitions
+        run: |
+          python3 "Pokemon Game/scripts/audit-averon-graphics.py" \
+            --engine "Pokemon Game/engine" \
+            --json "$RUNNER_TEMP/averon-graphics.json" \
+            --csv "$RUNNER_TEMP/averon-graphics.csv"
+          python3 - "$RUNNER_TEMP/averon-graphics.json" <<'PY'
+          import json, sys
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          count = report["species_entry_count"]
+          print("Species/form initializers:", count)
+          print("Declared lacking initializer:", len(report["declared_without_entry"]))
+          # Guard against silently auditing only the wrapper species_info.h.
+          if count < 500:
+              raise SystemExit("Incomplete species inventory: fewer than 500 entries")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: averon-graphics-source-report
+          path: |
+            ${{ runner.temp }}/averon-graphics.json
+            ${{ runner.temp }}/averon-graphics.csv
+            ${{ runner.temp }}/averon-asset-files.json
+            ${{ runner.temp }}/averon-asset-files.csv
