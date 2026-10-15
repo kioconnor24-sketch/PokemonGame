@@ -6,11 +6,14 @@ not a final release. Generated ROMs remain local and ignored by Git.
 
 Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
 `make -j20 -O all`; exit 0. SHA256:
-`251c6947b807674fd0b8b73cb750a69a12827a2ecb91c5ad43cbe2892ec50e95`.
-Source: `303ab9c6134f8fcbbf45190a2c6d8add1c53eaf9` on
+`dced4e3cf19cc5c440ef54b4342cb43fc8eaed6ea939259134f67fc7d96b9491`.
+Source: `14aded35657fbcb8e78e9feb6d7607f091bbf8ca` on
 `codex/first-gym-verification`. Latest fixes redraw the live Gym gate and
 use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
 these do not replace native runtime acceptance.
+Includes optional Gym doubles, harvest fair, full-party starter guards, native
+Rare Candy cap and Gym TM retry. Nineteen named native Averon tests and four
+save-layout tests pass. Full conversational gameplay/save walkthrough pending.
 Size: 33,554,432 bytes. Build source metadata is in the adjacent local manifest.
 
 The user can upload this file directly into the ChatGPT testing conversation

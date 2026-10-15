@@ -1,23 +1,32 @@
 # Engineering progress
 
-## Authoritative checkpoint — GitHub migration, 2026-10-14
+## Current checkpoint — 2026-10-14
 
-Latest source follow-up: `303ab9c6134f8fcbbf45190a2c6d8add1c53eaf9`
-on `codex/first-gym-verification`, pushed and remote SHA verified. Live Gym
-gate now redraws after sluice use; Elio verifies both flags before first
-battle. EXP allocation explicitly GEN_5 rather than modern participant EXP.
-Native warp/collision and closed/open Gym flood-fill checks pass. Host-compiled
-actual caps.c functions pass all 11 caps and EXP below/at/above each cap.
-`make -j20 -O all` exited 0; `evidence/m2/gate-exp-build.log`. Latest local
-`build-output/Pokemon-Averon-Test-Build.gba` SHA256
-`251c6947b807674fd0b8b73cb750a69a12827a2ecb91c5ad43cbe2892ec50e95`,
-33,554,432 bytes. **BUILT — RUNTIME TEST PENDING**. The automated native
-six-member EXP regression passed via `make check -j12 TESTS="Averon"`, exit 0,
-in the bundled headless mGBA runner. Six parameter scenarios cover item
-present/absent, lead at/below cap, holder at/below cap, nonholder bench members,
-and reduced active-member EXP with the held item. No manual emulator run this
-session. Next: automated Mega/Set coverage, remaining starter edge-case checks,
-and independent integration while full gameplay acceptance is pending.
+- Latest game source: `14aded35657fbcb8e78e9feb6d7607f091bbf8ca`, pushed
+  and verified on `codex/first-gym-verification`; PR #1 remains open. `main`
+  is still `a844b3b2`. Shared publishing checkout is `shared-repo/`.
+- Implemented: opening gift guards, optional Gym doubles, visible rules statue,
+  harvest-fair errand/reward retry, Gen5 EXP allocation, native Rare Candy cap,
+  Elio Work Up/Oran Berry/status-aware AI, safe one-time Gym TM claim.
+- Built: `make -j20 -O all`, exit0; `evidence/m2/gym-reward-build.log`.
+  Latest local `build-output/Pokemon-Averon-Test-Build.gba`, 33,554,432 bytes,
+  SHA256 `dced4e3cf19cc5c440ef54b4342cb43fc8eaed6ea939259134f67fc7d96b9491`.
+- Tested: **19 named Averon tests PASS** through bundled headless mGBA
+  (`make check -j12 TESTS="Averon"`), plus four save-layout tests. Covers
+  actual errand/gift/reward scripts, party and pocket limits/retry, healing,
+  whiteout target selection, cap crossing/candy, EXP allocation, legal Mega,
+  excluded gimmicks, old-save Set mode, physical/special damage and real teams.
+- Static: all 13 maps' door/border entries and NPC/sign interactions connect;
+  water requiring Surf excluded, counters handled; Gym gate states checked.
+  Regeneration stable across 64 source/map files; 153 dialogue lines fit.
+- Unverified: full first-Gym conversation/win/reload/whiteout walkthrough,
+  dialogue choices and native saves after new features, natural balance, Delta.
+  **BUILT — FULL GAMEPLAY ACCEPTANCE PENDING**; M2 not marked complete.
+- Next: review/integrate this coherent branch; address external gameplay bugs;
+  implement independent first-slice improvements before mass map expansion.
+  No manual emulator navigation by default. Preserve story/geography/style.
+
+## Historical checkpoints (superseded by the current record above)
 
 - Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;
   fetched successfully. No other branch or open PR observed at inspection.

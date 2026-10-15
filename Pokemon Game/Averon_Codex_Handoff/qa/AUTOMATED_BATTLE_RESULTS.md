@@ -90,3 +90,9 @@ Normal build exit0: `gym-reward-build.log`; ROM SHA256
 Existing `make check -j12 TESTS="test/save.c"` also passed all four save-layout
 tests (SaveBlock1/2/3 and PokemonStorage). This is structural compatibility
 evidence, not a replacement for a native save/reset walkthrough.
+
+Map-check follow-up traces a single connected component through each map's
+real door/border entries, blocks NPC occupancy and Surf-only water, handles
+counter interactions, and checks every current NPC/sign approach. All 13 maps
+pass. This is a static walking model; elevation/ledge events and actual camera,
+warps, input, scripts and saves still require full gameplay acceptance.
