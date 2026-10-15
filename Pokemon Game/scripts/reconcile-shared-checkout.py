@@ -34,6 +34,8 @@ new = ['scripts/averon-first-gym.inc', 'scripts/build-averon-first-gym.py',
        'scripts/install-averon-debug-tests.py', 'scripts/send-mgba-input.ps1',
        'scripts/reconcile-shared-checkout.py',
        'scripts/test-averon-caps.py', 'engine/test/battle/averon_exp.c',
+       'engine/test/battle/averon_rules.c', 'engine/test/battle/averon_trainers.c',
+       'engine/test/averon_scripts.c',
        'Averon_Codex_Handoff/development/FIRST_GYM_IMPLEMENTATION.md',
        'Averon_Codex_Handoff/development/TASKS.md',
        'Averon_Codex_Handoff/qa/OPENING_TEST_RESULTS.md']

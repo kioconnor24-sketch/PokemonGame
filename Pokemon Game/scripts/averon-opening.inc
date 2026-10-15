@@ -40,14 +40,18 @@ Saltmere_GreenhouseKeeper::
     goto_if_ne VAR_AVERON_GREENHOUSE, 0, Saltmere_GreenhouseRepeat
     msgbox Saltmere_Text_GreenhouseAsk, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
-    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstGreenhouse
-    setvar VAR_AVERON_GREENHOUSE, 1
+    call Saltmere_AcceptGreenhouse
 Saltmere_GreenhouseRepeat:
     msgbox Saltmere_Text_TrayBench, MSGBOX_DEFAULT
     release
     end
 Saltmere_FirstGreenhouse:
     setvar VAR_AVERON_FIRST_HOUSE, 1
+    return
+Saltmere_AcceptGreenhouse::
+    goto_if_ne VAR_AVERON_GREENHOUSE, 0, Saltmere_AcceptReturn
+    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstGreenhouse
+    setvar VAR_AVERON_GREENHOUSE, 1
     return
 Saltmere_Tray::
     lockall
@@ -67,14 +71,18 @@ Saltmere_WorkshopKeeper::
     goto_if_ne VAR_AVERON_WORKSHOP, 0, Saltmere_WorkshopRepeat
     msgbox Saltmere_Text_WorkshopAsk, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
-    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstWorkshop
-    setvar VAR_AVERON_WORKSHOP, 1
+    call Saltmere_AcceptWorkshop
 Saltmere_WorkshopRepeat:
     msgbox Saltmere_Text_ScrewShelf, MSGBOX_DEFAULT
     release
     end
 Saltmere_FirstWorkshop:
     setvar VAR_AVERON_FIRST_HOUSE, 2
+    return
+Saltmere_AcceptWorkshop::
+    goto_if_ne VAR_AVERON_WORKSHOP, 0, Saltmere_AcceptReturn
+    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstWorkshop
+    setvar VAR_AVERON_WORKSHOP, 1
     return
 Saltmere_WorkshopScrew::
     lockall
@@ -94,14 +102,19 @@ Saltmere_HarborKeeper::
     goto_if_ne VAR_AVERON_HARBOR, 0, Saltmere_HarborRepeat
     msgbox Saltmere_Text_HarborAsk, MSGBOX_YESNO
     goto_if_eq VAR_RESULT, NO, Saltmere_DeclineErrand
-    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstHarbor
-    setvar VAR_AVERON_HARBOR, 1
+    call Saltmere_AcceptHarbor
 Saltmere_HarborRepeat:
     msgbox Saltmere_Text_ParcelDock, MSGBOX_DEFAULT
     release
     end
 Saltmere_FirstHarbor:
     setvar VAR_AVERON_FIRST_HOUSE, 3
+    return
+Saltmere_AcceptHarbor::
+    goto_if_ne VAR_AVERON_HARBOR, 0, Saltmere_AcceptReturn
+    call_if_eq VAR_AVERON_FIRST_HOUSE, 0, Saltmere_FirstHarbor
+    setvar VAR_AVERON_HARBOR, 1
+Saltmere_AcceptReturn:
     return
 Saltmere_DeclineErrand:
     msgbox Saltmere_Text_NoRush, MSGBOX_DEFAULT

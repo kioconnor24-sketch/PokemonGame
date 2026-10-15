@@ -67,7 +67,7 @@ Alderfield_Release:
     release
     end
 Alderfield_GymTrainer::
-    trainerbattle_single TRAINER_AVERON_GYM1, Alderfield_Text_Nico, Alderfield_Text_NicoDefeat
+    trainerbattle_double TRAINER_AVERON_GYM1, Alderfield_Text_Nico, Alderfield_Text_NicoDefeat, Alderfield_Text_NicoNeedTwo
     msgbox Alderfield_Text_NicoAfter, MSGBOX_AUTOCLOSE
     end
 Alderfield_RouteTrainerA::
@@ -142,7 +142,9 @@ Alderfield_Text_Badge:
 Alderfield_Text_Advice:
     .string "Work Up gives your team a boost.\nTry it when you've got room to set up.$"
 Alderfield_Text_Nico:
-    .string "I train before the morning chores.\nYou're just in time!$"
+    .string "Two at a time, like the farm chores.\nWant to see how our team works?$"
+Alderfield_Text_NicoNeedTwo:
+    .string "Bring two Pokemon ready to battle.\nI'll keep the field clear for you!$"
 Alderfield_Text_NicoDefeat:
     .string "Right. Now for the chores.$"
 Alderfield_Text_NicoAfter:

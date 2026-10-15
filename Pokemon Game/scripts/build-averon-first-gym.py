@@ -81,12 +81,13 @@ wild=read('src/data/wild_encounters.json');e=copy.deepcopy(next(e for e in wild[
 for mon in e['land_mons']['mons']:mon.update(min_level=5,max_level=7)
 wild['wild_encounter_groups'][0]['encounters']=[x for x in wild['wild_encounter_groups'][0]['encounters'] if x['map']!='MAP_ORCHARDLANE']+[e];write('src/data/wild_encounters.json',wild)
 
-teams=[('FARMER','SAM','Youngster','Youngster',[('Sentret',7),('Bunnelby',8)]),('PICNIC','LINA','Picnicker','Picnicker',[('Hoppip',8),('Smoliv',9)]),('GYM1','NICO','Youngster','Youngster',[('Lillipup',11)]),('ELIO','ELIO','Leader','Leader Norman',[('Bunnelby',12),('Lechonk',13),('Lillipup',15)]),('ORCHARD','MILO','Youngster','Youngster',[('Pawmi',9),('Lechonk',10)])]
+teams=[('FARMER','SAM','Youngster','Youngster',[('Sentret',7),('Bunnelby',8)]),('PICNIC','LINA','Picnicker','Picnicker',[('Hoppip',8),('Smoliv',9)]),('GYM1','NICO','Youngster','Youngster',[('Bunnelby',10),('Lillipup',11)]),('ELIO','ELIO','Leader','Leader Norman',[('Bunnelby',12),('Lechonk',13),('Lillipup',15)]),('ORCHARD','MILO','Youngster','Youngster',[('Pawmi',9),('Lechonk',10)])]
 tp=ROOT/'src/data/trainers.party';t=tp.read_text(encoding='utf-8');marker='/* AVERON ALDERFIELD TEAMS */'
 if marker in t:t=t[:t.index(marker)]
 t+='\n'+marker+'\n'
 for id,name,cl,pic,mons in teams:
     t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: Check Bad Move / Try To Faint\n'
+    if id=='GYM1':t+='Double Battle: Yes\n'
     for mon,level in mons:t+=f'\n{mon}\nLevel: {level}\nIVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe\n'
 tp.write_text(t,encoding='utf-8')
 replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859','''#define TRAINER_AVERON_FARMER 859
@@ -100,6 +101,10 @@ replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859'
 replace('include/config/battle.h','B_SPLIT_EXP                 GEN_LATEST','B_SPLIT_EXP                 GEN_5')
 replace('src/new_game.c','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/battle_main.c','gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;')
+replace('src/battle_main.c','''    #if TESTING
+    gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
+    #endif
+''','')
 replace('src/option_menu.c','gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gTasks[taskId].tBattleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/option_menu.c','''    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {

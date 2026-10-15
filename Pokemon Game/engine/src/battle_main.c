@@ -2745,9 +2745,6 @@ static void ClearSetBScriptingStruct(void)
 
     gBattleScripting.windowsType = temp;
     gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
-    #if TESTING
-    gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
-    #endif
     gBattleScripting.expOnCatch = (GetConfig(B_EXP_CATCH) >= GEN_6);
     gBattleScripting.specialTrainerBattleType = specialBattleType;
 }
