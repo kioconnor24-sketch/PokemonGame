@@ -56,7 +56,10 @@ with mocked save flags using the host C compiler. All 11 progression ceilings
 and EXP below/at/above each ceiling pass. Rare Candy configuration is checked;
 actual item use is still a runtime test.
 
-`engine/test/battle/averon_exp.c` adds four automated native battle scenarios:
-six-member party, held item present/absent, lead below/at first cap. These use
+`engine/test/battle/averon_exp.c` adds six automated native battle scenarios:
+six-member party, held item present/absent, lead and holder below/at first cap.
+The active member receives less EXP when a holder shares the pool. These use
 the existing `make check TESTS="Averon"` framework and headless mGBA runner.
-Record execution results before claiming those automated battle tests passed.
+Executed successfully: one parameterized test, six scenarios, PASS; command
+exit 0. Evidence: `evidence/m2/automated-exp-check.log`. The runner operates
+headlessly and does not verify overworld traversal, Gym events or native saves.

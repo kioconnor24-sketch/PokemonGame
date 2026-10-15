@@ -2,20 +2,23 @@
 #include "test/battle.h"
 #include "event_data.h"
 
-WILD_BATTLE_TEST("Averon six-member party respects held EXP Share and the first cap")
+WILD_BATTLE_TEST("Averon six-member party respects held EXP Share and the first cap", u32 leadExp)
 {
     enum Item item = ITEM_NONE;
     u8 leadLevel = 10;
+    u8 holderLevel = 10;
 
     PARAMETRIZE { item = ITEM_NONE; leadLevel = 10; }
     PARAMETRIZE { item = ITEM_EXP_SHARE; leadLevel = 10; }
     PARAMETRIZE { item = ITEM_NONE; leadLevel = 15; }
     PARAMETRIZE { item = ITEM_EXP_SHARE; leadLevel = 15; }
+    PARAMETRIZE { item = ITEM_EXP_SHARE; leadLevel = 10; holderLevel = 15; }
+    PARAMETRIZE { item = ITEM_EXP_SHARE; leadLevel = 15; holderLevel = 15; }
 
     GIVEN {
         FlagClear(FLAG_BADGE01_GET);
         PLAYER(SPECIES_WOBBUFFET) { Level(leadLevel); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(10); Item(item); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(holderLevel); Item(item); }
         PLAYER(SPECIES_WOBBUFFET) { Level(10); }
         PLAYER(SPECIES_WOBBUFFET) { Level(10); }
         PLAYER(SPECIES_WOBBUFFET) { Level(10); }
@@ -30,15 +33,21 @@ WILD_BATTLE_TEST("Averon six-member party respects held EXP Share and the first 
     } THEN {
         u32 leadStart = gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][leadLevel];
         u32 benchStart = gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][10];
+        u32 holderStart = gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][holderLevel];
+        results[i].leadExp = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP) - leadStart;
         if (leadLevel < 15)
             EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), leadStart);
         else
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), leadStart);
-        if (item == ITEM_EXP_SHARE)
-            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), benchStart);
+        if (item == ITEM_EXP_SHARE && holderLevel < 15)
+            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), holderStart);
         else
-            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), benchStart);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), holderStart);
         for (u32 i = 2; i < PARTY_SIZE; ++i)
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_EXP), benchStart);
+    } FINALLY {
+        // Gen 5 allocation shares the available EXP pool, rather than giving
+        // the active Pokemon full EXP plus a separate bonus to the holder.
+        EXPECT_GT(results[0].leadExp, results[1].leadExp);
     }
 }

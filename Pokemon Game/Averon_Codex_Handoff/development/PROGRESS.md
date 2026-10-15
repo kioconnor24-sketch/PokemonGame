@@ -2,6 +2,23 @@
 
 ## Authoritative checkpoint — GitHub migration, 2026-10-14
 
+Latest source follow-up: `303ab9c6134f8fcbbf45190a2c6d8add1c53eaf9`
+on `codex/first-gym-verification`, pushed and remote SHA verified. Live Gym
+gate now redraws after sluice use; Elio verifies both flags before first
+battle. EXP allocation explicitly GEN_5 rather than modern participant EXP.
+Native warp/collision and closed/open Gym flood-fill checks pass. Host-compiled
+actual caps.c functions pass all 11 caps and EXP below/at/above each cap.
+`make -j20 -O all` exited 0; `evidence/m2/gate-exp-build.log`. Latest local
+`build-output/Pokemon-Averon-Test-Build.gba` SHA256
+`251c6947b807674fd0b8b73cb750a69a12827a2ecb91c5ad43cbe2892ec50e95`,
+33,554,432 bytes. **BUILT — RUNTIME TEST PENDING**. The automated native
+six-member EXP regression passed via `make check -j12 TESTS="Averon"`, exit 0,
+in the bundled headless mGBA runner. Six parameter scenarios cover item
+present/absent, lead at/below cap, holder at/below cap, nonholder bench members,
+and reduced active-member EXP with the held item. No manual emulator run this
+session. Next: automated Mega/Set coverage, remaining starter edge-case checks,
+and independent integration while full gameplay acceptance is pending.
+
 - Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;
   fetched successfully. No other branch or open PR observed at inspection.
 - Active branch: `codex/first-gym-verification`; repository project prefix

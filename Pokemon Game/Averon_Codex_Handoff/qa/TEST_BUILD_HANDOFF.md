@@ -6,7 +6,11 @@ not a final release. Generated ROMs remain local and ignored by Git.
 
 Compiled with the existing WSL ARM GCC 14.2.1 toolchain using
 `make -j20 -O all`; exit 0. SHA256:
-`0ce5bab776eb44adab514e0589ea38b7ab9b477ddb97e640a2032fcfee22e62f`.
+`251c6947b807674fd0b8b73cb750a69a12827a2ecb91c5ad43cbe2892ec50e95`.
+Source: `303ab9c6134f8fcbbf45190a2c6d8add1c53eaf9` on
+`codex/first-gym-verification`. Latest fixes redraw the live Gym gate and
+use Gen 5 EXP allocation. Host cap and native map reachability checks pass;
+these do not replace native runtime acceptance.
 Size: 33,554,432 bytes. Build source metadata is in the adjacent local manifest.
 
 The user can upload this file directly into the ChatGPT testing conversation
