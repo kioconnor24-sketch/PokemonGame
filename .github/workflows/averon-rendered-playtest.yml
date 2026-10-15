@@ -155,12 +155,22 @@ jobs:
           # This never edits event flags, party or inventory, but reaching Alderfield
           # through debug warp is labeled FIXTURE ACCESS (not normal progression).
           capture "Q1-pre-debug"
+          # Verify that field input is unlocked (ordinary Start -> menu -> B).
+          press Return
+          sleep 1
+          capture "Q1-ordinary-start"
+          press z
+          sleep 1
+          capture "Q1-ordinary-start-closed"
+          # DEBUG_OVERWORLD_HELD_KEYS = R; START must become NEW after R
+          # has been held for several emulated frames, not in same host tick.
+          xdotool windowactivate --sync "$win" || true
           xdotool keydown s
-          xdotool keydown Return
-          sleep 0.4
-          xdotool keyup Return
+          sleep 0.55
+          xdotool key --clearmodifiers Return
+          sleep 0.9
           xdotool keyup s
-          sleep 1.5
+          sleep 0.8
           capture "Q1-debug-main"
           press x
           sleep 0.8
