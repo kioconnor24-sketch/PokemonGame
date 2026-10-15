@@ -18,5 +18,14 @@ Makefile beginning/build target definitions; caps.h; species_enabled.h beginning
 targeted config searches; Route103/scripts.inc opening and rival-battle pattern.
 See ENGINE_FINDINGS.md. No need to repeat this initial discovery on resume.
 
-Next reading: WSL setup result, Ubuntu package availability, remaining Makefile
-prerequisites, then mGBA official installation and control documentation.
+Resume with PROGRESS.md and TASKS.md. Setup, toolchain discovery, reference-map
+visual review and initial engine discovery are complete; do not repeat them.
+Subsequent focused reads: native script testing DSL; production trainer
+generation versus synthetic test tables; item-effect/candy cap paths; heal and
+whiteout target selection; normal-font widths. Native automated battle/script
+execution is working in WSL through the bundled headless mGBA test runner.
+
+Focused follow-up: GetEvolutionTargetSpecies, native flash save/load and normal
+bag pointers. Ordinary bags point into SaveBlock1; SavePlayerBag restores a
+link-room backup, so do not call that helper in ordinary save regression tests.
+Two actual flash save/load cycles now pass, including the Gym TM claim script.

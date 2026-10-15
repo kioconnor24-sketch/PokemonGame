@@ -18,6 +18,11 @@
       "map": "MAP_ORCHARDLANE",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_COASTALBLUFFS",
+      "offset": 0,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -84,6 +89,34 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 38,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CoastalBluffs_BadgeGate"
+    },
+    {
+      "type": "trigger",
+      "x": 38,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CoastalBluffs_BadgeGate"
+    },
+    {
+      "type": "trigger",
+      "x": 38,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CoastalBluffs_BadgeGate"
+    }
+  ],
   "bg_events": []
 }

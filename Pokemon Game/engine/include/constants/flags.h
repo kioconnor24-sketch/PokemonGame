@@ -60,7 +60,7 @@
 #define FLAG_AVERON_EAST_SLUICE    0x26 // Unused Flag
 #define FLAG_AVERON_EXP_SHARE    0x27 // Unused Flag
 #define FLAG_AVERON_GYM1_TM    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
+#define FLAG_AVERON_COAST_ITEM    0x29 // Unused Flag
 #define FLAG_UNUSED_0x02A    0x2A // Unused Flag
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag

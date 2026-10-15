@@ -8,11 +8,21 @@ Git: 2.53.0.windows.3
 Toolchain: Ubuntu 26.04.1 under WSL2; ARM GCC 14.2.1; GNU Make 4.4.1; libpng/newlib installed
 Base ROM provenance: USER-SUPPLIED/LOCALLY OWNED WHERE REQUIRED; NOT INCLUDED
 Build command: make -j$(nproc) -O all (nproc = 20), exit 0; evidence/m0/base-build.log
-mGBA emulator version: portable 0.10.5 downloaded/extracted; SDL --version executed; ROM execution NOT RUN
+mGBA emulator version: portable 0.10.5; base and custom ROM execution verified; focused acceptance remains in progress
 Delta iOS build/version: NOT TESTED
 ROM SHA256: 4ac97b2d70cbb550f1f912303f441b0a6f66a81816ea0b5dc824933aa5e06e1e
 ROM size: 33554432 bytes; evidence/m0/base-emerald.gba (workspace-relative)
 Linux build checkout: /root/averon/engine, detached at pinned SHA
+
+GitHub feature publishing checkout: workspace `shared-repo/`, branch
+`codex/first-gym-verification`; project prefix `Pokemon Game/`. Root workspace
+retains the pre-migration history and active authoring source at `engine/`.
+Use `scripts/reconcile-shared-checkout.py` for changed-source synchronization;
+do not commit the old workspace tree directly over the differently laid-out
+remote. WSL remains the persistent incremental build/test environment. Only
+changed source files are copied there, retaining its compiler/build caches.
+Native automated battle/script testing now executes through bundled
+mgba-rom-test-hydra/mgba-rom-test, independently of the Windows GUI emulator.
 
 Windows restart completed 2026-10-14 15:27. Ubuntu installed with
 `wsl --install -d Ubuntu --no-launch`. Documented packages installed with

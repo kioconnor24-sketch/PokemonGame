@@ -52,13 +52,15 @@ gc[8]=copy.deepcopy(g[6]) # replace the original room separator with walkable fl
 gc[15]=copy.deepcopy(g[111]);floor=g[6][4];wall=g[1][0]
 for x in range(9):gc[9][x]=wall
 gc[9][4]=0x3624 # existing Petalburg Gym door, elevation 3 + collision
+gc[12][1]=g[109][1] # existing Gym statue top, visible rules landmark
+gc[13][1]=g[110][1] # statue base; read from the walkable tile below
 mapfile('AlderfieldGym',layout('AlderfieldGym',gc,gymtemplate),'MAPSEC_ALDERFIELD',[
  npc(4,4,'OBJ_EVENT_GFX_MAN_1','Alderfield_Elio',1),npc(2,12,'OBJ_EVENT_GFX_MAN_1','Alderfield_WestSluice',2),npc(6,12,'OBJ_EVENT_GFX_WOMAN_1','Alderfield_EastSluice',3),npc(7,6,'OBJ_EVENT_GFX_YOUNGSTER','Alderfield_GymTrainer',4),
 ], [warp(4,15,'Alderfield',0),warp(5,15,'Alderfield',0)],indoor=True)
 gm=read('data/maps/AlderfieldGym/map.json');gm['music']='MUS_GYM';write('data/maps/AlderfieldGym/map.json',gm)
 gm['bg_events']=[bg(1,13,'Alderfield_GymRules')];write('data/maps/AlderfieldGym/map.json',gm)
 clinic=read('data/maps/OldaleTown_PokemonCenter_1F/map.json')
-clinic.update(id='MAP_ALDERFIELDCLINIC',name='AlderfieldClinic',region_map_section='MAPSEC_ALDERFIELD',connections=None,object_events=[npc(7,2,'OBJ_EVENT_GFX_NURSE','Saltmere_HomeHeal',1)],warp_events=[warp(7,8,'Alderfield',1),warp(6,8,'Alderfield',1)],coord_events=[],bg_events=[])
+clinic.update(id='MAP_ALDERFIELDCLINIC',name='AlderfieldClinic',region_map_section='MAPSEC_ALDERFIELD',connections=None,object_events=[npc(7,2,'OBJ_EVENT_GFX_NURSE','Alderfield_ClinicNurse',1)],warp_events=[warp(7,8,'Alderfield',1),warp(6,8,'Alderfield',1)],coord_events=[],bg_events=[])
 write('data/maps/AlderfieldClinic/map.json',clinic)
 text('data/maps/AlderfieldClinic/scripts.inc','AlderfieldClinic_MapScripts::\n\tmap_script MAP_SCRIPT_ON_TRANSITION, AlderfieldClinic_OnTransition\n\t.byte 0\nAlderfieldClinic_OnTransition:\n\tsetrespawn HEAL_LOCATION_ALDERFIELD\n\tend\n')
 mapfile('AlderfieldSupply',layout('AlderfieldSupply',copy.deepcopy(housecells),house),'MAPSEC_ALDERFIELD',[npc(6,4,'OBJ_EVENT_GFX_MAN_1','Alderfield_Shop',1)],[warp(3,8,'Alderfield',2),warp(4,8,'Alderfield',2)],indoor=True)
@@ -76,18 +78,23 @@ if not any(h['id']=='HEAL_LOCATION_ALDERFIELD' for h in heals['heal_locations'])
     heals['heal_locations'].append(dict(id='HEAL_LOCATION_ALDERFIELD',map='MAP_ALDERFIELD',x=17,y=13,respawn_map='MAP_ALDERFIELDCLINIC',respawn_npc='1',respawn_x=7,respawn_y=4))
 write('src/data/heal_locations.json',heals)
 for number,name in [('024','ASSAULT_COMPLETE'),('025','WEST_SLUICE'),('026','EAST_SLUICE'),('027','EXP_SHARE'),('028','GYM1_TM')]:replace('include/constants/flags.h','FLAG_UNUSED_0x'+number,'FLAG_AVERON_'+name)
+replace('include/constants/vars.h','VAR_UNUSED_0x40A8','VAR_AVERON_HARVEST_FAIR')
 
 wild=read('src/data/wild_encounters.json');e=copy.deepcopy(next(e for e in wild['wild_encounter_groups'][0]['encounters'] if e['map']=='MAP_COASTALMEADOW'));e.update(map='MAP_ORCHARDLANE',base_label='gOrchardLane')
 for mon in e['land_mons']['mons']:mon.update(min_level=5,max_level=7)
 wild['wild_encounter_groups'][0]['encounters']=[x for x in wild['wild_encounter_groups'][0]['encounters'] if x['map']!='MAP_ORCHARDLANE']+[e];write('src/data/wild_encounters.json',wild)
 
-teams=[('FARMER','SAM','Youngster','Youngster',[('Sentret',7),('Bunnelby',8)]),('PICNIC','LINA','Picnicker','Picnicker',[('Hoppip',8),('Smoliv',9)]),('GYM1','NICO','Youngster','Youngster',[('Lillipup',11)]),('ELIO','ELIO','Leader','Leader Norman',[('Bunnelby',12),('Lechonk',13),('Lillipup',15)]),('ORCHARD','MILO','Youngster','Youngster',[('Pawmi',9),('Lechonk',10)])]
+teams=[('FARMER','SAM','Youngster','Youngster',[('Sentret',7),('Bunnelby',8)]),('PICNIC','LINA','Picnicker','Picnicker',[('Hoppip',8),('Smoliv',9)]),('GYM1','NICO','Youngster','Youngster',[('Bunnelby',10),('Lillipup',11)]),('ELIO','ELIO','Leader','Leader Norman',[('Bunnelby',12),('Lechonk',13),('Lillipup',15)]),('ORCHARD','MILO','Youngster','Youngster',[('Pawmi',9),('Lechonk',10)])]
 tp=ROOT/'src/data/trainers.party';t=tp.read_text(encoding='utf-8');marker='/* AVERON ALDERFIELD TEAMS */'
 if marker in t:t=t[:t.index(marker)]
-t+='\n'+marker+'\n'
+t=t.rstrip()+'\n\n'+marker+'\n'
 for id,name,cl,pic,mons in teams:
-    t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: Check Bad Move / Try To Faint\n'
-    for mon,level in mons:t+=f'\n{mon}\nLevel: {level}\nIVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe\n'
+    ai='Check Bad Move / Check Viability / Try To Faint' if id=='ELIO' else 'Check Bad Move / Try To Faint'
+    t+=f'\n=== TRAINER_AVERON_{id} ===\nName: {name}\nClass: {cl}\nPic: {pic}\nGender: Male\nMusic: Male\nAI: {ai}\n'
+    if id=='GYM1':t+='Double Battle: Yes\n'
+    for mon,level in mons:
+        held=' @ Oran Berry' if id=='ELIO' and mon=='Lillipup' else ''
+        t+=f'\n{mon}{held}\nLevel: {level}\nIVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe\n'
 tp.write_text(t,encoding='utf-8')
 replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859','''#define TRAINER_AVERON_FARMER 859
 #define TRAINER_AVERON_PICNIC 860
@@ -97,8 +104,13 @@ replace('include/constants/opponents.h','#define TRAINERS_COUNT_EMERALD     859'
 #define TRAINERS_COUNT_EMERALD     864''')
 
 # Enforce the user-selected battle rules at the engine boundary.
+replace('include/config/battle.h','B_SPLIT_EXP                 GEN_LATEST','B_SPLIT_EXP                 GEN_5')
 replace('src/new_game.c','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;','optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/battle_main.c','gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;')
+replace('src/battle_main.c','''    #if TESTING
+    gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
+    #endif
+''','')
 replace('src/option_menu.c','gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;','gTasks[taskId].tBattleStyle = OPTIONS_BATTLE_STYLE_SET;')
 replace('src/option_menu.c','''    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
@@ -116,6 +128,14 @@ static void BattleStyle_DrawChoices''')
 replace('include/config/caps.h','B_EXP_CAP_TYPE                  EXP_CAP_NONE','B_EXP_CAP_TYPE                  EXP_CAP_HARD')
 replace('include/config/caps.h','B_LEVEL_CAP_TYPE                LEVEL_CAP_NONE','B_LEVEL_CAP_TYPE                LEVEL_CAP_FLAG_LIST')
 replace('include/config/caps.h','B_RARE_CANDY_CAP                FALSE','B_RARE_CANDY_CAP                TRUE')
+replace('src/pokemon.c','''    // Determine the EV cap to use
+    u32 maxAllowedEVs''','''    // Enforce the player cap here too, so scripts cannot bypass the menu guard.
+    if (!usedByAI && B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD
+        && item == ITEM_RARE_CANDY && GetMonData(mon, MON_DATA_LEVEL) >= GetCurrentLevelCap())
+        return TRUE;
+
+    // Determine the EV cap to use
+    u32 maxAllowedEVs''')
 for flag,old,new in [(2,19,23),(3,24,31),(4,29,39),(5,31,47),(6,33,55),(7,42,62),(8,46,69)]:replace('src/caps.c',f'{{FLAG_BADGE0{flag}_GET, {old}}}',f'{{FLAG_BADGE0{flag}_GET, {new}}}')
 replace('src/caps.c','{FLAG_IS_CHAMPION, 58}', '{FLAG_AVERON_ASSAULT_COMPLETE, 72},\n        {FLAG_IS_CHAMPION, 76}')
 replace('src/battle_gimmick.c','return gGimmicksInfo[gimmick].CanActivate != NULL', 'if (gimmick != GIMMICK_MEGA)\n        return FALSE;\n    return gGimmicksInfo[gimmick].CanActivate != NULL')
