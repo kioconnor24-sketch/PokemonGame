@@ -1,0 +1,60 @@
+name: Averon native build gate
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-native-build.yml"
+      - "Pokemon Game/engine/include/config/**"
+      - "Pokemon Game/engine/include/constants/flags.h"
+      - "Pokemon Game/engine/src/caps.c"
+      - "Pokemon Game/engine/tools/compresSmol/**"
+      - "Pokemon Game/scripts/check-averon-resource-budget.py"
+      - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
+  workflow_dispatch:
+
+jobs:
+  native-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify budget parser fixtures
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_resource_budget.py" -v
+      - name: Install engine toolchain documented by pinned source
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3
+      - name: Compile actual Emerald-derived game
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O all > "$RUNNER_TEMP/averon-build.log" 2>&1 || {
+            tail -150 "$RUNNER_TEMP/averon-build.log"
+            exit 1
+          }
+          test -s pokeemerald.gba
+          sha256sum pokeemerald.gba
+          du -h pokeemerald.gba
+          python3 "../scripts/check-averon-resource-budget.py" --log "$RUNNER_TEMP/averon-build.log" --rom pokeemerald.gba --json "$RUNNER_TEMP/averon-memory-budget.json"
+          tail -30 "$RUNNER_TEMP/averon-build.log"
+      - name: Run native Averon regression tests through the bundled headless runner
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O check TESTS="Averon" > "$RUNNER_TEMP/averon-native-tests.log" 2>&1 || {
+            tail -100 "$RUNNER_TEMP/averon-native-tests.log"
+            exit 1
+          }
+          tail -60 "$RUNNER_TEMP/averon-native-tests.log"
+      - name: Do not distribute full copyrighted ROM
+        run: echo "Build output remains ephemeral in CI; only textual logs are uploaded."
+      - name: Attach build log, not ROM
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-native-build-log
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-build.log
+            ${{ runner.temp }}/averon-memory-budget.json
+            ${{ runner.temp }}/averon-native-tests.log
