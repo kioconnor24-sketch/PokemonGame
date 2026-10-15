@@ -154,7 +154,27 @@ jobs:
           # QUEST locator: use the GAME'S BUILT-IN developer map-warp menu.
           # This never edits event flags, party or inventory, but reaching Alderfield
           # through debug warp is labeled FIXTURE ACCESS (not normal progression).
-          capture "Q1-pre-debug"
+          # Wait for native MAP_SCRIPT_ON_FRAME_TABLE Fenwick welcome to appear
+          # and finish. Prior probes sent Start while the deferred welcome owned input.
+          sleep 3
+          dialogue_open() {
+            import -window "$win" "$RUNNER_TEMP/averon-playtest/dialogue-probe.png"
+            local mean
+            mean=$(convert "$RUNNER_TEMP/averon-playtest/dialogue-probe.png" -crop 40x26+415+266 +repage -format '%[fx:mean]' info:)
+            echo "DIALOGUE_PROBE mean=$mean" >&2
+            awk -v n="$mean" 'BEGIN {exit !(n > 0.67)}'
+          }
+          for i in $(seq 1 12); do
+            if dialogue_open; then
+              capture "Q1-welcome-page-$i"
+              press x
+              sleep 0.8
+            else
+              sleep 0.9
+              if ! dialogue_open; then break; fi
+            fi
+          done
+          capture "Q1-field-ready"
           # Verify that field input is unlocked (ordinary Start -> menu -> B).
           press Return
           sleep 1
