@@ -37,8 +37,8 @@ Snapshot: 15 October 2026. This is a verified-status handoff, **not** a statemen
 | 21 | Save flags and vars | PR #5 reserved names and collision audit | Registry integration with all future quest flags |
 | 22 | Averon–Sinnoh transition | Design plans only | Entire region, 8 gyms, party/save travel system |
 | 23 | Map/script templates | Codex already authors native maps by Python | Reusable stable design kit and reviewed tilesets |
-| 24 | Resource budgets | Early 32 MB ROM previously built | Full ROM/EWRAM/IWRAM/palette ceilings measured after content |
-| 25 | Automated validation | GitHub Actions PRs #4–#7; Codex native tests | Permanent native build and emulator gate on integrated branches |
+| 24 | Resource budgets | Clean 32 MiB build: ROM 79.64%, EWRAM 86.37%, IWRAM 86.60% | Recheck when additional maps/forms/content arrive; graphics palette limits separately |
+| 25 | Automated validation | GitHub Actions PRs #4–#7; PR #5 clean ARM compilation passing; Codex native tests | Permanent integrated native emulator and Delta acceptance gates |
 | 26 | Species attainability | PR #2 static audit | Gifts, quests, item use, Sinnoh and capture walkthroughs |
 | 27 | Level balance | PR #6 includes 10 existing Averon trainer definitions / 17 Pokémon | 2-region density, actual EXP income and team-size simulations |
 | 28 | Licenses and assets | Design-led asset ledger exists | Legal attribution and replaced/commissioned assets as needed |
@@ -57,7 +57,7 @@ The whole game must pass all five tiers, where relevant. No item, species or tra
 
 ## Current build reproducibility issue
 
-GitHub clean checkout initially lacked tools/compresSmol (the directory was ignored by .gitignore), although the makefile requires it. PR #5 restores that folder from the exact pinned upstream source so cloud builds can attempt to compile without unofficial hand-built tool binaries. The new native-build workflow does not upload full ROMs or copyrighted assets; it uploads textual build logs only. Verify this job's current status before claiming a successful clean build.
+GitHub clean checkout initially lacked tools/compresSmol (the directory was ignored by .gitignore), although the makefile requires it. PR #5 restores that folder from the exact pinned upstream source. **Clean native ARM compilation now passed**, demonstrated by GitHub Actions run 38689686458 on October 15, 2026. It produced a 32 MiB .gba, SHA-256 75893cd9ae3a19297e9a5958cffdf4646a07a3d258c9b787aa3b254015c8cba2. Linker budget in that tested build: ROM 26,722,880 B / 32 MiB = 79.64%; EWRAM 226,416 B / 256 KiB = 86.37%; IWRAM 28,376 B / 32 KiB = 86.60%. **No emulator or Delta acceptance is inferred from compilation.** CI uploads the text build log but never the ROM.
 
 ## Immediate integration steps
 
