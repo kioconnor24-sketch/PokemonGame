@@ -31,8 +31,6 @@ jobs:
           python3 "Pokemon Game/scripts/audit-averon-event-ids.py" \
             --engine "Pokemon Game/engine" \
             --json "$RUNNER_TEMP/averon-event-ids.json"
-      - name: Sinnoh progression unit tests
-      - name: Verify native Sinnoh cap definitions
       - name: Verify pinned Averon game configuration
         shell: bash
         run: |
