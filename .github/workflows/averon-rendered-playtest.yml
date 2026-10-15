@@ -154,9 +154,12 @@ jobs:
           # QUEST locator: use the GAME'S BUILT-IN developer map-warp menu.
           # This never edits event flags, party or inventory, but reaching Alderfield
           # through debug warp is labeled FIXTURE ACCESS (not normal progression).
-          # Wait for native MAP_SCRIPT_ON_FRAME_TABLE Fenwick welcome to appear
-          # and finish. Prior probes sent Start while the deferred welcome owned input.
-          sleep 3
+          # FIRST post-map Start press initiates delayed Saltmere_Welcome,
+          # as verified in runs 38815797064 and 38816761733.
+          # Trigger it deliberately, then finish the real script before other inputs.
+          press Return
+          sleep 1
+          capture "Q1-welcome-triggered"
           dialogue_open() {
             import -window "$win" "$RUNNER_TEMP/averon-playtest/dialogue-probe.png"
             local mean
