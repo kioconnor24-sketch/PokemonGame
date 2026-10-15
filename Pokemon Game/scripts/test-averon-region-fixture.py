@@ -21,6 +21,8 @@ class Badges(ctypes.Structure):
 
 
 BadgeReader = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_void_p)
+HealReader = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint32, ctypes.c_void_p,
+                             ctypes.POINTER(ctypes.c_uint32), ctypes.POINTER(ctypes.c_uint32))
 
 
 class MapBinding(ctypes.Structure):
@@ -52,6 +54,102 @@ class RegionFixtureTests(unittest.TestCase):
         cls.lib.AveronRegionFixture_IsFlyDestinationEligible.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
             ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_int]
         cls.lib.AveronRegionFixture_IsFlyDestinationEligible.restype = ctypes.c_int
+        cls.lib.AveronRegionFixture_SelectRegionalHeal.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
+            ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32,
+            HealReader, ctypes.c_void_p, ctypes.POINTER(ctypes.c_uint32)]
+        cls.lib.AveronRegionFixture_SelectRegionalHeal.restype = ctypes.c_int
+
+    def test_heal_selection_prefers_valid_current_region_then_validates_fallback(self):
+        entries = [(3, 7, AVERON), (3, 8, AVERON), (4, 1, SINNOH)]
+        maps = (MapBinding * 3)(*(MapBinding(*entry) for entry in entries))
+        metadata = {1: (3, 7), 2: (3, 8), 9: (4, 1)}
+        regions = {(group, number): region for group, number, region in entries}
+        for current in ((3, 7), (4, 1)):
+            for preferred in (0, 1, 2, 9, 99, 2**32 - 1):
+                for fallback in (0, 1, 2, 9, 99, 2**32 - 1):
+                    calls = []
+
+                    @HealReader
+                    def read(identifier, context, group, number):
+                        calls.append(identifier)
+                        if identifier not in metadata:
+                            return 0
+                        group[0], number[0] = metadata[identifier]
+                        return 1
+
+                    expected = next((identifier for identifier in (preferred, fallback)
+                                     if identifier in metadata and regions[metadata[identifier]] == regions[current]), 0)
+                    selected = ctypes.c_uint32(0xDEADBEEF)
+                    result = self.lib.AveronRegionFixture_SelectRegionalHeal(
+                        maps, 3, *current, preferred, fallback, read, None, ctypes.byref(selected))
+                    self.assertEqual(result, bool(expected))
+                    self.assertEqual(selected.value, expected if expected else 0xDEADBEEF)
+                    self.assertNotIn(0, calls)
+                    self.assertLessEqual(len(calls), 1 if preferred == fallback else 2)
+
+    def test_heal_selection_refuses_invalid_or_unwritten_metadata(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        for reply, coordinates in ((0, None), (-1, None), (2, (3, 7)), (1, None),
+                                    (1, (259, 7)), (1, (3, 263)), (1, (3, 8))):
+            calls = []
+
+            @HealReader
+            def read(identifier, context, group, number):
+                calls.append(identifier)
+                if coordinates is not None:
+                    group[0], number[0] = coordinates
+                return reply
+
+            selected = ctypes.c_uint32(0xDEADBEEF)
+            self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+                maps, 1, 3, 7, 1, 0, read, None, ctypes.byref(selected)), 0)
+            self.assertEqual(selected.value, 0xDEADBEEF)
+            self.assertEqual(calls, [1])
+
+    def test_heal_selection_validates_arguments_and_source_region_before_reading(self):
+        maps = (MapBinding * 2)(MapBinding(3, 7, AVERON), MapBinding(3, 7, AVERON))
+        calls = []
+
+        @HealReader
+        def read(identifier, context, group, number):
+            calls.append(identifier)
+            group[0], number[0] = 3, 7
+            return 1
+
+        selected = ctypes.c_uint32(0xDEADBEEF)
+        self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+            maps, 1, 3, 7, 1, 2, HealReader(), None, ctypes.byref(selected)), 0)
+        self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+            maps, 1, 3, 7, 1, 2, read, None, None), 0)
+        for source, count, current in ((None, 1, (3, 7)), (maps, 0, (3, 7)),
+                                       (maps, 1, (259, 7)), (maps, 2, (3, 7))):
+            self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+                source, count, *current, 1, 2, read, None, ctypes.byref(selected)), 0)
+        self.assertEqual(calls, [])
+        self.assertEqual(selected.value, 0xDEADBEEF)
+
+    def test_heal_selection_does_not_retry_an_identical_failed_identifier(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        calls = []
+
+        @HealReader
+        def read(identifier, context, group, number):
+            calls.append(identifier)
+            if len(calls) == 1:
+                return 0
+            group[0], number[0] = 3, 7
+            return 1
+
+        selected = ctypes.c_uint32(0xDEADBEEF)
+        self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+            maps, 1, 3, 7, 1, 1, read, None, ctypes.byref(selected)), 0)
+        self.assertEqual(calls, [1])
+        self.assertEqual(selected.value, 0xDEADBEEF)
+        calls.clear()
+        self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+            maps, 1, 3, 7, 1, 2, read, None, ctypes.byref(selected)), 1)
+        self.assertEqual(calls, [1, 2])
+        self.assertEqual(selected.value, 2)
 
     def test_fly_destination_policy_truth_table_and_immutable_inputs(self):
         entries = [(3, 1, AVERON), (3, 2, AVERON), (4, 1, SINNOH), (4, 2, SINNOH)]

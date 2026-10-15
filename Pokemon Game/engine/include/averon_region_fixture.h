@@ -51,6 +51,19 @@ int AveronRegionFixture_IsFlyDestinationEligible(
     uint32_t currentGroup, uint32_t currentNum,
     uint32_t destinationGroup, uint32_t destinationNum, int destinationVisited);
 
+typedef int (*AveronFixtureHealMapReader)(uint32_t healId, void *context,
+                                        uint32_t *mapGroup, uint32_t *mapNum);
+
+// Select metadata only; never heals, warps, spends money or changes saved state.
+// Zero is no healer. Reader must return exactly 1 and supply a known map.
+// A caller-supplied fallback is subject to the same current-region validation.
+// Failure leaves output untouched; a failed identical ID is not read twice.
+int AveronRegionFixture_SelectRegionalHeal(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t currentGroup, uint32_t currentNum,
+    uint32_t preferredHealId, uint32_t fallbackHealId,
+    AveronFixtureHealMapReader reader, void *context, uint32_t *selectedHealId);
+
 // Badge numbers are 1..8, with bit 0 representing Badge 1 in each bank.
 // Full-width region inputs reject invalid values before -fshort-enums can
 // truncate them into a valid bank. This struct is not a persistent format.

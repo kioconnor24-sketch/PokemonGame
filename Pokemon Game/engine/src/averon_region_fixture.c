@@ -58,6 +58,41 @@ int AveronRegionFixture_IsFlyDestinationEligible(
     return currentRegion == destinationRegion;
 }
 
+static int HealMatchesRegion(const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+                             uint32_t region, uint32_t healId,
+                             AveronFixtureHealMapReader reader, void *context)
+{
+    uint32_t mapGroup = UINT32_MAX, mapNum = UINT32_MAX;
+    if (healId == 0 || reader(healId, context, &mapGroup, &mapNum) != 1)
+        return 0;
+    return AveronRegionFixture_ResolveMap(bindings, bindingCount, mapGroup, mapNum) == region;
+}
+
+int AveronRegionFixture_SelectRegionalHeal(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t currentGroup, uint32_t currentNum,
+    uint32_t preferredHealId, uint32_t fallbackHealId,
+    AveronFixtureHealMapReader reader, void *context, uint32_t *selectedHealId)
+{
+    if (!reader || !selectedHealId)
+        return 0;
+    uint32_t region = AveronRegionFixture_ResolveMap(bindings, bindingCount, currentGroup, currentNum);
+    if (region == AVERON_FIXTURE_UNKNOWN)
+        return 0;
+    uint32_t candidates[] = {preferredHealId, fallbackHealId};
+    for (size_t i = 0; i < sizeof(candidates) / sizeof(candidates[0]); ++i)
+    {
+        if (i != 0 && candidates[i] == candidates[0])
+            continue;
+        if (HealMatchesRegion(bindings, bindingCount, region, candidates[i], reader, context))
+        {
+            *selectedHealId = candidates[i];
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static uint8_t GetBadgeMask(const struct AveronFixtureBadges *badges,
                             uint32_t region)
 {

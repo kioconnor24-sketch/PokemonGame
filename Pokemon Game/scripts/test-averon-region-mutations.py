@@ -62,6 +62,16 @@ class RegionMutationTests(unittest.TestCase):
         self.assert_detected('return currentRegion == destinationRegion;', 'return 1;',
                              'test_fly_destination_policy_truth_table_and_immutable_inputs')
 
+    def test_detects_cross_region_healer_leak(self):
+        original = 'return AveronRegionFixture_ResolveMap(bindings, bindingCount, mapGroup, mapNum) == region;'
+        self.assert_detected(original, original.replace('== region;', '== region || region != AVERON_FIXTURE_UNKNOWN;'),
+                             'test_heal_selection_prefers_valid_current_region_then_validates_fallback')
+
+    def test_detects_retrying_a_failed_healer_identifier(self):
+        self.assert_detected('if (i != 0 && candidates[i] == candidates[0])',
+                             'if (i > 2 && candidates[i] == candidates[0])',
+                             'test_heal_selection_does_not_retry_an_identical_failed_identifier')
+
     def test_detects_ignoring_map_group(self):
         self.assert_detected('bindings[i].mapGroup != mapGroup || bindings[i].mapNum != mapNum',
                              'bindings[i].mapNum != mapNum',
