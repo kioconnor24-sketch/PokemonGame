@@ -42,6 +42,16 @@
   prompt now carries this backend-first order. Computer/app must remain awake.
 - Numeric caps, including former League76, remain provisional/unapproved.
   Preserve level100 maximum; no new cap guesses. Do not repeat setup/audits.
+- Wrap-up requested by user: no partial Fly implementation was started. Source
+  remains a25755fb; last pushed documentation checkpoint was 86df98cf. The
+  authoring checkout and published branch were clean before this handoff note.
+  Rechecked the saved 32 MiB test ROM SHA256 against its manifest: matching.
+  Existing 30/30 native and 4/4 save-layout results remain the latest evidence;
+  no new build or emulator session was needed for this documentation-only wrap.
+  Resume at native Fly destination selection/callbacks in region_map.c, using
+  temporary developer destinations; do not route the player into vanilla Hoenn
+  or assign final Averon geography. Then validate and compile Task2 changes.
+  Status: BUILT — RUNTIME TEST PENDING. Task2 remains incomplete.
 ## Historical checkpoints (superseded by the current record above)
 
 - Accepted remote: `a844b3b2481d5ee817f61137383f163c6d483124` on `main`;
