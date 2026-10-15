@@ -31,8 +31,11 @@
   manual emulator testing is deferred by user instruction. ChatGPT may attempt
   runtime tests with the local compiled artifact; capability is not established.
 - Continuation scheduled in this chat for October 15 at 02:25 and 09:00 EDT.
-  Local computer must be awake with app running. Later cadence awaiting user
-  clarification. No paid reload, credit purchase or manual usage reset allowed.
+  Then every 5½ hours anchored at 09:00 EDT. Local computer must be awake with
+  app running. No paid reload, credit purchase or manual usage reset allowed.
+- Remote feature checkpoint `c7049ccca24c02e6db42183c41e227923d38e45a`
+  pushed and verified with `git ls-remote`. Engine tree matches accepted main:
+  `2a56dd29f6c60ed5aa21b006e0388d71eb859702`; migration already preserved it.
 
 Older entries below are historical; they do not override this checkpoint.
 
