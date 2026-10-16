@@ -309,6 +309,17 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-navigation.log"
+          # Human-reviewed previous run 38840269355 proved the real researcher
+          # line on (75,9), (13,16). Continue only if this run reproduced it.
+          # The GDB observer reads existing saved flags, never changes them.
+          if ! python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" q1-offer \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
+            echo "QA_Q1_PARTIAL_BLOCKED: review exact step screenshots; not a game FAIL"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
