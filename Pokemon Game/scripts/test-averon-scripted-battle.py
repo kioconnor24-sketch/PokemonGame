@@ -8,9 +8,13 @@ uses its macros:
 - the macro wraps exactly one trainer battle between Begin and Finish;
 - every native the macros call is defined in src/averon_scripted_battle.c
   and requests script effects;
-- every in-process load of the normal save still resets EWRAM first, so the
-  RAM-only no-whiteout special flag cannot survive a load (a native test
-  cannot do the hardware reset).
+- the known boot, soft-reset and in-process reload sequences still reach
+  the BIOS EWRAM reset before initialization/load;
+- normal-load and Continue references in top-level engine C files stay at
+  their reviewed entry points. New dynamic/aliased references fail closed.
+These are bounded source guards, not a C preprocessor/control-flow proof
+or execution of hardware reset. Indirection introduced in headers needs
+separate review. A direct low-level LoadGameSave does not reset special RAM.
 Example scripts in the .inc header comments are checked like real scripts.
 """
 from pathlib import Path
@@ -61,6 +65,114 @@ def macro_body(text, name):
     return [line.strip() for line in match.group(1).splitlines() if line.strip() and not line.strip().startswith('@')] if match else None
 
 
+def c_code(text):
+    """Hide comments and strings without changing offsets or line numbers."""
+    ignored = r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\''
+    return re.sub(ignored, lambda m: re.sub(r'[^\n]', ' ', m.group()), text, flags=re.S)
+
+
+def function_body(text, name):
+    text = c_code(text)
+    match = re.search(rf'\b{re.escape(name)}\s*\([^;{{}}]*\)\s*\{{', text)
+    if match is None:
+        return ''
+    start, depth = match.end(), 1
+    for end in range(start, len(text)):
+        depth += (text[end] == '{') - (text[end] == '}')
+        if depth == 0:
+            return text[start:end]
+    return ''
+
+
+def asm_instructions(text, label):
+    text = '\n'.join(line.split('@', 1)[0] for line in text.splitlines())
+    match = re.search(rf'(?m)^{re.escape(label)}::?[ \t]*$', text)
+    if match is None:
+        return []
+    body = re.split(r'(?m)^(?:[A-Za-z_]\w*::?(?=\s|$)|[ \t]*thumb_func_end\b)',
+                    text[match.end():], maxsplit=1)[0]
+    return [re.sub(r'\s+', '', line).lower() for line in body.splitlines()
+            if line.strip() and not line.lstrip().startswith('.')]
+
+
+def reset_sources():
+    names = ('src/crt0.s', 'libagbsyscall/libagbsyscall.s', 'include/gba/syscall.h')
+    sources = {name: (ENGINE / name).read_text() for name in names}
+    sources.update((str(p.relative_to(ENGINE)), p.read_text()) for p in (ENGINE / 'src').glob('*.c'))
+    return sources
+
+
+def reset_problems(sources):
+    """Pin the reviewed reset instructions and ordering, not arbitrary C flow."""
+    problems = []
+    header = c_code(sources['include/gba/syscall.h'])
+    values = {}
+    for name in ('RESET_EWRAM', 'RESET_ALL'):
+        match = re.search(rf'(?m)^\s*#\s*define\s+{name}\s+(0[xX][0-9a-fA-F]+|[0-9]+)\s*$', header)
+        values[name] = int(match.group(1), 0) if match else 0
+    if values['RESET_EWRAM'] != 1 or values['RESET_ALL'] != 0xFF or not values['RESET_ALL'] & values['RESET_EWRAM']:
+        problems.append('RESET_ALL must include the BIOS EWRAM bit (RESET_EWRAM = 1)')
+    boot = asm_instructions(sources['src/crt0.s'], 'Init')
+    boot_reset = ('movr0,#255', 'svc#1<<16', 'blinitializeworkingmemory')
+    # Init is ARM code: BIOS RegisterRamReset (1) occupies bits 16..23.
+    modes = re.findall(r'(?m)^\s*\.(arm|thumb)\b', sources['src/crt0.s'].split('Init::', 1)[0])
+    if (not modes or modes[-1] != 'arm' or boot.count('blinitializeworkingmemory') != 1
+            or not any(tuple(boot[i:i + 3]) == boot_reset for i in range(len(boot)))):
+        problems.append('ARM boot must reset all RAM via BIOS 1 immediately before InitializeWorkingMemory')
+    wrappers = sources['libagbsyscall/libagbsyscall.s']
+    if asm_instructions(wrappers, 'RegisterRamReset') != ['svc#1', 'bxlr']:
+        problems.append('RegisterRamReset must call BIOS 1')
+    soft = asm_instructions(wrappers, 'SoftReset')
+    if [line for line in soft if line.startswith('svc')] != ['svc#1', 'svc#0']:
+        problems.append('SoftReset must call RegisterRamReset BIOS 1 before restarting with BIOS 0')
+    if any('r0' in line for line in soft):
+        problems.append('SoftReset must preserve its reset-mask argument in r0')
+    main = function_body(sources['src/main.c'], 'DoSoftReset')
+    if [arg.strip() for arg in re.findall(r'\bSoftReset\s*\(([^)]*)\)', main)] != ['RESET_ALL']:
+        problems.append('DoSoftReset must request RESET_ALL')
+    reload = function_body(sources['src/reload_save.c'], 'ReloadSave')
+    sequence = [re.search(pattern, reload) for pattern in (
+        r'\bRegisterRamReset\s*\(\s*RESET_EWRAM\s*\)\s*;',
+        r'\bReInitializeEWRAM\s*\(\s*\)\s*;',
+        r'\bLoadGameSave\s*\(\s*SAVE_NORMAL\s*\)\s*;',
+    )]
+    if not all(sequence) or [m.start() for m in sequence] != sorted(m.start() for m in sequence):
+        problems.append('ReloadSave must reset EWRAM, initialize it, then load SAVE_NORMAL')
+    return problems
+
+
+def loader_problems(sources):
+    """Reject unreviewed visible loader/callback references, including aliases."""
+    problems, loads, continues = [], [], []
+    for path, raw in sources.items():
+        if not path.startswith('src/') or not path.endswith('.c'):
+            continue
+        source = c_code(raw)
+        for match in re.finditer(r'\bLoadGameSave\b', source):
+            tail = source[match.end():]
+            if path == 'src/save.c' and re.match(r'\s*\(\s*u8\s+saveType\s*\)\s*\{', tail):
+                continue  # The actual function definition, not a loader call.
+            call = re.match(r'\s*\(\s*(SAVE_NORMAL|SAVE_HALL_OF_FAME)\s*\)', tail)
+            if call is None:
+                problems.append(f'{path}: dynamic/aliased LoadGameSave reference requires review')
+            elif call.group(1) == 'SAVE_NORMAL':
+                loads.append(path)
+        for match in re.finditer(r'\bCB2_ContinueSavedGame\b', source):
+            tail = source[match.end():]
+            if path == 'src/overworld.c' and re.match(r'\s*\(\s*void\s*\)\s*\{', tail):
+                continue
+            if (re.search(r'\bSetMainCallback2\s*\(\s*$', source[:match.start()])
+                    and re.match(r'\s*\)', tail)):
+                continues.append(path)
+            else:
+                problems.append(f'{path}: aliased/direct Continue reference requires review')
+    if sorted(loads) != ['src/intro.c', 'src/reload_save.c']:
+        problems.append(f'unreviewed normal-save call sites: {sorted(loads)}')
+    if sorted(continues) != ['src/main_menu.c', 'src/reload_save.c']:
+        problems.append(f'unreviewed Continue call sites: {sorted(continues)}')
+    return problems
+
+
 class ScriptedBattleSourceTests(unittest.TestCase):
     def test_examples_have_no_win_fallthrough(self):
         lines = example_lines(INC.read_text())
@@ -98,17 +210,77 @@ class ScriptedBattleSourceTests(unittest.TestCase):
             self.assertIn('Script_RequestEffects(', match.group(1), name)
 
     def test_every_normal_save_load_resets_ewram_first(self):
-        src = lambda name: (ENGINE / 'src' / name).read_text()
-        self.assertRegex(src('event_data.c'), r'\bEWRAM_DATA static u8 sSpecialFlags\[')
-        # Exactly these callers load the normal save or continue a saved game.
-        callers = sorted(str(p.relative_to(ENGINE)) for p in (ENGINE / 'src').glob('*.c')
-                         if re.search(r'LoadGameSave\(SAVE_NORMAL\)|SetMainCallback2\(CB2_ContinueSavedGame\)', p.read_text()))
-        self.assertEqual(callers, ['src/intro.c', 'src/main_menu.c', 'src/reload_save.c'])
-        # Boot: crt0 zeroes EWRAM. Main menu: reached from boot or DoSoftReset.
-        self.assertRegex(src('main.c'), r'void DoSoftReset\(void\)\n\{[^}]*SoftReset\(RESET_ALL\);\n\}')
-        # Link-error reload: resets EWRAM before loading.
-        reload = src('reload_save.c')
-        self.assertLess(reload.index('RegisterRamReset(RESET_EWRAM);'), reload.index('LoadGameSave(SAVE_NORMAL);'))
+        sources = reset_sources()
+        self.assertRegex(c_code(sources['src/event_data.c']), r'\bEWRAM_DATA\s+static\s+u8\s+sSpecialFlags\[')
+        self.assertEqual(loader_problems(sources), [])
+        self.assertEqual(reset_problems(sources), [])
+
+    def test_reset_guard_rejects_boot_mask_and_reload_mutations(self):
+        sources = reset_sources()
+        self.assertEqual(reset_problems(sources), [], 'valid reset control must pass before mutations')
+        mutations = (
+            ('src/crt0.s', 'svc #1 << 16', 'svc #0 << 16'),
+            ('src/crt0.s', 'mov r0, #255', 'mov r0, #254'),
+            ('src/crt0.s', 'svc #1 << 16', '@ svc #1 << 16'),
+            ('src/crt0.s', 'bl InitializeWorkingMemory', '@ bl InitializeWorkingMemory'),
+            ('src/crt0.s', 'mov r0, #255', 'bl InitializeWorkingMemory\n\tmov r0, #255'),
+            ('src/crt0.s', '\t.arm', '\t.thumb'),
+            ('include/gba/syscall.h', '#define RESET_EWRAM      0x01', '#define RESET_EWRAM      0x02'),
+            ('include/gba/syscall.h', '#define RESET_ALL        0xFF', '#define RESET_ALL        0xFE'),
+            ('libagbsyscall/libagbsyscall.s', 'RegisterRamReset:\n\tsvc #1', 'RegisterRamReset:\n\tsvc #0'),
+            ('libagbsyscall/libagbsyscall.s', '\tsvc #1\n\tsvc #0\n\t.pool\n\tthumb_func_end SoftReset\n',
+             '\tsvc #0\n\tsvc #1\n\t.pool\n\tthumb_func_end SoftReset\n'),
+            ('libagbsyscall/libagbsyscall.s', 'SoftReset:\n', 'SoftReset:\n\tsvc #0\n'),
+            ('libagbsyscall/libagbsyscall.s', 'SoftReset:\n', 'SoftReset:\n\tmovs r0, #0\n'),
+            ('src/main.c', 'SoftReset(RESET_ALL);', 'SoftReset(RESET_IWRAM);'),
+            ('src/main.c', 'SoftReset(RESET_ALL);', 'SoftReset(RESET_IWRAM); SoftReset(RESET_ALL);'),
+            ('src/reload_save.c', 'RegisterRamReset(RESET_EWRAM);', 'RegisterRamReset(RESET_IWRAM);'),
+            ('src/reload_save.c', 'RegisterRamReset(RESET_EWRAM);', '/* RegisterRamReset(RESET_EWRAM); */'),
+            ('src/reload_save.c', 'ReInitializeEWRAM();', '/* ReInitializeEWRAM(); */'),
+            ('src/reload_save.c', 'RegisterRamReset(RESET_EWRAM);', 'LoadGameSave(SAVE_NORMAL);\n    RegisterRamReset(RESET_EWRAM);'),
+        )
+        rejected = 0
+        for path, old, new in mutations:
+            with self.subTest(path=path, mutation=new):
+                self.assertIn(old, sources[path], 'mutation target no longer exists')
+                changed = dict(sources)
+                changed[path] = sources[path].replace(old, new, 1)
+                errors = reset_problems(changed)
+                rejected += bool(errors)
+                self.assertTrue(errors, 'unsafe reset mutation survived')
+        print(f'reset mutations rejected: {rejected}/{len(mutations)}')
+
+    def test_loader_guard_accepts_whitespace_and_ignores_comments(self):
+        sources = reset_sources()
+        changed = {path: text.replace('LoadGameSave(SAVE_NORMAL)', 'LoadGameSave /* load */ (\n SAVE_NORMAL \n)')
+                   .replace('SetMainCallback2(CB2_ContinueSavedGame)', 'SetMainCallback2 ( /* callback */ CB2_ContinueSavedGame )')
+                   for path, text in sources.items()}
+        changed['src/new_non_loader.c'] = ('// LoadGameSave(SAVE_NORMAL);\n'
+            '/* SetMainCallback2(CB2_ContinueSavedGame); */\n'
+            'const char *note = "LoadGameSave(SAVE_NORMAL)";\n')
+        self.assertEqual(loader_problems(changed), [])
+        self.assertEqual(reset_problems(changed), [])
+
+    def test_loader_guard_rejects_new_dynamic_and_aliased_entrypoints(self):
+        sources = reset_sources()
+        self.assertEqual(loader_problems(sources), [], 'valid loader control must pass before mutations')
+        mutations = (
+            'void NewLoad(void) { LoadGameSave ( SAVE_NORMAL ); }',
+            'void NewLoad(u8 kind) { LoadGameSave(kind); }',
+            'u8 (*load)(u8) = LoadGameSave;',
+            '#define load SaveAlias\n#define SaveAlias LoadGameSave',
+            'void NewContinue(void) { SetMainCallback2 ( CB2_ContinueSavedGame ); }',
+            'void (*next)(void) = CB2_ContinueSavedGame;',
+            'void NewContinue(void) { CB2_ContinueSavedGame(); }',
+        )
+        rejected = 0
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                changed = dict(sources, **{'src/new_entrypoint.c': mutation})
+                errors = loader_problems(changed)
+                rejected += bool(errors)
+                self.assertTrue(errors, 'unreviewed loader mutation survived')
+        print(f'loader mutations rejected: {rejected}/{len(mutations)}')
 
     def test_checker_detects_fallthrough_and_missing_branch(self):
         bad = [
