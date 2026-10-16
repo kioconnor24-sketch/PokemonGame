@@ -275,15 +275,15 @@ jobs:
           capture "Q1-warp-group-before"
           python3 "$qa_controller" assert-ui --kind numeric \
             --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-before.png"
-          # The unchanged source registry declares group 76, map 9.
+          # map_groups.json group_order (not JSON object key index) puts AveronOpening at group 75; Alderfield is map 9.
           # Reliable down/up transitions must be long enough to register.
           press_debug Right
           for i in $(seq 1 7); do press_debug Up; done
           press_debug Left
           for i in $(seq 1 6); do press_debug Up; done
-          capture "Q1-warp-group-76"
+          capture "Q1-warp-group-75"
           python3 "$qa_controller" assert-ui --kind numeric \
-            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-76.png"
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-75.png"
           press_debug x
           for i in $(seq 1 9); do press_debug Up; done
           capture "Q1-warp-map-9"
