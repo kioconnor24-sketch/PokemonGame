@@ -1684,11 +1684,32 @@ def q2_visual_relaunch(args):
     print("QA_VISUAL_ARTIST_MENU_RATIO", f"{choices:.4f}", flush=True)
     if choices > 0.52:
         raise Blocked("Artist produced YESNO instead of expected Q2 DONE")
-    print("QA_Q2_FLASH_VISUAL_PARTIAL: real flash file, restarted emulator, "
-          "observed title, physical START and Continue-like menu, saved "
-          "field render match and completed artist text. Independent "
-          "screenshots review required; encrypted Oran quantity and "
-          "all quest flags NOT PROVEN after reboot.", flush=True)
+    print("QA_Q2_FLASH_VISUAL_ARTIST_DONE: completed artist text seen "
+          "after genuine emulator process restart", flush=True)
+    # Check Bag visibly rather than pretending title-stage GDB still works.
+    # Actual source Start actions before save were [BAG(2), PLAYER(4),
+    # SAVE(5), OPTION(6), EXIT(7)], making BAG the default first choice.
+    press("x")
+    closed, _, _ = shot("artist-done-closed")
+    if white_panel_ratio(closed) > 0.30:
+        raise Blocked("Cannot open restored Bag while artist dialogue active")
+    press("Return")
+    start_frame, _, _ = shot("restored-start-menu")
+    press("x")
+    bag_frame, bag_raw, _ = shot("restored-bag-open")
+    if pixel_distance(visual_frame_data(start_frame), bag_raw) < 0.05:
+        raise Blocked("No observed field Start-menu-to-Bag transition")
+    # Source bag has five pockets. SDL R has been independently verified as
+    # xdotool 's' by the in-game developer R+START entry. Four single R
+    # pulses move from Items to Berries, with screenshots at every stage.
+    for i in range(4):
+        press("s")
+        shot(f"restored-bag-pocket-after-R-{i+1}")
+    print("QA_Q2_FLASH_VISUAL_PARTIAL: genuine saved process restart, "
+          "title/Continue-like menu, saved Windrow field, completed artist "
+          "DONE dialogue and Bag/Berry pocket screenshots captured. "
+          "Require manual verification of visible ORAN BERRY x3; source "
+          "flags cannot be asserted from broken reboot GDB.", flush=True)
 
 
 def main():
