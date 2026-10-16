@@ -2,6 +2,7 @@
 #include "test/test.h"
 #include "averon_region_save.h"
 #include "event_data.h"
+#include "hall_of_fame.h"
 #include "item.h"
 #include "load_save.h"
 #include "malloc.h"
@@ -11,6 +12,7 @@
 #include "pokemon_storage_system.h"
 #include "save.h"
 #include "gba/flash_internal.h"
+#include "main.h"
 #include "constants/heal_locations.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
@@ -770,4 +772,155 @@ TEST("Averon region adapters keep both badge banks independent and fail closed")
     EXPECT_EQ(AveronRegion_GetHealLocation(AVERON_SAVE_REGION_AVERON), HEAL_LOCATION_NONE);
     AveronRegionSave_InitNewGame();
     FlagClear(FLAG_BADGE01_GET);
+}
+
+// The newest slot carries a valid anchor with a newer format.
+static void MakeNewestUnsupported(struct SaveSector *sector)
+{
+    u32 physical = FindPhysical(NewestSlot(), SECTOR_ID_SAVEBLOCK2);
+    ReadSector(physical, sector);
+    sector->data[ANCHOR_OFFSET + 4] = AVERON_REGION_SAVE_FORMAT + 1;
+    sector->data[ANCHOR_OFFSET + 5] = 0;
+    sector->data[ANCHOR_OFFSET + 6] = ~(AVERON_REGION_SAVE_FORMAT + 1);
+    sector->data[ANCHOR_OFFSET + 7] = 0xFF;
+    ResealSaveBlock2(sector);
+    WriteSector(physical, sector);
+}
+
+static u32 RamCrc(void)
+{
+    return AveronRegionSave_Crc32((const u8 *)gSaveBlock1Ptr, sizeof(struct SaveBlock1))
+         ^ AveronRegionSave_Crc32((const u8 *)gSaveBlock2Ptr, sizeof(struct SaveBlock2)) * 3
+         ^ AveronRegionSave_Crc32((const u8 *)gPokemonStoragePtr, sizeof(struct PokemonStorage)) * 5;
+}
+
+TEST("Averon region save publishes nothing from a rejected load into RAM")
+{
+    struct SaveSector *sector = Alloc(sizeof(*sector));
+    u32 unsupported = 0, ramBefore;
+    u8 status;
+    PARAMETRIZE { unsupported = TRUE; }  // newer format: CORRUPT, no fallback
+    PARAMETRIZE { unsupported = FALSE; } // both slots damaged: CORRUPT
+    EXPECT(StartFlash());
+    SaveTwo(1, 2);
+    if (unsupported)
+    {
+        MakeNewestUnsupported(sector);
+    }
+    else
+    {
+        for (u32 slot = 0; slot < NUM_SAVE_SLOTS; slot++)
+        {
+            u32 physical = FindPhysical(slot, SECTOR_ID_SAVEBLOCK1_START);
+            ReadSector(physical, sector);
+            sector->data[100] ^= 0x01; // SaveBlock1 checksum now fails
+            WriteSector(physical, sector);
+        }
+    }
+    ApplyState(11); // RAM differs from both slots
+    gPokemonStoragePtr->boxNames[0][0] ^= 0xFF;
+    ramBefore = RamCrc();
+    Save_ResetSaveCounters();
+    status = LoadGameSave(SAVE_NORMAL);
+    AveronRegionSave_BeginLoad(); // unblock before any check can end the test
+    EXPECT_EQ(status, SAVE_STATUS_CORRUPT);
+    EXPECT_EQ(RamCrc(), ramBefore); // SaveBlock1, SaveBlock2 and PC untouched
+    Free(sector);
+}
+
+enum
+{
+    ENTRY_SAVE_NORMAL,
+    ENTRY_SAVE_LINK,
+    ENTRY_SAVE_EREADER,
+    ENTRY_SAVE_HALL_OF_FAME,
+    ENTRY_SAVE_HALL_OF_FAME_ERASE_BEFORE,
+    ENTRY_SAVE_OVERWRITE_DIFFERENT_FILE,
+    ENTRY_LINK_FULL_SAVE,
+    ENTRY_WRITE_SAVE_BLOCKS_1_2,
+    ENTRY_SPECIAL_TRAINER_HILL,
+    ENTRY_SPECIAL_RECORDED_BATTLE,
+};
+
+TEST("Averon region save refuses a newer format at every save entry point without touching flash")
+{
+    struct SaveSector *sector = Alloc(sizeof(*sector));
+    u8 *buffer = Alloc(2 * SECTOR_DATA_SIZE);
+    u32 entry = 0, before[SECTORS_COUNT], writes, damaged;
+    void (*callback2)(void) = gMain.callback2;
+    struct HallofFameTeam *hof = gHoFSaveBuffer;
+    u32 result = SAVE_STATUS_OK;
+    PARAMETRIZE { entry = ENTRY_SAVE_NORMAL; }
+    PARAMETRIZE { entry = ENTRY_SAVE_LINK; }
+    PARAMETRIZE { entry = ENTRY_SAVE_EREADER; }
+    PARAMETRIZE { entry = ENTRY_SAVE_HALL_OF_FAME; }
+    PARAMETRIZE { entry = ENTRY_SAVE_HALL_OF_FAME_ERASE_BEFORE; }
+    PARAMETRIZE { entry = ENTRY_SAVE_OVERWRITE_DIFFERENT_FILE; }
+    PARAMETRIZE { entry = ENTRY_LINK_FULL_SAVE; }
+    PARAMETRIZE { entry = ENTRY_WRITE_SAVE_BLOCKS_1_2; }
+    PARAMETRIZE { entry = ENTRY_SPECIAL_TRAINER_HILL; }
+    PARAMETRIZE { entry = ENTRY_SPECIAL_RECORDED_BATTLE; }
+    EXPECT(StartFlash());
+    SaveTwo(1, 2);
+    MakeNewestUnsupported(sector);
+    memset(buffer, 0x3C, 2 * SECTOR_DATA_SIZE);
+    for (u32 i = SECTOR_ID_HOF_1; i < SECTORS_COUNT; i++)
+        WriteSector(i, (struct SaveSector *)buffer); // non-erased special sectors
+    for (u32 i = 0; i < SECTORS_COUNT; i++)
+    {
+        ReadSector(i, sector);
+        before[i] = AveronRegionSave_Crc32((const u8 *)sector, sizeof(*sector));
+    }
+    Save_ResetSaveCounters();
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_CORRUPT);
+    ApplyState(9);
+    gDamagedSaveSectors = 0;
+    gHoFSaveBuffer = (struct HallofFameTeam *)buffer;
+    StartCountingWrites();
+    switch (entry)
+    {
+    case ENTRY_SAVE_NORMAL:                    HandleSavingData(SAVE_NORMAL); break;
+    case ENTRY_SAVE_LINK:                      HandleSavingData(SAVE_LINK); break;
+    case ENTRY_SAVE_EREADER:                   HandleSavingData(SAVE_EREADER); break;
+    case ENTRY_SAVE_HALL_OF_FAME:              HandleSavingData(SAVE_HALL_OF_FAME); break;
+    case ENTRY_SAVE_HALL_OF_FAME_ERASE_BEFORE: HandleSavingData(SAVE_HALL_OF_FAME_ERASE_BEFORE); break;
+    case ENTRY_SAVE_OVERWRITE_DIFFERENT_FILE:  HandleSavingData(SAVE_OVERWRITE_DIFFERENT_FILE); break;
+    case ENTRY_LINK_FULL_SAVE: // trade.c's Task_LinkFullSave sequence
+        LinkFullSave_Init();
+        for (u32 i = 0; i <= NUM_SECTORS_PER_SLOT && !LinkFullSave_WriteSector(); i++)
+            ;
+        LinkFullSave_ReplaceLastSector();
+        LinkFullSave_SetLastSectorSignature();
+        break;
+    case ENTRY_WRITE_SAVE_BLOCKS_1_2: // record mixing / Berry Blender
+        WriteSaveBlock2();
+        for (u32 i = 0; i <= NUM_SECTORS_PER_SLOT && !WriteSaveBlock1Sector(); i++)
+            ;
+        break;
+    case ENTRY_SPECIAL_TRAINER_HILL:
+        result = TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_HILL, buffer);
+        break;
+    case ENTRY_SPECIAL_RECORDED_BATTLE:
+        result = TryWriteSpecialSaveSector(SECTOR_ID_RECORDED_BATTLE, buffer);
+        break;
+    }
+    StopCountingWrites();
+    writes = sFlashWrites;
+    damaged = gDamagedSaveSectors;
+    gHoFSaveBuffer = hof;
+    SetMainCallback2(callback2); // the refusal shows the save-failed screen
+    AveronRegionSave_BeginLoad(); // unblock before any check can end the test
+    Save_ResetSaveCounters();
+    EXPECT_EQ(writes, 0);
+    if (entry >= ENTRY_SPECIAL_TRAINER_HILL)
+        EXPECT_EQ(result, SAVE_STATUS_ERROR);
+    else
+        EXPECT_NE(damaged, 0); // reported as a failed save
+    for (u32 i = 0; i < SECTORS_COUNT; i++)
+    {
+        ReadSector(i, sector);
+        EXPECT_EQ(AveronRegionSave_Crc32((const u8 *)sector, sizeof(*sector)), before[i]);
+    }
+    Free(buffer);
+    Free(sector);
 }
