@@ -237,6 +237,37 @@ class ObserverTests(unittest.TestCase):
             gdb.title_state(dict(main=0x03001000))
         self.assertEqual(calls, ["m3001004,4", "c"])
 
+    def test_gift_source_flag_and_player_party_read_only(self):
+        header = struct.pack("<hhbbbxhh", 24, 19, 75, 14, -1, -1, -1)
+        gdb, commands = self.fake(header)
+        old = gdb.command
+        def reply(cmd, reply=True):
+            if cmd in ("m2001376,1", "m3000108,1"):
+                commands.append(cmd)
+                return "80" if cmd.startswith("m200") else "02"
+            return old(cmd, reply)
+        gdb.command = reply
+        state = gdb.position(0x03000100, 0x03000104,
+                             parties_count_symbol=0x03000108)
+        self.assertEqual(state["playerPartyCount"], 2)
+        self.assertTrue(state["devGiftReceived"])
+        self.assertIn("m2001376,1", commands)
+        self.assertIn("m3000108,1", commands)
+        self.assertEqual(gdb.sock.sent, [b"\\x03"])
+
+    def test_gift_rejects_invalid_six_slot_party_count(self):
+        header = struct.pack("<hhbbbxhh", 24, 19, 75, 14, -1, -1, -1)
+        gdb, commands = self.fake(header)
+        old = gdb.command
+        def reply(cmd, reply=True):
+            if cmd in ("m2001376,1", "m3000108,1"):
+                return "80" if cmd.startswith("m200") else "07"
+            return old(cmd, reply)
+        gdb.command = reply
+        with self.assertRaisesRegex(qa.Blocked, "Invalid actual party count"):
+            gdb.position(0x03000100, 0x03000104,
+                         parties_count_symbol=0x03000108)
+
     def test_reset_transient_is_allowed_only_for_title_poll(self):
         self.assertTrue(qa.reboot_transient(
             "title-102-title-poll-1", ValueError("non-hexadecimal debugger reply")))
