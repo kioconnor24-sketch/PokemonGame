@@ -1983,14 +1983,21 @@ def q3_clinic_entry(args):
     state = snapshot(args, "q3-clinic-source-heal")
     if (state["mapGroup"], state["mapNum"]) != (75, 11):
         raise Blocked(f"Expected original AlderfieldClinic(75,11): {state}")
-    if (state["lastHealMapGroup"], state["lastHealMapNum"]) != (75, 11):
-        raise Blocked(f"Original clinic transition did not register "
-                      f"its heal map through setrespawn: {state}")
+    # HEAL_LOCATION_ALDERFIELD stores the OUTDOOR town position; its
+    # distinct respawn_map is the clinic. Source: src/data/heal_locations.json.
+    # A matching saved location may predate this entry and does not, alone,
+    # prove the MAP_SCRIPT_ON_TRANSITION actually executed.
+    heal = (state["lastHealMapGroup"], state["lastHealMapNum"],
+            state["lastHealWarpId"], state["lastHealX"], state["lastHealY"])
+    if heal != (75, 9, -1, 17, 13):
+        raise Blocked(f"Source-defined Alderfield heal warp missing "
+                      f"(expected town 75/9 at 17,13, not clinic 75/11): {state}")
     if white_panel_ratio(frame) > 0.3:
         raise Blocked("Clinic entry screenshot not clear field")
-    print("QA_Q3_REAL_CLINIC_RESPAWN_REGISTERED: real warp + native "
-          "AlderfieldClinic setrespawn, no memory writes; actual loss "
-          "and return need separate proof.",
+    print("QA_Q3_SOURCE_HEAL_WARP_PRESENT: entered original clinic and "
+          "saved warp matches HEAL_LOCATION_ALDERFIELD's outdoor map; "
+          "source transition execution and subsequent real whiteout "
+          "into clinic/nurse healing still require independent proof.",
           json.dumps(state, sort_keys=True), flush=True)
 
 
