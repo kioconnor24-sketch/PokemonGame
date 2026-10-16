@@ -781,6 +781,14 @@ u8 HandleSavingData(u8 saveType)
 
     gTrainerHillVBlankCounter = NULL;
     UpdateSaveAddresses();
+    // Averon: a newer-format save is on flash. Erase and write nothing, not
+    // even the Hall of Fame sectors a different-file save clears first.
+    if (AveronRegionSave_IsWriteBlocked())
+    {
+        SetDamagedSectorBits(ENABLE, NUM_SECTORS_PER_SLOT * ((gSaveCounter + 1) % NUM_SAVE_SLOTS));
+        gTrainerHillVBlankCounter = backupVar;
+        return 0;
+    }
     switch (saveType)
     {
     case SAVE_HALL_OF_FAME_ERASE_BEFORE:
@@ -837,6 +845,14 @@ u8 HandleSavingData(u8 saveType)
 u8 TrySavingData(u8 saveType)
 {
     if (gFlashMemoryPresent != TRUE)
+    {
+        gSaveAttemptStatus = SAVE_STATUS_ERROR;
+        return SAVE_STATUS_ERROR;
+    }
+
+    // Averon: refuse a blocked save before the save failed screen, whose
+    // recovery would wipe the sectors the refusal marked damaged.
+    if (AveronRegionSave_IsWriteBlocked())
     {
         gSaveAttemptStatus = SAVE_STATUS_ERROR;
         return SAVE_STATUS_ERROR;
@@ -1034,6 +1050,9 @@ u32 TryWriteSpecialSaveSector(u8 sector, u8 *src)
     void *savDataBuffer;
 
     if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
+        return SAVE_STATUS_ERROR;
+    // Averon: never overwrite a save written by a newer region format
+    if (AveronRegionSave_IsWriteBlocked())
         return SAVE_STATUS_ERROR;
 
     savDataBuffer = &gSaveDataBuffer;
