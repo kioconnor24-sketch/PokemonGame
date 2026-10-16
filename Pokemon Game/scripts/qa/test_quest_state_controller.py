@@ -36,6 +36,10 @@ class ObserverTests(unittest.TestCase):
                 return payload.hex()
             if q == "m2001375,1":
                 return "00"
+            if q == "m3000104,4":
+                return struct.pack("<I", 0x02000200).hex()
+            if q == "m20002ac,4":
+                return struct.pack("<I", 0xA33A).hex()
             if q == "m2000890,b8":
                 return "00" * (46 * 4)
             if q == "c":
@@ -48,10 +52,11 @@ class ObserverTests(unittest.TestCase):
         # global.h: pos.x/y 0/2; location group/map/warp 4/5/6.
         header = struct.pack("<hhbbbxhh", 13, 16, 76, 9, 1, -1, -1)
         gdb, commands = self.fake(header)
-        result = gdb.position(0x03000100)
+        result = gdb.position(0x03000100, 0x03000104)
         self.assertEqual((result["x"], result["y"]), (13, 16))
         self.assertEqual((result["mapGroup"], result["mapNum"], result["warpId"]), (76, 9, 1))
-        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "m2001375,1", "m2000890,b8", "c"])
+        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "m2001375,1",
+                         "m3000104,4", "m20002ac,4", "m2000890,b8", "c"])
         self.assertEqual(gdb.sock.sent, [b"\x03"])
 
     def test_saved_flag_bit_masks(self):
@@ -59,7 +64,7 @@ class ObserverTests(unittest.TestCase):
         gdb, commands = self.fake(header)
         old = gdb.command
         gdb.command = lambda q, reply=True: "1c" if q == "m2001375,1" else old(q, reply)
-        state = gdb.position(0x03000100)
+        state = gdb.position(0x03000100, 0x03000104)
         self.assertTrue(state["notesStarted"])
         self.assertTrue(state["notesRecorded"])
         self.assertTrue(state["notesRewarded"])
@@ -69,7 +74,7 @@ class ObserverTests(unittest.TestCase):
         gdb, _ = self.fake(header)
         old = gdb.command
         gdb.command = lambda q, reply=True: "e0" if q == "m2001375,1" else old(q, reply)
-        state = gdb.position(0x03000100)
+        state = gdb.position(0x03000100, 0x03000104)
         self.assertTrue(state["sketchStarted"])
         self.assertTrue(state["sketchFound"])
         self.assertTrue(state["sketchRewarded"])
@@ -82,16 +87,16 @@ class ObserverTests(unittest.TestCase):
         gdb, commands = self.fake(header)
         source = gdb.command
         slots = bytearray(46 * 4)
-        struct.pack_into("<HH", slots, 0, 520, 3)
+        struct.pack_into("<HH", slots, 0, 520, 3 ^ 0xA33A)
         struct.pack_into("<HH", slots, 4, 519, 9)
-        struct.pack_into("<HH", slots, 8, 520, 2)
+        struct.pack_into("<HH", slots, 8, 520, 2 ^ 0xA33A)
         def bag_reply(q, reply=True):
             if q == "m2000890,b8":
                 commands.append(q)
                 return slots.hex()
             return source(q, reply)
         gdb.command = bag_reply
-        state = gdb.position(0x03000100)
+        state = gdb.position(0x03000100, 0x03000104)
         self.assertEqual(state["oranBerryQuantity"], 5)
         self.assertIn("m2000890,b8", commands)
         self.assertEqual(gdb.sock.sent, [b"\x03"])
@@ -103,18 +108,33 @@ class ObserverTests(unittest.TestCase):
             return ("00000000" if q == "m3000100,4" else None)
         gdb.command = invalid
         with self.assertRaisesRegex(qa.Blocked, "outside EWRAM"):
-            gdb.position(0x03000100)
+            gdb.position(0x03000100, 0x03000104)
+        self.assertEqual(commands[-1], "c")
+
+    def test_reject_invalid_saveblock2_pointer_before_berry_read(self):
+        header = struct.pack("<hhbbbxhh", 13, 16, 75, 9, 1, -1, -1)
+        gdb, commands = self.fake(header)
+        orig = gdb.command
+        def invalid(q, reply=True):
+            if q == "m3000104,4":
+                commands.append(q)
+                return "00000000"
+            return orig(q, reply)
+        gdb.command = invalid
+        with self.assertRaisesRegex(qa.Blocked, "gSaveBlock2Ptr outside EWRAM"):
+            gdb.position(0x03000100, 0x03000104)
+        self.assertNotIn("m2000890,b8", commands)
         self.assertEqual(commands[-1], "c")
 
     def test_reject_debugger_without_interrupt(self):
         gdb, _ = self.fake(b"\x00"*12, stop="E00")
         with self.assertRaisesRegex(qa.Blocked, "interrupt failed"):
-            gdb.position(0x03000100)
+            gdb.position(0x03000100, 0x03000104)
 
     def test_reject_invalid_coordinates(self):
         gdb, _ = self.fake(struct.pack("<hhbbbxhh", -9, 600, 76, 9, 1, -1, -1))
         with self.assertRaisesRegex(qa.Blocked, "Invalid tile"):
-            gdb.position(0x03000100)
+            gdb.position(0x03000100, 0x03000104)
 
     def test_panel_detector_map_and_dialogue(self):
         with tempfile.TemporaryDirectory() as tmp:
