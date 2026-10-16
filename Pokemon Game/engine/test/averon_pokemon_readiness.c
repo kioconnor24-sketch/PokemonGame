@@ -866,3 +866,4 @@ WILD_BATTLE_TEST("Averon with every level cap lifted a Pokemon grows to level 10
             FlagClear(sCapFlags[j]);
     }
 }
+

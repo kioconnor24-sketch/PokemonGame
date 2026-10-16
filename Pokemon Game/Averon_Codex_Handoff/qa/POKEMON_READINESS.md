@@ -47,6 +47,8 @@ python3 ../scripts/test-averon-release-forms.py
 | Evolutions | Every unconditional level evolution (at its level) and item evolution (with its item) actually triggers through `GetEvolutionTargetSpecies` | 465 run, 0 problems | NATIVE |
 | Evolutions | Conditional evolutions whose conditions depend only on the Pokémon (gender, friendship, a known move or move type, a held item, not another region) or on the time of day (set with `SetTimeOfDay`): built to meet them, then run | 94 run, 0 problems | NATIVE |
 | Evolutions | Conditional evolutions on weather, party, trade partner, map, steps, personality or battle records | 115 **not run** | — |
+| Breeding | Every breedable species (1,145) hatches, through the real `GetEggSpecies`, from an enabled, non-battle-only species that is the bottom of its own family (`test/averon_breeding.c`) | 0 problems | NATIVE |
+| Breeding | Offspring species, regional forms, Shellos form, egg moves, natures | Upstream `test/daycare.c` | NATIVE (existing) |
 | Trade evolutions | Solo alternatives | Codex audit `audit-averon-solo-evolutions.py`; Linking Cord test | SOURCE / NATIVE (existing) |
 | Forms | Every allowed form change targets an enabled species. Faint and end-of-battle changes without a target revert to the saved form, by design | 2,481 changes, 0 problems | NATIVE |
 | Forms | Form tables and form-change tables are consistent | Upstream `test/species.c` | NATIVE (existing) |
@@ -95,6 +97,19 @@ at the Shoal Cave ice room) all have a stone alternative, and the stone
 evolutions trigger natively, so none of those species is lost. For the second
 region: a Sinnoh map would also report `REGION_HOENN` unless the region
 mapping changes (Codex's TWO-REGION area).
+
+## Obedience against Averon's level caps (SOURCE, for the owner and Codex)
+
+`GetAttackerObedienceForAction` (`src/battle_util.c`) lets Pokémon obey up
+to level 10 with no badges, then 20, 30, ... 80 per badge, and without limit
+after badge 8. Under `B_OBEDIENCE_MECHANICS GEN_LATEST`, the player's own
+Pokémon are judged by their **met** level and others by their current level.
+Averon's caps are 15, 23 and 31 at zero, one and two badges, above the
+obedience levels 10, 20 and 30. So at those stages a traded or gifted
+Pokémon at the cap, or the player's own Pokémon caught above the obedience
+level, can disobey. Pokémon the player raised from a low met level obey.
+This is a design interplay in Codex's region-aware obedience area, not
+changed here.
 
 ## Two engine weak points (no current data triggers them)
 
