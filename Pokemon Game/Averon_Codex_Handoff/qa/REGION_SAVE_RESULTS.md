@@ -76,10 +76,16 @@ layout.
    badges, no return warps or healers. Averon badges stay in their existing
    flags. Nothing is written to flash on load. The next ordinary save writes
    the anchor and the record.
-4. UNSUPPORTED: nothing is loaded, and every slot write is refused, so an
-   older build can never overwrite newer progress. The player sees the
-   existing "save file erased" text, and any save attempt shows the existing
-   save-failed screen. **Owner decision pending:** a dedicated
+4. UNSUPPORTED: nothing is loaded, and every flash write is refused, so an
+   older build can never overwrite newer progress. That covers the slot
+   sectors, the Hall of Fame / Trainer Hill / Recorded Battle sectors (which
+   the New Game "different file" save used to erase first), and
+   `TryWriteSpecialSaveSector`. The player sees the existing "save file
+   erased" text. An ordinary save attempt (`TrySavingData`) returns the
+   existing in-game save error, without opening the save-failed screen. If a
+   link save still reaches that screen, it skips its recovery wipe and shows
+   "backup memory damaged / cannot continue", because the sectors it would
+   wipe are the newer save. **Owner decision pending:** a dedicated
    downgrade/unsupported-save message.
 
 ## Engine adapters (callable, registered in the ROM via save.c)
@@ -129,3 +135,44 @@ Run: `make check TESTS="Averon region save"`, **13/13 PASS** (125 runs):
 GBA build: `make -j20 -O all` OK. EWRAM 226488 B (+68 vs main: +64 record,
 +2 state, alignment).
 Mutations: 15/15 killed. Full suite: 328 failures = the 327 expected plus the known Gimmick flake, after the SaveBlock3 size pin fix (`test/save.c`).
+
+## Refused newer-format saves leave flash untouched (2026-10-16 follow-up)
+
+**Defect found and fixed.** The first refusal only blocked the slot-sector
+writers, and it marked each refused sector damaged. `TrySavingData` then
+opened the save-failed screen, whose recovery (`CB2_WipeSave`) **programs
+every damaged sector to zero**. So the first save attempt after the refusal
+would have wiped the newer save it was meant to protect. Separately, the
+New Game "different file" save erased sectors 28 to 31 (Hall of Fame,
+Trainer Hill, Recorded Battle) before its blocked slot write, and
+`TryWriteSpecialSaveSector` was not guarded. The earlier test called
+`HandleSavingData` directly, so neither path was exercised.
+
+Fix: `save.c` guards `TrySavingData` (an in-game error, no save-failed
+screen), `HandleSavingData` (no erase or write for any save type; the caller
+still sees a failure) and `TryWriteSpecialSaveSector`. `save_failed_screen.c`
+never wipes while the refusal is in force.
+
+New `engine/test/averon_region_save_refusal.c` (real flash, all 32 sectors
+compared by CRC):
+- `TrySavingData` for normal, different-file (New Game), Hall of Fame and
+  link saves: returns error, sets `gSaveAttemptStatus`, opens no screen, and
+  changes 0 of 32 sectors.
+- `HandleSavingData` for all five save types, plus Trainer Hill and Recorded
+  Battle special writes: 0 sectors changed, and the failure is still
+  reported.
+- The real save-failed screen driven through fade-in, wipe step and the
+  "cannot continue" wait: 0 sectors changed.
+- Manager audit item 3: `GetSaveBlocksPointersBaseOffset` returns the
+  trainer-ID sum of the same slot the load falls back to (newest intact;
+  record bit flip; anchor bit flip under a recomputed checksum; record copied
+  from the older slot), independent of RAM.
+
+Run: `make check TESTS="Averon region save"` **17/17 PASS**. Mutations
+(each guard removed alone, temporary, reverted): no `TrySavingData` guard,
+no `HandleSavingData` guard, no special-sector guard and no save-failed
+wipe guard are each KILLED (4/4). Forcing every slot's region check to pass
+fails 12 of 17 tests, including the pointer-selector test (2 of its 4
+cases).
+Source contract 11/11. `scripts/test-averon-region-save.py --mutations` now
+also lists these four guards.
