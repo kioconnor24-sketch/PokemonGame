@@ -373,6 +373,16 @@ class ObserverTests(unittest.TestCase):
         engine = Path(__file__).resolve().parents[2] / "engine"
         clinic = (engine / "data/maps/AlderfieldClinic/scripts.inc").read_text()
         self.assertIn("setrespawn HEAL_LOCATION_ALDERFIELD", clinic)
+        # The saved heal warp is on the OUTSIDE town map; after whiteout,
+        # the engine resolves a distinct respawn_map for the clinic.
+        heals = json.loads((engine / "src/data/heal_locations.json").read_text())
+        alderfield = next(h for h in heals["heal_locations"]
+                          if h["id"] == "HEAL_LOCATION_ALDERFIELD")
+        self.assertEqual((alderfield["map"], alderfield["x"], alderfield["y"],
+                          alderfield["respawn_map"],
+                          alderfield["respawn_x"], alderfield["respawn_y"]),
+                         ("MAP_ALDERFIELD", 17, 13,
+                          "MAP_ALDERFIELDCLINIC", 7, 4))
         headers = (engine / "include/global.h").read_text()
         self.assertIn("/*0x1C*/ struct WarpData lastHealLocation;", headers)
         payload = struct.pack("<hhbbbxhh", 7, 8, 75, 11, 0, -1, -1)
@@ -381,13 +391,15 @@ class ObserverTests(unittest.TestCase):
         def response(cmd, reply=True):
             if cmd == "m200011c,8":
                 asked.append(cmd)
-                return struct.pack("<bbbxhh", 75, 11, -1, 7, 3).hex()
+                return struct.pack("<bbbxhh", 75, 9, -1, 17, 13).hex()
             return before(cmd, reply)
         g.command = response
         data = g.position(0x03000100, 0x03000104, heal_probe=True)
         self.assertEqual((data["lastHealMapGroup"], data["lastHealMapNum"]),
-                         (75, 11))
-        self.assertEqual(data["lastHealX"], 7)
+                         (75, 9))
+        self.assertEqual((data["lastHealWarpId"],
+                          data["lastHealX"], data["lastHealY"]),
+                         (-1, 17, 13))
         self.assertIn("m200011c,8", asked)
         g.command = lambda cmd, reply=True: (
             "" if cmd == "m200011c,8" else before(cmd, reply))
