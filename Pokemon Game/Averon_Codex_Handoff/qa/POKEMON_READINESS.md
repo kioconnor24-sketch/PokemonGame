@@ -66,6 +66,31 @@ python3 ../scripts/test-averon-release-forms.py
 | Pokédex | Setting every seen and caught flag changes no other SaveBlock1 byte, counts the full dex, and survives a real flash save and load | Pass | NATIVE |
 | Box storage | Species, item, ball, EXP and move fields fit their bit widths | Upstream `sBoxPokemonConstantsFit` (build fails otherwise) | BUILD (existing) |
 
+## Evolutions that cannot happen in Averon (NATIVE, pinned list)
+
+Every Averon map reports `REGION_HOENN`, because `GetRegionForSectionId`
+(`include/regions.h`) knows only Kanto and Hoenn. Averon's maps are also not
+the upstream Hoenn maps. So an evolution gated on another region
+(`IF_REGION`) or on an upstream map (`IF_IN_MAP`, `IF_IN_MAPSEC`) can never
+happen. The test `Averon lists the evolution targets that only another region
+or an upstream map can reach` computes every target with no other possible
+evolution and fails if the list changes:
+
+- **Ursaluna** (a National Dex species in its own right): its only evolution
+  needs Hisui and a Peat Block;
+- **Alolan** Raichu, Exeggutor and Marowak;
+- **Galarian** Weezing and Mr. Mime;
+- **Hisuian** Typhlosion, Samurott, Decidueye, Lilligant, Braviary, Sliggoo
+  and Avalugg (and so Hisuian Goodra through Sliggoo).
+
+These need another source (gift, wild, in-game trade) or a region rule, which
+is an owner decision. The map-gated evolutions (Magnezone, Probopass and
+Vikavolt at New Mauville; Leafeon at Petalburg Woods; Glaceon and Crabominable
+at the Shoal Cave ice room) all have a stone alternative, and the stone
+evolutions trigger natively, so none of those species is lost. For the second
+region: a Sinnoh map would also report `REGION_HOENN` unless the region
+mapping changes (Codex's TWO-REGION area).
+
 ## Two engine weak points (no current data triggers them)
 
 1. `LoadDynamicFollowerPalette` (`src/event_object_movement.c`) uses the
@@ -106,6 +131,8 @@ SaveBlock1 and SaveBlock2 are nearly full. Codex was told in #15.
    reverting after battle), a full-party catch (the swap menu), Pokédex screens
    with all forms.
 2. The 209 conditional evolutions: per-condition native cases (time of day,
-   friendship, held item, gender, move, party member).
-3. A decision on the 174 placeholder follower lookups: they need art, which is
+   friendship, held item, gender, move, party member). Region and map
+   conditions are covered above.
+3. Owner decision on how the 13 region-only forms and Ursaluna are obtained.
+4. A decision on the 174 placeholder follower lookups: they need art, which is
    frozen.

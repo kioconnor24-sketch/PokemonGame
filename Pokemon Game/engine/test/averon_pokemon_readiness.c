@@ -7,6 +7,7 @@
 #include "load_save.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "regions.h"
 #include "save.h"
 #include "gba/flash_internal.h"
 #include "constants/event_objects.h"
@@ -414,4 +415,92 @@ TEST("Averon every growth rate reaches level 100 and stops there")
         CalculateMonStats(&mon);
         EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), MAX_LEVEL);
     }
+}
+
+// Averon's maps all report REGION_HOENN (GetRegionForSectionId knows only
+// Kanto and Hoenn), and its maps are not the upstream Hoenn maps. An
+// evolution gated on another region or on an upstream map can never happen.
+// This lists every target species reachable ONLY through such evolutions:
+// those need another source (gift, wild, trade) chosen by the owner.
+static bool32 IsEvolutionPossibleInAveron(const struct Evolution *evolution)
+{
+    for (u32 i = 0; evolution->params != NULL && evolution->params[i].condition != CONDITIONS_END; i++)
+    {
+        const struct EvolutionParam *param = &evolution->params[i];
+        if (param->condition == IF_REGION && param->arg1 != REGION_HOENN)
+            return FALSE;
+        if (param->condition == IF_IN_MAP || param->condition == IF_IN_MAPSEC)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+// Recorded 2026-10-16. A change here means the data changed: review it, then
+// update the list and POKEMON_READINESS.md.
+static const u16 sEvolutionOnlyElsewhere[] =
+{
+    SPECIES_URSALUNA,
+    SPECIES_RAICHU_ALOLA,
+    SPECIES_EXEGGUTOR_ALOLA,
+    SPECIES_MAROWAK_ALOLA,
+    SPECIES_WEEZING_GALAR,
+    SPECIES_MR_MIME_GALAR,
+    SPECIES_TYPHLOSION_HISUI,
+    SPECIES_SAMUROTT_HISUI,
+    SPECIES_LILLIGANT_HISUI,
+    SPECIES_BRAVIARY_HISUI,
+    SPECIES_SLIGGOO_HISUI,
+    SPECIES_AVALUGG_HISUI,
+    SPECIES_DECIDUEYE_HISUI,
+};
+
+// Whether any evolution that can happen in Averon leads to target.
+static bool32 HasPossibleEvolutionInto(u32 target)
+{
+    for (u32 species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species) || species == SPECIES_EGG)
+            continue;
+        const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+        for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            if (evolutions[i].targetSpecies == target && evolutions[i].method != EVO_NONE
+             && IsEvolutionPossibleInAveron(&evolutions[i]))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+TEST("Averon lists the evolution targets that only another region or an upstream map can reach")
+{
+    u32 blocked = 0, listed = 0;
+    for (u32 species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species) || species == SPECIES_EGG)
+            continue;
+        const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+        for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            u32 target = evolutions[i].targetSpecies;
+            bool32 known = FALSE, firstEdge = TRUE;
+            // EVO_NONE is not an evolution; count each blocked target once,
+            // at its first blocked edge.
+            if (evolutions[i].method == EVO_NONE || IsEvolutionPossibleInAveron(&evolutions[i])
+             || !IsValidEnabledSpecies(target) || HasPossibleEvolutionInto(target))
+                continue;
+            for (u32 j = 0; j < i; j++)
+                firstEdge = firstEdge && !(evolutions[j].targetSpecies == target && evolutions[j].method != EVO_NONE);
+            if (!firstEdge)
+                continue;
+            for (u32 k = 0; k < ARRAY_COUNT(sEvolutionOnlyElsewhere); k++)
+                known = known || sEvolutionOnlyElsewhere[k] == target;
+            DebugPrintf("evolution-only-elsewhere: %S (%u)%s", GetSpeciesName(target), target, known ? "" : " NEW");
+            blocked++;
+            listed += known;
+        }
+    }
+    DebugPrintf("targets reachable only through another region or upstream map: %u", blocked);
+    EXPECT_EQ(blocked, ARRAY_COUNT(sEvolutionOnlyElsewhere));
+    EXPECT_EQ(listed, ARRAY_COUNT(sEvolutionOnlyElsewhere));
 }
