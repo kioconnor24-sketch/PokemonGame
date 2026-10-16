@@ -15,6 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class RegionMutationTests(unittest.TestCase):
+    def test_detects_heal_id_unsigned_byte_truncation(self):
+        self.assert_detected('healId == 0 || healId > UINT8_MAX ||', 'healId == 0 ||',
+                             'test_heal_selection_rejects_engine_argument_truncation')
+
+    def test_detects_heal_map_signed_byte_truncation(self):
+        self.assert_detected('if (mapGroup > INT8_MAX || mapNum > INT8_MAX)',
+                             'if (mapGroup > UINT8_MAX || mapNum > UINT8_MAX)',
+                             'test_heal_selection_rejects_engine_argument_truncation')
+
     def test_detects_progression_reading_other_badge_bank(self):
         self.assert_detected('uint32_t count = AveronRegionFixture_CountBadges(badges, region);',
                              'uint32_t count = AveronRegionFixture_CountBadges(badges, AVERON_FIXTURE_AVERON);',
@@ -124,8 +133,8 @@ class RegionMutationTests(unittest.TestCase):
                              'test_warp_indexed_requests_enforce_event_count_and_signed_byte_limit')
 
     def test_detects_accepting_map_id_signed_byte_overflow(self):
-        self.assert_detected('mapGroup > INT8_MAX || mapNum > INT8_MAX',
-                             'mapGroup > UINT8_MAX || mapNum > UINT8_MAX',
+        self.assert_detected('if (!reader || mapGroup > INT8_MAX || mapNum > INT8_MAX',
+                             'if (!reader || mapGroup > UINT8_MAX || mapNum > UINT8_MAX',
                              'test_warp_known_map_ids_must_fit_engine_signed_bytes')
 
     def test_detects_accepting_warp_coordinate_signed_byte_overflow(self):

@@ -310,6 +310,32 @@ class RegionFixtureTests(unittest.TestCase):
                     self.assertNotIn(0, calls)
                     self.assertLessEqual(len(calls), 1 if preferred == fallback else 2)
 
+    def test_heal_selection_rejects_engine_argument_truncation(self):
+        maps = (MapBinding * 4)(MapBinding(3, 7, AVERON), MapBinding(127, 127, AVERON),
+                               MapBinding(128, 7, AVERON), MapBinding(3, 128, AVERON))
+        for identifier, target, valid in ((255, (127, 127), True), (256, (3, 7), False),
+                                          (65537, (3, 7), False), (2**32 - 1, (3, 7), False),
+                                          (2, (128, 7), False), (2, (3, 128), False)):
+            calls = []
+
+            @HealReader
+            def read(value, context, group, number):
+                calls.append(value)
+                group[0], number[0] = target if value == identifier else (3, 7)
+                return 1
+
+            selected = ctypes.c_uint32(0xDEADBEEF)
+            self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+                maps, 4, 3, 7, identifier, 0, read, None, ctypes.byref(selected)), valid)
+            self.assertEqual(selected.value, identifier if valid else 0xDEADBEEF)
+            self.assertEqual(calls, [] if identifier > 255 else [identifier])
+            if not valid:
+                calls.clear()
+                self.assertEqual(self.lib.AveronRegionFixture_SelectRegionalHeal(
+                    maps, 4, 3, 7, identifier, 1, read, None, ctypes.byref(selected)), 1)
+                self.assertEqual(selected.value, 1)
+                self.assertEqual(calls, [1] if identifier > 255 else [identifier, 1])
+
     def test_heal_selection_refuses_invalid_or_unwritten_metadata(self):
         maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
         for reply, coordinates in ((0, None), (-1, None), (2, (3, 7)), (1, None),

@@ -90,7 +90,9 @@ static int HealMatchesRegion(const struct AveronFixtureMapBinding *bindings, siz
                              AveronFixtureHealMapReader reader, void *context)
 {
     uint32_t mapGroup = UINT32_MAX, mapNum = UINT32_MAX;
-    if (healId == 0 || reader(healId, context, &mapGroup, &mapNum) != 1)
+    if (healId == 0 || healId > UINT8_MAX || reader(healId, context, &mapGroup, &mapNum) != 1)
+        return 0;
+    if (mapGroup > INT8_MAX || mapNum > INT8_MAX)
         return 0;
     return AveronRegionFixture_ResolveMap(bindings, bindingCount, mapGroup, mapNum) == region;
 }

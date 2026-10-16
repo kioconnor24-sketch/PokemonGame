@@ -15,7 +15,7 @@
 #include "constants/heal_locations.h"
 
 // Opaque test-only handle, outside the engine's healer registry. Never saved.
-#define FIXTURE_SINNOH_HEAL 0x10000
+#define FIXTURE_SINNOH_HEAL 255
 
 static void InitProgressionProfiles(struct AveronFixtureProgressionPolicy *profiles)
 {
@@ -104,7 +104,7 @@ struct HealReadFixture
 static const struct AveronFixtureMapBinding sHealFixtureMaps[] = {
     {MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), AVERON_FIXTURE_AVERON},
     {MAP_GROUP(MAP_ALDERFIELD), MAP_NUM(MAP_ALDERFIELD), AVERON_FIXTURE_AVERON},
-    {255, 1, AVERON_FIXTURE_SINNOH},
+    {127, 1, AVERON_FIXTURE_SINNOH},
 };
 
 static int ReadHealFixture(uint32_t id, void *context, uint32_t *group, uint32_t *number)
@@ -125,7 +125,7 @@ static int ReadHealFixture(uint32_t id, void *context, uint32_t *group, uint32_t
         return 1; // Deliberately fails to initialize metadata outputs.
     if (id == FIXTURE_SINNOH_HEAL)
     {
-        *group = 255;
+        *group = 127;
         *number = 1;
         return 1;
     }
@@ -135,6 +135,50 @@ static int ReadHealFixture(uint32_t id, void *context, uint32_t *group, uint32_t
     *group = (u8) heal->mapGroup;
     *number = (u8) heal->mapNum;
     return 1;
+}
+
+struct HealWidthFixture
+{
+    u32 group, number, calls;
+};
+
+static int ReadHealWidthFixture(uint32_t id, void *context, uint32_t *group, uint32_t *number)
+{
+    struct HealWidthFixture *fixture = context;
+    ++fixture->calls;
+    *group = id == 1 ? 3 : fixture->group;
+    *number = id == 1 ? 7 : fixture->number;
+    return 1;
+}
+
+TEST("Averon region fixture rejects healer arguments that truncate through engine APIs")
+{
+    u32 id = 255, group = 127, number = 127;
+    PARAMETRIZE { id = 255; group = 127; number = 127; }
+    PARAMETRIZE { id = 256; group = 3; number = 7; }
+    PARAMETRIZE { id = 65537; group = 3; number = 7; }
+    PARAMETRIZE { id = UINT32_MAX; group = 3; number = 7; }
+    PARAMETRIZE { id = 2; group = 128; number = 7; }
+    PARAMETRIZE { id = 2; group = 3; number = 128; }
+    const struct AveronFixtureMapBinding maps[] = {
+        {3, 7, AVERON_FIXTURE_AVERON}, {127, 127, AVERON_FIXTURE_AVERON},
+        {128, 7, AVERON_FIXTURE_AVERON}, {3, 128, AVERON_FIXTURE_AVERON},
+    };
+    struct HealWidthFixture reader = {group, number, 0};
+    u32 selected = 0xDEADBEEF;
+    bool32 valid = id == 255;
+    EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(maps, ARRAY_COUNT(maps),
+        3, 7, id, 0, ReadHealWidthFixture, &reader, &selected), valid);
+    EXPECT_EQ(selected, valid ? id : 0xDEADBEEF);
+    EXPECT_EQ(reader.calls, id > UINT8_MAX ? 0 : 1);
+    if (!valid)
+    {
+        reader.calls = 0;
+        EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(maps, ARRAY_COUNT(maps),
+            3, 7, id, 1, ReadHealWidthFixture, &reader, &selected), TRUE);
+        EXPECT_EQ(selected, 1);
+        EXPECT_EQ(reader.calls, id > UINT8_MAX ? 1 : 2);
+    }
 }
 
 TEST("Averon region fixture validates existing heal metadata and region fallback")
@@ -156,7 +200,7 @@ TEST("Averon region fixture validates existing heal metadata and region fallback
     EXPECT_EQ(reader.calls, 2);
     reader.calls = 0;
     EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
-        255, 1, HEAL_LOCATION_ALDERFIELD, FIXTURE_SINNOH_HEAL, ReadHealFixture, &reader, &selected), TRUE);
+        127, 1, HEAL_LOCATION_ALDERFIELD, FIXTURE_SINNOH_HEAL, ReadHealFixture, &reader, &selected), TRUE);
     EXPECT_EQ(selected, FIXTURE_SINNOH_HEAL);
     EXPECT_EQ(reader.calls, 2);
     EXPECT_EQ(memcmp(&before, &gSaveBlock1Ptr->lastHealLocation, sizeof(before)), 0);
@@ -178,7 +222,7 @@ TEST("Averon region fixture rejects invalid healer IDs and never retries the sam
         EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
             MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), invalid[i], invalid[i],
             ReadHealFixture, &reader, &selected), FALSE);
-        EXPECT_EQ(reader.calls, invalid[i] == 0 ? 0 : 1);
+        EXPECT_EQ(reader.calls, 0); // Reject before any narrowing/metadata callback.
         EXPECT_EQ(selected, 0xDEADBEEF);
     }
 }
@@ -625,7 +669,7 @@ TEST("Averon region fixture revalidates restored healer metadata without changin
     EXPECT_EQ(reader.calls, 1);
     selected = 0xDEADBEEF;
     EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
-        255, 1, restoredId, 0, ReadHealFixture, &reader, &selected), FALSE);
+        127, 1, restoredId, 0, ReadHealFixture, &reader, &selected), FALSE);
     EXPECT_EQ(selected, 0xDEADBEEF);
     EXPECT_EQ(memcmp(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected)), 0);
     for (u32 i = 0; i < 8; ++i)
@@ -805,7 +849,7 @@ TEST("Averon region fixture reverse travel policy preserves the real whiteout de
         EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
             current->mapGroup, current->mapNum, MAP_GROUP(MAP_ALDERFIELD), MAP_NUM(MAP_ALDERFIELD), 1), averon);
         EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
-            current->mapGroup, current->mapNum, 255, 1, 1), !averon);
+            current->mapGroup, current->mapNum, 127, 1, 1), !averon);
         EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
             current->mapGroup, current->mapNum, current->mapGroup, current->mapNum, 0), FALSE);
         struct HealReadFixture reader = {0};

@@ -77,7 +77,8 @@ typedef int (*AveronFixtureHealMapReader)(uint32_t healId, void *context,
                                         uint32_t *mapGroup, uint32_t *mapNum);
 
 // Select metadata only; never heals, warps, spends money or changes saved state.
-// Zero is no healer. Reader must return exactly 1 and supply a known map.
+// IDs must fit the engine heal setter's u8; zero is no healer. Reader must
+// return exactly 1 and supply a known map with signed-byte group/number.
 // A caller-supplied fallback is subject to the same current-region validation.
 // Failure leaves output untouched; a failed identical ID is not read twice.
 int AveronRegionFixture_SelectRegionalHeal(
