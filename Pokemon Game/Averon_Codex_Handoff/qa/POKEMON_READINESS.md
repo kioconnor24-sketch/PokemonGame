@@ -138,17 +138,23 @@ changed here.
 Both are upstream code. A defensive fix would touch shared engine files, so it
 is not made here; the tests guard the data instead.
 
-## Capacity (BUILD, main `0dd026f6` + #25)
+## Capacity (BUILD, every open feature branch combined, 2026-10-16)
 
-| Resource | Used | Size | Free |
-| --- | --- | --- | --- |
-| ROM | 26,729,652 B | 32 MiB | about 6.8 MB (20.3%) |
-| EWRAM | 226,416 B | 256 KiB | 35,728 B (13.6%) |
-| IWRAM | 28,392 B | 32 KiB | 4,376 B (13.4%) |
-| SaveBlock1 (flags, vars, dex, bag) | 15,568 B | 15,872 B (4 sectors) | **304 B** |
-| SaveBlock2 | 3,884 B | 3,968 B (1 sector) | **84 B** |
-| SaveBlock3 | about 4 B | 1,624 B | 1,620 B |
-| Pokémon storage | 34,144 B | 35,712 B | 1,568 B |
+Measured on a local merge (not pushed) of `main` `7f4ecc44` + QUEST #14
+`db6baaea` + SCRIPTED #25 `456bd035` + LEGEND #47 `cf2a1aaf` + this PR
+`afd5dd6f` + #61 `78b5ed44` (with #56 `2f4dba7b` and #50–#52) + #64
+`cad90937` (with #57 `5ce9301e`): tip `e7175118`, `make -j4 -O all`, GCC
+14.2.1. ROM is the end of the last loaded section; RAM is section sizes.
+
+| Resource | Used | Size | Free | Change vs `main`+#25 (earlier table) |
+| --- | --- | --- | --- | --- |
+| ROM | 26,733,816 B | 32 MiB | 6,820,616 B (20.3%) | +4,164 B |
+| EWRAM | 226,484 B | 256 KiB | 35,660 B (13.6%) | +68 B (the region record) |
+| IWRAM | 28,388 B | 32 KiB | 4,380 B (13.4%) | none |
+| SaveBlock1 (flags, vars, dex, bag) | 15,568 B | 15,872 B (4 sectors) | **304 B** | none |
+| SaveBlock2 | 3,884 B | 3,968 B (1 sector) | **84 B** | none (the region anchor reuses `filler_90`) |
+| SaveBlock3 | 68 B | 1,624 B | 1,556 B | +64 B (the region record, #56) |
+| Pokémon storage | 34,144 B | 35,712 B | 1,568 B | none |
 
 Save sizes are ELF symbol sizes (`arm-none-eabi-nm -S`) minus the 128-byte ASLR
 pad, against `include/save.h`. Upstream `STATIC_ASSERT`s in `src/save.c` stop a
