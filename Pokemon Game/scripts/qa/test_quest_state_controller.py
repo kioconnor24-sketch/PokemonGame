@@ -308,6 +308,13 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(original_metatile(6, 13), 513) # eastern sluice face-up
         self.assertEqual(original_metatile(4, 9), 548)  # genuine blocked leader gate
         self.assertEqual(original_metatile(4, 5), 513)  # Elio adjacency
+        # Validate EACH unaltered floor tile along the exact walk after
+        # real warp0 (4,15), not just final target endpoints.
+        for x in range(2, 7):
+            self.assertEqual(original_metatile(x, 14), 513)
+            self.assertEqual(original_metatile(x, 13), 513)
+        for y in list(range(5, 9)) + list(range(10, 15)):
+            self.assertEqual(original_metatile(4, y), 513)
         script = (base / "data/maps/AlderfieldGym/scripts.inc").read_text()
         self.assertIn("trainerbattle_no_intro TRAINER_AVERON_ELIO", script)
         self.assertIn("setflag FLAG_AVERON_WEST_SLUICE", script)
