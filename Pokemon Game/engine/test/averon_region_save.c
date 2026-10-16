@@ -497,14 +497,20 @@ TEST("Averon region save rejects a record copied from the other slot")
 
 TEST("Averon region save rejects a slot whose sectors come from two different saves")
 {
-    u32 variant = 0;
+    u32 variant = 0, extraSave = 0;
     struct SaveSector *sector = Alloc(sizeof(*sector));
     struct SaveSector *other = Alloc(sizeof(*other));
     u32 olderCounter, physical;
-    PARAMETRIZE { variant = 0; } // one sector's footer counter differs
-    PARAMETRIZE { variant = 1; } // older slot's whole sector 0 spliced in
-    PARAMETRIZE { variant = 2; } // older sector 0 spliced in, footer counter forged
+    // Each damage kind, with the newest save in either physical slot.
+    for (u32 i = 0; i < 2; i++)
+    {
+        PARAMETRIZE { variant = 0; extraSave = i; } // one sector's footer counter differs
+        PARAMETRIZE { variant = 1; extraSave = i; } // older slot's whole sector 0 spliced in
+        PARAMETRIZE { variant = 2; extraSave = i; } // older sector 0 spliced in, footer counter forged
+    }
     EXPECT(StartFlash());
+    if (extraSave)
+        TrySavingData(SAVE_NORMAL);
     SaveTwo(1, 2);
     olderCounter = gSaveCounter - 1;
     if (variant == 0)
