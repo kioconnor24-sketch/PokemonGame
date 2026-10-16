@@ -23,6 +23,23 @@ python3 "../scripts/test-averon-scripted-battle.py"
 Native tests use the release flag. One test fails if `B_FLAG_NO_WHITEOUT`
 is ever not `FLAG_SPECIAL_FLAG_UNUSED_0x4003`.
 
+Labels: **NATIVE** means executed in the native test ROM. **SOURCE** means a
+script reads the code; it checks the listed callers, but it is not a full
+control-flow proof. **GUI** means a rendered emulator run by ChatGPT QA. No
+GUI evidence exists yet.
+
+## Flag lifecycle evidence
+
+| Boundary | Evidence | Label |
+| --- | --- | --- |
+| Where the flag is stored | Its byte is in EWRAM and outside SaveBlock1, 2, 3 and Pokémon storage (all including their ASLR padding); setting it changes no saved byte. Mutation: moving the flag to saved flag `0x20` fails this and two other tests | NATIVE |
+| Flash save and load | A set flag is not restored by a real `TrySavingData`/`LoadGameSave` round trip; a badge flag is | NATIVE |
+| Scripted battle, win or loss | The macro's `Begin` and `Finish` natives, run by the script engine around a real AI battle: the flag survives the battle, then `Finish` reports the result in `VAR_RESULT` and clears it; a loss keeps the money. Mutations: `Finish` not clearing the flag fails 5 tests; `Finish` always reporting a win fails 3 | NATIVE |
+| Boot | crt0 zeroes EWRAM before `intro.c` loads the save | SOURCE |
+| Soft reset, then Continue | `DoSoftReset` ends in `SoftReset(RESET_ALL)`; main menu Continue is reached only from boot or that reset | SOURCE |
+| In-process reload | `ReloadSave` calls `RegisterRamReset(RESET_EWRAM)` before `LoadGameSave(SAVE_NORMAL)`; these three files are the only normal-save loaders | SOURCE |
+| The macro's full expansion | `Begin`, one `trainerbattle` (always fight, continue script, single, not rematch) and `Finish`, in that order | NATIVE (bytes); the `trainerbattle` itself needs the overworld and is not run |
+
 ## QA_MATRIX rows and current evidence
 
 | QA_MATRIX row | What is proven now | Status | Still needs |

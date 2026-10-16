@@ -202,6 +202,49 @@ TEST("Averon scripted battle natives tolerate a repeated Begin and a Finish with
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 }
 
+static u32 HashBytes(const void *data, u32 size)
+{
+    const u8 *bytes = data;
+    u32 hash = 2166136261u;
+    for (u32 i = 0; i < size; i++)
+        hash = (hash ^ bytes[i]) * 16777619u;
+    return hash;
+}
+
+static bool32 PointerInside(const void *ptr, const void *start, u32 size)
+{
+    return (uintptr_t)ptr >= (uintptr_t)start && (uintptr_t)ptr < (uintptr_t)start + size;
+}
+
+// Executed proof that the flag cannot reach a save: its byte lies in EWRAM
+// (wiped by every reset that precedes a save load) and outside every block
+// the game writes to flash, and setting it changes no saved byte.
+TEST("Averon no-whiteout flag lives in RAM outside every saved block")
+{
+    const u8 *flag = GetFlagPointer(B_FLAG_NO_WHITEOUT);
+    u32 before[4], after[4];
+    EXPECT_NE(flag, NULL);
+    EXPECT(PointerInside(flag, (const void *)EWRAM_START, EWRAM_END - EWRAM_START));
+    EXPECT(!PointerInside(flag, &gSaveblock1, sizeof(gSaveblock1)));
+    EXPECT(!PointerInside(flag, &gSaveblock2, sizeof(gSaveblock2)));
+    EXPECT(!PointerInside(flag, &gSaveblock3, sizeof(gSaveblock3)));
+    EXPECT(!PointerInside(flag, &gPokemonStorage, sizeof(gPokemonStorage)));
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    before[0] = HashBytes(&gSaveblock1, sizeof(gSaveblock1));
+    before[1] = HashBytes(&gSaveblock2, sizeof(gSaveblock2));
+    before[2] = HashBytes(&gSaveblock3, sizeof(gSaveblock3));
+    before[3] = HashBytes(&gPokemonStorage, sizeof(gPokemonStorage));
+    FlagSet(B_FLAG_NO_WHITEOUT);
+    after[0] = HashBytes(&gSaveblock1, sizeof(gSaveblock1));
+    after[1] = HashBytes(&gSaveblock2, sizeof(gSaveblock2));
+    after[2] = HashBytes(&gSaveblock3, sizeof(gSaveblock3));
+    after[3] = HashBytes(&gPokemonStorage, sizeof(gPokemonStorage));
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), TRUE);
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    for (u32 i = 0; i < ARRAY_COUNT(before); i++)
+        EXPECT_EQ(before[i], after[i]);
+}
+
 // The release B_FLAG_NO_WHITEOUT is a special flag, which lives in RAM only,
 // so a set flag can never be restored from a save, while badges are.
 TEST("Averon RAM-only special flag is not restored from a save but the badge is")
