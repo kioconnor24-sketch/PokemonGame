@@ -539,9 +539,19 @@ jobs:
                 exit 2
               fi
               cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+              # The previous witnessed original Elio intro is left open.
+              # One ordinary A must transition to the actual in-battle state
+              # from engine/include/main.h, never a memory/HP injection.
+              if ! python3 -u "$qa_controller" q3-battle-start \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log"
             ); then
-              qa_q3_outcome="REAL_SLUICES_AND_ELIO_INTRO_ONLY"
-              echo "QA_Q3_INTRO_PARTIAL: original gym scripts visible; whiteout NOT ACCEPTED"
+              qa_q3_outcome="REAL_ELIO_BATTLE_STARTED_ONLY"
+              echo "QA_Q3_BATTLE_PARTIAL: original Elio encounter started; defeat/whiteout/heal NOT ACCEPTED"
             else
               qa_q3_outcome="BLOCKED"
               if test -s "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"; then
