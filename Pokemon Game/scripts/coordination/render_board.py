@@ -136,7 +136,7 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         # shared merge from becoming an idle developer session.
         fallback = task.get("fallback_order", [])
         next_action = task["next"]
-        if fallback and not done[task["id"]]:
+        if fallback and not d["status"].startswith("MERGED"):
             next_action += f" **While waiting:** {fallback[0]}."
         row = (
             f"| {_escape(task['id'])} | {_escape(task['agent'])} | "
