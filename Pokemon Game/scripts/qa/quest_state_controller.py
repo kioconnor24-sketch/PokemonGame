@@ -788,6 +788,45 @@ def q2_meadow(args):
           "exactly +3 ORAN BERRIES by source-backed Bag read-only observer. "
           "Requires independent screenshot review; full-pocket, flash and "
           "whiteout remain NOT RUN.", flush=True)
+    # Complete the reward/fanfare and the source's following DONE message
+    # before a second normal interaction. Never modify saved reward flags.
+    # The check does not infer 'done' merely from a short blank interlude.
+    press("x", wait=4.0)
+    saw_later_message = False
+    released = False
+    for i in range(8):
+        now, panel_frame = check(f"reward-release-{i+1}", windrow)
+        if (not now["sketchRewarded"] or
+                now["oranBerryQuantity"] != before_berries + 3):
+            raise Blocked(f"Reward mutated during fanfare/close: {now}")
+        if white_panel_ratio(panel_frame) > 0.50:
+            saw_later_message = True
+            press("x", wait=1.2)
+            continue
+        if saw_later_message:
+            # Re-check that dialogue remains closed after a full second;
+            # only then attempt an independent second A against the artist.
+            time.sleep(1.2)
+            settled, _ = check(f"reward-release-settled-{i+1}",
+                               windrow, field=True)
+            if (settled["x"], settled["y"]) != (19, 14):
+                raise Blocked(f"Changed tile while closing reward: {settled}")
+            released = True
+            break
+        time.sleep(1.2)
+    if not saw_later_message or not released:
+        raise Blocked("Could not verify complete reward/fanfare/DONE dialogue "
+                      "was released before duplicate attempt")
+    duplicate_before, duplicate_after = talk(
+        "artist-duplicate-claim", windrow, (19, 14))
+    if (not duplicate_after["sketchRewarded"] or
+            duplicate_after["oranBerryQuantity"] != before_berries + 3 or
+            not duplicate_after["sketchFound"]):
+        raise Blocked("Repeated artist interaction duplicated reward or "
+                      f"changed quest flag: {duplicate_after}")
+    print("QA_MEADOW_ARTIST_REPEAT_NO_DUPLICATE: same saved flags and "
+          "Oran quantity before/after revisit; dialogue visually present. "
+          "Human screenshot text review required.", flush=True)
 
 
 def main():
