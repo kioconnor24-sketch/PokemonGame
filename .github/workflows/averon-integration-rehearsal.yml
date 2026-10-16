@@ -47,10 +47,15 @@ jobs:
           git -c user.name='Averon Rehearsal' -c user.email='rehearsal@users.noreply.github.com' \
             -c core.hooksPath=/dev/null merge --no-ff --no-edit rehearsal-second
           git diff --check "$BASE"...HEAD
+          # A limited SOURCE-contract check on the combined throwaway tree.
+          # Never substitute it for a ROM build, save test, QA or approval.
+          python3 "Pokemon Game/scripts/coordination/check_integration_contract.py" \
+            --engine "Pokemon Game/engine"
           {
             echo "## Disposable two-PR merge rehearsal"
             echo "PRs: #$FIRST + #$SECOND"
             echo "Combined local checkout HEAD: $(git rev-parse HEAD)"
+            echo "Read-only QUEST + SCRIPTED-BATTLE source-contract check completed (when applicable)."
             echo "No game build, runtime QA, or save compatibility testing performed."
             echo "No changes pushed. Success only proves Git textual merge + whitespace checks."
             echo "Do NOT infer approval to merge or lift frozen content."
