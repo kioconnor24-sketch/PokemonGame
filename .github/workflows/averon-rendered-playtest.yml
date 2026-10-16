@@ -422,11 +422,65 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
-          if ! python3 -u "$qa_controller" q2-continue \
+          # PREVIOUS GBA in-process soft reset genuinely rendered the title,
+          # but mGBA 0.10.2's GDB socket ceased replying after CPU reset.
+          # Test the stronger flash-persistence boundary: close the emulator,
+          # start a NEW emulator process from the SAME local on-disk flash,
+          # attach a FRESH read-only debugger and invoke ordinary Continue.
+          # This never loads a savestate or mutates any quest data.
+          flash="Pokemon Game/engine/pokeemerald.sav"
+          if ! test -s "$flash"; then
+            echo "QA_FLASH_RESTART_BLOCKED: expected genuine mGBA flash file absent"
+            find "Pokemon Game/engine" -maxdepth 1 -name '*.sav' -printf '%f %s bytes\n'
+            exit 2
+          fi
+          echo "QA_FLASH_FILE: $(stat -c '%n (%s bytes)' "$flash")"
+          flash_before=$(sha256sum "$flash" | cut -d' ' -f1)
+          echo "QA_FLASH_BEFORE_RELAUNCH_SHA256=$flash_before"
+          kill "$emu_pid"
+          wait "$emu_pid" 2>/dev/null || true
+          kill "$qa_pid" 2>/dev/null || true
+          wait "$qa_pid" 2>/dev/null || true
+          # Preserve the real flash file in-place, no ROM/save upload.
+          test -s "$flash" || { echo "QA_FLASH_RESTART_BLOCKED: save missing after shutdown"; exit 2; }
+          flash_after=$(sha256sum "$flash" | cut -d' ' -f1)
+          echo "QA_FLASH_AFTER_SHUTDOWN_SHA256=$flash_after"
+          sleep 2
+          mgba -g -2 "Pokemon Game/engine/pokeemerald.gba" \
+            > "$RUNNER_TEMP/averon-playtest/mgba-relaunch.log" 2>&1 &
+          emu_pid=$!
+          win=""
+          for i in $(seq 1 40); do
+            win=$(xdotool search --onlyvisible --name "mGBA" 2>/dev/null | head -n1 || true)
+            if test -n "$win"; then break; fi
+            sleep 0.5
+          done
+          test -n "$win" || { echo "QA_FLASH_RESTART_BLOCKED: no relaunched mGBA window"; exit 2; }
+          qa_fifo="$RUNNER_TEMP/averon-playtest/qa-relaunch.fifo"
+          qa_ready="$RUNNER_TEMP/averon-playtest/qa-relaunch-ready.txt"
+          mkfifo "$qa_fifo"
+          python3 -u "$qa_controller" daemon \
+            --elf "Pokemon Game/engine/pokeemerald.elf" \
+            --fifo "$qa_fifo" --ready "$qa_ready" \
+            --outdir "$RUNNER_TEMP/averon-playtest" \
+            > "$RUNNER_TEMP/averon-playtest/qa-debugger-relaunch.log" 2>&1 &
+          qa_pid=$!
+          for i in $(seq 1 25); do
+            if test -s "$qa_ready"; then break; fi
+            if ! kill -0 "$qa_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if ! test -s "$qa_ready"; then
+            echo "QA_FLASH_RESTART_BLOCKED: new read-only debugger failed"
+            tail -80 "$RUNNER_TEMP/averon-playtest/qa-debugger-relaunch.log"
+            exit 2
+          fi
+          capture "Q2-relaunch-physical-title"
+          if ! python3 -u "$qa_controller" q2-relaunch-continue \
               --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
               --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log" 2>&1; then
             cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
-            echo "QA_Q2_CONTINUE_BLOCKED: do NOT claim saved-state acceptance"
+            echo "QA_Q2_CONTINUE_BLOCKED: real flash and Continue not yet proven"
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
