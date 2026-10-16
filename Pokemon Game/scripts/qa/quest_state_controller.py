@@ -1507,17 +1507,27 @@ def q4_lab_gift(args):
             break
     else:
         raise Blocked("Gift done message never released normal field controls")
-    key("Left")
-    stepped, step_frame = read("post-gift-control-left", field=True)
-    if ((stepped["x"], stepped["y"]) != (23, 19)
-            or not stepped["devGiftReceived"]
-            or stepped["playerPartyCount"] != original_party + 1):
-        raise Blocked(f"Input lock not released after gift: {stepped}")
-    key("Right")
-    returned, return_frame = read("post-gift-control-right", field=True)
-    if ((returned["x"], returned["y"]) != (24, 19)
-            or returned["playerPartyCount"] != original_party + 1):
-        raise Blocked(f"Controls/position failed to recover after gift: {returned}")
+    # The first direction press in Emerald may only turn the avatar.
+    # Require exact legal single-tile movement, accepting a facing-only
+    # frame as an observed retry, without guessing a timed button batch.
+    for direction, destination in (("Left", 23), ("Right", 24)):
+        origin = 24 if direction == "Left" else 23
+        for attempt in range(5):
+            key(direction)
+            stepped, step_frame = read(
+                f"post-gift-{direction.lower()}-{attempt+1}", field=True)
+            if (not stepped["devGiftReceived"]
+                    or stepped["playerPartyCount"] != original_party + 1
+                    or stepped["y"] != 19
+                    or stepped["x"] not in (origin, destination)):
+                raise Blocked(
+                    f"Invalid post-gift movement/flag transition: {stepped}")
+            if stepped["x"] == destination:
+                break
+        else:
+            raise Blocked(
+                f"Field never moved from x{origin} to x{destination} "
+                f"after observed facing-only attempts")
     print("QA_Q5_POST_GIFT_CONTROL_RECOVERY: script/dialogue exited; "
           "real left/right D-pad restored; party and gift flags stable. "
           "Follower/audio remain visually/aurally unverified.", flush=True)
@@ -1634,16 +1644,47 @@ def pixel_distance(a, b):
 
 
 def visual_title_score(rgb):
+    """Title-logo-specific signature; reject green outdoor intro scenes.
+
+    Based on independently viewed mGBA run38862320655 title frame:
+    yellow+purple upper POKEMON logo over a green lower background.
+    The previous whole-frame yellow/green signature falsely matched
+    the earlier forest/character intro frame on run38868936415.
+    """
     if len(rgb) != 480*320*3:
         raise Blocked("Title scoring requires exact emulator framebuffer")
-    n = 480*320
-    yellow = sum(rgb[i] > 170 and rgb[i+1] > 120 and rgb[i+2] < 120
-                 for i in range(0,len(rgb),3))/n
-    green = sum(rgb[i+1] > 100 and rgb[i+1] > rgb[i]*1.2
-                and rgb[i+1] > rgb[i+2]*0.8
-                for i in range(0,len(rgb),3))/n
-    return dict(yellow=yellow, green=green,
-                present=yellow > 0.035 and green > 0.22)
+    upper = rgb[:480*160*3]
+    lower = rgb[480*160*3:]
+    logo_yellow = sum(upper[i] > 170 and upper[i+1] > 120
+                      and upper[i+2] < 120
+                      for i in range(0, len(upper), 3))/(480*160)
+    logo_purple = sum(upper[i+2] > upper[i]*0.5
+                      and upper[i+2] > upper[i+1]*1.2
+                      and upper[i] > 40 and upper[i+2] > 80
+                      for i in range(0, len(upper), 3))/(480*160)
+    lower_green = sum(lower[i+1] > 100
+                      and lower[i+1] > lower[i]*1.2
+                      and lower[i+1] > lower[i+2]*0.8
+                      for i in range(0, len(lower), 3))/(480*160)
+    return dict(yellow=logo_yellow, purple=logo_purple,
+                green=lower_green,
+                present=(logo_yellow > 0.06 and logo_purple > 0.10
+                         and lower_green > 0.25))
+
+
+def visual_saved_main_menu(rgb):
+    """Observe actual white menu panels over Emerald's purple backing."""
+    if len(rgb) != 480*320*3:
+        raise Blocked("Menu scoring requires exact emulator framebuffer")
+    upper = rgb[:480*160*3]
+    purple = sum(upper[i+2] > upper[i]*0.5
+                 and upper[i+2] > upper[i+1]*1.2
+                 and upper[i] > 40 and upper[i+2] > 80
+                 for i in range(0, len(upper), 3))/(480*160)
+    pale = sum(min(upper[i:i+3]) > 180
+               for i in range(0, len(upper), 3))/(480*160)
+    return dict(purple=purple, pale=pale,
+                present=purple > 0.12 and pale > 0.25)
 
 
 def q2_visual_relaunch(args):
@@ -1698,9 +1739,13 @@ def q2_visual_relaunch(args):
     print("QA_VISUAL_MAIN_MENU_CHANGE", f"{scene_delta:.5f}", flush=True)
     if scene_delta < 0.08:
         raise Blocked("START did not visibly leave title screen")
-    # This is a *candidate* real saved CONTINUE UI; a human must inspect
-    # the menu screenshot. One ordinary A follows the source's standard
-    # SAVE_STATUS_OK CONTINUE-as-first-option behavior.
+    menu_score = visual_saved_main_menu(menu_raw)
+    print("QA_VISUAL_SAVED_MENU_GATE", menu_score, flush=True)
+    if not menu_score["present"]:
+        raise Blocked("START did not visibly reach verified saved menu: "
+                      f"{menu_score}")
+    # Candidate CONTINUE is first option only on a valid-source real save;
+    # manual screenshot inspection remains mandatory for Q2 acceptance.
     press("x")
     closest = (1.0, "")
     field_ready = False
