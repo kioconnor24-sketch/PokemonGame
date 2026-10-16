@@ -2013,6 +2013,108 @@ def q3_battle_start(args):
     raise Blocked("Original leader dialogue never transitioned to actual battle")
 
 
+# SAVE sector definitions are taken verbatim from engine/include/save.h
+# and engine/src/save.c of the pinned QUEST source (not a guessed .sav
+# layout). This is an offline, read-only flash observer after emulator exit.
+FLASH_SECTOR_BYTES = 4096
+FLASH_SECTOR_DATA_BYTES = 3968
+FLASH_SIGNATURE = 0x08012025
+FLASH_VALIDATED_CHECKSUM_LENGTHS = {
+    **{i: FLASH_SECTOR_DATA_BYTES for i in
+       (*range(1, 4), *range(5, 13))},
+    0: 0xF2C,  # SaveBlock2 sizeof in source global.h
+}
+
+
+def flash_sector_checksum(data, size):
+    """Exact u32-folded checksum from pinned engine/src/save.c."""
+    if size % 4 or len(data) < size:
+        raise Blocked("Invalid saved flash sector checksum length")
+    total = sum(struct.unpack_from("<I", data, i)[0]
+                for i in range(0, size, 4)) & 0xFFFFFFFF
+    return ((total >> 16) + total) & 0xFFFF
+
+
+def decode_flash_q2(image):
+    """Decode independently CRC-verified *on-disk* Q2 flash, no emulator RAM.
+
+    Each 14-sector slot is rotated on flash. Match source sector IDs, not
+    physical offsets. The SaveBlock3 extension/footer must not be included in
+    reconstructed SaveBlock1 or SaveBlock2. Refuse incomplete/mixed counters.
+    """
+    if len(image) < 32 * FLASH_SECTOR_BYTES:
+        raise Blocked("Physical 128 KiB flash image incomplete")
+    candidates = []
+    for slot in range(2):
+        sectors = {}
+        for i in range(14):
+            start = (slot * 14 + i) * FLASH_SECTOR_BYTES
+            raw = image[start:start + FLASH_SECTOR_BYTES]
+            sid, checksum, signature, counter = struct.unpack_from(
+                "<HHII", raw, FLASH_SECTOR_BYTES - 12)
+            if signature != FLASH_SIGNATURE or sid > 13 or sid in sectors:
+                continue
+            size = FLASH_VALIDATED_CHECKSUM_LENGTHS.get(sid)
+            if size is not None and flash_sector_checksum(raw, size) != checksum:
+                continue
+            sectors[sid] = (raw[:FLASH_SECTOR_DATA_BYTES], counter)
+        if len(sectors) != 14 or len({v[1] for v in sectors.values()}) != 1:
+            continue
+        block1 = b"".join(sectors[id][0] for id in range(1, 5))
+        block2 = sectors[0][0]
+        x, y, map_group, map_num, warp = struct.unpack_from(
+            "<hhbbb", block1)
+        flags = block1[0x1270 + 0x2A // 8]
+        raw_flags = tuple(bool(flags & (1 << (n & 7)))
+                          for n in range(0x2A, 0x30))
+        key = struct.unpack_from("<I", block2, 0xAC)[0] & 0xFFFF
+        base = 0x560 + (30 + 30 + 16 + 64) * 4
+        pocket = block1[base:base + 46 * 4]
+        oran = sum(saved ^ key for item_id, saved in
+                   struct.iter_unpack("<HH", pocket) if item_id == 520)
+        candidates.append(dict(slot=slot, saveCounter=sectors[0][1],
+                               x=x, y=y, mapGroup=map_group,
+                               mapNum=map_num, warpId=warp,
+                               notesStarted=raw_flags[0],
+                               notesRecorded=raw_flags[1],
+                               notesRewarded=raw_flags[2],
+                               sketchStarted=raw_flags[3],
+                               sketchFound=raw_flags[4],
+                               sketchRewarded=raw_flags[5],
+                               oranBerryQuantity=oran))
+    if not candidates:
+        raise Blocked("No complete signed and checksum-valid 14-sector flash slot")
+    newest = candidates[0]
+    for candidate in candidates[1:]:
+        delta = (candidate["saveCounter"] -
+                 newest["saveCounter"]) & 0xFFFFFFFF
+        if 0 < delta < 0x80000000:
+            newest = candidate
+        elif delta == 0:
+            raise Blocked("Two complete flash slots have ambiguous counters")
+    return newest
+
+
+def q2_flash_sector(args):
+    """Independently assert Q2 stored on *disk* after real normal in-game SAVE."""
+    data = args.flash.read_bytes()
+    state = decode_flash_q2(data)
+    expected = dict(x=19, y=14, mapGroup=75, mapNum=6, warpId=-1,
+                    notesStarted=True, notesRecorded=False,
+                    notesRewarded=False, sketchStarted=True,
+                    sketchFound=True, sketchRewarded=True,
+                    oranBerryQuantity=3)
+    wrong = {key: (state.get(key), value) for key, value in expected.items()
+             if state.get(key) != value}
+    if wrong:
+        raise Blocked(f"On-disk Q2 flash state does not match actual source "
+                      f"pre-save field: {wrong}")
+    print("QA_Q2_PHYSICAL_FLASH_FLAGS_ORAN3_PASS:",
+          json.dumps(state, sort_keys=True),
+          "signed/CRC-valid full slot loaded from real .sav; "
+          "not a claim that post-restart GDB worked", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -2058,6 +2160,8 @@ def main():
     battle.add_argument("--fifo", required=True)
     battle.add_argument("--outdir", required=True)
     battle.add_argument("--window", required=True)
+    flash = sub.add_parser("q2-flash-sector")
+    flash.add_argument("--flash", type=Path, required=True)
     gift = sub.add_parser("q4-lab-gift")
     gift.add_argument("--fifo", required=True)
     gift.add_argument("--outdir", required=True)
@@ -2097,6 +2201,8 @@ def main():
             return q3_gym_entry(args)
         if args.mode == "q3-battle-start":
             return q3_battle_start(args)
+        if args.mode == "q2-flash-sector":
+            return q2_flash_sector(args)
         if args.mode == "q4-lab-gift":
             return q4_lab_gift(args)
         if args.mode == "q2-relaunch-continue":
