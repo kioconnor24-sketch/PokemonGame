@@ -57,7 +57,7 @@ class ObserverTests(unittest.TestCase):
         symbols = dict(cursor=0x02001000, count=0x02001001,
                        actions=0x02001002, saveCallback=0x02001010,
                        main=0x02001020, saveStatus=0x02001030,
-                       differentFile=0x02001040,
+                       saveAttempt=0x02001050, differentFile=0x02001040,
                        callbacks={"SaveConfirmInputCallback": 0x08005000},
                        mainCallbacks={"CB2_MainMenu": 0x08006000})
         contents = {
@@ -66,7 +66,8 @@ class ObserverTests(unittest.TestCase):
             "m2001002,9": bytes([2, 4, 5, 0, 0, 0, 0, 0, 0]),
             "m2001010,4": struct.pack("<I", 0x08005001),
             "m2001024,4": struct.pack("<I", 0x08006001),
-            "m2001030,2": struct.pack("<H", 1),
+            "m2001030,2": struct.pack("<H", 0),
+            "m2001050,2": struct.pack("<H", 1),
             "m2001040,1": b"\x00",
         }
         commands = []
@@ -81,7 +82,8 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(state["actions"], [2, 4, 5])
         self.assertEqual(state["savePhase"], "SaveConfirmInputCallback")
         self.assertEqual(state["mainPhase"], "CB2_MainMenu")
-        self.assertEqual(state["saveStatus"], 1)
+        self.assertEqual(state["saveStatus"], 0)  # load status still EMPTY
+        self.assertEqual(state["saveAttemptStatus"], 1)  # write succeeded
         self.assertEqual(state["differentSaveFile"], 0)
         self.assertEqual(g.sock.sent, [b"\x03"])
         self.assertEqual(commands[-1], "c")
