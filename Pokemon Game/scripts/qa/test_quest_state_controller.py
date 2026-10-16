@@ -227,16 +227,39 @@ class ObserverTests(unittest.TestCase):
         # Synthetic color fractions from the independently reviewed actual
         # Emerald title vs preceding black copyright frame.
         pixels = 480 * 320
+        half = 480 * 160
+        # Representative title has YELLOW logo, PURPLE outlines above
+        # middle, GREEN water below. Forest cutscene has no upper logo.
         title = bytearray(bytes((0, 145, 50)) * pixels)
-        for index in range(int(pixels * 0.07)):
+        for index in range(int(half * .15)):
             title[index*3:index*3+3] = bytes((245, 195, 44))
+        for index in range(int(half * .2)):
+            offset = (index + int(half * .2)) * 3
+            title[offset:offset+3] = bytes((100, 60, 180))
         score = qa.visual_title_score(title)
         self.assertTrue(score["present"])
-        self.assertGreater(score["green"], 0.22)
+        self.assertGreater(score["yellow"], 0.06)
+        self.assertGreater(score["purple"], 0.10)
+        self.assertGreater(score["green"], 0.25)
+        # Actual regression: previously incorrectly accepted forest, with
+        # yellow/orange character BELOW center but no logo in upper half.
+        forest = bytearray(bytes((235, 245, 242)) * half
+                           + bytes((40, 165, 60)) * half)
+        for index in range(int(half * .10)):
+            offset = (index + half) * 3
+            forest[offset:offset+3] = bytes((245, 185, 40))
+        self.assertFalse(qa.visual_title_score(forest)["present"])
         black = bytes((0, 0, 0)) * pixels
         self.assertFalse(qa.visual_title_score(black)["present"])
         self.assertLess(qa.pixel_distance(title, title), 1e-6)
         self.assertGreater(qa.pixel_distance(title, black), 0.1)
+        # Emerald saved main menu is pale boxes over purple.
+        menu = bytearray(bytes((140, 120, 240)) * pixels)
+        for i in range(int(half * .6)):
+            menu[i*3:i*3+3] = bytes((245, 245, 245))
+        self.assertTrue(qa.visual_saved_main_menu(menu)["present"])
+        self.assertFalse(qa.visual_saved_main_menu(title)["present"])
+        self.assertFalse(qa.visual_saved_main_menu(forest)["present"])
         with self.assertRaisesRegex(qa.Blocked, "exact emulator framebuffer"):
             qa.visual_title_score(b"tiny")
 
