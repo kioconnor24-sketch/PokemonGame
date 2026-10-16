@@ -21,7 +21,8 @@
         "Q4",
         "Q5"
       ],
-      "next": "Address reproducible QUEST QA defects, then request merge review. Native green is not QA acceptance."
+      "next": "Epic #34: help QA establish deterministic existing-NPC access, fix only confirmed QUEST gameplay defects, then native/graphical acceptance and approved merge.",
+      "issue": 34
     },
     {
       "id": "TWO-REGION",
@@ -31,7 +32,8 @@
         "QUEST"
       ],
       "requires_handoff": true,
-      "next": "Preserve already tested non-map badge/Fly/heal groundwork; integrate only after QUEST and shared-file handoff."
+      "next": "Epic #34: existing 65/65 native-tested pure groundwork remains unregistered; integrate 8+8 badge/Fly/heal/save only after QUEST acceptance and exclusive shared-file coordination, no map files.",
+      "issue": 34
     },
     {
       "id": "SCRIPTED-BATTLE",
@@ -40,19 +42,21 @@
       "deps": [
         "QUEST"
       ],
-      "requires_handoff": true,
+      "requires_handoff": false,
       "qa_cases": [
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "Wait for exclusive config/battle.h and event_scripts.s handoff, prove stale flag clears on in-process load and registered fixture acceptance."
+      "next": "Epic #35: owner-approved two shared hook lines ALREADY PUSHED 9e4340b0; keep #25 unmerged until QUEST #14; strengthen tests, prepare future QA, seek new handoff for any additional protected path.",
+      "issue": 35
     },
     {
       "id": "NATIVE-BASELINE",
       "agent": "claude",
       "pr": 29,
       "deps": [],
-      "next": "Review 282 individually classified expected full-suite failures; merge only after checks/review."
+      "next": "Epic #35: review and merge #29 with 282 individually classified expected failures and unknown-failure detection, then permit #30.",
+      "issue": 35
     },
     {
       "id": "NO-PRIMAL",
@@ -61,14 +65,16 @@
       "deps": [
         "NATIVE-BASELINE"
       ],
-      "next": "After baseline merge, reconcile exactly 45 Primal/orb-related expected upstream failures, rerun targeted tests before merge."
+      "next": "Epic #35: after #29 merges, incorporate exactly 45 specifically confirmed primal-disabled expectation changes, rebuild/review #30.",
+      "issue": 35
     },
     {
       "id": "QUEST-PLAYTEST",
       "agent": "playtest",
       "pr": 20,
       "deps": [],
-      "next": "Reuse working Alderfield warp; one tile left from (14,16), face researcher at (12,16), press mapped A, capture actual Q1 dialogue and continue acceptance cases."
+      "next": "Epic #36: STOP blind fixed-keys overshoot; build an observable state-aware mGBA controller in QA #20 or provide Codex a precise minimum QA-access blocker; then run Q1–Q5.",
+      "issue": 36
     }
   ]
 }
