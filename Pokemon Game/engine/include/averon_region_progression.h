@@ -34,10 +34,29 @@ bool32 AveronProgression_GetRegionalObedienceLevel(u32 *obedienceLevel);
 
 bool32 AveronProgression_IsProfileValid(const struct AveronProgressionProfile *profile);
 
+// Which badges count for the other badge consumers: whiteout money, the
+// missing-badge catch penalty and badge-unlocked field moves (Flash). OWNER
+// DECISION (#64 comment 6220453512). The default keeps today's behaviour.
+enum AveronBadgeRule
+{
+    AVERON_BADGE_RULE_AVERON,        // Averon's badges only (today)
+    AVERON_BADGE_RULE_ACTIVE_REGION, // the badges of the region the player is in
+    AVERON_BADGE_RULE_EITHER,        // badge N counts if earned in either region
+};
+#define AVERON_BADGE_RULE AVERON_BADGE_RULE_AVERON
+
+// Badge N (1..8) under the rule, and how many of the 8 count (0..8, so
+// tables indexed by badge count stay in bounds).
+bool32 AveronProgression_HasRuleBadge(u32 badgeNumber);
+u32 AveronProgression_CountRuleBadges(void);
+
 #if TESTING
 // Tests install a parameterized profile; NULL removes it. An invalid profile
 // is refused and leaves the previous one in place.
 bool32 AveronProgression_SetTestProfile(u32 region, const struct AveronProgressionProfile *profile);
+// Tests try each rule; AVERON_BADGE_RULE applies again after Reset.
+bool32 AveronProgression_SetTestBadgeRule(u32 rule);
+void AveronProgression_ResetTestBadgeRule(void);
 #endif
 
 #endif // GUARD_AVERON_REGION_PROGRESSION_H

@@ -9,6 +9,8 @@
 #include "battle_util.h"
 #include "caps.h"
 #include "event_data.h"
+#include "field_move.h"
+#include "money.h"
 #include "item.h"
 #include "load_save.h"
 #include "save.h"
@@ -41,6 +43,7 @@ static void SetSinnohBadges(u32 count)
 
 static void ResetProgression(void)
 {
+    AveronProgression_ResetTestBadgeRule();
     AveronProgression_SetTestProfile(AVERON_SAVE_REGION_AVERON, NULL);
     AveronProgression_SetTestProfile(AVERON_SAVE_REGION_SINNOH, NULL);
     AveronRegionSave_InitNewGame();
@@ -361,4 +364,85 @@ TEST("Averon region progression: Rare Candy stops at the active region's cap")
     EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 14);
     ZeroPlayerPartyMons();
     ResetProgression();
+}
+
+// The rule for the other badge consumers (owner decision). Each value is
+// proven here; the game keeps AVERON_BADGE_RULE_AVERON until the owner picks.
+TEST("Averon region progression: the badge rule decides which badges count")
+{
+    ResetProgression();
+    EXPECT_EQ(AVERON_BADGE_RULE, AVERON_BADGE_RULE_AVERON); // today's behaviour
+    SetAveronBadges(3);   // Averon badges 1-3
+    SetSinnohBadges(5);   // Sinnoh badges 1-5
+    EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_SINNOH));
+
+    EXPECT(AveronProgression_SetTestBadgeRule(AVERON_BADGE_RULE_AVERON));
+    EXPECT_EQ(AveronProgression_CountRuleBadges(), 3);
+    EXPECT(!AveronProgression_HasRuleBadge(4));
+
+    EXPECT(AveronProgression_SetTestBadgeRule(AVERON_BADGE_RULE_ACTIVE_REGION));
+    EXPECT_EQ(AveronProgression_CountRuleBadges(), 5);
+    EXPECT(AveronProgression_HasRuleBadge(4));
+    EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_AVERON));
+    EXPECT_EQ(AveronProgression_CountRuleBadges(), 3);
+
+    // Either region: badge N counts once, so the count never exceeds 8.
+    EXPECT(AveronProgression_SetTestBadgeRule(AVERON_BADGE_RULE_EITHER));
+    EXPECT_EQ(AveronProgression_CountRuleBadges(), 5);
+    SetAveronBadges(AVERON_REGION_BADGES);
+    SetSinnohBadges(AVERON_REGION_BADGES);
+    EXPECT_EQ(AveronProgression_CountRuleBadges(), AVERON_REGION_BADGES);
+
+    EXPECT(!AveronProgression_SetTestBadgeRule(AVERON_BADGE_RULE_EITHER + 1));
+    EXPECT(!AveronProgression_HasRuleBadge(0));
+    EXPECT(!AveronProgression_HasRuleBadge(AVERON_REGION_BADGES + 1));
+    ResetProgression();
+}
+
+// Flash is the one field move unlocked by a badge (Averon badge 2) rather
+// than a license. In Sinnoh with only Sinnoh's badge 2, the rule decides.
+TEST("Averon region progression: the badge rule decides the badge-unlocked field move")
+{
+    u32 i = 0;
+    PARAMETRIZE { i = AVERON_BADGE_RULE_AVERON; }
+    PARAMETRIZE { i = AVERON_BADGE_RULE_ACTIVE_REGION; }
+    PARAMETRIZE { i = AVERON_BADGE_RULE_EITHER; }
+    ResetProgression();
+    ASSUME(gFieldMoveInfo[FIELD_MOVE_FLASH].unlockType == BADGE_UNLOCK);
+    EXPECT(AveronProgression_SetTestBadgeRule(i));
+    EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_SINNOH));
+    SetSinnohBadges(2);
+    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLASH), i != AVERON_BADGE_RULE_AVERON);
+    ResetProgression();
+}
+
+// Whiteout money in a real trainer loss, under each rule. In Sinnoh with all
+// eight Averon badges and two Sinnoh badges, the badge rate is 120 (eight
+// badges) or 24 (two).
+AI_SINGLE_BATTLE_TEST("Averon region progression: the badge rule decides whiteout money in Sinnoh", u32 lost)
+{
+    u32 rule = 0;
+    PARAMETRIZE { rule = AVERON_BADGE_RULE_AVERON; }
+    PARAMETRIZE { rule = AVERON_BADGE_RULE_ACTIVE_REGION; }
+    PARAMETRIZE { rule = AVERON_BADGE_RULE_EITHER; }
+    GIVEN {
+        ResetProgression();
+        AveronProgression_SetTestBadgeRule(rule);
+        AveronRegion_SetActive(AVERON_SAVE_REGION_SINNOH);
+        SetAveronBadges(AVERON_REGION_BADGES);
+        SetSinnohBadges(2);
+        SetMoney(&gSaveBlock1Ptr->money, 50000);
+        PLAYER(SPECIES_WOBBUFFET) { Level(40); HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_SEISMIC_TOSS); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_SEISMIC_TOSS); }
+    } THEN {
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_LOST);
+        results[i].lost = 50000 - GetMoney(&gSaveBlock1Ptr->money);
+        ResetProgression();
+    } FINALLY {
+        EXPECT_EQ(results[0].lost, 120 * 40);
+        EXPECT_EQ(results[1].lost, 24 * 40);
+        EXPECT_EQ(results[2].lost, 120 * 40);
+    }
 }

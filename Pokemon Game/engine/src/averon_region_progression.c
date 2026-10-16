@@ -12,7 +12,18 @@ static const struct AveronProgressionProfile *const sRegionProfiles[AVERON_SAVE_
 
 #if TESTING
 static const struct AveronProgressionProfile *sTestProfiles[AVERON_SAVE_REGION_COUNT];
+static bool8 sTestBadgeRuleSet;
+static u8 sTestBadgeRule;
 #endif
+
+static u32 GetBadgeRule(void)
+{
+#if TESTING
+    if (sTestBadgeRuleSet)
+        return sTestBadgeRule;
+#endif
+    return AVERON_BADGE_RULE;
+}
 
 static const struct AveronProgressionProfile *GetProfile(u32 region)
 {
@@ -54,6 +65,29 @@ u32 AveronProgression_CountActiveRegionBadges(void)
     return AveronRegion_CountBadges(AveronProgression_GetActiveRegion());
 }
 
+bool32 AveronProgression_HasRuleBadge(u32 badgeNumber)
+{
+    switch (GetBadgeRule())
+    {
+    case AVERON_BADGE_RULE_ACTIVE_REGION:
+        return AveronProgression_HasActiveRegionBadge(badgeNumber);
+    case AVERON_BADGE_RULE_EITHER:
+        return AveronRegion_HasBadge(AVERON_SAVE_REGION_AVERON, badgeNumber)
+            || AveronRegion_HasBadge(AVERON_SAVE_REGION_SINNOH, badgeNumber);
+    case AVERON_BADGE_RULE_AVERON:
+    default:
+        return AveronRegion_HasBadge(AVERON_SAVE_REGION_AVERON, badgeNumber);
+    }
+}
+
+u32 AveronProgression_CountRuleBadges(void)
+{
+    u32 count = 0;
+    for (u32 badge = 1; badge <= AVERON_REGION_BADGES; badge++)
+        count += AveronProgression_HasRuleBadge(badge) != FALSE;
+    return count;
+}
+
 // A profile that fails validation is treated as absent, so a bad table can
 // never produce a cap of 0 or above MAX_LEVEL.
 static const struct AveronProgressionProfile *GetActiveProfile(void)
@@ -89,5 +123,19 @@ bool32 AveronProgression_SetTestProfile(u32 region, const struct AveronProgressi
         return FALSE;
     sTestProfiles[region] = profile;
     return TRUE;
+}
+
+bool32 AveronProgression_SetTestBadgeRule(u32 rule)
+{
+    if (rule > AVERON_BADGE_RULE_EITHER)
+        return FALSE;
+    sTestBadgeRule = rule;
+    sTestBadgeRuleSet = TRUE;
+    return TRUE;
+}
+
+void AveronProgression_ResetTestBadgeRule(void)
+{
+    sTestBadgeRuleSet = FALSE;
 }
 #endif
