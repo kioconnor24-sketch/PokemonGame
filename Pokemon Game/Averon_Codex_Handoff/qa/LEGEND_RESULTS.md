@@ -51,6 +51,7 @@ python3 ../scripts/test-averon-legend.py
 | Check and retry macros | Script engine | NATIVE |
 | Caught and defeated states survive a real flash save and load | Upstream Ho-Oh flags as stand-ins | NATIVE |
 | A player loss ends the script in a whiteout before anything is recorded | `CB2_EndScriptedWildBattle` | SOURCE |
+| Even if a loss were recorded, the encounter stays available | Real wild battle the player loses (`B_OUTCOME_LOST`) | NATIVE |
 | Every `B_OUTCOME_*` in `constants/battle.h` is in the native outcome table; the classifier has exactly two non-default cases; no game script uses the macros | `test-averon-legend.py` | SOURCE |
 
 ## Still needs

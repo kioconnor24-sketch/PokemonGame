@@ -302,3 +302,25 @@ WILD_BATTLE_TEST("Averon legend a capture is recorded as caught")
         ResetEncounter();
     }
 }
+
+// In the game a player loss whites out before the script records anything.
+// Even if a script recorded it, nothing would be lost.
+WILD_BATTLE_TEST("Averon legend a player loss leaves the encounter available")
+{
+    GIVEN {
+        ResetEncounter();
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_HO_OH) { Level(70); Speed(100); Moves(MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet fainted!");
+    } THEN {
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_LOST);
+        RecordAfterBattle();
+        EXPECT_EQ(gSpecialVar_Result, AVERON_LEGEND_AVAILABLE);
+        EXPECT_EQ(FlagGet(CAUGHT), FALSE);
+        EXPECT_EQ(FlagGet(DEFEATED), FALSE);
+        ResetEncounter();
+    }
+}
