@@ -19,6 +19,7 @@ Status: **TESTED ON ISOLATED BRANCH / INTEGRATION PENDING**.
 | `engine/include/averon_region_save.h`, `engine/src/averon_region_save.c` (new) | Codec, validation and the engine adapters listed below. |
 | `engine/test/averon_region_save.c` (new) | 13 native flash tests, 125 parameter runs in all. |
 | `scripts/test-averon-region-save.py` (new) | Source contract checks, plus `--mutations`. |
+| `engine/test/save.c` | Upstream size pin `T_SAVEBLOCK3_SIZE` 4 → 68. The SaveBlock1, SaveBlock2 and PokemonStorage pins are unchanged and still pass. |
 
 `load_save.c` is not changed. It was in the approved scope, but the load
 hook fits in `LoadGameSave` in `save.c`.
