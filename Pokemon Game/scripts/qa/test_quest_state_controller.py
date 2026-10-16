@@ -224,6 +224,50 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(asked, ["m3001004,4", "m3002000,2",
                                  "m3003000,280", "c"])
 
+    def test_physical_emerald_flash_q2_flags_and_encrypted_oran3(self):
+        # Original engine save.h/save.c: two 14-sector rotating slots,
+        # 3968 data bytes + SaveBlock3 extension + 12-byte footer.
+        # This synthetic flash is not a gameplay PASS, but checks decoder
+        # rotation, C folded CRC, XOR and source-proven Q2 flag bits.
+        data = [bytearray(qa.FLASH_SECTOR_DATA_BYTES) for _ in range(14)]
+        struct.pack_into("<hhbbb", data[1], 0, 19, 14, 75, 6, -1)
+        data[2][0x1275 - 3968] = 0xE4
+        struct.pack_into("<I", data[0], 0xAC, 0x0000EFFA)
+        struct.pack_into("<HH", data[1], 0x790, 520, 3 ^ 0xEFFA)
+        flash = bytearray(b"\\xff" * (32 * qa.FLASH_SECTOR_BYTES))
+        for sid in range(14):
+            phys = (sid + 5) % 14  # genuine sector ID rotation
+            sect = bytearray(qa.FLASH_SECTOR_BYTES)
+            sect[:qa.FLASH_SECTOR_DATA_BYTES] = data[sid]
+            length = qa.FLASH_VALIDATED_CHECKSUM_LENGTHS.get(sid)
+            checksum = qa.flash_sector_checksum(sect, length) if length else 0
+            struct.pack_into("<HHII", sect, 4084, sid, checksum,
+                             qa.FLASH_SIGNATURE, 17)
+            flash[phys*4096:(phys+1)*4096] = sect
+        got = qa.decode_flash_q2(flash + b"RTC-TRAILER")
+        self.assertEqual(got["slot"], 0)
+        self.assertEqual(got["saveCounter"], 17)
+        self.assertEqual((got["x"], got["y"], got["mapGroup"],
+                          got["mapNum"], got["warpId"]),
+                         (19, 14, 75, 6, -1))
+        self.assertEqual(got["oranBerryQuantity"], 3)
+        self.assertEqual(tuple(got[k] for k in (
+            "notesStarted", "notesRecorded", "notesRewarded",
+            "sketchStarted", "sketchFound", "sketchRewarded")),
+                         (True, False, False, True, True, True))
+        with tempfile.TemporaryDirectory() as folder:
+            from types import SimpleNamespace
+            path = Path(folder) / "source.sav"
+            path.write_bytes(flash)
+            qa.q2_flash_sector(SimpleNamespace(flash=path))
+        # Tampering the authenticated Berry block must NOT return a PASS.
+        phys_berries = (1 + 5) % 14
+        flash[phys_berries*4096 + 0x790 + 2] ^= 1
+        with self.assertRaisesRegex(qa.Blocked, "checksum-valid"):
+            qa.decode_flash_q2(flash)
+        with self.assertRaisesRegex(qa.Blocked, "Physical 128 KiB"):
+            qa.decode_flash_q2(b"too short")
+
     def test_actual_bag_berry_tab_is_third_right_not_fourth(self):
         # Real screenshot sequence in graphical run 38870779185:
         # right1 POKE BALLS, right2 TMs & HMs, right3 BERRIES,
