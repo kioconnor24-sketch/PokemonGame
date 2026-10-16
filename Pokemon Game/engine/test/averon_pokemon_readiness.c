@@ -6,8 +6,11 @@
 #include "item.h"
 #include "load_save.h"
 #include "move.h"
+#include "overworld.h"
+#include "rtc.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "regions.h"
 #include "save.h"
 #include "gba/flash_internal.h"
@@ -507,9 +510,10 @@ TEST("Averon lists the evolution targets that only another region or an upstream
 }
 
 // Conditional evolutions whose conditions depend only on the Pokemon itself
-// (gender, friendship, a known move or move type, a held item) or are already
-// true in Averon (not in another region). Time, weather, party, map, step and
-// battle-record conditions are left out and counted.
+// (gender, friendship, a known move or move type, a held item), on the time of
+// day (set with SetTimeOfDay), or are already true in Averon (not in another
+// region). Weather, party, map, step and battle-record conditions are left out
+// and counted.
 static bool32 CanSatisfyFromMonData(const struct EvolutionParam *params)
 {
     for (u32 i = 0; params[i].condition != CONDITIONS_END; i++)
@@ -521,6 +525,8 @@ static bool32 CanSatisfyFromMonData(const struct EvolutionParam *params)
         case IF_KNOWS_MOVE:
         case IF_KNOWS_MOVE_TYPE:
         case IF_HOLD_ITEM:
+        case IF_TIME:
+        case IF_NOT_TIME:
             break;
         case IF_NOT_REGION:
             if (params[i].arg1 == REGION_HOENN)
@@ -531,6 +537,28 @@ static bool32 CanSatisfyFromMonData(const struct EvolutionParam *params)
         }
     }
     return TRUE;
+}
+
+// Sets an hour (1-23; 0 turns the override off) that meets every time
+// condition. Returns FALSE if none does.
+static bool32 SetHourForTimeConditions(const struct EvolutionParam *params)
+{
+    for (u32 hour = 1; hour < HOURS_PER_DAY; hour++)
+    {
+        bool32 ok = TRUE;
+        SetTimeOfDay(hour);
+        for (u32 i = 0; params[i].condition != CONDITIONS_END; i++)
+        {
+            if (params[i].condition == IF_TIME)
+                ok = ok && GetTimeOfDay() == params[i].arg1;
+            else if (params[i].condition == IF_NOT_TIME)
+                ok = ok && GetTimeOfDay() != params[i].arg1;
+        }
+        if (ok)
+            return TRUE;
+    }
+    SetTimeOfDay(0);
+    return FALSE;
 }
 
 static u32 PersonalityForGender(u32 species, u32 gender)
@@ -572,7 +600,8 @@ TEST("Averon every conditional evolution satisfiable from the Pokemon's own data
             if (params == NULL)
                 continue;
             if (!CanSatisfyFromMonData(params)
-             || (evo->method != EVO_LEVEL && evo->method != EVO_ITEM && evo->method != EVO_TRADE))
+             || (evo->method != EVO_LEVEL && evo->method != EVO_ITEM && evo->method != EVO_TRADE)
+             || !SetHourForTimeConditions(params))
             {
                 skipped++;
                 continue;
@@ -622,6 +651,7 @@ TEST("Averon every conditional evolution satisfiable from the Pokemon's own data
             }
             tested++;
             enum Species result = GetEvolutionTargetSpecies(&mon, mode, item, NULL, &canStopEvo, CHECK_EVO);
+            SetTimeOfDay(0);
             if (!IsValidEnabledSpecies(result))
             {
                 DebugPrintf("conditional evolution did not trigger %S -> %S (method %u)", GetSpeciesName(species), GetSpeciesName(evo->targetSpecies), evo->method);
@@ -631,5 +661,74 @@ TEST("Averon every conditional evolution satisfiable from the Pokemon's own data
     }
     DebugPrintf("conditional evolutions run: %u, left out: %u", tested, skipped);
     EXPECT_GT(tested, 0);
+    EXPECT_EQ(bad, 0);
+}
+
+// Every species and form, packed into PC boxes, written to flash, cleared,
+// read back. Values are derived from the species ID, so nothing is stored.
+static u32 TestPersonality(u32 species) { return species * 2654435761u; }
+static u32 TestHeldItem(u32 species)    { return 1 + species % (ITEMS_COUNT - 1); }
+static u32 TestLevel(u32 species)       { return 1 + species % MAX_LEVEL; }
+static u32 TestMove(u32 species)        { return 1 + species % (MOVES_COUNT - 1); }
+
+static u32 NextEnabledSpecies(u32 species)
+{
+    do
+        species++;
+    while (species < NUM_SPECIES && (!IsSpeciesEnabled(species) || species == SPECIES_EGG));
+    return species;
+}
+
+TEST("Averon every enabled species survives the PC boxes and a flash save and load")
+{
+    u32 bad = 0, stored = 0, rounds = 0;
+    u32 first = NextEnabledSpecies(SPECIES_NONE);
+    struct BoxPokemon boxMon;
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    while (first < NUM_SPECIES)
+    {
+        u32 species = first, slot;
+        ClearSaveData();
+        Save_ResetSaveCounters();
+        for (slot = 0; slot < TOTAL_BOXES_COUNT * IN_BOX_COUNT && species < NUM_SPECIES; slot++, species = NextEnabledSpecies(species))
+        {
+            u32 item = TestHeldItem(species), move = TestMove(species);
+            CreateBoxMon(&boxMon, species, TestLevel(species), TestPersonality(species), OTID_STRUCT_PLAYER_ID);
+            SetBoxMonData(&boxMon, MON_DATA_HELD_ITEM, &item);
+            SetBoxMonData(&boxMon, MON_DATA_MOVE1, &move);
+            SetBoxMonAt(slot / IN_BOX_COUNT, slot % IN_BOX_COUNT, &boxMon);
+        }
+        EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+        for (u32 i = 0; i < slot; i++)
+            ZeroBoxMonAt(i / IN_BOX_COUNT, i % IN_BOX_COUNT);
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        species = first;
+        for (u32 i = 0; i < slot; i++, species = NextEnabledSpecies(species))
+        {
+            struct BoxPokemon *loaded = GetBoxedMonPtr(i / IN_BOX_COUNT, i % IN_BOX_COUNT);
+            CreateBoxMon(&boxMon, species, TestLevel(species), TestPersonality(species), OTID_STRUCT_PLAYER_ID);
+            if (GetBoxMonData(loaded, MON_DATA_SANITY_IS_BAD_EGG)
+             || GetBoxMonData(loaded, MON_DATA_SPECIES) != species
+             || GetBoxMonData(loaded, MON_DATA_PERSONALITY) != TestPersonality(species)
+             || GetBoxMonData(loaded, MON_DATA_HELD_ITEM) != TestHeldItem(species)
+             || GetBoxMonData(loaded, MON_DATA_MOVE1) != TestMove(species)
+             || GetBoxMonData(loaded, MON_DATA_EXP) != GetBoxMonData(&boxMon, MON_DATA_EXP)
+             || GetBoxMonData(loaded, MON_DATA_ABILITY_NUM) != GetBoxMonData(&boxMon, MON_DATA_ABILITY_NUM))
+            {
+                DebugPrintf("box round trip %S (%u)", GetSpeciesName(species), species);
+                bad++;
+            }
+            stored++;
+        }
+        first = species;
+        rounds++;
+    }
+    for (u32 i = 0; i < TOTAL_BOXES_COUNT * IN_BOX_COUNT; i++)
+        ZeroBoxMonAt(i / IN_BOX_COUNT, i % IN_BOX_COUNT);
+    DebugPrintf("species stored and reloaded: %u in %u saves", stored, rounds);
+    EXPECT_GT(rounds, 1);
     EXPECT_EQ(bad, 0);
 }

@@ -45,8 +45,8 @@ python3 ../scripts/test-averon-release-forms.py
 | Species data | Every enabled species: valid types, nonzero base stats, first ability set, all abilities in range | 0 problems | NATIVE |
 | Evolutions | Every evolution target is an enabled species | 697 edges, 0 problems | NATIVE |
 | Evolutions | Every unconditional level evolution (at its level) and item evolution (with its item) actually triggers through `GetEvolutionTargetSpecies` | 465 run, 0 problems | NATIVE |
-| Evolutions | Conditional evolutions whose conditions depend only on the Pokémon (gender, friendship, a known move or move type, a held item, not another region): built to meet them, then run | 68 run, 0 problems | NATIVE |
-| Evolutions | Conditional evolutions on time of day, weather, party, trade partner, map, steps or battle records | 141 **not run**. Time of day comes from the real RTC (`OW_USE_FAKE_RTC` FALSE), which a headless test cannot set | — |
+| Evolutions | Conditional evolutions whose conditions depend only on the Pokémon (gender, friendship, a known move or move type, a held item, not another region) or on the time of day (set with `SetTimeOfDay`): built to meet them, then run | 94 run, 0 problems | NATIVE |
+| Evolutions | Conditional evolutions on weather, party, trade partner, map, steps, personality or battle records | 115 **not run** | — |
 | Trade evolutions | Solo alternatives | Codex audit `audit-averon-solo-evolutions.py`; Linking Cord test | SOURCE / NATIVE (existing) |
 | Forms | Every allowed form change targets an enabled species. Faint and end-of-battle changes without a target revert to the saved form, by design | 2,481 changes, 0 problems | NATIVE |
 | Forms | Form tables and form-change tables are consistent | Upstream `test/species.c` | NATIVE (existing) |
@@ -66,6 +66,7 @@ python3 ../scripts/test-averon-release-forms.py
 | Pokédex | Every enabled species has a national dex number from 1 to `NATIONAL_DEX_COUNT`, which the seen/caught flag arrays hold | 0 problems | NATIVE |
 | Pokédex | Setting every seen and caught flag changes no other SaveBlock1 byte, counts the full dex, and survives a real flash save and load | Pass | NATIVE |
 | Box storage | Species, item, ball, EXP and move fields fit their bit widths | Upstream `sBoxPokemonConstantsFit` (build fails otherwise) | BUILD (existing) |
+| Box storage and saves | Every enabled species and form (1,571) is stored in the PC boxes with a held item, a move, a level and a personality, written to flash, cleared and read back: checksum valid, every field equal | 4 saves, 0 problems | NATIVE |
 
 ## Evolutions that cannot happen in Averon (NATIVE, pinned list)
 
@@ -131,9 +132,9 @@ SaveBlock1 and SaveBlock2 are nearly full. Codex was told in #15.
 1. GUI: followers on a real map (walking, surfing, shiny, gender forms, Mega
    reverting after battle), a full-party catch (the swap menu), Pokédex screens
    with all forms.
-2. The 141 conditional evolutions not run: time of day (needs a way to set
-   the clock in tests), weather, party, trade partner, steps and battle-record
-   conditions. Region and map conditions are covered above.
+2. The 115 conditional evolutions not run: weather, party, trade partner,
+   steps, personality and battle-record conditions. Region and map conditions
+   are covered above.
 3. Owner decision on how the 13 region-only forms and Ursaluna are obtained.
 4. A decision on the 174 placeholder follower lookups: they need art, which is
    frozen.
