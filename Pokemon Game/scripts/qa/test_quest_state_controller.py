@@ -87,6 +87,18 @@ class ObserverTests(unittest.TestCase):
             with self.assertRaisesRegex(qa.Blocked, "geometry"):
                 qa.white_panel_ratio(frame)
 
+    def test_debug_ui_requires_correct_panel(self):
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as tmp:
+            dark = Path(tmp) / "map.png"
+            menu = Path(tmp) / "menu.png"
+            subprocess.run(["convert", "-size", "480x320", "xc:#282D42", str(dark)], check=True)
+            subprocess.run(["convert", str(dark), "-fill", "white",
+                            "-draw", "rectangle 4,4 295,314", str(menu)], check=True)
+            with self.assertRaisesRegex(qa.Blocked, "sidebar"):
+                qa.assert_ui(SimpleNamespace(frame=dark, kind="sidebar"))
+            self.assertIsNone(qa.assert_ui(SimpleNamespace(frame=menu, kind="sidebar")))
+
     def test_elf_no_symbol_fails_closed(self):
         from unittest.mock import patch
         with patch.object(qa.subprocess, "check_output", return_value="03001000 D other\n"):
