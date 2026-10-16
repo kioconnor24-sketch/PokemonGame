@@ -528,9 +528,16 @@ jobs:
               press_debug x
               sleep 3
               capture "Q3-real-gym-warp0"
-              python3 -u "$qa_controller" q3-gym-entry \
-                --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
-                --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log" 2>&1
+              # Explicitly propagate the Python exit status; 'set -e' is
+              # suppressed inside an 'if (subshell); then' condition.
+              # A preceding run misreported Q3_INTRO_PARTIAL after a real
+              # spawn assertion failed, because 'cat' returned status 0.
+              if ! python3 -u "$qa_controller" q3-gym-entry \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+                exit 2
+              fi
               cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
             ); then
               qa_q3_outcome="REAL_SLUICES_AND_ELIO_INTRO_ONLY"
