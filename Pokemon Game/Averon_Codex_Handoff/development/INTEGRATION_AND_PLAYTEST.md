@@ -25,6 +25,18 @@ For a stable-main control, use `0` and `0` for the two PR fields. PRs must exist
 
 **Safety:** opt-in manual dispatch or an exact authorized Issue #15 command limits duplicate 50-minute ARM jobs and additional GitHub Actions consumption. The workflow has read-only GitHub permissions, rejects forks, performs no PR/main push or code review approval, and stores no distributable ROM. Untrusted code from unrelated GitHub forks is not run. Review PR source before dispatch, even for collaborators.
 
+## One-command owner-local development package (WSL)
+
+From a **clean, verified** checkout with the existing ARM toolchain installed, at the repository root run:
+
+```bash
+bash "Pokemon Game/scripts/coordination/package_local_playtest.sh"
+```
+
+The script stops rather than silently compiling a dirty engine, runs a real GBA build plus positive-count Averon and save tests, confirms linker/ROM budget and SHA, then writes `Pokemon Game/build-output/local-playtest/Averon-DEV-<git-short-sha>.gba`, `manifest.json` and named logs. The output directory and `.gba` are **gitignored and local only**. Copy the private ROM to your own iOS device through your chosen file-transfer method, then import it into Delta for **separate** manual playtesting. There is no guarantee of iOS compatibility from successful local compilation.
+
+If you use Windows and Windows Subsystem for Linux (WSL), this command runs **inside the WSL checkout**, not in a PowerShell window unless Bash and its ARM toolchain are available. A clean committed engine is necessary; never reset or discard unsaved local work merely to satisfy this script. It does not fetch/merge PRs or change your source branch.
+
 ## How to produce an actual owner-side playtest ROM
 
 An accepted *development build* can be compiled locally from the exact pinned source SHA and PR heads in the JSON manifest using the project's working WSL ARM toolchain and `make -j4 -O all` from `Pokemon Game/engine`. Verify the local ROM SHA-256 matches that manifest **when reproduced from identical inputs/toolchain**; a different compiler or build environment may yield different bytes and is not automatically an error.

@@ -40,6 +40,7 @@ jobs:
       - name: Validate disposable integration runner shell syntax
         run: |
           bash -n "Pokemon Game/scripts/coordination/run_combined_build.sh"
+          bash -n "Pokemon Game/scripts/coordination/package_local_playtest.sh"
           python3 -m py_compile "Pokemon Game/scripts/coordination/verify_build_readiness.py"
       - name: Render actual task registry with synthetic safe GitHub state
         run: |
