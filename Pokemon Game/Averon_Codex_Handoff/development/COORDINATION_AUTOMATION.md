@@ -12,9 +12,33 @@
 - [Sensitive file guard](../../scripts/coordination/check_protected_files.py)
 - [Screenshot observation helper](../../scripts/coordination/qa_frame_gate.py)
 
+## Manual sessions, direct agent-to-agent messages
+
+**No API keys, external messaging platform or automated agent execution needed.** Finish each Codex, Claude and Playtest chat normally. GitHub preserves their messages; the next manually started session reads [Issue #31](https://github.com/kioconnor24-sketch/PokemonGame/issues/31) before acting.
+
+Post a short message in [team #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [QA #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23), or a relevant feature PR when another agent must know a decision, bug, blocker or required action. **The first line must be the exact one-line envelope:**
+
+```text
+AGENT_MESSAGE TO=claude KIND=ANSWER TASK=SCRIPTED-BATTLE PR=#25
+SUMMARY: Codex verified RAM-only flag 0x4003 is a valid candidate.
+NEXT: Do not edit shared files until QUEST merges and the exclusive handoff is granted.
+```
+
+Set `TO` to `codex`, `claude`, `playtest`, or `all`. Set `KIND` to `QUESTION`, `ANSWER`, `HANDOFF`, `BLOCKER`, `QA`, or `FYI`. `PR=#N` is optional. Both `SUMMARY:` and `NEXT:` are required. Include actual PR/issue/test evidence links in the originating comment whenever possible, but keep the summary short. **No third-party bots or extra message files.**
+
+The board reads these explicit messages from #15/#23 and registered PR conversations. Its three inboxes prioritize unanswered messages and link back to the *original* comment. To acknowledge a specific message after reading it, reply in that issue or PR with a comment containing only:
+
+```text
+AGENT_ACK ID=123456789 BY=claude
+```
+
+Replace the ID with the actual source GitHub comment ID and `BY` with your agent. An acknowledgment is **informational only**; all three sessions may share the same GitHub identity, so this is not proof of who typed it and cannot grant permission. Leave the original question/answer and verify the underlying source. Keep routine session summaries in your own PR handoffs, not the shared channel, and use a directed message only when another agent needs to act.
+
+An agent should check the task board and its message inbox at session start, address the highest-priority waiting message, and post a new directed update when its action materially unblocks another agent. Messages are **never** equivalent to `HANDOFF_APPROVED` or `QA_ACCEPTED` markers, and GitHub comments do **not** restart a ChatGPT or Claude session.
+
 ## What runs after the integration PR merges
 
-**Agent board:** averon-agent-board.yml reads GitHub PRs, head SHAs, check conclusions and explicitly accepted QA evidence using code checked out from trusted main. It updates **only Issue #31's body**, creates a GitHub Actions summary and an artifact with codex.md, claude.md, and playtest.md. It runs on PR updates, QA #23 comments, new main commits, daily schedule and manual dispatch. The source tasks.json is updated at approved task/milestone changes, not every session.
+**Agent board:** averon-agent-board.yml reads GitHub PRs, head SHAs, check conclusions and explicitly accepted QA evidence using code checked out from trusted main. It updates **only Issue #31's body**, creates a GitHub Actions summary and an artifact with codex.md, claude.md, and playtest.md. It runs on PR updates, team #15 or QA #23 comments, comments on tracked PRs, new main commits, daily schedule and manual dispatch. The source tasks.json is updated at approved task/milestone changes, not every session.
 
 **Dependency gates:** Passing native tests never counts as graphical acceptance. A dependent task can become machine-ready only after its prerequisite is merged AND exact-head, authorized QA signoff exists if required. Even then, shared-file changes still require a documented human handoff in Issue #15. No auto merge or automatic paid agent execution occurs.
 
