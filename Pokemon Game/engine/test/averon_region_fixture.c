@@ -952,3 +952,95 @@ TEST("Averon region fixture rejects corrupt saved healer requests and validates 
         ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
     }
 }
+
+TEST("Averon region fixture real whiteout heals at existing respawns and survives flash reload")
+{
+    u32 healer, badgeMask;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; badgeMask = 0; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; badgeMask = 0xA5; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; badgeMask = 0xFF; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; badgeMask = 0; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; badgeMask = 0xA5; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; badgeMask = 0xFF; }
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_GREAT_BALL, 4));
+    EXPECT(AddBagItem(ITEM_ORAN_BERRY, 7));
+    memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
+    ZeroPlayerPartyMons();
+    const u32 species[] = {SPECIES_SNIVY, SPECIES_PIPLUP};
+    u32 personalities[2], experience[2], zero = 0, status = STATUS1_POISON;
+    for (u32 i = 0; i < ARRAY_COUNT(species); ++i)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        CreateRandomMonWithIVs(mon, species[i], 12, 0);
+        SetMonMoveSlot(mon, MOVE_TACKLE, 0);
+        SetMonData(mon, MON_DATA_PP1, &zero);
+        SetMonData(mon, MON_DATA_HP, &zero);
+        SetMonData(mon, MON_DATA_STATUS, &status);
+        personalities[i] = GetMonData(mon, MON_DATA_PERSONALITY);
+        experience[i] = GetMonData(mon, MON_DATA_EXP);
+    }
+    CalculatePlayerPartyCount();
+    SetRegionLegacyState(badgeMask, 0x53, healer, 9876);
+    struct WarpData savedHeal = gSaveBlock1Ptr->lastHealLocation;
+    // Pure A -> RAM-S -> A queries do not install a synthetic engine map.
+    ExerciseRestoredRegionQueries(badgeMask, 0x5A);
+    SetWarpDestination(MAP_GROUP(MAP_COASTALMEADOW), MAP_NUM(MAP_COASTALMEADOW), -1, 18, 22);
+    WarpIntoMap();
+    VarSet(VAR_BRINEY_LOCATION, 0);
+    FlagSet(FLAG_SYS_USE_STRENGTH);
+    FlagSet(FLAG_SYS_USE_FLASH);
+    // Execute the actual immediate scripts, heal/reset, destination and
+    // relocation path. CB2 rendering and the nurse cutscene remain QA work.
+    DoWhiteOut();
+    u16 expectedMap = healer == HEAL_LOCATION_ALDERFIELD ? MAP_ALDERFIELDCLINIC : MAP_SALTMEREHOME;
+    u32 expectedX = healer == HEAL_LOCATION_ALDERFIELD ? 7 : 6;
+    u32 expectedY = healer == HEAL_LOCATION_ALDERFIELD ? 4 : 5;
+    for (u32 stage = 0; stage < 2; ++stage)
+    {
+        EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(expectedMap));
+        EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(expectedMap));
+        EXPECT_EQ(gSaveBlock1Ptr->location.warpId, -1);
+        EXPECT_EQ(gSaveBlock1Ptr->pos.x, expectedX);
+        EXPECT_EQ(gSaveBlock1Ptr->pos.y, expectedY);
+        EXPECT_EQ(memcmp(&savedHeal, &gSaveBlock1Ptr->lastHealLocation, sizeof(savedHeal)), 0);
+        ExpectRegionLegacyState(badgeMask, 0x53, healer, 9876);
+        EXPECT_EQ(FlagGet(FLAG_SYS_USE_STRENGTH), FALSE);
+        EXPECT_EQ(FlagGet(FLAG_SYS_USE_FLASH), FALSE);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 4);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), 7);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+        for (u32 i = 0; i < ARRAY_COUNT(species); ++i)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+            EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), species[i]);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_PERSONALITY), personalities[i]);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_EXP), experience[i]);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+            EXPECT(GetMonData(mon, MON_DATA_HP) > 0);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_STATUS), 0);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_PP1), CalculatePPWithBonus(MOVE_TACKLE, 0, 0));
+        }
+        if (stage == 0)
+        {
+            EXPECT_EQ(gSpecialVar_LastTalked, 1);
+            EXPECT_EQ(gSpecialVar_0x800B, 1);
+            EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+            SetRegionLegacyState(badgeMask ^ 0xFF, 0, HEAL_LOCATION_ALDERFIELD, 0);
+            ClearBag();
+            ZeroPlayerPartyMons();
+            gSaveBlock1Ptr->location.mapGroup = -1;
+            gSaveBlock1Ptr->location.mapNum = -1;
+            gSaveBlock1Ptr->pos.x = -1;
+            gSaveBlock1Ptr->pos.y = -1;
+            EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        }
+    }
+    ExerciseRestoredRegionQueries(badgeMask, 0xA5);
+}
