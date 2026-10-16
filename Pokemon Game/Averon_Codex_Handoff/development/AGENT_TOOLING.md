@@ -15,7 +15,7 @@ Status words: **installed** (software present), **configured** (project files ex
 | Graphify hosted MCP service (`https://api.graphify.com/mcp`) | opt-in; not configured, not authenticated | A separate hosted service, documented at [`Graphify-Labs/graphify-mcp`](https://github.com/Graphify-Labs/graphify-mcp) (checked 2026-10-16): Streamable HTTP, browser OAuth, account and plan apply separately. Not the same as local `graphifyy[mcp]`. Not recommended now |
 | Ponytail | not installed | Source cloned and read, not run. Deferred (see below) |
 | OmniRoute | deferred | Per owner instruction |
-| ARM toolchain / mGBA in cloud sandbox | unavailable | apt and PyPI unreachable. CI is the build and native-test run |
+| ARM toolchain / mGBA in the initial cloud sandbox (report written 2026-10-15) | historical observation: unavailable | apt and PyPI were unreachable in that session; CI supplied its build/native evidence. Later Claude cloud sessions (2026-10-16) reported ARM GCC 13.2 preinstalled. Verify compiler, runner and network availability in the current runtime |
 | Claude local WSL clone (observed on the owner's host) | tested | `/root/claude-dev/PokemonGame` on 2026-10-15: clean build of `main` `36cb7ca9` OK; `TESTS=Averon` 44/44 and `test/save.c` 4/4 pass; push verified via a deleted temporary branch; mGBA 0.10.5 boot smoke only (see Issue #15) |
 | ChatGPT access to graphs/skills | untested | Use GitHub as the handoff layer |
 
