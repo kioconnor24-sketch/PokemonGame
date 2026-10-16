@@ -245,6 +245,26 @@ TEST("Averon no-whiteout flag lives in RAM outside every saved block")
         EXPECT_EQ(before[i], after[i]);
 }
 
+// LoadGameSave by itself copies flash into the save blocks and leaves the rest
+// of RAM alone, so it does not clear a set flag. What clears it is the RAM
+// reset that every real entry path runs first (boot, soft reset, ReloadSave;
+// see scripts/test-averon-scripted-battle.py).
+TEST("Averon a low-level save load alone leaves the RAM-only flag as it was")
+{
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    FlagSet(B_FLAG_NO_WHITEOUT);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), TRUE);
+    FlagClear(B_FLAG_NO_WHITEOUT);
+}
+
 // The release B_FLAG_NO_WHITEOUT is a special flag, which lives in RAM only,
 // so a set flag can never be restored from a save, while badges are.
 TEST("Averon RAM-only special flag is not restored from a save but the badge is")

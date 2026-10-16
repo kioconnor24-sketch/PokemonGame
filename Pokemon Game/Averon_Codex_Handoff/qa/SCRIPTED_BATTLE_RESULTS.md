@@ -35,9 +35,12 @@ GUI evidence exists yet.
 | Where the flag is stored | Its byte is in EWRAM and outside SaveBlock1, 2, 3 and Pokémon storage (all including their ASLR padding); setting it changes no saved byte. Mutation: moving the flag to saved flag `0x20` fails this and two other tests | NATIVE |
 | Flash save and load | A set flag is not restored by a real `TrySavingData`/`LoadGameSave` round trip; a badge flag is | NATIVE |
 | Scripted battle, win or loss | The macro's `Begin` and `Finish` natives, run by the script engine around a real AI battle: the flag survives the battle, then `Finish` reports the result in `VAR_RESULT` and clears it; a loss keeps the money. Mutations: `Finish` not clearing the flag fails 5 tests; `Finish` always reporting a win fails 3 | NATIVE |
+| Low-level `LoadGameSave` alone | It copies flash into the save blocks and does **not** clear a set flag. Safety comes from the RAM reset on every real entry path (next three rows), not from the load itself | NATIVE |
 | Boot | crt0 zeroes EWRAM before `intro.c` loads the save | SOURCE |
 | Soft reset, then Continue | `DoSoftReset` ends in `SoftReset(RESET_ALL)`; main menu Continue is reached only from boot or that reset | SOURCE |
 | In-process reload | `ReloadSave` calls `RegisterRamReset(RESET_EWRAM)` before `LoadGameSave(SAVE_NORMAL)`; these three files are the only normal-save loaders | SOURCE |
+| Ordinary loss after a scripted win, or after a scripted loss and respawn | The next ordinary trainer loss whites out and takes money in both cases | NATIVE |
+| Switching inside a chain battle | Damage and poison carry back for every Pokémon the player switched in | NATIVE |
 | The macro's full expansion | `Begin`, one `trainerbattle` (always fight, continue script, single, not rematch) and `Finish`, in that order | NATIVE (bytes); the `trainerbattle` itself needs the overworld and is not run |
 
 ## QA_MATRIX rows and current evidence
@@ -64,3 +67,17 @@ GUI evidence exists yet.
 4. Waiting: trainers and scenes, once the owner approves rosters and text.
    Then native tests that run each registered scene, and ChatGPT QA
    emulator cases for each row above.
+
+## Known gap: running from a scripted battle
+
+`B_RUN_TRAINER_BATTLE` is `TRUE`, so the player can Run from a trainer battle,
+which forfeits. `BattleScript_ForfeitBattleGaveMoney` (`battle_scripts_1.s`)
+runs `getmoneyreward` without checking `B_FLAG_NO_WHITEOUT`, so a forfeit
+takes whiteout money even in a scripted battle (SOURCE). The test runner has no
+Run action, so this path cannot be executed natively.
+
+Owner decision (2026-10-16): the player cannot run from a scripted battle;
+ordinary trainer battles keep forfeiting. The fix is one line in
+`CanPlayerForfeitNormalTrainerBattle()` (`src/battle_main.c`, shared). It is
+claimed in #15 and waits for Codex's acknowledgement. Its native test already
+fails before the fix and is held back until then.
