@@ -199,9 +199,9 @@ def daemon(args):
         "differentFile": elf_symbol(args.elf, "gDifferentSaveFile"),
         "mainCallbacks": {
             name: elf_symbol(args.elf, name)
-            for name in ("CB2_InitTitleScreen", "MainCB2",
-                         "CB2_InitMainMenu", "CB2_MainMenu",
-                         "CB2_ContinueSavedGame")
+            for name in ("CB2_InitTitleScreen", "CB2_InitMainMenu",
+                         "CB2_MainMenu", "CB2_ContinueSavedGame",
+                         "CB2_Overworld")
         },
         "callbacks": {
             name: elf_symbol(args.elf, name)
@@ -1064,11 +1064,18 @@ def q2_reset_continue(args):
 
     observed_title = False
     observed_main = False
+    before_callback = before["menu"]["mainCallback2"]
     for i in range(22):
         sample, frame = save_probe(
             args, f"title-102-title-poll-{i+1}", require_position=False)
         phase = sample["menu"]["mainPhase"]
-        if phase in ("CB2_InitTitleScreen", "MainCB2", "CB2_InitMainMenu"):
+        if phase in ("CB2_InitTitleScreen", "CB2_InitMainMenu"):
+            observed_title = True
+        if (phase == "other" and
+                sample["menu"]["mainCallback2"] != before_callback):
+            # title_screen.c uses a local MainCB2 name that multiple
+            # source files share. Never guess one of their ELF addresses;
+            # require distinct main callback + saved Continue below.
             observed_title = True
         if phase == "CB2_MainMenu":
             if not observed_title:
@@ -1077,7 +1084,7 @@ def q2_reset_continue(args):
                 raise Blocked("Main menu did not detect a valid saved game")
             observed_main = True
             break
-        if observed_title and phase in ("MainCB2", "CB2_InitTitleScreen"):
+        if observed_title and phase in ("other", "CB2_InitTitleScreen"):
             # On real title screen, START/A advances to main menu.
             if i in (3, 8, 13):
                 qa_key(args.window, "Return", wait=1.6)
@@ -1096,9 +1103,7 @@ def q2_reset_continue(args):
         phase = sample["menu"]["mainPhase"]
         if phase == "CB2_MainMenu" and i >= 9:
             raise Blocked("Continue A did not transition out of main menu")
-        if phase not in ("CB2_MainMenu", "CB2_InitMainMenu",
-                         "CB2_InitTitleScreen", "MainCB2",
-                         "CB2_ContinueSavedGame"):
+        if phase == "CB2_Overworld":
             # A non-menu field callback is expected only AFTER the
             # graphical Continue action; now check reloaded gameplay RAM.
             try:
