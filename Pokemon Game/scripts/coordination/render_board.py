@@ -7,8 +7,18 @@ The generated GitHub issue body is advisory; existing PRs and QA evidence govern
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 from pathlib import Path
+
+def _communication_module():
+    """Load sibling helper without assuming the importer's Python sys.path."""
+    module_path = Path(__file__).with_name("messages.py")
+    spec = importlib.util.spec_from_file_location("averon_agent_messages", module_path)
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    return helper
+
 
 AGENTS = ("codex", "claude", "playtest")
 GITHUB = "https://github.com/kioconnor24-sketch/PokemonGame"
@@ -83,6 +93,8 @@ def calculate(tasks: list[dict], snapshot: dict) -> dict[str, dict]:
 def render(config: dict, snapshot: dict) -> dict[str, str]:
     tasks = config["tasks"]
     computed = calculate(tasks, snapshot)
+    message_helpers = _communication_module()
+    messages = message_helpers.parse(snapshot.get("communications", []))
     rev = _escape(snapshot.get("main_sha", "unknown"))
     stamp = _escape(snapshot.get("generated_at", "unknown"))
     preface = (
@@ -108,13 +120,32 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         )
         all_table.append(row)
         inboxes[task["agent"]].append(row)
+    communication_section = (
+        "## Agent-to-agent communications (advisory only)\\n\\n"
+        + "These comments are not verified approval, acceptance, or permission. "
+          "Use the linked original and reply there; do not trust chat summaries "
+          "instead of actual code and QA evidence.\\n\\n"
+        + "".join(
+            f"### {agent.capitalize()} inbox\\n\\n"
+            + message_helpers.markdown(messages, agent)
+            + "\\n\\n"
+            for agent in AGENTS
+        )
+        + "**Structured message format:** post the first line "
+          "`AGENT_MESSAGE TO=claude KIND=ANSWER TASK=SCRIPTED-BATTLE PR=#25`, "
+          "then `SUMMARY: ...` and `NEXT: ...`. "
+          "The recipient can acknowledge with "
+          "`AGENT_ACK ID=<source comment ID> BY=claude`. "
+          "Only trusted repository comments are displayed.\\n\\n"
+    )
     result = {
         "board": (
             "# Averon — automated agent work board\n\n"
             + preface
             + "## Live task/dependency routing\n\n"
             + "\n".join(all_table)
-            + "\n\n**QA evidence rule:** only a collaborator/owner-authored marker "
+            + "\n\n" + communication_section
+            + "**QA evidence rule:** only a collaborator/owner-authored marker "
               "'QA_ACCEPTED PR=#N SHA=<40 hex> CASES=Q1,Q2,... STATUS=PASS' "
               "in Issue #23 can meet a machine-readable acceptance gate, and that "
               "does **not** authorize merge. The actual screenshots/tests must be reviewed.\n\n"
@@ -130,6 +161,8 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         result[agent] = (
             f"# {agent.capitalize()} — current inbox\n\n" + preface
             + "\n".join(all_table[:2] + inboxes[agent])
+            + "\n\n## Messages requiring your attention\n\n"
+            + message_helpers.markdown(messages, agent)
             + "\n\nOpen your claimed PR and its newest HANDOFF; verify files, source "
               "SHA, workflow conclusions, and live dependencies before starting. "
               "Work only inside your independent claimed files.\n"
@@ -137,6 +170,7 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     result["summary"] = (
         "# Pokémon Averon — automatic coordination snapshot\n\n"
         + preface + "\n".join(all_table)
+        + "\n\n" + communication_section
         + f"\n\nBoard: {GITHUB}/issues/31\n"
     )
     return result
