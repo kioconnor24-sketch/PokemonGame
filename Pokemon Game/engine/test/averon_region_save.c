@@ -14,6 +14,9 @@
 #include "constants/heal_locations.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
+#include "data/map_group_count.h"
+
+extern const struct MapHeader *const *const gMapGroups[];
 
 // Real flash tests for the two-region save format (averon_region_save.c):
 // round trip, legacy migration, corruption, rollback, power loss and the
@@ -415,6 +418,7 @@ enum
     BAD_HEAL_RANGE,
     BAD_HEAL_MAX,
     BAD_WARP_GROUP,
+    BAD_WARP_DISABLED_GROUP,
     BAD_WARP_MAP,
     BAD_WARP_INDEX,
     BAD_WARP_COORDS,
@@ -454,6 +458,12 @@ TEST("Averon region save rejects CRC-valid semantic corruption and loads the old
     case BAD_HEAL_RANGE:     record[36] = NUM_HEAL_LOCATIONS; record[37] = 0; break;
     case BAD_HEAL_MAX:       record[38] = 0xFF; record[39] = 0xFF; break;
     case BAD_WARP_GROUP:     record[20] = MAP_GROUPS_COUNT; break;
+    case BAD_WARP_DISABLED_GROUP:
+        // These IDs are in range, but Kanto's group is not linked. Reseal
+        // the record below so only the missing group can reject the warp.
+        record[20] = MAP_GROUP(MAP_PALLET_TOWN);
+        record[21] = MAP_NUM(MAP_PALLET_TOWN);
+        break;
     case BAD_WARP_MAP:       record[21] = 0x7F; break;
     case BAD_WARP_INDEX:     record[22] = 0x7F; record[23] = 0; record[24] = 0xFF; record[25] = 0xFF; record[26] = 0xFF; record[27] = 0xFF; break;
     case BAD_WARP_COORDS:    record[24] = 0x7F; break; // x = 127, outside Saltmere
@@ -679,6 +689,32 @@ TEST("Averon region save power loss at any sector write keeps the last whole slo
             }
         }
     }
+}
+
+TEST("Averon region adapters reject disabled map groups without changing the return warp")
+{
+    struct AveronRegionState before, after;
+    struct WarpData warp = {MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), WARP_ID_NONE, 18, 18};
+    bool32 indexed = FALSE;
+    PARAMETRIZE { indexed = FALSE; }
+    PARAMETRIZE { indexed = TRUE; }
+
+    // Pallet Town still has a numeric ID and nonzero group count while the
+    // Kanto group is disabled. Bounds checks alone cannot make it safe.
+    EXPECT_LT(MAP_GROUP(MAP_PALLET_TOWN), MAP_GROUPS_COUNT);
+    EXPECT_LT(MAP_NUM(MAP_PALLET_TOWN), MAP_GROUP_COUNT[MAP_GROUP(MAP_PALLET_TOWN)]);
+    EXPECT_EQ(gMapGroups[MAP_GROUP(MAP_PALLET_TOWN)], NULL);
+    AveronRegionSave_InitNewGame();
+    EXPECT(AveronRegion_SetReturnWarp(AVERON_SAVE_REGION_SINNOH, &warp));
+    EXPECT(AveronRegionSave_GetState(&before));
+
+    warp = (struct WarpData){MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN),
+        indexed ? 0 : WARP_ID_NONE, indexed ? -1 : 1, indexed ? -1 : 1};
+    EXPECT(!AveronRegion_IsWarpShapeValid(&warp));
+    EXPECT(!AveronRegion_SetReturnWarp(AVERON_SAVE_REGION_SINNOH, &warp));
+    EXPECT(AveronRegionSave_GetState(&after));
+    EXPECT_EQ(memcmp(&before, &after, sizeof(before)), 0);
+    AveronRegionSave_InitNewGame();
 }
 
 TEST("Averon region adapters keep both badge banks independent and fail closed")

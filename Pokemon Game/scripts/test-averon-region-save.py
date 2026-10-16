@@ -74,7 +74,7 @@ CONTRACT = [
     ("include/global.h", "u8 filler_90[", 0),
     ("include/global.h", "ALIGNED(4) u8 averonRegionRecord[64];\n}; /* max size 1624 bytes */", 1),
     ("src/save.c", "AveronRegionSave_Seal(gSaveCounter);", 2),
-    ("src/save.c", "if (AveronRegionSave_IsWriteBlocked())", 5),
+    ("src/save.c", "if (AveronRegionSave_IsWriteBlocked())", 8),
     ("src/save_failed_screen.c", "if (AveronRegionSave_IsWriteBlocked())", 1),
     ("src/save.c", "CheckRegionSlot(0, saveSlot1Counter, &unsupported)", 1),
     ("src/save.c", "CheckRegionSlot(1, saveSlot2Counter, &unsupported)", 1),
