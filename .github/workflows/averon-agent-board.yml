@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   route:
-    if: github.event_name != 'issue_comment' || github.event.issue.number == 23
+    if: github.event_name != 'issue_comment' || github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
@@ -84,10 +84,32 @@ jobs:
             } catch (error) {
               core.warning('QA comments unavailable: ' + error.message);
             }
+            // Read only explicitly structured, trusted collaboration comments.
+            // These are DISPLAY-ONLY; they cannot authorize merges, QA, or edits.
+            const communications = [];
+            const messageSources = [...new Set([15, 23, ...numbers])];
+            for (const sourceNumber of messageSources) {
+              try {
+                const sourceComments = await github.paginate(github.rest.issues.listComments,{
+                  owner, repo, issue_number:sourceNumber, per_page:100
+                });
+                for (const note of sourceComments) {
+                  if (!['OWNER','MEMBER','COLLABORATOR'].includes(note.author_association)) continue;
+                  const first = (note.body || '').split(/\r?\n/)[0].trim();
+                  if (!first.startsWith('AGENT_MESSAGE ') && !first.startsWith('AGENT_ACK ')) continue;
+                  communications.push({
+                    id:note.id, html_url:note.html_url, body:(note.body || '').slice(0,1800),
+                    author_association:note.author_association, created_at:note.created_at
+                  });
+                }
+              } catch (error) {
+                core.warning('Agent messages unavailable for #'+sourceNumber+': '+error.message);
+              }
+            }
             const {data: main} = await github.rest.repos.getBranch({owner,repo,branch:'main'});
             fs.writeFileSync('/tmp/averon-board-snapshot.json',JSON.stringify({
               main_sha:main.commit.sha, generated_at:new Date().toISOString(),
-              pull_requests,qa_signoffs
+              pull_requests,qa_signoffs,communications
             },null,2));
       - name: Render read-only inbox files and summary
         shell: bash
