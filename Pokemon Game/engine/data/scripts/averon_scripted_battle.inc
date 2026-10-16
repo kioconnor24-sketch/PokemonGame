@@ -1,11 +1,11 @@
 @ Averon scripted-battle macros: story losses, the operative chain and the
 @ Gym ambush. Natives live in src/averon_scripted_battle.c.
 @
-@ NOT YET REGISTERED: nothing in event_scripts.s includes this file, and
-@ B_FLAG_NO_WHITEOUT is still 0 in include/config/battle.h, so in the ROM a
-@ loss still whites out. Registration waits for QUEST #14 to merge and for an
-@ explicit flag handoff with Codex (Issue #15). Native tests include this
-@ file directly.
+@ data/event_scripts.s includes this file right after the constants, so every
+@ script can use the macros. B_FLAG_NO_WHITEOUT (include/config/battle.h) is
+@ the RAM-only FLAG_SPECIAL_FLAG_UNUSED_0x4003: never saved, and cleared by
+@ every reset before a save is loaded. No scene uses these macros yet; the
+@ scenes wait for approved trainers and text.
 @
 @ Rules every caller follows:
 @ - Keep each sequence inside one locked script so the game cannot be saved

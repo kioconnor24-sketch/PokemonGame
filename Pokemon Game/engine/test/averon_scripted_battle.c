@@ -51,9 +51,9 @@ static void ExpectPartyFullyHealed(void)
 
 TEST("Averon scripted battle tests run with a real no-whiteout flag")
 {
-    // config/test.h maps B_FLAG_NO_WHITEOUT to a test-only flag. Without it the
-    // flag is 0, FlagSet does nothing and the leak checks would pass vacuously.
-    EXPECT_NE(B_FLAG_NO_WHITEOUT, 0);
+    // The release config uses this RAM-only special flag. If it were 0, FlagSet
+    // would do nothing and the leak checks would pass vacuously.
+    EXPECT_EQ(B_FLAG_NO_WHITEOUT, FLAG_SPECIAL_FLAG_UNUSED_0x4003);
     FlagSet(B_FLAG_NO_WHITEOUT);
     EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), TRUE);
     FlagClear(B_FLAG_NO_WHITEOUT);
@@ -202,12 +202,11 @@ TEST("Averon scripted battle natives tolerate a repeated Begin and a Finish with
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 }
 
-// Integration candidate for the release B_FLAG_NO_WHITEOUT (needs Codex's
-// handoff before config/battle.h changes): a special flag lives in RAM only,
+// The release B_FLAG_NO_WHITEOUT is a special flag, which lives in RAM only,
 // so a set flag can never be restored from a save, while badges are.
 TEST("Averon RAM-only special flag is not restored from a save but the badge is")
 {
-    const u32 candidate = FLAG_SPECIAL_FLAG_UNUSED_0x4003;
+    const u32 candidate = B_FLAG_NO_WHITEOUT;
     CheckForFlashMemory();
     EXPECT_EQ(gFlashMemoryPresent, TRUE);
     if (!gFlashMemoryPresent)
