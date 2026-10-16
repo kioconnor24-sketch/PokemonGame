@@ -25,7 +25,14 @@ concurrency:
 
 jobs:
   route:
-    if: github.event_name != 'issue_comment' || github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null
+    # Agent inboxes only parse these structured comment types; ordinary PR
+    # chatter/CI handoffs should not fan out into full GitHub API snapshots.
+    if: >-
+      github.event_name != 'issue_comment' ||
+      ((github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null) &&
+       (startsWith(github.event.comment.body, 'AGENT_MESSAGE ') ||
+        startsWith(github.event.comment.body, 'AGENT_ACK ') ||
+        (github.event.issue.number == 23 && contains(github.event.comment.body, 'QA_ACCEPTED PR=#'))))
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
