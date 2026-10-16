@@ -8400,7 +8400,8 @@ static void Cmd_givecaughtmon(void)
                  && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) != ITEM_NONE)
                     heldElsewhere = TRUE;
             }
-            if (!heldElsewhere && lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES)
+            if (!heldElsewhere && !caughtItem->preservedElsewhere
+             && lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES)
             {
                 SetMonData(caughtMon, MON_DATA_HELD_ITEM, &lostItem);  // Restore non-berry items
                 caughtItem->heldOrigin = originalOrigin;
