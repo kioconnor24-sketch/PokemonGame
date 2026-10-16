@@ -122,6 +122,24 @@ class ObserverTests(unittest.TestCase):
                 with self.assertRaises(qa.Blocked):
                     qa.require_q2_complete(changed)
 
+    def test_title_ready_requires_exact_active_title_phase_three_task(self):
+        tasks = bytearray(16 * 40)
+        target = 0x08006000
+        struct.pack_into("<I", tasks, 2*40, target | 1)
+        tasks[2*40 + 4] = 0
+        self.assertFalse(qa.title_input_ready(tasks, target))
+        tasks[2*40 + 4] = 1
+        self.assertTrue(qa.title_input_ready(tasks, target))
+        self.assertFalse(qa.title_input_ready(tasks, 0x08006020))
+        tasks[2*40 + 4] = 0
+        struct.pack_into("<I", tasks, 12*40, target)
+        tasks[12*40 + 4] = 1
+        self.assertTrue(qa.title_input_ready(tasks, target | 1))
+
+    def test_title_ready_rejects_unverified_task_record_size(self):
+        with self.assertRaisesRegex(qa.Blocked, "exactly 640"):
+            qa.title_input_ready(b"\x00" * 639, 0x08006000)
+
     def test_actual_saveblock_offsets(self):
         # global.h: pos.x/y 0/2; location group/map/warp 4/5/6.
         header = struct.pack("<hhbbbxhh", 13, 16, 76, 9, 1, -1, -1)
