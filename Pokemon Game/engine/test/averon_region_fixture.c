@@ -1044,3 +1044,84 @@ TEST("Averon region fixture real whiteout heals at existing respawns and survive
     }
     ExerciseRestoredRegionQueries(badgeMask, 0xA5);
 }
+
+TEST("Averon region fixture interrupted whiteout save recovers one coherent older slot")
+{
+    u32 healer;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; }
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    // Remove each physical sector in turn, not just the first sector. A
+    // damaged latest slot must never mix healed/new position with old data.
+    for (u32 sectorOffset = 0; sectorOffset < NUM_SECTORS_PER_SLOT; ++sectorOffset)
+    {
+        ClearSaveData();
+        Save_ResetSaveCounters();
+        ClearBag();
+        EXPECT(AddBagItem(ITEM_GREAT_BALL, 4));
+        memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
+        ZeroPlayerPartyMons();
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+        CreateRandomMonWithIVs(mon, SPECIES_PIPLUP, 12, 0);
+        u32 hp = 1, status = STATUS1_POISON;
+        SetMonData(mon, MON_DATA_HP, &hp);
+        SetMonData(mon, MON_DATA_STATUS, &status);
+        CalculatePlayerPartyCount();
+        SetRegionLegacyState(0xA5, 0x53, healer, 9876);
+        SetWarpDestination(MAP_GROUP(MAP_COASTALMEADOW), MAP_NUM(MAP_COASTALMEADOW), -1, 18, 22);
+        WarpIntoMap();
+        VarSet(VAR_BRINEY_LOCATION, 0);
+        FlagSet(FLAG_SYS_USE_STRENGTH);
+        struct Pokemon previousParty[PARTY_SIZE];
+        memcpy(previousParty, gParties[B_TRAINER_PLAYER], sizeof(previousParty));
+        EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+        u32 previousCounter = gSaveCounter;
+        hp = 0;
+        SetMonData(mon, MON_DATA_HP, &hp);
+        DoWhiteOut();
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
+        EXPECT_EQ(FlagGet(FLAG_SYS_USE_STRENGTH), FALSE);
+        struct WarpData newPosition = gSaveBlock1Ptr->location;
+        struct Pokemon healedParty[PARTY_SIZE];
+        memcpy(healedParty, gParties[B_TRAINER_PLAYER], sizeof(healedParty));
+        EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+        u16 physicalSector = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS) + sectorOffset;
+        EXPECT_EQ(EraseFlashSector(physicalSector), 0);
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_ERROR);
+        EXPECT_EQ(gSaveCounter, previousCounter);
+        EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_COASTALMEADOW));
+        EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_COASTALMEADOW));
+        EXPECT_EQ(gSaveBlock1Ptr->pos.x, 18);
+        EXPECT_EQ(gSaveBlock1Ptr->pos.y, 22);
+        EXPECT_EQ(memcmp(previousParty, gParties[B_TRAINER_PLAYER], sizeof(previousParty)), 0);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HP), 1);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_STATUS), STATUS1_POISON);
+        EXPECT_EQ(FlagGet(FLAG_SYS_USE_STRENGTH), TRUE);
+        ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 4);
+        ExerciseRestoredRegionQueries(0xA5, 0x81);
+        struct WarpReadFixture reader = {0};
+        EXPECT_EQ(ValidateSavedHealRequest(&gSaveBlock1Ptr->lastHealLocation, &reader), TRUE);
+        // A fresh real whiteout and clean save/reload can recover afterward.
+        hp = 0;
+        SetMonData(mon, MON_DATA_HP, &hp);
+        DoWhiteOut();
+        EXPECT_EQ(memcmp(&newPosition, &gSaveBlock1Ptr->location, sizeof(newPosition)), 0);
+        EXPECT_EQ(memcmp(healedParty, gParties[B_TRAINER_PLAYER], sizeof(healedParty)), 0);
+        EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+        hp = 0;
+        SetMonData(mon, MON_DATA_HP, &hp);
+        gSaveBlock1Ptr->pos.x = -1;
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        EXPECT_EQ(memcmp(&newPosition, &gSaveBlock1Ptr->location, sizeof(newPosition)), 0);
+        EXPECT_EQ(gSaveBlock1Ptr->pos.x, newPosition.x);
+        EXPECT_EQ(gSaveBlock1Ptr->pos.y, newPosition.y);
+        EXPECT_EQ(memcmp(healedParty, gParties[B_TRAINER_PLAYER], sizeof(healedParty)), 0);
+        EXPECT_EQ(FlagGet(FLAG_SYS_USE_STRENGTH), FALSE);
+        ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 4);
+    }
+}
