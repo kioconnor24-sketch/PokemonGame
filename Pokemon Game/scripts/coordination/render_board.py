@@ -99,7 +99,15 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     rev = _escape(snapshot.get("main_sha", "unknown"))
     stamp = _escape(snapshot.get("generated_at", "unknown"))
     preface = (
-        f"> **Generated {stamp}; main {rev}.** Read-only GitHub snapshot; not a "
+        "> **STATIC REGISTRY — NOT LIVE FILE OWNERSHIP:** This automatically "
+        "rewritten board and its inboxes use the historical tasks.json task "
+        "registry. **Agent labels, backlog suggestions and dependency labels "
+        "are NOT current assignments, authorization to edit, or a file "
+        "claim.** Read [active assignments and exact claims]("
+        + GITHUB + "/issues/15), then verify current PR diffs and checks "
+        "before any work. Manual edits to Issue #31 will be overwritten by "
+        "the next generated snapshot.\n\n"
+        + f"> **Generated {stamp}; main {rev}.** Read-only GitHub snapshot; not a "
         "replacement for Issue #15/QA #23, direct review, or owner decisions.\n\n"
         "> **HARD FREEZE:** No new temporary or production maps, region geography, "
         "unapproved story, Gym, encounter placement, trainer roster, level curve or art. "
@@ -120,7 +128,7 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         "specified resume condition. No new maps before owner approval. "
         "GitHub comments never auto-start agents.\n\n"
     )
-    all_table = ["| Task | Owner | Status | Source | Next action |",
+    all_table = ["| Task | Legacy registry agent (NOT active file owner) | Historical dependency status | Source | Historical backlog note (VERIFY #15 FIRST) |",
                  "| --- | --- | --- | --- | --- |"]
     inboxes: dict[str, list[str]] = {a: [] for a in AGENTS}
     for task in tasks:
@@ -137,9 +145,9 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         # Explicit next alternative in the same board row keeps a blocked
         # shared merge from becoming an idle developer session.
         fallback = task.get("fallback_order", [])
-        next_action = task["next"]
+        next_action = "HISTORICAL ONLY — verify current #15 claim and PR scope first. " + task["next"]
         if fallback and not d["status"].startswith("MERGED"):
-            next_action += f" **While waiting:** {fallback[0]}."
+            next_action += f" **While waiting:** historical fallback only; recheck #15 first: {fallback[0]}."
         row = (
             f"| {_escape(task['id'])} | {_escape(task['agent'])} | "
             f"{_escape(d['status'])} | {source} | {_escape(next_action)} |"
@@ -166,9 +174,9 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     )
     result = {
         "board": (
-            "# Averon — automated agent work board\n\n"
+            "# Averon — historical automated task snapshot (not active routing)\n\n"
             + preface
-            + "## Live task/dependency routing\n\n"
+            + "## Historical task/dependency snapshot — never claim files from this table\n\n"
             + "\n".join(all_table)
             + "\n\n" + communication_section
             + "**QA evidence rule:** only a collaborator/owner-authored marker "
@@ -176,7 +184,7 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
               "in Issue #23 can meet a machine-readable acceptance gate, and that "
               "does **not** authorize merge. The actual screenshots/tests must be reviewed.\n\n"
             + "**Development vs. integration:** a status of DEVELOPMENT OPEN; MERGE GATED means "
-              "the assigned engineer can continue code, branch-local builds and tests in own "
+              "an engineer with a verified current #15 claim can continue code and tests in their own "
               "file-disjoint areas NOW. Only merging, shared-file collision and actual gameplay "
               "QA must wait. Do not stop a session merely because another PR is open.\n\n"
             + "**Shared-file rule:** even after prerequisite PRs merge, an exclusive "
@@ -189,16 +197,16 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     }
     for agent in AGENTS:
         result[agent] = (
-            f"# {agent.capitalize()} — current inbox\n\n" + preface
+            f"# {agent.capitalize()} — historical inbox (NOT current assignments)\n\n" + preface
             + "\n".join(all_table[:2] + inboxes[agent])
-            + "\n\n## Messages requiring your attention\n\n"
+            + "\n\n## Advisory messages (verify original claims; may be stale)\n\n"
             + message_helpers.markdown(messages, agent)
             + "\n\nOpen your claimed PR and its newest HANDOFF; verify files, source "
               "SHA, workflow conclusions, and live dependencies before starting. "
               "Work only inside your independent claimed files.\n"
         )
     result["summary"] = (
-        "# Pokémon Averon — automatic coordination snapshot\n\n"
+        "# Pokémon Averon — historical coordination snapshot, NOT current assignment\n\n"
         + preface + "\n".join(all_table)
         + "\n\n" + communication_section
         + f"\n\nBoard: {GITHUB}/issues/31\n"

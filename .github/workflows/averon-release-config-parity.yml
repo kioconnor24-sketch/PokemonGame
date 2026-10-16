@@ -1,0 +1,92 @@
+name: Averon release configuration parity
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/engine/**"
+      - "Pokemon Game/scripts/test-averon-release-config-parity.py"
+      - ".github/workflows/averon-release-config-parity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Pokemon Game/engine/**"
+      - "Pokemon Game/scripts/test-averon-release-config-parity.py"
+      - ".github/workflows/averon-release-config-parity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: averon-release-parity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  production-config:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+        working-directory: "Pokemon Game"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install preprocessing and host-test toolchains
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential gcc-arm-none-eabi libnewlib-arm-none-eabi python3
+      - name: Generate production header prerequisites
+        run: |
+          set -euo pipefail
+          make -C engine/tools/mapjson
+          make -C engine/tools/jsonproc
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import shutil
+          import subprocess
+          import tempfile
+
+          engine = Path('engine').resolve()
+          # Use unchanged checked-in map inputs, with assembly outputs confined
+          # to a disposable directory. No new maps/layouts or ROM assets.
+          with tempfile.TemporaryDirectory(dir=os.environ['RUNNER_TEMP']) as output:
+              scratch = Path(output)
+              (scratch / 'tools/mapjson').mkdir(parents=True)
+              (scratch / 'src/data').mkdir(parents=True)
+              shutil.copyfile(engine / 'tools/mapjson/required_map_defines.json',
+                              scratch / 'tools/mapjson/required_map_defines.json')
+              # mapjson also cleans heal metadata relative to its cwd. Keep
+              # that side effect entirely outside the checked-out engine.
+              shutil.copyfile(engine / 'src/data/heal_locations.json',
+                              scratch / 'src/data/heal_locations.json')
+              subprocess.run([
+                  str(engine / 'tools/mapjson/mapjson'), 'groups', 'emerald',
+                  str(engine / 'data/maps/map_groups.json'),
+                  *map(str, sorted((engine / 'data/maps').glob('*/map.json'))),
+                  output, str(engine / 'include/constants'),
+              ], cwd=scratch, check=True)
+          subprocess.run([
+              str(engine / 'tools/jsonproc/jsonproc'),
+              str(engine / 'src/data/region_map/region_map_sections.json'),
+              str(engine / 'src/data/region_map/region_map_sections.constants.json.txt'),
+              str(engine / 'include/constants/region_map_sections.h'),
+          ], check=True)
+          PY
+          git diff --exit-code -- engine
+      - name: Execute production modes and deliberate regressions
+        run: |
+          set -euo pipefail
+          python3 scripts/test-averon-release-config-parity.py \
+            --engine engine --mutations --report "$RUNNER_TEMP/release-parity-results.json" \
+            2>&1 | tee "$RUNNER_TEMP/release-parity-tests.log"
+      - name: Attach text evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-release-config-parity
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/release-parity-results.json
+            ${{ runner.temp }}/release-parity-tests.log
