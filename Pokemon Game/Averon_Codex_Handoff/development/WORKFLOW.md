@@ -2,6 +2,19 @@
 
 **Goal:** keep the repository organized with tiny cleanup at every coding session, not periodic major cleanups. Applies to Codex and Claude as peer co-lead developers, both ChatGPT agents, and other contributors. This is the only active *process* manual. For the division of responsibilities, read [AGENT_ROLES.md](AGENT_ROLES.md) and the live [team hub #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
 
+## Current owner directive: parallel development first
+
+**The owner has clarified that frequent Codex/Claude waiting is harming progress.** See [the owner-directed concurrency correction in #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6206878015). This section supersedes older *one-PR-per-developer*, "wait for prerequisite merge before coding" and broad "blocked task" language below **only for independently owned development**. It does **not** waive the creative freeze, shared-source claims, independent QA, protected branch checks or final merge criteria.
+
+- **Develop now, integrate later.** A prerequisite such as QUEST means a downstream feature cannot claim *integrated/playable/merged* status until the upstream feature passes its required checks. It does **not** stop coding, negative native tests, synthetic in-memory fixtures, code review, or branch-local GBA builds for a file-disjoint, approved module. In particular, Codex can harden TWO-REGION's isolated pure branch while #14 awaits graphical QA; Claude can extend SCRIPTED-BATTLE's owned files and build a separately claimed, unplaced generic engine module while #14 awaits integration.
+- **No artificial global one-PR limit.** Maintain one **primary** development PR per lead and preferably just one secondary disjoint coding PR when it materially advances the game. An additional narrowly scoped, independent track is permitted **without waiting for another lead's merge or manager permission**. Each feature gets its own branch, exact path claim, tests, and handoff. Avoid duplicate implementations or churn; don't treat this as permission to start every backlog item.
+- **Claims are notifications when disjoint.** The developer posts exact paths/functions/IDs, checks the current claims/PRs, then starts an already-approved file-disjoint feature immediately. No need to wait for an "ACK" from another agent if no protected overlap and no reserved creative/architecture decision is involved. Questions are asynchronous; send a directed `AGENT_MESSAGE` and work on independent files meanwhile.
+- **Serialize only the collision.** Before touching `event_scripts.s`, `config/battle.h`, `flags.h`, `vars.h`, `save.c`, shared save/badge/region/overworld interfaces or the same generator input/output, obtain the exact exclusive handoff. If that file is busy, do not edit *that file*, but keep implementing/tests in owned nonconflicting files. A temporary integrator branch can rehearse the combination; don't manually copy another agent's commits into `main`.
+- **Merge/QA gates remain real.** QUEST #14 needs independent game QA evidence to merge; #25's existing approved two shared-line edits do not permit a simultaneous protected-file merge while #14 is open. Codex and Claude may still prepare and test both modules independently. The `exclusive-files`, `file-guard`, applicable native, save and runtime checks are unchanged. Build results cannot be relabeled as gameplay or Delta acceptance.
+- **Creative freeze remains absolute.** No new/temporary production maps, regional geography, story scenes, trainer teams, legendary species/placements, art, saved identifier allocations or other owner-reserved content without separate specific approval. Only already-approved generic mechanics and test data may proceed.
+
+**Block the smallest thing possible:** a protected-file edit, an integrated merge or an actual creative decision—**never an entire developer's coding session** merely because another PR is not merged.
+
 ## 1. Only one authority for each kind of information
 
 | Concern | Authority | When updated |
@@ -20,12 +33,12 @@
 
 1. Preserve dirty checkout first. Fetch latest `main` and remote PR state, inspect checks, compare relevant changed files. Local/cloud instances do not share filesystem or chat history.
 2. If your own PR is open, resume it. Read its latest HANDOFF and fix applicable red CI. Don't create another PR for the same task merely because a session ended.
-3. Otherwise read TASKS.md in priority order; take the first READY task with satisfied dependencies and no file overlap with an active PR. Respect the currently claimed Codex and Claude scopes; check current PRs and the shared claim thread before modifying any overlapping source. Old branch/ownership references elsewhere in this file are historical.
+3. Otherwise read TASKS.md and the live issue board; start an independently claimed file-disjoint development task even if its *merge* dependency is pending. Only integration and protected-file writes wait for their gates. Respect the currently claimed Codex and Claude scopes; check current PRs and the shared claim thread before modifying any overlapping source. Old branch/ownership references elsewhere in this file are historical.
 4. Define a single executable target: expected player behavior, source files, test assertions, and known blockers. Claim by opening a draft PR after the first meaningful commit. Larger independent features may use a GitHub engineering Issue template, but Issues aren't mandatory for tiny fixes.
 5. Branch from fresh `main`: `codex/<feature>`, `claude/<feature>`, `chatgpt/<feature>`, or `contrib/<feature>`. Continue an existing PR on its existing branch. Avoid stacked PRs unless a real technical dependency makes them necessary.
-6. If no task is READY and nonoverlapping, report the exact blocker instead of inventing geography/story, making extra plans, or silently interfering.
+6. If one integration or file is blocked, continue any specifically approved, disjoint implementation/testing first. If no safe work exists, report the precise blocker instead of inventing geography/story.
 
-**WIP limit:** one coding PR per agent and at most one integration/operations PR. Two agents needing the same `flags.h`, save code, event scripts, or shared asset file must **serialize** the work and communicate in the PR.
+**WIP guidance, not a hard cap:** prefer one primary coding PR plus one useful disjoint secondary track per developer. Do not start redundant work, but do not stop merely because a different PR remains open. Exact protected-file edits still need one writer and a scoped handoff.
 
 ## 3. Development and verification
 
@@ -65,7 +78,7 @@ Unverified interactions / blockers:
 Next single concrete action:
 ```
 
-Every session leaves pushed recoverable work or an exact blocker, not a mysterious private workspace. If blocked, take an unrelated READY task next time; don't consume tokens repeating the same unsuccessful guess. PR comments replace constant shared-doc rewrites.
+Every session leaves pushed recoverable work or an exact blocker, not a mysterious private workspace. If a specific file, QA case or merge is blocked, keep progressing your own disjoint tests/code during the same session; don't repeat the same unsuccessful guess. PR comments replace constant shared-doc rewrites.
 
 ## 6. Ownership, schedules and maintenance
 
