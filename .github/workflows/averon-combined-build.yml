@@ -1,0 +1,75 @@
+name: Averon combined build and playtest readiness
+
+# Explicit opt-in: do not build both large feature branches on every chat comment.
+on:
+  workflow_dispatch:
+    inputs:
+      first_pr:
+        description: "First same-repo PR (0 for main-only)"
+        required: true
+        default: "14"
+        type: string
+      second_pr:
+        description: "Second same-repo PR (0 for main-only)"
+        required: true
+        default: "25"
+        type: string
+      graphical_smoke:
+        description: "Capture two graphical emulator boot frames (not gameplay acceptance)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: averon-combined-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  combined:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify two same-repo PRs and combine in temporary workspace
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FIRST_PR: ${{ inputs.first_pr }}
+          SECOND_PR: ${{ inputs.second_pr }}
+        run: bash "Pokemon Game/scripts/coordination/run_combined_build.sh" prepare
+      - name: Install existing ARM and optional graphical emulator dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3 \
+            mgba-sdl xvfb xdotool openbox imagemagick xauth
+      - name: Compile actual combined GBA engine, native and save tests
+        run: bash "Pokemon Game/scripts/coordination/run_combined_build.sh" test
+      - name: Limited graphical boot smoke
+        if: ${{ inputs.graphical_smoke }}
+        run: bash "Pokemon Game/scripts/coordination/run_combined_build.sh" smoke
+        env:
+          SDL_AUDIODRIVER: dummy
+          SDL_VIDEODRIVER: x11
+          LIBGL_ALWAYS_SOFTWARE: "1"
+      - name: Verify SHA, real test counts and honest readiness report
+        run: bash "Pokemon Game/scripts/coordination/run_combined_build.sh" report
+      - name: Attach logs, checksums and screenshots ONLY — no ROM/save
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-combined-readiness-evidence
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-integration/*.json
+            ${{ runner.temp }}/averon-integration/*.tsv
+            ${{ runner.temp }}/averon-integration/*.log
+            ${{ runner.temp }}/averon-integration/*.png
+          retention-days: 14
