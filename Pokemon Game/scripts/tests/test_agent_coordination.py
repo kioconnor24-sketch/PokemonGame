@@ -75,6 +75,16 @@ class BoardTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             MODULE.calculate(self.tasks, self.snap)
 
+    def test_large_epic_links_are_visible_without_releasing_gates(self):
+        self.tasks[0]["issue"] = 34
+        self.tasks[1]["issue"] = 35
+        self.tasks[2]["issue"] = 36
+        rendered = MODULE.render(self.conf, self.snap)
+        self.assertIn("[epic #34](https://github.com/kioconnor24-sketch/PokemonGame/issues/34)", rendered["board"])
+        self.assertIn("[epic #35](https://github.com/kioconnor24-sketch/PokemonGame/issues/35)", rendered["claude"])
+        self.assertIn("[epic #36](https://github.com/kioconnor24-sketch/PokemonGame/issues/36)", rendered["playtest"])
+        self.assertIn("BLOCKED ON Q", rendered["board"])
+
     def test_generated_board_says_no_auto_merge_or_map_work(self):
         result = MODULE.render(self.conf, self.snap)
         self.assertEqual(set(result), {"board", "codex", "claude", "playtest", "summary"})
