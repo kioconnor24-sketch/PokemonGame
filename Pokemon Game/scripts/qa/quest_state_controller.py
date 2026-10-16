@@ -361,10 +361,21 @@ def q1_offer(args):
     if cleared["notesStarted"]:
         raise Blocked("Quest started while declining/dismissing")
     key("x")
-    again, _ = observe("return-yes-selected", panel=True, menu=True)
-    if (again["notesStarted"] or again["notesRecorded"]
-            or again["notesRewarded"]):
-        raise Blocked("Quest started before return YES choice")
+    # In run 38843336625 the refreshed line was STILL drawing characters
+    # at 0.75 seconds, with no selector yet. Do not send blind extra A.
+    # Observe successive frames and wait for the real YES/NO to appear.
+    again = None
+    for attempt in range(10):
+        current, frame = observe(f"return-menu-wait-{attempt+1}", panel=True)
+        if (current["notesStarted"] or current["notesRecorded"]
+                or current["notesRewarded"]):
+            raise Blocked("Quest started before return YES choice")
+        if sample_menu(frame) >= 0.52:
+            again = current
+            break
+        time.sleep(0.75)
+    if again is None:
+        raise Blocked("Return YESNO never rendered without extra inputs")
     key("x")
     accepted, _ = observe("accept-waiting-text", panel=True, menu=False)
     if (not accepted["notesStarted"] or accepted["notesRecorded"]
