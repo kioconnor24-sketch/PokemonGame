@@ -1,4 +1,5 @@
 #include "global.h"
+#include "averon_region_progression.h"
 #include "event_data.h"
 #include "battle.h"
 #include "pokemon.h"
@@ -23,7 +24,8 @@ static bool32 IsAlwaysTrue(enum FieldMove fieldMove)
 
 static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 {
-    return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
+    // Averon: badge N under AVERON_BADGE_RULE; arg is the offset from Badge 1.
+    return AveronProgression_HasRuleBadge(gFieldMoveInfo[fieldMove].arg + 1);
 }
 
 static bool32 HasFieldLicense(enum FieldMove fieldMove)
