@@ -33,7 +33,8 @@ constant ROM data; no large stack or static EWRAM fixture is added.
 python3 scripts/check-averon-map-registry.py --engine engine --mutations --report /tmp/map-registry.json
 ```
 
-Executed locally: **76 groups, 951 pinned map IDs, 534 linked maps PASS**.
+Executed locally: **76 groups, 951 pinned map IDs, 534 linked maps PASS**:
+35 linked groups and 41 intentionally disabled groups.
 Ten in-memory mutations detected: group/map reorder, duplicate ID, missing map,
 symbol mismatch, mixed-region group, group/map overflow and object/warp-count
 overflow. A separate valid-boundary control accepts the last representable
@@ -63,13 +64,32 @@ python3 scripts/check-averon-map-registry.py --engine engine --mutations \
   --elf engine/pokeemerald-test.elf --report /tmp/map-registry-linked.json
 ```
 
-The first build rejected cross-enum sentinel comparisons under `-Werror`;
-the test now casts to unsigned before comparing values. The initial direct C
-references to local header symbols failed to link; exported group checks plus
-read-only ELF inspection provide that coverage without engine changes. These
-failed attempts are not counted as passing builds.
+Normal `make -j5 -O all` also **PASS**. The actual normal ELF independently
+matched all **534 header symbols**, and all **3 pointer mutations** were caught.
+Source/code tested at `9b40e538b7c0c936b9ebc10ea83ff1a4fd57f357`; subsequent
+evidence-only edits leave those C/Python/manifest inputs unchanged.
 
-A new normal GBA build and its separate ELF verification are still PENDING.
+```sh
+python3 scripts/check-averon-map-registry.py --engine engine --mutations \
+  --elf engine/pokeemerald.elf --report /tmp/map-registry-normal.json
+```
+
+| Normal build measurement | Bytes |
+| --- | ---: |
+| EWRAM used / free | 226,420 / 35,724 |
+| IWRAM used / free | 28,392 / 4,376 |
+| Linked ROM used / free | 26,729,436 / 6,824,996 |
+| Padded private ROM | 33,554,432 |
+
+ROM SHA256: `f118f53442d5610568c54486f78486d96ae43dfcf6e25860b9679c6e2f74dc40`.
+Object-symbol measurements place both test arrays in read-only data (`r`):
+608 + 2,136 = **2,744 bytes** in the test build; neither is a BSS/stack buffer.
+The normal game build excludes the test source entirely.
+
+Source-contract CI [38933734690](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38933734690)
+passed. Normal GBA/native CI is separately tracked on PR #63; do not infer a
+CI pass from local execution. Earlier compile/link failures were corrected only
+in these new test files and are not counted as successful builds.
 Existing standard native CI will compile/run these tests; the separate source
 workflow checks the source registry and stores input hashes without an ARM/ROM
 dependency. Later results must identify the actual tested source SHA.
