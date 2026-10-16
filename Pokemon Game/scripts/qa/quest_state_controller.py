@@ -100,9 +100,20 @@ class ReadOnlyGdb:
             phase = next(
                 (name for name, addr in symbols["callbacks"].items()
                  if (cb & ~1) == (addr & ~1)), "unknown")
+            callback2 = struct.unpack(
+                "<I", read(symbols["main"] + 4, 4))[0]
+            main_phase = next(
+                (name for name, addr in symbols["mainCallbacks"].items()
+                 if (callback2 & ~1) == (addr & ~1)), "other")
+            save_status = struct.unpack(
+                "<H", read(symbols["saveStatus"], 2))[0]
+            different = read(symbols["differentFile"], 1)[0]
             return dict(count=n, cursor=index, actions=actions[:n],
                         selected=actions[index] if n else None,
-                        saveCallback=f"0x{cb:08X}", savePhase=phase)
+                        saveCallback=f"0x{cb:08X}", savePhase=phase,
+                        mainCallback2=f"0x{callback2:08X}",
+                        mainPhase=main_phase, saveStatus=save_status,
+                        differentSaveFile=different)
         finally:
             self.command("c", reply=False)
 
@@ -179,6 +190,15 @@ def daemon(args):
         "count": elf_symbol(args.elf, "sNumStartMenuActions"),
         "actions": elf_symbol(args.elf, "sCurrentStartMenuActions"),
         "saveCallback": elf_symbol(args.elf, "sSaveDialogCallback"),
+        "main": elf_symbol(args.elf, "gMain"),
+        "saveStatus": elf_symbol(args.elf, "gSaveFileStatus"),
+        "differentFile": elf_symbol(args.elf, "gDifferentSaveFile"),
+        "mainCallbacks": {
+            name: elf_symbol(args.elf, name)
+            for name in ("CB2_InitTitleScreen", "MainCB2",
+                         "CB2_InitMainMenu", "CB2_MainMenu",
+                         "CB2_ContinueSavedGame")
+        },
         "callbacks": {
             name: elf_symbol(args.elf, name)
             for name in ("SaveConfirmInputCallback",
