@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "qa_issue": 23,
+  "board_issue": 31,
+  "policies": {
+    "creative_freeze": true,
+    "auto_merge": false,
+    "auto_agent_execution": false,
+    "shared_files_require_manual_handoff": true
+  },
+  "tasks": [
+    {
+      "id": "QUEST",
+      "agent": "codex",
+      "pr": 14,
+      "deps": [],
+      "qa_cases": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5"
+      ],
+      "next": "Epic #34: help QA establish deterministic existing-NPC access, fix only confirmed QUEST gameplay defects, then native/graphical acceptance and approved merge.",
+      "issue": 34
+    },
+    {
+      "id": "TWO-REGION",
+      "agent": "codex",
+      "branch": "codex/two-region-groundwork",
+      "deps": [
+        "QUEST"
+      ],
+      "requires_handoff": true,
+      "next": "Epic #34: existing 65/65 native-tested pure groundwork remains unregistered; integrate 8+8 badge/Fly/heal/save only after QUEST acceptance and exclusive shared-file coordination, no map files.",
+      "issue": 34
+    },
+    {
+      "id": "SCRIPTED-BATTLE",
+      "agent": "claude",
+      "pr": 25,
+      "deps": [
+        "QUEST"
+      ],
+      "requires_handoff": false,
+      "qa_cases": [
+        "SB-LOSS",
+        "SB-CLEANUP"
+      ],
+      "next": "Epic #35: owner-approved two shared lines ALREADY PUSHED; exclusive-files correctly blocks current #14 overlap. #25 remains draft until #14 QA acceptance and merge, then rebase and retest.",
+      "issue": 35
+    },
+    {
+      "id": "NATIVE-BASELINE",
+      "agent": "claude",
+      "pr": 29,
+      "deps": [],
+      "next": "Epic #35: MERGED #29 as 96dd43ef; baseline parser is now protected by standard CI 12/12 via #38. Continue with dependent #30; no further #29 edits needed.",
+      "issue": 35
+    },
+    {
+      "id": "NO-PRIMAL",
+      "agent": "claude",
+      "pr": 30,
+      "deps": [
+        "NATIVE-BASELINE"
+      ],
+      "next": "Epic #35: prerequisite #29 now MERGED; Claude updates existing #30 with exactly 45 source-matched primal-disabled expected failures, targeted native/build/review before merge.",
+      "issue": 35
+    },
+    {
+      "id": "QUEST-PLAYTEST",
+      "agent": "playtest",
+      "pr": 20,
+      "deps": [],
+      "next": "Epic #36: STOP blind fixed-keys overshoot; build an observable state-aware mGBA controller in QA #20 or provide Codex a precise minimum QA-access blocker; then run Q1–Q5.",
+      "issue": 36
+    }
+  ]
+}

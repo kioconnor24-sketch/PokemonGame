@@ -1,0 +1,138 @@
+name: Averon agent dispatch board
+# All code executed here comes only from trusted main, never a PR checkout.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, closed, ready_for_review, converted_to_draft, edited]
+  issue_comment:
+    types: [created]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "31 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+  checks: read
+
+concurrency:
+  group: averon-agent-board
+  cancel-in-progress: true
+
+jobs:
+  route:
+    if: github.event_name != 'issue_comment' || github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Read GitHub PRs, checks, and authorized QA signoffs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const {owner, repo} = context.repo;
+            const registry = JSON.parse(fs.readFileSync('Pokemon Game/scripts/coordination/tasks.json','utf8'));
+            const numbers = [...new Set(registry.tasks.filter(t => t.pr).map(t => t.pr))];
+            const pull_requests = [];
+            for (const number of numbers) {
+              try {
+                const {data: pr} = await github.rest.pulls.get({owner, repo, pull_number:number});
+                let checks = 'unknown';
+                try {
+                  const {data} = await github.rest.checks.listForRef({
+                    owner, repo, ref:pr.head.sha, per_page:100
+                  });
+                  const jobs = data.check_runs.filter(r => r.name !== 'route');
+                  const failed = jobs.some(r => ['failure','cancelled','timed_out',
+                    'action_required','startup_failure'].includes(r.conclusion));
+                  checks = failed ? 'failure' : jobs.length
+                    ? jobs.every(r => r.status === 'completed'
+                      && ['success','neutral','skipped'].includes(r.conclusion))
+                      ? 'success' : 'pending'
+                    : 'unknown';
+                } catch (error) {
+                  core.warning('Checks unavailable for PR #' + number + ': ' + error.message);
+                }
+                pull_requests.push({number, state:pr.state, merged:pr.merged, draft:pr.draft,
+                  head_sha:pr.head.sha, checks});
+              } catch (error) {
+                core.warning('PR #' + number + ' unavailable: ' + error.message);
+              }
+            }
+            const qa_signoffs = [];
+            try {
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner, repo, issue_number: registry.qa_issue, per_page:100
+              });
+              const pattern = /^QA_ACCEPTED PR=#(\d+) SHA=([0-9a-f]{40}) CASES=([A-Za-z0-9_,.-]+) STATUS=(PASS|FAIL)$/gm;
+              for (const c of comments) {
+                if (!['OWNER','MEMBER','COLLABORATOR'].includes(c.author_association)) continue;
+                let m;
+                pattern.lastIndex = 0;
+                while ((m = pattern.exec(c.body || '')) !== null) {
+                  qa_signoffs.push({pr:Number(m[1]),sha:m[2],cases:m[3].split(','),
+                    status:m[4],association:c.author_association});
+                }
+              }
+            } catch (error) {
+              core.warning('QA comments unavailable: ' + error.message);
+            }
+            // Read only explicitly structured, trusted collaboration comments.
+            // These are DISPLAY-ONLY; they cannot authorize merges, QA, or edits.
+            const communications = [];
+            const messageSources = [...new Set([15, 23, ...numbers])];
+            for (const sourceNumber of messageSources) {
+              try {
+                const sourceComments = await github.paginate(github.rest.issues.listComments,{
+                  owner, repo, issue_number:sourceNumber, per_page:100
+                });
+                for (const note of sourceComments) {
+                  if (!['OWNER','MEMBER','COLLABORATOR'].includes(note.author_association)) continue;
+                  const first = (note.body || '').split(/\r?\n/)[0].trim();
+                  if (!first.startsWith('AGENT_MESSAGE ') && !first.startsWith('AGENT_ACK ')) continue;
+                  communications.push({
+                    id:note.id, html_url:note.html_url, body:(note.body || '').slice(0,1800),
+                    author_association:note.author_association, created_at:note.created_at
+                  });
+                }
+              } catch (error) {
+                core.warning('Agent messages unavailable for #'+sourceNumber+': '+error.message);
+              }
+            }
+            const {data: main} = await github.rest.repos.getBranch({owner,repo,branch:'main'});
+            fs.writeFileSync('/tmp/averon-board-snapshot.json',JSON.stringify({
+              main_sha:main.commit.sha, generated_at:new Date().toISOString(),
+              pull_requests,qa_signoffs,communications
+            },null,2));
+      - name: Render read-only inbox files and summary
+        shell: bash
+        run: |
+          python3 "Pokemon Game/scripts/coordination/render_board.py" \
+            --registry "Pokemon Game/scripts/coordination/tasks.json" \
+            --snapshot "/tmp/averon-board-snapshot.json" \
+            --out "/tmp/averon-agent-inboxes"
+          cat "/tmp/averon-agent-inboxes/summary.md" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agent-inboxes
+          path: /tmp/averon-agent-inboxes/*.md
+          retention-days: 14
+      - name: Update one advisory GitHub dispatch issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const {owner,repo} = context.repo;
+            const config = JSON.parse(fs.readFileSync('Pokemon Game/scripts/coordination/tasks.json','utf8'));
+            const body = fs.readFileSync('/tmp/averon-agent-inboxes/board.md','utf8');
+            const {data: current} = await github.rest.issues.get({
+              owner,repo,issue_number:config.board_issue});
+            if (current.body !== body) await github.rest.issues.update({
+              owner,repo,issue_number:config.board_issue,body});
