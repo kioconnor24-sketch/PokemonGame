@@ -1,20 +1,29 @@
-# Averon — stable prioritized task queue
+# Pokémon Averon — stable prioritized task queue
 
-**This file is for order and dependencies, not daily status updates.** Actual ownership/current progress live in OPEN pull requests and their latest HANDOFF comment. Check current GitHub before taking a task; update this file only when a new task is approved, priorities/dependencies change, a block becomes permanent, or a milestone merges.
+> **UPDATED OWNER PRIORITY — PARALLEL IMPLEMENTATION:** Development and merge are different gates. Codex and Claude can each continue one primary and preferably one disjoint secondary coding PR *now*, with exact path claims that do not need an ACK for unclaimed, nonprotected files. QUEST acceptance prevents merging/integrating dependent shared features, **not coding or native-testing independent parts of TWO-REGION or SCRIPTED-BATTLE**. Stop only overlapping protected-file edits; keep the rest of the session productive. See [WORKFLOW.md](WORKFLOW.md#current-owner-directive-parallel-development-first). No change to creative freeze, owner-only canon/map scope, protected-file handoffs or independent QA requirements.
 
-**CURRENT RESERVED WORK:** Codex owns [PR #10 — field licenses and Field Kit](https://github.com/kioconnor24-sketch/PokemonGame/pull/10), `codex/field-licenses`, while the PR remains open. Do not touch its source, flags, map fixture, field menu or related code unless Codex transfers the claim. It has partial native verification; emulator and Delta coverage are not automatically established. `main` already integrates the opening/Gym 1 and contributor backend via PRs #1/#9 and repository hygiene PR #11. Never remerge old contributor PRs.
 
-| Priority | ID | Readiness | Acceptance goal |
+**Updated for the 2026-10-15 owner-approved milestone and hard creative freeze.** This is a **queue and dependency file, not a live status log**. Confirm every claim against [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [current assignments #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24), [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls) and exact CI before starting. The newest owner restrictions at the top of those issues prevail over older roadmap prose.
+
+**Already integrated:** Opening/first Gym backend and FIELD licenses ([PR #10](https://github.com/kioconnor24-sketch/PokemonGame/pull/10) **merged**). Their particular emulator scenarios are not thereby all verified. Do not reclaim or remerge FIELD just because an old progress note still says it is active.
+
+**Current file owners:** Codex — [QUEST #14](https://github.com/kioconnor24-sketch/PokemonGame/pull/14) and narrowly allowed `codex/two-region-groundwork` *new-file-only* recovery branch. Claude — [SCRIPTED-BATTLE #25](https://github.com/kioconnor24-sketch/PokemonGame/pull/25). ChatGPT QA — [emulator runner #20](https://github.com/kioconnor24-sketch/PokemonGame/pull/20) and [QA tracker #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23). [Tooling #19](https://github.com/kioconnor24-sketch/PokemonGame/pull/19) and [Claude onboarding #18](https://github.com/kioconnor24-sketch/PokemonGame/pull/18) are separate docs/ops PRs pending independent review. **All statuses may change; check live branches first.**
+
+| Priority | Milestone | Owner / readiness | Acceptance and dependencies |
 | --- | --- | --- | --- |
-| 1 | FIELD | ACTIVE Codex | Finish existing Fly destination, menu/cancel, field effects, follower/obstacle and persistence checks; clean compilation, native test counts; record emulator gaps |
-| 2 | QUEST | READY after FIELD | Reusable multi-stage native event scripts with one-time reward, prerequisites, full inventory and save/reload developer fixture |
-| 3 | LEGEND | READY after QUEST | Unique encounter prereqs, capture/flee/defeat/retry state and saved quest progression on fixture |
-| 4 | SCRIPTED-BATTLE | READY after QUEST | Safe forced Renn loss, sequential ten-operative battles with party carryover, allied heal, corrupt Gym no-heal rematch tests |
-| 5 | TWO-REGION | READY after core events | Separate badge/transport/Fly/whiteout and save compatibility on two **temporary** region maps; no production Sinnoh map |
-| 6 | DATA-GAPS | READY if file-disjoint | ChatGPT/guest: verify actual Gen I–IX species/form, evolution, battle rule or follower defect and fix with regression tests |
-| 7 | LEVEL-ECONOMY | PARTIALLY READY | Source-driven EXP modeling without choosing final numerical Gym caps; final curves wait on geography/trainer density |
-| 8 | AVERON-MAPS | PAUSED user | Author-approved geography, routes, Gym placements, encounters, level progression |
-| 9 | SINNOH-CONTENT | PAUSED | Complete second region after two-region proof + established world production |
-| 10 | POSTGAME | PAUSED | Legendary quests, Champions' Circuit, Cynthia, Red final, long-form QA and Delta |
+| 1 | QUEST | **Codex ACTIVE; QA pending** | Fix confirmed defects and verify rendered NPC/tree/rewards, full Bag/party, whiteout and real save/reload; native 49/49 reported on #14, not a visual pass; keep draft until evidence/approved gate |
+| 2 | SCRIPTED-BATTLE core | **Claude ACTIVE (parallel)** | Finish native/macro/CI tests and actual safe-win/loss/chain recovery; release-flag, script registration and save hooks require explicit handoff after QUEST merge; no finished story scenes |
+| 3 | TWO-REGION abstract groundwork | **Codex DEVELOPMENT OPEN NOW** | Advance existing isolated new-file-only 8+8 badge, identity, Fly/heal/whiteout, flash save/recovery regressions using synthetic IDs. Only protected engine integration and merge wait for QUEST QA and scoped handoff; no new map files. |
+| 4 | QUEST graphical acceptance | **ChatGPT QA ACTIVE** | Continue exact Q1–Q5 rendered interactions; Q0-C opening movement/menu demonstrated; log reproducible defects with ROM/source SHA; don't equate smoke with full acceptance |
+| 5 | TOOLING ONBOARDING | **Review pending** | Canonical shared skills #19 and distinct Claude docs #18; do not re-create competing skills; no install/hooks or feature work implied |
+| 6 | TWO-REGION integration | **WAITING: QUEST gate and shared-source handoff** | Region-aware flags/8+8 badges, save compatibility, healing/Fly and no invalid warps; no production map files, use synthetic IDs/existing maps |
+| 7 | SCRIPTED-BATTLE integration | **MERGE GATED (development continues)** | Approved RAM-only 0x4003 and macro hook ALREADY installed on #25; continue owned native lifecycle and adversarial tests NOW. Only protected file collisions and final #25 integration wait for QUEST. No saved flag allocation or unapproved scenes. |
+| 8 | LEGEND reusable encounter semantics | **FUTURE technical, unclaimed until ready** | Capture/defeat/flee/retry/persist mechanics using fixtures, with no final legendary species, locations or lore |
+| 9 | VERIFIED GAPS | **FUTURE only if unclaimed/file-disjoint** | Repair measured issues in species/forms/evolution, follower, battle AI, field menus, save/ROM/tests; no duplicate audits or arbitrary new systems |
+| 10 | LEVEL ECONOMY analysis | **LIMITED / design blocked** | Can test existing EXP/cap code with supplied symbolic values; **no final numeric Gym caps or level curve** |
+| 11 | AVERON / SINNOH MAP PRODUCTION | **OWNER FROZEN** | No new maps, temporary map layouts, region drawings, routes, tiles, production warp geography or generator-driven content |
+| 12 | STORY, NPC, GYM, LEGEND PLACEMENTS, POSTGAME | **OWNER FROZEN** | No new canon scenes, Gym teams/puzzles, encounter tables, level choices, art/likenesses; wait for explicit owner authorization |
 
-**Priority algorithm:** Continue your open PR; otherwise take the first READY nonoverlapping item with prerequisites. If all coding tasks are claimed/blocked, report rather than inventing world design. One coding PR per agent, one integration/ops PR at most. Changes to `TASKS.md` and `PROGRESS.md` belong to integration milestones, not each cloud session.
+**Work selection:** complete your active PR before another coding PR; otherwise choose the first ready file-disjoint technical milestone, post exact intended paths/IDs/functions in #15, and respect exclusive ownership of `flags.h`, `event_scripts.s`, trainer/save/region/battle config, generated inputs and other shared files. **The freeze and claims are hard gates.** Test and post HANDOFF on the relevant PR; update this document only for milestone/priority changes, not individual sessions. No direct main pushes or secret/ROM uploads.
+
+See [ROADMAP.md](ROADMAP.md) for gates and [INDEX.md](INDEX.md) for navigation. Preserve historical details in [PROGRESS.md](PROGRESS.md) but don't treat old checkpoints as current.

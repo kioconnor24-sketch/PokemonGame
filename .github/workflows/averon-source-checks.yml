@@ -41,6 +41,7 @@ jobs:
             test-audit-averon-evolution-reach.py \
             test-averon-sidequests.py \
             test-averon-quest-flow.py \
+            test-check-averon-native-baseline.py \
             test-audit-averon-progression.py
           do
             file="Pokemon Game/scripts/$name"

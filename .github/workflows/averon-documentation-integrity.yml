@@ -1,0 +1,43 @@
+name: Averon documentation integrity
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "Pokemon Game/AGENTS.md"
+      - "Pokemon Game/Averon_Codex_Handoff/START_HERE.md"
+      - "Pokemon Game/Averon_Codex_Handoff/development/**"
+      - "Pokemon Game/scripts/check-repo-navigation.py"
+      - "Pokemon Game/scripts/tests/test_repo_navigation.py"
+      - ".github/workflows/averon-documentation-integrity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "Pokemon Game/AGENTS.md"
+      - "Pokemon Game/Averon_Codex_Handoff/START_HERE.md"
+      - "Pokemon Game/Averon_Codex_Handoff/development/**"
+      - "Pokemon Game/scripts/check-repo-navigation.py"
+      - "Pokemon Game/scripts/tests/test_repo_navigation.py"
+      - ".github/workflows/averon-documentation-integrity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documentation-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test link-checker failure behavior
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_repo_navigation.py" -v
+      - name: Check active documentation relative links
+        run: python3 "Pokemon Game/scripts/check-repo-navigation.py" --root .
