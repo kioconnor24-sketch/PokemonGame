@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "qa_issue": 23,
+  "board_issue": 31,
+  "policies": {
+    "creative_freeze": true,
+    "auto_merge": false,
+    "auto_agent_execution": false,
+    "shared_files_require_manual_handoff": true
+  },
+  "tasks": [
+    {
+      "id": "QUEST",
+      "agent": "codex",
+      "pr": 14,
+      "deps": [],
+      "qa_cases": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Q5"
+      ],
+      "next": "Address reproducible QUEST QA defects, then request merge review. Native green is not QA acceptance."
+    },
+    {
+      "id": "TWO-REGION",
+      "agent": "codex",
+      "branch": "codex/two-region-groundwork",
+      "deps": [
+        "QUEST"
+      ],
+      "requires_handoff": true,
+      "next": "Preserve already tested non-map badge/Fly/heal groundwork; integrate only after QUEST and shared-file handoff."
+    },
+    {
+      "id": "SCRIPTED-BATTLE",
+      "agent": "claude",
+      "pr": 25,
+      "deps": [
+        "QUEST"
+      ],
+      "requires_handoff": true,
+      "qa_cases": [
+        "SB-LOSS",
+        "SB-CLEANUP"
+      ],
+      "next": "Wait for exclusive config/battle.h and event_scripts.s handoff, prove stale flag clears on in-process load and registered fixture acceptance."
+    },
+    {
+      "id": "NATIVE-BASELINE",
+      "agent": "claude",
+      "pr": 29,
+      "deps": [],
+      "next": "Review 282 individually classified expected full-suite failures; merge only after checks/review."
+    },
+    {
+      "id": "NO-PRIMAL",
+      "agent": "claude",
+      "pr": 30,
+      "deps": [
+        "NATIVE-BASELINE"
+      ],
+      "next": "After baseline merge, reconcile exactly 45 Primal/orb-related expected upstream failures, rerun targeted tests before merge."
+    },
+    {
+      "id": "QUEST-PLAYTEST",
+      "agent": "playtest",
+      "pr": 20,
+      "deps": [],
+      "next": "Reuse working Alderfield warp; one tile left from (14,16), face researcher at (12,16), press mapped A, capture actual Q1 dialogue and continue acceptance cases."
+    }
+  ]
+}
