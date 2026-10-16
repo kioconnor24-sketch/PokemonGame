@@ -253,7 +253,7 @@ class ObserverTests(unittest.TestCase):
         self.assertTrue(state["devGiftReceived"])
         self.assertIn("m2001376,1", commands)
         self.assertIn("m3000108,1", commands)
-        self.assertEqual(gdb.sock.sent, [b"\\x03"])
+        self.assertEqual(gdb.sock.sent, [bytes([3])])
 
     def test_gift_rejects_invalid_six_slot_party_count(self):
         header = struct.pack("<hhbbbxhh", 24, 19, 75, 14, -1, -1, -1)
