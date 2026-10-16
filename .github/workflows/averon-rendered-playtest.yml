@@ -241,6 +241,7 @@ jobs:
             sleep 0.20
           }
           open_debug_menu() {
+            local stage="${1:-Q1}"
             xdotool windowactivate --sync "$win" || true
             xdotool keydown s
             sleep 0.50
@@ -250,9 +251,9 @@ jobs:
             sleep 0.35
             xdotool keyup s
             sleep 0.65
-            capture "Q1-debug-main"
+            capture "$stage-debug-main"
             python3 "$qa_controller" assert-ui --kind sidebar \
-              --frame "$RUNNER_TEMP/averon-playtest/Q1-debug-main.png"
+              --frame "$RUNNER_TEMP/averon-playtest/$stage-debug-main.png"
           }
           if ! open_debug_menu; then
             # One bounded feedback-gated recovery only: normal Start may
@@ -320,6 +321,72 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
+          # Next independent QA case: Windrow artist at source (20,14).
+          # This relies ONLY on existing Windrow map75/6 warp0; it does
+          # not create an event, flag, route, party, item or warp index.
+          # First close the ordinary Q1 waiting text. Screenshots must
+          # prove actual field control before R+Start is permitted.
+          q2_field=0
+          for step in 1 2 3; do
+            sleep 1
+            press_debug x
+            sleep 0.5
+            capture "Q2-after-q1-close-$step"
+            if python3 "$qa_controller" assert-ui --kind field \
+                --frame "$RUNNER_TEMP/averon-playtest/Q2-after-q1-close-$step.png"; then
+              q2_field=1
+              break
+            fi
+          done
+          if [ "$q2_field" != "1" ]; then
+            echo "QA_ACCESS_BLOCKED: Q1 waiting text not closed; do not warp"
+            exit 2
+          fi
+          if ! open_debug_menu Q2; then
+            press_debug z
+            sleep 0.7
+            if ! open_debug_menu Q2; then
+              echo "QA_ACCESS_BLOCKED: Q2 R+START debug menu did not render"
+              exit 2
+            fi
+          fi
+          press_debug x
+          capture "Q2-utilities-menu"
+          python3 "$qa_controller" assert-ui --kind sidebar \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-utilities-menu.png"
+          press_debug Down
+          press_debug x
+          capture "Q2-warp-group-before"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-group-before.png"
+          # Source map_groups.json group_order index 75; Windrow local 6.
+          press_debug Right
+          for i in $(seq 1 7); do press_debug Up; done
+          press_debug Left
+          for i in $(seq 1 6); do press_debug Up; done
+          capture "Q2-warp-group-75"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-group-75.png"
+          press_debug x
+          for i in $(seq 1 6); do press_debug Up; done
+          capture "Q2-warp-map-6"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-map-6.png"
+          press_debug x
+          capture "Q2-warp-index-0"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-index-0.png"
+          press_debug x
+          sleep 3
+          capture "Q2-windrow-after-existing-warp0"
+          if ! python3 -u "$qa_controller" navigate-artist \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log"
+            echo "QA_Q2_ACCESS_BLOCKED: bounded artist navigation / dialogue only"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
