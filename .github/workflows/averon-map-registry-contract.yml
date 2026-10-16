@@ -1,0 +1,56 @@
+name: Averon map registry contract
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/engine/data/maps/**"
+      - "Pokemon Game/engine/include/global*.h"
+      - "Pokemon Game/engine/tools/mapjson/**"
+      - "Pokemon Game/engine/test/averon_map_registry_contract.c"
+      - "Pokemon Game/engine/test/data/averon_map_registry_slots.inc"
+      - "Pokemon Game/scripts/check-averon-map-registry.py"
+      - ".github/workflows/averon-map-registry-contract.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Pokemon Game/engine/data/maps/**"
+      - "Pokemon Game/engine/include/global*.h"
+      - "Pokemon Game/engine/tools/mapjson/**"
+      - "Pokemon Game/engine/test/averon_map_registry_contract.c"
+      - "Pokemon Game/engine/test/data/averon_map_registry_slots.inc"
+      - "Pokemon Game/scripts/check-averon-map-registry.py"
+      - ".github/workflows/averon-map-registry-contract.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: averon-map-registry-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check pinned IDs, capacity and in-memory adversarial cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Pokemon Game/scripts/check-averon-map-registry.py" \
+            --engine "Pokemon Game/engine" --mutations \
+            --report "$RUNNER_TEMP/map-registry-contract.json" \
+            2>&1 | tee "$RUNNER_TEMP/map-registry-contract.log"
+          git diff --exit-code
+      - name: Attach text evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-map-registry-contract
+          path: |
+            ${{ runner.temp }}/map-registry-contract.json
+            ${{ runner.temp }}/map-registry-contract.log

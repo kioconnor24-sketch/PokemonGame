@@ -424,6 +424,12 @@ static u8 WriteSectorSignatureByte_NoOffset(u16 sectorId, const struct SaveSecto
     sector %= NUM_SECTORS_PER_SLOT;
     sector += NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
 
+    if (AveronRegionSave_IsWriteBlocked())
+    {
+        SetDamagedSectorBits(ENABLE, sector);
+        return SAVE_STATUS_ERROR;
+    }
+
     // Write just the first byte of the signature field, which was skipped by HandleReplaceSector
     if (ProgramFlashByte(sector, SECTOR_SIGNATURE_OFFSET, SECTOR_SIGNATURE & 0xFF))
     {
@@ -448,6 +454,12 @@ static u8 CopySectorSignatureByte(u16 sectorId, const struct SaveSectorLocation 
     sector %= NUM_SECTORS_PER_SLOT;
     sector += NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
 
+    if (AveronRegionSave_IsWriteBlocked())
+    {
+        SetDamagedSectorBits(ENABLE, sector);
+        return SAVE_STATUS_ERROR;
+    }
+
     // Copy just the first byte of the signature field from the read/write buffer
     if (ProgramFlashByte(sector, SECTOR_SIGNATURE_OFFSET, ((u8 *)gReadWriteSector)[SECTOR_SIGNATURE_OFFSET]))
     {
@@ -471,6 +483,12 @@ static u8 WriteSectorSignatureByte(u16 sectorId, const struct SaveSectorLocation
     u16 sector = sectorId + gLastWrittenSector - 1;
     sector %= NUM_SECTORS_PER_SLOT;
     sector += NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
+
+    if (AveronRegionSave_IsWriteBlocked())
+    {
+        SetDamagedSectorBits(ENABLE, sector);
+        return SAVE_STATUS_ERROR;
+    }
 
     // Write just the first byte of the signature field, which was skipped by HandleReplaceSector
     if (ProgramFlashByte(sector, SECTOR_SIGNATURE_OFFSET, SECTOR_SIGNATURE & 0xFF))
@@ -501,7 +519,10 @@ static u8 TryLoadSaveSlot(u16 sectorId, struct SaveSectorLocation *locations)
     else
     {
         status = GetSaveValidStatus(locations);
-        CopySaveSlotData(FULL_SAVE_SLOT, locations);
+        // ERROR here means an accepted whole-slot fallback. CORRUPT and
+        // EMPTY have no accepted slot and must publish none of its sectors.
+        if (status == SAVE_STATUS_OK || status == SAVE_STATUS_ERROR)
+            CopySaveSlotData(FULL_SAVE_SLOT, locations);
     }
 
     return status;
@@ -872,8 +893,21 @@ u8 TrySavingData(u8 saveType)
     }
 }
 
+// Incremental callers do not all pass through TrySavingData. Refuse them
+// before changing counters, copying runtime state or opening a recovery
+// screen. TRUE is the callers' finished/error result, also used for no flash.
+static bool32 RefuseBlockedIncrementalSave(void)
+{
+    if (!AveronRegionSave_IsWriteBlocked())
+        return FALSE;
+    gSaveAttemptStatus = SAVE_STATUS_ERROR;
+    return TRUE;
+}
+
 bool8 LinkFullSave_Init(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     if (gFlashMemoryPresent != TRUE)
         return TRUE;
     UpdateSaveAddresses();
@@ -884,6 +918,8 @@ bool8 LinkFullSave_Init(void)
 
 bool8 LinkFullSave_WriteSector(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     u8 status = HandleWriteIncrementalSector(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
@@ -899,6 +935,8 @@ bool8 LinkFullSave_WriteSector(void)
 
 bool8 LinkFullSave_ReplaceLastSector(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     HandleReplaceSectorAndVerify(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
@@ -907,6 +945,8 @@ bool8 LinkFullSave_ReplaceLastSector(void)
 
 bool8 LinkFullSave_SetLastSectorSignature(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     CopySectorSignatureByte(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
@@ -915,6 +955,8 @@ bool8 LinkFullSave_SetLastSectorSignature(void)
 
 bool8 WriteSaveBlock2(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     if (gFlashMemoryPresent != TRUE)
         return TRUE;
 
@@ -933,6 +975,8 @@ bool8 WriteSaveBlock2(void)
 // It returns TRUE when finished.
 bool8 WriteSaveBlock1Sector(void)
 {
+    if (RefuseBlockedIncrementalSave())
+        return TRUE;
     bool32 finished = FALSE;
     u16 sectorId = ++gIncrementalSectorId; // Because WriteSaveBlock2 will have been called prior, this will be SECTOR_ID_SAVEBLOCK1_START
     if (sectorId <= SECTOR_ID_SAVEBLOCK1_END)
@@ -973,7 +1017,8 @@ u8 LoadGameSave(u8 saveType)
     default:
         status = TryLoadSaveSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         AveronRegionSave_FinishLoad(status);
-        CopyPartyAndObjectsFromSave();
+        if (status == SAVE_STATUS_OK || status == SAVE_STATUS_ERROR)
+            CopyPartyAndObjectsFromSave();
         gSaveFileStatus = status;
         gGameContinueCallback = NULL;
         break;
@@ -998,13 +1043,16 @@ u8 LoadGameSave(u8 saveType)
 u16 GetSaveBlocksPointersBaseOffset(void)
 {
     u16 i, slotOffset;
+    u8 status;
     struct SaveSector *sector;
 
     sector = gReadWriteSector = &gSaveDataBuffer;
     if (gFlashMemoryPresent != TRUE)
         return 0;
     UpdateSaveAddresses();
-    GetSaveValidStatus(gRamSaveSectorLocations);
+    status = GetSaveValidStatus(gRamSaveSectorLocations);
+    if (status != SAVE_STATUS_OK && status != SAVE_STATUS_ERROR)
+        return 0;
     slotOffset = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
     for (i = 0; i < NUM_SECTORS_PER_SLOT; i++)
     {
