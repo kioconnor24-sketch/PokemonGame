@@ -278,11 +278,14 @@ AI_DOUBLE_BATTLE_TEST("Averon held items: Recycle remembers the donor of a consu
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ORAN_BERRY); Speed(200); Moves(MOVE_BESTOW, MOVE_CELEBRATE, MOVE_TACKLE); }
-        PLAYER(SPECIES_SKWOVET) { Speed(150); Moves(MOVE_STUFF_CHEEKS, MOVE_RECYCLE, MOVE_TACKLE); }
+        PLAYER(SPECIES_SKWOVET) { Speed(150); Moves(MOVE_STUFF_CHEEKS, MOVE_RECYCLE, MOVE_TACKLE, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_BESTOW, target: playerRight); MOVE(playerRight, MOVE_STUFF_CHEEKS); }
+        // Gen 9 cannot select Stuff Cheeks before holding a Berry. Receive
+        // the gift first, then consume it on the following ordinary turn.
+        TURN { MOVE(playerLeft, MOVE_BESTOW, target: playerRight); MOVE(playerRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_STUFF_CHEEKS); }
         TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_RECYCLE); }
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
     } SCENE {
@@ -298,13 +301,14 @@ AI_DOUBLE_BATTLE_TEST("Averon held items: Recycle remembers the donor of a consu
 AI_DOUBLE_BATTLE_TEST("Averon held items: Harvest remembers the donor of a consumed Berry")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ORAN_BERRY); Speed(200); Moves(MOVE_SUNNY_DAY, MOVE_BESTOW, MOVE_TACKLE); }
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ORAN_BERRY); Speed(200); Moves(MOVE_SUNNY_DAY, MOVE_BESTOW, MOVE_TACKLE, MOVE_CELEBRATE); }
         PLAYER(SPECIES_TREVENANT) { Ability(ABILITY_HARVEST); Speed(150); Moves(MOVE_CELEBRATE, MOVE_STUFF_CHEEKS, MOVE_TACKLE); }
         OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_SUNNY_DAY); MOVE(playerRight, MOVE_CELEBRATE); }
-        TURN { MOVE(playerLeft, MOVE_BESTOW, target: playerRight); MOVE(playerRight, MOVE_STUFF_CHEEKS); }
+        TURN { MOVE(playerLeft, MOVE_BESTOW, target: playerRight); MOVE(playerRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_STUFF_CHEEKS); }
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, playerRight);
@@ -371,7 +375,7 @@ AI_DOUBLE_BATTLE_TEST("Averon held items: a newly found item cannot replace or d
     }
 }
 
-WILD_BATTLE_TEST("Averon held items: same-holder wild loot survives restoration with space or a full Bag")
+WILD_BATTLE_TEST("Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries")
 {
     bool32 fullBag = FALSE;
     PARAMETRIZE { fullBag = FALSE; }
@@ -379,18 +383,6 @@ WILD_BATTLE_TEST("Averon held items: same-holder wild loot survives restoration 
     GIVEN {
         SetBagItemsPointers();
         ClearBag();
-        if (fullBag)
-        {
-            u32 added = 0;
-            for (enum Item filler = ITEM_NONE + 1; filler < ITEMS_COUNT && added < BAG_ITEMS_COUNT; filler++)
-            {
-                if (filler != ITEM_LEFTOVERS && GetItemPocket(filler) == POCKET_ITEMS
-                 && AddBagItem(filler, MAX_BAG_ITEM_CAPACITY))
-                    added++;
-            }
-            EXPECT_EQ(added, BAG_ITEMS_COUNT);
-            EXPECT_EQ(AddBagItem(ITEM_LEFTOVERS, 1), FALSE);
-        }
         PLAYER(SPECIES_KLEFKI) { Ability(ABILITY_MAGICIAN); Item(ITEM_LEFTOVERS); Level(100); Attack(1); Speed(200); Moves(MOVE_FLING, MOVE_TACKLE, MOVE_SEISMIC_TOSS); }
         OPPONENT(SPECIES_MAGIKARP) { Item(ITEM_POTION); Level(100); MaxHP(100); HP(100); Defense(100); Speed(1); Moves(MOVE_CELEBRATE); }
     } WHEN {
@@ -403,6 +395,24 @@ WILD_BATTLE_TEST("Averon held items: same-holder wild loot survives restoration 
     } THEN {
         EXPECT_EQ(gBattleOutcome, B_OUTCOME_WON);
         EXPECT_EQ(PartyItem(0), ITEM_POTION);
+        // The runner clears the Bag at StartBattle and only records ten
+        // inventory slots. Exercise the full-Bag case at the actual cleanup
+        // boundary after the real battle, not as claimed in-battle inventory.
+        if (fullBag)
+        {
+            u32 added = 0;
+            ClearBag();
+            for (enum Item filler = ITEM_NONE + 1; filler < ITEMS_COUNT && added < BAG_ITEMS_COUNT; filler++)
+            {
+                if (filler != ITEM_LEFTOVERS && GetItemPocket(filler) == POCKET_ITEMS
+                 && AddBagItem(filler, MAX_BAG_ITEM_CAPACITY))
+                    added++;
+            }
+            EXPECT_EQ(added, BAG_ITEMS_COUNT);
+            EXPECT_EQ(AddBagItem(ITEM_LEFTOVERS, 1), FALSE);
+            GetLostItemState(B_TRAINER_PLAYER, 0)->preservedElsewhere = FALSE;
+        }
+        TryRestoreHeldItems();
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LEFTOVERS), fullBag ? 0 : 1);
         TryRestoreHeldItems();
         EXPECT_EQ(PartyItem(0), ITEM_POTION);
