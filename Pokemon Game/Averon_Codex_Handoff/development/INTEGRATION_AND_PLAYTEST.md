@@ -2,7 +2,11 @@
 
 **Purpose:** give the two peer developers a reproducible, independent compatibility check without making them wait for one another's full QA/merge. This does not authorize new maps, trainers, story, encounters, or changes to live game save identifiers.
 
-## Combined build: one manually initiated GitHub Actions run
+## Combined build: opt-in GitHub Actions or precise trusted team comment
+
+A trusted collaborator can also comment **exactly** `AVERON_BUILD PRS=14,25` on [team Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). That one explicit message triggers the same disposable paired build with graphical boot enabled. No other text, untrusted account, issue or PR numbers can activate this shortcut. It does NOT launch Codex/Claude/ChatGPT agents or merge a PR.
+
+## Standard manual GitHub Actions run
 
 Open [Actions — Averon combined build and playtest readiness](https://github.com/kioconnor24-sketch/PokemonGame/actions/workflows/averon-combined-build.yml), select **Run workflow**, and choose:
 
@@ -19,7 +23,7 @@ For a stable-main control, use `0` and `0` for the two PR fields. PRs must exist
 
 **What failure means:** a git conflict or missing source contract belongs to the relevant PR owner; a test/build regression needs a minimal reproduction compared to main and to each feature's known passing branch. An opt-in graphical-boot failure is not proof that quest reward/dialogue logic is broken. Report exact pinned SHAs, failing command, expected/observed and job link on the affected PR. Do not send generalized "please retry" comments or make a developer repeat a build on unchanged source.
 
-**Safety:** explicit manual dispatch limits duplicate 50-minute ARM jobs and additional GitHub Actions consumption. The workflow has read-only GitHub permissions, rejects forks, performs no PR/main push or code review approval, and stores no distributable ROM. Untrusted code from unrelated GitHub forks is not run. Review PR source before dispatch, even for collaborators.
+**Safety:** opt-in manual dispatch or an exact authorized Issue #15 command limits duplicate 50-minute ARM jobs and additional GitHub Actions consumption. The workflow has read-only GitHub permissions, rejects forks, performs no PR/main push or code review approval, and stores no distributable ROM. Untrusted code from unrelated GitHub forks is not run. Review PR source before dispatch, even for collaborators.
 
 ## How to produce an actual owner-side playtest ROM
 
