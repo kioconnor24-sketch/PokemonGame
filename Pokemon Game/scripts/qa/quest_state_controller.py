@@ -1919,11 +1919,15 @@ def q3_gym_entry(args):
         print(f"QA_Q3_ORIGINAL_{what.upper()}_ACTIVATED", flush=True)
 
     start,_=see("actual-warp-entry")
-    if (start["x"],start["y"])!=(4,14):
+    # The *actual* unchanged AlderfieldGym warp0 is (4,15), as observed
+    # with read-only GDB in run38871202223 and declared in map.json.
+    # Step onto known original floor at (4,14) before moving west;
+    # never confuse the interior approach tile with the warp itself.
+    if (start["x"],start["y"])!=(4,15) or start["warpId"] != 0:
         raise Blocked(f"Unexpected original Gym1 warp0 spawn: {start}")
     if start["gymWestSluice"] or start["gymEastSluice"]:
         raise Blocked("Sluice state is not fresh; cannot prove YES branches")
-    walk("x",2); walk("y",13)
+    walk("y",14); walk("x",2); walk("y",13)
     activate("west",2,13,"gymWestSluice")
     walk("x",6)
     activate("east",6,13,"gymEastSluice")
