@@ -1,12 +1,12 @@
 name: Averon agent dispatch board
 # All code executed here comes only from trusted main, never a PR checkout.
+# PR merges already emit pull_request_target.closed; listening to main pushes
+# as well doubled dispatch work for each ordinary merge.
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, closed, ready_for_review, converted_to_draft, edited]
   issue_comment:
     types: [created]
-  push:
-    branches: [main]
   schedule:
     - cron: "31 13 * * *"
   workflow_dispatch:
@@ -18,8 +18,10 @@ permissions:
   checks: read
 
 concurrency:
+  # Keep the running snapshot alive; a burst of PR comments/merges coalesces
+  # behind it instead of repeatedly cancelling GitHub API pagination.
   group: averon-agent-board
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   route:
