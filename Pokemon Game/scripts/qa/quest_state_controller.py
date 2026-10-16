@@ -239,8 +239,16 @@ def daemon(args):
 def snapshot_detail(args, name):
     dest = Path(args.outdir) / f"{name}.json"
     dest.unlink(missing_ok=True)
-    with open(args.fifo, "w", encoding="ascii") as pipe:
-        pipe.write(name + "\n")
+    # O_NONBLOCK guarantees a failed debugger daemon cannot hang the
+    # entire Actions job waiting for a reader that has already exited.
+    try:
+        fd = os.open(args.fifo, os.O_WRONLY | os.O_NONBLOCK)
+    except OSError as exc:
+        raise Blocked(f"Debugger daemon not reading FIFO at {name}: {exc}") from exc
+    try:
+        os.write(fd, (name + "\n").encode("ascii"))
+    finally:
+        os.close(fd)
     for _ in range(80):
         if dest.exists():
             result = json.loads(dest.read_text())
