@@ -1479,6 +1479,30 @@ def q4_lab_gift(args):
     print("QA_Q4_GIFT_REPEAT_NO_DUPLICATE: source completion dialogue, "
           "flag and party count stable. Full-party and save-reload still "
           "NOT ACCEPTED.", flush=True)
+    # Q5 bounded runtime input-release evidence after an actual scripted
+    # gift. Adjacent original lab tile (23,19) is 0x01 land in source
+    # blockdata and has no defined NPC. This is not a follower PASS claim.
+    for i in range(5):
+        key("x", delay=0.7)
+        idle, pic = read(f"gift-repeat-dismiss-{i+1}")
+        if white_panel_ratio(pic) <= 0.30:
+            break
+    else:
+        raise Blocked("Gift done message never released normal field controls")
+    key("Left")
+    stepped, step_frame = read("post-gift-control-left", field=True)
+    if ((stepped["x"], stepped["y"]) != (23, 19)
+            or not stepped["devGiftReceived"]
+            or stepped["playerPartyCount"] != original_party + 1):
+        raise Blocked(f"Input lock not released after gift: {stepped}")
+    key("Right")
+    returned, return_frame = read("post-gift-control-right", field=True)
+    if ((returned["x"], returned["y"]) != (24, 19)
+            or returned["playerPartyCount"] != original_party + 1):
+        raise Blocked(f"Controls/position failed to recover after gift: {returned}")
+    print("QA_Q5_POST_GIFT_CONTROL_RECOVERY: script/dialogue exited; "
+          "real left/right D-pad restored; party and gift flags stable. "
+          "Follower/audio remain visually/aurally unverified.", flush=True)
 
 
 
