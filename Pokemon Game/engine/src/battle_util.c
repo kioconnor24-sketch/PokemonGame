@@ -9308,8 +9308,63 @@ void SetItemsToRestoreAfterBattle(enum BattleTrainer trainer, u32 partySlot)
     lostItem->restoreAfterBattle = B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || B_TRAINERS_KNOCK_OFF_ITEMS;
 }
 
+// A player Pokemon that started the battle with no item can end it holding
+// one taken from a trainer (Thief, Covet, Magician, Pickup) or given by a
+// teammate (Bestow, Symbiosis). Restoring only the slots that started with an
+// item would let the player keep the trainer's item, or keep a teammate's item
+// while the teammate also gets it back. Return such items to the teammate and
+// drop ones a trainer started with. Wild Pokemon's items and items found
+// after battle (Pickup, Honey Gather) are kept.
+static bool32 DidOpponentStartWithItem(enum Item item)
+{
+    // Only trainers in this battle; other parties can hold stale data.
+    for (enum BattleTrainer trainer = 0; trainer < gBattlersCount; trainer++)
+    {
+        if (trainer == B_TRAINER_PLAYER || trainer == B_TRAINER_PARTNER)
+            continue;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            if (GetLostItemState(trainer, slot)->originalItem == item)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void ReturnItemsGainedByEmptyHandedPlayerMons(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+        enum Item none = ITEM_NONE;
+        struct LostItem *lostItem = GetLostItemState(B_TRAINER_PLAYER, slot);
+
+        if (!lostItem->restoreAfterBattle || lostItem->originalItem != ITEM_NONE || item == ITEM_NONE)
+            continue;
+
+        bool32 returned = FALSE;
+        for (u32 owner = 0; owner < PARTY_SIZE; owner++)
+        {
+            struct Pokemon *ownerMon = &gParties[B_TRAINER_PLAYER][owner];
+            if (owner == slot
+             || GetLostItemState(B_TRAINER_PLAYER, owner)->originalItem != item
+             || GetMonData(ownerMon, MON_DATA_HELD_ITEM) == item)
+                continue;
+            SetMonData(ownerMon, MON_DATA_HELD_ITEM, &item);
+            returned = TRUE;
+            break;
+        }
+
+        if (returned || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && DidOpponentStartWithItem(item)))
+            SetMonData(mon, MON_DATA_HELD_ITEM, &none);
+    }
+}
+
 void TryRestoreHeldItems(void)
 {
+    ReturnItemsGainedByEmptyHandedPlayerMons();
+
     for (enum BattleTrainer trainer = 0; trainer < gBattlersCount; trainer++)
     {
         for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
