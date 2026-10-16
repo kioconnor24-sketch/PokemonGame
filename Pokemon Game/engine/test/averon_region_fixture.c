@@ -1047,15 +1047,17 @@ TEST("Averon region fixture real whiteout heals at existing respawns and survive
 
 TEST("Averon region fixture interrupted whiteout save recovers one coherent older slot")
 {
-    u32 healer;
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; }
+    u32 healer, corruptPayload;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; }
     CheckForFlashMemory();
     EXPECT_EQ(gFlashMemoryPresent, TRUE);
     if (!gFlashMemoryPresent)
         return;
-    // Remove each physical sector in turn, not just the first sector. A
-    // damaged latest slot must never mix healed/new position with old data.
+    // Damage each physical sector in turn, not just the first sector. Cover
+    // both missing signatures and corrupt data under an otherwise valid footer.
     for (u32 sectorOffset = 0; sectorOffset < NUM_SECTORS_PER_SLOT; ++sectorOffset)
     {
         ClearSaveData();
@@ -1089,7 +1091,31 @@ TEST("Averon region fixture interrupted whiteout save recovers one coherent olde
         memcpy(healedParty, gParties[B_TRAINER_PLAYER], sizeof(healedParty));
         EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
         u16 physicalSector = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS) + sectorOffset;
-        EXPECT_EQ(EraseFlashSector(physicalSector), 0);
+        if (corruptPayload)
+        {
+            struct SaveSector *damaged = Alloc(sizeof(*damaged));
+            EXPECT(damaged != NULL);
+            ReadFlash(physicalSector, 0, (u8 *)damaged, sizeof(*damaged));
+            EXPECT_EQ(damaged->signature, SECTOR_SIGNATURE);
+            EXPECT_EQ(damaged->counter, gSaveCounter);
+            u16 originalChecksum = damaged->checksum;
+            u16 originalId = damaged->id;
+            damaged->data[0] ^= 1;
+            u8 changedByte = damaged->data[0];
+            // Reprogram the copied sector with only its payload changed. Do
+            // not recalculate checksum, alter its ID, counter or signature.
+            EXPECT_EQ(EraseFlashSector(physicalSector), 0);
+            EXPECT_EQ(ProgramFlashSector(physicalSector, (u8 *)damaged), 0);
+            ReadFlash(physicalSector, 0, (u8 *)damaged, sizeof(*damaged));
+            EXPECT_EQ(damaged->data[0], changedByte);
+            EXPECT_EQ(damaged->checksum, originalChecksum);
+            EXPECT_EQ(damaged->id, originalId);
+            EXPECT_EQ(damaged->signature, SECTOR_SIGNATURE);
+            EXPECT_EQ(damaged->counter, gSaveCounter);
+            Free(damaged);
+        }
+        else
+            EXPECT_EQ(EraseFlashSector(physicalSector), 0);
         EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_ERROR);
         EXPECT_EQ(gSaveCounter, previousCounter);
         EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_COASTALMEADOW));
