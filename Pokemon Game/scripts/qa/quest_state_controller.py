@@ -325,7 +325,7 @@ def daemon(args):
                         result["position"] = gdb.position(
                             symbol, symbol2,
                             parties_count_symbol=parties_count
-                            if name.startswith("q4-") else None,
+                            if name.startswith(("q4-", "q3-")) else None,
                             badge_probe=name.startswith(("q1-gate", "q3-")),
                             gym_probe=name.startswith("q3-"))
                     if name.startswith("title-"):
