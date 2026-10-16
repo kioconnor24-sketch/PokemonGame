@@ -1207,6 +1207,93 @@ def q2_reset_continue(args):
         time.sleep(0.6)
     raise Blocked("Never observed resumed field with persistent Q2 state")
 
+
+def q2_continue_relaunch(args):
+    """Fresh GBA process, original flash file, genuine Continue; no savestate.
+
+    The previous in-process soft reset rendered the real Emerald title but
+    mGBA 0.10.2's GDB socket ceased answering. An emulator process restart
+    is a stronger persistence boundary: this controller never copies a RAM
+    image or inserts quest flags; the game must load its own flash.
+    """
+    last = None
+    saw_title = False
+    saw_main = False
+    sent_start = False
+    for i in range(100):
+        state, frame = save_probe(
+            args, f"title-relaunch-before-continue-{i+1}",
+            require_position=False)
+        menu = state["menu"]
+        if state.get("transient"):
+            print("QA_RELAUNCH_GDB_TRANSIENT", state["transient"], flush=True)
+            time.sleep(0.5)
+            continue
+        phase = menu["mainPhase"]
+        last = menu
+        if phase in ("CB2_InitTitleScreen", "CB2_InitMainMenu"):
+            saw_title = True
+        if menu["titleInputReady"]:
+            saw_title = True
+        if phase == "CB2_MainMenu":
+            if menu["saveStatus"] != 1:
+                raise Blocked(
+                    "Fresh emulator main menu did not load valid flash save")
+            saw_main = True
+            break
+        if not sent_start and menu["titleInputReady"]:
+            if menu["saveStatus"] != 1:
+                raise Blocked(
+                    "Title ready but original on-disk save is invalid/missing")
+            print("QA_RELAUNCH_REAL_TITLE_READY", menu, flush=True)
+            sent_start = True
+            qa_key(args.window, "Return", wait=1.4)
+        time.sleep(0.55)
+    if not saw_title or not saw_main:
+        raise Blocked(f"No independently verified title/menu after "
+                      f"fresh emulator restart: {last}")
+    print("QA_RELAUNCH_VALID_FLASH_MAIN_MENU", last, flush=True)
+    # A single A to default main-menu option CONTINUE is permissible only
+    # after source CB2_MainMenu and SAVE_STATUS_OK are actually observed.
+    qa_key(args.window, "x", wait=1.5)
+    left_menu = False
+    for i in range(65):
+        state, frame = save_probe(
+            args, f"title-relaunch-continue-{i+1}",
+            require_position=False)
+        menu = state["menu"]
+        if state.get("transient"):
+            time.sleep(0.45)
+            continue
+        phase = menu["mainPhase"]
+        if phase == "CB2_MainMenu":
+            if i >= 12:
+                raise Blocked("Continue input never left valid main menu")
+        else:
+            left_menu = True
+        if phase == "CB2_Overworld" and left_menu:
+            # Wait for restored field RAM to be safely accessible.
+            for j in range(30):
+                try:
+                    fresh, image = save_probe(
+                        args, f"save-relaunch-restored-field-{j+1}")
+                    require_q2_complete(fresh["position"], expected_qty=3)
+                    if white_panel_ratio(image) <= 0.30:
+                        print("QA_Q2_FLASH_POWER_CYCLE_PASS: new emulator "
+                              "instance loaded genuine flash SAVE, valid "
+                              "CONTINUE, exact original map/position, Q1/Q2 "
+                              "flags and ORAN=3; no savestate/memory write",
+                              flush=True)
+                        return
+                except Blocked as exc:
+                    print("QA_RELAUNCH_FIELD_NOT_YET_READY", str(exc), flush=True)
+                time.sleep(0.6)
+            raise Blocked("Continue transition observed but field state "
+                          "did not match saved source conditions")
+        time.sleep(0.5)
+    raise Blocked(f"Continue never returned to verified game field: {last}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1237,6 +1324,10 @@ def main():
     a.add_argument("--fifo", required=True)
     a.add_argument("--outdir", required=True)
     a.add_argument("--window", required=True)
+    reload = sub.add_parser("q2-relaunch-continue")
+    reload.add_argument("--fifo", required=True)
+    reload.add_argument("--outdir", required=True)
+    reload.add_argument("--window", required=True)
     q = sub.add_parser("q1-offer")
     q.add_argument("--fifo", required=True)
     q.add_argument("--outdir", required=True)
@@ -1260,6 +1351,8 @@ def main():
             return q2_artist_offer(args)
         if args.mode == "navigate-artist":
             return navigate_artist(args)
+        if args.mode == "q2-relaunch-continue":
+            return q2_continue_relaunch(args)
         if args.mode == "q1-offer":
             return q1_offer(args)
         return navigate(args)
