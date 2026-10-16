@@ -46,7 +46,8 @@ python3 ../scripts/test-averon-release-forms.py
 | Evolutions | Every evolution target is an enabled species | 697 edges, 0 problems | NATIVE |
 | Evolutions | Every unconditional level evolution (at its level) and item evolution (with its item) actually triggers through `GetEvolutionTargetSpecies` | 465 run, 0 problems | NATIVE |
 | Evolutions | Conditional evolutions whose conditions depend only on the Pokémon (gender, friendship, a known move or move type, a held item, not another region) or on the time of day (set with `SetTimeOfDay`): built to meet them, then run | 94 run, 0 problems | NATIVE |
-| Evolutions | Conditional evolutions on weather, party, trade partner, map, steps, personality or battle records | 115 **not run** | — |
+| Evolutions | **Every** conditional evolution Averon can meet (`test/averon_evolution_conditions.c`): conditions set up (personality, nature, weather, overworld steps, party species/type, trade partner, bag items, evolution trackers, crits, current damage, Attack vs Defense, contest stats, time), run in its own mode (level, item, trade, spin, script trigger, battle end), and required to produce **exactly** its own form, so an earlier edge cannot shadow it. Includes all 63 Alcremie spin forms | 182 run, 0 failed, 0 shadowed | NATIVE |
+| Evolutions | Not run: region- and upstream-map-gated edges (listed below) and Shedinja's split from Nincada | 27 | — |
 | Breeding | Every breedable species (1,145) hatches, through the real `GetEggSpecies`, from an enabled, non-battle-only species that is the bottom of its own family (`test/averon_breeding.c`) | 0 problems | NATIVE |
 | Breeding | Offspring species, regional forms, Shellos form, egg moves, natures | Upstream `test/daycare.c` | NATIVE (existing) |
 | Trade evolutions | Solo alternatives | Codex audit `audit-averon-solo-evolutions.py`; Linking Cord test | SOURCE / NATIVE (existing) |
@@ -170,9 +171,8 @@ SaveBlock1 and SaveBlock2 are nearly full. Codex was told in #15.
 1. GUI: followers on a real map (walking, surfing, shiny, gender forms, Mega
    reverting after battle), a full-party catch (the swap menu), Pokédex screens
    with all forms.
-2. The 115 conditional evolutions not run: weather, party, trade partner,
-   steps, personality and battle-record conditions. Region and map conditions
-   are covered above.
+2. Shedinja's split from Nincada (handled inside Nincada's evolution) and a
+   rendered spin/step trigger in the overworld (GUI).
 3. Owner decision on how the 13 region-only forms and Ursaluna are obtained.
 4. A decision on the 174 placeholder follower lookups: they need art, which is
    frozen.
