@@ -95,6 +95,17 @@ class ReadOnlyGdb:
             flags_byte = bytes.fromhex(self.command(f"m{ptr + 0x1270 + (0x2A // 8):x},1"))
             if len(flags_byte) != 1:
                 raise Blocked("Quest flag byte response has wrong size")
+            # global.h SaveBlock1.bag at 0x560; constants/global.h defines
+            # 30 items + 30 key + 16 Balls + 64 TMs/HMs before 46 Berries.
+            # ItemSlot is two little-endian u16s, 4 bytes each. Oran Berry
+            # is item ID 520 from existing constants/items.h.
+            berry_offset = 0x560 + (30 + 30 + 16 + 64) * 4
+            berries = bytes.fromhex(
+                self.command(f"m{ptr + berry_offset:x},{46*4:x}"))
+            if len(berries) != 46 * 4:
+                raise Blocked("Incomplete read-only Berry Pocket response")
+            oran_qty = sum(quantity for item, quantity in
+                           struct.iter_unpack("<HH", berries) if item == 520)
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
             x, y, group, number, warp = struct.unpack_from("<hhbbb", data)
@@ -107,7 +118,8 @@ class ReadOnlyGdb:
                         notesRewarded=bool(flags_byte[0] & (1 << (0x2C & 7))),
                         sketchStarted=bool(flags_byte[0] & (1 << (0x2D & 7))),
                         sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
-                        sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))))
+                        sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))),
+                        oranBerryQuantity=oran_qty)
         finally:
             self.command("c", reply=False)
 
