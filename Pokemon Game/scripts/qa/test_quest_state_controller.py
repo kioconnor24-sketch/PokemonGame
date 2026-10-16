@@ -254,6 +254,32 @@ class ObserverTests(unittest.TestCase):
             gdb.title_state(dict(main=0x03001000))
         self.assertEqual(calls, ["m3001004,4", "c"])
 
+    def test_original_gym_whiteout_candidate_preserves_source_route(self):
+        # Independent fixture CONTRACT, not a gameplay whiteout PASS:
+        # all paths are existing engine files. Actual movement/battle must
+        # still be performed and visually checked.
+        base = Path(__file__).resolve().parents[2] / "engine"
+        blockdata = (base / "data/layouts/AlderfieldGym/map.bin").read_bytes()
+        self.assertEqual(len(blockdata), 9 * 16 * 2)
+        def original_metatile(x, y):
+            return struct.unpack_from("<H", blockdata, 2*(y*9+x))[0] & 0x3ff
+        self.assertEqual(original_metatile(4, 14), 513) # original warp entry approach
+        self.assertEqual(original_metatile(2, 13), 513) # western sluice face-up
+        self.assertEqual(original_metatile(6, 13), 513) # eastern sluice face-up
+        self.assertEqual(original_metatile(4, 9), 548)  # genuine blocked leader gate
+        self.assertEqual(original_metatile(4, 5), 513)  # Elio adjacency
+        script = (base / "data/maps/AlderfieldGym/scripts.inc").read_text()
+        self.assertIn("trainerbattle_no_intro TRAINER_AVERON_ELIO", script)
+        self.assertIn("setflag FLAG_AVERON_WEST_SLUICE", script)
+        self.assertIn("setflag FLAG_AVERON_EAST_SLUICE", script)
+        self.assertIn("setflag FLAG_BADGE01_GET", script)
+        trainer = (base / "src/data/trainers.party").read_text()
+        elio = trainer.split("=== TRAINER_AVERON_ELIO ===", 1)[1].split(
+            "===",1)[0]
+        self.assertIn("Bunnelby\\nLevel: 12", elio)
+        self.assertIn("Lechonk\\nLevel: 13", elio)
+        self.assertIn("Lillipup @ Oran Berry\\nLevel: 15", elio)
+
     def test_real_badge01_source_flag_read_only(self):
         header = struct.pack("<hhbbbxhh", 37, 16, 75, 9, -1, -1, -1)
         gdb, observed = self.fake(header)
