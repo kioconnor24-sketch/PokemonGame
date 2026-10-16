@@ -248,7 +248,19 @@ def daemon(args):
                         result["menu"] = gdb.menu_state(
                             menu_symbols, include_tasks=name.startswith("title-"))
                 except Exception as exc:
-                    result = {"checkpoint": name, "blocked": str(exc)}
+                    if name.startswith("title-") and isinstance(
+                            exc, (ValueError, Blocked, OSError, socket.timeout)):
+                        # Expected possibility while GBA's CPU resets and
+                        # gTasks/menu globals are not initialized. Preserve
+                        # a non-accepting, observable retry state; do not
+                        # silently declare a title, save, or Continue PASS.
+                        result = {"checkpoint": name, "transient": str(exc),
+                                  "menu": {"mainPhase": "unavailable",
+                                           "mainCallback2": None,
+                                           "saveStatus": None,
+                                           "titleInputReady": False}}
+                    else:
+                        result = {"checkpoint": name, "blocked": str(exc)}
                 dest = Path(args.outdir) / f"{name}.json"
                 temp = dest.with_suffix(".tmp")
                 temp.write_text(json.dumps(result, sort_keys=True))
@@ -1091,6 +1103,10 @@ def q2_reset_continue(args):
         sample, frame = save_probe(
             args, f"title-102-title-poll-{i+1}", require_position=False)
         phase = sample["menu"]["mainPhase"]
+        if sample.get("transient"):
+            print("QA_TITLE_TRANSIENT_RETRY", sample["transient"], flush=True)
+            time.sleep(0.60)
+            continue
         if phase in ("CB2_InitTitleScreen", "CB2_InitMainMenu"):
             observed_title = True
         if sample["menu"]["titleInputReady"]:
