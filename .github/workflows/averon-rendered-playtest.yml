@@ -398,6 +398,18 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log"
+          # The Codex source-checked route uses the actual Windrow/Meadow
+          # connection, not an invented warp or any game memory mutation.
+          # Q2 boy hint, tree, repeat tree, return reward and Bag delta are
+          # independently gated after EACH normal D-pad movement.
+          if ! python3 -u "$qa_controller" q2-meadow \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log"
+            echo "QA_Q2_MEADOW_BLOCKED: review last saved map, tile and frame; NOT a game bug"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
