@@ -57,6 +57,8 @@ python3 ../scripts/test-averon-release-forms.py
 | Mega Evolution | Every held-stone Mega uses an item with `HOLD_EFFECT_MEGA_STONE` and targets an enabled species | 209 Megas, 0 problems | NATIVE |
 | Battle-only forms | Every form reached in battle (Mega, weather, HP thresholds, Battle Bond, switch-in, begin-battle and the excluded gimmicks) has the end-of-battle revert that `TryRevertPartyMonFormChange` applies, so it cannot stay in the party or as the follower | 298 changes, 0 problems | NATIVE |
 | Mega Evolution after battle | A Mega Evolved Venusaur is plain Venusaur in the party after a won battle and keeps its stone | Real battle | NATIVE |
+| Mega restrictions (`test/battle/averon_mega.c`) | A Mega Stone for another species does nothing; after one Pokémon Mega Evolves its partner cannot; a Mega stays Mega through switching out and back; Rayquaza Mega Evolves through Dragon Ascent without a stone and not without it | 4 tests | NATIVE |
+| Mega Ring (SOURCE, **owner decision**) | `CanMegaEvolve` (`src/battle_util.c`) requires `ITEM_MEGA_RING` in the Bag in the real game (the check is skipped under `TESTING`). Averon must give the player a Mega Ring somewhere, or no Mega Evolution is possible. The same-turn block on a second Mega is enforced by the battle menu (GUI) | — | SOURCE |
 | Mega Evolution in battle | Works; Primal Reversion, Z-Move, Dynamax, Tera and Ultra Burst are blocked | `averon_battle_rules.c` | NATIVE (existing) |
 | Learnsets | Level-up, teachable and egg moves are real moves, never Z-Moves or Max Moves; levels are at most 100 and in order | 78,179 entries, 0 problems | NATIVE |
 | Physical/special split | Dark physical, Ghost special | `averon_battle_rules.c` | NATIVE (existing) |
