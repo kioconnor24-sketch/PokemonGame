@@ -103,7 +103,7 @@ Run: `make check TESTS="Averon region save"`, **13/13 PASS** (125 runs):
 - Round trip of both regions through flash, with **zero flash writes during
   load** (all three flash write pointers hooked).
 - SaveBlock1, SaveBlock2 and PC storage are byte-exact after save and load.
-- Legacy (with and without a leftover tail): loads OK, keeps party, Bag,
+- Legacy (no tail, leftover bytes, or a stale CRC-valid record left without an anchor): loads OK, keeps party, Bag,
   money and flags byte-exact, Averon badges come from the flags, Sinnoh
   starts at 0, nothing is written on load, and the next save upgrades the
   file.
@@ -128,4 +128,4 @@ Run: `make check TESTS="Averon region save"`, **13/13 PASS** (125 runs):
 
 GBA build: `make -j20 -O all` OK. EWRAM 226488 B (+68 vs main: +64 record,
 +2 state, alignment).
-Mutation and full-suite results: see the PR.
+Mutations: 15/15 killed. Full suite: 328 failures = the 327 expected plus the known Gimmick flake, after the SaveBlock3 size pin fix (`test/save.c`).

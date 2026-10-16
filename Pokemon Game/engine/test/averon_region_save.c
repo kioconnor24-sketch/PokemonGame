@@ -229,13 +229,14 @@ static u32 SaveTwo(u32 older, u32 newer)
 // Rewrite one slot's sector 0 as the pre-Averon writer left it: no anchor,
 // and nothing in the SaveBlock3 chunk past the original 4-byte prefix
 // unless `tail` asks for leftover bytes there.
-static void MakeSlotLegacy(u32 slot, bool32 tail)
+// tail: 0 = zero, 1 = leftover bytes, 2 = a stale but well-formed record.
+static void MakeSlotLegacy(u32 slot, u32 tail)
 {
     struct SaveSector *sector = Alloc(sizeof(*sector));
     s32 physical = FindPhysical(slot, SECTOR_ID_SAVEBLOCK2);
     ReadSector(physical, sector);
     memset(&sector->data[ANCHOR_OFFSET], 0, AVERON_REGION_ANCHOR_SIZE);
-    for (u32 i = 4; i < SAVE_BLOCK_3_CHUNK_SIZE; i++)
+    for (u32 i = 4; i < SAVE_BLOCK_3_CHUNK_SIZE && tail != 2; i++)
         sector->saveBlock3Chunk[i] = tail ? (u8)(i * 37 + 5) : 0;
     ResealSaveBlock2(sector);
     WriteSector(physical, sector);
@@ -300,12 +301,13 @@ TEST("Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact thro
 
 TEST("Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save")
 {
-    u32 tail = FALSE;
+    u32 tail = 0;
     u8 status;
     u8 anchor[AVERON_REGION_ANCHOR_SIZE];
     struct SaveBlock1 *sb1 = Alloc(sizeof(struct SaveBlock1));
-    PARAMETRIZE { tail = FALSE; }
-    PARAMETRIZE { tail = TRUE; } // leftover bytes past the old SaveBlock3
+    PARAMETRIZE { tail = 0; }
+    PARAMETRIZE { tail = 1; } // leftover bytes past the old SaveBlock3
+    PARAMETRIZE { tail = 2; } // a CRC-valid record left behind without an anchor
     EXPECT(StartFlash());
     ApplyState(5); // Averon badges 0x5F; Sinnoh state will be dropped
     EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
