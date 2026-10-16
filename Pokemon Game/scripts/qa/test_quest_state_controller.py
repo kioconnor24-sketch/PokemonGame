@@ -276,9 +276,9 @@ class ObserverTests(unittest.TestCase):
         trainer = (base / "src/data/trainers.party").read_text()
         elio = trainer.split("=== TRAINER_AVERON_ELIO ===", 1)[1].split(
             "===",1)[0]
-        self.assertIn("Bunnelby\\nLevel: 12", elio)
-        self.assertIn("Lechonk\\nLevel: 13", elio)
-        self.assertIn("Lillipup @ Oran Berry\\nLevel: 15", elio)
+        self.assertIn("Bunnelby\nLevel: 12", elio)
+        self.assertIn("Lechonk\nLevel: 13", elio)
+        self.assertIn("Lillipup @ Oran Berry\nLevel: 15", elio)
 
     def test_real_badge01_source_flag_read_only(self):
         header = struct.pack("<hhbbbxhh", 37, 16, 75, 9, -1, -1, -1)
