@@ -36,6 +36,8 @@ class ObserverTests(unittest.TestCase):
                 return payload.hex()
             if q == "m2001375,1":
                 return "00"
+            if q == "m2000890,b8":
+                return "00" * (46 * 4)
             if q == "c":
                 return None
             raise AssertionError(f"Unplanned remote command: {q}")
@@ -49,7 +51,7 @@ class ObserverTests(unittest.TestCase):
         result = gdb.position(0x03000100)
         self.assertEqual((result["x"], result["y"]), (13, 16))
         self.assertEqual((result["mapGroup"], result["mapNum"], result["warpId"]), (76, 9, 1))
-        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "m2001375,1", "c"])
+        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "m2001375,1", "m2000890,b8", "c"])
         self.assertEqual(gdb.sock.sent, [b"\x03"])
 
     def test_saved_flag_bit_masks(self):
@@ -74,6 +76,22 @@ class ObserverTests(unittest.TestCase):
         self.assertFalse(state["notesStarted"])
         self.assertFalse(state["notesRecorded"])
         self.assertFalse(state["notesRewarded"])
+
+    def test_berry_pocket_quantity_reads_item520_without_memory_writes(self):
+        header = struct.pack("<hhbbbxhh", 11, 27, 75, 5, -1, -1, -1)
+        gdb, commands = self.fake(header)
+        source = gdb.command
+        slots = bytearray(46 * 4)
+        struct.pack_into("<HH", slots, 0, 520, 3)
+        struct.pack_into("<HH", slots, 4, 519, 9)
+        struct.pack_into("<HH", slots, 8, 520, 2)
+        gdb.command = lambda q, reply=True: (slots.hex()
+                                            if q == "m2000890,b8"
+                                            else source(q, reply))
+        state = gdb.position(0x03000100)
+        self.assertEqual(state["oranBerryQuantity"], 5)
+        self.assertIn("m2000890,b8", commands)
+        self.assertEqual(gdb.sock.sent, [b"\x03"])
 
     def test_reject_non_ewram_pointer(self):
         gdb, commands = self.fake(b"\x00"*12)
