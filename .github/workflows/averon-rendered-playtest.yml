@@ -539,10 +539,6 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
-            echo "QA_Q2_CONTINUE_BLOCKED: real flash and Continue not yet proven"
-            exit 2
-          fi
-          cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
           if [ "$qa_gate_blocked" != "0" ]; then
             echo "QA_Q1_GATE_PARTIAL: source negative badge gate not accepted"
             exit 2
