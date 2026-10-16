@@ -1662,7 +1662,10 @@ def q2_visual_relaunch(args):
         raise Blocked("Source-backed pre-powercycle field screenshot missing")
     baseline = visual_frame_data(original_field)
     title_frame = None
-    for i in range(80):
+    # Observed mGBA artifact 12030325106: after the first 80 samples
+    # the authentic Kyogre introductory animation was STILL playing.
+    # Do not mistake animated intro for invalid flash/title.
+    for i in range(220):
         frame, raw, score = shot(f"title-wait-{i+1}")
         if score["present"]:
             title_frame = raw
