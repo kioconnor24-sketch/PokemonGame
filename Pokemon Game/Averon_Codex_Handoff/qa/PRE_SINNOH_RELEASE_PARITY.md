@@ -1,7 +1,8 @@
 # Pre-Sinnoh release configuration parity
 
 Recovered in Codex Cloud on 2026-10-16 from the tested patch at
-`3536aa2565d69396c7f34ea56ab3acab9ac08bfa`, without rewriting its test script.
+`3536aa2565d69396c7f34ea56ab3acab9ac08bfa`. The first implementation commit
+retains its test script verbatim; subsequent commits extend that existing probe.
 Applied after [exact-path claim #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6212086334)
 and checking all live open PR paths and Claude inheritance claims. No production
 code changes. The dedicated `Averon release configuration parity` workflow runs
@@ -17,7 +18,7 @@ python3 scripts/test-averon-release-config-parity.py --engine engine --mutations
 ```
 
 The script uses ARM GCC preprocessing with the real include order, MODERN=1,
-EMERALD and TESTING=0 in both development and RELEASE configurations. The host
+EMERALD, ARM7TDMI/Thumb and TESTING=0 in development and RELEASE configurations. The host
 compiler executes extracted production functions under ASan/UBSan. Compilation
 errors and missing generated headers fail the command rather than skipping checks.
 The retained cloud toolchain is selected by `. /workspace/.onboarding/activate.sh`.
@@ -54,11 +55,24 @@ checkpoint retains per-file digests, test output, safety review and release log:
 [3536aa25 evidence](https://github.com/kioconnor24-sketch/PokemonGame/tree/3536aa2565d69396c7f34ea56ab3acab9ac08bfa/Pokemon%20Game/evidence/cloud/20261016-release-parity).
 A separate tracked-files-only scratch checkout also passed header generation,
 139+139 assertions and 17/17 mutations, without retained generated headers.
+GitHub Actions independently reproduced that recovered version in
+[run 38879083825](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38879083825),
+with [text/JSON artifact 12036477765](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38879083825/artifacts/12036477765).
+
+The extended probe now passes **216 development + 216 release assertions** and
+detects **23/23 mutants** locally. It adds battle-debug/sprite-debug removal,
+modern physical/special split configuration, invalid gimmick enum values, and
+the actual `AssignUsableGimmicks` function. Zero through four active battlers
+are checked with Mega allowed/denied, stale Tera state, callback counts and
+untouched inactive slots. Mutants retaining stale state, skipping the last
+battler, or substituting a banned gimmick all fail. The JSON report also records
+the host compiler, probe SHA256 and ASan options. This host fixture still does
+not verify production battle-struct layout or actual battle-menu rendering.
 
 Checks cover Gen V held-item EXP Share configuration and disabled team-share
 flag lookup; hard-cap/candy configuration and MAX_LEVEL=100; configured Gen I-IX
 families, regional forms, Mega enablement, disabled Primal/Ultra forms; release
-removal of debug overworld entry; extracted CanActivateGimmick behavior for all
+removal of overworld/battle/sprite debug entries; extracted CanActivateGimmick behavior for all
 four battlers, all gimmick enum values, callback permission/denial/null cases;
 and extracted battle initialization forcing Set while preserving existing fields.
 

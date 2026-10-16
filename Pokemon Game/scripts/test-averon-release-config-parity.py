@@ -10,7 +10,6 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import re
 import shlex
 import subprocess
 import tempfile
@@ -45,7 +44,7 @@ def definition(source, signature):
 
 
 def cpp(engine, compiler, mode, content):
-    flags = ['-DMODERN=1', '-DEMERALD', '-DTESTING=0']
+    flags = ['-mcpu=arm7tdmi', '-mthumb', '-DMODERN=1', '-DEMERALD', '-DTESTING=0']
     if mode == 'release':
         flags.append('-DRELEASE')
     command = [*compiler, '-E', '-P', '-std=gnu17', '-iquote', str(engine / 'include'), *flags, '-x', 'c', '-']
@@ -66,12 +65,18 @@ static unsigned checks, flagCalls, callbackCalls;
 static bool32 flagValue, callbackValue;
 static unsigned lastBattler;
 static bool32 FlagGet(unsigned id) { ++flagCalls; (void)id; return flagValue; }
-static bool32 MegaCallback(int battler) { ++callbackCalls; lastBattler=battler; return callbackValue; }
 enum BattlerId { BATTLER_ZERO, BATTLER_ONE, BATTLER_TWO, BATTLER_THREE };
-struct GimmickInfo { bool32 (*CanActivate)(int); };
-static struct GimmickInfo gGimmicksInfo[6];
+static bool32 MegaCallback(enum BattlerId battler) { ++callbackCalls; lastBattler=battler; return callbackValue; }
+struct GimmickInfo { bool32 (*CanActivate)(enum BattlerId); };
 static struct { u32 windowsType, battleStyle, expOnCatch, specialTrainerBattleType; } gBattleScripting;
 #define GetConfig(x) (x)
+'''
+
+FIXTURE = r'''
+static struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT];
+struct BattleFixture { struct { enum Gimmick usableGimmick[4]; } gimmick; };
+static struct BattleFixture battleStruct, *gBattleStruct = &battleStruct;
+static unsigned gBattlersCount;
 '''
 
 DRIVER = r'''
@@ -98,6 +103,27 @@ int main(void) {
     callbackCalls=0;
     CHECK(CanActivateGimmick(0,GIMMICK_MEGA)==0);
     CHECK(callbackCalls==0);
+    const unsigned invalidGimmicks[] = {GIMMICKS_COUNT, 255, UINT32_MAX};
+    for (unsigned battler=0;battler<4;++battler) {
+        for (unsigned i=0;i<sizeof(invalidGimmicks)/sizeof(invalidGimmicks[0]);++i) {
+            callbackCalls=0;
+            CHECK(CanActivateGimmick(battler,invalidGimmicks[i])==0);
+            CHECK(callbackCalls==0);
+        }
+    }
+    for (gBattlersCount=0;gBattlersCount<=4;++gBattlersCount) {
+        for (unsigned allowed=0;allowed<2;++allowed) {
+            for (unsigned i=0;i<GIMMICKS_COUNT;++i) gGimmicksInfo[i].CanActivate=MegaCallback;
+            for (unsigned i=0;i<4;++i) gBattleStruct->gimmick.usableGimmick[i]=GIMMICK_TERA;
+            callbackValue=allowed;callbackCalls=0;
+            AssignUsableGimmicks();
+            for (unsigned i=0;i<4;++i) {
+                CHECK(gBattleStruct->gimmick.usableGimmick[i]==
+                      (i>=gBattlersCount ? GIMMICK_TERA : allowed ? GIMMICK_MEGA : GIMMICK_NONE));
+            }
+            CHECK(callbackCalls==gBattlersCount);
+        }
+    }
     for (unsigned oldStyle=0;oldStyle<3;++oldStyle) {
         gBattleScripting.windowsType=7;
         gBattleScripting.specialTrainerBattleType=13;
@@ -117,6 +143,7 @@ def probe(engine, compiler, host, mode, overrides='', function_mutation=None):
     functions = '\n'.join(definition((engine / name).read_text(), signature) for name, signature in [
         ('src/battle_util.c', 'bool32 IsGen6ExpShareEnabled(void)'),
         ('src/battle_gimmick.c', 'bool32 CanActivateGimmick('),
+        ('src/battle_gimmick.c', 'void AssignUsableGimmicks(void)'),
         ('src/battle_main.c', 'static void ClearSetBScriptingStruct(void)'),
     ])
     if function_mutation:
@@ -125,7 +152,9 @@ def probe(engine, compiler, host, mode, overrides='', function_mutation=None):
             raise ValueError('Mutation target must match exactly once')
         functions = functions.replace(before, after)
     assertions = '\n'.join(f'CHECK(({name}) == ({expected}));' for name, expected in MACROS.items())
-    assertions += '\nCHECK(DEBUG_OVERWORLD_MENU == ' + ('0' if mode == 'release' else '1') + ');'
+    for macro in ('DEBUG_OVERWORLD_MENU', 'DEBUG_BATTLE_MENU', 'DEBUG_POKEMON_SPRITE_VISUALIZER'):
+        assertions += f'\nCHECK({macro} == {0 if mode == "release" else 1});'
+    assertions += '\nCHECK(B_PHYSICAL_SPECIAL_SPLIT >= GEN_4);'
     # Only the marked code is compiled by the host. Every macro is expanded by
     # the ARM compiler against real production include order with TESTING=0.
     marked = '\nPARITY_BEGIN\n' + functions + '\n' + DRIVER.replace('PARITY_CONFIG_ASSERTS', assertions) + '\nPARITY_END\n'
@@ -135,10 +164,12 @@ def probe(engine, compiler, host, mode, overrides='', function_mutation=None):
     with tempfile.TemporaryDirectory(prefix='averon-release-parity-') as directory:
         source = Path(directory) / 'probe.c'
         binary = Path(directory) / 'probe'
-        source.write_text(PREFIX + enum + body)
-        subprocess.run([*host, '-std=c17', '-Wall', '-Wextra', '-fsanitize=address,undefined',
-                        '-fno-sanitize-recover=all', str(source), '-o', str(binary)], check=True,
-                       capture_output=True, text=True)
+        source.write_text(PREFIX + enum + FIXTURE + body)
+        compiled = subprocess.run([*host, '-std=c17', '-Wall', '-Wextra', '-fsanitize=address,undefined',
+                                   '-fno-sanitize-recover=all', str(source), '-o', str(binary)],
+                                  capture_output=True, text=True)
+        if compiled.returncode:
+            raise RuntimeError(f'Host compilation failed:\n{compiled.stderr}')
         return subprocess.run([str(binary)], text=True, capture_output=True)
 
 
@@ -152,7 +183,10 @@ def main():
     compiler = shlex.split(os.environ.get('ARM_CC', 'arm-none-eabi-gcc'))
     host = shlex.split(os.environ.get('CC', 'cc'))
     report = {'engine': str(engine), 'testing': 0, 'modes': {}, 'mutations': {},
+              'probe_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'arm_compiler': subprocess.run([*compiler, '--version'], check=True, capture_output=True, text=True).stdout.splitlines()[0],
+              'host_compiler': subprocess.run([*host, '--version'], check=True, capture_output=True, text=True).stdout.splitlines()[0],
+              'asan_options': os.environ.get('ASAN_OPTIONS', ''),
               'source_sha256': {str(p.relative_to(engine)): hashlib.sha256(p.read_bytes()).hexdigest()
                                 for p in [*(engine/'include/config').glob('*.h'),
                                           engine/'include/global.h', engine/'include/constants/global.h',
@@ -178,6 +212,9 @@ def main():
             'P_REGIONAL_FORMS': 'FALSE',
             'P_GEN_9_POKEMON': 'FALSE',
             'DEBUG_OVERWORLD_MENU': 'TRUE',
+            'DEBUG_BATTLE_MENU': 'TRUE',
+            'DEBUG_POKEMON_SPRITE_VISUALIZER': 'TRUE',
+            'B_PHYSICAL_SPECIAL_SPLIT': 'GEN_3',
         }.items():
             result = probe(engine, compiler, host, 'release', f'\n#undef {macro}\n#define {macro} {replacement}\n')
             if result.returncode == 0 or 'FAIL line' not in result.stderr:
@@ -190,6 +227,9 @@ def main():
             'mega-legality-callback-bypassed': ('return gGimmicksInfo[gimmick].CanActivate != NULL && gGimmicksInfo[gimmick].CanActivate(battler);', 'return TRUE;'),
             'shift-restored': ('gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;', 'gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SHIFT;'),
             'team-share-enabled': ('if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)', 'if (FALSE)'),
+            'stale-gimmick-retained': ('gBattleStruct->gimmick.usableGimmick[battler] = GIMMICK_NONE;', 'gBattleStruct->gimmick.usableGimmick[battler] = GIMMICK_TERA;'),
+            'last-battler-not-assigned': ('battler < gBattlersCount;', 'battler + 1 < gBattlersCount;'),
+            'assigned-gimmick-substituted': ('gBattleStruct->gimmick.usableGimmick[battler] = gimmick;', 'gBattleStruct->gimmick.usableGimmick[battler] = GIMMICK_Z_MOVE;'),
         }.items():
             result = probe(engine, compiler, host, 'release', function_mutation=change)
             if result.returncode == 0 or 'FAIL line' not in result.stderr:
