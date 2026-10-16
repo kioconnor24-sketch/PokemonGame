@@ -14,7 +14,7 @@ extern const struct MapHeader *const *const gMapGroups[];
 #define REGISTRY_SLOT(group, index, id, symbol, linked) \
     _Static_assert((id) == ((group) << 8 | (index)), "Saved map ID moved: " #id); \
     _Static_assert((group) <= 127 && (index) <= 127, "Map ID exceeds signed warp storage"); \
-    _Static_assert((id) != MAP_DYNAMIC && (id) != MAP_UNDEFINED, "Reserved map ID used"); \
+    _Static_assert((u32)(id) != (u32)MAP_DYNAMIC && (u32)(id) != (u32)MAP_UNDEFINED, "Reserved map ID used"); \
     DECLARE_##linked(symbol)
 #include "data/averon_map_registry_slots.inc"
 #undef REGISTRY_GROUP
