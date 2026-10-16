@@ -473,6 +473,104 @@ def q1_offer(args):
           "Hiker/reward/Bag/save/whiteout remain unverified.", flush=True)
 
 
+
+def q2_artist_offer(args):
+    """Observe Windrow artist refusal/reoffer/accept with saved flag reads only."""
+    directory = Path(args.outdir)
+    num = 300
+
+    def menu_ratio(frame):
+        if subprocess.check_output(
+                ["identify", "-format", "%wx%h", str(frame)],
+                text=True) != "480x320":
+            raise Blocked("Q2 unexpected screenshot dimensions")
+        return sum(min(rgb[i:i+3]) >= 190
+                   for rgb in [subprocess.check_output(
+                       ["convert", str(frame), "-crop", "106x90+323+130",
+                        "+repage", "-depth", "8", "RGB:-"])]
+                   for i in range(0, len(rgb), 3)) / (106*90)
+
+    def menu_bytes(frame):
+        return subprocess.check_output(
+            ["convert", str(frame), "-crop", "106x90+323+130",
+             "+repage", "-depth", "8", "RGB:-"])
+
+    def see(tag, expected_menu=None, expected_panel=None):
+        nonlocal num
+        num += 1
+        name = f"{num:03d}-q2-{tag}"
+        pic = directory / (name + ".png")
+        grab(args.window, pic)
+        state = snapshot(args, name)
+        if (state["mapGroup"], state["mapNum"],
+                state["x"], state["y"]) != (75, 6, 20, 15):
+            raise Blocked(f"Q2 artist adjacency changed: {state}")
+        mr = menu_ratio(pic)
+        pr = white_panel_ratio(pic)
+        print("QA_Q2_OFFER", name, json.dumps(state, sort_keys=True),
+              f"menu={mr:.4f} panel={pr:.4f}", flush=True)
+        if expected_menu is True and mr < 0.52:
+            raise Blocked(f"Q2 YESNO absent at {tag}")
+        if expected_menu is False and mr > 0.52:
+            raise Blocked(f"Q2 YESNO unexpectedly open at {tag}")
+        if expected_panel is True and pr < 0.50:
+            raise Blocked(f"Q2 dialogue not visible at {tag}")
+        if expected_panel is False and pr > 0.30:
+            raise Blocked(f"Q2 dialogue not closed at {tag}")
+        return state, pic, mr
+
+    def key(k):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", k], check=True)
+        time.sleep(0.1)
+        subprocess.run(["xdotool", "keyup", k], check=True)
+        time.sleep(0.75)
+
+    def get_menu(label):
+        for i in range(12):
+            state, frame, mr = see(f"{label}-wait-{i+1}", expected_panel=True)
+            if state["sketchStarted"] or state["sketchFound"] or state["sketchRewarded"]:
+                raise Blocked(f"Q2 changed stage before YES choice: {state}")
+            if mr >= 0.52:
+                return frame
+            time.sleep(0.75)
+        raise Blocked(f"Q2 artist YESNO did not render for {label}")
+
+    time.sleep(0.75)
+    before = get_menu("first-offer")
+    key("Down")
+    state, selected, _ = see("select-no", expected_menu=True, expected_panel=True)
+    selector_delta = difference(menu_bytes(before), menu_bytes(selected))
+    print(f"QA_Q2_SELECTOR_DELTA {selector_delta:.5f}", flush=True)
+    if selector_delta < 0.001:
+        raise Blocked("Q2 did not observe selector move to NO")
+    key("x")
+    declined, _, _ = see("decline-text", expected_menu=False, expected_panel=True)
+    if declined["sketchStarted"] or declined["sketchFound"] or declined["sketchRewarded"]:
+        raise Blocked(f"Q2 refusal changed flags: {declined}")
+    key("x")
+    closed, _, _ = see("decline-dismissed", expected_menu=False,
+                       expected_panel=False)
+    if closed["sketchStarted"]:
+        raise Blocked("Q2 stage advanced while leaving refusal")
+    key("x")
+    get_menu("return-offer")
+    key("x")
+    accepted, _, _ = see("accept-waiting-text", expected_menu=False,
+                         expected_panel=True)
+    if (not accepted["sketchStarted"]
+            or accepted["sketchFound"] or accepted["sketchRewarded"]):
+        raise Blocked(f"Q2 YES not STARTED-only: {accepted}")
+    if not accepted["notesStarted"]:
+        raise Blocked("Q2 unexpectedly lost unrelated Q1 STARTED state")
+    print("QA_Q2_OFFER_PARTIAL_OBSERVED: NO leaves sketch flags clear; "
+          "return YES sets SKETCH_STARTED only. Tree, reward, inventory, "
+          "whiteout and flash NOT TESTED. Human screenshot review needed.",
+          flush=True)
+
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -486,6 +584,10 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    b = sub.add_parser("q2-artist-offer")
+    b.add_argument("--fifo", required=True)
+    b.add_argument("--outdir", required=True)
+    b.add_argument("--window", required=True)
     a = sub.add_parser("navigate-artist")
     a.add_argument("--fifo", required=True)
     a.add_argument("--outdir", required=True)
@@ -503,6 +605,8 @@ def main():
             return daemon(args)
         if args.mode == "assert-ui":
             return assert_ui(args)
+        if args.mode == "q2-artist-offer":
+            return q2_artist_offer(args)
         if args.mode == "navigate-artist":
             return navigate_artist(args)
         if args.mode == "q1-offer":
