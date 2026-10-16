@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Local/CI no-ROM tests of the independent QUEST observer's fail-closed logic."""
 import importlib.util
+import json
 from pathlib import Path
 import struct
 import subprocess
@@ -299,7 +300,10 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(len(blockdata), 9 * 16 * 2)
         def original_metatile(x, y):
             return struct.unpack_from("<H", blockdata, 2*(y*9+x))[0] & 0x3ff
-        self.assertEqual(original_metatile(4, 14), 513) # original warp entry approach
+        gym_map = json.loads((base / "data/maps/AlderfieldGym/map.json").read_text())
+        self.assertEqual((gym_map["warp_events"][0]["x"],
+                          gym_map["warp_events"][0]["y"]), (4, 15))
+        self.assertEqual(original_metatile(4, 14), 513) # true floor after warp0
         self.assertEqual(original_metatile(2, 13), 513) # western sluice face-up
         self.assertEqual(original_metatile(6, 13), 513) # eastern sluice face-up
         self.assertEqual(original_metatile(4, 9), 548)  # genuine blocked leader gate
@@ -317,7 +321,7 @@ class ObserverTests(unittest.TestCase):
         self.assertIn("Lillipup @ Oran Berry\nLevel: 15", elio)
 
     def test_original_gym_sluice_flags_read_only(self):
-        header = struct.pack("<hhbbbxhh", 4, 14, 75, 10, 0, -1, -1)
+        header = struct.pack("<hhbbbxhh", 4, 15, 75, 10, 0, -1, -1)
         gdb, commands = self.fake(header)
         old = gdb.command
         def reply(q, reply=True):
