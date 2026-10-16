@@ -1,12 +1,12 @@
 name: Averon agent dispatch board
 # All code executed here comes only from trusted main, never a PR checkout.
+# PR merges already emit pull_request_target.closed; listening to main pushes
+# as well doubled dispatch work for each ordinary merge.
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, closed, ready_for_review, converted_to_draft, edited]
   issue_comment:
     types: [created]
-  push:
-    branches: [main]
   schedule:
     - cron: "31 13 * * *"
   workflow_dispatch:
@@ -18,12 +18,21 @@ permissions:
   checks: read
 
 concurrency:
+  # Keep the running snapshot alive; a burst of PR comments/merges coalesces
+  # behind it instead of repeatedly cancelling GitHub API pagination.
   group: averon-agent-board
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   route:
-    if: github.event_name != 'issue_comment' || github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null
+    # Agent inboxes only parse these structured comment types; ordinary PR
+    # chatter/CI handoffs should not fan out into full GitHub API snapshots.
+    if: >-
+      github.event_name != 'issue_comment' ||
+      ((github.event.issue.number == 15 || github.event.issue.number == 23 || github.event.issue.pull_request != null) &&
+       (startsWith(github.event.comment.body, 'AGENT_MESSAGE ') ||
+        startsWith(github.event.comment.body, 'AGENT_ACK ') ||
+        (github.event.issue.number == 23 && contains(github.event.comment.body, 'QA_ACCEPTED PR=#'))))
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
