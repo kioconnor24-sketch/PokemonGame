@@ -55,6 +55,16 @@ typedef uint32_t u32;
 static unsigned char gTestFlags[256];
 static int FlagGet(unsigned int flag) { return gTestFlags[flag]; }
 static unsigned int VarGet(unsigned int id) { (void)id; return 0; }
+typedef int bool32;
+/* Region-aware progression hook (averon_region_progression.c). Off means the
+   active region has no profile, so the Averon flag ladder must apply. */
+static int gTestRegionalCapOn;
+static u32 gTestRegionalCap;
+static bool32 AveronProgression_GetRegionalLevelCap(u32 *levelCap) {
+    if (!gTestRegionalCapOn) return FALSE;
+    *levelCap = gTestRegionalCap;
+    return TRUE;
+}
 #include "config/caps.h"
 static void require_true(int condition, const char *reason) {
     if (!condition) { fprintf(stderr, "FAIL: %s\\n", reason); exit(1); }
@@ -77,8 +87,16 @@ int main(void) {{
         if (i + 1 < ARRAY_COUNT(expected))
             gTestFlags[i] = 1;
     }}
+    /* A region with its own profile overrides the Averon ladder. */
+    gTestRegionalCapOn = 1;
+    for (u32 cap = 1; cap <= MAX_LEVEL; cap += 33) {{
+        gTestRegionalCap = cap;
+        require_true(GetCurrentLevelCap() == cap, "regional profile cap takes precedence");
+    }}
+    gTestRegionalCapOn = 0;
+    require_true(GetCurrentLevelCap() == MAX_LEVEL, "no profile returns to the Averon ladder");
     require_true(B_RARE_CANDY_CAP == TRUE, "Rare Candy cap configured");
-    puts("PASS: native level-cap functions + EXP behavior for {len(stages)} flag stages and MAX_LEVEL.");
+    puts("PASS: native level-cap functions + EXP behavior for {len(stages)} flag stages and MAX_LEVEL, and the regional-profile override.");
     return 0;
 }}
 """
