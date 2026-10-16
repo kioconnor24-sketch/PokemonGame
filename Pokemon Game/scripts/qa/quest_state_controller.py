@@ -1398,6 +1398,11 @@ def q4_lab_gift(args):
     original_party = state["playerPartyCount"]
     if original_party >= 6:
         raise Blocked("Gift positive branch needs a genuinely nonfull party")
+    # Verified against unchanged data/layouts/AveronFieldLab/map.bin:
+    # water occupies x17..24, rows5..16; original land corridor x25
+    # remains metatile 0x01. Do NOT walk down from (24,4) into water.
+    move("x", 25)
+    move("y", 18)
     move("x", 24)
     move("y", 19)
     at, empty = read("scientist-west", field=True)
