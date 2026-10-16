@@ -33,6 +33,15 @@ class WarpMetadata(ctypes.Structure):
     _fields_ = [('width', ctypes.c_uint32), ('height', ctypes.c_uint32), ('warp_count', ctypes.c_uint32)]
 
 
+class ProgressionPolicy(ctypes.Structure):
+    _fields_ = [('region', ctypes.c_uint32), ('level_caps', ctypes.c_uint32 * 9),
+                ('obedience_caps', ctypes.c_uint32 * 9)]
+
+
+class Progression(ctypes.Structure):
+    _fields_ = [('level_cap', ctypes.c_uint8), ('obedience_cap', ctypes.c_uint8)]
+
+
 WarpReader = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint32, ctypes.c_uint32,
                              ctypes.c_void_p, ctypes.POINTER(WarpMetadata))
 
@@ -70,6 +79,72 @@ class RegionFixtureTests(unittest.TestCase):
             ctypes.c_uint32, ctypes.c_uint32, ctypes.c_int32, ctypes.c_int32, ctypes.c_int32,
             WarpReader, ctypes.c_void_p]
         cls.lib.AveronRegionFixture_IsWarpRequestValid.restype = ctypes.c_int
+        cls.lib.AveronRegionFixture_SelectProgression.argtypes = [ctypes.POINTER(Badges), ctypes.c_uint32,
+            ctypes.POINTER(ProgressionPolicy), ctypes.c_size_t, ctypes.POINTER(Progression)]
+        cls.lib.AveronRegionFixture_SelectProgression.restype = ctypes.c_int
+
+    def progression_policies(self):
+        # Deliberately synthetic profiles; these are not proposed Gym caps.
+        return (ProgressionPolicy * 2)(
+            ProgressionPolicy(AVERON, (ctypes.c_uint32 * 9)(*range(1, 10)),
+                              (ctypes.c_uint32 * 9)(*range(91, 100))),
+            ProgressionPolicy(SINNOH, (ctypes.c_uint32 * 9)(*range(21, 30)),
+                              (ctypes.c_uint32 * 9)(*range(41, 50))))
+
+    def test_progression_uses_only_its_region_badge_bank(self):
+        profiles = self.progression_policies()
+        original = bytes(profiles)
+        for mask in range(256):
+            for other in (0, mask ^ 255, 255):
+                badges = Badges(mask, other)
+                for region, count, level, obedience in (
+                        (AVERON, mask.bit_count(), 1, 91), (SINNOH, other.bit_count(), 21, 41)):
+                    output = Progression(222, 173)
+                    self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+                        ctypes.byref(badges), region, profiles, 2, ctypes.byref(output)), 1)
+                    self.assertEqual((output.level_cap, output.obedience_cap), (level + count, obedience + count))
+                self.assertEqual(bytes(badges), bytes(Badges(mask, other)))
+        self.assertEqual(bytes(profiles), original)
+
+    def test_progression_rejects_ambiguous_unknown_and_missing_inputs_atomically(self):
+        profiles = self.progression_policies()
+        badges = Badges(0xA5, 0x81)
+        output = Progression(222, 173)
+        for region in (0, 3, 257, 258, 2**32 - 1):
+            self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+                ctypes.byref(badges), region, profiles, 2, ctypes.byref(output)), 0)
+        for count in (0, 1):
+            self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+                ctypes.byref(badges), SINNOH, profiles, count, ctypes.byref(output)), 0)
+        profiles[1].region = AVERON
+        self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+            ctypes.byref(badges), AVERON, profiles, 2, ctypes.byref(output)), 0)
+        for b, p, out in ((None, profiles, ctypes.byref(output)), (ctypes.byref(badges), None, ctypes.byref(output)),
+                           (ctypes.byref(badges), profiles, None)):
+            self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(b, AVERON, p, 2, out), 0)
+        self.assertEqual(bytes(output), bytes(Progression(222, 173)))
+
+    def test_progression_validates_every_full_width_cap_before_commit(self):
+        profiles = self.progression_policies()
+        badges = Badges(0, 255)
+        output = Progression(222, 173)
+        for bank in (0, 1):
+            for field in ('level_caps', 'obedience_caps'):
+                for index in range(9):
+                    for invalid in (0, 101, 256, 2**32 - 1):
+                        values = getattr(profiles[bank], field)
+                        saved = values[index]
+                        values[index] = invalid
+                        self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+                            ctypes.byref(badges), bank + 1, profiles, 2, ctypes.byref(output)), 0)
+                        self.assertEqual(bytes(output), bytes(Progression(222, 173)))
+                        values[index] = saved
+        profiles[0].level_caps[8] = 100
+        profiles[0].obedience_caps[8] = 100
+        badges.averon = 255
+        self.assertEqual(self.lib.AveronRegionFixture_SelectProgression(
+            ctypes.byref(badges), AVERON, profiles, 2, ctypes.byref(output)), 1)
+        self.assertEqual((output.level_cap, output.obedience_cap), (100, 100))
 
     def test_warp_indexed_requests_enforce_event_count_and_signed_byte_limit(self):
         maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))

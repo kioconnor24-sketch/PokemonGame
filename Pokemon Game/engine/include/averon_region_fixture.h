@@ -95,4 +95,27 @@ int AveronRegionFixture_HasBadge(const struct AveronFixtureBadges *badges,
 uint32_t AveronRegionFixture_CountBadges(const struct AveronFixtureBadges *badges,
                                        uint32_t region);
 
+// Caller-supplied technical profiles only; no final Gym levels or saved data.
+// Index0 is no badges; index8 is all eight badges of THIS region.
+struct AveronFixtureProgressionPolicy
+{
+    uint32_t region;
+    uint32_t levelCaps[AVERON_FIXTURE_BADGES_PER_REGION + 1];
+    uint32_t obedienceCaps[AVERON_FIXTURE_BADGES_PER_REGION + 1];
+};
+
+struct AveronFixtureProgression
+{
+    uint8_t levelCap;
+    uint8_t obedienceCap;
+};
+
+// Select from the matching region's independent badge count. Unknown or
+// duplicate matching profiles and ANY selected-profile cap outside1..100
+// fail without changing output. No fallback to another region or legacy cap.
+// No EXP/obedience engine hooks are installed by this pure query.
+int AveronRegionFixture_SelectProgression(const struct AveronFixtureBadges *badges,
+    uint32_t region, const struct AveronFixtureProgressionPolicy *policies, size_t policyCount,
+    struct AveronFixtureProgression *selected);
+
 #endif

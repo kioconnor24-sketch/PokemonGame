@@ -153,3 +153,34 @@ uint32_t AveronRegionFixture_CountBadges(const struct AveronFixtureBadges *badge
         count += mask & 1u;
     return count;
 }
+
+int AveronRegionFixture_SelectProgression(const struct AveronFixtureBadges *badges,
+    uint32_t region, const struct AveronFixtureProgressionPolicy *policies, size_t policyCount,
+    struct AveronFixtureProgression *selected)
+{
+    if (!badges || !policies || !selected
+        || (region != AVERON_FIXTURE_AVERON && region != AVERON_FIXTURE_SINNOH))
+        return 0;
+    const struct AveronFixtureProgressionPolicy *policy = NULL;
+    for (size_t i = 0; i < policyCount; ++i)
+    {
+        if (policies[i].region != region)
+            continue;
+        if (policy)
+            return 0;
+        policy = &policies[i];
+    }
+    if (!policy)
+        return 0;
+    for (size_t i = 0; i <= AVERON_FIXTURE_BADGES_PER_REGION; ++i)
+        if (policy->levelCaps[i] == 0 || policy->levelCaps[i] > 100
+            || policy->obedienceCaps[i] == 0 || policy->obedienceCaps[i] > 100)
+            return 0;
+    uint32_t count = AveronRegionFixture_CountBadges(badges, region);
+    const struct AveronFixtureProgression result = {
+        .levelCap = policy->levelCaps[count],
+        .obedienceCap = policy->obedienceCaps[count],
+    };
+    *selected = result;
+    return 1;
+}

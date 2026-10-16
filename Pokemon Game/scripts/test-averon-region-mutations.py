@@ -15,6 +15,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class RegionMutationTests(unittest.TestCase):
+    def test_detects_progression_reading_other_badge_bank(self):
+        self.assert_detected('uint32_t count = AveronRegionFixture_CountBadges(badges, region);',
+                             'uint32_t count = AveronRegionFixture_CountBadges(badges, AVERON_FIXTURE_AVERON);',
+                             'test_progression_uses_only_its_region_badge_bank')
+
+    def test_detects_progression_accepting_level_above100(self):
+        self.assert_detected('policy->levelCaps[i] > 100', 'policy->levelCaps[i] > UINT32_MAX',
+                             'test_progression_validates_every_full_width_cap_before_commit')
+
+    def test_detects_progression_accepting_obedience_above100(self):
+        self.assert_detected('policy->obedienceCaps[i] > 100', 'policy->obedienceCaps[i] > UINT32_MAX',
+                             'test_progression_validates_every_full_width_cap_before_commit')
+
     def assert_detected(self, before, after, test_name):
         with tempfile.TemporaryDirectory(prefix='averon-region-mutation-') as temporary:
             destination = Path(temporary)

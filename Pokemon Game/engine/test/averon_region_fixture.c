@@ -17,6 +17,84 @@
 // Opaque test-only handle, outside the engine's healer registry. Never saved.
 #define FIXTURE_SINNOH_HEAL 0x10000
 
+static void InitProgressionProfiles(struct AveronFixtureProgressionPolicy *profiles)
+{
+    // Test-only values demonstrate selection; these are not game cap data.
+    for (u32 bank = 0; bank < 2; ++bank)
+    {
+        profiles[bank].region = bank + 1;
+        for (u32 count = 0; count <= 8; ++count)
+        {
+            profiles[bank].levelCaps[count] = 1 + 20 * bank + count;
+            profiles[bank].obedienceCaps[count] = 91 - 50 * bank + count;
+        }
+    }
+}
+
+TEST("Averon region fixture selects cap and obedience from independent regional badges")
+{
+    EXPECT_EQ(MAX_LEVEL, 100);
+    struct AveronFixtureProgressionPolicy profiles[2], original[2];
+    InitProgressionProfiles(profiles);
+    memcpy(original, profiles, sizeof(original));
+    for (u32 mask = 0; mask < 256; ++mask)
+    {
+        struct AveronFixtureBadges badges = {mask, mask ^ 255};
+        for (u32 bank = 0; bank < 2; ++bank)
+        {
+            struct AveronFixtureProgression result = {222, 173};
+            u32 count = 0, bits = bank ? badges.sinnoh : badges.averon;
+            for (u32 bit = 0; bit < 8; ++bit)
+                count += (bits >> bit) & 1;
+            EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, bank + 1, profiles, 2, &result), TRUE);
+            EXPECT_EQ(result.levelCap, 1 + 20 * bank + count);
+            EXPECT_EQ(result.obedienceCap, 91 - 50 * bank + count);
+        }
+        EXPECT_EQ(badges.averon, mask);
+        EXPECT_EQ(badges.sinnoh, mask ^ 255);
+    }
+    EXPECT_EQ(memcmp(original, profiles, sizeof(original)), 0);
+}
+
+TEST("Averon region fixture rejects malformed full-width progression profiles atomically")
+{
+    struct AveronFixtureProgressionPolicy profiles[2];
+    struct AveronFixtureBadges badges = {0, 255};
+    struct AveronFixtureProgression output = {222, 173};
+    InitProgressionProfiles(profiles);
+    const u32 invalidRegions[] = {0, 3, 257, 258, UINT32_MAX};
+    const u32 invalidCaps[] = {0, 101, 256, UINT32_MAX};
+    for (u32 i = 0; i < ARRAY_COUNT(invalidRegions); ++i)
+        EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, invalidRegions[i], profiles, 2, &output), FALSE);
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(NULL, 1, profiles, 2, &output), FALSE);
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, 1, NULL, 2, &output), FALSE);
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, 1, profiles, 2, NULL), FALSE);
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, 1, profiles, 0, &output), FALSE);
+    profiles[1].region = 1;
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, 1, profiles, 2, &output), FALSE);
+    profiles[1].region = 2;
+    for (u32 bank = 0; bank < 2; ++bank)
+        for (u32 field = 0; field < 2; ++field)
+            for (u32 index = 0; index <= 8; ++index)
+                for (u32 bad = 0; bad < ARRAY_COUNT(invalidCaps); ++bad)
+                {
+                    u32 *value = field ? &profiles[bank].obedienceCaps[index] : &profiles[bank].levelCaps[index];
+                    u32 saved = *value;
+                    *value = invalidCaps[bad];
+                    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, bank + 1, profiles, 2, &output), FALSE);
+                    EXPECT_EQ(output.levelCap, 222);
+                    EXPECT_EQ(output.obedienceCap, 173);
+                    *value = saved;
+                }
+    EXPECT_EQ(output.levelCap, 222);
+    EXPECT_EQ(output.obedienceCap, 173);
+    profiles[1].levelCaps[8] = 100;
+    profiles[1].obedienceCaps[8] = 100;
+    EXPECT_EQ(AveronRegionFixture_SelectProgression(&badges, 2, profiles, 2, &output), TRUE);
+    EXPECT_EQ(output.levelCap, 100);
+    EXPECT_EQ(output.obedienceCap, 100);
+}
+
 struct HealReadFixture
 {
     u32 calls;
@@ -1045,24 +1123,40 @@ TEST("Averon region fixture real whiteout heals at existing respawns and survive
     ExerciseRestoredRegionQueries(badgeMask, 0xA5);
 }
 
+#define WHITEOUT_SECTOR_PARAMETERS(healValue, corruptValue, primeValue) \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 0; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 1; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 2; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 3; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 4; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 5; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 6; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 7; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 8; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 9; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 10; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 11; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 12; } \
+    PARAMETRIZE { healer = healValue; corruptPayload = corruptValue; primeSlot = primeValue; sectorOffset = 13; }
+
 TEST("Averon region fixture interrupted whiteout save recovers one coherent older slot")
 {
-    u32 healer, corruptPayload, primeSlot;
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; primeSlot = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; primeSlot = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; primeSlot = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; primeSlot = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; primeSlot = TRUE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; primeSlot = TRUE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; primeSlot = TRUE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; primeSlot = TRUE; }
+    u32 healer, corruptPayload, primeSlot, sectorOffset;
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_ALDERFIELD, FALSE, FALSE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, FALSE, FALSE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_ALDERFIELD, TRUE, FALSE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, TRUE, FALSE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_ALDERFIELD, FALSE, TRUE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, FALSE, TRUE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_ALDERFIELD, TRUE, TRUE)
+    WHITEOUT_SECTOR_PARAMETERS(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, TRUE, TRUE)
     CheckForFlashMemory();
     EXPECT_EQ(gFlashMemoryPresent, TRUE);
     if (!gFlashMemoryPresent)
         return;
     // Damage each physical sector in turn, not just the first sector. Cover
     // both missing signatures and corrupt data under an otherwise valid footer.
-    for (u32 sectorOffset = 0; sectorOffset < NUM_SECTORS_PER_SLOT; ++sectorOffset)
+    EXPECT_EQ(NUM_SECTORS_PER_SLOT, 14);
     {
         ClearSaveData();
         Save_ResetSaveCounters();
@@ -1159,3 +1253,5 @@ TEST("Averon region fixture interrupted whiteout save recovers one coherent olde
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 4);
     }
 }
+
+#undef WHITEOUT_SECTOR_PARAMETERS
