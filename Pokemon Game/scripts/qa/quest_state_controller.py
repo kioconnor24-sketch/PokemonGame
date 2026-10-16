@@ -171,7 +171,7 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
-    def position(self, symbol, symbol2, parties_count_symbol=None):
+    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -218,6 +218,16 @@ class ReadOnlyGdb:
                 raise Blocked("Incomplete read-only Berry Pocket response")
             oran_qty = sum((saved ^ key) for item, saved in
                            struct.iter_unpack("<HH", berries) if item == 520)
+            badge_data = {}
+            if badge_probe:
+                # flags.h: SYSTEM_FLAGS=0x860; FLAG_BADGE01_GET=0x867.
+                # Source SaveBlock1.flags begins at +0x1270.
+                badge = bytes.fromhex(self.command(
+                    f"m{ptr + 0x1270 + (0x867 // 8):x},1"))
+                if len(badge) != 1:
+                    raise Blocked("Incomplete saved Badge01 flag read")
+                badge_data = dict(badge01=bool(
+                    badge[0] & (1 << (0x867 & 7))))
             gift_data = {}
             if parties_count_symbol is not None:
                 # flags[0x37 // 8] uses one more saved byte; do not
@@ -247,7 +257,8 @@ class ReadOnlyGdb:
                         sketchStarted=bool(flags_byte[0] & (1 << (0x2D & 7))),
                         sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
                         sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))),
-                        oranBerryQuantity=oran_qty, **gift_data)
+                        oranBerryQuantity=oran_qty,
+                        **gift_data, **badge_data)
         finally:
             self.command("c", reply=False)
 
@@ -306,7 +317,8 @@ def daemon(args):
                         result["position"] = gdb.position(
                             symbol, symbol2,
                             parties_count_symbol=parties_count
-                            if name.startswith("q4-") else None)
+                            if name.startswith("q4-") else None,
+                            badge_probe=name.startswith("q1-gate"))
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
