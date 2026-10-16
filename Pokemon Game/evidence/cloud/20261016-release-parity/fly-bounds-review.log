@@ -1,0 +1,24 @@
+source=/workspace/.onboarding/verification-snapshot/Pokemon Game/engine/src/region_map.c sha256=570352b8870e37faa8d0905a552b670ada857b74a94cbf398631ffc90cf24a89
+PASS case=0 checks=1536 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=1 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=2 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=3 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=4 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=5 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=6 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+PASS case=7 checks=1 table_rows=192 frontier=58 saltmere=209 alderfield=213
+actual source cases: 8/8 PASS
+synthetic high-index explicit special: PASS case=1 checks=1 table_rows=192 frontier=65534 saltmere=209 alderfield=213
+mutation remove-getter-guard: KILLED exit=1
+/tmp/averon-fly-bounds-qxz9f994/remove-getter-guard.c:200:30: runtime error: index 192 out of bounds for type 'u8 [192][3]'
+mutation getter-only-still-unsafe: KILLED exit=1
+/tmp/averon-fly-bounds-qxz9f994/getter-only-still-unsafe.c:215:97: runtime error: index 192 out of bounds for type 'u8 [192][3]'
+mutation getter-off-by-one: KILLED exit=1
+/tmp/averon-fly-bounds-qxz9f994/getter-off-by-one.c:202:30: runtime error: index 192 out of bounds for type 'u8 [192][3]'
+mutation setter-off-by-one: KILLED exit=1
+/tmp/averon-fly-bounds-qxz9f994/setter-off-by-one.c:215:97: runtime error: index 192 out of bounds for type 'u8 [192][3]'
+mutation early-setter-breaks-frontier: KILLED exit=2
+ASSERT line=243: healCalls == 1 && warpCalls == 0 && healArg == expected
+mutation wrong-home-gender: KILLED exit=2
+ASSERT line=237: FilterFlyDestination(&map) == expected
+mutations: 6/6 KILLED

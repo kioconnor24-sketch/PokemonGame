@@ -1,0 +1,13 @@
+test_corrupt_ids_are_not_copied (__main__.SaveSectorBounds.test_corrupt_ids_are_not_copied) ... ok
+test_empty_flash_copy_never_looks_up_erased_id (__main__.SaveSectorBounds.test_empty_flash_copy_never_looks_up_erased_id) ... ok
+test_healthy_sector_copy (__main__.SaveSectorBounds.test_healthy_sector_copy) ... ok
+test_healthy_slot_selection (__main__.SaveSectorBounds.test_healthy_slot_selection) ... ok
+test_invalid_id_recovers_other_valid_slot (__main__.SaveSectorBounds.test_invalid_id_recovers_other_valid_slot) ... ok
+test_invalid_signature_copy_skips_before_lookup (__main__.SaveSectorBounds.test_invalid_signature_copy_skips_before_lookup) ... ok
+test_invalid_signature_recovers_other_valid_slot (__main__.SaveSectorBounds.test_invalid_signature_recovers_other_valid_slot) ... ok
+test_signed_invalid_ids_do_not_become_empty (__main__.SaveSectorBounds.test_signed_invalid_ids_do_not_become_empty) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.931s
+
+OK

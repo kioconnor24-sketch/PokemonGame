@@ -1,0 +1,20 @@
+development: PASS: 139 production/config checks
+release: PASS: 139 production/config checks
+mutation I_EXP_SHARE_ITEM: DETECTED
+mutation I_EXP_SHARE_FLAG: DETECTED
+mutation B_SPLIT_EXP: DETECTED
+mutation B_EXP_CAP_TYPE: DETECTED
+mutation B_RARE_CANDY_CAP: DETECTED
+mutation MAX_LEVEL: DETECTED
+mutation P_MEGA_EVOLUTIONS: DETECTED
+mutation P_PRIMAL_REVERSIONS: DETECTED
+mutation P_ULTRA_BURST_FORMS: DETECTED
+mutation P_REGIONAL_FORMS: DETECTED
+mutation P_GEN_9_POKEMON: DETECTED
+mutation DEBUG_OVERWORLD_MENU: DETECTED
+mutation gimmick-release-guard-removed: DETECTED
+mutation gimmick-guard-test-only: DETECTED
+mutation mega-legality-callback-bypassed: DETECTED
+mutation shift-restored: DETECTED
+mutation team-share-enabled: DETECTED
+PASS: 2 production modes; 17 mutations detected
