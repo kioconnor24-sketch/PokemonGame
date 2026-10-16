@@ -5,6 +5,7 @@
 #include "event_object_movement.h"
 #include "item.h"
 #include "load_save.h"
+#include "move.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "regions.h"
@@ -503,4 +504,132 @@ TEST("Averon lists the evolution targets that only another region or an upstream
     DebugPrintf("targets reachable only through another region or upstream map: %u", blocked);
     EXPECT_EQ(blocked, ARRAY_COUNT(sEvolutionOnlyElsewhere));
     EXPECT_EQ(listed, ARRAY_COUNT(sEvolutionOnlyElsewhere));
+}
+
+// Conditional evolutions whose conditions depend only on the Pokemon itself
+// (gender, friendship, a known move or move type, a held item) or are already
+// true in Averon (not in another region). Time, weather, party, map, step and
+// battle-record conditions are left out and counted.
+static bool32 CanSatisfyFromMonData(const struct EvolutionParam *params)
+{
+    for (u32 i = 0; params[i].condition != CONDITIONS_END; i++)
+    {
+        switch (params[i].condition)
+        {
+        case IF_GENDER:
+        case IF_MIN_FRIENDSHIP:
+        case IF_KNOWS_MOVE:
+        case IF_KNOWS_MOVE_TYPE:
+        case IF_HOLD_ITEM:
+            break;
+        case IF_NOT_REGION:
+            if (params[i].arg1 == REGION_HOENN)
+                return FALSE;
+            break;
+        default:
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+static u32 PersonalityForGender(u32 species, u32 gender)
+{
+    for (u32 personality = 0; personality < 256; personality++)
+    {
+        if (GetGenderFromSpeciesAndPersonality(species, personality) == gender)
+            return personality;
+    }
+    return 0;
+}
+
+static enum Move AnyMoveOfType(u32 type)
+{
+    for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    {
+        if (GetMoveType(move) == type && IsValidLearnableMove(move))
+            return move;
+    }
+    return MOVE_NONE;
+}
+
+TEST("Averon every conditional evolution satisfiable from the Pokemon's own data triggers")
+{
+    u32 bad = 0, tested = 0, skipped = 0;
+    struct Pokemon mon;
+    for (u32 species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species) || species == SPECIES_EGG)
+            continue;
+        const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+        for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+        {
+            const struct Evolution *evo = &evolutions[i];
+            const struct EvolutionParam *params = evo->params;
+            enum EvolutionMode mode;
+            u32 level = 50, personality = 0, item = ITEM_NONE;
+            bool32 canStopEvo = TRUE;
+            if (params == NULL)
+                continue;
+            if (!CanSatisfyFromMonData(params)
+             || (evo->method != EVO_LEVEL && evo->method != EVO_ITEM && evo->method != EVO_TRADE))
+            {
+                skipped++;
+                continue;
+            }
+            if (evo->method == EVO_LEVEL)
+            {
+                mode = EVO_MODE_NORMAL;
+                level = evo->param == 0 ? 50 : evo->param;
+            }
+            else if (evo->method == EVO_ITEM)
+            {
+                mode = EVO_MODE_ITEM_USE;
+                item = evo->param;
+            }
+            else
+            {
+                mode = EVO_MODE_TRADE;
+            }
+            for (u32 j = 0; params[j].condition != CONDITIONS_END; j++)
+            {
+                if (params[j].condition == IF_GENDER)
+                    personality = PersonalityForGender(species, params[j].arg1);
+            }
+            CreateMon(&mon, species, level, personality, OTID_STRUCT_PLAYER_ID);
+            for (u32 j = 0; params[j].condition != CONDITIONS_END; j++)
+            {
+                u32 value = params[j].arg1;
+                switch (params[j].condition)
+                {
+                case IF_MIN_FRIENDSHIP:
+                    value = MAX_FRIENDSHIP;
+                    SetMonData(&mon, MON_DATA_FRIENDSHIP, &value);
+                    break;
+                case IF_KNOWS_MOVE:
+                    SetMonData(&mon, MON_DATA_MOVE1, &value);
+                    break;
+                case IF_KNOWS_MOVE_TYPE:
+                    value = AnyMoveOfType(value);
+                    SetMonData(&mon, MON_DATA_MOVE1, &value);
+                    break;
+                case IF_HOLD_ITEM:
+                    SetMonData(&mon, MON_DATA_HELD_ITEM, &value);
+                    break;
+                default:
+                    break;
+                }
+            }
+            tested++;
+            enum Species result = GetEvolutionTargetSpecies(&mon, mode, item, NULL, &canStopEvo, CHECK_EVO);
+            if (!IsValidEnabledSpecies(result))
+            {
+                DebugPrintf("conditional evolution did not trigger %S -> %S (method %u)", GetSpeciesName(species), GetSpeciesName(evo->targetSpecies), evo->method);
+                bad++;
+            }
+        }
+    }
+    DebugPrintf("conditional evolutions run: %u, left out: %u", tested, skipped);
+    EXPECT_GT(tested, 0);
+    EXPECT_EQ(bad, 0);
 }
