@@ -171,7 +171,7 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
-    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False):
+    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False, gym_probe=False):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -228,6 +228,14 @@ class ReadOnlyGdb:
                     raise Blocked("Incomplete saved Badge01 flag read")
                 badge_data = dict(badge01=bool(
                     badge[0] & (1 << (0x867 & 7))))
+            if gym_probe:
+                sluices = bytes.fromhex(self.command(
+                    f"m{ptr + 0x1270 + (0x25 // 8):x},1"))
+                if len(sluices) != 1:
+                    raise Blocked("Incomplete first-gym sluice saved flag read")
+                badge_data.update(
+                    gymWestSluice=bool(sluices[0] & (1 << (0x25 & 7))),
+                    gymEastSluice=bool(sluices[0] & (1 << (0x26 & 7))))
             gift_data = {}
             if parties_count_symbol is not None:
                 # flags[0x37 // 8] uses one more saved byte; do not
@@ -318,7 +326,8 @@ def daemon(args):
                             symbol, symbol2,
                             parties_count_symbol=parties_count
                             if name.startswith("q4-") else None,
-                            badge_probe=name.startswith("q1-gate"))
+                            badge_probe=name.startswith(("q1-gate", "q3-")),
+                            gym_probe=name.startswith("q3-"))
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
@@ -1768,6 +1777,120 @@ def q2_visual_relaunch(args):
           "flags cannot be asserted from broken reboot GDB.", flush=True)
 
 
+
+def q3_gym_entry(args):
+    """QA-only staged genuine Gym1 challenge setup: no battle victory claim.
+
+    Verify existing source sluices through ordinary YES inputs. Attempt
+    leader dialogue via original event NPC, not developer NPC party/spoof.
+    Stop upon observable battle transition, do not declare whiteout.
+    """
+    folder = Path(args.outdir)
+    seq = 800
+
+    def see(label, require_field=False):
+        nonlocal seq
+        seq += 1
+        key = f"q3-{seq:03d}-{label}"
+        frame = folder / (key + ".png")
+        grab(args.window, frame)
+        state = snapshot(args, key)
+        print("QA_Q3_GYM", key, json.dumps(state, sort_keys=True),
+              str(frame), flush=True)
+        if (state["mapGroup"], state["mapNum"]) != (75, 10):
+            raise Blocked(f"Not original AlderfieldGym source map: {state}")
+        if state["badge01"]:
+            raise Blocked("Do not run defeat fixture with first badge already won")
+        if (not state["devGiftReceived"] or state["playerPartyCount"] != 1
+                or not state["sketchRewarded"] or not state["notesStarted"]):
+            raise Blocked(f"Original story/party not ready for real Gym1: {state}")
+        if require_field and white_panel_ratio(frame) > 0.30:
+            raise Blocked(f"Unclosed dialogue on Gym1 walk: {state}")
+        return state, frame
+
+    def press(key, duration=0.10, delay=0.55):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", key], check=True)
+        time.sleep(duration)
+        subprocess.run(["xdotool", "keyup", key], check=True)
+        time.sleep(delay)
+
+    def walk(axis, target):
+        pos, _ = see(f"before-{axis}-{target}", require_field=True)
+        stalled = 0
+        for i in range(35):
+            if pos[axis] == target:
+                return pos
+            direction = 1 if target > pos[axis] else -1
+            key = ("Right" if direction > 0 else "Left") if axis=="x" else (
+                "Down" if direction > 0 else "Up")
+            press(key)
+            after, _ = see(f"{axis}-{target}-{i+1}", require_field=True)
+            other = "y" if axis=="x" else "x"
+            delta = after[axis]-pos[axis]
+            if delta not in (0, direction) or pos[other] != after[other]:
+                raise Blocked(f"Uncontrolled gym movement {pos}->{after}")
+            stalled = stalled + 1 if delta==0 else 0
+            if stalled>=4:
+                raise Blocked(f"Blocked by unchanged gym collision {after}")
+            pos=after
+        raise Blocked("Unbounded gym walk")
+
+    def activate(what,x,y,flag):
+        walk("x", x)
+        walk("y", y)
+        pos,_=see(what+"-before-yes",require_field=True)
+        press("Up",duration=0.045)
+        faced,_=see(what+"-face-up",require_field=True)
+        if (faced["x"],faced["y"])!=(x,y):
+            raise Blocked(f"Gym sluice facing moved avatar: {faced}")
+        press("x",delay=1.15)
+        offered,frame=see(what+"-yesno-visible")
+        if white_panel_ratio(frame)<0.50:
+            raise Blocked(f"Original {what} script not visible")
+        press("x",delay=1.1)
+        switched,_=see(what+"-selected-yes")
+        if not switched[flag]:
+            raise Blocked(f"YES did not set actual {flag} flag: {switched}")
+        for i in range(5):
+            curr,frame=see(what+f"-dismiss-{i+1}")
+            if white_panel_ratio(frame)<=0.30:
+                break
+            press("x",delay=0.9)
+        else:
+            raise Blocked(f"{what} script never returned field control")
+        print(f"QA_Q3_ORIGINAL_{what.upper()}_ACTIVATED", flush=True)
+
+    start,_=see("actual-warp-entry")
+    if (start["x"],start["y"])!=(4,14):
+        raise Blocked(f"Unexpected original Gym1 warp0 spawn: {start}")
+    if start["gymWestSluice"] or start["gymEastSluice"]:
+        raise Blocked("Sluice state is not fresh; cannot prove YES branches")
+    walk("x",2); walk("y",13)
+    activate("west",2,13,"gymWestSluice")
+    walk("x",6)
+    activate("east",6,13,"gymEastSluice")
+    enabled,_=see("both-switches-after",require_field=True)
+    if not(enabled["gymWestSluice"] and enabled["gymEastSluice"]):
+        raise Blocked("Original pair of sluices did not both activate")
+    walk("x",4);walk("y",5)
+    pos,_=see("elio-adjacent",require_field=True)
+    if (pos["x"],pos["y"])!=(4,5):
+        raise Blocked("Could not reach original Elio with source gate opened")
+    press("Up",duration=0.045)
+    turned,_=see("elio-face-north",require_field=True)
+    if (turned["x"],turned["y"])!=(4,5):
+        raise Blocked("Facing original leader moved player")
+    press("x",delay=1.5)
+    leader,frame=see("elio-original-intro")
+    if white_panel_ratio(frame)<0.5:
+        raise Blocked("No original Elio trainer pre-battle dialogue visible")
+    print("QA_Q3_GYM_ORIGINAL_LEADER_INTRO: genuine sluices and leader "
+          "interaction observed. BATTLE/WHITEOUT/HEAL NOT YET PROVEN.",
+          flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1805,6 +1928,10 @@ def main():
     gate.add_argument("--fifo", required=True)
     gate.add_argument("--outdir", required=True)
     gate.add_argument("--window", required=True)
+    gym = sub.add_parser("q3-gym-entry")
+    gym.add_argument("--fifo", required=True)
+    gym.add_argument("--outdir", required=True)
+    gym.add_argument("--window", required=True)
     gift = sub.add_parser("q4-lab-gift")
     gift.add_argument("--fifo", required=True)
     gift.add_argument("--outdir", required=True)
@@ -1840,6 +1967,8 @@ def main():
             return q2_visual_relaunch(args)
         if args.mode == "q1-badge-gate":
             return q1_badge_gate(args)
+        if args.mode == "q3-gym-entry":
+            return q3_gym_entry(args)
         if args.mode == "q4-lab-gift":
             return q4_lab_gift(args)
         if args.mode == "q2-relaunch-continue":
