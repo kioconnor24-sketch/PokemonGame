@@ -1517,10 +1517,14 @@ def q1_badge_gate(args):
     if (start["x"], start["y"]) != (13, 16):
         raise Blocked(f"Q1 gate starts from researcher-adjacent tile: {start}")
     if white_panel_ratio(image) > 0.50:
-        key("x", wait=1.0)
-        clear, image = read("researcher-accepted-dismissed")
-        if white_panel_ratio(image) > 0.30:
-            raise Blocked("Researcher waiting text did not dismiss safely")
+        for page in range(6):
+            key("x", wait=1.0)
+            clear, image = read(f"researcher-accepted-dismissed-{page+1}")
+            if white_panel_ratio(image) <= 0.30:
+                break
+        else:
+            raise Blocked("Researcher waiting text never dismissed after "
+                          "six observed pages")
     last, _ = read("start-east", require_field=True)
     stationary = 0
     for i in range(58):
