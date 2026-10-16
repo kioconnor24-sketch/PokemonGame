@@ -11,7 +11,7 @@ static enum Item PartyItem(u32 slot)
     return GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM);
 }
 
-SINGLE_BATTLE_TEST("Averon held items: a non-Berry item lost to a trainer is back after the battle")
+AI_SINGLE_BATTLE_TEST("Averon held items: a non-Berry item lost to a trainer is back after the battle")
 {
     enum Item item = ITEM_NONE;
     enum Move move = MOVE_KNOCK_OFF;
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Averon held items: a non-Berry item lost to a trainer is bac
         PLAYER(SPECIES_WOBBUFFET) { Item(item); Level(100); MaxHP(100); HP(100); Speed(100); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_WOBBUFFET) { Level(100); HP(1); Speed(200); Moves(move); }
     } WHEN {
-        TURN { MOVE(opponent, move); MOVE(player, MOVE_TACKLE); }
+        TURN { EXPECT_MOVE(opponent, move); MOVE(player, MOVE_TACKLE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
         if (move == MOVE_KNOCK_OFF)
@@ -41,13 +41,13 @@ SINGLE_BATTLE_TEST("Averon held items: a non-Berry item lost to a trainer is bac
     }
 }
 
-SINGLE_BATTLE_TEST("Averon held items: a Berry eaten in battle stays eaten")
+AI_SINGLE_BATTLE_TEST("Averon held items: a Berry eaten in battle stays eaten")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SITRUS_BERRY); Level(100); MaxHP(100); HP(100); Speed(100); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_WOBBUFFET) { Level(60); HP(1); Speed(200); Moves(MOVE_SEISMIC_TOSS); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SEISMIC_TOSS); MOVE(player, MOVE_TACKLE); }
+        TURN { EXPECT_MOVE(opponent, MOVE_SEISMIC_TOSS); MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet fainted!");
     } THEN {
@@ -58,13 +58,13 @@ SINGLE_BATTLE_TEST("Averon held items: a Berry eaten in battle stays eaten")
     }
 }
 
-SINGLE_BATTLE_TEST("Averon held items: Trick returns each side's own item after the battle")
+AI_SINGLE_BATTLE_TEST("Averon held items: Trick returns each side's own item after the battle")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_CHOICE_SCARF); Speed(200); Moves(MOVE_TRICK, MOVE_TACKLE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LEFTOVERS); HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TRICK); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_TRICK); EXPECT_MOVE(opponent, MOVE_CELEBRATE); }
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK, player);
@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("Averon held items: Trick returns each side's own item after 
 
 // Gen 5+ (B_RETURN_STOLEN_NPC_ITEMS): Thief does not permanently take a
 // trainer's item, so beating trainers cannot be used to farm their items.
-SINGLE_BATTLE_TEST("Averon held items: an item the player steals from a trainer is not kept", u32 outcome)
+AI_SINGLE_BATTLE_TEST("Averon held items: an item the player steals from a trainer is not kept", u32 outcome)
 {
     u32 win = FALSE;
     PARAMETRIZE { win = TRUE; }
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("Averon held items: an item the player steals from a trainer 
         PLAYER(SPECIES_WOBBUFFET) { HP(win ? 100 : 1); Speed(200); Moves(MOVE_THIEF); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LEFTOVERS); HP(win ? 1 : 400); MaxHP(400); Speed(1); Moves(MOVE_SEISMIC_TOSS); }
     } WHEN {
-        TURN { MOVE(player, MOVE_THIEF); MOVE(opponent, MOVE_SEISMIC_TOSS); }
+        TURN { MOVE(player, MOVE_THIEF); EXPECT_MOVE(opponent, MOVE_SEISMIC_TOSS); }
     } SCENE {
         MESSAGE("Wobbuffet stole the opposing Wobbuffet's Leftovers!");
     } THEN {
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Averon held items: an item the player steals from a trainer 
 
 // An item given to a partner with Bestow must not exist twice after battle:
 // the giver gets its own item back, so the receiver must not keep a copy.
-DOUBLE_BATTLE_TEST("Averon held items: Bestow to a partner does not duplicate the item")
+AI_DOUBLE_BATTLE_TEST("Averon held items: Bestow to a partner does not duplicate the item")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LEFTOVERS); Speed(200); Moves(MOVE_BESTOW, MOVE_TACKLE); }
@@ -118,7 +118,7 @@ DOUBLE_BATTLE_TEST("Averon held items: Bestow to a partner does not duplicate th
 
 // A Berry is not restored to its holder after battle, so one handed to a
 // partner must go back to the giver rather than vanish.
-DOUBLE_BATTLE_TEST("Averon held items: a Berry given to a partner with Bestow goes back to the giver")
+AI_DOUBLE_BATTLE_TEST("Averon held items: a Berry given to a partner with Bestow goes back to the giver")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ORAN_BERRY); Speed(200); Moves(MOVE_BESTOW, MOVE_TACKLE); }
