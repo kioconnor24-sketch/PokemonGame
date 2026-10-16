@@ -1,5 +1,8 @@
 # Pokémon Averon — stable prioritized task queue
 
+> **UPDATED OWNER PRIORITY — PARALLEL IMPLEMENTATION:** Development and merge are different gates. Codex and Claude can each continue one primary and preferably one disjoint secondary coding PR *now*, with exact path claims that do not need an ACK for unclaimed, nonprotected files. QUEST acceptance prevents merging/integrating dependent shared features, **not coding or native-testing independent parts of TWO-REGION or SCRIPTED-BATTLE**. Stop only overlapping protected-file edits; keep the rest of the session productive. See [WORKFLOW.md](WORKFLOW.md#current-owner-directive-parallel-development-first). No change to creative freeze, owner-only canon/map scope, protected-file handoffs or independent QA requirements.
+
+
 **Updated for the 2026-10-15 owner-approved milestone and hard creative freeze.** This is a **queue and dependency file, not a live status log**. Confirm every claim against [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [current assignments #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24), [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls) and exact CI before starting. The newest owner restrictions at the top of those issues prevail over older roadmap prose.
 
 **Already integrated:** Opening/first Gym backend and FIELD licenses ([PR #10](https://github.com/kioconnor24-sketch/PokemonGame/pull/10) **merged**). Their particular emulator scenarios are not thereby all verified. Do not reclaim or remerge FIELD just because an old progress note still says it is active.
@@ -10,11 +13,11 @@
 | --- | --- | --- | --- |
 | 1 | QUEST | **Codex ACTIVE; QA pending** | Fix confirmed defects and verify rendered NPC/tree/rewards, full Bag/party, whiteout and real save/reload; native 49/49 reported on #14, not a visual pass; keep draft until evidence/approved gate |
 | 2 | SCRIPTED-BATTLE core | **Claude ACTIVE (parallel)** | Finish native/macro/CI tests and actual safe-win/loss/chain recovery; release-flag, script registration and save hooks require explicit handoff after QUEST merge; no finished story scenes |
-| 3 | TWO-REGION abstract groundwork | **Codex ACTIVE on bounded recovery branch** | Pure region/badge resolver, synthetically identified maps, test against existing engine, no existing file or map JSON edits until integration window; 8+8 backend save/travel later |
+| 3 | TWO-REGION abstract groundwork | **Codex DEVELOPMENT OPEN NOW** | Advance existing isolated new-file-only 8+8 badge, identity, Fly/heal/whiteout, flash save/recovery regressions using synthetic IDs. Only protected engine integration and merge wait for QUEST QA and scoped handoff; no new map files. |
 | 4 | QUEST graphical acceptance | **ChatGPT QA ACTIVE** | Continue exact Q1–Q5 rendered interactions; Q0-C opening movement/menu demonstrated; log reproducible defects with ROM/source SHA; don't equate smoke with full acceptance |
 | 5 | TOOLING ONBOARDING | **Review pending** | Canonical shared skills #19 and distinct Claude docs #18; do not re-create competing skills; no install/hooks or feature work implied |
 | 6 | TWO-REGION integration | **WAITING: QUEST gate and shared-source handoff** | Region-aware flags/8+8 badges, save compatibility, healing/Fly and no invalid warps; no production map files, use synthetic IDs/existing maps |
-| 7 | SCRIPTED-BATTLE integration | **WAITING: QUEST gate and Codex handoff** | Allocate audited saved flag; install registered macro and cleanup; confirm ordinary whiteout after story battle, interrupts, save/reload, no money/party/badge loss; QA case requests |
+| 7 | SCRIPTED-BATTLE integration | **MERGE GATED (development continues)** | Approved RAM-only 0x4003 and macro hook ALREADY installed on #25; continue owned native lifecycle and adversarial tests NOW. Only protected file collisions and final #25 integration wait for QUEST. No saved flag allocation or unapproved scenes. |
 | 8 | LEGEND reusable encounter semantics | **FUTURE technical, unclaimed until ready** | Capture/defeat/flee/retry/persist mechanics using fixtures, with no final legendary species, locations or lore |
 | 9 | VERIFIED GAPS | **FUTURE only if unclaimed/file-disjoint** | Repair measured issues in species/forms/evolution, follower, battle AI, field menus, save/ROM/tests; no duplicate audits or arbitrary new systems |
 | 10 | LEVEL ECONOMY analysis | **LIMITED / design blocked** | Can test existing EXP/cap code with supplied symbolic values; **no final numeric Gym caps or level curve** |

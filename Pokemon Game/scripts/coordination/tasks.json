@@ -6,7 +6,9 @@
     "creative_freeze": true,
     "auto_merge": false,
     "auto_agent_execution": false,
-    "shared_files_require_manual_handoff": true
+    "shared_files_require_manual_handoff": true,
+    "parallel_independent_development": true,
+    "dependency_gates_apply_to_merge": true
   },
   "tasks": [
     {
@@ -21,8 +23,8 @@
         "Q4",
         "Q5"
       ],
-      "next": "Epic #34: help QA establish deterministic existing-NPC access, fix only confirmed QUEST gameplay defects, then native/graphical acceptance and approved merge.",
-      "issue": 34
+      "next": "Codex fixes QUEST issues on #14 with native/QA collaboration. Q1–Q5 graphical acceptance is a MERGE gate, not a stop to disjoint coding.",
+      "issue": 41
     },
     {
       "id": "TWO-REGION",
@@ -32,8 +34,9 @@
         "QUEST"
       ],
       "requires_handoff": true,
-      "next": "Epic #34: existing 65/65 native-tested pure groundwork remains unregistered; integrate 8+8 badge/Fly/heal/save only after QUEST acceptance and exclusive shared-file coordination, no map files.",
-      "issue": 34
+      "next": "DEVELOP NOW on separate new-file-only region branch: 8+8 badge/save rollback, travel/heal/Fly synthetic regressions. Only shared-file integration and main merge wait for QUEST QA and exact-file handoff.",
+      "issue": 41,
+      "parallel_development": true
     },
     {
       "id": "SCRIPTED-BATTLE",
@@ -47,15 +50,16 @@
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "Epic #35: owner-approved two shared lines ALREADY PUSHED; exclusive-files correctly blocks current #14 overlap. #25 remains draft until #14 QA acceptance and merge, then rebase and retest.",
-      "issue": 35
+      "next": "DEVELOP NOW on existing #25 or disjoint technical branch: no-whiteout lifecycle tests and engine recovery. Only protected registry collision and #25 merge wait for QUEST; approved two lines already pushed.",
+      "issue": 42,
+      "parallel_development": true
     },
     {
       "id": "NATIVE-BASELINE",
       "agent": "claude",
       "pr": 29,
       "deps": [],
-      "next": "Epic #35: MERGED #29 as 96dd43ef; baseline parser is now protected by standard CI 12/12 via #38. Continue with dependent #30; no further #29 edits needed.",
+      "next": "MERGED #29; 12/12 parser regression tests protected by main CI via #38.",
       "issue": 35
     },
     {
@@ -65,7 +69,7 @@
       "deps": [
         "NATIVE-BASELINE"
       ],
-      "next": "Epic #35: prerequisite #29 now MERGED; Claude updates existing #30 with exactly 45 source-matched primal-disabled expected failures, targeted native/build/review before merge.",
+      "next": "MERGED #30 at 3f64a54a; do not repeat completed implementation or rebase.",
       "issue": 35
     },
     {
@@ -73,7 +77,7 @@
       "agent": "playtest",
       "pr": 20,
       "deps": [],
-      "next": "Epic #36: STOP blind fixed-keys overshoot; build an observable state-aware mGBA controller in QA #20 or provide Codex a precise minimum QA-access blocker; then run Q1–Q5.",
+      "next": "Playtest: use state-aware mGBA observer to verify Q1–Q5 dialogue, rewards, persistence and whiteout; no native-test substitution or gameplay-source changes.",
       "issue": 36
     }
   ]

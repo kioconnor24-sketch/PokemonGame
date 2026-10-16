@@ -50,5 +50,5 @@ jobs:
             --registry "Pokemon Game/scripts/coordination/tasks.json" \
             --snapshot "/tmp/coord-sample.json" \
             --out "/tmp/coord-test"
-          grep -q "BLOCKED ON QUEST" "/tmp/coord-test/claude.md"
+          grep -q "DEVELOPMENT OPEN; MERGE GATED ON QUEST" "/tmp/coord-test/claude.md"
           grep -q "HARD FREEZE" "/tmp/coord-test/board.md"

@@ -2,6 +2,20 @@
 
 **This is infrastructure, not another game design plan.** It does not authorize maps (including temporary map files), story/Gym/encounter/level decisions, automatic merging, or concurrent protected-source changes.
 
+## Parallel developer sessions vs. integration gates (owner update)
+
+**Do not stop Codex or Claude just because a different PR is not merged.** Exact-file ownership and downstream acceptance are separate decisions:
+
+- **Independent coding:** a specifically approved, nonconflicting engine feature or existing isolated backend worktree can be built, tested, and pushed now. Post an exact path CLAIM as notice; no manager/other-agent ACK is needed when it touches unclaimed, nonprotected files. Each lead may have a primary coding PR and a useful secondary disjoint PR.
+- **Shared-source writing:** if both features need the same protected file or saved identifier, pause **only that edit** for the shortest exact handoff window. Keep other work moving. No simultaneous writes to event registries, save layout or other protected files.
+- **Main integration:** dependent feature PRs can be rehearsed or prepared while QUEST graphical QA is pending, but cannot merge as accepted features until their real prerequisite/QA/source-file gates pass. The protected-file check remains required.
+- **Questions:** send a directed message and proceed with independent steps. Never hold an entire coding session for a routine response.
+- **Not authorized:** new/temporary maps, trainer or legendary placements, story content, numeric curves, save-ID allocations, bypassed checks, false visual QA, automatic merges or paid agent starts.
+
+The board labels independent tasks **DEVELOPMENT OPEN; MERGE GATED** instead of **BLOCKED** when only the integration dependency is missing. This does **not** mark a tested or releasable feature.
+
+See [WORKFLOW.md](WORKFLOW.md#current-owner-directive-parallel-development-first) and the [owner's process correction in #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6206878015).
+
 ## Operational links
 
 - [Live generated agent board](https://github.com/kioconnor24-sketch/PokemonGame/issues/31): one current GitHub issue body, not dozens of status comments
@@ -40,7 +54,7 @@ An agent should check the task board and its message inbox at session start, add
 
 **Agent board:** averon-agent-board.yml reads GitHub PRs, head SHAs, check conclusions and explicitly accepted QA evidence using code checked out from trusted main. It updates **only Issue #31's body**, creates a GitHub Actions summary and an artifact with codex.md, claude.md, and playtest.md. It runs on PR updates, team #15 or QA #23 comments, comments on tracked PRs, new main commits, daily schedule and manual dispatch. The source tasks.json is updated at approved task/milestone changes, not every session.
 
-**Dependency gates:** Passing native tests never counts as graphical acceptance. A dependent task can become machine-ready only after its prerequisite is merged AND exact-head, authorized QA signoff exists if required. Even then, shared-file changes still require a documented human handoff in Issue #15. No auto merge or automatic paid agent execution occurs.
+**Dependency gates govern integration, NOT independent coding:** Native tests do not count as graphical acceptance. A dependent PR is not ready to merge until its prerequisite is merged and any exact-head authorized QA signoff exists. Independent approved branch-local code/tests may proceed during this wait. Only actual edits to occupied protected shared files require an exclusive handoff in Issue #15; no automatic merge or paid agent execution occurs.
 
 **File guard:** averon-shared-file-guard.yml detects overlap in high-risk paths, forbids new touches to frozen map/layout paths (except the already-open historical QUEST #14 PR), and requires an explicit approved shared-file claim for sensitive changes. A failing workflow blocks GitHub merges **only if the owner sets it as a required status check in branch protection**. The checker cannot see uncommitted/unpublished branch work; maintain exact file claims.
 

@@ -5,6 +5,8 @@
 
 This is a permanent onboarding reference for separate Codex, Claude, and ChatGPT sessions. Each session MUST inspect the current `main`, open PRs, issue claims, and latest PR HANDOFF before starting. Historical task queues or old README/AGENTS role claims cannot override live ownership or the owner's newer direction. See [WORKFLOW.md](WORKFLOW.md) for the established PR/CI rules.
 
+**Updated owner instruction — parallel development:** Codex and Claude can develop independent, approved, file-disjoint modules simultaneously even while QUEST QA or other PR merges are pending. Prefer one primary and one secondary coding PR each. A claim on unclaimed, nonprotected files is a notification, not a request to wait for acknowledgment. Only overlapping protected-file edits and integration into main are serialized. Preserve the owner hard freeze, required QA, CI, review, and branch protection. See [current workflow policy](WORKFLOW.md#current-owner-directive-parallel-development-first) and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6206878015). Earlier one-PR and blanket dependency waiting instructions are superseded only for independent development.
+
 ## Four roles: two lead developers and two independent reviewers
 
 | Actor | Authority and responsibility | Current / initial work | Boundaries |
