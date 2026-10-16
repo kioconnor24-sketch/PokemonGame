@@ -246,40 +246,33 @@ jobs:
           xdotool keydown Down; sleep 0.8; xdotool keyup Down
           sleep 0.7
           capture "Q1-alderfield-down"
-          # Live frame in run 38832855320: researcher at screen (88,155);
-          # player at (120,140) = TWO tiles right and ONE tile north.
-          # Move to (104,155), left-adjacent, facing west; then press A.
-          xdotool keydown Down; sleep 0.24; xdotool keyup Down
-          sleep 0.7
-          capture "Q1-align-row"
-          xdotool keydown Left; sleep 0.24; xdotool keyup Left
+          # From run 38833560489 player is visibly ONE tile SOUTH of
+          # Alderfield researcher (same screen X, NPC directly above).
+          # Do not move farther or A from the wrong facing; face UP first.
+          xdotool key --clearmodifiers Up
           sleep 0.6
-          capture "Q1-align-column"
-          press Left
-          sleep 0.45
-          capture "Q1-face-researcher"
+          capture "Q1-facing-up"
           press x
-          sleep 1
-          capture "Q1-researcher-initial-dialogue"
-          # The offer is YES/NO. Record text/selector before input.
+          sleep 0.9
+          capture "Q1-offer-dialogue"
+          # Dialog is yes/no; do not assume it appeared without inspecting.
           press Down
-          sleep 0.45
-          capture "Q1-researcher-no-selected"
+          sleep 0.4
+          capture "Q1-no-highlight"
           press x
           sleep 0.8
-          capture "Q1-researcher-refusal"
+          capture "Q1-decline-response"
           press x
-          sleep 0.9
-          capture "Q1-after-refusal"
-          press x
-          sleep 0.9
-          capture "Q1-researcher-reopen"
-          press x
-          sleep 0.8
-          capture "Q1-researcher-yes-response"
+          sleep 0.6
+          capture "Q1-decline-dismissed"
+          xdotool key --clearmodifiers Up
+          sleep 0.35
           press x
           sleep 0.8
-          capture "Q1-researcher-accepted"
+          capture "Q1-reopen-offer"
+          press x
+          sleep 0.8
+          capture "Q1-accept-response"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
