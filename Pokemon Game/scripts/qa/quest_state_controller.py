@@ -1968,9 +1968,12 @@ def q3_battle_start(args):
     Battle whiteout, heal, and follower acceptance require later snapshots.
     """
     out = Path(args.outdir)
-    prior = out / "q3-850-elio-original-intro.png"
-    if not prior.is_file():
-        raise Blocked("No witnessed original Gym leader dialogue screenshot")
+    matches = sorted(out.glob("q3-*-elio-original-intro.png"))
+    # The per-input checkpoint number varies legitimately with turn-only
+    # D-pad presses. Never hardcode q3-850 or accept an ambiguous fixture.
+    if len(matches) != 1:
+        raise Blocked(f"Expected exactly one real Elio intro frame, got {len(matches)}")
+    prior = matches[0]
     source_intro = visual_frame_data(prior)
     if white_panel_ratio(prior) < 0.5:
         raise Blocked("Source leader dialogue not visibly open before battle")
