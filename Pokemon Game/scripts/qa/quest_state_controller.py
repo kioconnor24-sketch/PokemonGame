@@ -268,29 +268,57 @@ def navigate(args):
 
 
 
+def difference(first, second):
+    if len(first) != len(second) or not first:
+        raise Blocked('Cannot compare differently sized menu samples')
+    return sum(abs(a-b) for a,b in zip(first,second))/(255.0*len(first))
+
+
 def q1_offer(args):
-    """Test only Q1 researcher decline/return/accept; no Hiker/reward claims."""
+    """Test only real researcher decline / re-offer / accept. Fail closed."""
     directory = Path(args.outdir)
     count = 100
 
-    def observe(tag, require_panel=None):
+    def sample_menu(frame):
+        # Verified in artifact 12021269079: real source MSGBOX_YESNO
+        # overlays x=323..429, y=130..220 on the 480x320 framebuffer.
+        size = subprocess.check_output(
+            ["identify", "-format", "%wx%h", str(frame)], text=True)
+        if size != "480x320":
+            raise Blocked(f"Unknown YESNO frame geometry: {size}")
+        rgb = subprocess.check_output(
+            ["convert", str(frame), "-crop", "106x90+323+130",
+             "+repage", "-depth", "8", "RGB:-"])
+        if len(rgb) != 106*90*3:
+            raise Blocked("Corrupt YESNO crop")
+        return sum(min(rgb[i:i+3]) >= 190
+                   for i in range(0, len(rgb), 3)) / (106*90)
+
+    def observe(tag, panel=None, menu=None):
         nonlocal count
         count += 1
         name = f"{count:03d}-q1-{tag}"
         frame = directory / (name + ".png")
         grab(args.window, frame)
-        pos = snapshot(args, name)
-        print("QA_Q1_CHECK", name, json.dumps(pos, sort_keys=True),
+        state = snapshot(args, name)
+        print("QA_Q1_CHECK", name, json.dumps(state, sort_keys=True),
               str(frame), flush=True)
-        if (pos["mapGroup"], pos["mapNum"], pos["x"], pos["y"]) != (75, 9, 13, 16):
-            raise Blocked(f"Researcher adjacency lost during Q1: {pos}")
-        ratio = white_panel_ratio(frame)
-        print("QA_Q1_PANEL", name, f"{ratio:.4f}", flush=True)
-        if require_panel is True and ratio < 0.50:
-            raise Blocked(f"Researcher message panel missing at {tag}")
-        if require_panel is False and ratio > 0.30:
-            raise Blocked(f"Researcher message did not close at {tag}")
-        return pos, ratio
+        if (state["mapGroup"], state["mapNum"],
+                state["x"], state["y"]) != (75, 9, 13, 16):
+            raise Blocked(f"Researcher adjacency lost at {tag}: {state}")
+        panel_ratio = white_panel_ratio(frame)
+        menu_ratio = sample_menu(frame)
+        print("QA_Q1_UI", name,
+              f"panel={panel_ratio:.4f} menu={menu_ratio:.4f}", flush=True)
+        if panel is True and panel_ratio < 0.50:
+            raise Blocked(f"Dialogue panel absent at {tag}")
+        if panel is False and panel_ratio > 0.30:
+            raise Blocked(f"Dialogue panel remains open at {tag}")
+        if menu is True and menu_ratio < 0.52:
+            raise Blocked(f"YESNO menu absent at {tag}")
+        if menu is False and menu_ratio > 0.52:
+            raise Blocked(f"Unexpected YESNO menu at {tag}")
+        return state, frame
 
     def key(name):
         subprocess.run(["xdotool", "windowactivate", str(args.window)],
@@ -301,52 +329,50 @@ def q1_offer(args):
         time.sleep(0.75)
 
     time.sleep(1)
-    state, _ = observe("researcher-offer-first", True)
-    if state["notesStarted"] or state["notesRecorded"] or state["notesRewarded"]:
-        raise Blocked("QUEST fresh offer incorrectly has preexisting progress")
-    # MSGBOX_YESNO may need separate text completion and confirm A. If its
-    # real UI behavior differs, fail closed before making a PASS assertion.
-    for i in range(2):
-        key("x")
-        state, _ = observe(f"ask-page-{i+1}", True)
-        if state["notesStarted"]:
-            raise Blocked("A unexpectedly accepted before NO branch")
+    first, first_frame = observe("offer-yes-selected", panel=True, menu=True)
+    if (first["notesStarted"] or first["notesRecorded"]
+            or first["notesRewarded"]):
+        raise Blocked("QUEST fresh offer has preexisting progress")
+
+    # The real screenshot proves this is ALREADY the YES/NO choice menu.
+    # Do not press A to 'finish text': that selects the default YES.
     key("Down")
-    state, _ = observe("select-no", True)
-    if state["notesStarted"]:
-        raise Blocked("Direction accidentally changed quest stage")
+    pre_no, selected = observe("offer-no-selected", panel=True, menu=True)
+    if pre_no["notesStarted"]:
+        raise Blocked("Direction changed quest flag unexpectedly")
+    # A distinct frame at this point is necessary to verify menu input.
+    raw_first = subprocess.check_output(
+        ["convert", str(first_frame), "-crop", "106x90+323+130",
+         "+repage", "-depth", "8", "RGB:-"])
+    raw_selected = subprocess.check_output(
+        ["convert", str(selected), "-crop", "106x90+323+130",
+         "+repage", "-depth", "8", "RGB:-"])
+    menu_delta = difference(raw_first, raw_selected)
+    print(f"QA_Q1_SELECTOR_DELTA {menu_delta:.5f}", flush=True)
+    if menu_delta < 0.001:
+        raise Blocked("No observed menu cursor change after DOWN")
     key("x")
-    state, _ = observe("decline-result")
-    if state["notesStarted"]:
-        raise Blocked("NO input produced STARTED flag; branch unverified")
-    # Ordinary dialog is dismissed with A; do not advance an unknown menu.
-    closed = False
-    for i in range(4):
-        key("x")
-        state, ratio = observe(f"decline-dismiss-{i+1}")
-        if state["notesStarted"]:
-            raise Blocked("Unexpected started flag while dismissing refusal")
-        if ratio < 0.30:
-            closed = True
-            break
-    if not closed:
-        raise Blocked("Decline text never visibly closed; stop before retry")
+    declined, _ = observe("decline-text", panel=True, menu=False)
+    if (declined["notesStarted"] or declined["notesRecorded"]
+            or declined["notesRewarded"]):
+        raise Blocked("NO selected but quest progress changed")
     key("x")
-    state, _ = observe("researcher-offer-return", True)
-    if state["notesStarted"]:
-        raise Blocked("Repeated offer already started before YES")
-    for i in range(2):
-        key("x")
-        state, _ = observe(f"return-ask-page-{i+1}", True)
-        if state["notesStarted"]:
-            raise Blocked("Repeated offer unexpectedly accepted too early")
+    cleared, _ = observe("decline-dismissed", panel=False, menu=False)
+    if cleared["notesStarted"]:
+        raise Blocked("Quest started while declining/dismissing")
     key("x")
-    state, _ = observe("accept-result", True)
-    if not state["notesStarted"] or state["notesRecorded"] or state["notesRewarded"]:
-        raise Blocked(f"YES input did not produce exact STARTED-only state: {state}")
-    print("QA_Q1_OFFER_PARTIAL_PASS: decline kept STARTED false; return YES "
-          "set STARTED true; still needs human screenshot review, Hiker, "
-          "reward, Bag and flash verification", flush=True)
+    again, _ = observe("return-yes-selected", panel=True, menu=True)
+    if (again["notesStarted"] or again["notesRecorded"]
+            or again["notesRewarded"]):
+        raise Blocked("Quest started before return YES choice")
+    key("x")
+    accepted, _ = observe("accept-waiting-text", panel=True, menu=False)
+    if (not accepted["notesStarted"] or accepted["notesRecorded"]
+            or accepted["notesRewarded"]):
+        raise Blocked(f"YES failed STARTED-only state: {accepted}")
+    print("QA_Q1_OFFER_PARTIAL_OBSERVED: decline saved no flags, "
+          "returned YES sets STARTED only. Manual screenshot review required. "
+          "Hiker/reward/Bag/save/whiteout remain unverified.", flush=True)
 
 
 def main():
