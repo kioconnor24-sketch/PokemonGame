@@ -1,5 +1,6 @@
 # Averon expected native test failures. Format: STATUS | reason | test name
-# Names drop the per-parameter suffix ("1/2", "(1/?)"). Checked by
+# Names drop the per-parameter suffix ("1/2", "(1/?)"). "STATUS x2" marks a
+# name two tests share (test/battle/gimmick/terastal.c); both must fail. Checked by
 # check-averon-native-baseline.py. Recorded 2026-10-15 from a full
 # `make -j20 -O check` on main 36cb7ca9 (WSL, arm-none-eabi-gcc 14.2.1).
 #
@@ -49,11 +50,11 @@ FAIL | gimmick-disabled | (TERA) Stellar type's one-time boost factors in dynami
 FAIL | gimmick-disabled | (TERA) Synchronoise uses a Terastallized Pokemon's Tera Type
 FAIL | gimmick-disabled | (TERA) Terapagos retains its base defensive profile when Terastalizing
 FAIL | gimmick-disabled | (TERA) Terastallization changes the effect of Curse
-FAIL | gimmick-disabled | (TERA) Terastallization changes type effectiveness
+FAIL x2 | gimmick-disabled | (TERA) Terastallization changes type effectiveness
 FAIL | gimmick-disabled | (TERA) Terastallization persists across switches
 FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor does not apply to multi-hit moves
 FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor does not apply to priority moves
-FAIL | gimmick-disabled | (TERA) Terastallization's 60 BP floor occurs after Technician
+FAIL x2 | gimmick-disabled | (TERA) Terastallization's 60 BP floor occurs after Technician
 FAIL | gimmick-disabled | (TERA) Terastallizing boosts moves of the same type to 60 BP
 FAIL | gimmick-disabled | (TERA) Terastallizing into a different type gives that type 1.5x STAB
 FAIL | gimmick-disabled | (TERA) Terastallizing into a different type with Adaptability gives 2.0x STAB
