@@ -7,7 +7,10 @@ uses its macros:
   label ending in "Lost" is an unconditional goto or end);
 - the macro wraps exactly one trainer battle between Begin and Finish;
 - every native the macros call is defined in src/averon_scripted_battle.c
-  and requests script effects.
+  and requests script effects;
+- every in-process load of the normal save still resets EWRAM first, so the
+  RAM-only no-whiteout special flag cannot survive a load (a native test
+  cannot do the hardware reset).
 Example scripts in the .inc header comments are checked like real scripts.
 """
 from pathlib import Path
@@ -93,6 +96,19 @@ class ScriptedBattleSourceTests(unittest.TestCase):
             match = re.search(rf'^void {name}\(struct ScriptContext \*ctx\)\n\{{\n(.*?)\n\}}', src, re.M | re.S)
             self.assertIsNotNone(match, f'{name} not defined in {SOURCE.name}')
             self.assertIn('Script_RequestEffects(', match.group(1), name)
+
+    def test_every_normal_save_load_resets_ewram_first(self):
+        src = lambda name: (ENGINE / 'src' / name).read_text()
+        self.assertRegex(src('event_data.c'), r'\bEWRAM_DATA static u8 sSpecialFlags\[')
+        # Exactly these callers load the normal save or continue a saved game.
+        callers = sorted(str(p.relative_to(ENGINE)) for p in (ENGINE / 'src').glob('*.c')
+                         if re.search(r'LoadGameSave\(SAVE_NORMAL\)|SetMainCallback2\(CB2_ContinueSavedGame\)', p.read_text()))
+        self.assertEqual(callers, ['src/intro.c', 'src/main_menu.c', 'src/reload_save.c'])
+        # Boot: crt0 zeroes EWRAM. Main menu: reached from boot or DoSoftReset.
+        self.assertRegex(src('main.c'), r'void DoSoftReset\(void\)\n\{[^}]*SoftReset\(RESET_ALL\);\n\}')
+        # Link-error reload: resets EWRAM before loading.
+        reload = src('reload_save.c')
+        self.assertLess(reload.index('RegisterRamReset(RESET_EWRAM);'), reload.index('LoadGameSave(SAVE_NORMAL);'))
 
     def test_checker_detects_fallthrough_and_missing_branch(self):
         bad = [
