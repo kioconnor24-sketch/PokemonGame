@@ -104,7 +104,10 @@ class ReadOnlyGdb:
                         warpId=warp, saveBlockPtr=f"0x{ptr:08X}",
                         notesStarted=bool(flags_byte[0] & (1 << (0x2A & 7))),
                         notesRecorded=bool(flags_byte[0] & (1 << (0x2B & 7))),
-                        notesRewarded=bool(flags_byte[0] & (1 << (0x2C & 7))))
+                        notesRewarded=bool(flags_byte[0] & (1 << (0x2C & 7))),
+                        sketchStarted=bool(flags_byte[0] & (1 << (0x2D & 7))),
+                        sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
+                        sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))))
         finally:
             self.command("c", reply=False)
 
@@ -268,6 +271,83 @@ def navigate(args):
 
 
 
+
+def navigate_artist(args):
+    """Prove the existing Windrow artist talks, without altering map/flags."""
+    directory = Path(args.outdir)
+    sequence = 200
+
+    def read(stage):
+        nonlocal sequence
+        sequence += 1
+        name = f"{sequence:03d}-q2-{stage}"
+        frame = directory / (name + ".png")
+        grab(args.window, frame)
+        state = snapshot(args, name)
+        print("QA_Q2_CHECK", name, json.dumps(state, sort_keys=True),
+              str(frame), flush=True)
+        if (state["mapGroup"], state["mapNum"]) != (75, 6):
+            raise Blocked(f"Not source Windrow group75/map6: {state}")
+        return state, frame
+
+    def press(key, seconds=0.09):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", key], check=True)
+        time.sleep(seconds)
+        subprocess.run(["xdotool", "keyup", key], check=True)
+        time.sleep(0.34)
+
+    def move(coord, value):
+        state, _ = read(f"before-{coord}-to-{value}")
+        stalled = 0
+        for n in range(35):
+            if state[coord] == value:
+                return
+            sign = 1 if value > state[coord] else -1
+            key = ("Right" if sign > 0 else "Left") if coord == "x" else (
+                "Down" if sign > 0 else "Up")
+            press(key)
+            nxt, _ = read(f"{coord}-{n+1}-{key}")
+            other = "y" if coord == "x" else "x"
+            delta = nxt[coord] - state[coord]
+            if delta not in (0, sign) or nxt[other] != state[other]:
+                raise Blocked(f"Windrow uncontrolled step: {state} -> {nxt}")
+            stalled = stalled + 1 if delta == 0 else 0
+            if stalled >= 4:
+                raise Blocked(f"Windrow collision on {key}; {state} -> {nxt}")
+            state = nxt
+        raise Blocked(f"Windrow exceeded bounded move to {coord}={value}")
+
+    start, _ = read("existing-warp0-entry")
+    if not (19 <= start["x"] <= 32 and 17 <= start["y"] <= 26):
+        raise Blocked(f"Unexpected real Windrow existing-warp0 spawn: {start}")
+    # Existing Windrow artist at (20,14). Target directly south (20,15),
+    # then face north. This is developer fixture navigation, not route proof.
+    move("x", 20)
+    move("y", 15)
+    at, before = read("artist-south-adjacent")
+    if (at["x"], at["y"]) != (20, 15):
+        raise Blocked(f"Not adjacent to source artist: {at}")
+    if white_panel_ratio(before) > 0.30:
+        raise Blocked("Dialogue already open before approaching artist")
+    if at["sketchStarted"] or at["sketchFound"] or at["sketchRewarded"]:
+        raise Blocked(f"Fresh artist already has story flags: {at}")
+    press("Up", 0.04)
+    face, _ = read("artist-face-up")
+    if (face["x"], face["y"]) != (20, 15):
+        raise Blocked(f"Face command moved player; unverified artist: {face}")
+    press("x", 0.10)
+    talked, after = read("artist-first-A")
+    ratio = white_panel_ratio(after)
+    print(f"QA_Q2_ARTIST_PANEL before={white_panel_ratio(before):.4f} "
+          f"after={ratio:.4f}", flush=True)
+    if (talked["x"], talked["y"]) != (20, 15) or ratio < 0.50:
+        raise Blocked("No visible artist dialogue at source adjacent position")
+    print("QA_Q2_ARTIST_DIALOGUE_OBSERVED: requires human source-text "
+          "review; no claim of artist accept/tree/reward", flush=True)
+
+
 def difference(first, second):
     if len(first) != len(second) or not first:
         raise Blocked('Cannot compare differently sized menu samples')
@@ -399,6 +479,10 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    a = sub.add_parser("navigate-artist")
+    a.add_argument("--fifo", required=True)
+    a.add_argument("--outdir", required=True)
+    a.add_argument("--window", required=True)
     q = sub.add_parser("q1-offer")
     q.add_argument("--fifo", required=True)
     q.add_argument("--outdir", required=True)
@@ -412,6 +496,8 @@ def main():
             return daemon(args)
         if args.mode == "assert-ui":
             return assert_ui(args)
+        if args.mode == "navigate-artist":
+            return navigate_artist(args)
         if args.mode == "q1-offer":
             return q1_offer(args)
         return navigate(args)
