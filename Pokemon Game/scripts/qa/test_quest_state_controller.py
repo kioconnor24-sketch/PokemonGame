@@ -291,6 +291,39 @@ class ObserverTests(unittest.TestCase):
             gdb.title_state(dict(main=0x03001000))
         self.assertEqual(calls, ["m3001004,4", "c"])
 
+    def test_read_only_actual_battle_flag_source_main_offset(self):
+        # engine/include/main.h: +0x439, bit0 OAM, bit1 inBattle.
+        main_header = (Path(__file__).resolve().parents[2] /
+                       "engine/include/main.h").read_text()
+        self.assertIn("/*0x439*/ u8 oamLoadDisabled:1;", main_header)
+        self.assertIn("/*0x439*/ u8 inBattle:1;", main_header)
+        hdr = struct.pack("<hhbbbxhh", 4, 5, 75, 10, 0, -1, -1)
+        for value, expected in [(0, False), (1, False), (2, True),
+                                (3, True)]:
+            g, asked = self.fake(hdr)
+            old = g.command
+            def reply(q, reply=True):
+                if q == "m3002439,1":
+                    asked.append(q)
+                    return bytes([value]).hex()
+                return old(q, reply)
+            g.command = reply
+            result = g.position(0x03000100, 0x03000104,
+                                battle_main_symbol=0x03002000)
+            self.assertEqual(result["inBattle"], expected)
+            self.assertIn("m3002439,1", asked)
+
+    def test_battle_probe_rejects_missing_memory_not_false_pass(self):
+        hdr = struct.pack("<hhbbbxhh", 4, 5, 75, 10, 0, -1, -1)
+        g, _ = self.fake(hdr)
+        old = g.command
+        g.command = lambda q, reply=True: (
+            "" if q == "m3002439,1" else old(q, reply))
+        with self.assertRaisesRegex(qa.Blocked,
+                                    "Incomplete source battle bit read"):
+            g.position(0x03000100, 0x03000104,
+                       battle_main_symbol=0x03002000)
+
     def test_original_gym_whiteout_candidate_preserves_source_route(self):
         # Independent fixture CONTRACT, not a gameplay whiteout PASS:
         # all paths are existing engine files. Actual movement/battle must
