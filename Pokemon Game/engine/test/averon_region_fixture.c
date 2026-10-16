@@ -8,6 +8,10 @@
 #include "constants/maps.h"
 #include "heal_location.h"
 #include "overworld.h"
+#include "item.h"
+#include "malloc.h"
+#include "money.h"
+#include "pokemon.h"
 #include "constants/heal_locations.h"
 
 // Opaque test-only handle, outside the engine's healer registry. Never saved.
@@ -548,4 +552,210 @@ TEST("Averon region fixture revalidates restored healer metadata without changin
     EXPECT_EQ(memcmp(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected)), 0);
     for (u32 i = 0; i < 8; ++i)
         EXPECT_EQ(FlagGet(FLAG_BADGE01_GET + i), (i & 1) != 0);
+}
+
+static void SetRegionLegacyState(u32 badges, u32 licenses, u32 healer, u32 money)
+{
+    for (u32 i = 0; i < 8; ++i)
+    {
+        if (badges & (1u << i))
+            FlagSet(gBadgeFlags[i]);
+        else
+            FlagClear(gBadgeFlags[i]);
+    }
+    for (u32 i = 0; i < 7; ++i)
+    {
+        if (licenses & (1u << i))
+            FlagSet(FLAG_AVERON_LICENSE_CUT + i);
+        else
+            FlagClear(FLAG_AVERON_LICENSE_CUT + i);
+    }
+    SetLastHealLocationWarp(healer); // Only existing real IDs reach this API.
+    SetMoney(&gSaveBlock1Ptr->money, money);
+}
+
+static void ExpectRegionLegacyState(u32 badges, u32 licenses, u32 healer, u32 money)
+{
+    for (u32 i = 0; i < 8; ++i)
+        EXPECT_EQ(FlagGet(gBadgeFlags[i]), (badges & (1u << i)) != 0);
+    for (u32 i = 0; i < 7; ++i)
+        EXPECT_EQ(FlagGet(FLAG_AVERON_LICENSE_CUT + i), (licenses & (1u << i)) != 0);
+    EXPECT_EQ(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation), healer);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), money);
+}
+
+// Sinnoh is deliberately caller-supplied RAM, never serialized by this fixture.
+// Recapture from actual restored legacy flags; never reuse a pre-load snapshot.
+static void ExerciseRestoredRegionQueries(u32 legacyMask, u8 ramSinnohMask)
+{
+    struct SaveBlock1 *saved = Alloc(sizeof(*saved));
+    struct SaveBlock2 *saved2 = Alloc(sizeof(*saved2));
+    struct Pokemon party[PARTY_SIZE];
+    EXPECT(saved != NULL && saved2 != NULL);
+    memcpy(saved, gSaveBlock1Ptr, sizeof(*saved));
+    memcpy(saved2, gSaveBlock2Ptr, sizeof(*saved2));
+    memcpy(party, gParties[B_TRAINER_PLAYER], sizeof(party));
+    const u32 regions[] = {AVERON_FIXTURE_AVERON, AVERON_FIXTURE_SINNOH,
+        AVERON_FIXTURE_UNKNOWN, AVERON_FIXTURE_SINNOH, AVERON_FIXTURE_AVERON, 257};
+    for (u32 cycle = 0; cycle < 3; ++cycle)
+    {
+        struct BadgeReadFixture reader = {.sinnoh = ramSinnohMask};
+        struct AveronFixtureBadges snapshot = {0xDE, 0xAD};
+        EXPECT_EQ(AveronRegionFixture_CaptureBadges(ReadBadgeFixture, &reader, &snapshot), TRUE);
+        EXPECT_EQ(reader.calls, 16);
+        EXPECT_EQ(snapshot.averon, legacyMask);
+        EXPECT_EQ(snapshot.sinnoh, ramSinnohMask);
+        for (u32 region = 0; region < ARRAY_COUNT(regions); ++region)
+        {
+            u32 expectedMask = regions[region] == AVERON_FIXTURE_AVERON ? legacyMask
+                : regions[region] == AVERON_FIXTURE_SINNOH ? ramSinnohMask : 0;
+            u32 count = 0;
+            for (u32 badge = 1; badge <= 8; ++badge)
+            {
+                bool32 expected = (expectedMask & (1u << (badge - 1))) != 0;
+                count += expected;
+                EXPECT_EQ(AveronRegionFixture_HasBadge(&snapshot, regions[region], badge), expected);
+            }
+            EXPECT_EQ(AveronRegionFixture_CountBadges(&snapshot, regions[region]), count);
+        }
+    }
+    EXPECT_EQ(memcmp(saved, gSaveBlock1Ptr, sizeof(*saved)), 0);
+    EXPECT_EQ(memcmp(saved2, gSaveBlock2Ptr, sizeof(*saved2)), 0);
+    EXPECT_EQ(memcmp(party, gParties[B_TRAINER_PLAYER], sizeof(party)), 0);
+    Free(saved2);
+    Free(saved);
+}
+
+TEST("Averon region fixture recaptures each badge toggle after real flash and reverse queries")
+{
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_GREAT_BALL, 3));
+    EXPECT(AddBagItem(ITEM_ORAN_BERRY, 7));
+    // ZeroMonData sets HP before maxHP. Clear inherited cached maxHP first so
+    // empty slots start with canonical box.hpLost=0, as LoadPlayerParty expects.
+    memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
+    ZeroPlayerPartyMons();
+    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_SNIVY, 12, 0);
+    u32 hp = 1, status = STATUS1_POISON;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS, &status);
+    CalculatePlayerPartyCount();
+    struct Pokemon expectedParty[PARTY_SIZE];
+    memcpy(expectedParty, gParties[B_TRAINER_PLAYER], sizeof(expectedParty));
+    u32 mask = 0;
+    for (u32 step = 0; step < 16; ++step)
+    {
+        if (step < 8)
+            mask |= 1u << step;
+        else
+            mask &= ~(1u << (step - 8));
+        u32 healer = step & 1 ? HEAL_LOCATION_ALDERFIELD
+            : HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F;
+        SetRegionLegacyState(mask, 0x55, healer, 12000 + step);
+        EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+        // Corrupt live RAM to make a stale snapshot unable to satisfy checks.
+        SetRegionLegacyState(mask ^ 0xFF, 0x2A, HEAL_LOCATION_ALDERFIELD, 0);
+        ClearBag();
+        ZeroPlayerPartyMons();
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        ExpectRegionLegacyState(mask, 0x55, healer, 12000 + step);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 3);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), 7);
+        EXPECT_EQ(memcmp(expectedParty, gParties[B_TRAINER_PLAYER], sizeof(expectedParty)), 0);
+        // Opposite bank is RAM-only, explicitly supplied after each reload.
+        ExerciseRestoredRegionQueries(mask, mask ^ 0xFF);
+    }
+}
+
+TEST("Averon region fixture recaptures safe legacy rollback after an interrupted newest slot")
+{
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_GREAT_BALL, 4));
+    memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
+    ZeroPlayerPartyMons();
+    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIPLUP, 12, 0);
+    CalculatePlayerPartyCount();
+    struct Pokemon expectedParty[PARTY_SIZE];
+    memcpy(expectedParty, gParties[B_TRAINER_PLAYER], sizeof(expectedParty));
+    SetRegionLegacyState(0x35, 0x52, HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 7319);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    u32 previousCounter = gSaveCounter;
+    ExerciseRestoredRegionQueries(0x35, 0x81);
+    SetRegionLegacyState(0xCA, 0x2D, HEAL_LOCATION_ALDERFIELD, 42);
+    ClearBag();
+    ZeroPlayerPartyMons();
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    u16 sector = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
+    EXPECT_EQ(EraseFlashSector(sector), 0);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_ERROR);
+    EXPECT_EQ(gSaveCounter, previousCounter);
+    ExpectRegionLegacyState(0x35, 0x52, HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 7319);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 4);
+    EXPECT_EQ(memcmp(expectedParty, gParties[B_TRAINER_PLAYER], sizeof(expectedParty)), 0);
+    ExerciseRestoredRegionQueries(0x35, 0xE1); // Not rolled back: explicit RAM input.
+    SetRegionLegacyState(0x5A, 0x33, HEAL_LOCATION_ALDERFIELD, 9123);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    SetRegionLegacyState(0, 0, HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 0);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    ExpectRegionLegacyState(0x5A, 0x33, HEAL_LOCATION_ALDERFIELD, 9123);
+    ExerciseRestoredRegionQueries(0x5A, 0x18);
+}
+
+TEST("Averon region fixture reverse travel policy preserves the real whiteout destination")
+{
+    u32 healer;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; }
+    SetRegionLegacyState(0xA5, 0x53, healer, 9876);
+    const u32 sequence[] = {0, 2, 0}; // A -> synthetic S -> A, no engine map warp.
+    for (u32 step = 0; step < ARRAY_COUNT(sequence); ++step)
+    {
+        const struct AveronFixtureMapBinding *current = &sHealFixtureMaps[sequence[step]];
+        bool32 averon = current->region == AVERON_FIXTURE_AVERON;
+        EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+            current->mapGroup, current->mapNum, MAP_GROUP(MAP_ALDERFIELD), MAP_NUM(MAP_ALDERFIELD), 1), averon);
+        EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+            current->mapGroup, current->mapNum, 255, 1, 1), !averon);
+        EXPECT_EQ(AveronRegionFixture_IsFlyDestinationEligible(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+            current->mapGroup, current->mapNum, current->mapGroup, current->mapNum, 0), FALSE);
+        struct HealReadFixture reader = {0};
+        u32 selected = 0xDEADBEEF;
+        EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+            current->mapGroup, current->mapNum, healer, FIXTURE_SINNOH_HEAL,
+            ReadHealFixture, &reader, &selected), TRUE);
+        EXPECT_EQ(selected, averon ? healer : FIXTURE_SINNOH_HEAL);
+        // Unset and invalid handles fail closed and preserve output.
+        selected = 0xDEADBEEF;
+        EXPECT_EQ(AveronRegionFixture_SelectRegionalHeal(sHealFixtureMaps, ARRAY_COUNT(sHealFixtureMaps),
+            current->mapGroup, current->mapNum, 0, 0xFFFFFFFF,
+            ReadHealFixture, &reader, &selected), FALSE);
+        EXPECT_EQ(selected, 0xDEADBEEF);
+        ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
+        ExerciseRestoredRegionQueries(0xA5, 0x5A);
+    }
+    // Only an existing, validated Averon heal reaches the real respawn API.
+    struct WarpData destination;
+    memset(&destination, 0x7F, sizeof(destination));
+    SetWhiteoutRespawnWarpAndHealerNPC(&destination);
+    u16 expectedMap = healer == HEAL_LOCATION_ALDERFIELD ? MAP_ALDERFIELDCLINIC : MAP_SALTMEREHOME;
+    EXPECT_EQ(destination.mapGroup, MAP_GROUP(expectedMap));
+    EXPECT_EQ(destination.mapNum, MAP_NUM(expectedMap));
+    EXPECT_EQ(destination.warpId, -1);
+    EXPECT_EQ(destination.x, healer == HEAL_LOCATION_ALDERFIELD ? 7 : 6);
+    EXPECT_EQ(destination.y, healer == HEAL_LOCATION_ALDERFIELD ? 4 : 5);
+    EXPECT_EQ(gSpecialVar_LastTalked, 1);
+    EXPECT_EQ(gSpecialVar_0x800B, 1);
+    ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
 }

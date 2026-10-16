@@ -67,6 +67,21 @@ class RegionMutationTests(unittest.TestCase):
         self.assert_detected(original, original.replace('== region;', '== region || region != AVERON_FIXTURE_UNKNOWN;'),
                              'test_heal_selection_prefers_valid_current_region_then_validates_fallback')
 
+    def test_detects_reversed_healer_candidate_priority(self):
+        self.assert_detected('uint32_t candidates[] = {preferredHealId, fallbackHealId};',
+                             'uint32_t candidates[] = {fallbackHealId, preferredHealId};',
+                             'test_heal_selection_prefers_valid_current_region_then_validates_fallback')
+
+    def test_detects_accepting_non_boolean_positive_healer_reader_result(self):
+        self.assert_detected('reader(healId, context, &mapGroup, &mapNum) != 1',
+                             'reader(healId, context, &mapGroup, &mapNum) < 1',
+                             'test_heal_selection_refuses_invalid_or_unwritten_metadata')
+
+    def test_detects_healer_output_mutation_on_failure(self):
+        original = 'if (!reader || !selectedHealId)\n        return 0;'
+        self.assert_detected(original, original + '\n    *selectedHealId = 0;',
+                             'test_heal_selection_validates_arguments_and_source_region_before_reading')
+
     def test_detects_retrying_a_failed_healer_identifier(self):
         self.assert_detected('if (i != 0 && candidates[i] == candidates[0])',
                              'if (i > 2 && candidates[i] == candidates[0])',
