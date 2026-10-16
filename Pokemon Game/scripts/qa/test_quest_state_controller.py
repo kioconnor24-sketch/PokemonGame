@@ -223,6 +223,19 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(asked, ["m3001004,4", "m3002000,2",
                                  "m3003000,280", "c"])
 
+    def test_actual_bag_berry_tab_is_third_right_not_fourth(self):
+        # Real screenshot sequence in graphical run 38870779185:
+        # right1 POKE BALLS, right2 TMs & HMs, right3 BERRIES,
+        # right4 KEY ITEMS. Stop at the actual Oran Berry x3 evidence.
+        self.assertEqual(qa.BAG_POCKET_ORDER, (
+            "ITEMS", "POKE BALLS", "TMS & HMS", "BERRIES", "KEY ITEMS"))
+        self.assertEqual(qa.bag_pocket_right_steps("ITEMS", "BERRIES"), 3)
+        self.assertEqual(qa.bag_pocket_right_steps("ITEMS", "KEY ITEMS"), 4)
+        self.assertEqual(qa.bag_pocket_right_steps("BERRIES", "BERRIES"), 0)
+        self.assertEqual(qa.bag_pocket_right_steps("BERRIES", "ITEMS"), 2)
+        with self.assertRaisesRegex(qa.Blocked, "Unknown original Bag pocket"):
+            qa.bag_pocket_right_steps("INJECTED", "BERRIES")
+
     def test_visual_reboot_title_signature_rejects_copyright_blank(self):
         # Synthetic color fractions from the independently reviewed actual
         # Emerald title vs preceding black copyright frame.
