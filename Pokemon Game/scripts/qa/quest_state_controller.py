@@ -1314,6 +1314,156 @@ def q2_continue_relaunch(args):
     raise Blocked(f"Continue never returned to verified game field: {last}")
 
 
+
+def q4_lab_gift(args):
+    """Actual existing lab Script4 gift, no item/flag/party writes."""
+    directory = Path(args.outdir)
+    n = 600
+
+    def read(label, field=False):
+        nonlocal n
+        n += 1
+        tag = f"q4-{n:03d}-{label}"
+        image = directory / (tag + ".png")
+        grab(args.window, image)
+        state = snapshot(args, tag)
+        print("QA_GIFT_STATE", tag, json.dumps(state, sort_keys=True),
+              str(image), flush=True)
+        if (state["mapGroup"], state["mapNum"]) != (75, 14):
+            raise Blocked(f"Script4 did not enter actual AveronFieldLab: {state}")
+        if not state["sketchRewarded"]:
+            raise Blocked(f"Existing sketch prerequisite missing: {state}")
+        if field and white_panel_ratio(image) > 0.30:
+            raise Blocked(f"Unexpected lab textbox on route {tag}")
+        return state, image
+
+    def key(k, duration=0.095, delay=0.42):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", k], check=True)
+        time.sleep(duration)
+        subprocess.run(["xdotool", "keyup", k], check=True)
+        time.sleep(delay)
+
+    def move(axis, target):
+        here, _ = read(f"before-{axis}-{target}", field=True)
+        idle = 0
+        for i in range(60):
+            if here[axis] == target:
+                return
+            sign = 1 if target > here[axis] else -1
+            k = (("Right" if sign > 0 else "Left") if axis == "x"
+                 else ("Down" if sign > 0 else "Up"))
+            key(k)
+            next_state, _ = read(f"{axis}-{target}-{i+1}", field=True)
+            other = "y" if axis == "x" else "x"
+            delta = next_state[axis] - here[axis]
+            if delta not in (0, sign) or next_state[other] != here[other]:
+                raise Blocked(f"Uncontrolled lab movement: {here}->{next_state}")
+            idle = idle+1 if delta == 0 else 0
+            if idle >= 4:
+                raise Blocked(f"Original lab collision at {next_state}")
+            here = next_state
+        raise Blocked(f"Lab route >60 steps for {axis}={target}")
+
+    def panel_ratio(path):
+        return white_panel_ratio(path)
+
+    def menu_ratio(path):
+        pixels = subprocess.check_output([
+            "convert", str(path), "-crop", "106x90+323+130",
+            "+repage", "-depth", "8", "RGB:-"])
+        if len(pixels) != 106*90*3:
+            raise Blocked("Malformed lab YesNo crop")
+        return sum(min(pixels[i:i+3]) >= 190
+                   for i in range(0, len(pixels), 3))/(106*90)
+
+    state, _ = read("script4-entry")
+    if not (2 <= state["x"] <= 8 and 2 <= state["y"] <= 8):
+        raise Blocked(f"Unexpected Script4 lab arrival tile: {state}")
+    if state["devGiftReceived"]:
+        raise Blocked("Gift was already received at start; cannot test fresh gift")
+    original_party = state["playerPartyCount"]
+    if original_party >= 6:
+        raise Blocked("Gift positive branch needs a genuinely nonfull party")
+    move("x", 24)
+    move("y", 19)
+    at, empty = read("scientist-west", field=True)
+    if (at["x"], at["y"]) != (24, 19):
+        raise Blocked(f"Not beside existing scientist (25,19): {at}")
+    key("Right", duration=0.045)
+    faced, _ = read("scientist-face-right", field=True)
+    if (faced["x"], faced["y"]) != (24, 19):
+        raise Blocked("Facing scientist unexpectedly moved player")
+    key("x", delay=1.4)
+    open_state, offer = read("offer-first")
+    if panel_ratio(offer) < 0.5:
+        raise Blocked("No visible source scientist dialogue")
+    if open_state["devGiftReceived"] or open_state["playerPartyCount"] != original_party:
+        raise Blocked("Gift incorrectly triggered before ordinary YES")
+    for i in range(12):
+        current, picture = read(f"offer-menu-{i+1}")
+        if menu_ratio(picture) >= 0.52:
+            offer = picture
+            break
+        time.sleep(0.6)
+    else:
+        raise Blocked("Scientist YESNO menu not visually observed")
+    key("Down")
+    no_state, no_pic = read("selected-NO")
+    if menu_ratio(no_pic) < 0.52:
+        raise Blocked("Scientist NO menu missing")
+    key("x")
+    refused, refuse_pic = read("refuse-message")
+    if (refused["devGiftReceived"] or
+            refused["playerPartyCount"] != original_party):
+        raise Blocked("Scientist refusal altered party/flag")
+    print("QA_Q4_SCIENTIST_REFUSAL_NO_GIFT: observed source lab event",
+          flush=True)
+    # Actual refusal closes without a new default change.
+    for i in range(5):
+        key("x",delay=0.8)
+        here, pic = read(f"refuse-dismiss-{i+1}")
+        if panel_ratio(pic) <= 0.30:
+            break
+    else:
+        raise Blocked("Could not close original scientist refusal text")
+    key("x", delay=1.4)
+    for i in range(12):
+        candidate, pic = read(f"reoffer-menu-{i+1}")
+        if menu_ratio(pic) >= 0.52:
+            break
+        time.sleep(0.6)
+    else:
+        raise Blocked("Scientist reoffer YESNO did not render")
+    key("x",delay=1.8)
+    accepted, granted_pic = read("gift-accepted")
+    if (not accepted["devGiftReceived"] or
+            accepted["playerPartyCount"] != original_party + 1):
+        raise Blocked(f"Source-gift YES did not add ONE party member: {accepted}")
+    if panel_ratio(granted_pic) < 0.50:
+        raise Blocked("Gift success message absent")
+    print("QA_Q4_GIFT_POSITIVE_FLAG_PARTY_PASS: only after actual YES, "
+          "DEV_GIFT_RECEIVED=true, player-party count +1; species/level "
+          "still require party-menu screenshot review.", flush=True)
+    for i in range(7):
+        key("x",delay=0.9)
+        here, pic = read(f"gift-dismiss-{i+1}")
+        if panel_ratio(pic) < 0.30:
+            break
+    else:
+        raise Blocked("Could not dismiss success text for duplicate test")
+    key("x",delay=1.2)
+    repeated, repeat_pic = read("gift-duplicate-dialogue")
+    if (not repeated["devGiftReceived"] or
+            repeated["playerPartyCount"] != original_party + 1 or
+            panel_ratio(repeat_pic) < 0.5):
+        raise Blocked("Scientist repeat interaction changed gift or failed UI")
+    print("QA_Q4_GIFT_REPEAT_NO_DUPLICATE: source completion dialogue, "
+          "flag and party count stable. Full-party and save-reload still "
+          "NOT ACCEPTED.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1344,6 +1494,10 @@ def main():
     a.add_argument("--fifo", required=True)
     a.add_argument("--outdir", required=True)
     a.add_argument("--window", required=True)
+    gift = sub.add_parser("q4-lab-gift")
+    gift.add_argument("--fifo", required=True)
+    gift.add_argument("--outdir", required=True)
+    gift.add_argument("--window", required=True)
     reload = sub.add_parser("q2-relaunch-continue")
     reload.add_argument("--fifo", required=True)
     reload.add_argument("--outdir", required=True)
@@ -1371,6 +1525,8 @@ def main():
             return q2_artist_offer(args)
         if args.mode == "navigate-artist":
             return navigate_artist(args)
+        if args.mode == "q4-lab-gift":
+            return q4_lab_gift(args)
         if args.mode == "q2-relaunch-continue":
             return q2_continue_relaunch(args)
         if args.mode == "q1-offer":
