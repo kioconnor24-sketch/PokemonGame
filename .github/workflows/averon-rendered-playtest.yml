@@ -321,6 +321,19 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
+          # Additional legal negative Q1 branch: walk original Alderfield
+          # tiles to source x38/16 Badge01 gate without granting a badge.
+          # This is NOT the badge-earned Hiker positive quest path.
+          qa_gate_blocked=0
+          if ! python3 -u "$qa_controller" q1-badge-gate \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log" 2>&1; then
+            qa_gate_blocked=1
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log"
+            echo "QA_Q1_GATE_BLOCKED: exact tile+frame in artifact; separate Q1-badge-earned Hiker remains pending"
+          else
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log"
+          fi
           # Next independent QA case: Windrow artist at source (20,14).
           # This relies ONLY on existing Windrow map75/6 warp0; it does
           # not create an event, flag, route, party, item or warp index.
@@ -538,6 +551,10 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+          if [ "$qa_gate_blocked" != "0" ]; then
+            echo "QA_Q1_GATE_PARTIAL: source negative badge gate not accepted"
+            exit 2
+          fi
           if [ "$qa_q4_blocked" != "0" ]; then
             echo "QA_Q4_PARTIAL: Q2 flash proven independently, but Q4 gift test blocked"
             exit 2
