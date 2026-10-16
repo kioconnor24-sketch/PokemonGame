@@ -549,9 +549,20 @@ jobs:
                 exit 2
               fi
               cat "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log"
+              # Next real QA stage: normal Fight/dialogue A inputs in the
+              # original leader battle; stop on an observed actual exit.
+              # No badge/HP writes, manufactured save, or simulated loss.
+              if ! python3 -u "$qa_controller" q3-battle-play \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-play.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-play.log"
+                echo "QA_Q3_BATTLE_PLAY_BLOCKED: check last actual battle screenshot"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-play.log"
             ); then
-              qa_q3_outcome="REAL_ELIO_BATTLE_STARTED_ONLY"
-              echo "QA_Q3_BATTLE_PARTIAL: original Elio encounter started; defeat/whiteout/heal NOT ACCEPTED"
+              qa_q3_outcome="REAL_ELIO_BATTLE_EXIT_SCOPED"
+              echo "QA_Q3_BATTLE_PARTIAL: genuine battle observed through exit or abort; independently inspect whiteout/respawn and badge outcome"
             else
               qa_q3_outcome="BLOCKED"
               if test -s "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"; then
