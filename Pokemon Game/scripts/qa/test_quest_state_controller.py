@@ -279,6 +279,21 @@ class ObserverTests(unittest.TestCase):
                               badge_probe=True)
         self.assertFalse(result["badge01"])
 
+    def test_existing_lab_land_corridor_is_source_backed(self):
+        # This is a read-only contract against original lab blockdata,
+        # not a new map or gameplay modification.
+        layout = (Path(__file__).resolve().parents[2]
+                  / "engine/data/layouts/AveronFieldLab/map.bin")
+        raw = layout.read_bytes()
+        self.assertEqual(len(raw), 28*22*2)
+        def metatile(x,y):
+            return struct.unpack_from("<H", raw, 2*(y*28+x))[0] & 0x3ff
+        self.assertEqual(metatile(24,5), 161)  # real impassable water
+        self.assertEqual(metatile(25,5), 1)    # adjacent land corridor
+        self.assertEqual(metatile(25,18), 1)   # land south of water
+        self.assertEqual(metatile(24,18), 1)   # west of gift scientist
+        self.assertEqual(metatile(24,19), 1)   # tested adjacency tile
+
     def test_gift_source_flag_and_player_party_read_only(self):
         header = struct.pack("<hhbbbxhh", 24, 19, 75, 14, -1, -1, -1)
         gdb, commands = self.fake(header)
