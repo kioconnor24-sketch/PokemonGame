@@ -1,0 +1,8 @@
+# Local derived knowledge graphs and ephemeral tooling artifacts
+.graphify/
+graphify-out/
+.graphify_*.json
+# Runtime emulator saves and ROMs must remain local
+*.gba
+*.sav
+*.ss[0-9]
