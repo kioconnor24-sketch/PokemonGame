@@ -171,8 +171,11 @@ SaveBlock1 and SaveBlock2 are nearly full. Codex was told in #15.
 1. GUI: followers on a real map (walking, surfing, shiny, gender forms, Mega
    reverting after battle), a full-party catch (the swap menu), Pokédex screens
    with all forms.
-2. Shedinja's split from Nincada (handled inside Nincada's evolution) and a
-   rendered spin/step trigger in the overworld (GUI).
+2. Shedinja: `CreateShedinja` (`src/evolution_scene.c`, static, runs only in
+   the evolution scene) adds Shedinja when Nincada evolves into Ninjask with a
+   free party slot and, under `P_SHEDINJA_BALL` Gen 4+, a Poké Ball in the bag,
+   which it uses up (SOURCE). A native or GUI run needs the evolution scene.
+   A rendered spin/step trigger in the overworld also needs GUI.
 3. Owner decision on how the 13 region-only forms and Ursaluna are obtained.
 4. A decision on the 174 placeholder follower lookups: they need art, which is
    frozen.
