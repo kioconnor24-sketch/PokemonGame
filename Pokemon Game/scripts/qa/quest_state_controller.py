@@ -107,12 +107,15 @@ class ReadOnlyGdb:
                  if (callback2 & ~1) == (addr & ~1)), "other")
             save_status = struct.unpack(
                 "<H", read(symbols["saveStatus"], 2))[0]
+            save_attempt = struct.unpack(
+                "<H", read(symbols["saveAttempt"], 2))[0]
             different = read(symbols["differentFile"], 1)[0]
             return dict(count=n, cursor=index, actions=actions[:n],
                         selected=actions[index] if n else None,
                         saveCallback=f"0x{cb:08X}", savePhase=phase,
                         mainCallback2=f"0x{callback2:08X}",
                         mainPhase=main_phase, saveStatus=save_status,
+                        saveAttemptStatus=save_attempt,
                         differentSaveFile=different)
         finally:
             self.command("c", reply=False)
@@ -192,6 +195,7 @@ def daemon(args):
         "saveCallback": elf_symbol(args.elf, "sSaveDialogCallback"),
         "main": elf_symbol(args.elf, "gMain"),
         "saveStatus": elf_symbol(args.elf, "gSaveFileStatus"),
+        "saveAttempt": elf_symbol(args.elf, "gSaveAttemptStatus"),
         "differentFile": elf_symbol(args.elf, "gDifferentSaveFile"),
         "mainCallbacks": {
             name: elf_symbol(args.elf, name)
@@ -1027,8 +1031,11 @@ def q2_save(args):
         state, frame = save_probe(args, f"save-007-return-field-{i+1}")
         require_q2_complete(state["position"])
         if white_panel_ratio(frame) <= 0.30:
-            if state["menu"]["saveStatus"] != 1:
-                raise Blocked("Game did not report SAVE_STATUS_OK=1")
+            # save.c TrySavingData sets gSaveAttemptStatus=SAVE_STATUS_OK.
+            # gSaveFileStatus is a LOAD status, and can remain EMPTY until
+            # a real reset/Continue. Do not conflate the two.
+            if state["menu"]["saveAttemptStatus"] != 1:
+                raise Blocked("Actual save attempt did not report STATUS_OK=1")
             print("QA_SAVE_REAL_SUCCESS: game callback confirmed; "
                   "completed Q2 flags and exactly 3 Oran observed; "
                   "reset/Continue remains a separate checkpoint", flush=True)
