@@ -38,6 +38,14 @@ class AgentBoardDeliveryTests(unittest.TestCase):
         self.assertRegex(concurrency, r"(?m)^  cancel-in-progress: false$")
         self.assertNotIn("cancel-in-progress: true", concurrency)
 
+    def test_ordinary_comments_cannot_launch_api_heavy_board(self):
+        self.assertIn("startsWith(github.event.comment.body, 'AGENT_MESSAGE ')", self.source)
+        self.assertIn("startsWith(github.event.comment.body, 'AGENT_ACK ')", self.source)
+        self.assertIn("github.event.issue.number == 23 && contains(github.event.comment.body, 'QA_ACCEPTED PR=#')", self.source)
+        # PR, schedule and manual events still bypass this issue-comment-only filter.
+        self.assertIn("github.event_name != 'issue_comment' ||", self.source)
+        self.assertIn("github.event.issue.pull_request != null", self.source)
+
     def test_board_stays_advisory_and_uses_trusted_main(self):
         self.assertIn("ref: main", self.source)
         self.assertIn("persist-credentials: false", self.source)
