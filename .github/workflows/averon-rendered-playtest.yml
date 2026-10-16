@@ -585,6 +585,17 @@ jobs:
           test -s "$flash" || { echo "QA_FLASH_RESTART_BLOCKED: save missing after shutdown"; exit 2; }
           flash_after=$(sha256sum "$flash" | cut -d' ' -f1)
           echo "QA_FLASH_AFTER_SHUTDOWN_SHA256=$flash_after"
+          # Independent READ-ONLY physical flash sector decode. Require all 14
+          # signed sector IDs, one counter, C checksums, Q2 flags and Oran3.
+          # Never include .sav bytes in the uploaded screenshot/log artifacts.
+          if python3 -u "$qa_controller" q2-flash-sector --flash "$flash" \
+              > "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log"
+            echo "QA_Q2_PHYSICAL_FLASH_SCOPED_PASS: signed saved quest and item bytes"
+          else
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log"
+            echo "QA_Q2_PHYSICAL_FLASH_BLOCKED: do not claim raw saved flags"
+          fi
           sleep 2
           # mGBA 0.10.2 GDB hangs on title memory reads even when a
           # fresh debugger socket is attached; run a pristine NO-DEBUGGER
