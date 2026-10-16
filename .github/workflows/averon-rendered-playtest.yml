@@ -513,7 +513,11 @@ jobs:
           flash_after=$(sha256sum "$flash" | cut -d' ' -f1)
           echo "QA_FLASH_AFTER_SHUTDOWN_SHA256=$flash_after"
           sleep 2
-          mgba -g -2 "Pokemon Game/engine/pokeemerald.gba" \
+          # mGBA 0.10.2 GDB hangs on title memory reads even when a
+          # fresh debugger socket is attached; run a pristine NO-DEBUGGER
+          # process against the exact same flash instead. This is a genuine
+          # process/power-cycle test and never loads a savestate.
+          mgba -2 "Pokemon Game/engine/pokeemerald.gba" \
             > "$RUNNER_TEMP/averon-playtest/mgba-relaunch.log" 2>&1 &
           emu_pid=$!
           win=""
@@ -522,31 +526,19 @@ jobs:
             if test -n "$win"; then break; fi
             sleep 0.5
           done
-          test -n "$win" || { echo "QA_FLASH_RESTART_BLOCKED: no relaunched mGBA window"; exit 2; }
-          qa_fifo="$RUNNER_TEMP/averon-playtest/qa-relaunch.fifo"
-          qa_ready="$RUNNER_TEMP/averon-playtest/qa-relaunch-ready.txt"
-          mkfifo "$qa_fifo"
-          python3 -u "$qa_controller" daemon \
-            --elf "Pokemon Game/engine/pokeemerald.elf" \
-            --fifo "$qa_fifo" --ready "$qa_ready" \
-            --outdir "$RUNNER_TEMP/averon-playtest" \
-            > "$RUNNER_TEMP/averon-playtest/qa-debugger-relaunch.log" 2>&1 &
-          qa_pid=$!
-          for i in $(seq 1 25); do
-            if test -s "$qa_ready"; then break; fi
-            if ! kill -0 "$qa_pid" 2>/dev/null; then break; fi
-            sleep 1
-          done
-          if ! test -s "$qa_ready"; then
-            echo "QA_FLASH_RESTART_BLOCKED: new read-only debugger failed"
-            tail -80 "$RUNNER_TEMP/averon-playtest/qa-debugger-relaunch.log"
+          test -n "$win" || {
+            echo "QA_FLASH_RESTART_BLOCKED: no real mGBA restart window"
             exit 2
-          fi
-          capture "Q2-relaunch-physical-title"
-          if ! python3 -u "$qa_controller" q2-relaunch-continue \
-              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+          }
+          capture "Q2-relaunch-copyright-screen"
+          if ! python3 -u "$qa_controller" q2-visual-relaunch \
+              --outdir "$RUNNER_TEMP/averon-playtest" \
               --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log" 2>&1; then
             cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+            echo "QA_Q2_VISUAL_CONTINUE_BLOCKED: review exact frames"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
             echo "QA_Q2_CONTINUE_BLOCKED: real flash and Continue not yet proven"
             exit 2
           fi
