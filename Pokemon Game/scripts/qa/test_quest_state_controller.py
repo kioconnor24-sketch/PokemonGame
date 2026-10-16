@@ -223,6 +223,23 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(asked, ["m3001004,4", "m3002000,2",
                                  "m3003000,280", "c"])
 
+    def test_visual_reboot_title_signature_rejects_copyright_blank(self):
+        # Synthetic color fractions from the independently reviewed actual
+        # Emerald title vs preceding black copyright frame.
+        pixels = 480 * 320
+        title = bytearray(bytes((0, 145, 50)) * pixels)
+        for index in range(int(pixels * 0.07)):
+            title[index*3:index*3+3] = bytes((245, 195, 44))
+        score = qa.visual_title_score(title)
+        self.assertTrue(score["present"])
+        self.assertGreater(score["green"], 0.22)
+        black = bytes((0, 0, 0)) * pixels
+        self.assertFalse(qa.visual_title_score(black)["present"])
+        self.assertLess(qa.pixel_distance(title, title), 1e-6)
+        self.assertGreater(qa.pixel_distance(title, black), 0.1)
+        with self.assertRaisesRegex(qa.Blocked, "exact emulator framebuffer"):
+            qa.visual_title_score(b"tiny")
+
     def test_title_probe_gdb_error_identifies_specific_symbol(self):
         gdb = object.__new__(qa.ReadOnlyGdb)
         gdb.sock = DummySocket()
