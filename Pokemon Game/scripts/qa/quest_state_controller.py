@@ -135,6 +135,42 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
+    def title_state(self, symbols):
+        """Only title-relevant globals: never read stale Start-menu RAM."""
+        self.sock.sendall(b"\\x03")
+        stop = self.packet()
+        if not stop.startswith(("S", "T")):
+            raise Blocked(f"Title debugger interrupt failed: {stop[:70]}")
+        try:
+            def read(name, addr, size):
+                raw = self.command(f"m{addr:x},{size:x}")
+                # GDB error responses (e.g., E14) are NOT packed game data.
+                if raw.startswith("E") and len(raw) == 3:
+                    raise Blocked(
+                        f"title {name} read 0x{addr:08X}: GDB {raw}")
+                try:
+                    data = bytes.fromhex(raw)
+                except ValueError as exc:
+                    raise Blocked(
+                        f"title {name} read 0x{addr:08X}: malformed GDB "
+                        f"reply {raw[:24]!r}") from exc
+                if len(data) != size:
+                    raise Blocked(f"title {name} read size {len(data)}/{size}")
+                return data
+            cb = struct.unpack("<I", read(
+                "main callback", symbols["main"] + 4, 4))[0]
+            phase = next(
+                (name for name, addr in symbols["mainCallbacks"].items()
+                 if (cb & ~1) == (addr & ~1)), "other")
+            status = struct.unpack("<H", read(
+                "save file status", symbols["saveStatus"], 2))[0]
+            tasks = read("title task array", symbols["taskArray"], 16 * 40)
+            ready = title_input_ready(tasks, symbols["titleReadyFunc"])
+            return dict(mainCallback2=f"0x{cb:08X}", mainPhase=phase,
+                        saveStatus=status, titleInputReady=ready)
+        finally:
+            self.command("c", reply=False)
+
     def position(self, symbol, symbol2):
         self.sock.sendall(b"\x03")
         stop = self.packet()
@@ -251,9 +287,10 @@ def daemon(args):
                     result = {"checkpoint": name}
                     if not name.startswith("title-"):
                         result["position"] = gdb.position(symbol, symbol2)
-                    if name.startswith(("save-", "title-")):
-                        result["menu"] = gdb.menu_state(
-                            menu_symbols, include_tasks=name.startswith("title-"))
+                    if name.startswith("title-"):
+                        result["menu"] = gdb.title_state(menu_symbols)
+                    elif name.startswith("save-"):
+                        result["menu"] = gdb.menu_state(menu_symbols)
                 except Exception as exc:
                     if reboot_transient(name, exc):
                         # Expected possibility while GBA's CPU resets and
