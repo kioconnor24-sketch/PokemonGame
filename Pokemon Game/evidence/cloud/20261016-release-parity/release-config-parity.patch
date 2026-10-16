@@ -211,7 +211,7 @@ diff --git "a/Pokemon Game/Averon_Codex_Handoff/qa/PRE_SINNOH_RELEASE_PARITY.md"
 new file mode 100644
 --- /dev/null
 +++ "b/Pokemon Game/Averon_Codex_Handoff/qa/PRE_SINNOH_RELEASE_PARITY.md"
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,66 @@
 +# Pre-Sinnoh release configuration parity
 +
 +Prepared in Codex Cloud on 2026-10-16. This candidate is not registered in CI or
@@ -264,8 +264,13 @@ new file mode 100644
 +layout, dynamic GetConfig behavior, complete EXP allocation, candy enforcement,
 +form rendering, every possible activation path, save compatibility, resource
 +budgets, or Delta acceptance. Existing native/graphical suites remain required.
-+No new release build, native suite, graphical acceptance or backend-ready claim
-+is made for this candidate. Capture EXP and final regional numeric caps remain
++A separate real `make -j5 -O release` of snapshot c1d34602 passed with LTO
++enabled: 33,554,432 bytes, SHA256
++`c467cf2d672f281c4b18df2d254eb56673848417e174b5635c08f5f5fdd2f53f`.
++Linker EWRAM 226418 B, IWRAM 28328 B, linked ROM 26849028 B. Compiler warnings
++are retained in the checkpoint release-build.log.gz; they were not silenced.
++This does not prove release gameplay. No new native suite, graphical acceptance
++or backend-ready claim is made for this candidate. Capture EXP and final regional numeric caps remain
 +owner decisions and are deliberately not assigned values here.
 +
 +Next: publish the exact two-path claim, apply the candidate to a unique branch
