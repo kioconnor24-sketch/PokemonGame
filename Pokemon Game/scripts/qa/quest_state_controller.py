@@ -20,12 +20,15 @@ class Blocked(RuntimeError):
     pass
 
 
-def elf_symbol(elf):
+def elf_symbol(elf, name="gSaveBlock1Ptr"):
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name):
+        raise Blocked("Invalid ELF symbol name")
     symbols = subprocess.check_output(
         ["arm-none-eabi-nm", "--defined-only", str(elf)], text=True)
-    hits = re.findall(r"^([0-9a-fA-F]{8}) [A-Za-z] gSaveBlock1Ptr$", symbols, re.M)
+    hits = re.findall(r"^([0-9a-fA-F]{8}) [A-Za-z] " + re.escape(name) + r"$",
+                      symbols, re.M)
     if len(hits) != 1:
-        raise Blocked(f"ELF gSaveBlock1Ptr count must be one, found {len(hits)}")
+        raise Blocked(f"ELF {name} count must be one, found {len(hits)}")
     return int(hits[0], 16)
 
 
@@ -74,7 +77,7 @@ class ReadOnlyGdb:
             raise Blocked(f"Debugger stop request unsupported: {stop[:70]}")
         self.command("c", reply=False)
 
-    def position(self, symbol):
+    def position(self, symbol, symbol2):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -100,11 +103,26 @@ class ReadOnlyGdb:
             # ItemSlot is two little-endian u16s, 4 bytes each. Oran Berry
             # is item ID 520 from existing constants/items.h.
             berry_offset = 0x560 + (30 + 30 + 16 + 64) * 4
+            if ptr + berry_offset + 46*4 > 0x02040000:
+                raise Blocked("SaveBlock1 Berry Pocket exceeds EWRAM")
+            p2_bytes = bytes.fromhex(self.command(f"m{symbol2:x},4"))
+            if len(p2_bytes) != 4:
+                raise Blocked("SaveBlock2 pointer response has wrong size")
+            p2 = struct.unpack("<I", p2_bytes)[0]
+            # Verified against QUEST global.h SaveBlock2.encryptionKey
+            # at +0xAC and item.c BagPocket_GetSlotDataGeneric: the saved
+            # quantity is XORed with the lower 16 bits of encryptionKey.
+            if not 0x02000000 <= p2 <= 0x02040000 - 0xB0:
+                raise Blocked(f"gSaveBlock2Ptr outside EWRAM: 0x{p2:08X}")
+            key_bytes = bytes.fromhex(self.command(f"m{p2 + 0xAC:x},4"))
+            if len(key_bytes) != 4:
+                raise Blocked("Bag encryption key response wrong size")
+            key = struct.unpack("<I", key_bytes)[0] & 0xFFFF
             berries = bytes.fromhex(
                 self.command(f"m{ptr + berry_offset:x},{46*4:x}"))
             if len(berries) != 46 * 4:
                 raise Blocked("Incomplete read-only Berry Pocket response")
-            oran_qty = sum(quantity for item, quantity in
+            oran_qty = sum((saved ^ key) for item, saved in
                            struct.iter_unpack("<HH", berries) if item == 520)
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
@@ -125,10 +143,13 @@ class ReadOnlyGdb:
 
 
 def daemon(args):
-    symbol = elf_symbol(args.elf)
+    symbol = elf_symbol(args.elf, "gSaveBlock1Ptr")
+    symbol2 = elf_symbol(args.elf, "gSaveBlock2Ptr")
     gdb = ReadOnlyGdb(args.port)
     gdb.start()
-    Path(args.ready).write_text(f"read-only GDB: gSaveBlock1Ptr at 0x{symbol:08X}\n")
+    Path(args.ready).write_text(
+        f"read-only GDB: gSaveBlock1Ptr at 0x{symbol:08X}, "
+        f"gSaveBlock2Ptr at 0x{symbol2:08X}\n")
     while True:
         with open(args.fifo, encoding="ascii") as fifo:
             for line in fifo:
@@ -136,7 +157,7 @@ def daemon(args):
                 if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", name):
                     continue
                 try:
-                    result = {"checkpoint": name, "position": gdb.position(symbol)}
+                    result = {"checkpoint": name, "position": gdb.position(symbol, symbol2)}
                 except Exception as exc:
                     result = {"checkpoint": name, "blocked": str(exc)}
                 dest = Path(args.outdir) / f"{name}.json"
