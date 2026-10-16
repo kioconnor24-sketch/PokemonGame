@@ -2016,6 +2016,74 @@ def q3_battle_start(args):
     raise Blocked("Original leader dialogue never transitioned to actual battle")
 
 
+def q3_battle_play(args):
+    """Real battle UI A presses; never alter player HP, trainer or save state.
+
+    A battle result is reported only after a witnessed inBattle transition and
+    its actual original-map/first-badge state. No assumed heal/whiteout PASS.
+    """
+    out = Path(args.outdir)
+    prior = out / "q3-battle-first-reachable-battle-screen.png"
+    if not prior.is_file():
+        raise Blocked("No rendered original Elio battle startup in this run")
+
+    def record(label):
+        tag = f"q3-play-{label}"
+        frame = out / (tag + ".png")
+        grab(args.window, frame)
+        state = snapshot(args, tag)
+        if not state["devGiftReceived"] or state["playerPartyCount"] != 1:
+            raise Blocked(f"Unexpected real gifted party during trainer battle: {state}")
+        if not state["gymWestSluice"] or not state["gymEastSluice"]:
+            raise Blocked(f"Source sluice states vanished during battle: {state}")
+        if not state.get("inBattle", False) and state["badge01"]:
+            print("QA_Q3_REAL_BADGE_EARNED_CANDIDATE", json.dumps(state), flush=True)
+        print("QA_Q3_BATTLE_PROGRESS", tag,
+              json.dumps(state, sort_keys=True), str(frame), flush=True)
+        return state, frame
+
+    start, _ = record("initial")
+    if not start["inBattle"] or start["badge01"] or (
+            start["mapGroup"], start["mapNum"]) != (75, 10):
+        raise Blocked(f"Original Elio battle start not verified: {start}")
+    # Actual Wobbuffet is level 5 from the game's Script4; the opponent is
+    # the unchanged Elio. Repeated ordinary A selects player Fight/move and
+    # advances dialogue. Neither HP nor results are injected or controlled.
+    for i in range(160):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", "x"], check=True)
+        time.sleep(0.12)
+        subprocess.run(["xdotool", "keyup", "x"], check=True)
+        time.sleep(0.58)
+        # Read-only battle probe and screenshot every second interaction;
+        # do not keep sending A once the battle has actually concluded.
+        if i % 2 != 1:
+            continue
+        state, frame = record(f"real-A-{i+1:03d}")
+        if state["inBattle"]:
+            continue
+        time.sleep(1.3)
+        after, image = record("after-battle-transition")
+        if after["inBattle"]:
+            continue
+        if after["badge01"]:
+            print("QA_Q3_ORIGINAL_BADGE_VICTORY_CANDIDATE: actual source "
+                  "Badge01, but verify fanfare/leader reward screenshots.",
+                  flush=True)
+        else:
+            print("QA_Q3_ORIGINAL_BATTLE_EXIT_NO_BADGE: battle ended without "
+                  "Badge01; require visible defeat/whiteout and clinic "
+                  "before claiming healed whiteout.", flush=True)
+        if (after["mapGroup"], after["mapNum"]) == (75, 11):
+            print("QA_Q3_ORIGINAL_CLINIC_MAP_CANDIDATE: player on original "
+                  "AlderfieldClinic after trainer battle, examine actual "
+                  "frame and verify nurse healing before full PASS.", flush=True)
+        return
+    raise Blocked("No observed real Elio battle conclusion in 160 actual A "
+                  "presses; review last rendered frame, not a game failure")
+
+
 # SAVE sector definitions are taken verbatim from engine/include/save.h
 # and engine/src/save.c of the pinned QUEST source (not a guessed .sav
 # layout). This is an offline, read-only flash observer after emulator exit.
@@ -2163,6 +2231,10 @@ def main():
     battle.add_argument("--fifo", required=True)
     battle.add_argument("--outdir", required=True)
     battle.add_argument("--window", required=True)
+    play = sub.add_parser("q3-battle-play")
+    play.add_argument("--fifo", required=True)
+    play.add_argument("--outdir", required=True)
+    play.add_argument("--window", required=True)
     flash = sub.add_parser("q2-flash-sector")
     flash.add_argument("--flash", type=Path, required=True)
     gift = sub.add_parser("q4-lab-gift")
@@ -2204,6 +2276,8 @@ def main():
             return q3_gym_entry(args)
         if args.mode == "q3-battle-start":
             return q3_battle_start(args)
+        if args.mode == "q3-battle-play":
+            return q3_battle_play(args)
         if args.mode == "q2-flash-sector":
             return q2_flash_sector(args)
         if args.mode == "q4-lab-gift":
