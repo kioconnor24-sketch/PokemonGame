@@ -22,6 +22,10 @@ jobs:
             build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
             libnewlib-arm-none-eabi git libpng-dev python3 \
             mgba-sdl xvfb xdotool openbox imagemagick xauth
+      - name: Verify QA observer in isolation (no ROM, no game flags)
+        run: |
+          python3 -m py_compile "Pokemon Game/scripts/qa/quest_state_controller.py"
+          python3 "Pokemon Game/scripts/qa/test_quest_state_controller.py"
       - name: Compile ROM for isolated test (never upload ROM or save)
         working-directory: "Pokemon Game/engine"
         run: |
