@@ -18,11 +18,14 @@ Thus a defined constant or positive debug count does not prove a usable runtime
 map. A mixed enabled/disabled group would compact pointers while leaving numeric
 IDs and counts unchanged, so the source check rejects it.
 
-Three native tests independently compare the actual linked table with pinned
-IDs/header symbols, confirm all disabled group slots stay NULL, and round-trip
-linked IDs through the real signed warp fields. Compile-time assertions cover
-numeric identity for disabled maps too. Test arrays are constant ROM data; no
-large stack or static EWRAM fixture is added.
+Three native tests compare the linked table with pinned IDs/exported group
+symbols, confirm disabled group slots stay NULL, and round-trip linked IDs
+through the real signed warp fields. Compile-time assertions cover numeric
+identity for disabled maps too. Individual header labels are local assembler
+symbols, so the optional ELF verifier reads the actual linked ARM symbol table
+and pointer bytes to check every original header address independently. It
+requires an unstripped ELF and never changes engine exports. Test arrays are
+constant ROM data; no large stack or static EWRAM fixture is added.
 
 ## Source results
 
@@ -49,7 +52,24 @@ make -j5 -O all
 
 The retained cloud toolchain is selected with
 `. /workspace/.onboarding/activate.sh`; the ROMTEST override is environment-specific.
-Native execution and a new real GBA build are PENDING at this initial checkpoint.
+Local GCC ARM 14.2.1/headless mGBA execution: **3/3 registry tests PASS**;
+the broader Averon suite also passed **50/50**, with zero failures/skips.
+On that actual test ELF, the verifier checked **534 original header symbols**
+and detected **3/3 in-memory pointer mutations** (a linked group nulled, a
+disabled group made live, and a valid but wrong header placed in a slot).
+
+```sh
+python3 scripts/check-averon-map-registry.py --engine engine --mutations \
+  --elf engine/pokeemerald-test.elf --report /tmp/map-registry-linked.json
+```
+
+The first build rejected cross-enum sentinel comparisons under `-Werror`;
+the test now casts to unsigned before comparing values. The initial direct C
+references to local header symbols failed to link; exported group checks plus
+read-only ELF inspection provide that coverage without engine changes. These
+failed attempts are not counted as passing builds.
+
+A new normal GBA build and its separate ELF verification are still PENDING.
 Existing standard native CI will compile/run these tests; the separate source
 workflow checks the source registry and stores input hashes without an ARM/ROM
 dependency. Later results must identify the actual tested source SHA.

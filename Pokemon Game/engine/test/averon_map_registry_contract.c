@@ -8,14 +8,13 @@ extern const struct MapHeader *const *const gMapGroups[];
 
 // Validate every existing numeric ID, including maps omitted by this ROM's
 // region filter. A disabled map constant is not a usable runtime pointer.
-#define REGISTRY_GROUP(index, symbol, count, linked)
 #define DECLARE_0(symbol)
-#define DECLARE_1(symbol) extern const struct MapHeader symbol;
+#define DECLARE_1(symbol) extern const struct MapHeader *const symbol[];
+#define REGISTRY_GROUP(index, symbol, count, linked) DECLARE_##linked(symbol)
 #define REGISTRY_SLOT(group, index, id, symbol, linked) \
     _Static_assert((id) == ((group) << 8 | (index)), "Saved map ID moved: " #id); \
     _Static_assert((group) <= 127 && (index) <= 127, "Map ID exceeds signed warp storage"); \
-    _Static_assert((u32)(id) != (u32)MAP_DYNAMIC && (u32)(id) != (u32)MAP_UNDEFINED, "Reserved map ID used"); \
-    DECLARE_##linked(symbol)
+    _Static_assert((u32)(id) != (u32)MAP_DYNAMIC && (u32)(id) != (u32)MAP_UNDEFINED, "Reserved map ID used");
 #include "data/averon_map_registry_slots.inc"
 #undef REGISTRY_GROUP
 #undef REGISTRY_SLOT
@@ -24,8 +23,11 @@ static const struct
 {
     u8 count;
     bool8 linked;
+    const struct MapHeader *const *headers;
 } sExpectedGroups[] = {
-#define REGISTRY_GROUP(index, symbol, count, linked) [index] = {count, linked},
+#define GROUP_ADDRESS_0(symbol) NULL
+#define GROUP_ADDRESS_1(symbol) symbol
+#define REGISTRY_GROUP(index, symbol, count, linked) [index] = {count, linked, GROUP_ADDRESS_##linked(symbol)},
 #define REGISTRY_SLOT(group, index, id, symbol, linked)
 #include "data/averon_map_registry_slots.inc"
 #undef REGISTRY_GROUP
@@ -35,10 +37,9 @@ static const struct
 static const struct
 {
     u8 group, number;
-    const struct MapHeader *header;
 } sExpectedMaps[] = {
 #define ENTRY_0(group, index, symbol)
-#define ENTRY_1(group, index, symbol) {group, index, &symbol},
+#define ENTRY_1(group, index, symbol) {group, index},
 #define REGISTRY_GROUP(index, symbol, count, linked)
 #define REGISTRY_SLOT(group, index, id, symbol, linked) ENTRY_##linked(group, index, symbol)
 #include "data/averon_map_registry_slots.inc"
@@ -55,10 +56,11 @@ TEST("Averon map registry preserves group slots and disabled-region null entries
     {
         EXPECT_EQ(MAP_GROUP_COUNT[group], sExpectedGroups[group].count);
         EXPECT_EQ(gMapGroups[group] != NULL, sExpectedGroups[group].linked);
+        EXPECT_EQ(gMapGroups[group], sExpectedGroups[group].headers);
     }
 }
 
-TEST("Averon map registry resolves every linked numeric ID to its original header symbol")
+TEST("Averon map registry resolves every linked numeric ID within its original group")
 {
     EXPECT(ARRAY_COUNT(sExpectedMaps) > 0);
     for (u32 i = 0; i < ARRAY_COUNT(sExpectedMaps); ++i)
@@ -71,7 +73,8 @@ TEST("Averon map registry resolves every linked numeric ID to its original heade
         EXPECT(number < MAP_GROUP_COUNT[group]);
         if (number >= MAP_GROUP_COUNT[group])
             continue;
-        EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(group, number), sExpectedMaps[i].header);
+        EXPECT(Overworld_GetMapHeaderByGroupAndId(group, number) != NULL);
+        EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(group, number), sExpectedGroups[group].headers[number]);
     }
 }
 

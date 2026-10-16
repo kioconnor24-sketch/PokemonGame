@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 
 GROUP = re.compile(r'REGISTRY_GROUP\((\d+), (\w+), (\d+), ([01])\)')
 SLOT = re.compile(r'REGISTRY_SLOT\((\d+), (\d+), (MAP_\w+), (\w+), ([01])\)')
@@ -156,11 +157,104 @@ def mutations(groups, maps, pins):
     return cases
 
 
+class ArmElf:
+    """Read allocated ARM ELF bytes and local symbols; no external packages."""
+    def __init__(self, data):
+        self.data = data
+        if data[:7] != b'\x7fELF\x01\x01\x01':
+            raise ValueError('Expected a little-endian ELF32 build')
+        header = struct.unpack_from('<HHIIIIIHHHHHH', data, 16)
+        if header[0] != 2 or header[1] != 40 or header[10] != 40:
+            raise ValueError('Expected executable ARM ELF with ELF32 section headers')
+        self.sections = [struct.unpack_from('<10I', data, header[5] + i * 40)
+                         for i in range(header[11])]
+        self.symbols = {}
+        for section in self.sections:
+            if section[1] != 2:  # SHT_SYMTAB, including assembler-local labels.
+                continue
+            if section[9] != 16:
+                raise ValueError('Unexpected ELF32 symbol size')
+            strings = self.sections[section[6]]
+            text = data[strings[4]:strings[4] + strings[5]]
+            for offset in range(section[4], section[4] + section[5], 16):
+                name, value, size, info, other, index = struct.unpack_from('<IIIBBH', data, offset)
+                if index == 0:
+                    continue
+                end = text.find(b'\0', name)
+                if end < name:
+                    raise ValueError('Unterminated ELF symbol')
+                name = text[name:end].decode('utf-8', errors='replace')
+                self.symbols.setdefault(name, []).append(value)
+
+    def symbol(self, name):
+        values = self.symbols.get(name, [])
+        if len(values) != 1:
+            raise ValueError(f'Expected one defined ELF symbol {name}, found {len(values)}')
+        return values[0]
+
+    def offset(self, address):
+        for section in self.sections:
+            if section[1] != 8 and section[2] & 2 and section[3] <= address and address + 4 <= section[3] + section[5]:
+                offset = section[4] + address - section[3]
+                if offset + 4 > len(self.data):
+                    raise ValueError('ELF section extends past file')
+                return offset
+        raise ValueError(f'Address 0x{address:x} has no allocated ELF bytes')
+
+    def word(self, address):
+        return struct.unpack_from('<I', self.data, self.offset(address))[0]
+
+
+def validate_elf(data, pins):
+    elf, errors = ArmElf(data), []
+    table = elf.symbol('gMapGroups')
+    matched_groups = set()
+    for index, symbol, count, linked in pins[0]:
+        actual = elf.word(table + 4 * index)
+        expected = elf.symbol(symbol) if linked else 0
+        if actual != expected:
+            errors.append({'code': 'elf-group-pointer', 'detail': f'{index}: {symbol}'})
+        else:
+            matched_groups.add(index)
+    checked = 0
+    for group, index, constant, symbol, linked in pins[1]:
+        if not linked or group not in matched_groups:
+            continue
+        actual = elf.word(elf.word(table + 4 * group) + 4 * index)
+        if actual != elf.symbol(symbol):
+            errors.append({'code': 'elf-map-pointer', 'detail': constant})
+        checked += 1
+    return errors, checked
+
+
+def elf_mutations(data, pins):
+    elf = ArmElf(data)
+    table = elf.symbol('gMapGroups')
+    active = next(g for g in pins[0] if g[3])
+    disabled = next(g for g in pins[0] if not g[3])
+    group_address = elf.symbol(active[1])
+    changes = {
+        'linked-group-null': (table + 4 * active[0], 0, 'elf-group-pointer'),
+        'disabled-group-linked': (table + 4 * disabled[0], group_address, 'elf-group-pointer'),
+        'wrong-header-in-slot': (group_address, elf.word(group_address + 4), 'elf-map-pointer'),
+    }
+    results = {}
+    for name, (address, value, expected) in changes.items():
+        changed = bytearray(data)
+        struct.pack_into('<I', changed, elf.offset(address), value)
+        errors, checked = validate_elf(changed, pins)
+        if expected not in {e['code'] for e in errors}:
+            raise AssertionError(f'Undetected ELF mutation {name}')
+        results[name] = 'DETECTED'
+    return results
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, required=True)
     parser.add_argument('--mutations', action='store_true')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--elf', type=Path, help='Also inspect an actual linked ARM ELF without modifying it')
     args = parser.parse_args()
     engine = args.engine.resolve()
     manifest = engine / 'test/data/averon_map_registry_slots.inc'
@@ -195,6 +289,12 @@ def main():
                                          engine / 'include/global.fieldmap.h', *paths.values()]}}
     if not errors and args.mutations:
         report['mutations'] = mutations(groups, maps, pins)
+    if not errors and args.elf:
+        data = args.elf.read_bytes()
+        elf_errors, checked = validate_elf(data, pins)
+        errors.extend(elf_errors)
+        report['elf'] = {'sha256': hashlib.sha256(data).hexdigest(), 'checked_maps': checked,
+                         'mutations': elf_mutations(data, pins) if not elf_errors and args.mutations else {}}
     if args.report:
         args.report.write_text(json.dumps(report, indent=2) + '\n')
     for error in errors[:20]:
@@ -206,6 +306,9 @@ def main():
     print(f'Capacity: {report["signed_group_slots_remaining"]} signed group slots remain; '
           f'minimum per-group headroom {report["smallest_group_headroom"]} '
           f'({report["smallest_linked_group_headroom"]} among linked groups)')
+    if 'elf' in report:
+        print(f'ELF PASS: {report["elf"]["checked_maps"]} original header symbols; '
+              f'{len(report["elf"]["mutations"])} pointer mutations detected')
 
 
 if __name__ == '__main__':
