@@ -171,7 +171,7 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
-    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False, gym_probe=False):
+    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False, gym_probe=False, battle_main_symbol=None):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -252,6 +252,15 @@ class ReadOnlyGdb:
                     devGiftReceived=bool(
                         gift_raw[0] & (1 << (0x37 & 7))),
                     playerPartyCount=count_raw[0])
+            battle_data = {}
+            if battle_main_symbol is not None:
+                # Source engine/include/main.h: gMain +0x439,
+                # oamLoadDisabled bit0 and inBattle bit1.
+                raw = bytes.fromhex(self.command(
+                    f"m{battle_main_symbol + 0x439:x},1"))
+                if len(raw) != 1:
+                    raise Blocked("Incomplete source battle bit read")
+                battle_data = dict(inBattle=bool(raw[0] & 2))
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
             x, y, group, number, warp = struct.unpack_from("<hhbbb", data)
@@ -266,7 +275,7 @@ class ReadOnlyGdb:
                         sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
                         sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))),
                         oranBerryQuantity=oran_qty,
-                        **gift_data, **badge_data)
+                        **gift_data, **badge_data, **battle_data)
         finally:
             self.command("c", reply=False)
 
@@ -327,7 +336,9 @@ def daemon(args):
                             parties_count_symbol=parties_count
                             if name.startswith(("q4-", "q3-")) else None,
                             badge_probe=name.startswith(("q1-gate", "q3-")),
-                            gym_probe=name.startswith("q3-"))
+                            gym_probe=name.startswith("q3-"),
+                            battle_main_symbol=menu_symbols["main"]
+                            if name.startswith("q3-battle-") else None)
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
@@ -1951,6 +1962,57 @@ def q3_gym_entry(args):
           flush=True)
 
 
+def q3_battle_start(args):
+    """Start real original Elio battle with ordinary A; do not force defeat.
+
+    Battle whiteout, heal, and follower acceptance require later snapshots.
+    """
+    out = Path(args.outdir)
+    prior = out / "q3-850-elio-original-intro.png"
+    if not prior.is_file():
+        raise Blocked("No witnessed original Gym leader dialogue screenshot")
+    source_intro = visual_frame_data(prior)
+    if white_panel_ratio(prior) < 0.5:
+        raise Blocked("Source leader dialogue not visibly open before battle")
+
+    def snap(label):
+        key = f"q3-battle-{label}"
+        shot = out / f"{key}.png"
+        grab(args.window, shot)
+        state = snapshot(args, key)
+        if (state["mapGroup"], state["mapNum"]) != (75, 10):
+            raise Blocked(f"Battle fixture left original Gym1 map: {state}")
+        if not (state["gymWestSluice"] and state["gymEastSluice"]):
+            raise Blocked(f"Real sluice flags vanished before battle: {state}")
+        if state["badge01"] or not state["devGiftReceived"] or state["playerPartyCount"] != 1:
+            raise Blocked(f"Original badge/party prerequisite mismatch: {state}")
+        print("QA_Q3_BATTLE", key, json.dumps(state, sort_keys=True),
+              str(shot), flush=True)
+        return state, shot
+
+    before,_ = snap("leader-dialogue-held")
+    if before["inBattle"]:
+        raise Blocked("Already in battle before exiting real Elio intro")
+    subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                   check=False)
+    subprocess.run(["xdotool", "keydown", "x"], check=True)
+    time.sleep(0.12)
+    subprocess.run(["xdotool", "keyup", "x"], check=True)
+    for i in range(60):
+        time.sleep(0.55)
+        state, frame = snap(f"after-ordinary-A-{i+1}")
+        if state["inBattle"]:
+            time.sleep(2.0)
+            after, visible = snap("first-reachable-battle-screen")
+            delta = pixel_distance(source_intro, visual_frame_data(visible))
+            if not after["inBattle"] or delta < 0.08:
+                raise Blocked(f"Battle bit set but no distinct rendered battle screen: {delta:.5f}")
+            print("QA_Q3_ORIGINAL_BATTLE_STARTED: actual Elio trainer encounter; "
+                  "BATTLE DEFEAT/WHITEOUT/HEAL NOT YET ACCEPTED.", flush=True)
+            return
+    raise Blocked("Original leader dialogue never transitioned to actual battle")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1992,6 +2054,10 @@ def main():
     gym.add_argument("--fifo", required=True)
     gym.add_argument("--outdir", required=True)
     gym.add_argument("--window", required=True)
+    battle = sub.add_parser("q3-battle-start")
+    battle.add_argument("--fifo", required=True)
+    battle.add_argument("--outdir", required=True)
+    battle.add_argument("--window", required=True)
     gift = sub.add_parser("q4-lab-gift")
     gift.add_argument("--fifo", required=True)
     gift.add_argument("--outdir", required=True)
@@ -2029,6 +2095,8 @@ def main():
             return q1_badge_gate(args)
         if args.mode == "q3-gym-entry":
             return q3_gym_entry(args)
+        if args.mode == "q3-battle-start":
+            return q3_battle_start(args)
         if args.mode == "q4-lab-gift":
             return q4_lab_gift(args)
         if args.mode == "q2-relaunch-continue":
