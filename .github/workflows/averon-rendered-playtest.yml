@@ -47,7 +47,7 @@ jobs:
           sleep 2
           openbox > "$RUNNER_TEMP/averon-playtest/window-manager.log" 2>&1 &
           sleep 2
-          mgba -2 "Pokemon Game/engine/pokeemerald.gba" > "$RUNNER_TEMP/averon-playtest/mgba.log" 2>&1 &
+          mgba -g -2 "Pokemon Game/engine/pokeemerald.gba" > "$RUNNER_TEMP/averon-playtest/mgba.log" 2>&1 &
           emu_pid=$!
           cleanup() { kill "$emu_pid" "$xvfb_pid" 2>/dev/null || true; }
           trap cleanup EXIT
@@ -71,6 +71,31 @@ jobs:
           xdotool windowactivate --sync "$win" || true
           echo "mGBA WINDOW=$win"
           mgba --version 2>&1 || true
+          # GDB is only used as a read-only, exact-source emulator observer.
+          # If debugger is unsupported, stop before sending any ungated move.
+          qa_fifo="$RUNNER_TEMP/averon-playtest/qa-commands.fifo"
+          qa_ready="$RUNNER_TEMP/averon-playtest/qa-debugger-ready.txt"
+          mkfifo "$qa_fifo"
+          python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" daemon \
+            --elf "Pokemon Game/engine/pokeemerald.elf" \
+            --fifo "$qa_fifo" --ready "$qa_ready" \
+            --outdir "$RUNNER_TEMP/averon-playtest" \
+            > "$RUNNER_TEMP/averon-playtest/qa-debugger.log" 2>&1 &
+          qa_pid=$!
+          for i in $(seq 1 25); do
+            if test -s "$qa_ready"; then break; fi
+            if ! kill -0 "$qa_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if ! test -s "$qa_ready"; then
+            echo "QA_ACCESS_BLOCKED: debugger attach/start not verified"
+            cat "$RUNNER_TEMP/averon-playtest/qa-debugger.log"
+            exit 2
+          fi
+          cat "$qa_ready"
+          echo "QA pinned game source: $(git rev-parse HEAD)"
+          echo "QA full ephemeral ROM hash:"
+          sha256sum "Pokemon Game/engine/pokeemerald.gba"
           capture() {
             local stage="$1"
             local filename="$RUNNER_TEMP/averon-playtest/$stage.png"
@@ -238,48 +263,18 @@ jobs:
           press x
           sleep 3
           capture "Q1-alderfield-after-warp"
-          # Best-effort visual navigation toward researcher (12,16):
-          # inspect screenshots; do not infer a successful interaction from x presses.
-          xdotool keydown Left; sleep 0.8; xdotool keyup Left
-          sleep 0.7
-          capture "Q1-alderfield-left"
-          xdotool keydown Down; sleep 0.8; xdotool keyup Down
-          sleep 0.7
-          capture "Q1-alderfield-down"
-          # From run 38833560489 player is visibly ONE tile SOUTH of
-          # Alderfield researcher (same screen X, NPC directly above).
-          # Do not move farther or A from the wrong facing; face UP first.
-          xdotool keydown Down; sleep 0.24; xdotool keyup Down
-          sleep 0.5
-          xdotool keydown Left; sleep 0.24; xdotool keyup Left
-          sleep 0.5
-          press Left
-          sleep 0.5
-          capture "Q1-adjacent-south"
-          xdotool key --clearmodifiers Up
-          sleep 0.6
-          capture "Q1-facing-up"
-          press x
-          sleep 0.9
-          capture "Q1-offer-dialogue"
-          # Dialog is yes/no; do not assume it appeared without inspecting.
-          press Down
-          sleep 0.4
-          capture "Q1-no-highlight"
-          press x
-          sleep 0.8
-          capture "Q1-decline-response"
-          press x
-          sleep 0.6
-          capture "Q1-decline-dismissed"
-          xdotool key --clearmodifiers Up
-          sleep 0.35
-          press x
-          sleep 0.8
-          capture "Q1-reopen-offer"
-          press x
-          sleep 0.8
-          capture "Q1-accept-response"
+          # The old fixed 0.8-second holds repeatedly overshot the researcher.
+          # Only source-derived per-tile read-only GDB positions may now steer.
+          # Each move captures a frame, independently verifies position + map,
+          # and fails CLOSED before A if adjacency cannot be established.
+          if ! python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" navigate \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-navigation.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-navigation.log"
+            echo "QA_ACCESS_BLOCKED: do NOT claim Q1 dialogue or game defect"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-navigation.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
@@ -294,4 +289,6 @@ jobs:
           path: |
             ${{ runner.temp }}/averon-playtest/*.png
             ${{ runner.temp }}/averon-playtest/*.log
+            ${{ runner.temp }}/averon-playtest/*.json
+            ${{ runner.temp }}/averon-playtest/qa-debugger-ready.txt
             ${{ runner.temp }}/playtest-build.log
