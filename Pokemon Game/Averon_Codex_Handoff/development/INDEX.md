@@ -10,7 +10,7 @@ This is the **navigation page**, not an independent source of gameplay requireme
 | Agent responsibilities | [AGENT_ROLES.md](AGENT_ROLES.md), [root AGENTS.md](../../../AGENTS.md) | Standing operating rules |
 | Collaboration, commits and acceptance | [WORKFLOW.md](WORKFLOW.md) | Process |
 | Current working code | [main and open pull requests](https://github.com/kioconnor24-sketch/PokemonGame/pulls) | Actual source and head-specific tests |
-| Next unblocked work | [TASKS.md](TASKS.md), latest claims in [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) | Stable priorities; newest PR claim wins when files overlap |
+| **Agent-specific next actions** | [NEXT_AGENT_COMMANDS.md](NEXT_AGENT_COMMANDS.md) | Dated, source-checked commands for Codex, Claude and Playtest; recheck current claims before use |\n| Next unblocked work | [TASKS.md](TASKS.md), latest claims in [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) | Stable priorities; newest PR claim wins when files overlap |
 | Milestones and dependency gates | [ROADMAP.md](ROADMAP.md), [conditional future backlog #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) | Backlog **not** permission to start frozen content |
 | Independent player-facing testing | [QA tracker #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23), [QA_MATRIX.md](../qa/QA_MATRIX.md) | Only specifically executed cases are emulator-tested |
 | Previously integrated evidence | [PROGRESS.md](PROGRESS.md) | Historical integration log; not live PR status |
