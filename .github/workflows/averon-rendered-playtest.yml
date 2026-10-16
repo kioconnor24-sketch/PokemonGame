@@ -497,6 +497,53 @@ jobs:
           if [ "$qa_q4_blocked" = "0" ]; then
             if (
               set -Eeuo pipefail
+              # Visit the game's EXISTING AlderfieldClinic first: its
+              # original MAP_SCRIPT_ON_TRANSITION runs setrespawn. This
+              # is real map fixture access, never a memory healpoint write.
+              if ! open_debug_menu Q3C; then
+                press_debug z
+                sleep 0.7
+                if ! open_debug_menu Q3C; then
+                  echo "QA_Q3_CLINIC_ACCESS_BLOCKED: original debug menu"
+                  exit 2
+                fi
+              fi
+              press_debug x
+              capture "Q3C-utilities-menu"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-utilities-menu.png"
+              press_debug Down
+              press_debug x
+              capture "Q3C-warp-group-editor"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-group-editor.png"
+              press_debug Right
+              for i in $(seq 1 7); do press_debug Up; done
+              press_debug Left
+              for i in $(seq 1 6); do press_debug Up; done
+              press_debug x
+              # Original map group75, existing AlderfieldClinic local map11.
+              for i in $(seq 1 11); do press_debug Up; done
+              capture "Q3C-warp-map11"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-map11.png"
+              press_debug x
+              capture "Q3C-warp-index0"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-index0.png"
+              press_debug x
+              sleep 3
+              capture "q3-clinic-rendered-entry"
+              if ! python3 -u "$qa_controller" q3-clinic-entry \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log"
+                echo "QA_Q3_CLINIC_ACCESS_BLOCKED: no source heal evidence"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log"
+              # After genuine respawn registration use the SAME existing
+              # debug menu to access original Gym1, leaving heal data intact.
               if ! open_debug_menu Q3; then
                 press_debug z
                 sleep 0.7
