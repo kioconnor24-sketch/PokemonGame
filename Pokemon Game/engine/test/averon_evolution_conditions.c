@@ -252,8 +252,14 @@ static enum Setup SetUp(u32 species, const struct Evolution *evo, u32 personalit
     return SETUP_OK;
 }
 
+// The test runner does not reset overworld weather between tests, and a
+// battle starts with the overworld weather (fog lowers accuracy), so every
+// change made here is undone before the next test.
+static u8 sStartWeather;
+
 static void CleanUp(const struct EvolutionParam *params)
 {
+    SetCurrentAndNextWeatherNoDelay(sStartWeather);
     for (u32 i = 0; params[i].condition != CONDITIONS_END; i++)
     {
         if (params[i].condition == IF_BAG_ITEM_COUNT)
@@ -272,6 +278,7 @@ TEST("Averon every conditional evolution Averon can meet produces exactly its ow
     struct Pokemon partner;
     for (u32 p = 0; p < PARTS; p++)
         PARAMETRIZE { part = p; }
+    sStartWeather = GetCurrentWeather();
     for (u32 species = SPECIES_NONE + 1 + part; species < NUM_SPECIES; species += PARTS)
     {
         if (!IsEnabled(species) || species == SPECIES_EGG)
@@ -319,6 +326,8 @@ TEST("Averon every conditional evolution Averon can meet produces exactly its ow
             }
         }
     }
+    SetCurrentAndNextWeatherNoDelay(sStartWeather);
+    EXPECT_EQ(GetCurrentWeather(), sStartWeather);
     DebugPrintf("part %u: run %u, shadowed %u, not supported %u", part, run, shadowed, unsupported);
     EXPECT_GT(run, 0);
     EXPECT_EQ(bad, 0);
