@@ -170,6 +170,9 @@ compared by CRC):
 
 Run: `make check TESTS="Averon region save"` **17/17 PASS**. Mutations
 (each guard removed alone, temporary, reverted): no `TrySavingData` guard,
-no `HandleSavingData` guard, and no special-sector guard are each KILLED.
+no `HandleSavingData` guard, no special-sector guard and no save-failed
+wipe guard are each KILLED (4/4). Forcing every slot's region check to pass
+fails 12 of 17 tests, including the pointer-selector test (2 of its 4
+cases).
 Source contract 11/11. `scripts/test-averon-region-save.py --mutations` now
 also lists these four guards.
