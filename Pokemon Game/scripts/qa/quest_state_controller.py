@@ -193,8 +193,8 @@ def navigate(args):
         grab(args.window, frame)
         pos = snapshot(args, name)
         print("QA_CHECK", name, json.dumps(pos), str(frame), flush=True)
-        if (pos["mapGroup"], pos["mapNum"]) != (76, 9):
-            raise Blocked(f"Not source Alderfield map 76/9: {pos}")
+        if (pos["mapGroup"], pos["mapNum"]) != (75, 9):
+            raise Blocked(f"Not source Alderfield map 75/9: {pos}")
         return pos, frame
 
     def press(name, duration=0.09):
