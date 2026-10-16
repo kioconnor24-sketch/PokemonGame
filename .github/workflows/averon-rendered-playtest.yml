@@ -246,39 +246,40 @@ jobs:
           xdotool keydown Down; sleep 0.8; xdotool keyup Down
           sleep 0.7
           capture "Q1-alderfield-down"
-          # Researcher is at (12,16), southwest of the clinic door (17,12).
-          # Last run showed player on path one row below the researcher.
-          # Move toward the NPC, face left, then accept/decline using actual UI.
-          xdotool keydown Up; sleep 0.22; xdotool keyup Up
+          # Live frame in run 38832855320: researcher at screen (88,155);
+          # player at (120,140) = TWO tiles right and ONE tile north.
+          # Move to (104,155), left-adjacent, facing west; then press A.
+          xdotool keydown Down; sleep 0.24; xdotool keyup Down
+          sleep 0.7
+          capture "Q1-align-row"
+          xdotool keydown Left; sleep 0.24; xdotool keyup Left
           sleep 0.6
-          capture "Q1-before-facing-researcher"
+          capture "Q1-align-column"
           press Left
-          sleep 0.5
+          sleep 0.45
+          capture "Q1-face-researcher"
           press x
           sleep 1
-          capture "Q1-researcher-first-talk"
-          press x
-          sleep 0.6
-          capture "Q1-researcher-next-page"
+          capture "Q1-researcher-initial-dialogue"
+          # The offer is YES/NO. Record text/selector before input.
           press Down
-          sleep 0.3
-          capture "Q1-researcher-choice-down"
+          sleep 0.45
+          capture "Q1-researcher-no-selected"
           press x
           sleep 0.8
-          capture "Q1-researcher-decline"
+          capture "Q1-researcher-refusal"
+          press x
+          sleep 0.9
+          capture "Q1-after-refusal"
+          press x
+          sleep 0.9
+          capture "Q1-researcher-reopen"
           press x
           sleep 0.8
-          capture "Q1-researcher-post-decline"
-          press Left
+          capture "Q1-researcher-yes-response"
           press x
           sleep 0.8
-          capture "Q1-researcher-retry"
-          press x
-          sleep 0.6
-          capture "Q1-researcher-retry-choice"
-          press x
-          sleep 0.8
-          capture "Q1-researcher-accept"
+          capture "Q1-researcher-accepted"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
