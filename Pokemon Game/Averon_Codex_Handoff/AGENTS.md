@@ -1,4 +1,6 @@
-> **Current session authority (2026-10-15):** Read `development/TASKS.md`, the **top** of `development/PROGRESS.md`, and `development/WORKFLOW.md` first. The older M0–M2 milestone and WSL instructions below are historical. `main` now has PRs #1 and #9; unfinished field-license PR #10 belongs to Codex. User still owns final maps and level caps. Optional Nuzlocke mechanics remain paused until approved.
+> **LIVE CODEX TAKEOVER (2026-10-16):** The owner has assigned the entire unfinished *map-independent* pre-Sinnoh backend/integration to Codex. Claude's manual session ended and its separate scheduled routine is reported paused; verify [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) and live branch/file claims before writing. Playtest independently owns real rendered acceptance in [#23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23). Current engineering handoff: [PR #66](https://github.com/kioconnor24-sketch/PokemonGame/pull/66); technical completion and deferred map cases: [Issue #46](https://github.com/kioconnor24-sketch/PokemonGame/issues/46). This replaces historical M0–M2, co-lead, older region-branch and setup directions *as executable orders*, while retaining the safety and design rules below.
+
+> **Start quickly and safely:** Read the newest #15 claims, current main/open PR heads/files/checks, then only the relevant active PR handoff. Begin implementation/legitimate reviewed integration on a claimed path; don't reread the entire historical task library on every session. No new maps/temporary map fixtures, saved IDs, unapproved story/Gyms/encounters/teams, fabricated owner handoffs, bypassed protected checks, unreviewed merges, or self-certified Playtest acceptance. A blocked file must not halt other unclaimed work.
 
 # Codex instructions for Pokémon Averon
 
@@ -30,5 +32,5 @@ Produce a bootable, playable, saveable **`.gba`** that passes mGBA smoke tests a
 - If tools/assets are unavailable, stop at that specific boundary and report it. Continue independent documentation, code review and fixture work where possible; never fake a ROM or bypass a missing validation stage.
 - Keep design intent intact. Technical compromises should be documented in `development/DECISIONS.md`, with implications for quality, rather than silently deleting features.
 
-## Initial work order
-Start with tasks M0–M2 in `CODEX_WORK_ORDER.md`: establish a reproducible Emerald Expansion build, implement a small playable Saltmere→Windrow→Alderfield slice with battle/save/level-cap/following Pokémon, and validate it in a real emulator. Do not start by scattering hundreds of empty maps or writing the complete final story before a vertical slice boots.
+## Current work order
+Resume the exact currently unmerged pre-Sinnoh features and integration listed in Issue #15 and PR #66; don't recreate the already-implemented opening slice, old M0–M2 work, or previously merged tests. Build and test real GBA code, use the independent Playtest #23 for rendered cases, and preserve the owner’s freeze on new maps. Older `CODEX_WORK_ORDER.md` is historical.
