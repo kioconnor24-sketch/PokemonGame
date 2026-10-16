@@ -1,0 +1,110 @@
+# POKÉMON AVERON — CHATGPT MANAGER NEXT-SESSION HANDOFF
+**Owner-requested permanent handoff. Snapshot: October 16, 2026, last verified main 9d32324580ea9e1d528cefc3bfe53f087b9f5962.**
+**Purpose:** Give a new ChatGPT instance enough context to take over the MANAGER/INTEGRATION-COORDINATION role without reopening completed work, duplicating Codex, delaying Playtest, or rewriting the game's creative scope. **This is a documentation snapshot, not a live agent launcher, actual merge, QA approval, or permission to generate maps.** At every new session fetch current repository data FIRST; live #15/current main/current PR SHA and exact file claims supersede all prose in this file.
+
+## A. What the owner actually wants
+
+Project: https://github.com/kioconnor24-sketch/PokemonGame, Emerald-derived Pokémon Averon game. Averon is the original first region; full Sinnoh is the later second region. Owner wants technical groundwork and then fast progress into a playable traditional Pokémon adventure. **Do not force absolute completion of every optional backend edge case before playable Averon construction.** Aim for a safe **gameplay-ready core** with critical save/battle/travel/progression interfaces integrated and tested, and documented post-map items; user separately decides when to lift the freeze.
+
+Absolute CURRENT content boundaries: **NO NEW MAPS** (not even placeholder/temporary map JSON, fake layouts/tilesets, or Sinnoh location), no unapproved story/dialogue/trainer parties/encounters, custom sprites/music, saved flags/IDs, final numerical Sinnoh caps, legendary locations, or Mega Ring acquisition. Existing unchanged maps and symbolic in-memory negative-test data only. Locked systems include the Gen 5 **held-item** EXP Share, forced Set style/no free switching, level 100 max, physical-special split, Mega Evolution, following Pokémon, and NO Z-Moves, Dynamax, Terastallization or Primal Reversion. Keep the feel of an ordinary lively Pokémon adventure, not a constant grim conspiracy. Do not generate a final owner Codex design story document or alter canon under manager authority.
+
+**Role division as of this snapshot:**
+- **Codex:** sole ACTIVE backend implementer and primary integrator; owner directly delegated routine eligible merges and inherited unfinished Claude branches. Its exact current claim is Issue #15. Do not edit its active PRs, review results or branches on its behalf without a real disjoint file claim. When Codex finishes a task, check actual main SHA and new tests before calling it complete. Codex is allowed to continue and normally merge verified changes with actual GitHub protection/independent review conditions satisfied.
+- **Playtest:** independent owner of actual mGBA graphical gameplay acceptance, Issue #23 and QA PR #20. NEVER fabricate acceptance, set badges/HP/party/flags/debug saves to simulate actual gameplay, or sign its conclusions on their behalf. Real screenshots+ROM SHA+run artifact and case-by-case PASS/PARTIAL/FAIL matter.
+- **Claude:** prior main engineering developer; manual work has ended, its separate scheduled engineering routine was reported DISABLED. A later Claude comment [#15/6225222644](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6225222644) is read-only source/build verification on merged main, not a claim to resume writing. Never restart overlapping Claude development merely because older #42/#53 docs say Claude owns it.
+- **ChatGPT Manager (you):** inspect fresh progress, manage stuck dependencies, independently review/test, maintain a reliable single status and owner-decision list, fix real workflow friction on file-disjoint manager branches, and send narrowly targeted GitHub comments only when materially helpful. Do NOT become a competing main engine implementer while Codex is actively changing those paths. Take a verified released claim only with actual coordination. No unreviewed merges, fake owner authorization, disabled guards, false status/percentage or spamming the agents with plans.
+
+## B. Source-of-truth precedence and reading order
+
+1. LIVE [Issue #15 claims / agent coordination](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) newest comments (including open PR file claims); real main SHA and PR metadata/changed files/CI/reviews; not dated branch names in old documents.
+2. [Issue #46 acceptance contract](https://github.com/kioconnor24-sketch/PokemonGame/issues/46), includes map-independent backend requirements and definitions; distinguish its detailed requirements from its sometimes **historical agent assignments**.
+3. [Codex Issue #54](https://github.com/kioconnor24-sketch/PokemonGame/issues/54), [manager-documented takeover #66](https://github.com/kioconnor24-sketch/PokemonGame/pull/66), [Playtest Issue #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23), [QA branch/PR #20](https://github.com/kioconnor24-sketch/PokemonGame/pull/20), and [Problem Desk #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55).
+4. Real [workflow handbook](https://github.com/kioconnor24-sketch/PokemonGame/blob/main/Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md), [engine execution contract](https://github.com/kioconnor24-sketch/PokemonGame/blob/main/Pokemon%20Game/Averon_Codex_Handoff/development/BACKEND_TO_SINNOH_EXECUTION.md), [root AGENTS.md](https://github.com/kioconnor24-sketch/PokemonGame/blob/main/AGENTS.md). PRs #67 and #68 corrected agent-board cancellations and stale AGENTS.md instructions and are **MERGED**.
+5. Prior elaborate #62/#65/#66 runbooks are historical reference for **requirements**, but many PRs they call unmerged have SINCE MERGED. Do NOT assign Codex to re-merge, rewrite or revalidate the entire old list without a reason.
+
+GitHub connectors are available to current ChatGPT (discover mcp__GitHub__ tools using functions.exec). Read-only REST endpoints through GitHub.fetch can enumerate branches, PRs, comments, CI checks, commits, comparison, rulesets. Use genuine permissions; no tool that can dispatch a cloud Claude/Codex session is implied. Cite actual PR/commit/run links in progress answers.
+
+## C. LIVE INTEGRATION STATE CHECKED WHEN THIS HANDOFF WAS WRITTEN
+
+**main = 9d32324580ea9e1d528cefc3bfe53f087b9f5962** (MERGE of PR #64).
+All these major technical PRs are now REAL MERGES, not just disposable compilations:
+- #56 **regional flash-save**: CRC/anchored two-region state, migration, whole-slot selection, refusal/sector recovery.
+- #61 **Hall of Fame/link/overwrite save path coverage**.
+- #57 **region-travel native/script integration**.
+- #64 **region badge/level cap/obedience/progression selector**. Owner Sinnoh cap numbers and regional badge policy still future decisions, not default magically final.
+- #47 **generic legendary encounter state**, but the *production event_scripts.s macro registration* remains future shared-file work.
+- #58 release configuration parity, #60 PC/Bag transactions, #63 map registry and capacity; #51 Fly fixture and #52 Fly bounds; #59 agent ownership board; #18 tooling; #62/#65/#66 handoffs; #67 agent-board efficiency; #68 updated AGENTS.md entrypoints. #50 safety patch was deliberately absorbed by save branch history and not independently merged; do not revive #50.
+- The original protected-source collision (#50/#52 versus #56) was resolved under the unchanged guard. **It is no longer the blocker.**
+
+**Fresh main regression evidence, independently reported by Claude in [Issue #15 comment 6225222644](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6225222644):**
+- Complete native suite 5,992 total, 5,217 PASS, 327 expected baseline failures; all 127 Averon-specific tests PASS. A known animation test alternated TIMEOUT vs FAIL, not a new unaccounted failure per the baseline checker. Different native totals can reflect checkout/test selection; do NOT transplant this result onto a new SHA without testing.
+- Real release GBA build success, no C compiler warnings. ROM 26,732,924 bytes of 32 MiB. Available: EWRAM 35,656 B, IWRAM 4,380 B, SaveBlock1 304 B, SaveBlock2 84 B, SaveBlock3 68 of 1,624 B, PokemonStorage 1,568 B. **Low memory/save headroom is a genuine future capacity concern**; no speculative asset import or map expansion without an approved plan.
+- Main native-build, release production-config, and python-source-checks SUCCESS at this SHA. This is BUILD+NATIVE-TESTED, **not** real mGBA/Delta/campaign QA for regional travel or all interactions. Use latest live Actions for future checks.
+
+### Open pull requests at this snapshot (must refresh)
+
+- **[#48 Pokémon readiness / held-item provenance](https://github.com/kioconnor24-sketch/PokemonGame/pull/48)**, draft, head 5408b47110f…, on main. Codex is repairing original-item provenance, consumed Berry/Trick/Bestow/Symbiosis, occupied donor, Recycle/Harvest, wild loot, capture/PC duplication. The PR's former 110/110 count is **historical** and not exact-head acceptance. Codex reported host ASan/UBSan 19/19, native/full production CI and review still outstanding. Do not modify these source files.
+- **[#25 SCRIPTED-BATTLE core](https://github.com/kioconnor24-sketch/PokemonGame/pull/25)**, draft, head f324e485358…, on main. Codex has new claim [#15/6222761222](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6222761222) for only a source-contract test script; the PR body still contains old statements that battle.h config and event script inclusion are missing, whereas the claim says those are implemented. **Read live actual files/current head and source gates before telling Codex to duplicate anything.** Its integration with QUEST event_scripts.s is still a protected overlap and real gameplay acceptability remains separate.
+- **[#14 QUEST event scripts](https://github.com/kioconnor24-sketch/PokemonGame/pull/14)**, draft, head db6baaea45e…; must remain awaiting actual independent Q1–Q5 rendered acceptance, not merely 49/49 native.
+- **[#20 graphical Playtest QA](https://github.com/kioconnor24-sketch/PokemonGame/pull/20)**, draft based on #14, head e46beacf003…; no generic blanket QA signoff.
+- **[#69 combined-build trigger removal](https://github.com/kioconnor24-sketch/PokemonGame/pull/69)**, GREEN but **DO NOT MERGE**: manager explicitly withdrew its proposal in [#69 comment 6222708391](https://github.com/kioconnor24-sketch/PokemonGame/pull/69#issuecomment-6222708391). It removes useful owner-authorized Issue #15 comment command AVERON_BUILD PRS=14,25; cloud GitHub Actions manual dispatch may be unavailable. Prior attempt to close PR through GitHub connector was blocked; if owner/repo permissions permit, permanently close it unmerged with preservation rationale. Do not reintroduce it.
+
+**Thus, not "pre-Sinnoh backend 100% complete."** We are approaching safe playable-world readiness on a credible engine, but #48, #25, #14/#20 QA, final integration and owner-map-decision remain. Avoid unsupported numeric completion claims.
+
+## D. What Playtest has actually verified, and what still blocks QUEST
+
+Primary QA authority: [Issue #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23). Last posted evidence (as of this handoff) includes:
+- Q1 researcher/Hiker negative: legitimate no-Badge01 gate rejects. **Q1 full PASS NOT established:** still need earn Badge01 in real battle, reach Hiker, complete and retry reward without full-Bag duplication.
+- Q2 artist/Oran: original Berry item ×3, actual player Save -> exit -> fresh mGBA -> Continue -> artist DONE and Oran ×3 rendered; separate physical flash checks. Scoped PASS only; full Berries pocket/full-Bag retry edge remains.
+- Q3 real original Gym Elio fight: player genuinely loses, $40 lost, no badge issued, original home whiteout; [actual run 38932180353](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38932180353). **Clinic visit, nurse healing, respawn/recovery, battle WIN and Badge01** are not fully observed. No debug-supplied badge as acceptance.
+- Q4 original gift: genuine one Wobbuffet, duplicate refusal and following sprite/movement on existing Gym map. Full-party-six refusal/retry, persistence remain unaccepted.
+- Q5 ordinary movement/text control and limited follower frames observed. Cross-map/battle lifecycle, difficult audio proof, fresh reset/recovery still partial as applicable.
+
+Watch [#23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) for new exact runs and screenshots. QA runner's flaky GDB/mGBA after reset is a **harness limitation**, not proof of a gameplay defect; process restart and screenshot-gated tests are valid scoped alternatives. Do not have Codex rewrite game code for a QA harness mistake. Do not merge #14 until true acceptance (or owner explicitly narrows an impossible scope), then integrate conflicting protected event_scripts.s changes from #25, then optional #47 script registration with exact owner approval as required.
+
+## E. The MANAGER's work, priority order — ACT, not just reassign
+
+**1. Check real progress first.** At task start retrieve main SHA, recent actual merged PRs, all open PRs (head/base/draft/changed paths), PR reviews and exact-head required + applicable CI, latest #15/#54/#23/#55 comments, and actual changed tests. Do not call a branch feature "integrated" or a green test "graphically accepted." Only inspect old 30k-character handoffs if newer data is unclear.
+
+**2. Identify which of these is the single concrete current blocker:** save/integration regression, source PR #48 item provenance defect, scripted #25 registration/QUEST collision, actual Playtest Q1–Q5 case, obsolete operational task, owner design value, or genuine tool/CI infrastructure failure. Don't create an issue/comment for ordinary already-owned active work. If Codex can safely progress, let it.
+
+**3. Take independent, bounded actions with real output.** Examples: inspect/adversarially review a released PR; reproduce fresh exact-head CI failure; fix a disjoint workflow bottleneck after claiming exact paths in #15; write a bounded host/test-side contract; improve one clear owner decision summary; close a clearly abandoned own PR via normal permission; make normal PR on manager branch and let peer review/CI handle merge. Recheck current claimed file lists to avoid an overlap. Do not edit #48 or #25 under Codex. Do not modify Playtest #20. No multiple docs repeating the same plan or dozens of repetitive agent comments.
+
+**4. Give Codex no new roadblocks.** It has delegated normal *eligible* merge authority. Do not demand a conversational approval every commit; do not tell it to wait for Claude, or re-review already verified merged code with no new failing evidence. No required GitHub approvals should be invented: current branch protection relies on real PR + checks, and the project additionally expects honest independent source review. Preserve file-guard/exclusive-files and source tests. A formerly protected overlap is not fixed by hiding or temporarily closing an active PR. Ask the genuine owner for a precise new protected handoff only when actual guard reports it; never forge.
+
+**5. Distinguish owner decisions from engineering blockers.** The missing 0–8 Sinnoh cap and obedience values, AVERON vs ACTIVE_REGION vs EITHER for whiteout/catch/Flash, optional Gen 5 EXP variants, Mega Ring placement and regional evolutions are intentional design gaps. Safe generic selectable backend may still integrate with documented current default; no invented values. The owner has explicitly said it's acceptable to enter world-building after critical playable backend, with noncritical deferred. **Only owner can lift no-map freeze.**
+
+**6. Report factual progress once per substantial checkpoint:** main SHA, merged PRs, exact test evidence (PASS/FAIL/skips), actual blockers, next decision/action. If no evidence, don't claim completion or percent exactness. Approximate percentages need explicit estimate label, core gameplay-ready backend vs complete Averon campaign vs full Sinnoh distinguished.
+
+**7. Move toward a concise gameplay-ready release gate:** new main real normal+release ARM GBA build, full native expected-failure baseline and tracked budget, critical flash/save migration and corruption, healed/traveled region selection, item/party battle safety after #48, genuine existing-map emulator basic Save/Continue/Gym/whiteout/regression, independent QUEST acceptance where required. Separate strictly POST-MAP tests from feasible current ones. Prepare owner's yes/no decision on starting Averon maps only when evidence justifies it; never silently start mapping.
+
+## F. Concrete friction to avoid repeating
+
+- Old #50/#52/#56 exclusive gate conflict was real and is solved. #56/#61/#57/#64 all **merged**. Do not reopen that roadblock or use historical Issue #55 report as proof it persists.
+- [#67](https://github.com/kioconnor24-sketch/PokemonGame/pull/67) merged: agent dispatch board now coalesces instead of continuously cancelling, removes redundant push triggering, filters irrelevant issue comments; [#68](https://github.com/kioconnor24-sketch/PokemonGame/pull/68) merged and fixes stale triple AGENTS.md entrypoints. Do not produce duplicate fixes.
+- Repo's combined readiness workflow deliberately retains trusted Issue #15 literal command AVERON_BUILD PRS=14,25. [#69](https://github.com/kioconnor24-sketch/PokemonGame/pull/69) would accidentally remove that option. DO NOT MERGE.
+- Codex's cloud shell may suffer proxy:8080 HTTP000 GitHub REST/Git failures; supported connected GitHub tools worked as an alternative. Verify each fresh runtime, don't assert universal access failure. Do not claim a source test was run on shell if only GitHub Actions built it. Launching Codex or Claude from an Issue comment is not supported by this workflow.
+- Native baseline has recognized expected failures; compare *actual run* with baseline rather than fail on any known longstanding case or call 327 failures "all pass". LeakSanitizer under ptrace sometimes unavailable; never extrapolate ASan/UBSan to a leak test you didn't run.
+- CI can be expensive. Avoid duplicate full ARM builds for docs-only or unchanged source, unnecessary reopening same head, and notification/comment storms. Counterpart testing must use a real modified SHA. No manual/automatic merge to simply make dashboard look green.
+- The owner wants normal Pokémon adventure tone and a smooth eventually complete Averon+Sinnoh, but manager is NOT to settle plot/maps/trainer roster unilaterally.
+
+## G. ChatGPT scheduled tasks at latest check
+
+Account-level, **do not duplicate**:
+1. **Averon Integration Blocker Watch**, ID 6ad1a43e502081919b736cde5aa43d99, condition_watch HOURLY, **enabled**, read-only check. Last checked 2026-10-16 23:22 UTC. Task notification_enabled FALSE at last inspection; don't promise external push alerts if product notifications are disabled.
+2. **Averon Integration Watch (Paused)**, ID 6ad1e163fa288191a45ad025bf7d1310, **disabled** intentionally because Codex is active sole integration engineer. Do not re-enable or create another competing hourly writer without owner request and fresh ownership inspection.
+3. Other unrelated or inactive scheduled tasks exist; manager doesn't need to adjust them.
+
+When the user asks "work while Codex works", prioritize real disjoint file fixes/reviews in the current session. The read-only watcher doesn't perform Codex edits or start a new ChatGPT session. An automation may become stale when PRs merge: update its prompt if needed, but avoid spam or duplicate watches.
+
+## H. Next new ChatGPT instance — five-action startup checklist
+
+1. Read THIS file entirely from GitHub: main may not contain it until its manager documentation PR merges; fetch manager/next-chat-manager-handoff-20261016 branch or its PR. Then read newest Issue #15 comments and #46.
+2. Verify fresh main SHA, PRs #48/#25/#14/#20/#69 and any newer PRs; confirm #56/#61/#57/#64 actually merged. Compare exact claimed file lists before new task.
+3. Read latest Codex #54 and Playtest #23 firsthand evidence, current CI statuses and #55 new problems. Name what Codex *might* not know only if a genuinely unassigned task exists; don't invent a new backend epic.
+4. Pick ONE highest-value independent manager task. If suitable: actual read-only review + tested minimal separate branch PR; else actionable status/owner clarification. No creative/map content.
+5. Reply to owner with **short evidence-grounded summary** and actual GitHub links/SHA, not a new giant handoff every response. Use prompts only when owner asks or a genuine agent blockage needs them.
+
+### Tiny starter prompt for a future ChatGPT manager
+
+> Resume Pokémon Averon MANAGER role. Read CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261016.md in the manager handoff PR/branch, latest Issue #15, #46, Codex #54, Playtest #23 and live PRs. Refresh main and CI, respect Codex's exclusive source and independent QA. Independently fix any disjoint verified bottleneck, not merely summarize; publish a tested PR or precise blocker. No new maps or false acceptance. Keep answer short.
