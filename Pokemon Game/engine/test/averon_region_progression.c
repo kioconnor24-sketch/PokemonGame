@@ -1,6 +1,11 @@
 #include "global.h"
 #include "test/battle.h"
 #include "averon_region_progression.h"
+#include "averon_region_travel.h"
+#include "heal_location.h"
+#include "overworld.h"
+#include "constants/heal_locations.h"
+#include "constants/map_groups.h"
 #include "battle_util.h"
 #include "caps.h"
 #include "event_data.h"
@@ -238,4 +243,85 @@ WILD_BATTLE_TEST("Averon region progression: a Sinnoh profile's obedience level 
         gBattleTypeFlags = savedFlags;
         ResetProgression();
     }
+}
+
+// #53 P2 "8+8 badge/cap/obedience/warp/whiteout" through the real travel
+// transaction (#57). Existing Hoenn maps stand in symbolically for both
+// regions, exactly as averon_region_travel.c uses them; no map is created.
+static void StandAt(u32 map, s32 x, s32 y)
+{
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(map);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(map);
+    gSaveBlock1Ptr->location.warpId = WARP_ID_NONE;
+    gSaveBlock1Ptr->location.x = x;
+    gSaveBlock1Ptr->location.y = y;
+    gSaveBlock1Ptr->pos.x = x;
+    gSaveBlock1Ptr->pos.y = y;
+}
+
+static void Arrive(void)
+{
+    ApplyCurrentWarp();
+    gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->location.x;
+    gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->location.y;
+}
+
+TEST("Averon region progression: cap and obedience follow the player through travel, flash and whiteout")
+{
+    struct WarpData arrival = {MAP_GROUP(MAP_OLDALE_TOWN), MAP_NUM(MAP_OLDALE_TOWN), WARP_ID_NONE, 10, 10};
+    u32 obedience = 0;
+
+    CheckForFlashMemory();
+    ASSUME(gFlashMemoryPresent);
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    AveronRegionSave_BeginLoad();
+    ResetProgression();
+    EXPECT(AveronProgression_SetTestProfile(AVERON_SAVE_REGION_SINNOH, &sTestProfile));
+
+    // An Averon Champion: no Averon cap, every Pokemon obeys.
+    SetAveronBadges(AVERON_REGION_BADGES);
+    FlagSet(FLAG_AVERON_ASSAULT_COMPLETE);
+    FlagSet(FLAG_IS_CHAMPION);
+    StandAt(MAP_PETALBURG_CITY, 15, 15);
+    SetLastHealLocationWarp(HEAL_LOCATION_PETALBURG_CITY);
+    EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
+    EXPECT(!AveronProgression_GetRegionalObedienceLevel(&obedience));
+
+    // Arriving in Sinnoh with no Sinnoh badges: Sinnoh's first step applies.
+    EXPECT(AveronRegion_BeginTravel(AVERON_SAVE_REGION_SINNOH, &arrival));
+    Arrive();
+    EXPECT_EQ(GetCurrentLevelCap(), sTestProfile.levelCaps[0]);
+    EXPECT(AveronProgression_GetRegionalObedienceLevel(&obedience));
+    EXPECT_EQ(obedience, sTestProfile.obedienceLevels[0]);
+
+    // Three Sinnoh badges, then a save, a power-off and a load.
+    SetSinnohBadges(3);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    AveronRegionSave_InitNewGame();
+    SetAveronBadges(0);
+    FlagClear(FLAG_IS_CHAMPION);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(AveronProgression_GetActiveRegion(), AVERON_SAVE_REGION_SINNOH);
+    EXPECT_EQ(GetCurrentLevelCap(), sTestProfile.levelCaps[3]);
+
+    // A whiteout keeps the player, and the cap, in Sinnoh.
+    SetWarpDestinationToLastHealLocation();
+    Arrive();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_OLDALE_TOWN));
+    EXPECT_EQ(GetCurrentLevelCap(), sTestProfile.levelCaps[3]);
+
+    // Home: the Averon Champion has no cap again; Sinnoh's badges are kept.
+    EXPECT(AveronRegion_BeginTravel(AVERON_SAVE_REGION_AVERON, NULL));
+    Arrive();
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_PETALBURG_CITY));
+    EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
+    EXPECT(!AveronProgression_GetRegionalObedienceLevel(&obedience));
+    EXPECT_EQ(AveronRegion_CountBadges(AVERON_SAVE_REGION_SINNOH), 3);
+
+    // And back to Sinnoh: its cap picks up where it was.
+    EXPECT(AveronRegion_BeginTravel(AVERON_SAVE_REGION_SINNOH, NULL));
+    Arrive();
+    EXPECT_EQ(GetCurrentLevelCap(), sTestProfile.levelCaps[3]);
+    ResetProgression();
 }
