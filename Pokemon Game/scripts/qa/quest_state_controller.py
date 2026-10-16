@@ -32,6 +32,16 @@ def elf_symbol(elf, name="gSaveBlock1Ptr"):
     return int(hits[0], 16)
 
 
+def title_input_ready(tasks, target_func):
+    # task.h: 16 Task records, each 40 bytes: func u32 at +0,
+    # isActive u8 at +4, prev/next/priority u8 then data[16] s16.
+    if len(tasks) != 16 * 40:
+        raise Blocked("Title task-array read must be exactly 640 bytes")
+    return any(tasks[i*40 + 4] == 1 and
+               (struct.unpack_from("<I", tasks, i*40)[0] & ~1)
+               == (target_func & ~1) for i in range(16))
+
+
 class ReadOnlyGdb:
     def __init__(self, port):
         end = time.monotonic() + 16
@@ -77,8 +87,8 @@ class ReadOnlyGdb:
             raise Blocked(f"Debugger stop request unsupported: {stop[:70]}")
         self.command("c", reply=False)
 
-    def menu_state(self, symbols):
-        """Read actual start-menu selection and save callback, without writes."""
+    def menu_state(self, symbols, include_tasks=False):
+        """Read actual save/menu and optional title-task state, without writes."""
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -110,7 +120,12 @@ class ReadOnlyGdb:
             save_attempt = struct.unpack(
                 "<H", read(symbols["saveAttempt"], 2))[0]
             different = read(symbols["differentFile"], 1)[0]
-            return dict(count=n, cursor=index, actions=actions[:n],
+            ready = None
+            if include_tasks:
+                tasks = read(symbols["taskArray"], 16 * 40)
+                ready = title_input_ready(tasks, symbols["titleReadyFunc"])
+            return dict(titleInputReady=ready,
+                        count=n, cursor=index, actions=actions[:n],
                         selected=actions[index] if n else None,
                         saveCallback=f"0x{cb:08X}", savePhase=phase,
                         mainCallback2=f"0x{callback2:08X}",
@@ -197,6 +212,8 @@ def daemon(args):
         "saveStatus": elf_symbol(args.elf, "gSaveFileStatus"),
         "saveAttempt": elf_symbol(args.elf, "gSaveAttemptStatus"),
         "differentFile": elf_symbol(args.elf, "gDifferentSaveFile"),
+        "taskArray": elf_symbol(args.elf, "gTasks"),
+        "titleReadyFunc": elf_symbol(args.elf, "Task_TitleScreenPhase3"),
         "mainCallbacks": {
             name: elf_symbol(args.elf, name)
             for name in ("CB2_InitTitleScreen", "CB2_InitMainMenu",
@@ -228,7 +245,8 @@ def daemon(args):
                     if not name.startswith("title-"):
                         result["position"] = gdb.position(symbol, symbol2)
                     if name.startswith(("save-", "title-")):
-                        result["menu"] = gdb.menu_state(menu_symbols)
+                        result["menu"] = gdb.menu_state(
+                            menu_symbols, include_tasks=name.startswith("title-"))
                 except Exception as exc:
                     result = {"checkpoint": name, "blocked": str(exc)}
                 dest = Path(args.outdir) / f"{name}.json"
@@ -1064,12 +1082,18 @@ def q2_reset_continue(args):
 
     observed_title = False
     observed_main = False
+    requested_menu = False
     before_callback = before["menu"]["mainCallback2"]
-    for i in range(22):
+    # Source title_screen.c Task_TitleScreenPhase3 only exists when
+    # Press Start is available; wait for ACTUAL active TaskFunc rather
+    # than guessing how long copyright, logos or fade animations take.
+    for i in range(110):
         sample, frame = save_probe(
             args, f"title-102-title-poll-{i+1}", require_position=False)
         phase = sample["menu"]["mainPhase"]
         if phase in ("CB2_InitTitleScreen", "CB2_InitMainMenu"):
+            observed_title = True
+        if sample["menu"]["titleInputReady"]:
             observed_title = True
         if (phase == "other" and
                 sample["menu"]["mainCallback2"] != before_callback):
@@ -1084,11 +1108,13 @@ def q2_reset_continue(args):
                 raise Blocked("Main menu did not detect a valid saved game")
             observed_main = True
             break
-        if observed_title and phase in ("other", "CB2_InitTitleScreen"):
-            # On real title screen, START/A advances to main menu.
-            if i in (3, 8, 13):
-                qa_key(args.window, "Return", wait=1.6)
-        time.sleep(0.4)
+        if (not requested_menu and sample["menu"]["titleInputReady"]
+                and sample["menu"]["saveStatus"] == 1):
+            print("QA_TITLE_INPUT_READY: Task_TitleScreenPhase3 active "
+                  "and saved-file status OK; press START once", flush=True)
+            requested_menu = True
+            qa_key(args.window, "Return", wait=1.7)
+        time.sleep(0.60)
     if not (observed_title and observed_main):
         raise Blocked("Soft reset did not visibly enter saved-game main menu")
     print("QA_SAVE_REBOOT_TITLE_AND_CONTINUE_MENU", flush=True)
