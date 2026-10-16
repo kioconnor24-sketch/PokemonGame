@@ -338,7 +338,7 @@ def daemon(args):
                             badge_probe=name.startswith(("q1-gate", "q3-")),
                             gym_probe=name.startswith("q3-"),
                             battle_main_symbol=menu_symbols["main"]
-                            if name.startswith("q3-battle-") else None)
+                            if name.startswith(("q3-battle-", "q3-play-")) else None)
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
