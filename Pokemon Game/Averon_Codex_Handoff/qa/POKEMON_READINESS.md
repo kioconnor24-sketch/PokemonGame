@@ -65,6 +65,7 @@ python3 ../scripts/test-averon-release-forms.py
 | Followers rendered on a map | Walking, surfing, shiny, transform | Not run | GUI needed |
 | EXP | Held-item Gen 5 EXP Share, caps, large rewards | `averon_exp.c`, `averon_candy.c` | NATIVE (existing) |
 | Level 100 | Every growth rate: EXP rises at each level and fits the 21-bit box field; a level-100 Pokémon given more EXP stays at 100 | 6 growth rates, 0 problems | NATIVE |
+| Level 100 under Averon's caps | With every cap flag set (eight badges, assault, Champion) the cap is `MAX_LEVEL`, and a level-99 Pokémon gains EXP in a real battle. Without Champion the last cap still blocks it. A level-100 Pokémon gains none. Mutation (final cap 76) fails | 3 cases | NATIVE |
 | Pokédex | Every enabled species has a national dex number from 1 to `NATIONAL_DEX_COUNT`, which the seen/caught flag arrays hold | 0 problems | NATIVE |
 | Pokédex | Setting every seen and caught flag changes no other SaveBlock1 byte, counts the full dex, and survives a real flash save and load | Pass | NATIVE |
 | Box storage | Species, item, ball, EXP and move fields fit their bit widths | Upstream `sBoxPokemonConstantsFit` (build fails otherwise) | BUILD (existing) |

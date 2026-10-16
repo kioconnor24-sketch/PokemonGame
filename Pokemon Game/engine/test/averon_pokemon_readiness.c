@@ -1,6 +1,8 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_dynamax.h"
+#include "caps.h"
+#include "event_data.h"
 #include "battle_z_move.h"
 #include "event_object_movement.h"
 #include "item.h"
@@ -820,5 +822,47 @@ SINGLE_BATTLE_TEST("Averon a Mega Evolved Pokemon is back in its base form in th
         EXPECT_EQ(gBattleOutcome, B_OUTCOME_WON);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_VENUSAUR);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_VENUSAURITE);
+    }
+}
+
+// The last cap lifts with FLAG_IS_CHAMPION; after that only MAX_LEVEL limits
+// growth. The cap values themselves are a design decision and not tested.
+static const u16 sCapFlags[] =
+{
+    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
+    FLAG_AVERON_ASSAULT_COMPLETE, FLAG_IS_CHAMPION,
+};
+
+WILD_BATTLE_TEST("Averon with every level cap lifted a Pokemon grows to level 100 and no further")
+{
+    u32 level, champion;
+    PARAMETRIZE { level = MAX_LEVEL - 1; champion = TRUE; }
+    PARAMETRIZE { level = MAX_LEVEL - 1; champion = FALSE; }
+    PARAMETRIZE { level = MAX_LEVEL; champion = TRUE; }
+    GIVEN {
+        for (u32 j = 0; j < ARRAY_COUNT(sCapFlags); j++)
+            FlagSet(sCapFlags[j]);
+        if (!champion)
+            FlagClear(FLAG_IS_CHAMPION);
+        PLAYER(SPECIES_WOBBUFFET) { Level(level); }
+        OPPONENT(SPECIES_BLISSEY) { Level(50); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Blissey fainted!");
+    } THEN {
+        u32 start = gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][level];
+        if (champion)
+            EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
+        else
+            EXPECT_LT(GetCurrentLevelCap(), MAX_LEVEL);
+        if (champion && level < MAX_LEVEL)
+            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), start);
+        else
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), start);
+        EXPECT_LE(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), MAX_LEVEL);
+        for (u32 j = 0; j < ARRAY_COUNT(sCapFlags); j++)
+            FlagClear(sCapFlags[j]);
     }
 }
