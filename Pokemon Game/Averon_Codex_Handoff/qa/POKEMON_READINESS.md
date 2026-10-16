@@ -126,6 +126,26 @@ Save sizes are ELF symbol sizes (`arm-none-eabi-nm -S`) minus the 128-byte ASLR
 pad, against `include/save.h`. Upstream `STATIC_ASSERT`s in `src/save.c` stop a
 build that overflows.
 
+Where the ROM goes (BUILD, `arm-none-eabi-nm -S` on the same ELF; sized
+symbols total 25.42 MiB):
+
+| Category | ROM |
+| --- | --- |
+| Cries (1,158) | **8.98 MiB** |
+| Battle front sprites | 1.51 MiB |
+| Party icons | 1.38 MiB |
+| Follower sprites (Pokémon) | 1.35 MiB |
+| Battle back sprites | 0.85 MiB |
+| Species info table | 0.40 MiB |
+| Palettes (battle and overworld) | 0.17 MiB |
+| Learnsets (level-up, teachable, egg) | 0.15 MiB |
+| Trainers, moves, items tables | 0.23 MiB |
+
+Cries take about a third of the used ROM, more than all Pokémon graphics
+together. If maps and music for two regions run short of the 6.8 MB free,
+cry compression or sample-rate settings are the largest single lever; that
+needs review before any change.
+
 For the second region: reusing existing flag and var IDs costs no save space,
 but any new saved structure must go in SaveBlock3 or take space from elsewhere.
 SaveBlock1 and SaveBlock2 are nearly full. Codex was told in #15.
