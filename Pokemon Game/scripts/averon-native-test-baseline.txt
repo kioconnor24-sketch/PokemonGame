@@ -1,6 +1,8 @@
 # Averon expected native test failures. Format: STATUS | reason | test name
 # Names drop the per-parameter suffix ("1/2", "(1/?)"). "STATUS x2" marks a
-# name two tests share (test/battle/gimmick/terastal.c); both must fail. Checked by
+# name two tests share (test/battle/gimmick/terastal.c); both must fail.
+# "TIMEOUT/FAIL" accepts either: "Gimmick Form Change animations work" ends
+# by timeout or by failure depending on run timing. Checked by
 # check-averon-native-baseline.py. Recorded 2026-10-15 from a full
 # `make -j20 -O check` on main 36cb7ca9 (WSL, arm-none-eabi-gcc 14.2.1).
 #
@@ -225,7 +227,7 @@ FAIL | gimmick-disabled | Flower Gift reverts Cherrim back after Teraform Zero c
 FAIL | gimmick-disabled | Forecast reverts Castform back after Teraform Zero clears weather
 FAIL | gimmick-disabled | Galvanize doesn't affect damaging Z-Move types
 FAIL | gimmick-disabled | Galvanize doesn't change Tera Blast's type when Terastallized
-TIMEOUT | gimmick-disabled | Gimmick Form Change animations work
+TIMEOUT/FAIL | gimmick-disabled | Gimmick Form Change animations work
 FAIL | gimmick-disabled | Gorilla Tactics does not boost damage while Dynamaxed
 INVALID | gimmick-disabled | Gorilla Tactics does not lock moves while Dynamaxed
 FAIL | gimmick-disabled | Grudge depletes all PP from a Max Move's base move

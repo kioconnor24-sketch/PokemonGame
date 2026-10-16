@@ -23,7 +23,7 @@ BASELINE = Path(__file__).with_name('averon-native-test-baseline.txt')
 FAILING = ('FAIL', 'INVALID', 'ERROR', 'TIMEOUT', 'CRASH')
 RESULT = re.compile(r'^\[\d+\] (.+): ([A-Z_]+)$')
 TOTAL = re.compile(r'^- Tests TOTAL:\s+(\d+)')
-STATUS_COUNT = re.compile(r'^([A-Z_]+)(?: x(\d+))?$')
+STATUS_COUNT = re.compile(r'^([A-Z_]+(?:/[A-Z_]+)*)(?: x(\d+))?$')
 PARAM_SUFFIX = re.compile(r'( \d+/\d+)?( \(\d+/[\d?]+\))?$')
 ANSI = re.compile(r'\x1b\[[0-9;]*m')
 
@@ -57,8 +57,10 @@ def parse_log(text):
 
 
 def parse_baseline(text):
-    """Return {name: (status, count, reason)} from 'STATUS | reason | name'
-    lines. 'STATUS xN' means N tests share the name and all N fail."""
+    """Return {name: (statuses, count, reason)} from 'STATUS | reason | name'
+    lines. 'STATUS xN' means N tests share the name and all N fail.
+    'TIMEOUT/FAIL' accepts either status, for a test whose result depends
+    on run timing."""
     entries = {}
     for number, raw in enumerate(text.splitlines(), 1):
         line = raw.strip()
@@ -66,13 +68,13 @@ def parse_baseline(text):
             continue
         parts = [part.strip() for part in line.split('|', 2)]
         status = STATUS_COUNT.match(parts[0]) if len(parts) == 3 else None
-        if (not status or status.group(1) not in FAILING or status.group(2) in ('0', '1')
+        if (not status or not set(status.group(1).split('/')) <= set(FAILING) or status.group(2) in ('0', '1')
                 or not parts[1] or not parts[2]):
             raise ValueError(f'baseline line {number}: expected "STATUS[ xN] | reason | test name"')
         name = normalize(parts[2])
         if name in entries:
             raise ValueError(f'baseline line {number}: duplicate entry for {name!r}')
-        entries[name] = (status.group(1), int(status.group(2) or 1), parts[1])
+        entries[name] = (frozenset(status.group(1).split('/')), int(status.group(2) or 1), parts[1])
     return entries
 
 
@@ -94,8 +96,8 @@ def compare(log_text, baseline_text, partial=False):
             problems.append(f'NEW {"/".join(sorted(set(statuses)))}: {name}')
             continue
         status, count, reason = baseline[name]
-        if set(statuses) != {status}:
-            problems.append(f'STATUS CHANGED {status} -> {"/".join(sorted(set(statuses)))} '
+        if not set(statuses) <= status:
+            problems.append(f'STATUS CHANGED {"/".join(sorted(status))} -> {"/".join(sorted(set(statuses)))} '
                             f'(was {reason}): {name}')
         elif len(statuses) != count:
             problems.append(f'FAILED {len(statuses)} times, baseline expects {count} '
