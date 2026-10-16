@@ -1,0 +1,66 @@
+name: Averon exclusive-source gate
+
+# Trusted main checkout (NEVER PR head code) with read-only privileges.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Open PR number to recheck after a signed handoff"
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  exclusive-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Fetch changed files, peer claims and approved handoffs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const {owner,repo} = context.repo;
+            const number = context.eventName === 'workflow_dispatch'
+              ? Number(context.payload.inputs.pr_number) : context.issue.number;
+            if (!Number.isInteger(number) || number <= 0) throw Error('Invalid PR number');
+            const {data: pr} = await github.rest.pulls.get({owner,repo,pull_number:number});
+            const own = await github.paginate(github.rest.pulls.listFiles,{
+              owner,repo,pull_number:number,per_page:100});
+            const open = await github.paginate(github.rest.pulls.list,{
+              owner,repo,state:'open',per_page:100});
+            const other_open_prs=[];
+            for (const p of open.filter(p => p.number !== number)) {
+              const other = await github.paginate(github.rest.pulls.listFiles,{
+                owner,repo,pull_number:p.number,per_page:100});
+              other_open_prs.push({number:p.number,files:other.filter(f=>f.status!=='removed')
+                .map(f=>f.filename)});
+            }
+            const comments = await github.paginate(github.rest.issues.listComments,{
+              owner,repo,issue_number:15,per_page:100});
+            const handoffs=[];
+            const regex=/^HANDOFF_APPROVED PR=#(\d+) PATHS=([^\r\n]+)$/gm;
+            for(const c of comments){
+              if(!['OWNER','MEMBER','COLLABORATOR'].includes(c.author_association))continue;
+              let match; regex.lastIndex=0;
+              while((match=regex.exec(c.body||''))!==null){
+                handoffs.push({pr:Number(match[1]),paths:match[2].split(',').map(x=>x.trim()),
+                  association:c.author_association});
+              }
+            }
+            fs.writeFileSync('/tmp/averon-guard.json',JSON.stringify({
+              pull_request:{number,files:own.map(f=>({filename:f.filename,status:f.status}))},
+              other_open_prs,handoffs
+            },null,2));
+      - name: Enforce exclusive handoffs, prevent overlap and freeze violations
+        run: python3 "Pokemon Game/scripts/coordination/check_protected_files.py" /tmp/averon-guard.json

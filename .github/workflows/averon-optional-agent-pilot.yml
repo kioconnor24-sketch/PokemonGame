@@ -1,0 +1,84 @@
+name: Averon optional paid agent pilot
+
+# Manual only, disabled until owner configures a repository variable + API secrets.
+# The agents may inspect and edit a disposable checkout; cannot push or merge.
+on:
+  workflow_dispatch:
+    inputs:
+      agent:
+        description: "Which paid AI agent to execute in an isolated checkout?"
+        required: true
+        type: choice
+        options: [codex, claude]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+concurrency:
+  group: averon-paid-agent-pilot
+  cancel-in-progress: false
+
+jobs:
+  codex-pilot:
+    if: vars.AVERON_ENABLE_PAID_AGENTS == 'true' && inputs.agent == 'codex'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: "Pokemon Game/scripts/coordination/prompts/codex_pilot.txt"
+          permission-profile: ":workspace"
+          output-file: /tmp/averon-codex-report.txt
+      - name: Capture unmerged local changes for human review
+        if: always()
+        shell: bash
+        run: |
+          git diff --binary > /tmp/averon-codex-review.patch
+          git status --short > /tmp/averon-codex-status.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: codex-review-only
+          path: |
+            /tmp/averon-codex-report.txt
+            /tmp/averon-codex-review.patch
+            /tmp/averon-codex-status.txt
+          retention-days: 7
+
+  claude-pilot:
+    if: vars.AVERON_ENABLE_PAID_AGENTS == 'true' && inputs.agent == 'claude'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Read Pokemon Game/scripts/coordination/prompts/claude_pilot.txt.
+            Follow its exact bounds. Do NOT commit, push, post GitHub comments,
+            edit maps, creative content, or protected shared files.
+            Return a concise evidence-based proposed next step.
+          claude_args: "--max-turns 10"
+      - name: Capture unmerged local changes for human review
+        if: always()
+        shell: bash
+        run: |
+          git diff --binary > /tmp/averon-claude-review.patch
+          git status --short > /tmp/averon-claude-status.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: claude-review-only
+          path: |
+            /tmp/averon-claude-review.patch
+            /tmp/averon-claude-status.txt
+          retention-days: 7

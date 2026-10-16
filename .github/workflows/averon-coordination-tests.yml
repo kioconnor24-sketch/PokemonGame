@@ -1,0 +1,54 @@
+name: Averon coordination regression tests
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/coordination/**"
+      - "Pokemon Game/scripts/tests/test_agent_*.py"
+      - "Pokemon Game/scripts/tests/test_qa_frame_gate.py"
+      - ".github/workflows/averon-agent-*.yml"
+      - ".github/workflows/averon-shared-file-guard.yml"
+      - ".github/workflows/averon-integration-rehearsal.yml"
+      - ".github/workflows/averon-coordination-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Pokemon Game/scripts/coordination/**"
+      - "Pokemon Game/scripts/tests/test_agent_*.py"
+      - "Pokemon Game/scripts/tests/test_qa_frame_gate.py"
+      - ".github/workflows/averon-agent-*.yml"
+      - ".github/workflows/averon-shared-file-guard.yml"
+      - ".github/workflows/averon-integration-rehearsal.yml"
+      - ".github/workflows/averon-coordination-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  deterministic-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test agent routing, exact-SHA QA signoffs and exclusive file handoffs
+        run: |
+          python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_agent_*.py" -v
+          python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_qa_frame_gate.py" -v
+      - name: Render actual task registry with synthetic safe GitHub state
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          tasks=json.loads(Path('Pokemon Game/scripts/coordination/tasks.json').read_text())
+          prs=[dict(number=t['pr'],state='open',merged=False,head_sha='a'*40,checks='success')
+               for t in tasks['tasks'] if 'pr' in t]
+          Path('/tmp/coord-sample.json').write_text(json.dumps(dict(
+               main_sha='b'*40,generated_at='synthetic',pull_requests=prs,qa_signoffs=[])))
+          PY
+          python3 "Pokemon Game/scripts/coordination/render_board.py" \
+            --registry "Pokemon Game/scripts/coordination/tasks.json" \
+            --snapshot "/tmp/coord-sample.json" \
+            --out "/tmp/coord-test"
+          grep -q "BLOCKED ON QUEST" "/tmp/coord-test/claude.md"
+          grep -q "HARD FREEZE" "/tmp/coord-test/board.md"
