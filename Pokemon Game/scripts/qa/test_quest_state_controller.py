@@ -62,6 +62,19 @@ class ObserverTests(unittest.TestCase):
         self.assertTrue(state["notesRecorded"])
         self.assertTrue(state["notesRewarded"])
 
+    def test_sketch_flags_use_same_saved_byte_distinct_bits(self):
+        header = struct.pack("<hhbbbxhh", 20, 15, 75, 6, 0, -1, -1)
+        gdb, _ = self.fake(header)
+        old = gdb.command
+        gdb.command = lambda q, reply=True: "e0" if q == "m2001375,1" else old(q, reply)
+        state = gdb.position(0x03000100)
+        self.assertTrue(state["sketchStarted"])
+        self.assertTrue(state["sketchFound"])
+        self.assertTrue(state["sketchRewarded"])
+        self.assertFalse(state["notesStarted"])
+        self.assertFalse(state["notesRecorded"])
+        self.assertFalse(state["notesRewarded"])
+
     def test_reject_non_ewram_pointer(self):
         gdb, commands = self.fake(b"\x00"*12)
         def invalid(q, reply=True):
