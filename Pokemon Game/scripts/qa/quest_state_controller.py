@@ -170,6 +170,13 @@ def white_panel_ratio(path):
 
 
 def assert_ui(args):
+    if args.kind == "field":
+        ratio = white_panel_ratio(args.frame)
+        print(f"QA_UI field dialogue-bright={ratio:.4f} frame={args.frame}",
+              flush=True)
+        if ratio > 0.30:
+            raise Blocked(f"Overworld field not ready; dialogue still open {ratio:.4f}")
+        return
     # Source-run screenshots establish these two different menu locations.
     # This is an explicit graphic assertion, NOT OCR of the selected option.
     size = subprocess.check_output(
@@ -488,7 +495,7 @@ def main():
     q.add_argument("--outdir", required=True)
     q.add_argument("--window", required=True)
     u = sub.add_parser("assert-ui")
-    u.add_argument("--kind", choices=["sidebar", "numeric"], required=True)
+    u.add_argument("--kind", choices=["sidebar", "numeric", "field"], required=True)
     u.add_argument("--frame", type=Path, required=True)
     args = parser.parse_args()
     try:
