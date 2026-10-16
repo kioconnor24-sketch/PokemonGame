@@ -52,6 +52,8 @@ python3 ../scripts/test-averon-release-forms.py
 | Forms | Form tables and form-change tables are consistent | Upstream `test/species.c` | NATIVE (existing) |
 | Forms disabled in release | Every reference to Primal Groudon/Kyogre and Ultra Necrozma is guarded | 0 unguarded | SOURCE |
 | Mega Evolution | Every held-stone Mega uses an item with `HOLD_EFFECT_MEGA_STONE` and targets an enabled species | 209 Megas, 0 problems | NATIVE |
+| Battle-only forms | Every form reached in battle (Mega, weather, HP thresholds, Battle Bond, switch-in, begin-battle and the excluded gimmicks) has the end-of-battle revert that `TryRevertPartyMonFormChange` applies, so it cannot stay in the party or as the follower | 298 changes, 0 problems | NATIVE |
+| Mega Evolution after battle | A Mega Evolved Venusaur is plain Venusaur in the party after a won battle and keeps its stone | Real battle | NATIVE |
 | Mega Evolution in battle | Works; Primal Reversion, Z-Move, Dynamax, Tera and Ultra Burst are blocked | `averon_battle_rules.c` | NATIVE (existing) |
 | Learnsets | Level-up, teachable and egg moves are real moves, never Z-Moves or Max Moves; levels are at most 100 and in order | 78,179 entries, 0 problems | NATIVE |
 | Physical/special split | Dark physical, Ghost special | `averon_battle_rules.c` | NATIVE (existing) |

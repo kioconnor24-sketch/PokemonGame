@@ -1,5 +1,5 @@
 #include "global.h"
-#include "test/test.h"
+#include "test/battle.h"
 #include "battle_dynamax.h"
 #include "battle_z_move.h"
 #include "event_object_movement.h"
@@ -731,4 +731,94 @@ TEST("Averon every enabled species survives the PC boxes and a flash save and lo
     DebugPrintf("species stored and reloaded: %u in %u saves", stored, rounds);
     EXPECT_GT(rounds, 1);
     EXPECT_EQ(bad, 0);
+}
+
+static bool32 IsBattleOnlyFormChange(enum FormChanges method)
+{
+    switch (method)
+    {
+    case FORM_CHANGE_BEGIN_BATTLE:
+    case FORM_CHANGE_BATTLE_SWITCH_IN:
+    case FORM_CHANGE_BATTLE_HP_PERCENT_TURN_END:
+    case FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT:
+    case FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE:
+    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
+    case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+    case FORM_CHANGE_BATTLE_WEATHER:
+    case FORM_CHANGE_BATTLE_TURN_END:
+    case FORM_CHANGE_BATTLE_ULTRA_BURST:
+    case FORM_CHANGE_BATTLE_GIGANTAMAX:
+    case FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY:
+    case FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG:
+    case FORM_CHANGE_BATTLE_TERASTALLIZATION:
+    case FORM_CHANGE_BATTLE_BEFORE_MOVE:
+    case FORM_CHANGE_BATTLE_AFTER_MOVE:
+    case FORM_CHANGE_BATTLE_BOND:
+    case FORM_CHANGE_BATTLE_BEFORE_MOVE_CATEGORY:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool32 HasEndBattleRevert(u32 species)
+{
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+    for (u32 i = 0; formChanges != NULL && formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
+        if (formChanges[i].method == FORM_CHANGE_END_BATTLE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// After battle, TryRevertPartyMonFormChange applies FORM_CHANGE_END_BATTLE to
+// each party Pokemon. A form reached only in battle without that entry would
+// stay in the party, and as the follower, after the battle.
+TEST("Averon every form reached in battle has an end-of-battle revert")
+{
+    u32 bad = 0, battleForms = 0;
+    for (u32 species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species) || species == SPECIES_EGG)
+            continue;
+        const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+        for (u32 i = 0; formChanges != NULL && formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            u32 target = formChanges[i].targetSpecies;
+            if (!IsBattleOnlyFormChange(formChanges[i].method) || target == species || !IsValidEnabledSpecies(target))
+                continue;
+            // A change back to the base form (first in the form table) is
+            // itself the revert, e.g. Gulping Cramorant to Cramorant.
+            if (GetSpeciesFormTable(target) != NULL && GetSpeciesFormTable(target)[0] == target)
+                continue;
+            battleForms++;
+            if (!HasEndBattleRevert(target))
+            {
+                DebugPrintf("no end-of-battle revert: %S (%u) from %S, method %u", GetSpeciesName(target), target, GetSpeciesName(species), formChanges[i].method);
+                bad++;
+            }
+        }
+    }
+    DebugPrintf("battle form changes checked: %u", battleForms);
+    EXPECT_GT(battleForms, 0);
+    EXPECT_EQ(bad, 0);
+}
+
+SINGLE_BATTLE_TEST("Averon a Mega Evolved Pokemon is back in its base form in the party after battle")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR) { Item(ITEM_VENUSAURITE); Speed(100); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, gimmick: GIMMICK_MEGA); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
+        MESSAGE("The opposing Wobbuffet fainted!");
+    } THEN {
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_WON);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_VENUSAUR);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_VENUSAURITE);
+    }
 }
