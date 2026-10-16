@@ -9,6 +9,7 @@
 #include "battle_util.h"
 #include "caps.h"
 #include "event_data.h"
+#include "item.h"
 #include "load_save.h"
 #include "save.h"
 #include "constants/battle.h"
@@ -323,5 +324,41 @@ TEST("Averon region progression: cap and obedience follow the player through tra
     EXPECT(AveronRegion_BeginTravel(AVERON_SAVE_REGION_SINNOH, NULL));
     Arrive();
     EXPECT_EQ(GetCurrentLevelCap(), sTestProfile.levelCaps[3]);
+    ResetProgression();
+}
+
+// Rare Candy is limited by GetCurrentLevelCap, so in Sinnoh it follows the
+// Sinnoh step, not the Averon Champion's missing cap.
+TEST("Averon region progression: Rare Candy stops at the active region's cap")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    ResetProgression();
+    EXPECT(AveronProgression_SetTestProfile(AVERON_SAVE_REGION_SINNOH, &sTestProfile));
+    SetAveronBadges(AVERON_REGION_BADGES);
+    FlagSet(FLAG_AVERON_ASSAULT_COMPLETE);
+    FlagSet(FLAG_IS_CHAMPION);
+    EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_SINNOH));
+    SetSinnohBadges(1); // cap 12
+
+    ZeroPlayerPartyMons();
+    CreateRandomMonWithIVs(mon, SPECIES_WOBBUFFET, 11, 0);
+    CalculatePlayerPartyCount();
+    gMain.inBattle = FALSE;
+    EXPECT_EQ(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0), FALSE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    EXPECT_EQ(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0), TRUE); // refused at the cap
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+
+    // A Sinnoh badge opens the next step; Averon's flags never did.
+    SetSinnohBadges(2); // cap 13
+    EXPECT_EQ(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0), FALSE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 13);
+    EXPECT_EQ(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0), TRUE);
+
+    // Back in Averon, the Champion's Pokemon is uncapped again.
+    EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_AVERON));
+    EXPECT_EQ(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0), FALSE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 14);
+    ZeroPlayerPartyMons();
     ResetProgression();
 }
