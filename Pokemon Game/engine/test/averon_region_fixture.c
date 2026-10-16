@@ -901,3 +901,54 @@ TEST("Averon region fixture warp guard rejects unknown or ambiguous identities b
     EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
         127, 1, -1, 0, 0, NULL, &reader), FALSE);
 }
+
+static int ValidateSavedHealRequest(const struct WarpData *warp, struct WarpReadFixture *reader)
+{
+    return AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        (u8)warp->mapGroup, (u8)warp->mapNum, warp->warpId, warp->x, warp->y,
+        ReadWarpFixture, reader);
+}
+
+TEST("Averon region fixture rejects corrupt saved healer requests and validates flash restored coordinates")
+{
+    u32 healer;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; }
+    CheckForFlashMemory();
+    EXPECT_EQ(gFlashMemoryPresent, TRUE);
+    if (!gFlashMemoryPresent)
+        return;
+    ClearSaveData();
+    Save_ResetSaveCounters();
+    SetRegionLegacyState(0xA5, 0x53, healer, 9876);
+    struct WarpData expected = gSaveBlock1Ptr->lastHealLocation;
+    struct WarpReadFixture reader = {0};
+    EXPECT_EQ(ValidateSavedHealRequest(&expected, &reader), TRUE);
+    EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId((u8)expected.mapGroup, (u8)expected.mapNum);
+    for (u32 fault = 0; fault < 8; ++fault)
+    {
+        struct WarpData *bad = &gSaveBlock1Ptr->lastHealLocation;
+        *bad = expected;
+        switch (fault)
+        {
+        case 0: bad->mapGroup = -1; break;
+        case 1: bad->mapNum = -1; break;
+        case 2: bad->warpId = -2; break;
+        case 3: bad->x = 128; break;
+        case 4: bad->y = 128; break;
+        case 5: bad->x = header->mapLayout->width; break;
+        case 6: bad->y = header->mapLayout->height; break;
+        case 7: bad->warpId = 0; break; // Inconsistent index + coordinate request.
+        }
+        struct WarpData corrupted = *bad;
+        EXPECT_EQ(ValidateSavedHealRequest(bad, &reader), FALSE);
+        EXPECT_EQ(memcmp(&corrupted, bad, sizeof(corrupted)), 0);
+        // Never enter a real warp with corrupted metadata. Only normal flash
+        // reload restores the existing location; no region/save hook installed.
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        EXPECT_EQ(memcmp(&expected, &gSaveBlock1Ptr->lastHealLocation, sizeof(expected)), 0);
+        EXPECT_EQ(ValidateSavedHealRequest(&gSaveBlock1Ptr->lastHealLocation, &reader), TRUE);
+        ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
+    }
+}
