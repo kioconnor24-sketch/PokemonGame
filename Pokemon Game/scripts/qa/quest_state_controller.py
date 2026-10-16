@@ -77,6 +77,35 @@ class ReadOnlyGdb:
             raise Blocked(f"Debugger stop request unsupported: {stop[:70]}")
         self.command("c", reply=False)
 
+    def menu_state(self, symbols):
+        """Read actual start-menu selection and save callback, without writes."""
+        self.sock.sendall(b"\x03")
+        stop = self.packet()
+        if not stop.startswith(("S", "T")):
+            raise Blocked(f"Menu debugger interrupt failed: {stop[:70]}")
+        try:
+            def read(addr, size):
+                data = bytes.fromhex(self.command(f"m{addr:x},{size:x}"))
+                if len(data) != size:
+                    raise Blocked(f"Short debugger menu read at 0x{addr:08X}")
+                return data
+            n = read(symbols["count"], 1)[0]
+            index = read(symbols["cursor"], 1)[0]
+            if n > 9:
+                raise Blocked(f"Invalid start-menu action count {n}")
+            actions = list(read(symbols["actions"], 9))
+            if n and index >= n:
+                raise Blocked(f"Invalid cursor {index} for {n} actions")
+            cb = struct.unpack("<I", read(symbols["saveCallback"], 4))[0]
+            phase = next(
+                (name for name, addr in symbols["callbacks"].items()
+                 if (cb & ~1) == (addr & ~1)), "unknown")
+            return dict(count=n, cursor=index, actions=actions[:n],
+                        selected=actions[index] if n else None,
+                        saveCallback=f"0x{cb:08X}", savePhase=phase)
+        finally:
+            self.command("c", reply=False)
+
     def position(self, symbol, symbol2):
         self.sock.sendall(b"\x03")
         stop = self.packet()
@@ -145,6 +174,20 @@ class ReadOnlyGdb:
 def daemon(args):
     symbol = elf_symbol(args.elf, "gSaveBlock1Ptr")
     symbol2 = elf_symbol(args.elf, "gSaveBlock2Ptr")
+    menu_symbols = {
+        "cursor": elf_symbol(args.elf, "sStartMenuCursorPos"),
+        "count": elf_symbol(args.elf, "sNumStartMenuActions"),
+        "actions": elf_symbol(args.elf, "sCurrentStartMenuActions"),
+        "saveCallback": elf_symbol(args.elf, "sSaveDialogCallback"),
+        "callbacks": {
+            name: elf_symbol(args.elf, name)
+            for name in ("SaveConfirmInputCallback",
+                         "SaveOverwriteInputCallback",
+                         "SaveSavingMessageCallback", "SaveDoSaveCallback",
+                         "SaveSuccessCallback", "SaveReturnSuccessCallback",
+                         "SaveErrorCallback")
+        },
+    }
     gdb = ReadOnlyGdb(args.port)
     gdb.start()
     Path(args.ready).write_text(
@@ -157,7 +200,10 @@ def daemon(args):
                 if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", name):
                     continue
                 try:
-                    result = {"checkpoint": name, "position": gdb.position(symbol, symbol2)}
+                    result = {"checkpoint": name,
+                              "position": gdb.position(symbol, symbol2)}
+                    if name.startswith("save-"):
+                        result["menu"] = gdb.menu_state(menu_symbols)
                 except Exception as exc:
                     result = {"checkpoint": name, "blocked": str(exc)}
                 dest = Path(args.outdir) / f"{name}.json"
@@ -169,7 +215,7 @@ def daemon(args):
                     return 2
 
 
-def snapshot(args, name):
+def snapshot_detail(args, name):
     dest = Path(args.outdir) / f"{name}.json"
     dest.unlink(missing_ok=True)
     with open(args.fifo, "w", encoding="ascii") as pipe:
@@ -179,9 +225,13 @@ def snapshot(args, name):
             result = json.loads(dest.read_text())
             if "blocked" in result:
                 raise Blocked(result["blocked"])
-            return result["position"]
+            return result
         time.sleep(0.10)
     raise Blocked(f"Missing debugger reply for {name}")
+
+
+def snapshot(args, name):
+    return snapshot_detail(args, name)["position"]
 
 
 def grab(window, dest):
