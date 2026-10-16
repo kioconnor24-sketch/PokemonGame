@@ -105,6 +105,18 @@ class ObserverTests(unittest.TestCase):
             self.assertLess(qa.white_panel_ratio(dark), 0.30)
             self.assertGreater(qa.white_panel_ratio(panel), 0.50)
 
+    def test_field_ui_requires_message_closed(self):
+        from types import SimpleNamespace
+        with tempfile.TemporaryDirectory() as tmp:
+            field = Path(tmp) / "field.png"
+            message = Path(tmp) / "message.png"
+            subprocess.run(["convert", "-size", "480x320", "xc:#282D42", str(field)], check=True)
+            subprocess.run(["convert", str(field), "-fill", "white",
+                            "-draw", "rectangle 4,236 475,312", str(message)], check=True)
+            self.assertIsNone(qa.assert_ui(SimpleNamespace(frame=field, kind="field")))
+            with self.assertRaisesRegex(qa.Blocked, "field not ready"):
+                qa.assert_ui(SimpleNamespace(frame=message, kind="field"))
+
     def test_reject_unknown_frame_shape(self):
         with tempfile.TemporaryDirectory() as tmp:
             frame = Path(tmp) / "bad.png"
