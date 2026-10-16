@@ -90,7 +90,7 @@ class ObserverTests(unittest.TestCase):
     def test_elf_no_symbol_fails_closed(self):
         from unittest.mock import patch
         with patch.object(qa.subprocess, "check_output", return_value="03001000 D other\n"):
-            with self.assertRaisesRegex(qa.Blocked, "symbol"):
+            with self.assertRaisesRegex(qa.Blocked, "gSaveBlock1Ptr"):
                 qa.elf_symbol("fake.elf")
 
 
