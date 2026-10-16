@@ -1624,6 +1624,19 @@ def q1_badge_gate(args):
 
 
 
+# Verified Emerald Bag order from actual mGBA run 38870779185:
+# Items -> Poke Balls -> TMs & HMs -> Berries -> Key Items.
+# The third (not fourth) RIGHT press reaches the visible Oran Berry x3.
+BAG_POCKET_ORDER = ("ITEMS", "POKE BALLS", "TMS & HMS", "BERRIES", "KEY ITEMS")
+
+
+def bag_pocket_right_steps(start, target):
+    """Calculate actual visible right-tab inputs; reject unknown pockets."""
+    if start not in BAG_POCKET_ORDER or target not in BAG_POCKET_ORDER:
+        raise Blocked(f"Unknown original Bag pocket: {start!r} -> {target!r}")
+    return (BAG_POCKET_ORDER.index(target) - BAG_POCKET_ORDER.index(start)) % len(BAG_POCKET_ORDER)
+
+
 def visual_frame_data(path):
     """Source screenshot geometry only; reads pixels, never emulator memory."""
     wh = subprocess.check_output(
@@ -1794,16 +1807,14 @@ def q2_visual_relaunch(args):
     bag_frame, bag_raw, _ = shot("restored-bag-open")
     if pixel_distance(visual_frame_data(start_frame), bag_raw) < 0.05:
         raise Blocked("No observed field Start-menu-to-Bag transition")
-    # Source bag has five pockets. SDL R has been independently verified as
-    # xdotool 's' by the in-game developer R+START entry. Four single R
-    # pulses move from Items to Berries, with screenshots at every stage.
-    # In real mGBA artifact12030615444, xdotool 's' did NOT cycle bag
-    # tabs. Use the actual D-pad RIGHT that changes Emerald's pocket,
-    # and require a rendered header change after each single input.
+    # Real mGBA run38870779185 visibly proved that three D-pad RIGHT
+    # presses reach BERRIES from ITEMS (four would overshoot to KEY ITEMS).
+    # xdotool 's' did not cycle these tabs; require a fresh screenshot and
+    # changed header after EVERY ordinary D-pad RIGHT input.
     before_header = subprocess.check_output([
         "convert", str(bag_frame), "-crop", "170x30+18+0",
         "+repage", "-depth", "8", "RGB:-"])
-    for i in range(4):
+    for i in range(bag_pocket_right_steps("ITEMS", "BERRIES")):
         press("Right")
         frame, raw, _ = shot(f"restored-bag-pocket-after-RIGHT-{i+1}")
         new_header = subprocess.check_output([
