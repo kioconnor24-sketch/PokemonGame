@@ -126,8 +126,10 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     for task in tasks:
         d = computed[task["id"]]
         pr = d["pr"]
-        source = f"[#{task['pr']}]({GITHUB}/pull/{task['pr']})" if task.get("pr") else (
-            f"unmerged {task.get('branch', 'task')}")
+        source = (f"[#{task['pr']}]({GITHUB}/pull/{task['pr']})"
+                  if task.get("pr") else
+                  (f"unmerged {task['branch']}" if task.get("branch")
+                   else "unclaimed backend lane"))
         if pr and pr.get("head_sha"):
             source += f" @{pr['head_sha'][:10]}"
         if task.get("issue"):
