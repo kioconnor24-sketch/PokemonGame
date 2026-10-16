@@ -220,9 +220,10 @@ def daemon(args):
                 if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", name):
                     continue
                 try:
-                    result = {"checkpoint": name,
-                              "position": gdb.position(symbol, symbol2)}
-                    if name.startswith("save-"):
+                    result = {"checkpoint": name}
+                    if not name.startswith("title-"):
+                        result["position"] = gdb.position(symbol, symbol2)
+                    if name.startswith(("save-", "title-")):
                         result["menu"] = gdb.menu_state(menu_symbols)
                 except Exception as exc:
                     result = {"checkpoint": name, "blocked": str(exc)}
@@ -899,6 +900,208 @@ def q2_meadow(args):
           "Human screenshot text review required.", flush=True)
 
 
+
+def save_probe(args, stage, require_position=True):
+    """Visible screenshot + read-only source-derived save/menu telemetry."""
+    frame = Path(args.outdir) / (stage + ".png")
+    grab(args.window, frame)
+    obj = snapshot_detail(args, stage)
+    ui = obj.get("menu")
+    if ui is None:
+        raise Blocked(f"No read-only save menu response for {stage}")
+    pos = obj.get("position")
+    if require_position and pos is None:
+        raise Blocked(f"No game position read for {stage}")
+    print("QA_SAVE_PROBE", stage, json.dumps(obj, sort_keys=True),
+          str(frame), flush=True)
+    return obj, frame
+
+
+def qa_key(window, name, duration=0.11, wait=0.8):
+    subprocess.run(["xdotool", "windowactivate", str(window)], check=False)
+    subprocess.run(["xdotool", "keydown", name], check=True)
+    time.sleep(duration)
+    subprocess.run(["xdotool", "keyup", name], check=True)
+    time.sleep(wait)
+
+
+def require_q2_complete(pos, expected_qty=3):
+    if (pos["mapGroup"], pos["mapNum"], pos["x"], pos["y"]
+            ) != (75, 6, 19, 14):
+        raise Blocked(f"Unexpected Q2 artist save/continue tile: {pos}")
+    expected = dict(notesStarted=True, notesRecorded=False,
+                    notesRewarded=False, sketchStarted=True,
+                    sketchFound=True, sketchRewarded=True,
+                    oranBerryQuantity=expected_qty)
+    for key, value in expected.items():
+        if pos.get(key) != value:
+            raise Blocked(f"Q2 save/reload state mismatch for {key}: "
+                          f"expected {value}, got {pos.get(key)}")
+
+
+def q2_save(args):
+    """Perform ordinary Start/SAVE/YES; prove actual success callback."""
+    state, frame = save_probe(args, "save-001-artist-done")
+    require_q2_complete(state["position"])
+    if white_panel_ratio(frame) < 0.50:
+        raise Blocked("Expected completed-quest dialogue before save")
+    qa_key(args.window, "x", wait=1.7)
+    state, frame = save_probe(args, "save-002-done-dismissed")
+    require_q2_complete(state["position"])
+    if white_panel_ratio(frame) > 0.30:
+        raise Blocked("DONE dialogue did not close: can't open Start menu")
+    qa_key(args.window, "Return", wait=1.5)
+    state, frame = save_probe(args, "save-003-start-menu-open")
+    require_q2_complete(state["position"])
+    menu = state["menu"]
+    # start_menu.c: enum MENU_ACTION_SAVE = 5; actual ordered actions and
+    # cursor are read from same binary's EWRAM symbols on every step.
+    if not (3 <= menu["count"] <= 9 and
+            menu["actions"].count(5) == 1 and
+            menu["selected"] in menu["actions"]):
+        raise Blocked(f"Ordinary Start menu not observed: {menu}")
+    destination = menu["actions"].index(5)
+    for attempt in range(9):
+        if menu["selected"] == 5:
+            break
+        if menu["cursor"] == destination:
+            raise Blocked(f"Selection inconsistent despite matching cursor: {menu}")
+        # Use the monotone path through the known source action list,
+        # never blindly hold Down or rely on one keypress being one row.
+        direction = "Down" if menu["cursor"] < destination else "Up"
+        old_index = menu["cursor"]
+        qa_key(args.window, direction, wait=0.65)
+        state, _ = save_probe(args, f"save-004-choice-{attempt+1}")
+        menu = state["menu"]
+        if menu["cursor"] not in (old_index, old_index +
+                                  (1 if direction == "Down" else -1)):
+            raise Blocked(f"Uncontrolled Start cursor after {direction}: {menu}")
+    if menu["selected"] != 5:
+        raise Blocked(f"Could not select exactly source action SAVE=5: {menu}")
+    print("QA_SAVE_START_ACTION_SELECTED", menu, flush=True)
+    qa_key(args.window, "x", wait=0.9)
+    # Wait for source SaveYesNoCallback to install the real Yes/No handler.
+    for attempt in range(20):
+        state, frame = save_probe(args, f"save-005-confirm-wait-{attempt+1}")
+        menu = state["menu"]
+        if menu["savePhase"] == "SaveConfirmInputCallback":
+            if white_panel_ratio(frame) < 0.5:
+                raise Blocked("Save-confirm callback but no visible dialogue")
+            break
+        time.sleep(0.35)
+    else:
+        raise Blocked("Source SAVE confirm callback never observed")
+    # First explicit Yes uses source DisplayYesNoMenuDefaultYes().
+    qa_key(args.window, "x", wait=0.8)
+    confirmed_success = False
+    for attempt in range(50):
+        state, frame = save_probe(args, f"save-006-write-stage-{attempt+1}")
+        menu = state["menu"]
+        phase = menu["savePhase"]
+        if phase == "SaveOverwriteInputCallback":
+            # Existing file prompts default YES except when the game reports
+            # gDifferentSaveFile, whose default NO must not be guessed.
+            if menu["differentSaveFile"] != 0:
+                raise Blocked("Different-save overwrite requires independent owner approval")
+            qa_key(args.window, "x", wait=0.9)
+        elif phase in ("SaveSuccessCallback", "SaveReturnSuccessCallback"):
+            confirmed_success = True
+            print("QA_SAVE_SUCCESS_CALLBACK", phase, flush=True)
+            break
+        elif phase == "SaveErrorCallback":
+            raise Blocked("Actual in-game save error callback")
+        time.sleep(0.30)
+    if not confirmed_success:
+        raise Blocked("Never observed real successful Save callback")
+    # Keep emulator running; allow on-screen saving success and automatic
+    # Start-menu dismissal.  Only a prior seen successful callback counts.
+    for i in range(30):
+        state, frame = save_probe(args, f"save-007-return-field-{i+1}")
+        require_q2_complete(state["position"])
+        if white_panel_ratio(frame) <= 0.30:
+            if state["menu"]["saveStatus"] != 1:
+                raise Blocked("Game did not report SAVE_STATUS_OK=1")
+            print("QA_SAVE_REAL_SUCCESS: game callback confirmed; "
+                  "completed Q2 flags and exactly 3 Oran observed; "
+                  "reset/Continue remains a separate checkpoint", flush=True)
+            return
+        time.sleep(0.45)
+    raise Blocked("Save success message never visibly closed")
+
+
+def q2_reset_continue(args):
+    """Soft-reset with ordinary keys and accept only real saved Continue."""
+    before, frame = save_probe(args, "save-101-before-softreset")
+    require_q2_complete(before["position"])
+    if white_panel_ratio(frame) > 0.30:
+        raise Blocked("Cannot reset until field is visibly idle")
+    # GBA A+B+START+SELECT soft-reset is a normal input, never a GDB
+    # write or savestate.  An observed title callback is REQUIRED before
+    # any claim that RAM has reloaded from game flash.
+    subprocess.run(["xdotool", "windowactivate", str(args.window)], check=False)
+    for key in ("x", "z", "Return", "BackSpace"):
+        subprocess.run(["xdotool", "keydown", key], check=True)
+        time.sleep(0.12)
+    time.sleep(1.0)
+    for key in ("BackSpace", "Return", "z", "x"):
+        subprocess.run(["xdotool", "keyup", key], check=True)
+    time.sleep(2.0)
+
+    observed_title = False
+    observed_main = False
+    for i in range(22):
+        sample, frame = save_probe(
+            args, f"title-102-title-poll-{i+1}", require_position=False)
+        phase = sample["menu"]["mainPhase"]
+        if phase in ("CB2_InitTitleScreen", "MainCB2", "CB2_InitMainMenu"):
+            observed_title = True
+        if phase == "CB2_MainMenu":
+            if not observed_title:
+                raise Blocked("Main menu reached with no observed soft reset/title")
+            if sample["menu"]["saveStatus"] != 1:
+                raise Blocked("Main menu did not detect a valid saved game")
+            observed_main = True
+            break
+        if observed_title and phase in ("MainCB2", "CB2_InitTitleScreen"):
+            # On real title screen, START/A advances to main menu.
+            if i in (3, 8, 13):
+                qa_key(args.window, "Return", wait=1.6)
+        time.sleep(0.4)
+    if not (observed_title and observed_main):
+        raise Blocked("Soft reset did not visibly enter saved-game main menu")
+    print("QA_SAVE_REBOOT_TITLE_AND_CONTINUE_MENU", flush=True)
+    time.sleep(1.5)
+    qa_key(args.window, "x", wait=2.0)
+    # main_menu.c: for SAVE_STATUS_OK, entry #0 is ACTION_CONTINUE.
+    # We do not try a second A while the selection is uncertain.
+    for i in range(40):
+        sample, frame = save_probe(
+            args, f"title-103-continue-poll-{i+1}",
+            require_position=False)
+        phase = sample["menu"]["mainPhase"]
+        if phase == "CB2_MainMenu" and i >= 9:
+            raise Blocked("Continue A did not transition out of main menu")
+        if phase not in ("CB2_MainMenu", "CB2_InitMainMenu",
+                         "CB2_InitTitleScreen", "MainCB2",
+                         "CB2_ContinueSavedGame"):
+            # A non-menu field callback is expected only AFTER the
+            # graphical Continue action; now check reloaded gameplay RAM.
+            try:
+                fresh, scene = save_probe(
+                    args, f"save-104-after-continue-{i+1}")
+                require_q2_complete(fresh["position"])
+                if white_panel_ratio(scene) <= 0.30:
+                    print("QA_Q2_FLASH_ROUNDTRIP_PASS: observed title and "
+                          "Continue after actual soft reset, reloaded "
+                          "source map/position, QUEST flags and Oran=3 "
+                          "without debugger writes", flush=True)
+                    return
+            except Blocked:
+                # Field may still be initializing; bounded retry.
+                pass
+        time.sleep(0.6)
+    raise Blocked("Never observed resumed field with persistent Q2 state")
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -912,6 +1115,11 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    for command in ("q2-save", "q2-continue"):
+        sp = sub.add_parser(command)
+        sp.add_argument("--fifo", required=True)
+        sp.add_argument("--outdir", required=True)
+        sp.add_argument("--window", required=True)
     meadow = sub.add_parser("q2-meadow")
     meadow.add_argument("--fifo", required=True)
     meadow.add_argument("--outdir", required=True)
@@ -937,6 +1145,10 @@ def main():
             return daemon(args)
         if args.mode == "assert-ui":
             return assert_ui(args)
+        if args.mode == "q2-save":
+            return q2_save(args)
+        if args.mode == "q2-continue":
+            return q2_reset_continue(args)
         if args.mode == "q2-meadow":
             return q2_meadow(args)
         if args.mode == "q2-artist-offer":
