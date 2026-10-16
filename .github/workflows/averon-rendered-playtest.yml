@@ -489,6 +489,62 @@ jobs:
             qa_q4_blocked=1
             echo "QA_Q4_SUBCASE_BLOCKED: preserve source-backed Q2 flash test"
           fi
+          # New independent Q3 partial acceptance fixture: use only the
+          # existing Gym1 warp0, original YES sluice scripts and ordinary
+          # Elio trainer NPC. No badge/HP/party flags injected. Stop BEFORE
+          # claiming a battle loss or whiteout; log exact observed state.
+          qa_q3_outcome="NOT_RUN"
+          if [ "$qa_q4_blocked" = "0" ]; then
+            if (
+              set -Eeuo pipefail
+              if ! open_debug_menu Q3; then
+                press_debug z
+                sleep 0.7
+                open_debug_menu Q3
+              fi
+              press_debug x
+              capture "Q3-utilities-menu"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-utilities-menu.png"
+              press_debug Down
+              press_debug x
+              capture "Q3-warp-group-editor"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-group-editor.png"
+              press_debug Right
+              for i in $(seq 1 7); do press_debug Up; done
+              press_debug Left
+              for i in $(seq 1 6); do press_debug Up; done
+              press_debug x
+              # group_order index 75, AlderfieldGym local map10, warp0.
+              for i in $(seq 1 10); do press_debug Up; done
+              capture "Q3-warp-map10"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-map10.png"
+              press_debug x
+              capture "Q3-warp-index0"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-index0.png"
+              press_debug x
+              sleep 3
+              capture "Q3-real-gym-warp0"
+              python3 -u "$qa_controller" q3-gym-entry \
+                --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log" 2>&1
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+            ); then
+              qa_q3_outcome="REAL_SLUICES_AND_ELIO_INTRO_ONLY"
+              echo "QA_Q3_INTRO_PARTIAL: original gym scripts visible; whiteout NOT ACCEPTED"
+            else
+              qa_q3_outcome="BLOCKED"
+              if test -s "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"; then
+                tail -90 "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+              fi
+              echo "QA_Q3_GYM_BLOCKED: source/GUI/collision checkpoint, not a game defect"
+            fi
+          else
+            echo "QA_Q3_GYM_NOT_RUN: genuine gifted party prerequisite not proven"
+          fi
           # PREVIOUS GBA in-process soft reset genuinely rendered the title,
           # but mGBA 0.10.2's GDB socket ceased replying after CPU reset.
           # Test the stronger flash-persistence boundary: close the emulator,
@@ -539,6 +595,7 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+          echo "QA_Q3_INTERACTION_STATUS=$qa_q3_outcome (whiteout still unverified)"
           if [ "$qa_gate_blocked" != "0" ]; then
             echo "QA_Q1_GATE_PARTIAL: source negative badge gate not accepted"
             exit 2
