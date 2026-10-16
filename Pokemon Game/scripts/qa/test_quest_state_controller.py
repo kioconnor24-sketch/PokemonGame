@@ -34,6 +34,8 @@ class ObserverTests(unittest.TestCase):
                 return struct.pack("<I", 0x02000100).hex()
             if q == "m2000100,c":
                 return payload.hex()
+            if q == "m2001375,1":
+                return "00"
             if q == "c":
                 return None
             raise AssertionError(f"Unplanned remote command: {q}")
@@ -47,8 +49,18 @@ class ObserverTests(unittest.TestCase):
         result = gdb.position(0x03000100)
         self.assertEqual((result["x"], result["y"]), (13, 16))
         self.assertEqual((result["mapGroup"], result["mapNum"], result["warpId"]), (76, 9, 1))
-        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "c"])
+        self.assertEqual(commands, ["m3000100,4", "m2000100,c", "m2001375,1", "c"])
         self.assertEqual(gdb.sock.sent, [b"\x03"])
+
+    def test_saved_flag_bit_masks(self):
+        header = struct.pack("<hhbbbxhh", 13, 16, 75, 9, 1, -1, -1)
+        gdb, commands = self.fake(header)
+        old = gdb.command
+        gdb.command = lambda q, reply=True: "1c" if q == "m2001375,1" else old(q, reply)
+        state = gdb.position(0x03000100)
+        self.assertTrue(state["notesStarted"])
+        self.assertTrue(state["notesRecorded"])
+        self.assertTrue(state["notesRewarded"])
 
     def test_reject_non_ewram_pointer(self):
         gdb, commands = self.fake(b"\x00"*12)
