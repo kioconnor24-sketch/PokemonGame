@@ -114,6 +114,8 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
             f"unmerged {task.get('branch', 'task')}")
         if pr and pr.get("head_sha"):
             source += f" @{pr['head_sha'][:10]}"
+        if task.get("issue"):
+            source += f" · [epic #{task['issue']}]({GITHUB}/issues/{task['issue']})"
         row = (
             f"| {_escape(task['id'])} | {_escape(task['agent'])} | "
             f"{_escape(d['status'])} | {source} | {_escape(task['next'])} |"
