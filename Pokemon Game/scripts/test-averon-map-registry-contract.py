@@ -48,6 +48,34 @@ def stable_averon(bindings):
             raise ValueError("existing saved/QA map identity changed: " + name)
 
 
+def event_identifier_contract(maps, template_capacity):
+    """mapjson emits object IDs i+1 and warp IDs i into one global header."""
+    identifiers = {}
+    maximum_objects = maximum_warps = 0
+    for data in maps:
+        for key, limit, first, symbol in (("object_events", template_capacity, 1, "local_id"),
+                                           ("warp_events", 128, 0, "warp_id")):
+            events = data.get(key)
+            if not isinstance(events, list) or len(events) > limit:
+                raise ValueError(key + " exceeds native saved-template/signed-warp capacity")
+            if key == "object_events":
+                maximum_objects = max(maximum_objects, len(events))
+            else:
+                maximum_warps = max(maximum_warps, len(events))
+            for index, event in enumerate(events, first):
+                if not isinstance(event, dict):
+                    raise ValueError("invalid event record")
+                if symbol not in event:
+                    continue
+                name = event[symbol]
+                if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*", name):
+                    raise ValueError("invalid generated event macro")
+                if name in identifiers and identifiers[name] != index:
+                    raise ValueError("conflicting generated event identifier: " + name)
+                identifiers[name] = index
+    return maximum_objects, maximum_warps
+
+
 def generated_contract(groups, header, constants):
     bindings = registry(groups)
     stable_averon(bindings)
@@ -74,8 +102,53 @@ class MapRegistryContract(unittest.TestCase):
         cls.header = args.generated_header.read_text()
         # Read only the already-published Averon identities, not every map's
         # geometry/events or the old unrelated reference/design documents.
-        cls.constants = {name: json.loads((ENGINE / "data/maps" / name / "map.json").read_text())["id"]
-                         for name in AVERON_ORDER}
+        cls.maps = [json.loads((ENGINE / "data/maps" / name / "map.json").read_text())
+                    for name in AVERON_ORDER]
+        cls.constants = {name: data["id"] for name, data in zip(AVERON_ORDER, cls.maps)}
+        capacity = re.search(r"^#define\s+OBJECT_EVENT_TEMPLATES_COUNT\s+(\d+)\s*$",
+                             (ENGINE / "include/constants/global.h").read_text(), re.M)
+        if not capacity:
+            raise ValueError("saved object-template capacity needs source review")
+        cls.template_capacity = int(capacity[1])
+
+    def test_existing_event_identifiers_fit_engine_storage(self):
+        objects, warps = event_identifier_contract(self.maps, self.template_capacity)
+        print(f"Existing Averon16 maps: max objects={objects}/{self.template_capacity}, max warps={warps}/128")
+
+    def test_static_objects_use_saved_capacity_not_active_sprite_count(self):
+        for count in (0, 16, 17, self.template_capacity):
+            data = {"object_events": [{} for _ in range(count)], "warp_events": []}
+            self.assertEqual(event_identifier_contract([data], self.template_capacity), (count, 0))
+        data["object_events"].append({})
+        with self.assertRaises(ValueError):
+            event_identifier_contract([data], self.template_capacity)
+
+    def test_warp_event_index127_fits_but128_does_not(self):
+        data = {"object_events": [], "warp_events": [{} for _ in range(128)]}
+        data["warp_events"][-1]["warp_id"] = "WARP_BOUNDARY"
+        self.assertEqual(event_identifier_contract([data], 64), (0, 128))
+        data["warp_events"].append({"warp_id": "WARP_OVERFLOW"})
+        with self.assertRaises(ValueError):
+            event_identifier_contract([data], 64)
+
+    def test_conflicting_event_macros_across_maps_and_kinds_are_rejected(self):
+        a = {"object_events": [{"local_id": "SYMBOL"}], "warp_events": []}
+        for b in ({"object_events": [{}, {"local_id": "SYMBOL"}], "warp_events": []},
+                  {"object_events": [], "warp_events": [{"warp_id": "SYMBOL"}]}):
+            with self.assertRaises(ValueError):
+                event_identifier_contract([a, b], 64)
+        # Repeated identical numeric macros are legal in the generated header.
+        self.assertEqual(event_identifier_contract([a, copy.deepcopy(a)], 64), (1, 0))
+
+    def test_bad_event_macro_names_and_records_are_rejected(self):
+        for value in ("", "1LOCAL", "bad-name", 1, True, None):
+            data = {"object_events": [{"local_id": value}], "warp_events": []}
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                event_identifier_contract([data], 64)
+        for value in (None, {}, [None]):
+            data = {"object_events": [], "warp_events": value}
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                event_identifier_contract([data], 64)
 
     def test_live_registry_and_generated_header(self):
         generated_contract(self.groups, self.header, self.constants)
