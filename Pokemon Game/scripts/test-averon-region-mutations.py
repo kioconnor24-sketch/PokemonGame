@@ -96,6 +96,34 @@ class RegionMutationTests(unittest.TestCase):
         self.assert_detected('found = (enum AveronFixtureRegion) bindings[i].region;', 'return bindings[i].region;',
                              'test_ambiguous_and_unknown_regions_fail_closed')
 
+    def test_detects_warp_event_count_off_by_one(self):
+        self.assert_detected('return (uint32_t)warpId < metadata.warpCount;',
+                             'return (uint32_t)warpId <= metadata.warpCount;',
+                             'test_warp_indexed_requests_enforce_event_count_and_signed_byte_limit')
+
+    def test_detects_ignoring_warp_coordinate_dimensions(self):
+        self.assert_detected('return (uint32_t)x < metadata.width && (uint32_t)y < metadata.height;',
+                             'return 1;',
+                             'test_warp_coordinate_requests_enforce_dimensions_and_signed_byte_limit')
+
+    def test_detects_accepting_warp_index_signed_byte_overflow(self):
+        self.assert_detected('warpId > INT8_MAX', 'warpId > UINT8_MAX',
+                             'test_warp_indexed_requests_enforce_event_count_and_signed_byte_limit')
+
+    def test_detects_accepting_map_id_signed_byte_overflow(self):
+        self.assert_detected('mapGroup > INT8_MAX || mapNum > INT8_MAX',
+                             'mapGroup > UINT8_MAX || mapNum > UINT8_MAX',
+                             'test_warp_known_map_ids_must_fit_engine_signed_bytes')
+
+    def test_detects_accepting_warp_coordinate_signed_byte_overflow(self):
+        self.assert_detected('x > INT8_MAX || y > INT8_MAX', 'x > UINT8_MAX || y > UINT8_MAX',
+                             'test_warp_coordinate_requests_enforce_dimensions_and_signed_byte_limit')
+
+    def test_detects_accepting_non_boolean_positive_warp_reader_result(self):
+        self.assert_detected('reader(mapGroup, mapNum, context, &metadata) != 1',
+                             'reader(mapGroup, mapNum, context, &metadata) < 1',
+                             'test_warp_reader_requires_exact_success_and_preserves_context')
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

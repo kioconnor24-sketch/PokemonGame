@@ -29,6 +29,14 @@ class MapBinding(ctypes.Structure):
     _fields_ = [('map_group', ctypes.c_uint8), ('map_num', ctypes.c_uint8), ('region', ctypes.c_uint32)]
 
 
+class WarpMetadata(ctypes.Structure):
+    _fields_ = [('width', ctypes.c_uint32), ('height', ctypes.c_uint32), ('warp_count', ctypes.c_uint32)]
+
+
+WarpReader = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint32, ctypes.c_uint32,
+                             ctypes.c_void_p, ctypes.POINTER(WarpMetadata))
+
+
 class RegionFixtureTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -58,6 +66,146 @@ class RegionFixtureTests(unittest.TestCase):
             ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32,
             HealReader, ctypes.c_void_p, ctypes.POINTER(ctypes.c_uint32)]
         cls.lib.AveronRegionFixture_SelectRegionalHeal.restype = ctypes.c_int
+        cls.lib.AveronRegionFixture_IsWarpRequestValid.argtypes = [ctypes.POINTER(MapBinding), ctypes.c_size_t,
+            ctypes.c_uint32, ctypes.c_uint32, ctypes.c_int32, ctypes.c_int32, ctypes.c_int32,
+            WarpReader, ctypes.c_void_p]
+        cls.lib.AveronRegionFixture_IsWarpRequestValid.restype = ctypes.c_int
+
+    def test_warp_indexed_requests_enforce_event_count_and_signed_byte_limit(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        before = bytes(maps)
+        for count in (0, 1, 127, 128, 255):
+            for index in (0, 1, 126, 127, 128, 255, 256, 2**31 - 1):
+                calls = []
+
+                @WarpReader
+                def read(group, number, context, metadata):
+                    calls.append((group, number))
+                    metadata[0] = WarpMetadata(32767, 32767, count)
+                    return 1
+
+                actual = self.lib.AveronRegionFixture_IsWarpRequestValid(
+                    maps, 1, 3, 7, index, -1, -1, read, None)
+                self.assertEqual(actual, 0 <= index <= 127 and index < count)
+                self.assertEqual(calls, [(3, 7)] if index <= 127 else [])
+        self.assertEqual(bytes(maps), before)
+
+    def test_warp_coordinate_requests_enforce_dimensions_and_signed_byte_limit(self):
+        maps = (MapBinding * 1)(MapBinding(127, 127, SINNOH))
+        before = bytes(maps)
+        for width, height in ((1, 1), (1, 128), (128, 1), (127, 127), (128, 128), (32767, 32767)):
+            for x, y in itertools.product((-1, 0, 1, 126, 127, 128, 2**31 - 1), repeat=2):
+                calls = []
+
+                @WarpReader
+                def read(group, number, context, metadata):
+                    calls.append((group, number))
+                    metadata[0] = WarpMetadata(width, height, 0)
+                    return 1
+
+                actual = self.lib.AveronRegionFixture_IsWarpRequestValid(
+                    maps, 1, 127, 127, -1, x, y, read, None)
+                representable = 0 <= x <= 127 and 0 <= y <= 127
+                self.assertEqual(actual, representable and x < width and y < height)
+                self.assertEqual(calls, [(127, 127)] if representable else [])
+        self.assertEqual(bytes(maps), before)
+
+    def test_warp_known_map_ids_must_fit_engine_signed_bytes(self):
+        for group, number in ((0, 0), (127, 127), (128, 1), (1, 128), (255, 255)):
+            maps = (MapBinding * 1)(MapBinding(group, number, SINNOH))
+            calls = []
+
+            @WarpReader
+            def read(g, n, context, metadata):
+                calls.append((g, n))
+                metadata[0] = WarpMetadata(1, 1, 0)
+                return 1
+
+            valid = group <= 127 and number <= 127
+            self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                maps, 1, group, number, -1, 0, 0, read, None), valid)
+            self.assertEqual(calls, [(group, number)] if valid else [])
+
+    def test_warp_metadata_rejects_malformed_and_unwritten_fields(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        invalid = ((0, 1, 0), (1, 0, 0), (32768, 1, 0), (1, 32768, 0),
+                   (1, 1, 256), (2**32 - 1, 1, 0), (1, 2**32 - 1, 0), (1, 1, 2**32 - 1),
+                   (None, 1, 0), (1, None, 0), (1, 1, None), (None, None, None))
+        for values in invalid:
+            calls = []
+
+            @WarpReader
+            def read(group, number, context, metadata):
+                calls.append((group, number))
+                for field, value in zip(('width', 'height', 'warp_count'), values):
+                    if value is not None:
+                        setattr(metadata.contents, field, value)
+                return 1
+
+            self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                maps, 1, 3, 7, -1, 0, 0, read, None), 0)
+            self.assertEqual(calls, [(3, 7)])
+
+    def test_warp_reader_requires_exact_success_and_preserves_context(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        marker = ctypes.c_uint32(0xA55A1234)
+        for reply in (-1, 0, 1, 2, 2**31 - 1):
+            for context in (None, ctypes.byref(marker)):
+                calls = []
+
+                @WarpReader
+                def read(group, number, received, metadata):
+                    calls.append((group, number, received))
+                    metadata[0] = WarpMetadata(1, 1, 1)
+                    return reply
+
+                self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                    maps, 1, 3, 7, -1, 0, 0, read, context), reply == 1)
+                self.assertEqual(calls, [(3, 7, None if context is None else ctypes.addressof(marker))])
+                self.assertEqual(marker.value, 0xA55A1234)
+        self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+            maps, 1, 3, 7, -1, 0, 0, WarpReader(), None), 0)
+
+    def test_warp_invalid_request_shape_never_calls_reader(self):
+        maps = (MapBinding * 1)(MapBinding(3, 7, AVERON))
+        calls = []
+
+        @WarpReader
+        def read(group, number, context, metadata):
+            calls.append((group, number))
+            metadata[0] = WarpMetadata(32767, 32767, 255)
+            return 1
+
+        invalid = ((-2, -1, -1), (-128, -1, -1), (-2**31, -1, -1),
+                   (128, -1, -1), (255, -1, -1), (2**31 - 1, -1, -1),
+                   (0, 0, -1), (0, -1, 0), (0, 0, 0), (127, 127, 127),
+                   (-1, -1, 0), (-1, 0, -1), (-1, 128, 0), (-1, 0, 128),
+                   (-1, -2**31, 0), (-1, 0, 2**31 - 1))
+        for warp_id, x, y in invalid:
+            self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                maps, 1, 3, 7, warp_id, x, y, read, None), 0)
+        self.assertEqual(calls, [])
+
+    def test_warp_invalid_or_ambiguous_map_never_calls_reader(self):
+        maps = (MapBinding * 2)(MapBinding(3, 7, AVERON), MapBinding(3, 7, SINNOH))
+        calls = []
+
+        @WarpReader
+        def read(group, number, context, metadata):
+            calls.append((group, number))
+            metadata[0] = WarpMetadata(1, 1, 1)
+            return 1
+
+        for source, count, group, number in ((None, 1, 3, 7), (maps, 0, 3, 7), (maps, 2, 3, 7),
+                                             (maps, 1, 3, 8), (maps, 1, 256, 7), (maps, 1, 3, 256),
+                                             (maps, 1, 2**32 - 1, 7), (maps, 1, 3, 2**32 - 1)):
+            self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                source, count, group, number, -1, 0, 0, read, None), 0)
+        for region in (0, 3, 257, 258, 2**32 - 1):
+            maps[0].region = region
+            self.assertEqual(self.lib.AveronRegionFixture_IsWarpRequestValid(
+                maps, 1, 3, 7, -1, 0, 0, read, None), 0)
+        self.assertEqual(calls, [])
 
     def test_heal_selection_prefers_valid_current_region_then_validates_fallback(self):
         entries = [(3, 7, AVERON), (3, 8, AVERON), (4, 1, SINNOH)]

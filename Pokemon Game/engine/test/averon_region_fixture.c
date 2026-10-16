@@ -759,3 +759,145 @@ TEST("Averon region fixture reverse travel policy preserves the real whiteout de
     EXPECT_EQ(gSpecialVar_0x800B, 1);
     ExpectRegionLegacyState(0xA5, 0x53, healer, 9876);
 }
+
+struct WarpReadFixture
+{
+    u32 calls;
+    u32 mode;
+};
+
+static const struct AveronFixtureMapBinding sWarpFixtureMaps[] = {
+    {MAP_GROUP(MAP_SALTMERE), MAP_NUM(MAP_SALTMERE), AVERON_FIXTURE_AVERON},
+    {MAP_GROUP(MAP_ALDERFIELD), MAP_NUM(MAP_ALDERFIELD), AVERON_FIXTURE_AVERON},
+    {MAP_GROUP(MAP_COASTALMEADOW), MAP_NUM(MAP_COASTALMEADOW), AVERON_FIXTURE_AVERON},
+    {127, 1, AVERON_FIXTURE_SINNOH},
+};
+
+static int ReadWarpFixture(uint32_t group, uint32_t number, void *context,
+                           struct AveronFixtureWarpMetadata *metadata)
+{
+    struct WarpReadFixture *fixture = context;
+    fixture->calls++;
+    if (fixture->mode == 4)
+        return 1; // Missing fields must fail closed, never become large limits.
+    if (group == 127 && number == 1)
+    {
+        metadata->width = 128;
+        metadata->height = 128;
+        metadata->warpCount = 255;
+    }
+    else
+    {
+        // Never index the engine registry using arbitrary synthetic metadata.
+        if (!((group == MAP_GROUP(MAP_SALTMERE) && number == MAP_NUM(MAP_SALTMERE))
+            || (group == MAP_GROUP(MAP_ALDERFIELD) && number == MAP_NUM(MAP_ALDERFIELD))
+            || (group == MAP_GROUP(MAP_COASTALMEADOW) && number == MAP_NUM(MAP_COASTALMEADOW))))
+            return 0;
+        const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(group, number);
+        metadata->width = header->mapLayout->width;
+        metadata->height = header->mapLayout->height;
+        metadata->warpCount = header->events->warpCount;
+    }
+    switch (fixture->mode)
+    {
+    case 1: return 0;
+    case 2: return 2;
+    case 3: return -1;
+    case 5: metadata->width = 0; break;
+    case 6: metadata->height = UINT32_MAX; break;
+    case 7: metadata->warpCount = 256; break;
+    }
+    return 1;
+}
+
+TEST("Averon region fixture warp guard validates actual map bounds without changing saved state")
+{
+    SetRegionLegacyState(0xA5, 0x53, HEAL_LOCATION_ALDERFIELD, 9876);
+    struct SaveBlock1 *before = Alloc(sizeof(*before));
+    EXPECT(before != NULL);
+    memcpy(before, gSaveBlock1Ptr, sizeof(*before));
+    for (u32 i = 0; i < ARRAY_COUNT(sWarpFixtureMaps) - 1; ++i)
+    {
+        const struct AveronFixtureMapBinding *map = &sWarpFixtureMaps[i];
+        const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(map->mapGroup, map->mapNum);
+        struct WarpReadFixture reader = {0};
+        u32 width = header->mapLayout->width, height = header->mapLayout->height;
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            map->mapGroup, map->mapNum, -1, width - 1, height - 1, ReadWarpFixture, &reader), TRUE);
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            map->mapGroup, map->mapNum, -1, width, 0, ReadWarpFixture, &reader), FALSE);
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            map->mapGroup, map->mapNum, -1, 0, height, ReadWarpFixture, &reader), FALSE);
+        u32 count = header->events->warpCount;
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            map->mapGroup, map->mapNum, count, -1, -1, ReadWarpFixture, &reader), FALSE);
+        if (count)
+            EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+                map->mapGroup, map->mapNum, count - 1, -1, -1, ReadWarpFixture, &reader), TRUE);
+    }
+    EXPECT_EQ(memcmp(before, gSaveBlock1Ptr, sizeof(*before)), 0);
+    Free(before);
+}
+
+TEST("Averon region fixture warp guard rejects signed byte truncation and malformed request shapes")
+{
+    struct WarpReadFixture reader = {0};
+    const s32 invalid[] = {INT32_MIN, -2, 128, 255, 256, INT32_MAX};
+    for (u32 i = 0; i < ARRAY_COUNT(invalid); ++i)
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            127, 1, invalid[i], -1, -1, ReadWarpFixture, &reader), FALSE);
+    const s32 invalidCoords[] = {INT32_MIN, -1, 128, 256, INT32_MAX};
+    for (u32 i = 0; i < ARRAY_COUNT(invalidCoords); ++i)
+    {
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            127, 1, -1, invalidCoords[i], 0, ReadWarpFixture, &reader), FALSE);
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            127, 1, -1, 0, invalidCoords[i], ReadWarpFixture, &reader), FALSE);
+    }
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        127, 1, 0, 0, -1, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        127, 1, 0, -1, 0, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(reader.calls, 0);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        127, 1, 127, -1, -1, ReadWarpFixture, &reader), TRUE);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        127, 1, -1, 127, 127, ReadWarpFixture, &reader), TRUE);
+    EXPECT_EQ(reader.calls, 2);
+}
+
+TEST("Averon region fixture warp guard refuses malformed or unwritten map metadata")
+{
+    for (u32 mode = 1; mode <= 7; ++mode)
+    {
+        struct WarpReadFixture reader = {.mode = mode};
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            127, 1, -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            127, 1, 0, -1, -1, ReadWarpFixture, &reader), FALSE);
+        EXPECT_EQ(reader.calls, 2);
+    }
+}
+
+TEST("Averon region fixture warp guard rejects unknown or ambiguous identities before metadata lookup")
+{
+    struct WarpReadFixture reader = {0};
+    const struct AveronFixtureMapBinding duplicate[] = {{127, 1, AVERON_FIXTURE_SINNOH}, {127, 1, AVERON_FIXTURE_SINNOH}};
+    const struct AveronFixtureMapBinding unsafe[] = {{128, 1, AVERON_FIXTURE_SINNOH}, {127, 128, AVERON_FIXTURE_SINNOH}};
+    for (u32 i = 0; i < ARRAY_COUNT(unsafe); ++i)
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(unsafe, ARRAY_COUNT(unsafe),
+            unsafe[i].mapGroup, unsafe[i].mapNum, -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(duplicate, 2,
+        127, 1, -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(NULL, 1,
+        127, 1, -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, 0,
+        127, 1, -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+    const u32 invalidMaps[][2] = {{128, 1}, {127, 128}, {255, 1}, {UINT32_MAX, 1}, {127, UINT32_MAX}, {127, 2}};
+    for (u32 i = 0; i < ARRAY_COUNT(invalidMaps); ++i)
+        EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+            invalidMaps[i][0], invalidMaps[i][1], -1, 0, 0, ReadWarpFixture, &reader), FALSE);
+    EXPECT_EQ(reader.calls, 0);
+    EXPECT_EQ(AveronRegionFixture_IsWarpRequestValid(sWarpFixtureMaps, ARRAY_COUNT(sWarpFixtureMaps),
+        127, 1, -1, 0, 0, NULL, &reader), FALSE);
+}

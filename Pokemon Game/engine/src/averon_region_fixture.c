@@ -58,6 +58,33 @@ int AveronRegionFixture_IsFlyDestinationEligible(
     return currentRegion == destinationRegion;
 }
 
+int AveronRegionFixture_IsWarpRequestValid(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t mapGroup, uint32_t mapNum, int32_t warpId, int32_t x, int32_t y,
+    AveronFixtureWarpMapReader reader, void *context)
+{
+    if (!reader || mapGroup > INT8_MAX || mapNum > INT8_MAX || warpId < -1 || warpId > INT8_MAX)
+        return 0;
+    if (warpId >= 0)
+    {
+        if (x != -1 || y != -1)
+            return 0;
+    }
+    else if (x < 0 || y < 0 || x > INT8_MAX || y > INT8_MAX)
+        return 0;
+    if (AveronRegionFixture_ResolveMap(bindings, bindingCount, mapGroup, mapNum) == AVERON_FIXTURE_UNKNOWN)
+        return 0;
+    struct AveronFixtureWarpMetadata metadata = {UINT32_MAX, UINT32_MAX, UINT32_MAX};
+    if (reader(mapGroup, mapNum, context, &metadata) != 1)
+        return 0;
+    if (metadata.width == 0 || metadata.width > INT16_MAX
+        || metadata.height == 0 || metadata.height > INT16_MAX || metadata.warpCount > UINT8_MAX)
+        return 0;
+    if (warpId >= 0)
+        return (uint32_t)warpId < metadata.warpCount;
+    return (uint32_t)x < metadata.width && (uint32_t)y < metadata.height;
+}
+
 static int HealMatchesRegion(const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
                              uint32_t region, uint32_t healId,
                              AveronFixtureHealMapReader reader, void *context)

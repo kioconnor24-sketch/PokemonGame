@@ -51,6 +51,28 @@ int AveronRegionFixture_IsFlyDestinationEligible(
     uint32_t currentGroup, uint32_t currentNum,
     uint32_t destinationGroup, uint32_t destinationNum, int destinationVisited);
 
+struct AveronFixtureWarpMetadata
+{
+    uint32_t width;
+    uint32_t height;
+    uint32_t warpCount;
+};
+
+typedef int (*AveronFixtureWarpMapReader)(uint32_t mapGroup, uint32_t mapNum,
+                                        void *context, struct AveronFixtureWarpMetadata *metadata);
+
+// Request shape only, before any future SetWarpDestination(s8,...) call.
+// A known region binding with group/number 0..127 is required (signed-byte API).
+// Reader returns exactly 1 and fills all
+// metadata (positive signed-halfword dimensions, byte-sized warpCount).
+// Indexed warps require 0..127, index < warpCount, and x=y=-1.
+// Coordinate mode uses warpId=-1 and 0..127 x/y within the map dimensions.
+// No engine array access, state mutation, collision check or travel permission.
+int AveronRegionFixture_IsWarpRequestValid(
+    const struct AveronFixtureMapBinding *bindings, size_t bindingCount,
+    uint32_t mapGroup, uint32_t mapNum, int32_t warpId, int32_t x, int32_t y,
+    AveronFixtureWarpMapReader reader, void *context);
+
 typedef int (*AveronFixtureHealMapReader)(uint32_t healId, void *context,
                                         uint32_t *mapGroup, uint32_t *mapNum);
 
