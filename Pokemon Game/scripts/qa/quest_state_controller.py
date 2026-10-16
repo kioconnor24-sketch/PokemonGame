@@ -1437,14 +1437,23 @@ def q4_lab_gift(args):
         raise Blocked("Scientist refusal altered party/flag")
     print("QA_Q4_SCIENTIST_REFUSAL_NO_GIFT: observed source lab event",
           flush=True)
-    # Actual refusal closes without a new default change.
-    for i in range(5):
-        key("x",delay=0.8)
-        here, pic = read(f"refuse-dismiss-{i+1}")
-        if panel_ratio(pic) <= 0.30:
-            break
-    else:
-        raise Blocked("Could not close original scientist refusal text")
+    # The source NO branch usually closes directly into the field.
+    # First OBSERVE refusal postcondition; blindly pressing A here
+    # reopened the offer and then selected default YES in run38862320655.
+    here, pic = read("refuse-postcondition")
+    if here["devGiftReceived"] or here["playerPartyCount"] != original_party:
+        raise Blocked("Gift mutated after NO (before re-interaction)")
+    if panel_ratio(pic) > 0.30:
+        for i in range(5):
+            key("x",delay=0.8)
+            here, pic = read(f"refuse-dismiss-{i+1}")
+            if here["devGiftReceived"] or here["playerPartyCount"] != original_party:
+                raise Blocked("Unexpected grant while dismissing refusal")
+            if panel_ratio(pic) <= 0.30:
+                break
+        else:
+            raise Blocked("Could not close original scientist refusal text")
+    # A is issued exactly once ONLY after the returned field is verified.
     key("x", delay=1.4)
     for i in range(12):
         candidate, pic = read(f"reoffer-menu-{i+1}")
@@ -1734,9 +1743,24 @@ def q2_visual_relaunch(args):
     # Source bag has five pockets. SDL R has been independently verified as
     # xdotool 's' by the in-game developer R+START entry. Four single R
     # pulses move from Items to Berries, with screenshots at every stage.
+    # In real mGBA artifact12030615444, xdotool 's' did NOT cycle bag
+    # tabs. Use the actual D-pad RIGHT that changes Emerald's pocket,
+    # and require a rendered header change after each single input.
+    before_header = subprocess.check_output([
+        "convert", str(bag_frame), "-crop", "170x30+18+0",
+        "+repage", "-depth", "8", "RGB:-"])
     for i in range(4):
-        press("s")
-        shot(f"restored-bag-pocket-after-R-{i+1}")
+        press("Right")
+        frame, raw, _ = shot(f"restored-bag-pocket-after-RIGHT-{i+1}")
+        new_header = subprocess.check_output([
+            "convert", str(frame), "-crop", "170x30+18+0",
+            "+repage", "-depth", "8", "RGB:-"])
+        delta = pixel_distance(before_header, new_header)
+        print("QA_VISUAL_BAG_HEADER_CHANGED", i+1,
+              f"delta={delta:.5f}", flush=True)
+        if delta < 0.012:
+            raise Blocked("Actual D-pad RIGHT did not visibly cycle Bag pocket")
+        before_header = new_header
     print("QA_Q2_FLASH_VISUAL_PARTIAL: genuine saved process restart, "
           "title/Continue-like menu, saved Windrow field, completed artist "
           "DONE dialogue and Bag/Berry pocket screenshots captured. "
