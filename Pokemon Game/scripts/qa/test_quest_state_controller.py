@@ -48,6 +48,78 @@ class ObserverTests(unittest.TestCase):
         gdb.command = reply
         return gdb, queries
 
+    def test_read_only_source_start_menu_save_action(self):
+        # start_menu.c MENU_ACTION_SAVE == 5, selected at index 2.
+        from types import SimpleNamespace
+        g = object.__new__(qa.ReadOnlyGdb)
+        g.sock = DummySocket()
+        g.packet = lambda: "S05"
+        symbols = dict(cursor=0x02001000, count=0x02001001,
+                       actions=0x02001002, saveCallback=0x02001010,
+                       main=0x02001020, saveStatus=0x02001030,
+                       differentFile=0x02001040,
+                       callbacks={"SaveConfirmInputCallback": 0x08005000},
+                       mainCallbacks={"CB2_MainMenu": 0x08006000})
+        contents = {
+            "m2001000,1": b"\x02",
+            "m2001001,1": b"\x03",
+            "m2001002,9": bytes([2, 4, 5, 0, 0, 0, 0, 0, 0]),
+            "m2001010,4": struct.pack("<I", 0x08005001),
+            "m2001024,4": struct.pack("<I", 0x08006001),
+            "m2001030,2": struct.pack("<H", 1),
+            "m2001040,1": b"\x00",
+        }
+        commands = []
+        def reply(command, reply=True):
+            commands.append(command)
+            if command == "c":
+                return None
+            return contents[command].hex()
+        g.command = reply
+        state = g.menu_state(symbols)
+        self.assertEqual(state["selected"], 5)
+        self.assertEqual(state["actions"], [2, 4, 5])
+        self.assertEqual(state["savePhase"], "SaveConfirmInputCallback")
+        self.assertEqual(state["mainPhase"], "CB2_MainMenu")
+        self.assertEqual(state["saveStatus"], 1)
+        self.assertEqual(state["differentSaveFile"], 0)
+        self.assertEqual(g.sock.sent, [b"\x03"])
+        self.assertEqual(commands[-1], "c")
+
+    def test_invalid_start_cursor_fails_closed(self):
+        from unittest.mock import patch
+        g = object.__new__(qa.ReadOnlyGdb)
+        g.sock = DummySocket()
+        g.packet = lambda: "S05"
+        symbols = dict(cursor=0x02001000, count=0x02001001,
+                       actions=0x02001002, saveCallback=0x02001010)
+        calls = []
+        def reply(q, reply=True):
+            calls.append(q)
+            if q == "c":
+                return None
+            return {"m2001001,1": "03", "m2001000,1": "09",
+                    "m2001002,9": "020405000000000000"}[q]
+        g.command = reply
+        with self.assertRaisesRegex(qa.Blocked, "Invalid cursor"):
+            g.menu_state(symbols)
+        self.assertEqual(calls[-1], "c")
+
+    def test_actual_saved_q2_state_contract(self):
+        exact = dict(mapGroup=75, mapNum=6, x=19, y=14,
+                     notesStarted=True, notesRecorded=False,
+                     notesRewarded=False, sketchStarted=True,
+                     sketchFound=True, sketchRewarded=True,
+                     oranBerryQuantity=3)
+        qa.require_q2_complete(exact)
+        for key, bad in [("oranBerryQuantity", 6),
+                         ("sketchRewarded", False),
+                         ("notesRecorded", True), ("mapNum", 5)]:
+            with self.subTest(key=key):
+                changed = dict(exact, **{key: bad})
+                with self.assertRaises(qa.Blocked):
+                    qa.require_q2_complete(changed)
+
     def test_actual_saveblock_offsets(self):
         # global.h: pos.x/y 0/2; location group/map/warp 4/5/6.
         header = struct.pack("<hhbbbxhh", 13, 16, 76, 9, 1, -1, -1)
