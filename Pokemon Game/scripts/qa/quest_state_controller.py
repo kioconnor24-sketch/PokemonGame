@@ -157,6 +157,29 @@ def white_panel_ratio(path):
     return sum(min(rgb[i:i+3]) >= 190 for i in range(0, len(rgb), 3)) / 20000
 
 
+def assert_ui(args):
+    # Source-run screenshots establish these two different menu locations.
+    # This is an explicit graphic assertion, NOT OCR of the selected option.
+    size = subprocess.check_output(
+        ["identify", "-format", "%wx%h", str(args.frame)], text=True)
+    if size != "480x320":
+        raise Blocked(f"Unknown debug screenshot size: {size}")
+    boxes = {
+        "sidebar": ("220x200+25+35", 220*200),
+        "numeric": ("140x90+310+28", 140*90),
+    }
+    crop, pixels = boxes[args.kind]
+    rgb = subprocess.check_output(
+        ["convert", str(args.frame), "-crop", crop, "+repage",
+         "-depth", "8", "RGB:-"])
+    if len(rgb) != pixels * 3:
+        raise Blocked("Wrong debug UI crop size")
+    ratio = sum(min(rgb[i:i+3]) >= 190 for i in range(0, len(rgb), 3)) / pixels
+    print(f"QA_UI {args.kind} bright={ratio:.4f} frame={args.frame}", flush=True)
+    if ratio < 0.55:
+        raise Blocked(f"No visible {args.kind} debug UI, bright ratio={ratio:.4f}")
+
+
 def navigate(args):
     directory = Path(args.outdir)
     directory.mkdir(parents=True, exist_ok=True)
@@ -248,9 +271,16 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    u = sub.add_parser("assert-ui")
+    u.add_argument("--kind", choices=["sidebar", "numeric"], required=True)
+    u.add_argument("--frame", type=Path, required=True)
     args = parser.parse_args()
     try:
-        return daemon(args) if args.mode == "daemon" else navigate(args)
+        if args.mode == "daemon":
+            return daemon(args)
+        if args.mode == "assert-ui":
+            return assert_ui(args)
+        return navigate(args)
     except (Blocked, OSError, ValueError, subprocess.CalledProcessError,
             socket.timeout) as exc:
         print("QA_ACCESS_BLOCKED:", exc, file=sys.stderr, flush=True)
