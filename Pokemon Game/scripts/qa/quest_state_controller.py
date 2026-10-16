@@ -1562,6 +1562,131 @@ def q1_badge_gate(args):
                   "at original Alderfield tile (37,16)")
 
 
+
+def visual_frame_data(path):
+    """Source screenshot geometry only; reads pixels, never emulator memory."""
+    wh = subprocess.check_output(
+        ["identify", "-format", "%wx%h", str(path)], text=True)
+    if wh != "480x320":
+        raise Blocked(f"Unexpected actual mGBA frame geometry {wh}")
+    rgb = subprocess.check_output(
+        ["convert", str(path), "-depth", "8", "RGB:-"])
+    if len(rgb) != 480*320*3:
+        raise Blocked("Malformed actual emulator frame")
+    return rgb
+
+
+def pixel_distance(a, b):
+    if len(a) != len(b) or len(a) == 0:
+        raise Blocked("Cannot compare differently sized render frames")
+    return sum(abs(x-y) for x,y in zip(a,b))/(255.0*len(a))
+
+
+def visual_title_score(rgb):
+    if len(rgb) != 480*320*3:
+        raise Blocked("Title scoring requires exact emulator framebuffer")
+    n = 480*320
+    yellow = sum(rgb[i] > 170 and rgb[i+1] > 120 and rgb[i+2] < 120
+                 for i in range(0,len(rgb),3))/n
+    green = sum(rgb[i+1] > 100 and rgb[i+1] > rgb[i]*1.2
+                and rgb[i+1] > rgb[i+2]*0.8
+                for i in range(0,len(rgb),3))/n
+    return dict(yellow=yellow, green=green,
+                present=yellow > 0.035 and green > 0.22)
+
+
+def q2_visual_relaunch(args):
+    """Real flash-fed emulator reboot with screenshot-gated user controls.
+
+    This is NOT a memory-only flash flag acceptance; capture actual in-game
+    Continue and the completed artist dialogue for independent inspection.
+    """
+    out = Path(args.outdir)
+    index = 0
+
+    def shot(label):
+        nonlocal index
+        index += 1
+        name = f"visual-{index:03d}-{label}"
+        path = out / (name + ".png")
+        grab(args.window, path)
+        raw = visual_frame_data(path)
+        stats = visual_title_score(raw)
+        print("QA_VISUAL_REBOOT_FRAME", name, json.dumps(stats), str(path),
+              flush=True)
+        return path, raw, stats
+
+    def press(key):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", key], check=True)
+        time.sleep(0.13)
+        subprocess.run(["xdotool", "keyup", key], check=True)
+        time.sleep(1.3)
+
+    original_field = out / "save-007-return-field-5.png"
+    if not original_field.exists():
+        raise Blocked("Source-backed pre-powercycle field screenshot missing")
+    baseline = visual_frame_data(original_field)
+    title_frame = None
+    for i in range(80):
+        frame, raw, score = shot(f"title-wait-{i+1}")
+        if score["present"]:
+            title_frame = raw
+            print("QA_VISUAL_REBOOT_TITLE_RENDERED", str(frame), flush=True)
+            break
+        time.sleep(0.45)
+    if title_frame is None:
+        raise Blocked("Reboot did not render the previous verified Emerald logo")
+    press("Return")  # physical START
+    menu_frame, menu_raw, title_after = shot("real-menu-after-start")
+    scene_delta = pixel_distance(title_frame, menu_raw)
+    print("QA_VISUAL_MAIN_MENU_CHANGE", f"{scene_delta:.5f}", flush=True)
+    if scene_delta < 0.08:
+        raise Blocked("START did not visibly leave title screen")
+    # This is a *candidate* real saved CONTINUE UI; a human must inspect
+    # the menu screenshot. One ordinary A follows the source's standard
+    # SAVE_STATUS_OK CONTINUE-as-first-option behavior.
+    press("x")
+    closest = (1.0, "")
+    field_ready = False
+    for i in range(60):
+        frame, raw, _ = shot(f"field-after-continue-{i+1}")
+        delta = pixel_distance(baseline, raw)
+        print("QA_VISUAL_FIELD_MATCH", str(frame), f"{delta:.5f}", flush=True)
+        if delta < closest[0]:
+            closest = (delta,str(frame))
+        if delta < 0.18:
+            print("QA_VISUAL_RESTORED_FIELD_MATCH", str(frame),
+                  f"delta={delta:.5f}", flush=True)
+            field_ready = True
+            break
+        time.sleep(0.5)
+    if not field_ready:
+        raise Blocked(f"Continue never matched the source-saved Windrow "
+                      f"field (closest={closest})")
+    # The source image saved the avatar adjacent west of the artist, facing
+    # east, so A here must show completed artist DONE, not a fresh offer.
+    press("x")
+    done_frame, _, _ = shot("saved-artist-done-dialogue")
+    if white_panel_ratio(done_frame) < 0.50:
+        raise Blocked("Saved artist did not produce completed-quest textbox")
+    # A YESNO choice menu after actual player A would mean uncompleted Q2.
+    crop = subprocess.check_output([
+        "convert", str(done_frame), "-crop", "106x90+323+130",
+        "+repage", "-depth", "8", "RGB:-"])
+    choices = sum(min(crop[i:i+3]) >= 190
+                  for i in range(0,len(crop),3))/(106*90)
+    print("QA_VISUAL_ARTIST_MENU_RATIO", f"{choices:.4f}", flush=True)
+    if choices > 0.52:
+        raise Blocked("Artist produced YESNO instead of expected Q2 DONE")
+    print("QA_Q2_FLASH_VISUAL_PARTIAL: real flash file, restarted emulator, "
+          "observed title, physical START and Continue-like menu, saved "
+          "field render match and completed artist text. Independent "
+          "screenshots review required; encrypted Oran quantity and "
+          "all quest flags NOT PROVEN after reboot.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1592,6 +1717,9 @@ def main():
     a.add_argument("--fifo", required=True)
     a.add_argument("--outdir", required=True)
     a.add_argument("--window", required=True)
+    visual = sub.add_parser("q2-visual-relaunch")
+    visual.add_argument("--outdir", required=True)
+    visual.add_argument("--window", required=True)
     gate = sub.add_parser("q1-badge-gate")
     gate.add_argument("--fifo", required=True)
     gate.add_argument("--outdir", required=True)
@@ -1627,6 +1755,8 @@ def main():
             return q2_artist_offer(args)
         if args.mode == "navigate-artist":
             return navigate_artist(args)
+        if args.mode == "q2-visual-relaunch":
+            return q2_visual_relaunch(args)
         if args.mode == "q1-badge-gate":
             return q1_badge_gate(args)
         if args.mode == "q4-lab-gift":
