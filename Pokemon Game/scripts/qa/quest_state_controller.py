@@ -171,7 +171,7 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
-    def position(self, symbol, symbol2):
+    def position(self, symbol, symbol2, parties_count_symbol=None):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -218,6 +218,22 @@ class ReadOnlyGdb:
                 raise Blocked("Incomplete read-only Berry Pocket response")
             oran_qty = sum((saved ^ key) for item, saved in
                            struct.iter_unpack("<HH", berries) if item == 520)
+            gift_data = {}
+            if parties_count_symbol is not None:
+                # flags[0x37 // 8] uses one more saved byte; do not
+                # silently treat the sketch flag byte as the gift byte.
+                gift_raw = bytes.fromhex(self.command(
+                    f"m{ptr + 0x1270 + (0x37 // 8):x},1"))
+                count_raw = bytes.fromhex(self.command(
+                    f"m{parties_count_symbol:x},1"))
+                if len(gift_raw) != 1 or len(count_raw) != 1:
+                    raise Blocked("Incomplete gift/party count probe")
+                if count_raw[0] > 6:
+                    raise Blocked(f"Invalid actual party count {count_raw[0]}")
+                gift_data = dict(
+                    devGiftReceived=bool(
+                        gift_raw[0] & (1 << (0x37 & 7))),
+                    playerPartyCount=count_raw[0])
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
             x, y, group, number, warp = struct.unpack_from("<hhbbb", data)
@@ -231,7 +247,7 @@ class ReadOnlyGdb:
                         sketchStarted=bool(flags_byte[0] & (1 << (0x2D & 7))),
                         sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
                         sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))),
-                        oranBerryQuantity=oran_qty)
+                        oranBerryQuantity=oran_qty, **gift_data)
         finally:
             self.command("c", reply=False)
 
@@ -246,6 +262,7 @@ def reboot_transient(name, exc):
 def daemon(args):
     symbol = elf_symbol(args.elf, "gSaveBlock1Ptr")
     symbol2 = elf_symbol(args.elf, "gSaveBlock2Ptr")
+    parties_count = elf_symbol(args.elf, "gPartiesCount")
     menu_symbols = {
         "cursor": elf_symbol(args.elf, "sStartMenuCursorPos"),
         "count": elf_symbol(args.elf, "sNumStartMenuActions"),
@@ -286,7 +303,10 @@ def daemon(args):
                 try:
                     result = {"checkpoint": name}
                     if not name.startswith("title-"):
-                        result["position"] = gdb.position(symbol, symbol2)
+                        result["position"] = gdb.position(
+                            symbol, symbol2,
+                            parties_count_symbol=parties_count
+                            if name.startswith("q4-") else None)
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
