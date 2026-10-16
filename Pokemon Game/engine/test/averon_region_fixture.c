@@ -1047,11 +1047,15 @@ TEST("Averon region fixture real whiteout heals at existing respawns and survive
 
 TEST("Averon region fixture interrupted whiteout save recovers one coherent older slot")
 {
-    u32 healer, corruptPayload;
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; }
-    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; }
+    u32 healer, corruptPayload, primeSlot;
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; primeSlot = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; primeSlot = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; primeSlot = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; primeSlot = FALSE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = FALSE; primeSlot = TRUE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = FALSE; primeSlot = TRUE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_ALDERFIELD; corruptPayload = TRUE; primeSlot = TRUE; }
+    PARAMETRIZE { healer = HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F; corruptPayload = TRUE; primeSlot = TRUE; }
     CheckForFlashMemory();
     EXPECT_EQ(gFlashMemoryPresent, TRUE);
     if (!gFlashMemoryPresent)
@@ -1079,6 +1083,10 @@ TEST("Averon region fixture interrupted whiteout save recovers one coherent olde
         FlagSet(FLAG_SYS_USE_STRENGTH);
         struct Pokemon previousParty[PARTY_SIZE];
         memcpy(previousParty, gParties[B_TRAINER_PLAYER], sizeof(previousParty));
+        // One extra complete save reverses which physical slot is newest.
+        // Exercise rollback in both bank directions, not only slot0 -> slot1.
+        if (primeSlot)
+            EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
         EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
         u32 previousCounter = gSaveCounter;
         hp = 0;
