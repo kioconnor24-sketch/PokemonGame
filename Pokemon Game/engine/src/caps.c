@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "event_data.h"
 #include "caps.h"
+#include "averon_region_progression.h"
 #include "pokemon.h"
 
 
@@ -25,6 +26,10 @@ u32 GetCurrentLevelCap(void)
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
+        // Averon: a region with its own profile uses its own badge count.
+        u32 regionalCap;
+        if (AveronProgression_GetRegionalLevelCap(&regionalCap))
+            return regionalCap;
         for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
         {
             if (!FlagGet(sLevelCapFlagMap[i][0]))
