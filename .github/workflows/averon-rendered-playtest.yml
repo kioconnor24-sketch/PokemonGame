@@ -387,6 +387,17 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log"
+          # The actual artist starts a two-choice script at source (20,14).
+          # Verify refusal and acceptance entirely through rendered prompts
+          # and read-only 0x2D..0x2F saved flags; never inject stage flags.
+          if ! python3 -u "$qa_controller" q2-artist-offer \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log"
+            echo "QA_Q2_OFFER_BLOCKED: independently review stage and input"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
