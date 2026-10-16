@@ -171,7 +171,7 @@ class ReadOnlyGdb:
         finally:
             self.command("c", reply=False)
 
-    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False, gym_probe=False, battle_main_symbol=None):
+    def position(self, symbol, symbol2, parties_count_symbol=None, badge_probe=False, gym_probe=False, battle_main_symbol=None, heal_probe=False):
         self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
@@ -261,6 +261,17 @@ class ReadOnlyGdb:
                 if len(raw) != 1:
                     raise Blocked("Incomplete source battle bit read")
                 battle_data = dict(inBattle=bool(raw[0] & 2))
+            heal_data = {}
+            if heal_probe:
+                # SaveBlock1.lastHealLocation at +0x1C, read only.
+                # WarpData: s8 group,num,warp, pad; s16 x,y.
+                raw = bytes.fromhex(self.command(f"m{ptr + 0x1c:x},8"))
+                if len(raw) != 8:
+                    raise Blocked("Incomplete actual last-heal warp data")
+                hgroup, hnum, hwarp, hx, hy = struct.unpack("<bbbxhh", raw)
+                heal_data = dict(lastHealMapGroup=hgroup, lastHealMapNum=hnum,
+                                 lastHealWarpId=hwarp, lastHealX=hx,
+                                 lastHealY=hy)
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
             x, y, group, number, warp = struct.unpack_from("<hhbbb", data)
@@ -275,7 +286,7 @@ class ReadOnlyGdb:
                         sketchFound=bool(flags_byte[0] & (1 << (0x2E & 7))),
                         sketchRewarded=bool(flags_byte[0] & (1 << (0x2F & 7))),
                         oranBerryQuantity=oran_qty,
-                        **gift_data, **badge_data, **battle_data)
+                        **gift_data, **badge_data, **battle_data, **heal_data)
         finally:
             self.command("c", reply=False)
 
@@ -338,7 +349,8 @@ def daemon(args):
                             badge_probe=name.startswith(("q1-gate", "q3-")),
                             gym_probe=name.startswith("q3-"),
                             battle_main_symbol=menu_symbols["main"]
-                            if name.startswith(("q3-battle-", "q3-play-")) else None)
+                            if name.startswith(("q3-battle-", "q3-play-")) else None,
+                            heal_probe=name.startswith(("q3-clinic-", "q3-play-")))
                     if name.startswith("title-"):
                         result["menu"] = gdb.title_state(menu_symbols)
                     elif name.startswith("save-"):
@@ -1962,6 +1974,26 @@ def q3_gym_entry(args):
           flush=True)
 
 
+def q3_clinic_entry(args):
+    """Actual original clinic map must set heal point via its own script."""
+    out = Path(args.outdir)
+    frame = out / "q3-clinic-rendered-entry.png"
+    if not frame.exists():
+        raise Blocked("Actual AlderfieldClinic entry screenshot missing")
+    state = snapshot(args, "q3-clinic-source-heal")
+    if (state["mapGroup"], state["mapNum"]) != (75, 11):
+        raise Blocked(f"Expected original AlderfieldClinic(75,11): {state}")
+    if (state["lastHealMapGroup"], state["lastHealMapNum"]) != (75, 11):
+        raise Blocked(f"Original clinic transition did not register "
+                      f"its heal map through setrespawn: {state}")
+    if white_panel_ratio(frame) > 0.3:
+        raise Blocked("Clinic entry screenshot not clear field")
+    print("QA_Q3_REAL_CLINIC_RESPAWN_REGISTERED: real warp + native "
+          "AlderfieldClinic setrespawn, no memory writes; actual loss "
+          "and return need separate proof.",
+          json.dumps(state, sort_keys=True), flush=True)
+
+
 def q3_battle_start(args):
     """Start real original Elio battle with ordinary A; do not force defeat.
 
@@ -2227,6 +2259,10 @@ def main():
     gym.add_argument("--fifo", required=True)
     gym.add_argument("--outdir", required=True)
     gym.add_argument("--window", required=True)
+    clinic = sub.add_parser("q3-clinic-entry")
+    clinic.add_argument("--fifo", required=True)
+    clinic.add_argument("--outdir", required=True)
+    clinic.add_argument("--window", required=True)
     battle = sub.add_parser("q3-battle-start")
     battle.add_argument("--fifo", required=True)
     battle.add_argument("--outdir", required=True)
@@ -2274,6 +2310,8 @@ def main():
             return q1_badge_gate(args)
         if args.mode == "q3-gym-entry":
             return q3_gym_entry(args)
+        if args.mode == "q3-clinic-entry":
+            return q3_clinic_entry(args)
         if args.mode == "q3-battle-start":
             return q3_battle_start(args)
         if args.mode == "q3-battle-play":
