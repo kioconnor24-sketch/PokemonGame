@@ -230,4 +230,3 @@ TEST("Averon developer gift rejects missing prerequisite and full party without 
     for (u32 slot = 0; slot < PARTY_SIZE - 1; ++slot)
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), SPECIES_BUNNELBY);
 }
-
