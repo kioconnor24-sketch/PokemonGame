@@ -583,6 +583,192 @@ def q2_artist_offer(args):
 
 
 
+
+def q2_meadow(args):
+    """Natural Windrow -> Meadow -> Windrow route on unchanged maps.
+
+    All movement is ordinary controller input gated by per-step read-only
+    mGBA SaveBlock1 position/flags and a rendered screenshot.  Map crossing
+    and berry count are observable; no memory or save writes.
+    """
+    out = Path(args.outdir)
+    count = 400
+    windrow = (75, 6)
+    meadow = (75, 5)
+
+    def check(stage, target_map=None, field=False):
+        nonlocal count
+        count += 1
+        name = f"{count:03d}-q2-meadow-{stage}"
+        frame = out / (name + ".png")
+        grab(args.window, frame)
+        pos = snapshot(args, name)
+        print("QA_MEADOW_STATE", name, json.dumps(pos, sort_keys=True),
+              str(frame), flush=True)
+        if target_map is not None and (
+                pos["mapGroup"], pos["mapNum"]) != target_map:
+            raise Blocked(f"Unexpected map at {stage}: {pos}")
+        # No unstated quest progression is inserted or permitted.
+        if not pos["sketchStarted"] or not pos["notesStarted"]:
+            raise Blocked(f"Previously accepted quests disappeared: {pos}")
+        if pos["notesRecorded"] or pos["notesRewarded"]:
+            raise Blocked(f"Unrelated Field Notes progressed on Q2 walk: {pos}")
+        if field and white_panel_ratio(frame) > 0.30:
+            raise Blocked(f"Unexpected dialogue/battle while walking {stage}")
+        return pos, frame
+
+    def press(key, duration=0.09, wait=0.40):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", key], check=True)
+        time.sleep(duration)
+        subprocess.run(["xdotool", "keyup", key], check=True)
+        time.sleep(wait)
+
+    def move(coord, target, target_map):
+        current, _ = check(f"before-{coord}-{target}", target_map, field=True)
+        stalled = 0
+        for i in range(90):
+            if current[coord] == target:
+                return
+            sign = 1 if target > current[coord] else -1
+            key = ("Right" if sign > 0 else "Left") if coord == "x" else (
+                "Down" if sign > 0 else "Up")
+            press(key)
+            after, _ = check(f"{coord}-{target}-{i+1}-{key}",
+                             target_map, field=True)
+            other = "y" if coord == "x" else "x"
+            delta = after[coord] - current[coord]
+            if after[other] != current[other] or delta not in (0, sign):
+                raise Blocked(f"Uncontrolled Q2 route tile {current} -> {after}")
+            stalled = stalled + 1 if delta == 0 else 0
+            if stalled >= 4:
+                raise Blocked(f"Q2 collision or lost controls at {after}")
+            current = after
+        raise Blocked(f"Q2 route exceeded 90 steps to {coord}={target}")
+
+    def cross(source, dest, key, x, source_y, dest_y):
+        first, _ = check(f"before-cross-{key}", source, field=True)
+        if (first["x"], first["y"]) != (x, source_y):
+            raise Blocked(f"Wrong tile for natural map connection: {first}")
+        state = first
+        for i in range(7):
+            press(key, wait=0.85)
+            state, _ = check(f"cross-{key}-{i+1}", field=True)
+            group = (state["mapGroup"], state["mapNum"])
+            if group == dest:
+                if (state["x"], state["y"]) != (x, dest_y):
+                    raise Blocked(f"Crossed to unexpected destination tile: {state}")
+                print("QA_MEADOW_NATURAL_CONNECTION", source, dest,
+                      "at", state["x"], state["y"], flush=True)
+                return
+            if group != source or state["x"] != x:
+                raise Blocked(f"Natural connection diverged: {state}")
+            if (key == "Down" and not source_y <= state["y"] <= source_y + 2):
+                raise Blocked(f"Unexpected move before southern exit: {state}")
+            if (key == "Up" and not source_y - 2 <= state["y"] <= source_y):
+                raise Blocked(f"Unexpected move before northern exit: {state}")
+        raise Blocked(f"Natural map transition {source}->{dest} not observed")
+
+    def face(key, tile, target_map):
+        initial, _ = check(f"before-face-{key}", target_map, field=True)
+        if (initial["x"], initial["y"]) != tile:
+            raise Blocked(f"Wrong facing origin: {initial} expected {tile}")
+        press(key, duration=0.045)
+        after, _ = check(f"face-{key}", target_map, field=True)
+        if (after["x"], after["y"]) != tile:
+            raise Blocked(f"Facing toward object moved player: {after}")
+
+    def talk(tag, target_map, tile):
+        prior, prior_frame = check(f"{tag}-before-A", target_map, field=True)
+        if (prior["x"], prior["y"]) != tile:
+            raise Blocked(f"Not source-adjacent for {tag}: {prior}")
+        press("x", wait=1.3)
+        msg, screenshot = check(f"{tag}-after-A", target_map)
+        ratio = white_panel_ratio(screenshot)
+        if (msg["x"], msg["y"]) != tile or ratio < 0.50:
+            raise Blocked(f"No visible {tag} dialogue after A: {msg} {ratio:.3f}")
+        print("QA_MEADOW_DIALOGUE", tag, f"panel={ratio:.4f}",
+              str(screenshot), flush=True)
+        return prior, msg
+
+    def close_text(tag, target_map):
+        # Check before pressing. No extra A is sent after the panel closes.
+        for i in range(5):
+            before, pic = check(f"{tag}-dismiss-pre-{i}", target_map)
+            if white_panel_ratio(pic) <= 0.30:
+                return before
+            press("x", wait=1.0)
+        after, pic = check(f"{tag}-dismiss-post", target_map)
+        if white_panel_ratio(pic) > 0.30:
+            raise Blocked(f"Cannot safely dismiss {tag} without blind input")
+        return after
+
+    start, frame = check("artist-waiting", windrow)
+    if (start["x"], start["y"]) != (20, 15):
+        raise Blocked(f"Must start adjacent to Windrow artist: {start}")
+    if (start["sketchFound"] or start["sketchRewarded"]):
+        raise Blocked(f"Cannot fake fresh Meadow prerequisite: {start}")
+    before_berries = start["oranBerryQuantity"]
+    close_text("artist-waiting", windrow)
+    move("x", 19, windrow)
+    move("y", 25, windrow)
+    cross(windrow, meadow, "Down", 19, 25, 0)
+    move("x", 18, meadow)
+    move("y", 22, meadow)
+    move("x", 11, meadow)
+    face("Left", (11, 22), meadow)
+    boy_before, boy_after = talk("boy-hint", meadow, (11, 22))
+    if (boy_after["sketchFound"] or boy_after["sketchRewarded"]
+            or boy_after["oranBerryQuantity"] != before_berries):
+        raise Blocked("Meadow boy improperly granted sketch progress/reward")
+    print("QA_MEADOW_BOY_HINT_NO_PROGRESS: visible dialogue, FOUND false",
+          flush=True)
+    close_text("boy-hint", meadow)
+    move("y", 27, meadow)
+    face("Right", (11, 27), meadow)
+    tree_before, tree_after = talk("real-tree", meadow, (11, 27))
+    if tree_before["sketchFound"] or tree_before["sketchRewarded"]:
+        raise Blocked("FOUND/reward state already set before tree")
+    if (not tree_after["sketchFound"] or tree_after["sketchRewarded"]
+            or tree_after["oranBerryQuantity"] != before_berries):
+        raise Blocked(f"Tree did not set FOUND alone: {tree_after}")
+    print("QA_MEADOW_TREE_FOUND_ONLY: source BG_EVENT at (12,27), "
+          "ordinary interaction from west", flush=True)
+    close_text("tree-found", meadow)
+    again_before, again_after = talk("tree-repeat", meadow, (11, 27))
+    if (not again_after["sketchFound"] or again_after["sketchRewarded"]
+            or again_after["oranBerryQuantity"] != before_berries):
+        raise Blocked(f"Repeat tree gave premature reward/changed flag: {again_after}")
+    print("QA_MEADOW_TREE_REPEAT_NO_REWARD", flush=True)
+    close_text("tree-repeat", meadow)
+
+    # Return along the identical source-verified connection. This tests
+    # actual game navigation; a collision, wild encounter or map mismatch
+    # stops without granting any quest prerequisites.
+    move("y", 22, meadow)
+    move("x", 18, meadow)
+    move("y", 0, meadow)
+    move("x", 19, meadow)
+    cross(meadow, windrow, "Up", 19, 0, 25)
+    move("y", 14, windrow)
+    face("Right", (19, 14), windrow)
+    reward_before, reward_after = talk("artist-reward", windrow, (19, 14))
+    delta = reward_after["oranBerryQuantity"] - before_berries
+    print("QA_MEADOW_REWARD_QUANTITY", "before", before_berries,
+          "after", reward_after["oranBerryQuantity"], "delta", delta,
+          flush=True)
+    if (not reward_after["sketchStarted"] or not reward_after["sketchFound"]
+            or not reward_after["sketchRewarded"] or delta != 3):
+        raise Blocked("Artist did not add exactly three Oran Berries once "
+                      f"with REWARDED flag: {reward_after}")
+    print("QA_MEADOW_Q2_POSITIVE_BOUNDED: boy hint no effect, real tree "
+          "FOUND only, repeat tree no duplication, return artist granted "
+          "exactly +3 ORAN BERRIES by source-backed Bag read-only observer. "
+          "Requires independent screenshot review; full-pocket, flash and "
+          "whiteout remain NOT RUN.", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -596,6 +782,10 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    meadow = sub.add_parser("q2-meadow")
+    meadow.add_argument("--fifo", required=True)
+    meadow.add_argument("--outdir", required=True)
+    meadow.add_argument("--window", required=True)
     b = sub.add_parser("q2-artist-offer")
     b.add_argument("--fifo", required=True)
     b.add_argument("--outdir", required=True)
@@ -617,6 +807,8 @@ def main():
             return daemon(args)
         if args.mode == "assert-ui":
             return assert_ui(args)
+        if args.mode == "q2-meadow":
+            return q2_meadow(args)
         if args.mode == "q2-artist-offer":
             return q2_artist_offer(args)
         if args.mode == "navigate-artist":
