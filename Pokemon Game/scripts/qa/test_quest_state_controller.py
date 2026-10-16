@@ -85,9 +85,12 @@ class ObserverTests(unittest.TestCase):
         struct.pack_into("<HH", slots, 0, 520, 3)
         struct.pack_into("<HH", slots, 4, 519, 9)
         struct.pack_into("<HH", slots, 8, 520, 2)
-        gdb.command = lambda q, reply=True: (slots.hex()
-                                            if q == "m2000890,b8"
-                                            else source(q, reply))
+        def bag_reply(q, reply=True):
+            if q == "m2000890,b8":
+                commands.append(q)
+                return slots.hex()
+            return source(q, reply)
+        gdb.command = bag_reply
         state = gdb.position(0x03000100)
         self.assertEqual(state["oranBerryQuantity"], 5)
         self.assertIn("m2000890,b8", commands)
