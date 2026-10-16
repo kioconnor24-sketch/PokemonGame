@@ -1,0 +1,38 @@
+name: Averon QA observer unit tests
+
+# Fast source-only preflight for QA controller edits. This intentionally does
+# not build a GBA ROM or claim any rendered gameplay acceptance.
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/qa/quest_state_controller.py"
+      - "Pokemon Game/scripts/qa/test_quest_state_controller.py"
+      - ".github/workflows/averon-qa-observer-unit.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Pokemon Game/scripts/qa/quest_state_controller.py"
+      - "Pokemon Game/scripts/qa/test_quest_state_controller.py"
+      - ".github/workflows/averon-qa-observer-unit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa-observer-unit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile observer and execute real QA controller unit tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile "Pokemon Game/scripts/qa/quest_state_controller.py"
+          python3 "Pokemon Game/scripts/qa/test_quest_state_controller.py"
+      - name: State evidence boundary
+        run: |
+          echo "PASS here proves only source-only QA observer checks."
+          echo "Real mGBA frames, ordinary gameplay, whiteout, save and audio acceptance remain independent."
