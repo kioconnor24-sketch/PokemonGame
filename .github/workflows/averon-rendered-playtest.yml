@@ -410,6 +410,26 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log"
+          # New independent flash acceptance: real Start/SAVE UI, game
+          # callback SUCCESS, field return, then normal A+B+START+SELECT
+          # soft reset + observed title + saved Continue + replay of flags
+          # and encrypted Bag. GDB remains strictly READ ONLY.
+          if ! python3 -u "$qa_controller" q2-save \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-save.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
+            echo "QA_Q2_SAVE_BLOCKED: review exact source callback and screen; not a game bug"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
+          if ! python3 -u "$qa_controller" q2-continue \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+            echo "QA_Q2_CONTINUE_BLOCKED: do NOT claim saved-state acceptance"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
           if ! kill -0 "$emu_pid" 2>/dev/null; then
             echo "Emulator exited unexpectedly"
             cat "$RUNNER_TEMP/averon-playtest/mgba.log"
