@@ -3,6 +3,7 @@
 #include "test/overworld_script.h"
 #include "averon_scripted_battle.h"
 #include "battle.h"
+#include "battle_main.h"
 #include "event_data.h"
 #include "heal_location.h"
 #include "load_save.h"
@@ -135,6 +136,21 @@ TEST("Averon ambush loss respawns at the last heal location and keeps the badge"
     EXPECT_EQ(AveronScriptedBattle_IsNoWhiteoutActive(), FALSE);
     EXPECT(GetDestinationWarpMapHeader() == Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(expectedMap), MAP_NUM(expectedMap)));
     FlagClear(FLAG_BADGE01_GET);
+}
+
+// Owner decision 2026-10-16: the player cannot run from a scripted battle.
+// Running would forfeit, and the forfeit script takes whiteout money without
+// checking B_FLAG_NO_WHITEOUT. Ordinary trainer battles keep Gen 9 forfeiting.
+TEST("Averon scripted battles cannot be forfeited but ordinary trainer battles can")
+{
+    u32 battleTypeFlags = gBattleTypeFlags;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    EXPECT_EQ(CanPlayerForfeitNormalTrainerBattle() != FALSE, B_RUN_TRAINER_BATTLE);
+    FlagSet(B_FLAG_NO_WHITEOUT);
+    EXPECT_EQ(CanPlayerForfeitNormalTrainerBattle(), FALSE);
+    FlagClear(B_FLAG_NO_WHITEOUT);
+    gBattleTypeFlags = battleTypeFlags;
 }
 
 TEST("Averon stale no-whiteout state is cleared before ordinary battles")

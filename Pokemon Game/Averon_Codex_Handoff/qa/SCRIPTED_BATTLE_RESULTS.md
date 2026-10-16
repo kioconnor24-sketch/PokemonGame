@@ -68,16 +68,22 @@ GUI evidence exists yet.
    Then native tests that run each registered scene, and ChatGPT QA
    emulator cases for each row above.
 
-## Known gap: running from a scripted battle
+## Running from a scripted battle (fixed)
 
 `B_RUN_TRAINER_BATTLE` is `TRUE`, so the player can Run from a trainer battle,
 which forfeits. `BattleScript_ForfeitBattleGaveMoney` (`battle_scripts_1.s`)
-runs `getmoneyreward` without checking `B_FLAG_NO_WHITEOUT`, so a forfeit
-takes whiteout money even in a scripted battle (SOURCE). The test runner has no
-Run action, so this path cannot be executed natively.
+runs `getmoneyreward` without checking `B_FLAG_NO_WHITEOUT`, so before the fix
+a forfeit took whiteout money even in a scripted battle (SOURCE; the test
+runner has no Run action, so the forfeit itself cannot be executed natively).
 
 Owner decision (2026-10-16): the player cannot run from a scripted battle;
-ordinary trainer battles keep forfeiting. The fix is one line in
-`CanPlayerForfeitNormalTrainerBattle()` (`src/battle_main.c`, shared). It is
-claimed in #15 and waits for Codex's acknowledgement. Its native test already
-fails before the fix and is held back until then.
+ordinary trainer battles keep forfeiting. `CanPlayerForfeitNormalTrainerBattle()`
+in `src/battle_main.c` now returns `FALSE` while the flag is set. Every forfeit
+path uses that function (the Run menu, `TryRunFromBattle`, end of turn), so the
+player sees the usual "can't run from a trainer battle" message.
+
+| Case | Before | After | Label |
+| --- | --- | --- | --- |
+| Forfeit allowed in a scripted battle | FAIL (`EXPECT_EQ(8, 0)`) | PASS | NATIVE (function) |
+| Forfeit still allowed in an ordinary trainer battle | PASS | PASS | NATIVE (function) |
+| Run in a scripted battle shows the message and the battle continues | — | — | GUI case, not run |

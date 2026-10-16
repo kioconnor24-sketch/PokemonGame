@@ -5830,6 +5830,9 @@ bool32 CanPlayerForfeitNormalTrainerBattle(void)
     if (!B_RUN_TRAINER_BATTLE)
         return FALSE;
 
+    if (FlagGet(B_FLAG_NO_WHITEOUT)) // Averon: scripted battles cannot be run from (owner decision 2026-10-16)
+        return FALSE;
+
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         return FALSE;
 
