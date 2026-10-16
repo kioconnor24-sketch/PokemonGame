@@ -237,6 +237,31 @@ class ObserverTests(unittest.TestCase):
             gdb.title_state(dict(main=0x03001000))
         self.assertEqual(calls, ["m3001004,4", "c"])
 
+    def test_real_badge01_source_flag_read_only(self):
+        header = struct.pack("<hhbbbxhh", 37, 16, 75, 9, -1, -1, -1)
+        gdb, observed = self.fake(header)
+        orig = gdb.command
+        def reply(q, reply=True):
+            if q == "m200147c,1":
+                observed.append(q)
+                return "80"
+            return orig(q, reply)
+        gdb.command = reply
+        result = gdb.position(0x03000100, 0x03000104,
+                              badge_probe=True)
+        self.assertTrue(result["badge01"])
+        self.assertIn("m200147c,1", observed)
+
+    def test_missing_badge01_flag_rejected_without_faking_source(self):
+        header = struct.pack("<hhbbbxhh", 37, 16, 75, 9, -1, -1, -1)
+        gdb, observed = self.fake(header)
+        orig = gdb.command
+        gdb.command = lambda q, reply=True: (
+            "00" if q == "m200147c,1" else orig(q, reply))
+        result = gdb.position(0x03000100, 0x03000104,
+                              badge_probe=True)
+        self.assertFalse(result["badge01"])
+
     def test_gift_source_flag_and_player_party_read_only(self):
         header = struct.pack("<hhbbbxhh", 24, 19, 75, 14, -1, -1, -1)
         gdb, commands = self.fake(header)
