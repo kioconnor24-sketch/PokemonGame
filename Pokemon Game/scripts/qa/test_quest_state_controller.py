@@ -368,6 +368,32 @@ class ObserverTests(unittest.TestCase):
             g.position(0x03000100, 0x03000104,
                        battle_main_symbol=0x03002000)
 
+    def test_original_clinic_respawn_warp_is_read_only_and_source_backed(self):
+        # Real existing clinic MAP_SCRIPT_ON_TRANSITION performs setrespawn.
+        engine = Path(__file__).resolve().parents[2] / "engine"
+        clinic = (engine / "data/maps/AlderfieldClinic/scripts.inc").read_text()
+        self.assertIn("setrespawn HEAL_LOCATION_ALDERFIELD", clinic)
+        headers = (engine / "include/global.h").read_text()
+        self.assertIn("/*0x1C*/ struct WarpData lastHealLocation;", headers)
+        payload = struct.pack("<hhbbbxhh", 7, 8, 75, 11, 0, -1, -1)
+        g, asked = self.fake(payload)
+        before = g.command
+        def response(cmd, reply=True):
+            if cmd == "m200011c,8":
+                asked.append(cmd)
+                return struct.pack("<bbbxhh", 75, 11, -1, 7, 3).hex()
+            return before(cmd, reply)
+        g.command = response
+        data = g.position(0x03000100, 0x03000104, heal_probe=True)
+        self.assertEqual((data["lastHealMapGroup"], data["lastHealMapNum"]),
+                         (75, 11))
+        self.assertEqual(data["lastHealX"], 7)
+        self.assertIn("m200011c,8", asked)
+        g.command = lambda cmd, reply=True: (
+            "" if cmd == "m200011c,8" else before(cmd, reply))
+        with self.assertRaisesRegex(qa.Blocked, "last-heal warp"):
+            g.position(0x03000100, 0x03000104, heal_probe=True)
+
     def test_original_gym_whiteout_candidate_preserves_source_route(self):
         # Independent fixture CONTRACT, not a gameplay whiteout PASS:
         # all paths are existing engine files. Actual movement/battle must
