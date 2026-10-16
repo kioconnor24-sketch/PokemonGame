@@ -1,0 +1,57 @@
+name: Averon disposable integration rehearsal
+
+# Manual and read-only: no pushes, merges to main, paid agents, or untrusted scripts.
+on:
+  workflow_dispatch:
+    inputs:
+      first_pr:
+        description: "First existing pull request number"
+        required: true
+        type: number
+      second_pr:
+        description: "Second existing pull request number"
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  dry-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Merge both PR heads in throwaway local checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          FIRST=$(jq -r '.inputs.first_pr' "$GITHUB_EVENT_PATH")
+          SECOND=$(jq -r '.inputs.second_pr' "$GITHUB_EVENT_PATH")
+          [[ "$FIRST" =~ ^[0-9]+$ ]] && [[ "$SECOND" =~ ^[0-9]+$ ]] || {
+            echo "Invalid PR number"; exit 1;
+          }
+          [[ "$FIRST" != "$SECOND" ]] || { echo "Choose different PRs"; exit 1; }
+          BASE=$(git rev-parse HEAD)
+          git fetch --no-tags origin \
+            "+refs/pull/$FIRST/head:refs/heads/rehearsal-first" \
+            "+refs/pull/$SECOND/head:refs/heads/rehearsal-second"
+          git -c user.name='Averon Rehearsal' -c user.email='rehearsal@users.noreply.github.com' \
+            -c core.hooksPath=/dev/null merge --no-ff --no-edit rehearsal-first
+          git diff --check "$BASE"...HEAD
+          git -c user.name='Averon Rehearsal' -c user.email='rehearsal@users.noreply.github.com' \
+            -c core.hooksPath=/dev/null merge --no-ff --no-edit rehearsal-second
+          git diff --check "$BASE"...HEAD
+          {
+            echo "## Disposable two-PR merge rehearsal"
+            echo "PRs: #$FIRST + #$SECOND"
+            echo "Combined local checkout HEAD: $(git rev-parse HEAD)"
+            echo "No game build, runtime QA, or save compatibility testing performed."
+            echo "No changes pushed. Success only proves Git textual merge + whitespace checks."
+            echo "Do NOT infer approval to merge or lift frozen content."
+          } >> "$GITHUB_STEP_SUMMARY"
