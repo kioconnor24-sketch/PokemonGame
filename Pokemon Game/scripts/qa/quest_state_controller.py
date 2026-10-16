@@ -1476,6 +1476,92 @@ def q4_lab_gift(args):
           "NOT ACCEPTED.", flush=True)
 
 
+
+def q1_badge_gate(args):
+    """Observe the real pre-Badge01 Bluffs denial from ordinary Alderfield.
+
+    No badge writes, battle skips, waypoint insertion, or synthetic warp.
+    """
+    out = Path(args.outdir)
+    n = 700
+
+    def read(label, require_field=False):
+        nonlocal n
+        n += 1
+        name = f"q1-gate-{n:03d}-{label}"
+        image = out / (name + ".png")
+        grab(args.window, image)
+        data = snapshot(args, name)
+        print("QA_BLuffs_GATE", name, json.dumps(data, sort_keys=True),
+              str(image), flush=True)
+        if (data["mapGroup"], data["mapNum"]) != (75, 9):
+            raise Blocked(f"Q1 gate left original Alderfield map: {data}")
+        if data["badge01"]:
+            raise Blocked("Refuse to label badge-gate denial: actual Badge01 is set")
+        if (not data["notesStarted"] or data["notesRecorded"]
+                or data["notesRewarded"]):
+            raise Blocked(f"Q1 stage changed unexpectedly approaching gate: {data}")
+        if require_field and white_panel_ratio(image) > 0.30:
+            raise Blocked(f"Q1 unexpected dialogue during gate navigation: {data}")
+        return data, image
+
+    def key(k, duration=0.09, wait=0.46):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", k], check=True)
+        time.sleep(duration)
+        subprocess.run(["xdotool", "keyup", k], check=True)
+        time.sleep(wait)
+
+    start, image = read("researcher-accepted")
+    if (start["x"], start["y"]) != (13, 16):
+        raise Blocked(f"Q1 gate starts from researcher-adjacent tile: {start}")
+    if white_panel_ratio(image) > 0.50:
+        key("x", wait=1.0)
+        clear, image = read("researcher-accepted-dismissed")
+        if white_panel_ratio(image) > 0.30:
+            raise Blocked("Researcher waiting text did not dismiss safely")
+    last, _ = read("start-east", require_field=True)
+    stationary = 0
+    for i in range(58):
+        if last["x"] == 37:
+            break
+        key("Right")
+        state, _ = read(f"east-{i+1}", require_field=True)
+        dx = state["x"] - last["x"]
+        if state["y"] != 16 or dx not in (0, 1):
+            raise Blocked(f"Unverified ordinary Alderfield movement: {last}->{state}")
+        stationary = stationary + 1 if dx == 0 else 0
+        if stationary >= 4:
+            raise Blocked(f"Collision/blocked before source trigger x38: {state}")
+        last = state
+    else:
+        raise Blocked("Could not approach legal badge-gate x37")
+    if last["x"] != 37:
+        raise Blocked(f"Wrong gate adjacency: {last}")
+    # Actual Alderfield original coord-event at (38,16), with source
+    # CoastalBluffs_BadgeGate giving text and walk_left when no badge.
+    key("Right", wait=1.5)
+    active, prompt = read("no-badge-gate-triggered")
+    if white_panel_ratio(prompt) < 0.50:
+        raise Blocked("Badge gate produced no visibly active denial dialogue")
+    if active["x"] not in (37, 38):
+        raise Blocked(f"Unexpected trigger destination: {active}")
+    print("QA_Q1_BADGE_GATE_DENIAL_DIALOGUE_OBSERVED", flush=True)
+    key("x", wait=2.0)
+    for i in range(12):
+        post, frame = read(f"post-gate-walk-left-{i+1}")
+        if (post["x"], post["y"]) == (37, 16) and white_panel_ratio(frame) < 0.30:
+            print("QA_Q1_BADGE_GATE_NEGATIVE_PASS: actual no-badge field "
+                  "trigger, real denial dialogue and forced walk_left; "
+                  "Q1 started/recorded/rewarded unchanged, no invented map",
+                  flush=True)
+            return
+        time.sleep(0.5)
+    raise Blocked("Gate denial message seen but script did not regain field "
+                  "at original Alderfield tile (37,16)")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -1506,6 +1592,10 @@ def main():
     a.add_argument("--fifo", required=True)
     a.add_argument("--outdir", required=True)
     a.add_argument("--window", required=True)
+    gate = sub.add_parser("q1-badge-gate")
+    gate.add_argument("--fifo", required=True)
+    gate.add_argument("--outdir", required=True)
+    gate.add_argument("--window", required=True)
     gift = sub.add_parser("q4-lab-gift")
     gift.add_argument("--fifo", required=True)
     gift.add_argument("--outdir", required=True)
@@ -1537,6 +1627,8 @@ def main():
             return q2_artist_offer(args)
         if args.mode == "navigate-artist":
             return navigate_artist(args)
+        if args.mode == "q1-badge-gate":
+            return q1_badge_gate(args)
         if args.mode == "q4-lab-gift":
             return q4_lab_gift(args)
         if args.mode == "q2-relaunch-continue":
