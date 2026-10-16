@@ -303,6 +303,24 @@ class ObserverTests(unittest.TestCase):
         self.assertIn("Lechonk\nLevel: 13", elio)
         self.assertIn("Lillipup @ Oran Berry\nLevel: 15", elio)
 
+    def test_original_gym_sluice_flags_read_only(self):
+        header = struct.pack("<hhbbbxhh", 4, 14, 75, 10, 0, -1, -1)
+        gdb, commands = self.fake(header)
+        old = gdb.command
+        def reply(q, reply=True):
+            if q in ("m2001374,1", "m200147c,1"):
+                commands.append(q)
+                return "60" if q == "m2001374,1" else "00"
+            return old(q, reply)
+        gdb.command = reply
+        data = gdb.position(0x03000100, 0x03000104,
+                            badge_probe=True, gym_probe=True)
+        self.assertTrue(data["gymWestSluice"])
+        self.assertTrue(data["gymEastSluice"])
+        self.assertFalse(data["badge01"])
+        self.assertIn("m2001374,1", commands)
+        self.assertIn("m200147c,1", commands)
+
     def test_real_badge01_source_flag_read_only(self):
         header = struct.pack("<hhbbbxhh", 37, 16, 75, 9, -1, -1, -1)
         gdb, observed = self.fake(header)
