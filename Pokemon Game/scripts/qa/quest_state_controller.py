@@ -89,13 +89,22 @@ class ReadOnlyGdb:
             data = bytes.fromhex(self.command(f"m{ptr:x},c"))
             if len(data) != 12:
                 raise Blocked("SaveBlock1 header response has wrong size")
+            # Saved flags array starts at 0x1270 in QUEST global.h, and
+            # flags.h allocates NOTES_STARTED=0x2A, RECORDED=0x2B,
+            # REWARDED=0x2C. event_data.c uses flags[id/8], bit id&7.
+            flags_byte = bytes.fromhex(self.command(f"m{ptr + 0x1270 + (0x2A // 8):x},1"))
+            if len(flags_byte) != 1:
+                raise Blocked("Quest flag byte response has wrong size")
             # Verified against QUEST source global.h: pos at offset 0,
             # location mapGroup/mapNum/warpId at offsets 4/5/6.
             x, y, group, number, warp = struct.unpack_from("<hhbbb", data)
             if not 0 <= x < 256 or not 0 <= y < 256:
                 raise Blocked(f"Invalid tile ({x},{y})")
             return dict(x=x, y=y, mapGroup=group, mapNum=number,
-                        warpId=warp, saveBlockPtr=f"0x{ptr:08X}")
+                        warpId=warp, saveBlockPtr=f"0x{ptr:08X}",
+                        notesStarted=bool(flags_byte[0] & (1 << (0x2A & 7))),
+                        notesRecorded=bool(flags_byte[0] & (1 << (0x2B & 7))),
+                        notesRewarded=bool(flags_byte[0] & (1 << (0x2C & 7))))
         finally:
             self.command("c", reply=False)
 
@@ -258,6 +267,88 @@ def navigate(args):
           "NOT Q1 reward/decline/accept acceptance", flush=True)
 
 
+
+def q1_offer(args):
+    """Test only Q1 researcher decline/return/accept; no Hiker/reward claims."""
+    directory = Path(args.outdir)
+    count = 100
+
+    def observe(tag, require_panel=None):
+        nonlocal count
+        count += 1
+        name = f"{count:03d}-q1-{tag}"
+        frame = directory / (name + ".png")
+        grab(args.window, frame)
+        pos = snapshot(args, name)
+        print("QA_Q1_CHECK", name, json.dumps(pos, sort_keys=True),
+              str(frame), flush=True)
+        if (pos["mapGroup"], pos["mapNum"], pos["x"], pos["y"]) != (75, 9, 13, 16):
+            raise Blocked(f"Researcher adjacency lost during Q1: {pos}")
+        ratio = white_panel_ratio(frame)
+        print("QA_Q1_PANEL", name, f"{ratio:.4f}", flush=True)
+        if require_panel is True and ratio < 0.50:
+            raise Blocked(f"Researcher message panel missing at {tag}")
+        if require_panel is False and ratio > 0.30:
+            raise Blocked(f"Researcher message did not close at {tag}")
+        return pos, ratio
+
+    def key(name):
+        subprocess.run(["xdotool", "windowactivate", str(args.window)],
+                       check=False)
+        subprocess.run(["xdotool", "keydown", name], check=True)
+        time.sleep(0.10)
+        subprocess.run(["xdotool", "keyup", name], check=True)
+        time.sleep(0.75)
+
+    time.sleep(1)
+    state, _ = observe("researcher-offer-first", True)
+    if state["notesStarted"] or state["notesRecorded"] or state["notesRewarded"]:
+        raise Blocked("QUEST fresh offer incorrectly has preexisting progress")
+    # MSGBOX_YESNO may need separate text completion and confirm A. If its
+    # real UI behavior differs, fail closed before making a PASS assertion.
+    for i in range(2):
+        key("x")
+        state, _ = observe(f"ask-page-{i+1}", True)
+        if state["notesStarted"]:
+            raise Blocked("A unexpectedly accepted before NO branch")
+    key("Down")
+    state, _ = observe("select-no", True)
+    if state["notesStarted"]:
+        raise Blocked("Direction accidentally changed quest stage")
+    key("x")
+    state, _ = observe("decline-result")
+    if state["notesStarted"]:
+        raise Blocked("NO input produced STARTED flag; branch unverified")
+    # Ordinary dialog is dismissed with A; do not advance an unknown menu.
+    closed = False
+    for i in range(4):
+        key("x")
+        state, ratio = observe(f"decline-dismiss-{i+1}")
+        if state["notesStarted"]:
+            raise Blocked("Unexpected started flag while dismissing refusal")
+        if ratio < 0.30:
+            closed = True
+            break
+    if not closed:
+        raise Blocked("Decline text never visibly closed; stop before retry")
+    key("x")
+    state, _ = observe("researcher-offer-return", True)
+    if state["notesStarted"]:
+        raise Blocked("Repeated offer already started before YES")
+    for i in range(2):
+        key("x")
+        state, _ = observe(f"return-ask-page-{i+1}", True)
+        if state["notesStarted"]:
+            raise Blocked("Repeated offer unexpectedly accepted too early")
+    key("x")
+    state, _ = observe("accept-result", True)
+    if not state["notesStarted"] or state["notesRecorded"] or state["notesRewarded"]:
+        raise Blocked(f"YES input did not produce exact STARTED-only state: {state}")
+    print("QA_Q1_OFFER_PARTIAL_PASS: decline kept STARTED false; return YES "
+          "set STARTED true; still needs human screenshot review, Hiker, "
+          "reward, Bag and flash verification", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="mode", required=True)
@@ -271,6 +362,10 @@ def main():
     n.add_argument("--fifo", required=True)
     n.add_argument("--outdir", required=True)
     n.add_argument("--window", required=True)
+    q = sub.add_parser("q1-offer")
+    q.add_argument("--fifo", required=True)
+    q.add_argument("--outdir", required=True)
+    q.add_argument("--window", required=True)
     u = sub.add_parser("assert-ui")
     u.add_argument("--kind", choices=["sidebar", "numeric"], required=True)
     u.add_argument("--frame", type=Path, required=True)
@@ -280,6 +375,8 @@ def main():
             return daemon(args)
         if args.mode == "assert-ui":
             return assert_ui(args)
+        if args.mode == "q1-offer":
+            return q1_offer(args)
         return navigate(args)
     except (Blocked, OSError, ValueError, subprocess.CalledProcessError,
             socket.timeout) as exc:
