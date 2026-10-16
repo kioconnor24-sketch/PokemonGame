@@ -230,41 +230,71 @@ jobs:
           press z
           sleep 1
           capture "Q1-ordinary-start-closed"
-          # DEBUG_OVERWORLD_HELD_KEYS = R; START must become NEW after R
-          # has been held for several emulated frames, not in same host tick.
-          xdotool windowactivate --sync "$win" || true
-          xdotool keydown s
-          sleep 0.55
-          xdotool key --clearmodifiers Return
-          sleep 0.9
-          xdotool keyup s
-          sleep 0.8
-          capture "Q1-debug-main"
-          press x
-          sleep 0.8
+          # Explicit read-back replaces false claims that the debug warp
+          # menu was open merely because a fixed R+START stream was sent.
+          qa_controller="Pokemon Game/scripts/qa/quest_state_controller.py"
+          press_debug() {
+            xdotool windowactivate "$win" || true
+            xdotool keydown "$1"
+            sleep 0.12
+            xdotool keyup "$1"
+            sleep 0.20
+          }
+          open_debug_menu() {
+            xdotool windowactivate --sync "$win" || true
+            xdotool keydown s
+            sleep 0.50
+            xdotool keydown Return
+            sleep 0.14
+            xdotool keyup Return
+            sleep 0.35
+            xdotool keyup s
+            sleep 0.65
+            capture "Q1-debug-main"
+            python3 "$qa_controller" assert-ui --kind sidebar \
+              --frame "$RUNNER_TEMP/averon-playtest/Q1-debug-main.png"
+          }
+          if ! open_debug_menu; then
+            # One bounded feedback-gated recovery only: normal Start may
+            # have opened; B closes it before a fresh R+START.
+            press_debug z
+            sleep 0.8
+            if ! open_debug_menu; then
+              echo "QA_ACCESS_BLOCKED: R+START debug menu never rendered"
+              exit 2
+            fi
+          fi
+          press_debug x
+          sleep 0.4
           capture "Q1-utilities-menu"
-          press Down
-          press x
-          sleep 1
+          python3 "$qa_controller" assert-ui --kind sidebar \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-utilities-menu.png"
+          press_debug Down
+          press_debug x
+          sleep 0.4
           capture "Q1-warp-group-before"
-          # Actual debug.c numeric editor: tDigit=0 starts ones, Right=tens.
-          # Map group gMapGroup_AveronOpening=76 (map_groups.json).
-          press Right
-          for i in $(seq 1 7); do press Up; sleep 0.12; done
-          press Left
-          for i in $(seq 1 6); do press Up; sleep 0.12; done
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-before.png"
+          # The unchanged source registry declares group 76, map 9.
+          # Reliable down/up transitions must be long enough to register.
+          press_debug Right
+          for i in $(seq 1 7); do press_debug Up; done
+          press_debug Left
+          for i in $(seq 1 6); do press_debug Up; done
           capture "Q1-warp-group-76"
-          press x
-          sleep 0.8
-          # The existing Alderfield map is local map number 9 in group 76.
-          for i in $(seq 1 9); do press Up; sleep 0.12; done
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-76.png"
+          press_debug x
+          for i in $(seq 1 9); do press_debug Up; done
           capture "Q1-warp-map-9"
-          press x
-          sleep 0.8
-          # Existing Alderfield clinic door is warp index 1.
-          press Up
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-map-9.png"
+          press_debug x
+          press_debug Up
           capture "Q1-warp-index-1"
-          press x
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-index-1.png"
+          press_debug x
           sleep 3
           capture "Q1-alderfield-after-warp"
           # The old fixed 0.8-second holds repeatedly overshot the researcher.
