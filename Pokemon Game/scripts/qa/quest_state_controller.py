@@ -200,6 +200,13 @@ class ReadOnlyGdb:
             self.command("c", reply=False)
 
 
+def reboot_transient(name, exc):
+    """Only polling after real reset may retry unavailable debugger memory."""
+    return (name.startswith("title-") and
+            isinstance(exc, (ValueError, Blocked, OSError, socket.timeout)))
+
+
+
 def daemon(args):
     symbol = elf_symbol(args.elf, "gSaveBlock1Ptr")
     symbol2 = elf_symbol(args.elf, "gSaveBlock2Ptr")
@@ -248,8 +255,7 @@ def daemon(args):
                         result["menu"] = gdb.menu_state(
                             menu_symbols, include_tasks=name.startswith("title-"))
                 except Exception as exc:
-                    if name.startswith("title-") and isinstance(
-                            exc, (ValueError, Blocked, OSError, socket.timeout)):
+                    if reboot_transient(name, exc):
                         # Expected possibility while GBA's CPU resets and
                         # gTasks/menu globals are not initialized. Preserve
                         # a non-accepting, observable retry state; do not
