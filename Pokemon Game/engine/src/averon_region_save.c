@@ -9,6 +9,8 @@
 #include "constants/map_groups.h"
 #include "data/map_group_count.h"
 
+extern const struct MapHeader *const *const gMapGroups[];
+
 // See averon_region_save.h for the format. Record layout (little-endian):
 //   0..3   tag            4..5 format        6..7 length (64)
 //   8..11  save counter, equal to the containing sector footer's
@@ -131,6 +133,10 @@ static bool32 IsWarpValid(s32 group, s32 num, s32 warpId, s32 x, s32 y)
 {
     const struct MapHeader *header;
     if (group < 0 || group >= MAP_GROUPS_COUNT || group > 127)
+        return FALSE;
+    // Disabled regions retain numeric map IDs and counts, but have no
+    // linked group. The overworld lookup dereferences the group pointer.
+    if (gMapGroups[group] == NULL)
         return FALSE;
     if (num < 0 || num >= MAP_GROUP_COUNT[group] || num > 127)
         return FALSE;
