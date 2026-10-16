@@ -73,9 +73,10 @@ def calculate(tasks: list[dict], snapshot: dict) -> dict[str, dict]:
             if not task.get("qa_cases"):
                 status = "MERGED"
         elif missing:
-            status = "BLOCKED ON " + ", ".join(missing)
+            status = ("DEVELOPMENT OPEN; MERGE GATED ON " if task.get("parallel_development") else "BLOCKED ON ") + ", ".join(missing)
         elif task.get("requires_handoff"):
-            status = "MANUAL SHARED-FILE HANDOFF REQUIRED"
+            status = ("DEVELOPMENT OPEN; SHARED-FILE MERGE HANDOFF REQUIRED"
+                      if task.get("parallel_development") else "MANUAL SHARED-FILE HANDOFF REQUIRED")
         elif pr and pr.get("merged") and task.get("qa_cases"):
             status = "MERGED; REQUIRED QA SIGNOFF NOT FOUND"
         elif pr and pr.get("state") == "open":
@@ -103,6 +104,11 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         "> **HARD FREEZE:** No new temporary or production maps, region geography, "
         "unapproved story, Gym, encounter placement, trainer roster, level curve or art. "
         "**No automated agent launch, shared-file handoff, QA acceptance or code merge.**\n\n"
+        "> **PARALLEL WORK:** A dependency can gate **merging into main** without blocking "
+        "development/testing in an independently claimed, file-disjoint feature branch. "
+        "Only the specific overlapping protected-file edit needs an exclusive handoff. "
+        "A board label saying DEVELOPMENT OPEN does not constitute approval for new maps, "
+        "story, trainer rosters, unclaimed creative features, save IDs or merge.\n\n"
     )
     all_table = ["| Task | Owner | Status | Source | Next action |",
                  "| --- | --- | --- | --- | --- |"]
@@ -151,6 +157,10 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
               "'QA_ACCEPTED PR=#N SHA=<40 hex> CASES=Q1,Q2,... STATUS=PASS' "
               "in Issue #23 can meet a machine-readable acceptance gate, and that "
               "does **not** authorize merge. The actual screenshots/tests must be reviewed.\n\n"
+            + "**Development vs. integration:** a status of DEVELOPMENT OPEN; MERGE GATED means "
+              "the assigned engineer can continue code, branch-local builds and tests in own "
+              "file-disjoint areas NOW. Only merging, shared-file collision and actual gameplay "
+              "QA must wait. Do not stop a session merely because another PR is open.\n\n"
             + "**Shared-file rule:** even after prerequisite PRs merge, an exclusive "
               "Codex/Claude handoff documented in Issue #15 is required; this board "
               "does not grant that handoff.\n\n"
