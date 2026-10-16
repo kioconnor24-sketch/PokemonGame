@@ -1,4 +1,5 @@
 #include "global.h"
+#include "averon_region_save.h"
 #include "clock.h"
 #include "new_game.h"
 #include "random.h"
@@ -177,6 +178,7 @@ void NewGameInitData(void)
     ClearFrontierRecord();
     ClearSav1();
     ClearSav3();
+    AveronRegionSave_InitNewGame();
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;

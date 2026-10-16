@@ -2527,6 +2527,8 @@ u32 FilterFlyDestination(struct RegionMap* regionMap)
     case MAPSEC_EVER_GRANDE_CITY:
         return (FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
     default:
+        if (regionMap->mapSecId >= ARRAY_COUNT(sMapHealLocations))
+            return WARP_ID_NONE;
         if (sMapHealLocations[regionMap->mapSecId][2] != HEAL_LOCATION_NONE)
             return sMapHealLocations[regionMap->mapSecId][2];
         else
@@ -2540,6 +2542,6 @@ void SetFlyDestination(struct RegionMap* regionMap)
 
     if (flyDestination != WARP_ID_NONE)
         SetWarpDestinationToHealLocation(flyDestination);
-    else
+    else if (regionMap->mapSecId < ARRAY_COUNT(sMapHealLocations))
         SetWarpDestinationToMapWarp(sMapHealLocations[regionMap->mapSecId][0], sMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
 }

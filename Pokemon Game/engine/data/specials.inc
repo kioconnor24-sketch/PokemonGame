@@ -642,3 +642,5 @@ gSpecials::
 	def_special UpdateFollowingPokemon
 
 	def_special GetCurrentLevelCap
+
+	def_special AveronRegion_BeginTravelSpecial

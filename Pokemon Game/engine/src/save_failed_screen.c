@@ -1,4 +1,5 @@
 #include "global.h"
+#include "averon_region_save.h"
 #include "text.h"
 #include "main.h"
 #include "malloc.h"
@@ -258,6 +259,16 @@ static void CB2_WipeSave(void)
     u8 wipeTries = 0;
 
     sClockInfo[CLOCK_RUNNING] = TRUE;
+
+    // Averon: the save was refused because flash holds a newer-format save.
+    // The sectors marked damaged are that save; wiping them would destroy it.
+    if (AveronRegionSave_IsWriteBlocked())
+    {
+        FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
+        SaveFailedScreenTextPrint(gText_BackupMemoryDamaged, 1, 0);
+        SetMainCallback2(CB2_GameplayCannotBeContinued);
+        return;
+    }
 
     while (gDamagedSaveSectors != 0 && wipeTries < 3)
     {

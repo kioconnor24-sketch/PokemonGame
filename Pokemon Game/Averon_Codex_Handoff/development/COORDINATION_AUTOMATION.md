@@ -1,3 +1,5 @@
+> **LATEST NO-WAIT HANDOFF (2026-10-16):** [BACKEND_TO_SINNOH_EXECUTION.md](BACKEND_TO_SINNOH_EXECUTION.md) assigns primary/secondary/fallback work and exact `WAITING_ON`/`RESUME_WHEN` triggers for Codex, Claude and Playtest. Use the new [current commands](NEXT_AGENT_COMMANDS.md); do not follow old example instructions below that say wait for #14 before independently testing #25/#47/TWO-REGION. Daily GitHub board refresh shows new messages but cannot start an AI coding session, send an external notification by itself, authorize a protected edit or merge a feature. No unattended paid/API agent runs are configured. Sinnoh maps cannot start until backend gate #46 and explicit owner approval.
+
 # Pokémon Averon — GitHub coordination and optional agent automation
 
 **This is infrastructure, not another game design plan.** It does not authorize maps (including temporary map files), story/Gym/encounter/level decisions, automatic merging, or concurrent protected-source changes.

@@ -1,3 +1,5 @@
+> **CURRENT OWNER-APPROVED DIVISION (2026-10-16):** [Backend-to-Sinnoh execution and no-wait ladder](BACKEND_TO_SINNOH_EXECUTION.md) replaces stale "QUEST then TWO-REGION only" and "one coding PR per lead" statements below. **Codex:** QUEST #14 and TWO-REGION badge/region-specific caps/obedience/travel/save; **Claude:** SCRIPTED-BATTLE #25, already-open LEGEND #47, general species/forms/evolution/EXP/followers/AI; **Playtest:** real game/emulator QA #20/#23; **Manager:** source integration, cross-PR builds, resource/flash budget. An exact-file claim on an unclaimed nonprotected path is a notification. Continue safe disjoint work while a different PR merges; only overlapping protected edits and required final QA remain gated. New map production remains entirely frozen until #46 is actually met and the owner separately authorizes Sinnoh.
+
 # Pokémon Averon — four-agent engineering roles and GitHub coordination
 
 **Approved by the project owner on 2026-10-15.**
@@ -52,7 +54,7 @@ Player-observable acceptance:
 Build and native/emulator test gate:
 ```
 
-Use feature branches like `codex/<feature>` or `claude/<feature>`, from fresh `main` when independent; one coding PR per developer. Allow a single separate integration/ops PR at most. Avoid stacking on another PR unless the dependency is explicit and coordinated.
+Use feature branches like `codex/<feature>` or `claude/<feature>`, from fresh `main` when independent; one primary and at most one useful truly disjoint secondary coding PR per lead, as defined in the latest owner policy. This does not permit overlapping sources or duplicate implementations. Avoid stacking on another PR unless the dependency is explicit and coordinated.
 
 **High-risk shared files** (e.g., `engine/include/constants/flags.h`, `vars.h`, `save.c`, `global.h`, event script registries, region/badge APIs, shared species tables and generated data) are serialized, not edited simultaneously. An explicit handoff or file-disjoint interface contract is needed. Source generators and outputs must remain in sync.
 
