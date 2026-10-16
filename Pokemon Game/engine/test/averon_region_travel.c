@@ -9,6 +9,7 @@
 #include "pokemon.h"
 #include "save.h"
 #include "gba/flash_internal.h"
+#include "test/overworld_script.h"
 #include "constants/heal_locations.h"
 #include "constants/map_groups.h"
 
@@ -329,4 +330,48 @@ TEST("Averon region travel power loss while saving keeps region and location tog
         EXPECT_EQ(status, SAVE_STATUS_ERROR);
         EXPECT(SameSnapshot(&beforeTravel));
     }
+}
+
+// The special is registered in data/specials.inc, which also keeps the
+// transaction in the GBA ROM: without a gSpecials entry nothing references
+// it and the linker drops it. This goes through the real `special` command.
+TEST("Averon region travel runs from an overworld script through the registered special")
+{
+    struct TravelSnapshot before;
+    struct WarpData warp;
+    StartInAveron();
+
+    gSpecialVar_0x8004 = AVERON_SAVE_REGION_AVERON; // already there
+    gSpecialVar_0x8005 = 0xFFFF;
+    gSpecialVar_Result = 0xBEEF;
+    Snapshot(&before);
+    RUN_OVERWORLD_SCRIPT(special AveronRegion_BeginTravelSpecial;);
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT(SameSnapshot(&before));
+
+    gSpecialVar_0x8004 = AVERON_SAVE_REGION_SINNOH;
+    gSpecialVar_0x8005 = MAP_GROUP(MAP_OLDALE_TOWN);
+    gSpecialVar_0x8006 = MAP_NUM(MAP_OLDALE_TOWN);
+    gSpecialVar_0x8007 = (u16)WARP_ID_NONE;
+    gSpecialVar_0x8008 = 10;
+    gSpecialVar_0x8009 = 9;
+    RUN_OVERWORLD_SCRIPT(special AveronRegion_BeginTravelSpecial;);
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(AveronRegion_GetActive(), AVERON_SAVE_REGION_SINNOH);
+    EXPECT(AveronRegion_GetReturnWarp(AVERON_SAVE_REGION_AVERON, &warp));
+    EXPECT(WarpIs(&warp, MAP_PETALBURG_CITY, WARP_ID_NONE, 15, 15));
+    Arrive();
+    EXPECT(WarpIs(&gSaveBlock1Ptr->location, MAP_OLDALE_TOWN, WARP_ID_NONE, 10, 9));
+
+    // Back the way the player came, by the "return" form of the special.
+    gSpecialVar_0x8004 = AVERON_SAVE_REGION_AVERON;
+    gSpecialVar_0x8005 = 0xFFFF;
+    RUN_OVERWORLD_SCRIPT(special AveronRegion_BeginTravelSpecial;);
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(AveronRegion_GetActive(), AVERON_SAVE_REGION_AVERON);
+    Arrive();
+    EXPECT(WarpIs(&gSaveBlock1Ptr->location, MAP_PETALBURG_CITY, WARP_ID_NONE, 15, 15));
+    WhiteOut(); // the Averon healer is armed again
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_PETALBURG_CITY_POKEMON_CENTER_1F));
+    EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_PETALBURG_CITY_POKEMON_CENTER_1F));
 }

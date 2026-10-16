@@ -2,7 +2,8 @@
 
 Status: **TESTED ON ISOLATED BRANCH / INTEGRATION PENDING**. This branch builds on
 PR #56 (the region save). It adds no maps, flags, vars or save fields, and it
-doesn't touch event scripts. No Sinnoh map exists yet, so the tests use Hoenn
+doesn't touch event scripts. Its only registry change is one `def_special`
+line at the end of `data/specials.inc`. No Sinnoh map exists yet, so the tests use Hoenn
 maps as stand-ins: Petalburg for Averon and Oldale for Sinnoh.
 
 ## Code
@@ -16,11 +17,26 @@ maps as stand-ins: Petalburg for Averon and Oldale for Sinnoh.
   - aims Escape Rope and Dig at the arrival point;
   - sets the warp destination. The caller then performs the warp.
   `arrival == NULL` returns the player to where they left the target region.
-- `AveronRegion_BeginTravelSpecial`: script entry (`callnative`). Reads
-  VAR_0x8004..0x8009 and rejects values that would wrap when narrowed to s8.
+- `AveronRegion_BeginTravelSpecial`: script entry, registered as
+  `special AveronRegion_BeginTravelSpecial` (untagged, so script effect
+  analysis stops before it). Reads VAR_0x8004..0x8009 and rejects values
+  that would wrap when narrowed to s8.
+- Why it's registered: with nothing referencing it, `--gc-sections` dropped
+  the whole transaction from the GBA ROM (`arm-none-eabi-nm` on `fe1c1c3e`
+  showed neither function), so it existed only in the test ROM. The
+  `gSpecials` entry keeps it linked: `AveronRegion_BeginTravel` at
+  0x08006798 and `AveronRegion_BeginTravelSpecial` at 0x08006898 in
+  `pokeemerald.elf`, text +392 B, data +4 B.
 
 ## Evidence (native mGBA test runner, this machine; no emulator GUI, no Delta)
-`make check TESTS="Averon region travel"`: **6/6 PASS**.
+`make check TESTS="Averon region travel"`: **7/7 PASS**.
+- Through the real `special` command (`RUN_OVERWORLD_SCRIPT`): a same-region
+  request fails and changes nothing; travel to the stand-in Sinnoh stores the
+  Averon return point and lands at the arrival; the "return" form brings the
+  player back to the exact tile, and whiteout uses the Averon healer again.
+  Removing the `specials.inc` line breaks the test build (undefined
+  `SPECIAL_AveronRegion_BeginTravelSpecial`), so the registration can't be
+  dropped silently.
 - The departure is stored. Whiteout, Teleport and Escape Rope stay in the new
   region before the player heals there.
 - Whiteout goes to the Pokémon Center of the region the player is in, both
