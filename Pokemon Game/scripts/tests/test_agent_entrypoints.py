@@ -20,8 +20,7 @@ class AgentEntrypointTests(unittest.TestCase):
             with self.subTest(path=str(path)):
                 beginning = path.read_text(encoding="utf-8")[:1800]
                 self.assertIn("Issue #15", beginning)
-                self.assertIn("Codex", beginning)
-                self.assertIn("Playtest", beginning)
+                # Do not pin a particular agent name: the owner may change roles.
                 self.assertIn("main", beginning)
                 self.assertRegex(beginning.lower(), r"map")
 
