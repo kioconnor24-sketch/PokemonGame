@@ -14,7 +14,7 @@
 #include "constants/heal_locations.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
-#include "data/map_group_count.h"
+#include "../src/data/map_group_count.h"
 
 extern const struct MapHeader *const *const gMapGroups[];
 
