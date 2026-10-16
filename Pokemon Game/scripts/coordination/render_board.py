@@ -110,21 +110,39 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         "A board label saying DEVELOPMENT OPEN does not constitute approval for new maps, "
         "story, trainer rosters, unclaimed creative features, save IDs or merge.\n\n"
     )
+    preface += (
+        "> **BACKEND FIRST / NO IDLE WAITING:** The [owner's complete pre-Sinnoh "
+        "completion inventory and no-wait fallbacks]("
+        + GITHUB + "/blob/main/Pokemon%20Game/Averon_Codex_Handoff/development/"
+        "BACKEND_TO_SINNOH_EXECUTION.md) and [milestone #46]("
+        + GITHUB + "/issues/46) govern task selection. A blocked merge means "
+        "execute the explicit file-disjoint fallback, then check only the "
+        "specified resume condition. No new maps before owner approval. "
+        "GitHub comments never auto-start agents.\n\n"
+    )
     all_table = ["| Task | Owner | Status | Source | Next action |",
                  "| --- | --- | --- | --- | --- |"]
     inboxes: dict[str, list[str]] = {a: [] for a in AGENTS}
     for task in tasks:
         d = computed[task["id"]]
         pr = d["pr"]
-        source = f"[#{task['pr']}]({GITHUB}/pull/{task['pr']})" if task.get("pr") else (
-            f"unmerged {task.get('branch', 'task')}")
+        source = (f"[#{task['pr']}]({GITHUB}/pull/{task['pr']})"
+                  if task.get("pr") else
+                  (f"unmerged {task['branch']}" if task.get("branch")
+                   else "unclaimed backend lane"))
         if pr and pr.get("head_sha"):
             source += f" @{pr['head_sha'][:10]}"
         if task.get("issue"):
             source += f" · [epic #{task['issue']}]({GITHUB}/issues/{task['issue']})"
+        # Explicit next alternative in the same board row keeps a blocked
+        # shared merge from becoming an idle developer session.
+        fallback = task.get("fallback_order", [])
+        next_action = task["next"]
+        if fallback and not d["status"].startswith("MERGED"):
+            next_action += f" **While waiting:** {fallback[0]}."
         row = (
             f"| {_escape(task['id'])} | {_escape(task['agent'])} | "
-            f"{_escape(d['status'])} | {source} | {_escape(task['next'])} |"
+            f"{_escape(d['status'])} | {source} | {_escape(next_action)} |"
         )
         all_table.append(row)
         inboxes[task["agent"]].append(row)
