@@ -47,7 +47,7 @@
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "Epic #35: owner-approved two shared hook lines ALREADY PUSHED 9e4340b0; keep #25 unmerged until QUEST #14; strengthen tests, prepare future QA, seek new handoff for any additional protected path.",
+      "next": "Epic #35: owner-approved two shared lines ALREADY PUSHED; exclusive-files correctly blocks current #14 overlap. #25 remains draft until #14 QA acceptance and merge, then rebase and retest.",
       "issue": 35
     },
     {
@@ -55,7 +55,7 @@
       "agent": "claude",
       "pr": 29,
       "deps": [],
-      "next": "Epic #35: review and merge #29 with 282 individually classified expected failures and unknown-failure detection, then permit #30.",
+      "next": "Epic #35: MERGED #29 as 96dd43ef; baseline parser is now protected by standard CI 12/12 via #38. Continue with dependent #30; no further #29 edits needed.",
       "issue": 35
     },
     {
@@ -65,7 +65,7 @@
       "deps": [
         "NATIVE-BASELINE"
       ],
-      "next": "Epic #35: after #29 merges, incorporate exactly 45 specifically confirmed primal-disabled expectation changes, rebuild/review #30.",
+      "next": "Epic #35: prerequisite #29 now MERGED; Claude updates existing #30 with exactly 45 source-matched primal-disabled expected failures, targeted native/build/review before merge.",
       "issue": 35
     },
     {
