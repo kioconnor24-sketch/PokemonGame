@@ -193,6 +193,18 @@ class ObserverTests(unittest.TestCase):
         self.assertIn("m2000890,b8", commands)
         self.assertEqual(gdb.sock.sent, [b"\x03"])
 
+    def test_reset_transient_is_allowed_only_for_title_poll(self):
+        self.assertTrue(qa.reboot_transient(
+            "title-102-title-poll-1", ValueError("non-hexadecimal debugger reply")))
+        self.assertTrue(qa.reboot_transient(
+            "title-102-title-poll-1", qa.Blocked("uninitialized title globals")))
+        self.assertFalse(qa.reboot_transient(
+            "save-006-write-stage-1", ValueError("non-hexadecimal reply")))
+        self.assertFalse(qa.reboot_transient(
+            "401-q2-meadow-step", ValueError("non-hexadecimal reply")))
+        self.assertFalse(qa.reboot_transient(
+            "title-102-title-poll-2", RuntimeError("unexpected reader defect")))
+
     def test_reject_non_ewram_pointer(self):
         gdb, commands = self.fake(b"\x00"*12)
         def invalid(q, reply=True):
