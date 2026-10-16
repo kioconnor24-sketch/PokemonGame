@@ -98,7 +98,7 @@ class NativeBaselineTests(unittest.TestCase):
         entries = check.parse_baseline(check.BASELINE.read_text())
         self.assertGreater(len(entries), 0)
         reasons = {reason for _, _, reason in entries.values()}
-        self.assertEqual(reasons, {'gimmick-disabled', 'level-cap', 'runner-self-test'})
+        self.assertEqual(reasons, {'gimmick-disabled', 'level-cap', 'runner-self-test', 'primal-disabled'})
 
 
 if __name__ == '__main__':

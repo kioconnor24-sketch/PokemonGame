@@ -10,6 +10,9 @@
 #   level-cap         EXP_CAP_HARD with no badges caps levels at 15
 #                     (src/caps.c); see the Issue #15 FINDING on EXP.
 #   runner-self-test  KNOWN_CRASHING tests in test/test_test_runner.c.
+#   primal-disabled   Averon turns off Primal Reversion (TryPrimalReversion in
+#                     src/battle_util.c); each of these upstream tests holds a
+#                     Red or Blue Orb in its own body and expects the change.
 
 # --- level-cap (5)
 FAIL | level-cap | Both opponent's Pokemon give experience in battle against two opponents
@@ -298,3 +301,50 @@ INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Encored
 INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Imprisoned
 INVALID | gimmick-disabled | Z-Move: Z-Moves can be selected while Tormented
 FAIL | gimmick-disabled | Z-Moves animations work
+
+# --- primal-disabled (45)
+FAIL | primal-disabled | AI sees that Primal weather can block a move by type
+FAIL | primal-disabled | Chilly Reception switches the user out, even if the weather does not change
+FAIL | primal-disabled | Desolate Land blocks damaging Water-type moves
+FAIL | primal-disabled | Desolate Land blocks damaging Water-type moves and prints the message only once with moves hitting multiple targets
+FAIL | primal-disabled | Desolate Land blocks weather-setting moves
+FAIL | primal-disabled | Desolate Land can be replaced by Primordial Sea
+FAIL | primal-disabled | Desolate Land ending reverts Castform before the replacement Drizzle activates
+FAIL | primal-disabled | Desolate Land fails if overworld weather is present (Gen9)
+FAIL | primal-disabled | Desolate Land is removed immediately if user faints
+FAIL | primal-disabled | Desolate Land persists when another holder sustains it during an Ability replacement
+FAIL | primal-disabled | Desolate Land prevents other weather abilities
+FAIL | primal-disabled | Desolate Land will not create a softlock when move in semi invulnerable position is blocked
+FAIL | primal-disabled | Drizzle fails if Desolate Land is active
+FAIL | primal-disabled | Embargo doesn't prevent Primal Reversion
+FAIL | primal-disabled | Entrainment causes primal weather to revert
+FAIL | primal-disabled | Forecast transforms Castform in primal weather
+FAIL | primal-disabled | Forecast: All Forecast mons revert on the field if Primal Weather is removed due to fainting
+FAIL | primal-disabled | Hail fails if Desolate Land or Primordial Sea are active
+FAIL | primal-disabled | Primal Reversion and other switch-in effects trigger for all battlers if multiple fainted the previous turn
+FAIL | primal-disabled | Primal Reversion happens after a mon is sent out after a mon is fainted
+FAIL | primal-disabled | Primal Reversion happens after a mon is switched in
+FAIL | primal-disabled | Primal Reversion happens after a switch-in caused by Eject Button
+FAIL | primal-disabled | Primal Reversion happens after a switch-in caused by Red Card
+FAIL | primal-disabled | Primal Reversion happens after the entry hazards damage
+FAIL | primal-disabled | Primal Reversion happens for Groudon only when holding Red Orb
+FAIL | primal-disabled | Primal Reversion happens for Kyogre only when holding Blue Orb
+FAIL | primal-disabled | Primal Reversion happens immediately if it was brought in by U-turn
+FAIL | primal-disabled | Primal Reversion is NOT reverted upon fainting
+FAIL | primal-disabled | Primal Reversion triggers for all battlers if multiple fainted the previous turn
+FAIL | primal-disabled | Primal Reversion triggers for multiple battlers if multiple fainted the previous turn
+FAIL | primal-disabled | Primal Reversion's order is determined by Speed - opponent faster
+FAIL | primal-disabled | Primal Reversion's order is determined by Speed - player faster
+FAIL | primal-disabled | Primordial Sea blocks damaging Fire-type moves
+FAIL | primal-disabled | Primordial Sea blocks damaging Fire-type moves and prints the message only once with moves hitting multiple targets
+FAIL | primal-disabled | Primordial Sea blocks weather-setting moves
+FAIL | primal-disabled | Primordial Sea can be replaced by Desolate Land
+FAIL | primal-disabled | Primordial Sea ending reverts Castform before the replacement Drizzle activates
+FAIL | primal-disabled | Primordial Sea fails if overworld weather is present (Gen9)
+FAIL | primal-disabled | Primordial Sea persists when another holder sustains it during an Ability replacement
+FAIL | primal-disabled | Primordial Sea prevents other weather abilities
+FAIL | primal-disabled | Snowscape fails if Desolate Land or Primordial Sea are active
+FAIL | primal-disabled | Strong winds can be replaced by Desolate Land
+FAIL | primal-disabled | Strong winds can be replaced by Primordial Sea
+FAIL | primal-disabled | Sunny Day fails if Primordial Sea is active
+FAIL | primal-disabled | Toxic Spikes inflicts poison on switch in after Primal Reversed mon fainted
