@@ -249,6 +249,13 @@ jobs:
           # From run 38833560489 player is visibly ONE tile SOUTH of
           # Alderfield researcher (same screen X, NPC directly above).
           # Do not move farther or A from the wrong facing; face UP first.
+          xdotool keydown Down; sleep 0.24; xdotool keyup Down
+          sleep 0.5
+          xdotool keydown Left; sleep 0.24; xdotool keyup Left
+          sleep 0.5
+          press Left
+          sleep 0.5
+          capture "Q1-adjacent-south"
           xdotool key --clearmodifiers Up
           sleep 0.6
           capture "Q1-facing-up"
