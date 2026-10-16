@@ -8,6 +8,7 @@ on:
       - ".github/workflows/averon-agent-*.yml"
       - ".github/workflows/averon-shared-file-guard.yml"
       - ".github/workflows/averon-integration-rehearsal.yml"
+      - ".github/workflows/averon-combined-build.yml"
       - ".github/workflows/averon-coordination-tests.yml"
   push:
     branches: [main]
@@ -18,6 +19,7 @@ on:
       - ".github/workflows/averon-agent-*.yml"
       - ".github/workflows/averon-shared-file-guard.yml"
       - ".github/workflows/averon-integration-rehearsal.yml"
+      - ".github/workflows/averon-combined-build.yml"
       - ".github/workflows/averon-coordination-tests.yml"
   workflow_dispatch:
 permissions:
@@ -35,6 +37,10 @@ jobs:
         run: |
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_agent_*.py" -v
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_qa_frame_gate.py" -v
+      - name: Validate disposable integration runner shell syntax
+        run: |
+          bash -n "Pokemon Game/scripts/coordination/run_combined_build.sh"
+          python3 -m py_compile "Pokemon Game/scripts/coordination/verify_build_readiness.py"
       - name: Render actual task registry with synthetic safe GitHub state
         run: |
           python3 - <<'PY'
