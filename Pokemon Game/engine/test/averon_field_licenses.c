@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "test/test.h"
 #include "test/field_menu.h"
 #include "main.h"
@@ -569,7 +570,11 @@ TEST("Averon developer Fly destination lands both player genders safely in Saltm
     u32 gender = MALE;
     PARAMETRIZE { gender = MALE; }
     PARAMETRIZE { gender = FEMALE; }
-    struct RegionMap destination = { .mapSecId = MAPSEC_LITTLEROOT_TOWN };
+    // RegionMap is 0x884 bytes: placing it on the small IWRAM test stack can
+    // overwrite gTasks when an unrelated test changes the common-data layout.
+    struct RegionMap *destination = AllocZeroed(sizeof(*destination));
+    EXPECT(destination != NULL);
+    destination->mapSecId = MAPSEC_LITTLEROOT_TOWN;
     CreatePartner();
     gSaveBlock2Ptr->playerGender = gender;
     // The debug destination control only enables the visited destination. It
@@ -580,12 +585,12 @@ TEST("Averon developer Fly destination lands both player genders safely in Saltm
     FlagSet(FLAG_AVERON_LICENSE_FLY);
     EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_FLY), 0);
     EXPECT_EQ(MonKnowsMove(&gParties[B_TRAINER_PLAYER][0], MOVE_FLY), FALSE);
-    EXPECT_EQ(FilterFlyDestination(&destination), gender == MALE
+    EXPECT_EQ(FilterFlyDestination(destination), gender == MALE
         ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
         : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
     SetWarpDestination(MAP_GROUP(MAP_AVERONFIELDLAB), MAP_NUM(MAP_AVERONFIELDLAB), WARP_ID_NONE, 4, 4);
     WarpIntoMap();
-    SetFlyDestination(&destination);
+    SetFlyDestination(destination);
     WarpIntoMap();
     EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, MAP_GROUP(MAP_SALTMERE));
     EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_SALTMERE));
@@ -601,4 +606,5 @@ TEST("Averon developer Fly destination lands both player genders safely in Saltm
     WarpIntoMap();
     EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, MAP_NUM(MAP_AVERONFIELDLAB));
     EXPECT_EQ(FieldMove_GetPartyMember(FIELD_MOVE_FLY), 0);
+    Free(destination);
 }
