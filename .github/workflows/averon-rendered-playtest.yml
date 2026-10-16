@@ -422,6 +422,51 @@ jobs:
             exit 2
           fi
           cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
+          # INDEPENDENT no-wait QA fallback: exact existing developer
+          # R+START -> Scripts -> Script4 -> AveronFieldLab_Enter. The game
+          # itself requires SKETCH_REWARDED, obtained above by normal Q2 play.
+          # This session's real flash save was made BEFORE Q4 so the Q2
+          # power-cycle proof remains isolated from developer gift contents.
+          capture "Q4-after-q2-save"
+          python3 "$qa_controller" assert-ui --kind field \
+            --frame "$RUNNER_TEMP/averon-playtest/Q4-after-q2-save.png"
+          if ! open_debug_menu Q4; then
+            press_debug z
+            sleep 0.7
+            if ! open_debug_menu Q4; then
+              echo "QA_Q4_ACCESS_BLOCKED: Scripts developer menu not open"
+              exit 2
+            fi
+          fi
+          # debug.c root: Utilities row0, Scripts row5.
+          for i in $(seq 1 5); do
+            press_debug Down
+            capture "Q4-root-to-scripts-$i"
+            python3 "$qa_controller" assert-ui --kind sidebar \
+              --frame "$RUNNER_TEMP/averon-playtest/Q4-root-to-scripts-$i.png"
+          done
+          press_debug x
+          capture "Q4-scripts-menu"
+          python3 "$qa_controller" assert-ui --kind sidebar \
+            --frame "$RUNNER_TEMP/averon-playtest/Q4-scripts-menu.png"
+          # debug.c Scripts child: Script1 row0, Script4 row3.
+          for i in $(seq 1 3); do
+            press_debug Down
+            capture "Q4-select-script4-$i"
+            python3 "$qa_controller" assert-ui --kind sidebar \
+              --frame "$RUNNER_TEMP/averon-playtest/Q4-select-script4-$i.png"
+          done
+          press_debug x
+          sleep 3
+          capture "Q4-script4-lab-entry"
+          if ! python3 -u "$qa_controller" q4-lab-gift \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log"
+            echo "QA_Q4_GIFT_BLOCKED: state-aware source lab access; no game defect inferred"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log"
           # PREVIOUS GBA in-process soft reset genuinely rendered the title,
           # but mGBA 0.10.2's GDB socket ceased replying after CPU reset.
           # Test the stronger flash-persistence boundary: close the emulator,
