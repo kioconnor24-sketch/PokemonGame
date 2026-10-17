@@ -137,7 +137,7 @@ class ReadOnlyGdb:
 
     def title_state(self, symbols):
         """Only title-relevant globals: never read stale Start-menu RAM."""
-        self.sock.sendall(b"\\x03")
+        self.sock.sendall(b"\x03")
         stop = self.packet()
         if not stop.startswith(("S", "T")):
             raise Blocked(f"Title debugger interrupt failed: {stop[:70]}")

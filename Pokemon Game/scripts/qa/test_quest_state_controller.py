@@ -321,6 +321,26 @@ class ObserverTests(unittest.TestCase):
         with self.assertRaisesRegex(qa.Blocked, "exact emulator framebuffer"):
             qa.visual_title_score(b"tiny")
 
+    def test_title_probe_interrupts_with_the_real_gdb_break_byte(self):
+        # GDB remote protocol: a lone 0x03 byte interrupts the target. The
+        # old title_state sent the four characters backslash-x-0-3 instead,
+        # which mGBA does not treat as an interrupt.
+        gdb = object.__new__(qa.ReadOnlyGdb)
+        gdb.sock = DummySocket()
+        gdb.packet = lambda: "S05"
+        gdb.command = lambda cmd, reply=True: "E14" if cmd != "c" else None
+        with self.assertRaises(qa.Blocked):
+            gdb.title_state(dict(main=0x03001000))
+        self.assertEqual(gdb.sock.sent, [b"\x03"])
+        self.assertEqual(len(gdb.sock.sent[0]), 1)
+
+    def test_every_probe_uses_the_same_one_byte_interrupt(self):
+        source = module.read_text()
+        sends = [line.strip() for line in source.splitlines() if "sendall(b" in line and "03" in line]
+        self.assertTrue(sends)
+        for line in sends:
+            self.assertEqual(line, 'self.sock.sendall(b"\\x03")', line)
+
     def test_title_probe_gdb_error_identifies_specific_symbol(self):
         gdb = object.__new__(qa.ReadOnlyGdb)
         gdb.sock = DummySocket()
