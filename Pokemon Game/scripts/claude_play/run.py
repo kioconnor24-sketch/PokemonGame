@@ -738,8 +738,9 @@ def toss_all(d, pocket, item, label):
     the item leaving the pocket."""
     g, gd, sym, off = d.g, d.g.gdb, d.g.sym, d.g.off
     want = g.c[pocket]
-    field = {"POCKET_POKE_BALLS": "pokeBalls", "POCKET_BERRIES": "berries"}[pocket]
-    items = [i for i, _ in getattr(d.state(), field)]
+    field, count = {"POCKET_POKE_BALLS": ("pokeBalls", "BAG_POKEBALLS_COUNT"),
+                    "POCKET_BERRIES": ("berries", "BAG_BERRIES_COUNT")}[pocket]
+    items = [i for i, _ in g.bag_pocket(f"bag.{field}", count)]
     index = items.index(item)
     base = sym["gBagPosition"]
     open_start_menu_action(d, 2)  # MENU_ACTION_BAG
