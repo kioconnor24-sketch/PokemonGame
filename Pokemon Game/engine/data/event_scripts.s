@@ -79,6 +79,7 @@
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
 	.include "data/scripts/averon_scripted_battle.inc"
+	.include "data/scripts/averon_legend.inc"
 
 	.section script_data, "aw", %progbits
 
