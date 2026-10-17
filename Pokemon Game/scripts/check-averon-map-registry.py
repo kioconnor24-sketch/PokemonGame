@@ -10,7 +10,10 @@ import struct
 
 GROUP = re.compile(r'REGISTRY_GROUP\((\d+), (\w+), (\d+), ([01])\)')
 SLOT = re.compile(r'REGISTRY_SLOT\((\d+), (\d+), (MAP_\w+), (\w+), ([01])\)')
-EVENTS = {'object_events': 255, 'warp_events': 128,
+# Overworld copies every map object template into a fixed-size SaveBlock1 array.
+# More than 64 object events would overrun OBJECT_EVENT_TEMPLATES_COUNT.
+# Other event counters have their separate source-defined capacities.
+EVENTS = {'object_events': 64, 'warp_events': 128,
           'coord_events': 255, 'bg_events': 255}
 
 
@@ -138,7 +141,7 @@ def mutations(groups, maps, pins):
             g[first] = [symbol] * 129
             expected = 'map-capacity'
         elif name == 'event-overflow':
-            m[symbol]['object_events'] = [{}] * 256
+            m[symbol]['object_events'] = [{}] * (EVENTS['object_events'] + 1)
             expected = 'event-capacity'
         elif name == 'warp-index-overflow':
             m[symbol]['warp_events'] = [{}] * 129
@@ -257,6 +260,12 @@ def main():
     parser.add_argument('--elf', type=Path, help='Also inspect an actual linked ARM ELF without modifying it')
     args = parser.parse_args()
     engine = args.engine.resolve()
+    event_constants = (engine / 'include/constants/global.h').read_text()
+    template_count = re.search(
+        r'^\s*#define\s+OBJECT_EVENT_TEMPLATES_COUNT\s+(\d+)\b',
+        event_constants, re.M)
+    if not template_count or int(template_count.group(1)) != EVENTS['object_events']:
+        raise ValueError('Object template save-array capacity changed; review map event limit')
     manifest = engine / 'test/data/averon_map_registry_slots.inc'
     groups_path = engine / 'data/maps/map_groups.json'
     groups = json.loads(groups_path.read_text())
