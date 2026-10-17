@@ -7,9 +7,12 @@
 #include "gba/m4a_internal.h"
 #include "constants/cries.h"
 #include "constants/songs.h"
+#include "script.h"
+#include "constants/script_commands.h"
 
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;
 extern u8 gPokemonCryBGMDuckingCounter;
+extern ScrCmdFunc gScriptCmdTable[], gScriptCmdTableEnd[];
 
 static void ColdStart(void)
 {
@@ -114,4 +117,45 @@ TEST("Averon cry safety normal and by-mode cleanup preserve music and effects")
     }
     PlaySE(SE_SELECT);
     EXPECT_EQ(gMPlayTable[gSongTable[SE_SELECT].ms].info->songHeader, gSongTable[SE_SELECT].header);
+}
+
+TEST("Averon cry safety real playmoncry waitmoncry bytecode resumes")
+{
+    static const u8 script[] = {
+        SCR_OP_PLAYMONCRY, SPECIES_BULBASAUR & 0xff, SPECIES_BULBASAUR >> 8,
+        CRY_MODE_NORMAL, 0, SCR_OP_WAITMONCRY, SCR_OP_END,
+    };
+    struct ScriptContext ctx;
+    ColdStart();
+    InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
+    SetupBytecodeScript(&ctx, script);
+    EXPECT(RunScriptCommand(&ctx));
+    EXPECT_EQ(ctx.nativePtr, IsCryFinished);
+    EXPECT(!IsCryFinished());
+    StopCry();
+    bool32 finished = FALSE;
+    for (u32 frame = 0; frame < 6; ++frame)
+    {
+        RunTasks();
+        if (!RunScriptCommand(&ctx))
+        {
+            finished = TRUE;
+            break;
+        }
+    }
+    EXPECT(finished);
+    EXPECT_EQ(ctx.scriptPtr, NULL);
+    ExpectFullBGMVolume();
+}
+
+TEST("Averon cry safety absent species completes without a previous player")
+{
+    ColdStart();
+    PlayCry_Script(SPECIES_NONE, CRY_MODE_NORMAL);
+    StopCryAndClearCrySongs();
+    EXPECT(!IsCryPlayingOrClearCrySongs());
+    for (u32 i = 0; i < 4; ++i)
+        RunTasks();
+    EXPECT(IsCryFinished());
+    ExpectFullBGMVolume();
 }
