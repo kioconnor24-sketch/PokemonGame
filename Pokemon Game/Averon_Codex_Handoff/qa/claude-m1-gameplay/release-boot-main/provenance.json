@@ -1,0 +1,15 @@
+{
+ "stage": "start",
+ "source_sha": "9ae0b32a4b53e552c82bf67f5dfd7a9742a0a3bb",
+ "engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
+ "engine_dirty": false,
+ "rom": "pokeemerald-release.gba (make release)",
+ "rom_sha256": "c918e880413e6b66c05778ca88a2891e8d1be538a17507331c20220b1e6627c2",
+ "engine_rom_sha256": "c918e880413e6b66c05778ca88a2891e8d1be538a17507331c20220b1e6627c2",
+ "save_sha256": "42276c420dcddf79af56fd57e4509350b97c8101ac71b9c234e61eedc32917f8",
+ "method": "key presses + screenshots only (no memory reads: driver symbols are for the normal ELF)",
+ "script": "boot_release.py",
+ "mgba": "0.10.5",
+ "save_note": "copy of the run58 end save (current-main ROM, clinic)",
+ "frame_note": "screenshot names are one stage behind: 0005 shows the Continue menu, 0006 the clinic field after Continue"
+}

@@ -1,20 +1,138 @@
-# M1 ACCEPTANCE REPORT — pre-Sinnoh backend (Claude, 2026-10-17)
+# M1 ACCEPTANCE REPORT — pre-Sinnoh backend (consolidated, 2026-10-17)
 
-**Status: GRAPHICAL LANE COMPLETE — FOR OWNER DECISION.** Written by Claude, the sole active
-executor. Gameplay verdicts are Claude's own QA, with a separate read-only
-reviewer pass by a Claude subagent. **They are not third-party or independent
-Playtest approval.** Sinnoh work has not started and waits for the owner.
+**Status: FINAL CONSOLIDATED REVIEW — FOR OWNER ACCEPTANCE.** Combines Codex's
+native/backend closeout (`CODEX_M1_NATIVE_CLOSEOUT_20261017.md`, merged #109)
+with Claude's graphical Q1–Q5 evidence (`qa/claude-m1-gameplay/`, merged #110).
+Reviews are by AI agents (Codex, Claude and Claude read-only subagents). **None
+is third-party human Playtest.** Sinnoh work has not started.
 
-Legend: **PASS** (verified this session with evidence) · **VERIFIED_EXISTING**
-(already-merged tests, re-run green this session) · **FIXED_AND_RETESTED** ·
-**PARTIAL** (exact missing fact stated) · **POST-CONTENT** · **OWNER_ACTION**
-(ready, blocked only by a GitHub write the host denied to Claude).
+## 0. Final answers
+
+| Question | Answer |
+| --- | --- |
+| All assigned pre-Sinnoh backend engineering complete? | **Yes.** Every P0–P4 item in `M1_EXHAUSTIVE_REMAINING_WORK_20261017.md` is done, verified on current main, or classified as a limitation / POST-CONTENT / OWNER_DECISION below. No open engineering PR (open #111 is Codex's Sinnoh-readiness documentation). |
+| M1 ready for owner acceptance? | **Yes, with one human check outstanding** (a short audio listen, §0.3). |
+| Genuine blocking defects? | **None.** The only reproduced defect (#100 foreign-OT egg hatch) is fixed and merged (#101). No new production defect was found by Codex's or Claude's 6,107-result runs or by the packaged graphical runs 17–59 plus the RELEASE boot. |
+| What needs owner approval? | (1) audio listen result, (2) accepting Gym 1's missing dialogue screenshots as non-blocking, (3) accepting the known limitations in §0.4, (4) M1 acceptance itself, (5) authorizing Sinnoh map/content production. |
+| Can Sinnoh begin after approval? | **Yes.** No technical blocker. Planning constraints in §0.5 apply (SaveBlock2 has 84 B free; ROM ~6.5 MiB free). |
+| Where are the verdict and approvals recorded? | Verdict and summary posted to Issues #15, #23, #46 and #55; the owner records the audio-listen result on #23 and M1 acceptance / Sinnoh authorization on #15 (and #46's checklist). |
+
+**BACKEND_READY: CONDITIONAL** — all engineering is complete and verified
+(§0.1–§0.2) and nothing is blocked on code. The single remaining condition is
+a human check: gameplay audio has been shown to be non-silent but has not been
+listened to (§0.3). Once the owner records a satisfactory listen, this becomes
+YES; the other approvals in the table are owner decisions, not conditions on
+the engineering.
+
+### 0.1 Native/backend verification (Codex lane; cross-checked by Claude)
+
+- Codex's final unfiltered native run on main `4f8f987b` (engine tree
+  `5d81cc84…`): 6,107/6,107 results, PASS 5,332, strict comparison exit 0 —
+  all 327 normalized failing identities / 329 results match the unchanged
+  baseline (`averon-native-test-baseline.txt` SHA256 `18af720b…`, last changed
+  before M1 closeout; Claude re-hashed it from main). Normal and RELEASE builds
+  exit 0, 0 compiler warnings in Codex's clean builds (RELEASE: 4 inherited
+  newlib `_close/_lseek/_read/_write` linker warnings).
+  Save batch 30/30 PASS, including Codex's new torn-PC-sector composition test.
+- Claude re-checked: main `9ae0b32a`'s engine tree equals tested `4f8f987b`'s
+  (`git rev-parse … :Pokemon Game/engine` = `5d81cc84…`); `103d05dd` →
+  `4f8f987b` engine diff is the single new test file; cited CI runs
+  39057987968 and 39018184673 concluded success.
+- **Independent Claude run on main `9ae0b32a`** (separate machine, `make -j10 -O check`, 782 s): **6,107 total, 5,332 PASS**, FAILED 327 / KNOWN_FAILING 17 / TO_DO 421 / EXPECT_FAILING 9; `check-averon-native-baseline.py`: "failing tests in log: 327; baseline entries: 327 — OK: matches the Averon baseline". Averon 242/242 PASS, including `Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state`. Normal (incremental, link-only) and RELEASE builds exit 0; RELEASE log has the same 4 newlib linker warnings plus one assembler warning (`section .rodata.compound_string… size is not a multiple of its entry size`) that is present in every earlier Claude RELEASE build too; normal ROM `3072c6c0…` / ELF `180caa1a…` (the exact ROM used for the current-main gameplay runs), RELEASE ROM `c918e880…`. Agrees with Codex's result.
+- ROM hashes differ between Codex's and Claude's environments for the same
+  source (Codex normal `e09381d0…`, Claude `3072c6c0…`; both GCC 14.2.1).
+  Each environment reproduces its own hash exactly (Claude: two worktrees at
+  different paths, and a clean rebuild of run17's source reproduced
+  `66b58c3a…`). Graphical evidence is tied to Claude's ROM hashes; native
+  evidence to Codex's. Not a defect; noted for release reproducibility.
+- Resources (Codex, actual ELFs): ROM 25.50 MiB used / 6.50 MiB (6,818,232 B) free (normal);
+  EWRAM 35,660 B free; IWRAM 4,376 B free; SaveBlock1/2/3/PC free
+  304 / **84** / 1,556 / 1,568 B. Claude's measured dynamic stack high-water in
+  real play: 2,216–2,376 B of the 3,928 B region, including 2,376 B measured
+  directly on the current-main ROM (run54, run58). A lower bound, not every
+  code path. Peak sprite/palette use not measured.
+
+### 0.2 Graphical Gate B (Claude lane)
+
+Q1, Q2, Q3, Q4 (DEV_FIXTURE), Q5, Q1/Q2 full-Bag retry (DEV_FIXTURE) and
+corrupt-newest-slot fallback (DEV_FIXTURE): **PASS** (§3). Gym 1: PARTIAL
+evidence, **not blocking** (§0.3). Current-main applicability: justified, with
+Continue/Q3/Q4/Q5 rerun on the main ROM. **RELEASE ROM** (`c918e880…`, main
+`9ae0b32a`) booted in mGBA by key presses: title → Continue into the clinic →
+Start menu open/close → walking with the follower, no softlock
+(`qa/claude-m1-gameplay/release-boot-main/`; screenshots only, no memory reads).
+
+### 0.3 Gym 1 and audio decisions
+
+**Gym 1 (recommendation: accept; does not block backend acceptance).** Proven:
+an ordinary Elio battle won on the current-quest ROM (run52 try3, last foe
+fainted on screen), `FLAG_BADGE01_GET` and the TM flag set immediately after,
+trainer card badge 1 in the same run, the save written (flash hash changed),
+and a fresh Continue showing badge 1 (run53); run17 also won on the older ROM.
+Gym script and reward are covered natively (`Gym TM requires a badge and is
+granted only once`, `Gym TM01 reward resolves to Work Up`, `Gym reward
+normal/link flash preserves full-Bag retry and nonduplication`). Dialogue
+rendering itself is proven elsewhere (Q1–Q5 dialogue frames). Missing: a
+screenshot of Elio's post-battle lines and the badge/TM message text (captured
+as empty boxes). That is a presentation-evidence gap with no functional
+consequence. No Gym replay was run after the owner's instruction.
+
+**Audio (needs a human; not verified by Claude).** Claude measured only that
+mGBA's mixed output is non-silent: segment-mean RMS 2,229–3,242 during the
+wild battles and ~1,300–2,400 in the field; the whiteout/clinic window has mean
+1,017 with 20 of 26 seconds audible (run23 `audio-report.json`,
+`audio-by-state.json`; alignment approximate). Nobody has listened. A
+human should play the current main ROM with sound for ~10 minutes and confirm:
+title music; Saltmere/Alderfield field music; music changes on a map change;
+wild battle music start and loop; trainer/Gym battle music; victory fanfare;
+low-HP warning beep; whiteout transition; clinic healing jingle; menu
+cursor/select, door and save sound effects; Pokémon cries; and no crackle,
+dropouts, wrong pitch/tempo, stuck notes or silence. Record PASS/FAIL per item
+on Issue #23.
+
+### 0.4 Known limitations (accepted scope, not defects)
+
+- DEV_FIXTURE paths: Q4's Field Lab and PC are reached only through the debug
+  menu (no natural lab entrance — POST-CONTENT); full Bag pockets were made
+  with debug Fill; corrupt-slot test used a deliberately damaged save copy.
+- Not exercised: full-party capture swap UI; live peer-to-peer trade; a status
+  condition at whiteout (status clearing is native-tested); legacy
+  Ruby/Sapphire link and Berry Blender save concerns (no reachable reproduction).
+- Opening/starter: covered natively (`starter awards respect party capacity`,
+  `first accepted errand survives all six household orders`, `opening and Gym
+  progression survive two native flash save and load cycles`); the natural
+  save chain began with the real opening, but no opening frames are in the
+  packaged evidence.
+- SCRIPTED/LEGEND have no story caller yet (registered macros, native tests):
+  POST-CONTENT.
+- Driver artifact: caught Pokémon in the test save are nicknamed "A".
+- Bounded coverage only (upstream suites run in the unfiltered native run;
+  no new Averon tests): battle AI, double battles beyond the Gym preview,
+  TM/tutor menus (`every TM and HM …`, `a TM move is taught only …`),
+  weather/day-night (no full RTC calendar audit; time-of-day encounters off).
+- Not measured: peak sprite/palette/object use at runtime (static limits 64
+  sprites, 16 objects, 16 OBJ palettes) — unknown, not PASS.
+- Premature quest interactions (artist/tree before starting) not setting
+  reward states: native `optional event rewards require both prerequisites and
+  cannot repeat`, `tree observation needs the artist and cannot reset recorded
+  progress`; graphically the boy's hint leaves FOUND unset (run20).
+
+### 0.5 Sinnoh readiness (technical vs content)
+
+No technical blocker. Constraints to plan around: SaveBlock2 has 84 B free and
+SaveBlock1 304 B — new saved Sinnoh state should use free saved flags/vars
+(about 297 persistent `FLAG_UNUSED_*` once the 52 daily-reset ones are
+excluded, and 14 saved `VAR_UNUSED_*`; one more is a non-saved special var),
+SaveBlock3 (1,556 B free) or the region record, not new SB1/SB2 fields; ROM has ~6.5 MiB for all new maps, tilesets, graphics and music; map
+registry has 52 signed group slots left. Everything else for Sinnoh is
+content/owner work: maps, Gyms, routes, encounters, story/canon, trainers,
+graphics, music, level curve, natural Field Lab access, legend/scripted scenes.
 
 ## 1. Source and build identity
 
 | Item | Value |
 | --- | --- |
-| main at writing | `103d05dd712bb4f0271e9c78050fa642cee0830d` (#101 egg fix and #102 QA tooling merged; #105/#106 docs) |
+| main at writing | `9ae0b32a4b53e552c82bf67f5dfd7a9742a0a3bb` (engine tree `5d81cc84…` = tested `4f8f987b`; #107/#108/#109/#110 merged) |
 | Gameplay build (Q1–Q5) | source `bcfeb28d…`, ROM `e6870c30…a7f34e1`, ELF `aa2efbd9…4262d` |
 | main + #101 build | `9f0efe03`: normal ROM `3072c6c0…1bfb5`, RELEASE ROM `c918e880…627c2` |
 | Toolchain | arm-none-eabi-gcc 14.2.1, mGBA 0.10.5 |
@@ -27,6 +145,9 @@ Legend: **PASS** (verified this session with evidence) · **VERIFIED_EXISTING**
 | #100 foreign-OT egg hatch | FIXED_AND_RETESTED, **merged #101 (`c708d6db`)** | native RED (`invalid move: 2027` in BoxMonRestorePP) on a foreign-OT egg through real `ScriptHatchMon`, control green; narrow decrypt→set OT→re-encrypt helper; GREEN incl. flash Save→Load memcmp; full suite 5331 pass / 327 = baseline; normal+RELEASE built; reviewer APPROVE. Latent (no foreign-OT egg source in Averon content today). |
 | #100 battle OT/personality writes | SOURCE-REVIEWED / RUNTIME NOT DEMONSTRATED | 51 `BtlController_EmitSetMonData` call sites inspected; none writes OT_ID/PERSONALITY/ALL on a reachable path |
 | #20/#71 QA stack | **merged #102 (`95ac045b`)**; #20/#71 closed as superseded | 5 files byte-identical to #71 head + GDB `\x03` fix with RED→GREEN tests (36/36); rendered-smoke green (run 39018323656); reviewer APPROVE; nothing else in #20/#71 needed |
+| #107 Codex torn-PC-sector test | VERIFIED (Codex) | merged `4f8f987b`; 242/242 Averon CI |
+| #109 Codex native closeout | VERIFIED (Codex; cross-checked §0.1) | merged `9ae0b32a` |
+| #108 / #110 | merged `6140a397` / `d50de2ce` | driver follow-up; graphical evidence + this report |
 | #97 driver (QA tooling) | **merged `4153ce5a`** at reviewed head `a9676159` | three separate read-only code reviews (two REQUEST_CHANGES, all findings fixed with mutation-checked tests); 33 offline tests; checks green. Tooling merge is not a gameplay PASS. |
 
 ## 3. Gate B gameplay (existing approved maps)
@@ -67,7 +188,7 @@ Q5 and Continue were rerun on the main ROM.
 
 ## 4. Native suite, builds and save handling (Claude's earlier measurement)
 
-> **Ownership:** under the parallel plan (`M1_PARALLEL_CLAUDE_CODEX_EXECUTION_20261017.md`) the final native/resource closeout belongs to Codex (`CODEX_M1_NATIVE_CLOSEOUT_20261017.md`). This section and §5 record Claude's run on `a3d2ad99` (pre-#101 main) for reference only; Codex's final-main results supersede them.
+> **Superseded by §0.1 / Codex's final closeout.** Under the parallel plan (`M1_PARALLEL_CLAUDE_CODEX_EXECUTION_20261017.md`) the final native/resource closeout belongs to Codex (`CODEX_M1_NATIVE_CLOSEOUT_20261017.md`). This section and §5 record Claude's run on `a3d2ad99` (pre-#101 main) for reference only; Codex's final-main results supersede them.
 
 Run on a clean worktree of main `a3d2ad99` (2026-10-17 09:05–09:21 UTC), nice'd
 `make -j10`. Toolchain: arm-none-eabi-gcc 14.2.1 (15:14.2.rel1-1), host gcc
@@ -140,28 +261,8 @@ deepest battle/AI paths are not measured.
 | Whiteout money / heal | VERIFIED_EXISTING + graphical PASS | `whiteout money: *` (3), `native whiteout heals *` (2), Q3 |
 | Wild encounters on existing tables | VERIFIED_EXISTING | `wild encounters: *` (3) |
 
-## 7. Graphical lane conclusion (Claude) and open items
+## 7. Graphical lane conclusion (superseded by §0)
 
-**Graphical half: CONDITIONAL-YES.** Every Q1–Q5 case is PASS on genuine
-emulator evidence except Gym 1, which is PARTIAL only for missing on-screen
-defeat/badge text (the win, badge, save and Continue are proven). The
-quest-build evidence applies to current main (`103d05dd` game code; main
-`6140a397` adds only QA tooling), and the main ROM itself passed Continue from
-an older-ROM save, Q3, Q4 and Q5 runs. Gameplay audio is non-silent across
-field, battle and clinic, but **a human must still listen** to judge it.
-
-Tooling: #97 merged (`4153ce5a`), follow-up #108 merged (`6140a397`); #101,
-#102 merged; #20/#71 closed as superseded.
-
-Open, for the owner:
-1. **Audio listen** (owner or human tester) — not something Claude can judge.
-2. **Gym 1 text frames** — accept PARTIAL, or ask for one Gym replay with
-   longer per-message waits (owner asked not to repeat it now).
-3. **Backend half** — Codex owns the final native suite, saves and resources
-   (`CODEX_M1_NATIVE_CLOSEOUT_20261017.md`); §4–§5 here are Claude's earlier
-   reference measurements only.
-4. **POST-CONTENT** (not M1 failures): natural Field Lab access for the Q4 gift,
-   real story/legend callers, Sinnoh maps.
-
-**BACKEND_READY** is the owner's combined call after Codex's closeout. Sinnoh
-work has not started and waits for the owner's approval.
+Earlier wording here (graphical half CONDITIONAL-YES; backend pending Codex) is
+superseded by §0: Codex's closeout is merged and cross-checked, and the
+consolidated verdict is in §0.
