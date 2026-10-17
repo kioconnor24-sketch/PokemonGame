@@ -247,6 +247,87 @@ def pc_deposit(d, slot):
     observe(d, "pc-deposit", {"partyShrank": lambda o: len(o["party"]) == before - 1})
 
 
+def phase_q4_gift(d):
+    """Q4 developer gift. DEV-ONLY ACCESS, disclosed: the Field Lab has no
+    ordinary entrance (debug Scripts -> Script 4) and Averon has no PC
+    (debug Access PC). The party being full is NOT a fixture: it is the six
+    Pokemon caught in play. Run this on a copy of the save, never the
+    natural chain. Full party -> refusal; deposit one -> retry -> Wobbuffet;
+    asking again gives nothing."""
+    wob = d.g.c["SPECIES_WOBBUFFET"]
+    count = lambda o: sum(m["species"] == wob for m in o["party"])
+    debug_menu(d, [5, 3], "field-lab")  # Scripts -> Script 4 (AveronFieldLab_Enter)
+    for _ in range(40):
+        s = d.state()
+        if d.here(s)[0] == "MAP_AVERONFIELDLAB" and d.field_ready(s):
+            break
+        time.sleep(0.25)
+    observe(d, "q4-lab", {"map": "MAP_AVERONFIELDLAB", "FLAG_AVERON_SKETCH_REWARDED": True,
+                          "party6": lambda o: len(o["party"]) == 6, "noWobbuffet": lambda o: count(o) == 0})
+    d.talk("MAP_AVERONFIELDLAB", (25, 19))
+    observe(d, "q4-full-refused", {"FLAG_AVERON_DEV_GIFT_RECEIVED": False,
+                                   "party6": lambda o: len(o["party"]) == 6, "noWobbuffet": lambda o: count(o) == 0})
+    pc_deposit(d, 5)
+    d.talk("MAP_AVERONFIELDLAB", (25, 19))
+    observe(d, "q4-gift", {"FLAG_AVERON_DEV_GIFT_RECEIVED": True,
+                           "party6": lambda o: len(o["party"]) == 6, "oneWobbuffet": lambda o: count(o) == 1})
+    d.talk("MAP_AVERONFIELDLAB", (25, 19))
+    observe(d, "q4-no-duplicate", {"party6": lambda o: len(o["party"]) == 6, "oneWobbuffet": lambda o: count(o) == 1})
+
+
+def weakest_move(d):
+    """Losing on purpose with ordinary menu choices: always the move with the
+    lowest power (status moves first)."""
+    def choose(s):
+        me = s.mons[0]
+        options = [(d.moves.move(mv)["power"], slot) for slot, (mv, pp)
+                   in enumerate(zip(me["moves"], me["pp"])) if mv and pp]
+        return min(options)[1] if options else 0
+    return choose
+
+
+def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
+    """Q3: a genuine loss. Wild battles on Coastal Bluffs grass, choosing the
+    weakest move every turn and never running, until the whole party faints.
+    Then the whiteout message and the clinic nurse's after-whiteout script are
+    screenshotted message by message, and the party must be fully healed."""
+    before = observe(d, "q3-before")
+    battles = 0
+    while True:
+        mid, pos = d.here()
+        if mid == "MAP_ALDERFIELDCLINIC" and battles:
+            break
+        if mid != map_id or pos not in tiles:
+            d.travel_to(map_id)
+            d.walk_path(map_id, set(tiles), on_event=lambda s: d.battle(choose_move=weakest_move(d)))
+            continue
+        other = tiles[1] if pos == tiles[0] else tiles[0]
+        direction = next(k for k, v in mapdata.DIRS.items() if (pos[0] + v[0], pos[1] + v[1]) == other)
+        d.step(direction)
+        for _ in range(8):
+            time.sleep(0.08)
+            s = d.state()
+            if s.in_battle or s.cb2 != "CB2_Overworld":
+                break
+        if s.in_battle or s.cb2 != "CB2_Overworld":
+            d.battle(choose_move=weakest_move(d), label=f"q3-loss{battles:02d}")
+            battles += 1
+            d.log("q3-party", party=d.state().party, map=d.here()[0])
+    d.shot("q3-after-whiteout")
+    d.clear_text(capture="q3-clinic", frames=16)
+    observe(d, "q3-clinic", {"map": "MAP_ALDERFIELDCLINIC",
+                             "partyHealed": lambda o: all(m["hp"] == m["maxhp"] for m in o["party"]),
+                             "partySame": lambda o: [m["species"] for m in o["party"]]
+                             == [m["species"] for m in before["party"]],
+                             "moneyLost": lambda o: o["money"] < before["money"]})
+
+
+def phase_q3_continued(d):
+    """After Save and a fresh emulator process: still in the clinic, healed."""
+    observe(d, "q3-continued", {"map": "MAP_ALDERFIELDCLINIC",
+                                "partyHealed": lambda o: all(m["hp"] == m["maxhp"] for m in o["party"])})
+
+
 def phase_save(d):
     save_game(d, "checkpoint")
 
@@ -629,7 +710,8 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "q2_continued": phase_q2_continued, "q2_reward": phase_q2_reward,
           "gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
           "q1_reward": phase_q1_reward, "q1_continued": phase_q1_continued,
-          "show_bag": phase_show_bag, "trainer_card": phase_trainer_card,
+          "show_bag": phase_show_bag, "q3_whiteout": phase_q3_whiteout,
+          "q3_continued": phase_q3_continued, "q4_gift": phase_q4_gift, "trainer_card": phase_trainer_card,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),

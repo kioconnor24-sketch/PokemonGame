@@ -128,7 +128,7 @@ class Game:
                  "FLAG_AVERON_NOTES_STARTED", "FLAG_AVERON_NOTES_RECORDED",
                  "FLAG_AVERON_NOTES_REWARDED", "FLAG_AVERON_EXP_SHARE",
                  "FLAG_AVERON_SKETCH_STARTED", "FLAG_AVERON_SKETCH_FOUND",
-                 "FLAG_AVERON_SKETCH_REWARDED"]
+                 "FLAG_AVERON_SKETCH_REWARDED", "FLAG_AVERON_DEV_GIFT_RECEIVED"]
         return dict(
             map=self.emu_map_name(s), cb2=s.cb2, mapGroup=s.group, mapNum=s.num, x=s.x, y=s.y,
             frame=self.emu.frame(),
