@@ -507,8 +507,14 @@ def phase_badge_gate(d, tile=(38, 16)):
     observe(d, "gate-before", {"FLAG_BADGE01_GET": False})
     d.travel_to("MAP_ALDERFIELD")
     d.walk_path("MAP_ALDERFIELD", {(tile[0] - 1, tile[1])}, on_event=lambda s: d.battle())
-    s = d.step("right")
-    d.clear_text(capture="gate-text", frames=4)
+    d.step("right")
+    for _ in range(20):                # the trigger script locks the player
+        if d.state().locked:
+            break
+        time.sleep(0.05)
+    time.sleep(0.6)
+    d.shot("gate-text-01")
+    d.clear_text(capture="gate-text-more", frames=3)
     d.settle()
     observe(d, "gate-blocked", {"map": "MAP_ALDERFIELD",
                                 "steppedBack": lambda o: o["x"] < tile[0],
@@ -523,6 +529,7 @@ def phase_badge_gate(d, tile=(38, 16)):
 def phase_q4_continued(d):
     """DEV copy, fresh process after the Q4 save: Wobbuffet once, flag set."""
     wob = d.g.c["SPECIES_WOBBUFFET"]
+    show_party(d, "q4-continued-party")
     observe(d, "q4-continued", {"FLAG_AVERON_DEV_GIFT_RECEIVED": True,
                                 "oneWobbuffet": lambda o: [m["species"] for m in o["party"]].count(wob) == 1,
                                 "partyOf6": lambda o: len(o["party"]) == 6})
@@ -793,10 +800,9 @@ def fill_pocket(d, row, label):
     back_to_field(d)
 
 
-def toss_all(d, pocket, item, label):
-    """BAG -> pocket -> item -> TOSS -> quantity DOWN once (wraps 1 -> all)
-    -> YES. Ordinary Bag inputs, driven by reading gBagPosition. Verified by
-    the item leaving the pocket."""
+def bag_to_item(d, pocket, item):
+    """Open the Bag and move the cursor onto `item` in `pocket` with ordinary
+    inputs, reading gBagPosition. Returns the pocket's field name."""
     g, gd, sym, off = d.g, d.g.gdb, d.g.sym, d.g.off
     want = g.c[pocket]
     field, count = {"POCKET_POKE_BALLS": ("pokeBalls", "BAG_POKEBALLS_COUNT"),
@@ -821,6 +827,31 @@ def toss_all(d, pocket, item, label):
         d.e.tap("DOWN" if cursor + scroll < index else "UP", after=0.3)
     else:
         raise drv.Stuck(f"bag cursor never reached item index {index}")
+    time.sleep(0.6)
+    return field
+
+
+def show_item(d, pocket, item, label):
+    """The Bag open on `item`, so its quantity is on screen; then close."""
+    field = bag_to_item(d, pocket, item)
+    d.shot(label)
+    back_to_field(d)
+    return field
+
+
+def show_party(d, label):
+    """START -> POKEMON: every member's HP bar, HP numbers and status icon."""
+    open_start_menu_action(d, 1)
+    time.sleep(1.0)
+    d.shot(label)
+    back_to_field(d)
+
+
+def toss_all(d, pocket, item, label):
+    """BAG -> pocket -> item -> TOSS -> quantity DOWN once (wraps 1 -> all)
+    -> YES. Ordinary Bag inputs, driven by reading gBagPosition. Verified by
+    the item leaving the pocket."""
+    field = bag_to_item(d, pocket, item)
     d.shot(f"{label}-item")
     d.e.tap("A", after=0.8)
     # Context menu, two columns (item_menu.c): Balls GIVE/-/TOSS/CANCEL,
@@ -1011,6 +1042,9 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "q2_full_pocket": phase_q2_full_pocket, "corrupt_fallback": phase_corrupt_fallback,
           "clinic_continued": phase_clinic_continued, "badge_gate": phase_badge_gate,
           "q4_continued": phase_q4_continued,
+          "show_party": lambda d: show_party(d, "party-screen"),
+          "show_great_balls": lambda d: show_item(d, "POCKET_POKE_BALLS", d.g.c["ITEM_GREAT_BALL"], "bag-great-balls"),
+          "show_oran": lambda d: show_item(d, "POCKET_BERRIES", d.g.c["ITEM_ORAN_BERRY"], "bag-oran-berries"),
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),

@@ -382,6 +382,16 @@ class EvidenceTests(unittest.TestCase):
             self.assertTrue(all("DEV-ONLY" in o["statement"] for o in fix["state_observations"]))
             self.assertFalse(any("DEV-ONLY" in o["statement"] for o in plain["state_observations"]))
 
+    def test_extra_screenshots_must_exist(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            run_dir = synthetic_run(root, "r1")
+            (run_dir / "0002-talk-x-01.png").write_bytes(b"\x89PNG\r\n\x1a\nSYNTHETIC")
+            case = evidence.build({"C": [("r1", ["badge", "shot:*-talk-*"])]}, root)["cases"][0]
+            self.assertIn("r1/0002-talk-x-01.png", case["screenshots"])
+            with self.assertRaises(evidence.EvidenceError):
+                evidence.build({"C": [("r1", ["shot:*-missing-*"])]}, root)
+
     def test_external_fixture_marks_the_case(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)

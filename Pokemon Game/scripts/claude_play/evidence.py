@@ -3,6 +3,7 @@
 
   python3 evidence.py --case Q1=run12:gym1-result,q1-hiker,q1-reward \
       --root /private/evidence --out qa-evidence-input.json
+  (a label "shot:*-talk-*" adds matching screenshots, e.g. dialogue frames)
 
 Builds the input the manager's coordination/qa_evidence_report.py checks
 (source/ROM SHA, input trace, screenshots, state observations) from files the
@@ -87,6 +88,14 @@ def build(cases, root):
             how = (f"after ordinary inputs and DEV-ONLY debug fixture(s) {used} in this run"
                    if used else "after ordinary inputs")
             for label in labels:
+                if label.startswith("shot:"):
+                    # Proof frames that are not state milestones (dialogue,
+                    # Bag pockets, defeat text): named explicitly, must exist.
+                    found = sorted(p.name for p in run.glob(label[5:]) if p.suffix == ".png")
+                    if not found:
+                        raise EvidenceError(f"{run}: no screenshot matches {label[5:]!r}")
+                    screenshots += [f"{run_name}/{n}" for n in found]
+                    continue
                 state = load_state(run, label)
                 screenshots.append(f"{run_name}/{state['screenshot']}")
                 for key, want in state.get("expected", {}).items():
