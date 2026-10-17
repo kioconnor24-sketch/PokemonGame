@@ -306,7 +306,8 @@ bool8 IsBGMStopped(void)
 
 void PlayCry_Normal(enum Species species, s8 pan)
 {
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+    if (P_CRIES_ENABLED)
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
     PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
@@ -326,7 +327,8 @@ void PlayCry_ByMode(enum Species species, s8 pan, u8 mode)
     }
     else
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+        if (P_CRIES_ENABLED)
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
         RestoreBGMVolumeAfterPokemonCry();
@@ -342,7 +344,7 @@ void PlayCry_ReleaseDouble(enum Species species, s8 pan, u8 mode)
     }
     else
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (P_CRIES_ENABLED && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
@@ -357,7 +359,8 @@ void PlayCry_DuckNoRestore(enum Species species, s8 pan, u8 mode)
     }
     else
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+        if (P_CRIES_ENABLED)
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
     }
@@ -365,7 +368,8 @@ void PlayCry_DuckNoRestore(enum Species species, s8 pan, u8 mode)
 
 void PlayCry_Script(enum Species species, u8 mode)
 {
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+    if (P_CRIES_ENABLED)
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
     PlayCryInternal(species, 0, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
@@ -498,18 +502,20 @@ bool8 IsCryFinished(void)
 
 void StopCryAndClearCrySongs(void)
 {
-    m4aMPlayStop(gMPlay_PokemonCry);
+    StopCry();
     ClearPokemonCrySongs();
 }
 
 void StopCry(void)
 {
-    m4aMPlayStop(gMPlay_PokemonCry);
+    // No player is assigned until a real cry starts (including on cold boot).
+    if (gMPlay_PokemonCry != NULL)
+        m4aMPlayStop(gMPlay_PokemonCry);
 }
 
 bool8 IsCryPlayingOrClearCrySongs(void)
 {
-    if (IsPokemonCryPlaying(gMPlay_PokemonCry))
+    if (IsCryPlaying())
     {
         return TRUE;
     }
@@ -522,10 +528,7 @@ bool8 IsCryPlayingOrClearCrySongs(void)
 
 bool8 IsCryPlaying(void)
 {
-    if (IsPokemonCryPlaying(gMPlay_PokemonCry))
-        return TRUE;
-    else
-        return FALSE;
+    return gMPlay_PokemonCry != NULL && IsPokemonCryPlaying(gMPlay_PokemonCry);
 }
 
 void Task_DuckBGMForPokemonCry(u8 taskId)
@@ -536,7 +539,7 @@ void Task_DuckBGMForPokemonCry(u8 taskId)
         return;
     }
 
-    if (!IsPokemonCryPlaying(gMPlay_PokemonCry))
+    if (!IsCryPlaying())
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         DestroyTask(taskId);

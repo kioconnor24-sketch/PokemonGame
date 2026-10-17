@@ -62,6 +62,25 @@ endif
 
 include config.mk
 
+# Reversible audio profiles. Keep the source default and all cry assets intact.
+# Isolate BOTH objects and outputs: changing CPPFLAGS alone can reuse stale data.
+CRIES ?= default
+ifneq ($(words $(CRIES)),1)
+  $(error CRIES must be exactly one of default, on, or off)
+endif
+ifeq ($(filter $(CRIES),default on off),)
+  $(error CRIES must be default, on, or off)
+endif
+ifneq ($(CRIES),default)
+  CRY_BUILD_SUFFIX := -cries-$(CRIES)
+  FILE_NAME := $(FILE_NAME)$(CRY_BUILD_SUFFIX)
+  ifeq ($(CRIES),on)
+    CRY_CPPFLAGS := -DP_CRIES_ENABLED=TRUE
+  else
+    CRY_CPPFLAGS := -DP_CRIES_ENABLED=FALSE
+  endif
+endif
+
 # Default make rule
 all: rom
 
@@ -97,10 +116,10 @@ ifeq ($(RELEASE),1)
 endif
 
 ROM_NAME := $(FILE_NAME).gba
-OBJ_DIR_NAME := $(BUILD_DIR)/$(BUILD_NAME)
-OBJ_DIR_NAME_TEST := $(BUILD_DIR)/$(BUILD_NAME)-test
-OBJ_DIR_NAME_DEBUG := $(BUILD_DIR)/$(BUILD_NAME)-debug
-OBJ_DIR_NAME_RELEASE := $(BUILD_DIR)/$(BUILD_NAME)-release
+OBJ_DIR_NAME := $(BUILD_DIR)/$(BUILD_NAME)$(CRY_BUILD_SUFFIX)
+OBJ_DIR_NAME_TEST := $(OBJ_DIR_NAME)-test
+OBJ_DIR_NAME_DEBUG := $(OBJ_DIR_NAME)-debug
+OBJ_DIR_NAME_RELEASE := $(OBJ_DIR_NAME)-release
 ASSETS_DIR_NAME := $(BUILD_DIR)/assets
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
@@ -157,6 +176,7 @@ else
 O_LEVEL ?= 2
 endif
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
+override CPPFLAGS += $(CRY_CPPFLAGS)
 ifeq ($(RELEASE),1)
 	override CPPFLAGS += -DRELEASE
 	ifeq ($(USE_LTO_ON_RELEASE),1)

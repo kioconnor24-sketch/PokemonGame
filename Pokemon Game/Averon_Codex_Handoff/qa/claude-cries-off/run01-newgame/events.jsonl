@@ -1,0 +1,49 @@
+{"t": 1792279577.37, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792279577.39, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792279577.9, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792279577.92, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792279580.47, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792279580.49, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792279581.56, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792279581.59, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792279582.13, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792279582.15, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792279582.67, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792279582.69, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792279583.71, "event": "screen", "cb2": "CB2_MainMenu.lto_priv.0", "i": 12}
+{"t": 1792279583.72, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792279616.51, "event": "screen", "cb2": "CB2_LoadNamingScreen.lto_priv.0", "i": 75}
+{"t": 1792279616.53, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792279616.54, "event": "capture", "file": "0009-naming.png"}
+{"t": 1792279633.38, "event": "screen", "cb2": "CB2_Overworld", "i": 104}
+{"t": 1792279633.4, "event": "capture", "file": "0010-boot-09.png"}
+{"t": 1792279650.77, "event": "field", "map": "MAP_SALTMERE", "pos": [18, 18], "party": []}
+{"t": 1792279650.82, "event": "vars", "intro": 1, "first": 0, "harbor": 0, "starter": false}
+{"t": 1792279656.86, "event": "map", "map": "MAP_SALTMEREHARBOR", "pos": [3, 8]}
+{"t": 1792279660.43, "event": "capture", "file": "0011-talk-saltmereharbor-6-4-01.png"}
+{"t": 1792279661.8, "event": "capture", "file": "0012-talk-saltmereharbor-6-4-02.png"}
+{"t": 1792279662.28, "event": "capture", "file": "0013-harbor-errand-accepted.png"}
+{"t": 1792279666.61, "event": "map", "map": "MAP_SALTMERE", "pos": [25, 23]}
+{"t": 1792279669.78, "event": "capture", "file": "0014-talk-saltmere-28-25-01.png"}
+{"t": 1792279671.15, "event": "capture", "file": "0015-talk-saltmere-28-25-02.png"}
+{"t": 1792279671.59, "event": "capture", "file": "0016-parcel-delivered.png"}
+{"t": 1792279678.35, "event": "capture", "file": "0017-talk-saltmere-18-16-01.png"}
+{"t": 1792279679.73, "event": "capture", "file": "0018-talk-saltmere-18-16-02.png"}
+{"t": 1792279681.11, "event": "capture", "file": "0019-talk-saltmere-18-16-03.png"}
+{"t": 1792279682.49, "event": "capture", "file": "0020-talk-saltmere-18-16-04.png"}
+{"t": 1792279683.86, "event": "capture", "file": "0021-talk-saltmere-18-16-05.png"}
+{"t": 1792279685.25, "event": "capture", "file": "0022-talk-saltmere-18-16-06.png"}
+{"t": 1792279685.71, "event": "capture", "file": "0023-starter-received.png"}
+{"t": 1792279685.73, "event": "opening-done", "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}], "harbor": 2, "starter": true}
+{"t": 1792279691.44, "event": "capture", "file": "0024-save-confirm-checkpoint-1.png"}
+{"t": 1792279692.58, "event": "capture", "file": "0025-save-step-checkpoint-1-01.png"}
+{"t": 1792279693.63, "event": "capture", "file": "0026-save-step-checkpoint-1-02.png"}
+{"t": 1792279694.62, "event": "capture", "file": "0027-save-step-checkpoint-1-03.png"}
+{"t": 1792279695.62, "event": "capture", "file": "0028-save-step-checkpoint-1-04.png"}
+{"t": 1792279696.61, "event": "capture", "file": "0029-save-step-checkpoint-1-05.png"}
+{"t": 1792279697.72, "event": "capture", "file": "0030-save-step-checkpoint-1-06.png"}
+{"t": 1792279698.83, "event": "capture", "file": "0031-save-step-checkpoint-1-07.png"}
+{"t": 1792279699.66, "event": "capture", "file": "0032-saved-checkpoint-1.png"}
+{"t": 1792279699.66, "event": "release-save", "label": "checkpoint-1", "callbacks": ["SaveConfirmInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792279699.8, "event": "capture", "file": "0033-end.png"}
+{"t": 1792279699.8, "event": "observe", "label": "end", "problems": []}
