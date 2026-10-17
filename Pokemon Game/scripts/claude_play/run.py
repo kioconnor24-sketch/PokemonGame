@@ -372,7 +372,77 @@ def phase_q2_reward(d):
     observe(d, "q2-no-duplicate", {"oranBerries+3": lambda o: count_item(o["berries"], oran) == have + 3})
 
 
-PHASES = {"q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_reward": phase_q2_reward,
+def balls(d):
+    return sum(q for _, q in d.g.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"))
+
+
+def phase_buy_balls(d, qty=5):
+    """Alderfield Supply: BUY -> Poke Ball (first in the list) -> quantity -> YES."""
+    before = observe(d, "shop-before")
+    have, money = balls(d), before["money"]
+    d.travel_to("MAP_ALDERFIELDSUPPLY")
+    d.talk("MAP_ALDERFIELDSUPPLY", (6, 4), clear=False)  # "How may I serve you?"
+    time.sleep(1.2)
+    d.shot("shop-menu")
+    d.e.tap("A", after=1.5)   # BUY -> item list, cursor on Poke Ball
+    d.shot("shop-list")
+    d.e.tap("A", after=1.0)   # Poke Ball -> "How many?"
+    for _ in range(qty - 1):
+        d.e.tap("UP", after=0.15)
+    d.shot("shop-quantity")
+    d.e.tap("A", after=1.0)   # quantity -> "That will be ... OK?"
+    d.e.tap("A", after=1.0)   # YES
+    for _ in range(4):
+        d.e.tap("A", after=0.8)  # "Here you go!" and any bonus message
+    for _ in range(12):
+        s = d.state()
+        if d.field_ready(s):
+            break
+        d.e.tap("B", after=0.5)
+    observe(d, "shop-after", {"ballsBought": lambda o: balls(d) == have + qty,
+                              "moneySpent": lambda o: o["money"] == money - 200 * qty})
+
+
+def make_catch(target_party):
+    """Wild battles on Orchard Lane, throwing Poke Balls (R) at new species."""
+    def phase(d):
+        def caught_species(s):
+            return len(s.party)
+        def catch_if(s):
+            trainer = s.battle_flags & d.g.c["BATTLE_TYPE_TRAINER"]
+            return not trainer and len(d.state().party) < target_party and balls(d) > 0
+        tries = 0
+        while len(d.state().party) < target_party and tries < 60:
+            if balls(d) == 0:
+                phase_buy_balls(d)
+            heal_full(d) if lead(d)["hp"] * 2 < lead(d)["maxhp"] else None
+            mid, pos = d.here()
+            tiles = ((27, 8), (28, 8))
+            if mid != "MAP_ORCHARDLANE" or pos not in tiles:
+                d.travel_to("MAP_ORCHARDLANE")
+                d.walk_path("MAP_ORCHARDLANE", set(tiles))
+                continue
+            other = tiles[1] if pos == tiles[0] else tiles[0]
+            direction = "right" if other[0] > pos[0] else "left"
+            d.step(direction)
+            for _ in range(8):
+                time.sleep(0.08)
+                s = d.state()
+                if s.in_battle or s.cb2 != "CB2_Overworld":
+                    break
+            if s.in_battle or s.cb2 != "CB2_Overworld":
+                tries += 1
+                before = len(d.state().party)
+                d.battle(run_if=wild_low_hp(d), catch_if=catch_if, label=f"catch{tries:02d}")
+                after = len(d.state().party)
+                if after > before:
+                    observe(d, f"caught-{after}", {"partyGrew": lambda o, n=after: len(o["party"]) == n})
+        observe(d, f"party-{target_party}", {"partySize": lambda o: len(o["party"]) >= target_party})
+    return phase
+
+
+PHASES = {"buy_balls": phase_buy_balls, "catch2": make_catch(2), "catch6": make_catch(6),
+          "q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_reward": phase_q2_reward,
           "gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
           "q1_reward": phase_q1_reward,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),

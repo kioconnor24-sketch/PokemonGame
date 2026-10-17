@@ -116,17 +116,20 @@ def load_build_info(elf, engine, cache_dir):
     elf = pathlib.Path(elf)
     digest = subprocess.check_output(["sha256sum", str(elf)], text=True).split()[0]
     import hashlib
-    probe_key = hashlib.sha256(json.dumps([OFFSET_EXPRS, CONSTANTS]).encode()).hexdigest()[:8]
+    probe_key = hashlib.sha256(json.dumps([OFFSET_EXPRS, CONSTANTS, "all_symbols"]).encode()).hexdigest()[:8]
     cache = pathlib.Path(cache_dir) / f"buildinfo-{digest[:16]}-{probe_key}.json"
     if cache.exists():
         return json.loads(cache.read_text())
     symbols = {}
+    all_symbols = []  # static functions can share a name (two HandleInputChooseAction)
     for line in subprocess.check_output(["arm-none-eabi-nm", "--defined-only", str(elf)], text=True).splitlines():
         parts = line.split()
         if len(parts) == 3:
-            symbols.setdefault(parts[2], int(parts[0], 16))
+            addr = int(parts[0], 16)
+            symbols.setdefault(parts[2], addr)
+            all_symbols.append((addr, parts[2]))
     probed = probe_offsets(engine, pathlib.Path(cache_dir) / "probe")
-    info = {"elf_sha256": digest, "symbols": symbols,
+    info = {"elf_sha256": digest, "symbols": symbols, "all_symbols": all_symbols,
             "offsets": {k: v for k, v in probed.items() if not k.startswith("const.")},
             "constants": {k[6:]: v for k, v in probed.items() if k.startswith("const.")}}
     cache.parent.mkdir(parents=True, exist_ok=True)
@@ -247,6 +250,7 @@ def audio_report(raw_path, wav_path, rate=44100, window=1.0):
 
 
 class Emulator:
+    # mGBA's -g always listens on 2345; one emulator per machine at a time.
     def __init__(self, rom, outdir, display=77, port=2345, scale=2, fps_target=None, save=None,
                  audio=False):
         self.rom = pathlib.Path(rom)
@@ -270,6 +274,13 @@ class Emulator:
         args.append(str(self.rom))
         self.log = open(self.outdir / "mgba.log", "a")
         self.proc = subprocess.Popen(args, env=self.env, stdout=self.log, stderr=subprocess.STDOUT)
+        try:
+            self._attach(port)
+        except BaseException:
+            self.close()  # never leak an emulator or X server on a failed start
+            raise
+
+    def _attach(self, port):
         self.window = None
         for _ in range(60):
             out = subprocess.run(["xdotool", "search", "--onlyvisible", "--name", "mGBA"],
@@ -279,7 +290,6 @@ class Emulator:
                 break
             time.sleep(0.5)
         if not self.window:
-            self.close()
             raise Blocked("no mGBA window")
         self.gdb = Gdb(port)
         self.gdb.halt()

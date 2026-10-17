@@ -233,7 +233,7 @@ class Driver:
         self.log("healed", party=s.party)
         return s
 
-    def talk(self, map_id, npc, answer_yes=True):
+    def talk(self, map_id, npc, answer_yes=True, clear=True):
         """Stand next to the NPC tile, face it and press A."""
         m = self.w.map(map_id)
         options = {}
@@ -253,7 +253,7 @@ class Driver:
             self.e.tap("A", after=0.5)
             s = self.state()
             if s.locked or s.in_battle or s.cb2 != "CB2_Overworld":
-                return self.clear_text()
+                return self.clear_text() if clear else s
             self.log("talk-retry", map=map_id, npc=npc, attempt=attempt)
         raise Stuck(f"talking to {npc} on {map_id} started no script")
 
@@ -275,7 +275,7 @@ class Driver:
                 best, best_score = slot, score
         return best if best is not None else 0
 
-    def battle(self, choose_move=None, run_if=None, label="battle"):
+    def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None):
         """Play a battle to the end with ordinary menu inputs."""
         choose_move = choose_move or self.best_move
         shots = 0
@@ -297,10 +297,17 @@ class Driver:
                 self.log("battle-end", party=s.party)
                 return s
             if not s.in_battle:
-                # Post-battle screens (move learning summary, evolution):
-                # B declines replacing a move; A advances everything else.
+                # Post-battle screens (move learning summary, evolution, Pokedex
+                # registration, naming): B declines replacing a move; the naming
+                # screen keeps the default name (START moves to OK); A advances
+                # everything else.
                 idle += 1
-                self.e.tap("B" if "Summary" in (s.cb2 or "") else "A", after=0.3)
+                cb = s.cb2 or ""
+                if "Naming" in cb:
+                    self.e.tap("START", after=0.4)
+                    self.e.tap("A", after=0.8)
+                else:
+                    self.e.tap("B" if "Summary" in cb else "A", after=0.3)
                 continue
             ctrl = s.controller
             if ctrl != last:
@@ -310,11 +317,20 @@ class Driver:
                 if shots < 3:
                     self.shot(f"{label}-action")
                     shots += 1
+                if catch_if and catch_if(s):
+                    # R throws the last-used ball (B_LAST_USED_BALL_BUTTON).
+                    self.log("throw-ball", foe=(s.mons[1]["species"], s.mons[1]["level"], s.mons[1]["hp"]))
+                    self.e.tap("R", hold=0.15, after=0.8)
+                    continue
                 want = 3 if (run_if and run_if(s)) else 0
                 self.move_cursor(s.action_cursor, want)
                 self.e.tap("A", after=0.4)
             elif ctrl == "HandleInputChooseMove":
                 slot = choose_move(s)
+                me, foe = s.mons[0], s.mons[1]
+                self.log("turn", label=label, me=(me["species"], me["level"], me["hp"], me["maxhp"]),
+                         foe=(foe["species"], foe["level"], foe["hp"], foe["maxhp"]),
+                         move=me["moves"][slot], pp=me["pp"][slot])
                 self.move_cursor(s.move_cursor, slot)
                 self.e.tap("A", after=0.6)
             else:

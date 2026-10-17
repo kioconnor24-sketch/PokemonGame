@@ -20,7 +20,7 @@ class Game:
         self.off = info["offsets"]
         self.c = info["constants"]
         self.by_addr = {}
-        for name, addr in self.sym.items():
+        for addr, name in info.get("all_symbols") or [(a, n) for n, a in self.sym.items()]:
             if 0x08000000 <= addr < 0x0A000000:
                 self.by_addr.setdefault(addr & ~1, name)
 
@@ -116,7 +116,14 @@ class Game:
             party=s.party,
             pokeBalls=self.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"),
             berries=self.bag_pocket("bag.berries", "BAG_BERRIES_COUNT"),
+            money=self.money(),
             saveAttemptStatus=self.gdb.read(self.sym["gSaveAttemptStatus"], 1)[0])
+
+    def money(self):
+        sb1 = self._u("<I", self.sym["gSaveBlock1Ptr"])[0]
+        sb2 = self._u("<I", self.sym["gSaveBlock2Ptr"])[0]
+        key = self._u("<I", sb2 + self.off["sb2.encryptionKey"])[0]
+        return self._u("<I", sb1 + self.off["sb1.money"])[0] ^ key
 
     def live_blocks(self, width, height, border=7):
         """Current map grid from gBackupMapLayout, without the MAP_OFFSET border."""

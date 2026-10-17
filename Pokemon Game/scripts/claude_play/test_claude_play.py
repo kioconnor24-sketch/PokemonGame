@@ -67,6 +67,18 @@ class MapTests(unittest.TestCase):
             d.map_route("MAP_AVERONFIELDLAB", "MAP_SALTMERE")
 
 
+class SymbolTests(unittest.TestCase):
+    def test_duplicate_static_names_resolve_by_address(self):
+        import game
+        info = dict(symbols={"HandleInputChooseAction": 0x080581A0}, offsets={}, constants={},
+                    all_symbols=[(0x080581A0, "HandleInputChooseAction"),
+                                 (0x0805D22C, "HandleInputChooseAction")])
+        g = game.Game.__new__(game.Game)
+        game.Game.__init__(g, type("E", (), {"gdb": None})(), info)
+        self.assertEqual(g.func_name(0x0805D22D), "HandleInputChooseAction")
+        self.assertEqual(g.func_name(0x080581A1), "HandleInputChooseAction")
+
+
 class FakeGame:
     def __init__(self, flags):
         self.flags = flags
