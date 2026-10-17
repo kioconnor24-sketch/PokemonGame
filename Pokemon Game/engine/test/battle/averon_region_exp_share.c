@@ -56,11 +56,11 @@ WILD_BATTLE_TEST("Averon regional EXP Share keeps a capped holder's pool separat
         AveronRegion_SetActive(region);
 
         PLAYER(SPECIES_WOBBUFFET) { Level(10); Speed(100); Moves(MOVE_TACKLE); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(11); Item(heldItem); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(10); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(10); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(10); }
-        PLAYER(SPECIES_WOBBUFFET) { Level(10); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(11); Item(heldItem); Speed(90); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Speed(80); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Speed(70); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Speed(60); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Speed(50); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); Speed(1); Moves(MOVE_CELEBRATE); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); }
