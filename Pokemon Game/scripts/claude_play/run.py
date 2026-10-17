@@ -348,7 +348,7 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
             break
         if mid != map_id or pos not in tiles:
             d.travel_to(map_id)
-            d.walk_path(map_id, set(tiles), on_event=lambda s: d.battle(choose_move=weakest_move(d)))
+            d.walk_path(map_id, set(tiles), on_event=lambda s: d.battle(choose_move=weakest_move(d), never_b=True))
             continue
         other = tiles[1] if pos == tiles[0] else tiles[0]
         direction = next(k for k, v in mapdata.DIRS.items() if (pos[0] + v[0], pos[1] + v[1]) == other)
@@ -359,12 +359,15 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
             if s.in_battle or s.cb2 != "CB2_Overworld":
                 break
         if s.in_battle or s.cb2 != "CB2_Overworld":
-            d.battle(choose_move=weakest_move(d), label=f"q3-loss{battles:02d}")
+            d.battle(choose_move=weakest_move(d), label=f"q3-loss{battles:02d}", never_b=True)
             battles += 1
             d.log("q3-party", party=d.state().party, map=d.here()[0])
     else:
         raise drv.Stuck("Q3 loss loop did not reach the clinic")
-    d.shot("q3-after-whiteout")
+    # The whiteout message prints slowly over black: keep several frames.
+    for n in range(6):
+        d.shot(f"q3-after-whiteout-{n + 1}")
+        time.sleep(0.7)
     d.clear_text(capture="q3-clinic", frames=16)
     observe(d, "q3-clinic", {"map": "MAP_ALDERFIELDCLINIC",
                              "partyHealed": lambda o: party_fully_restored(d, o),

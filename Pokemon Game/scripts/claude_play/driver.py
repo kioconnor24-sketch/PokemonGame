@@ -310,11 +310,14 @@ class Driver:
                 best, best_score = slot, score
         return best if best is not None else 0
 
-    def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None, switch_if=None):
+    def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None, switch_if=None,
+               never_b=False):
         """Play a battle to the end with ordinary menu inputs.
 
         switch_if(s) -> True switches the lead out (POKeMON in the action
-        menu) for the lowest-level healthy party member that turn."""
+        menu) for the lowest-level healthy party member that turn.
+        never_b: advance text with A only. B also answers NO to "Use next
+        Pokemon?" in a wild battle, which flees (seen in run41)."""
         choose_move = choose_move or self.best_move
         self.switch_pref = None
         shots = defeat_shots = 0
@@ -394,7 +397,7 @@ class Driver:
                     defeat_shots += 1
                 # Text and animations: A advances messages; B declines
                 # optional prompts (nickname, move replacement) safely.
-                self.e.tap("A" if idle % 6 else "B", after=0.3)
+                self.e.tap("A" if never_b or idle % 6 else "B", after=0.3)
 
     def choose_replacement(self, s):
         """Party menu during battle: pick a healthy Pokemon other than the one
