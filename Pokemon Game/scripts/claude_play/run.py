@@ -447,13 +447,29 @@ def phase_q5_field(d, map_id="MAP_ALDERFIELD"):
                                  "FLAG_AVERON_NOTES_REWARDED": True})
     observe(d, "q5-follower-outside", {"follower": follower_ok})
     d.travel_to("MAP_ALDERFIELDCLINIC")
-    d.settle()
-    time.sleep(1.0)
-    observe(d, "q5-follower-inside", {"follower": follower_ok})
+    follower_after_door(d, "q5-follower-inside")
     d.travel_to(map_id)
+    follower_after_door(d, "q5-follower-back-outside")
+
+
+def follower_after_door(d, label):
+    """After a warp the expansion spawns the follower invisible on the
+    player's tile (UpdateFollowingPokemon); it walks out on the first step.
+    Record that, take one ordinary step, then require it visible."""
     d.settle()
-    time.sleep(1.0)
-    observe(d, "q5-follower-back-outside", {"follower": follower_ok})
+    time.sleep(0.8)
+    observe(d, f"{label}-arrived", {"followerSpawned": lambda o: bool(o["follower"])
+                                    and o["follower"]["species"] == o["party"][0]["species"]})
+    mid, pos = d.here()
+    m = d.live_map(mid)
+    for name, (dx, dy) in mapdata.DIRS.items():
+        nxt = (pos[0] + dx, pos[1] + dy)
+        if m.walkable(*nxt) and not m.warp_at(*nxt):
+            d.step(name)
+            break
+    d.settle()
+    time.sleep(0.8)
+    observe(d, label, {"follower": follower_ok})
 
 
 def phase_save(d):
