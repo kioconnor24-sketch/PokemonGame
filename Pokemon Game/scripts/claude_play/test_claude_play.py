@@ -389,6 +389,8 @@ class EvidenceTests(unittest.TestCase):
             (run_dir / "0002-talk-x-01.png").write_bytes(b"\x89PNG\r\n\x1a\nSYNTHETIC")
             case = evidence.build({"C": [("r1", ["badge", "shot:*-talk-*"])]}, root)["cases"][0]
             self.assertIn("r1/0002-talk-x-01.png", case["screenshots"])
+            twice = evidence.build({"C": [("r1", ["shot:*-talk-*", "shot:*-talk-*"])]}, root)["cases"][0]
+            self.assertEqual(twice["screenshots"], ["r1/0002-talk-x-01.png"])
             with self.assertRaises(evidence.EvidenceError):
                 evidence.build({"C": [("r1", ["shot:*-missing-*"])]}, root)
 

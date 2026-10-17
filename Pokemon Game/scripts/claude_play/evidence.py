@@ -107,7 +107,8 @@ def build(cases, root):
                             statement=f"{label}: {key} ({how})",
                             evidence_file=f"{run_name}/state-{label}.json",
                             expected=want, observed=observed_value(state, key)))
-        out_cases.append(dict(case_id=case_id, input_trace=traces[0] if len(traces) == 1 else traces[-1],
+        screenshots = list(dict.fromkeys(screenshots))  # a frame listed twice is one frame
+        out_cases.append(dict(case_id=case_id, input_trace=traces[0],
                               input_traces=traces, screenshots=screenshots,
                               state_observations=observations,
                               dev_fixtures=fixtures, scope="DEV_FIXTURE" if fixtures else "ORDINARY_PLAY",
