@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "faraway_island.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
