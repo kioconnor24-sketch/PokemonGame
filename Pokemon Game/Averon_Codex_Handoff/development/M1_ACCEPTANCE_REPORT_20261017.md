@@ -33,7 +33,7 @@ approvals above; those are human checks and decisions, not engineering work.
   (`git rev-parse … :Pokemon Game/engine` = `5d81cc84…`); `103d05dd` →
   `4f8f987b` engine diff is the single new test file; cited CI runs
   39057987968 and 39018184673 concluded success.
-- **Independent Claude run on main `9ae0b32a`:** CROSSCHECK_PLACEHOLDER
+- **Independent Claude run on main `9ae0b32a`** (separate machine, `make -j10 -O check`, 782 s): **6,107 total, 5,332 PASS**, FAILED 327 / KNOWN_FAILING 17 / TO_DO 421 / EXPECT_FAILING 9; `check-averon-native-baseline.py`: "failing tests in log: 327; baseline entries: 327 — OK: matches the Averon baseline". Averon 242/242 PASS, including `Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state`. Normal and RELEASE builds exit 0, no compiler warnings; normal ROM `3072c6c0…` / ELF `180caa1a…` (the exact ROM used for the current-main gameplay runs), RELEASE ROM `c918e880…`. Agrees with Codex's result.
 - ROM hashes differ between Codex's and Claude's environments for the same
   source (Codex normal `e09381d0…`, Claude `3072c6c0…`; both GCC 14.2.1).
   Each environment reproduces its own hash exactly (Claude: two worktrees at
