@@ -1,3 +1,7 @@
+> **SUPERSEDED 2026-10-17 — READ THE NEW CURRENT MANAGER HANDOFF FIRST:** [CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261017.md](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261017.md) and [M1_EXHAUSTIVE_REMAINING_WORK_20261017.md](M1_EXHAUSTIVE_REMAINING_WORK_20261017.md). As of the new handoff, #14/#25/#95/#96/#99/#103 are MERGED, and new #101 (foreign-OT egg hatch) and #102 (QA #20/#71 transplant) need independent review/checks, while Claude maintains #97 and authentic Gate B. **Everything below is historical and may contradict current owner delegation, CI and PR status. Do not execute old merge queues or revive separate Codex/Playtest roles from it.**
+
+---
+
 > **LATEST OWNER ROUTING — 2026-10-17: CLAUDE ALONE HANDLES ALL M1 ROLES.** Codex and separate Playtest/Manager agents are PAUSED. Claude now owns engineering, genuine mGBA evidence, a distinct read-only second-pass QA assessment, Gate A/B decisions, source/CI review, protected PR-specific handoff administration and **normal merges for genuinely eligible PRs**. No extra agent approval queue. Read the [sole-Claude execution instructions](CLAUDE_SOLE_M1_EXECUTION_20261017.md), Issue #15 and scope-limited Issue #46. All contradictory historical matrices below are superseded. No maps/canon/IDs, artificial PASS or protected-check bypass; GitHub account permissions still apply.
 
 # MOST RECENT MANAGER HANDOFF — 2026-10-17 after actual blocker removal
