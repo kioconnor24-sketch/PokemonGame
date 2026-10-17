@@ -48,6 +48,7 @@ OFFSET_EXPRS = {
     "bm.types": "offsetof(struct BattlePokemon, types)",
     "bm.statStages": "offsetof(struct BattlePokemon, statStages)",
     "pm.slotId": "offsetof(struct PartyMenu, slotId)",
+    "typechart.elem": "sizeof(gTypeEffectivenessTable[0][0])",
     "move.size": "sizeof(struct MoveInfo)",
     "main.vblankCounter1": "offsetof(struct Main, vblankCounter1)",
     "slot.size": "sizeof(struct ItemSlot)",
@@ -72,7 +73,8 @@ CONSTANTS = [
     "BAG_ITEMS_COUNT", "BAG_POKEBALLS_COUNT", "BAG_BERRIES_COUNT", "ITEM_EXP_SHARE",
     "TRAINER_FLAGS_START", "TRAINER_AVERON_FARMER", "TRAINER_AVERON_PICNIC", "TRAINER_AVERON_ORCHARD",
     "TRAINER_AVERON_GYM1", "TRAINER_AVERON_ELIO", "TRAINER_AVERON_MEADOW",
-    "STAT_ATK", "DEFAULT_STAT_STAGE", "MOVE_BABY_DOLL_EYES", "MOVE_GROWL",
+    "STAT_ATK", "DEFAULT_STAT_STAGE", "MOVE_BABY_DOLL_EYES", "MOVE_CHARM",
+    "TYPE_NORMAL", "TYPE_WATER", "TYPE_FIRE", "TYPE_GRASS", "TYPE_GHOST",
 ]
 
 
@@ -92,7 +94,8 @@ def probe_offsets(engine, workdir):
              '#include "constants/flags.h"', '#include "constants/vars.h"', '#include "constants/items.h"',
              '#include "constants/species.h"', '#include "constants/battle.h"',
              '#include "move.h"', '#include "save.h"', '#include "constants/moves.h"',
-             '#include "constants/opponents.h"', '#include "party_menu.h"',
+             '#include "constants/opponents.h"', '#include "party_menu.h"', '#include "fpmath.h"',
+             'extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];',
              '#define P(n, v) asm volatile(".globl AVPROBE_" #n "\\n.equ AVPROBE_" #n ", %c0" :: "i"(v))',
              "void AvProbe(void)", "{"]
     lines += [f"    P(p{i}, {exprs[n]});" for i, n in enumerate(names)]
@@ -109,7 +112,7 @@ def probe_offsets(engine, workdir):
         m = re.match(r"([0-9a-f]+) A AVPROBE_p(\d+)$", line)
         if m:
             found[names[int(m.group(2))]] = int(m.group(1), 16)
-    if len(found) != len(names):
+    if len(found) != len(set(names)):
         raise Blocked(f"offset probe found {len(found)} of {len(names)}")
     return found
 

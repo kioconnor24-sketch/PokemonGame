@@ -79,6 +79,28 @@ class SymbolTests(unittest.TestCase):
         self.assertEqual(g.func_name(0x080581A1), "HandleInputChooseAction")
 
 
+class RomTableTests(unittest.TestCase):
+    """Reads the real built ROM when one is present next to the engine."""
+
+    def setUp(self):
+        self.rom = ENGINE / "pokeemerald.gba"
+        self.elf = ENGINE / "pokeemerald.elf"
+        if not (self.rom.exists() and self.elf.exists()):
+            self.skipTest("no built ROM/ELF in this checkout")
+
+    def test_type_chart_matches_known_matchups(self):
+        import game
+        with tempfile.TemporaryDirectory() as tmp:
+            info = emu.load_build_info(self.elf, ENGINE, tmp)
+        c = info["constants"]
+        mt = game.MoveTable(self.rom, info)
+        self.assertEqual(mt.effectiveness(c["TYPE_WATER"], [c["TYPE_NORMAL"]]), 1.0)
+        self.assertEqual(mt.effectiveness(c["TYPE_WATER"], [c["TYPE_FIRE"]]), 2.0)
+        self.assertEqual(mt.effectiveness(c["TYPE_NORMAL"], [c["TYPE_GHOST"]]), 0.0)
+        self.assertEqual(mt.effectiveness(c["TYPE_WATER"], [c["TYPE_GRASS"]]), 0.5)
+        self.assertEqual(mt.move(c["MOVE_WATER_GUN"])["power"], 40)
+
+
 class FakeGame:
     def __init__(self, flags):
         self.flags = flags

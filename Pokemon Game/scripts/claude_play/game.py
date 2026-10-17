@@ -157,8 +157,9 @@ class MoveTable:
         self.base = info["symbols"]["gMovesInfo"]
         self.size = info["offsets"]["move.size"]
         self.ntypes = info["constants"]["NUMBER_OF_MON_TYPES"]
-        raw = self._rom(info["symbols"]["gTypeEffectivenessTable"], self.ntypes * self.ntypes * 2)
-        self.chart = struct.unpack(f"<{self.ntypes * self.ntypes}H", raw)
+        elem = info["offsets"]["typechart.elem"]  # uq4_12_t is 32-bit (fpmath.h)
+        raw = self._rom(info["symbols"]["gTypeEffectivenessTable"], self.ntypes * self.ntypes * elem)
+        self.chart = struct.unpack(f"<{self.ntypes * self.ntypes}{'I' if elem == 4 else 'H'}", raw)
         self.cache = {}
 
     def move(self, move_id):

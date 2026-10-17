@@ -261,13 +261,13 @@ class Driver:
     # -- battles --------------------------------------------------------------
     def trainer_move(self, s):
         """Against trainers: lower a healthy physical attacker's Attack twice
-        with Baby-Doll Eyes (priority) or Growl while we are healthy, then
+        (Baby-Doll Eyes, Charm or Growl) while we are healthy, then
         attack with the strongest move."""
         c = self.g.c
         me, foe = s.mons[0], s.mons[1]
         atk_stage = foe["stages"][c["STAT_ATK"]] - c["DEFAULT_STAT_STAGE"]
         if me["hp"] * 10 > me["maxhp"] * 6 and foe["hp"] * 2 > foe["maxhp"] and atk_stage > -2:
-            for move in (c["MOVE_BABY_DOLL_EYES"], c["MOVE_GROWL"]):
+            for move in (c["MOVE_BABY_DOLL_EYES"], c["MOVE_CHARM"], c["MOVE_GROWL"]):
                 if move in me["moves"]:
                     slot = me["moves"].index(move)
                     if me["pp"][slot]:
