@@ -404,11 +404,31 @@ def phase_gym1(d):
     observe(d, "gym1-sluices", {"FLAG_AVERON_WEST_SLUICE": True, "FLAG_AVERON_EAST_SLUICE": True})
     s = d.talk("MAP_ALDERFIELDGYM", (4, 4))
     if s.in_battle:
-        d.battle(choose_move=d.trainer_move, label="elio")
+        d.battle(choose_move=d.trainer_move, label="elio", switch_if=retaliate_switch(d))
         s = d.clear_text(limit=300)
     won = d.g.flag(d.state(), "FLAG_BADGE01_GET")
     d.log("gym1-result", won=won, map=d.here()[0], lead=lead(d))
     observe(d, "gym1-result", {"FLAG_BADGE01_GET": True})
+
+
+def retaliate_switch(d):
+    """Switch rule for one trainer battle. Retaliate doubles in power on the
+    turn after one of its user's side faints, which is exactly the turn a
+    replacement arrives (run15: Elio's Lillipup knocked out Piplup that
+    way). When a new foe that knows Retaliate arrives, send in the
+    lowest-level healthy member for that one turn; the forced replacement
+    afterwards brings back the strongest."""
+    seen = {"foe": None}
+    retaliate = d.g.c["MOVE_RETALIATE"]
+
+    def switch_if(s):
+        foe = s.mons[1]
+        key = (foe["species"], foe["level"])
+        arrived = seen["foe"] is not None and key != seen["foe"]
+        seen["foe"] = key
+        fodder = [m for m in s.party if m["hp"] > 0 and m["level"] < s.mons[0]["level"]]
+        return arrived and retaliate in foe["moves"] and bool(fodder)
+    return switch_if
 
 
 def phase_q1_start(d):

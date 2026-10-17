@@ -260,13 +260,17 @@ class Driver:
 
     # -- battles --------------------------------------------------------------
     def trainer_move(self, s):
-        """Against trainers: lower a healthy physical attacker's Attack twice
-        (Baby-Doll Eyes, Charm or Growl) while we are healthy, then
-        attack with the strongest move."""
+        """Against trainers: lower a physical attacker's Attack (Baby-Doll Eyes,
+        Charm or Growl), then attack with the strongest move. Lower it twice
+        while we are healthy and the foe is above half HP, and again whenever
+        the foe has boosted itself (Work Up) unless it is nearly knocked out
+        (run16: a +2 Lillipup knocked out Piplup from 32/44 HP in one hit)."""
         c = self.g.c
         me, foe = s.mons[0], s.mons[1]
         atk_stage = foe["stages"][c["STAT_ATK"]] - c["DEFAULT_STAT_STAGE"]
-        if me["hp"] * 10 > me["maxhp"] * 6 and foe["hp"] * 2 > foe["maxhp"] and atk_stage > -2:
+        opening = me["hp"] * 10 > me["maxhp"] * 6 and foe["hp"] * 2 > foe["maxhp"] and atk_stage > -2
+        boosted = atk_stage > 0 and foe["hp"] * 4 > foe["maxhp"] and me["hp"] * 3 > me["maxhp"]
+        if opening or boosted:
             for move in (c["MOVE_BABY_DOLL_EYES"], c["MOVE_CHARM"], c["MOVE_GROWL"]):
                 if move in me["moves"]:
                     slot = me["moves"].index(move)
@@ -291,9 +295,13 @@ class Driver:
                 best, best_score = slot, score
         return best if best is not None else 0
 
-    def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None):
-        """Play a battle to the end with ordinary menu inputs."""
+    def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None, switch_if=None):
+        """Play a battle to the end with ordinary menu inputs.
+
+        switch_if(s) -> True switches the lead out (POKeMON in the action
+        menu) for the lowest-level healthy party member that turn."""
         choose_move = choose_move or self.best_move
+        self.switch_pref = None
         shots = 0
         last = None
         idle = 0
@@ -343,6 +351,13 @@ class Driver:
                     self.log("throw-ball", foe=(s.mons[1]["species"], s.mons[1]["level"], s.mons[1]["hp"]))
                     self.e.tap("R", hold=0.15, after=0.8)
                     continue
+                if switch_if and switch_if(s):
+                    self.log("switch-out", label=label, me=(s.mons[0]["species"], s.mons[0]["hp"]),
+                             foe=(s.mons[1]["species"], s.mons[1]["level"], s.mons[1]["hp"]))
+                    self.switch_pref = "fodder"
+                    self.move_cursor(s.action_cursor, 2)
+                    self.e.tap("A", after=0.8)
+                    continue
                 want = 3 if (run_if and run_if(s)) else 0
                 self.move_cursor(s.action_cursor, want)
                 self.e.tap("A", after=0.4)
@@ -361,9 +376,15 @@ class Driver:
                 self.e.tap("A" if idle % 6 else "B", after=0.3)
 
     def choose_replacement(self, s):
-        """Party menu during battle (lead fainted): pick the first healthy
-        Pokemon by moving the cursor down to it, then A (choose) and A (SHIFT)."""
-        target = next((i for i, m in enumerate(s.party) if m["hp"] > 0 and i > 0), None)
+        """Party menu during battle: pick a healthy Pokemon other than the one
+        in battle (the menu shows battle order, so slot 0 is the active one):
+        the highest level after a faint, the lowest level for a voluntary
+        switch. Move the cursor to it, then A (choose) and A (SHIFT)."""
+        healthy = [i for i, m in enumerate(s.party) if m["hp"] > 0 and i > 0]
+        fodder = getattr(self, "switch_pref", None) == "fodder"
+        self.switch_pref = None
+        key = (lambda i: (s.party[i]["level"], i)) if fodder else (lambda i: (-s.party[i]["level"], i))
+        target = min(healthy, key=key) if healthy else None
         if target is None:
             self.e.tap("B", after=0.4)
             return
