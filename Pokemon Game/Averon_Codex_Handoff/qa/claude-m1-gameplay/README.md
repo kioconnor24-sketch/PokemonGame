@@ -33,6 +33,13 @@ differs), run20 and run34 (clean at start, dirty at end). The driver only reads
 memory and presses keys, so this affects reproducibility of the inputs, not the
 game build; the packages list each run's start driver state.
 
+**ROM attestation.** Runs before the `engine_rom_sha256` field were packaged
+with `--legacy-rom` only after checking: `e6870c30…` equals the
+`pokeemerald.gba` built from `bcfeb28d`, and rebuilding `abb13f29` from a
+clean worktree reproduced run17's ROM `66b58c3a…` and ELF `5e9b67de…` byte for
+byte. Current main `103d05dd` builds ROM `3072c6c0…`, byte-identical to the
+build of #101's head `9f0efe03`.
+
 ## Save chain (flash sha256, first 12 hex)
 
 ```
