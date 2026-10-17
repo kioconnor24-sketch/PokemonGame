@@ -58,7 +58,9 @@ python3 ../scripts/test-averon-legend.py
 
 1. Owner decisions per encounter: species, location, whether a defeat may be
    retried and when, and the two saved flags it uses.
-2. A handoff to register `data/scripts/averon_legend.inc` in `event_scripts.s`.
+2. Done: `event_scripts.s` includes `data/scripts/averon_legend.inc` next to the
+   scripted-battle macros. Registration links nothing by itself; the natives
+   enter the ROM when the first approved encounter invokes a macro.
 3. ChatGPT QA emulator cases once an approved encounter exists: catch,
    knockout, run, the wild Pokémon's Whirlwind or Roar, a full-party catch, and
    save before and after.

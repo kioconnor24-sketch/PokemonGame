@@ -7,7 +7,8 @@ checks keep them complete when the engine changes:
   "records nothing" test;
 - AveronLegend_ClassifyOutcome returns CAUGHT only for B_OUTCOME_CAUGHT and
   DEFEATED only for B_OUTCOME_WON, with everything else falling to default;
-- no game script uses the macros yet (they are not registered).
+- event_scripts.s registers the macros exactly once, and no game script
+  uses them yet (no encounter is approved).
 """
 from pathlib import Path
 import re
@@ -54,13 +55,21 @@ class AveronLegendSourceTests(unittest.TestCase):
         self.assertRegex(body, r'default:\s*return AVERON_LEGEND_AVAILABLE;')
         self.assertEqual(body.count('return'), 3)
 
-    def test_no_game_script_uses_the_unregistered_macros(self):
+    def test_macros_are_registered_once(self):
+        event = read('data/event_scripts.s')
+        includes = re.findall(r'^\s*\.include\s+"data/scripts/averon_legend\.inc"\s*$', event, re.M)
+        self.assertEqual(len(includes), 1)
+        # Macros must be defined before any script include that could use them.
+        self.assertLess(event.index('"data/scripts/averon_legend.inc"'),
+                        event.index('"data/averon_optional_sidequests.inc"'))
+
+    def test_no_game_script_uses_the_macros(self):
         users = []
         for path in (ENGINE / 'data').rglob('*'):
             if path.suffix not in ('.inc', '.s', '.pory') or path.name == 'averon_legend.inc':
                 continue
             text = path.read_text(encoding='utf-8', errors='replace')
-            if 'averon_legend.inc' in text or re.search(r'^\s*averon_legend_\w+', text, re.M):
+            if re.search(r'^\s*averon_legend_\w+', text, re.M):
                 users.append(str(path.relative_to(ENGINE)))
         self.assertEqual(users, [])
 

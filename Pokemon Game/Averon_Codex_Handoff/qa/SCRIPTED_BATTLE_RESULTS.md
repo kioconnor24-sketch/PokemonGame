@@ -1,19 +1,17 @@
-# SCRIPTED-BATTLE core — CORE_ONLY / UNREGISTERED / NOT GAMEPLAY_ACCEPTED
+# SCRIPTED-BATTLE — core merged, registration deferred (NOT GAMEPLAY_ACCEPTED)
 
-Scope: `codex/scripted-core-only-20261017`, extracted from PR #25 at
-`f324e485358cf6f076418e7c223559f164c36dc1` under the owner-approved PR #76
-staging method. The implementation and native fixtures are reused; only the
-production `event_scripts.s` registration is omitted. The registry remains
-byte-identical to this branch's main base. The core's `B_FLAG_NO_WHITEOUT`
-uses the existing RAM-only `FLAG_SPECIAL_FLAG_UNUSED_0x4003` mapping.
-The original #25 remains draft for later serialized registration; its old
-protected-file approval does not transfer to this new PR. Normal source
-handoff, exclusive-file checks, independent review and exact-head build/native
-evidence remain required. **No scene
+Scope: the core (macros, natives, RAM-only `B_FLAG_NO_WHITEOUT` mapping to
+`FLAG_SPECIAL_FLAG_UNUSED_0x4003` and native fixtures) merged to main through
+core-only PR #81 (`6d5c0967`), extracted from PR #25 at
+`f324e485358cf6f076418e7c223559f164c36dc1` under the PR #76 staging method.
+PR #25 (`claude/scripted-battle`) now carries only the deferred production
+registration: one `.include "data/scripts/averon_scripted_battle.inc"` line in
+`event_scripts.s`. That line waits for QUEST #14's independent GATE A and a
+serialized exact-file handoff for the protected registry. **No scene
 uses them yet**: Renn, the operatives and the ambush wait for approved
 trainers and text, so no scripted battle can be played. Nothing here is
 EMULATOR-TESTED. The detailed evidence below describes the inherited #25
-implementation; current-head results are recorded separately in the new PR.
+implementation; #81's current-head results are recorded in that PR.
 
 ## How to rerun
 
@@ -68,13 +66,13 @@ GUI evidence exists yet.
 1. Done: `include/config/battle.h` sets `B_FLAG_NO_WHITEOUT` to
    `FLAG_SPECIAL_FLAG_UNUSED_0x4003`. It is RAM-only, so there is no
    `flags.h` or SaveBlock change, and `0x38–0x3F` stays unallocated.
-2. Deliberately unregistered: `data/event_scripts.s` is unchanged from main.
-   Native script fixtures include the macros directly; there are no production
-   macro callers. This is core verification, not playable scene acceptance.
-3. The original #25 registry change remains gated on QUEST #14 and the exact
-   serialized protected-source handoff. The new core-only PR also needs its own
-   approval and resolution of #25's overlapping protected config header; no
-   guard is waived by successful staging.
+2. Deferred: PR #25 adds the `data/event_scripts.s` include. Until it merges,
+   native script fixtures include the macros directly and there are no
+   production macro callers. This is core verification, not playable scene
+   acceptance.
+3. #25's registry line merges only after QUEST #14 merges, through the exact
+   serialized protected-source handoff; QUEST's own `event_scripts.s` lines
+   are kept and the include stays above the QUEST include. No guard is waived.
 4. Waiting: trainers and scenes, once the owner approves rosters and text.
    Then native tests that run each registered scene, and ChatGPT QA
    emulator cases for each row above.
