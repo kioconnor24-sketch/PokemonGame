@@ -15,6 +15,7 @@ is third-party human Playtest.** Sinnoh work has not started.
 | Genuine blocking defects? | **None.** The only reproduced defect (#100 foreign-OT egg hatch) is fixed and merged (#101). No new production defect was found by Codex's or Claude's 6,107-result runs or by the packaged graphical runs 17–59 plus the RELEASE boot. |
 | What needs owner approval? | (1) audio listen result, (2) accepting Gym 1's missing dialogue screenshots as non-blocking, (3) accepting the known limitations in §0.4, (4) M1 acceptance itself, (5) authorizing Sinnoh map/content production. |
 | Can Sinnoh begin after approval? | **Yes.** No technical blocker. Planning constraints in §0.5 apply (SaveBlock2 has 84 B free; ROM ~6.5 MiB free). |
+| Where are the verdict and approvals recorded? | Verdict and summary posted to Issues #15, #23, #46 and #55; the owner records the audio-listen result on #23 and M1 acceptance / Sinnoh authorization on #15 (and #46's checklist). |
 
 **BACKEND_READY: CONDITIONAL** — all engineering is complete and verified
 (§0.1–§0.2) and nothing is blocked on code. The single remaining condition is
