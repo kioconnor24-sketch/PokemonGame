@@ -95,15 +95,22 @@ class Game:
                 out.append((item, qty))
         return out
 
+    map_names = {}
+
+    def emu_map_name(self, s):
+        return self.map_names.get((s.group, s.num))
+
     def observation(self):
         """Plain facts for an evidence state file."""
         s = self.snapshot(battle=False)
         names = ["FLAG_BADGE01_GET", "FLAG_BADGE02_GET", "FLAG_AVERON_STARTER",
                  "FLAG_AVERON_WEST_SLUICE", "FLAG_AVERON_EAST_SLUICE", "FLAG_AVERON_GYM1_TM",
                  "FLAG_AVERON_NOTES_STARTED", "FLAG_AVERON_NOTES_RECORDED",
-                 "FLAG_AVERON_NOTES_REWARDED", "FLAG_AVERON_EXP_SHARE"]
+                 "FLAG_AVERON_NOTES_REWARDED", "FLAG_AVERON_EXP_SHARE",
+                 "FLAG_AVERON_SKETCH_STARTED", "FLAG_AVERON_SKETCH_FOUND",
+                 "FLAG_AVERON_SKETCH_REWARDED"]
         return dict(
-            cb2=s.cb2, mapGroup=s.group, mapNum=s.num, x=s.x, y=s.y,
+            map=self.emu_map_name(s), cb2=s.cb2, mapGroup=s.group, mapNum=s.num, x=s.x, y=s.y,
             frame=self.emu.frame(),
             flags={n: self.flag(s, n) for n in names},
             party=s.party,

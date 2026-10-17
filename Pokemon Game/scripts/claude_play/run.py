@@ -279,7 +279,14 @@ def make_trainer(name, map_id, tile, trainer):
         beaten = trainer_beaten(d, trainer)
         d.log("trainer-done", trainer=name, map=mid, lead=lead(d), beaten=beaten,
               whiteout=mid != map_id)
-        observe(d, f"{name}-after")
+        if mid != map_id:
+            # A genuine loss: record where the whiteout put the player and
+            # whether the party was restored (Q3 material).
+            observe(d, f"{name}-whiteout", {"map": "MAP_ALDERFIELDCLINIC",
+                                            "leadHealed": lambda o: o["party"] and
+                                            o["party"][0]["hp"] == o["party"][0]["maxhp"]})
+        else:
+            observe(d, f"{name}-after")
     return phase
 
 
@@ -338,7 +345,35 @@ def phase_q1_reward(d):
     observe(d, "q1-no-duplicate", {"greatBalls+2": lambda o: count_item(o["pokeBalls"], great) == have + 2})
 
 
-PHASES = {"gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
+def phase_q2_start(d):
+    """Windrow artist asks for a berry sketch check; answer YES."""
+    if not d.g.flag(d.state(), "FLAG_AVERON_SKETCH_STARTED"):
+        d.travel_to("MAP_WINDROW")
+        d.talk("MAP_WINDROW", (20, 14))
+    observe(d, "q2-started", {"FLAG_AVERON_SKETCH_STARTED": True})
+
+
+def phase_q2_observer(d):
+    d.travel_to("MAP_COASTALMEADOW")
+    d.talk("MAP_COASTALMEADOW", (10, 22))
+    observe(d, "q2-observer", {"FLAG_AVERON_SKETCH_FOUND": True, "FLAG_AVERON_SKETCH_REWARDED": False})
+
+
+def phase_q2_reward(d):
+    """Back to the artist: exactly three Oran Berries, once."""
+    oran = d.g.c["ITEM_ORAN_BERRY"]
+    before = observe(d, "q2-before-reward")
+    have = count_item(before["berries"], oran)
+    d.travel_to("MAP_WINDROW")
+    d.talk("MAP_WINDROW", (20, 14))
+    observe(d, "q2-reward", {"FLAG_AVERON_SKETCH_REWARDED": True,
+                             "oranBerries+3": lambda o: count_item(o["berries"], oran) == have + 3})
+    d.talk("MAP_WINDROW", (20, 14))
+    observe(d, "q2-no-duplicate", {"oranBerries+3": lambda o: count_item(o["berries"], oran) == have + 3})
+
+
+PHASES = {"q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_reward": phase_q2_reward,
+          "gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
           "q1_reward": phase_q1_reward,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
@@ -369,6 +404,7 @@ def main():
         g = game.Game(e, info)
         d = drv.Driver(e, g, world, out / "events.jsonl")
         d.moves = game.MoveTable(a.rom, info)
+        g.map_names = world.by_num
         e.start_trace(out / "inputs.jsonl", info["symbols"]["gMain"] + info["offsets"]["main.vblankCounter1"])
         prov = provenance(a, info, out, "start")
         d.log("start", source=prov["source_sha"], rom_sha256=prov["rom_sha256"], elf=info["elf_sha256"], rom=a.rom, phases=a.phases, new_game=a.new_game)
