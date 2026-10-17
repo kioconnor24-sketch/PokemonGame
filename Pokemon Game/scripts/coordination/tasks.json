@@ -13,12 +13,18 @@
     "sinnoh_maps_require_owner_approval": true,
     "continue_disjoint_when_merge_blocked": true,
     "prevent_duplicate_interface_owners": true,
-    "do_not_auto_awaken_agents": true
+    "do_not_auto_awaken_agents": true,
+    "sole_backend_developer": "claude",
+    "local_build_debug_test_unrestricted_within_m1": true,
+    "claims_are_not_permission_requests": true,
+    "independent_qa_required_for_gameplay_acceptance": true,
+    "codex_active": false,
+    "milestone_1_scope": "map_independent_backend_only"
   },
   "tasks": [
     {
       "id": "QUEST",
-      "agent": "codex",
+      "agent": "claude",
       "pr": 14,
       "deps": [],
       "qa_cases": [
@@ -28,28 +34,26 @@
         "Q4",
         "Q5"
       ],
-      "next": "Finish only proven QUEST defects on #14; Playtest #23 completes rendered Hiker/tree, rewards, Bag, gift, save and whiteout. Otherwise continue owned disjoint TWO-REGION tests now.",
-      "issue": 41,
+      "next": "Claude is sole M1 backend writer: repair verified existing QUEST #14 defects and build/test freely on owned worktree. Playtest #23 independently decides Gate A/B. #14 normal merge follows required acceptance; continue other M1 work while waiting.",
+      "issue": 46,
       "owned_interfaces": [
         "optional_quest_events",
         "optional_quest_rewards"
       ],
       "fallback_order": [
-        "isolated TWO-REGION badge/flash/region tests",
-        "source-backed existing-map registry and save corruption tests"
+        "unclaimed M1 source/native cross-feature defects, flash/save and mechanics tests",
+        "improve existing-map reproducible input/trace instrumentation without touching Playtest's QA source"
       ],
-      "resume_when": "Exact-head Playtest Q1-Q5 acceptance and required checks allow protected merge"
+      "resume_when": "Independent #23 Gate A decision supports normal #14 merge; no dependency on this gate for other backend coding",
+      "parallel_development": true
     },
     {
       "id": "TWO-REGION",
-      "agent": "codex",
-      "branch": "codex/two-region-groundwork",
-      "deps": [
-        "QUEST"
-      ],
-      "requires_handoff": true,
-      "next": "Develop new-file region/flash/8+8 badge/cap/Fly/heal backend now, then register proven code in real engine only with scoped shared file handoff. No Sinnoh or test map files.",
-      "issue": 41,
+      "agent": "claude",
+      "deps": [],
+      "requires_handoff": false,
+      "next": "Already integrated on main: do NOT recreate two-region core. Claude owns any remaining demonstrated regional identity, badge, save, Fly, healing, field, bounds or old-save M1 defects; use native/symbolic fixtures. No real Sinnoh maps.",
+      "issue": 46,
       "parallel_development": true,
       "owned_interfaces": [
         "two_region_identity",
@@ -59,10 +63,10 @@
         "region_save_migration"
       ],
       "fallback_order": [
-        "separate save sector bounds repair with granted save.c handoff",
-        "existing-map registry/ID contract and flash recovery tests"
+        "cross-system Save/Continue and regional badge/field/cap native regressions",
+        "unclaimed general field, follower and UI implementation defects"
       ],
-      "resume_when": "QUEST #14 exact-head QA + safe merge and specific shared-file handoff recorded"
+      "resume_when": "A concrete missing M1 regional behavior or failing test is reproduced; normal guarded PR integration follows source review"
     },
     {
       "id": "SCRIPTED-BATTLE",
@@ -76,18 +80,18 @@
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "Finish owner-approved no-Run guard and source/native save and loss cleanup on #25; proceed to LEGEND #47 when event registry merge blocked; no canon battle scenes.",
-      "issue": 42,
+      "next": "Core already merged (#81); Claude may implement/debug/test all M1 scripted battle functions NOW. Keep #25 deferred event_scripts.s registration out until QUEST #14 is normally merged, then apply claude/scripted-battle-after-quest, run source/ARM/RELEASE/native checks, request eligible merge.",
+      "issue": 46,
       "parallel_development": true,
       "owned_interfaces": [
         "scripted_battle_lifecycle",
         "scripted_no_whiteout_and_forfeit"
       ],
       "fallback_order": [
-        "continue independently claimed LEGEND #47 outcome and save tests",
-        "reproduce unowned general battle/AI defects without altering region selector"
+        "independent battle cleanup, no-Run/forced-loss/gauntlet/native tests while waiting on #14",
+        "any other unclaimed M1 gameplay backend defect"
       ],
-      "resume_when": "QUEST #14 actual QA/integration completed and shared event_scripts.s merge window available"
+      "resume_when": "#14 normal merge releases #25 registry insertion; source/tests development need not wait"
     },
     {
       "id": "NATIVE-BASELINE",
@@ -112,7 +116,7 @@
       "agent": "playtest",
       "pr": 20,
       "deps": [],
-      "next": "Complete Q1-Q5 via real emulator from already-proved NPC interactions; do NOT redo researcher/artist YES/NO on same SHA; if gated, continue other existing-map QA.",
+      "next": "Independent Playtest still OWNS graphical Gate A and Q1-Q5 Gate B decisions. Reuse authentic inputs, screenshots, saved flashes and hashes; no artificial acceptance. Claude's local mGBA evidence is supporting evidence, not replacement.",
       "issue": 36,
       "owned_interfaces": [
         "rendered_quest_qa"
@@ -134,12 +138,12 @@
         "unique_encounter_outcome_and_retry"
       ],
       "fallback_order": [
-        "SCRIPTED-BATTLE #25 disjoint battle lifecycle tests",
-        "unclaimed species/forms/followers tests after exact claim"
+        "real failing generic LEGEND save, forced escape, retry, full-party test",
+        "unclaimed battle/flash native M1 gap"
       ],
-      "resume_when": "Actual owner-approved encounter is available for placement and player-facing GUI acceptance; generic backend can merge earlier under normal tests",
-      "next": "Already open draft #47: verify and complete generic caught/defeat/flee/teleport/retry/flash, real negative tests and GBA; no second LEGEND implementation, no species/site placement.",
-      "issue": 42
+      "resume_when": "#14 normal merge permits deferred registration or a reproduced generic backend defect warrants implementation",
+      "next": "Generic LEGEND core already merged; do not reproduce it. Claude may debug/test generic encounter outcomes and flash now. Prepared registration in claude/scripted-battle-after-quest must wait for #14 and #25 ordering. Actual legendary scene not required M1.",
+      "issue": 46
     },
     {
       "id": "POKEMON-MECHANICS",
@@ -151,16 +155,16 @@
         "generic_battle_exp_items_followers_ai"
       ],
       "fallback_order": [
-        "complete existing SCRIPTED-BATTLE #25 or LEGEND #47 unverified acceptance",
-        "source-grounded bounded native test of an unclaimed general mechanic"
+        "reproduce smallest unverified M1 mechanic through native fixture",
+        "source-backed asset/form/supported-feature availability audit without generating maps"
       ],
-      "resume_when": "Unclaimed source files and a reproducible mechanics gap are identified",
-      "next": "Claim real file-disjoint species/forms/evolutions/followers/general battle and Gen-5 held EXP Share defect after #25/#47 checkpoint; don't implement Codex's region-specific caps/obedience.",
+      "resume_when": "A concrete unverified M1 invariant, reproducible defect or missing check is found",
+      "next": "Core and held-EXP ownership repair already merged via #48. Claude has sole M1 production authority to address remaining proved species/forms/evolution/follower/AI/EXP/cap/breeding/PC/field gaps using local ARM+mGBA and native tests; never rewrite already merged work.",
       "issue": 46
     },
     {
       "id": "REGION-PLATFORM",
-      "agent": "codex",
+      "agent": "claude",
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
@@ -168,12 +172,28 @@
         "field_navigation_core_capacity"
       ],
       "fallback_order": [
-        "continue existing TWO-REGION backend unit tests",
-        "fix supported save/flash corruption and old-save cases"
+        "cross-feature save/flash/region platform native test",
+        "unclaimed reusable field or follower defect"
       ],
-      "resume_when": "A concrete unclaimed engine API/capacity defect has evidence; no map content required",
-      "next": "After TWO-REGION checkpoint, verify map registry/object/warp ID limits, field transitions, collision interfaces and resource capacity with existing maps only; never create prototype maps.",
+      "resume_when": "A concrete source-backed M1 engine/platform gap needs a fix; no creative map authoring",
+      "next": "Region map/object/Fly/warp capacity safeguards already largely merged. Claude may independently repair any proven remaining map-independent navigation, collision, event/flag registry, field permission or ROM-memory issue. Use existing maps/symbolic IDs only.",
       "issue": 46
+    },
+    {
+      "id": "M1-BACKEND-CLOSEOUT",
+      "agent": "claude",
+      "deps": [],
+      "parallel_development": true,
+      "issue": 46,
+      "next": "Develop and test unresolved map-independent backend invariants across source/region/flash/QUEST/SCRIPTED/LEGEND/EXP/follower/field in local WSL without asking Codex or manager for permission to code. Report exact test source/head and any true defect. Final normal+RELEASE/full native/main-resource proof coordinated with manager and independently accepted Playtest.",
+      "owned_interfaces": [
+        "cross_system_m1_backend_closeout"
+      ],
+      "fallback_order": [
+        "small unclaimed native regression for saved/field/follower/EXP boundary",
+        "compile/review next independently testable M1 interface while waiting on external PR merge"
+      ],
+      "resume_when": "Any source-backed unverified M1 acceptance item; do not wait on #14 to code unrelated tests"
     }
   ]
 }
