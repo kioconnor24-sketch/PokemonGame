@@ -10,6 +10,7 @@ on:
     paths:
       - ".github/workflows/averon-quest-support-q3.yml"
       - "Pokemon Game/scripts/quest_support/**"
+      - "!Pokemon Game/scripts/quest_support/**/*.md"
 
 permissions:
   contents: read
