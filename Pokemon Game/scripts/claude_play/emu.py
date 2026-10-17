@@ -221,6 +221,10 @@ class Gdb:
         raw = self._cmd(f"m{addr:x},{n:x}")
         if raw.startswith("E") and len(raw) == 3:
             return None, raw
+        if raw.startswith(("S", "T", "W", "X")):
+            # An asynchronous stop reply (the core stopped on its own) is not
+            # memory: fail closed instead of misreading it as data.
+            raise Blocked(f"unexpected stop reply during a read: {raw[:40]}")
         data = bytes.fromhex(raw)
         return (data, None) if len(data) == n else (None, "short")
 

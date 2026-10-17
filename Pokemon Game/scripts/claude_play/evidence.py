@@ -6,10 +6,14 @@
 
 Builds the input the manager's coordination/qa_evidence_report.py checks
 (source/ROM SHA, input trace, screenshots, state observations) from files the
-driver wrote during real runs: provenance-start.json, inputs.jsonl and
-state-<label>.json (each with its screenshot and expectations). Nothing is
-invented: a missing file, an unexpected SHA difference between runs, or a
+driver wrote during real runs: provenance-start.json, inputs.jsonl,
+events.jsonl and state-<label>.json (each with its screenshot and
+expectations). Nothing is invented: a missing file, a source/ROM/ELF
+difference between runs, a played ROM that is not the engine's build, or a
 state file whose recorded problems are not empty makes this exit non-zero.
+Every case that used the debug menu is marked scope DEV_FIXTURE and each of
+its statements names the fixture; each run's driver commit and dirty state is
+listed.
 """
 import argparse
 import json
@@ -39,13 +43,26 @@ def observed_value(state, key):
     return state.get(key)
 
 
+def dev_fixtures(run):
+    """Debug-menu uses recorded in the run's events.jsonl (dev_only=true)."""
+    path = run / "events.jsonl"
+    if not path.is_file():
+        raise EvidenceError(f"{run}: no events.jsonl")
+    uses = []
+    for line in path.read_text().splitlines():
+        event = json.loads(line)
+        if event.get("dev_only"):
+            uses.append(event.get("label") or event.get("event"))
+    return uses
+
+
 def build(cases, root):
     """cases: {case_id: [(run_dir, [labels])]} with run dirs under root."""
     root = pathlib.Path(root)
-    source = rom = None
+    source = rom = elf = None
     out_cases = []
     for case_id, parts in cases.items():
-        screenshots, observations, traces = [], [], []
+        screenshots, observations, traces, fixtures, drivers = [], [], [], [], []
         for run_name, labels in parts:
             run = root / run_name
             prov_path = run / "provenance-start.json"
@@ -54,30 +71,39 @@ def build(cases, root):
             prov = json.loads(prov_path.read_text())
             if prov.get("engine_dirty"):
                 raise EvidenceError(f"{run}: engine tree was dirty")
+            if prov.get("engine_rom_sha256") not in (None, prov["rom_sha256"]):
+                raise EvidenceError(f"{run}: played ROM is not the engine's build")
             if source is None:
-                source, rom = prov["source_sha"], prov["rom_sha256"]
-            elif (source, rom) != (prov["source_sha"], prov["rom_sha256"]):
-                raise EvidenceError(f"{run}: source/ROM differ from the first run")
+                source, rom, elf = prov["source_sha"], prov["rom_sha256"], prov["elf_sha256"]
+            elif (source, rom, elf) != (prov["source_sha"], prov["rom_sha256"], prov["elf_sha256"]):
+                raise EvidenceError(f"{run}: source/ROM/ELF differ from the first run")
             if not (run / "inputs.jsonl").is_file():
                 raise EvidenceError(f"{run}: no inputs.jsonl")
             traces.append(f"{run_name}/inputs.jsonl")
+            drivers.append(dict(run=run_name, driver_sha=prov.get("driver_sha"),
+                                driver_dirty=prov.get("driver_dirty")))
+            used = dev_fixtures(run)
+            fixtures += [f"{run_name}: {u}" for u in used]
+            how = (f"after ordinary inputs and DEV-ONLY debug fixture(s) {used} in this run"
+                   if used else "after ordinary inputs")
             for label in labels:
                 state = load_state(run, label)
                 screenshots.append(f"{run_name}/{state['screenshot']}")
                 for key, want in state.get("expected", {}).items():
                     if want == "check":
-                        statement = f"{label}: {key} held after ordinary inputs"
-                        observations.append(dict(statement=statement,
+                        observations.append(dict(statement=f"{label}: {key} held {how}",
                                                  evidence_file=f"{run_name}/state-{label}.json"))
                     else:
                         observations.append(dict(
-                            statement=f"{label}: {key}",
+                            statement=f"{label}: {key} ({how})",
                             evidence_file=f"{run_name}/state-{label}.json",
                             expected=want, observed=observed_value(state, key)))
         out_cases.append(dict(case_id=case_id, input_trace=traces[0] if len(traces) == 1 else traces[-1],
                               input_traces=traces, screenshots=screenshots,
-                              state_observations=observations))
-    return dict(source_sha=source, rom_sha256=rom, cases=out_cases)
+                              state_observations=observations,
+                              dev_fixtures=fixtures, scope="DEV_FIXTURE" if fixtures else "ORDINARY_PLAY",
+                              drivers=drivers))
+    return dict(source_sha=source, rom_sha256=rom, elf_sha256=elf, cases=out_cases)
 
 
 def parse_case(text):

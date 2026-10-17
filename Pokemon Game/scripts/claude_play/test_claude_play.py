@@ -21,6 +21,7 @@ import driver  # noqa: E402
 import emu  # noqa: E402
 import evidence  # noqa: E402
 import mapdata  # noqa: E402
+import game  # noqa: E402
 import run  # noqa: E402
 
 WORLD = mapdata.World(ENGINE)
@@ -136,11 +137,12 @@ class RomTableTests(unittest.TestCase):
 
 
 class FakeGame:
-    def __init__(self, flags):
+    def __init__(self, flags, cb2="CB2_Overworld"):
         self.flags = flags
+        self.cb2 = cb2
 
     def observation(self):
-        return dict(flags=dict(self.flags), party=[], pokeBalls=[], berries=[])
+        return dict(cb2=self.cb2, flags=dict(self.flags), party=[], pokeBalls=[], berries=[])
 
 
 class FakeEmu:
@@ -156,8 +158,8 @@ class FakeEmu:
 
 
 class FakeDriver:
-    def __init__(self, outdir, flags):
-        self.g = FakeGame(flags)
+    def __init__(self, outdir, flags, cb2="CB2_Overworld"):
+        self.g = FakeGame(flags, cb2)
         self.e = FakeEmu(outdir)
         self.events = []
 
@@ -189,6 +191,62 @@ class ObserveTests(unittest.TestCase):
             d = FakeDriver(pathlib.Path(tmp), {})
             with self.assertRaises(run.ExpectationFailed):
                 run.observe(d, "badge", {"FLAG_BADGE01_GET": True})
+
+    def test_title_screen_is_not_gameplay(self):
+        # The title screen already holds the loaded save's flags.
+        with tempfile.TemporaryDirectory() as tmp:
+            d = FakeDriver(pathlib.Path(tmp), {"FLAG_BADGE01_GET": True}, cb2="CB2_InitTitleScreen")
+            with self.assertRaises(run.ExpectationFailed):
+                run.observe(d, "badge", {"FLAG_BADGE01_GET": True})
+
+    def test_empty_party_is_not_fully_restored(self):
+        self.assertFalse(run.party_fully_restored(None, {"party": []}))
+
+
+class FakeGdb:
+    """SYNTHETIC memory: {address: bytes}."""
+    def __init__(self, mem):
+        self.mem = mem
+
+    def read(self, addr, size):
+        for base, data in self.mem.items():
+            if base <= addr and addr + size <= base + len(data):
+                return data[addr - base:addr - base + size]
+        raise AssertionError(f"unmapped read {addr:#x}+{size}")
+
+
+class DecoderTests(unittest.TestCase):
+    def game(self, mem, sym, off=None, consts=None, sections=None):
+        g = game.Game.__new__(game.Game)
+        g.gdb, g.sym, g.off, g.c = FakeGdb(mem), sym, off or {}, consts or {}
+        g.sections = sections or {}
+        return g
+
+    def test_bag_quantity_uses_the_low_half_of_the_key(self):
+        key = 0x1234ABCD
+        sb1, sb2 = 0x02001000, 0x02002000
+        slots = struct.pack("<HHHH", 26, 999 ^ 0xABCD, 0, 0 ^ 0xABCD)
+        g = self.game({0x03000000: struct.pack("<II", sb1, sb2), sb1: b"\0" * 16 + slots,
+                       sb2: b"\0" * 8 + struct.pack("<I", key)},
+                      {"gSaveBlock1Ptr": 0x03000000, "gSaveBlock2Ptr": 0x03000004},
+                      {"sb2.encryptionKey": 8, "sb1.bag": 16, "bag.pokeBalls": 0,
+                       "slot.size": 4, "slot.quantity": 2}, {"BAG_POKEBALLS_COUNT": 2})
+        self.assertEqual(g.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"), [(26, 999)])
+
+    def test_stack_high_water_finds_the_deepest_written_byte(self):
+        low, top = 0x03006000, 0x03008000 - 0x1C0
+        region = bytearray(top - low)
+        region[0x300] = 7                           # deepest write
+        g = self.game({low: bytes(region)}, {"IWRAM_END": 0x03008000},
+                      sections={".iwram.bss": dict(vma=0x03005000, size=0x1000)})
+        self.assertEqual(g.stack_high_water(),
+                         dict(regionBytes=top - low, usedBytes=top - low - 0x300, freeBytes=0x300))
+
+    def test_async_stop_reply_during_a_read_fails_closed(self):
+        gdb = emu.Gdb.__new__(emu.Gdb)
+        gdb._cmd = lambda text, reply=True: "T05thread:01;"
+        with self.assertRaises(emu.Blocked):
+            gdb._read_chunk(0x02000000, 4)
 
 
 class TraceTests(unittest.TestCase):
@@ -258,12 +316,18 @@ class AudioReportTests(unittest.TestCase):
 
 
 def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
-                  problems=(), screenshot=True, trace=True):
+                  problems=(), screenshot=True, trace=True, elf="e" * 64, engine_rom=None,
+                  dev_only=False):
     """SYNTHETIC run directory for harness tests only."""
     run_dir = root / name
     run_dir.mkdir(parents=True)
     (run_dir / "provenance-start.json").write_text(json.dumps(dict(
-        source_sha=source, rom_sha256=rom, engine_dirty=dirty, synthetic=True)))
+        source_sha=source, rom_sha256=rom, elf_sha256=elf, engine_rom_sha256=engine_rom or rom,
+        engine_dirty=dirty, driver_sha="d" * 40, driver_dirty=False, synthetic=True)))
+    events = [dict(event="start")]
+    if dev_only:
+        events.append(dict(event="debug-menu", label="fill-balls", rows=[1, 1, 4], dev_only=True))
+    (run_dir / "events.jsonl").write_text("".join(json.dumps(e) + "\n" for e in events))
     if trace:
         (run_dir / "inputs.jsonl").write_text('{"key": "A", "down": true, "frame": 1}\n')
     if screenshot:
@@ -302,6 +366,34 @@ class EvidenceTests(unittest.TestCase):
             root = pathlib.Path(tmp)
             synthetic_run(root, "r1")
             synthetic_run(root, "r2", rom="c" * 64)
+            with self.assertRaises(evidence.EvidenceError):
+                evidence.build({"Q1": [("r1", ["badge"]), ("r2", ["badge"])]}, root)
+
+    def test_debug_menu_use_marks_the_case_dev_fixture(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1")
+            synthetic_run(root, "r2", dev_only=True)
+            manifest = evidence.build({"PLAIN": [("r1", ["badge"])], "FIX": [("r2", ["badge"])]}, root)
+            plain, fix = manifest["cases"]
+            self.assertEqual(plain["scope"], "ORDINARY_PLAY")
+            self.assertEqual(fix["scope"], "DEV_FIXTURE")
+            self.assertEqual(fix["dev_fixtures"], ["r2: fill-balls"])
+            self.assertTrue(all("DEV-ONLY" in o["statement"] for o in fix["state_observations"]))
+            self.assertFalse(any("DEV-ONLY" in o["statement"] for o in plain["state_observations"]))
+
+    def test_rom_that_is_not_the_engine_build_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", engine_rom="f" * 64)
+            with self.assertRaises(evidence.EvidenceError):
+                evidence.build({"Q1": [("r1", ["badge"])]}, root)
+
+    def test_runs_with_different_elves_are_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1")
+            synthetic_run(root, "r2", elf="0" * 64)
             with self.assertRaises(evidence.EvidenceError):
                 evidence.build({"Q1": [("r1", ["badge"]), ("r2", ["badge"])]}, root)
 

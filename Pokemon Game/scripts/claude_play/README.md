@@ -9,9 +9,19 @@ supporting evidence** for Playtest (#23). It is not a Gate A/B verdict.
 - **Inputs:** xdotool key presses to the mGBA window only (A=`x`, B=`z`,
   Start=`Return`, arrows).
 - **Observation:** read-only memory reads through mGBA's GDB stub (`-g`).
-  The driver never writes memory, registers, flags, items, Pokémon, badges or
-  saves. There is no debug menu, no cheat file, no savestate and no injected
-  state.
+  The driver never writes memory, registers or save files. There is no cheat
+  file and no savestate.
+- **DEV-ONLY fixtures (disclosed):** a few phases open the expansion's own
+  debug menu (R+START) with ordinary key presses: Field Lab entry and Access
+  PC for Q4 (no ordinary route exists in Averon maps), and Fill Pocket for
+  the full-Bag quest negatives. Those change game state through the game's
+  debug code. Each use is logged in `events.jsonl` as `debug-menu` with
+  `dev_only: true`; `evidence.py` marks every case that contains one as
+  `scope: DEV_FIXTURE` and names the fixture in each statement. Run them only
+  on save copies, never on the natural save chain.
+- **Build match:** `--rom` must be a byte-identical copy of the engine's
+  `pokeemerald.gba` outside the engine tree, so symbols, offsets and the ROM
+  agree; provenance records both hashes.
 - **Persistence:** only the game's own flash file. Phases continue from the
   previous phase's in-game SAVE through the title screen's CONTINUE.
 - **Addresses, struct offsets and constants** come from the exact build being
@@ -79,7 +89,9 @@ shows sound is produced; whether it sounds right still needs a human listen.
 python3 test_claude_play.py   # offline: real map sources + SYNTHETIC fixtures
 ```
 
-These cover routing on real maps (including the Gym gate that only opens in
+They also cover the read-only decoders (Bag quantity key, stack high-water,
+GDB stop replies during reads), title-screen and empty-party fail-closed
+checks, DEV_FIXTURE tagging and ROM/ELF build matching. These cover routing on real maps (including the Gym gate that only opens in
 the live map grid), map-to-map routes and unreachable maps, fail-closed
 observations, the frame-stamped input trace, and evidence packaging through
 `qa_evidence_report.inspect_package`. Removing either fail-closed check makes

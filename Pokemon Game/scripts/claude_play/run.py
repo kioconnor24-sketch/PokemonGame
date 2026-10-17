@@ -5,7 +5,11 @@
 
 The ROM is played from a scratch copy; mGBA keeps the game's own flash file
 next to it, so each phase continues from the previous phase's in-game save.
-No memory, flag, item, party or save is ever written by the driver.
+The driver never writes emulator memory, registers or save files. Phases that
+use the expansion's debug menu (Field Lab entry, Access PC, Fill Pocket) are
+DEV-ONLY fixtures: they change game state through the game's own debug code,
+are logged as `debug-menu` with dev_only=true, and evidence.py tags every case
+that contains one.
 """
 import argparse
 import json
@@ -327,7 +331,9 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
     screenshotted message by message, and the party must be fully healed."""
     before = observe(d, "q3-before")
     battles = 0
-    while True:
+    for _ in range(400):
+        if battles > 40:
+            raise drv.Stuck("no whiteout after 40 battles")
         mid, pos = d.here()
         if mid == "MAP_ALDERFIELDCLINIC" and battles:
             break
@@ -347,6 +353,8 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
             d.battle(choose_move=weakest_move(d), label=f"q3-loss{battles:02d}")
             battles += 1
             d.log("q3-party", party=d.state().party, map=d.here()[0])
+    else:
+        raise drv.Stuck("Q3 loss loop did not reach the clinic")
     d.shot("q3-after-whiteout")
     d.clear_text(capture="q3-clinic", frames=16)
     observe(d, "q3-clinic", {"map": "MAP_ALDERFIELDCLINIC",
@@ -360,6 +368,8 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
 
 def party_fully_restored(d, o):
     """Every party member at full HP, no status, every move at full PP."""
+    if not o["party"]:
+        return False
     for m in o["party"]:
         if m["hp"] != m["maxhp"] or m["status"]:
             return False
@@ -565,6 +575,7 @@ def provenance(a, info, out, stage):
         engine_tree=git(engine, "rev-parse", "HEAD:Pokemon Game/engine"),
         engine_dirty=bool(git(engine, "status", "--porcelain", "--", ".")),
         rom_sha256=sha256(a.rom),
+        engine_rom_sha256=sha256(engine / "pokeemerald.gba"),
         elf_sha256=info["elf_sha256"],
         save_sha256=sha256(sav) if sav.exists() else None,
         driver_sha=git(here, "rev-parse", "HEAD"),
@@ -586,6 +597,10 @@ def observe(d, label, expect=None):
     obs["screenshot"] = shot.name
     obs["label"] = label
     problems = []
+    if obs["cb2"] != "CB2_Overworld":
+        # The title screen already holds the loaded save's map and flags:
+        # only the overworld counts as gameplay state.
+        problems.append(f"not in the overworld (cb2 {obs['cb2']})")
     for key, want in (expect or {}).items():
         have = obs["flags"].get(key) if key.startswith("FLAG_") else obs.get(key)
         if callable(want):
@@ -1018,6 +1033,11 @@ def main():
     a = ap.parse_args()
     engine = pathlib.Path(a.engine)
     out = pathlib.Path(a.out)
+    rom = pathlib.Path(a.rom).resolve()
+    if engine.resolve() in rom.parents:
+        sys.exit("--rom must be a scratch copy outside the engine tree (mGBA writes a .sav next to it)")
+    if sha256(rom) != sha256(engine / "pokeemerald.gba"):
+        sys.exit("--rom is not a copy of this engine's pokeemerald.gba: symbols would not match the ROM")
     out.mkdir(parents=True, exist_ok=True)
     info = emu.load_build_info(engine / "pokeemerald.elf", engine, out.parent / "play-cache")
     world = mapdata.World(engine)
