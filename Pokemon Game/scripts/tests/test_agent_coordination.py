@@ -39,7 +39,7 @@ class BoardTests(unittest.TestCase):
         self.snap["pull_requests"][0]["merged"] = True
         results = MODULE.calculate(self.tasks, self.snap)
         self.assertIn("QA SIGNOFF NOT FOUND", results["Q"]["status"])
-        self.assertEqual(results["B"]["status"], "BLOCKED ON Q")
+        self.assertEqual(results["B"]["status"], "MANUAL SHARED-FILE HANDOFF REQUIRED")
 
     def test_qa_requires_same_sha_all_cases_and_authorization(self):
         self.snap["pull_requests"][0].update(state="closed", merged=True)
@@ -83,10 +83,19 @@ class BoardTests(unittest.TestCase):
     def test_parallel_work_is_not_a_qa_shortcut(self):
         self.tasks[1]["parallel_development"] = True
         self.snap["pull_requests"][0].update(state="closed", merged=True)
-        # No authenticated per-SHA QA marker, so even merged code stays gated.
+        # Missing Gate B QA is still recorded, but a real upstream merge
+        # releases downstream merge-dependency tracking.
         results = MODULE.calculate(self.tasks, self.snap)
-        self.assertEqual(results["B"]["status"], "DEVELOPMENT OPEN; MERGE GATED ON Q")
+        self.assertEqual(results["B"]["status"], "DEVELOPMENT OPEN; SHARED-FILE MERGE HANDOFF REQUIRED")
         self.assertIn("QA SIGNOFF NOT FOUND", results["Q"]["status"])
+
+    def test_actual_upstream_merge_releases_downstream_dependency_but_not_qa_verdict(self):
+        self.tasks[1]["parallel_development"] = True
+        self.snap["pull_requests"][0].update(state="closed", merged=True)
+        results = MODULE.calculate(self.tasks, self.snap)
+        self.assertEqual(results["Q"]["status"], "MERGED; REQUIRED QA SIGNOFF NOT FOUND")
+        self.assertEqual(results["B"]["status"],
+                         "DEVELOPMENT OPEN; SHARED-FILE MERGE HANDOFF REQUIRED")
 
     def test_merged_without_extra_qa_is_done(self):
         self.snap["pull_requests"][2].update(state="closed", merged=True)
@@ -125,17 +134,17 @@ class BoardTests(unittest.TestCase):
             with self.subTest(output=name):
                 self.assertIn("STATIC REGISTRY — NOT LIVE FILE OWNERSHIP", body)
                 self.assertIn("https://github.com/kioconnor24-sketch/PokemonGame/issues/15", body)
-                self.assertIn("HISTORICAL ONLY", body)
-        self.assertIn("Legacy registry agent (NOT active file owner)", rendered["board"])
-        self.assertIn("Historical backlog note (VERIFY #15 FIRST)", rendered["board"])
+                self.assertIn("ACTIVE M1", body)
+        self.assertIn("M1 responsible lane (not file claim)", rendered["board"])
+        self.assertIn("M1 action (verify #15)", rendered["board"])
         self.assertIn(
-            "HISTORICAL ONLY — verify current #15 claim and PR scope first. "
+            "ACTIVE M1 — verify current #15 claim and PR scope first. "
             "EDIT SHARED FILES NOW",
             rendered["board"],
         )
         self.assertNotIn("## Live task/dependency routing", rendered["board"])
-        self.assertIn("historical inbox (NOT current assignments)", rendered["codex"])
-        self.assertIn("historical inbox (NOT current assignments)", rendered["claude"])
+        self.assertIn("advisory inbox (verify live claims)", rendered["codex"])
+        self.assertIn("advisory inbox (verify live claims)", rendered["claude"])
 
     def test_generated_board_says_no_auto_merge_or_map_work(self):
         result = MODULE.render(self.conf, self.snap)
