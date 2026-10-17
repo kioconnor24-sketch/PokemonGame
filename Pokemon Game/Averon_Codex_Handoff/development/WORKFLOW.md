@@ -1,3 +1,7 @@
+> **CURRENT OWNER-APPROVED PHASE (2026-10-17):** Pre-Sinnoh M1 is accepted, the next development phase is authorized, and human audio listening is **deferred / unverified**. For current ownership/scope read [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md), [TASKS.md](TASKS.md) and live [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). The dated pre-Sinnoh freezes, sole-Claude/Codex-paused routing and pending-Gate-B paragraphs **below** are historical only. **DO preserve** the actual PR/CI/file-guard/protected-path/source-provenance rules below: owner approval is not a bypass of safeguards or approval of undesigned maps, IDs or story.
+>
+> ---
+
 > **LATEST OWNER EXECUTION POLICY — BACKEND FIRST, NO IDLE WAITING:** [BACKEND_TO_SINNOH_EXECUTION.md](BACKEND_TO_SINNOH_EXECUTION.md) is the detailed authoritative ownership matrix, map-independent completion inventory and fallback ladder. Any older text suggesting Codex must stop TWO-REGION until QUEST merges, Claude must wait to begin LEGEND or a legal disjoint mechanics task, or that every ACK is permission, is historical/superseded. New Sinnoh/Averon maps remain frozen. At each blocked file, QA case or merge, continue fallback within your existing session and revisit only after the documented observable trigger. Do not turn 'backend complete' into endless audit-only work. GitHub comments do not launch agents.
 
 # Pokémon Averon — permanent GitHub operations handbook
