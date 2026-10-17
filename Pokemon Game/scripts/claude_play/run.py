@@ -392,6 +392,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--new-game", action="store_true")
     ap.add_argument("--fps", type=int, default=0)
+    ap.add_argument("--audio", action="store_true", help="capture real audio via SDL's disk driver")
     ap.add_argument("phases", nargs="*")
     a = ap.parse_args()
     engine = pathlib.Path(a.engine)
@@ -399,7 +400,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     info = emu.load_build_info(engine / "pokeemerald.elf", engine, out.parent / "play-cache")
     world = mapdata.World(engine)
-    e = emu.Emulator(a.rom, out, fps_target=a.fps or None)
+    e = emu.Emulator(a.rom, out, fps_target=a.fps or None, audio=a.audio)
     try:
         g = game.Game(e, info)
         d = drv.Driver(e, g, world, out / "events.jsonl")
@@ -421,6 +422,10 @@ def main():
         raise
     finally:
         e.close()
+        if a.audio and e.audio_raw and e.audio_raw.exists():
+            report = emu.audio_report(e.audio_raw, out / "audio.wav")
+            (out / "audio-report.json").write_text(json.dumps(report, indent=1))
+            print("audio", report["seconds"], "s,", report["audible_windows"], "audible windows", file=sys.stderr)
         try:
             provenance(a, info, out, "end")  # save hash after mGBA wrote its flash file
         except Exception as exc:

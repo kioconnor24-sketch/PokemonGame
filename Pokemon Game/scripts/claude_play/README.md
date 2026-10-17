@@ -64,6 +64,15 @@ tree, runs from different source/ROM builds, and states with recorded
 problems. `READY_FOR_INDEPENDENT_REVIEW` from that tool is not a gameplay
 PASS; Playtest decides.
 
+## Audio (`--audio`)
+
+There is no sound server or ffmpeg here. SDL2's `disk` audio driver writes
+mGBA's real mixed output to `audio.raw`. The run wraps it as `audio.wav`
+(S16LE stereo, 44.1 kHz assumed) and writes `audio-report.json`, a per-second
+RMS/peak timeline. A first capture showed silence on the copyright screen,
+then intro and title music (RMS about 1,000–2,700, peaks up to 11,532). That
+shows sound is produced; whether it sounds right still needs a human listen.
+
 ## Tests
 
 ```bash

@@ -223,14 +223,44 @@ class Gdb:
 
 # --- emulator process, window, input and capture ---------------------------------
 
+def audio_report(raw_path, wav_path, rate=44100, window=1.0):
+    """Wrap the SDL disk capture (S16 LE stereo) as WAV and summarise loudness."""
+    import math
+    import wave
+    raw = pathlib.Path(raw_path).read_bytes()
+    raw = raw[:len(raw) // 4 * 4]
+    with wave.open(str(wav_path), "wb") as w:
+        w.setnchannels(2)
+        w.setsampwidth(2)
+        w.setframerate(rate)
+        w.writeframes(raw)
+    samples = struct.unpack(f"<{len(raw) // 2}h", raw)
+    step = int(rate * window) * 2
+    timeline = []
+    for i in range(0, len(samples), step):
+        seg = samples[i:i + step]
+        rms = math.sqrt(sum(x * x for x in seg) / len(seg)) if seg else 0.0
+        timeline.append(dict(t=round(i / 2 / rate, 1), rms=round(rms, 1), peak=max(map(abs, seg)) if seg else 0))
+    audible = sum(1 for w in timeline if w["rms"] > 100)
+    return dict(seconds=round(len(samples) / 2 / rate, 1), assumed_format="S16LE stereo",
+                assumed_rate=rate, audible_windows=audible, windows=len(timeline), timeline=timeline)
+
+
 class Emulator:
-    def __init__(self, rom, outdir, display=77, port=2345, scale=2, fps_target=None, save=None):
+    def __init__(self, rom, outdir, display=77, port=2345, scale=2, fps_target=None, save=None,
+                 audio=False):
         self.rom = pathlib.Path(rom)
         self.outdir = pathlib.Path(outdir)
         self.outdir.mkdir(parents=True, exist_ok=True)
         self.display = f":{display}"
         self.port = port
         self.env = dict(os.environ, DISPLAY=self.display, SDL_AUDIODRIVER="dummy")
+        self.audio_raw = None
+        if audio:
+            # SDL2's "disk" driver writes the emulator's real mixed output to a
+            # file: genuine audio capture without a sound server.
+            self.audio_raw = self.outdir / "audio.raw"
+            self.env.update(SDL_AUDIODRIVER="disk", SDL_DISKAUDIOFILE=str(self.audio_raw))
         self.xvfb = subprocess.Popen(["Xvfb", self.display, "-screen", "0", "800x600x24", "-nolisten", "tcp"],
                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(1.0)

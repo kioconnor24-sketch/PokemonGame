@@ -170,6 +170,25 @@ class GdbReadTests(unittest.TestCase):
         self.assertTrue(g.running)
 
 
+class AudioReportTests(unittest.TestCase):
+    def test_silence_and_tone_are_distinguished(self):
+        import math
+        with tempfile.TemporaryDirectory() as tmp:
+            raw = pathlib.Path(tmp) / "audio.raw"
+            rate = 1000
+            silence = [0] * (rate * 2)  # 1 s of stereo silence (SYNTHETIC)
+            tone = []
+            for i in range(rate):
+                v = int(3000 * math.sin(i / 5))
+                tone += [v, v]
+            raw.write_bytes(struct.pack(f"<{len(silence) + len(tone)}h", *(silence + tone)))
+            rep = emu.audio_report(raw, pathlib.Path(tmp) / "a.wav", rate=rate)
+            self.assertEqual(rep["windows"], 2)
+            self.assertEqual(rep["audible_windows"], 1)
+            self.assertEqual(rep["timeline"][0]["rms"], 0.0)
+            self.assertTrue((pathlib.Path(tmp) / "a.wav").stat().st_size > 44)
+
+
 def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
                   problems=(), screenshot=True, trace=True):
     """SYNTHETIC run directory for harness tests only."""
