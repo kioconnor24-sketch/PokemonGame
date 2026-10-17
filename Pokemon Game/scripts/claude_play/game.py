@@ -19,6 +19,7 @@ class Game:
         self.sym = info["symbols"]
         self.off = info["offsets"]
         self.c = info["constants"]
+        self.sections = info.get("sections", {})
         self.by_addr = {}
         for addr, name in info.get("all_symbols") or [(a, n) for n, a in self.sym.items()]:
             if 0x08000000 <= addr < 0x0A000000:
@@ -182,7 +183,21 @@ class Game:
             pokeBalls=self.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"),
             berries=self.bag_pocket("bag.berries", "BAG_BERRIES_COUNT"),
             money=self.money(),
+            stack=self.stack_high_water(),
             saveAttemptStatus=self.gdb.read(self.sym["gSaveAttemptStatus"], 1)[0])
+
+    def stack_high_water(self):
+        """Deepest system-stack use so far, read-only: the bytes between the
+        end of IWRAM statics (.iwram.bss) and sp_sys (IWRAM_END - 0x1c0,
+        crt0.s) start zeroed after reset; the lowest non-zero byte marks the
+        deepest the stack has reached. A lower bound, not a guarantee."""
+        bss = self.sections.get(".iwram.bss")
+        if not bss or "IWRAM_END" not in self.sym:
+            return None
+        low, top = bss["vma"] + bss["size"], self.sym["IWRAM_END"] - 0x1c0
+        raw = self.gdb.read(low, top - low)
+        used = next((top - (low + i) for i, b in enumerate(raw) if b), 0)
+        return dict(regionBytes=top - low, usedBytes=used, freeBytes=top - low - used)
 
     def money(self):
         sb1 = self._u("<I", self.sym["gSaveBlock1Ptr"])[0]

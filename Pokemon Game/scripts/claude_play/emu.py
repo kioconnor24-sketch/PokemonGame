@@ -139,7 +139,7 @@ def load_build_info(elf, engine, cache_dir):
     elf = pathlib.Path(elf)
     digest = subprocess.check_output(["sha256sum", str(elf)], text=True).split()[0]
     import hashlib
-    probe_key = hashlib.sha256(json.dumps([OFFSET_EXPRS, CONSTANTS, "all_symbols"]).encode()).hexdigest()[:8]
+    probe_key = hashlib.sha256(json.dumps([OFFSET_EXPRS, CONSTANTS, "all_symbols", "sections"]).encode()).hexdigest()[:8]
     cache = pathlib.Path(cache_dir) / f"buildinfo-{digest[:16]}-{probe_key}.json"
     if cache.exists():
         return json.loads(cache.read_text())
@@ -152,7 +152,12 @@ def load_build_info(elf, engine, cache_dir):
             symbols.setdefault(parts[2], addr)
             all_symbols.append((addr, parts[2]))
     probed = probe_offsets(engine, pathlib.Path(cache_dir) / "probe")
-    info = {"elf_sha256": digest, "symbols": symbols, "all_symbols": all_symbols,
+    sections = {}
+    for line in subprocess.check_output(["arm-none-eabi-objdump", "-h", str(elf)], text=True).splitlines():
+        parts = line.split()
+        if len(parts) >= 4 and parts[0].isdigit():
+            sections[parts[1]] = dict(size=int(parts[2], 16), vma=int(parts[3], 16))
+    info = {"elf_sha256": digest, "symbols": symbols, "all_symbols": all_symbols, "sections": sections,
             "offsets": {k: v for k, v in probed.items() if not k.startswith("const.")},
             "constants": {k[6:]: v for k, v in probed.items() if k.startswith("const.")}}
     cache.parent.mkdir(parents=True, exist_ok=True)
