@@ -84,6 +84,9 @@ struct MysteryGiftClient
     ALIGNED(4) u8 bufferScript[MG_LINK_BUFFER_SIZE];
 };
 
+extern const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[];
+extern const u32 gMysteryGiftClientScript_InitSize;
+
 void MysteryGiftClient_Create(bool32 isWonderNews);
 u32 MysteryGiftClient_Run(u16 *endVal);
 void MysteryGiftClient_AdvanceState(void);

@@ -15,6 +15,10 @@ const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[] = {
     {CLI_COPY_RECV}
 };
 
+// Client_Init copies only these bytes; the rest of the script buffer stays zeroed.
+const u32 gMysteryGiftClientScript_InitSize = sizeof(gMysteryGiftClientScript_Init);
+STATIC_ASSERT(sizeof(gMysteryGiftClientScript_Init) <= MG_LINK_BUFFER_SIZE, MysteryGiftClientScriptInitFitsLinkBuffer);
+
 static const struct MysteryGiftClientCmd sClientScript_SendGameData[] = {
     {CLI_LOAD_GAME_DATA},
     {CLI_SEND_LOADED},
