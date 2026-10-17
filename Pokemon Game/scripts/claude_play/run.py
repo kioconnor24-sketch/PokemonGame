@@ -472,6 +472,24 @@ def follower_after_door(d, label):
     observe(d, label, {"follower": follower_ok})
 
 
+def phase_corrupt_fallback(d):
+    """Save robustness on a COPY whose newest flash slot was deliberately
+    damaged outside the game (one SaveBlock1 byte; disclosed test fixture).
+    CONTINUE must load the whole older slot: run23's clinic save, healed
+    party, no mixing with the newer slot's Alderfield position."""
+    observe(d, "corrupt-fallback", {"map": "MAP_ALDERFIELDCLINIC",
+                                    "position": lambda o: (o["x"], o["y"]) == (7, 4),
+                                    "partyHealed": lambda o: party_fully_restored(d, o),
+                                    "FLAG_AVERON_NOTES_REWARDED": True,
+                                    "FLAG_AVERON_SKETCH_REWARDED": True})
+
+
+def phase_clinic_continued(d):
+    """Fresh process after saving on top of the fallback: still the clinic."""
+    observe(d, "clinic-continued", {"map": "MAP_ALDERFIELDCLINIC",
+                                    "partyHealed": lambda o: party_fully_restored(d, o)})
+
+
 def phase_save(d):
     save_game(d, "checkpoint")
 
@@ -947,7 +965,8 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "show_bag": phase_show_bag, "q3_whiteout": phase_q3_whiteout,
           "q3_continued": phase_q3_continued, "q4_gift": phase_q4_gift, "trainer_card": phase_trainer_card,
           "q5_field": phase_q5_field, "q1_full_pocket": phase_q1_full_pocket,
-          "q2_full_pocket": phase_q2_full_pocket,
+          "q2_full_pocket": phase_q2_full_pocket, "corrupt_fallback": phase_corrupt_fallback,
+          "clinic_continued": phase_clinic_continued,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),
