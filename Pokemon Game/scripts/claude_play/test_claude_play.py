@@ -422,6 +422,14 @@ class EvidenceTests(unittest.TestCase):
             self.assertIn("inherited", m["cases"][0]["dev_fixtures"][0])
             self.assertEqual(m["cases"][1]["scope"], "ORDINARY_PLAY")
 
+    def test_a_fixture_run_that_never_saved_taints_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", dev_only=True, start_save="s0", end_save="s0")
+            synthetic_run(root, "r2", start_save="s0", end_save="s1")
+            m = evidence.build({"A": [("r2", ["badge"])]}, root)
+            self.assertEqual(m["cases"][0]["scope"], "ORDINARY_PLAY")
+
     def test_declared_fixture_save_taints_later_runs(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
