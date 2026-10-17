@@ -1,5 +1,8 @@
 @AGENTS.md
 
+> **LATEST SOLE-CLAUDE M1 EXECUTOR DIRECTIVE (2026-10-17):** All previous Codex, separate Playtest and Manager role divisions are paused. **Claude owns every M1 role, QA case verdict and eligible normal merge.** The full authoritative work queue is in [CLAUDE_SOLE_M1_EXECUTION_20261017.md](Pokemon%20Game/Averon_Codex_Handoff/development/CLAUDE_SOLE_M1_EXECUTION_20261017.md), followed by actual main, Issues #15/#23/#46 and CI. Use true emulator/evidence second-pass review; don't mislabel it third-party independent. Normal eligible PR merging via authenticated GitHub is authorized, including #14→#25, #95/#96/#97 and #20→#71. Never bypass checks or freeze. Old instructions below are retained only for context and superseded.
+
+
 ## Claude Code specifics
 
 > **Current owner-approved split (2026-10-17):** The newest root `AGENTS.md` section and Issue #15 supersede historical sole-writer notes. **Claude's priority:** continue live `claude/local-playthrough` at `5ab78aeb` through genuine Gym 1 Badge01/Hiker/reward and other existing-map Q1–Q5 cases; Playtest alone signs QA. Own #14 feature corrections and final #14→#25 scripted/legend integration, respecting the original protected registry merge order. **Codex is authorized for a larger independent backend/native regression queue** (trade-save refusal, region/flash, cross-feature, source/RELEASE). Both may borrow an available, completed/blocked lane after exact-path GitHub notice and checking no active other writer; no regular permission wait or map production. PR #77 has merged, so no duplicate Q3 support fixes.

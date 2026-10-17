@@ -16,20 +16,44 @@
     "do_not_auto_awaken_agents": true,
     "local_build_debug_test_unrestricted_within_m1": true,
     "claims_are_not_permission_requests": true,
-    "independent_qa_required_for_gameplay_acceptance": true,
+    "independent_qa_required_for_gameplay_acceptance": false,
     "codex_active": false,
     "milestone_1_scope": "map_independent_backend_only",
     "backend_developers": [
-      "claude",
-      "codex"
+      "claude"
     ],
-    "codex_status": "AUTHORIZED_TO_RESUME_WHEN_SESSION_STARTS",
+    "codex_status": "PAUSED_BY_OWNER_NO_NEW_WORK",
     "cross_lane_takeover_allowed_after_handoff": true,
     "single_active_writer_per_exact_path": true,
     "claim_notice_not_permission_gate": true,
-    "independent_playtest_final_verdict": true,
-    "m1_codex_priority": "majority of remaining backend native and cross-feature engineering",
-    "m1_claude_priority": "local real mGBA playthrough, quest/scripted/legend registration and final integration"
+    "independent_playtest_final_verdict": false,
+    "m1_codex_priority": "PAUSED; all unfinished work transferred to Claude",
+    "m1_claude_priority": "all remaining M1: Gate A evidence decision, #14→#25, #95/#96/#97, real Q1-Q5, backend closeout, merges, final proof",
+    "separate_playtest_active": false,
+    "separate_manager_active": false,
+    "sole_active_m1_executor": "claude",
+    "claude_authorized_roles": [
+      "production_engineer",
+      "integrator",
+      "graphical_playtester",
+      "qa_decision_maker",
+      "native_regression_owner",
+      "code_reviewer",
+      "github_pr_manager",
+      "eligible_merge_executor",
+      "project_coordinator",
+      "evidence_and_release_readiness_owner"
+    ],
+    "claude_may_merge_eligible_prs": true,
+    "claude_may_post_scoped_protected_file_handoffs": true,
+    "claude_may_record_gameplay_acceptance": true,
+    "qa_acceptance_requires_real_gameplay_proof": true,
+    "qa_separate_review_pass_required": true,
+    "qa_signoff_requires_external_agent": false,
+    "qa_verdict_owner": "claude",
+    "separate_qa_review_method": "Fresh read-only evidence review of real mGBA input, screenshot, save and exact ROM/source hashes; separate rerun or isolated reviewing subagent when feasible; never describe self-review as independent third-party QA",
+    "merge_policy": "Claude may normal-merge reviewed eligible PRs after actual required checks; never disable protections, merge known failures, skip true prerequisite, or force direct main",
+    "owner_override_scope": "until user or project manager explicitly revises sole-Claude assignment"
   },
   "tasks": [
     {
@@ -44,7 +68,7 @@
         "Q4",
         "Q5"
       ],
-      "next": "Claude retains QUEST #14 and the legitimate mGBA first-Gym/Hiker path; repair only verified feature defects. Playtest still alone issues Gate A/B. #14 merge by manager when authorized.",
+      "next": "Claude now owns source implementation, genuine QA Gate A review, and eligible #14 normal merge; inspect real Q2+Oran Save→Continue proof on exact #14 head, use separate review pass, record truthful ACCEPTED/NOT_ACCEPTED, correct smallest missing case. Gate B Q1-Q5 remains separate.",
       "issue": 46,
       "owned_interfaces": [
         "optional_quest_events",
@@ -54,15 +78,15 @@
         "advance genuine existing-area mGBA input trace, clinic/party evidence without altering Playtest tests",
         "rehearse combined #14→#25 integration in a disposable private worktree; no early registration merge"
       ],
-      "resume_when": "Independent #23 Gate A decision supports normal #14 merge; no dependency on this gate for other backend coding",
+      "resume_when": "No other agent approval needed; QA verdict MUST follow genuine exact-ROM evidence and second-pass review before source merge",
       "parallel_development": true
     },
     {
       "id": "TWO-REGION",
-      "agent": "codex",
+      "agent": "claude",
       "deps": [],
       "requires_handoff": false,
-      "next": "Already integrated on main. Codex now owns NEW file-disjoint native/symbolic regression probes for existing region identity, 8+8 badge banks, cap/obedience/field licenses/Fly/whiteout, legacy/flash corruption. Fix only demonstrated defects with exact-path claim; do not rebuild the core or demand Sinnoh maps.",
+      "next": "Already merged and substantially natively tested; Claude reviews remaining gaps in 8+8 badges, independent progress/caps, save/flash, Fly/whiteout. Mark VERIFIED EXISTING when source/tests suffice; implement only demonstrated defects.",
       "issue": 46,
       "parallel_development": true,
       "owned_interfaces": [
@@ -124,10 +148,10 @@
     },
     {
       "id": "QUEST-PLAYTEST",
-      "agent": "playtest",
+      "agent": "claude",
       "pr": 20,
       "deps": [],
-      "next": "Independent Playtest still OWNS graphical Gate A and Q1-Q5 Gate B decisions. Reuse authentic inputs, screenshots, saved flashes and hashes; no artificial acceptance. Claude's local mGBA evidence is supporting evidence, not replacement.",
+      "next": "CLAUDE ASSUMES FULL PLAYTEST ROLE. Existing #20/#71 evidence remains authoritative only for cases actually proved. Execute real mGBA Q1-Q5 including actual Badge01→Hiker, Oran+3, clinic nurse HP/follower/Continue, full Bag and naturally six-member party gift refusal/retry, Q5 audio/sprites/controls; record PASS/PARTIAL/FAIL with exact SHA, screenshots, inputs and state. Distinguish debug-only fixtures. Run an explicit separate clean evidence review before writing verdict.",
       "issue": 36,
       "owned_interfaces": [
         "rendered_quest_qa"
@@ -137,7 +161,7 @@
         "existing-map menu/field/save/follower smoke test",
         "reliable fail-closed access controller test (without source writes)"
       ],
-      "resume_when": "Legal state/location reached or relevant game PR source changes and fresh ROM is built"
+      "resume_when": "Claude chooses next missing existing-map original-input case and reviews verified evidence without any other agent waiting"
     },
     {
       "id": "LEGEND",
@@ -158,7 +182,7 @@
     },
     {
       "id": "POKEMON-MECHANICS",
-      "agent": "codex",
+      "agent": "claude",
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
@@ -170,13 +194,13 @@
         "Party/PC gift, Mega exit or held-item+capture/save red-green regression"
       ],
       "resume_when": "A concrete unverified M1 invariant, reproducible defect or missing check is found",
-      "next": "Core and #48 ownership regression merged. Codex owns additional PROVEN cross-feature Pokémon/held-EXP/level-cap/evolution/Mega/PC/party boundary defects and new-file native tests, without duplicating Claude's currently claimed emulator work.",
+      "next": "Already merged core, #48 and #94; Claude completes verified species/forms/follower/held EXP/Mega/level cap source gap matrix, resolves proven PC foreign-OT bug #96, no duplicate tests.",
       "issue": 46,
       "implementation_merged": true
     },
     {
       "id": "REGION-PLATFORM",
-      "agent": "codex",
+      "agent": "claude",
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
@@ -188,17 +212,17 @@
         "new-file release/resource/stack/memory checks where source-backed"
       ],
       "resume_when": "A concrete source-backed M1 engine/platform gap needs a fix; no creative map authoring",
-      "next": "Codex owns map-independent region registry/warp/object/field/flash/save-capacity, release source bounds tests. Existing platform safeguards merged; avoid maps and speculative refactors.",
+      "next": "Claude completes map-independent capacity/bounds, save compatibility, source/normal+RELEASE and memory headroom proof; no new maps or creative canon.",
       "issue": 46,
       "implementation_merged": true
     },
     {
       "id": "M1-BACKEND-CLOSEOUT",
-      "agent": "codex",
+      "agent": "claude",
       "deps": [],
       "parallel_development": true,
       "issue": 46,
-      "next": "Codex takes majority of outstanding section C: new-file native cross-feature regressions, old/new/corrupt save and error UI, battle/item/region/field, resource and release risk. Claude handles final combined integration and local actual gameplay. Keep exact claim notices; no shared live writers.",
+      "next": "Claude closes Section C against existing tests and already-merged #92/#93/#94; finish review-ready #95/#96 first; reproduce further defects before coding. Reuse tests, not open endless PRs.",
       "owned_interfaces": [
         "cross_system_m1_backend_closeout"
       ],
@@ -210,30 +234,31 @@
     },
     {
       "id": "M1-TRADE-SAVE-REFUSAL",
-      "agent": "codex",
+      "agent": "claude",
       "issue": 46,
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
         "trade_incremental_save_ui_refusal"
       ],
-      "next": "TOP PRIORITY: independently reproduce Claude's 44/45 region-save negative result (branch claude/verify-negatives-on-main commit 13e2a183). Source read shows RefuseBlockedIncrementalSave sets gSaveAttemptStatus=ERROR while LinkFullSave/trade task can rely only on gDamagedSaveSectors. Determine whether the trade UI silently progresses despite an unsupported-format save refusal; write smallest RED test, implement narrowly scoped correction, show GREEN and normal+RELEASE/native proof. NEVER assume item loss or exploit without real evidence. Do not edit Claude's existing branch; new Codex worktree/new test file; exact claim if engine/src/save.c or other protected path required.",
+      "next": "COMPLETE: PR #92 normally merged at 16363efd; focused native red/green and actual normal+RELEASE tests already done. Revisit only for a newly reproduced different save caller (start_menu/record_mixing/berry_blender), never duplicate #92.",
       "fallback_order": [
         "new-file read-only contract test of save status propagation across trade and link entry points",
         "reproduce alternative save entry refusal without touching protected source"
       ],
-      "resume_when": "Concrete red reproduction proves user-visible/error-state regression; otherwise report negative and switch to next Codex M1 task"
+      "resume_when": "Concrete red reproduction proves user-visible/error-state regression; otherwise report negative and switch to next Codex M1 task",
+      "implementation_merged": true
     },
     {
       "id": "M1-CROSS-FEATURE-REGRESSIONS",
-      "agent": "codex",
+      "agent": "claude",
       "issue": 46,
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
         "cross_feature_native_boundary_regressions"
       ],
-      "next": "Add compact new-file native cross-feature tests for quest+Bag+PC+flash, badges+cap+Fly+save, region+whiteout+follower, scripted+normal battle recovery, LEGEND+PC+save, EXP+cap+Mega cleanup, after verifying existing tests to avoid duplication. Positive and mutation/negative controls where safe; no content or map edits.",
+      "next": "Claude integrates #95 whiteout/follower flash and #96 foreign-OT delivery as first priorities; then use merged native source coverage for remaining specific cross-feature gaps rather than speculative expansion.",
       "fallback_order": [
         "reproduce next untested section C boundary on current source",
         "produce source-backed gap ledger for specific missing invariant and write its smallest failing test"
@@ -242,14 +267,14 @@
     },
     {
       "id": "M1-BUILD-RESOURCE-EVIDENCE",
-      "agent": "codex",
+      "agent": "claude",
       "issue": 46,
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
         "m1_resource_and_build_verification"
       ],
-      "next": "Independently validate immutable native baseline, actual normal+RELEASE compatibility, ROM <=32MiB, EWRAM/IWRAM, SaveBlock headroom, generated graphics/IDs, relevant gameplay-side release guard failures; use source-pinned build manifest from #89. Do not rerun 6k suite when exact-head green evidence is reusable; do not modify manager-owned coordination scripts.",
+      "next": "Claude owns final integrated main source-pinned normal+RELEASE, 32MiB ROM, EWRAM/IWRAM, actual runtime stack where measured, SaveBlocks, sprites/IDs and strict full native regression ONCE at final source; distinguish unmeasured quantities.",
       "fallback_order": [
         "source-backed asset/follower availability matrix for existing assets only",
         "new-file negative test for already-identified release/resource/ID boundary"
@@ -265,12 +290,13 @@
       "owned_interfaces": [
         "local_authentic_mgba_playthrough_driver"
       ],
-      "next": "Continue claude/local-playthrough at 5ab78aeb: genuine Orchard Lane training and route trainer/Gym sluice/Elio → Badge01 → researcher/Hiker Great Balls, then full Bag and six-party edge cases. Reuse player Save→Continue and clinic evidence. Capture real ROM/ELF/source hashes, trace, screenshots, state; push scripts not private ROM/saves. Fix command fail-closed timeouts and EOF/stuck handling in isolated claude_play scripts where evidenced; keep Playtest independent.",
+      "next": "Claude PR #97 head 81500a2a has six naturally acquired mons, Piplup lv15, Fletchling lv12, Gym sluices and a real loss; train/retry for legitimate Elio Badge01 then researcher→Hiker exactly 2 Great Balls on #14 build and Save→Continue, actual traced source/ROM/ELF/screenshot evidence. Avoid dev-only PC for natural QA.",
       "fallback_order": [
         "support genuine Q3 HP or Q5 audio/inputs on existing maps without duplicating Playtest scripts",
         "integrate #14→#25 after independent Gate A, while preserving #25 serialized protected merge"
       ],
-      "resume_when": "Actual existing-map input can advance or Claude finds a proved playthrough harness defect; no map authoring"
+      "resume_when": "Actual existing-map input can advance or Claude finds a proved playthrough harness defect; no map authoring",
+      "pr": 97
     },
     {
       "id": "M1-CLAUDE-INTEGRATION",
@@ -283,12 +309,28 @@
       "owned_interfaces": [
         "m1_final_quest_scripted_legend_integration"
       ],
-      "next": "Once Playtest Gate A provides authorized minimum #14 acceptance, manager normally merges #14, then Claude applies existing claude/scripted-battle-after-quest to #25 and tests combined source/normal+RELEASE/native. Only then manager merges eligible #25. Until then continue mGBA code; no fabricated acceptance.",
+      "next": "Claude has full manager/integrator authority. After defensible Gate A, normal-merge #14 if current checks, then apply prepared two claude/scripted-battle-after-quest commits into #25 and ensure actual registration and clean merge; normal/RELEASE/native and eligible normal merge. Close #20/#71 stack deliberately; no fake linked natives without real content callers.",
       "fallback_order": [
         "source-level combined integration rehearsal without early #25 protected registry PR changes",
         "local actual gameplay trace/reward continuation"
       ],
       "resume_when": "Actual eligible #14 merge and source-verified shared registry handoff; no requirement for finished Q1-Q5 Gate B to develop source"
+    },
+    {
+      "id": "M1-CLAUDE-REVIEW-MERGE",
+      "agent": "claude",
+      "issue": 46,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "remaining_m1_pr_and_ci_merge_operations"
+      ],
+      "next": "Claude assumes Manager. Inspect current live main and all open PR heads; review original diffs+claimed paths+applicable exact-head checks and source evidence; complete #95/#96/#97 and #14→#25; perform normal eligible merges using authenticated GitHub; post per-PR scoped protected handoffs for real reviewed work if GitHub identity permits; after each merge refresh main and rerun affected checks. If credentials cannot merge, post exact ready/blocked evidence; don't claim merge.",
+      "fallback_order": [
+        "QA Gate A packet from real Q2 Save→Continue screenshots/flash on #14 source",
+        "finish an unclaimed #95/#96 source review or final actual gameplay case"
+      ],
+      "resume_when": "Any merge-ready or reviewable existing PR, or other available M1 evidence"
     }
   ]
 }

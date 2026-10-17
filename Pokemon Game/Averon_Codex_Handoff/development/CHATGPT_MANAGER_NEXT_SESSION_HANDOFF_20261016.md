@@ -1,3 +1,5 @@
+> **LATEST OWNER ROUTING — 2026-10-17: CLAUDE ALONE HANDLES ALL M1 ROLES.** Codex and separate Playtest/Manager agents are PAUSED. Claude now owns engineering, genuine mGBA evidence, a distinct read-only second-pass QA assessment, Gate A/B decisions, source/CI review, protected PR-specific handoff administration and **normal merges for genuinely eligible PRs**. No extra agent approval queue. Read the [sole-Claude execution instructions](CLAUDE_SOLE_M1_EXECUTION_20261017.md), Issue #15 and scope-limited Issue #46. All contradictory historical matrices below are superseded. No maps/canon/IDs, artificial PASS or protected-check bypass; GitHub account permissions still apply.
+
 # MOST RECENT MANAGER HANDOFF — 2026-10-17 after actual blocker removal
 
 **Read this first; newer live main/CI supersedes the historical sections below.** Last verified source main `3b9cba688b31b304d01dce28c9f235e6f362077a`. Owner directed the manager to eliminate Claude's roadblocks. **Achieved, NOT just requested:**
