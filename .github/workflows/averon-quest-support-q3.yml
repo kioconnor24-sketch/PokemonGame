@@ -48,6 +48,7 @@ jobs:
         run: |
           python3 "support/Pokemon Game/scripts/quest_support/test_compose_q3_run.py"
           python3 "support/Pokemon Game/scripts/quest_support/test_frame_match.py"
+          python3 "support/Pokemon Game/scripts/quest_support/test_q3_continuation.py"
           test "$(git -C qa rev-parse HEAD)" = "$QA_SHA"
           python3 "support/Pokemon Game/scripts/quest_support/compose_q3_run.py" \
             --workflow qa/.github/workflows/averon-rendered-playtest.yml \

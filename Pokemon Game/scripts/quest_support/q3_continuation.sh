@@ -22,16 +22,26 @@ kill "$emu_pid"; wait "$emu_pid" 2>/dev/null || true
 kill "$qa_pid" 2>/dev/null || true; wait "$qa_pid" 2>/dev/null || true
 if ! test -s "$flash"; then
   echo "Q3X_FLASH_MISSING: no flash file after shutdown; no Continue evidence"
-  exit 0
+  exit 4
 fi
 echo "Q3X_FLASH $(stat -c '%s' "$flash") bytes sha256=$(sha256sum "$flash" | cut -c1-64)"
-python3 - "$flash" <<'PY' || true
+if python3 - "$flash" <<'PY'
 import json, sys
 sys.path.insert(0, "Pokemon Game/scripts/qa")
 import quest_state_controller as qc
 s = qc.decode_flash_q2(open(sys.argv[1], "rb").read())
 print("Q3X_SAVED_SLOT", json.dumps({k: s[k] for k in ("slot", "saveCounter", "mapGroup", "mapNum", "x", "y", "warpId")}))
+# Required evidence: the saved slot must be the Alderfield clinic (75,11).
+if (s["mapGroup"], s["mapNum"]) != (75, 11):
+    print("Q3X_SAVED_SLOT_NOT_CLINIC")
+    sys.exit(1)
 PY
+then
+  :
+else
+  echo "Q3X_SAVED_SLOT_INVALID: flash did not decode to the clinic slot"
+  exit 6
+fi
 
 # Fresh emulator process from the same flash, no debugger: title -> Continue.
 sleep 2
@@ -45,7 +55,7 @@ for i in $(seq 1 40); do
 done
 if test -z "$win"; then
   echo "Q3X_RELAUNCH_BLOCKED: no mGBA window"
-  exit 0
+  exit 5
 fi
 sleep 9; capture "q3x-relaunch-boot"
 press Return; sleep 4; capture "q3x-relaunch-title"
@@ -70,6 +80,8 @@ done
 sleep 3; capture "q3x-relaunch-continued"
 kill "$emu_pid" 2>/dev/null || true
 echo "Q3X_CONTINUE_RESULT $continue_result after $attempt A press(es); last: $score"
+# Exit codes: 3 Continue not shown, 4 no flash, 5 no relaunch window,
+# 6 saved slot missing or not the clinic; the observer's own code otherwise.
 # Exit non-zero unless the observer and the Continue check both succeeded,
 # so the job's status means something; the evidence uploads either way.
 if [ "$q3x_rc" -ne 0 ]; then exit "$q3x_rc"; fi
