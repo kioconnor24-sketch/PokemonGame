@@ -370,11 +370,90 @@ def party_fully_restored(d, o):
 
 
 def phase_q3_continued(d):
-    """After Save and a fresh emulator process: still in the clinic, healed."""
+    """After Save and a fresh emulator process: still in the clinic, healed.
+    The follower is hidden on the player's tile after a warp or load; one
+    ordinary step must bring it out, visible, as the lead's species."""
     observe(d, "q3-continued", {"map": "MAP_ALDERFIELDCLINIC",
                                 "partyHealed": lambda o: party_fully_restored(d, o),
                                 "follower": lambda o: bool(o["follower"]) and o["follower"]["species"]
                                 == o["party"][0]["species"]})
+    d.step("down")
+    d.settle()
+    time.sleep(0.8)
+    observe(d, "q3-follower-after-step", {"follower": follower_ok})
+
+
+def follower_ok(o):
+    f = o["follower"]
+    return bool(f) and not f["invisible"] and f["species"] == o["party"][0]["species"]
+
+
+def phase_q5_field(d, map_id="MAP_ALDERFIELD"):
+    """Q5 on existing approved maps (Alderfield and its clinic): collision,
+    every ordinary Start-menu screen and the party Field Kit return control,
+    NPC dialogue prints and closes, and the follower comes through a door
+    both ways. Ordinary inputs only; each check is a state file."""
+    d.travel_to(map_id)
+    d.settle()
+    m = d.live_map(map_id)
+    walls = {}
+    for y in range(m.height):
+        for x in range(m.width):
+            if not m.walkable(x, y):
+                continue
+            for name, (dx, dy) in mapdata.DIRS.items():
+                if m.inside(x + dx, y + dy) and m.collision(x + dx, y + dy) and not m.warp_at(x + dx, y + dy):
+                    walls[(x, y)] = name
+    _, pos = d.walk_path(map_id, set(walls))
+    into = walls[pos]
+    d.e.tap(drv.KEY[into], hold=0.6, after=0.4)  # hold into the wall
+    observe(d, "q5-collision", {"position": lambda o: (o["x"], o["y"]) == pos,
+                                "fieldReady": lambda o: d.field_ready(d.state())})
+    d.log("collision", map=map_id, at=pos, pushed=into)
+    away = {"up": "down", "down": "up", "left": "right", "right": "left"}[into]
+    dx, dy = mapdata.DIRS[away]
+    if m.walkable(pos[0] + dx, pos[1] + dy):
+        d.step(away)
+        d.settle()
+        observe(d, "q5-open-step", {"position": lambda o: (o["x"], o["y"]) == (pos[0] + dx, pos[1] + dy)})
+
+    gd, sym = d.g.gdb, d.g.sym
+    d.e.tap("START", after=0.8)
+    n = gd.read(sym["sNumStartMenuActions"], 1)[0]
+    actions = list(gd.read(sym["sCurrentStartMenuActions"], 9))[:n]
+    d.shot("q5-start-menu")
+    back_to_field(d)
+    d.log("start-menu", actions=actions)
+    names = {0: "pokedex", 1: "pokemon", 2: "bag", 4: "player", 6: "option"}
+    for action in [a for a in actions if a in names]:
+        open_start_menu_action(d, action)
+        time.sleep(1.0)
+        d.shot(f"q5-menu-{names[action]}")
+        if action == 1:
+            # Lead -> actions SUMMARY, [field moves], FIELD KIT, SWITCH, ITEM,
+            # CANCEL (party_menu.c). UP wraps from SUMMARY: CANCEL, ITEM,
+            # SWITCH, FIELD KIT (the lead knows no field-visible move).
+            d.e.tap("A", after=0.8)
+            for _ in range(4):
+                d.e.tap("UP", after=0.25)
+            d.shot("q5-menu-pokemon-actions")
+            d.e.tap("A", after=1.0)
+            d.shot("q5-menu-field-kit")
+        back_to_field(d)
+        observe(d, f"q5-menu-{names[action]}-closed", {"fieldReady": lambda o: d.field_ready(d.state())})
+
+    d.talk(map_id, (12, 16))                 # researcher, Q1 already done
+    observe(d, "q5-npc-closed", {"fieldReady": lambda o: d.field_ready(d.state()),
+                                 "FLAG_AVERON_NOTES_REWARDED": True})
+    observe(d, "q5-follower-outside", {"follower": follower_ok})
+    d.travel_to("MAP_ALDERFIELDCLINIC")
+    d.settle()
+    time.sleep(1.0)
+    observe(d, "q5-follower-inside", {"follower": follower_ok})
+    d.travel_to(map_id)
+    d.settle()
+    time.sleep(1.0)
+    observe(d, "q5-follower-back-outside", {"follower": follower_ok})
 
 
 def phase_save(d):
@@ -628,6 +707,95 @@ def phase_q1_reward(d):
     observe(d, "q1-no-duplicate", {"greatBalls+2": lambda o: count_item(o["pokeBalls"], great) == have + 2})
 
 
+def fill_pocket(d, row, label):
+    """DEV FIXTURE (disclosed): debug PC/Bag -> Fill... -> Fill Pocket <row>.
+    The expansion's debug fill adds 999 of every item of that pocket that
+    fits (debug.c DebugAction_PCBag_Fill_Pocket*). It only prepares a full
+    pocket; the quest reward that follows is the ordinary NPC script."""
+    debug_menu(d, [1, 1, row], f"fill-{label}")
+    back_to_field(d)
+
+
+def toss_all(d, pocket, item, label):
+    """BAG -> pocket -> item -> TOSS -> quantity DOWN once (wraps 1 -> all)
+    -> YES. Ordinary Bag inputs, driven by reading gBagPosition. Verified by
+    the item leaving the pocket."""
+    g, gd, sym, off = d.g, d.g.gdb, d.g.sym, d.g.off
+    want = g.c[pocket]
+    field = {"POCKET_POKE_BALLS": "pokeBalls", "POCKET_BERRIES": "berries"}[pocket]
+    items = [i for i, _ in getattr(d.state(), field)]
+    index = items.index(item)
+    base = sym["gBagPosition"]
+    open_start_menu_action(d, 2)  # MENU_ACTION_BAG
+    time.sleep(1.0)
+    for _ in range(8):
+        cur = gd.read(base + off["bagpos.pocket"], 1)[0]
+        if cur == want:
+            break
+        d.e.tap("RIGHT" if cur < want else "LEFT", after=0.9)
+    else:
+        raise drv.Stuck(f"bag never reached pocket {want}")
+    for _ in range(len(items) + 4):
+        cursor = struct.unpack("<H", gd.read(base + off["bagpos.cursor"] + 2 * want, 2))[0]
+        scroll = struct.unpack("<H", gd.read(base + off["bagpos.scroll"] + 2 * want, 2))[0]
+        if cursor + scroll == index:
+            break
+        d.e.tap("DOWN" if cursor + scroll < index else "UP", after=0.3)
+    else:
+        raise drv.Stuck(f"bag cursor never reached item index {index}")
+    d.shot(f"{label}-item")
+    d.e.tap("A", after=0.8)
+    # Context menu, two columns (item_menu.c): Balls GIVE/-/TOSS/CANCEL,
+    # Berries CHECK TAG/-/USE/GIVE/TOSS/CANCEL. TOSS is the left column.
+    for _ in range(1 if pocket == "POCKET_POKE_BALLS" else 2):
+        d.e.tap("DOWN", after=0.3)
+    d.shot(f"{label}-menu")
+    d.e.tap("A", after=0.8)
+    d.e.tap("DOWN", after=0.5)      # quantity 1 -> wraps to everything held
+    d.shot(f"{label}-quantity")
+    d.e.tap("A", after=0.8)         # "Throw away ...?"
+    d.shot(f"{label}-confirm")
+    d.e.tap("A", after=1.0)         # YES
+    d.shot(f"{label}-thrown")
+    back_to_field(d)
+    observe(d, label, {f"{field}-tossed": lambda o: count_item(o[field], item) == 0})
+
+
+def phase_q1_full_pocket(d):
+    """Q1 negative on a save COPY: the Hiker has recorded the notes; the Poke
+    Balls pocket is filled by the disclosed debug fixture, so the two Great
+    Balls cannot fit. The researcher must refuse (no balls, no reward flag),
+    then pay exactly two once space is freed by tossing with the Bag."""
+    great = d.g.c["ITEM_GREAT_BALL"]
+    fill_pocket(d, 4, "balls")  # Fill Pocket Poke Balls
+    full = observe(d, "q1-full-pocket", {"FLAG_AVERON_NOTES_RECORDED": True,
+                                         "FLAG_AVERON_NOTES_REWARDED": False,
+                                         "greatBalls==999": lambda o: count_item(o["pokeBalls"], great) == 999})
+    d.travel_to("MAP_ALDERFIELD")
+    d.talk("MAP_ALDERFIELD", (12, 16))
+    observe(d, "q1-refused", {"FLAG_AVERON_NOTES_REWARDED": False,
+                              "pocketUnchanged": lambda o: o["pokeBalls"] == full["pokeBalls"]})
+    toss_all(d, "POCKET_POKE_BALLS", great, "q1-tossed")
+    phase_q1_reward(d)
+
+
+def phase_q2_full_pocket(d):
+    """Q2 negative on a save COPY: the tree sketch is FOUND; the Berries
+    pocket is filled by the disclosed debug fixture. The artist must refuse
+    (no berries, no reward flag), then pay exactly three once space is freed."""
+    oran = d.g.c["ITEM_ORAN_BERRY"]
+    fill_pocket(d, 6, "berries")  # Fill Pocket Berries
+    full = observe(d, "q2-full-pocket", {"FLAG_AVERON_SKETCH_FOUND": True,
+                                         "FLAG_AVERON_SKETCH_REWARDED": False,
+                                         "oran==999": lambda o: count_item(o["berries"], oran) == 999})
+    d.travel_to("MAP_WINDROW")
+    d.talk("MAP_WINDROW", (20, 14))
+    observe(d, "q2-refused", {"FLAG_AVERON_SKETCH_REWARDED": False,
+                              "pocketUnchanged": lambda o: o["berries"] == full["berries"]})
+    toss_all(d, "POCKET_BERRIES", oran, "q2-tossed")
+    phase_q2_reward(d)
+
+
 def phase_q2_start(d):
     """Windrow artist asks for a berry sketch check; answer YES."""
     if not d.g.flag(d.state(), "FLAG_AVERON_SKETCH_STARTED"):
@@ -761,6 +929,8 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "q1_reward": phase_q1_reward, "q1_continued": phase_q1_continued,
           "show_bag": phase_show_bag, "q3_whiteout": phase_q3_whiteout,
           "q3_continued": phase_q3_continued, "q4_gift": phase_q4_gift, "trainer_card": phase_trainer_card,
+          "q5_field": phase_q5_field, "q1_full_pocket": phase_q1_full_pocket,
+          "q2_full_pocket": phase_q2_full_pocket,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),

@@ -67,6 +67,9 @@ OFFSET_EXPRS = {
     "bag.items": "offsetof(struct Bag, items)",
     "bag.pokeBalls": "offsetof(struct Bag, pokeBalls)",
     "bag.berries": "offsetof(struct Bag, berries)",
+    "bagpos.pocket": "offsetof(struct BagPosition, pocket)",
+    "bagpos.cursor": "offsetof(struct BagPosition, cursorPosition)",
+    "bagpos.scroll": "offsetof(struct BagPosition, scrollPosition)",
 }
 
 
@@ -87,6 +90,7 @@ CONSTANTS = [
     "TRAINER_AVERON_GYM1", "TRAINER_AVERON_ELIO", "TRAINER_AVERON_MEADOW",
     "STAT_ATK", "DEFAULT_STAT_STAGE", "MOVE_BABY_DOLL_EYES", "MOVE_CHARM", "MOVE_RETALIATE",
     "TYPE_NORMAL", "TYPE_WATER", "TYPE_FIRE", "TYPE_GRASS", "TYPE_GHOST",
+    "POCKET_POKE_BALLS", "POCKET_BERRIES",
 ]
 
 
@@ -107,7 +111,7 @@ def probe_offsets(engine, workdir):
              '#include "constants/species.h"', '#include "constants/battle.h"',
              '#include "move.h"', '#include "save.h"', '#include "constants/moves.h"',
              '#include "constants/opponents.h"', '#include "party_menu.h"', '#include "fpmath.h"',
-             '#include "task.h"', '#include "constants/event_objects.h"',
+             '#include "task.h"', '#include "constants/event_objects.h"', '#include "item_menu.h"',
              'extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];',
              '#define P(n, v) asm volatile(".globl AVPROBE_" #n "\\n.equ AVPROBE_" #n ", %c0" :: "i"(v))',
              "void AvProbe(void)", "{"]

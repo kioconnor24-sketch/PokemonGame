@@ -313,7 +313,7 @@ class Driver:
         menu) for the lowest-level healthy party member that turn."""
         choose_move = choose_move or self.best_move
         self.switch_pref = None
-        shots = 0
+        shots = defeat_shots = 0
         last = None
         idle = 0
         for _ in range(100):
@@ -382,6 +382,12 @@ class Driver:
                 self.e.tap("A", after=0.6)
             else:
                 idle += 1
+                if defeat_shots < 12 and s.party and not any(m["hp"] for m in s.party):
+                    # The whole party has fainted: keep each defeat/whiteout
+                    # message as evidence before advancing it.
+                    time.sleep(0.5)
+                    self.shot(f"{label}-defeat")
+                    defeat_shots += 1
                 # Text and animations: A advances messages; B declines
                 # optional prompts (nickname, move replacement) safely.
                 self.e.tap("A" if idle % 6 else "B", after=0.3)
