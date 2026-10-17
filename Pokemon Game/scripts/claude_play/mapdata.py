@@ -1,0 +1,170 @@
+"""Static map knowledge for the local playthrough driver, read from source.
+
+Everything here comes from the engine's own map, layout and tileset files:
+collision bits and elevation from each layout's map.bin, metatile behaviours
+from the tilesets' metatile_attributes.bin, and warps, connections and objects
+from map.json. The driver only uses this to plan ordinary walking; it never
+changes the game.
+"""
+import json
+import pathlib
+import re
+import struct
+from collections import deque
+
+DIRS = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
+
+
+def _behavior_names(engine):
+    text = (engine / "include/constants/metatile_behaviors.h").read_text()
+    body = text[text.index("enum {") + 6:text.index("};")]
+    names = [m.group(1) for m in re.finditer(r"^\s*(MB_[A-Z0-9_]+)", body, re.M)]
+    return {i: n for i, n in enumerate(names)}
+
+
+class World:
+    def __init__(self, engine):
+        self.engine = pathlib.Path(engine)
+        groups = json.loads((self.engine / "data/maps/map_groups.json").read_text())
+        self.map_ids = {}  # "MAP_X" -> (group, num, folder)
+        for g, gname in enumerate(groups["group_order"]):
+            for n, folder in enumerate(groups[gname]):
+                info = json.loads((self.engine / f"data/maps/{folder}/map.json").read_text())
+                self.map_ids[info["id"]] = (g, n, folder)
+        self.by_num = {(g, n): mid for mid, (g, n, _) in self.map_ids.items()}
+        self.layouts = {l["id"]: l for l in json.loads(
+            (self.engine / "data/layouts/layouts.json").read_text())["layouts"] if "id" in l}
+        self.behavior_names = _behavior_names(self.engine)
+        self._attrs = {}
+        self._maps = {}
+        headers = (self.engine / "src/data/tilesets/headers.h").read_text()
+        self._tileset_attr_symbol = dict(re.findall(
+            r"const struct Tileset (gTileset_\w+) =\s*\{[^}]*?\.metatileAttributes = (\w+)", headers, re.S))
+        metatiles = (self.engine / "src/data/tilesets/metatiles.h").read_text()
+        self._attr_file = dict(re.findall(r"const u16 (\w+)\[\] = INCBIN_U16\(\"([^\"]+)\"\)", metatiles))
+
+    def _attributes(self, tileset):
+        if tileset not in self._attrs:
+            path = self.engine / self._attr_file[self._tileset_attr_symbol[tileset]]
+            raw = path.read_bytes()
+            self._attrs[tileset] = struct.unpack(f"<{len(raw) // 2}H", raw)
+        return self._attrs[tileset]
+
+    def map(self, map_id):
+        if map_id not in self._maps:
+            self._maps[map_id] = MapInfo(self, map_id)
+        return self._maps[map_id]
+
+    def map_at(self, group, num):
+        return self.map(self.by_num[(group, num)])
+
+
+class MapInfo:
+    def __init__(self, world, map_id):
+        self.world = world
+        self.id = map_id
+        self.group, self.num, self.folder = world.map_ids[map_id]
+        info = json.loads((world.engine / f"data/maps/{self.folder}/map.json").read_text())
+        self.info = info
+        layout = world.layouts[info["layout"]]
+        self.width, self.height = layout["width"], layout["height"]
+        raw = (world.engine / layout["blockdata_filepath"]).read_bytes()
+        self.blocks = struct.unpack(f"<{self.width * self.height}H", raw)
+        primary = world._attributes(layout["primary_tileset"])
+        secondary = world._attributes(layout["secondary_tileset"])
+        self.behaviors = []
+        for b in self.blocks:
+            mid = b & 0x3FF
+            attr = primary[mid] if mid < 512 else secondary[mid - 512] if mid - 512 < len(secondary) else 0
+            self.behaviors.append(world.behavior_names.get(attr & 0xFF, "MB_?"))
+        self.warps = [(w["x"], w["y"], w["dest_map"], int(w["dest_warp_id"]))
+                      for w in info.get("warp_events", [])]
+        self.connections = [(c["direction"], c["map"], int(c["offset"]))
+                            for c in (info.get("connections") or [])]
+        self.objects = [(o["x"], o["y"], o.get("script", ""), o.get("graphics_id", ""))
+                        for o in info.get("object_events", [])]
+
+    def inside(self, x, y):
+        return 0 <= x < self.width and 0 <= y < self.height
+
+    def collision(self, x, y):
+        return (self.blocks[y * self.width + x] >> 10) & 3
+
+    def elevation(self, x, y):
+        return self.blocks[y * self.width + x] >> 12
+
+    def behavior(self, x, y):
+        return self.behaviors[y * self.width + x]
+
+    def is_grass(self, x, y):
+        return self.behavior(x, y) in ("MB_TALL_GRASS", "MB_LONG_GRASS")
+
+    def walkable(self, x, y):
+        if not self.inside(x, y) or self.collision(x, y):
+            return False
+        b = self.behavior(x, y)
+        if "WATER" in b or b.startswith("MB_JUMP") or b == "MB_COUNTER":
+            return False
+        return True
+
+    def warp_at(self, x, y):
+        for wx, wy, dest, warp in self.warps:
+            if (wx, wy) == (x, y):
+                return dest, warp
+        return None
+
+
+def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
+    """Shortest list of direction names from start to any goal tile."""
+    goals = set(goals)
+    if start in goals:
+        return []
+    prev = {start: None}
+    q = deque([start])
+    while q:
+        cur = q.popleft()
+        for name, (dx, dy) in DIRS.items():
+            nxt = (cur[0] + dx, cur[1] + dy)
+            if nxt in prev or nxt in blocked:
+                continue
+            ok = m.walkable(*nxt) or (allow_goal_unwalkable and nxt in goals and m.inside(*nxt))
+            if not ok:
+                continue
+            # A warp tile that is not the goal would take us elsewhere.
+            if nxt not in goals and m.warp_at(*nxt):
+                continue
+            prev[nxt] = (cur, name)
+            if nxt in goals:
+                path = []
+                node = nxt
+                while prev[node]:
+                    node, step = prev[node]
+                    path.append(step)
+                return path[::-1]
+            q.append(nxt)
+    return None
+
+
+def edge_exits(m, direction):
+    """Tiles on m's edge from which stepping `direction` enters the connected map."""
+    conn = next((c for c in m.connections if c[0] == direction), None)
+    if conn is None:
+        return []
+    other = m.world.map(conn[1])
+    offset = conn[2]
+    tiles = []
+    if direction in ("up", "down"):
+        y = 0 if direction == "up" else m.height - 1
+        oy = other.height - 1 if direction == "up" else 0
+        for x in range(m.width):
+            ox = x - offset
+            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
+                tiles.append((x, y))
+    else:
+        x = 0 if direction == "left" else m.width - 1
+        ox = other.width - 1 if direction == "left" else 0
+        for y in range(m.height):
+            oy = y - offset
+            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
+                tiles.append((x, y))
+    return tiles
