@@ -83,9 +83,10 @@ class BoardTests(unittest.TestCase):
     def test_parallel_work_is_not_a_qa_shortcut(self):
         self.tasks[1]["parallel_development"] = True
         self.snap["pull_requests"][0].update(state="closed", merged=True)
-        # No authenticated per-SHA QA marker, so even merged code stays gated.
+        # Missing Gate B QA is still recorded, but a real upstream merge
+        # releases downstream merge-dependency tracking.
         results = MODULE.calculate(self.tasks, self.snap)
-        self.assertEqual(results["B"]["status"], "DEVELOPMENT OPEN; MERGE GATED ON Q")
+        self.assertEqual(results["B"]["status"], "DEVELOPMENT OPEN; SHARED-FILE MERGE HANDOFF REQUIRED")
         self.assertIn("QA SIGNOFF NOT FOUND", results["Q"]["status"])
 
     def test_actual_upstream_merge_releases_downstream_dependency_but_not_qa_verdict(self):
@@ -143,7 +144,7 @@ class BoardTests(unittest.TestCase):
         )
         self.assertNotIn("## Live task/dependency routing", rendered["board"])
         self.assertIn("advisory inbox (verify live claims)", rendered["codex"])
-        self.assertIn("historical inbox (NOT current assignments)", rendered["claude"])
+        self.assertIn("advisory inbox (verify live claims)", rendered["claude"])
 
     def test_generated_board_says_no_auto_merge_or_map_work(self):
         result = MODULE.render(self.conf, self.snap)
