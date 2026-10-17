@@ -4,6 +4,7 @@ Everything is done with ordinary button presses; the state reads in game.py
 only decide which button to press next.
 """
 import json
+import struct
 import time
 
 import mapdata
@@ -258,6 +259,21 @@ class Driver:
         raise Stuck(f"talking to {npc} on {map_id} started no script")
 
     # -- battles --------------------------------------------------------------
+    def trainer_move(self, s):
+        """Against trainers: lower a healthy physical attacker's Attack twice
+        with Baby-Doll Eyes (priority) or Growl while we are healthy, then
+        attack with the strongest move."""
+        c = self.g.c
+        me, foe = s.mons[0], s.mons[1]
+        atk_stage = foe["stages"][c["STAT_ATK"]] - c["DEFAULT_STAT_STAGE"]
+        if me["hp"] * 10 > me["maxhp"] * 6 and foe["hp"] * 2 > foe["maxhp"] and atk_stage > -2:
+            for move in (c["MOVE_BABY_DOLL_EYES"], c["MOVE_GROWL"]):
+                if move in me["moves"]:
+                    slot = me["moves"].index(move)
+                    if me["pp"][slot]:
+                        return slot
+        return self.best_move(s)
+
     def best_move(self, s):
         """Highest expected damage among moves with PP, by ROM power/type/STAB."""
         me, foe = s.mons[0], s.mons[1]
@@ -306,6 +322,8 @@ class Driver:
                 if "Naming" in cb:
                     self.e.tap("START", after=0.4)
                     self.e.tap("A", after=0.8)
+                elif cb == "CB2_UpdatePartyMenu":
+                    self.choose_replacement(s)
                 else:
                     self.e.tap("B" if "Summary" in cb else "A", after=0.3)
                 continue
@@ -338,6 +356,23 @@ class Driver:
                 # Text and animations: A advances messages; B declines
                 # optional prompts (nickname, move replacement) safely.
                 self.e.tap("A" if idle % 6 else "B", after=0.3)
+
+    def choose_replacement(self, s):
+        """Party menu during battle (lead fainted): pick the first healthy
+        Pokemon by moving the cursor down to it, then A (choose) and A (SHIFT)."""
+        target = next((i for i, m in enumerate(s.party) if m["hp"] > 0 and i > 0), None)
+        if target is None:
+            self.e.tap("B", after=0.4)
+            return
+        slot_addr = self.g.sym["gPartyMenu"] + self.g.off["pm.slotId"]
+        for _ in range(8):
+            cur = struct.unpack("<b", self.g.gdb.read(slot_addr, 1))[0]
+            if cur == target:
+                break
+            self.e.tap("DOWN" if cur < target else "UP", after=0.25)
+        self.log("replacement", slot=target, mon=s.party[target])
+        self.e.tap("A", after=0.6)
+        self.e.tap("A", after=1.0)
 
     def move_cursor(self, cur, want):
         # 2x2 grids: 0 top-left, 1 top-right, 2 bottom-left, 3 bottom-right.

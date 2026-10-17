@@ -72,7 +72,8 @@ class Game:
                         hp=struct.unpack_from("<H", raw, self.off["bm.hp"])[0],
                         maxhp=struct.unpack_from("<H", raw, self.off["bm.maxHP"])[0],
                         level=raw[self.off["bm.level"]],
-                        types=list(raw[self.off["bm.types"]:self.off["bm.types"] + 2])))
+                        types=list(raw[self.off["bm.types"]:self.off["bm.types"] + 2]),
+                        stages=list(raw[self.off["bm.statStages"]:self.off["bm.statStages"] + 8])))
             return s
         finally:
             g.resume()

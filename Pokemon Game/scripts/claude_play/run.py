@@ -309,7 +309,7 @@ def phase_gym1(d):
     observe(d, "gym1-sluices", {"FLAG_AVERON_WEST_SLUICE": True, "FLAG_AVERON_EAST_SLUICE": True})
     s = d.talk("MAP_ALDERFIELDGYM", (4, 4))
     if s.in_battle:
-        d.battle(label="elio")
+        d.battle(choose_move=d.trainer_move, label="elio")
         s = d.clear_text(limit=300)
     won = d.g.flag(d.state(), "FLAG_BADGE01_GET")
     d.log("gym1-result", won=won, map=d.here()[0], lead=lead(d))

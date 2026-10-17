@@ -46,6 +46,8 @@ OFFSET_EXPRS = {
     "bm.maxHP": "offsetof(struct BattlePokemon, maxHP)",
     "bm.level": "offsetof(struct BattlePokemon, level)",
     "bm.types": "offsetof(struct BattlePokemon, types)",
+    "bm.statStages": "offsetof(struct BattlePokemon, statStages)",
+    "pm.slotId": "offsetof(struct PartyMenu, slotId)",
     "move.size": "sizeof(struct MoveInfo)",
     "main.vblankCounter1": "offsetof(struct Main, vblankCounter1)",
     "slot.size": "sizeof(struct ItemSlot)",
@@ -70,6 +72,7 @@ CONSTANTS = [
     "BAG_ITEMS_COUNT", "BAG_POKEBALLS_COUNT", "BAG_BERRIES_COUNT", "ITEM_EXP_SHARE",
     "TRAINER_FLAGS_START", "TRAINER_AVERON_FARMER", "TRAINER_AVERON_PICNIC", "TRAINER_AVERON_ORCHARD",
     "TRAINER_AVERON_GYM1", "TRAINER_AVERON_ELIO", "TRAINER_AVERON_MEADOW",
+    "STAT_ATK", "DEFAULT_STAT_STAGE", "MOVE_BABY_DOLL_EYES", "MOVE_GROWL",
 ]
 
 
@@ -89,7 +92,7 @@ def probe_offsets(engine, workdir):
              '#include "constants/flags.h"', '#include "constants/vars.h"', '#include "constants/items.h"',
              '#include "constants/species.h"', '#include "constants/battle.h"',
              '#include "move.h"', '#include "save.h"', '#include "constants/moves.h"',
-             '#include "constants/opponents.h"',
+             '#include "constants/opponents.h"', '#include "party_menu.h"',
              '#define P(n, v) asm volatile(".globl AVPROBE_" #n "\\n.equ AVPROBE_" #n ", %c0" :: "i"(v))',
              "void AvProbe(void)", "{"]
     lines += [f"    P(p{i}, {exprs[n]});" for i, n in enumerate(names)]
