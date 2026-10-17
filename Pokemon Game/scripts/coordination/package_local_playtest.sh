@@ -64,6 +64,11 @@ print("PASS:", manifest["status"], "native", native, "save", save)
 PY
 cp -f -- pokeemerald.gba "$out/$file"
 sha256sum "$out/$file"
+# Actual local compiler/tool/source provenance, separate from native and gameplay QA.
+python3 "../scripts/coordination/toolchain_manifest.py" \\
+  --repo "$root" --engine "$engine" --rom "$out/$file" \\
+  --out "$out/toolchain.json" --strict
 echo "Private ROM for owner playtest: $out/$file"
 echo "Manifest: $out/manifest.json"
+echo "Toolchain provenance: $out/toolchain.json"
 echo "This has not been tested in Delta iOS or accepted for public distribution."

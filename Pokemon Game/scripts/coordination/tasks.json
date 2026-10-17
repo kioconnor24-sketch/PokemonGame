@@ -14,12 +14,22 @@
     "continue_disjoint_when_merge_blocked": true,
     "prevent_duplicate_interface_owners": true,
     "do_not_auto_awaken_agents": true,
-    "sole_backend_developer": "claude",
     "local_build_debug_test_unrestricted_within_m1": true,
     "claims_are_not_permission_requests": true,
     "independent_qa_required_for_gameplay_acceptance": true,
     "codex_active": false,
-    "milestone_1_scope": "map_independent_backend_only"
+    "milestone_1_scope": "map_independent_backend_only",
+    "backend_developers": [
+      "claude",
+      "codex"
+    ],
+    "codex_status": "AUTHORIZED_TO_RESUME_WHEN_SESSION_STARTS",
+    "cross_lane_takeover_allowed_after_handoff": true,
+    "single_active_writer_per_exact_path": true,
+    "claim_notice_not_permission_gate": true,
+    "independent_playtest_final_verdict": true,
+    "m1_codex_priority": "majority of remaining backend native and cross-feature engineering",
+    "m1_claude_priority": "local real mGBA playthrough, quest/scripted/legend registration and final integration"
   },
   "tasks": [
     {
@@ -34,25 +44,25 @@
         "Q4",
         "Q5"
       ],
-      "next": "Claude is sole M1 backend writer: repair verified existing QUEST #14 defects and build/test freely on owned worktree. Playtest #23 independently decides Gate A/B. #14 normal merge follows required acceptance; continue other M1 work while waiting.",
+      "next": "Claude retains QUEST #14 and the legitimate mGBA first-Gym/Hiker path; repair only verified feature defects. Playtest still alone issues Gate A/B. #14 merge by manager when authorized.",
       "issue": 46,
       "owned_interfaces": [
         "optional_quest_events",
         "optional_quest_rewards"
       ],
       "fallback_order": [
-        "unclaimed M1 source/native cross-feature defects, flash/save and mechanics tests",
-        "improve existing-map reproducible input/trace instrumentation without touching Playtest's QA source"
+        "advance genuine existing-area mGBA input trace, clinic/party evidence without altering Playtest tests",
+        "rehearse combined #14→#25 integration in a disposable private worktree; no early registration merge"
       ],
       "resume_when": "Independent #23 Gate A decision supports normal #14 merge; no dependency on this gate for other backend coding",
       "parallel_development": true
     },
     {
       "id": "TWO-REGION",
-      "agent": "claude",
+      "agent": "codex",
       "deps": [],
       "requires_handoff": false,
-      "next": "Already integrated on main: do NOT recreate two-region core. Claude owns any remaining demonstrated regional identity, badge, save, Fly, healing, field, bounds or old-save M1 defects; use native/symbolic fixtures. No real Sinnoh maps.",
+      "next": "Already integrated on main. Codex now owns NEW file-disjoint native/symbolic regression probes for existing region identity, 8+8 badge banks, cap/obedience/field licenses/Fly/whiteout, legacy/flash corruption. Fix only demonstrated defects with exact-path claim; do not rebuild the core or demand Sinnoh maps.",
       "issue": 46,
       "parallel_development": true,
       "owned_interfaces": [
@@ -63,8 +73,8 @@
         "region_save_migration"
       ],
       "fallback_order": [
-        "cross-system Save/Continue and regional badge/field/cap native regressions",
-        "unclaimed general field, follower and UI implementation defects"
+        "new-file region save cross-boundary tests that do not alter Claude's emulator driver",
+        "review source-level region/badge/field adapter edge cases and produce an executable regression"
       ],
       "resume_when": "A concrete missing M1 regional behavior or failing test is reproduced; normal guarded PR integration follows source review",
       "implementation_merged": true
@@ -81,7 +91,7 @@
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "Core already merged (#81); Claude may implement/debug/test all M1 scripted battle functions NOW. Keep #25 deferred event_scripts.s registration out until QUEST #14 is normally merged, then apply claude/scripted-battle-after-quest, run source/ARM/RELEASE/native checks, request eligible merge.",
+      "next": "Claude owns the prepared #25 SCRIPTED/LEGEND registry integration after #14 merger, all source/normal/RELEASE/native tests. Generic core already merged; no made-up story callers.",
       "issue": 46,
       "parallel_development": true,
       "owned_interfaces": [
@@ -89,8 +99,8 @@
         "scripted_no_whiteout_and_forfeit"
       ],
       "fallback_order": [
-        "independent battle cleanup, no-Run/forced-loss/gauntlet/native tests while waiting on #14",
-        "any other unclaimed M1 gameplay backend defect"
+        "unclaimed mGBA input replay and deterministic valid controller-state handling",
+        "independent SCRIPTED/LEGEND native verification that does not overlap Codex's claimed engine source"
       ],
       "resume_when": "#14 normal merge releases #25 registry insertion; source/tests development need not wait"
     },
@@ -139,16 +149,16 @@
         "unique_encounter_outcome_and_retry"
       ],
       "fallback_order": [
-        "real failing generic LEGEND save, forced escape, retry, full-party test",
-        "unclaimed battle/flash native M1 gap"
+        "local gameplay automation in claude_play (claimed Claude)",
+        "source/registry preflight for future #25 integration without changing Codex source"
       ],
       "resume_when": "#14 normal merge permits deferred registration or a reproduced generic backend defect warrants implementation",
-      "next": "Generic LEGEND core already merged; do not reproduce it. Claude may debug/test generic encounter outcomes and flash now. Prepared registration in claude/scripted-battle-after-quest must wait for #14 and #25 ordering. Actual legendary scene not required M1.",
+      "next": "Claude owns prepared generic LEGEND registration attached to #25 after #14, no real legendary scene. Do not reimplement merged generic core. Playtest independently accepts GUI when content exists.",
       "issue": 46
     },
     {
       "id": "POKEMON-MECHANICS",
-      "agent": "claude",
+      "agent": "codex",
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
@@ -156,17 +166,17 @@
         "generic_battle_exp_items_followers_ai"
       ],
       "fallback_order": [
-        "reproduce smallest unverified M1 mechanic through native fixture",
-        "source-backed asset/form/supported-feature availability audit without generating maps"
+        "held-EXP Gen5/fainted/switch/cap native negative tests and source coverage gap",
+        "Party/PC gift, Mega exit or held-item+capture/save red-green regression"
       ],
       "resume_when": "A concrete unverified M1 invariant, reproducible defect or missing check is found",
-      "next": "Core and held-EXP ownership repair already merged via #48. Claude has sole M1 production authority to address remaining proved species/forms/evolution/follower/AI/EXP/cap/breeding/PC/field gaps using local ARM+mGBA and native tests; never rewrite already merged work.",
+      "next": "Core and #48 ownership regression merged. Codex owns additional PROVEN cross-feature Pokémon/held-EXP/level-cap/evolution/Mega/PC/party boundary defects and new-file native tests, without duplicating Claude's currently claimed emulator work.",
       "issue": 46,
       "implementation_merged": true
     },
     {
       "id": "REGION-PLATFORM",
-      "agent": "claude",
+      "agent": "codex",
       "deps": [],
       "parallel_development": true,
       "owned_interfaces": [
@@ -174,29 +184,111 @@
         "field_navigation_core_capacity"
       ],
       "fallback_order": [
-        "cross-feature save/flash/region platform native test",
-        "unclaimed reusable field or follower defect"
+        "existing-map registry/warp disabled-group and event capacity negative tests",
+        "new-file release/resource/stack/memory checks where source-backed"
       ],
       "resume_when": "A concrete source-backed M1 engine/platform gap needs a fix; no creative map authoring",
-      "next": "Region map/object/Fly/warp capacity safeguards already largely merged. Claude may independently repair any proven remaining map-independent navigation, collision, event/flag registry, field permission or ROM-memory issue. Use existing maps/symbolic IDs only.",
+      "next": "Codex owns map-independent region registry/warp/object/field/flash/save-capacity, release source bounds tests. Existing platform safeguards merged; avoid maps and speculative refactors.",
       "issue": 46,
       "implementation_merged": true
     },
     {
       "id": "M1-BACKEND-CLOSEOUT",
-      "agent": "claude",
+      "agent": "codex",
       "deps": [],
       "parallel_development": true,
       "issue": 46,
-      "next": "Develop and test unresolved map-independent backend invariants across source/region/flash/QUEST/SCRIPTED/LEGEND/EXP/follower/field in local WSL without asking Codex or manager for permission to code. Report exact test source/head and any true defect. Final normal+RELEASE/full native/main-resource proof coordinated with manager and independently accepted Playtest.",
+      "next": "Codex takes majority of outstanding section C: new-file native cross-feature regressions, old/new/corrupt save and error UI, battle/item/region/field, resource and release risk. Claude handles final combined integration and local actual gameplay. Keep exact claim notices; no shared live writers.",
       "owned_interfaces": [
         "cross_system_m1_backend_closeout"
       ],
       "fallback_order": [
-        "small unclaimed native regression for saved/field/follower/EXP boundary",
-        "compile/review next independently testable M1 interface while waiting on external PR merge"
+        "independent new-file cross-feature native tests",
+        "build/RELEASE warning+ROM/RAM/save budget reproducible evidence with pinned source"
       ],
       "resume_when": "Any source-backed unverified M1 acceptance item; do not wait on #14 to code unrelated tests"
+    },
+    {
+      "id": "M1-TRADE-SAVE-REFUSAL",
+      "agent": "codex",
+      "issue": 46,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "trade_incremental_save_ui_refusal"
+      ],
+      "next": "TOP PRIORITY: independently reproduce Claude's 44/45 region-save negative result (branch claude/verify-negatives-on-main commit 13e2a183). Source read shows RefuseBlockedIncrementalSave sets gSaveAttemptStatus=ERROR while LinkFullSave/trade task can rely only on gDamagedSaveSectors. Determine whether the trade UI silently progresses despite an unsupported-format save refusal; write smallest RED test, implement narrowly scoped correction, show GREEN and normal+RELEASE/native proof. NEVER assume item loss or exploit without real evidence. Do not edit Claude's existing branch; new Codex worktree/new test file; exact claim if engine/src/save.c or other protected path required.",
+      "fallback_order": [
+        "new-file read-only contract test of save status propagation across trade and link entry points",
+        "reproduce alternative save entry refusal without touching protected source"
+      ],
+      "resume_when": "Concrete red reproduction proves user-visible/error-state regression; otherwise report negative and switch to next Codex M1 task"
+    },
+    {
+      "id": "M1-CROSS-FEATURE-REGRESSIONS",
+      "agent": "codex",
+      "issue": 46,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "cross_feature_native_boundary_regressions"
+      ],
+      "next": "Add compact new-file native cross-feature tests for quest+Bag+PC+flash, badges+cap+Fly+save, region+whiteout+follower, scripted+normal battle recovery, LEGEND+PC+save, EXP+cap+Mega cleanup, after verifying existing tests to avoid duplication. Positive and mutation/negative controls where safe; no content or map edits.",
+      "fallback_order": [
+        "reproduce next untested section C boundary on current source",
+        "produce source-backed gap ledger for specific missing invariant and write its smallest failing test"
+      ],
+      "resume_when": "A particular M1 C cross-feature invariant lacks a meaningful executed test"
+    },
+    {
+      "id": "M1-BUILD-RESOURCE-EVIDENCE",
+      "agent": "codex",
+      "issue": 46,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "m1_resource_and_build_verification"
+      ],
+      "next": "Independently validate immutable native baseline, actual normal+RELEASE compatibility, ROM <=32MiB, EWRAM/IWRAM, SaveBlock headroom, generated graphics/IDs, relevant gameplay-side release guard failures; use source-pinned build manifest from #89. Do not rerun 6k suite when exact-head green evidence is reusable; do not modify manager-owned coordination scripts.",
+      "fallback_order": [
+        "source-backed asset/follower availability matrix for existing assets only",
+        "new-file negative test for already-identified release/resource/ID boundary"
+      ],
+      "resume_when": "Unverified reproducibility/resource/CI test gap exists on actual integrated source"
+    },
+    {
+      "id": "M1-EMULATOR-GAMEPLAY",
+      "agent": "claude",
+      "issue": 46,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "local_authentic_mgba_playthrough_driver"
+      ],
+      "next": "Continue claude/local-playthrough at 5ab78aeb: genuine Orchard Lane training and route trainer/Gym sluice/Elio → Badge01 → researcher/Hiker Great Balls, then full Bag and six-party edge cases. Reuse player Save→Continue and clinic evidence. Capture real ROM/ELF/source hashes, trace, screenshots, state; push scripts not private ROM/saves. Fix command fail-closed timeouts and EOF/stuck handling in isolated claude_play scripts where evidenced; keep Playtest independent.",
+      "fallback_order": [
+        "support genuine Q3 HP or Q5 audio/inputs on existing maps without duplicating Playtest scripts",
+        "integrate #14→#25 after independent Gate A, while preserving #25 serialized protected merge"
+      ],
+      "resume_when": "Actual existing-map input can advance or Claude finds a proved playthrough harness defect; no map authoring"
+    },
+    {
+      "id": "M1-CLAUDE-INTEGRATION",
+      "agent": "claude",
+      "issue": 46,
+      "deps": [
+        "QUEST"
+      ],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "m1_final_quest_scripted_legend_integration"
+      ],
+      "next": "Once Playtest Gate A provides authorized minimum #14 acceptance, manager normally merges #14, then Claude applies existing claude/scripted-battle-after-quest to #25 and tests combined source/normal+RELEASE/native. Only then manager merges eligible #25. Until then continue mGBA code; no fabricated acceptance.",
+      "fallback_order": [
+        "source-level combined integration rehearsal without early #25 protected registry PR changes",
+        "local actual gameplay trace/reward continuation"
+      ],
+      "resume_when": "Actual eligible #14 merge and source-verified shared registry handoff; no requirement for finished Q1-Q5 Gate B to develop source"
     }
   ]
 }
