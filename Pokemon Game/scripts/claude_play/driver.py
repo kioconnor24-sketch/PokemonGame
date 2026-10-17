@@ -320,6 +320,9 @@ class Driver:
                 idle += 1
                 cb = s.cb2 or ""
                 if "Naming" in cb:
+                    # Keep the species name: erase anything typed, then OK.
+                    for _ in range(3):
+                        self.e.tap("B", after=0.2)
                     self.e.tap("START", after=0.4)
                     self.e.tap("A", after=0.8)
                 elif cb == "CB2_UpdatePartyMenu":

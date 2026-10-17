@@ -114,6 +114,58 @@ def save_game(d, label):
         raise drv.Stuck(f"save failed: status {status}")
 
 
+def open_start_menu_action(d, action_id):
+    """START, then move the cursor to the given start-menu action and press A."""
+    gd, sym = d.g.gdb, d.g.sym
+    d.settle()
+    d.e.tap("START", after=0.8)
+    for _ in range(12):
+        n = gd.read(sym["sNumStartMenuActions"], 1)[0]
+        cur = gd.read(sym["sStartMenuCursorPos"], 1)[0]
+        actions = list(gd.read(sym["sCurrentStartMenuActions"], 9))[:n]
+        if n and actions[cur] == action_id:
+            d.e.tap("A", after=1.5)
+            return
+        d.e.tap("DOWN", after=0.25)
+    raise drv.Stuck(f"start menu action {action_id} not found in {actions}")
+
+
+def party_swap(d, a, b):
+    """Field party menu: select slot a -> SWITCH -> slot b. Verified by order."""
+    before = [dict(m) for m in d.state().party]
+    open_start_menu_action(d, 1)  # MENU_ACTION_POKEMON
+
+    def cursor_to(target, field="pm.slotId"):
+        # In "Move to where?" the cursor is gPartyMenu.slotId2
+        # (party_menu.c GetCurrentPartySlotPtr).
+        slot_addr = d.g.sym["gPartyMenu"] + d.g.off[field]
+        for _ in range(10):
+            cur = struct.unpack("<b", d.g.gdb.read(slot_addr, 1))[0]
+            if cur == target:
+                return
+            d.e.tap("DOWN" if cur < target else "UP", after=0.25)
+        raise drv.Stuck(f"party cursor never reached {target}")
+
+    cursor_to(a)
+    d.e.tap("A", after=0.8)            # action list: SUMMARY ... SWITCH, ITEM, CANCEL
+    for _ in range(3):
+        d.e.tap("UP", after=0.2)       # wraps from SUMMARY to CANCEL, then ITEM, SWITCH
+    d.shot(f"party-switch-{a}-{b}")
+    d.e.tap("A", after=0.8)            # SWITCH: "Move to where?"
+    cursor_to(b, "pm.slotId2")
+    d.e.tap("A", after=1.5)            # swap animation
+    for _ in range(6):
+        s = d.state()
+        if d.field_ready(s):
+            break
+        d.e.tap("B", after=0.6)
+    after = d.state().party
+    want = list(before)
+    want[a], want[b] = want[b], want[a]
+    observe(d, f"party-swapped-{a}-{b}", {"order": lambda o: [(m["level"], m["maxhp"]) for m in o["party"]]
+                                          == [(m["level"], m["maxhp"]) for m in want]})
+
+
 def phase_save(d):
     save_game(d, "checkpoint")
 
@@ -441,7 +493,19 @@ def make_catch(target_party):
     return phase
 
 
-PHASES = {"buy_balls": phase_buy_balls, "catch2": make_catch(2), "catch6": make_catch(6),
+def make_train_slot(level):
+    """Train whichever Pokemon leads the party up to `level`."""
+    def phase(d):
+        n = grind_until(d, lambda d, s: lead(d, s)["level"] >= level)
+        d.log("trained", level=level, battles=n, lead=lead(d))
+        observe(d, f"lead-trained-{level}")
+    return phase
+
+
+PHASES = {"fletchling_lead": lambda d: (party_swap(d, 2, 0), party_swap(d, 2, 1)),
+          "lead_train10": make_train_slot(10), "lead_train13": make_train_slot(13),
+          "lead_train15": make_train_slot(15),
+          "buy_balls": phase_buy_balls, "catch2": make_catch(2), "catch6": make_catch(6),
           "q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_reward": phase_q2_reward,
           "gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
           "q1_reward": phase_q1_reward,

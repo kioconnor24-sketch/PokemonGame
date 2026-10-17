@@ -48,6 +48,7 @@ OFFSET_EXPRS = {
     "bm.types": "offsetof(struct BattlePokemon, types)",
     "bm.statStages": "offsetof(struct BattlePokemon, statStages)",
     "pm.slotId": "offsetof(struct PartyMenu, slotId)",
+    "pm.slotId2": "offsetof(struct PartyMenu, slotId2)",
     "typechart.elem": "sizeof(gTypeEffectivenessTable[0][0])",
     "move.size": "sizeof(struct MoveInfo)",
     "main.vblankCounter1": "offsetof(struct Main, vblankCounter1)",
