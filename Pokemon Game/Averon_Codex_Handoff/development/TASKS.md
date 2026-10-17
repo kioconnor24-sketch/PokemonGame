@@ -1,5 +1,7 @@
 # Pokémon Averon — current next-phase task queue (after accepted M1)
 
+**CURRENT OWNER-DIRECTED HANDOFF (2026-10-17):** Codex has stopped due to usage; **Claude takes over the unfinished reversible-cries audio PR #117** starting from Codex's verified remote head `852a2f6c`. Read [CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md](CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md) for exact pushed results, suspected unpushed final work, safe branch transfer, remaining real graphical QA and independent review. The owner-approved cries-OFF policy and original cries-source retention stay intact. Do not re-run the completed ROM capacity study; no sound changes are merged in main yet. After the audio lane, Claude may research a map-section/met-location architecture **without committing owner-reserved numeric IDs/save migrations**.
+
 
 **NEW OWNER AUDIO DECISION / CODEX IMPLEMENTATION PRIORITY (2026-10-17):** [Reversible cries-OFF policy](CRIES_OFF_REVERSIBLE_OWNER_POLICY_20261017.md). Owner accepts no cries **if** music/SFX and gameplay function, but insists all cry source assets stay preserved and cries-ON remains rebuildable later. Codex's [measured report](CODEX_ROM_CAPACITY_RESULTS_20261017.md) is complete; next task is the OFF cold-start null-player fix, reversible ON/OFF build paths, real native/emulator QA and linked-byte checks in a reviewed PR. **Do not delete cry files or treat the current OFF build as already safe.** The prior ROM-capacity P0 assignment is historical/completed.
 
