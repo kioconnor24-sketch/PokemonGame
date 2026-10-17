@@ -1,6 +1,6 @@
 # M1 ACCEPTANCE REPORT — pre-Sinnoh backend (Claude, 2026-10-17)
 
-**Status: DRAFT FOR OWNER DECISION.** Written by Claude, the sole active
+**Status: GRAPHICAL LANE COMPLETE — FOR OWNER DECISION.** Written by Claude, the sole active
 executor. Gameplay verdicts are Claude's own QA, with a separate read-only
 reviewer pass by a Claude subagent. **They are not third-party or independent
 Playtest approval.** Sinnoh work has not started and waits for the owner.
@@ -140,6 +140,28 @@ deepest battle/AI paths are not measured.
 | Whiteout money / heal | VERIFIED_EXISTING + graphical PASS | `whiteout money: *` (3), `native whiteout heals *` (2), Q3 |
 | Wild encounters on existing tables | VERIFIED_EXISTING | `wild encounters: *` (3) |
 
-## 7. Open owner actions and risks
+## 7. Graphical lane conclusion (Claude) and open items
 
-(Filled at the end.)
+**Graphical half: CONDITIONAL-YES.** Every Q1–Q5 case is PASS on genuine
+emulator evidence except Gym 1, which is PARTIAL only for missing on-screen
+defeat/badge text (the win, badge, save and Continue are proven). The
+quest-build evidence applies to current main (`103d05dd` game code; main
+`6140a397` adds only QA tooling), and the main ROM itself passed Continue from
+an older-ROM save, Q3, Q4 and Q5 runs. Gameplay audio is non-silent across
+field, battle and clinic, but **a human must still listen** to judge it.
+
+Tooling: #97 merged (`4153ce5a`), follow-up #108 merged (`6140a397`); #101,
+#102 merged; #20/#71 closed as superseded.
+
+Open, for the owner:
+1. **Audio listen** (owner or human tester) — not something Claude can judge.
+2. **Gym 1 text frames** — accept PARTIAL, or ask for one Gym replay with
+   longer per-message waits (owner asked not to repeat it now).
+3. **Backend half** — Codex owns the final native suite, saves and resources
+   (`CODEX_M1_NATIVE_CLOSEOUT_20261017.md`); §4–§5 here are Claude's earlier
+   reference measurements only.
+4. **POST-CONTENT** (not M1 failures): natural Field Lab access for the Q4 gift,
+   real story/legend callers, Sinnoh maps.
+
+**BACKEND_READY** is the owner's combined call after Codex's closeout. Sinnoh
+work has not started and waits for the owner's approval.
