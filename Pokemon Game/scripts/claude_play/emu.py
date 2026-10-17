@@ -36,6 +36,9 @@ OFFSET_EXPRS = {
     "main.callback2": "offsetof(struct Main, callback2)",
     "mon.size": "sizeof(struct Pokemon)",
     "box.secure": "offsetof(struct BoxPokemon, secure)",
+    "task.size": "sizeof(struct Task)",
+    "task.isActive": "offsetof(struct Task, isActive)",
+    "task.data": "offsetof(struct Task, data)",
     "box.substruct": "sizeof(union PokemonSubstruct)",
     "mon.level": "offsetof(struct Pokemon, level)",
     "mon.hp": "offsetof(struct Pokemon, hp)",
@@ -99,6 +102,7 @@ def probe_offsets(engine, workdir):
              '#include "constants/species.h"', '#include "constants/battle.h"',
              '#include "move.h"', '#include "save.h"', '#include "constants/moves.h"',
              '#include "constants/opponents.h"', '#include "party_menu.h"', '#include "fpmath.h"',
+             '#include "task.h"',
              'extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];',
              '#define P(n, v) asm volatile(".globl AVPROBE_" #n "\\n.equ AVPROBE_" #n ", %c0" :: "i"(v))',
              "void AvProbe(void)", "{"]

@@ -223,27 +223,61 @@ def debug_menu(d, rows, label):
 
 
 def pc_deposit(d, slot):
-    """Pokemon Storage via the debug 'Access PC' entry (Averon maps have no PC):
-    SOMEONE'S PC -> DEPOSIT -> party slot -> DEPOSIT -> box. Verified by party size."""
+    """DEV-ONLY ACCESS (disclosed): Averon maps have no PC, so the debug menu's
+    Access PC opens Pokemon Storage. Its menu (Gen 7 order here: MOVE, DEPOSIT,
+    WITHDRAW, MOVE ITEMS, SEE YA) and the storage cursor are driven by reading
+    the game's own state (Task_PCMainMenu data, sCursorArea/sCursorPosition);
+    nothing is written. Verified by the party shrinking by one."""
+    g, gd, sym = d.g, d.g.gdb, d.g.sym
     before = len(d.state().party)
     debug_menu(d, [1, 0], "access-pc")          # PC/Bag... -> Access PC
-    for _ in range(3):
-        d.e.tap("A", after=1.0)                 # "booted up the PC" / SOMEONE'S PC
-    d.shot("pc-storage-menu")
-    d.e.tap("DOWN", after=0.3)                  # WITHDRAW -> DEPOSIT
-    d.e.tap("A", after=2.5)                     # storage screen with the party
-    for _ in range(slot):
-        d.e.tap("DOWN", after=0.25)
-    d.shot("pc-deposit-pick")
-    d.e.tap("A", after=0.8)                     # submenu: DEPOSIT first
-    d.e.tap("A", after=0.8)                     # "Deposit in which Box?"
-    d.e.tap("A", after=2.0)                     # current box
-    d.shot("pc-deposited")
+    for _ in range(40):                          # "Storage System opened." -> menu
+        t = g.task("Task_PCMainMenu")
+        if t and t[0] == 2:                      # STATE_HANDLE_INPUT
+            break
+        if t is None:
+            d.e.tap("A", after=0.5)              # close the "opened" message
+        else:
+            time.sleep(0.3)                      # menu loading or fading in
+    else:
+        raise drv.Stuck("PC main menu never took input")
+    time.sleep(0.6)
+    d.shot("pc-menu")
+    labels = ["MOVE", "DEPOSIT", "WITHDRAW", "MOVE ITEMS", "SEE YA"]  # OW_PC_MOVE_ORDER >= GEN_7
+    deposit = labels.index("DEPOSIT")
+    for _ in range(8):
+        t = g.task("Task_PCMainMenu")
+        if t[1] == deposit:                      # tSelectedOption
+            break
+        d.e.tap("DOWN" if t[1] < deposit else "UP", after=0.35)
+    d.log("pc-menu", selected=labels[g.task("Task_PCMainMenu")[1]])
+    d.e.tap("A", after=3.0)                      # into storage, party shown
+    area_addr, pos_addr = sym["sCursorArea"], sym["sCursorPosition"]
+    for _ in range(20):
+        if struct.unpack("<b", gd.read(area_addr, 1))[0] == 1:   # CURSOR_AREA_IN_PARTY
+            break
+        time.sleep(0.3)
+    else:
+        raise drv.Stuck("storage did not open in the party area (not DEPOSIT?)")
     for _ in range(10):
+        pos = struct.unpack("<b", gd.read(pos_addr, 1))[0]
+        if pos == slot:
+            break
+        d.e.tap("DOWN" if pos < slot else "UP", after=0.35)
+    else:
+        raise drv.Stuck(f"storage cursor never reached party slot {slot}")
+    d.shot("pc-deposit-pick")
+    d.e.tap("A", after=0.9)                      # selection menu: STORE first
+    d.shot("pc-deposit-menu")
+    d.e.tap("A", after=1.2)                      # "Deposit in which BOX?"
+    d.shot("pc-deposit-box")
+    d.e.tap("A", after=2.5)                      # current box
+    d.shot("pc-deposited")
+    for _ in range(14):
         s = d.state()
         if d.field_ready(s):
             break
-        d.e.tap("B", after=0.8)
+        d.e.tap("B", after=0.9)
     observe(d, "pc-deposit", {"partyShrank": lambda o: len(o["party"]) == before - 1})
 
 

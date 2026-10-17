@@ -45,6 +45,18 @@ class Game:
         word = struct.unpack_from("<I", raw, base)[0] ^ key
         return word & 0x7FF
 
+    def task(self, func):
+        """Data words (s16[16]) of the active task running `func`, or None.
+        Read-only: lets a menu be driven by its own state and cursor."""
+        size, data = self.off["task.size"], self.off["task.data"]
+        raw = self.gdb.read(self.sym["gTasks"], 16 * size)
+        for i in range(16):
+            rec = raw[i * size:(i + 1) * size]
+            ptr = struct.unpack_from("<I", rec, 0)[0]
+            if rec[self.off["task.isActive"]] and self.func_name(ptr) == func:
+                return list(struct.unpack_from("<16h", rec, data))
+        return None
+
     def func_name(self, ptr):
         return self.by_addr.get(ptr & ~1, f"0x{ptr:08X}")
 
