@@ -378,7 +378,7 @@ class EvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
             synthetic_run(root, "r1")
-            synthetic_run(root, "r2", dev_only=True)
+            synthetic_run(root, "r2", dev_only=True, start_save="s0", end_save="s1")
             manifest = evidence.build({"PLAIN": [("r1", ["badge"])], "FIX": [("r2", ["badge"])]}, root)
             plain, fix = manifest["cases"]
             self.assertEqual(plain["scope"], "ORDINARY_PLAY")
@@ -421,6 +421,30 @@ class EvidenceTests(unittest.TestCase):
             self.assertEqual(m["cases"][0]["scope"], "DEV_FIXTURE")
             self.assertIn("inherited", m["cases"][0]["dev_fixtures"][0])
             self.assertEqual(m["cases"][1]["scope"], "ORDINARY_PLAY")
+
+    def test_a_fixture_run_that_never_saved_taints_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", dev_only=True, start_save="s0", end_save="s0")
+            synthetic_run(root, "r2", start_save="s0", end_save="s1")
+            m = evidence.build({"A": [("r2", ["badge"])]}, root)
+            self.assertEqual(m["cases"][0]["scope"], "ORDINARY_PLAY")
+
+    def test_fixture_run_without_an_end_record_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", dev_only=True, start_save="s0")  # no provenance-end
+            synthetic_run(root, "r2", start_save="s0", end_save="s0")
+            with self.assertRaises(evidence.EvidenceError):
+                evidence.build({"A": [("r2", ["badge"])]}, root)
+
+    def test_q3_party_check_allows_evolution_but_not_a_swap(self):
+        before = [dict(species=661, level=16), dict(species=659, level=5), dict(species=187, level=5)]
+        self.assertTrue(run.same_members(list(before), before))
+        self.assertTrue(run.same_members([dict(species=662, level=17)] + before[1:], before))  # evolved
+        self.assertFalse(run.same_members([before[0], before[2], before[1]], before))         # swapped
+        self.assertFalse(run.same_members([before[0], dict(species=393, level=5), before[2]], before))
+        self.assertFalse(run.same_members(before[:2], before))                                  # one missing
 
     def test_declared_fixture_save_taints_later_runs(self):
         with tempfile.TemporaryDirectory() as tmp:

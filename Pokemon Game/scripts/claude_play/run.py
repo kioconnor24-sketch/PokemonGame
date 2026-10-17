@@ -373,9 +373,18 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
                              "partyHealed": lambda o: party_fully_restored(d, o),
                              "follower": lambda o: bool(o["follower"]) and o["follower"]["species"]
                              == o["party"][0]["species"],
-                             "partySame": lambda o: [m["species"] for m in o["party"]]
-                             == [m["species"] for m in before["party"]],
+                             # Same members: a level-up evolution in the loss battles is
+                             # legitimate (run54: Fletchling Lv16 -> Fletchinder Lv17).
+                             "partySame": lambda o: same_members(o["party"], before["party"]),
                              "moneyLost": lambda o: o["money"] < before["money"]})
+
+
+def same_members(after, before):
+    """The same party slot by slot: same species at no lower level, or a
+    higher level (a level-up evolution changes the species)."""
+    return len(after) == len(before) and all(
+        a["species"] == b["species"] and a["level"] >= b["level"] or a["level"] > b["level"]
+        for a, b in zip(after, before))
 
 
 def party_fully_restored(d, o):

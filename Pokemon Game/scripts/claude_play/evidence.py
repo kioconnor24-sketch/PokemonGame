@@ -61,7 +61,7 @@ def save_taint(root, seeds=None):
     """{save sha256: origin} for every flash save that a DEV fixture touched.
 
     A run is tainted if it used the debug menu itself or started from a
-    tainted save; its end save is then tainted too. Saves carry state from
+    tainted save; a save it then writes is tainted too. Saves carry state from
     one process to the next, so a fixture taints every later run on that
     chain, not only the run that used it. `seeds` declares out-of-game
     fixtures (e.g. a deliberately damaged save copy)."""
@@ -71,15 +71,21 @@ def save_taint(root, seeds=None):
     for run in sorted(p for p in root.iterdir() if (p / "provenance-start.json").is_file()):
         start = json.loads((run / "provenance-start.json").read_text()).get("save_sha256")
         end_path = run / "provenance-end.json"
-        end = json.loads(end_path.read_text()).get("save_sha256") if end_path.is_file() else start
         own = dev_fixtures(run) if (run / "events.jsonl").is_file() else []
+        if not end_path.is_file() and own:
+            # It may have saved before it died: its end save is unknown.
+            raise EvidenceError(f"{run}: used a DEV fixture but has no provenance-end.json")
+        end = json.loads(end_path.read_text()).get("save_sha256") if end_path.is_file() else start
         runs.append((run.name, start, end, own))
     changed = True
     while changed:
         changed = False
         for name, start, end, own in runs:
             origin = (f"{name}: {', '.join(own)}" if own else tainted.get(start))
-            if origin and end and end not in tainted:
+            # Only a save the run actually wrote carries its fixtures: a run
+            # that used the debug menu but never saved leaves the flash file
+            # (and so the next run's start) exactly as it found it.
+            if origin and end and end != start and end not in tainted:
                 tainted[end] = origin
                 changed = True
     return tainted
