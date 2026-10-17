@@ -66,7 +66,8 @@
         "cross-system Save/Continue and regional badge/field/cap native regressions",
         "unclaimed general field, follower and UI implementation defects"
       ],
-      "resume_when": "A concrete missing M1 regional behavior or failing test is reproduced; normal guarded PR integration follows source review"
+      "resume_when": "A concrete missing M1 regional behavior or failing test is reproduced; normal guarded PR integration follows source review",
+      "implementation_merged": true
     },
     {
       "id": "SCRIPTED-BATTLE",
@@ -75,7 +76,7 @@
       "deps": [
         "QUEST"
       ],
-      "requires_handoff": false,
+      "requires_handoff": true,
       "qa_cases": [
         "SB-LOSS",
         "SB-CLEANUP"
@@ -160,7 +161,8 @@
       ],
       "resume_when": "A concrete unverified M1 invariant, reproducible defect or missing check is found",
       "next": "Core and held-EXP ownership repair already merged via #48. Claude has sole M1 production authority to address remaining proved species/forms/evolution/follower/AI/EXP/cap/breeding/PC/field gaps using local ARM+mGBA and native tests; never rewrite already merged work.",
-      "issue": 46
+      "issue": 46,
+      "implementation_merged": true
     },
     {
       "id": "REGION-PLATFORM",
@@ -177,7 +179,8 @@
       ],
       "resume_when": "A concrete source-backed M1 engine/platform gap needs a fix; no creative map authoring",
       "next": "Region map/object/Fly/warp capacity safeguards already largely merged. Claude may independently repair any proven remaining map-independent navigation, collision, event/flag registry, field permission or ROM-memory issue. Use existing maps/symbolic IDs only.",
-      "issue": 46
+      "issue": 46,
+      "implementation_merged": true
     },
     {
       "id": "M1-BACKEND-CLOSEOUT",
