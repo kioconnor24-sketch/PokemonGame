@@ -107,12 +107,21 @@ def save_game(d, label):
     # run17's capture 1.0 s after A caught it blank, so wait longer.
     d.e.tap("A", after=2.5)
     d.shot(f"save-confirm-{label}")
-    for _ in range(40):
+    # The info box sometimes draws late (seen blank indoors): keep a few more
+    # frames, and one per dialogue step, so the box and "saved the game" text
+    # are on record.
+    for n in range(2):
+        time.sleep(0.8)
+        d.shot(f"save-confirm-{label}-{n + 2}")
+    for step in range(40):
         cb = g.func_name(struct.unpack("<I", gd.read(sym["sSaveDialogCallback"], 4))[0])
         s = d.state()
         if d.field_ready(s):
             break
         d.e.tap("A", after=0.6)
+        if step < 8:
+            time.sleep(0.6)
+            d.shot(f"save-step-{label}-{step + 1:02d}")
     status = gd.read(sym["gSaveAttemptStatus"], 1)[0]
     d.log("saved", label=label, status=status, ok=status == g.c["SAVE_STATUS_OK"])
     d.shot(f"saved-{label}")
