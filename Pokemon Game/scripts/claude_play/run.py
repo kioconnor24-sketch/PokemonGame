@@ -166,6 +166,49 @@ def party_swap(d, a, b):
                                           == [(m["level"], m["maxhp"]) for m in want]})
 
 
+def debug_menu(d, rows, label):
+    """DEV-ONLY ACCESS (disclosed in evidence): R+START opens the expansion
+    debug menu; each entry of `rows` is a row index to select with A."""
+    d.settle()
+    d.e.key("R", True)
+    time.sleep(0.5)
+    d.e.tap("START", hold=0.14, after=0.35)
+    d.e.key("R", False)
+    time.sleep(0.8)
+    d.shot(f"debug-{label}-root")
+    for depth, row in enumerate(rows):
+        for _ in range(row):
+            d.e.tap("DOWN", after=0.25)
+        d.shot(f"debug-{label}-{depth}")
+        d.e.tap("A", after=1.0)
+    d.log("debug-menu", label=label, rows=rows, dev_only=True)
+
+
+def pc_deposit(d, slot):
+    """Pokemon Storage via the debug 'Access PC' entry (Averon maps have no PC):
+    SOMEONE'S PC -> DEPOSIT -> party slot -> DEPOSIT -> box. Verified by party size."""
+    before = len(d.state().party)
+    debug_menu(d, [1, 0], "access-pc")          # PC/Bag... -> Access PC
+    for _ in range(3):
+        d.e.tap("A", after=1.0)                 # "booted up the PC" / SOMEONE'S PC
+    d.shot("pc-storage-menu")
+    d.e.tap("DOWN", after=0.3)                  # WITHDRAW -> DEPOSIT
+    d.e.tap("A", after=2.5)                     # storage screen with the party
+    for _ in range(slot):
+        d.e.tap("DOWN", after=0.25)
+    d.shot("pc-deposit-pick")
+    d.e.tap("A", after=0.8)                     # submenu: DEPOSIT first
+    d.e.tap("A", after=0.8)                     # "Deposit in which Box?"
+    d.e.tap("A", after=2.0)                     # current box
+    d.shot("pc-deposited")
+    for _ in range(10):
+        s = d.state()
+        if d.field_ready(s):
+            break
+        d.e.tap("B", after=0.8)
+    observe(d, "pc-deposit", {"partyShrank": lambda o: len(o["party"]) == before - 1})
+
+
 def phase_save(d):
     save_game(d, "checkpoint")
 
