@@ -5,6 +5,7 @@ on:
       - "Pokemon Game/scripts/coordination/**"
       - "Pokemon Game/scripts/tests/test_agent_*.py"
       - "Pokemon Game/scripts/tests/test_qa_frame_gate.py"
+      - "Pokemon Game/scripts/tests/test_m1_evidence_reporting.py"
       - ".github/workflows/averon-agent-*.yml"
       - ".github/workflows/averon-shared-file-guard.yml"
       - ".github/workflows/averon-integration-rehearsal.yml"
@@ -16,6 +17,7 @@ on:
       - "Pokemon Game/scripts/coordination/**"
       - "Pokemon Game/scripts/tests/test_agent_*.py"
       - "Pokemon Game/scripts/tests/test_qa_frame_gate.py"
+      - "Pokemon Game/scripts/tests/test_m1_evidence_reporting.py"
       - ".github/workflows/averon-agent-*.yml"
       - ".github/workflows/averon-shared-file-guard.yml"
       - ".github/workflows/averon-integration-rehearsal.yml"
@@ -37,11 +39,13 @@ jobs:
         run: |
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_agent_*.py" -v
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_qa_frame_gate.py" -v
+          python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_m1_evidence_reporting.py" -v
       - name: Validate disposable integration runner shell syntax
         run: |
           bash -n "Pokemon Game/scripts/coordination/run_combined_build.sh"
           bash -n "Pokemon Game/scripts/coordination/package_local_playtest.sh"
           python3 -m py_compile "Pokemon Game/scripts/coordination/verify_build_readiness.py"
+          python3 -m py_compile "Pokemon Game/scripts/coordination/toolchain_manifest.py" "Pokemon Game/scripts/coordination/qa_evidence_report.py"
       - name: Render actual task registry with synthetic safe GitHub state
         run: |
           python3 - <<'PY'
