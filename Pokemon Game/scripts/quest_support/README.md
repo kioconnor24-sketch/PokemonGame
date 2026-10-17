@@ -36,12 +36,39 @@ alone integrates. Nothing here approves #14 or #25.
 | Q3 clinic entry (#71 expectation) | `QA_Q3_SOURCE_HEAL_WARP_PRESENT`: inside clinic (75,11); saved heal = (75,9) x17 y13 warp -1 = `HEAL_LOCATION_ALDERFIELD` |
 | Q3 Elio battle | real battle, 80 ordinary A presses; `QA_Q3_ORIGINAL_BATTLE_EXIT_NO_BADGE` |
 | **Q3 whiteout destination** | **NEW:** frame `q3-play-x-002` reads "…scurried to a POKéMON CENTER, protecting the exhausted and fainted POKéMON…"; read-only position right after = map **(75,11) x7 y4**, the `respawn_map`/`respawn_x`/`respawn_y` of `HEAL_LOCATION_ALDERFIELD` in `src/data/heal_locations.json`. Badge01 stays false, party count 1. |
-| Nurse heal dialogue | **NOT OBSERVED** (observer defect, below) |
-| Q3 Save + Continue at clinic | **NOT DONE**: the flash still holds the Q2 slot (counter 1, map 75/6 x19 y14) |
+| Nurse heal dialogue | Run 1: **NOT OBSERVED** (observer defects 1–2, below). Run 2: **OBSERVED**, see below |
+| Q3 Save + Continue at clinic | **NOT DONE** in either run: the flash still holds the Q2 slot (counter 1, map 75/6 x19 y14) |
 
 In short, the run shows a genuine Elio defeat followed by a whiteout respawn at
 the clinic's source-defined respawn tile. It does **not** show nurse healing
 or Save/Continue at the clinic.
+
+**Run 2 (2026-10-17, same ROM `ea245cde…`, same #71 head, observer `7770455e`):**
+the workflow step was unchanged, followed by the observer with defects 1–2
+fixed. Ordinary input only; read-only GDB.
+
+- `q3-play-x-002` and `-003` show the whiteout text, white on black at 0.965
+  and 0.922 black. A advanced it, and the position read (75,11) x7 y4.
+- `q3-play-x-004` to `-013` show the source after-whiteout nurse script
+  (`EventScript_AfterWhiteOutHeal`) in the lit clinic, with the player in
+  front of the nurse. The text, advanced only with A, read:
+  "First, you should restore your POKéMON to full health." →
+  "Your POKéMON have been healed to perfect health." →
+  "If your POKéMON's energy, HP, is down, please come see us." →
+  "If you're planning to go far in the field, you should buy some POTIONS
+  at the POKéMON MART." → "We hope you excel!" Badge01 stayed false and the
+  party count stayed 1.
+- `q3-play-x-014` is the idle clinic field. The lit floor reads 0.33 on the
+  shared panel crop (defect 3), so the observer pressed A, re-talked to the
+  nurse and repeated ordinary heal conversations until its 90-frame limit.
+  Its Start press then landed in an open text box (`save-q3x-save-open.png`
+  shows a text box and no Start menu). The stale menu globals passed the
+  menu check, and the step stopped with `SAVE confirm callback never
+  observed`. Nothing was saved; flash sha256 `2dfa3d1c…` still decodes to
+  the Q2 slot.
+- Not measured: party HP. The read-only probe has no HP field, so "healed"
+  rests on the game's own message above. HP also returns through the
+  whiteout itself (`HealPlayerParty` in `overworld.c`).
 
 **Observer defects (`q3_post_battle_observer.py` as run):**
 1. Its text detector only looks for the white dialogue box. The whiteout
@@ -52,6 +79,14 @@ or Save/Continue at the clinic.
    party-screen step raised. The Q4 developer gift gives a Pokémon without
    the normal "has Pokémon" unlock. That is a fixture property, not a claimed
    game defect. Skip the party screen when action 1 is absent.
+3. (Run 2) The clinic floor reads 0.33 on the panel crop, above the generic
+   0.30 field threshold, while clinic text boxes read 0.85–1.00. The
+   observer now treats only > 0.60 as text and stops if the clinic never
+   goes idle. Before trusting the menu globals it requires a visible Start
+   window (0.90 bright when open, ≤ 0.23 in every other calibration frame).
+
+Defects 1–2 were fixed in `7770455e`, defect 3 in `a6c32659`. A run with
+`a6c32659` (nurse → clinic Save → relaunch → Continue) is still pending.
 
 **Reproduce:** build the ROM at the #71 head, then run the workflow step with
 `RUNNER_TEMP` set. After the Q3 block, call:
