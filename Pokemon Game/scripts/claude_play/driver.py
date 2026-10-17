@@ -169,6 +169,65 @@ class Driver:
             mid, pos = self.here()
             self.log("map", map=mid, pos=pos)
 
+    # -- map graph travel ------------------------------------------------------
+    def warp_push(self, m, tile):
+        b = m.behavior(*tile)
+        for word, d in (("SOUTH", "down"), ("NORTH", "up"), ("EAST", "right"), ("WEST", "left")):
+            if word + "_ARROW" in b:
+                return d
+        return "up" if "DOOR" in b else "down"
+
+    def map_route(self, src, dst):
+        """Breadth-first route over map connections and warps."""
+        from collections import deque
+        prev = {src: None}
+        q = deque([src])
+        while q:
+            cur = q.popleft()
+            if cur == dst:
+                break
+            m = self.w.map(cur)
+            legs = [((cur, "edge", d), other) for d, other, _ in m.connections if mapdata.edge_exits(m, d)]
+            legs += [((cur, "warp", (x, y), self.warp_push(m, (x, y))), dest) for x, y, dest, _ in m.warps
+                     if dest in self.w.map_ids]
+            for leg, nxt in legs:
+                if nxt not in prev:
+                    prev[nxt] = (cur, leg)
+                    q.append(nxt)
+        if dst not in prev:
+            raise Stuck(f"no map route {src} -> {dst}")
+        route = []
+        node = dst
+        while prev[node]:
+            node, leg = prev[node]
+            route.append(leg)
+        return route[::-1]
+
+    def travel_to(self, dst, on_event=None):
+        on_event = on_event or (lambda s: self.battle())
+        for _ in range(12):
+            mid, _ = self.here()
+            if mid == dst:
+                return
+            for leg in self.map_route(mid, dst):
+                self.go_map([leg], on_event=on_event)
+                if self.here()[0] != leg[0] and self.here()[0] == dst:
+                    return
+                if self.state().in_battle:
+                    self.battle()
+        if self.here()[0] != dst:
+            raise Stuck(f"could not travel to {dst}")
+
+    def heal_at_clinic(self):
+        """Alderfield clinic nurse across the counter: stand at (7,4), face up, A, YES."""
+        self.travel_to("MAP_ALDERFIELDCLINIC")
+        self.walk_path("MAP_ALDERFIELDCLINIC", {(7, 4)})
+        self.e.tap("UP", hold=0.05, after=0.3)
+        self.e.tap("A", after=0.6)
+        s = self.clear_text()
+        self.log("healed", party=s.party)
+        return s
+
     def talk(self, map_id, npc, answer_yes=True):
         """Stand next to the NPC tile, face it and press A."""
         m = self.w.map(map_id)
@@ -209,7 +268,11 @@ class Driver:
         shots = 0
         last = None
         idle = 0
-        first = self.state()
+        for _ in range(100):
+            first = self.state()
+            if first.in_battle and first.mons:
+                break
+            time.sleep(0.1)
         self.log("battle-start", flags=hex(first.battle_flags or 0),
                  foe=[(m["species"], m["level"]) for m in (first.mons or [])[1:2]],
                  me=[(m["species"], m["level"], m["hp"]) for m in (first.mons or [])[:1]])

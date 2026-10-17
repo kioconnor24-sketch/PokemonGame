@@ -134,7 +134,61 @@ def phase_to_alderfield(d):
     d.shot("alderfield")
 
 
-PHASES = {"opening": phase_opening, "save": phase_save, "to_alderfield": phase_to_alderfield}
+def lead(d, s=None):
+    s = s or d.state()
+    return s.party[0] if s.party else dict(level=0, hp=0, maxhp=1)
+
+
+def wild_low_hp(d):
+    def run_if(s):
+        trainer = s.battle_flags & d.g.c["BATTLE_TYPE_TRAINER"]
+        me = s.mons[0]
+        return not trainer and me["hp"] * 100 < me["maxhp"] * 35
+    return run_if
+
+
+def grind_until(d, done, map_id="MAP_ORCHARDLANE", tiles=((27, 8), (28, 8)), heal_below=45):
+    """Pace on grass with ordinary steps; fight wild Pokemon; heal at the clinic."""
+    battles = 0
+    while True:
+        s = d.state()
+        if done(d, s):
+            return battles
+        mon = lead(d, s)
+        if mon["hp"] * 100 < mon["maxhp"] * heal_below:
+            d.heal_at_clinic()
+            continue
+        mid, pos = d.here(s)
+        if mid != map_id or pos not in tiles:
+            d.travel_to(map_id)
+            d.walk_path(map_id, set(tiles), on_event=lambda s: d.battle(run_if=wild_low_hp(d)))
+            continue
+        other = tiles[1] if pos == tiles[0] else tiles[0]
+        direction = next(k for k, v in mapdata.DIRS.items() if (pos[0] + v[0], pos[1] + v[1]) == other)
+        d.step(direction)
+        for _ in range(8):
+            time.sleep(0.08)
+            s = d.state()
+            if s.in_battle or s.cb2 != "CB2_Overworld":
+                break
+        if s.in_battle or s.cb2 != "CB2_Overworld":
+            d.battle(run_if=wild_low_hp(d), label=f"wild{battles:03d}")
+            battles += 1
+            d.log("lead", **lead(d))
+
+
+def make_train(level):
+    def phase(d):
+        n = grind_until(d, lambda d, s: lead(d, s)["level"] >= level)
+        d.log("trained", level=level, battles=n, lead=lead(d))
+        d.shot(f"trained-{level}")
+    return phase
+
+
+PHASES = {"train8": make_train(8), "train10": make_train(10), "train12": make_train(12),
+          "train13": make_train(13), "train14": make_train(14), "train15": make_train(15),
+          "heal": lambda d: d.heal_at_clinic(),
+          "opening": phase_opening, "save": phase_save, "to_alderfield": phase_to_alderfield}
 
 
 def main():
