@@ -88,6 +88,7 @@ static void ExpectHealedParty(void)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
         EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), sPartySpecies[slot]);
+        EXPECT_GT(GetMonData(mon, MON_DATA_MAX_HP), 0);
         EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
         EXPECT_EQ(GetMonData(mon, MON_DATA_STATUS), 0);
         EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1), MOVE_TACKLE);
@@ -126,6 +127,8 @@ static void ExerciseWhiteoutFlash(u32 healer, u32 map, s32 x, s32 y)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
         CreateMon(mon, sPartySpecies[slot], 10, slot, OTID_STRUCT_PLAYER_ID);
+        CalculateMonStats(mon);
+        EXPECT_GT(GetMonData(mon, MON_DATA_HP), 0);
         SetMonData(mon, MON_DATA_MOVE1, &move);
         SetMonData(mon, MON_DATA_HELD_ITEM, &sHeldItems[slot]);
     }
@@ -161,6 +164,8 @@ static void ExerciseWhiteoutFlash(u32 healer, u32 map, s32 x, s32 y)
     EnterSaltmere();
     ZeroPlayerPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), 0);
     CalculatePlayerPartyCount();
     EXPECT_EQ(FollowerSpecies(), SPECIES_BULBASAUR);
     AveronRegionSave_InitNewGame();
