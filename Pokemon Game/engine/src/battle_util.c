@@ -3775,6 +3775,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     gLastUsedItem = gLastUsedBall;
                     gBattleScripting.battler = battler;
                     gBattleMons[battler].item = gLastUsedItem;
+                    GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler])->heldOrigin = HELD_ITEM_ORIGIN_NONE;
                     BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
                     MarkBattlerForControllerExec(battler);
                     gHasFetchedBall = TRUE;
@@ -9319,33 +9320,117 @@ void SetItemsToRestoreAfterBattle(enum BattleTrainer trainer, u32 partySlot)
     struct LostItem *lostItem = GetLostItemState(trainer, partySlot);
     lostItem->originalItem = GetMonData(&gParties[trainer][partySlot], MON_DATA_HELD_ITEM);
     lostItem->restoreAfterBattle = B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || B_TRAINERS_KNOCK_OFF_ITEMS;
+    lostItem->heldOrigin = lostItem->originalItem == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : trainer * PARTY_SIZE + partySlot;
+    lostItem->usedOrigin = HELD_ITEM_ORIGIN_NONE;
+    lostItem->preservedElsewhere = FALSE;
+}
+
+// Origins identify actual item copies, so separate wild loot with the same
+// item ID can never be mistaken for a teammate's original held item.
+static bool32 IsHeldItemOriginPresent(u32 origin)
+{
+    // Uncaptured NPC parties disappear after battle. Their copies must not
+    // prevent restoration into the player's persistent inventory.
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (GetLostItemState(B_TRAINER_PLAYER, slot)->heldOrigin == origin
+         && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) != ITEM_NONE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void ReturnTransferredPlayerItems(void)
+{
+    // Exchanges put an original back without discarding the displaced item.
+    // Revisit slots freed by later returns, including chains of donated Berries.
+    for (u32 round = 0; round < PARTY_SIZE; round++)
+    {
+        for (u32 berryPass = FALSE; berryPass <= TRUE; berryPass++)
+        {
+            for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            {
+                struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+                struct LostItem *state = GetLostItemState(B_TRAINER_PLAYER, slot);
+                enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+                enum Item none = ITEM_NONE;
+                u32 origin = state->heldOrigin;
+
+                if (item == ITEM_NONE || origin == HELD_ITEM_ORIGIN_NONE || origin == slot)
+                    continue;
+
+                enum BattleTrainer owner = origin / PARTY_SIZE;
+                u32 ownerSlot = origin % PARTY_SIZE;
+                if (owner != B_TRAINER_PLAYER && owner != B_TRAINER_PARTNER)
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                    {
+                        SetMonData(mon, MON_DATA_HELD_ITEM, &none);
+                        state->heldOrigin = HELD_ITEM_ORIGIN_NONE;
+                    }
+                    continue; // a wild Pokemon's item is legitimate loot
+                }
+
+                struct LostItem *ownerState = GetLostItemState(owner, ownerSlot);
+                struct Pokemon *ownerMon = &gParties[owner][ownerSlot];
+                enum Item displaced = GetMonData(ownerMon, MON_DATA_HELD_ITEM);
+                u32 displacedOrigin = ownerState->heldOrigin;
+                if ((GetItemPocket(item) == POCKET_BERRIES) != berryPass)
+                    continue;
+                if (!berryPass && !ownerState->stolen && !ownerState->restoreAfterBattle)
+                    continue;
+                if (displaced != ITEM_NONE)
+                {
+                    // Preserve newly acquired loot on its actual holder, and
+                    // leave the borrowed original elsewhere instead of cloning it.
+                    if (berryPass || displacedOrigin == HELD_ITEM_ORIGIN_NONE
+                     || (displacedOrigin / PARTY_SIZE != B_TRAINER_PLAYER
+                      && displacedOrigin / PARTY_SIZE != B_TRAINER_PARTNER))
+                        continue;
+                }
+                SetMonData(ownerMon, MON_DATA_HELD_ITEM, &item);
+                ownerState->heldOrigin = origin;
+                SetMonData(mon, MON_DATA_HELD_ITEM, &displaced);
+                state->heldOrigin = displaced == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : displacedOrigin;
+            }
+        }
+    }
 }
 
 void TryRestoreHeldItems(void)
 {
+    ReturnTransferredPlayerItems();
+
     for (enum BattleTrainer trainer = 0; trainer < gBattlersCount; trainer++)
     {
         for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
         {
             struct LostItem *lostItem = GetLostItemState(trainer, partySlot);
-            enum Item originaItem = lostItem->originalItem;
+            enum Item originalItem = lostItem->originalItem;
+            u32 origin = trainer * PARTY_SIZE + partySlot;
 
             if (lostItem->wildItemPending)
             {
-                AddBagItem(originaItem, 1);
+                if (AddBagItem(originalItem, 1))
+                    lostItem->wildItemPending = FALSE;
                 continue;
             }
-
-            if (!lostItem->stolen && !lostItem->restoreAfterBattle)
+            if ((!lostItem->stolen && !lostItem->restoreAfterBattle)
+             || originalItem == ITEM_NONE || GetItemPocket(originalItem) == POCKET_BERRIES
+             || lostItem->preservedElsewhere || IsHeldItemOriginPresent(origin))
                 continue;
 
-            if (originaItem == ITEM_NONE)
+            struct Pokemon *mon = &gParties[trainer][partySlot];
+            if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
+            {
+                // Prefer preserving a real newly acquired item over overwriting
+                // it. If the Bag is full, the consumed original cannot be restored.
+                if (trainer == B_TRAINER_PLAYER && AddBagItem(originalItem, 1))
+                    lostItem->preservedElsewhere = TRUE;
                 continue;
-
-            if (GetItemPocket(originaItem) == POCKET_BERRIES)
-                continue;
-
-            SetMonData(&gParties[trainer][partySlot], MON_DATA_HELD_ITEM, &originaItem);
+            }
+            SetMonData(mon, MON_DATA_HELD_ITEM, &originalItem);
+            lostItem->heldOrigin = origin;
         }
     }
 }
@@ -9353,17 +9438,43 @@ void TryRestoreHeldItems(void)
 void RestoreCaughtWildMonHeldItem(struct Pokemon *mon, enum BattlerId battler)
 {
     struct LostItem *lostItem = GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler]);
+    enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u32 origin = lostItem->heldOrigin;
 
-    if (GetMonData(mon, MON_DATA_HELD_ITEM) != lostItem->originalItem)
+    // Only remove a borrowed item that will really be restored elsewhere.
+    // Donated Berries are not automatically restored and must survive capture.
+    if (item != ITEM_NONE && origin != HELD_ITEM_ORIGIN_NONE)
     {
-        enum Item itemToRestore = ITEM_NONE;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &itemToRestore);
+        enum BattleTrainer owner = origin / PARTY_SIZE;
+        struct LostItem *ownerState = GetLostItemState(owner, origin % PARTY_SIZE);
+        if ((owner == B_TRAINER_PLAYER || owner == B_TRAINER_PARTNER)
+         && GetItemPocket(item) != POCKET_BERRIES
+         && (ownerState->stolen || ownerState->restoreAfterBattle))
+        {
+            struct Pokemon *ownerMon = &gParties[owner][origin % PARTY_SIZE];
+            enum Item displaced = GetMonData(ownerMon, MON_DATA_HELD_ITEM);
+            u32 caughtOrigin = GetBattlerTrainer(battler) * PARTY_SIZE + gBattlerPartyIndexes[battler];
+            // Trick can leave the donor holding this caught Pokemon's own
+            // original item. Exchange those real copies, but never overwrite
+            // unrelated loot, even when its item ID happens to match.
+            if (displaced == ITEM_NONE || ownerState->heldOrigin == caughtOrigin)
+            {
+                SetMonData(ownerMon, MON_DATA_HELD_ITEM, &item);
+                ownerState->heldOrigin = origin;
+                item = displaced;
+                SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+                lostItem->heldOrigin = item == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : caughtOrigin;
+            }
+        }
     }
 
-    if (lostItem->wildItemPending)
+    // If the caught Pokemon now holds a donated Berry, keep the pending wild
+    // item for normal Bag delivery rather than overwrite the Berry with it.
+    if (lostItem->wildItemPending && item == ITEM_NONE)
     {
-        enum Item itemToRestore = lostItem->originalItem;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &itemToRestore);
+        item = lostItem->originalItem;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+        lostItem->heldOrigin = GetBattlerTrainer(battler) * PARTY_SIZE + gBattlerPartyIndexes[battler];
         lostItem->wildItemPending = FALSE;
     }
 }
@@ -10238,6 +10349,10 @@ bool32 TrySymbiosis(enum BattlerId battler, enum Item itemId, const u8 *nextInst
 // Used by Bestow and Symbiosis to take an item from one battler and give to another.
 void BestowItem(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
+    struct LostItem *giver = GetLostItemState(GetBattlerTrainer(battlerAtk), gBattlerPartyIndexes[battlerAtk]);
+    struct LostItem *receiver = GetLostItemState(GetBattlerTrainer(battlerDef), gBattlerPartyIndexes[battlerDef]);
+    receiver->heldOrigin = giver->heldOrigin;
+    giver->heldOrigin = HELD_ITEM_ORIGIN_NONE;
     gLastUsedItem = gBattleMons[battlerAtk].item;
 
     gBattleMons[battlerAtk].item = ITEM_NONE;

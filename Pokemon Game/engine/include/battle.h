@@ -478,13 +478,24 @@ struct BattleGimmickData
     bool8 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
 };
 
+#define HELD_ITEM_ORIGIN_NONE 31
+
 struct LostItem
 {
     enum Item originalItem;
     u16 stolen:1;
     u16 restoreAfterBattle:1;
     u16 wildItemPending:1;
+    // Volatile provenance of the currently held and last recyclable items.
+    // Values 0..23 identify an original trainer/party slot; 31 is a new item
+    // or no item. Transfers copy the origin, never infer it from item type.
+    u16 heldOrigin:5;
+    u16 usedOrigin:5;
+    u16 preservedElsewhere:1; // original item delivered to the Bag or a PC mon
 };
+
+STATIC_ASSERT(sizeof(struct LostItem) == 4, LostItemSizeMustRemainUnchanged)
+STATIC_ASSERT(MAX_BATTLE_TRAINERS * PARTY_SIZE < HELD_ITEM_ORIGIN_NONE, HeldItemOriginsMustFit)
 
 struct BattleVideo {
     u32 battleTypeFlags;

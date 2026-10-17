@@ -92,7 +92,18 @@ class NativeBaselineTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 check.parse_baseline(f'{status} | r | name\n')
         self.assertEqual(check.parse_baseline('CRASH x3 | r | name\n'),
-                         {'name': ('CRASH', 3, 'r')})
+                         {'name': (frozenset({'CRASH'}), 3, 'r')})
+        with self.assertRaises(ValueError):
+            check.parse_baseline('TIMEOUT/PASS | r | name\n')
+
+    def test_either_status_is_accepted_when_listed(self):
+        baseline = BASELINE + 'TIMEOUT/FAIL | gimmick-disabled | Flaky\n'
+        for status in ('TIMEOUT', 'FAIL'):
+            text = log(('Tera thing', 'FAIL'), ('Z-Move thing', 'INVALID'), *SHARED, ('Flaky', status))
+            self.assertEqual(check.compare(text, baseline), [])
+        text = log(('Tera thing', 'FAIL'), ('Z-Move thing', 'INVALID'), *SHARED, ('Flaky', 'CRASH'))
+        self.assertEqual(check.compare(text, baseline),
+                         ['STATUS CHANGED FAIL/TIMEOUT -> CRASH (was gimmick-disabled): Flaky'])
 
     def test_committed_baseline_is_valid_and_explained(self):
         entries = check.parse_baseline(check.BASELINE.read_text())
