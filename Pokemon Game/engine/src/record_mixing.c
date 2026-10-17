@@ -129,6 +129,13 @@ static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *);
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *);
 static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *);
 
+#if TESTING
+TaskFunc Test_GetRecordMixingSaveTask(void)
+{
+    return Task_DoRecordMixing;
+}
+#endif
+
 static const u8 sPlayerIdxOrders_2Player[] = {1, 0};
 
 static const u8 sPlayerIdxOrders_3Player[][3] =

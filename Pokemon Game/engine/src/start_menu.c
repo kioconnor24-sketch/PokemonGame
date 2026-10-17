@@ -145,6 +145,13 @@ static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
+#if TESTING
+TaskFunc Test_GetSaveAfterLinkBattleTask(void)
+{
+    return Task_SaveAfterLinkBattle;
+}
+#endif
+
 static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .bg = 0,
     .tilemapLeft = 1,
