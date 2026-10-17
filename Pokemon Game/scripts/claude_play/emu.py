@@ -35,6 +35,8 @@ OFFSET_EXPRS = {
     "sb2.encryptionKey": "offsetof(struct SaveBlock2, encryptionKey)",
     "main.callback2": "offsetof(struct Main, callback2)",
     "mon.size": "sizeof(struct Pokemon)",
+    "box.secure": "offsetof(struct BoxPokemon, secure)",
+    "box.substruct": "sizeof(union PokemonSubstruct)",
     "mon.level": "offsetof(struct Pokemon, level)",
     "mon.hp": "offsetof(struct Pokemon, hp)",
     "mon.maxHP": "offsetof(struct Pokemon, maxHP)",

@@ -79,6 +79,40 @@ class SymbolTests(unittest.TestCase):
         self.assertEqual(g.func_name(0x080581A1), "HandleInputChooseAction")
 
 
+class SpeciesDecodeTests(unittest.TestCase):
+    """SYNTHETIC encrypted Pokemon: the decode must use the order table and key."""
+
+    def make(self, personality, ot_id, species, order):
+        secure, size = 32, 12
+        raw = bytearray(100)
+        struct.pack_into("<II", raw, 0, personality, ot_id)
+        # Substruct 0 holds species (11 bits) + tera type; fill every other
+        # word with a different value so a wrong slot or key is caught.
+        for slot in range(4):
+            for w in range(size // 4):
+                struct.pack_into("<I", raw, secure + slot * size + w * 4, 0x0000ABCD + slot)
+        struct.pack_into("<I", raw, secure + order[personality % 24] * size, (5 << 11) | species)
+        key = personality ^ ot_id
+        for off in range(secure, secure + 4 * size, 4):
+            struct.pack_into("<I", raw, off, struct.unpack_from("<I", raw, off)[0] ^ key)
+        return bytes(raw)
+
+    def test_species_follows_personality_order_and_key(self):
+        import game
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = pathlib.Path(tmp) / "rom.gba"
+            order = bytes((i * 7 + 1) % 4 for i in range(24))
+            rom.write_bytes(bytes(0x100) + order)
+            g = game.Game.__new__(game.Game)
+            g.emu = type("E", (), {"rom": rom})()
+            g.sym = {"sSubstructOffsets": 0x08000100}
+            g.off = {"box.secure": 32, "box.substruct": 12}
+            for personality, ot_id, species in ((0x1234FEDC, 0xA1B2C3D4, 202), (25, 0, 393), (7, 7, 661)):
+                raw = self.make(personality, ot_id, species, order)
+                self.assertEqual(g.box_species(raw), species)
+            self.assertEqual(g.box_species(bytes(100)), 0)  # empty slot
+
+
 class RomTableTests(unittest.TestCase):
     """Reads the real built ROM when one is present next to the engine."""
 

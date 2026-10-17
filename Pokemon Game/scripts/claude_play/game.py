@@ -27,6 +27,24 @@ class Game:
     def _u(self, fmt, addr):
         return struct.unpack(fmt, self.gdb.read(addr, struct.calcsize(fmt)))
 
+    def box_species(self, raw):
+        """Species of a party Pokemon, decoded read-only like GetSubstruct():
+        the secure words are XORed with otId ^ personality, and substruct 0
+        (species in its low 11 bits) sits where sSubstructOffsets[0][p % 24]
+        says. The table is read from the ROM file."""
+        if not hasattr(self, "_substruct_order"):
+            addr = self.sym["sSubstructOffsets"] - 0x08000000
+            with open(self.emu.rom, "rb") as f:
+                f.seek(addr)
+                self._substruct_order = f.read(24)
+        personality, ot_id = struct.unpack_from("<II", raw, 0)
+        if not personality and not ot_id:
+            return 0
+        base = self.off["box.secure"] + self._substruct_order[personality % 24] * self.off["box.substruct"]
+        key = personality ^ ot_id
+        word = struct.unpack_from("<I", raw, base)[0] ^ key
+        return word & 0x7FF
+
     def func_name(self, ptr):
         return self.by_addr.get(ptr & ~1, f"0x{ptr:08X}")
 
@@ -53,7 +71,8 @@ class Game:
                 size = self.off["mon.size"]
                 for i in range(count):
                     raw = g.read(base + i * size, size)
-                    s.party.append(dict(level=raw[self.off["mon.level"]],
+                    s.party.append(dict(species=self.box_species(raw),
+                                        level=raw[self.off["mon.level"]],
                                         hp=struct.unpack_from("<H", raw, self.off["mon.hp"])[0],
                                         maxhp=struct.unpack_from("<H", raw, self.off["mon.maxHP"])[0]))
             s.in_battle = s.cb2 == "BattleMainCB2"
