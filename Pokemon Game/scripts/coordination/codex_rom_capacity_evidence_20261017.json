@@ -1223,5 +1223,20 @@
     "delta_device": "UNTESTED",
     "zenulator_device": "UNTESTED"
   },
-  "forecast_production_reclaim_credit_bytes": 0
+  "forecast_production_reclaim_credit_bytes": 0,
+  "coordination_tests": {
+    "agent": {
+      "pass": 69,
+      "fail": 0
+    },
+    "qa_frame_gate": {
+      "pass": 4,
+      "fail": 0
+    },
+    "m1_evidence": {
+      "pass": 15,
+      "fail": 0
+    },
+    "initial_ci_failure": "Root AGENTS label missing literal Issue #15; corrected label only, guard/test unchanged."
+  }
 }
