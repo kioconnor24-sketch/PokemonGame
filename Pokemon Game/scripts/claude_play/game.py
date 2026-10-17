@@ -27,6 +27,30 @@ class Game:
     def _u(self, fmt, addr):
         return struct.unpack(fmt, self.gdb.read(addr, struct.calcsize(fmt)))
 
+    def box_substruct(self, raw, n):
+        """Decrypted bytes of secure substruct n (read-only, like GetSubstruct)."""
+        if not hasattr(self, "_substruct_order"):
+            self.box_species(raw)
+        personality, ot_id = struct.unpack_from("<II", raw, 0)
+        size = self.off["box.substruct"]
+        key = personality ^ ot_id
+        order = self._substruct_offsets[n] if hasattr(self, "_substruct_offsets") else None
+        base = self.off["box.secure"] + order[personality % 24] * size
+        words = struct.unpack_from(f"<{size // 4}I", raw, base)
+        return struct.pack(f"<{size // 4}I", *(x ^ key for x in words))
+
+    def follower(self):
+        """The active follower object (localId OBJ_EVENT_ID_FOLLOWER), read-only."""
+        size = self.off["oe.size"]
+        raw = self.gdb.read(self.sym["gObjectEvents"], 16 * size)
+        for i in range(16):
+            rec = raw[i * size:(i + 1) * size]
+            if rec[0] & 1 and rec[self.off["oe.localId"]] == self.c["OBJ_EVENT_ID_FOLLOWER"]:
+                gid = struct.unpack_from("<H", rec, self.off["oe.graphicsId"])[0]
+                return dict(species=gid & ~(7 << 12) & 0xFFFF if gid & (1 << 14) else None,
+                            graphicsId=gid, invisible=bool(rec[1] & 0x20))
+        return None
+
     def box_species(self, raw):
         """Species of a party Pokemon, decoded read-only like GetSubstruct():
         the secure words are XORed with otId ^ personality, and substruct 0
@@ -36,7 +60,9 @@ class Game:
             addr = self.sym["sSubstructOffsets"] - 0x08000000
             with open(self.emu.rom, "rb") as f:
                 f.seek(addr)
-                self._substruct_order = f.read(24)
+                table = f.read(96)
+            self._substruct_offsets = [table[i * 24:(i + 1) * 24] for i in range(4)]
+            self._substruct_order = self._substruct_offsets[0]
         personality, ot_id = struct.unpack_from("<II", raw, 0)
         if not personality and not ot_id:
             return 0
@@ -83,7 +109,13 @@ class Game:
                 size = self.off["mon.size"]
                 for i in range(count):
                     raw = g.read(base + i * size, size)
+                    sub0, sub1 = self.box_substruct(raw, 0), self.box_substruct(raw, 1)
+                    w = struct.unpack("<4H", sub1[:8])
                     s.party.append(dict(species=self.box_species(raw),
+                                        status=struct.unpack_from("<I", raw, self.off["mon.status"])[0],
+                                        moves=[x & 0x7FF for x in w],
+                                        pp=[b & 0x7F for b in sub1[8:12]],
+                                        ppBonuses=sub0[8],
                                         level=raw[self.off["mon.level"]],
                                         hp=struct.unpack_from("<H", raw, self.off["mon.hp"])[0],
                                         maxhp=struct.unpack_from("<H", raw, self.off["mon.maxHP"])[0]))
@@ -146,6 +178,7 @@ class Game:
             frame=self.emu.frame(),
             flags={n: self.flag(s, n) for n in names},
             party=s.party,
+            follower=self.follower(),
             pokeBalls=self.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"),
             berries=self.bag_pocket("bag.berries", "BAG_BERRIES_COUNT"),
             money=self.money(),
@@ -187,6 +220,7 @@ class MoveTable:
         self.rom = open(rom_path, "rb").read()
         self.base = info["symbols"]["gMovesInfo"]
         self.size = info["offsets"]["move.size"]
+        self.pp_off = info["offsets"].get("moveinfo.pp")
         self.ntypes = info["constants"]["NUMBER_OF_MON_TYPES"]
         elem = info["offsets"]["typechart.elem"]  # uq4_12_t is 32-bit (fpmath.h)
         raw = self._rom(info["symbols"]["gTypeEffectivenessTable"], self.ntypes * self.ntypes * elem)
@@ -198,11 +232,19 @@ class MoveTable:
             word = struct.unpack("<I", self._rom(self.base + move_id * self.size + 8, 4))[0]
             self.cache[move_id] = dict(effect=word & 0xFFFF, type=(word >> 16) & 0x1F,
                                        category=(word >> 21) & 3, power=word >> 23)
+            if self.pp_off is not None:
+                self.cache[move_id]["pp"] = self._rom(self.base + move_id * self.size + self.pp_off, 1)[0]
         return self.cache[move_id]
 
     def _rom(self, addr, size):
         off = addr - 0x08000000
         return self.rom[off:off + size]
+
+    def max_pp(self, move_id, pp_bonuses, slot):
+        """CalculatePPWithBonus(): base PP plus 20% per PP Up in that slot."""
+        base = self.move(move_id)["pp"]
+        ups = (pp_bonuses >> (2 * slot)) & 3
+        return base + base * 20 * ups // 100
 
     def effectiveness(self, atk_type, def_types):
         mult = 1.0

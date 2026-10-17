@@ -350,16 +350,31 @@ def phase_q3_whiteout(d, map_id="MAP_COASTALBLUFFS", tiles=((8, 10), (9, 10))):
     d.shot("q3-after-whiteout")
     d.clear_text(capture="q3-clinic", frames=16)
     observe(d, "q3-clinic", {"map": "MAP_ALDERFIELDCLINIC",
-                             "partyHealed": lambda o: all(m["hp"] == m["maxhp"] for m in o["party"]),
+                             "partyHealed": lambda o: party_fully_restored(d, o),
+                             "follower": lambda o: bool(o["follower"]) and o["follower"]["species"]
+                             == o["party"][0]["species"],
                              "partySame": lambda o: [m["species"] for m in o["party"]]
                              == [m["species"] for m in before["party"]],
                              "moneyLost": lambda o: o["money"] < before["money"]})
 
 
+def party_fully_restored(d, o):
+    """Every party member at full HP, no status, every move at full PP."""
+    for m in o["party"]:
+        if m["hp"] != m["maxhp"] or m["status"]:
+            return False
+        for slot, (mv, pp) in enumerate(zip(m["moves"], m["pp"])):
+            if mv and pp != d.moves.max_pp(mv, m["ppBonuses"], slot):
+                return False
+    return True
+
+
 def phase_q3_continued(d):
     """After Save and a fresh emulator process: still in the clinic, healed."""
     observe(d, "q3-continued", {"map": "MAP_ALDERFIELDCLINIC",
-                                "partyHealed": lambda o: all(m["hp"] == m["maxhp"] for m in o["party"])})
+                                "partyHealed": lambda o: party_fully_restored(d, o),
+                                "follower": lambda o: bool(o["follower"]) and o["follower"]["species"]
+                                == o["party"][0]["species"]})
 
 
 def phase_save(d):
