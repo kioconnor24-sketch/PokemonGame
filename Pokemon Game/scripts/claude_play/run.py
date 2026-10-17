@@ -545,7 +545,8 @@ def make_train_slot(level):
     return phase
 
 
-PHASES = {"fletchling_lead": lambda d: (party_swap(d, 2, 0), party_swap(d, 2, 1)),
+PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
+          "fletchling_lead": lambda d: (party_swap(d, 2, 0), party_swap(d, 2, 1)),
           "lead_train10": make_train_slot(10), "lead_train13": make_train_slot(13),
           "lead_train15": make_train_slot(15),
           "buy_balls": phase_buy_balls, "catch2": make_catch(2), "catch6": make_catch(6),
