@@ -71,8 +71,11 @@ def save_taint(root, seeds=None):
     for run in sorted(p for p in root.iterdir() if (p / "provenance-start.json").is_file()):
         start = json.loads((run / "provenance-start.json").read_text()).get("save_sha256")
         end_path = run / "provenance-end.json"
-        end = json.loads(end_path.read_text()).get("save_sha256") if end_path.is_file() else start
         own = dev_fixtures(run) if (run / "events.jsonl").is_file() else []
+        if not end_path.is_file() and own:
+            # It may have saved before it died: its end save is unknown.
+            raise EvidenceError(f"{run}: used a DEV fixture but has no provenance-end.json")
+        end = json.loads(end_path.read_text()).get("save_sha256") if end_path.is_file() else start
         runs.append((run.name, start, end, own))
     changed = True
     while changed:
