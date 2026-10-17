@@ -226,6 +226,114 @@ def check_continue(d, expected_path):
         raise driver.Stuck(f'continue did not restore the saved state: {problems}')
 
 
+# --- Silent-cry gameplay paths -------------------------------------------------
+OPPOSITE = {'up': 'down', 'down': 'up', 'left': 'right', 'right': 'left'}
+
+
+def active_tasks(g):
+    """Base names of the active task functions (read-only)."""
+    size, flag = g.off['task.size'], g.off['task.isActive']
+    raw = g.gdb.read(g.sym['gTasks'], 16*size)
+    return [base_name(g.func_name(struct.unpack_from('<I', raw, i*size)[0]))
+            for i in range(16) if raw[i*size + flag]]
+
+
+def wait_task(d, names, timeout=8.0):
+    """Wait until one of `names` is an active task; returns it or None."""
+    end = time.monotonic() + timeout
+    while time.monotonic() < end:
+        found = set(active_tasks(d.g)) & set(names)
+        if found:
+            return found.pop()
+        time.sleep(0.1)
+    return None
+
+
+def talk_follower(d):
+    """Face the follower and press A: EventScript_Follower runs playfirstmoncry
+    (and waitmoncry for some reactions), the silent-cry script path."""
+    d.settle()
+    mid, pos = d.here()
+    m = d.w.map(mid)
+    for _ in range(3):
+        # One step puts the follower on the tile just left (and shows it after a warp).
+        for direction, (dx, dy) in mapdata.DIRS.items():
+            if m.walkable(pos[0] + dx, pos[1] + dy):
+                break
+        else:
+            raise driver.Stuck(f'no free tile next to {pos} on {mid}')
+        d.step(direction)
+        d.settle()
+        follower = d.g.follower()
+        d.log('follower-before-talk', follower=follower, pos=d.here()[1])
+        back = OPPOSITE[direction]
+        for attempt in range(4):
+            here = d.here()
+            d.e.tap(driver.KEY[back], hold=0.03 + 0.03*attempt, after=0.3)
+            if d.here() != here:
+                break  # walked instead of turning; step again and retry
+            d.e.tap('A', after=0.4)
+            s = d.state()
+            if s.locked or s.cb2 != 'CB2_Overworld':
+                d.shot('follower-talk')
+                tasks = active_tasks(d.g)
+                s = d.clear_text(capture='follower-talk')
+                d.log('follower-talked', tasks=tasks, field_ready=d.field_ready(s), follower=d.g.follower())
+                if not d.field_ready(d.state()):
+                    raise driver.Stuck('follower script did not return control')
+                return
+        mid, pos = d.here()
+    raise driver.Stuck('talking to the follower started no script')
+
+
+def pokedex_cry(d):
+    """Pokedex entry (opening it waits on IsCryPlayingOrClearCrySongs), the CRY
+    page and its replay button, then back out to the field."""
+    play.open_start_menu_action(d, 0)  # MENU_ACTION_POKEDEX
+    listed = wait_task(d, ['Task_HandlePokedexInput'])
+    time.sleep(1.0)
+    d.shot('dex-list')
+    d.log('dex', step='list', tasks=active_tasks(d.g))
+    if not listed:
+        raise driver.Stuck(f'Pokedex list never took input: {active_tasks(d.g)}')
+    for attempt in range(40):
+        d.e.tap('A', after=0.3)
+        info = wait_task(d, ['Task_HandleInfoScreenInput'], timeout=6.0)
+        if info:
+            break
+        d.e.tap('DOWN', after=0.3)  # unseen entries do not open
+    else:
+        raise driver.Stuck('no Pokedex entry opened')
+    time.sleep(0.8)
+    d.shot('dex-entry')
+    d.log('dex', step='entry', tasks=active_tasks(d.g), attempts=attempt)
+    d.e.tap('RIGHT', after=0.4)   # AREA
+    d.e.tap('RIGHT', after=0.4)   # CRY
+    d.e.tap('A', after=0.4)
+    cry = wait_task(d, ['Task_HandleCryScreenInput'], timeout=8.0)
+    time.sleep(0.8)
+    d.shot('dex-cry-page')
+    d.log('dex', step='cry-page', tasks=active_tasks(d.g))
+    if not cry:
+        raise driver.Stuck(f'CRY page never took input: {active_tasks(d.g)}')
+    for n in range(3):  # replay; each press is PlayCry_NormalNoDucking
+        d.e.tap('A', after=1.2)
+        d.shot(f'dex-cry-replay-{n + 1}')
+        if 'Task_HandleCryScreenInput' not in active_tasks(d.g):
+            raise driver.Stuck(f'CRY page lost input after replay {n + 1}: {active_tasks(d.g)}')
+    for _ in range(12):
+        if d.field_ready(d.state()):
+            break
+        d.e.tap('B', after=1.0)
+    else:
+        raise driver.Stuck(f'Pokedex did not close: {active_tasks(d.g)}')
+    d.shot('dex-closed')
+    d.log('dex', step='closed')
+
+
+EXTRA_PHASES = {'talk_follower': talk_follower, 'pokedex_cry': pokedex_cry}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, required=True)
@@ -236,7 +344,7 @@ def main():
     parser.add_argument('--audio', action='store_true')
     parser.add_argument('--expect-saved', type=Path,
                         help='saved-<label>.json from an earlier run; CONTINUE must restore it')
-    parser.add_argument('phases', nargs='*', choices=sorted(play.PHASES))
+    parser.add_argument('phases', nargs='*', choices=sorted(set(play.PHASES) | set(EXTRA_PHASES)))
     args = parser.parse_args()
     engine, scratch, out = args.engine.resolve(), args.scratch.resolve(), args.out.resolve()
     if engine == scratch or engine in scratch.parents:
@@ -296,7 +404,7 @@ def main():
                 saves += 1
                 release_save(d, f'checkpoint-{saves}', sizes, flash_path)
             else:
-                play.PHASES[phase](d)
+                EXTRA_PHASES.get(phase, play.PHASES.get(phase))(d)
         record['saves'] = saves
         play.observe(d, 'end')
         record['completed'] = True
