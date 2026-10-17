@@ -288,7 +288,9 @@ class Driver:
             time.sleep(0.1)
         self.log("battle-start", flags=hex(first.battle_flags or 0),
                  foe=[(m["species"], m["level"]) for m in (first.mons or [])[1:2]],
-                 me=[(m["species"], m["level"], m["hp"]) for m in (first.mons or [])[:1]])
+                 me=[(m["species"], m["level"], m["hp"]) for m in (first.mons or [])[:1]],
+                 moves=[(mv, pp) for mv, pp in zip(first.mons[0]["moves"], first.mons[0]["pp"]) if mv]
+                 if first.mons else [])
         while True:
             s = self.state()
             if s.cb2 == "CB2_Overworld" and not s.in_battle:
