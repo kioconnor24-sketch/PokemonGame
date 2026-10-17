@@ -8,6 +8,7 @@ driver without editing its files. Human listening and Delta remain separate.
 import argparse
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -20,6 +21,20 @@ import emu
 import game
 import mapdata
 import run as play
+
+
+def lto_aliases(symbols):
+    """Use only unambiguous ELF-provided names, never guessed addresses."""
+    result = dict(symbols)
+    candidates = {}
+    for name, address in symbols.items():
+        match = re.fullmatch(r'(.+)\.lto_priv\.[0-9]+', name)
+        if match:
+            candidates.setdefault(match[1], set()).add(address)
+    for name, addresses in candidates.items():
+        if name not in result and len(addresses) == 1:
+            result[name] = addresses.pop()
+    return result
 
 
 def main():
@@ -46,6 +61,9 @@ def main():
         parser.error('new-game refuses to overwrite an existing flash save')
     shutil.copyfile(rom_source, rom)
     info = emu.load_build_info(elf, engine, scratch/'symbol-cache')
+    # RELEASE LTO gives shared static globals names such as
+    # sLockFieldControls.lto_priv.0; the normal-build driver expects the base.
+    info['symbols'] = lto_aliases(info['symbols'])
     record = dict(source_sha=play.git(engine, 'rev-parse', 'HEAD'),
                   engine_tree=play.git(engine, 'rev-parse', 'HEAD:Pokemon Game/engine'),
                   engine_status=play.git(engine, 'status', '--short', '--', '.').splitlines(),
@@ -60,8 +78,9 @@ def main():
         parser.error('commit source before collecting publishable gameplay evidence')
     (out/'provenance-start.json').write_text(json.dumps(record, indent=2)+'\n')
     world = mapdata.World(engine)
-    emulator = emu.Emulator(rom, out, audio=args.audio)
+    emulator = None
     try:
+        emulator = emu.Emulator(rom, out, audio=args.audio)
         observed = game.Game(emulator, info)
         d = driver.Driver(emulator, observed, world, out/'events.jsonl')
         d.moves = game.MoveTable(rom, info)
@@ -75,13 +94,21 @@ def main():
     except Exception as error:
         record['completed'] = False
         record['error'] = f'{type(error).__name__}: {error}'
-        emulator.capture('error')
+        if emulator:
+            try:
+                emulator.capture('error')
+            except Exception:
+                pass
         raise
     finally:
-        emulator.close()
+        if emulator:
+            emulator.close()
+        record['source_sha_end'] = play.git(engine, 'rev-parse', 'HEAD')
+        record['engine_status_end'] = play.git(engine, 'status', '--short', '--', '.').splitlines()
+        record['source_unchanged'] = record['source_sha_end'] == record['source_sha'] and not record['engine_status_end']
         record['save_after'] = play.sha256(rom.with_suffix('.sav')) if rom.with_suffix('.sav').exists() else None
         (out/'provenance-end.json').write_text(json.dumps(record, indent=2)+'\n')
-        if args.audio and emulator.audio_raw and emulator.audio_raw.exists():
+        if args.audio and emulator and emulator.audio_raw and emulator.audio_raw.exists():
             report = emu.audio_report(emulator.audio_raw, out/'audio.wav')
             (out/'audio-report.json').write_text(json.dumps(report, indent=2)+'\n')
 

@@ -161,3 +161,36 @@ TEST("Averon cry safety absent species completes without a previous player")
     EXPECT(IsCryFinished());
     ExpectFullBGMVolume();
 }
+
+TEST("Averon cry safety title town route battle victory heal music starts")
+{
+    u16 song;
+    PARAMETRIZE { song = MUS_TITLE; }
+    PARAMETRIZE { song = MUS_LITTLEROOT; }
+    PARAMETRIZE { song = MUS_ROUTE101; }
+    PARAMETRIZE { song = MUS_VS_WILD; }
+    PARAMETRIZE { song = MUS_VICTORY_WILD; }
+    PARAMETRIZE { song = MUS_HEAL; }
+    ColdStart();
+    PlayBGM(song);
+    // Healing uses the fanfare player, so resolve the actual song's player.
+    struct MusicPlayerInfo *player = gMPlayTable[gSongTable[song].ms].info;
+    EXPECT_EQ(player->songHeader, gSongTable[song].header);
+    for (u32 i = 0; i < 8; ++i)
+        MPlayMain(player);
+    EXPECT_NE(player->status & MUSICPLAYER_STATUS_TRACK, 0);
+}
+
+TEST("Averon cry safety menu and field effects still start")
+{
+    u16 song;
+    PARAMETRIZE { song = SE_SELECT; }
+    PARAMETRIZE { song = SE_DOOR; }
+    ColdStart();
+    PlaySE(song);
+    struct MusicPlayerInfo *player = gMPlayTable[gSongTable[song].ms].info;
+    EXPECT_EQ(player->songHeader, gSongTable[song].header);
+    MPlayMain(player);
+    EXPECT_NE(player->status & MUSICPLAYER_STATUS_TRACK, 0);
+    ExpectFullBGMVolume();
+}
