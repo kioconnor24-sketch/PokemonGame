@@ -19,7 +19,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  preflight-unit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate staged-core safety fixtures without building a ROM
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/coordination" -p "test_stage_scripted_core.py" -v
+
   staged-core:
+    # Expensive GBA/native/save compilation is a manual opt-in, not triggered
+    # by each documentation/source-only PR edit. Existing first-run proof remains.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 80
     steps:
