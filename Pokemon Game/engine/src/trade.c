@@ -320,6 +320,14 @@ static void Task_OpenCenterWhiteColumn(u8);
 static void Task_CloseCenterWhiteColumn(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
 
+#if TESTING
+// Expose the real callbacks to native tests without a second implementation.
+MainCallback Test_GetTradeSaveCallback(bool32 wireless)
+{
+    return wireless ? CB2_SaveAndEndWirelessTrade : CB2_SaveAndEndTrade;
+}
+#endif
+
 #include "data/trade.h"
 
 static bool8 SendLinkData(const void *linkData, u32 size)
