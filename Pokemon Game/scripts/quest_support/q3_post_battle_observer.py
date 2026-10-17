@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local-only Q3 post-battle observer (Claude support run, not a repo file).
+"""Q3 post-battle observer: whiteout text, clinic nurse, party, SAVE (Claude QUEST support).
 
 Runs after the workflow's own q3-battle-play step inside the SAME emulator
 process. Ordinary key input only; every state read goes through the existing
@@ -8,6 +8,7 @@ memory, flags, party, items or saves except by the game's own Save UI.
 """
 import argparse
 import json
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -26,27 +27,45 @@ args = SimpleNamespace(fifo=a.fifo, outdir=a.outdir, window=a.window)
 out = Path(a.outdir)
 
 
+def black_ratio(path):
+    """Share of near-black pixels in the whole 480x320 frame."""
+    rgb = subprocess.check_output(["convert", str(path), "-depth", "8", "RGB:-"])
+    if len(rgb) != 480 * 320 * 3:
+        raise qc.Blocked("Unknown frame geometry for black ratio")
+    return sum(max(rgb[i:i+3]) <= 40 for i in range(0, len(rgb), 3)) / (480 * 320)
+
+
 def observe(tag):
     frame = out / f"{tag}.png"
     qc.grab(a.window, frame)
     obj = qc.snapshot_detail(args, tag)
     pos = obj["position"]
     panel = qc.white_panel_ratio(frame)
-    print("Q3X", tag, json.dumps(pos, sort_keys=True), f"panel={panel:.2f}", frame, flush=True)
-    return pos, panel
+    black = black_ratio(frame)
+    print("Q3X", tag, json.dumps(pos, sort_keys=True), f"panel={panel:.2f}", f"black={black:.3f}",
+          frame, flush=True)
+    return pos, panel, black
 
 
 # 1. Whiteout / respawn / nurse: advance only visible text with A.
+# Calibrated on the 2026-10-17 run: the whiteout message (white text on
+# black) is 0.92-0.98 black, a full fade is 1.00, the lit clinic field ~0.49.
+# A is pressed on dialogue boxes and on the whiteout text, never on a bare
+# fade or on the field, so the player never re-talks to the nurse.
+WHITEOUT_TEXT = (0.85, 0.995)
 idle_in_clinic = 0
 last = None
-for n in range(1, 61):
-    pos, panel = observe(f"q3-play-x-{n:03d}")
+whiteout_frames, clinic_dialogue_frames = [], []
+for n in range(1, 91):
+    tag = f"q3-play-x-{n:03d}"
+    pos, panel, black = observe(tag)
     last = pos
     where = (pos["mapGroup"], pos["mapNum"])
     if pos.get("inBattle"):
         qc.qa_key(a.window, "x", wait=0.7)
         continue
-    if where == (75, 11) and panel <= 0.30:
+    whiteout_text = WHITEOUT_TEXT[0] < black < WHITEOUT_TEXT[1]
+    if where == (75, 11) and panel <= 0.30 and black < WHITEOUT_TEXT[0]:
         idle_in_clinic += 1
         if idle_in_clinic >= 3:
             break
@@ -54,9 +73,16 @@ for n in range(1, 61):
         continue
     idle_in_clinic = 0
     if panel > 0.30:
+        if where == (75, 11):
+            clinic_dialogue_frames.append(tag)
+        qc.qa_key(a.window, "x", wait=1.0)
+    elif whiteout_text:
+        whiteout_frames.append(tag)
         qc.qa_key(a.window, "x", wait=1.0)
     else:
         time.sleep(1.0)
+print("Q3X_WHITEOUT_TEXT_FRAMES", json.dumps(whiteout_frames), flush=True)
+print("Q3X_CLINIC_DIALOGUE_FRAMES", json.dumps(clinic_dialogue_frames), flush=True)
 print("Q3X_RESPAWN_RESULT", json.dumps(last, sort_keys=True), flush=True)
 if (last["mapGroup"], last["mapNum"]) != (75, 11):
     print("Q3X_NOT_IN_CLINIC: stop; do not claim clinic recovery", flush=True)
@@ -65,10 +91,16 @@ if (last["mapGroup"], last["mapNum"]) != (75, 11):
 
 # 2. Ordinary Start menu: select an action by source enum id, verified by
 # the read-only cursor after every key (same rule as q2_save).
-def select_action(action, label):
+def select_action(action, label, optional=False):
+    """Open Start and choose `action`. With optional, close Start and return
+    False if the game does not offer it."""
     qc.qa_key(a.window, "Return", wait=1.5)
     state, _ = qc.save_probe(args, f"save-q3x-{label}-open")
     menu = state["menu"]
+    if optional and action not in menu["actions"]:
+        print("Q3X_ACTION_NOT_OFFERED", action, json.dumps(menu, sort_keys=True), flush=True)
+        qc.qa_key(a.window, "z", wait=1.5)
+        return False
     if menu["actions"].count(action) != 1:
         raise qc.Blocked(f"Start action {action} not offered: {menu}")
     dest = menu["actions"].index(action)
@@ -85,15 +117,18 @@ def select_action(action, label):
     if menu["selected"] != action:
         raise qc.Blocked(f"Could not select action {action}: {menu}")
     qc.qa_key(a.window, "x", wait=2.0)
+    return True
 
 
 # Party screen after the nurse (visible HP bars), then back to the field.
-select_action(1, "party")  # MENU_ACTION_POKEMON
-qc.grab(a.window, out / "q3x-party-after-clinic.png")
-print("Q3X_PARTY_SCREEN", out / "q3x-party-after-clinic.png", flush=True)
-qc.qa_key(a.window, "z", wait=2.0)
-qc.qa_key(a.window, "z", wait=1.5)
-pos, panel = observe("q3-play-x-after-party")
+# The Q4 developer gift gives a Pokemon without the POKEMON Start entry, so
+# the party screen is evidence only when the game itself offers it.
+if select_action(1, "party", optional=True):  # MENU_ACTION_POKEMON
+    qc.grab(a.window, out / "q3x-party-after-clinic.png")
+    print("Q3X_PARTY_SCREEN", out / "q3x-party-after-clinic.png", flush=True)
+    qc.qa_key(a.window, "z", wait=2.0)
+    qc.qa_key(a.window, "z", wait=1.5)
+pos, panel, black = observe("q3-play-x-after-party")
 
 # 3. Ordinary SAVE -> YES, accepted only on the game's success callback.
 select_action(5, "save")  # MENU_ACTION_SAVE
