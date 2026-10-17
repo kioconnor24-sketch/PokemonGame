@@ -1,0 +1,55 @@
+{"t": 1792227289.47, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/play14.gba", "phases": ["q3_continued", "q5_field", "save"], "new_game": false}
+{"t": 1792227289.47, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792227289.49, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792227290.0, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792227290.02, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792227292.57, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792227292.59, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792227293.75, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792227293.78, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792227294.33, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792227294.35, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792227294.88, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792227294.9, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792227295.95, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792227295.96, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792227299.59, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792227299.61, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792227300.28, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 16, "hp": 41, "maxhp": 41}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792227300.35, "event": "capture", "file": "0009-q3-continued.png"}
+{"t": 1792227300.35, "event": "observe", "label": "q3-continued", "problems": []}
+{"t": 1792227301.85, "event": "capture", "file": "0010-q3-follower-after-step.png"}
+{"t": 1792227301.85, "event": "observe", "label": "q3-follower-after-step", "problems": []}
+{"t": 1792227305.38, "event": "map", "map": "MAP_ALDERFIELD", "pos": [17, 13]}
+{"t": 1792227307.41, "event": "capture", "file": "0011-q5-collision.png"}
+{"t": 1792227307.44, "event": "observe", "label": "q5-collision", "problems": []}
+{"t": 1792227307.44, "event": "collision", "map": "MAP_ALDERFIELD", "at": [16, 13], "pushed": "up"}
+{"t": 1792227308.1, "event": "capture", "file": "0012-q5-open-step.png"}
+{"t": 1792227308.1, "event": "observe", "label": "q5-open-step", "problems": []}
+{"t": 1792227309.12, "event": "capture", "file": "0013-q5-start-menu.png"}
+{"t": 1792227309.94, "event": "start-menu", "actions": [0, 1, 2, 4, 5, 6, 7]}
+{"t": 1792227313.89, "event": "capture", "file": "0014-q5-menu-pokedex.png"}
+{"t": 1792227316.39, "event": "capture", "file": "0015-q5-menu-pokedex-closed.png"}
+{"t": 1792227316.41, "event": "observe", "label": "q5-menu-pokedex-closed", "problems": []}
+{"t": 1792227320.81, "event": "capture", "file": "0016-q5-menu-pokemon.png"}
+{"t": 1792227323.5, "event": "capture", "file": "0017-q5-menu-pokemon-actions.png"}
+{"t": 1792227324.69, "event": "capture", "file": "0018-q5-menu-field-kit.png"}
+{"t": 1792227328.74, "event": "capture", "file": "0019-q5-menu-pokemon-closed.png"}
+{"t": 1792227328.78, "event": "observe", "label": "q5-menu-pokemon-closed", "problems": []}
+{"t": 1792227333.16, "event": "capture", "file": "0020-q5-menu-bag.png"}
+{"t": 1792227335.68, "event": "capture", "file": "0021-q5-menu-bag-closed.png"}
+{"t": 1792227335.73, "event": "observe", "label": "q5-menu-bag-closed", "problems": []}
+{"t": 1792227340.13, "event": "capture", "file": "0022-q5-menu-player.png"}
+{"t": 1792227342.62, "event": "capture", "file": "0023-q5-menu-player-closed.png"}
+{"t": 1792227342.65, "event": "observe", "label": "q5-menu-player-closed", "problems": []}
+{"t": 1792227347.48, "event": "capture", "file": "0024-q5-menu-option.png"}
+{"t": 1792227349.96, "event": "capture", "file": "0025-q5-menu-option-closed.png"}
+{"t": 1792227350.01, "event": "observe", "label": "q5-menu-option-closed", "problems": []}
+{"t": 1792227353.51, "event": "capture", "file": "0026-talk-alderfield-12-16-01.png"}
+{"t": 1792227354.04, "event": "capture", "file": "0027-q5-npc-closed.png"}
+{"t": 1792227354.07, "event": "observe", "label": "q5-npc-closed", "problems": []}
+{"t": 1792227354.16, "event": "capture", "file": "0028-q5-follower-outside.png"}
+{"t": 1792227354.16, "event": "observe", "label": "q5-follower-outside", "problems": []}
+{"t": 1792227358.87, "event": "map", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 8]}
+{"t": 1792227360.32, "event": "capture", "file": "0029-q5-follower-inside.png"}
+{"t": 1792227360.32, "event": "observe", "label": "q5-follower-inside", "problems": ["follower: expected <function follower_ok at 0x7e837bfec930>, observed {'species': 393, 'graphicsId': 20873, 'invisible': True}"]}

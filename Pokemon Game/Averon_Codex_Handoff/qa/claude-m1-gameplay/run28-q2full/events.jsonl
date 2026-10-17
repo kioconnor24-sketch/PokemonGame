@@ -1,0 +1,72 @@
+{"t": 1792227970.08, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/q2full.gba", "phases": ["q2_start", "q2_observer", "q2_tree", "q2_full_pocket", "save"], "new_game": false}
+{"t": 1792227970.09, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792227970.11, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792227970.65, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792227970.66, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792227973.22, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792227973.23, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792227974.44, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792227974.49, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792227975.05, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792227975.08, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792227975.63, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792227975.67, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792227976.74, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792227976.77, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792227980.45, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792227980.49, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792227981.16, "event": "field", "map": "MAP_ALDERFIELD", "pos": [13, 16], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 20, 18], "ppBonuses": 0, "level": 15, "hp": 4, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 27, 25], "ppBonuses": 0, "level": 15, "hp": 0, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 0, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792227986.75, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [16, 0]}
+{"t": 1792227995.73, "event": "map", "map": "MAP_WINDROW", "pos": [17, 0]}
+{"t": 1792228002.15, "event": "capture", "file": "0009-talk-windrow-20-14-01.png"}
+{"t": 1792228003.54, "event": "capture", "file": "0010-talk-windrow-20-14-02.png"}
+{"t": 1792228004.18, "event": "capture", "file": "0011-q2-started.png"}
+{"t": 1792228004.18, "event": "observe", "label": "q2-started", "problems": []}
+{"t": 1792228007.87, "event": "map", "map": "MAP_COASTALMEADOW", "pos": [19, 0]}
+{"t": 1792228017.91, "event": "capture", "file": "0012-talk-coastalmeadow-10-22-01.png"}
+{"t": 1792228018.58, "event": "capture", "file": "0013-q2-observer.png"}
+{"t": 1792228018.58, "event": "observe", "label": "q2-observer", "problems": []}
+{"t": 1792228022.38, "event": "capture", "file": "0014-talk-coastalmeadow-12-27-01.png"}
+{"t": 1792228023.03, "event": "capture", "file": "0015-q2-tree.png"}
+{"t": 1792228023.03, "event": "observe", "label": "q2-tree", "problems": []}
+{"t": 1792228025.26, "event": "capture", "file": "0016-talk-coastalmeadow-12-27-01.png"}
+{"t": 1792228025.88, "event": "capture", "file": "0017-q2-tree-repeat.png"}
+{"t": 1792228025.88, "event": "observe", "label": "q2-tree-repeat", "problems": []}
+{"t": 1792228028.13, "event": "capture", "file": "0018-debug-fill-berries-root.png"}
+{"t": 1792228028.6, "event": "capture", "file": "0019-debug-fill-berries-0.png"}
+{"t": 1792228030.23, "event": "capture", "file": "0020-debug-fill-berries-1.png"}
+{"t": 1792228033.93, "event": "capture", "file": "0021-debug-fill-berries-2.png"}
+{"t": 1792228035.1, "event": "debug-menu", "label": "fill-berries", "rows": [1, 1, 6], "dev_only": true}
+{"t": 1792228037.67, "event": "capture", "file": "0022-q2-full-pocket.png"}
+{"t": 1792228037.67, "event": "observe", "label": "q2-full-pocket", "problems": []}
+{"t": 1792228044.59, "event": "battle-start", "flags": "0x4", "foe": [[1298, 4]], "me": [[393, 15, 4]], "moves": [[64, 35], [45, 40], [55, 20], [204, 18]]}
+{"t": 1792228051.31, "event": "capture", "file": "0023-battle-action.png"}
+{"t": 1792228051.92, "event": "turn", "label": "battle", "me": [393, 15, 4, 44], "foe": [1298, 4, 18, 18], "move": 55, "pp": 20}
+{"t": 1792228061.15, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 19, 18], "ppBonuses": 0, "level": 15, "hp": 4, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 27, 25], "ppBonuses": 0, "level": 15, "hp": 0, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 0, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792228066.34, "event": "map", "map": "MAP_WINDROW", "pos": [16, 25]}
+{"t": 1792228072.29, "event": "capture", "file": "0024-talk-windrow-20-14-01.png"}
+{"t": 1792228073.0, "event": "capture", "file": "0025-q2-refused.png"}
+{"t": 1792228073.0, "event": "observe", "label": "q2-refused", "problems": []}
+{"t": 1792228083.86, "event": "capture", "file": "0026-q2-tossed-item.png"}
+{"t": 1792228085.84, "event": "capture", "file": "0027-q2-tossed-menu.png"}
+{"t": 1792228087.52, "event": "capture", "file": "0028-q2-tossed-quantity.png"}
+{"t": 1792228088.53, "event": "capture", "file": "0029-q2-tossed-confirm.png"}
+{"t": 1792228089.74, "event": "capture", "file": "0030-q2-tossed-thrown.png"}
+{"t": 1792228093.19, "event": "capture", "file": "0031-q2-tossed.png"}
+{"t": 1792228093.19, "event": "observe", "label": "q2-tossed", "problems": []}
+{"t": 1792228093.35, "event": "capture", "file": "0032-q2-before-reward.png"}
+{"t": 1792228093.35, "event": "observe", "label": "q2-before-reward", "problems": []}
+{"t": 1792228095.66, "event": "capture", "file": "0033-talk-windrow-20-14-01.png"}
+{"t": 1792228097.1, "event": "capture", "file": "0034-talk-windrow-20-14-02.png"}
+{"t": 1792228098.49, "event": "capture", "file": "0035-talk-windrow-20-14-03.png"}
+{"t": 1792228099.9, "event": "capture", "file": "0036-talk-windrow-20-14-04.png"}
+{"t": 1792228100.49, "event": "capture", "file": "0037-q2-reward.png"}
+{"t": 1792228100.49, "event": "observe", "label": "q2-reward", "problems": []}
+{"t": 1792228102.74, "event": "capture", "file": "0038-talk-windrow-20-14-01.png"}
+{"t": 1792228103.4, "event": "capture", "file": "0039-q2-no-duplicate.png"}
+{"t": 1792228103.4, "event": "observe", "label": "q2-no-duplicate", "problems": []}
+{"t": 1792228108.23, "event": "capture", "file": "0040-save-confirm-checkpoint.png"}
+{"t": 1792228117.05, "event": "saved", "label": "checkpoint", "status": 1, "ok": true}
+{"t": 1792228117.08, "event": "capture", "file": "0041-saved-checkpoint.png"}
+{"t": 1792228117.25, "event": "capture", "file": "0042-end.png"}
+{"t": 1792228117.25, "event": "observe", "label": "end", "problems": []}

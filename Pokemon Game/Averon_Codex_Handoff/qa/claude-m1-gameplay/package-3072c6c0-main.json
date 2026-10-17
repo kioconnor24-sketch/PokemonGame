@@ -1,0 +1,316 @@
+{
+ "source_sha": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+ "rom_sha256": "3072c6c0c23c42d404ac346497bc992220075ea233f34a28fd57581e0ba1bfb5",
+ "elf_sha256": "180caa1a30442a1beabb8ac400bcfcf16ea5e79395f4a5c6244940997e60d691",
+ "cases": [
+  {
+   "case_id": "MAIN-CONTINUE-Q5",
+   "input_trace": "run54-main-smoke/inputs.jsonl",
+   "input_traces": [
+    "run54-main-smoke/inputs.jsonl"
+   ],
+   "screenshots": [
+    "run54-main-smoke/0011-q5-collision.png",
+    "run54-main-smoke/0012-q5-open-step.png",
+    "run54-main-smoke/0019-q5-menu-pokemon-closed.png",
+    "run54-main-smoke/0021-q5-menu-bag-closed.png",
+    "run54-main-smoke/0027-q5-npc-closed.png",
+    "run54-main-smoke/0030-q5-follower-inside.png",
+    "run54-main-smoke/0032-q5-follower-back-outside.png",
+    "run54-main-smoke/0008-bag-great-balls.png",
+    "run54-main-smoke/0009-bag-oran-berries.png",
+    "run54-main-smoke/0010-party-screen.png",
+    "run54-main-smoke/0018-q5-menu-field-kit.png",
+    "run54-main-smoke/0026-talk-alderfield-12-16-01.png"
+   ],
+   "state_observations": [
+    {
+     "statement": "q5-collision: position held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-collision.json"
+    },
+    {
+     "statement": "q5-collision: fieldReady held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-collision.json"
+    },
+    {
+     "statement": "q5-open-step: position held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-open-step.json"
+    },
+    {
+     "statement": "q5-menu-pokemon-closed: fieldReady held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-menu-pokemon-closed.json"
+    },
+    {
+     "statement": "q5-menu-bag-closed: fieldReady held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-menu-bag-closed.json"
+    },
+    {
+     "statement": "q5-npc-closed: fieldReady held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-npc-closed.json"
+    },
+    {
+     "statement": "q5-npc-closed: FLAG_AVERON_NOTES_REWARDED (after ordinary inputs)",
+     "evidence_file": "run54-main-smoke/state-q5-npc-closed.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q5-follower-inside: follower held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-follower-inside.json"
+    },
+    {
+     "statement": "q5-follower-back-outside: follower held after ordinary inputs",
+     "evidence_file": "run54-main-smoke/state-q5-follower-back-outside.json"
+    }
+   ],
+   "dev_fixtures": [],
+   "scope": "ORDINARY_PLAY",
+   "drivers": [
+    {
+     "run": "run54-main-smoke",
+     "driver_sha": "a96761595591e58e0db5277ee086c46c7f2c3de1",
+     "driver_dirty": false
+    }
+   ]
+  },
+  {
+   "case_id": "MAIN-Q3",
+   "input_trace": "run58-main-q3/inputs.jsonl",
+   "input_traces": [
+    "run58-main-q3/inputs.jsonl",
+    "run59-main-q3-cont/inputs.jsonl"
+   ],
+   "screenshots": [
+    "run58-main-q3/0009-q3-before.png",
+    "run58-main-q3/0066-q3-clinic.png",
+    "run58-main-q3/0035-q3-loss10-defeat.png",
+    "run58-main-q3/0036-q3-loss10-defeat.png",
+    "run58-main-q3/0037-q3-loss10-defeat.png",
+    "run58-main-q3/0038-q3-loss10-defeat.png",
+    "run58-main-q3/0039-q3-loss10-defeat.png",
+    "run58-main-q3/0040-q3-loss10-defeat.png",
+    "run58-main-q3/0041-q3-loss10-defeat.png",
+    "run58-main-q3/0042-q3-loss10-defeat.png",
+    "run58-main-q3/0043-q3-loss10-defeat.png",
+    "run58-main-q3/0044-q3-after-whiteout-1.png",
+    "run58-main-q3/0045-q3-after-whiteout-2.png",
+    "run58-main-q3/0046-q3-after-whiteout-3.png",
+    "run58-main-q3/0047-q3-after-whiteout-4.png",
+    "run58-main-q3/0048-q3-after-whiteout-5.png",
+    "run58-main-q3/0049-q3-after-whiteout-6.png",
+    "run58-main-q3/0050-q3-clinic-01.png",
+    "run58-main-q3/0051-q3-clinic-02.png",
+    "run58-main-q3/0052-q3-clinic-03.png",
+    "run58-main-q3/0053-q3-clinic-04.png",
+    "run58-main-q3/0054-q3-clinic-05.png",
+    "run58-main-q3/0055-q3-clinic-06.png",
+    "run58-main-q3/0056-q3-clinic-07.png",
+    "run58-main-q3/0057-q3-clinic-08.png",
+    "run58-main-q3/0058-q3-clinic-09.png",
+    "run58-main-q3/0059-q3-clinic-10.png",
+    "run58-main-q3/0060-q3-clinic-11.png",
+    "run58-main-q3/0061-q3-clinic-12.png",
+    "run58-main-q3/0062-q3-clinic-13.png",
+    "run58-main-q3/0063-q3-clinic-14.png",
+    "run58-main-q3/0064-q3-clinic-15.png",
+    "run58-main-q3/0065-q3-clinic-16.png",
+    "run58-main-q3/0067-party-screen.png",
+    "run58-main-q3/0068-save-confirm-checkpoint.png",
+    "run58-main-q3/0069-save-confirm-checkpoint-2.png",
+    "run58-main-q3/0070-save-confirm-checkpoint-3.png",
+    "run58-main-q3/0071-save-step-checkpoint-01.png",
+    "run58-main-q3/0072-save-step-checkpoint-02.png",
+    "run58-main-q3/0073-save-step-checkpoint-03.png",
+    "run58-main-q3/0074-save-step-checkpoint-04.png",
+    "run58-main-q3/0075-save-step-checkpoint-05.png",
+    "run58-main-q3/0076-save-step-checkpoint-06.png",
+    "run59-main-q3-cont/0008-q3-continued.png",
+    "run59-main-q3-cont/0009-q3-follower-after-step.png",
+    "run59-main-q3-cont/0010-party-screen.png",
+    "run59-main-q3-cont/0011-bag-great-balls.png",
+    "run59-main-q3-cont/0012-bag-oran-berries.png"
+   ],
+   "state_observations": [
+    {
+     "statement": "q3-clinic: map (after ordinary inputs)",
+     "evidence_file": "run58-main-q3/state-q3-clinic.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-clinic: partyHealed held after ordinary inputs",
+     "evidence_file": "run58-main-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: follower held after ordinary inputs",
+     "evidence_file": "run58-main-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: partySame held after ordinary inputs",
+     "evidence_file": "run58-main-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: moneyLost held after ordinary inputs",
+     "evidence_file": "run58-main-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-continued: map (after ordinary inputs)",
+     "evidence_file": "run59-main-q3-cont/state-q3-continued.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-continued: partyHealed held after ordinary inputs",
+     "evidence_file": "run59-main-q3-cont/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-continued: follower held after ordinary inputs",
+     "evidence_file": "run59-main-q3-cont/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-follower-after-step: follower held after ordinary inputs",
+     "evidence_file": "run59-main-q3-cont/state-q3-follower-after-step.json"
+    }
+   ],
+   "dev_fixtures": [],
+   "scope": "ORDINARY_PLAY",
+   "drivers": [
+    {
+     "run": "run58-main-q3",
+     "driver_sha": "07111746442d317ed99ac791f99b9819bbeab631",
+     "driver_dirty": false
+    },
+    {
+     "run": "run59-main-q3-cont",
+     "driver_sha": "07111746442d317ed99ac791f99b9819bbeab631",
+     "driver_dirty": false
+    }
+   ]
+  },
+  {
+   "case_id": "MAIN-Q4",
+   "input_trace": "run56-main-q4/inputs.jsonl",
+   "input_traces": [
+    "run56-main-q4/inputs.jsonl",
+    "run57-main-q4-cont/inputs.jsonl"
+   ],
+   "screenshots": [
+    "run56-main-q4/0012-q4-lab.png",
+    "run56-main-q4/0015-q4-full-refused.png",
+    "run56-main-q4/0024-pc-deposit.png",
+    "run56-main-q4/0027-q4-gift.png",
+    "run56-main-q4/0029-q4-no-duplicate.png",
+    "run56-main-q4/0013-talk-averonfieldlab-25-19-01.png",
+    "run56-main-q4/0014-talk-averonfieldlab-25-19-02.png",
+    "run56-main-q4/0025-talk-averonfieldlab-25-19-01.png",
+    "run56-main-q4/0026-talk-averonfieldlab-25-19-02.png",
+    "run56-main-q4/0028-talk-averonfieldlab-25-19-01.png",
+    "run56-main-q4/0016-debug-access-pc-root.png",
+    "run56-main-q4/0017-debug-access-pc-0.png",
+    "run56-main-q4/0018-debug-access-pc-1.png",
+    "run56-main-q4/0019-pc-menu.png",
+    "run56-main-q4/0020-pc-deposit-pick.png",
+    "run56-main-q4/0021-pc-deposit-menu.png",
+    "run56-main-q4/0022-pc-deposit-box.png",
+    "run56-main-q4/0023-pc-deposited.png",
+    "run57-main-q4-cont/0010-q4-continued.png",
+    "run57-main-q4-cont/0009-q4-continued-party.png"
+   ],
+   "state_observations": [
+    {
+     "statement": "q4-lab: map (after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run)",
+     "evidence_file": "run56-main-q4/state-q4-lab.json",
+     "expected": "MAP_AVERONFIELDLAB",
+     "observed": "MAP_AVERONFIELDLAB"
+    },
+    {
+     "statement": "q4-lab: FLAG_AVERON_SKETCH_REWARDED (after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run)",
+     "evidence_file": "run56-main-q4/state-q4-lab.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q4-lab: party6 held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-lab.json"
+    },
+    {
+     "statement": "q4-lab: noWobbuffet held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-lab.json"
+    },
+    {
+     "statement": "q4-full-refused: FLAG_AVERON_DEV_GIFT_RECEIVED (after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run)",
+     "evidence_file": "run56-main-q4/state-q4-full-refused.json",
+     "expected": false,
+     "observed": false
+    },
+    {
+     "statement": "q4-full-refused: party6 held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-full-refused.json"
+    },
+    {
+     "statement": "q4-full-refused: noWobbuffet held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-full-refused.json"
+    },
+    {
+     "statement": "pc-deposit: partyShrank held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-pc-deposit.json"
+    },
+    {
+     "statement": "q4-gift: FLAG_AVERON_DEV_GIFT_RECEIVED (after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run)",
+     "evidence_file": "run56-main-q4/state-q4-gift.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q4-gift: party6 held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-gift.json"
+    },
+    {
+     "statement": "q4-gift: oneWobbuffet held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-gift.json"
+    },
+    {
+     "statement": "q4-no-duplicate: party6 held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-no-duplicate.json"
+    },
+    {
+     "statement": "q4-no-duplicate: oneWobbuffet held after ordinary inputs and DEV-ONLY debug fixture(s) ['field-lab', 'access-pc'] in this run",
+     "evidence_file": "run56-main-q4/state-q4-no-duplicate.json"
+    },
+    {
+     "statement": "q4-continued: FLAG_AVERON_DEV_GIFT_RECEIVED (after ordinary inputs and DEV-ONLY debug fixture(s) ['inherited from save made by run56-main-q4: field-lab, access-pc'] in this run)",
+     "evidence_file": "run57-main-q4-cont/state-q4-continued.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q4-continued: oneWobbuffet held after ordinary inputs and DEV-ONLY debug fixture(s) ['inherited from save made by run56-main-q4: field-lab, access-pc'] in this run",
+     "evidence_file": "run57-main-q4-cont/state-q4-continued.json"
+    },
+    {
+     "statement": "q4-continued: partyOf6 held after ordinary inputs and DEV-ONLY debug fixture(s) ['inherited from save made by run56-main-q4: field-lab, access-pc'] in this run",
+     "evidence_file": "run57-main-q4-cont/state-q4-continued.json"
+    }
+   ],
+   "dev_fixtures": [
+    "run56-main-q4: field-lab",
+    "run56-main-q4: access-pc",
+    "run57-main-q4-cont: inherited from save made by run56-main-q4: field-lab, access-pc"
+   ],
+   "scope": "DEV_FIXTURE",
+   "drivers": [
+    {
+     "run": "run56-main-q4",
+     "driver_sha": "a96761595591e58e0db5277ee086c46c7f2c3de1",
+     "driver_dirty": false
+    },
+    {
+     "run": "run57-main-q4-cont",
+     "driver_sha": "07111746442d317ed99ac791f99b9819bbeab631",
+     "driver_dirty": false
+    }
+   ]
+  }
+ ],
+ "legacy_rom_attested": []
+}

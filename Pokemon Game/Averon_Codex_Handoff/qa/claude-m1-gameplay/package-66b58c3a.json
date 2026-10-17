@@ -1,0 +1,54 @@
+{
+ "source_sha": "abb13f29fd7c409fc5447231aa9e6c3d67a64e08",
+ "rom_sha256": "66b58c3a90111b46f79e4b53eb9a9c3c33d30083ba0e5c5ecb379b50203ffa26",
+ "elf_sha256": "5e9b67ded94987099a35cae3c9e548fa7da12a6b25c4580df2afb78e4a79c7f3",
+ "cases": [
+  {
+   "case_id": "GYM1-OLDER-ROM",
+   "input_trace": "run17/inputs.jsonl",
+   "input_traces": [
+    "run17/inputs.jsonl"
+   ],
+   "screenshots": [
+    "run17/0011-gym1-entered.png",
+    "run17/0012-gym1-sluices.png",
+    "run17/0016-gym1-result.png",
+    "run17/0013-elio-action.png",
+    "run17/0014-elio-action.png",
+    "run17/0015-elio-action.png"
+   ],
+   "state_observations": [
+    {
+     "statement": "gym1-sluices: FLAG_AVERON_WEST_SLUICE (after ordinary inputs)",
+     "evidence_file": "run17/state-gym1-sluices.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "gym1-sluices: FLAG_AVERON_EAST_SLUICE (after ordinary inputs)",
+     "evidence_file": "run17/state-gym1-sluices.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "gym1-result: FLAG_BADGE01_GET (after ordinary inputs)",
+     "evidence_file": "run17/state-gym1-result.json",
+     "expected": true,
+     "observed": true
+    }
+   ],
+   "dev_fixtures": [],
+   "scope": "ORDINARY_PLAY",
+   "drivers": [
+    {
+     "run": "run17",
+     "driver_sha": "81500a2a4bd57ccd73f8122df406a0e085cb4183",
+     "driver_dirty": true
+    }
+   ]
+  }
+ ],
+ "legacy_rom_attested": [
+  "66b58c3a90111b46f79e4b53eb9a9c3c33d30083ba0e5c5ecb379b50203ffa26"
+ ]
+}

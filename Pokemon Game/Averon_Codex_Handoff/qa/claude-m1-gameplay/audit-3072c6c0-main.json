@@ -1,0 +1,624 @@
+{
+  "cases": [
+    {
+      "case_id": "MAIN-CONTINUE-Q5",
+      "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
+      "files": [
+        {
+          "bytes": 198485,
+          "path": "run54-main-smoke/inputs.jsonl",
+          "sha256": "c8ab7e52aceb8388126b9e4dec702b875253ae9ddfef949676f4e1e4702cd4b4"
+        },
+        {
+          "bytes": 3628,
+          "path": "run54-main-smoke/0011-q5-collision.png",
+          "sha256": "40e251ee342b765e9efb5a1dda6bd7ec351bf6eaa54ed2320572bd50bb6f1082"
+        },
+        {
+          "bytes": 3430,
+          "path": "run54-main-smoke/0012-q5-open-step.png",
+          "sha256": "9d10937895a24c386688c147005758cbc0ea100c616ecbad133530b291abc319"
+        },
+        {
+          "bytes": 3429,
+          "path": "run54-main-smoke/0019-q5-menu-pokemon-closed.png",
+          "sha256": "35ae6c9fa81d8bf7fbe95bc5d55eebdc971d93b1f26ffae9ea39ac08cb79b6fc"
+        },
+        {
+          "bytes": 3430,
+          "path": "run54-main-smoke/0021-q5-menu-bag-closed.png",
+          "sha256": "9d10937895a24c386688c147005758cbc0ea100c616ecbad133530b291abc319"
+        },
+        {
+          "bytes": 3381,
+          "path": "run54-main-smoke/0027-q5-npc-closed.png",
+          "sha256": "678092197d5aa3122663ab2b672d00209ce8df03115857a19d3ad5661e97f73f"
+        },
+        {
+          "bytes": 3609,
+          "path": "run54-main-smoke/0030-q5-follower-inside.png",
+          "sha256": "6a996808414b8de9fc7471f967ae23899c910e4adb779a8cfdd4f0025cffca20"
+        },
+        {
+          "bytes": 3449,
+          "path": "run54-main-smoke/0032-q5-follower-back-outside.png",
+          "sha256": "55a034e0e728c809583bc0856e7dd7dfa735c18256e5e217691c40e200268f7f"
+        },
+        {
+          "bytes": 3867,
+          "path": "run54-main-smoke/0008-bag-great-balls.png",
+          "sha256": "9ac252b026f70002b744b8be73b80e8c8aa449b08da614404f134c10e1eb403b"
+        },
+        {
+          "bytes": 3714,
+          "path": "run54-main-smoke/0009-bag-oran-berries.png",
+          "sha256": "0623bca09b5495bcad714d0401611dd7e223207119f6f97a03b1414d236cee35"
+        },
+        {
+          "bytes": 4622,
+          "path": "run54-main-smoke/0010-party-screen.png",
+          "sha256": "68b44617175b68b415863701fe3e3e56fdb55589b0ff7d73992d85ac60926395"
+        },
+        {
+          "bytes": 5084,
+          "path": "run54-main-smoke/0018-q5-menu-field-kit.png",
+          "sha256": "37da2cd77c07de5fcc04c7235cae6f89676a88b11fe5f2c507f2e3265558b556"
+        },
+        {
+          "bytes": 3822,
+          "path": "run54-main-smoke/0026-talk-alderfield-12-16-01.png",
+          "sha256": "cdbcccbf70d495c8fb508a6fbcafe7e44833d7028eb51f41eeba4f98ff59cb88"
+        },
+        {
+          "bytes": 2301,
+          "path": "run54-main-smoke/state-q5-collision.json",
+          "sha256": "d310b7555323a7b612ece5d077f48a9edbef415f6791846ba742571321af9e66"
+        },
+        {
+          "bytes": 2301,
+          "path": "run54-main-smoke/state-q5-collision.json",
+          "sha256": "d310b7555323a7b612ece5d077f48a9edbef415f6791846ba742571321af9e66"
+        },
+        {
+          "bytes": 2276,
+          "path": "run54-main-smoke/state-q5-open-step.json",
+          "sha256": "d943df1a6ff52c1ad5f5308fd96615a489a217031cf02303563d98533017a896"
+        },
+        {
+          "bytes": 2298,
+          "path": "run54-main-smoke/state-q5-menu-pokemon-closed.json",
+          "sha256": "41e28988e1be4e1b52fb2cc4d8f6dc4cb26f77ac0c2cf1b0769c3ee16d26cdaa"
+        },
+        {
+          "bytes": 2290,
+          "path": "run54-main-smoke/state-q5-menu-bag-closed.json",
+          "sha256": "31683e9c0fc6604267da53518f562978d18498fa5feee7d0c6c41ed57402a094"
+        },
+        {
+          "bytes": 2318,
+          "path": "run54-main-smoke/state-q5-npc-closed.json",
+          "sha256": "7432c5e9f7d54b6fbd1cbb3084020076ed96f9d0476ce7c7e53f7b2d69f5d4dc"
+        },
+        {
+          "bytes": 2318,
+          "path": "run54-main-smoke/state-q5-npc-closed.json",
+          "sha256": "7432c5e9f7d54b6fbd1cbb3084020076ed96f9d0476ce7c7e53f7b2d69f5d4dc"
+        },
+        {
+          "bytes": 2293,
+          "path": "run54-main-smoke/state-q5-follower-inside.json",
+          "sha256": "24a94835ea4ac613f2a73b091ad9e8d7f200457bc6f26b6966412b55b56c3bab"
+        },
+        {
+          "bytes": 2300,
+          "path": "run54-main-smoke/state-q5-follower-back-outside.json",
+          "sha256": "af3498c1c7743bd2f3b7573384040c42a0d7759744bb0c2e46ca75da3302373c"
+        }
+      ],
+      "independent_playtest_verdict": "NOT_GRANTED_BY_THIS_TOOL",
+      "issues": []
+    },
+    {
+      "case_id": "MAIN-Q3",
+      "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
+      "files": [
+        {
+          "bytes": 145033,
+          "path": "run58-main-q3/inputs.jsonl",
+          "sha256": "d48654a866abed58007029581159ee852da4b195ad190fb128dcf296b74a6c7d"
+        },
+        {
+          "bytes": 4123,
+          "path": "run58-main-q3/0009-q3-before.png",
+          "sha256": "ca0bcb4b4e595d4772dc7bd5f28689d28fecab0f5b533dbfaa0e84271d895b41"
+        },
+        {
+          "bytes": 4937,
+          "path": "run58-main-q3/0066-q3-clinic.png",
+          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
+        },
+        {
+          "bytes": 3832,
+          "path": "run58-main-q3/0035-q3-loss10-defeat.png",
+          "sha256": "9fbb03d010f9d50ac8b274c7c177b6ec629d9b859a575d3be90975d97df0cc5e"
+        },
+        {
+          "bytes": 2689,
+          "path": "run58-main-q3/0036-q3-loss10-defeat.png",
+          "sha256": "99a7d91c258ccfa6d80e9e33e294429602c041babc2d2ea8bd94f2a579ac5166"
+        },
+        {
+          "bytes": 2662,
+          "path": "run58-main-q3/0037-q3-loss10-defeat.png",
+          "sha256": "f018f4d3f5e14275b8f392477507677631b68149f0101074b95e9468b0b636fd"
+        },
+        {
+          "bytes": 3047,
+          "path": "run58-main-q3/0038-q3-loss10-defeat.png",
+          "sha256": "c0c0c81114b78e23fb669d2fa9933161cfb50ab46fbc8de3009901840dda7c0d"
+        },
+        {
+          "bytes": 2534,
+          "path": "run58-main-q3/0039-q3-loss10-defeat.png",
+          "sha256": "86bfd843b545c8777863b78fc1604e77e737461f06d52b76362097651fd323b9"
+        },
+        {
+          "bytes": 2920,
+          "path": "run58-main-q3/0040-q3-loss10-defeat.png",
+          "sha256": "77a986335d8ffc000739b88434d495378ff2e93131a129626e276058eae358b6"
+        },
+        {
+          "bytes": 2799,
+          "path": "run58-main-q3/0041-q3-loss10-defeat.png",
+          "sha256": "2496754e827d4f6209b5e5e6ad97b822250c15801063298018418f3821c90959"
+        },
+        {
+          "bytes": 2962,
+          "path": "run58-main-q3/0042-q3-loss10-defeat.png",
+          "sha256": "a699297641b833e02805c579b83bf03573d8ee046d33cc1d0720e5c03be07653"
+        },
+        {
+          "bytes": 157,
+          "path": "run58-main-q3/0043-q3-loss10-defeat.png",
+          "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
+        },
+        {
+          "bytes": 611,
+          "path": "run58-main-q3/0044-q3-after-whiteout-1.png",
+          "sha256": "0f66bf5f2fd3b2bddff39a14193aa4ac5335cf4ad053ef6c224e4a3ad1c77ebb"
+        },
+        {
+          "bytes": 1213,
+          "path": "run58-main-q3/0045-q3-after-whiteout-2.png",
+          "sha256": "7fbb5e8922b242c208dd586387ab597b3ae8724f3614af350629273f75a38452"
+        },
+        {
+          "bytes": 1146,
+          "path": "run58-main-q3/0046-q3-after-whiteout-3.png",
+          "sha256": "239b6b33bd8e5fcd8595772920996ffefd736e14b0910a9162b9c1d50013859e"
+        },
+        {
+          "bytes": 1146,
+          "path": "run58-main-q3/0047-q3-after-whiteout-4.png",
+          "sha256": "239b6b33bd8e5fcd8595772920996ffefd736e14b0910a9162b9c1d50013859e"
+        },
+        {
+          "bytes": 1148,
+          "path": "run58-main-q3/0048-q3-after-whiteout-5.png",
+          "sha256": "c121d4ffa00d9ebde5baf40f06b353f5f8c75a1af33b5cc8076c42efd2944b96"
+        },
+        {
+          "bytes": 1146,
+          "path": "run58-main-q3/0049-q3-after-whiteout-6.png",
+          "sha256": "239b6b33bd8e5fcd8595772920996ffefd736e14b0910a9162b9c1d50013859e"
+        },
+        {
+          "bytes": 1148,
+          "path": "run58-main-q3/0050-q3-clinic-01.png",
+          "sha256": "c121d4ffa00d9ebde5baf40f06b353f5f8c75a1af33b5cc8076c42efd2944b96"
+        },
+        {
+          "bytes": 4853,
+          "path": "run58-main-q3/0051-q3-clinic-02.png",
+          "sha256": "2694aa7f64234178b79d5f095d5d9cf10c99fc8a07749940ad88bc5428e056fc"
+        },
+        {
+          "bytes": 4931,
+          "path": "run58-main-q3/0052-q3-clinic-03.png",
+          "sha256": "2ade39660e4a50e70f19a6a4edb0cafa304754ebfa39efabbc40f89c8691a64f"
+        },
+        {
+          "bytes": 4898,
+          "path": "run58-main-q3/0053-q3-clinic-04.png",
+          "sha256": "520fc4f88f43b0abf9dfa2b0bba7afc151d9341fa373c9f141cf835f10a70f43"
+        },
+        {
+          "bytes": 4921,
+          "path": "run58-main-q3/0054-q3-clinic-05.png",
+          "sha256": "b5336f0aa9a6a0db4dd511e685a303b516f86fd67dc2e7d97319890cef44a55e"
+        },
+        {
+          "bytes": 4338,
+          "path": "run58-main-q3/0055-q3-clinic-06.png",
+          "sha256": "3dcc72d182aa315c9d19299162453b1e6a653e950adc4943b9e5dcd29dd9c5da"
+        },
+        {
+          "bytes": 4862,
+          "path": "run58-main-q3/0056-q3-clinic-07.png",
+          "sha256": "df55c688d419236c35ba37ef675f56d364efdf75d2164b9081c232af7f7775a4"
+        },
+        {
+          "bytes": 4958,
+          "path": "run58-main-q3/0057-q3-clinic-08.png",
+          "sha256": "1f0f2f233a5af271ed7abe8d15ebed7c0e5aaa004692874b854d924d32a9b041"
+        },
+        {
+          "bytes": 5062,
+          "path": "run58-main-q3/0058-q3-clinic-09.png",
+          "sha256": "98f96ef9d18a50229dd1e73159dafc22737e17791ee90515b973f82db4f6fce9"
+        },
+        {
+          "bytes": 4939,
+          "path": "run58-main-q3/0059-q3-clinic-10.png",
+          "sha256": "7127e71f39dfe4eda64ab627affc210f78dd8462ff6f8e2c3d43fae152335f77"
+        },
+        {
+          "bytes": 4515,
+          "path": "run58-main-q3/0060-q3-clinic-11.png",
+          "sha256": "f647dc00e8c19f15c69697efc81731713b2c0d45cb734aec57cf30c9082ccd32"
+        },
+        {
+          "bytes": 4937,
+          "path": "run58-main-q3/0061-q3-clinic-12.png",
+          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
+        },
+        {
+          "bytes": 4839,
+          "path": "run58-main-q3/0062-q3-clinic-13.png",
+          "sha256": "100302201354c258c2f805b67a3f34a7d11a8de5f134a7482dbe48d24eeb2b0c"
+        },
+        {
+          "bytes": 4818,
+          "path": "run58-main-q3/0063-q3-clinic-14.png",
+          "sha256": "c84c38890b0b9e25b3f982ccb91aff291daa7d0ba16dc4871f2d3d2562b2a664"
+        },
+        {
+          "bytes": 4880,
+          "path": "run58-main-q3/0064-q3-clinic-15.png",
+          "sha256": "c9cc78494d664d45f6014983dc852973aafd3980a6f1edbc0f8ebc4ff5a53bbd"
+        },
+        {
+          "bytes": 4875,
+          "path": "run58-main-q3/0065-q3-clinic-16.png",
+          "sha256": "15a1a57c40d307fdf011533e5c119d99ef7ccb60a75e22d60c012ec3a95583f9"
+        },
+        {
+          "bytes": 3524,
+          "path": "run58-main-q3/0067-party-screen.png",
+          "sha256": "b492cde3c2cd44edb7962abc9c37c60e3064ee9bd4f234a8fd12677d26b4eff4"
+        },
+        {
+          "bytes": 2587,
+          "path": "run58-main-q3/0068-save-confirm-checkpoint.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run58-main-q3/0069-save-confirm-checkpoint-2.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run58-main-q3/0070-save-confirm-checkpoint-3.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run58-main-q3/0071-save-step-checkpoint-01.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2609,
+          "path": "run58-main-q3/0072-save-step-checkpoint-02.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run58-main-q3/0073-save-step-checkpoint-03.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run58-main-q3/0074-save-step-checkpoint-04.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run58-main-q3/0075-save-step-checkpoint-05.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 4988,
+          "path": "run58-main-q3/0076-save-step-checkpoint-06.png",
+          "sha256": "c5abd7845fb467532d1971b36b40532b982a11907bcb52cd04d670bc79d196e7"
+        },
+        {
+          "bytes": 4988,
+          "path": "run59-main-q3-cont/0008-q3-continued.png",
+          "sha256": "c5abd7845fb467532d1971b36b40532b982a11907bcb52cd04d670bc79d196e7"
+        },
+        {
+          "bytes": 5163,
+          "path": "run59-main-q3-cont/0009-q3-follower-after-step.png",
+          "sha256": "63e5a93c5eff03ee418525ba407b4bd6fbb8a52745b76aebf33994668f2bc668"
+        },
+        {
+          "bytes": 4641,
+          "path": "run59-main-q3-cont/0010-party-screen.png",
+          "sha256": "fa27856cdf6a0dae8a64a78fc6b17865df48ca5605752f637c0cb540cbc77eb7"
+        },
+        {
+          "bytes": 3867,
+          "path": "run59-main-q3-cont/0011-bag-great-balls.png",
+          "sha256": "9ac252b026f70002b744b8be73b80e8c8aa449b08da614404f134c10e1eb403b"
+        },
+        {
+          "bytes": 3714,
+          "path": "run59-main-q3-cont/0012-bag-oran-berries.png",
+          "sha256": "0623bca09b5495bcad714d0401611dd7e223207119f6f97a03b1414d236cee35"
+        },
+        {
+          "bytes": 2382,
+          "path": "run58-main-q3/state-q3-clinic.json",
+          "sha256": "d4c9605f7f339f21df125240500705eac0606076aa5ca4116d6bf9c522363a25"
+        },
+        {
+          "bytes": 2382,
+          "path": "run58-main-q3/state-q3-clinic.json",
+          "sha256": "d4c9605f7f339f21df125240500705eac0606076aa5ca4116d6bf9c522363a25"
+        },
+        {
+          "bytes": 2382,
+          "path": "run58-main-q3/state-q3-clinic.json",
+          "sha256": "d4c9605f7f339f21df125240500705eac0606076aa5ca4116d6bf9c522363a25"
+        },
+        {
+          "bytes": 2382,
+          "path": "run58-main-q3/state-q3-clinic.json",
+          "sha256": "d4c9605f7f339f21df125240500705eac0606076aa5ca4116d6bf9c522363a25"
+        },
+        {
+          "bytes": 2382,
+          "path": "run58-main-q3/state-q3-clinic.json",
+          "sha256": "d4c9605f7f339f21df125240500705eac0606076aa5ca4116d6bf9c522363a25"
+        },
+        {
+          "bytes": 2338,
+          "path": "run59-main-q3-cont/state-q3-continued.json",
+          "sha256": "57f772610c1b84794b7ea9482c51fa4bd0f0c3daaebf36c4bde019787417d646"
+        },
+        {
+          "bytes": 2338,
+          "path": "run59-main-q3-cont/state-q3-continued.json",
+          "sha256": "57f772610c1b84794b7ea9482c51fa4bd0f0c3daaebf36c4bde019787417d646"
+        },
+        {
+          "bytes": 2338,
+          "path": "run59-main-q3-cont/state-q3-continued.json",
+          "sha256": "57f772610c1b84794b7ea9482c51fa4bd0f0c3daaebf36c4bde019787417d646"
+        },
+        {
+          "bytes": 2300,
+          "path": "run59-main-q3-cont/state-q3-follower-after-step.json",
+          "sha256": "841650092f8b0c7d9b146aaa645bfa91ae8cdc79662af5f91a2056bc0eb5c170"
+        }
+      ],
+      "independent_playtest_verdict": "NOT_GRANTED_BY_THIS_TOOL",
+      "issues": []
+    },
+    {
+      "case_id": "MAIN-Q4",
+      "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
+      "files": [
+        {
+          "bytes": 13209,
+          "path": "run56-main-q4/inputs.jsonl",
+          "sha256": "bb84d3f25e2cf9eaec024c8fec1244d85f386ca7f20f836a298a1dad85e0903f"
+        },
+        {
+          "bytes": 3151,
+          "path": "run56-main-q4/0012-q4-lab.png",
+          "sha256": "a5ceb275f2a71f5c67fcb6730905f1542f274764344e95fdfa97951e8d90dc32"
+        },
+        {
+          "bytes": 3501,
+          "path": "run56-main-q4/0015-q4-full-refused.png",
+          "sha256": "b33159770aec702e77c31fe8c88314d39b0c4312fdf489ac7b508a12ead482e8"
+        },
+        {
+          "bytes": 3481,
+          "path": "run56-main-q4/0024-pc-deposit.png",
+          "sha256": "303825b980be8f86be3c0dff3ad86afc10e8b3aaf3422070857f500c07aa8337"
+        },
+        {
+          "bytes": 3481,
+          "path": "run56-main-q4/0027-q4-gift.png",
+          "sha256": "303825b980be8f86be3c0dff3ad86afc10e8b3aaf3422070857f500c07aa8337"
+        },
+        {
+          "bytes": 3493,
+          "path": "run56-main-q4/0029-q4-no-duplicate.png",
+          "sha256": "1eff268063c8c60a06e0edf1b5d38b06b49c78d7340c3dfa0ec2b4491913909e"
+        },
+        {
+          "bytes": 4593,
+          "path": "run56-main-q4/0013-talk-averonfieldlab-25-19-01.png",
+          "sha256": "a594054c4ee847b9114731d4f20f1bd6e3b8f5e7cf5c135d7ebcfb6b41f42692"
+        },
+        {
+          "bytes": 3962,
+          "path": "run56-main-q4/0014-talk-averonfieldlab-25-19-02.png",
+          "sha256": "4cd8b7728d9a6bad660dbe9d353d3502f722f90b0bdb716e03be1d6a6fcb8d48"
+        },
+        {
+          "bytes": 4576,
+          "path": "run56-main-q4/0025-talk-averonfieldlab-25-19-01.png",
+          "sha256": "03c9ef913ebb3557ec8d4e87fd75abe59a0af5d0ce44f413540c5092468c4d33"
+        },
+        {
+          "bytes": 3835,
+          "path": "run56-main-q4/0026-talk-averonfieldlab-25-19-02.png",
+          "sha256": "085841d9d7aafe581a6e37145b5522980c835da09ca360424f4e880b6cc8bea0"
+        },
+        {
+          "bytes": 3815,
+          "path": "run56-main-q4/0028-talk-averonfieldlab-25-19-01.png",
+          "sha256": "aa97cd75e3d850539bac3e11147c6b1688c0418aca5f6334772ef8f5bc3e5007"
+        },
+        {
+          "bytes": 3756,
+          "path": "run56-main-q4/0016-debug-access-pc-root.png",
+          "sha256": "2990e86e4de02f1528220a94781631d830e78d7f5f01930d0b14039cd0701a45"
+        },
+        {
+          "bytes": 3761,
+          "path": "run56-main-q4/0017-debug-access-pc-0.png",
+          "sha256": "7d973690b5cf32fd0acd1d6812ad72b0a0ed3feb073487b30bbcc66db39bae79"
+        },
+        {
+          "bytes": 3234,
+          "path": "run56-main-q4/0018-debug-access-pc-1.png",
+          "sha256": "8f5fe861e658592f7212705ec1a8794d47a0c8e41adbe4743fbd87cb8c8ea0a5"
+        },
+        {
+          "bytes": 4528,
+          "path": "run56-main-q4/0019-pc-menu.png",
+          "sha256": "6650d1a18d45357c7e5da30d13970036e153af0dee8ba10c4b8fb04c10840ba4"
+        },
+        {
+          "bytes": 5695,
+          "path": "run56-main-q4/0020-pc-deposit-pick.png",
+          "sha256": "3b48151c2f18f46455c02e65620c2e04b580ccaa8975002c9cbcf5668c1e951a"
+        },
+        {
+          "bytes": 5616,
+          "path": "run56-main-q4/0021-pc-deposit-menu.png",
+          "sha256": "82e37223618fb52e8f7df40fa9e92c8e6d95821c63b6557010bfef04fee5367d"
+        },
+        {
+          "bytes": 5917,
+          "path": "run56-main-q4/0022-pc-deposit-box.png",
+          "sha256": "382e2124f715589b3ebaacb71e5bf4d54d3e10aa01afbadf51fe842c738ff456"
+        },
+        {
+          "bytes": 4596,
+          "path": "run56-main-q4/0023-pc-deposited.png",
+          "sha256": "ca976599984a61b0b38d490ba403dad7199a62667b83d0b6f9bc392ae5608f72"
+        },
+        {
+          "bytes": 3481,
+          "path": "run57-main-q4-cont/0010-q4-continued.png",
+          "sha256": "a2cb4b9c6dff3cf782f628de483171ba35ddfdd01cffcb441d41d2fa260f6c5c"
+        },
+        {
+          "bytes": 4922,
+          "path": "run57-main-q4-cont/0009-q4-continued-party.png",
+          "sha256": "4dffb8aaccabd24f5ce5ebc8d607039ea9a059b240ba1e94438f3345eaacca3c"
+        },
+        {
+          "bytes": 2357,
+          "path": "run56-main-q4/state-q4-lab.json",
+          "sha256": "f78a0679d8ad53d61d1cd7c689ca1fa77b1541da606cd76c5a78466162c97e57"
+        },
+        {
+          "bytes": 2357,
+          "path": "run56-main-q4/state-q4-lab.json",
+          "sha256": "f78a0679d8ad53d61d1cd7c689ca1fa77b1541da606cd76c5a78466162c97e57"
+        },
+        {
+          "bytes": 2357,
+          "path": "run56-main-q4/state-q4-lab.json",
+          "sha256": "f78a0679d8ad53d61d1cd7c689ca1fa77b1541da606cd76c5a78466162c97e57"
+        },
+        {
+          "bytes": 2357,
+          "path": "run56-main-q4/state-q4-lab.json",
+          "sha256": "f78a0679d8ad53d61d1cd7c689ca1fa77b1541da606cd76c5a78466162c97e57"
+        },
+        {
+          "bytes": 2350,
+          "path": "run56-main-q4/state-q4-full-refused.json",
+          "sha256": "afdcddc4c7e0619513b62a3b519de0f8f50557d665a68b09640f75af13987d8a"
+        },
+        {
+          "bytes": 2350,
+          "path": "run56-main-q4/state-q4-full-refused.json",
+          "sha256": "afdcddc4c7e0619513b62a3b519de0f8f50557d665a68b09640f75af13987d8a"
+        },
+        {
+          "bytes": 2350,
+          "path": "run56-main-q4/state-q4-full-refused.json",
+          "sha256": "afdcddc4c7e0619513b62a3b519de0f8f50557d665a68b09640f75af13987d8a"
+        },
+        {
+          "bytes": 2072,
+          "path": "run56-main-q4/state-pc-deposit.json",
+          "sha256": "5094c9db0b610aff8dde28aedf91c3a8a7888be0e8c388cd33068d033096a239"
+        },
+        {
+          "bytes": 2335,
+          "path": "run56-main-q4/state-q4-gift.json",
+          "sha256": "a1bf21c293dc38ab225c6ae2e648f2f6e3131211a7a9158073938a566c627c49"
+        },
+        {
+          "bytes": 2335,
+          "path": "run56-main-q4/state-q4-gift.json",
+          "sha256": "a1bf21c293dc38ab225c6ae2e648f2f6e3131211a7a9158073938a566c627c49"
+        },
+        {
+          "bytes": 2335,
+          "path": "run56-main-q4/state-q4-gift.json",
+          "sha256": "a1bf21c293dc38ab225c6ae2e648f2f6e3131211a7a9158073938a566c627c49"
+        },
+        {
+          "bytes": 2310,
+          "path": "run56-main-q4/state-q4-no-duplicate.json",
+          "sha256": "b48234fcc9c1dd8951aa2dff3fa99069b3463f401ac18d476d5a59a3d6770f22"
+        },
+        {
+          "bytes": 2310,
+          "path": "run56-main-q4/state-q4-no-duplicate.json",
+          "sha256": "b48234fcc9c1dd8951aa2dff3fa99069b3463f401ac18d476d5a59a3d6770f22"
+        },
+        {
+          "bytes": 2347,
+          "path": "run57-main-q4-cont/state-q4-continued.json",
+          "sha256": "0dd17c90d1e57d6c095eb73760dbccfb2e0a3dd247f4bceca178ecf621a3b36c"
+        },
+        {
+          "bytes": 2347,
+          "path": "run57-main-q4-cont/state-q4-continued.json",
+          "sha256": "0dd17c90d1e57d6c095eb73760dbccfb2e0a3dd247f4bceca178ecf621a3b36c"
+        },
+        {
+          "bytes": 2347,
+          "path": "run57-main-q4-cont/state-q4-continued.json",
+          "sha256": "0dd17c90d1e57d6c095eb73760dbccfb2e0a3dd247f4bceca178ecf621a3b36c"
+        }
+      ],
+      "independent_playtest_verdict": "NOT_GRANTED_BY_THIS_TOOL",
+      "issues": []
+    }
+  ],
+  "independent_playtest_verdict": "NOT_GRANTED_BY_THIS_TOOL",
+  "limitations": [
+    "File presence and hashes cannot establish genuine player inputs or game-state truth",
+    "Fixture/instrumentation must be disclosed and independently reviewed",
+    "Only authorized Playtest can assign actual Q1-Q5 acceptance"
+  ],
+  "ready_for_review": 3,
+  "rom_sha256": "3072c6c0c23c42d404ac346497bc992220075ea233f34a28fd57581e0ba1bfb5",
+  "schema": "averon-qa-evidence-audit-v1",
+  "source_sha": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+  "total_cases": 3
+}

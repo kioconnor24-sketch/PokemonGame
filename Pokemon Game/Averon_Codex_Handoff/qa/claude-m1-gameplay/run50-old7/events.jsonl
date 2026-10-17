@@ -1,0 +1,20 @@
+{"t": 1792260111.76, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/old7.gba", "phases": ["observe"], "new_game": false}
+{"t": 1792260111.76, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792260111.78, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792260114.38, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792260114.41, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792260116.1, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792260116.14, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792260116.67, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792260116.71, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792260117.23, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792260117.25, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792260118.27, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792260118.28, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792260121.85, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792260121.89, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792260122.55, "event": "field", "map": "MAP_ORCHARDLANE", "pos": [27, 8], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [26, 40, 25, 0], "ppBonuses": 0, "level": 8, "hp": 7, "maxhp": 27}]}
+{"t": 1792260122.75, "event": "capture", "file": "0008-checkpoint.png"}
+{"t": 1792260122.75, "event": "observe", "label": "checkpoint", "problems": []}
+{"t": 1792260122.93, "event": "capture", "file": "0009-end.png"}
+{"t": 1792260122.93, "event": "observe", "label": "end", "problems": []}
