@@ -24,27 +24,43 @@ def parse_defines(text):
 def limits(save_h, load_save_h):
     """Each block's symbol, its byte limit and the ASLR padding in the symbol."""
     d = parse_defines(save_h)
-    pad = parse_defines(load_save_h)["SAVEBLOCK_MOVE_RANGE"]
-    sector = d["SECTOR_DATA_SIZE"]
+    d.update(parse_defines(load_save_h))
+
+    def define(name):
+        if name not in d:
+            raise ValueError(f"Missing define {name}")
+        return d[name]
+
+    pad = define("SAVEBLOCK_MOVE_RANGE")
+    sector = define("SECTOR_DATA_SIZE")
 
     def sectors(start, end):
-        return sector * (d[end] - d[start] + 1)
+        return sector * (define(end) - define(start) + 1)
 
-    return {
+    result = {
         "SaveBlock1": ("gSaveblock1", sectors("SECTOR_ID_SAVEBLOCK1_START", "SECTOR_ID_SAVEBLOCK1_END"), pad),
         "SaveBlock2": ("gSaveblock2", sector, pad),
-        "SaveBlock3": ("gSaveblock3", d["SAVE_BLOCK_3_CHUNK_SIZE"] * d["NUM_SECTORS_PER_SLOT"], 0),
+        "SaveBlock3": ("gSaveblock3", define("SAVE_BLOCK_3_CHUNK_SIZE") * define("NUM_SECTORS_PER_SLOT"), 0),
         "PokemonStorage": ("gPokemonStorage", sectors("SECTOR_ID_PKMN_STORAGE_START", "SECTOR_ID_PKMN_STORAGE_END"), pad),
     }
+    for block, (_, limit, _) in result.items():
+        if limit <= 0:
+            raise ValueError(f"Non-positive limit for {block}: {limit}")
+    return result
 
 
 def parse_symbol_sizes(nm_text):
-    """Sizes from `nm -S` lines: address size type name."""
+    """Sizes from `nm -S` lines (address size type name), as a list per name."""
     sizes = {}
     for line in nm_text.splitlines():
         fields = line.split()
-        if len(fields) == 4:
-            sizes[fields[3]] = int(fields[1], 16)
+        if len(fields) != 4:
+            continue
+        try:
+            size = int(fields[1], 16)
+        except ValueError:
+            raise ValueError(f"Malformed nm line: {line!r}") from None
+        sizes.setdefault(fields[3], []).append(size)
     return sizes
 
 
@@ -53,7 +69,9 @@ def report(sizes, block_limits):
     for block, (symbol, limit, pad) in block_limits.items():
         if symbol not in sizes:
             raise ValueError(f"Missing save symbol {symbol}")
-        used = sizes[symbol] - pad
+        if len(sizes[symbol]) != 1:
+            raise ValueError(f"Ambiguous save symbol {symbol}: {len(sizes[symbol])} definitions")
+        used = sizes[symbol][0] - pad
         if used <= 0 or used > limit:
             raise ValueError(f"Out-of-bounds {block}: {used}/{limit}")
         result[block] = {"used_bytes": used, "limit_bytes": limit, "free_bytes": limit - used}

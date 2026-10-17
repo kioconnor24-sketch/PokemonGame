@@ -46,6 +46,33 @@ class SaveHeadroomTests(unittest.TestCase):
             tool.report(tool.parse_symbol_sizes(NM.replace("gSaveblock3", "other")), limits)
         with self.assertRaisesRegex(ValueError, "Out-of-bounds SaveBlock2"):
             tool.report(tool.parse_symbol_sizes(NM.replace("00000fac", "00001010")), limits)
+        with self.assertRaisesRegex(ValueError, "Out-of-bounds SaveBlock3"):
+            tool.report(tool.parse_symbol_sizes(NM.replace("00000044", "00000000")), limits)
+
+    def test_a_block_exactly_at_its_limit_has_zero_free(self):
+        # SaveBlock2 limit 3968 + 128 padding = 0x1000; one byte more is over.
+        limits = tool.limits(SAVE_H, LOAD_SAVE_H)
+        at_limit = NM.replace("00000fac", "%08x" % (3968 + 128))
+        self.assertEqual(tool.report(tool.parse_symbol_sizes(at_limit), limits)["SaveBlock2"]["free_bytes"], 0)
+        over = NM.replace("00000fac", "%08x" % (3968 + 128 + 1))
+        with self.assertRaisesRegex(ValueError, "Out-of-bounds SaveBlock2: 3969/3968"):
+            tool.report(tool.parse_symbol_sizes(over), limits)
+
+    def test_ambiguous_or_malformed_symbols_fail(self):
+        limits = tool.limits(SAVE_H, LOAD_SAVE_H)
+        duplicate = NM + "02020000 00000fac b gSaveblock2\n"
+        with self.assertRaisesRegex(ValueError, "Ambiguous save symbol gSaveblock2: 2"):
+            tool.report(tool.parse_symbol_sizes(duplicate), limits)
+        with self.assertRaisesRegex(ValueError, "Malformed nm line"):
+            tool.parse_symbol_sizes("0200fee8 zz B gSaveblock1\n")
+
+    def test_missing_or_invalid_header_constants_fail(self):
+        with self.assertRaisesRegex(ValueError, "Missing define SAVEBLOCK_MOVE_RANGE"):
+            tool.limits(SAVE_H, "")
+        with self.assertRaisesRegex(ValueError, "Missing define SECTOR_ID_PKMN_STORAGE_END"):
+            tool.limits(SAVE_H.replace("SECTOR_ID_PKMN_STORAGE_END", "UNRELATED"), LOAD_SAVE_H)
+        with self.assertRaisesRegex(ValueError, "Non-positive limit for SaveBlock1"):
+            tool.limits(SAVE_H.replace("SAVEBLOCK1_END      4", "SAVEBLOCK1_END      0"), LOAD_SAVE_H)
 
 if __name__ == "__main__":
     unittest.main()

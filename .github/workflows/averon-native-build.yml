@@ -7,6 +7,8 @@ on:
       - "Pokemon Game/engine/**"
       - "Pokemon Game/scripts/check-averon-resource-budget.py"
       - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
+      - "Pokemon Game/scripts/report-averon-save-headroom.py"
+      - "Pokemon Game/scripts/tests/test_averon_save_headroom.py"
   push:
     branches: [main]
     paths:
@@ -14,6 +16,8 @@ on:
       - "Pokemon Game/engine/**"
       - "Pokemon Game/scripts/check-averon-resource-budget.py"
       - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
+      - "Pokemon Game/scripts/report-averon-save-headroom.py"
+      - "Pokemon Game/scripts/tests/test_averon_save_headroom.py"
   workflow_dispatch:
 
 permissions:
@@ -31,6 +35,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify budget parser fixtures
         run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_resource_budget.py" -v
+      - name: Verify save-headroom report fixtures
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_save_headroom.py" -v
       - name: Install engine toolchain documented by pinned source
         run: |
           sudo apt-get update -qq
@@ -49,6 +55,13 @@ jobs:
           du -h pokeemerald.gba
           python3 "../scripts/check-averon-resource-budget.py" --log "$RUNNER_TEMP/averon-build.log" --rom pokeemerald.gba --json "$RUNNER_TEMP/averon-memory-budget.json"
           tail -30 "$RUNNER_TEMP/averon-build.log"
+      - name: Report save-block headroom from the linked ELF
+        working-directory: "Pokemon Game/engine"
+        run: |
+          test -s pokeemerald.elf
+          python3 "../scripts/report-averon-save-headroom.py" --elf pokeemerald.elf --json "$RUNNER_TEMP/averon-save-headroom.json"
+          test -s "$RUNNER_TEMP/averon-save-headroom.json"
+          echo "::notice title=Save-block headroom::$(jq -r 'to_entries | map("\(.key) \(.value.free_bytes) B free") | join("; ")' "$RUNNER_TEMP/averon-save-headroom.json")"
       - name: Run native Averon regression tests through the bundled headless runner
         working-directory: "Pokemon Game/engine"
         run: |
@@ -73,4 +86,5 @@ jobs:
           path: |
             ${{ runner.temp }}/averon-build.log
             ${{ runner.temp }}/averon-memory-budget.json
+            ${{ runner.temp }}/averon-save-headroom.json
             ${{ runner.temp }}/averon-native-tests.log
