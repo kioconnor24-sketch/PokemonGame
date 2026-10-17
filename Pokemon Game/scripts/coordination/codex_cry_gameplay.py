@@ -309,10 +309,20 @@ def pokedex_cry(d):
     time.sleep(0.8)
     d.shot('dex-entry')
     d.log('dex', step='entry', tasks=active_tasks(d.g), attempts=attempt)
-    d.e.tap('RIGHT', after=0.4)   # AREA
-    d.e.tap('RIGHT', after=0.4)   # CRY
-    d.e.tap('A', after=0.4)
-    cry = wait_task(d, ['Task_HandleCryScreenInput'], timeout=8.0)
+    # The page menu opens on AREA (pokedex.c selectedScreen); CRY is next.
+    pages = ['Task_HandleCryScreenInput', 'Task_HandleSizeScreenInput', 'Task_HandleAreaScreenInput']
+    cry = None
+    for key in ('RIGHT', 'LEFT', 'LEFT'):
+        d.e.tap(key, after=0.4)
+        d.e.tap('A', after=0.4)
+        page = wait_task(d, pages, timeout=8.0)
+        d.log('dex', step='page', key=key, page=page)
+        if page == 'Task_HandleCryScreenInput':
+            cry = page
+            break
+        if page:  # another page opened: back to the entry and move again
+            d.e.tap('B', after=0.4)
+            wait_task(d, ['Task_HandleInfoScreenInput'], timeout=8.0)
     time.sleep(0.8)
     d.shot('dex-cry-page')
     d.log('dex', step='cry-page', tasks=active_tasks(d.g))
