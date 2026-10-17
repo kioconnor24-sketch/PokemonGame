@@ -1,0 +1,29 @@
+{"t": 1792224649.05, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/play14.gba", "phases": ["q1_continued", "trainer_card", "show_bag"], "new_game": false}
+{"t": 1792224649.09, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792224649.12, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792224651.9, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792224651.96, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792224653.17, "event": "screen", "cb2": "MainCB2_Intro", "i": 7}
+{"t": 1792224653.26, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792224653.83, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 8}
+{"t": 1792224653.93, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792224654.56, "event": "screen", "cb2": "MainCB2", "i": 9}
+{"t": 1792224654.65, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792224655.78, "event": "screen", "cb2": "CB2_MainMenu", "i": 11}
+{"t": 1792224655.84, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792224659.59, "event": "screen", "cb2": "CB2_Overworld", "i": 14}
+{"t": 1792224659.67, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792224660.39, "event": "field", "map": "MAP_ALDERFIELD", "pos": [13, 16], "party": [{"level": 15, "hp": 4, "maxhp": 44}, {"level": 15, "hp": 0, "maxhp": 39}, {"level": 5, "hp": 0, "maxhp": 19}, {"level": 5, "hp": 19, "maxhp": 19}, {"level": 5, "hp": 18, "maxhp": 18}, {"level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792224660.52, "event": "capture", "file": "0008-q1-continued.png"}
+{"t": 1792224660.52, "event": "observe", "label": "q1-continued", "problems": []}
+{"t": 1792224666.31, "event": "capture", "file": "0009-trainer-card.png"}
+{"t": 1792224675.51, "event": "capture", "file": "0010-bag-pocket-0.png"}
+{"t": 1792224676.71, "event": "capture", "file": "0011-bag-pocket-1.png"}
+{"t": 1792224677.87, "event": "capture", "file": "0012-bag-pocket-2.png"}
+{"t": 1792224679.02, "event": "capture", "file": "0013-bag-pocket-3.png"}
+{"t": 1792224680.16, "event": "capture", "file": "0014-bag-pocket-4.png"}
+{"t": 1792224681.36, "event": "capture", "file": "0015-bag-pocket-5.png"}
+{"t": 1792224684.06, "event": "capture", "file": "0016-bag-shown.png"}
+{"t": 1792224684.06, "event": "observe", "label": "bag-shown", "problems": []}
+{"t": 1792224684.19, "event": "capture", "file": "0017-end.png"}
+{"t": 1792224684.19, "event": "observe", "label": "end", "problems": []}

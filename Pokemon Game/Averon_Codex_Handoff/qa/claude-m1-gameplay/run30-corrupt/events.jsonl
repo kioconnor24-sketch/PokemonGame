@@ -1,0 +1,23 @@
+{"t": 1792228150.07, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/corrupt.gba", "phases": ["corrupt_fallback", "save"], "new_game": false}
+{"t": 1792228150.09, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792228150.12, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792228152.76, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792228152.8, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792228154.56, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792228154.62, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792228155.2, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792228155.27, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792228155.85, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792228155.89, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792228156.97, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792228157.0, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792228164.51, "event": "screen", "cb2": "CB2_Overworld", "i": 18}
+{"t": 1792228164.54, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792228165.23, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 16, "hp": 41, "maxhp": 41}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792228165.39, "event": "capture", "file": "0008-corrupt-fallback.png"}
+{"t": 1792228165.39, "event": "observe", "label": "corrupt-fallback", "problems": []}
+{"t": 1792228171.04, "event": "capture", "file": "0009-save-confirm-checkpoint.png"}
+{"t": 1792228179.77, "event": "saved", "label": "checkpoint", "status": 1, "ok": true}
+{"t": 1792228179.84, "event": "capture", "file": "0010-saved-checkpoint.png"}
+{"t": 1792228180.05, "event": "capture", "file": "0011-end.png"}
+{"t": 1792228180.05, "event": "observe", "label": "end", "problems": []}

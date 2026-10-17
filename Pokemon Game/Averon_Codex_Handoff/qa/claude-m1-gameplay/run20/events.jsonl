@@ -1,0 +1,49 @@
+{"t": 1792224735.18, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/play14.gba", "phases": ["q2_start", "q2_observer", "q2_tree", "q2_reward", "save"], "new_game": false}
+{"t": 1792224735.24, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792224735.32, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792224737.54, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 4}
+{"t": 1792224737.59, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792224739.38, "event": "screen", "cb2": "MainCB2_Intro", "i": 7}
+{"t": 1792224739.5, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792224740.09, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 8}
+{"t": 1792224740.16, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792224740.72, "event": "screen", "cb2": "MainCB2", "i": 9}
+{"t": 1792224740.81, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792224741.95, "event": "screen", "cb2": "CB2_MainMenu", "i": 11}
+{"t": 1792224742.04, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792224745.89, "event": "screen", "cb2": "CB2_Overworld", "i": 14}
+{"t": 1792224745.99, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792224746.7, "event": "field", "map": "MAP_ALDERFIELD", "pos": [13, 16], "party": [{"level": 15, "hp": 4, "maxhp": 44}, {"level": 15, "hp": 0, "maxhp": 39}, {"level": 5, "hp": 0, "maxhp": 19}, {"level": 5, "hp": 19, "maxhp": 19}, {"level": 5, "hp": 18, "maxhp": 18}, {"level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792224752.78, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [16, 0]}
+{"t": 1792224762.72, "event": "map", "map": "MAP_WINDROW", "pos": [17, 0]}
+{"t": 1792224769.73, "event": "capture", "file": "0008-talk-windrow-20-14-01.png"}
+{"t": 1792224771.21, "event": "capture", "file": "0009-talk-windrow-20-14-02.png"}
+{"t": 1792224771.85, "event": "capture", "file": "0010-q2-started.png"}
+{"t": 1792224771.85, "event": "observe", "label": "q2-started", "problems": []}
+{"t": 1792224776.32, "event": "map", "map": "MAP_COASTALMEADOW", "pos": [19, 0]}
+{"t": 1792224787.6, "event": "capture", "file": "0011-talk-coastalmeadow-10-22-01.png"}
+{"t": 1792224788.23, "event": "capture", "file": "0012-q2-observer.png"}
+{"t": 1792224788.23, "event": "observe", "label": "q2-observer", "problems": []}
+{"t": 1792224792.24, "event": "capture", "file": "0013-talk-coastalmeadow-12-27-01.png"}
+{"t": 1792224792.88, "event": "capture", "file": "0014-q2-tree.png"}
+{"t": 1792224792.88, "event": "observe", "label": "q2-tree", "problems": []}
+{"t": 1792224795.26, "event": "capture", "file": "0015-talk-coastalmeadow-12-27-01.png"}
+{"t": 1792224795.86, "event": "capture", "file": "0016-q2-tree-repeat.png"}
+{"t": 1792224795.86, "event": "observe", "label": "q2-tree-repeat", "problems": []}
+{"t": 1792224796.03, "event": "capture", "file": "0017-q2-before-reward.png"}
+{"t": 1792224796.03, "event": "observe", "label": "q2-before-reward", "problems": []}
+{"t": 1792224806.16, "event": "map", "map": "MAP_WINDROW", "pos": [16, 25]}
+{"t": 1792224812.49, "event": "capture", "file": "0018-talk-windrow-20-14-01.png"}
+{"t": 1792224814.02, "event": "capture", "file": "0019-talk-windrow-20-14-02.png"}
+{"t": 1792224815.48, "event": "capture", "file": "0020-talk-windrow-20-14-03.png"}
+{"t": 1792224817.03, "event": "capture", "file": "0021-talk-windrow-20-14-04.png"}
+{"t": 1792224817.69, "event": "capture", "file": "0022-q2-reward.png"}
+{"t": 1792224817.69, "event": "observe", "label": "q2-reward", "problems": []}
+{"t": 1792224820.01, "event": "capture", "file": "0023-talk-windrow-20-14-01.png"}
+{"t": 1792224820.63, "event": "capture", "file": "0024-q2-no-duplicate.png"}
+{"t": 1792224820.63, "event": "observe", "label": "q2-no-duplicate", "problems": []}
+{"t": 1792224826.48, "event": "capture", "file": "0025-save-confirm-checkpoint.png"}
+{"t": 1792224836.36, "event": "saved", "label": "checkpoint", "status": 1, "ok": true}
+{"t": 1792224836.44, "event": "capture", "file": "0026-saved-checkpoint.png"}
+{"t": 1792224836.57, "event": "capture", "file": "0027-end.png"}
+{"t": 1792224836.58, "event": "observe", "label": "end", "problems": []}

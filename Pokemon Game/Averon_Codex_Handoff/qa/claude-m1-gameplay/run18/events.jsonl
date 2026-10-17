@@ -1,0 +1,34 @@
+{"t": 1792224440.56, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/play14.gba", "phases": ["q1_hiker", "q1_reward", "save"], "new_game": false}
+{"t": 1792224440.56, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792224440.61, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792224443.21, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792224443.25, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792224445.04, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792224445.09, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792224445.64, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792224445.68, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792224446.22, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792224446.27, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792224447.34, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792224447.37, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792224451.02, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792224451.05, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792224451.71, "event": "field", "map": "MAP_ALDERFIELDGYM", "pos": [4, 5], "party": [{"level": 15, "hp": 4, "maxhp": 44}, {"level": 15, "hp": 0, "maxhp": 39}, {"level": 5, "hp": 0, "maxhp": 19}, {"level": 5, "hp": 19, "maxhp": 19}, {"level": 5, "hp": 18, "maxhp": 18}, {"level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792224457.22, "event": "map", "map": "MAP_ALDERFIELD", "pos": [8, 9]}
+{"t": 1792224467.63, "event": "map", "map": "MAP_COASTALBLUFFS", "pos": [0, 15]}
+{"t": 1792224467.73, "event": "capture", "file": "0008-q1-bluffs-entered.png"}
+{"t": 1792224467.73, "event": "observe", "label": "q1-bluffs-entered", "problems": []}
+{"t": 1792224481.37, "event": "capture", "file": "0009-q1-hiker.png"}
+{"t": 1792224481.37, "event": "observe", "label": "q1-hiker", "problems": []}
+{"t": 1792224481.44, "event": "capture", "file": "0010-q1-before-reward.png"}
+{"t": 1792224481.44, "event": "observe", "label": "q1-before-reward", "problems": []}
+{"t": 1792224493.22, "event": "map", "map": "MAP_ALDERFIELD", "pos": [39, 15]}
+{"t": 1792224507.19, "event": "capture", "file": "0011-q1-reward.png"}
+{"t": 1792224507.19, "event": "observe", "label": "q1-reward", "problems": []}
+{"t": 1792224509.43, "event": "capture", "file": "0012-q1-no-duplicate.png"}
+{"t": 1792224509.43, "event": "observe", "label": "q1-no-duplicate", "problems": []}
+{"t": 1792224515.1, "event": "capture", "file": "0013-save-confirm-checkpoint.png"}
+{"t": 1792224523.65, "event": "saved", "label": "checkpoint", "status": 1, "ok": true}
+{"t": 1792224523.68, "event": "capture", "file": "0014-saved-checkpoint.png"}
+{"t": 1792224523.75, "event": "capture", "file": "0015-end.png"}
+{"t": 1792224523.75, "event": "observe", "label": "end", "problems": []}
