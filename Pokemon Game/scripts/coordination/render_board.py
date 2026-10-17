@@ -26,7 +26,7 @@ AUTHORIZED_ASSOCIATIONS = {"OWNER", "MEMBER", "COLLABORATOR"}
 
 
 def _escape(value: object) -> str:
-    return str(value).replace("|", "\\|").replace("\n", " ").replace("\r", " ")[:400]
+    return str(value).replace("|", "\\|").replace("\n", " ").replace("\r", " ")[:1000]
 
 
 def is_qa_accepted(task: dict, snapshot: dict, pr: dict) -> bool:
