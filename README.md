@@ -1,38 +1,29 @@
-# Pokémon Averon — Game Boy Advance project
+# Pokémon Averon — Pokémon Emerald Expansion game project
 
-The source project for a Pokémon Emerald Expansion game with the original Averon region and Sinnoh planned as a full second region. The source is actively developed; a complete playable game and independent Delta iOS verification are **not** claimed.
+The source project for an original **Averon** region followed by a full **Sinnoh** second region. This is actively developed source, **not** a complete playable game or verified Delta iOS release.
 
-## Start here — one reliable path
+## Start here — CURRENT source of truth
 
-1. [Repository operating instructions](AGENTS.md) and [four-agent roles](Pokemon%20Game/Averon_Codex_Handoff/development/AGENT_ROLES.md)
-2. [Development index / file organization](Pokemon%20Game/Averon_Codex_Handoff/development/INDEX.md) — what each folder contains; which documents are historical
-3. [Current work queue](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md) and [dependency roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/ROADMAP.md)
-4. [Team claims and owner restrictions — Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15); [active assignments #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24)
-5. [Current source branches and PR handoffs](https://github.com/kioconnor24-sketch/PokemonGame/pulls); [QA observations #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23)
-6. [GitHub workflow handbook](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md) and [build/test checks](https://github.com/kioconnor24-sketch/PokemonGame/actions)
+1. **[Owner-approved current phase, readiness and developer handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md)** — the single canonical status. **Pre-Sinnoh Milestone 1 is accepted; the next phase is authorized.** Human audio listening is deferred; detailed map/story/ID design still requires approval.
+2. [Repository-wide agent rules](AGENTS.md) and [Claude-specific rules](CLAUDE.md), then [documentation index](Pokemon%20Game/Averon_Codex_Handoff/development/INDEX.md).
+3. [Current Phase 2 task queue](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md), [milestone roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/ROADMAP.md) and [Sinnoh technical readiness](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_TECHNICAL_READINESS_20261017.md).
+4. [Developer ownership hub — Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) · [future design backlog #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) · [QA / deferred human audio #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) · [problem desk #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55).
+5. [Pull requests](https://github.com/kioconnor24-sketch/PokemonGame/pulls) · [GitHub Actions](https://github.com/kioconnor24-sketch/PokemonGame/actions) · [workflow rules](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md).
 
-## Repository layout
+## Milestone 1 evidence (finished; do not reimplement)
+- [Consolidated acceptance, merged #112](Pokemon%20Game/Averon_Codex_Handoff/development/M1_ACCEPTANCE_REPORT_20261017.md): all assigned map-independent engineering complete, no known blocking defects, Q1–Q5 scoped graphical evidence, Gym 1 victory/badge preserved; remaining human **audio quality check is DEFERRED, NOT PASS**.
+- [Native/full regression closeout, merged #109](Pokemon%20Game/Averon_Codex_Handoff/development/CODEX_M1_NATIVE_CLOSEOUT_20261017.md): 6,107 native test outcomes, 5,332 PASS and an **unchanged strict expected-failure baseline**; normal/RELEASE builds and save-integrity evidence.
+- [Current new-phase technical planning, merged #111](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_TECHNICAL_READINESS_20261017.md): RELEASE ROM ~6.39 MiB headroom, SaveBlock2 84 B free, and pending section/met-location/region integration contracts. This does **not** prove a full region fits.
+
+## Repository
 
 | Path | Purpose |
 | --- | --- |
-| [Pokemon Game/engine/](Pokemon%20Game/engine/) | Game engine, data, sprites, native tests |
-| [Pokemon Game/scripts/](Pokemon%20Game/scripts/) | Build, audits, authoring, host tests; keep existing paths stable |
-| [Pokemon Game/Averon_Codex_Handoff/development/](Pokemon%20Game/Averon_Codex_Handoff/development/) | Collaboration rules, roadmap, active task queue, historical progress |
-| [Pokemon Game/Averon_Codex_Handoff/qa/](Pokemon%20Game/Averon_Codex_Handoff/qa/) | Test plans and evidence, not equivalent to a complete emulator pass |
-| [Pokemon Game/Averon_Codex_Handoff/design/](Pokemon%20Game/Averon_Codex_Handoff/design/) | **Historical/provisional** creative drafts, not authorization to implement |
-| [Pokemon Game/Averon_Codex_Handoff/data/](Pokemon%20Game/Averon_Codex_Handoff/data/) | Planning CSVs and asset information; do not treat provisional data as final |
-| [.github/workflows/](.github/workflows/) | Source checks, native builds, safety checks |
+| [Pokemon Game/engine/](Pokemon%20Game/engine/) | Buildable GBA engine, game data and native tests |
+| [Pokemon Game/scripts/](Pokemon%20Game/scripts/) | Build, QA and coordination tools |
+| [Pokemon Game/Averon_Codex_Handoff/development/](Pokemon%20Game/Averon_Codex_Handoff/development/) | Current phase, signed-off M1 evidence, historical handoffs |
+| [Pokemon Game/Averon_Codex_Handoff/qa/](Pokemon%20Game/Averon_Codex_Handoff/qa/) | Case-specific visual testing and evidence |
+| [Pokemon Game/Averon_Codex_Handoff/design/](Pokemon%20Game/Averon_Codex_Handoff/design/) | Provisional creative drafts, not automatically accepted canon |
+| [.github/workflows/](.github/workflows/) | Required CI, guard and reproducible validation |
 
-## Current constraints
-
-Codex and Claude are **equal peer developers in separate checkouts**, with exclusive claims for shared files; ChatGPT QA owns independent emulator acceptance, and ChatGPT management handles reviews. Read the latest [coordination hub](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) before touching a claimed path.
-
-**Owner hard freeze:** no new production *or temporary* map/layout/route/geography files, no final Sinnoh maps, unapproved story scenes, Gym teams or level curves, Pokémon placement, legendary locations, custom friend likenesses or unapproved sprites/music. Synthetic in-memory region/badge fixtures and unrelated verified technical work are permitted. The [conditional future backlog](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) does not lift this freeze.
-
-`main` is the integrated baseline. Open PRs are **not merged achievements**. Source/compile/native tests are not graphical gameplay verification; owner-run Delta testing remains separate. Do not publish copyrighted complete ROMs, private save data, secrets, or unlicensed media.
-
-## Developer workflow
-
-Read the [working procedure](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md), claim exact files in #15, code on an independent branch, run targeted checks, then build/test the actual GBA engine when appropriate. Record the exact head SHA, actual results and the next action in that PR's **HANDOFF** rather than rewriting shared documents every session.
-
-Past creative packets and Codex bootstrap instructions remain available for provenance but should **not** override this entry point or current owner approvals.
+**Working rule:** Codex and Claude may work independently on nonoverlapping, approved scopes. No direct unreviewed `main` pushes or guard bypasses, and no unapproved creative decisions or ROM/private-save uploads. Historical documents/issues stay accessible for provenance but do not override the [current-phase handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md).
