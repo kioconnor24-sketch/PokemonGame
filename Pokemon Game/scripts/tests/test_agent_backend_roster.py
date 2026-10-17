@@ -38,8 +38,8 @@ class BackendOwnershipTests(unittest.TestCase):
                 self.assertNotIn(interface, owners,
                                  f"{interface} claimed by both {owners.get(interface)} and {task['id']}")
                 owners[interface] = task["agent"]
-        self.assertEqual(owners["region_specific_caps_obedience"], "claude")
-        self.assertEqual(owners["generic_battle_exp_items_followers_ai"], "claude")
+        self.assertEqual(owners["region_specific_caps_obedience"], "codex")
+        self.assertEqual(owners["generic_battle_exp_items_followers_ai"], "codex")
 
     def test_legend_not_restarted_or_owned_by_codex(self):
         task = self.by_id["LEGEND"]
@@ -51,7 +51,7 @@ class BackendOwnershipTests(unittest.TestCase):
     def test_all_active_tasks_have_fallback_and_resume_trigger(self):
         active = ["QUEST", "TWO-REGION", "SCRIPTED-BATTLE",
                   "LEGEND", "POKEMON-MECHANICS", "REGION-PLATFORM",
-                  "QUEST-PLAYTEST"]
+                  "QUEST-PLAYTEST", "M1-BACKEND-CLOSEOUT", "M1-TRADE-SAVE-REFUSAL", "M1-CROSS-FEATURE-REGRESSIONS", "M1-BUILD-RESOURCE-EVIDENCE", "M1-EMULATOR-GAMEPLAY", "M1-CLAUDE-INTEGRATION"]
         for name in active:
             task = self.by_id[name]
             with self.subTest(task=name):
@@ -79,7 +79,7 @@ class BackendOwnershipTests(unittest.TestCase):
                     "pull_requests": prs, "qa_signoffs": []}
         result = board.render(self.conf, snapshot)
         self.assertIn("| LEGEND | claude |", result["board"])
-        self.assertIn("| POKEMON-MECHANICS | claude |", result["board"])
+        self.assertIn("| POKEMON-MECHANICS | codex |", result["board"])
         self.assertIn("While waiting on integration:", result["claude"])
         self.assertNotIn("| QUEST | codex |", result["board"])
         self.assertIn("BACKEND FIRST", result["board"])
@@ -99,20 +99,20 @@ class BackendOwnershipTests(unittest.TestCase):
         self.assertEqual(computed["TWO-REGION"]["status"], "MERGED CORE; REMAINING M1 VERIFICATION")
         self.assertNotIn("MERGED", computed["QUEST"]["status"])
 
-    def test_claude_has_full_m1_backend_authority_and_codex_is_paused(self):
+    def test_fluid_two_developer_ownership_without_qa_or_merge_waiver(self):
         policy = self.conf["policies"]
-        self.assertEqual(policy["sole_backend_developer"], "claude")
+        self.assertEqual(policy["backend_developers"], ["claude", "codex"])
+        self.assertEqual(policy["codex_status"], "AUTHORIZED_TO_RESUME_WHEN_SESSION_STARTS")
         self.assertFalse(policy["codex_active"])
-        self.assertTrue(policy["local_build_debug_test_unrestricted_within_m1"])
+        self.assertTrue(policy["cross_lane_takeover_allowed_after_handoff"])
+        self.assertTrue(policy["single_active_writer_per_exact_path"])
         self.assertTrue(policy["claims_are_not_permission_requests"])
         self.assertTrue(policy["dependency_gates_apply_to_merge"])
         self.assertTrue(policy["independent_qa_required_for_gameplay_acceptance"])
-        for task in self.tasks:
-            if task["id"] == "QUEST-PLAYTEST":
-                self.assertEqual(task["agent"], "playtest")
-            else:
-                self.assertEqual(task["agent"], "claude")
-        self.assertFalse(self.by_id["TWO-REGION"]["deps"])
+        self.assertEqual(self.by_id["QUEST-PLAYTEST"]["agent"], "playtest")
+        self.assertEqual(self.by_id["M1-EMULATOR-GAMEPLAY"]["agent"], "claude")
+        self.assertEqual(self.by_id["M1-TRADE-SAVE-REFUSAL"]["agent"], "codex")
+        self.assertEqual(self.by_id["M1-BUILD-RESOURCE-EVIDENCE"]["agent"], "codex")
         self.assertTrue(self.by_id["SCRIPTED-BATTLE"]["parallel_development"])
 
     def test_no_invented_pr_for_region_groundwork(self):
