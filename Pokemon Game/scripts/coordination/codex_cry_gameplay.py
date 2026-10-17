@@ -49,9 +49,7 @@ SECTOR_SIZE = 0x1000
 SECTOR_DATA_SIZE = 3968
 SECTORS_PER_SLOT = 14
 SECTOR_SIGNATURE = 0x08012025
-SAVE_SIZE_EXPRS = {'save.sb2': 'sizeof(struct SaveBlock2)',
-                   'save.sb1': 'sizeof(struct SaveBlock1)',
-                   'save.storage': 'sizeof(struct PokemonStorage)'}
+SAVE_SIZE_TYPES = ('SaveBlock2', 'SaveBlock1', 'PokemonStorage')
 RESTORED_KEYS = ('map', 'mapGroup', 'mapNum', 'x', 'y', 'party', 'flags', 'money',
                  'pokeBalls', 'berries')
 
@@ -59,6 +57,28 @@ RESTORED_KEYS = ('map', 'mapGroup', 'mapNum', 'x', 'y', 'party', 'flags', 'money
 def base_name(name):
     """SaveSuccessCallback.lto_priv.0 / .constprop.0 / .isra.0 -> SaveSuccessCallback."""
     return re.sub(r'(\.(lto_priv|constprop|isra|part|cold)\.[0-9]+)+$', '', name)
+
+
+def save_struct_sizes(engine, workdir, profile):
+    """sizeof() of each saved block, from the game's own compiler and headers."""
+    workdir.mkdir(parents=True, exist_ok=True)
+    src, obj = workdir/'save_sizes.c', workdir/'save_sizes.o'
+    src.write_text('\n'.join(['#include "global.h"', '#include "pokemon_storage_system.h"',
+                              '#define P(n, v) asm volatile(".globl AVSIZE_" #n "\\n.equ AVSIZE_" #n ", %c0" :: "i"(v))',
+                              'void AvSizes(void)', '{']
+                             + [f'    P({name}, sizeof(struct {name}));' for name in SAVE_SIZE_TYPES]
+                             + ['}', '']))
+    subprocess.run(['arm-none-eabi-gcc', '-mthumb', '-mthumb-interwork', '-O2', '-mabi=apcs-gnu',
+                    '-mtune=arm7tdmi', '-march=armv4t', '-std=gnu17', '-iquote', 'include',
+                    '-I', 'tools/agbcc/include', '-DMODERN=1', '-DTESTING=0', '-DEMERALD', '-DRELEASE',
+                    f"-DP_CRIES_ENABLED={'TRUE' if profile == 'on' else 'FALSE'}",
+                    '-c', str(src), '-o', str(obj)], cwd=engine, check=True)
+    found = {}
+    for line in subprocess.check_output(['arm-none-eabi-nm', str(obj)], text=True).splitlines():
+        match = re.fullmatch(r'([0-9a-f]+) A AVSIZE_(\w+)', line)
+        if match:
+            found[match[2]] = int(match[1], 16)
+    return [found[name] for name in SAVE_SIZE_TYPES]
 
 
 def chunk_sizes(sb2, sb1, storage):
@@ -231,10 +251,9 @@ def main():
     if args.new_game and rom.with_suffix('.sav').exists():
         parser.error('new-game refuses to overwrite an existing flash save')
     shutil.copyfile(rom_source, rom)
-    # Sector checksum sizes come from the game's own struct layout (probe).
-    emu.OFFSET_EXPRS.update(SAVE_SIZE_EXPRS)
     info = emu.load_build_info(elf, engine, scratch/'symbol-cache')
-    sizes = chunk_sizes(*(info['offsets'][key] for key in ('save.sb2', 'save.sb1', 'save.storage')))
+    # Sector checksum sizes come from the game's own struct layout.
+    sizes = chunk_sizes(*save_struct_sizes(engine, scratch/'save-sizes', args.profile))
     flash_path = rom.with_suffix('.sav')
     if args.expect_saved and args.new_game:
         parser.error('--expect-saved checks a CONTINUE boot, not a new game')
@@ -246,6 +265,8 @@ def main():
                   engine_status=play.git(engine, 'status', '--short', '--', '.').splitlines(),
                   driver_sha=play.git(DRIVER, 'rev-parse', 'HEAD'),
                   driver_status=play.git(DRIVER, 'status', '--short', '--', '.').splitlines(),
+                  wrapper_status=play.git(Path(__file__).resolve().parent, 'status', '--short', '--',
+                                          Path(__file__).name).splitlines(),
                   rom_sha256=play.sha256(rom), elf_sha256=play.sha256(elf),
                   cry_profile=args.profile, release=True, phases=args.phases,
                   mgba=subprocess.check_output(['mgba', '--version'], text=True).strip(),
@@ -253,7 +274,7 @@ def main():
                   save_before=play.sha256(flash_path) if flash_path.exists() else None,
                   save_check='success dialog callback + valid newer flash slot + fresh-process CONTINUE '
                              '(gSaveAttemptStatus is not used: RELEASE LTO removes its stores)')
-    if record['engine_status'] or record['driver_status']:
+    if record['engine_status'] or record['driver_status'] or record['wrapper_status']:
         parser.error('commit source before collecting publishable gameplay evidence')
     (out/'provenance-start.json').write_text(json.dumps(record, indent=2)+'\n')
     world = mapdata.World(engine)
