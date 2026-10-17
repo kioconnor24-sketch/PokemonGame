@@ -21,15 +21,19 @@ verdict.** Nothing here contains a ROM, ELF, `.sav`, raw audio or emulator log.
 The two ROMs are **not** byte-identical. After `bcfeb28d`, main's non-test
 engine changes are only `data/event_scripts.s` and
 `data/scripts/averon_legend.inc` (#25, SCRIPTED/LEGEND macro registration) and
-`src/pokemon.c` (#96, delivery OT key); #95 added tests only. Open #101 changes
-egg hatching. They do not change the Q1–Q5 quest, gym or clinic scripts, but #25 does
+`src/pokemon.c` (#96, delivery OT key), and `include/pokemon.h`,
+`src/pokemon.c`, `src/egg_hatch.c` (#101, merged: egg OT re-keying); #95 added
+tests only. The `event_scripts.s`/`averon_legend.inc` changes only add macro
+includes that emit no bytes. They do not change the Q1–Q5 quest, gym or clinic scripts, but #25 does
 change `event_scripts.s` (which includes every script), so this is not proven
 equivalence: the gameplay runs prove the `bcfeb28d` build. Each run's
 `provenance-start.json`/`provenance-end.json` record source, engine-tree state
 (never dirty), ROM/ELF/save hashes, driver commit and whether the driver tree
 was dirty. **Driver dirty or driver changed during the run:** run17
 (81500a2a→231570c4), run18, run19, run21, run22, run23, run26 (start clean, end
-differs), run20 and run34 (clean at start, dirty at end). The driver only reads
+differs), run20 and run34 (clean at start, dirty at end), and runs whose
+committed driver changed while they ran: run47 (a28d7601→9222dde8),
+run52-try1 (b09c44f0→a9676159), run56 (a9676159→07111746). The driver only reads
 memory and presses keys, so this affects reproducibility of the inputs, not the
 game build; the packages list each run's start driver state.
 
@@ -92,9 +96,11 @@ run43 (same copy) 9b59fcbe5c90 -> f3d57867771e; run44 unchanged.  Re-save in the
 ```
 
 `package-e6870c30.json` (evidence.py) and `audit-e6870c30.json`
-(`scripts/coordination/qa_evidence_report.py`, 8/8 READY_FOR_INDEPENDENT_REVIEW)
-cover the current-ROM cases; `package-66b58c3a.json`/`audit-66b58c3a.json`
-cover Gym 1 on the older ROM. READY_FOR_INDEPENDENT_REVIEW is completeness,
+(`scripts/coordination/qa_evidence_report.py`, 9/9 READY_FOR_INDEPENDENT_REVIEW)
+cover the current-quest-ROM cases including GYM1; `package-66b58c3a.json`/
+`audit-66b58c3a.json` keep run17's older-ROM Gym 1 win; and
+`package-3072c6c0-main.json`/`audit-3072c6c0-main.json` (3/3) cover the
+current-main ROM runs (see below). READY_FOR_INDEPENDENT_REVIEW is completeness,
 not a PASS. Cases using a fixture are `scope: DEV_FIXTURE`.
 
 Two earlier attempts at run26 stopped on driver bugs before any save (a wild
@@ -119,7 +125,7 @@ rerun from the same untouched copy after its fix (`93a47f98`, `e2b527d7`).
   `events.jsonl` and has its screenshots; evidence.py marks those cases
   `DEV_FIXTURE`.
 
-Second-review reruns (clean drivers `a28d7601`–`a9676159`; ROM = engine build):
+Second-review reruns (clean drivers `a28d7601`–`a9676159`, runs 56–59 `07111746`; ROM = engine build):
 
 ```
 run45-old9/14, run50-old6/7/8 (COPIES, observe only)   Q1 started flag: false at run6/7/8 saves, true from run9
@@ -130,18 +136,33 @@ run48 (COPY of 29ea0df40d71, before Badge01)           Gym 1 replay: LOST to Eli
 run51 (COPY of save-after-run6, fddf1b772ba8)          Q1 opening request on screen: "Could you check the
                                                        bluffs for me?" YES -> NOTES_STARTED (not saved)
 run52 try1/try2 (fresh COPIES of 29ea0df40d71)         Gym 1: lost twice more (genuine, recorded)
-run52 try3     29ea0df40d71 -> 95164bf07835            Gym 1 WON on the current-quest ROM; trainer card badge 1,
-                                                       save box/save text; Elio's defeat-text frames caught the
-                                                       box between messages (empty)
+run52 try3     29ea0df40d71 -> 95164bf07835            Gym 1 WON on the current-quest ROM; trainer card badge 1
+                                                       (card text not drawn yet); saved (proved by the flash hash
+                                                       and run53, the save-dialogue frames are empty boxes);
+                                                       Elio's defeat/badge/TM text frames are empty boxes
 run53          95164bf07835 (unchanged)                fresh Continue: trainer card badge 1
+run49          (pre-badge copy, unchanged)             trainer card after run48's loss: no badge
+```
+
+Current-main ROM runs (source `103d05dd`, ROM `3072c6c0…`, ELF `180caa1a…`):
+
+```
+run54 (COPY of natural 4ca9b7f40dc6)        Continue of a quest-ROM save on the main ROM; Bag Great Ball x2,
+                                            Oran x3, party, all Q5 checks; Q3 loss loop evolved Fletchling
+                                            (driver check too strict, fixed) -> stopped, not saved
+run56 (COPY of 2bc19b97b053) -> 129b1d432922  Q4 DEV fixture through the changed GiveCapturedMonToPlayer
+run57          129b1d432922 (unchanged)       fresh Continue, party with one Wobbuffet
+run58 (COPY of natural 4ca9b7f40dc6) -> 42276c420dcd  Q3 genuine loss, whiteout, clinic, healed, save
+run59          42276c420dcd (unchanged)       fresh Continue in the clinic, follower after one step
 ```
 
 ## Known gaps (from the separate reviews)
 
 - **Q1 start:** the natural chain answered YES before run9 (outside this
   set); run51 shows the opening request and YES on a copy of the run6 save.
-- **Gym 1 text:** no frame shows Elio's defeat text or the badge message
-  (empty boxes between messages, run52 try3). The win is the battle plus the
+- **Gym 1 text:** no frame shows Elio's defeat text, the badge or TM message
+  or try3's save prompt (empty boxes; probably capture timing). Not replayed
+  (owner: no more Gym attempts). The win is the battle plus the
   badge flag immediately after, and the trainer card in the same run.
 - **Q3 status:** no party member had a status condition at the loss, so status
   clearing is not exercised on screen; it is covered natively

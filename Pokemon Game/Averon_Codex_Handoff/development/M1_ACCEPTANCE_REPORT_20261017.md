@@ -34,19 +34,19 @@ Legend: **PASS** (verified this session with evidence) · **VERIFIED_EXISTING**
 See `Averon_Codex_Handoff/qa/claude-m1-gameplay/README.md` for runs, hashes,
 save chain and fixture disclosure. Verdicts are filled from reviewed evidence.
 
-**Provisional — pending the final read-only review of runs 47–57.** Verdicts
-from the second separate review (Claude subagent, not third-party Playtest),
-updated for reruns made to close its gaps. Current-quest build: source
+Final verdicts after three separate read-only reviews (Claude subagents, **not
+third-party Playtest**); the last covered runs 47–59 and current-main
+applicability. Current-quest build: source
 `bcfeb28d`, ROM `e6870c30…`, ELF `aa2efbd9…`.
 
 | Case | Verdict | Scope | Evidence (runs) | Remaining gap |
 | --- | --- | --- | --- | --- |
-| Gym 1 | PASS (provisional) | ordinary play, save copy of the pre-badge save | run52 try3 win + badge flag + trainer card badge 1 + save; run53 Continue; run17 older-ROM win; run48/52 try1–2 genuine losses → clinic | Elio's defeat-text frames caught empty boxes |
-| Q1 | PASS (provisional) | ordinary play | run51 opening request; run35 Hiker/researcher dialogue, Bag 0 → Great Ball ×2, repeat; run36/38 Continue Bag ×2; run39 gate message + block | — |
+| Gym 1 | **PARTIAL** | ordinary play, save copy of the pre-badge save | run52 try3 win (last foe down, Elio sprite), badge + TM flags, trainer card badge 1; save proved by flash hash; run53 Continue card badge 1; run17 older-ROM win; run48/52 try1–2 genuine losses → clinic | no frame shows Elio's defeat, badge or TM text (empty boxes, capture timing); not replayed per owner |
+| Q1 | **PASS** | ordinary play | run51 opening request; run35 Hiker/researcher dialogue, Bag 0 → Great Ball ×2, repeat; run36/38 Continue Bag ×2; run39 gate message + block | — |
 | Q1 full pocket | PASS | DEV_FIXTURE (debug Fill) | run26 refusal → TOSS 999 → +2 once; run37 Continue Bag ×2 | — |
 | Q2 | PASS | ordinary play | run20 walk, boy hint, tree, artist +3, repeat; run38 natural Continue Oran ×3 | Oran 0 before is a memory read |
 | Q2 full pocket | PASS | DEV_FIXTURE (debug Fill) | run28 refusal → TOSS 999 → +3 once; run29 Continue Oran ×3 | — |
-| Q3 | PASS (provisional) | ordinary play on copies of the pre-Q3 save (+ natural run23) | run41/47 defeat text, full whiteout text (run47), nurse, party screens, save box + "saved"; run42/44 Continue in clinic, full HP numbers; follower after one step | status clearing not exercised (no status at the loss; native-tested); PP is a memory read |
+| Q3 | **PASS** | ordinary play on copies of the pre-Q3 save (+ natural run23) | run41/47 defeat text, full whiteout text (run47), nurse, party screens, save box + "saved"; run42/44 Continue in clinic, full HP numbers; follower after one step | status clearing not exercised (no status at the loss; native-tested); PP is a memory read |
 | Q4 | PASS | DEV_FIXTURE (lab + PC via debug menu) | run22 refusal, PC deposit → 5, one Wobbuffet, repeat; run40 Continue party screen | gift path changed on main (#96) → rechecked in run56/57 |
 | Q5 | PASS, audio needs a human listen | ordinary play | run25 collision, menus, Field Kit, NPC, follower through clinic door both ways; run23 audio non-silent in field/battle/clinic | audio quality not judged |
 | Corrupt newest slot | PASS | DEV_FIXTURE (damaged save copy) | run30/31 older whole slot loads, saves, continues | discriminator is state, not picture |
@@ -56,9 +56,14 @@ Gym map, Alderfield/Coastal Bluffs maps, trainer data and battle code are
 unchanged since run17's source. Main's other non-test engine changes since
 `bcfeb28d` are the SCRIPTED/LEGEND registration includes and `pokemon.c` OT
 re-keying (`GiveCapturedMonToPlayer`, used by `givemon` and captures). Minimal
-current-main runs: run54/55 (natural save on the main ROM: Bag, party, Q5
-checks, genuine loss/whiteout/clinic, save, Continue) and run56/57 (Q4 gift
-through the changed function).
+current-main runs: run54 (natural save on the main ROM: Bag, party, Q5
+checks; its Q3 loop stopped on a too-strict driver check after a legitimate
+evolution, not saved), run58/59 (genuine loss, whiteout, clinic, save, fresh
+Continue) and run56/57 (Q4 gift through the changed function). Final reviewer:
+**applicability JUSTIFIED** — the quest-build evidence applies to current main
+for GYM1, Q1/Q2 rewards, full pockets and corrupt fallback by unchanged source
+(save.c, quest scripts, Gym/maps/trainers/battle code unchanged), and Q3, Q4,
+Q5 and Continue were rerun on the main ROM.
 
 ## 4. Native suite, builds and save handling (Claude's earlier measurement)
 
