@@ -1,0 +1,709 @@
+name: Averon rendered emulator smoke playtest
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-rendered-playtest.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rendered-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install GBA build and graphical emulator tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3 \
+            mgba-sdl xvfb xdotool openbox imagemagick xauth
+      - name: Verify QA observer in isolation (no ROM, no game flags)
+        run: |
+          python3 -m py_compile "Pokemon Game/scripts/qa/quest_state_controller.py"
+          python3 "Pokemon Game/scripts/qa/test_quest_state_controller.py"
+      - name: Compile ROM for isolated test (never upload ROM or save)
+        working-directory: "Pokemon Game/engine"
+        run: |
+          make -j4 -O all > "$RUNNER_TEMP/playtest-build.log" 2>&1 || {
+            tail -120 "$RUNNER_TEMP/playtest-build.log"
+            exit 1
+          }
+          test -s pokeemerald.gba
+          sha256sum pokeemerald.gba
+          stat -c 'ROM bytes: %s' pokeemerald.gba
+      - name: Launch actual graphical mGBA and capture controller milestones
+        shell: bash
+        env:
+          SDL_AUDIODRIVER: dummy
+          SDL_VIDEODRIVER: x11
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/averon-playtest"
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1024x768x24 -nolisten tcp > "$RUNNER_TEMP/averon-playtest/xvfb.log" 2>&1 &
+          xvfb_pid=$!
+          sleep 2
+          openbox > "$RUNNER_TEMP/averon-playtest/window-manager.log" 2>&1 &
+          sleep 2
+          mgba -g -2 "Pokemon Game/engine/pokeemerald.gba" > "$RUNNER_TEMP/averon-playtest/mgba.log" 2>&1 &
+          emu_pid=$!
+          cleanup() { kill "$emu_pid" "$xvfb_pid" 2>/dev/null || true; }
+          trap cleanup EXIT
+          win=""
+          for i in $(seq 1 25); do
+            win=$(xdotool search --onlyvisible --name "mGBA" 2>/dev/null | head -1 || true)
+            if [ -n "$win" ]; then break; fi
+            if ! kill -0 "$emu_pid" 2>/dev/null; then
+              echo "Emulator exited prematurely:"
+              cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+              exit 1
+            fi
+            sleep 1
+          done
+          if [ -z "$win" ]; then
+            echo "No mGBA window after 25 seconds"
+            xdotool search --onlyvisible --name '.*' getwindowname || true
+            cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+            exit 1
+          fi
+          xdotool windowactivate --sync "$win" || true
+          echo "mGBA WINDOW=$win"
+          mgba --version 2>&1 || true
+          # GDB is only used as a read-only, exact-source emulator observer.
+          # If debugger is unsupported, stop before sending any ungated move.
+          qa_fifo="$RUNNER_TEMP/averon-playtest/qa-commands.fifo"
+          qa_ready="$RUNNER_TEMP/averon-playtest/qa-debugger-ready.txt"
+          mkfifo "$qa_fifo"
+          python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" daemon \
+            --elf "Pokemon Game/engine/pokeemerald.elf" \
+            --fifo "$qa_fifo" --ready "$qa_ready" \
+            --outdir "$RUNNER_TEMP/averon-playtest" \
+            > "$RUNNER_TEMP/averon-playtest/qa-debugger.log" 2>&1 &
+          qa_pid=$!
+          for i in $(seq 1 25); do
+            if test -s "$qa_ready"; then break; fi
+            if ! kill -0 "$qa_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if ! test -s "$qa_ready"; then
+            echo "QA_ACCESS_BLOCKED: debugger attach/start not verified"
+            cat "$RUNNER_TEMP/averon-playtest/qa-debugger.log"
+            exit 2
+          fi
+          cat "$qa_ready"
+          echo "QA pinned game source: $(git rev-parse HEAD)"
+          echo "QA full ephemeral ROM hash:"
+          sha256sum "Pokemon Game/engine/pokeemerald.gba"
+          capture() {
+            local stage="$1"
+            local filename="$RUNNER_TEMP/averon-playtest/$stage.png"
+            import -window "$win" "$filename"
+            convert "$filename" -resize 240x160 -colors 96 PNG8:"$RUNNER_TEMP/averon-playtest/$stage-small.png"
+            python3 - "$filename" "$stage" <<'PY'
+          import subprocess, sys
+          p, label=sys.argv[1:]
+          out=subprocess.check_output(['identify','-format','%wx%h %[colors]c',p],text=True)
+          print('SCREENSHOT',label,out,flush=True)
+          PY
+            echo "IMAGE_BASE64_BEGIN:$stage"
+            base64 -w 0 "$RUNNER_TEMP/averon-playtest/$stage-small.png"
+            echo
+            echo "IMAGE_BASE64_END:$stage"
+          }
+          press() {
+            xdotool windowactivate "$win" || true
+            xdotool key --clearmodifiers --delay 80 "$1"
+          }
+          sleep 9
+          capture boot
+          press Return
+          sleep 4
+          capture title-start
+          press x
+          sleep 8
+          capture new-game
+          for i in $(seq 1 12); do
+            press x
+            sleep 0.65
+          done
+          capture dialogue-advance
+          press Return
+          sleep 3
+          capture after-start
+          for i in $(seq 1 12); do
+            press x
+            sleep 0.65
+          done
+          capture continued
+          # Verified mapping in prior screenshots: x selects a menu entry,
+          # z advances text but does not select BOY/GIRL.
+          # The same quest source/ROM will be rebuilt and retested.
+          for i in $(seq 1 40); do
+            press z
+            sleep 0.08
+          done
+          capture "gender-selection"
+          press x
+          sleep 1
+          capture "chosen-boy"
+          press z
+          sleep 1
+          capture "naming-screen"
+          press x
+          sleep 0.8
+          capture "name-letter"
+          press Return
+          sleep 1
+          capture "name-start"
+          press x
+          sleep 1
+          capture "name-confirm"
+          for i in $(seq 1 45); do
+            press z
+            sleep 0.1
+            if (( i % 15 == 0 )); then capture "post-name-b-$i"; fi
+          done
+          for i in $(seq 1 20); do
+            press x
+            sleep 0.15
+            if (( i % 5 == 0 )); then capture "post-name-a-$i"; fi
+          done
+          # Continue past post-naming professor dialogue toward actual field play.
+          for i in $(seq 1 80); do
+            press x
+            sleep 0.15
+            if (( i % 10 == 0 )); then capture "opening-after-name-$i"; fi
+          done
+          # QUEST locator: use the GAME'S BUILT-IN developer map-warp menu.
+          # This never edits event flags, party or inventory, but reaching Alderfield
+          # through debug warp is labeled FIXTURE ACCESS (not normal progression).
+          # FIRST post-map Start press initiates delayed Saltmere_Welcome,
+          # as verified in runs 38815797064 and 38816761733.
+          # Trigger it deliberately, then finish the real script before other inputs.
+          press Return
+          sleep 1
+          capture "Q1-welcome-triggered"
+          dialogue_open() {
+            import -window "$win" "$RUNNER_TEMP/averon-playtest/dialogue-probe.png"
+            local mean
+            mean=$(convert "$RUNNER_TEMP/averon-playtest/dialogue-probe.png" -crop 40x26+415+266 +repage -format '%[fx:mean]' info:)
+            echo "DIALOGUE_PROBE mean=$mean" >&2
+            awk -v n="$mean" 'BEGIN {exit !(n > 0.67)}'
+          }
+          seen=0
+          cleared=0
+          # Do NOT exit while still waiting for the deferred opening script.
+          # B is harmless in the overworld here; advance dialogue only when
+          # the screen positively contains the message panel.
+          for i in $(seq 1 35); do
+            if dialogue_open; then
+              seen=1
+              capture "Q1-welcome-page-$i"
+              press x
+              sleep 0.75
+            else
+              if (( seen == 1 )); then
+                sleep 0.7
+                if ! dialogue_open; then cleared=1; break; fi
+              else
+                press z
+                sleep 0.85
+              fi
+            fi
+          done
+          if (( seen != 1 || cleared != 1 )); then
+            echo "QA_ACCESS_BLOCKED: Fenwick welcome did not visibly appear and finish; no Q1 warp test is claimed."
+            capture "Q1-opening-access-blocker"
+            exit 2
+          fi
+          capture "Q1-field-ready"
+          # Verify that field input is unlocked (ordinary Start -> menu -> B).
+          press Return
+          sleep 1
+          capture "Q1-ordinary-start"
+          press z
+          sleep 1
+          capture "Q1-ordinary-start-closed"
+          # Explicit read-back replaces false claims that the debug warp
+          # menu was open merely because a fixed R+START stream was sent.
+          qa_controller="Pokemon Game/scripts/qa/quest_state_controller.py"
+          press_debug() {
+            xdotool windowactivate "$win" || true
+            xdotool keydown "$1"
+            sleep 0.12
+            xdotool keyup "$1"
+            sleep 0.20
+          }
+          open_debug_menu() {
+            local stage="${1:-Q1}"
+            xdotool windowactivate --sync "$win" || true
+            xdotool keydown s
+            sleep 0.50
+            xdotool keydown Return
+            sleep 0.14
+            xdotool keyup Return
+            sleep 0.35
+            xdotool keyup s
+            sleep 0.65
+            capture "$stage-debug-main"
+            python3 "$qa_controller" assert-ui --kind sidebar \
+              --frame "$RUNNER_TEMP/averon-playtest/$stage-debug-main.png"
+          }
+          if ! open_debug_menu; then
+            # One bounded feedback-gated recovery only: normal Start may
+            # have opened; B closes it before a fresh R+START.
+            press_debug z
+            sleep 0.8
+            if ! open_debug_menu; then
+              echo "QA_ACCESS_BLOCKED: R+START debug menu never rendered"
+              exit 2
+            fi
+          fi
+          press_debug x
+          sleep 0.4
+          capture "Q1-utilities-menu"
+          python3 "$qa_controller" assert-ui --kind sidebar \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-utilities-menu.png"
+          press_debug Down
+          press_debug x
+          sleep 0.4
+          capture "Q1-warp-group-before"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-before.png"
+          # map_groups.json group_order (not JSON object key index) puts AveronOpening at group 75; Alderfield is map 9.
+          # Reliable down/up transitions must be long enough to register.
+          press_debug Right
+          for i in $(seq 1 7); do press_debug Up; done
+          press_debug Left
+          for i in $(seq 1 6); do press_debug Up; done
+          capture "Q1-warp-group-75"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-group-75.png"
+          press_debug x
+          for i in $(seq 1 9); do press_debug Up; done
+          capture "Q1-warp-map-9"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-map-9.png"
+          press_debug x
+          press_debug Up
+          capture "Q1-warp-index-1"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q1-warp-index-1.png"
+          press_debug x
+          sleep 3
+          capture "Q1-alderfield-after-warp"
+          # The old fixed 0.8-second holds repeatedly overshot the researcher.
+          # Only source-derived per-tile read-only GDB positions may now steer.
+          # Each move captures a frame, independently verifies position + map,
+          # and fails CLOSED before A if adjacency cannot be established.
+          if ! python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" navigate \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-navigation.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-navigation.log"
+            echo "QA_ACCESS_BLOCKED: do NOT claim Q1 dialogue or game defect"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-navigation.log"
+          # Human-reviewed previous run 38840269355 proved the real researcher
+          # line on (75,9), (13,16). Continue only if this run reproduced it.
+          # The GDB observer reads existing saved flags, never changes them.
+          if ! python3 -u "Pokemon Game/scripts/qa/quest_state_controller.py" q1-offer \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
+            echo "QA_Q1_PARTIAL_BLOCKED: review exact step screenshots; not a game FAIL"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q1-offer.log"
+          # Additional legal negative Q1 branch: walk original Alderfield
+          # tiles to source x38/16 Badge01 gate without granting a badge.
+          # This is NOT the badge-earned Hiker positive quest path.
+          qa_gate_blocked=0
+          if ! python3 -u "$qa_controller" q1-badge-gate \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log" 2>&1; then
+            qa_gate_blocked=1
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log"
+            echo "QA_Q1_GATE_BLOCKED: exact tile+frame in artifact; separate Q1-badge-earned Hiker remains pending"
+          else
+            cat "$RUNNER_TEMP/averon-playtest/qa-q1-gate.log"
+          fi
+          # Next independent QA case: Windrow artist at source (20,14).
+          # This relies ONLY on existing Windrow map75/6 warp0; it does
+          # not create an event, flag, route, party, item or warp index.
+          # First close the ordinary Q1 waiting text. Screenshots must
+          # prove actual field control before R+Start is permitted.
+          q2_field=0
+          for step in 1 2 3; do
+            sleep 1
+            press_debug x
+            sleep 0.5
+            capture "Q2-after-q1-close-$step"
+            if python3 "$qa_controller" assert-ui --kind field \
+                --frame "$RUNNER_TEMP/averon-playtest/Q2-after-q1-close-$step.png"; then
+              q2_field=1
+              break
+            fi
+          done
+          if [ "$q2_field" != "1" ]; then
+            echo "QA_ACCESS_BLOCKED: Q1 waiting text not closed; do not warp"
+            exit 2
+          fi
+          if ! open_debug_menu Q2; then
+            press_debug z
+            sleep 0.7
+            if ! open_debug_menu Q2; then
+              echo "QA_ACCESS_BLOCKED: Q2 R+START debug menu did not render"
+              exit 2
+            fi
+          fi
+          press_debug x
+          capture "Q2-utilities-menu"
+          python3 "$qa_controller" assert-ui --kind sidebar \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-utilities-menu.png"
+          press_debug Down
+          press_debug x
+          capture "Q2-warp-group-before"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-group-before.png"
+          # Source map_groups.json group_order index 75; Windrow local 6.
+          press_debug Right
+          for i in $(seq 1 7); do press_debug Up; done
+          press_debug Left
+          for i in $(seq 1 6); do press_debug Up; done
+          capture "Q2-warp-group-75"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-group-75.png"
+          press_debug x
+          for i in $(seq 1 6); do press_debug Up; done
+          capture "Q2-warp-map-6"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-map-6.png"
+          press_debug x
+          capture "Q2-warp-index-0"
+          python3 "$qa_controller" assert-ui --kind numeric \
+            --frame "$RUNNER_TEMP/averon-playtest/Q2-warp-index-0.png"
+          press_debug x
+          sleep 3
+          capture "Q2-windrow-after-existing-warp0"
+          if ! python3 -u "$qa_controller" navigate-artist \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log"
+            echo "QA_Q2_ACCESS_BLOCKED: bounded artist navigation / dialogue only"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-artist.log"
+          # The actual artist starts a two-choice script at source (20,14).
+          # Verify refusal and acceptance entirely through rendered prompts
+          # and read-only 0x2D..0x2F saved flags; never inject stage flags.
+          if ! python3 -u "$qa_controller" q2-artist-offer \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log"
+            echo "QA_Q2_OFFER_BLOCKED: independently review stage and input"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-offer.log"
+          # The Codex source-checked route uses the actual Windrow/Meadow
+          # connection, not an invented warp or any game memory mutation.
+          # Q2 boy hint, tree, repeat tree, return reward and Bag delta are
+          # independently gated after EACH normal D-pad movement.
+          if ! python3 -u "$qa_controller" q2-meadow \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log"
+            echo "QA_Q2_MEADOW_BLOCKED: review last saved map, tile and frame; NOT a game bug"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-meadow.log"
+          # New independent flash acceptance: real Start/SAVE UI, game
+          # callback SUCCESS, field return, then normal A+B+START+SELECT
+          # soft reset + observed title + saved Continue + replay of flags
+          # and encrypted Bag. GDB remains strictly READ ONLY.
+          if ! python3 -u "$qa_controller" q2-save \
+              --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-save.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
+            echo "QA_Q2_SAVE_BLOCKED: review exact source callback and screen; not a game bug"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-save.log"
+          # INDEPENDENT no-wait QA fallback: exact existing developer
+          # R+START -> Scripts -> Script4 -> AveronFieldLab_Enter. The game
+          # itself requires SKETCH_REWARDED, obtained above by normal Q2 play.
+          # This session's real flash save was made BEFORE Q4 so the Q2
+          # power-cycle proof remains isolated from developer gift contents.
+          qa_q4_blocked=0
+          if (
+            set -Eeuo pipefail
+            capture "Q4-after-q2-save"
+            python3 "$qa_controller" assert-ui --kind field \
+              --frame "$RUNNER_TEMP/averon-playtest/Q4-after-q2-save.png"
+            if ! open_debug_menu Q4; then
+              press_debug z
+              sleep 0.7
+              if ! open_debug_menu Q4; then
+                echo "QA_Q4_ACCESS_BLOCKED: Scripts developer menu not open"
+                exit 2
+              fi
+            fi
+            # debug.c root: Utilities row0, Scripts row5.
+            for i in $(seq 1 5); do
+              press_debug Down
+              capture "Q4-root-to-scripts-$i"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q4-root-to-scripts-$i.png"
+            done
+            press_debug x
+            capture "Q4-scripts-menu"
+            python3 "$qa_controller" assert-ui --kind sidebar \
+              --frame "$RUNNER_TEMP/averon-playtest/Q4-scripts-menu.png"
+            # debug.c Scripts child: Script1 row0, Script4 row3.
+            for i in $(seq 1 3); do
+              press_debug Down
+              capture "Q4-select-script4-$i"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q4-select-script4-$i.png"
+            done
+            press_debug x
+            sleep 3
+            capture "Q4-script4-lab-entry"
+            if ! python3 -u "$qa_controller" q4-lab-gift \
+                --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log" 2>&1; then
+              cat "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log"
+              echo "QA_Q4_GIFT_BLOCKED: state-aware source lab access; no game defect inferred"
+              exit 2
+            fi
+            cat "$RUNNER_TEMP/averon-playtest/qa-q4-gift.log"
+          ); then
+            echo "QA_Q4_SUBCASE_COMPLETED: actual Script4 gift state assertions"
+          else
+            qa_q4_blocked=1
+            echo "QA_Q4_SUBCASE_BLOCKED: preserve source-backed Q2 flash test"
+          fi
+          # New independent Q3 partial acceptance fixture: use only the
+          # existing Gym1 warp0, original YES sluice scripts and ordinary
+          # Elio trainer NPC. No badge/HP/party flags injected. Stop BEFORE
+          # claiming a battle loss or whiteout; log exact observed state.
+          qa_q3_outcome="NOT_RUN"
+          if [ "$qa_q4_blocked" = "0" ]; then
+            if (
+              set -Eeuo pipefail
+              # Visit the game's EXISTING AlderfieldClinic first: its
+              # original MAP_SCRIPT_ON_TRANSITION runs setrespawn. This
+              # is real map fixture access, never a memory healpoint write.
+              if ! open_debug_menu Q3C; then
+                press_debug z
+                sleep 0.7
+                if ! open_debug_menu Q3C; then
+                  echo "QA_Q3_CLINIC_ACCESS_BLOCKED: original debug menu"
+                  exit 2
+                fi
+              fi
+              press_debug x
+              capture "Q3C-utilities-menu"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-utilities-menu.png"
+              press_debug Down
+              press_debug x
+              capture "Q3C-warp-group-editor"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-group-editor.png"
+              press_debug Right
+              for i in $(seq 1 7); do press_debug Up; done
+              press_debug Left
+              for i in $(seq 1 6); do press_debug Up; done
+              press_debug x
+              # Original map group75, existing AlderfieldClinic local map11.
+              for i in $(seq 1 11); do press_debug Up; done
+              capture "Q3C-warp-map11"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-map11.png"
+              press_debug x
+              capture "Q3C-warp-index0"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3C-warp-index0.png"
+              press_debug x
+              sleep 3
+              capture "q3-clinic-rendered-entry"
+              if ! python3 -u "$qa_controller" q3-clinic-entry \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log"
+                echo "QA_Q3_CLINIC_ACCESS_BLOCKED: no source heal evidence"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-clinic.log"
+              # After genuine respawn registration use the SAME existing
+              # debug menu to access original Gym1, leaving heal data intact.
+              if ! open_debug_menu Q3; then
+                press_debug z
+                sleep 0.7
+                open_debug_menu Q3
+              fi
+              press_debug x
+              capture "Q3-utilities-menu"
+              python3 "$qa_controller" assert-ui --kind sidebar \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-utilities-menu.png"
+              press_debug Down
+              press_debug x
+              capture "Q3-warp-group-editor"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-group-editor.png"
+              press_debug Right
+              for i in $(seq 1 7); do press_debug Up; done
+              press_debug Left
+              for i in $(seq 1 6); do press_debug Up; done
+              press_debug x
+              # group_order index 75, AlderfieldGym local map10, warp0.
+              for i in $(seq 1 10); do press_debug Up; done
+              capture "Q3-warp-map10"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-map10.png"
+              press_debug x
+              capture "Q3-warp-index0"
+              python3 "$qa_controller" assert-ui --kind numeric \
+                --frame "$RUNNER_TEMP/averon-playtest/Q3-warp-index0.png"
+              press_debug x
+              sleep 3
+              capture "Q3-real-gym-warp0"
+              # Explicitly propagate the Python exit status; 'set -e' is
+              # suppressed inside an 'if (subshell); then' condition.
+              # A preceding run misreported Q3_INTRO_PARTIAL after a real
+              # spawn assertion failed, because 'cat' returned status 0.
+              if ! python3 -u "$qa_controller" q3-gym-entry \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+              # The previous witnessed original Elio intro is left open.
+              # One ordinary A must transition to the actual in-battle state
+              # from engine/include/main.h, never a memory/HP injection.
+              if ! python3 -u "$qa_controller" q3-battle-start \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-battle.log"
+              # Next real QA stage: normal Fight/dialogue A inputs in the
+              # original leader battle; stop on an observed actual exit.
+              # No badge/HP writes, manufactured save, or simulated loss.
+              if ! python3 -u "$qa_controller" q3-battle-play \
+                  --fifo "$qa_fifo" --outdir "$RUNNER_TEMP/averon-playtest" \
+                  --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q3-play.log" 2>&1; then
+                cat "$RUNNER_TEMP/averon-playtest/qa-q3-play.log"
+                echo "QA_Q3_BATTLE_PLAY_BLOCKED: check last actual battle screenshot"
+                exit 2
+              fi
+              cat "$RUNNER_TEMP/averon-playtest/qa-q3-play.log"
+            ); then
+              qa_q3_outcome="REAL_ELIO_BATTLE_EXIT_SCOPED"
+              echo "QA_Q3_BATTLE_PARTIAL: genuine battle observed through exit or abort; independently inspect whiteout/respawn and badge outcome"
+            else
+              qa_q3_outcome="BLOCKED"
+              if test -s "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"; then
+                tail -90 "$RUNNER_TEMP/averon-playtest/qa-q3-gym.log"
+              fi
+              echo "QA_Q3_GYM_BLOCKED: source/GUI/collision checkpoint, not a game defect"
+            fi
+          else
+            echo "QA_Q3_GYM_NOT_RUN: genuine gifted party prerequisite not proven"
+          fi
+          # PREVIOUS GBA in-process soft reset genuinely rendered the title,
+          # but mGBA 0.10.2's GDB socket ceased replying after CPU reset.
+          # Test the stronger flash-persistence boundary: close the emulator,
+          # start a NEW emulator process from the SAME local on-disk flash,
+          # attach a FRESH read-only debugger and invoke ordinary Continue.
+          # This never loads a savestate or mutates any quest data.
+          flash="Pokemon Game/engine/pokeemerald.sav"
+          if ! test -s "$flash"; then
+            echo "QA_FLASH_RESTART_BLOCKED: expected genuine mGBA flash file absent"
+            find "Pokemon Game/engine" -maxdepth 1 -name '*.sav' -printf '%f %s bytes\n'
+            exit 2
+          fi
+          echo "QA_FLASH_FILE: $(stat -c '%n (%s bytes)' "$flash")"
+          flash_before=$(sha256sum "$flash" | cut -d' ' -f1)
+          echo "QA_FLASH_BEFORE_RELAUNCH_SHA256=$flash_before"
+          kill "$emu_pid"
+          wait "$emu_pid" 2>/dev/null || true
+          kill "$qa_pid" 2>/dev/null || true
+          wait "$qa_pid" 2>/dev/null || true
+          # Preserve the real flash file in-place, no ROM/save upload.
+          test -s "$flash" || { echo "QA_FLASH_RESTART_BLOCKED: save missing after shutdown"; exit 2; }
+          flash_after=$(sha256sum "$flash" | cut -d' ' -f1)
+          echo "QA_FLASH_AFTER_SHUTDOWN_SHA256=$flash_after"
+          # Independent READ-ONLY physical flash sector decode. Require all 14
+          # signed sector IDs, one counter, C checksums, Q2 flags and Oran3.
+          # Never include .sav bytes in the uploaded screenshot/log artifacts.
+          if python3 -u "$qa_controller" q2-flash-sector --flash "$flash" \
+              > "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log"
+            echo "QA_Q2_PHYSICAL_FLASH_SCOPED_PASS: signed saved quest and item bytes"
+          else
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-physical-flash.log"
+            echo "QA_Q2_PHYSICAL_FLASH_BLOCKED: do not claim raw saved flags"
+          fi
+          sleep 2
+          # mGBA 0.10.2 GDB hangs on title memory reads even when a
+          # fresh debugger socket is attached; run a pristine NO-DEBUGGER
+          # process against the exact same flash instead. This is a genuine
+          # process/power-cycle test and never loads a savestate.
+          mgba -2 "Pokemon Game/engine/pokeemerald.gba" \
+            > "$RUNNER_TEMP/averon-playtest/mgba-relaunch.log" 2>&1 &
+          emu_pid=$!
+          win=""
+          for i in $(seq 1 40); do
+            win=$(xdotool search --onlyvisible --name "mGBA" 2>/dev/null | head -n1 || true)
+            if test -n "$win"; then break; fi
+            sleep 0.5
+          done
+          test -n "$win" || {
+            echo "QA_FLASH_RESTART_BLOCKED: no real mGBA restart window"
+            exit 2
+          }
+          capture "Q2-relaunch-copyright-screen"
+          if ! python3 -u "$qa_controller" q2-visual-relaunch \
+              --outdir "$RUNNER_TEMP/averon-playtest" \
+              --window "$win" > "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log" 2>&1; then
+            cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+            echo "QA_Q2_VISUAL_CONTINUE_BLOCKED: review exact frames"
+            exit 2
+          fi
+          cat "$RUNNER_TEMP/averon-playtest/qa-q2-continue.log"
+          echo "QA_Q3_INTERACTION_STATUS=$qa_q3_outcome (whiteout still unverified)"
+          if [ "$qa_gate_blocked" != "0" ]; then
+            echo "QA_Q1_GATE_PARTIAL: source negative badge gate not accepted"
+            exit 2
+          fi
+          if [ "$qa_q4_blocked" != "0" ]; then
+            echo "QA_Q4_PARTIAL: Q2 flash proven independently, but Q4 gift test blocked"
+            exit 2
+          fi
+          if ! kill -0 "$emu_pid" 2>/dev/null; then
+            echo "Emulator exited unexpectedly"
+            cat "$RUNNER_TEMP/averon-playtest/mgba.log"
+            exit 1
+          fi
+      - name: Attach only screenshots and logs (NO ROM or save)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-rendered-smoke-evidence
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-playtest/*.png
+            ${{ runner.temp }}/averon-playtest/*.log
+            ${{ runner.temp }}/averon-playtest/*.json
+            ${{ runner.temp }}/averon-playtest/qa-debugger-ready.txt
+            ${{ runner.temp }}/playtest-build.log
