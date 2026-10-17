@@ -12,6 +12,7 @@ import shutil
 import subprocess
 import sys
 
+sys.dont_write_bytecode = True
 DRIVER = Path(__file__).resolve().parents[1]/'claude_play'
 sys.path.insert(0, str(DRIVER))
 import driver

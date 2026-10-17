@@ -9,6 +9,8 @@ import argparse
 import json
 from pathlib import Path
 import subprocess
+import sys
+sys.dont_write_bytecode = True
 import codex_rom_capacity as capacity
 
 
