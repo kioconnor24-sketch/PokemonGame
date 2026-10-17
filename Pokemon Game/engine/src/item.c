@@ -495,7 +495,8 @@ void RemovePCItem(u8 index, u16 count)
     struct ItemSlot tempItem = BagPocket_GetSlotData(&dummyPocket, index);
 
     // Remove quantity
-    BagPocket_SetSlotItemIdAndCount(&dummyPocket, index, tempItem.itemId, tempItem.quantity - count);
+    tempItem.quantity -= count;
+    BagPocket_SetSlotItemIdAndCount(&dummyPocket, index, tempItem.itemId, tempItem.quantity);
 
     // Compact if necessary
     if (tempItem.quantity == 0)
