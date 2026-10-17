@@ -35,6 +35,17 @@ def black_ratio(path):
     return sum(max(rgb[i:i+3]) <= 40 for i in range(0, len(rgb), 3)) / (480 * 320)
 
 
+def start_window_ratio(path):
+    """Bright share inside the Start menu window (top right). Calibrated on
+    the 2026-10-17 runs: an open Start menu is ~0.90; the clinic, a dialogue
+    box or the overworld behind a closed menu are <= 0.23."""
+    rgb = subprocess.check_output(["convert", str(path), "-crop", "110x150+355+30", "+repage",
+                                   "-depth", "8", "RGB:-"])
+    if len(rgb) != 110 * 150 * 3:
+        raise qc.Blocked("Wrong Start window crop size")
+    return sum(min(rgb[i:i+3]) >= 190 for i in range(0, len(rgb), 3)) / (110 * 150)
+
+
 def observe(tag):
     frame = out / f"{tag}.png"
     qc.grab(a.window, frame)
@@ -48,11 +59,14 @@ def observe(tag):
 
 
 # 1. Whiteout / respawn / nurse: advance only visible text with A.
-# Calibrated on the 2026-10-17 run: the whiteout message (white text on
-# black) is 0.92-0.98 black, a full fade is 1.00, the lit clinic field ~0.49.
-# A is pressed on dialogue boxes and on the whiteout text, never on a bare
+# Calibrated on the 2026-10-17 runs: the whiteout message (white text on
+# black) is 0.92-0.98 black and a full fade 1.00. In the clinic a dialogue
+# box reads 0.85-1.00 on the shared panel crop, but the lit clinic floor
+# alone reads 0.33, above the controller's generic 0.30 field threshold.
+# A is pressed only on dialogue boxes and whiteout text, never on a bare
 # fade or on the field, so the player never re-talks to the nurse.
 WHITEOUT_TEXT = (0.85, 0.995)
+DIALOGUE = 0.60
 idle_in_clinic = 0
 last = None
 whiteout_frames, clinic_dialogue_frames = [], []
@@ -65,14 +79,14 @@ for n in range(1, 91):
         qc.qa_key(a.window, "x", wait=0.7)
         continue
     whiteout_text = WHITEOUT_TEXT[0] < black < WHITEOUT_TEXT[1]
-    if where == (75, 11) and panel <= 0.30 and black < WHITEOUT_TEXT[0]:
+    if where == (75, 11) and panel <= DIALOGUE and black < WHITEOUT_TEXT[0]:
         idle_in_clinic += 1
         if idle_in_clinic >= 3:
             break
         time.sleep(1.0)
         continue
     idle_in_clinic = 0
-    if panel > 0.30:
+    if panel > DIALOGUE:
         if where == (75, 11):
             clinic_dialogue_frames.append(tag)
         qc.qa_key(a.window, "x", wait=1.0)
@@ -87,6 +101,10 @@ print("Q3X_RESPAWN_RESULT", json.dumps(last, sort_keys=True), flush=True)
 if (last["mapGroup"], last["mapNum"]) != (75, 11):
     print("Q3X_NOT_IN_CLINIC: stop; do not claim clinic recovery", flush=True)
     sys.exit(3)
+if idle_in_clinic < 3:
+    print("Q3X_CLINIC_NOT_IDLE: dialogue still open after the frame limit; stop before the Start menu",
+          flush=True)
+    sys.exit(4)
 
 
 # 2. Ordinary Start menu: select an action by source enum id, verified by
@@ -95,7 +113,13 @@ def select_action(action, label, optional=False):
     """Open Start and choose `action`. With optional, close Start and return
     False if the game does not offer it."""
     qc.qa_key(a.window, "Return", wait=1.5)
-    state, _ = qc.save_probe(args, f"save-q3x-{label}-open")
+    state, frame = qc.save_probe(args, f"save-q3x-{label}-open")
+    # The menu globals keep their last values after the menu closes, so a
+    # Start press swallowed by an open text box would read as a stale menu.
+    window = start_window_ratio(frame)
+    print("Q3X_START_WINDOW", label, f"{window:.3f}", frame, flush=True)
+    if window < 0.60:
+        raise qc.Blocked(f"No visible Start menu window for {label} ({window:.3f}); not trusting menu globals")
     menu = state["menu"]
     if optional and action not in menu["actions"]:
         print("Q3X_ACTION_NOT_OFFERED", action, json.dumps(menu, sort_keys=True), flush=True)
