@@ -1,9 +1,10 @@
 @ Averon static-encounter macros: legendaries, mythicals and other
 @ one-of-a-kind Pokemon. Natives live in src/averon_legend.c.
 @
-@ NOT YET REGISTERED: data/event_scripts.s (a protected file) does not
-@ include this file, so no game script can use it yet. test/averon_legend.c
-@ includes it directly. Registering it needs a handoff in issue #15.
+@ Registered: data/event_scripts.s includes this file next to the
+@ scripted-battle macros, so game scripts may use it. No script does yet:
+@ every encounter needs an approved design. test/averon_legend.c also
+@ includes it directly.
 @
 @ Rules:
 @ - Only a real capture marks the encounter caught. A knockout marks it
