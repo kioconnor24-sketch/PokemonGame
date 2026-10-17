@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Play an exact cry-profile RELEASE image with the existing read-only driver.
+
+No memory/save writes or cheats. Uses ordinary controller input in graphical
+mGBA. New flash saves and captures stay in a scratch directory. Reuses Claude's
+driver without editing its files. Human listening and Delta remain separate.
+"""
+import argparse
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+DRIVER = Path(__file__).resolve().parents[1]/'claude_play'
+sys.path.insert(0, str(DRIVER))
+import driver
+import emu
+import game
+import mapdata
+import run as play
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--engine', type=Path, required=True)
+    parser.add_argument('--profile', choices=('on', 'off'), required=True)
+    parser.add_argument('--scratch', type=Path, required=True)
+    parser.add_argument('--out', type=Path, required=True)
+    parser.add_argument('--new-game', action='store_true')
+    parser.add_argument('--audio', action='store_true')
+    parser.add_argument('phases', nargs='*', choices=sorted(play.PHASES))
+    args = parser.parse_args()
+    engine, scratch, out = args.engine.resolve(), args.scratch.resolve(), args.out.resolve()
+    if engine == scratch or engine in scratch.parents:
+        parser.error('scratch must be outside the engine tree')
+    rom_source = engine/f'pokeemerald-cries-{args.profile}-release.gba'
+    elf = rom_source.with_suffix('.elf')
+    scratch.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
+    rom = scratch/'game.gba'
+    if rom.exists() and play.sha256(rom) != play.sha256(rom_source):
+        parser.error('scratch ROM belongs to a different build; use a new directory')
+    if args.new_game and rom.with_suffix('.sav').exists():
+        parser.error('new-game refuses to overwrite an existing flash save')
+    shutil.copyfile(rom_source, rom)
+    info = emu.load_build_info(elf, engine, scratch/'symbol-cache')
+    record = dict(source_sha=play.git(engine, 'rev-parse', 'HEAD'),
+                  engine_tree=play.git(engine, 'rev-parse', 'HEAD:Pokemon Game/engine'),
+                  engine_status=play.git(engine, 'status', '--short', '--', '.').splitlines(),
+                  driver_sha=play.git(DRIVER, 'rev-parse', 'HEAD'),
+                  driver_status=play.git(DRIVER, 'status', '--short', '--', '.').splitlines(),
+                  rom_sha256=play.sha256(rom), elf_sha256=play.sha256(elf),
+                  cry_profile=args.profile, release=True, phases=args.phases,
+                  mgba=subprocess.check_output(['mgba', '--version'], text=True).strip(),
+                  acceptance='Supporting real emulator evidence; not human listening or Delta',
+                  save_before=play.sha256(rom.with_suffix('.sav')) if rom.with_suffix('.sav').exists() else None)
+    if record['engine_status'] or record['driver_status']:
+        parser.error('commit source before collecting publishable gameplay evidence')
+    (out/'provenance-start.json').write_text(json.dumps(record, indent=2)+'\n')
+    world = mapdata.World(engine)
+    emulator = emu.Emulator(rom, out, audio=args.audio)
+    try:
+        observed = game.Game(emulator, info)
+        d = driver.Driver(emulator, observed, world, out/'events.jsonl')
+        d.moves = game.MoveTable(rom, info)
+        observed.map_names = world.by_num
+        emulator.start_trace(out/'inputs.jsonl', info['symbols']['gMain']+info['offsets']['main.vblankCounter1'])
+        play.boot(d, args.new_game)
+        for phase in args.phases:
+            play.PHASES[phase](d)
+        play.observe(d, 'end')
+        record['completed'] = True
+    except Exception as error:
+        record['completed'] = False
+        record['error'] = f'{type(error).__name__}: {error}'
+        emulator.capture('error')
+        raise
+    finally:
+        emulator.close()
+        record['save_after'] = play.sha256(rom.with_suffix('.sav')) if rom.with_suffix('.sav').exists() else None
+        (out/'provenance-end.json').write_text(json.dumps(record, indent=2)+'\n')
+        if args.audio and emulator.audio_raw and emulator.audio_raw.exists():
+            report = emu.audio_report(emulator.audio_raw, out/'audio.wav')
+            (out/'audio-report.json').write_text(json.dumps(report, indent=2)+'\n')
+
+
+if __name__ == '__main__':
+    main()
