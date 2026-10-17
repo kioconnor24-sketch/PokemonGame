@@ -46,6 +46,7 @@ jobs:
       - name: Test the composer, then compose the run from the pinned QA step
         run: |
           python3 "support/Pokemon Game/scripts/quest_support/test_compose_q3_run.py"
+          python3 "support/Pokemon Game/scripts/quest_support/test_frame_match.py"
           test "$(git -C qa rev-parse HEAD)" = "$QA_SHA"
           python3 "support/Pokemon Game/scripts/quest_support/compose_q3_run.py" \
             --workflow qa/.github/workflows/averon-rendered-playtest.yml \
@@ -75,10 +76,10 @@ jobs:
           test -s "$log" || { echo "::warning title=Q3 support::no run log"; exit 0; }
           # One notice per key line, most important first (GitHub keeps at
           # most 10 per step), trimmed; the full log is in the artifact.
-          for pattern in '^QA_Q3_INTERACTION_STATUS' '^Q3X_RC' 'Blocked:' '^Q3X_SAVED_SLOT' \
-                         '^Q3X_CONTINUE_MATCH' '^Q3X_SAVE_SUCCESS' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH)' \
-                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^Q3X_RESPAWN'; do
-            grep -aE "$pattern" "$log" | head -1 | cut -c1-240
+          for pattern in '^Q3X_CONTINUE_RESULT' '^Q3X_RC' 'Blocked:' '^Q3X_SAVED_SLOT' \
+                         '^Q3X_SAVE_SUCCESS' '^Q3X_RELAUNCH_A' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH_BLOCKED)' \
+                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^QA_Q3_INTERACTION_STATUS'; do
+            grep -aE "$pattern" "$log" | tail -1 | cut -c1-240
           done | while IFS= read -r line; do
             echo "::notice title=Q3 support::${line}"
           done

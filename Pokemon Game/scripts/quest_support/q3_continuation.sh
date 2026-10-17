@@ -49,24 +49,29 @@ if test -z "$win"; then
 fi
 sleep 9; capture "q3x-relaunch-boot"
 press Return; sleep 4; capture "q3x-relaunch-title"
-press x; sleep 3; capture "q3x-relaunch-main-menu"
-press x; sleep 7; capture "q3x-relaunch-continued-1"
-sleep 3; capture "q3x-relaunch-continued-2"
+# Ordinary A presses: title -> main menu -> CONTINUE (the default entry).
+# After each press compare the frame with the last pre-save clinic field
+# frame, and stop as soon as it matches: A is never pressed once the
+# overworld is back, where it would talk to the nurse. No debugger here, so
+# the match score is the evidence; Playtest judges the frames.
+frame_match="$(dirname "$Q3X")/frame_match.py"
+before="$RUNNER_TEMP/averon-playtest/q3-play-x-after-party.png"
+continue_result="NOT_SHOWN"
+for attempt in 1 2 3 4; do
+  press x; sleep 7; capture "q3x-relaunch-a-$attempt"
+  set +e
+  score=$(python3 "$frame_match" --min 0.70 "$before" "$RUNNER_TEMP/averon-playtest/q3x-relaunch-a-$attempt.png")
+  match_rc=$?
+  set -e
+  echo "Q3X_RELAUNCH_A attempt=$attempt $score"
+  if [ "$match_rc" -eq 0 ]; then continue_result="CLINIC_FIELD"; break; fi
+  if [ "$match_rc" -eq 2 ]; then continue_result="UNAVAILABLE"; break; fi
+done
+sleep 3; capture "q3x-relaunch-continued"
 kill "$emu_pid" 2>/dev/null || true
-# No debugger in this process: compare the Continue frame with the last
-# pre-save clinic field frame. A score, not a verdict; Playtest judges.
-python3 - "$RUNNER_TEMP/averon-playtest/q3-play-x-after-party.png" \
-  "$RUNNER_TEMP/averon-playtest/q3x-relaunch-continued-2.png" <<'PY' || true
-import os, subprocess, sys
-before, after = sys.argv[1:]
-if not (os.path.exists(before) and os.path.exists(after)):
-    sys.exit(print("Q3X_CONTINUE_MATCH unavailable: missing pre-save or Continue frame"))
-a, b = (subprocess.check_output(["convert", p, "-depth", "8", "RGB:-"]) for p in (before, after))
-if len(a) != len(b):
-    sys.exit(print("Q3X_CONTINUE_MATCH unavailable: frame sizes differ"))
-same = sum(a[i:i+3] == b[i:i+3] for i in range(0, len(a), 3)) / (len(a) // 3)
-diff = sum(abs(x - y) for x, y in zip(a, b)) / len(a)
-print(f"Q3X_CONTINUE_MATCH same_pixels={same:.3f} mean_abs_diff={diff:.2f}"
-      " (pre-save q3-play-x-after-party vs q3x-relaunch-continued-2)")
-PY
+echo "Q3X_CONTINUE_RESULT $continue_result after $attempt A press(es); last: $score"
+# Exit non-zero unless the observer and the Continue check both succeeded,
+# so the job's status means something; the evidence uploads either way.
+if [ "$q3x_rc" -ne 0 ]; then exit "$q3x_rc"; fi
+[ "$continue_result" = "CLINIC_FIELD" ] || exit 3
 echo "Q3X_DONE"
