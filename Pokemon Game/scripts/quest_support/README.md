@@ -124,48 +124,26 @@ run `compose_q3_run.py --workflow <#71>/.github/workflows/averon-rendered-playte
 - **Q5 audio/input:** CI and this container use `SDL_AUDIODRIVER=dummy`, so
   there is no audio evidence. This needs a human or Delta run.
 
-## 3. #14 → #25 integration plan (read-only rehearsal)
+## 3. #14 → #25 integration (status 2026-10-17)
 
-**Heads checked:** main `59a23eeb`, #14 `db6baaea` (118 behind main), #25
-`f324e485` (96 behind).
+Steps 1–2 of the earlier plan are done; the rest waits on Playtest:
 
-1. **Overlap:** the only shared file is `engine/data/event_scripts.s`. #14
-   appends `AveronFieldLab_Gift::`/`AveronFieldLab_TryGift::` stubs near
-   line 1785; #25 adds `.include "data/scripts/averon_scripted_battle.inc"`
-   near line 78. `git merge` of main ← #14 ← #25 is **conflict-free**
-   (local rehearsal 54945294; CI below).
-2. **IDs:** #14 takes saved flag `0x37` (`FLAG_AVERON_DEV_GIFT_RECEIVED`,
-   previously `FLAG_UNUSED_0x037`). #25 binds `B_FLAG_NO_WHITEOUT` to
-   RAM-only `FLAG_SPECIAL_FLAG_UNUSED_0x4003`. No collision; main has not
-   changed `flags.h` since #14's base. `audit-averon-event-ids.py`: 0
-   blockers.
-3. **Rehearsal checks:**
-   - `check_integration_contract.py` PASS, including the battle macro include
-     (line 81) preceding the QUEST include (line 1770).
-   - Source tests: 9/9 `test-averon-scripted-battle.py`,
-     7/7 `test-averon-quest-flow.py`, 10/10 `test-averon-sidequests.py`.
-   - CI [combined run 38987964339](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38987964339)
-     (main + #14 + #25): compile, native/save tests and readiness report all
-     success (artifact 12084190737).
-4. **Gate blocker (real, not textual):** both PRs currently fail the required
-   `exclusive-files` check, because `check_protected_files.py` fails any PR
-   whose protected paths overlap another *open* PR. #14's grandfathering
-   exempts it only from the approval and frozen-map checks, not from the
-   overlap rule. #14 therefore cannot get a green required check while #25
-   still touches `event_scripts.s`, even after Playtest acceptance.
-5. **Suggested legitimate order (Codex decides):**
-   1. On #25, a normal commit temporarily drops its one
-      `event_scripts.s` line. #25 is still a draft; its remaining protected
-      path, `config/battle.h`, is already approved by
-      [6209610910](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6209610910).
-      No PR is closed or hidden. (#25's source contract will then report the
-      missing include. That is expected while #25 is a draft.)
-   2. Re-run #14's `exclusive-files`; once Playtest accepts, merge #14
-      normally. Main checks are non-strict, so #14 need not be rebased; the
-      rehearsal shows the merge is clean.
-   3. Merge main into #25 and restore the `.include` line, which must stay
-      above the QUEST include.
-   4. Re-run guard, contract, source and native checks, then merge #25. Its
-      `event_scripts.s` approval is already recorded.
-   5. Post-merge: run the full native suite and baseline check, the release
-      build, and `report-averon-save-headroom.py`.
+- **Core:** the scripted-battle core merged as core-only #81 (`6d5c0967`).
+  #25 returned `config/battle.h` to its base (`ba24e52d`) so #81 had no
+  protected overlap.
+- **#25 now:** after `090ecbdb` (main merged) and the owner-directed
+  `bfffafac` (include held back), #25 is a draft whose only remaining
+  change is its evidence document. #14's `exclusive-files` is green.
+- **Next, after Playtest's GATE A on #23:**
+  1. Merge #14 normally.
+  2. Merge main into #25 and restore the scripted-battle include, plus the
+     LEGEND include from `claude/legend-registration` (`901a3533`). Both go
+     above the QUEST include, under #25's existing `event_scripts.s` handoff.
+  3. Verify and merge.
+- **Proof:** the end state (main + #48 + #14 + #25 + LEGEND) already passes
+  the integration contract, normal and release builds, and the full
+  unfiltered native suite (6,093 tests, strict baseline OK):
+  [#15 6228649047](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6228649047).
+- **Not linked yet:** with no scene caller, LEGEND and SCRIPTED natives are
+  dead-stripped from the ROM. This is recorded as POST-CONTENT in
+  `BACKEND_TO_SINNOH_EXECUTION.md` (#85).
