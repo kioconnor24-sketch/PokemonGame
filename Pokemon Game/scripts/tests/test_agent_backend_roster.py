@@ -38,7 +38,7 @@ class BackendOwnershipTests(unittest.TestCase):
                 self.assertNotIn(interface, owners,
                                  f"{interface} claimed by both {owners.get(interface)} and {task['id']}")
                 owners[interface] = task["agent"]
-        self.assertEqual(owners["region_specific_caps_obedience"], "codex")
+        self.assertEqual(owners["region_specific_caps_obedience"], "claude")
         self.assertEqual(owners["generic_battle_exp_items_followers_ai"], "claude")
 
     def test_legend_not_restarted_or_owned_by_codex(self):
@@ -51,7 +51,8 @@ class BackendOwnershipTests(unittest.TestCase):
     def test_all_active_tasks_have_fallback_and_resume_trigger(self):
         active = ["QUEST", "TWO-REGION", "SCRIPTED-BATTLE",
                   "LEGEND", "POKEMON-MECHANICS", "REGION-PLATFORM",
-                  "QUEST-PLAYTEST"]
+                  "QUEST-PLAYTEST", "M1-BACKEND-CLOSEOUT", "M1-TRADE-SAVE-REFUSAL", "M1-CROSS-FEATURE-REGRESSIONS", "M1-BUILD-RESOURCE-EVIDENCE", "M1-EMULATOR-GAMEPLAY", "M1-CLAUDE-INTEGRATION",
+                  "M1-CLAUDE-REVIEW-MERGE"]
         for name in active:
             task = self.by_id[name]
             with self.subTest(task=name):
@@ -63,7 +64,7 @@ class BackendOwnershipTests(unittest.TestCase):
         self.assertEqual(self.by_id["QUEST"]["qa_cases"],
                          ["Q1", "Q2", "Q3", "Q4", "Q5"])
         self.assertIn("QUEST", self.by_id["SCRIPTED-BATTLE"]["deps"])
-        self.assertIn("QUEST", self.by_id["TWO-REGION"]["deps"])
+        self.assertEqual(self.by_id["TWO-REGION"]["deps"], [], "merged region core must not wait on QUEST")
         self.assertTrue(self.conf["policies"]["dependency_gates_apply_to_merge"])
 
     def test_no_map_production_task_was_activated(self):
@@ -80,8 +81,8 @@ class BackendOwnershipTests(unittest.TestCase):
         result = board.render(self.conf, snapshot)
         self.assertIn("| LEGEND | claude |", result["board"])
         self.assertIn("| POKEMON-MECHANICS | claude |", result["board"])
-        self.assertIn("While waiting:", result["codex"])
-        self.assertIn("While waiting:", result["claude"])
+        self.assertIn("While waiting on integration:", result["claude"])
+        self.assertNotIn("| QUEST | codex |", result["board"])
         self.assertIn("BACKEND FIRST", result["board"])
         self.assertIn("No automated agent launch", result["board"])
 
@@ -96,13 +97,38 @@ class BackendOwnershipTests(unittest.TestCase):
             "qa_signoffs": []
         })
         self.assertIn("DEVELOPMENT OPEN", computed["SCRIPTED-BATTLE"]["status"])
-        self.assertIn("MERGE GATED", computed["TWO-REGION"]["status"])
+        self.assertEqual(computed["TWO-REGION"]["status"], "MERGED CORE; REMAINING M1 VERIFICATION")
         self.assertNotIn("MERGED", computed["QUEST"]["status"])
+
+    def test_claude_sole_operator_owns_all_roles_without_waiving_evidence(self):
+        policy = self.conf["policies"]
+        self.assertEqual(policy["backend_developers"], ["claude"])
+        self.assertEqual(policy["sole_active_m1_executor"], "claude")
+        self.assertFalse(policy["codex_active"])
+        self.assertFalse(policy["separate_playtest_active"])
+        self.assertFalse(policy["separate_manager_active"])
+        self.assertEqual(policy["codex_status"], "PAUSED_BY_OWNER_NO_NEW_WORK")
+        self.assertTrue(policy["claude_may_merge_eligible_prs"])
+        self.assertTrue(policy["claude_may_record_gameplay_acceptance"])
+        self.assertTrue(policy["qa_acceptance_requires_real_gameplay_proof"])
+        self.assertTrue(policy["qa_separate_review_pass_required"])
+        self.assertTrue(policy["single_active_writer_per_exact_path"])
+        self.assertTrue(policy["claims_are_not_permission_requests"])
+        self.assertTrue(policy["dependency_gates_apply_to_merge"])
+        self.assertFalse(policy["auto_merge"])
+        self.assertTrue(policy["creative_freeze"])
+        self.assertEqual({task["agent"] for task in self.tasks}, {"claude"})
+        self.assertEqual(self.by_id["QUEST-PLAYTEST"]["agent"], "claude")
+        self.assertEqual(self.by_id["M1-EMULATOR-GAMEPLAY"]["agent"], "claude")
+        self.assertEqual(self.by_id["M1-CLAUDE-REVIEW-MERGE"]["agent"], "claude")
+        self.assertTrue(self.by_id["M1-TRADE-SAVE-REFUSAL"]["implementation_merged"])
+        self.assertTrue(self.by_id["SCRIPTED-BATTLE"]["parallel_development"])
 
     def test_no_invented_pr_for_region_groundwork(self):
         task = self.by_id["TWO-REGION"]
         self.assertNotIn("pr", task)
-        self.assertEqual(task["branch"], "codex/two-region-groundwork")
+        self.assertNotIn("branch", task)
+        self.assertTrue(task["implementation_merged"])
 
 
 if __name__ == "__main__":

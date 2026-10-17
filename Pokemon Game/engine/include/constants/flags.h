@@ -74,7 +74,7 @@
 #define FLAG_AVERON_LICENSE_WATERFALL    0x34
 #define FLAG_AVERON_LICENSE_DIVE         0x35
 #define FLAG_AVERON_LICENSE_FLY          0x36
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
+#define FLAG_AVERON_DEV_GIFT_RECEIVED 0x37 // Developer fixture only; saved, never reset by entry.
 #define FLAG_UNUSED_0x038    0x38 // Unused Flag
 #define FLAG_UNUSED_0x039    0x39 // Unused Flag
 #define FLAG_UNUSED_0x03A    0x3A // Unused Flag

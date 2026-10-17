@@ -11,6 +11,7 @@ import argparse
 import copy
 import json
 import struct
+import re
 from pathlib import Path
 
 # Positions are selected from the authored walking paths in the map builders.
@@ -30,6 +31,30 @@ FLAG_SLOTS = {
     'FLAG_UNUSED_0x02F': 'FLAG_AVERON_SKETCH_REWARDED',
 }
 INCLUDE = '\t.include "data/averon_optional_sidequests.inc"'
+SKETCH_TREE = dict(type='sign', x=12, y=27, elevation=0,
+                   player_facing_dir='BG_EVENT_PLAYER_FACING_ANY',
+                   script='Averon_BerrySketch_Tree')
+
+
+def install_sketch_tree(engine, map_data):
+    """Bind observation to the existing tree; fail if its authored tiles change."""
+    width, height, tiles = walking_tiles(engine, map_data)
+    x, y = SKETCH_TREE['x'], SKETCH_TREE['y']
+    if not (1 <= x < width - 1 and 1 <= y < height - 1):
+        raise ValueError('Sketch tree out of bounds')
+    # Authored tree(12,25), left canopy tile. West approach (11,27) is grass.
+    if tiles[y * width + x] != 0x05D4 or ((tiles[y * width + x - 1] >> 10) & 3):
+        raise ValueError('Sketch tree or west approach changed')
+    events = map_data.setdefault('bg_events', [])
+    existing = [e for e in events if e.get('script') == SKETCH_TREE['script']]
+    if existing:
+        if existing != [SKETCH_TREE]:
+            raise ValueError('Conflicting sketch tree event')
+        return
+    for key in ('object_events', 'warp_events', 'coord_events', 'bg_events'):
+        if any(e.get('x') == x and e.get('y') == y for e in map_data.get(key) or []):
+            raise ValueError('Sketch tree event overlaps ' + key)
+    events.append(copy.deepcopy(SKETCH_TREE))
 
 
 def load_json(path):
@@ -88,6 +113,10 @@ def patch_flags(source):
             # Reject a second definition of the new symbol at a different address.
             if result.count('#define ' + replacement + ' ') != 1:
                 raise ValueError(f'Duplicate or malformed allocated flag: {replacement}')
+            expected = int(original.removeprefix('FLAG_UNUSED_'), 16)
+            assigned = re.search(r'^#define ' + replacement + r'\s+(0x[0-9A-Fa-f]+)\b', result, re.M)
+            if not assigned or int(assigned[1], 16) != expected:
+                raise ValueError(f'Persistent flag moved from its saved slot: {replacement}')
             continue
         old = '#define ' + original + ' '
         if result.count(old) != 1:
@@ -120,6 +149,7 @@ def apply(engine, source_script):
             continue
         validate_actor(engine, map_data, x, y)
         map_data['object_events'].append(new_actor(map_data, x, y, graphics, script))
+    install_sketch_tree(engine, target_maps['CoastalMeadow'])
     write_if_changed(flags_path, flags)
     write_if_changed(event_path, events if INCLUDE in events else events.rstrip() + '\n' + INCLUDE + '\n')
     write_if_changed(engine / 'data/averon_optional_sidequests.inc', source)

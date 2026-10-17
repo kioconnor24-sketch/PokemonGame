@@ -1,0 +1,99 @@
+name: Averon QUEST support Q3 clinic run
+
+# Claude QUEST support (PR #77). Runs Playtest's UNCHANGED rendered QA step
+# from a pinned QA commit up to the end of its Q3 block, then the #77
+# observer: whiteout text, clinic nurse, clinic Save, and a no-debugger
+# relaunch to Continue. Ordinary input; the debugger only reads. Evidence for
+# Playtest's own verdict, never acceptance. Uploads screenshots and logs only.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-quest-support-q3.yml"
+      - "Pokemon Game/scripts/quest_support/**"
+      - "!Pokemon Game/scripts/quest_support/**/*.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: averon-quest-support-q3-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # PR #71 head: Playtest QA #20 plus the manager's clinic-expectation fix.
+  QA_SHA: f34eab2184c40a7f6ab1bd74274c3058c7c0fdc9
+
+jobs:
+  q3-clinic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: support
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.QA_SHA }}
+          path: qa
+          persist-credentials: false
+      - name: Install GBA build and graphical emulator tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3 python3-yaml \
+            mgba-sdl xvfb xdotool openbox imagemagick xauth
+      - name: Test the composer, then compose the run from the pinned QA step
+        run: |
+          python3 "support/Pokemon Game/scripts/quest_support/test_compose_q3_run.py"
+          python3 "support/Pokemon Game/scripts/quest_support/test_frame_match.py"
+          python3 "support/Pokemon Game/scripts/quest_support/test_q3_continuation.py"
+          test "$(git -C qa rev-parse HEAD)" = "$QA_SHA"
+          python3 "support/Pokemon Game/scripts/quest_support/compose_q3_run.py" \
+            --workflow qa/.github/workflows/averon-rendered-playtest.yml \
+            --out "$RUNNER_TEMP/q3-run.sh"
+          bash -n "$RUNNER_TEMP/q3-run.sh"
+      - name: Compile ROM (never uploaded)
+        working-directory: qa/Pokemon Game/engine
+        run: |
+          make -j4 -O all > "$RUNNER_TEMP/q3-build.log" 2>&1 || {
+            tail -120 "$RUNNER_TEMP/q3-build.log"
+            exit 1
+          }
+          sha256sum pokeemerald.gba
+      - name: Run the QA step through Q3, then the clinic observer
+        working-directory: qa
+        env:
+          Q3X: ${{ github.workspace }}/support/Pokemon Game/scripts/quest_support/q3_post_battle_observer.py
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/averon-playtest"
+          bash --noprofile --norc -eo pipefail "$RUNNER_TEMP/q3-run.sh" 2>&1 \
+            | tee "$RUNNER_TEMP/averon-playtest/q3-support-run.log"
+      - name: Surface the case lines as annotations (readable without the log)
+        if: always()
+        run: |
+          log="$RUNNER_TEMP/averon-playtest/q3-support-run.log"
+          test -s "$log" || { echo "::warning title=Q3 support::no run log"; exit 0; }
+          # One notice per key line, most important first (GitHub keeps at
+          # most 10 per step), trimmed; the full log is in the artifact.
+          for pattern in '^Q3X_CONTINUE_RESULT' '^Q3X_RC' 'Blocked:' '^Q3X_SAVED_SLOT' \
+                         '^Q3X_SAVE_SUCCESS' '^Q3X_RELAUNCH_A' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH_BLOCKED)' \
+                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^QA_Q3_INTERACTION_STATUS'; do
+            grep -aE "$pattern" "$log" | tail -1 | cut -c1-240
+          done | while IFS= read -r line; do
+            echo "::notice title=Q3 support::${line}"
+          done
+      - name: Attach only screenshots and logs (NO ROM or save)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: averon-quest-support-q3-evidence
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/averon-playtest/*.png
+            ${{ runner.temp }}/averon-playtest/*.log
+            ${{ runner.temp }}/averon-playtest/*.json
+            ${{ runner.temp }}/q3-build.log
+          retention-days: 14

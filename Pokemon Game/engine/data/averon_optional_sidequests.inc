@@ -20,9 +20,8 @@ Averon_NotesDeclined:
     release
     end
 Averon_NotesReward:
-    additem ITEM_GREAT_BALL, 2
+    call Averon_FieldNotes_TryReward
     goto_if_eq VAR_RESULT, FALSE, Averon_NotesBagFull
-    setflag FLAG_AVERON_NOTES_REWARDED
     msgbox Averon_Text_NotesReward, MSGBOX_DEFAULT
     playfanfare MUS_OBTAIN_ITEM
     waitfanfare
@@ -66,9 +65,8 @@ Averon_SketchDeclined:
     release
     end
 Averon_SketchReward:
-    additem ITEM_ORAN_BERRY, 3
+    call Averon_BerrySketch_TryReward
     goto_if_eq VAR_RESULT, FALSE, Averon_SketchBagFull
-    setflag FLAG_AVERON_SKETCH_REWARDED
     msgbox Averon_Text_SketchReward, MSGBOX_DEFAULT
     playfanfare MUS_OBTAIN_ITEM
     waitfanfare
@@ -83,16 +81,52 @@ Averon_SketchBagFull:
 Averon_BerrySketch_Observer::
     lock
     faceplayer
-    goto_if_unset FLAG_AVERON_SKETCH_STARTED, Averon_SketchViewOnly
-    goto_if_set FLAG_AVERON_SKETCH_FOUND, Averon_SketchViewOnly
-    setflag FLAG_AVERON_SKETCH_FOUND
+    msgbox Averon_Text_SketchHint, MSGBOX_DEFAULT
+    release
+    end
+
+@ An existing meadow tree, approached from its west side. No new map tiles.
+Averon_BerrySketch_Tree::
+    lockall
+    call Averon_BerrySketch_ObserveTree
+    goto_if_eq VAR_RESULT, FALSE, Averon_SketchTreeViewOnly
     msgbox Averon_Text_SketchFound, MSGBOX_DEFAULT
-    release
+    releaseall
     end
-Averon_SketchViewOnly:
+Averon_SketchTreeViewOnly:
     msgbox Averon_Text_SketchViewOnly, MSGBOX_DEFAULT
-    release
+    releaseall
     end
+
+Averon_BerrySketch_ObserveTree::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_AVERON_SKETCH_STARTED, Averon_EventRewardReturn
+    goto_if_set FLAG_AVERON_SKETCH_FOUND, Averon_EventRewardReturn
+    setflag FLAG_AVERON_SKETCH_FOUND
+    setvar VAR_RESULT, TRUE
+    return
+@ Callable, UI-free reward boundaries shared by NPCs and native regression tests.
+@ A failed claim leaves all saved state and inventory untouched.
+Averon_FieldNotes_TryReward::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_AVERON_NOTES_STARTED, Averon_EventRewardReturn
+    goto_if_unset FLAG_AVERON_NOTES_RECORDED, Averon_EventRewardReturn
+    goto_if_set FLAG_AVERON_NOTES_REWARDED, Averon_EventRewardReturn
+    additem ITEM_GREAT_BALL, 2
+    goto_if_eq VAR_RESULT, FALSE, Averon_EventRewardReturn
+    setflag FLAG_AVERON_NOTES_REWARDED
+    return
+
+Averon_BerrySketch_TryReward::
+    setvar VAR_RESULT, FALSE
+    goto_if_unset FLAG_AVERON_SKETCH_STARTED, Averon_EventRewardReturn
+    goto_if_unset FLAG_AVERON_SKETCH_FOUND, Averon_EventRewardReturn
+    goto_if_set FLAG_AVERON_SKETCH_REWARDED, Averon_EventRewardReturn
+    additem ITEM_ORAN_BERRY, 3
+    goto_if_eq VAR_RESULT, FALSE, Averon_EventRewardReturn
+    setflag FLAG_AVERON_SKETCH_REWARDED
+Averon_EventRewardReturn:
+    return
 
 Averon_Text_NotesAsk:
     .string "I'm logging the coast's bird calls.\nCould you check the bluffs for me?$"
@@ -112,17 +146,19 @@ Averon_Text_NotesBagFull:
     .string "Your Bag's full. Those GREAT BALLS\nwill be here when you return.$"
 
 Averon_Text_SketchAsk:
-    .string "I'm drawing the old berry trees.\nSeen the little boy by the meadow?$"
+    .string "I'm drawing the meadow trees.\nWould you look at one for me?$"
 Averon_Text_SketchWaiting:
-    .string "He knows every tree by its fruit.\nHe's down along the meadow path.$"
+    .string "The boy knows a lovely old tree.\nTake a look if you pass that way.$"
 Averon_Text_SketchDeclined:
     .string "All right. I'll keep sketching.$"
 Averon_Text_SketchFound:
-    .string "That old tree is full of Oran!\nTell the artist it's the round one.$"
+    .string "Round leaves, a sturdy trunk...\nA good tree for a sketch.$"
 Averon_Text_SketchViewOnly:
-    .string "The orchard's nice, but these\nmeadow trees are my favorites.$"
+    .string "The leaves rustle in the breeze.$"
+Averon_Text_SketchHint:
+    .string "See the old tree below me?\nYou can look from its left side.$"
 Averon_Text_SketchReward:
-    .string "The round one! I know that tree.\nHere, take some ORAN BERRIES.$"
+    .string "Round leaves! That helps a lot.\nHere, take some ORAN BERRIES.$"
 Averon_Text_SketchDone:
     .string "I made it look a bit taller.\nDon't tell the tree.$"
 Averon_Text_SketchBagFull:

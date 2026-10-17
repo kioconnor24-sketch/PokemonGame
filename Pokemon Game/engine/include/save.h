@@ -102,6 +102,8 @@ bool8 LinkFullSave_Init(void);
 bool8 LinkFullSave_WriteSector(void);
 bool8 LinkFullSave_ReplaceLastSector(void);
 bool8 LinkFullSave_SetLastSectorSignature(void);
+// UI callers must stop before changing their state if flash is write-blocked.
+bool8 LinkFullSave_AbortIfWriteBlocked(void);
 bool8 WriteSaveBlock2(void);
 bool8 WriteSaveBlock1Sector(void);
 u8 LoadGameSave(u8 saveType);

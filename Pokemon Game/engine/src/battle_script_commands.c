@@ -1574,6 +1574,14 @@ u32 GetBattlerRawSpeedOrder(enum BattlerId battler)
 // battlerStealer steals the item of itemBattler
 void StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, enum Item itemOverride, bool32 stealWildItem)
 {
+    u32 sourceSlot = gBattlerPartyIndexes[itemBattler];
+    if (itemOverride != ITEM_NONE && gBattleStruct->battlerState[itemBattler].originalBattlerPartyId != PARTY_SIZE)
+        sourceSlot = gBattleStruct->battlerState[itemBattler].originalBattlerPartyId;
+    struct LostItem *source = GetLostItemState(GetBattlerTrainer(itemBattler), sourceSlot);
+    if (!stealWildItem)
+        GetLostItemState(GetBattlerTrainer(battlerStealer), gBattlerPartyIndexes[battlerStealer])->heldOrigin = source->heldOrigin;
+    source->heldOrigin = HELD_ITEM_ORIGIN_NONE;
+
     if (itemOverride)
     {
         gLastUsedItem = itemOverride;
@@ -4406,7 +4414,11 @@ static void Cmd_removeitem(void)
     // Corroded items cannot be restored either.
     if (GetBattlerHoldEffect(battler) != HOLD_EFFECT_AIR_BALLOON
      && GetMoveEffect(gCurrentMove) != EFFECT_CORROSIVE_GAS)
+    {
         GetBattlerPartyState(battler)->usedHeldItem = itemId; // Remember if switched out
+        GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler])->usedOrigin = GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler])->heldOrigin;
+    }
+    GetLostItemState(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler])->heldOrigin = HELD_ITEM_ORIGIN_NONE;
 
     gBattleMons[battler].item = ITEM_NONE;
     gBattleStruct->battlerState[battler].canPickupItem = TRUE;
@@ -7079,6 +7091,12 @@ static void Cmd_tryswapitems(void)
             oldItemAtk = gBattleMons[gBattlerAttacker].item;
             oldItemDef = gBattleMons[gBattlerTarget].item;
 
+            struct LostItem *attackerItem = GetLostItemState(GetBattlerTrainer(gBattlerAttacker), gBattlerPartyIndexes[gBattlerAttacker]);
+            struct LostItem *targetItem = GetLostItemState(GetBattlerTrainer(gBattlerTarget), gBattlerPartyIndexes[gBattlerTarget]);
+            u32 attackerOrigin = oldItemAtk == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : attackerItem->heldOrigin;
+            attackerItem->heldOrigin = oldItemDef == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : targetItem->heldOrigin;
+            targetItem->heldOrigin = attackerOrigin;
+
             gBattleMons[gBattlerAttacker].item = oldItemDef;
             gBattleMons[gBattlerTarget].item = oldItemAtk;
 
@@ -7548,6 +7566,7 @@ static void Cmd_pickup(void)
         {
             species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
             heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM);
+            enum Item initialHeldItem = heldItem;
             lvlDivBy10 = (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather.
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
@@ -7600,6 +7619,8 @@ static void Cmd_pickup(void)
                 heldItem = ITEM_BERRY_JUICE;
                 SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &heldItem);
             }
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM) != initialHeldItem)
+                GetLostItemState(B_TRAINER_PLAYER, i)->heldOrigin = HELD_ITEM_ORIGIN_NONE;
         }
     }
 
@@ -7719,13 +7740,20 @@ static void Cmd_tryrecycleitem(void)
     CMD_ARGS(const u8 *failInstr);
 
     enum Item *usedHeldItem;
+    enum BattlerId source = gBattlerAttacker;
 
     if (gCurrentMove == MOVE_NONE && GetBattlerAbility(gBattlerAttacker) == ABILITY_PICKUP)
+    {
+        source = gBattlerTarget;
         usedHeldItem = &GetBattlerPartyState(gBattlerTarget)->usedHeldItem;
+    }
     else
         usedHeldItem = &GetBattlerPartyState(gBattlerAttacker)->usedHeldItem;
     if (*usedHeldItem != ITEM_NONE && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
     {
+        struct LostItem *sourceItem = GetLostItemState(GetBattlerTrainer(source), gBattlerPartyIndexes[source]);
+        GetLostItemState(GetBattlerTrainer(gBattlerAttacker), gBattlerPartyIndexes[gBattlerAttacker])->heldOrigin = sourceItem->usedOrigin;
+        sourceItem->usedOrigin = HELD_ITEM_ORIGIN_NONE;
         gLastUsedItem = *usedHeldItem;
         *usedHeldItem = ITEM_NONE;
         gBattleMons[gBattlerAttacker].item = gLastUsedItem;
@@ -8336,6 +8364,10 @@ static void Cmd_givecaughtmon(void)
                 // Mon chosen, try to put it in the PC
                 if (CopyMonToPC(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId]) == MON_GIVEN_TO_PC)
                 {
+                    u32 origin = GetLostItemState(B_TRAINER_PLAYER, gSelectedMonPartyId)->heldOrigin;
+                    if (origin != HELD_ITEM_ORIGIN_NONE
+                     && GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId], MON_DATA_HELD_ITEM) != ITEM_NONE)
+                        GetLostItemState(origin / PARTY_SIZE, origin % PARTY_SIZE)->preservedElsewhere = TRUE;
                     GetMonNickname(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId], gStringVar2);
                     StringCopy(gStringVar1, GetBoxNamePtr(GetPCBoxToSendMon()));
                     ZeroMonData(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId]);
@@ -8354,12 +8386,26 @@ static void Cmd_givecaughtmon(void)
         break;
     case GIVECAUGHTMON_GIVE_AND_SHOW_MSG:
     {
-        struct Pokemon *caughtMon = GetBattlerMon(GetCatchingBattler());
-        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
+        enum BattlerId caughtBattler = GetCatchingBattler();
+        struct Pokemon *caughtMon = GetBattlerMon(caughtBattler);
+        struct LostItem *caughtItem = GetLostItemState(GetBattlerTrainer(caughtBattler), gBattlerPartyIndexes[caughtBattler]);
+        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 && GetMonData(caughtMon, MON_DATA_HELD_ITEM) == ITEM_NONE)
         {
-            enum Item lostItem = gBattleStruct->itemLost[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetCatchingBattler()]].originalItem;
-            if (lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES)
+            enum Item lostItem = caughtItem->originalItem;
+            u32 originalOrigin = GetBattlerTrainer(caughtBattler) * PARTY_SIZE + gBattlerPartyIndexes[caughtBattler];
+            bool32 heldElsewhere = FALSE;
+            for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            {
+                if (GetLostItemState(B_TRAINER_PLAYER, slot)->heldOrigin == originalOrigin
+                 && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) != ITEM_NONE)
+                    heldElsewhere = TRUE;
+            }
+            if (!heldElsewhere && !caughtItem->preservedElsewhere
+             && lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES)
+            {
                 SetMonData(caughtMon, MON_DATA_HELD_ITEM, &lostItem);  // Restore non-berry items
+                caughtItem->heldOrigin = originalOrigin;
+            }
         }
 
         u32 emptySlot;
@@ -8369,7 +8415,15 @@ static void Cmd_givecaughtmon(void)
                 break;
         }
 
-        if (GiveCapturedMonToPlayer(caughtMon) != MON_GIVEN_TO_PARTY
+        u32 destination = GiveCapturedMonToPlayer(caughtMon);
+        if (destination == MON_GIVEN_TO_PC
+         && GetMonData(caughtMon, MON_DATA_HELD_ITEM) != ITEM_NONE
+         && caughtItem->heldOrigin != HELD_ITEM_ORIGIN_NONE)
+        {
+            u32 origin = caughtItem->heldOrigin;
+            GetLostItemState(origin / PARTY_SIZE, origin % PARTY_SIZE)->preservedElsewhere = TRUE;
+        }
+        if (destination != MON_GIVEN_TO_PARTY
          && gBattleCommunication[MULTISTRING_CHOOSER] != B_MSG_SWAPPED_INTO_PARTY)
         {
             if (!ShouldShowBoxWasFullMessage())
@@ -8392,8 +8446,13 @@ static void Cmd_givecaughtmon(void)
         }
 
         // Copy changedSpecies to allow caught mon to revert to its original species.
-        if (emptySlot != PARTY_SIZE)
+        if (emptySlot != PARTY_SIZE && destination == MON_GIVEN_TO_PARTY)
+        {
             gBattleStruct->partyState[B_SIDE_PLAYER][emptySlot].changedSpecies = GetBattlerPartyState(GetCatchingBattler())->changedSpecies;
+            GetLostItemState(B_TRAINER_PLAYER, emptySlot)->heldOrigin = caughtItem->heldOrigin;
+            GetLostItemState(B_TRAINER_PLAYER, emptySlot)->usedOrigin = HELD_ITEM_ORIGIN_NONE;
+            GetLostItemState(B_TRAINER_PLAYER, emptySlot)->preservedElsewhere = FALSE;
+        }
 
         gBattleResults.caughtMonSpecies = GetMonData(caughtMon, MON_DATA_SPECIES);
         GetMonData(caughtMon, MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
@@ -10269,6 +10328,9 @@ void BS_TryRecycleBerry(void)
     if (gBattleMons[gBattlerTarget].item == ITEM_NONE
         && GetItemPocket(*usedHeldItem) == POCKET_BERRIES)
     {
+        struct LostItem *state = GetLostItemState(GetBattlerTrainer(gBattlerTarget), gBattlerPartyIndexes[gBattlerTarget]);
+        state->heldOrigin = state->usedOrigin;
+        state->usedOrigin = HELD_ITEM_ORIGIN_NONE;
         gLastUsedItem = *usedHeldItem;
         *usedHeldItem = ITEM_NONE;
         gBattleMons[gBattlerTarget].item = gLastUsedItem;

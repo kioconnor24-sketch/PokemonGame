@@ -904,6 +904,14 @@ static bool32 RefuseBlockedIncrementalSave(void)
     return TRUE;
 }
 
+bool8 LinkFullSave_AbortIfWriteBlocked(void)
+{
+    if (!RefuseBlockedIncrementalSave())
+        return FALSE;
+    DoSaveFailedScreen(SAVE_NORMAL);
+    return TRUE;
+}
+
 bool8 LinkFullSave_Init(void)
 {
     if (RefuseBlockedIncrementalSave())
@@ -1125,6 +1133,9 @@ u32 TryWriteSpecialSaveSector(u8 sector, u8 *src)
 // Most notably it does save the PC data.
 void Task_LinkFullSave(u8 taskId)
 {
+    if (LinkFullSave_AbortIfWriteBlocked())
+        return;
+
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
