@@ -1,0 +1,10 @@
+## normal build warnings (asset bKGD/iCCP notices omitted)
+arm-none-eabi-ld: warning: ../../pokeemerald.elf has a LOAD segment with RWX permissions
+## release build warnings
+closer.c:(.text._close_r+0xc): warning: _close is not implemented and will always fail
+lseekr.c:(.text._lseek_r+0x10): warning: _lseek is not implemented and will always fail
+readr.c:(.text._read_r+0x10): warning: _read is not implemented and will always fail
+writer.c:(.text._write_r+0x10): warning: _write is not implemented and will always fail
+/opt/arm14/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld: warning: ../../pokeemerald-release.elf has a LOAD segment with RWX permissions
+NORMAL_EXIT=0
+RELEASE_EXIT=0

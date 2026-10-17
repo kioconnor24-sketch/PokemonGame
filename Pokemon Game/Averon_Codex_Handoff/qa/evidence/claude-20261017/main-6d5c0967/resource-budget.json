@@ -1,0 +1,30 @@
+{
+  "scope": "Native build and linker footprints, not game runtime",
+  "memory": {
+    "EWRAM": {
+      "used_bytes": 226484,
+      "capacity_bytes": 262144,
+      "remaining_bytes": 35660,
+      "used_percent": 86.4,
+      "linker_reported_percent": 86.4
+    },
+    "IWRAM": {
+      "used_bytes": 28392,
+      "capacity_bytes": 32768,
+      "remaining_bytes": 4376,
+      "used_percent": 86.65,
+      "linker_reported_percent": 86.65
+    },
+    "ROM": {
+      "used_bytes": 26733244,
+      "capacity_bytes": 33554432,
+      "remaining_bytes": 6821188,
+      "used_percent": 79.67,
+      "linker_reported_percent": 79.67
+    }
+  },
+  "rom_artifact": {
+    "size_bytes": 33554432,
+    "sha256": "5c022d4caa21ac2e96eee77913b2081fac2465b197ad6f4d3cf63ca3a5c2bc36"
+  }
+}
