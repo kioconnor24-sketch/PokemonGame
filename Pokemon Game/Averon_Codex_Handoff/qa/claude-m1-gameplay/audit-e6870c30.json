@@ -1,13 +1,396 @@
 {
   "cases": [
     {
+      "case_id": "GYM1",
+      "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
+      "files": [
+        {
+          "bytes": 59086,
+          "path": "run52-gym1-try3/inputs.jsonl",
+          "sha256": "b2e84cdcf06f7031f2af35150945b88aab718b8e23f291e245164358ab16ec2e"
+        },
+        {
+          "bytes": 2055,
+          "path": "run52-gym1-try3/0011-gym1-entered.png",
+          "sha256": "7974bdce146d6956ed76a824a432ed015e295ca2c2393ef1c74a9262bfd178af"
+        },
+        {
+          "bytes": 2489,
+          "path": "run52-gym1-try3/0016-gym1-sluices.png",
+          "sha256": "722e2374eb47aa1654de8d0389c7cff227c8840a490c654b98e7445549b8430b"
+        },
+        {
+          "bytes": 2700,
+          "path": "run52-gym1-try3/0048-gym1-result.png",
+          "sha256": "3af2be496d636bd809f6115bc7a916eed453760aa76d875f170def4c9dddd332"
+        },
+        {
+          "bytes": 3382,
+          "path": "run52-gym1-try3/0020-elio-action.png",
+          "sha256": "e03ca44c25f638fcd6a8a20f772f443f7dc484bc70eff870d26ecfdc3f6c4e70"
+        },
+        {
+          "bytes": 3388,
+          "path": "run52-gym1-try3/0021-elio-action.png",
+          "sha256": "c8c6ed38380515a5ae3287807136f7d89116f980bdc98a4e2cb4c30610a1e7d5"
+        },
+        {
+          "bytes": 3388,
+          "path": "run52-gym1-try3/0022-elio-action.png",
+          "sha256": "5fad590bb57c69ceb4456075de37e8f26cd2f05863ac1d7d2e320a1d42fc7650"
+        },
+        {
+          "bytes": 3242,
+          "path": "run52-gym1-try3/0023-elio-foe-down.png",
+          "sha256": "431461e884b63e52fed1e0af9addb6d6957e4dd18d3e0d9aa7fb507f1017cf73"
+        },
+        {
+          "bytes": 2233,
+          "path": "run52-gym1-try3/0024-elio-foe-down.png",
+          "sha256": "2fbd0945581e4c7d47001fe8341eeb66a8a939ba264cc1c07954aadeb46216a3"
+        },
+        {
+          "bytes": 2242,
+          "path": "run52-gym1-try3/0025-elio-foe-down.png",
+          "sha256": "b990d0e3f727a5665ab2473647127cf34628f72fcd60a2c59349d54d24deba5c"
+        },
+        {
+          "bytes": 2387,
+          "path": "run52-gym1-try3/0026-elio-foe-down.png",
+          "sha256": "417e23d05b8cdafbef3bd50934c8f969f6bc763c8e9c3ea4aa92a258ea74f5e9"
+        },
+        {
+          "bytes": 2608,
+          "path": "run52-gym1-try3/0027-elio-foe-down.png",
+          "sha256": "c46ac261753ae48e96794e83024f315d8d4970a0e633181b7f06dc5c1fe85aab"
+        },
+        {
+          "bytes": 3136,
+          "path": "run52-gym1-try3/0028-elio-foe-down.png",
+          "sha256": "d17f42f8ef57b8d187102323ec7d53c1d2d238451e8106cac84e73ba55c84063"
+        },
+        {
+          "bytes": 2241,
+          "path": "run52-gym1-try3/0029-elio-foe-down.png",
+          "sha256": "1bf95d2ce15257680e3e60c1fed35b5c6420863af2ba47c6fb283c8827895128"
+        },
+        {
+          "bytes": 2242,
+          "path": "run52-gym1-try3/0030-elio-foe-down.png",
+          "sha256": "ebc929165577d2d507ac0691a31a029a7831bd7174bc20fb87b49ebf2062376f"
+        },
+        {
+          "bytes": 2391,
+          "path": "run52-gym1-try3/0031-elio-foe-down.png",
+          "sha256": "e59f02224fdef4bfb034a82e9776425a17b4e4ec15633d2b5c25ec97bb105976"
+        },
+        {
+          "bytes": 2391,
+          "path": "run52-gym1-try3/0032-elio-foe-down.png",
+          "sha256": "e59f02224fdef4bfb034a82e9776425a17b4e4ec15633d2b5c25ec97bb105976"
+        },
+        {
+          "bytes": 3076,
+          "path": "run52-gym1-try3/0033-elio-foe-down.png",
+          "sha256": "7d9896286cc770c69280d9f29b58ee4adbe9b97d80940f3ea98d200b80a7ee32"
+        },
+        {
+          "bytes": 2240,
+          "path": "run52-gym1-try3/0034-elio-foe-down.png",
+          "sha256": "61a7667c1c0dc913b4f95c681b8782a996b7200f6565cfe223a670f9a7d29f80"
+        },
+        {
+          "bytes": 2243,
+          "path": "run52-gym1-try3/0035-elio-foe-down.png",
+          "sha256": "bdbdf35ba6d245ee7a91b4279a3ad46463fdfeed8a862dc3a23482555313ee09"
+        },
+        {
+          "bytes": 3063,
+          "path": "run52-gym1-try3/0036-elio-foe-down.png",
+          "sha256": "287ab0d8b9f4dc2584a05dfc0a2008d05df465f7ef7304f1635a21d22ba7c571"
+        },
+        {
+          "bytes": 3072,
+          "path": "run52-gym1-try3/0037-elio-foe-down.png",
+          "sha256": "68a95ac1125a943d931ae3c28a12ce80512ee7182318c1c20416a085b8e9a870"
+        },
+        {
+          "bytes": 157,
+          "path": "run52-gym1-try3/0038-elio-foe-down.png",
+          "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
+        },
+        {
+          "bytes": 2929,
+          "path": "run52-gym1-try3/0049-trainer-card.png",
+          "sha256": "916e33d2e5df597bb9e1b48768a5a42a2c9763ba79d4cfe9e230b30d4f62e4f6"
+        },
+        {
+          "bytes": 1782,
+          "path": "run52-gym1-try3/0050-save-confirm-checkpoint.png",
+          "sha256": "72b80b3fc1bd4d8c1fdf3db52c29ab2430b2fa339b3b00cfaa38d5b08b124918"
+        },
+        {
+          "bytes": 1782,
+          "path": "run52-gym1-try3/0051-save-confirm-checkpoint-2.png",
+          "sha256": "72b80b3fc1bd4d8c1fdf3db52c29ab2430b2fa339b3b00cfaa38d5b08b124918"
+        },
+        {
+          "bytes": 1782,
+          "path": "run52-gym1-try3/0052-save-confirm-checkpoint-3.png",
+          "sha256": "72b80b3fc1bd4d8c1fdf3db52c29ab2430b2fa339b3b00cfaa38d5b08b124918"
+        },
+        {
+          "bytes": 1782,
+          "path": "run52-gym1-try3/0053-save-step-checkpoint-01.png",
+          "sha256": "72b80b3fc1bd4d8c1fdf3db52c29ab2430b2fa339b3b00cfaa38d5b08b124918"
+        },
+        {
+          "bytes": 1915,
+          "path": "run52-gym1-try3/0054-save-step-checkpoint-02.png",
+          "sha256": "181d2adc280b19d461361c8525429b53fd7dfcd54d761649f27b8b5ae7830947"
+        },
+        {
+          "bytes": 1915,
+          "path": "run52-gym1-try3/0055-save-step-checkpoint-03.png",
+          "sha256": "181d2adc280b19d461361c8525429b53fd7dfcd54d761649f27b8b5ae7830947"
+        },
+        {
+          "bytes": 1915,
+          "path": "run52-gym1-try3/0056-save-step-checkpoint-04.png",
+          "sha256": "181d2adc280b19d461361c8525429b53fd7dfcd54d761649f27b8b5ae7830947"
+        },
+        {
+          "bytes": 1915,
+          "path": "run52-gym1-try3/0057-save-step-checkpoint-05.png",
+          "sha256": "181d2adc280b19d461361c8525429b53fd7dfcd54d761649f27b8b5ae7830947"
+        },
+        {
+          "bytes": 2710,
+          "path": "run52-gym1-try3/0058-save-step-checkpoint-06.png",
+          "sha256": "cb65fa2bee627cd80ea32c8a77a41201a7eb96e4981b9bbdf89a549c71ab055d"
+        },
+        {
+          "bytes": 2710,
+          "path": "run53-gym1-cont/0010-end.png",
+          "sha256": "cb65fa2bee627cd80ea32c8a77a41201a7eb96e4981b9bbdf89a549c71ab055d"
+        },
+        {
+          "bytes": 3810,
+          "path": "run53-gym1-cont/0009-trainer-card.png",
+          "sha256": "cbc79640d97be73b3979a383ef827f59f880b30824d285333027ca300a5c2886"
+        },
+        {
+          "bytes": 2055,
+          "path": "run48-gym1/0010-gym1-entered.png",
+          "sha256": "7974bdce146d6956ed76a824a432ed015e295ca2c2393ef1c74a9262bfd178af"
+        },
+        {
+          "bytes": 3387,
+          "path": "run48-gym1/0019-elio-action.png",
+          "sha256": "e6476fa263e038f84da45a845d3bb0900eb9ffe8ea5c13fc50b298fa9c86eb73"
+        },
+        {
+          "bytes": 3388,
+          "path": "run48-gym1/0020-elio-action.png",
+          "sha256": "68ef96c77d48157c6b9514b480f866495d992c8fd25fdf24e6d7ef94b3832730"
+        },
+        {
+          "bytes": 3402,
+          "path": "run48-gym1/0021-elio-action.png",
+          "sha256": "d4ca23b2389e72ad39deb7e30845ce82564d4b855e55f882bb65524fd4142dfc"
+        },
+        {
+          "bytes": 3242,
+          "path": "run48-gym1/0022-elio-foe-down.png",
+          "sha256": "1cfb800be58564d4d1638c7806a4e34dccc9d1d85bdbae1407eae0c3cd183263"
+        },
+        {
+          "bytes": 3242,
+          "path": "run48-gym1/0023-elio-foe-down.png",
+          "sha256": "1cfb800be58564d4d1638c7806a4e34dccc9d1d85bdbae1407eae0c3cd183263"
+        },
+        {
+          "bytes": 2232,
+          "path": "run48-gym1/0024-elio-foe-down.png",
+          "sha256": "6f41a7d4bcea7f6966259d4738ef334c7b6709b98e22e63d0a06009267f5c494"
+        },
+        {
+          "bytes": 2242,
+          "path": "run48-gym1/0025-elio-foe-down.png",
+          "sha256": "4443de5d929c1872e464905141a74f9fcba77c36059744cf4d9e40a3d658a725"
+        },
+        {
+          "bytes": 2387,
+          "path": "run48-gym1/0026-elio-foe-down.png",
+          "sha256": "c826dcc982e2adddc9a8c59f85d89b3ea079af79148ac26f71c8c39bf2318218"
+        },
+        {
+          "bytes": 2387,
+          "path": "run48-gym1/0027-elio-foe-down.png",
+          "sha256": "c826dcc982e2adddc9a8c59f85d89b3ea079af79148ac26f71c8c39bf2318218"
+        },
+        {
+          "bytes": 3135,
+          "path": "run48-gym1/0028-elio-foe-down.png",
+          "sha256": "8d74e1a213c193c3309a4782a360a1eae2e71d8bdd5374f758a243c2635a9052"
+        },
+        {
+          "bytes": 2187,
+          "path": "run48-gym1/0029-elio-foe-down.png",
+          "sha256": "9beae6e6051e06da33f527d9828454df02f0a2cc6d07b76be63f6d3c96c2ccd6"
+        },
+        {
+          "bytes": 2242,
+          "path": "run48-gym1/0030-elio-foe-down.png",
+          "sha256": "4443de5d929c1872e464905141a74f9fcba77c36059744cf4d9e40a3d658a725"
+        },
+        {
+          "bytes": 2391,
+          "path": "run48-gym1/0031-elio-foe-down.png",
+          "sha256": "382c66c6c4d2ad147c6b7c6ce4381fe03414656e413ed6b6519f0802f5c1e865"
+        },
+        {
+          "bytes": 2391,
+          "path": "run48-gym1/0032-elio-foe-down.png",
+          "sha256": "382c66c6c4d2ad147c6b7c6ce4381fe03414656e413ed6b6519f0802f5c1e865"
+        },
+        {
+          "bytes": 2946,
+          "path": "run48-gym1/0033-elio-defeat.png",
+          "sha256": "8a7a80e876c2916e6fa2d73f4832c96dff589ec6032c6286b60cf7e4321993a4"
+        },
+        {
+          "bytes": 2272,
+          "path": "run48-gym1/0034-elio-defeat.png",
+          "sha256": "e39285e37216dba62a371f3aa497edd7aa12d3e7f1d1163f769abe83350aabe1"
+        },
+        {
+          "bytes": 2272,
+          "path": "run48-gym1/0035-elio-defeat.png",
+          "sha256": "29dec951f795a9713cab406979b7efb4c54f66725a38b6cc703a9aa7ff565fae"
+        },
+        {
+          "bytes": 2272,
+          "path": "run48-gym1/0036-elio-defeat.png",
+          "sha256": "29dec951f795a9713cab406979b7efb4c54f66725a38b6cc703a9aa7ff565fae"
+        },
+        {
+          "bytes": 2272,
+          "path": "run48-gym1/0037-elio-defeat.png",
+          "sha256": "29dec951f795a9713cab406979b7efb4c54f66725a38b6cc703a9aa7ff565fae"
+        },
+        {
+          "bytes": 2272,
+          "path": "run48-gym1/0038-elio-defeat.png",
+          "sha256": "29dec951f795a9713cab406979b7efb4c54f66725a38b6cc703a9aa7ff565fae"
+        },
+        {
+          "bytes": 157,
+          "path": "run48-gym1/0039-elio-defeat.png",
+          "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
+        },
+        {
+          "bytes": 4301,
+          "path": "run48-gym1/0040-gym1-after-01.png",
+          "sha256": "68ee7c658436fc3263ab20f2ae85c56442ab9a88e8bea9ac115b8ce03c13e3b3"
+        },
+        {
+          "bytes": 4353,
+          "path": "run48-gym1/0041-gym1-after-02.png",
+          "sha256": "068ec1c4d64c1c2865b144121266a86553eb745d764e5bd0d03d38690247e386"
+        },
+        {
+          "bytes": 4330,
+          "path": "run48-gym1/0042-gym1-after-03.png",
+          "sha256": "510ec09f39b91f91727f9b02a34f5bf9320e2e8944f0f3dc59b5d6f2755b6a1d"
+        },
+        {
+          "bytes": 4344,
+          "path": "run48-gym1/0043-gym1-after-04.png",
+          "sha256": "3d17fb0f3555c7dada14e08b6cc6fde3a2967cfa8477f085f4be6a6a202c8513"
+        },
+        {
+          "bytes": 4301,
+          "path": "run48-gym1/0044-gym1-after-05.png",
+          "sha256": "68ee7c658436fc3263ab20f2ae85c56442ab9a88e8bea9ac115b8ce03c13e3b3"
+        },
+        {
+          "bytes": 4301,
+          "path": "run48-gym1/0045-gym1-after-06.png",
+          "sha256": "68ee7c658436fc3263ab20f2ae85c56442ab9a88e8bea9ac115b8ce03c13e3b3"
+        },
+        {
+          "bytes": 4937,
+          "path": "run48-gym1/0046-gym1-after-07.png",
+          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
+        },
+        {
+          "bytes": 4297,
+          "path": "run48-gym1/0047-gym1-after-08.png",
+          "sha256": "d82b16e9a17c280a468d03653c67997a029ec1899e17c937d8cb6f91e3f4b19c"
+        },
+        {
+          "bytes": 4353,
+          "path": "run48-gym1/0048-gym1-after-09.png",
+          "sha256": "068ec1c4d64c1c2865b144121266a86553eb745d764e5bd0d03d38690247e386"
+        },
+        {
+          "bytes": 4350,
+          "path": "run48-gym1/0049-gym1-after-10.png",
+          "sha256": "96951c27d44236cf43241c8ef5ca32fcd51253a2698b9795944c0f6a1e633e43"
+        },
+        {
+          "bytes": 4330,
+          "path": "run48-gym1/0050-gym1-after-11.png",
+          "sha256": "1e70644a6da3c345cef6fb00ba64973ea7662ecc391e109d0e17efae26b8a86f"
+        },
+        {
+          "bytes": 4260,
+          "path": "run48-gym1/0051-gym1-after-12.png",
+          "sha256": "8f39820c08bddeee7fe191476d4ef1d88dc5b68156b5b0da23d33d1b417d7dfe"
+        },
+        {
+          "bytes": 2289,
+          "path": "run52-gym1-try3/state-gym1-sluices.json",
+          "sha256": "8e9d5fadc1d35a169a91455aa253c2c1eb00ca5793966556266f8eb5a93dad40"
+        },
+        {
+          "bytes": 2289,
+          "path": "run52-gym1-try3/state-gym1-sluices.json",
+          "sha256": "8e9d5fadc1d35a169a91455aa253c2c1eb00ca5793966556266f8eb5a93dad40"
+        },
+        {
+          "bytes": 2240,
+          "path": "run52-gym1-try3/state-gym1-result.json",
+          "sha256": "753030f4c922d6a73169be49eee116c6bac3c44682b9b4c8307b641d3ea0abe4"
+        }
+      ],
+      "independent_playtest_verdict": "NOT_GRANTED_BY_THIS_TOOL",
+      "issues": []
+    },
+    {
       "case_id": "Q1",
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 4941,
-          "path": "run38-natural-bag/inputs.jsonl",
-          "sha256": "d40c5860b725293ce63fa9036ff0f57d65fdc550bce5de5cfc0ba17510eb2535"
+          "bytes": 4771,
+          "path": "run51-q1start/inputs.jsonl",
+          "sha256": "4854fe6bd405d6ea4d81b11e7b3d57fe47c62728fe2cf66dac2dee29fa1b709a"
+        },
+        {
+          "bytes": 3384,
+          "path": "run51-q1start/0011-q1-started.png",
+          "sha256": "f84fac66c54204ecfabb68a585e629525c92de9dcd936cc56efb6079ca6cb0ee"
+        },
+        {
+          "bytes": 4097,
+          "path": "run51-q1start/0009-talk-alderfield-12-16-01.png",
+          "sha256": "ec9e67e849506aaa41626cf18ca2ff074921af4807fcaf4d8d4577e39bd1f3c0"
+        },
+        {
+          "bytes": 3912,
+          "path": "run51-q1start/0010-talk-alderfield-12-16-02.png",
+          "sha256": "6dee5055ac144203f9dfe18c17333b4951a88f0d49c49535a8c32f4afdc821f8"
         },
         {
           "bytes": 3716,
@@ -170,6 +553,11 @@
           "sha256": "9ac252b026f70002b744b8be73b80e8c8aa449b08da614404f134c10e1eb403b"
         },
         {
+          "bytes": 1241,
+          "path": "run51-q1start/state-q1-started.json",
+          "sha256": "fbd521a36155ed97fed2949bfc79dd36bdcfd773b9e467c54aae151e1f399fe0"
+        },
+        {
           "bytes": 2252,
           "path": "run35-q1ord/state-q1-bluffs-entered.json",
           "sha256": "151c57b654148186a9cc71209ed27417ebc32b2449202f62c2e68bca3e8fd743"
@@ -288,9 +676,9 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 4613,
-          "path": "run37-q1full-bag/inputs.jsonl",
-          "sha256": "89a2a3227bc2a9788b37110f5be7443ea10525d625efa476e85f9294f9599521"
+          "bytes": 29564,
+          "path": "run26-q1full/inputs.jsonl",
+          "sha256": "1b6f357d3455f1e6f197dfb494d75fe26df0969297ba53a1a7494570333afd34"
         },
         {
           "bytes": 3111,
@@ -496,9 +884,9 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 4941,
-          "path": "run38-natural-bag/inputs.jsonl",
-          "sha256": "d40c5860b725293ce63fa9036ff0f57d65fdc550bce5de5cfc0ba17510eb2535"
+          "bytes": 26534,
+          "path": "run20/inputs.jsonl",
+          "sha256": "c937dbd7781fa278a7fa36ad594c09bf97b93eb307f9ddafedd8f47b779e536b"
         },
         {
           "bytes": 4187,
@@ -649,9 +1037,9 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 3239,
-          "path": "run29-q2cont/inputs.jsonl",
-          "sha256": "5ee20d8e9e1bb644ad7ccb2bbc8f8651b7e93bae7e3e95253f723a738873cd45"
+          "bytes": 35595,
+          "path": "run28-q2full/inputs.jsonl",
+          "sha256": "e47ea63f9522e7fe36be7e90b0a72e90fa68b1547a2da619c5ac814e793a513e"
         },
         {
           "bytes": 3836,
@@ -902,9 +1290,219 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 13309,
-          "path": "run25-q3q5/inputs.jsonl",
-          "sha256": "fa81cbd04cc6755c7694b4abdb08e367e43108c8641fe7b8b4820552f06b3280"
+          "bytes": 49075,
+          "path": "run47-q3/inputs.jsonl",
+          "sha256": "933e257895df3cd055cc6dcd3ac4fa1ce04e61506d654a1e93a14978c4d8c07e"
+        },
+        {
+          "bytes": 4968,
+          "path": "run47-q3/0009-q3-before.png",
+          "sha256": "9437240ce15ec043bab9b9641062bad025184d19f86d666e8f1904a429e47032"
+        },
+        {
+          "bytes": 4937,
+          "path": "run47-q3/0044-q3-clinic.png",
+          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
+        },
+        {
+          "bytes": 3805,
+          "path": "run47-q3/0013-q3-loss00-defeat.png",
+          "sha256": "0a215671daca726ed9d052af382df939756ebc3d0a06784323209ef70cfab867"
+        },
+        {
+          "bytes": 2691,
+          "path": "run47-q3/0014-q3-loss00-defeat.png",
+          "sha256": "04b80afc8d06f402d22c54363db823bf37977963b0e61bd9bc7d47071fcee7fa"
+        },
+        {
+          "bytes": 2624,
+          "path": "run47-q3/0015-q3-loss00-defeat.png",
+          "sha256": "330027849af88d06ebf5980fe4d9e10e3bb8cbbec2ceda931c9bd7a1c5f28689"
+        },
+        {
+          "bytes": 3017,
+          "path": "run47-q3/0016-q3-loss00-defeat.png",
+          "sha256": "be7c85744b16320e2ce6e0d6f5cb30c953336d2dec7b6305972314d7d23ff3e5"
+        },
+        {
+          "bytes": 3017,
+          "path": "run47-q3/0017-q3-loss00-defeat.png",
+          "sha256": "be7c85744b16320e2ce6e0d6f5cb30c953336d2dec7b6305972314d7d23ff3e5"
+        },
+        {
+          "bytes": 2889,
+          "path": "run47-q3/0018-q3-loss00-defeat.png",
+          "sha256": "cbe73edcbd6b7cf36988be4301e5f47cdf18a7af4d2e76e15f2507ac86af1cc8"
+        },
+        {
+          "bytes": 2757,
+          "path": "run47-q3/0019-q3-loss00-defeat.png",
+          "sha256": "4587eedaa26cdc278f21c8ee84174a5884b2c53ca25055ba5c02866df6266abd"
+        },
+        {
+          "bytes": 2932,
+          "path": "run47-q3/0020-q3-loss00-defeat.png",
+          "sha256": "8bd0f61dc64085e87fcd333b225ae1b5835a2023af95bf0cfea625b53fdef842"
+        },
+        {
+          "bytes": 157,
+          "path": "run47-q3/0021-q3-loss00-defeat.png",
+          "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
+        },
+        {
+          "bytes": 587,
+          "path": "run47-q3/0022-q3-after-whiteout-1.png",
+          "sha256": "a37490f98b2a49a2e5e6eab729c65776ffd63498fb9f24f1e014638f0173cc30"
+        },
+        {
+          "bytes": 1194,
+          "path": "run47-q3/0023-q3-after-whiteout-2.png",
+          "sha256": "d40afa915d96d19062d9722e0e86e108dc24fbb582792a34e836514f15b838ad"
+        },
+        {
+          "bytes": 1143,
+          "path": "run47-q3/0024-q3-after-whiteout-3.png",
+          "sha256": "4f86423cf76421daa1f931fa51804d815e294c8df282988abafa57e2112edd1e"
+        },
+        {
+          "bytes": 1146,
+          "path": "run47-q3/0025-q3-after-whiteout-4.png",
+          "sha256": "239b6b33bd8e5fcd8595772920996ffefd736e14b0910a9162b9c1d50013859e"
+        },
+        {
+          "bytes": 1148,
+          "path": "run47-q3/0026-q3-after-whiteout-5.png",
+          "sha256": "c121d4ffa00d9ebde5baf40f06b353f5f8c75a1af33b5cc8076c42efd2944b96"
+        },
+        {
+          "bytes": 1146,
+          "path": "run47-q3/0027-q3-after-whiteout-6.png",
+          "sha256": "239b6b33bd8e5fcd8595772920996ffefd736e14b0910a9162b9c1d50013859e"
+        },
+        {
+          "bytes": 1148,
+          "path": "run47-q3/0028-q3-clinic-01.png",
+          "sha256": "c121d4ffa00d9ebde5baf40f06b353f5f8c75a1af33b5cc8076c42efd2944b96"
+        },
+        {
+          "bytes": 4853,
+          "path": "run47-q3/0029-q3-clinic-02.png",
+          "sha256": "2694aa7f64234178b79d5f095d5d9cf10c99fc8a07749940ad88bc5428e056fc"
+        },
+        {
+          "bytes": 4931,
+          "path": "run47-q3/0030-q3-clinic-03.png",
+          "sha256": "2ade39660e4a50e70f19a6a4edb0cafa304754ebfa39efabbc40f89c8691a64f"
+        },
+        {
+          "bytes": 4898,
+          "path": "run47-q3/0031-q3-clinic-04.png",
+          "sha256": "520fc4f88f43b0abf9dfa2b0bba7afc151d9341fa373c9f141cf835f10a70f43"
+        },
+        {
+          "bytes": 4921,
+          "path": "run47-q3/0032-q3-clinic-05.png",
+          "sha256": "59aa385a439d82192db84c7b03f02f7d212ecb6e6063518c4a791d2f6298b856"
+        },
+        {
+          "bytes": 4869,
+          "path": "run47-q3/0033-q3-clinic-06.png",
+          "sha256": "e95e693f67cc25222c55cfd99d453f04e0d2194589644b1a1db04ae01e7a82a3"
+        },
+        {
+          "bytes": 4862,
+          "path": "run47-q3/0034-q3-clinic-07.png",
+          "sha256": "cfcd5e06715a721f2bf606b24160a3835396550744a90da6f8a32dfa74a236af"
+        },
+        {
+          "bytes": 4958,
+          "path": "run47-q3/0035-q3-clinic-08.png",
+          "sha256": "1f0f2f233a5af271ed7abe8d15ebed7c0e5aaa004692874b854d924d32a9b041"
+        },
+        {
+          "bytes": 5062,
+          "path": "run47-q3/0036-q3-clinic-09.png",
+          "sha256": "98f96ef9d18a50229dd1e73159dafc22737e17791ee90515b973f82db4f6fce9"
+        },
+        {
+          "bytes": 4939,
+          "path": "run47-q3/0037-q3-clinic-10.png",
+          "sha256": "7127e71f39dfe4eda64ab627affc210f78dd8462ff6f8e2c3d43fae152335f77"
+        },
+        {
+          "bytes": 4515,
+          "path": "run47-q3/0038-q3-clinic-11.png",
+          "sha256": "f647dc00e8c19f15c69697efc81731713b2c0d45cb734aec57cf30c9082ccd32"
+        },
+        {
+          "bytes": 4937,
+          "path": "run47-q3/0039-q3-clinic-12.png",
+          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
+        },
+        {
+          "bytes": 4839,
+          "path": "run47-q3/0040-q3-clinic-13.png",
+          "sha256": "100302201354c258c2f805b67a3f34a7d11a8de5f134a7482dbe48d24eeb2b0c"
+        },
+        {
+          "bytes": 4818,
+          "path": "run47-q3/0041-q3-clinic-14.png",
+          "sha256": "c84c38890b0b9e25b3f982ccb91aff291daa7d0ba16dc4871f2d3d2562b2a664"
+        },
+        {
+          "bytes": 4880,
+          "path": "run47-q3/0042-q3-clinic-15.png",
+          "sha256": "c9cc78494d664d45f6014983dc852973aafd3980a6f1edbc0f8ebc4ff5a53bbd"
+        },
+        {
+          "bytes": 4875,
+          "path": "run47-q3/0043-q3-clinic-16.png",
+          "sha256": "15a1a57c40d307fdf011533e5c119d99ef7ccb60a75e22d60c012ec3a95583f9"
+        },
+        {
+          "bytes": 2587,
+          "path": "run47-q3/0046-save-confirm-checkpoint.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run47-q3/0047-save-confirm-checkpoint-2.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run47-q3/0048-save-confirm-checkpoint-3.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2587,
+          "path": "run47-q3/0049-save-step-checkpoint-01.png",
+          "sha256": "15cd31a76ef501022cfb40252f2bfb975bfa98ac6ba22eb72b527105ecff0665"
+        },
+        {
+          "bytes": 2609,
+          "path": "run47-q3/0050-save-step-checkpoint-02.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run47-q3/0051-save-step-checkpoint-03.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run47-q3/0052-save-step-checkpoint-04.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 2609,
+          "path": "run47-q3/0053-save-step-checkpoint-05.png",
+          "sha256": "237fdda44b2d4ecd0a77479e298d5ebee984bba7d803f1e20246b17f35b491fb"
+        },
+        {
+          "bytes": 4988,
+          "path": "run47-q3/0054-save-step-checkpoint-06.png",
+          "sha256": "c5abd7845fb467532d1971b36b40532b982a11907bcb52cd04d670bc79d196e7"
         },
         {
           "bytes": 4967,
@@ -965,11 +1563,6 @@
           "bytes": 157,
           "path": "run41-q3/0025-q3-loss01-defeat.png",
           "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
-        },
-        {
-          "bytes": 587,
-          "path": "run41-q3/0026-q3-after-whiteout.png",
-          "sha256": "a37490f98b2a49a2e5e6eab729c65776ffd63498fb9f24f1e014638f0173cc30"
         },
         {
           "bytes": 1354,
@@ -1050,11 +1643,6 @@
           "bytes": 4880,
           "path": "run41-q3/0042-q3-clinic-16.png",
           "sha256": "c9cc78494d664d45f6014983dc852973aafd3980a6f1edbc0f8ebc4ff5a53bbd"
-        },
-        {
-          "bytes": 3503,
-          "path": "run41-q3/0044-party-screen.png",
-          "sha256": "2af77bac0dd1c0ef6e12bfdb45ec510c134d6ad84713fcf0672e5af70218a6be"
         },
         {
           "bytes": 4988,
@@ -1222,61 +1810,6 @@
           "sha256": "c9cc78494d664d45f6014983dc852973aafd3980a6f1edbc0f8ebc4ff5a53bbd"
         },
         {
-          "bytes": 4937,
-          "path": "run34-q3defeat/0038-q3-clinic.png",
-          "sha256": "06a0f6edf7eb7a9264379f20979078ceb5e040801c1a6a6558c5585e24d0211c"
-        },
-        {
-          "bytes": 3792,
-          "path": "run34-q3defeat/0012-q3-loss00-defeat.png",
-          "sha256": "4a7ea9314959a1a418566082e1f0c44a2a80cb2d7b566402defbe47d9d528446"
-        },
-        {
-          "bytes": 2675,
-          "path": "run34-q3defeat/0013-q3-loss00-defeat.png",
-          "sha256": "e7d387e106e59b649f7c73996f28ebf96d75ed2fedd764eb0c2b8b9a24f5df6a"
-        },
-        {
-          "bytes": 2624,
-          "path": "run34-q3defeat/0014-q3-loss00-defeat.png",
-          "sha256": "cbce33609728787b5b4e65110a170021ba7df8319aa1c22879657322ea243271"
-        },
-        {
-          "bytes": 3001,
-          "path": "run34-q3defeat/0015-q3-loss00-defeat.png",
-          "sha256": "efce0cdbded56bf5b8e552b8bc8d858a9b8132f8c5856ef217c52c7f16645c37"
-        },
-        {
-          "bytes": 2997,
-          "path": "run34-q3defeat/0016-q3-loss00-defeat.png",
-          "sha256": "942279c039cb8cb68559f3dbb53b2f6bacd77d3d65bfd59f4861b1a84653fff3"
-        },
-        {
-          "bytes": 2873,
-          "path": "run34-q3defeat/0017-q3-loss00-defeat.png",
-          "sha256": "7ebc2f253f6d20a574b709a79c425d4fafc3e473955f9ad642211ac05fb845d5"
-        },
-        {
-          "bytes": 2801,
-          "path": "run34-q3defeat/0018-q3-loss00-defeat.png",
-          "sha256": "bb929b970ddce981fa3085da48608fbb6c654748a2ddb9b858ffdd2c2805c301"
-        },
-        {
-          "bytes": 2916,
-          "path": "run34-q3defeat/0019-q3-loss00-defeat.png",
-          "sha256": "0c9e727ab0ab65900c3b2e4a76e4b7a02cba9e9558b30b57bd1d775ed1677bbc"
-        },
-        {
-          "bytes": 157,
-          "path": "run34-q3defeat/0020-q3-loss00-defeat.png",
-          "sha256": "afdb78391ff1856befbc32c55fffda870a05d6cdb203b3a1551130a72d9627e9"
-        },
-        {
-          "bytes": 809,
-          "path": "run34-q3defeat/0021-q3-after-whiteout.png",
-          "sha256": "2b27320c1bbd203c849275e5a9454502319d9f596a088ceaf9059fd9172dc7e4"
-        },
-        {
           "bytes": 4988,
           "path": "run25-q3q5/0009-q3-continued.png",
           "sha256": "c5abd7845fb467532d1971b36b40532b982a11907bcb52cd04d670bc79d196e7"
@@ -1285,6 +1818,31 @@
           "bytes": 5183,
           "path": "run25-q3q5/0010-q3-follower-after-step.png",
           "sha256": "7ee25496df0f6701f46c10127fd07a1e1afc61c768a192b6c21571b44e5f1e78"
+        },
+        {
+          "bytes": 2382,
+          "path": "run47-q3/state-q3-clinic.json",
+          "sha256": "a9534396779f285103f1569b9f8a9e4f6dffddfe612efad26ad799e737884ea6"
+        },
+        {
+          "bytes": 2382,
+          "path": "run47-q3/state-q3-clinic.json",
+          "sha256": "a9534396779f285103f1569b9f8a9e4f6dffddfe612efad26ad799e737884ea6"
+        },
+        {
+          "bytes": 2382,
+          "path": "run47-q3/state-q3-clinic.json",
+          "sha256": "a9534396779f285103f1569b9f8a9e4f6dffddfe612efad26ad799e737884ea6"
+        },
+        {
+          "bytes": 2382,
+          "path": "run47-q3/state-q3-clinic.json",
+          "sha256": "a9534396779f285103f1569b9f8a9e4f6dffddfe612efad26ad799e737884ea6"
+        },
+        {
+          "bytes": 2382,
+          "path": "run47-q3/state-q3-clinic.json",
+          "sha256": "a9534396779f285103f1569b9f8a9e4f6dffddfe612efad26ad799e737884ea6"
         },
         {
           "bytes": 2382,
@@ -1382,31 +1940,6 @@
           "sha256": "46ace47d68619da05fed7a93d084a259eef717583289dc677c8c5ed2a4d5397b"
         },
         {
-          "bytes": 2382,
-          "path": "run34-q3defeat/state-q3-clinic.json",
-          "sha256": "17325bfd725a5d1ecfaae503231a4664bc54fbcbe0930acbac20423c347190e0"
-        },
-        {
-          "bytes": 2382,
-          "path": "run34-q3defeat/state-q3-clinic.json",
-          "sha256": "17325bfd725a5d1ecfaae503231a4664bc54fbcbe0930acbac20423c347190e0"
-        },
-        {
-          "bytes": 2382,
-          "path": "run34-q3defeat/state-q3-clinic.json",
-          "sha256": "17325bfd725a5d1ecfaae503231a4664bc54fbcbe0930acbac20423c347190e0"
-        },
-        {
-          "bytes": 2382,
-          "path": "run34-q3defeat/state-q3-clinic.json",
-          "sha256": "17325bfd725a5d1ecfaae503231a4664bc54fbcbe0930acbac20423c347190e0"
-        },
-        {
-          "bytes": 2382,
-          "path": "run34-q3defeat/state-q3-clinic.json",
-          "sha256": "17325bfd725a5d1ecfaae503231a4664bc54fbcbe0930acbac20423c347190e0"
-        },
-        {
           "bytes": 2258,
           "path": "run25-q3q5/state-q3-continued.json",
           "sha256": "6cd59fa156391f631a9e596c5018d985be103e0578295c271f38e128e9eebc44"
@@ -1435,9 +1968,9 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 2484,
-          "path": "run40-q4party/inputs.jsonl",
-          "sha256": "1eb20f5c9aa76ed8e981d65dc4076422c88ca33a0413fad88e7b476f0cef0d79"
+          "bytes": 13798,
+          "path": "run22-q4/inputs.jsonl",
+          "sha256": "91a9a4c27fe9905f4330eb557ee4f4d4e9d116c28eb51decf248cc7c4daed054"
         },
         {
           "bytes": 3154,
@@ -1520,21 +2053,6 @@
           "sha256": "c3fee7c4540958404f621646ebf2737c41821f4739fd06e222800c890ba23ad3"
         },
         {
-          "bytes": 3756,
-          "path": "run22-q4/0015-debug-access-pc-root.png",
-          "sha256": "574d66d63b35a0c4b0bac91d73f32ee0226e98c86e8846662275ea604cee9d60"
-        },
-        {
-          "bytes": 3749,
-          "path": "run22-q4/0016-debug-access-pc-0.png",
-          "sha256": "79b8b50ff3942953dd2d8e0edcfd5c13e11f23fb8d3b90502c906d1763dbd4ed"
-        },
-        {
-          "bytes": 3234,
-          "path": "run22-q4/0017-debug-access-pc-1.png",
-          "sha256": "3c3c0521be44333e44f8f807351b2c36f729324d036ed2454880ac99bf38b8e0"
-        },
-        {
           "bytes": 4535,
           "path": "run22-q4/0018-pc-menu.png",
           "sha256": "124747e4999ae8a17532cfd0cf79c0985ecb5dff6f17b0995fa7890080ae04f3"
@@ -1558,11 +2076,6 @@
           "bytes": 4597,
           "path": "run22-q4/0022-pc-deposited.png",
           "sha256": "4635052a2264c9949ab0e4922cebc41498022aa2ca47d2f9bc6a3f17c8fd8704"
-        },
-        {
-          "bytes": 3484,
-          "path": "run22-q4/0023-pc-deposit.png",
-          "sha256": "424f78698571cda13ca4045824c82ba86ecf9c408b14574f8069aae18db22919"
         },
         {
           "bytes": 3477,
@@ -1743,11 +2256,6 @@
           "sha256": "2f0d3c9c61c2a7e0b5e74183f18923390a25296f92b8ba14aea6dfac7d6389b6"
         },
         {
-          "bytes": 3433,
-          "path": "run25-q3q5/0015-q5-menu-pokedex-closed.png",
-          "sha256": "81d1241f9c5e59d5672c1d665053a123d3948de87e4c5f3d5cc5236bb39d7999"
-        },
-        {
           "bytes": 4622,
           "path": "run25-q3q5/0016-q5-menu-pokemon.png",
           "sha256": "68b44617175b68b415863701fe3e3e56fdb55589b0ff7d73992d85ac60926395"
@@ -1763,19 +2271,9 @@
           "sha256": "37da2cd77c07de5fcc04c7235cae6f89676a88b11fe5f2c507f2e3265558b556"
         },
         {
-          "bytes": 3433,
-          "path": "run25-q3q5/0019-q5-menu-pokemon-closed.png",
-          "sha256": "81d1241f9c5e59d5672c1d665053a123d3948de87e4c5f3d5cc5236bb39d7999"
-        },
-        {
           "bytes": 3119,
           "path": "run25-q3q5/0020-q5-menu-bag.png",
           "sha256": "b318147b16fbc67624bbdcd51736d113477bed822eb8e79e1ec893bb0847fee9"
-        },
-        {
-          "bytes": 3433,
-          "path": "run25-q3q5/0021-q5-menu-bag-closed.png",
-          "sha256": "81d1241f9c5e59d5672c1d665053a123d3948de87e4c5f3d5cc5236bb39d7999"
         },
         {
           "bytes": 3830,
@@ -1783,19 +2281,9 @@
           "sha256": "48bff70c7f4576bec369f639d765ebb830f6a6a4bab16046317c9ba6bcf88b60"
         },
         {
-          "bytes": 3433,
-          "path": "run25-q3q5/0023-q5-menu-player-closed.png",
-          "sha256": "81d1241f9c5e59d5672c1d665053a123d3948de87e4c5f3d5cc5236bb39d7999"
-        },
-        {
           "bytes": 2839,
           "path": "run25-q3q5/0024-q5-menu-option.png",
           "sha256": "57cb41a2358de34b6f0cd613ff5bf7535b18ef47db4580bcdb40aa424268df89"
-        },
-        {
-          "bytes": 3433,
-          "path": "run25-q3q5/0025-q5-menu-option-closed.png",
-          "sha256": "81d1241f9c5e59d5672c1d665053a123d3948de87e4c5f3d5cc5236bb39d7999"
         },
         {
           "bytes": 3828,
@@ -1886,9 +2374,9 @@
       "evidence_status": "READY_FOR_INDEPENDENT_REVIEW",
       "files": [
         {
-          "bytes": 1770,
-          "path": "run31-corrupt-cont/inputs.jsonl",
-          "sha256": "5e5e0e25bc301cf33ec72769027f2212aedf887a973c266734b0df34b06241fd"
+          "bytes": 4164,
+          "path": "run30-corrupt/inputs.jsonl",
+          "sha256": "101b96771bcee263f7fa39b5956945cbea709fb581abd5802eb96ba52445d998"
         },
         {
           "bytes": 4988,
@@ -1946,9 +2434,9 @@
     "Fixture/instrumentation must be disclosed and independently reviewed",
     "Only authorized Playtest can assign actual Q1-Q5 acceptance"
   ],
-  "ready_for_review": 8,
+  "ready_for_review": 9,
   "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1",
   "schema": "averon-qa-evidence-audit-v1",
   "source_sha": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6",
-  "total_cases": 8
+  "total_cases": 9
 }
