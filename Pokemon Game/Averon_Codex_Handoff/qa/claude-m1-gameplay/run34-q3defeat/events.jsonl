@@ -1,0 +1,76 @@
+{"t": 1792228294.91, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/q3copy.gba", "phases": ["q3_whiteout"], "new_game": false}
+{"t": 1792228294.92, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792228294.95, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792228297.59, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792228297.65, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792228299.41, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792228299.48, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792228300.04, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792228300.07, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792228300.61, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792228300.65, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792228301.72, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792228301.75, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792228305.42, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792228305.5, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792228306.16, "event": "field", "map": "MAP_WINDROW", "pos": [19, 14], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 20, 18], "ppBonuses": 0, "level": 15, "hp": 4, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 27, 25], "ppBonuses": 0, "level": 15, "hp": 0, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 0, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792228306.32, "event": "capture", "file": "0008-q3-before.png"}
+{"t": 1792228306.32, "event": "observe", "label": "q3-before", "problems": []}
+{"t": 1792228310.84, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [19, 31]}
+{"t": 1792228319.73, "event": "map", "map": "MAP_ALDERFIELD", "pos": [19, 31]}
+{"t": 1792228329.5, "event": "map", "map": "MAP_COASTALBLUFFS", "pos": [0, 17]}
+{"t": 1792228343.07, "event": "battle-start", "flags": "0x4", "foe": [[661, 11]], "me": [[393, 15, 4]], "moves": [[64, 35], [45, 40], [55, 20], [204, 18]]}
+{"t": 1792228349.9, "event": "capture", "file": "0009-q3-loss00-action.png"}
+{"t": 1792228350.52, "event": "turn", "label": "q3-loss00", "me": [393, 15, 4, 44], "foe": [661, 11, 31, 31], "move": 45, "pp": 40}
+{"t": 1792228361.0, "event": "capture", "file": "0010-q3-loss00-action.png"}
+{"t": 1792228361.61, "event": "turn", "label": "q3-loss00", "me": [393, 15, 4, 44], "foe": [661, 11, 31, 31], "move": 45, "pp": 39}
+{"t": 1792228371.8, "event": "capture", "file": "0011-q3-loss00-action.png"}
+{"t": 1792228372.43, "event": "turn", "label": "q3-loss00", "me": [393, 15, 4, 44], "foe": [661, 11, 31, 31], "move": 45, "pp": 38}
+{"t": 1792228382.62, "event": "turn", "label": "q3-loss00", "me": [393, 15, 3, 44], "foe": [661, 11, 31, 31], "move": 45, "pp": 37}
+{"t": 1792228391.32, "event": "replacement", "slot": 3, "mon": {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}}
+{"t": 1792228397.54, "event": "turn", "label": "q3-loss00", "me": [187, 5, 19, 19], "foe": [661, 11, 31, 31], "move": 150, "pp": 40}
+{"t": 1792228405.21, "event": "turn", "label": "q3-loss00", "me": [187, 5, 13, 19], "foe": [661, 11, 31, 31], "move": 150, "pp": 39}
+{"t": 1792228412.8, "event": "turn", "label": "q3-loss00", "me": [187, 5, 7, 19], "foe": [661, 11, 31, 31], "move": 150, "pp": 38}
+{"t": 1792228422.92, "event": "replacement", "slot": 4, "mon": {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}}
+{"t": 1792228428.15, "event": "turn", "label": "q3-loss00", "me": [659, 5, 18, 18], "foe": [661, 11, 31, 31], "move": 43, "pp": 30}
+{"t": 1792228435.71, "event": "turn", "label": "q3-loss00", "me": [659, 5, 14, 18], "foe": [661, 11, 31, 31], "move": 43, "pp": 29}
+{"t": 1792228445.28, "event": "turn", "label": "q3-loss00", "me": [659, 5, 14, 18], "foe": [661, 11, 31, 31], "move": 43, "pp": 28}
+{"t": 1792228452.28, "event": "turn", "label": "q3-loss00", "me": [659, 5, 10, 18], "foe": [661, 11, 31, 31], "move": 43, "pp": 27}
+{"t": 1792228459.83, "event": "turn", "label": "q3-loss00", "me": [659, 5, 3, 18], "foe": [661, 11, 31, 31], "move": 43, "pp": 26}
+{"t": 1792228469.86, "event": "replacement", "slot": 5, "mon": {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}}
+{"t": 1792228474.96, "event": "turn", "label": "q3-loss00", "me": [1298, 5, 20, 20], "foe": [661, 11, 31, 31], "move": 39, "pp": 30}
+{"t": 1792228482.37, "event": "turn", "label": "q3-loss00", "me": [1298, 5, 16, 20], "foe": [661, 11, 31, 31], "move": 39, "pp": 29}
+{"t": 1792228489.41, "event": "turn", "label": "q3-loss00", "me": [1298, 5, 12, 20], "foe": [661, 11, 31, 31], "move": 39, "pp": 28}
+{"t": 1792228496.87, "event": "turn", "label": "q3-loss00", "me": [1298, 5, 6, 20], "foe": [661, 11, 31, 31], "move": 39, "pp": 27}
+{"t": 1792228500.75, "event": "capture", "file": "0012-q3-loss00-defeat.png"}
+{"t": 1792228501.81, "event": "capture", "file": "0013-q3-loss00-defeat.png"}
+{"t": 1792228502.88, "event": "capture", "file": "0014-q3-loss00-defeat.png"}
+{"t": 1792228503.97, "event": "capture", "file": "0015-q3-loss00-defeat.png"}
+{"t": 1792228505.06, "event": "capture", "file": "0016-q3-loss00-defeat.png"}
+{"t": 1792228506.12, "event": "capture", "file": "0017-q3-loss00-defeat.png"}
+{"t": 1792228507.21, "event": "capture", "file": "0018-q3-loss00-defeat.png"}
+{"t": 1792228508.28, "event": "capture", "file": "0019-q3-loss00-defeat.png"}
+{"t": 1792228509.33, "event": "capture", "file": "0020-q3-loss00-defeat.png"}
+{"t": 1792228511.58, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792228511.72, "event": "q3-party", "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}], "map": "MAP_ALDERFIELDCLINIC"}
+{"t": 1792228511.82, "event": "capture", "file": "0021-q3-after-whiteout.png"}
+{"t": 1792228512.86, "event": "capture", "file": "0022-q3-clinic-01.png"}
+{"t": 1792228514.32, "event": "capture", "file": "0023-q3-clinic-02.png"}
+{"t": 1792228515.79, "event": "capture", "file": "0024-q3-clinic-03.png"}
+{"t": 1792228517.23, "event": "capture", "file": "0025-q3-clinic-04.png"}
+{"t": 1792228518.63, "event": "capture", "file": "0026-q3-clinic-05.png"}
+{"t": 1792228520.03, "event": "capture", "file": "0027-q3-clinic-06.png"}
+{"t": 1792228521.51, "event": "capture", "file": "0028-q3-clinic-07.png"}
+{"t": 1792228522.96, "event": "capture", "file": "0029-q3-clinic-08.png"}
+{"t": 1792228524.4, "event": "capture", "file": "0030-q3-clinic-09.png"}
+{"t": 1792228525.86, "event": "capture", "file": "0031-q3-clinic-10.png"}
+{"t": 1792228527.36, "event": "capture", "file": "0032-q3-clinic-11.png"}
+{"t": 1792228528.85, "event": "capture", "file": "0033-q3-clinic-12.png"}
+{"t": 1792228530.27, "event": "capture", "file": "0034-q3-clinic-13.png"}
+{"t": 1792228531.71, "event": "capture", "file": "0035-q3-clinic-14.png"}
+{"t": 1792228533.1, "event": "capture", "file": "0036-q3-clinic-15.png"}
+{"t": 1792228534.53, "event": "capture", "file": "0037-q3-clinic-16.png"}
+{"t": 1792228541.76, "event": "capture", "file": "0038-q3-clinic.png"}
+{"t": 1792228541.76, "event": "observe", "label": "q3-clinic", "problems": []}
+{"t": 1792228542.0, "event": "capture", "file": "0039-end.png"}
+{"t": 1792228542.0, "event": "observe", "label": "end", "problems": []}

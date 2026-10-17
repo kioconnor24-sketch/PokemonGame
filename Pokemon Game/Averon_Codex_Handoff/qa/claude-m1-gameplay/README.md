@@ -46,7 +46,16 @@ run27                                        1831b3f69997 (unchanged)   fresh Co
 run28 (COPY of 80100f9a6a0a, after Q1)       -> 96e3f895a25e   Q2 full Berries pocket: refuse, toss, +3 once
 run29                                        96e3f895a25e (unchanged)   fresh Continue, Bag
 run30/31 (COPY of 4ca9b7f40dc6, newest slot deliberately damaged)       corrupt-slot fallback
+run32    (COPY at 1c05fc46dc1d, Q4 dev copy)                            Q4 fresh Continue
+run33    (COPY of 29ea0df40d71, before Badge01)                          Bluffs gate blocks, controls respond
+run34    (COPY of 2bc19b97b053, the pre-Q3 save)                         Q3 repeated with in-battle defeat frames
 ```
+
+`package-e6870c30.json` (evidence.py) and `audit-e6870c30.json`
+(`scripts/coordination/qa_evidence_report.py`, 8/8 READY_FOR_INDEPENDENT_REVIEW)
+cover the current-ROM cases; `package-66b58c3a.json`/`audit-66b58c3a.json`
+cover Gym 1 on the older ROM. READY_FOR_INDEPENDENT_REVIEW is completeness,
+not a PASS. Cases using a fixture are `scope: DEV_FIXTURE`.
 
 Two earlier attempts at run26 stopped on driver bugs before any save (a wild
 battle on the walk to the Hiker was not fought; the toss helper read the pocket
