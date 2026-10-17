@@ -37,7 +37,7 @@ alone integrates. Nothing here approves #14 or #25.
 | Q3 Elio battle | real battle, 80 ordinary A presses; `QA_Q3_ORIGINAL_BATTLE_EXIT_NO_BADGE` |
 | **Q3 whiteout destination** | **NEW:** frame `q3-play-x-002` reads "…scurried to a POKéMON CENTER, protecting the exhausted and fainted POKéMON…"; read-only position right after = map **(75,11) x7 y4**, the `respawn_map`/`respawn_x`/`respawn_y` of `HEAL_LOCATION_ALDERFIELD` in `src/data/heal_locations.json`. Badge01 stays false, party count 1. |
 | Nurse heal dialogue | Run 1: **NOT OBSERVED** (observer defects 1–2, below). Run 2: **OBSERVED**, see below |
-| Q3 Save + Continue at clinic | **NOT DONE** in either run: the flash still holds the Q2 slot (counter 1, map 75/6 x19 y14) |
+| Q3 Save + Continue at clinic | Local runs 1–2: **NOT DONE**. **CI run 38996685926: save written at (75,11) x7 y4 and Continue restored the clinic field**; see CI runs below |
 
 In short, the run shows a genuine Elio defeat followed by a whiteout respawn at
 the clinic's source-defined respawn tile. It does **not** show nurse healing
@@ -93,7 +93,7 @@ Defects 1–2 were fixed in `7770455e`, defect 3 in `a6c32659`.
 |---|---|---|
 | [38993271535](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38993271535) | `a6c32659` | The manager opened the frames: the whiteout text (`q3-play-x-002`), the nurse's after-whiteout heal (`-006` to `-012`) and a clinic Start → SAVE were real. Both "continued" frames still showed the CONTINUE / NEW GAME menu, so Continue was **not** shown (defect 5) |
 | [38994567345](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38994567345) | `a6c32659` | Annotations: whiteout text `x-001`/`-002`, nurse `x-003` to `-012`. **Flash after shutdown: slot 0, save counter 2, map (75,11) x7 y4**, a new save at the clinic nurse tile. Observer rc 1, "Save message never closed" (defect 4) |
-| next run, observer `96f49e7c` | — | Defects 4–5 fixed; Continue result reported as `Q3X_CONTINUE_RESULT` |
+| [38996685926](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38996685926) | `96f49e7c` | **Full path, observer rc 0.** Whiteout text `x-001`/`-002`; nurse `x-003` to `-012`; `Q3X_SAVE_SUCCESS` (game callback, back in `CB2_Overworld`); flash slot 0, counter 2, (75,11) x7 y4. Then a no-debugger relaunch: after 3 A presses (title → menu → CONTINUE), `Q3X_CONTINUE_RESULT CLINIC_FIELD`, with 0.999 identical pixels against the pre-save clinic frame (mean difference 0.05). Artifact 12087349379. For Playtest's verdict |
 
 4. The post-save check used the generic 0.30 field threshold, which the lit
    clinic floor (0.33) exceeds. Fixed in `20f7a8ea`: the 0.60 clinic
