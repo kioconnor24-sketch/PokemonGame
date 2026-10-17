@@ -185,16 +185,35 @@ class Gdb:
         else:
             stop = self._cmd("?")
 
-    def read(self, addr, size):
+    def _read_chunk(self, addr, n):
+        raw = self._cmd(f"m{addr:x},{n:x}")
+        if raw.startswith("E") and len(raw) == 3:
+            return None, raw
+        data = bytes.fromhex(raw)
+        return (data, None) if len(data) == n else (None, "short")
+
+    def read(self, addr, size, chunk=0x100):
+        """Read memory. mGBA answers reads while running, but a live read was
+        seen to fail (E06) mid-run; retry, then fall back to a brief halt."""
         out = bytearray()
         while size:
-            n = min(size, 0x400)
-            raw = self._cmd(f"m{addr:x},{n:x}")
-            if raw.startswith("E") and len(raw) == 3:
-                raise Blocked(f"read 0x{addr:08X}: {raw}")
-            data = bytes.fromhex(raw)
-            if len(data) != n:
-                raise Blocked(f"short read 0x{addr:08X}")
+            n = min(size, chunk)
+            data, err = None, None
+            for attempt in range(3):
+                data, err = self._read_chunk(addr, n)
+                if data is not None:
+                    break
+                time.sleep(0.02)
+            if data is None:
+                was_running = self.running
+                self.halt()
+                try:
+                    data, err = self._read_chunk(addr, n)
+                finally:
+                    if was_running:
+                        self.resume()
+            if data is None:
+                raise Blocked(f"read 0x{addr:08X}+{n}: {err}")
             out += data
             addr += n
             size -= n

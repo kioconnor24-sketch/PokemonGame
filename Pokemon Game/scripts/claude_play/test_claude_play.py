@@ -141,6 +141,35 @@ class TraceTests(unittest.TestCase):
                              [("A", True, 100), ("A", False, 107)])
 
 
+class GdbReadTests(unittest.TestCase):
+    def make(self, replies):
+        g = emu.Gdb.__new__(emu.Gdb)
+        g.running = True
+        g.calls = []
+        it = iter(replies)
+        g._cmd = lambda text, reply=True: (g.calls.append(text), next(it))[1] if reply else g.calls.append(text)
+        g.halt = lambda: setattr(g, "running", False) or g.calls.append("HALT")
+        g.resume = lambda: setattr(g, "running", True) or g.calls.append("RESUME")
+        return g
+
+    def test_transient_error_is_retried(self):
+        g = self.make(["E06", "0102"])
+        self.assertEqual(g.read(0x02000000, 2), b"\x01\x02")
+        self.assertNotIn("HALT", g.calls)
+
+    def test_persistent_error_falls_back_to_a_halted_read(self):
+        g = self.make(["E06", "E06", "E06", "0304"])
+        self.assertEqual(g.read(0x02000000, 2), b"\x03\x04")
+        self.assertEqual(g.calls[-2:], ["m2000000,2", "RESUME"])
+        self.assertTrue(g.running)
+
+    def test_unreadable_memory_still_fails_closed(self):
+        g = self.make(["E06"] * 4)
+        with self.assertRaises(emu.Blocked):
+            g.read(0x02000000, 2)
+        self.assertTrue(g.running)
+
+
 def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
                   problems=(), screenshot=True, trace=True):
     """SYNTHETIC run directory for harness tests only."""
