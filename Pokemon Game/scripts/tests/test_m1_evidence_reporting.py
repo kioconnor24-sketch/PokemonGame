@@ -3,7 +3,9 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+import struct
 import tempfile
+import zlib
 import unittest
 from unittest.mock import patch
 
@@ -19,6 +21,20 @@ def load(filename, module_name):
 
 TOOL = load("toolchain_manifest.py", "averon_tool_provenance")
 QA = load("qa_evidence_report.py", "averon_qa_reporting")
+
+
+def png_chunk(name, content=b""):
+    crc = zlib.crc32(content, zlib.crc32(name)) & 0xFFFFFFFF
+    return struct.pack(">I", len(content)) + name + content + struct.pack(">I", crc)
+
+
+def valid_one_pixel_png():
+    # A real, tiny RGB PNG fixture; NOT an actual emulator screenshot.
+    ihdr = struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+    return (QA.PNG + png_chunk(b"IHDR", ihdr)
+            + png_chunk(b"IDAT", zlib.compress(b"\x00\x00\x00\x00"))
+            + png_chunk(b"IEND"))
+
 
 
 class BuildProvenanceTests(unittest.TestCase):
@@ -58,6 +74,18 @@ class BuildProvenanceTests(unittest.TestCase):
         self.assertEqual(result["status"], "INCOMPLETE_PROVENANCE")
         self.assertTrue(any("uncommitted" in issue for issue in result["problems"]))
 
+    def test_dirty_generator_scripts_also_make_source_provenance_incomplete(self):
+        scripts = self.engine.parent / "scripts"
+        scripts.mkdir()
+        (scripts / "build_source.py").write_text("print('changed generator')\n")
+        with patch.object(TOOL, "command_info", side_effect=self.good_tools):
+            result = TOOL.collect(self.root, self.engine, self.rom)
+        self.assertTrue(result["engine_clean"])
+        self.assertFalse(result["scripts_clean"])
+        self.assertFalse(result["source_inputs_clean"])
+        self.assertEqual(result["status"], "INCOMPLETE_PROVENANCE")
+        self.assertTrue(any("generator" in issue for issue in result["problems"]))
+
     def test_source_without_rom_is_not_build_evidence(self):
         with patch.object(TOOL, "command_info", side_effect=self.good_tools):
             result = TOOL.collect(self.root, self.engine)
@@ -87,7 +115,7 @@ class QaEvidenceTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / "trace.txt").write_text("REAL INPUT EVENTS NEED INDEPENDENT REVIEW\n")
-        (self.root / "scene.png").write_bytes(QA.PNG + b"fake pixel bytes")
+        (self.root / "scene.png").write_bytes(valid_one_pixel_png())
         (self.root / "saved_state.json").write_text(json.dumps({"badge": 1}))
         self.input = {
             "source_sha": "a" * 40, "rom_sha256": "b" * 64,
@@ -123,6 +151,29 @@ class QaEvidenceTests(unittest.TestCase):
         inp["cases"][0]["screenshots"] = ["../other.png"]
         report = QA.inspect_package(inp, self.root)
         self.assertIn("path outside evidence root", " ".join(report["cases"][0]["issues"]))
+
+    def test_png_signature_only_or_truncated_png_not_ready(self):
+        original = (self.root / "scene.png").read_bytes()
+        for payload in (QA.PNG, original[:-4], original[:-12]):
+            with self.subTest(payload_len=len(payload)):
+                (self.root / "scene.png").write_bytes(payload)
+                report = QA.inspect_package(self.input, self.root)
+                self.assertEqual(report["ready_for_review"], 0)
+                self.assertIn("PNG", " ".join(report["cases"][0]["issues"]))
+
+    def test_corrupt_png_chunk_checksum_fails_closed(self):
+        png = bytearray(valid_one_pixel_png())
+        png[22] ^= 1  # width/height/format header pixel metadata; CRC now wrong
+        (self.root / "scene.png").write_bytes(png)
+        report = QA.inspect_package(self.input, self.root)
+        self.assertEqual(report["ready_for_review"], 0)
+        self.assertIn("CRC", " ".join(report["cases"][0]["issues"]))
+
+    def test_png_trailing_data_not_ready(self):
+        (self.root / "scene.png").write_bytes(valid_one_pixel_png() + b"untrusted-tail")
+        report = QA.inspect_package(self.input, self.root)
+        self.assertEqual(report["ready_for_review"], 0)
+        self.assertIn("unexpected bytes", " ".join(report["cases"][0]["issues"]))
 
     def test_assertion_mismatch_and_hash_absence_flagged(self):
         inp = json.loads(json.dumps(self.input))

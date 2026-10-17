@@ -19,8 +19,8 @@ python3 "Pokemon Game/scripts/coordination/toolchain_manifest.py" \
   --out "/tmp/averon-toolchain.json" --strict
 ```
 
-Reports real `git HEAD`, committed engine-tree SHA, engine dirty state,
-available tool versions, ROM SHA-256/byte size. Strict mode returns nonzero
+Reports real `git HEAD`, committed engine-tree SHA, **engine and source-generator
+scripts dirty states**, available tool versions, ROM SHA-256/byte size. Strict mode returns nonzero
 if the engine is dirty, required tools cannot be identified, or ROM is missing.
 Without `--rom` it is a SOURCE/TOOL inventory, not build proof.
 
@@ -66,11 +66,13 @@ python3 "Pokemon Game/scripts/coordination/qa_evidence_report.py" qa \
   --out "/tmp/averon-qa-evidence-audit.json"
 ```
 
-Missing files, broken PNG headers, duplicate case IDs, SHA format errors,
-missing traces/observations or declared expected/observed mismatches produce
+Missing files, malformed/truncated PNG chunks or PNG checksum errors, duplicate
+case IDs, SHA format errors, missing traces/observations or declared
+expected/observed mismatches produce
 `INCOMPLETE_OR_CONTRADICTORY`. Presence of all named files produces
 `READY_FOR_INDEPENDENT_REVIEW`, **never a gameplay PASS**.
 
+Chunk/CRC checks cannot prove pixels decode correctly or represent genuine gameplay.
 Review must still verify actual player-input progression, source/ROM provenance,
 real badge/reward/party/save facts, fixture honesty, game constraints and
 screenshot authenticity. File checks cannot do this. Playtest independently

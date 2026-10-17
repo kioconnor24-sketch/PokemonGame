@@ -11,12 +11,70 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 import sys
+import zlib
 
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
 SHA64 = re.compile(r"^[0-9a-f]{64}$")
 CASE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,40}$")
 PNG = b"\x89PNG\r\n\x1a\n"
+
+
+MAX_SCREENSHOT_BYTES = 32 * 1024 * 1024
+
+
+def png_structure_error(path: Path) -> str | None:
+    """Validate bounded PNG chunk framing/CRCs, not pixels or visual truth.
+
+    This checks that the screenshot file is structurally intact; it deliberately
+    does NOT claim the pixels correspond to the ROM, trace, or game state.
+    """
+    if path.stat().st_size > MAX_SCREENSHOT_BYTES:
+        return "PNG exceeds 32 MiB evidence limit"
+    with path.open("rb") as img:
+        if img.read(len(PNG)) != PNG:
+            return "not a PNG"
+        seen_ihdr = False
+        seen_idat = False
+        for _ in range(100_000):  # finite bound even for intentionally tiny chunks
+            header = img.read(8)
+            if len(header) != 8:
+                return "missing or truncated PNG IEND"
+            length, chunk = struct.unpack(">I4s", header)
+            if length > MAX_SCREENSHOT_BYTES:
+                return "oversized PNG chunk"
+            data = img.read(length)
+            crc = img.read(4)
+            if len(data) != length or len(crc) != 4:
+                return "truncated PNG chunk"
+            actual_crc = zlib.crc32(data, zlib.crc32(chunk)) & 0xFFFFFFFF
+            if struct.unpack(">I", crc)[0] != actual_crc:
+                return "PNG chunk CRC mismatch"
+            if not seen_ihdr:
+                if chunk != b"IHDR" or length != 13:
+                    return "missing or invalid PNG IHDR"
+                width, height, depth, color, compression, filtering, interlace = (
+                    struct.unpack(">IIBBBBB", data))
+                if not (0 < width <= 16384 and 0 < height <= 16384):
+                    return "invalid PNG dimensions"
+                allowed = {0: (1, 2, 4, 8, 16), 2: (8, 16),
+                           3: (1, 2, 4, 8), 4: (8, 16), 6: (8, 16)}
+                if (depth not in allowed.get(color, ())
+                        or compression != 0 or filtering != 0 or interlace not in (0, 1)):
+                    return "invalid PNG format"
+                seen_ihdr = True
+            elif chunk == b"IHDR":
+                return "duplicate PNG IHDR"
+            if chunk == b"IDAT":
+                seen_idat = True
+            if chunk == b"IEND":
+                if length != 0 or not seen_idat:
+                    return "invalid PNG IEND or missing pixel data"
+                if img.read(1):
+                    return "unexpected bytes after PNG IEND"
+                return None
+        return "excessive number of PNG chunks"
 
 
 def file_evidence(root: Path, name: object, kind: str, issues: list[str]) -> dict | None:
@@ -33,10 +91,10 @@ def file_evidence(root: Path, name: object, kind: str, issues: list[str]) -> dic
         issues.append(f"{kind}: empty or nonexistent evidence: {name}")
         return None
     if kind == "screenshot":
-        with path.open("rb") as handle:
-            if handle.read(8) != PNG:
-                issues.append(f"{kind}: not a PNG: {name}")
-                return None
+        problem = png_structure_error(path)
+        if problem:
+            issues.append(f"{kind}: {problem}: {name}")
+            return None
     h = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
