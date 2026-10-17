@@ -311,16 +311,18 @@ class Driver:
         return best if best is not None else 0
 
     def battle(self, choose_move=None, run_if=None, label="battle", catch_if=None, switch_if=None,
-               never_b=False):
+               never_b=False, capture_win=False):
         """Play a battle to the end with ordinary menu inputs.
 
         switch_if(s) -> True switches the lead out (POKeMON in the action
         menu) for the lowest-level healthy party member that turn.
+        capture_win: screenshot each message once the foe's active Pokemon
+        has fainted (faint, "defeated", the trainer's speech, prize money).
         never_b: advance text with A only. B also answers NO to "Use next
         Pokemon?" in a wild battle, which flees (seen in run41)."""
         choose_move = choose_move or self.best_move
         self.switch_pref = None
-        shots = defeat_shots = 0
+        shots = defeat_shots = win_shots = 0
         last = None
         idle = 0
         for _ in range(100):
@@ -389,6 +391,11 @@ class Driver:
                 self.e.tap("A", after=0.6)
             else:
                 idle += 1
+                if (capture_win and win_shots < 16 and s.mons and len(s.mons) > 1
+                        and s.mons[1]["level"] and s.mons[1]["hp"] == 0):
+                    time.sleep(0.5)
+                    self.shot(f"{label}-foe-down")
+                    win_shots += 1
                 if defeat_shots < 12 and s.party and not any(m["hp"] for m in s.party):
                     # The whole party has fainted: keep each defeat/whiteout
                     # message as evidence before advancing it.

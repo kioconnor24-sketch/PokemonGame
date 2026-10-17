@@ -747,8 +747,9 @@ def phase_gym1(d):
     observe(d, "gym1-sluices", {"FLAG_AVERON_WEST_SLUICE": True, "FLAG_AVERON_EAST_SLUICE": True})
     s = d.talk("MAP_ALDERFIELDGYM", (4, 4))
     if s.in_battle:
-        d.battle(choose_move=d.trainer_move, label="elio", switch_if=retaliate_switch(d))
-        s = d.clear_text(limit=300)
+        d.battle(choose_move=d.trainer_move, label="elio", switch_if=retaliate_switch(d),
+                 capture_win=True)
+        s = d.clear_text(limit=300, capture="gym1-after", frames=12)
     won = d.g.flag(d.state(), "FLAG_BADGE01_GET")
     d.log("gym1-result", won=won, map=d.here()[0], lead=lead(d))
     observe(d, "gym1-result", {"FLAG_BADGE01_GET": True})
