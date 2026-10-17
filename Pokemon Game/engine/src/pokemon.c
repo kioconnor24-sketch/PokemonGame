@@ -2944,7 +2944,11 @@ u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
 
     SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
+    // OT_ID is part of the secure-data key. Keep the plaintext intact even
+    // when this delivery API receives a mon with a different original OT.
+    DecryptBoxMon(&mon->box);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
+    EncryptBoxMon(&mon->box);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
