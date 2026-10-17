@@ -47,6 +47,12 @@ OFFSET_EXPRS = {
     "bm.level": "offsetof(struct BattlePokemon, level)",
     "bm.types": "offsetof(struct BattlePokemon, types)",
     "move.size": "sizeof(struct MoveInfo)",
+    "main.vblankCounter1": "offsetof(struct Main, vblankCounter1)",
+    "slot.size": "sizeof(struct ItemSlot)",
+    "slot.quantity": "offsetof(struct ItemSlot, quantity)",
+    "bag.items": "offsetof(struct Bag, items)",
+    "bag.pokeBalls": "offsetof(struct Bag, pokeBalls)",
+    "bag.berries": "offsetof(struct Bag, berries)",
 }
 
 
@@ -59,6 +65,10 @@ CONSTANTS = [
     "ITEM_POTION", "ITEM_ORAN_BERRY", "B_ACTION_USE_MOVE", "NUMBER_OF_MON_TYPES",
     "MOVE_TACKLE", "MOVE_WATER_GUN", "MOVE_GROWL", "SAVE_STATUS_OK",
     "BATTLE_TYPE_TRAINER", "BATTLE_TYPE_DOUBLE", "FLAG_AVERON_EXP_SHARE",
+    "FLAG_AVERON_NOTES_STARTED", "FLAG_AVERON_NOTES_RECORDED", "FLAG_AVERON_NOTES_REWARDED",
+    "BAG_ITEMS_COUNT", "BAG_POKEBALLS_COUNT", "BAG_BERRIES_COUNT", "ITEM_EXP_SHARE",
+    "TRAINER_FLAGS_START", "TRAINER_AVERON_FARMER", "TRAINER_AVERON_PICNIC", "TRAINER_AVERON_ORCHARD",
+    "TRAINER_AVERON_GYM1", "TRAINER_AVERON_ELIO", "TRAINER_AVERON_MEADOW",
 ]
 
 
@@ -78,6 +88,7 @@ def probe_offsets(engine, workdir):
              '#include "constants/flags.h"', '#include "constants/vars.h"', '#include "constants/items.h"',
              '#include "constants/species.h"', '#include "constants/battle.h"',
              '#include "move.h"', '#include "save.h"', '#include "constants/moves.h"',
+             '#include "constants/opponents.h"',
              '#define P(n, v) asm volatile(".globl AVPROBE_" #n "\\n.equ AVPROBE_" #n ", %c0" :: "i"(v))',
              "void AvProbe(void)", "{"]
     lines += [f"    P(p{i}, {exprs[n]});" for i, n in enumerate(names)]
@@ -103,7 +114,9 @@ def load_build_info(elf, engine, cache_dir):
     """Symbols (nm), struct offsets (probe) and constants, cached by ELF hash."""
     elf = pathlib.Path(elf)
     digest = subprocess.check_output(["sha256sum", str(elf)], text=True).split()[0]
-    cache = pathlib.Path(cache_dir) / f"buildinfo-{digest[:16]}.json"
+    import hashlib
+    probe_key = hashlib.sha256(json.dumps([OFFSET_EXPRS, CONSTANTS]).encode()).hexdigest()[:8]
+    cache = pathlib.Path(cache_dir) / f"buildinfo-{digest[:16]}-{probe_key}.json"
     if cache.exists():
         return json.loads(cache.read_text())
     symbols = {}
@@ -223,7 +236,24 @@ class Emulator:
         self.gdb.resume()
         self.shots = 0
 
+    def start_trace(self, path, frame_addr):
+        """Record every key transition with wall time and the game's frame counter."""
+        self.trace = open(path, "a")
+        self.frame_addr = frame_addr
+
+    def frame(self):
+        if getattr(self, "frame_addr", None) is None:
+            return None
+        return struct.unpack("<I", self.gdb.read(self.frame_addr, 4))[0]
+
     def key(self, name, down):
+        if getattr(self, "trace", None):
+            self.trace.write(json.dumps(dict(t=round(time.monotonic(), 4), frame=self.frame(),
+                                             key=name, down=bool(down))) + "\n")
+            self.trace.flush()
+        self._key(name, down)
+
+    def _key(self, name, down):
         subprocess.run(["xdotool", "keydown" if down else "keyup", "--window", self.window, KEYS[name]],
                        env=self.env, check=True)
 
@@ -250,3 +280,5 @@ class Emulator:
                     p.kill()
         if getattr(self, "log", None):
             self.log.close()
+        if getattr(self, "trace", None):
+            self.trace.close()

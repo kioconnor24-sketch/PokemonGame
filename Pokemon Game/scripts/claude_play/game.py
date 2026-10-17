@@ -77,6 +77,51 @@ class Game:
         finally:
             g.resume()
 
+    def bag_pocket(self, field, count_name):
+        """[(itemId, quantity)] of one SaveBlock1 bag pocket; quantities are
+        stored XORed with SaveBlock2.encryptionKey (item.c)."""
+        g = self.gdb
+        sb1 = self._u("<I", self.sym["gSaveBlock1Ptr"])[0]
+        sb2 = self._u("<I", self.sym["gSaveBlock2Ptr"])[0]
+        key = self._u("<I", sb2 + self.off["sb2.encryptionKey"])[0] & 0xFFFF
+        size = self.off["slot.size"]
+        n = self.c[count_name]
+        raw = g.read(sb1 + self.off["sb1.bag"] + self.off[field], size * n)
+        out = []
+        for i in range(n):
+            item = struct.unpack_from("<H", raw, i * size)[0]
+            qty = struct.unpack_from("<H", raw, i * size + self.off["slot.quantity"])[0] ^ key
+            if item:
+                out.append((item, qty))
+        return out
+
+    def observation(self):
+        """Plain facts for an evidence state file."""
+        s = self.snapshot(battle=False)
+        names = ["FLAG_BADGE01_GET", "FLAG_BADGE02_GET", "FLAG_AVERON_STARTER",
+                 "FLAG_AVERON_WEST_SLUICE", "FLAG_AVERON_EAST_SLUICE", "FLAG_AVERON_GYM1_TM",
+                 "FLAG_AVERON_NOTES_STARTED", "FLAG_AVERON_NOTES_RECORDED",
+                 "FLAG_AVERON_NOTES_REWARDED", "FLAG_AVERON_EXP_SHARE"]
+        return dict(
+            cb2=s.cb2, mapGroup=s.group, mapNum=s.num, x=s.x, y=s.y,
+            frame=self.emu.frame(),
+            flags={n: self.flag(s, n) for n in names},
+            party=s.party,
+            pokeBalls=self.bag_pocket("bag.pokeBalls", "BAG_POKEBALLS_COUNT"),
+            berries=self.bag_pocket("bag.berries", "BAG_BERRIES_COUNT"),
+            saveAttemptStatus=self.gdb.read(self.sym["gSaveAttemptStatus"], 1)[0])
+
+    def live_blocks(self, width, height, border=7):
+        """Current map grid from gBackupMapLayout, without the MAP_OFFSET border."""
+        g = self.gdb
+        vw, vh, ptr = struct.unpack("<iiI", g.read(self.sym["gBackupMapLayout"], 12))
+        if vw != width + 2 * border + 1:  # MAP_OFFSET_W (fieldmap.h)
+            # Map sizes disagree: the player is not on the map we were asked about.
+            return None
+        raw = g.read(ptr, vw * vh * 2)
+        grid = struct.unpack(f"<{vw * vh}H", raw)
+        return [grid[(y + border) * vw + (x + border)] for y in range(height) for x in range(width)]
+
     def flag(self, s, name):
         fid = self.c[name] if isinstance(name, str) else name
         return bool(s.flags[fid // 8] & (1 << (fid % 8)))

@@ -99,7 +99,6 @@ class Driver:
 
     def walk_path(self, map_id, goals, max_replans=40, on_event=None):
         """Walk on map_id to any tile in goals, learning blocked tiles as we go."""
-        m = self.w.map(map_id)
         blocked = self.blocked.setdefault(map_id, set())
         for _ in range(max_replans):
             mid, pos = self.here()
@@ -107,6 +106,7 @@ class Driver:
                 return mid, pos
             if pos in goals:
                 return mid, pos
+            m = self.live_map(map_id)
             dyn = set(blocked) | {(x, y) for x, y, *_ in m.objects}
             path = mapdata.bfs(m, pos, goals, frozenset(dyn - set(goals)))
             if path is None:
@@ -168,6 +168,11 @@ class Driver:
                             self.settle()
             mid, pos = self.here()
             self.log("map", map=mid, pos=pos)
+
+    def live_map(self, map_id):
+        m = self.w.map(map_id)
+        blocks = self.g.live_blocks(m.width, m.height)
+        return m.with_live_blocks(blocks) if blocks else m
 
     # -- map graph travel ------------------------------------------------------
     def warp_push(self, m, tile):
@@ -240,9 +245,17 @@ class Driver:
         if pos not in options:
             raise Stuck(f"could not reach {npc} on {map_id}, at {pos}")
         face = options[pos]
-        self.e.tap(KEY[face], hold=0.05, after=0.3)
-        self.e.tap("A", after=0.5)
-        return self.clear_text()
+        # Holding toward the NPC turns the player without moving (the NPC
+        # blocks the tile); a too-short tap was seen to leave the player
+        # facing elsewhere, so retry until a script actually starts.
+        for attempt in range(4):
+            self.e.tap(KEY[face], hold=0.15 + 0.05 * attempt, after=0.3)
+            self.e.tap("A", after=0.5)
+            s = self.state()
+            if s.locked or s.in_battle or s.cb2 != "CB2_Overworld":
+                return self.clear_text()
+            self.log("talk-retry", map=map_id, npc=npc, attempt=attempt)
+        raise Stuck(f"talking to {npc} on {map_id} started no script")
 
     # -- battles --------------------------------------------------------------
     def best_move(self, s):

@@ -8,6 +8,7 @@ next to it, so each phase continues from the previous phase's in-game save.
 No memory, flag, item, party or save is ever written by the driver.
 """
 import argparse
+import json
 import pathlib
 import shutil
 import struct
@@ -134,6 +135,75 @@ def phase_to_alderfield(d):
     d.shot("alderfield")
 
 
+def sha256(path):
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def git(repo, *args):
+    import subprocess
+    return subprocess.check_output(["git", "-C", str(repo), *args], text=True).strip()
+
+
+def provenance(a, info, out, stage):
+    """Source/ROM/ELF/save/driver identity, written at the start and end of a run."""
+    import subprocess
+    engine = pathlib.Path(a.engine)
+    here = pathlib.Path(__file__).resolve().parent
+    sav = pathlib.Path(a.rom).with_suffix(".sav")
+    rec = dict(
+        stage=stage,
+        source_sha=git(engine, "rev-parse", "HEAD"),
+        engine_tree=git(engine, "rev-parse", "HEAD:Pokemon Game/engine"),
+        engine_dirty=bool(git(engine, "status", "--porcelain", "--", ".")),
+        rom_sha256=sha256(a.rom),
+        elf_sha256=info["elf_sha256"],
+        save_sha256=sha256(sav) if sav.exists() else None,
+        driver_sha=git(here, "rev-parse", "HEAD"),
+        driver_dirty=bool(git(here, "status", "--porcelain", "--", ".")),
+        mgba=subprocess.run(["mgba", "--version"], capture_output=True, text=True).stdout.strip(),
+        phases=a.phases, new_game=a.new_game)
+    (out / f"provenance-{stage}.json").write_text(json.dumps(rec, indent=1))
+    return rec
+
+
+class ExpectationFailed(RuntimeError):
+    pass
+
+
+def observe(d, label, expect=None):
+    """Write state-<label>.json with read-only facts; fail closed on mismatches."""
+    obs = d.g.observation()
+    shot = d.shot(label)
+    obs["screenshot"] = shot.name
+    obs["label"] = label
+    problems = []
+    for key, want in (expect or {}).items():
+        have = obs["flags"].get(key) if key.startswith("FLAG_") else obs.get(key)
+        if callable(want):
+            ok = bool(want(obs))
+        else:
+            ok = have == want
+        if not ok:
+            problems.append(f"{key}: expected {want}, observed {have}")
+    obs["expected"] = {k: (v if not callable(v) else "check") for k, v in (expect or {}).items()}
+    obs["problems"] = problems
+    path = d.e.outdir / f"state-{label}.json"
+    path.write_text(json.dumps(obs, indent=1))
+    d.log("observe", label=label, problems=problems)
+    if problems:
+        raise ExpectationFailed(f"{label}: {problems}")
+    return obs
+
+
+def count_item(pocket, item):
+    return sum(q for i, q in pocket if i == item)
+
+
 def lead(d, s=None):
     s = s or d.state()
     return s.party[0] if s.party else dict(level=0, hp=0, maxhp=1)
@@ -185,9 +255,17 @@ def make_train(level):
     return phase
 
 
-def make_trainer(name, map_id, tile, flag=None):
+def trainer_beaten(d, trainer):
+    c = d.g.c
+    return d.g.flag(d.state(), c["TRAINER_FLAGS_START"] + c[trainer])
+
+
+def make_trainer(name, map_id, tile, trainer):
     """Talk to a route trainer and fight the battle with ordinary inputs."""
     def phase(d):
+        if trainer_beaten(d, trainer):
+            d.log("trainer-already-beaten", trainer=name)
+            return
         mon = lead(d)
         if mon["hp"] * 100 < mon["maxhp"] * 90:
             d.heal_at_clinic()
@@ -198,18 +276,77 @@ def make_trainer(name, map_id, tile, flag=None):
             s = d.battle(label=name)
             d.clear_text()
         mid, pos = d.here()
-        d.log("trainer-done", trainer=name, map=mid, lead=lead(d),
+        beaten = trainer_beaten(d, trainer)
+        d.log("trainer-done", trainer=name, map=mid, lead=lead(d), beaten=beaten,
               whiteout=mid != map_id)
-        d.shot(f"{name}-after")
+        observe(d, f"{name}-after")
     return phase
 
 
-PHASES = {"sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9)),
-          "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17)),
-          "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12)),
+def heal_full(d):
+    mon = lead(d)
+    if mon["hp"] < mon["maxhp"]:
+        d.heal_at_clinic()
+
+
+def phase_gym1(d):
+    """Alderfield Gym: both sluices (YES), then Elio. A loss is recorded, not hidden."""
+    heal_full(d)
+    d.travel_to("MAP_ALDERFIELDGYM")
+    observe(d, "gym1-entered")
+    s = d.state()
+    if not d.g.flag(s, "FLAG_AVERON_WEST_SLUICE"):
+        d.talk("MAP_ALDERFIELDGYM", (2, 12))
+    if not d.g.flag(d.state(), "FLAG_AVERON_EAST_SLUICE"):
+        d.talk("MAP_ALDERFIELDGYM", (6, 12))
+    observe(d, "gym1-sluices", {"FLAG_AVERON_WEST_SLUICE": True, "FLAG_AVERON_EAST_SLUICE": True})
+    s = d.talk("MAP_ALDERFIELDGYM", (4, 4))
+    if s.in_battle:
+        d.battle(label="elio")
+        s = d.clear_text(limit=300)
+    won = d.g.flag(d.state(), "FLAG_BADGE01_GET")
+    d.log("gym1-result", won=won, map=d.here()[0], lead=lead(d))
+    observe(d, "gym1-result", {"FLAG_BADGE01_GET": True})
+
+
+def phase_q1_start(d):
+    """Researcher in Alderfield asks for field notes; answer YES."""
+    if not d.g.flag(d.state(), "FLAG_AVERON_NOTES_STARTED"):
+        d.travel_to("MAP_ALDERFIELD")
+        d.talk("MAP_ALDERFIELD", (12, 16))
+    observe(d, "q1-started", {"FLAG_AVERON_NOTES_STARTED": True})
+
+
+def phase_q1_hiker(d):
+    """Past the Badge01 gate into Coastal Bluffs; talk to the Hiker on the high path."""
+    d.travel_to("MAP_COASTALBLUFFS")
+    observe(d, "q1-bluffs-entered", {"FLAG_BADGE01_GET": True})
+    d.talk("MAP_COASTALBLUFFS", (35, 7))
+    observe(d, "q1-hiker", {"FLAG_AVERON_NOTES_RECORDED": True, "FLAG_AVERON_NOTES_REWARDED": False})
+
+
+def phase_q1_reward(d):
+    """Back to the researcher: exactly two Great Balls, once."""
+    great = d.g.c["ITEM_GREAT_BALL"]
+    before = observe(d, "q1-before-reward")
+    have = count_item(before["pokeBalls"], great)
+    d.travel_to("MAP_ALDERFIELD")
+    d.talk("MAP_ALDERFIELD", (12, 16))
+    observe(d, "q1-reward", {"FLAG_AVERON_NOTES_REWARDED": True,
+                             "greatBalls+2": lambda o: count_item(o["pokeBalls"], great) == have + 2})
+    d.talk("MAP_ALDERFIELD", (12, 16))  # asking again must not pay twice
+    observe(d, "q1-no-duplicate", {"greatBalls+2": lambda o: count_item(o["pokeBalls"], great) == have + 2})
+
+
+PHASES = {"gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
+          "q1_reward": phase_q1_reward,
+          "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
+          "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
+          "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),
           "train8": make_train(8), "train10": make_train(10), "train12": make_train(12),
           "train13": make_train(13), "train14": make_train(14), "train15": make_train(15),
           "heal": lambda d: d.heal_at_clinic(),
+          "observe": lambda d: observe(d, "checkpoint"),
           "opening": phase_opening, "save": phase_save, "to_alderfield": phase_to_alderfield}
 
 
@@ -232,11 +369,13 @@ def main():
         g = game.Game(e, info)
         d = drv.Driver(e, g, world, out / "events.jsonl")
         d.moves = game.MoveTable(a.rom, info)
-        d.log("start", elf=info["elf_sha256"], rom=a.rom, phases=a.phases, new_game=a.new_game)
+        e.start_trace(out / "inputs.jsonl", info["symbols"]["gMain"] + info["offsets"]["main.vblankCounter1"])
+        prov = provenance(a, info, out, "start")
+        d.log("start", source=prov["source_sha"], rom_sha256=prov["rom_sha256"], elf=info["elf_sha256"], rom=a.rom, phases=a.phases, new_game=a.new_game)
         boot(d, a.new_game)
         for p in a.phases:
             PHASES[p](d)
-        d.shot("end")
+        observe(d, "end")
     except Exception as exc:
         try:
             e.capture("error")
@@ -246,6 +385,10 @@ def main():
         raise
     finally:
         e.close()
+        try:
+            provenance(a, info, out, "end")  # save hash after mGBA wrote its flash file
+        except Exception as exc:
+            print("provenance-end failed:", exc, file=sys.stderr)
 
 
 if __name__ == "__main__":

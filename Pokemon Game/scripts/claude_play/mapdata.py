@@ -70,19 +70,33 @@ class MapInfo:
         self.width, self.height = layout["width"], layout["height"]
         raw = (world.engine / layout["blockdata_filepath"]).read_bytes()
         self.blocks = struct.unpack(f"<{self.width * self.height}H", raw)
-        primary = world._attributes(layout["primary_tileset"])
-        secondary = world._attributes(layout["secondary_tileset"])
-        self.behaviors = []
-        for b in self.blocks:
-            mid = b & 0x3FF
-            attr = primary[mid] if mid < 512 else secondary[mid - 512] if mid - 512 < len(secondary) else 0
-            self.behaviors.append(world.behavior_names.get(attr & 0xFF, "MB_?"))
+        self._primary = world._attributes(layout["primary_tileset"])
+        self._secondary = world._attributes(layout["secondary_tileset"])
+        self._derive_behaviors()
         self.warps = [(w["x"], w["y"], w["dest_map"], int(w["dest_warp_id"]))
                       for w in info.get("warp_events", [])]
         self.connections = [(c["direction"], c["map"], int(c["offset"]))
                             for c in (info.get("connections") or [])]
         self.objects = [(o["x"], o["y"], o.get("script", ""), o.get("graphics_id", ""))
                         for o in info.get("object_events", [])]
+
+    def _derive_behaviors(self):
+        self.behaviors = []
+        for b in self.blocks:
+            mid = b & 0x3FF
+            if mid < 512:
+                attr = self._primary[mid] if mid < len(self._primary) else 0
+            else:
+                attr = self._secondary[mid - 512] if mid - 512 < len(self._secondary) else 0
+            self.behaviors.append(self.world.behavior_names.get(attr & 0xFF, "MB_?"))
+
+    def with_live_blocks(self, blocks):
+        """A copy using the game's current map grid (setmetatile changes, gates)."""
+        import copy
+        live = copy.copy(self)
+        live.blocks = tuple(blocks)
+        live._derive_behaviors()
+        return live
 
     def inside(self, x, y):
         return 0 <= x < self.width and 0 <= y < self.height
