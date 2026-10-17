@@ -4700,6 +4700,9 @@ static void CB2_WaitTradeComplete(void)
 
 static void CB2_SaveAndEndTrade(void)
 {
+    if (LinkFullSave_AbortIfWriteBlocked())
+        return;
+
     switch (gMain.state)
     {
     case 0:
@@ -5015,6 +5018,9 @@ static void Task_CloseCenterWhiteColumn(u8 taskId)
 
 static void CB2_SaveAndEndWirelessTrade(void)
 {
+    if (LinkFullSave_AbortIfWriteBlocked())
+        return;
+
     switch (gMain.state)
     {
     case 0:
