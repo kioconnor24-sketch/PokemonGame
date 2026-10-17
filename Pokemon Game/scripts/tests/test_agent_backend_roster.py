@@ -63,7 +63,7 @@ class BackendOwnershipTests(unittest.TestCase):
         self.assertEqual(self.by_id["QUEST"]["qa_cases"],
                          ["Q1", "Q2", "Q3", "Q4", "Q5"])
         self.assertIn("QUEST", self.by_id["SCRIPTED-BATTLE"]["deps"])
-        self.assertIn("QUEST", self.by_id["TWO-REGION"]["deps"])
+        self.assertEqual(self.by_id["TWO-REGION"]["deps"], [], "merged region core must not wait on QUEST")
         self.assertTrue(self.conf["policies"]["dependency_gates_apply_to_merge"])
 
     def test_no_map_production_task_was_activated(self):
