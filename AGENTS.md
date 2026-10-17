@@ -2,7 +2,7 @@
 **OWNER-APPROVED NEXT PHASE, 2026-10-17.** The authoritative status, approved scope, responsibilities and unresolved limits are in [CURRENT_PHASE_AND_HANDOFF.md](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md). Read it **before** any older 2026-10-15/16/17 M1 runbooks, GitHub board snapshots, or previous handoffs. The owner accepted pre-Sinnoh Milestone 1, authorized proceeding to the next phase, accepted the Gym 1 missing-text evidence gap as non-blocking and **deferred human audio listening** to later QA.
 
 ## Start every new session
-1. Refresh `main`, open pull requests/checks, exact issue/PR heads and [the live ownership hub #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
+1. Refresh `main`, open pull requests/checks, exact issue/PR heads and [Issue #15 — live ownership hub](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
 2. Read the [current-phase handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md), then applicable [technical Sinnoh planning](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_TECHNICAL_READINESS_20261017.md), [final M1 QA](Pokemon%20Game/Averon_Codex_Handoff/development/M1_ACCEPTANCE_REPORT_20261017.md), and the exact code paths you will change.
 3. Claim **specific new files and scope** in #15 as a nonblocking notification; check no other developer owns a conflicting worktree/path. Coordinate real protected overlap rather than stopping unrelated work. Follow [WORKFLOW](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md).
 

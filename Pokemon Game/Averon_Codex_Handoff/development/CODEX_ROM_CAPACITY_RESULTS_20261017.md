@@ -61,7 +61,7 @@ Both retain EWRAM **226,486 B used / 35,658 B free**, IWRAM **28,336 / 4,432 B**
 
 **Mega-only configuration failure:** both real RELEASE and native compilation report undeclared `CRY_SLOWBRO_MEGA` at `src/data/pokemon/species_info/gen_1_families.h:10745` and `CRY_RAYQUAZA_MEGA` at `gen_3_families.h:13158`. The config removes these constants while those species initializers still reference them. No valid image or saving is reported. [Manager notice](https://github.com/kioconnor24-sketch/PokemonGame/issues/55#issuecomment-6241967276). The supported design intent is base cries with `CRY_MODE_HIGH_PITCH`; it is not presently a proven build option.
 
-Despite that test's broad historical name, modes 12 (weak doubles) and 13 (excluded Dynamax) are not executed by its bounded loop. Source-reviewed wait callers include battle controllers/pokeballs, cry animation tasks for moves, script `waitmoncry`, evolution, party menus, Pokédex info and cry pages, trade and Hall of Fame. The cry page samples the mixed PCM buffer and has replay/countdown logic; silence does not automatically make the screen safe. [Upstream #4791](https://github.com/rh-hideout/pokeemerald-expansion/pull/4791) is context, not acceptance of this checkout.
+Modes 12 (weak doubles) and 13 (excluded Dynamax) are not executed by that test's bounded loop. Source-reviewed wait callers include battle controllers/pokeballs, cry animation tasks for moves, script `waitmoncry`, evolution, party menus, Pokédex info and cry pages, trade and Hall of Fame. The cry page samples the mixed PCM buffer and has replay/countdown logic; silence does not automatically make the screen safe. [Upstream #4791](https://github.com/rh-hideout/pokeemerald-expansion/pull/4791) is context, not acceptance of this checkout.
 
 | Required interaction | Evidence this session | Remaining acceptance |
 | --- | --- | --- |
@@ -233,6 +233,8 @@ Other hard constraints do not disappear when ROM shrinks: SaveBlock2 **84 B** fr
 ## 9. Reproduction and handoff
 
 Work branch **`codex/rom-capacity-20261017`**, PR #115. Two source-only experimental branches above remain unmerged and must not be mistaken for eligible release changes. Default source, strict failure baseline, protected checks, Claude files and permanent IDs are unchanged. Relevant blockers are documented in #55; no newly demonstrated critical defect in accepted default gameplay is claimed.
+
+The PR also corrects only the root AGENTS hub-link label to the literal `Issue #15`, satisfying the existing entrypoint regression. That CI mismatch was present on unchanged main; no policy, guard or test expectation is relaxed.
 
 In a clean disposable worktree with the supported toolchain active, each source pin builds using `make -j8 -O RELEASE=1`. Record build status before hashing; **never reuse a prior `.gba` after a failed build**. Then:
 
