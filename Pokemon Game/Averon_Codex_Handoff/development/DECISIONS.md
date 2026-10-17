@@ -16,3 +16,5 @@ Date | Decision | Evidence / reason | Implications
 2026-10-14 | Boss rupture after a four-Pokémon first phase if true in-battle interruption is unstable | Avoid unsupported assumptions | Cutscene must still feel seamless
 2026-10-14 | Starter assignment via first meaningful house visit | User choice | Must offer clear eventual acceptance and safe reentry
 2026-10-14 | Rename childhood rival from provisional Rowan to Renn | Avoid conflict with Sinnoh's established Professor Rowan | All new text/flags should use RENN
+
+| 2026-10-17 | Pokémon cries OFF as preferred development build after bug fix and genuine QA; retain every source cry for reversible ON builds | [Owner's explicit reversible audio decision](CRIES_OFF_REVERSIBLE_OWNER_POLICY_20261017.md); real measured saving 9,416,648 B; OFF cold-start audio guard currently FAIL | No deletions; music/SFX remain; ON restoration not guaranteed to fit final 32 MiB ROM |
