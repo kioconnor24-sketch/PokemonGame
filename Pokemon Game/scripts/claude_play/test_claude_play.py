@@ -317,13 +317,18 @@ class AudioReportTests(unittest.TestCase):
 
 def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
                   problems=(), screenshot=True, trace=True, elf="e" * 64, engine_rom=None,
-                  dev_only=False):
+                  dev_only=False, start_save=None, end_save=None, legacy=False):
     """SYNTHETIC run directory for harness tests only."""
     run_dir = root / name
     run_dir.mkdir(parents=True)
-    (run_dir / "provenance-start.json").write_text(json.dumps(dict(
-        source_sha=source, rom_sha256=rom, elf_sha256=elf, engine_rom_sha256=engine_rom or rom,
-        engine_dirty=dirty, driver_sha="d" * 40, driver_dirty=False, synthetic=True)))
+    prov = dict(source_sha=source, rom_sha256=rom, elf_sha256=elf, engine_rom_sha256=engine_rom or rom,
+                engine_dirty=dirty, driver_sha="d" * 40, driver_dirty=False, synthetic=True,
+                save_sha256=start_save)
+    if legacy:
+        del prov["engine_rom_sha256"]
+    (run_dir / "provenance-start.json").write_text(json.dumps(prov))
+    if end_save:
+        (run_dir / "provenance-end.json").write_text(json.dumps(dict(prov, save_sha256=end_save)))
     events = [dict(event="start")]
     if dev_only:
         events.append(dict(event="debug-menu", label="fill-balls", rows=[1, 1, 4], dev_only=True))
@@ -402,6 +407,46 @@ class EvidenceTests(unittest.TestCase):
             evidence.mark_external_fixture(case, "damaged save copy")
             self.assertEqual(case["scope"], "DEV_FIXTURE")
             self.assertTrue(all("damaged save copy" in o["statement"] for o in case["state_observations"]))
+
+    def test_fixture_taint_follows_the_save_chain(self):
+        # r1 used the debug menu and saved; r2 continues r1's save without
+        # any debug use; r3 continues r2's. All are DEV_FIXTURE.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", dev_only=True, start_save="s0", end_save="s1")
+            synthetic_run(root, "r2", start_save="s1", end_save="s2")
+            synthetic_run(root, "r3", start_save="s2", end_save="s2")
+            synthetic_run(root, "r4", start_save="s0", end_save="s0")  # the untouched original
+            m = evidence.build({"A": [("r3", ["badge"])], "B": [("r4", ["badge"])]}, root)
+            self.assertEqual(m["cases"][0]["scope"], "DEV_FIXTURE")
+            self.assertIn("inherited", m["cases"][0]["dev_fixtures"][0])
+            self.assertEqual(m["cases"][1]["scope"], "ORDINARY_PLAY")
+
+    def test_declared_fixture_save_taints_later_runs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", start_save="bad", end_save="s1")
+            synthetic_run(root, "r2", start_save="s1", end_save="s1")
+            m = evidence.build({"A": [("r2", ["badge"])]}, root, {"bad": "damaged copy"})
+            self.assertEqual(m["cases"][0]["scope"], "DEV_FIXTURE")
+
+    def test_missing_build_match_needs_an_explicit_attestation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1", legacy=True)
+            with self.assertRaises(evidence.EvidenceError):
+                evidence.build({"A": [("r1", ["badge"])]}, root)
+            m = evidence.build({"A": [("r1", ["badge"])]}, root, legacy_roms=("b" * 64,))
+            self.assertEqual(m["legacy_rom_attested"], ["b" * 64])
+
+    def test_screenshot_patterns_cannot_leave_the_run(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1")
+            (root / "outside.png").write_bytes(b"\x89PNG\r\n\x1a\nSYNTHETIC")
+            for pattern in ("../*.png", "/tmp/*.png"):
+                with self.subTest(pattern=pattern), self.assertRaises(evidence.EvidenceError):
+                    evidence.build({"A": [("r1", ["shot:" + pattern])]}, root)
 
     def test_rom_that_is_not_the_engine_build_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -57,10 +57,44 @@ def dev_fixtures(run):
     return uses
 
 
-def build(cases, root):
-    """cases: {case_id: [(run_dir, [labels])]} with run dirs under root."""
+def save_taint(root, seeds=None):
+    """{save sha256: origin} for every flash save that a DEV fixture touched.
+
+    A run is tainted if it used the debug menu itself or started from a
+    tainted save; its end save is then tainted too. Saves carry state from
+    one process to the next, so a fixture taints every later run on that
+    chain, not only the run that used it. `seeds` declares out-of-game
+    fixtures (e.g. a deliberately damaged save copy)."""
     root = pathlib.Path(root)
+    tainted = dict(seeds or {})
+    runs = []
+    for run in sorted(p for p in root.iterdir() if (p / "provenance-start.json").is_file()):
+        start = json.loads((run / "provenance-start.json").read_text()).get("save_sha256")
+        end_path = run / "provenance-end.json"
+        end = json.loads(end_path.read_text()).get("save_sha256") if end_path.is_file() else start
+        own = dev_fixtures(run) if (run / "events.jsonl").is_file() else []
+        runs.append((run.name, start, end, own))
+    changed = True
+    while changed:
+        changed = False
+        for name, start, end, own in runs:
+            origin = (f"{name}: {', '.join(own)}" if own else tainted.get(start))
+            if origin and end and end not in tainted:
+                tainted[end] = origin
+                changed = True
+    return tainted
+
+
+def build(cases, root, taint_seeds=None, legacy_roms=()):
+    """cases: {case_id: [(run_dir, [labels])]} with run dirs under root.
+
+    legacy_roms: ROM sha256 values the operator attests are byte copies of
+    the engine build, for runs recorded before provenance carried
+    engine_rom_sha256. Anything else without that field is refused."""
+    root = pathlib.Path(root)
+    tainted = save_taint(root, taint_seeds)
     source = rom = elf = None
+    attested = set()
     out_cases = []
     for case_id, parts in cases.items():
         screenshots, observations, traces, fixtures, drivers = [], [], [], [], []
@@ -72,7 +106,12 @@ def build(cases, root):
             prov = json.loads(prov_path.read_text())
             if prov.get("engine_dirty"):
                 raise EvidenceError(f"{run}: engine tree was dirty")
-            if prov.get("engine_rom_sha256") not in (None, prov["rom_sha256"]):
+            if "engine_rom_sha256" not in prov:
+                if prov["rom_sha256"] not in legacy_roms:
+                    raise EvidenceError(f"{run}: provenance does not show the ROM is the engine's build "
+                                        "(pass --legacy-rom only for a ROM you verified)")
+                attested.add(prov["rom_sha256"])
+            elif prov["engine_rom_sha256"] != prov["rom_sha256"]:
                 raise EvidenceError(f"{run}: played ROM is not the engine's build")
             if source is None:
                 source, rom, elf = prov["source_sha"], prov["rom_sha256"], prov["elf_sha256"]
@@ -84,6 +123,9 @@ def build(cases, root):
             drivers.append(dict(run=run_name, driver_sha=prov.get("driver_sha"),
                                 driver_dirty=prov.get("driver_dirty")))
             used = dev_fixtures(run)
+            inherited = tainted.get(prov.get("save_sha256"))
+            if inherited:
+                used = used + [f"inherited from save made by {inherited}"]
             fixtures += [f"{run_name}: {u}" for u in used]
             how = (f"after ordinary inputs and DEV-ONLY debug fixture(s) {used} in this run"
                    if used else "after ordinary inputs")
@@ -91,9 +133,13 @@ def build(cases, root):
                 if label.startswith("shot:"):
                     # Proof frames that are not state milestones (dialogue,
                     # Bag pockets, defeat text): named explicitly, must exist.
-                    found = sorted(p.name for p in run.glob(label[5:]) if p.suffix == ".png")
+                    pattern = label[5:]
+                    if pattern.startswith("/") or ".." in pathlib.PurePath(pattern).parts:
+                        raise EvidenceError(f"{run}: screenshot pattern {pattern!r} leaves the run")
+                    found = sorted(p.relative_to(run).as_posix() for p in run.glob(pattern)
+                                   if p.suffix == ".png" and p.resolve().is_relative_to(run.resolve()))
                     if not found:
-                        raise EvidenceError(f"{run}: no screenshot matches {label[5:]!r}")
+                        raise EvidenceError(f"{run}: no screenshot matches {pattern!r}")
                     screenshots += [f"{run_name}/{n}" for n in found]
                     continue
                 state = load_state(run, label)
@@ -113,7 +159,8 @@ def build(cases, root):
                               state_observations=observations,
                               dev_fixtures=fixtures, scope="DEV_FIXTURE" if fixtures else "ORDINARY_PLAY",
                               drivers=drivers))
-    return dict(source_sha=source, rom_sha256=rom, elf_sha256=elf, cases=out_cases)
+    return dict(source_sha=source, rom_sha256=rom, elf_sha256=elf, cases=out_cases,
+                legacy_rom_attested=sorted(attested))
 
 
 def mark_external_fixture(case, desc):
@@ -140,12 +187,19 @@ def main():
     ap.add_argument("--fixture", action="append", default=[],
                     help="ID=description of a fixture applied outside the game "
                          "(e.g. a deliberately damaged save copy); marks the case")
+    ap.add_argument("--fixture-save", action="append", default=[],
+                    help="SHA256=description: a save changed outside the game; every run "
+                         "continuing from it (directly or later) is DEV_FIXTURE")
+    ap.add_argument("--legacy-rom", action="append", default=[],
+                    help="ROM sha256 you verified equals the engine build, for runs whose "
+                         "provenance predates engine_rom_sha256")
     ap.add_argument("--root", required=True)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     cases = dict(parse_case(c) for c in a.case)
     try:
-        manifest = build(cases, a.root)
+        seeds = dict(s.split("=", 1) for s in a.fixture_save)
+        manifest = build(cases, a.root, seeds, tuple(a.legacy_rom))
         for spec in a.fixture:
             case_id, desc = spec.split("=", 1)
             case = next((c for c in manifest["cases"] if c["case_id"] == case_id), None)

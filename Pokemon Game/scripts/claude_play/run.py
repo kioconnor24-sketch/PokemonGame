@@ -524,6 +524,8 @@ def phase_badge_gate(d, tile=(38, 16)):
         if d.state().locked:
             break
         time.sleep(0.05)
+    else:
+        d.log("gate-no-lock", note="trigger script not seen within 1 s")
     time.sleep(0.6)
     d.shot("gate-text-01")
     d.clear_text(capture="gate-text-more", frames=3)
