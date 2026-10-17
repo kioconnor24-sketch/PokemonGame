@@ -252,7 +252,11 @@ class Driver:
             t = (npc[0] - dx, npc[1] - dy)
             if m.walkable(*t):
                 options[t] = d
-        mid, pos = self.walk_path(map_id, set(options))
+        # Wild encounters on the way are fought (run26 lost the walk to one).
+        for _ in range(6):
+            mid, pos = self.walk_path(map_id, set(options), on_event=lambda s: self.battle())
+            if pos in options or mid != map_id:
+                break
         if pos not in options:
             raise Stuck(f"could not reach {npc} on {map_id}, at {pos}")
         face = options[pos]
