@@ -342,8 +342,8 @@ static void AddHatchedMonToParty(u8 id)
 
     SetMonData(mon, MON_DATA_MET_GAME, &gGameVersion);
 
-    u32 otId = READ_OTID_FROM_SAVE;
-    SetMonData(mon, MON_DATA_OT_ID, &otId);
+    // A traded egg still carries the other save's OT ID: rekey, don't corrupt.
+    SetBoxMonOtIdKeepingData(&mon->box, READ_OTID_FROM_SAVE);
     SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 

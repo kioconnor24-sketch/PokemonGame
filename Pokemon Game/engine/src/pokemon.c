@@ -2938,6 +2938,16 @@ void CopyMon(void *dest, void *src, size_t size)
     memcpy(dest, src, size);
 }
 
+// OT_ID is part of the secure-data key (personality ^ OT ID), and the raw
+// MON_DATA_OT_ID setter does not re-encrypt (constructors rely on that).
+// Use this to give an existing Pokemon a new original trainer.
+void SetBoxMonOtIdKeepingData(struct BoxPokemon *boxMon, u32 otId)
+{
+    DecryptBoxMon(boxMon);
+    SetBoxMonData(boxMon, MON_DATA_OT_ID, &otId);
+    EncryptBoxMon(boxMon);
+}
+
 u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
