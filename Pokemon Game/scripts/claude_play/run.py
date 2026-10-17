@@ -855,7 +855,7 @@ def show_item(d, pocket, item, label):
 def show_party(d, label):
     """START -> POKEMON: every member's HP bar, HP numbers and status icon."""
     open_start_menu_action(d, 1)
-    time.sleep(1.0)
+    time.sleep(2.0)  # names, levels and HP numbers draw after the bars
     d.shot(label)
     back_to_field(d)
 
