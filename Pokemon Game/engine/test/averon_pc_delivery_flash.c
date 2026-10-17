@@ -81,7 +81,7 @@ static void ExpectDeliveredState(void)
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 7);
 }
 
-TEST("Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash")
+static void ExerciseDeliveryFlash(bool32 foreignOt)
 {
     struct Pokemon delivery;
     struct BoxPokemon filler;
@@ -123,10 +123,15 @@ TEST("Averon full PC delivery refuses atomically then wraps into one free slot a
     VarSet(VAR_PC_BOX_TO_SEND_MON, TOTAL_BOXES_COUNT - 1);
     FlagSet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
     CreateMonWithIVs(&delivery, SPECIES_PIPLUP, 12, DELIVERY_PERSONALITY,
-                     OTID_STRUCT_PRESET(0xA1B2C3D4), 0);
+                     foreignOt ? OTID_STRUCT_PRESET(0xA1B2C3D4) : OTID_STRUCT_PLAYER_ID, 0);
     SetMonData(&delivery, MON_DATA_HELD_ITEM, &heldItem);
     SetMonMoveSlot(&delivery, MOVE_TACKLE, 0);
     SetMonData(&delivery, MON_DATA_PP1, &zero);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_HELD_ITEM), ITEM_EXP_SHARE);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_PP1), 0);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_OT_ID), foreignOt ? 0xA1B2C3D4 : PLAYER_OT_ID);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_SPECIES), SPECIES_PIPLUP);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_SANITY_IS_BAD_EGG), FALSE);
     partyCrc = PartyCrc();
     storageCrc = StorageCrc();
     bagCrc = BagCrc();
@@ -139,6 +144,8 @@ TEST("Averon full PC delivery refuses atomically then wraps into one free slot a
     EXPECT_EQ(BagCrc(), bagCrc);
     EXPECT_EQ(GetMonData(&delivery, MON_DATA_HELD_ITEM), ITEM_EXP_SHARE);
     EXPECT_EQ(GetMonData(&delivery, MON_DATA_PP1), 0);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_SPECIES), SPECIES_PIPLUP);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_SANITY_IS_BAD_EGG), FALSE);
     // The API intentionally assigns the player's OT even on refusal. Its
     // input is not claimed byte-immutable; party and storage must be.
     EXPECT_EQ(GetMonData(&delivery, MON_DATA_OT_ID), PLAYER_OT_ID);
@@ -203,4 +210,48 @@ TEST("Averon full PC delivery refuses atomically then wraps into one free slot a
     Save_ResetSaveCounters();
     AveronRegionSave_BeginLoad();
     AveronRegionSave_InitNewGame();
+}
+
+TEST("Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash")
+{
+    ExerciseDeliveryFlash(FALSE);
+}
+
+// Ordinary wild constructors already use the player's OT. This is the
+// production API's foreign-OT boundary, not evidence of a live capture bug.
+TEST("Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash")
+{
+    ExerciseDeliveryFlash(TRUE);
+}
+
+TEST("Averon foreign OT delivery preserves encrypted data when the party has space")
+{
+    struct Pokemon delivery;
+    u32 heldItem = ITEM_EXP_SHARE, zero = 0;
+
+    gSaveBlock2Ptr->playerTrainerId[0] = 0x12;
+    gSaveBlock2Ptr->playerTrainerId[1] = 0x34;
+    gSaveBlock2Ptr->playerTrainerId[2] = 0x56;
+    gSaveBlock2Ptr->playerTrainerId[3] = 0x78;
+    ZeroPlayerPartyMons();
+    CalculatePlayerPartyCount();
+    CreateMonWithIVs(&delivery, SPECIES_PIPLUP, 12, DELIVERY_PERSONALITY,
+                     OTID_STRUCT_PRESET(0xA1B2C3D4), 0);
+    SetMonData(&delivery, MON_DATA_HELD_ITEM, &heldItem);
+    SetMonMoveSlot(&delivery, MOVE_TACKLE, 0);
+    SetMonData(&delivery, MON_DATA_PP1, &zero);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_HELD_ITEM), ITEM_EXP_SHARE);
+    EXPECT_EQ(GetMonData(&delivery, MON_DATA_SPECIES), SPECIES_PIPLUP);
+    EXPECT_EQ(GiveCapturedMonToPlayer(&delivery), MON_GIVEN_TO_PARTY);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 1);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_EXP_SHARE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PIPLUP);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_BAD_EGG), FALSE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PERSONALITY), DELIVERY_PERSONALITY);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_OT_ID), PLAYER_OT_ID);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), 0);
+    EXPECT_EQ(memcmp(&delivery, &gParties[B_TRAINER_PLAYER][0], sizeof(delivery)), 0);
+    ZeroPlayerPartyMons();
+    CalculatePlayerPartyCount();
 }
