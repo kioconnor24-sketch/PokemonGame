@@ -86,7 +86,58 @@ jobs:
           from pathlib import Path
           import os,re
           log = (Path(os.environ['RUNNER_TEMP'])/'pr48-strict-evidence/full-native.log').read_text(errors='replace')
-          match = re.findall(r'(?m)^- Tests TOTAL:\s*(\d+)', log)
+          # The native runner emits ANSI-colored summary words; strip ONLY display escapes.
+          plain = re.sub(r'\x1b\[[0-9;]*m', '', log)
+          match = re.findall(r'(?m)^- Tests TOTAL:\s*(\d+)', plain)
+          results = re.findall(r'(?m)^\[\d+\] .+: [A-Z_]+
+          if len(match)!=1 or int(match[0]) < 6000 or len(results)!=int(match[0]):
+              raise SystemExit(f'FAIL: full test summary missing, duplicate or incomplete: totals={match}, results={len(results)}')
+          print('FULL NATIVE RESULTS COUNT:', match[0], 'individual outcomes:', len(results))
+          PY
+          python3 ../scripts/check-averon-native-baseline.py \
+            "$RUNNER_TEMP/pr48-strict-evidence/full-native.log" \
+            > "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log" 2>&1 || {
+              cat "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log"; exit 1;
+            }
+          cat "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log"
+          # The upstream native runner deliberately exits 2 on expected-failure
+          # tests even when every failure exactly matches the strict baseline.
+          # The unchanged comparator above is authoritative ONLY after the
+          # complete, unfiltered result count has been verified.
+          if [ "$make_status" -ne 0 ] && [ "$make_status" -ne 2 ]; then
+            echo "FAIL: unexpected native make exit $make_status, despite strict comparison"
+            exit "$make_status"
+          fi
+          echo "PASS: complete unfiltered native results exactly match unchanged strict baseline (make exit $make_status)"
+      - name: Reject result if PR48 changed since pinned check
+        if: success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -Eeuo pipefail
+          expected=$(sed -n 's/^PR48_HEAD=//p' "$RUNNER_TEMP/pr48-strict-evidence/source-pins.txt")
+          now=$(gh api "repos/$TARGET_REPO/pulls/48" --jq '.head.sha')
+          test "$expected" = "$now" || {
+            echo "FAIL: PR48 head moved; result remains pinned to earlier SHA $expected"; exit 1;
+          }
+          echo "PASS: exact current PR48 head $expected, real full native and strict baseline"
+      - name: Upload TEXT evidence only; never distribute ROM, save, or ELF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr48-full-native-strict-text-evidence
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/pr48-strict-evidence/source-pins.txt
+            ${{ runner.temp }}/pr48-strict-evidence/rom-sha256.txt
+            ${{ runner.temp }}/pr48-strict-evidence/save-headroom.json
+            ${{ runner.temp }}/pr48-strict-evidence/normal-build.log
+            ${{ runner.temp }}/pr48-strict-evidence/full-native.log
+            ${{ runner.temp }}/pr48-strict-evidence/strict-comparison.log
+, plain)
           if len(match)!=1 or int(match[0]) < 6000:
               raise SystemExit(f'FAIL: full test summary missing, duplicate or partial: {match}')
           print('FULL NATIVE RESULTS COUNT:', match[0])
