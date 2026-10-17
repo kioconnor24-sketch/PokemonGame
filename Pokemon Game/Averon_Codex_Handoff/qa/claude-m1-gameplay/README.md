@@ -36,7 +36,9 @@ game build; the packages list each run's start driver state.
 ## Save chain (flash sha256, first 12 hex)
 
 ```
-run17 (old ROM)  29ea0df40d71 -> 0a7429783b43   Gym 1 won (Badge01)
+run17 (old ROM)  29ea0df40d71 -> 0a7429783b43   Gym 1 won (Badge01): win and badge are memory reads and the
+                                                 battle log; no frame shows Elio's defeat text. Badge 1 is first
+                                                 on screen on run19's trainer card (newer ROM). Driver dirty at start.
 run18 (new ROM)  0a7429783b43 -> 80100f9a6a0a   old-ROM save loads on current ROM; Q1 reward (state only: no dialogue frames were captured in this run)
 run19            80100f9a6a0a -> 80100f9a6a0a   fresh-process Continue, trainer card, Bag
 run20            80100f9a6a0a -> 2bc19b97b053   Q2 by walking, reward, save
@@ -47,7 +49,7 @@ run20            80100f9a6a0a -> 2bc19b97b053   Q2 by walking, reward, save
                  Bluffs, t≈40–171 s; that whiteout and heal were not captured.
                  The loss loop then lost again and that second whiteout and the
                  nurse were captured. The whiteout frame 0028 is caught
-                 mid-print; run34 has the full text.)
+                 mid-print, as are run34/0021 and run41/0027; see run47.)
    run24/25      4b4eb93da3f5 -> 4ca9b7f40dc6   Q3 fresh Continue, Q5 field checks
 ```
 
@@ -64,7 +66,7 @@ run33    (COPY of 29ea0df40d71, before Badge01)                          Bluffs 
 run34    (COPY of 2bc19b97b053, the pre-Q3 save)                         Q3 repeated with in-battle defeat frames (not saved)
 ```
 
-Reruns after the evidence review (driver `7824fe12`, clean; ROM = engine build):
+Reruns after the evidence review (driver `7824fe12` for run35–42, `4c296f3e` for run43/44; clean; ROM = engine build):
 
 ```
 run35 (COPY of 0a7429783b43, after Badge01) -> eeaef2093efa   Q1 ordinary play again: Hiker and researcher
@@ -74,9 +76,11 @@ run37 (Q1 full-pocket copy)  1831b3f69997 (unchanged)         fresh Continue, Ba
 run38 (NATURAL chain)        4ca9b7f40dc6 (unchanged)         fresh Continue: Bag Great Ball x2, Oran Berry x3, party
 run39 (COPY of 29ea0df40d71, before Badge01) unchanged        gate message on screen, blocked, Bag opens/closes
 run40 (Q4 dev copy)          1c05fc46dc1d (unchanged)         fresh Continue, party screen with one Wobbuffet
-run41 (COPY of 2bc19b97b053, pre-Q3) -> 9b59fcbe5c90          Q3 loss with defeat frames, whiteout, nurse, party, save
+run41 (COPY of 2bc19b97b053, pre-Q3) -> 9b59fcbe5c90          Q3 loss with defeat frames, whiteout, nurse, party screen (bars only; text not yet drawn), save.
+                                                              Its first battle ended by fleeing: the driver's B answered NO to
+                                                              "Use next Pokémon?" (fixed in 230ceffa); the second battle was the loss.
 run42                        9b59fcbe5c90 (unchanged)         fresh Continue in the clinic, party screen
-run43/44 (same copy)                                          re-save in the clinic with the save box and
+run43 (same copy) 9b59fcbe5c90 -> f3d57867771e; run44 unchanged.  Re-save in the clinic with the save box and
                                                               "saved" text on record, then Continue
 ```
 
@@ -107,6 +111,41 @@ rerun from the same untouched copy after its fix (`93a47f98`, `e2b527d7`).
 - Each debug use is logged as `debug-menu` with `dev_only: true` in
   `events.jsonl` and has its screenshots; evidence.py marks those cases
   `DEV_FIXTURE`.
+
+Second-review reruns (clean drivers `a28d7601`–`a9676159`; ROM = engine build):
+
+```
+run45-old9/14, run50-old6/7/8 (COPIES, observe only)   Q1 started flag: false at run6/7/8 saves, true from run9
+run47 (COPY of 2bc19b97b053) -> 84bc854797aa           Q3 again with A-only battle text: one battle, genuine
+                                                       loss, full whiteout message (0025), nurse, save
+run48 (COPY of 29ea0df40d71, before Badge01)           Gym 1 replay: LOST to Elio -> whiteout -> clinic
+                                                       (genuine loss, recorded; not saved)
+run51 (COPY of save-after-run6, fddf1b772ba8)          Q1 opening request on screen: "Could you check the
+                                                       bluffs for me?" YES -> NOTES_STARTED (not saved)
+run52 try1/try2 (fresh COPIES of 29ea0df40d71)         Gym 1: lost twice more (genuine, recorded)
+run52 try3     29ea0df40d71 -> 95164bf07835            Gym 1 WON on the current-quest ROM; trainer card badge 1,
+                                                       save box/save text; Elio's defeat-text frames caught the
+                                                       box between messages (empty)
+run53          95164bf07835 (unchanged)                fresh Continue: trainer card badge 1
+```
+
+## Known gaps (from the separate reviews)
+
+- **Q1 start:** the natural chain answered YES before run9 (outside this
+  set); run51 shows the opening request and YES on a copy of the run6 save.
+- **Gym 1 text:** no frame shows Elio's defeat text or the badge message
+  (empty boxes between messages, run52 try3). The win is the battle plus the
+  badge flag immediately after, and the trainer card in the same run.
+- **Q3 status:** no party member had a status condition at the loss, so status
+  clearing is not exercised on screen; it is covered natively
+  (`home clinic and rival healing restores HP status and PP`, `native whiteout
+  heals *`). PP restoration is a memory read.
+- **Corrupt fallback:** the discriminator is state, not picture: the newest
+  slot (run25) was saved at Alderfield (17,14); the run loaded the clinic
+  (7,4), the older run23 slot. The frames look like any clinic Continue.
+- State-milestone frames can be byte-identical when nothing on screen changed
+  (for example the Q5 "*-closed" field frames); the claim then rests on the
+  state file, and the packages also name the frames that show the facts.
 
 ## Which screenshots prove what
 

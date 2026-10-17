@@ -1,0 +1,96 @@
+{"t": 1792260139.53, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/gym.gba", "phases": ["piplup_lead", "heal", "gym1", "trainer_card", "save"], "new_game": false}
+{"t": 1792260139.54, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792260139.56, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792260142.64, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792260142.67, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792260143.82, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792260143.87, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792260144.42, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792260144.46, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792260145.0, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792260145.04, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792260146.09, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792260146.11, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792260149.7, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792260149.73, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792260150.41, "event": "field", "map": "MAP_ORCHARDLANE", "pos": [28, 8], "party": [{"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 31, 10, 25], "ppBonuses": 0, "level": 15, "hp": 22, "maxhp": 39}, {"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792260156.35, "event": "capture", "file": "0008-party-switch-1-0.png"}
+{"t": 1792260162.0, "event": "capture", "file": "0009-party-swapped-1-0.png"}
+{"t": 1792260162.0, "event": "observe", "label": "party-swapped-1-0", "problems": []}
+{"t": 1792260167.29, "event": "map", "map": "MAP_ALDERFIELD", "pos": [19, 31]}
+{"t": 1792260175.23, "event": "map", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 8]}
+{"t": 1792260187.8, "event": "healed", "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792260191.76, "event": "map", "map": "MAP_ALDERFIELD", "pos": [17, 13]}
+{"t": 1792260198.07, "event": "map", "map": "MAP_ALDERFIELDGYM", "pos": [4, 15]}
+{"t": 1792260198.28, "event": "capture", "file": "0010-gym1-entered.png"}
+{"t": 1792260198.28, "event": "observe", "label": "gym1-entered", "problems": []}
+{"t": 1792260201.51, "event": "capture", "file": "0011-talk-alderfieldgym-2-12-01.png"}
+{"t": 1792260202.9, "event": "capture", "file": "0012-talk-alderfieldgym-2-12-02.png"}
+{"t": 1792260206.23, "event": "capture", "file": "0013-talk-alderfieldgym-6-12-01.png"}
+{"t": 1792260207.6, "event": "capture", "file": "0014-talk-alderfieldgym-6-12-02.png"}
+{"t": 1792260208.18, "event": "capture", "file": "0015-gym1-sluices.png"}
+{"t": 1792260208.18, "event": "observe", "label": "gym1-sluices", "problems": []}
+{"t": 1792260212.5, "event": "capture", "file": "0016-talk-alderfieldgym-4-4-01.png"}
+{"t": 1792260213.86, "event": "capture", "file": "0017-talk-alderfieldgym-4-4-02.png"}
+{"t": 1792260215.22, "event": "capture", "file": "0018-talk-alderfieldgym-4-4-03.png"}
+{"t": 1792260215.71, "event": "battle-start", "flags": "0xc", "foe": [[659, 12]], "me": [[393, 15, 44]], "moves": [[64, 35], [45, 40], [55, 25], [204, 20]]}
+{"t": 1792260222.31, "event": "capture", "file": "0019-elio-action.png"}
+{"t": 1792260222.9, "event": "turn", "label": "elio", "me": [393, 15, 44, 44], "foe": [659, 12, 32, 32], "move": 204, "pp": 20}
+{"t": 1792260235.02, "event": "capture", "file": "0020-elio-action.png"}
+{"t": 1792260235.62, "event": "turn", "label": "elio", "me": [393, 15, 40, 44], "foe": [659, 12, 32, 32], "move": 55, "pp": 25}
+{"t": 1792260241.77, "event": "capture", "file": "0021-elio-action.png"}
+{"t": 1792260242.37, "event": "turn", "label": "elio", "me": [393, 15, 40, 44], "foe": [659, 12, 17, 32], "move": 55, "pp": 24}
+{"t": 1792260253.3, "event": "turn", "label": "elio", "me": [393, 15, 36, 44], "foe": [659, 12, 2, 32], "move": 55, "pp": 23}
+{"t": 1792260263.26, "event": "capture", "file": "0022-elio-foe-down.png"}
+{"t": 1792260264.29, "event": "capture", "file": "0023-elio-foe-down.png"}
+{"t": 1792260265.34, "event": "capture", "file": "0024-elio-foe-down.png"}
+{"t": 1792260266.38, "event": "capture", "file": "0025-elio-foe-down.png"}
+{"t": 1792260267.42, "event": "capture", "file": "0026-elio-foe-down.png"}
+{"t": 1792260268.44, "event": "capture", "file": "0027-elio-foe-down.png"}
+{"t": 1792260271.89, "event": "switch-out", "label": "elio", "me": [393, 32], "foe": [506, 15, 40]}
+{"t": 1792260274.46, "event": "replacement", "slot": 2, "mon": {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}}
+{"t": 1792260287.75, "event": "replacement", "slot": 1, "mon": {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}}
+{"t": 1792260292.75, "event": "turn", "label": "elio", "me": [661, 15, 39, 39], "foe": [506, 15, 40, 40], "move": 98, "pp": 30}
+{"t": 1792260301.53, "event": "turn", "label": "elio", "me": [661, 15, 39, 39], "foe": [506, 15, 27, 40], "move": 98, "pp": 29}
+{"t": 1792260313.99, "event": "turn", "label": "elio", "me": [661, 15, 5, 39], "foe": [506, 15, 25, 40], "move": 98, "pp": 28}
+{"t": 1792260325.11, "event": "replacement", "slot": 2, "mon": {"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 22, 19], "ppBonuses": 0, "level": 15, "hp": 32, "maxhp": 44}}
+{"t": 1792260330.68, "event": "turn", "label": "elio", "me": [393, 15, 32, 44], "foe": [506, 15, 13, 40], "move": 204, "pp": 19}
+{"t": 1792260340.81, "event": "turn", "label": "elio", "me": [393, 15, 32, 44], "foe": [506, 15, 13, 40], "move": 55, "pp": 22}
+{"t": 1792260348.97, "event": "capture", "file": "0028-elio-foe-down.png"}
+{"t": 1792260350.0, "event": "capture", "file": "0029-elio-foe-down.png"}
+{"t": 1792260351.05, "event": "capture", "file": "0030-elio-foe-down.png"}
+{"t": 1792260352.09, "event": "capture", "file": "0031-elio-foe-down.png"}
+{"t": 1792260353.13, "event": "capture", "file": "0032-elio-foe-down.png"}
+{"t": 1792260356.74, "event": "turn", "label": "elio", "me": [393, 15, 32, 44], "foe": [1298, 13, 38, 38], "move": 204, "pp": 18}
+{"t": 1792260369.07, "event": "turn", "label": "elio", "me": [393, 15, 27, 44], "foe": [1298, 13, 38, 38], "move": 55, "pp": 21}
+{"t": 1792260376.3, "event": "turn", "label": "elio", "me": [393, 15, 21, 44], "foe": [1298, 13, 25, 38], "move": 55, "pp": 20}
+{"t": 1792260383.71, "event": "turn", "label": "elio", "me": [393, 15, 9, 44], "foe": [1298, 13, 4, 38], "move": 55, "pp": 19}
+{"t": 1792260391.12, "event": "replacement", "slot": 3, "mon": {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}}
+{"t": 1792260397.17, "event": "turn", "label": "elio", "me": [187, 5, 19, 19], "foe": [1298, 13, 4, 38], "move": 33, "pp": 35}
+{"t": 1792260406.29, "event": "replacement", "slot": 4, "mon": {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}}
+{"t": 1792260411.36, "event": "turn", "label": "elio", "me": [659, 5, 18, 18], "foe": [1298, 13, 4, 38], "move": 33, "pp": 35}
+{"t": 1792260420.94, "event": "replacement", "slot": 5, "mon": {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}}
+{"t": 1792260425.97, "event": "turn", "label": "elio", "me": [1298, 5, 20, 20], "foe": [1298, 13, 4, 38], "move": 33, "pp": 35}
+{"t": 1792260429.82, "event": "capture", "file": "0033-elio-defeat.png"}
+{"t": 1792260430.87, "event": "capture", "file": "0034-elio-defeat.png"}
+{"t": 1792260431.91, "event": "capture", "file": "0035-elio-defeat.png"}
+{"t": 1792260432.97, "event": "capture", "file": "0036-elio-defeat.png"}
+{"t": 1792260434.02, "event": "capture", "file": "0037-elio-defeat.png"}
+{"t": 1792260435.05, "event": "capture", "file": "0038-elio-defeat.png"}
+{"t": 1792260436.07, "event": "capture", "file": "0039-elio-defeat.png"}
+{"t": 1792260438.28, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792260439.27, "event": "capture", "file": "0040-gym1-after-01.png"}
+{"t": 1792260440.67, "event": "capture", "file": "0041-gym1-after-02.png"}
+{"t": 1792260442.08, "event": "capture", "file": "0042-gym1-after-03.png"}
+{"t": 1792260443.49, "event": "capture", "file": "0043-gym1-after-04.png"}
+{"t": 1792260444.86, "event": "capture", "file": "0044-gym1-after-05.png"}
+{"t": 1792260446.29, "event": "capture", "file": "0045-gym1-after-06.png"}
+{"t": 1792260447.7, "event": "capture", "file": "0046-gym1-after-07.png"}
+{"t": 1792260449.09, "event": "capture", "file": "0047-gym1-after-08.png"}
+{"t": 1792260450.46, "event": "capture", "file": "0048-gym1-after-09.png"}
+{"t": 1792260451.84, "event": "capture", "file": "0049-gym1-after-10.png"}
+{"t": 1792260453.23, "event": "capture", "file": "0050-gym1-after-11.png"}
+{"t": 1792260454.6, "event": "capture", "file": "0051-gym1-after-12.png"}
+{"t": 1792260456.55, "event": "gym1-result", "won": false, "map": "MAP_ALDERFIELDCLINIC", "lead": {"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}}
+{"t": 1792260456.73, "event": "capture", "file": "0052-gym1-result.png"}
+{"t": 1792260456.73, "event": "observe", "label": "gym1-result", "problems": ["FLAG_BADGE01_GET: expected True, observed False"]}
