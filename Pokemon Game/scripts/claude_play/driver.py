@@ -270,7 +270,7 @@ class Driver:
         idle = 0
         for _ in range(100):
             first = self.state()
-            if first.in_battle and first.mons:
+            if first.in_battle and first.mons and first.mons[0]["level"] and first.mons[1]["level"]:
                 break
             time.sleep(0.1)
         self.log("battle-start", flags=hex(first.battle_flags or 0),

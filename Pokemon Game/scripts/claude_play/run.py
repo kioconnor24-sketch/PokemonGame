@@ -185,7 +185,29 @@ def make_train(level):
     return phase
 
 
-PHASES = {"train8": make_train(8), "train10": make_train(10), "train12": make_train(12),
+def make_trainer(name, map_id, tile, flag=None):
+    """Talk to a route trainer and fight the battle with ordinary inputs."""
+    def phase(d):
+        mon = lead(d)
+        if mon["hp"] * 100 < mon["maxhp"] * 90:
+            d.heal_at_clinic()
+        d.travel_to(map_id)
+        d.shot(f"{name}-before")
+        s = d.talk(map_id, tile)
+        if s.in_battle:
+            s = d.battle(label=name)
+            d.clear_text()
+        mid, pos = d.here()
+        d.log("trainer-done", trainer=name, map=mid, lead=lead(d),
+              whiteout=mid != map_id)
+        d.shot(f"{name}-after")
+    return phase
+
+
+PHASES = {"sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9)),
+          "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17)),
+          "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12)),
+          "train8": make_train(8), "train10": make_train(10), "train12": make_train(12),
           "train13": make_train(13), "train14": make_train(14), "train15": make_train(15),
           "heal": lambda d: d.heal_at_clinic(),
           "opening": phase_opening, "save": phase_save, "to_alderfield": phase_to_alderfield}
