@@ -63,7 +63,25 @@ jobs:
         working-directory: qa
         env:
           Q3X: ${{ github.workspace }}/support/Pokemon Game/scripts/quest_support/q3_post_battle_observer.py
-        run: bash --noprofile --norc -eo pipefail "$RUNNER_TEMP/q3-run.sh"
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/averon-playtest"
+          bash --noprofile --norc -eo pipefail "$RUNNER_TEMP/q3-run.sh" 2>&1 \
+            | tee "$RUNNER_TEMP/averon-playtest/q3-support-run.log"
+      - name: Surface the case lines as annotations (readable without the log)
+        if: always()
+        run: |
+          log="$RUNNER_TEMP/averon-playtest/q3-support-run.log"
+          test -s "$log" || { echo "::warning title=Q3 support::no run log"; exit 0; }
+          # One notice per key line, most important first (GitHub keeps at
+          # most 10 per step), trimmed; the full log is in the artifact.
+          for pattern in '^QA_Q3_INTERACTION_STATUS' '^Q3X_RC' 'Blocked:' '^Q3X_SAVED_SLOT' \
+                         '^Q3X_SAVE_SUCCESS' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH)' \
+                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^Q3X_RESPAWN' '^Q3X_DONE'; do
+            grep -aE "$pattern" "$log" | head -1 | cut -c1-240
+          done | while IFS= read -r line; do
+            echo "::notice title=Q3 support::${line}"
+          done
       - name: Attach only screenshots and logs (NO ROM or save)
         if: always()
         uses: actions/upload-artifact@v4
