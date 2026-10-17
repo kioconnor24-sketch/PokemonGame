@@ -85,17 +85,30 @@ fixed. Ordinary input only; read-only GDB.
    goes idle. Before trusting the menu globals it requires a visible Start
    window (0.90 bright when open, ≤ 0.23 in every other calibration frame).
 
-Defects 1–2 were fixed in `7770455e`, defect 3 in `a6c32659`. A run with
-`a6c32659` (nurse → clinic Save → relaunch → Continue) is still pending.
+Defects 1–2 were fixed in `7770455e`, defect 3 in `a6c32659`.
 
-**Reproduce:** build the ROM at the #71 head, then run the workflow step with
-`RUNNER_TEMP` set. After the Q3 block, call:
+**CI runs** (`.github/workflows/averon-quest-support-q3.yml`, pinned #71 `f34eab21`):
 
-```
-python3 -u "Pokemon Game/scripts/quest_support/q3_post_battle_observer.py" \
-  --controller-dir "Pokemon Game/scripts/qa" --fifo "$qa_fifo" \
-  --outdir "$RUNNER_TEMP/averon-playtest" --window "$win"
-```
+| Run | Observer | Result |
+|---|---|---|
+| [38993271535](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38993271535) | `a6c32659` | The manager opened the frames: the whiteout text (`q3-play-x-002`), the nurse's after-whiteout heal (`-006` to `-012`) and a clinic Start → SAVE were real. Both "continued" frames still showed the CONTINUE / NEW GAME menu, so Continue was **not** shown (defect 5) |
+| [38994567345](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/38994567345) | `a6c32659` | Annotations: whiteout text `x-001`/`-002`, nurse `x-003` to `-012`. **Flash after shutdown: slot 0, save counter 2, map (75,11) x7 y4**, a new save at the clinic nurse tile. Observer rc 1, "Save message never closed" (defect 4) |
+| next run, observer `96f49e7c` | — | Defects 4–5 fixed; Continue result reported as `Q3X_CONTINUE_RESULT` |
+
+4. The post-save check used the generic 0.30 field threshold, which the lit
+   clinic floor (0.33) exceeds. Fixed in `20f7a8ea`: the 0.60 clinic
+   calibration, and the success callback printed when it occurs.
+5. The relaunch's fixed key sequence stopped at the CONTINUE menu. Fixed in
+   `96f49e7c`: after the title, press A at most four times. After each press,
+   `frame_match.py` compares the frame with the last pre-save clinic field
+   frame, and the presses stop as soon as it matches (so A is never pressed
+   beside the nurse). The job fails unless both the observer and this check
+   pass.
+
+**Reproduce:** push to this PR (the workflow runs on changes to itself or to
+`scripts/quest_support/**`), or locally: build the ROM at the #71 head, then
+run `compose_q3_run.py --workflow <#71>/.github/workflows/averon-rendered-playtest.yml
+--out run.sh` and `Q3X=<observer path> bash run.sh` from the #71 checkout.
 
 ## 2. Remaining Q1–Q5 cases: exact obstacle
 
