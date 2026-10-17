@@ -2,7 +2,8 @@
 """Read-only provenance for a privately built Averon ROM.
 
 Records actual source and tool versions; it never builds, tests, distributes a
-ROM, or asserts gameplay/QA acceptance. A dirty engine is *not* reproducible.
+ROM, or asserts gameplay/QA acceptance. Dirty engine files OR modified/untracked source-generator scripts make Git HEAD
+insufficient to reproduce the source inputs.
 """
 from __future__ import annotations
 
@@ -54,8 +55,16 @@ def collect(root: Path, engine: Path, rom: Path | None = None) -> dict:
     if not (engine / "Makefile").is_file():
         raise ValueError("Engine Makefile missing; cannot identify actual build input")
     source_tree = run_output(["git", "rev-parse", f"HEAD:{rel_engine.as_posix()}"], root)
-    changes = run_output(["git", "status", "--porcelain", "--untracked-files=all",
-                          "--", rel_engine.as_posix()], root)
+    engine_changes = run_output(["git", "status", "--porcelain", "--untracked-files=all",
+                                 "--", rel_engine.as_posix()], root)
+    # Engine generator inputs are tracked outside engine/ in scripts/. A clean
+    # engine alone does not prove the source/toolchain manifest is complete.
+    scripts_dir = engine.parent / "scripts"
+    scripts_changes = ""
+    if scripts_dir.is_dir():
+        rel_scripts = scripts_dir.relative_to(root)
+        scripts_changes = run_output(["git", "status", "--porcelain", "--untracked-files=all",
+                                      "--", rel_scripts.as_posix()], root)
     versions = {
         "arm_gcc": command_info("arm-none-eabi-gcc"),
         "arm_ld": command_info("arm-none-eabi-ld"),
@@ -74,8 +83,10 @@ def collect(root: Path, engine: Path, rom: Path | None = None) -> dict:
             raise ValueError("ROM must be nonempty and <= 32 MiB")
         artifact = {"filename": rom.name, "bytes": size, "sha256": sha256_file(rom)}
     problems = []
-    if changes:
+    if engine_changes:
         problems.append("Engine has uncommitted/untracked source; source cannot be reproduced from commit alone")
+    if scripts_changes:
+        problems.append("Source generator/scripts have uncommitted/untracked inputs; Git HEAD alone is insufficient")
     for required in ("arm_gcc", "make", "git"):
         if not versions[required]["available"] or not versions[required]["version"]:
             problems.append(f"Required tool version unavailable: {required}")
@@ -86,8 +97,11 @@ def collect(root: Path, engine: Path, rom: Path | None = None) -> dict:
         "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
         "source_sha": sha,
         "engine_tree_sha": source_tree,
-        "engine_clean": not bool(changes),
-        "engine_status_lines": len(changes.splitlines()) if changes else 0,
+        "engine_clean": not bool(engine_changes),
+        "engine_status_lines": len(engine_changes.splitlines()) if engine_changes else 0,
+        "scripts_clean": not bool(scripts_changes),
+        "scripts_status_lines": len(scripts_changes.splitlines()) if scripts_changes else 0,
+        "source_inputs_clean": not (bool(engine_changes) or bool(scripts_changes)),
         "tools": versions,
         "rom": artifact,
         "status": "COMPLETE_BUILD_PROVENANCE_NOT_GAMEPLAY_ACCEPTANCE" if not problems
