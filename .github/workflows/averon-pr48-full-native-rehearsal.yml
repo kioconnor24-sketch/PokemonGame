@@ -1,0 +1,131 @@
+name: Averon PR48 full unfiltered native proof (independent)
+
+# Disposable manager-owned proof, independent of Opus's active engine branch.
+# This runs the REAL full native suite and STRICT unchanged failure baseline.
+# No source changes, no ROM/save/ELF artifacts or gameplay acceptance.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/averon-pr48-full-native-rehearsal.yml"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: averon-pr48-strict-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  full-pr48-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Pin exact same-repo PR48 head and isolate source
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/pr48-strict-evidence"
+          gh api "repos/$TARGET_REPO/pulls/48" > "$RUNNER_TEMP/pr48-strict-evidence/pr48-initial.json"
+          jq -e --arg repo "$TARGET_REPO" '
+            .state == "open" and .head.repo.full_name == $repo
+            and .base.repo.full_name == $repo' "$RUNNER_TEMP/pr48-strict-evidence/pr48-initial.json" > /dev/null
+          pinned=$(jq -r '.head.sha' "$RUNNER_TEMP/pr48-strict-evidence/pr48-initial.json")
+          if ! [[ "$pinned" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid PR48 exact head"; exit 1
+          fi
+          git fetch --no-tags origin "+refs/pull/48/head:refs/remotes/origin/pr48-native"
+          actual=$(git rev-parse refs/remotes/origin/pr48-native)
+          test "$actual" = "$pinned" || { echo "PR48 changed during fetch: stop"; exit 1; }
+          git worktree add --detach "$RUNNER_TEMP/pr48-strict-worktree" "$pinned"
+          printf 'PR=48\nPR48_HEAD=%s\nSOURCE_REPO=%s\n' "$pinned" "$TARGET_REPO" \
+            | tee "$RUNNER_TEMP/pr48-strict-evidence/source-pins.txt"
+          git -C "$RUNNER_TEMP/pr48-strict-worktree" status --porcelain
+      - name: Install real ARM and headless GBA native test toolchain
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi git libpng-dev python3
+      - name: Compile genuine PR48 normal Game Boy Advance build
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          cd "$RUNNER_TEMP/pr48-strict-worktree/Pokemon Game/engine"
+          make -j4 -O all > "$RUNNER_TEMP/pr48-strict-evidence/normal-build.log" 2>&1 || {
+            tail -120 "$RUNNER_TEMP/pr48-strict-evidence/normal-build.log"; exit 1;
+          }
+          test -s pokeemerald.gba
+          test -s pokeemerald.elf
+          sha256sum pokeemerald.gba > "$RUNNER_TEMP/pr48-strict-evidence/rom-sha256.txt"
+          python3 ../scripts/report-averon-save-headroom.py --elf pokeemerald.elf \
+            --json "$RUNNER_TEMP/pr48-strict-evidence/save-headroom.json"
+      - name: Run the FULL unfiltered native suite and strict unchanged baseline
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          cd "$RUNNER_TEMP/pr48-strict-worktree/Pokemon Game/engine"
+          test -x tools/mgba/mgba-rom-test
+          echo "Running complete make check WITHOUT TESTS= filter; this takes substantial time"
+          set +e
+          make -j4 -O check > "$RUNNER_TEMP/pr48-strict-evidence/full-native.log" 2>&1
+          make_status=$?
+          set -e
+          echo "FULL_NATIVE_MAKE_EXIT=$make_status" | tee -a "$RUNNER_TEMP/pr48-strict-evidence/source-pins.txt"
+          tail -35 "$RUNNER_TEMP/pr48-strict-evidence/full-native.log"
+          python3 - <<'PY'
+          from pathlib import Path
+          import os,re
+          log = (Path(os.environ['RUNNER_TEMP'])/'pr48-strict-evidence/full-native.log').read_text(errors='replace')
+          match = re.findall(r'(?m)^- Tests TOTAL:\s*(\d+)', log)
+          if len(match)!=1 or int(match[0]) < 6000:
+              raise SystemExit(f'FAIL: full test summary missing, duplicate or partial: {match}')
+          print('FULL NATIVE RESULTS COUNT:', match[0])
+          PY
+          python3 ../scripts/check-averon-native-baseline.py \
+            "$RUNNER_TEMP/pr48-strict-evidence/full-native.log" \
+            > "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log" 2>&1 || {
+              cat "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log"; exit 1;
+            }
+          cat "$RUNNER_TEMP/pr48-strict-evidence/strict-comparison.log"
+          if [ "$make_status" -ne 0 ]; then
+            echo "FAIL: actual make check exited $make_status even though comparator passed"
+            exit "$make_status"
+          fi
+      - name: Reject result if PR48 changed since pinned check
+        if: success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -Eeuo pipefail
+          expected=$(sed -n 's/^PR48_HEAD=//p' "$RUNNER_TEMP/pr48-strict-evidence/source-pins.txt")
+          now=$(gh api "repos/$TARGET_REPO/pulls/48" --jq '.head.sha')
+          test "$expected" = "$now" || {
+            echo "FAIL: PR48 head moved; result remains pinned to earlier SHA $expected"; exit 1;
+          }
+          echo "PASS: exact current PR48 head $expected, real full native and strict baseline"
+      - name: Upload TEXT evidence only; never distribute ROM, save, or ELF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr48-full-native-strict-text-evidence
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/pr48-strict-evidence/source-pins.txt
+            ${{ runner.temp }}/pr48-strict-evidence/rom-sha256.txt
+            ${{ runner.temp }}/pr48-strict-evidence/save-headroom.json
+            ${{ runner.temp }}/pr48-strict-evidence/normal-build.log
+            ${{ runner.temp }}/pr48-strict-evidence/full-native.log
+            ${{ runner.temp }}/pr48-strict-evidence/strict-comparison.log
