@@ -320,6 +320,30 @@ AI_DOUBLE_BATTLE_TEST("Averon held items: Harvest remembers the donor of a consu
     }
 }
 
+WILD_BATTLE_TEST("Averon held items: capture returns both original items after Trick")
+{
+    enum Item wildItem = ITEM_HYPER_POTION;
+    PARAMETRIZE { wildItem = ITEM_HYPER_POTION; }
+    PARAMETRIZE { wildItem = ITEM_ORAN_BERRY; }
+    GIVEN {
+        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SUPER_POTION); Speed(200); Moves(MOVE_TRICK); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(wildItem); Speed(1); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TRICK); }
+        TURN { USE_ITEM(player, ITEM_MASTER_BALL); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK, player);
+    } THEN {
+        EXPECT_EQ(gBattleOutcome, B_OUTCOME_CAUGHT);
+        EXPECT_EQ(CalculatePlayerPartyCount(), 2);
+        EXPECT_EQ(PartyItem(0), ITEM_SUPER_POTION);
+        EXPECT_EQ(PartyItem(1), wildItem);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SUPER_POTION), 0);
+        EXPECT_EQ(CountTotalItemQuantityInBag(wildItem), 0);
+    }
+}
+
 WILD_BATTLE_TEST("Averon held items: capture cannot duplicate a player's same-ID donated item")
 {
     enum Item item = ITEM_LEFTOVERS;

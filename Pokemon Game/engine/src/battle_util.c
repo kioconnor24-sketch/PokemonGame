@@ -9452,13 +9452,18 @@ void RestoreCaughtWildMonHeldItem(struct Pokemon *mon, enum BattlerId battler)
          && (ownerState->stolen || ownerState->restoreAfterBattle))
         {
             struct Pokemon *ownerMon = &gParties[owner][origin % PARTY_SIZE];
-            if (GetMonData(ownerMon, MON_DATA_HELD_ITEM) == ITEM_NONE)
+            enum Item displaced = GetMonData(ownerMon, MON_DATA_HELD_ITEM);
+            u32 caughtOrigin = GetBattlerTrainer(battler) * PARTY_SIZE + gBattlerPartyIndexes[battler];
+            // Trick can leave the donor holding this caught Pokemon's own
+            // original item. Exchange those real copies, but never overwrite
+            // unrelated loot, even when its item ID happens to match.
+            if (displaced == ITEM_NONE || ownerState->heldOrigin == caughtOrigin)
             {
                 SetMonData(ownerMon, MON_DATA_HELD_ITEM, &item);
                 ownerState->heldOrigin = origin;
-                item = ITEM_NONE;
+                item = displaced;
                 SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-                lostItem->heldOrigin = HELD_ITEM_ORIGIN_NONE;
+                lostItem->heldOrigin = item == ITEM_NONE ? HELD_ITEM_ORIGIN_NONE : caughtOrigin;
             }
         }
     }
