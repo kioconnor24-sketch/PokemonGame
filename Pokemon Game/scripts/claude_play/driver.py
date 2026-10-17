@@ -61,8 +61,18 @@ class Driver:
             self.shot(label)
         raise Stuck(f"advance_until: no progress after {limit} presses")
 
-    def clear_text(self, limit=200):
-        """Press A through dialogue until the player can move again (or a battle starts)."""
+    def clear_text(self, limit=200, capture=None, frames=8):
+        """Press A through dialogue until the player can move again (or a battle
+        starts). With `capture`, screenshot up to `frames` messages, each after
+        it has had time to print, so the dialogue itself is on record."""
+        if capture:
+            for n in range(frames):
+                s = self.state()
+                if self.field_ready(s) or s.in_battle:
+                    return s
+                time.sleep(0.9)
+                self.shot(f"{capture}-{n + 1:02d}")
+                self.e.tap("A", after=0.25)
         return self.advance_until(lambda s: self.field_ready(s), limit=limit, label="stuck-text")
 
     # -- walking --------------------------------------------------------------
@@ -254,7 +264,8 @@ class Driver:
             self.e.tap("A", after=0.5)
             s = self.state()
             if s.locked or s.in_battle or s.cb2 != "CB2_Overworld":
-                return self.clear_text() if clear else s
+                label = f"talk-{map_id.removeprefix('MAP_').lower()}-{npc[0]}-{npc[1]}"
+                return self.clear_text(capture=label) if clear else s
             self.log("talk-retry", map=map_id, npc=npc, attempt=attempt)
         raise Stuck(f"talking to {npc} on {map_id} started no script")
 

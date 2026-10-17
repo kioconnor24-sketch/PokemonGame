@@ -99,7 +99,9 @@ def save_game(d, label):
         d.e.tap("DOWN", after=0.25)
     else:
         raise drv.Stuck(f"no SAVE entry in start menu {actions}")
-    d.e.tap("A", after=1.0)
+    # The save info box (map, name, BADGES, time) draws over several frames;
+    # run17's capture 1.0 s after A caught it blank, so wait longer.
+    d.e.tap("A", after=2.5)
     d.shot(f"save-confirm-{label}")
     for _ in range(40):
         cb = g.func_name(struct.unpack("<I", gd.read(sym["sSaveDialogCallback"], 4))[0])
@@ -128,6 +130,42 @@ def open_start_menu_action(d, action_id):
             return
         d.e.tap("DOWN", after=0.25)
     raise drv.Stuck(f"start menu action {action_id} not found in {actions}")
+
+
+def back_to_field(d, limit=12):
+    for _ in range(limit):
+        if d.field_ready(d.state()):
+            return
+        d.e.tap("B", after=0.6)
+    raise drv.Stuck("menus did not close")
+
+
+def phase_show_bag(d):
+    """Start -> BAG, then a screenshot of every pocket (RIGHT through them).
+    The pocket the Bag opens on is whatever was last used, so all are shown."""
+    open_start_menu_action(d, 2)  # MENU_ACTION_BAG
+    time.sleep(1.0)
+    d.shot("bag-pocket-0")
+    for i in range(1, 6):
+        d.e.tap("RIGHT", after=0.9)
+        d.shot(f"bag-pocket-{i}")
+    back_to_field(d)
+    observe(d, "bag-shown")
+
+
+def phase_trainer_card(d):
+    """Start -> player (trainer card): shows the badges actually earned."""
+    open_start_menu_action(d, 4)  # MENU_ACTION_PLAYER
+    time.sleep(1.5)
+    d.shot("trainer-card")
+    back_to_field(d)
+
+
+def phase_q1_continued(d):
+    """After a fresh emulator process and CONTINUE: Q1 state survived the save."""
+    great = d.g.c["ITEM_GREAT_BALL"]
+    observe(d, "q1-continued", {"FLAG_BADGE01_GET": True, "FLAG_AVERON_NOTES_REWARDED": True,
+                                "greatBalls==2": lambda o: count_item(o["pokeBalls"], great) == 2})
 
 
 def party_swap(d, a, b):
@@ -469,9 +507,26 @@ def phase_q2_start(d):
 
 
 def phase_q2_observer(d):
+    """The Coastal Meadow boy only hints (QUEST #14): nothing is found yet."""
     d.travel_to("MAP_COASTALMEADOW")
     d.talk("MAP_COASTALMEADOW", (10, 22))
-    observe(d, "q2-observer", {"FLAG_AVERON_SKETCH_FOUND": True, "FLAG_AVERON_SKETCH_REWARDED": False})
+    observe(d, "q2-observer", {"FLAG_AVERON_SKETCH_FOUND": False, "FLAG_AVERON_SKETCH_REWARDED": False})
+
+
+def phase_q2_tree(d):
+    """The tree sign at (12,27), looked at from its west side, records the
+    sketch; looking again changes nothing."""
+    d.travel_to("MAP_COASTALMEADOW")
+    d.talk("MAP_COASTALMEADOW", (12, 27))
+    observe(d, "q2-tree", {"FLAG_AVERON_SKETCH_FOUND": True, "FLAG_AVERON_SKETCH_REWARDED": False})
+    d.talk("MAP_COASTALMEADOW", (12, 27))
+    observe(d, "q2-tree-repeat", {"FLAG_AVERON_SKETCH_FOUND": True, "FLAG_AVERON_SKETCH_REWARDED": False})
+
+
+def phase_q2_continued(d):
+    """After a fresh emulator process and CONTINUE: Q2 state survived the save."""
+    observe(d, "q2-continued", {"FLAG_AVERON_SKETCH_REWARDED": True,
+                                "oranBerries==3": lambda o: count_item(o["berries"], d.g.c["ITEM_ORAN_BERRY"]) == 3})
 
 
 def phase_q2_reward(d):
@@ -570,9 +625,11 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "lead_train10": make_train_slot(10), "lead_train13": make_train_slot(13),
           "lead_train15": make_train_slot(15),
           "buy_balls": phase_buy_balls, "catch2": make_catch(2), "catch6": make_catch(6),
-          "q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_reward": phase_q2_reward,
+          "q2_start": phase_q2_start, "q2_observer": phase_q2_observer, "q2_tree": phase_q2_tree,
+          "q2_continued": phase_q2_continued, "q2_reward": phase_q2_reward,
           "gym1": phase_gym1, "q1_start": phase_q1_start, "q1_hiker": phase_q1_hiker,
-          "q1_reward": phase_q1_reward,
+          "q1_reward": phase_q1_reward, "q1_continued": phase_q1_continued,
+          "show_bag": phase_show_bag, "trainer_card": phase_trainer_card,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),
