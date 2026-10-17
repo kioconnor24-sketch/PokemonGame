@@ -1,35 +1,23 @@
-# Pokémon Averon — dependency roadmap (engineering-first)
+# Pokémon Averon — high-level roadmap (owner-approved transition)
 
-**Status:** stable navigation for *dependencies and gates*, not a live issue tracker or permission to begin all stages. Live work and source SHAs are in [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls), claims in [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [active assignments #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24), and [QA #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23). See [TASKS.md](TASKS.md) for the current queue.
+For **live status and scope**, read [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md) first; for actual assignments read [TASKS.md](TASKS.md) and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). Older pre-Sinnoh dependency/PR schedules are retained in dated runbooks for history.
 
-## Stage gates (review current GitHub before claiming a stage)
+| Stage | Status | Evidence / next gate |
+| --- | --- | --- |
+| **M1: map-independent pre-Sinnoh backend** | **OWNER-ACCEPTED 2026-10-17** | [Claude consolidated signoff](M1_ACCEPTANCE_REPORT_20261017.md), [Codex native closeout](CODEX_M1_NATIVE_CLOSEOUT_20261017.md); no known M1-blocking engineering defect. Human audio listen explicitly deferred, Gym 1 evidence gap accepted. |
+| **M2: next-phase design contract and technical infrastructure** | **AUTHORIZED TO BEGIN** | [Technical readiness plan](SINNOH_TECHNICAL_READINESS_20261017.md); owner decisions on geography, map IDs/sections, progression, asset resources/rights before those specific details are implemented. |
+| **M2: first approved playable region slices** | **APPROVED IN PRINCIPLE, NOT YET SPECIFIED** | Each concrete map/story/roster/encounter/saved-ID design must receive owner approval, satisfy guarded PR workflow, linked budgets and graphical QA. |
+| **Expanded Averon adventure and full Sinnoh second region** | **FUTURE CONTENT BUILD** | Incremental geography, NPCs, gyms, legendary quests, dialogue and pacing; no current claim these areas are implemented or fit on ROM. |
+| **Release candidate / Delta iOS compatibility** | **NOT YET VERIFIED** | Real owner device testing, finished story/world, audio listened to and documented, legal distribution and all relevant save/load/move/graphics tests. |
 
-| Stage | Owner / entry | Required outcome | Current gate at writing (2026-10-15) |
-| --- | --- | --- | --- |
-| Integrated opening, first Gym and field licenses | Previously merged to `main` | Preserve working baseline, correct persistent flags and menus | Source integrated, but specific natural emulator interactions may still be unverified |
-| QUEST | Codex [PR #14](https://github.com/kioconnor24-sketch/PokemonGame/pull/14) + independent QA | Reliable event prerequisites, full Bag/party retry, save/load, graphical event acceptance | Draft; CI native 49/49 verified, Q1–Q5 interactive acceptance outstanding |
-| SCRIPTED-BATTLE | Claude [PR #25](https://github.com/kioconnor24-sketch/PokemonGame/pull/25) | Reusable forced loss, chain damage, ambush semantics, safe recover/flag cleanup | Draft primitives, integration/shared flag/window pending |
-| TWO-REGION mechanics | Codex, experimental `codex/two-region-groundwork` | Region identity, 8+8 badges, Fly/heal/whiteout and persistence with current engine | Symbolic/new-file-only badge/region groundwork; no production map work authorized |
-| LEGEND and verified mechanics gaps | Next independent claim, usually Claude when free | Generic encounter state/eligibility/save robustness and targeted battle/evolution fixes | Future file-disjoint code; no canon species/legend sites |
-| Shared-feature integration | A coordinated owner when prerequisite PRs merge | Source ABI, flag safety, save migration, actual GBA builds and native tests | Do not assume two green independent PRs integrate without regression |
-| Playable new districts, Averon Gyms 2–8, League | **Owner approval required** | Approved geography, NPCs, battles, routes, progression, QA | **FROZEN**: no new map files, routes, story scenes or encounter placements |
-| Full Sinnoh, major story, legendary quests, postgame | **Owner approval required** | Approved production designs and full playable tested journey | **FROZEN**: backend contracts may be developed without map/story data |
-| Patch/Delta release | Integrator and owner | Reproducible build, non-ROM distribution, complete gameplay/compatibility and actual Delta owner test | Future; cannot claim release-ready from compile/native checks |
+## Immutable gameplay/product design guardrails
+Averon is the first region, Sinnoh the second. Most adventure play stays traditional, bright, exploratory and not dialogue-heavy, with sparse conspiracy hints; user decisions govern unfinished story. Use original Gen V **held-item** EXP Share, forced Set battles, level 100 cap, Mega and following Pokémon; no Z-Moves, Dynamax or Terastallization. Final selection of specific region maps, story choices, Gym types/teams, legendary locations, permanent identifiers, levels and music/art remains with the owner.
 
-## Technical work allowed during the map/story freeze
+## Integration sequence (not a blanket development gate)
+1. Approve actual content/resource and section/met-location/saved-state policy before assigning permanent content IDs.
+2. Establish link-time and runtime budget observations; no assumption full Sinnoh fits in ~6.39 MiB RELEASE remainder.
+3. Apply small reviewed map/section/region/Fly/healer engine integrations; run targeted saves, normal/RELEASE build and unchanged-baseline comparisons as appropriate after source changes.
+4. Build one approved slice; perform real mGBA checks and Save→Continue, fix defects, repeat carefully. Scale only after visible, measured successful slices.
+5. Human audio review is **deferred** but cannot be bypassed for eventual release acceptance; owner Delta testing remains a separate milestone.
 
-Finish claimed PRs; develop approved generic engine interfaces using **synthetic in-memory identifiers and existing unmodified maps**; repair verified native gameplay/engine defects; test saves and regression coverage; classify build warnings; improve source/build reliability without modifying other agents' files. No map JSON/layouts, production routes, terrain, story/legendary placements, final trainer tables, art, or numerical level curve.
-
-## Dependencies and shared-source access
-
-- QUEST changes to event registers/flags must be integrated before Claude takes an explicit scripted-battle shared-file handoff.
-- Region/save/heal/badges and battle no-whiteout flag/registries are serialized via Issue #15, not edited concurrently.
-- QA graphical tests need actual frame/input/ROM provenance; a CI native test is not a rendered acceptance.
-- Never force the current work to wait just for a future owner map or story decision; work on other **unclaimed and truly disjoint** approved technical tasks if available.
-- No map generation, even temporary fixtures, without explicit owner authorization. Use symbolic numeric/map identifiers instead.
-
-The detailed **conditional** future candidates remain in [Issue #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26); their production-content rows are not approved work until owner releases the freeze.
-
-## Release evidence vocabulary
-
-`DEFINED` → `SOURCE` → `BUILD` → `NATIVE-TESTED` → `EMULATOR-TESTED` (specified interactions) → `DELTA-VERIFIED` (owner iOS) — these are *different proofs*, not automatic sequential guarantees. Report exact SHA and test counts; never infer a later state from an earlier one.
+No bypassing protected GitHub guards, deleting history, uploading private ROM/saves or silently treating preliminary proposals as approved canon.
