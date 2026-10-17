@@ -30,7 +30,7 @@ def _escape(value: object) -> str:
 
 
 def is_qa_accepted(task: dict, snapshot: dict, pr: dict) -> bool:
-    """Require human-authored QA evidence for the *exact* game source SHA."""
+    """Require trusted source-pinned QA signoff; never infer actual gameplay."""
     required = set(task.get("qa_cases", []))
     if not required:
         return True
@@ -105,9 +105,9 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
     preface = (
         "> **STATIC REGISTRY — NOT LIVE FILE OWNERSHIP:** This automatically "
         "rewritten board and its inboxes use the current Milestone 1 task "
-        "registry. **Claude owns local real gameplay and QUEST/#25 integration; "
-        "Codex has the larger native/backend regression queue on restart. "
-        "Playtest remains independent. Task lanes are flexible, not "
+        "registry. **Claude now owns all M1 coding, QA decisions, PR review and eligible normal merging; "
+        "Codex, separate Playtest and Manager agents are paused. "
+        "Genuine QA requires actual emulator evidence and an explicit separate review pass. Task lanes are not "
         "permanent exclusive path claims.** Read [current exact claims]("
         + GITHUB + "/issues/15), then verify current PR diffs and checks "
         "before any work. Manual edits to Issue #31 will be overwritten by "
@@ -120,9 +120,9 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
         "> **PARALLEL WORK:** A dependency can gate **merging into main** without blocking "
         "development/testing in an independently claimed, file-disjoint feature branch. "
         "Only the overlapping protected-file merge needs an exclusive handoff. "
-        "Claude and Codex may develop and test independent M1 backend work in "
-        "different worktrees now, without waiting on the other agent. "
-        "After a checkpoint, either can take another lane with a concise "
+        "Claude alone may implement, test, review and merge eligible backend work in "
+        "separate worktrees without waiting on paused agents. "
+        "After a checkpoint, Claude can take the next available lane with a concise "
         "exact-path claim notice, never concurrent writes to the same path. "
         "A board label saying DEVELOPMENT OPEN does not constitute approval for new maps, "
         "story, trainer rosters, unclaimed creative features, save IDs or merge.\n\n"
@@ -189,16 +189,16 @@ def render(config: dict, snapshot: dict) -> dict[str, str]:
             + "## M1 task/dependency snapshot — exact file claims remain in Issue #15\n\n"
             + "\n".join(all_table)
             + "\n\n" + communication_section
-            + "**QA evidence rule:** only a collaborator/owner-authored marker "
+            + "**QA evidence rule:** Claude may now post a source-pinned trusted marker "
               "'QA_ACCEPTED PR=#N SHA=<40 hex> CASES=Q1,Q2,... STATUS=PASS' "
-              "in Issue #23 can meet a machine-readable acceptance gate, and that "
-              "does **not** authorize merge. The actual screenshots/tests must be reviewed.\n\n"
+              "in Issue #23 after actual original-input mGBA proof, exact SHA and a separate read-only evidence review; that "
+              "still requires passing source checks and normal review before merge. Never fabricate genuine screenshots/tests.\n\n"
             + "**Development vs. integration:** a status of DEVELOPMENT OPEN; MERGE GATED means "
               "an engineer with a verified current #15 claim can continue code and tests in their own "
-              "file-disjoint areas NOW. Only merging, shared-file collision and actual gameplay "
+              "file-disjoint areas NOW. Only actual merge conditions, shared-file collision and genuine gameplay "
               "QA must wait. Do not stop a session merely because another PR is open.\n\n"
             + "**Shared-file rule:** even after prerequisite PRs merge, an exclusive "
-              "Codex/Claude handoff documented in Issue #15 is required; this board "
+              "reviewed PR-specific protected-file handoff on Issue #15 is required; this board "
               "does not grant that handoff.\n\n"
             + f"**Canonical team hub:** [#15]({GITHUB}/issues/15) · "
               f"**QA evidence:** [#23]({GITHUB}/issues/23) · "
