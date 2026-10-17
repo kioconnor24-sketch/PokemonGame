@@ -382,6 +382,15 @@ class EvidenceTests(unittest.TestCase):
             self.assertTrue(all("DEV-ONLY" in o["statement"] for o in fix["state_observations"]))
             self.assertFalse(any("DEV-ONLY" in o["statement"] for o in plain["state_observations"]))
 
+    def test_external_fixture_marks_the_case(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            synthetic_run(root, "r1")
+            case = evidence.build({"C": [("r1", ["badge"])]}, root)["cases"][0]
+            evidence.mark_external_fixture(case, "damaged save copy")
+            self.assertEqual(case["scope"], "DEV_FIXTURE")
+            self.assertTrue(all("damaged save copy" in o["statement"] for o in case["state_observations"]))
+
     def test_rom_that_is_not_the_engine_build_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)

@@ -106,6 +106,14 @@ def build(cases, root):
     return dict(source_sha=source, rom_sha256=rom, elf_sha256=elf, cases=out_cases)
 
 
+def mark_external_fixture(case, desc):
+    """A fixture the run's own events cannot show (applied before the run)."""
+    case["dev_fixtures"].append(f"external: {desc}")
+    case["scope"] = "DEV_FIXTURE"
+    for o in case["state_observations"]:
+        o["statement"] += f" [fixture: {desc}]"
+
+
 def parse_case(text):
     case_id, rest = text.split("=", 1)
     parts = []
@@ -119,12 +127,21 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--case", action="append", required=True,
                     help="ID=run:label,label[;run2:label,...]")
+    ap.add_argument("--fixture", action="append", default=[],
+                    help="ID=description of a fixture applied outside the game "
+                         "(e.g. a deliberately damaged save copy); marks the case")
     ap.add_argument("--root", required=True)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     cases = dict(parse_case(c) for c in a.case)
     try:
         manifest = build(cases, a.root)
+        for spec in a.fixture:
+            case_id, desc = spec.split("=", 1)
+            case = next((c for c in manifest["cases"] if c["case_id"] == case_id), None)
+            if case is None:
+                raise EvidenceError(f"--fixture names unknown case {case_id}")
+            mark_external_fixture(case, desc)
     except EvidenceError as exc:
         print("EVIDENCE_INCOMPLETE", exc, file=sys.stderr)
         return 1
