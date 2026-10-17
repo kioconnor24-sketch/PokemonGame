@@ -53,4 +53,20 @@ press x; sleep 3; capture "q3x-relaunch-main-menu"
 press x; sleep 7; capture "q3x-relaunch-continued-1"
 sleep 3; capture "q3x-relaunch-continued-2"
 kill "$emu_pid" 2>/dev/null || true
+# No debugger in this process: compare the Continue frame with the last
+# pre-save clinic field frame. A score, not a verdict; Playtest judges.
+python3 - "$RUNNER_TEMP/averon-playtest/q3-play-x-after-party.png" \
+  "$RUNNER_TEMP/averon-playtest/q3x-relaunch-continued-2.png" <<'PY' || true
+import os, subprocess, sys
+before, after = sys.argv[1:]
+if not (os.path.exists(before) and os.path.exists(after)):
+    sys.exit(print("Q3X_CONTINUE_MATCH unavailable: missing pre-save or Continue frame"))
+a, b = (subprocess.check_output(["convert", p, "-depth", "8", "RGB:-"]) for p in (before, after))
+if len(a) != len(b):
+    sys.exit(print("Q3X_CONTINUE_MATCH unavailable: frame sizes differ"))
+same = sum(a[i:i+3] == b[i:i+3] for i in range(0, len(a), 3)) / (len(a) // 3)
+diff = sum(abs(x - y) for x, y in zip(a, b)) / len(a)
+print(f"Q3X_CONTINUE_MATCH same_pixels={same:.3f} mean_abs_diff={diff:.2f}"
+      " (pre-save q3-play-x-after-party vs q3x-relaunch-continued-2)")
+PY
 echo "Q3X_DONE"

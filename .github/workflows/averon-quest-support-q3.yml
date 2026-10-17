@@ -76,8 +76,8 @@ jobs:
           # One notice per key line, most important first (GitHub keeps at
           # most 10 per step), trimmed; the full log is in the artifact.
           for pattern in '^QA_Q3_INTERACTION_STATUS' '^Q3X_RC' 'Blocked:' '^Q3X_SAVED_SLOT' \
-                         '^Q3X_SAVE_SUCCESS' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH)' \
-                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^Q3X_RESPAWN' '^Q3X_DONE'; do
+                         '^Q3X_CONTINUE_MATCH' '^Q3X_SAVE_SUCCESS' '^Q3X_(NOT_IN|CLINIC_NOT_IDLE|RELAUNCH)' \
+                         '^Q3X_WHITEOUT' '^Q3X_CLINIC_DIALOGUE' '^Q3X_RESPAWN'; do
             grep -aE "$pattern" "$log" | head -1 | cut -c1-240
           done | while IFS= read -r line; do
             echo "::notice title=Q3 support::${line}"

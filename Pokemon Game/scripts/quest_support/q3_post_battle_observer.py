@@ -173,6 +173,7 @@ for attempt in range(50):
             raise qc.Blocked("Different-save overwrite: not guessing")
         qc.qa_key(a.window, "x", wait=0.9)
     elif phase in ("SaveSuccessCallback", "SaveReturnSuccessCallback"):
+        print("Q3X_SAVE_SUCCESS_CALLBACK", phase, f"attempt={attempt+1}", flush=True)
         ok = True
         break
     elif phase == "SaveErrorCallback":
@@ -182,7 +183,8 @@ if not ok:
     raise qc.Blocked("No save success callback")
 for i in range(30):
     state, frame = qc.save_probe(args, f"save-q3x-return-{i+1}")
-    if qc.white_panel_ratio(frame) <= 0.30:
+    # Same clinic calibration as the whiteout loop: the lit floor reads 0.33.
+    if qc.white_panel_ratio(frame) <= DIALOGUE:
         print("Q3X_SAVE_SUCCESS", json.dumps(state, sort_keys=True), flush=True)
         break
     time.sleep(0.45)
