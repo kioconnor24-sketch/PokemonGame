@@ -116,6 +116,27 @@ class BoardTests(unittest.TestCase):
         self.assertIn("[epic #36](https://github.com/kioconnor24-sketch/PokemonGame/issues/36)", rendered["playtest"])
         self.assertIn("BLOCKED ON Q", rendered["board"])
 
+    def test_generated_board_never_assigns_ownership_from_stale_registry(self):
+        # Issue #31 is overwritten on every Actions refresh.  Its static
+        # registry must never pretend to supersede newer Issue #15 claims.
+        self.tasks[0]["next"] = "EDIT SHARED FILES NOW (stale historical text)"
+        rendered = MODULE.render(self.conf, self.snap)
+        for name, body in rendered.items():
+            with self.subTest(output=name):
+                self.assertIn("STATIC REGISTRY — NOT LIVE FILE OWNERSHIP", body)
+                self.assertIn("https://github.com/kioconnor24-sketch/PokemonGame/issues/15", body)
+                self.assertIn("HISTORICAL ONLY", body)
+        self.assertIn("Legacy registry agent (NOT active file owner)", rendered["board"])
+        self.assertIn("Historical backlog note (VERIFY #15 FIRST)", rendered["board"])
+        self.assertIn(
+            "HISTORICAL ONLY — verify current #15 claim and PR scope first. "
+            "EDIT SHARED FILES NOW",
+            rendered["board"],
+        )
+        self.assertNotIn("## Live task/dependency routing", rendered["board"])
+        self.assertIn("historical inbox (NOT current assignments)", rendered["codex"])
+        self.assertIn("historical inbox (NOT current assignments)", rendered["claude"])
+
     def test_generated_board_says_no_auto_merge_or_map_work(self):
         result = MODULE.render(self.conf, self.snap)
         self.assertEqual(set(result), {"board", "codex", "claude", "playtest", "summary"})

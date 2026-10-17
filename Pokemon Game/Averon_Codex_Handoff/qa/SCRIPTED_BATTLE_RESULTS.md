@@ -1,12 +1,17 @@
-# SCRIPTED-BATTLE results — 2026-10-15
+# SCRIPTED-BATTLE — core merged, registration deferred (NOT GAMEPLAY_ACCEPTED)
 
-Scope: PR #25 (`claude/scripted-battle`). The building blocks are installed
-in the ROM: `event_scripts.s` includes `averon_scripted_battle.inc`, and the
-release `B_FLAG_NO_WHITEOUT` is the RAM-only `FLAG_SPECIAL_FLAG_UNUSED_0x4003`
-(owner gate exception and Codex handoff, #15 comment 6205844637). **No scene
+Scope: the core (macros, natives, RAM-only `B_FLAG_NO_WHITEOUT` mapping to
+`FLAG_SPECIAL_FLAG_UNUSED_0x4003` and native fixtures) merged to main through
+core-only PR #81 (`6d5c0967`), extracted from PR #25 at
+`f324e485358cf6f076418e7c223559f164c36dc1` under the PR #76 staging method.
+PR #25 (`claude/scripted-battle`) now carries only the deferred production
+registration: one `.include "data/scripts/averon_scripted_battle.inc"` line in
+`event_scripts.s`. That line waits for QUEST #14's independent GATE A and a
+serialized exact-file handoff for the protected registry. **No scene
 uses them yet**: Renn, the operatives and the ambush wait for approved
 trainers and text, so no scripted battle can be played. Nothing here is
-EMULATOR-TESTED.
+EMULATOR-TESTED. The detailed evidence below describes the inherited #25
+implementation; #81's current-head results are recorded in that PR.
 
 ## How to rerun
 
@@ -61,9 +66,13 @@ GUI evidence exists yet.
 1. Done: `include/config/battle.h` sets `B_FLAG_NO_WHITEOUT` to
    `FLAG_SPECIAL_FLAG_UNUSED_0x4003`. It is RAM-only, so there is no
    `flags.h` or SaveBlock change, and `0x38–0x3F` stays unallocated.
-2. Done: `data/event_scripts.s` includes `data/scripts/averon_scripted_battle.inc`.
-3. #25 merges only after QUEST #14. QUEST's own `event_scripts.s` lines are
-   kept when #25 is rebased.
+2. Deferred: PR #25 adds the `data/event_scripts.s` include. Until it merges,
+   native script fixtures include the macros directly and there are no
+   production macro callers. This is core verification, not playable scene
+   acceptance.
+3. #25's registry line merges only after QUEST #14 merges, through the exact
+   serialized protected-source handoff; QUEST's own `event_scripts.s` lines
+   are kept and the include stays above the QUEST include. No guard is waived.
 4. Waiting: trainers and scenes, once the owner approves rosters and text.
    Then native tests that run each registered scene, and ChatGPT QA
    emulator cases for each row above.

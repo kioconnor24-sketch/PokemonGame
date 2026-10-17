@@ -8,7 +8,12 @@
     "auto_agent_execution": false,
     "shared_files_require_manual_handoff": true,
     "parallel_independent_development": true,
-    "dependency_gates_apply_to_merge": true
+    "dependency_gates_apply_to_merge": true,
+    "backend_before_sinnoh": true,
+    "sinnoh_maps_require_owner_approval": true,
+    "continue_disjoint_when_merge_blocked": true,
+    "prevent_duplicate_interface_owners": true,
+    "do_not_auto_awaken_agents": true
   },
   "tasks": [
     {
@@ -23,8 +28,17 @@
         "Q4",
         "Q5"
       ],
-      "next": "Codex fixes QUEST issues on #14 with native/QA collaboration. Q1–Q5 graphical acceptance is a MERGE gate, not a stop to disjoint coding.",
-      "issue": 41
+      "next": "Finish only proven QUEST defects on #14; Playtest #23 completes rendered Hiker/tree, rewards, Bag, gift, save and whiteout. Otherwise continue owned disjoint TWO-REGION tests now.",
+      "issue": 41,
+      "owned_interfaces": [
+        "optional_quest_events",
+        "optional_quest_rewards"
+      ],
+      "fallback_order": [
+        "isolated TWO-REGION badge/flash/region tests",
+        "source-backed existing-map registry and save corruption tests"
+      ],
+      "resume_when": "Exact-head Playtest Q1-Q5 acceptance and required checks allow protected merge"
     },
     {
       "id": "TWO-REGION",
@@ -34,9 +48,21 @@
         "QUEST"
       ],
       "requires_handoff": true,
-      "next": "DEVELOP NOW on separate new-file-only region branch: 8+8 badge/save rollback, travel/heal/Fly synthetic regressions. Only shared-file integration and main merge wait for QUEST QA and exact-file handoff.",
+      "next": "Develop new-file region/flash/8+8 badge/cap/Fly/heal backend now, then register proven code in real engine only with scoped shared file handoff. No Sinnoh or test map files.",
       "issue": 41,
-      "parallel_development": true
+      "parallel_development": true,
+      "owned_interfaces": [
+        "two_region_identity",
+        "eight_plus_eight_badges",
+        "region_specific_caps_obedience",
+        "two_region_fly_heal_whiteout",
+        "region_save_migration"
+      ],
+      "fallback_order": [
+        "separate save sector bounds repair with granted save.c handoff",
+        "existing-map registry/ID contract and flash recovery tests"
+      ],
+      "resume_when": "QUEST #14 exact-head QA + safe merge and specific shared-file handoff recorded"
     },
     {
       "id": "SCRIPTED-BATTLE",
@@ -50,9 +76,18 @@
         "SB-LOSS",
         "SB-CLEANUP"
       ],
-      "next": "DEVELOP NOW on existing #25 or disjoint technical branch: no-whiteout lifecycle tests and engine recovery. Only protected registry collision and #25 merge wait for QUEST; approved two lines already pushed.",
+      "next": "Finish owner-approved no-Run guard and source/native save and loss cleanup on #25; proceed to LEGEND #47 when event registry merge blocked; no canon battle scenes.",
       "issue": 42,
-      "parallel_development": true
+      "parallel_development": true,
+      "owned_interfaces": [
+        "scripted_battle_lifecycle",
+        "scripted_no_whiteout_and_forfeit"
+      ],
+      "fallback_order": [
+        "continue independently claimed LEGEND #47 outcome and save tests",
+        "reproduce unowned general battle/AI defects without altering region selector"
+      ],
+      "resume_when": "QUEST #14 actual QA/integration completed and shared event_scripts.s merge window available"
     },
     {
       "id": "NATIVE-BASELINE",
@@ -77,8 +112,68 @@
       "agent": "playtest",
       "pr": 20,
       "deps": [],
-      "next": "Playtest: use state-aware mGBA observer to verify Q1–Q5 dialogue, rewards, persistence and whiteout; no native-test substitution or gameplay-source changes.",
-      "issue": 36
+      "next": "Complete Q1-Q5 via real emulator from already-proved NPC interactions; do NOT redo researcher/artist YES/NO on same SHA; if gated, continue other existing-map QA.",
+      "issue": 36,
+      "owned_interfaces": [
+        "rendered_quest_qa"
+      ],
+      "fallback_order": [
+        "next previously unverified Q1/Q2 Hiker/tree/full-bag/flash case on existing maps",
+        "existing-map menu/field/save/follower smoke test",
+        "reliable fail-closed access controller test (without source writes)"
+      ],
+      "resume_when": "Legal state/location reached or relevant game PR source changes and fresh ROM is built"
+    },
+    {
+      "id": "LEGEND",
+      "agent": "claude",
+      "pr": 47,
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "unique_encounter_outcome_and_retry"
+      ],
+      "fallback_order": [
+        "SCRIPTED-BATTLE #25 disjoint battle lifecycle tests",
+        "unclaimed species/forms/followers tests after exact claim"
+      ],
+      "resume_when": "Actual owner-approved encounter is available for placement and player-facing GUI acceptance; generic backend can merge earlier under normal tests",
+      "next": "Already open draft #47: verify and complete generic caught/defeat/flee/teleport/retry/flash, real negative tests and GBA; no second LEGEND implementation, no species/site placement.",
+      "issue": 42
+    },
+    {
+      "id": "POKEMON-MECHANICS",
+      "agent": "claude",
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "generic_species_forms_evolutions_moves",
+        "generic_battle_exp_items_followers_ai"
+      ],
+      "fallback_order": [
+        "complete existing SCRIPTED-BATTLE #25 or LEGEND #47 unverified acceptance",
+        "source-grounded bounded native test of an unclaimed general mechanic"
+      ],
+      "resume_when": "Unclaimed source files and a reproducible mechanics gap are identified",
+      "next": "Claim real file-disjoint species/forms/evolutions/followers/general battle and Gen-5 held EXP Share defect after #25/#47 checkpoint; don't implement Codex's region-specific caps/obedience.",
+      "issue": 46
+    },
+    {
+      "id": "REGION-PLATFORM",
+      "agent": "codex",
+      "deps": [],
+      "parallel_development": true,
+      "owned_interfaces": [
+        "map_registry_and_id_capacity",
+        "field_navigation_core_capacity"
+      ],
+      "fallback_order": [
+        "continue existing TWO-REGION backend unit tests",
+        "fix supported save/flash corruption and old-save cases"
+      ],
+      "resume_when": "A concrete unclaimed engine API/capacity defect has evidence; no map content required",
+      "next": "After TWO-REGION checkpoint, verify map registry/object/warp ID limits, field transitions, collision interfaces and resource capacity with existing maps only; never create prototype maps.",
+      "issue": 46
     }
   ]
 }
