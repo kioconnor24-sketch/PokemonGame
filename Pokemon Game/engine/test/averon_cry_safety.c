@@ -20,6 +20,7 @@ static void ColdStart(void)
     ResetTasks();
     gMPlay_PokemonCry = NULL;
     gPokemonCryBGMDuckingCounter = 0;
+    InitMapMusic();
     PlayBGM(MUS_ROUTE101);
     MPlayMain(&gMPlayInfo_BGM);
 }
@@ -41,6 +42,7 @@ static void ExpectFullBGMVolume(void)
 
 TEST("Averon cry safety cold stop and completion before any cry")
 {
+    Test_MgbaPrintf("CRY_PROFILE enabled=%d headless=%d", P_CRIES_ENABLED, gTestRunnerHeadless);
     ColdStart();
     StopCry();
     StopCryAndClearCrySongs();
