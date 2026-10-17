@@ -1,0 +1,25 @@
+{"t": 1792229626.38, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/q3b.gba", "phases": ["q3_continued", "show_party"], "new_game": false}
+{"t": 1792229626.39, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792229626.41, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792229626.92, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792229626.94, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792229629.49, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792229629.51, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792229630.67, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792229630.7, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792229631.24, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792229631.26, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792229631.8, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792229631.82, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792229632.87, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792229632.88, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792229636.49, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792229636.52, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792229637.19, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 30, 25], "ppBonuses": 0, "level": 15, "hp": 39, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792229637.33, "event": "capture", "file": "0009-q3-continued.png"}
+{"t": 1792229637.33, "event": "observe", "label": "q3-continued", "problems": []}
+{"t": 1792229638.88, "event": "capture", "file": "0010-q3-follower-after-step.png"}
+{"t": 1792229638.88, "event": "observe", "label": "q3-follower-after-step", "problems": []}
+{"t": 1792229643.28, "event": "capture", "file": "0011-party-screen.png"}
+{"t": 1792229645.81, "event": "capture", "file": "0012-end.png"}
+{"t": 1792229645.81, "event": "observe", "label": "end", "problems": []}

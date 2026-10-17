@@ -5,24 +5,124 @@
  "cases": [
   {
    "case_id": "Q1",
-   "input_trace": "run33-gate/inputs.jsonl",
+   "input_trace": "run38-natural-bag/inputs.jsonl",
    "input_traces": [
+    "run35-q1ord/inputs.jsonl",
+    "run36-q1ord-cont/inputs.jsonl",
+    "run39-gate/inputs.jsonl",
     "run18/inputs.jsonl",
     "run19/inputs.jsonl",
-    "run33-gate/inputs.jsonl"
+    "run38-natural-bag/inputs.jsonl"
    ],
    "screenshots": [
+    "run35-q1ord/0008-q1-bluffs-entered.png",
+    "run35-q1ord/0010-q1-hiker.png",
+    "run35-q1ord/0017-bag-shown.png",
+    "run35-q1ord/0018-q1-before-reward.png",
+    "run35-q1ord/0023-q1-reward.png",
+    "run35-q1ord/0025-q1-no-duplicate.png",
+    "run35-q1ord/0009-talk-coastalbluffs-35-7-01.png",
+    "run35-q1ord/0019-talk-alderfield-12-16-01.png",
+    "run35-q1ord/0020-talk-alderfield-12-16-02.png",
+    "run35-q1ord/0021-talk-alderfield-12-16-03.png",
+    "run35-q1ord/0022-talk-alderfield-12-16-04.png",
+    "run35-q1ord/0024-talk-alderfield-12-16-01.png",
+    "run35-q1ord/0012-bag-pocket-1.png",
+    "run35-q1ord/0026-bag-great-balls.png",
+    "run35-q1ord/0027-save-confirm-checkpoint.png",
+    "run36-q1ord-cont/0009-q1-continued.png",
+    "run36-q1ord-cont/0010-bag-great-balls.png",
+    "run39-gate/0009-gate-before.png",
+    "run39-gate/0012-gate-blocked.png",
+    "run39-gate/0014-gate-controls.png",
+    "run39-gate/0010-gate-text-01.png",
+    "run39-gate/0011-gate-text-more-01.png",
+    "run39-gate/0013-gate-bag.png",
     "run18/0009-q1-hiker.png",
-    "run18/0010-q1-before-reward.png",
     "run18/0011-q1-reward.png",
     "run18/0012-q1-no-duplicate.png",
     "run19/0008-q1-continued.png",
     "run19/0016-bag-shown.png",
-    "run33-gate/0008-gate-before.png",
-    "run33-gate/0009-gate-blocked.png",
-    "run33-gate/0011-gate-controls.png"
+    "run19/0011-bag-pocket-1.png",
+    "run19/0009-trainer-card.png",
+    "run38-natural-bag/0012-end.png",
+    "run38-natural-bag/0009-bag-great-balls.png"
    ],
    "state_observations": [
+    {
+     "statement": "q1-bluffs-entered: FLAG_BADGE01_GET (after ordinary inputs)",
+     "evidence_file": "run35-q1ord/state-q1-bluffs-entered.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q1-hiker: FLAG_AVERON_NOTES_RECORDED (after ordinary inputs)",
+     "evidence_file": "run35-q1ord/state-q1-hiker.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q1-hiker: FLAG_AVERON_NOTES_REWARDED (after ordinary inputs)",
+     "evidence_file": "run35-q1ord/state-q1-hiker.json",
+     "expected": false,
+     "observed": false
+    },
+    {
+     "statement": "q1-reward: FLAG_AVERON_NOTES_REWARDED (after ordinary inputs)",
+     "evidence_file": "run35-q1ord/state-q1-reward.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q1-reward: greatBalls+2 held after ordinary inputs",
+     "evidence_file": "run35-q1ord/state-q1-reward.json"
+    },
+    {
+     "statement": "q1-no-duplicate: greatBalls+2 held after ordinary inputs",
+     "evidence_file": "run35-q1ord/state-q1-no-duplicate.json"
+    },
+    {
+     "statement": "q1-continued: FLAG_BADGE01_GET (after ordinary inputs)",
+     "evidence_file": "run36-q1ord-cont/state-q1-continued.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q1-continued: FLAG_AVERON_NOTES_REWARDED (after ordinary inputs)",
+     "evidence_file": "run36-q1ord-cont/state-q1-continued.json",
+     "expected": true,
+     "observed": true
+    },
+    {
+     "statement": "q1-continued: greatBalls==2 held after ordinary inputs",
+     "evidence_file": "run36-q1ord-cont/state-q1-continued.json"
+    },
+    {
+     "statement": "gate-before: FLAG_BADGE01_GET (after ordinary inputs)",
+     "evidence_file": "run39-gate/state-gate-before.json",
+     "expected": false,
+     "observed": false
+    },
+    {
+     "statement": "gate-blocked: map (after ordinary inputs)",
+     "evidence_file": "run39-gate/state-gate-blocked.json",
+     "expected": "MAP_ALDERFIELD",
+     "observed": "MAP_ALDERFIELD"
+    },
+    {
+     "statement": "gate-blocked: steppedBack held after ordinary inputs",
+     "evidence_file": "run39-gate/state-gate-blocked.json"
+    },
+    {
+     "statement": "gate-blocked: FLAG_BADGE01_GET (after ordinary inputs)",
+     "evidence_file": "run39-gate/state-gate-blocked.json",
+     "expected": false,
+     "observed": false
+    },
+    {
+     "statement": "gate-controls: fieldReady held after ordinary inputs",
+     "evidence_file": "run39-gate/state-gate-controls.json"
+    },
     {
      "statement": "q1-hiker: FLAG_AVERON_NOTES_RECORDED (after ordinary inputs)",
      "evidence_file": "run18/state-q1-hiker.json",
@@ -64,37 +164,26 @@
     {
      "statement": "q1-continued: greatBalls==2 held after ordinary inputs",
      "evidence_file": "run19/state-q1-continued.json"
-    },
-    {
-     "statement": "gate-before: FLAG_BADGE01_GET (after ordinary inputs)",
-     "evidence_file": "run33-gate/state-gate-before.json",
-     "expected": false,
-     "observed": false
-    },
-    {
-     "statement": "gate-blocked: map (after ordinary inputs)",
-     "evidence_file": "run33-gate/state-gate-blocked.json",
-     "expected": "MAP_ALDERFIELD",
-     "observed": "MAP_ALDERFIELD"
-    },
-    {
-     "statement": "gate-blocked: steppedBack held after ordinary inputs",
-     "evidence_file": "run33-gate/state-gate-blocked.json"
-    },
-    {
-     "statement": "gate-blocked: FLAG_BADGE01_GET (after ordinary inputs)",
-     "evidence_file": "run33-gate/state-gate-blocked.json",
-     "expected": false,
-     "observed": false
-    },
-    {
-     "statement": "gate-controls: fieldReady held after ordinary inputs",
-     "evidence_file": "run33-gate/state-gate-controls.json"
     }
    ],
    "dev_fixtures": [],
    "scope": "ORDINARY_PLAY",
    "drivers": [
+    {
+     "run": "run35-q1ord",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
+    },
+    {
+     "run": "run36-q1ord-cont",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
+    },
+    {
+     "run": "run39-gate",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
+    },
     {
      "run": "run18",
      "driver_sha": "231570c41a3820ecfd1bb3a52f3e754bc2e4272a",
@@ -106,37 +195,48 @@
      "driver_dirty": true
     },
     {
-     "run": "run33-gate",
-     "driver_sha": "a0ba02bbe975a711791e6b3a7b0db225b406da1f",
+     "run": "run38-natural-bag",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
      "driver_dirty": false
     }
    ]
   },
   {
    "case_id": "Q1-FULL-POCKET",
-   "input_trace": "run27-q1cont/inputs.jsonl",
+   "input_trace": "run37-q1full-bag/inputs.jsonl",
    "input_traces": [
     "run26-q1full/inputs.jsonl",
-    "run27-q1cont/inputs.jsonl"
+    "run27-q1cont/inputs.jsonl",
+    "run37-q1full-bag/inputs.jsonl"
    ],
    "screenshots": [
-    "run26-q1full/0009-q1-started.png",
     "run26-q1full/0012-q1-hiker.png",
     "run26-q1full/0017-q1-full-pocket.png",
     "run26-q1full/0019-q1-refused.png",
     "run26-q1full/0025-q1-tossed.png",
     "run26-q1full/0031-q1-reward.png",
     "run26-q1full/0033-q1-no-duplicate.png",
+    "run26-q1full/0013-debug-fill-balls-root.png",
+    "run26-q1full/0014-debug-fill-balls-0.png",
+    "run26-q1full/0015-debug-fill-balls-1.png",
+    "run26-q1full/0016-debug-fill-balls-2.png",
+    "run26-q1full/0011-talk-coastalbluffs-35-7-01.png",
+    "run26-q1full/0018-talk-alderfield-12-16-01.png",
+    "run26-q1full/0027-talk-alderfield-12-16-01.png",
+    "run26-q1full/0028-talk-alderfield-12-16-02.png",
+    "run26-q1full/0029-talk-alderfield-12-16-03.png",
+    "run26-q1full/0030-talk-alderfield-12-16-04.png",
+    "run26-q1full/0032-talk-alderfield-12-16-01.png",
+    "run26-q1full/0020-q1-tossed-item.png",
+    "run26-q1full/0021-q1-tossed-menu.png",
+    "run26-q1full/0022-q1-tossed-quantity.png",
+    "run26-q1full/0023-q1-tossed-confirm.png",
+    "run26-q1full/0024-q1-tossed-thrown.png",
     "run27-q1cont/0009-q1-continued.png",
-    "run27-q1cont/0016-bag-shown.png"
+    "run37-q1full-bag/0010-end.png",
+    "run37-q1full-bag/0009-bag-great-balls.png"
    ],
    "state_observations": [
-    {
-     "statement": "q1-started: FLAG_AVERON_NOTES_STARTED (after ordinary inputs and DEV-ONLY debug fixture(s) ['fill-balls'] in this run)",
-     "evidence_file": "run26-q1full/state-q1-started.json",
-     "expected": true,
-     "observed": true
-    },
     {
      "statement": "q1-hiker: FLAG_AVERON_NOTES_RECORDED (after ordinary inputs and DEV-ONLY debug fixture(s) ['fill-balls'] in this run)",
      "evidence_file": "run26-q1full/state-q1-hiker.json",
@@ -224,14 +324,20 @@
      "run": "run27-q1cont",
      "driver_sha": "0ff274de92cb0c47a6cca0612ec799b280efdda3",
      "driver_dirty": false
+    },
+    {
+     "run": "run37-q1full-bag",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
     }
    ]
   },
   {
    "case_id": "Q2",
-   "input_trace": "run20/inputs.jsonl",
+   "input_trace": "run38-natural-bag/inputs.jsonl",
    "input_traces": [
-    "run20/inputs.jsonl"
+    "run20/inputs.jsonl",
+    "run38-natural-bag/inputs.jsonl"
    ],
    "screenshots": [
     "run20/0010-q2-started.png",
@@ -239,7 +345,19 @@
     "run20/0014-q2-tree.png",
     "run20/0016-q2-tree-repeat.png",
     "run20/0022-q2-reward.png",
-    "run20/0024-q2-no-duplicate.png"
+    "run20/0024-q2-no-duplicate.png",
+    "run20/0008-talk-windrow-20-14-01.png",
+    "run20/0009-talk-windrow-20-14-02.png",
+    "run20/0011-talk-coastalmeadow-10-22-01.png",
+    "run20/0013-talk-coastalmeadow-12-27-01.png",
+    "run20/0015-talk-coastalmeadow-12-27-01.png",
+    "run20/0018-talk-windrow-20-14-01.png",
+    "run20/0019-talk-windrow-20-14-02.png",
+    "run20/0020-talk-windrow-20-14-03.png",
+    "run20/0021-talk-windrow-20-14-04.png",
+    "run20/0023-talk-windrow-20-14-01.png",
+    "run38-natural-bag/0012-end.png",
+    "run38-natural-bag/0010-bag-oran-berries.png"
    ],
    "state_observations": [
     {
@@ -306,6 +424,11 @@
      "run": "run20",
      "driver_sha": "6af04ba73114ee4e94dc44c51ab32ff764c8ffb1",
      "driver_dirty": false
+    },
+    {
+     "run": "run38-natural-bag",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
     }
    ]
   },
@@ -317,7 +440,6 @@
     "run29-q2cont/inputs.jsonl"
    ],
    "screenshots": [
-    "run28-q2full/0011-q2-started.png",
     "run28-q2full/0013-q2-observer.png",
     "run28-q2full/0015-q2-tree.png",
     "run28-q2full/0017-q2-tree-repeat.png",
@@ -326,16 +448,31 @@
     "run28-q2full/0031-q2-tossed.png",
     "run28-q2full/0037-q2-reward.png",
     "run28-q2full/0039-q2-no-duplicate.png",
+    "run28-q2full/0018-debug-fill-berries-root.png",
+    "run28-q2full/0019-debug-fill-berries-0.png",
+    "run28-q2full/0020-debug-fill-berries-1.png",
+    "run28-q2full/0021-debug-fill-berries-2.png",
+    "run28-q2full/0009-talk-windrow-20-14-01.png",
+    "run28-q2full/0010-talk-windrow-20-14-02.png",
+    "run28-q2full/0012-talk-coastalmeadow-10-22-01.png",
+    "run28-q2full/0014-talk-coastalmeadow-12-27-01.png",
+    "run28-q2full/0016-talk-coastalmeadow-12-27-01.png",
+    "run28-q2full/0024-talk-windrow-20-14-01.png",
+    "run28-q2full/0033-talk-windrow-20-14-01.png",
+    "run28-q2full/0034-talk-windrow-20-14-02.png",
+    "run28-q2full/0035-talk-windrow-20-14-03.png",
+    "run28-q2full/0036-talk-windrow-20-14-04.png",
+    "run28-q2full/0038-talk-windrow-20-14-01.png",
+    "run28-q2full/0026-q2-tossed-item.png",
+    "run28-q2full/0027-q2-tossed-menu.png",
+    "run28-q2full/0028-q2-tossed-quantity.png",
+    "run28-q2full/0029-q2-tossed-confirm.png",
+    "run28-q2full/0030-q2-tossed-thrown.png",
     "run29-q2cont/0008-q2-continued.png",
-    "run29-q2cont/0015-bag-shown.png"
+    "run29-q2cont/0015-bag-shown.png",
+    "run29-q2cont/0012-bag-pocket-3.png"
    ],
    "state_observations": [
-    {
-     "statement": "q2-started: FLAG_AVERON_SKETCH_STARTED (after ordinary inputs and DEV-ONLY debug fixture(s) ['fill-berries'] in this run)",
-     "evidence_file": "run28-q2full/state-q2-started.json",
-     "expected": true,
-     "observed": true
-    },
     {
      "statement": "q2-observer: FLAG_AVERON_SKETCH_FOUND (after ordinary inputs and DEV-ONLY debug fixture(s) ['fill-berries'] in this run)",
      "evidence_file": "run28-q2full/state-q2-observer.json",
@@ -446,21 +583,159 @@
   },
   {
    "case_id": "Q3",
-   "input_trace": "run34-q3defeat/inputs.jsonl",
+   "input_trace": "run25-q3q5/inputs.jsonl",
    "input_traces": [
+    "run41-q3/inputs.jsonl",
+    "run42-q3-cont/inputs.jsonl",
+    "run43-q3-save/inputs.jsonl",
+    "run44-q3-cont2/inputs.jsonl",
     "run23-q3/inputs.jsonl",
-    "run25-q3q5/inputs.jsonl",
-    "run34-q3defeat/inputs.jsonl"
+    "run34-q3defeat/inputs.jsonl",
+    "run25-q3q5/inputs.jsonl"
    ],
    "screenshots": [
+    "run41-q3/0009-q3-before.png",
+    "run41-q3/0043-q3-clinic.png",
+    "run41-q3/0016-q3-loss01-defeat.png",
+    "run41-q3/0017-q3-loss01-defeat.png",
+    "run41-q3/0018-q3-loss01-defeat.png",
+    "run41-q3/0019-q3-loss01-defeat.png",
+    "run41-q3/0020-q3-loss01-defeat.png",
+    "run41-q3/0021-q3-loss01-defeat.png",
+    "run41-q3/0022-q3-loss01-defeat.png",
+    "run41-q3/0023-q3-loss01-defeat.png",
+    "run41-q3/0024-q3-loss01-defeat.png",
+    "run41-q3/0025-q3-loss01-defeat.png",
+    "run41-q3/0026-q3-after-whiteout.png",
+    "run41-q3/0027-q3-clinic-01.png",
+    "run41-q3/0028-q3-clinic-02.png",
+    "run41-q3/0029-q3-clinic-03.png",
+    "run41-q3/0030-q3-clinic-04.png",
+    "run41-q3/0031-q3-clinic-05.png",
+    "run41-q3/0032-q3-clinic-06.png",
+    "run41-q3/0033-q3-clinic-07.png",
+    "run41-q3/0034-q3-clinic-08.png",
+    "run41-q3/0035-q3-clinic-09.png",
+    "run41-q3/0036-q3-clinic-10.png",
+    "run41-q3/0037-q3-clinic-11.png",
+    "run41-q3/0038-q3-clinic-12.png",
+    "run41-q3/0039-q3-clinic-13.png",
+    "run41-q3/0040-q3-clinic-14.png",
+    "run41-q3/0041-q3-clinic-15.png",
+    "run41-q3/0042-q3-clinic-16.png",
+    "run41-q3/0044-party-screen.png",
+    "run42-q3-cont/0009-q3-continued.png",
+    "run42-q3-cont/0010-q3-follower-after-step.png",
+    "run42-q3-cont/0011-party-screen.png",
+    "run43-q3-save/0009-q3-continued.png",
+    "run43-q3-save/0011-save-confirm-checkpoint.png",
+    "run43-q3-save/0012-save-confirm-checkpoint-2.png",
+    "run43-q3-save/0013-save-confirm-checkpoint-3.png",
+    "run43-q3-save/0014-save-step-checkpoint-01.png",
+    "run43-q3-save/0015-save-step-checkpoint-02.png",
+    "run43-q3-save/0016-save-step-checkpoint-03.png",
+    "run43-q3-save/0017-save-step-checkpoint-04.png",
+    "run43-q3-save/0018-save-step-checkpoint-05.png",
+    "run43-q3-save/0019-save-step-checkpoint-06.png",
+    "run44-q3-cont2/0009-clinic-continued.png",
+    "run44-q3-cont2/0010-party-screen.png",
     "run23-q3/0009-q3-before.png",
     "run23-q3/0045-q3-clinic.png",
+    "run23-q3/0029-q3-clinic-01.png",
+    "run23-q3/0030-q3-clinic-02.png",
+    "run23-q3/0031-q3-clinic-03.png",
+    "run23-q3/0032-q3-clinic-04.png",
+    "run23-q3/0033-q3-clinic-05.png",
+    "run23-q3/0034-q3-clinic-06.png",
+    "run23-q3/0035-q3-clinic-07.png",
+    "run23-q3/0036-q3-clinic-08.png",
+    "run23-q3/0037-q3-clinic-09.png",
+    "run23-q3/0038-q3-clinic-10.png",
+    "run23-q3/0039-q3-clinic-11.png",
+    "run23-q3/0040-q3-clinic-12.png",
+    "run23-q3/0041-q3-clinic-13.png",
+    "run23-q3/0042-q3-clinic-14.png",
+    "run23-q3/0043-q3-clinic-15.png",
+    "run23-q3/0044-q3-clinic-16.png",
+    "run34-q3defeat/0038-q3-clinic.png",
+    "run34-q3defeat/0012-q3-loss00-defeat.png",
+    "run34-q3defeat/0013-q3-loss00-defeat.png",
+    "run34-q3defeat/0014-q3-loss00-defeat.png",
+    "run34-q3defeat/0015-q3-loss00-defeat.png",
+    "run34-q3defeat/0016-q3-loss00-defeat.png",
+    "run34-q3defeat/0017-q3-loss00-defeat.png",
+    "run34-q3defeat/0018-q3-loss00-defeat.png",
+    "run34-q3defeat/0019-q3-loss00-defeat.png",
+    "run34-q3defeat/0020-q3-loss00-defeat.png",
+    "run34-q3defeat/0021-q3-after-whiteout.png",
     "run25-q3q5/0009-q3-continued.png",
-    "run25-q3q5/0010-q3-follower-after-step.png",
-    "run34-q3defeat/0008-q3-before.png",
-    "run34-q3defeat/0038-q3-clinic.png"
+    "run25-q3q5/0010-q3-follower-after-step.png"
    ],
    "state_observations": [
+    {
+     "statement": "q3-clinic: map (after ordinary inputs)",
+     "evidence_file": "run41-q3/state-q3-clinic.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-clinic: partyHealed held after ordinary inputs",
+     "evidence_file": "run41-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: follower held after ordinary inputs",
+     "evidence_file": "run41-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: partySame held after ordinary inputs",
+     "evidence_file": "run41-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-clinic: moneyLost held after ordinary inputs",
+     "evidence_file": "run41-q3/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-continued: map (after ordinary inputs)",
+     "evidence_file": "run42-q3-cont/state-q3-continued.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-continued: partyHealed held after ordinary inputs",
+     "evidence_file": "run42-q3-cont/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-continued: follower held after ordinary inputs",
+     "evidence_file": "run42-q3-cont/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-follower-after-step: follower held after ordinary inputs",
+     "evidence_file": "run42-q3-cont/state-q3-follower-after-step.json"
+    },
+    {
+     "statement": "q3-continued: map (after ordinary inputs)",
+     "evidence_file": "run43-q3-save/state-q3-continued.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-continued: partyHealed held after ordinary inputs",
+     "evidence_file": "run43-q3-save/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-continued: follower held after ordinary inputs",
+     "evidence_file": "run43-q3-save/state-q3-continued.json"
+    },
+    {
+     "statement": "clinic-continued: map (after ordinary inputs)",
+     "evidence_file": "run44-q3-cont2/state-clinic-continued.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "clinic-continued: partyHealed held after ordinary inputs",
+     "evidence_file": "run44-q3-cont2/state-clinic-continued.json"
+    },
     {
      "statement": "q3-clinic: map (after ordinary inputs)",
      "evidence_file": "run23-q3/state-q3-clinic.json",
@@ -484,24 +759,6 @@
      "evidence_file": "run23-q3/state-q3-clinic.json"
     },
     {
-     "statement": "q3-continued: map (after ordinary inputs)",
-     "evidence_file": "run25-q3q5/state-q3-continued.json",
-     "expected": "MAP_ALDERFIELDCLINIC",
-     "observed": "MAP_ALDERFIELDCLINIC"
-    },
-    {
-     "statement": "q3-continued: partyHealed held after ordinary inputs",
-     "evidence_file": "run25-q3q5/state-q3-continued.json"
-    },
-    {
-     "statement": "q3-continued: follower held after ordinary inputs",
-     "evidence_file": "run25-q3q5/state-q3-continued.json"
-    },
-    {
-     "statement": "q3-follower-after-step: follower held after ordinary inputs",
-     "evidence_file": "run25-q3q5/state-q3-follower-after-step.json"
-    },
-    {
      "statement": "q3-clinic: map (after ordinary inputs)",
      "evidence_file": "run34-q3defeat/state-q3-clinic.json",
      "expected": "MAP_ALDERFIELDCLINIC",
@@ -522,34 +779,72 @@
     {
      "statement": "q3-clinic: moneyLost held after ordinary inputs",
      "evidence_file": "run34-q3defeat/state-q3-clinic.json"
+    },
+    {
+     "statement": "q3-continued: map (after ordinary inputs)",
+     "evidence_file": "run25-q3q5/state-q3-continued.json",
+     "expected": "MAP_ALDERFIELDCLINIC",
+     "observed": "MAP_ALDERFIELDCLINIC"
+    },
+    {
+     "statement": "q3-continued: partyHealed held after ordinary inputs",
+     "evidence_file": "run25-q3q5/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-continued: follower held after ordinary inputs",
+     "evidence_file": "run25-q3q5/state-q3-continued.json"
+    },
+    {
+     "statement": "q3-follower-after-step: follower held after ordinary inputs",
+     "evidence_file": "run25-q3q5/state-q3-follower-after-step.json"
     }
    ],
    "dev_fixtures": [],
    "scope": "ORDINARY_PLAY",
    "drivers": [
     {
+     "run": "run41-q3",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
+    },
+    {
+     "run": "run42-q3-cont",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
+     "driver_dirty": false
+    },
+    {
+     "run": "run43-q3-save",
+     "driver_sha": "4c296f3e0f677cff365d4166aaf58292490b3d0b",
+     "driver_dirty": false
+    },
+    {
+     "run": "run44-q3-cont2",
+     "driver_sha": "4c296f3e0f677cff365d4166aaf58292490b3d0b",
+     "driver_dirty": false
+    },
+    {
      "run": "run23-q3",
      "driver_sha": "eef446bb420848500dd69f9fdfad655a0b44f263",
      "driver_dirty": true
     },
     {
-     "run": "run25-q3q5",
-     "driver_sha": "7144b35a4ed4fd657d444cc0ee880a6600089d59",
+     "run": "run34-q3defeat",
+     "driver_sha": "a0ba02bbe975a711791e6b3a7b0db225b406da1f",
      "driver_dirty": false
     },
     {
-     "run": "run34-q3defeat",
-     "driver_sha": "a0ba02bbe975a711791e6b3a7b0db225b406da1f",
+     "run": "run25-q3q5",
+     "driver_sha": "7144b35a4ed4fd657d444cc0ee880a6600089d59",
      "driver_dirty": false
     }
    ]
   },
   {
    "case_id": "Q4",
-   "input_trace": "run32-q4cont/inputs.jsonl",
+   "input_trace": "run40-q4party/inputs.jsonl",
    "input_traces": [
     "run22-q4/inputs.jsonl",
-    "run32-q4cont/inputs.jsonl"
+    "run40-q4party/inputs.jsonl"
    ],
    "screenshots": [
     "run22-q4/0011-q4-lab.png",
@@ -557,7 +852,28 @@
     "run22-q4/0023-pc-deposit.png",
     "run22-q4/0026-q4-gift.png",
     "run22-q4/0028-q4-no-duplicate.png",
-    "run32-q4cont/0008-q4-continued.png"
+    "run22-q4/0008-debug-field-lab-root.png",
+    "run22-q4/0009-debug-field-lab-0.png",
+    "run22-q4/0010-debug-field-lab-1.png",
+    "run22-q4/0015-debug-access-pc-root.png",
+    "run22-q4/0016-debug-access-pc-0.png",
+    "run22-q4/0017-debug-access-pc-1.png",
+    "run22-q4/0012-talk-averonfieldlab-25-19-01.png",
+    "run22-q4/0013-talk-averonfieldlab-25-19-02.png",
+    "run22-q4/0024-talk-averonfieldlab-25-19-01.png",
+    "run22-q4/0025-talk-averonfieldlab-25-19-02.png",
+    "run22-q4/0027-talk-averonfieldlab-25-19-01.png",
+    "run22-q4/0015-debug-access-pc-root.png",
+    "run22-q4/0016-debug-access-pc-0.png",
+    "run22-q4/0017-debug-access-pc-1.png",
+    "run22-q4/0018-pc-menu.png",
+    "run22-q4/0019-pc-deposit-pick.png",
+    "run22-q4/0020-pc-deposit-menu.png",
+    "run22-q4/0021-pc-deposit-box.png",
+    "run22-q4/0022-pc-deposited.png",
+    "run22-q4/0023-pc-deposit.png",
+    "run40-q4party/0010-q4-continued.png",
+    "run40-q4party/0009-q4-continued-party.png"
    ],
    "state_observations": [
     {
@@ -622,17 +938,17 @@
     },
     {
      "statement": "q4-continued: FLAG_AVERON_DEV_GIFT_RECEIVED (after ordinary inputs)",
-     "evidence_file": "run32-q4cont/state-q4-continued.json",
+     "evidence_file": "run40-q4party/state-q4-continued.json",
      "expected": true,
      "observed": true
     },
     {
      "statement": "q4-continued: oneWobbuffet held after ordinary inputs",
-     "evidence_file": "run32-q4cont/state-q4-continued.json"
+     "evidence_file": "run40-q4party/state-q4-continued.json"
     },
     {
      "statement": "q4-continued: partyOf6 held after ordinary inputs",
-     "evidence_file": "run32-q4cont/state-q4-continued.json"
+     "evidence_file": "run40-q4party/state-q4-continued.json"
     }
    ],
    "dev_fixtures": [
@@ -647,8 +963,8 @@
      "driver_dirty": true
     },
     {
-     "run": "run32-q4cont",
-     "driver_sha": "a0ba02bbe975a711791e6b3a7b0db225b406da1f",
+     "run": "run40-q4party",
+     "driver_sha": "7824fe129a1540693dbd9fac32968738cc8c6837",
      "driver_dirty": false
     }
    ]
@@ -672,7 +988,21 @@
     "run25-q3q5/0029-q5-follower-inside-arrived.png",
     "run25-q3q5/0030-q5-follower-inside.png",
     "run25-q3q5/0031-q5-follower-back-outside-arrived.png",
-    "run25-q3q5/0032-q5-follower-back-outside.png"
+    "run25-q3q5/0032-q5-follower-back-outside.png",
+    "run25-q3q5/0013-q5-start-menu.png",
+    "run25-q3q5/0014-q5-menu-pokedex.png",
+    "run25-q3q5/0015-q5-menu-pokedex-closed.png",
+    "run25-q3q5/0016-q5-menu-pokemon.png",
+    "run25-q3q5/0017-q5-menu-pokemon-actions.png",
+    "run25-q3q5/0018-q5-menu-field-kit.png",
+    "run25-q3q5/0019-q5-menu-pokemon-closed.png",
+    "run25-q3q5/0020-q5-menu-bag.png",
+    "run25-q3q5/0021-q5-menu-bag-closed.png",
+    "run25-q3q5/0022-q5-menu-player.png",
+    "run25-q3q5/0023-q5-menu-player-closed.png",
+    "run25-q3q5/0024-q5-menu-option.png",
+    "run25-q3q5/0025-q5-menu-option-closed.png",
+    "run25-q3q5/0026-talk-alderfield-12-16-01.png"
    ],
    "state_observations": [
     {

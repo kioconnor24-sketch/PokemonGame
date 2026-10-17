@@ -1,0 +1,30 @@
+{"t": 1792229294.19, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/gate2.gba", "phases": ["badge_gate"], "new_game": false}
+{"t": 1792229294.21, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792229294.23, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792229294.74, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792229294.76, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792229297.33, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792229297.35, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792229298.51, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792229298.54, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792229299.09, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792229299.1, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792229299.64, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792229299.66, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792229300.71, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792229300.72, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792229304.29, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792229304.31, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792229304.98, "event": "field", "map": "MAP_ORCHARDLANE", "pos": [28, 8], "party": [{"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 31, 10, 25], "ppBonuses": 0, "level": 15, "hp": 22, "maxhp": 39}, {"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 25, 20], "ppBonuses": 0, "level": 15, "hp": 44, "maxhp": 44}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792229305.16, "event": "capture", "file": "0009-gate-before.png"}
+{"t": 1792229305.16, "event": "observe", "label": "gate-before", "problems": []}
+{"t": 1792229310.43, "event": "map", "map": "MAP_ALDERFIELD", "pos": [19, 31]}
+{"t": 1792229320.17, "event": "capture", "file": "0010-gate-text-01.png"}
+{"t": 1792229321.14, "event": "capture", "file": "0011-gate-text-more-01.png"}
+{"t": 1792229322.06, "event": "capture", "file": "0012-gate-blocked.png"}
+{"t": 1792229322.06, "event": "observe", "label": "gate-blocked", "problems": []}
+{"t": 1792229326.86, "event": "capture", "file": "0013-gate-bag.png"}
+{"t": 1792229329.38, "event": "capture", "file": "0014-gate-controls.png"}
+{"t": 1792229329.41, "event": "observe", "label": "gate-controls", "problems": []}
+{"t": 1792229329.57, "event": "capture", "file": "0015-end.png"}
+{"t": 1792229329.57, "event": "observe", "label": "end", "problems": []}

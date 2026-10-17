@@ -1,0 +1,49 @@
+{"t": 1792229096.74, "event": "start", "source": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6", "rom_sha256": "e6870c30ece40c6d180e9077b79c47ebae8b0d241ff02bdec645d3422a7f34e1", "elf": "aa2efbd95a6285c04d197b7a956878647fc97968fefe9eed02f347bda3f4262d", "rom": "/tmp/claude-0/-root-averon/0199c508-a967-4d20-a027-90b38c139b0e/scratchpad/q1o.gba", "phases": ["q1_hiker", "show_bag", "q1_reward", "show_great_balls", "save"], "new_game": false}
+{"t": 1792229096.76, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792229096.78, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792229099.35, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792229099.36, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792229101.01, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792229101.04, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792229101.59, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792229101.61, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792229102.14, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792229102.16, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792229103.23, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792229103.25, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792229106.87, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792229106.89, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792229107.54, "event": "field", "map": "MAP_ALDERFIELDGYM", "pos": [4, 5], "party": [{"species": 393, "status": 0, "moves": [64, 45, 55, 204], "pp": [35, 40, 20, 18], "ppBonuses": 0, "level": 15, "hp": 4, "maxhp": 44}, {"species": 661, "status": 0, "moves": [175, 64, 98, 52], "pp": [15, 35, 27, 25], "ppBonuses": 0, "level": 15, "hp": 0, "maxhp": 39}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 0, "maxhp": 19}, {"species": 187, "status": 0, "moves": [150, 33, 39, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 5, "hp": 19, "maxhp": 19}, {"species": 659, "status": 0, "moves": [189, 43, 33, 0], "pp": [10, 30, 35, 0], "ppBonuses": 0, "level": 5, "hp": 18, "maxhp": 18}, {"species": 1298, "status": 0, "moves": [33, 39, 574, 0], "pp": [35, 30, 15, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792229113.07, "event": "map", "map": "MAP_ALDERFIELD", "pos": [8, 9]}
+{"t": 1792229123.37, "event": "map", "map": "MAP_COASTALBLUFFS", "pos": [0, 15]}
+{"t": 1792229123.57, "event": "capture", "file": "0008-q1-bluffs-entered.png"}
+{"t": 1792229123.57, "event": "observe", "label": "q1-bluffs-entered", "problems": []}
+{"t": 1792229136.8, "event": "capture", "file": "0009-talk-coastalbluffs-35-7-01.png"}
+{"t": 1792229137.37, "event": "capture", "file": "0010-q1-hiker.png"}
+{"t": 1792229137.37, "event": "observe", "label": "q1-hiker", "problems": []}
+{"t": 1792229142.16, "event": "capture", "file": "0011-bag-pocket-0.png"}
+{"t": 1792229143.24, "event": "capture", "file": "0012-bag-pocket-1.png"}
+{"t": 1792229144.32, "event": "capture", "file": "0013-bag-pocket-2.png"}
+{"t": 1792229145.41, "event": "capture", "file": "0014-bag-pocket-3.png"}
+{"t": 1792229146.5, "event": "capture", "file": "0015-bag-pocket-4.png"}
+{"t": 1792229147.59, "event": "capture", "file": "0016-bag-pocket-5.png"}
+{"t": 1792229150.11, "event": "capture", "file": "0017-bag-shown.png"}
+{"t": 1792229150.11, "event": "observe", "label": "bag-shown", "problems": []}
+{"t": 1792229150.25, "event": "capture", "file": "0018-q1-before-reward.png"}
+{"t": 1792229150.25, "event": "observe", "label": "q1-before-reward", "problems": []}
+{"t": 1792229161.98, "event": "map", "map": "MAP_ALDERFIELD", "pos": [39, 15]}
+{"t": 1792229171.31, "event": "capture", "file": "0019-talk-alderfield-12-16-01.png"}
+{"t": 1792229172.7, "event": "capture", "file": "0020-talk-alderfield-12-16-02.png"}
+{"t": 1792229174.09, "event": "capture", "file": "0021-talk-alderfield-12-16-03.png"}
+{"t": 1792229175.45, "event": "capture", "file": "0022-talk-alderfield-12-16-04.png"}
+{"t": 1792229176.07, "event": "capture", "file": "0023-q1-reward.png"}
+{"t": 1792229176.07, "event": "observe", "label": "q1-reward", "problems": []}
+{"t": 1792229178.29, "event": "capture", "file": "0024-talk-alderfield-12-16-01.png"}
+{"t": 1792229178.89, "event": "capture", "file": "0025-q1-no-duplicate.png"}
+{"t": 1792229178.89, "event": "observe", "label": "q1-no-duplicate", "problems": []}
+{"t": 1792229184.51, "event": "capture", "file": "0026-bag-great-balls.png"}
+{"t": 1792229191.67, "event": "capture", "file": "0027-save-confirm-checkpoint.png"}
+{"t": 1792229200.23, "event": "saved", "label": "checkpoint", "status": 1, "ok": true}
+{"t": 1792229200.25, "event": "capture", "file": "0028-saved-checkpoint.png"}
+{"t": 1792229200.39, "event": "capture", "file": "0029-end.png"}
+{"t": 1792229200.39, "event": "observe", "label": "end", "problems": []}
