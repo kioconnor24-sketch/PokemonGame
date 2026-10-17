@@ -1,0 +1,393 @@
+{
+  "scope": "CODEX_NATIVE_BACKEND_EVIDENCE_NOT_GRAPHICAL_OR_FINAL_M1_ACCEPTANCE",
+  "date": "2026-10-17",
+  "source": {
+    "audited_main": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+    "audited_main_engine_tree": "d0fe403c419161f51879b7d9f7a1ec95dbca7c84",
+    "test_commit": "50807db707da4409ad46221e1d7cf4b49bc5b15e",
+    "test_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
+    "new_test_sha256": "b079ec0ac97f3cd402524b2ca35cfbe13cefe3f8c96bfba5ea0a80ff7fe97070"
+  },
+  "reused_exact_tree_ci": {
+    "run": 39018184673,
+    "job": 117354499570,
+    "source_head": "9f0efe031f7998f796ba14478a9881ba8af1a6c2",
+    "averon_passed": 241,
+    "averon_total": 241,
+    "artifact": 12095618397
+  },
+  "native": {
+    "pc_slot_focused": {
+      "exit_code": 0,
+      "named_results": 1,
+      "results": [
+        {
+          "name": "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+          "status": "PASS"
+        }
+      ],
+      "log_sha256": "4a404a96cc3f7bd4681e9d999a6de6bac810639f5f39adcc5d2fd9cac7a4d910",
+      "command": "make -C 'Pokemon Game/engine' -j4 -O check TEST_SRCS='test/test_runner.c test/test_runner_args.c test/test_runner_battle.c test/averon_m1_codex_pc_slot_recovery.c' TESTS='Averon M1' ROMTEST=/workspace/.onboarding/mgba-rom-test"
+    },
+    "save_integrity": {
+      "exit_code": 0,
+      "named_results": 30,
+      "results": [
+        {
+          "name": "Averon region adapters reject disabled map groups without changing the return warp",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region adapters keep both badge banks independent and fail closed",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save reports both slots corrupt instead of mixing them",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refuses a newer format: loads nothing and never overwrites it",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rolls back across save counter wrap",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rejects a record copied from the other slot",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save round-trips both regions through flash without writing on load",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refusal: no save type or special sector write reaches flash",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon trade save refusal: a supported full-save task still initializes",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon foreign OT delivery preserves encrypted data when the party has space",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon trade save refusal: wired callback enters failure without writing",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refusal: the save failed screen never wipes the refused save",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon trade save refusal: full-save task enters failure without writing",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save power loss at any sector write keeps the last whole slot",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rejects a slot whose sectors come from two different saves",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save rejects every single-bit flip in the record and loads the older slot",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon trade save refusal: wireless callback enters failure without writing",
+          "status": "PASS"
+        },
+        {
+          "name": "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+          "status": "PASS"
+        }
+      ],
+      "log_sha256": "b4cdb49712c482328b080d588b5c7801f30b2535cc869bc666caedcf3647aae3",
+      "command": "make -C 'Pokemon Game/engine' -j4 -O check TEST_SRCS='test/test_runner.c test/test_runner_args.c test/test_runner_battle.c test/averon_region_save.c test/averon_region_save_refusal.c test/averon_trade_save_refusal.c test/averon_pc_delivery_flash.c test/averon_egg_hatch_ot.c test/averon_m1_codex_pc_slot_recovery.c' TESTS='Averon' ROMTEST=/workspace/.onboarding/mgba-rom-test"
+    }
+  },
+  "builds": {
+    "normal": {
+      "source_sha": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+      "exit_code": 0,
+      "warnings": 0,
+      "errors": 0,
+      "rom": {
+        "size_bytes": 33554432,
+        "sha256": "e09381d08f29178328c364257502e86cd59ab744b291120390b344ce16ed2e5c"
+      },
+      "elf_sha256": "31efd1c9553d33b773d3d13bfeb584c2d8ff215a9238b1c1d7f8bb002a7d4067",
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226484,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35660,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28392,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4376,
+          "used_percent": 86.65,
+          "linker_reported_percent": 86.65
+        },
+        "ROM": {
+          "used_bytes": 26736200,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 6818232,
+          "used_percent": 79.68,
+          "linker_reported_percent": 79.68
+        }
+      },
+      "save_blocks": {
+        "SaveBlock1": {
+          "used_bytes": 15568,
+          "limit_bytes": 15872,
+          "free_bytes": 304
+        },
+        "SaveBlock2": {
+          "used_bytes": 3884,
+          "limit_bytes": 3968,
+          "free_bytes": 84
+        },
+        "SaveBlock3": {
+          "used_bytes": 68,
+          "limit_bytes": 1624,
+          "free_bytes": 1556
+        },
+        "PokemonStorage": {
+          "used_bytes": 34144,
+          "limit_bytes": 35712,
+          "free_bytes": 1568
+        }
+      },
+      "static_system_stack_span_bytes": 3928,
+      "dynamic_stack": "NOT_MEASURED_BY_CODEX",
+      "log_sha256": "f59a6ea755579ef703a45707933e539f36eb0fa87d3ee62a598f4a135fd45b12",
+      "provenance_sha256": "1d23d9b2b57f61d8831adb16bf46b3247e6d3f3e5c7c007c9ad518fe563a6346",
+      "command": "make -C 'Pokemon Game/engine' -j4 -O all"
+    },
+    "release": {
+      "source_sha": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+      "exit_code": 0,
+      "warnings": 4,
+      "errors": 0,
+      "rom": {
+        "size_bytes": 33554432,
+        "sha256": "56c902840cffb587a4add8a021260095e91cab77a2f170f6cf4f14bc333d9ea2"
+      },
+      "elf_sha256": "481510252e229314a4288c9db4e291aec43114e0b2596d18e013c813657d6932",
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226486,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35658,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28336,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4432,
+          "used_percent": 86.47,
+          "linker_reported_percent": 86.47
+        },
+        "ROM": {
+          "used_bytes": 26854924,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 6699508,
+          "used_percent": 80.03,
+          "linker_reported_percent": 80.03
+        }
+      },
+      "save_blocks": {
+        "SaveBlock1": {
+          "used_bytes": 15568,
+          "limit_bytes": 15872,
+          "free_bytes": 304
+        },
+        "SaveBlock2": {
+          "used_bytes": 3884,
+          "limit_bytes": 3968,
+          "free_bytes": 84
+        },
+        "SaveBlock3": {
+          "used_bytes": 68,
+          "limit_bytes": 1624,
+          "free_bytes": 1556
+        },
+        "PokemonStorage": {
+          "used_bytes": 34144,
+          "limit_bytes": 35712,
+          "free_bytes": 1568
+        }
+      },
+      "static_system_stack_span_bytes": 3984,
+      "dynamic_stack": "NOT_MEASURED_BY_CODEX",
+      "log_sha256": "84b74ee3a101e2269aca995d2b294fb359da809ab45b2e830bcadcd6b25fc836",
+      "provenance_sha256": "114a695b6a0446838fb7eb74b89c9c73cdd65a4d5d61820a6ca481d738ac4535",
+      "command": "make -C 'Pokemon Game/engine' -j4 -O RELEASE=1 all"
+    }
+  },
+  "tools": {
+    "build": {
+      "arm_gcc": {
+        "available": true,
+        "version": "arm-none-eabi-gcc (15:14.2.rel1-1) 14.2.1 20241119"
+      },
+      "arm_ld": {
+        "available": true,
+        "version": "GNU ld (2.44-3+23+b1) 2.44"
+      },
+      "git": {
+        "available": true,
+        "version": "git version 2.52.0"
+      },
+      "make": {
+        "available": true,
+        "version": "GNU Make 4.4.1"
+      },
+      "mgba": {
+        "available": false,
+        "version": null
+      },
+      "python": {
+        "available": true,
+        "version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+      }
+    },
+    "host_cc": "cc (Debian 14.2.0-19) 14.2.0",
+    "executed_headless_runner_sha256": "4304688a0b44007cca23c9e887af17c44530fd602ee3d1e57a232da397bec769",
+    "headless_runner_matches_bundled_binary": true,
+    "runner_version": "version flag prints usage; identify exact binary by SHA256"
+  },
+  "host_verifiers": {
+    "registry": {
+      "groups": 76,
+      "map_slots": 951,
+      "linked_groups": 35,
+      "linked_maps": 534,
+      "disabled_groups": 41,
+      "signed_group_slots_remaining": 52,
+      "smallest_group_headroom": 5,
+      "smallest_linked_group_headroom": 20,
+      "errors": [],
+      "mutations": {
+        "group-reorder": "DETECTED",
+        "map-reorder": "DETECTED",
+        "duplicate-id": "DETECTED",
+        "missing-map": "DETECTED",
+        "symbol-mismatch": "DETECTED",
+        "mixed-region": "DETECTED",
+        "group-overflow": "DETECTED",
+        "map-overflow": "DETECTED",
+        "event-overflow": "DETECTED",
+        "warp-index-overflow": "DETECTED"
+      },
+      "elf": {
+        "sha256": "31efd1c9553d33b773d3d13bfeb584c2d8ff215a9238b1c1d7f8bb002a7d4067",
+        "checked_maps": 534,
+        "mutations": {
+          "linked-group-null": "DETECTED",
+          "disabled-group-linked": "DETECTED",
+          "wrong-header-in-slot": "DETECTED"
+        }
+      }
+    },
+    "event_namespace": {
+      "averon_flags": 24,
+      "averon_vars": 8,
+      "summary": {
+        "blockers": 0,
+        "warnings": 0
+      }
+    },
+    "native_source_caps_host_harness": "PASS: native level-cap functions + EXP behavior for 10 flag stages and MAX_LEVEL, and the regional-profile override.",
+    "existing_map_generator_determinism": {
+      "Saltmere": {
+        "connections.inc": "ea5241cb1d3e8fee9d6baf64377d121c069a43c009637ee1d9c805fad0dff322",
+        "events.inc": "ef38c7258041f07ca5753529ea01dc32aa8cd9c6d4dca2e876801a2b187bab36",
+        "header.inc": "703fb8ebe6c75e119f94ae9d3ad7a06a57275862661e204c839e5720a309883b"
+      },
+      "AlderfieldClinic": {
+        "connections.inc": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "events.inc": "8e51d2f725d4a33fc756487b9b19de9bc4ad27c7a5557f519f0ee93492a7d1c2",
+        "header.inc": "d3ee5dbdb3dfe398d16c854826524b85d63e735862d33a320f3b81fd84d5a0c8"
+      }
+    }
+  },
+  "static_limits": {
+    "sprite_slots": 64,
+    "runtime_object_events": 16,
+    "saved_map_object_templates": 64,
+    "obj_palette_bytes": 512,
+    "obj_palette_4bpp_slots": 16,
+    "dynamic_peak_sprite_palette_object_usage": "NOT_MEASURED"
+  },
+  "strict_baseline": {
+    "path": "Pokemon Game/scripts/averon-native-test-baseline.txt",
+    "sha256": "18af720b60953ca776f619f60e208ac665256b0eb5d780c1c14a834b9b26ba82",
+    "normalized_identities": 327,
+    "expected_failing_results": 329,
+    "final_unfiltered_run": "PENDING_FINAL_INTEGRATION_OF_97_AND_TEST_PR_107"
+  },
+  "limitations": [
+    "No production defect demonstrated by the new regression",
+    "No gameplay save/Continue, graphical, audio or Delta verdict by Codex",
+    "Current-main build results are preparatory; not final integrated-main signoff",
+    "No estimate that future Sinnoh maps/assets fit all resource limits"
+  ]
+}
