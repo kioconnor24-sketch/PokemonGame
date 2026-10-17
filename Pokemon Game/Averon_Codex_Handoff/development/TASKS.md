@@ -1,5 +1,8 @@
 # Pokémon Averon — current next-phase task queue (after accepted M1)
 
+
+**NEW OWNER-DIRECTED CODEX P0 (2026-10-17):** [ROM capacity, cries-OFF experimental builds, reclaimable Hoenn, measured Averon+Sinnoh forecast and optional 64 MiB feasibility](CODEX_ROM_CAPACITY_AND_TWO_REGION_FORECAST_20261017.md). Start with a real cries-ON vs cries-OFF RELEASE build and verify music remains; then measure actual ROM deltas and forecast the unfinished two-region game. Keep configuration experiments separate from production and Claude's content work; do not merge no-cries as a user decision. This focused assignment supersedes the generic Codex budget row below for priority, but not safeguards.
+
 **Last owner decision: 2026-10-17.** [M1 is accepted; next phase is authorized](CURRENT_PHASE_AND_HANDOFF.md), with a **deferred, still-unverified human audio listen**. The original pre-Sinnoh implementation checklist in [M1_EXHAUSTIVE_REMAINING_WORK_20261017.md](M1_EXHAUSTIVE_REMAINING_WORK_20261017.md) is closed historical evidence, not new work. Check live [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) and [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls) for exact claims.
 
 | Priority | Owner/lane | Safe next deliverable | Required dependency / stop point |
