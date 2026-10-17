@@ -1,0 +1,87 @@
+@ Averon scripted-battle macros: story losses, the operative chain and the
+@ Gym ambush. Natives live in src/averon_scripted_battle.c.
+@
+@ data/event_scripts.s includes this file right after the constants, so every
+@ script can use the macros. B_FLAG_NO_WHITEOUT (include/config/battle.h) is
+@ the RAM-only FLAG_SPECIAL_FLAG_UNUSED_0x4003: never saved, and cleared by
+@ every reset before a save is loaded. No scene uses these macros yet; the
+@ scenes wait for approved trainers and text.
+@
+@ Rules every caller follows:
+@ - Keep each sequence inside one locked script so the game cannot be saved
+@   while the no-whiteout flag is set.
+@ - Every averon_scripted_battle is followed, on every path, by the result
+@   check. The macro clears the flag itself, win or lose.
+@
+@ Examples: every loss label is reached only by its goto_if_eq. The line
+@ before each loss label is an unconditional goto or end, so a win can never
+@ fall through into a loss path (checked by
+@ scripts/test-averon-scripted-battle.py).
+@
+@ Example: operative chain, allied heal after the last win
+@ Scene_Chain::
+@     averon_scripted_battle TRAINER_..._1, Text_..._Defeat1
+@     goto_if_eq VAR_RESULT, TRUE, Scene_ChainLost
+@     averon_scripted_battle TRAINER_..._2, Text_..._Defeat2
+@     goto_if_eq VAR_RESULT, TRUE, Scene_ChainLost
+@     @ ... one pair per operative; damage and status carry over
+@     special HealPlayerParty             @ the allied heal, after all wins
+@     goto Scene_ChainDone
+@ Scene_ChainLost:
+@     averon_respawn                      @ heals and warps; ends the script
+@ Scene_ChainDone:
+@     @ scene continues after the chain
+@     end
+@
+@ Example: Gym ambush straight after the official badge battle. The Gym
+@ script's own win path sets the badge flag and does NOT heal; the ambush
+@ starts immediately with the party as the Leader battle left it.
+@ Scene_Ambush::
+@     setflag FLAG_BADGE0x_GET
+@     averon_scripted_battle TRAINER_..._AMBUSH, Text_..._Defeat
+@     goto_if_eq VAR_RESULT, TRUE, Scene_AmbushLost
+@     goto Scene_AmbushDone
+@ Scene_AmbushLost:
+@     averon_respawn                      @ badge flag is kept
+@ Scene_AmbushDone:
+@     end
+@
+@ Example: forced story loss (design: wake at the Pokemon Center, no money
+@ lost, story progresses on a win too). averon_respawn ends the script, so
+@ record story progress BEFORE the battle.
+@ Scene_StoryBattle::
+@     setvar VAR_..._STORY, ...           @ progress first
+@     averon_scripted_battle TRAINER_..., Text_..._Defeat
+@     goto_if_eq VAR_RESULT, TRUE, Scene_StoryLost
+@     goto Scene_StoryDone                @ an unexpected win also progresses
+@ Scene_StoryLost:
+@     averon_respawn
+@ Scene_StoryDone:
+@     end
+@
+@ averon_recover_in_place is for a loss where the scene carries on at the
+@ same spot instead of warping.
+
+	@ Starts a trainer battle the player is allowed to lose. Afterwards
+	@ VAR_RESULT is TRUE if the player lost. Never heals.
+	.macro averon_scripted_battle trainer:req, lose_text:req
+	callnative AveronScriptedBattle_Begin, requests_effects=1
+	trainerbattle_no_intro \trainer, \lose_text
+	callnative AveronScriptedBattle_Finish, requests_effects=1
+	.endm
+
+	@ After a lost story battle: heals the party and lets the scene continue
+	@ where it is. No money is taken.
+	.macro averon_recover_in_place
+	callnative AveronScriptedBattle_RecoverInPlace, requests_effects=1
+	.endm
+
+	@ After a lost battle: heals the party and returns the player to the last
+	@ heal location, like a whiteout but without the money loss. Ends the
+	@ script, so set any story progress before the battle.
+	.macro averon_respawn
+	callnative AveronScriptedBattle_PrepareRespawn, requests_effects=1
+	callnative AveronScriptedBattle_DoRespawnWarp, requests_effects=1
+	waitstate
+	end
+	.endm
