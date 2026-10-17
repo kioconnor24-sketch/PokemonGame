@@ -8,7 +8,17 @@
     "test_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
     "new_test_sha256": "b079ec0ac97f3cd402524b2ca35cfbe13cefe3f8c96bfba5ea0a80ff7fe97070",
     "final_integrated_main": "4f8f987be4adc18ef9fb7637cbd7fbc3e43cb0d7",
-    "final_integrated_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3"
+    "final_integrated_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
+    "latest_main_equivalence": {
+      "main_sha": "d50de2ce427ff8a12a9554761afac022e94e9aa0",
+      "engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
+      "git_diff_engine_exit": 0,
+      "later_merges": [
+        108,
+        110
+      ],
+      "scope": "QA driver and Claude graphical evidence/report only; no engine change, full native not repeated"
+    }
   },
   "reused_exact_tree_ci": {
     "run": 39018184673,
