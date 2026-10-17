@@ -1,0 +1,1227 @@
+{
+  "scope": "CAPACITY_EXPERIMENTS_AND_LOW_CONFIDENCE_CONTENT_SCENARIOS_NOT_GAMEPLAY_ACCEPTANCE",
+  "date": "2026-10-17",
+  "base_main": "8ed13f12f6e60a92f42daff9dba0b0c5c0df7e77",
+  "base_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3",
+  "builds": {
+    "on": {
+      "linked_used_bytes": 26854924,
+      "free_bytes": 6699508,
+      "padded_file_bytes": 33554432,
+      "rom_sha256": "56c902840cffb587a4add8a021260095e91cab77a2f170f6cf4f14bc333d9ea2",
+      "elf_sha256": "481510252e229314a4288c9db4e291aec43114e0b2596d18e013c813657d6932",
+      "pokemon_config_sha256": "e476277d082276ac078452c44482cf9b3b6fb076159fe4745f0774bc276b85ba",
+      "sections": {
+        ".text": 2692056,
+        "script_data": 1262288,
+        ".rodata.compound_string": 357418,
+        ".rodata": 22540948,
+        ".data.iwram": 2204,
+        ".data.ewram": 4
+      },
+      "input_rodata": [
+        {
+          "object": "data/sound_data.o",
+          "bytes": 10422348
+        },
+        {
+          "object": "data/maps.o",
+          "bytes": 710320
+        },
+        {
+          "object": "data/map_events.o",
+          "bytes": 103692
+        }
+      ],
+      "songs_count": 8134,
+      "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+      "samples": {
+        "totals": {
+          "cries": {
+            "count": 1156,
+            "bytes": 9386416
+          },
+          "phonemes": {
+            "count": 51,
+            "bytes": 111496
+          },
+          "instruments_other": {
+            "count": 105,
+            "bytes": 642204
+          }
+        },
+        "blob_list_sha256": "7fcd7d2dfacd7c050060b4f7e201597069edde5932840d0b1d10bc1956a50815"
+      },
+      "ram": {
+        "EWRAM": {
+          "used": 226486,
+          "free": 35658
+        },
+        "IWRAM": {
+          "used": 28336,
+          "free": 4432
+        }
+      },
+      "build_exit": 0,
+      "build_log_sha256": "15072b1ec5532ad48325123aba0f6ccb1758061a13cfde734651f9c917ab267e",
+      "source_commit": "8ed13f12f6e60a92f42daff9dba0b0c5c0df7e77",
+      "engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3"
+    },
+    "off": {
+      "linked_used_bytes": 17438276,
+      "free_bytes": 16116156,
+      "padded_file_bytes": 33554432,
+      "rom_sha256": "923b49fc9b8429cbbae21736acd1ff3dd852410f5505dcfc3d10fdc0dbffa0d0",
+      "elf_sha256": "01da8b1c0c7b271e76419f31ae341da82cb9764178884ac720ddcd775795d361",
+      "pokemon_config_sha256": "7159d1bb965959e9f03e635226d31d59be5bed019aadaa20263febdad0ca9dd7",
+      "sections": {
+        ".text": 2691224,
+        "script_data": 1262288,
+        ".rodata.compound_string": 357418,
+        ".rodata": 13125132,
+        ".data.iwram": 2204,
+        ".data.ewram": 4
+      },
+      "input_rodata": [
+        {
+          "object": "data/sound_data.o",
+          "bytes": 1006532
+        },
+        {
+          "object": "data/maps.o",
+          "bytes": 710320
+        },
+        {
+          "object": "data/map_events.o",
+          "bytes": 103692
+        }
+      ],
+      "songs_count": 8134,
+      "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+      "samples": {
+        "totals": {
+          "cries": {
+            "count": 0,
+            "bytes": 0
+          },
+          "phonemes": {
+            "count": 51,
+            "bytes": 111496
+          },
+          "instruments_other": {
+            "count": 105,
+            "bytes": 642204
+          }
+        },
+        "blob_list_sha256": "69a46bca955535b4420d56b00a0d4e39f0e00735a15d699381c5c37646af4b17"
+      },
+      "ram": {
+        "EWRAM": {
+          "used": 226486,
+          "free": 35658
+        },
+        "IWRAM": {
+          "used": 28336,
+          "free": 4432
+        }
+      },
+      "build_exit": 0,
+      "build_log_sha256": "8137f360717e464956b6be5706945224f45b5f1f0fde05b33339d9d0fdec0e93",
+      "source_commit": "c9ddb7f47f57ed7cae30d2ceb4f4a397b8c5000f",
+      "engine_tree": "36593df765f0b5246de78ce86629d075f2b6c6c5"
+    },
+    "orphan": {
+      "linked_used_bytes": 26851192,
+      "free_bytes": 6703240,
+      "padded_file_bytes": 33554432,
+      "rom_sha256": "112dca56c48a16a5d6d9613f6f5d38bfaa89c8bdfe904494d1bee74bebc54d3c",
+      "elf_sha256": "c3ec4fafca66b856fb50e9ae70e0c95f10d2f657b49f713931dab8a8bec64fbc",
+      "pokemon_config_sha256": "e476277d082276ac078452c44482cf9b3b6fb076159fe4745f0774bc276b85ba",
+      "sections": {
+        ".text": 2692056,
+        "script_data": 1262288,
+        ".rodata.compound_string": 357418,
+        ".rodata": 22537216,
+        ".data.iwram": 2204,
+        ".data.ewram": 4
+      },
+      "input_rodata": [
+        {
+          "object": "data/sound_data.o",
+          "bytes": 10422348
+        },
+        {
+          "object": "data/maps.o",
+          "bytes": 706588
+        },
+        {
+          "object": "data/map_events.o",
+          "bytes": 103692
+        }
+      ],
+      "songs_count": 8134,
+      "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+      "samples": {
+        "totals": {
+          "cries": {
+            "count": 1156,
+            "bytes": 9386416
+          },
+          "phonemes": {
+            "count": 51,
+            "bytes": 111496
+          },
+          "instruments_other": {
+            "count": 105,
+            "bytes": 642204
+          }
+        },
+        "blob_list_sha256": "7fcd7d2dfacd7c050060b4f7e201597069edde5932840d0b1d10bc1956a50815"
+      },
+      "ram": {
+        "EWRAM": {
+          "used": 226486,
+          "free": 35658
+        },
+        "IWRAM": {
+          "used": 28336,
+          "free": 4432
+        }
+      },
+      "build_exit": 0,
+      "build_log_sha256": "5e7cce4ecdcc09741928967ed16ddf5559c735166f9c7d01e68828bdb8443269",
+      "overlay_generated_sha256": {
+        "data/layouts/layouts.inc": "3d45cf8469584ce02cf0bf2af225871b7f27cd6f8d5caa394413f4c673982dec",
+        "data/layouts/layouts_table.inc": "0474812d32e172fe3720b6924a5e58121c10b7b09ac23dac2904313c5f397051"
+      },
+      "source_commit": "8ed13f12f6e60a92f42daff9dba0b0c5c0df7e77",
+      "base_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3"
+    },
+    "alias": {
+      "linked_used_bytes": 26849852,
+      "free_bytes": 6704580,
+      "padded_file_bytes": 33554432,
+      "rom_sha256": "9b5c91a847cf0a012c633ac47246bf6554b12ed550ec2ab14607e76e3e7d7b06",
+      "elf_sha256": "b1bec7f5fc0af4eb7afcf9e3df190da1fa56631b8897592ff0caf110e58299f4",
+      "pokemon_config_sha256": "e476277d082276ac078452c44482cf9b3b6fb076159fe4745f0774bc276b85ba",
+      "sections": {
+        ".text": 2692056,
+        "script_data": 1262288,
+        ".rodata.compound_string": 357418,
+        ".rodata": 22535876,
+        ".data.iwram": 2204,
+        ".data.ewram": 4
+      },
+      "input_rodata": [
+        {
+          "object": "data/sound_data.o",
+          "bytes": 10417276
+        },
+        {
+          "object": "data/maps.o",
+          "bytes": 710320
+        },
+        {
+          "object": "data/map_events.o",
+          "bytes": 103692
+        }
+      ],
+      "songs_count": 8134,
+      "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+      "samples": {
+        "totals": {
+          "cries": {
+            "count": 1156,
+            "bytes": 9386416
+          },
+          "phonemes": {
+            "count": 51,
+            "bytes": 111496
+          },
+          "instruments_other": {
+            "count": 104,
+            "bytes": 637132
+          }
+        },
+        "blob_list_sha256": "63c25cda77491f64baf81fcbc1a4a410566e835d0604b4e26ea60d2e5d1b2bed"
+      },
+      "ram": {
+        "EWRAM": {
+          "used": 226486,
+          "free": 35658
+        },
+        "IWRAM": {
+          "used": 28336,
+          "free": 4432
+        }
+      },
+      "build_exit": 0,
+      "build_log_sha256": "c9eeb4ac7e40fcb8a5e4a84ab10f24d77f2183a2dbc56b56596fcde743d95506",
+      "overlay_source_sha256": {
+        "sound/direct_sound_data.inc": "06dcd9ee33580677a9de2ba2c5dde17e9a5fd456e180a931f0e6fd56ee2986a1"
+      },
+      "source_commit": "8ed13f12f6e60a92f42daff9dba0b0c5c0df7e77",
+      "base_engine_tree": "5d81cc8431cc4c915889b303c22aca2059b78aa3"
+    },
+    "mega_only_off": {
+      "source_commit": "d764fc2122d4ab720488508698583ef646f013d1",
+      "status": "BUILD_FAILED",
+      "release_exit": 2,
+      "native_build_exit": 2,
+      "linked_used_bytes": null,
+      "free_bytes": null,
+      "rom_sha256": null,
+      "elf_sha256": null,
+      "release_log_sha256": "ed531fc2a8281888fa4990179995735c1c7a258dc439ed1bbf482cd436c79f8a",
+      "native_build_log_sha256": "72351c4cc7503b0cfd6814353463eabe754fdeed06b47d324254714d6902b410",
+      "errors": [
+        "gen_1_families.h:10745 CRY_SLOWBRO_MEGA undeclared",
+        "gen_3_families.h:13158 CRY_RAYQUAZA_MEGA undeclared"
+      ],
+      "engine_tree": "91664049135fb8cac69abdf648b041e3a153ed18",
+      "pokemon_config_sha256": "b2e94a1ecaf7efc8c2929bd4a1fda78e351bd627afbda45aa8f2febd7a59c43d"
+    }
+  },
+  "native": {
+    "on": {
+      "test_identities": 6,
+      "pass": 6,
+      "fail": 0,
+      "parameter_cases": 13,
+      "headless": false,
+      "log_sha256": "25dc8a2890aae6177e94d1618581a5857f199eb638e5ea02502417f177f42086",
+      "elf_sha256": "75e2dea9cefa1831d2a666115820739e094aaf0e271ace7a834eab5a91609bae",
+      "fixture_sha256": "8f19aba73b19b167e521ff22c732d342dd0896c8aad685684819efb863e0a40e"
+    },
+    "off": {
+      "test_identities": 6,
+      "pass": 5,
+      "fail": 1,
+      "parameter_cases": 13,
+      "headless": false,
+      "log_sha256": "ddfaee1965c524d0726cc20def775896ebf0043f5aa602bdee03763c485a3a96",
+      "elf_sha256": "7410b02a02fbe42c033c29cc021c0aed3554fd963f576da52014efa666f76d8c",
+      "fixture_sha256": "8f19aba73b19b167e521ff22c732d342dd0896c8aad685684819efb863e0a40e"
+    },
+    "compression": {
+      "pass": 1,
+      "fail": 0,
+      "parameter_cases": 3,
+      "benchmarks": [
+        {
+          "id": 0,
+          "raw": 5088,
+          "fast_ticks64": 785,
+          "full_ticks64": 2457,
+          "scratch_payload": 2854,
+          "free_restored": 115756
+        },
+        {
+          "id": 1,
+          "raw": 15936,
+          "fast_ticks64": 1907,
+          "full_ticks64": 5315,
+          "scratch_payload": 5990,
+          "free_restored": 115756
+        },
+        {
+          "id": 2,
+          "raw": 16128,
+          "fast_ticks64": 2440,
+          "full_ticks64": 7835,
+          "scratch_payload": 10170,
+          "free_restored": 115756
+        }
+      ],
+      "log_sha256": "24ee4e2174de9a58109839450bee101ce6a5103e63ed3b41c9f1c76ec2d3f2e3",
+      "elf_sha256": "239ceffce05e6cd1f8c9726288da308df37b349e89014ab67b68c474f936db3d",
+      "fixture_sha256": "4b2d5d8c04dcedb02c82b1c6f0ad038e0383be0b10f9260798732b6e36fa6c84"
+    }
+  },
+  "host_unit_tests": {
+    "pass": 9,
+    "fail": 0
+  },
+  "song_objects": {
+    "count": 530,
+    "all_equal": true,
+    "objects_sha256": "11056ee24e4efc01b0fdc00ba31dbecd675b4ec8208c5e1b3910dcffb9928bea"
+  },
+  "map_graph_summary": {
+    "scope": "Explicit warps/connections only; dynamic callers, callbacks, tests and saved IDs are additional roots.",
+    "linked_header_count": 534,
+    "linked_layout_count": 456,
+    "averon_opening_roots": [
+      "Saltmere",
+      "SaltmereGreenhouse",
+      "SaltmereWorkshop",
+      "SaltmereHarbor",
+      "SaltmereHome",
+      "CoastalMeadow",
+      "Windrow",
+      "WindrowCooperative",
+      "OrchardLane",
+      "Alderfield",
+      "AlderfieldGym",
+      "AlderfieldClinic",
+      "AlderfieldSupply",
+      "CoastalBluffs",
+      "AveronFieldLab",
+      "AveronFieldLabUnderwater"
+    ],
+    "explicit_reached": [
+      "Alderfield",
+      "AlderfieldClinic",
+      "AlderfieldGym",
+      "AlderfieldSupply",
+      "AveronFieldLab",
+      "AveronFieldLabUnderwater",
+      "CoastalBluffs",
+      "CoastalMeadow",
+      "OrchardLane",
+      "Saltmere",
+      "SaltmereGreenhouse",
+      "SaltmereHarbor",
+      "SaltmereHome",
+      "SaltmereWorkshop",
+      "Windrow",
+      "WindrowCooperative"
+    ],
+    "orphan_layouts_not_a_removal_list": [
+      "Route130_MirageIsland_Layout",
+      "FallarborTown_LeftoverRSContestLobby_Layout",
+      "FallarborTown_LeftoverRSContestHall_Layout",
+      "UnusedContestRoom1_Layout",
+      "UnusedContestRoom2_Layout",
+      "UnusedContestRoom3_Layout",
+      "UnusedCave1_Layout",
+      "UnusedCave2_Layout",
+      "UnusedCave3_Layout",
+      "UnusedCave4_Layout",
+      "UnusedCave5_Layout",
+      "UnusedCave6_Layout",
+      "UnusedCave7_Layout",
+      "UnusedCave8_Layout",
+      "UnusedCave9_Layout",
+      "UnusedCave10_Layout",
+      "UnusedCave11_Layout",
+      "UnusedCave12_Layout",
+      "UnusedCave13_Layout",
+      "UnusedCave14_Layout",
+      "UnusedOutdoorArea_Layout",
+      "CaveOfOrigin_Unused_B4F_Lava_Layout",
+      "Route131_SkyPillar_Layout",
+      "SeafloorCavern_Room9_Lava_Layout",
+      "SootopolisCity_LegendsBattle_Layout",
+      "BattleFrontier_BattlePikeRoomUnused_Layout",
+      "Route111_NoMirageTower_Layout",
+      "LittlerootTown_ProfessorBirchsLabWithTable_Layout",
+      "SkyPillar_1F_Clean_Layout",
+      "SkyPillar_2F_Clean_Layout",
+      "SkyPillar_3F_Clean_Layout",
+      "SkyPillar_4F_Clean_Layout",
+      "SkyPillar_5F_Clean_Layout",
+      "SkyPillar_Top_Clean_Layout",
+      "SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked_Layout"
+    ]
+  },
+  "orphan_cohort": [
+    "UnusedContestRoom1_Layout",
+    "UnusedContestRoom2_Layout",
+    "UnusedContestRoom3_Layout",
+    "UnusedCave1_Layout",
+    "UnusedCave2_Layout",
+    "UnusedCave3_Layout",
+    "UnusedCave4_Layout",
+    "UnusedCave5_Layout",
+    "UnusedCave6_Layout",
+    "UnusedCave7_Layout",
+    "UnusedCave8_Layout",
+    "UnusedCave9_Layout",
+    "UnusedCave10_Layout",
+    "UnusedCave11_Layout",
+    "UnusedCave12_Layout",
+    "UnusedCave13_Layout",
+    "UnusedCave14_Layout",
+    "UnusedOutdoorArea_Layout"
+  ],
+  "cry_source_format": {
+    "linked_dpcm_blobs": 1156,
+    "generated_wave_type": 1,
+    "source_pcm_bytes": 19126422,
+    "sample_rate_counts": {
+      "10512": 391,
+      "13379": 734,
+      "11025": 22,
+      "13000": 9
+    },
+    "mono_8bit_sources": 1130,
+    "mono_16bit_sources": 26
+  },
+  "cry_lz_host_only": [
+    {
+      "label": "Cry_Cetitan",
+      "raw_dpcm_blob": 27648,
+      "lz_bytes": 19752,
+      "raw_sha256": "98878b064b469393d9199f7cf0ac46f4aaf40245fdb796753fff1f1a24404d94",
+      "lz_sha256": "4a6d37d493a0066383cc836f3a650c1a9b517dead35bdba6dcf7d92e8b7f1da6",
+      "host_roundtrip": true
+    },
+    {
+      "label": "Cry_ZygardeMega",
+      "raw_dpcm_blob": 26244,
+      "lz_bytes": 22052,
+      "raw_sha256": "3cdf0aa48b19f2b6b03fbbfde3f5e2b117969b518fcb1a208656d48f4f4d69c9",
+      "lz_sha256": "f53d4e06eb71bc8b79bc1f76fce1afa419e41c05ccf6e8b286515f22e02ed9ea",
+      "host_roundtrip": true
+    },
+    {
+      "label": "Cry_ChandelureMega",
+      "raw_dpcm_blob": 24281,
+      "lz_bytes": 20380,
+      "raw_sha256": "19c2310a8cf973d352a55b605089d89f004e6a082dc80c7c090db57f367feaa2",
+      "lz_sha256": "7d5a282a1668934e64e91dca684d2d66d47d060f1d540c20588afb3574540015",
+      "host_roundtrip": true
+    }
+  ],
+  "forecasts": {
+    "lean": {
+      "maps": [
+        [
+          [
+            16,
+            40,
+            34
+          ],
+          [
+            34,
+            60,
+            40
+          ],
+          [
+            55,
+            36,
+            30
+          ],
+          [
+            120,
+            14,
+            12
+          ]
+        ],
+        [
+          [
+            20,
+            40,
+            36
+          ],
+          [
+            35,
+            60,
+            40
+          ],
+          [
+            75,
+            36,
+            30
+          ],
+          [
+            180,
+            14,
+            12
+          ]
+        ],
+        [
+          [
+            10,
+            60,
+            40
+          ],
+          [
+            20,
+            36,
+            30
+          ],
+          [
+            18,
+            14,
+            12
+          ]
+        ]
+      ],
+      "event_bytes_per_map": 168,
+      "script_text_bytes_per_map": 1024,
+      "trainers": [
+        450,
+        450,
+        100
+      ],
+      "mons_per_trainer": 3,
+      "tileset_families": [
+        10,
+        14,
+        4
+      ],
+      "bytes_per_tileset_family": 20480,
+      "art": [
+        65536,
+        98304,
+        65536
+      ],
+      "songs": [
+        30,
+        35,
+        15
+      ],
+      "bytes_per_song": 2676,
+      "samples": [
+        131072,
+        131072,
+        131072
+      ],
+      "late_scene_assets": [
+        65536,
+        65536,
+        131072
+      ],
+      "engine_tables": [
+        32768,
+        65536,
+        32768
+      ],
+      "reserve": 1048576,
+      "regions": {
+        "remaining_averon": {
+          "layouts": [
+            {
+              "count": 16,
+              "width": 40,
+              "height": 34
+            },
+            {
+              "count": 34,
+              "width": 60,
+              "height": 40
+            },
+            {
+              "count": 55,
+              "width": 36,
+              "height": 30
+            },
+            {
+              "count": 120,
+              "width": 14,
+              "height": 12
+            }
+          ],
+          "map_count": 225,
+          "wild_table_count_upper_budget": 105,
+          "categories": {
+            "layout_and_header_tables": 14400,
+            "object_warp_coord_bg_connections": 37800,
+            "encounters": 18900,
+            "scripts_text": 230400,
+            "trainers_and_parties": 80100,
+            "new_environment_families": 204800,
+            "additional_character_ui_art": 65536,
+            "new_sequences": 80280,
+            "incremental_samples": 131072,
+            "additional_legend_scene_effect_art": 65536,
+            "engine_integration_tables": 32768,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 367640,
+          "growth_including_reserve_bytes": 1329232
+        },
+        "full_sinnoh": {
+          "layouts": [
+            {
+              "count": 20,
+              "width": 40,
+              "height": 36
+            },
+            {
+              "count": 35,
+              "width": 60,
+              "height": 40
+            },
+            {
+              "count": 75,
+              "width": 36,
+              "height": 30
+            },
+            {
+              "count": 180,
+              "width": 14,
+              "height": 12
+            }
+          ],
+          "map_count": 310,
+          "wild_table_count_upper_budget": 130,
+          "categories": {
+            "layout_and_header_tables": 19840,
+            "object_warp_coord_bg_connections": 52080,
+            "encounters": 23400,
+            "scripts_text": 317440,
+            "trainers_and_parties": 80100,
+            "new_environment_families": 286720,
+            "additional_character_ui_art": 98304,
+            "new_sequences": 93660,
+            "incremental_samples": 131072,
+            "additional_legend_scene_effect_art": 65536,
+            "engine_integration_tables": 65536,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 450560,
+          "growth_including_reserve_bytes": 1684248
+        },
+        "additional_postgame": {
+          "layouts": [
+            {
+              "count": 10,
+              "width": 60,
+              "height": 40
+            },
+            {
+              "count": 20,
+              "width": 36,
+              "height": 30
+            },
+            {
+              "count": 18,
+              "width": 14,
+              "height": 12
+            }
+          ],
+          "map_count": 48,
+          "wild_table_count_upper_budget": 30,
+          "categories": {
+            "layout_and_header_tables": 3072,
+            "object_warp_coord_bg_connections": 8064,
+            "encounters": 5400,
+            "scripts_text": 49152,
+            "trainers_and_parties": 17800,
+            "new_environment_families": 81920,
+            "additional_character_ui_art": 65536,
+            "new_sequences": 40140,
+            "incremental_samples": 131072,
+            "additional_legend_scene_effect_art": 131072,
+            "engine_integration_tables": 32768,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 97632,
+          "growth_including_reserve_bytes": 663628
+        }
+      },
+      "all_growth_before_reserve": 3677108,
+      "all_growth_with_reserve": 4725684,
+      "headroom_after_reserve_32MiB": {
+        "on": 1973824,
+        "off": 11390472,
+        "mega_only_off": null
+      },
+      "conditional_64MiB_arithmetic_only": {
+        "on": 35528256,
+        "off": 44944904
+      }
+    },
+    "expected": {
+      "maps": [
+        [
+          [
+            20,
+            48,
+            40
+          ],
+          [
+            40,
+            70,
+            40
+          ],
+          [
+            85,
+            40,
+            35
+          ],
+          [
+            180,
+            18,
+            14
+          ]
+        ],
+        [
+          [
+            26,
+            48,
+            40
+          ],
+          [
+            45,
+            70,
+            40
+          ],
+          [
+            115,
+            40,
+            35
+          ],
+          [
+            260,
+            18,
+            14
+          ]
+        ],
+        [
+          [
+            20,
+            70,
+            40
+          ],
+          [
+            35,
+            40,
+            35
+          ],
+          [
+            35,
+            18,
+            14
+          ]
+        ]
+      ],
+      "event_bytes_per_map": 284,
+      "script_text_bytes_per_map": 2048,
+      "trainers": [
+        650,
+        700,
+        200
+      ],
+      "mons_per_trainer": 4,
+      "tileset_families": [
+        16,
+        20,
+        8
+      ],
+      "bytes_per_tileset_family": 24576,
+      "art": [
+        131072,
+        196608,
+        196608
+      ],
+      "songs": [
+        50,
+        55,
+        25
+      ],
+      "bytes_per_song": 4096,
+      "samples": [
+        393216,
+        393216,
+        262144
+      ],
+      "late_scene_assets": [
+        131072,
+        131072,
+        262144
+      ],
+      "engine_tables": [
+        65536,
+        131072,
+        65536
+      ],
+      "reserve": 1572864,
+      "regions": {
+        "remaining_averon": {
+          "layouts": [
+            {
+              "count": 20,
+              "width": 48,
+              "height": 40
+            },
+            {
+              "count": 40,
+              "width": 70,
+              "height": 40
+            },
+            {
+              "count": 85,
+              "width": 40,
+              "height": 35
+            },
+            {
+              "count": 180,
+              "width": 18,
+              "height": 14
+            }
+          ],
+          "map_count": 325,
+          "wild_table_count_upper_budget": 145,
+          "categories": {
+            "layout_and_header_tables": 20800,
+            "object_warp_coord_bg_connections": 92300,
+            "encounters": 26100,
+            "scripts_text": 665600,
+            "trainers_and_parties": 143000,
+            "new_environment_families": 393216,
+            "additional_character_ui_art": 131072,
+            "new_sequences": 204800,
+            "incremental_samples": 393216,
+            "additional_legend_scene_effect_art": 131072,
+            "engine_integration_tables": 65536,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 632120,
+          "growth_including_reserve_bytes": 2898832
+        },
+        "full_sinnoh": {
+          "layouts": [
+            {
+              "count": 26,
+              "width": 48,
+              "height": 40
+            },
+            {
+              "count": 45,
+              "width": 70,
+              "height": 40
+            },
+            {
+              "count": 115,
+              "width": 40,
+              "height": 35
+            },
+            {
+              "count": 260,
+              "width": 18,
+              "height": 14
+            }
+          ],
+          "map_count": 446,
+          "wild_table_count_upper_budget": 186,
+          "categories": {
+            "layout_and_header_tables": 28544,
+            "object_warp_coord_bg_connections": 126664,
+            "encounters": 33480,
+            "scripts_text": 913408,
+            "trainers_and_parties": 154000,
+            "new_environment_families": 491520,
+            "additional_character_ui_art": 196608,
+            "new_sequences": 225280,
+            "incremental_samples": 393216,
+            "additional_legend_scene_effect_art": 131072,
+            "engine_integration_tables": 131072,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 808448,
+          "growth_including_reserve_bytes": 3633312
+        },
+        "additional_postgame": {
+          "layouts": [
+            {
+              "count": 20,
+              "width": 70,
+              "height": 40
+            },
+            {
+              "count": 35,
+              "width": 40,
+              "height": 35
+            },
+            {
+              "count": 35,
+              "width": 18,
+              "height": 14
+            }
+          ],
+          "map_count": 90,
+          "wild_table_count_upper_budget": 55,
+          "categories": {
+            "layout_and_header_tables": 5760,
+            "object_warp_coord_bg_connections": 25560,
+            "encounters": 9900,
+            "scripts_text": 184320,
+            "trainers_and_parties": 44000,
+            "new_environment_families": 196608,
+            "additional_character_ui_art": 196608,
+            "new_sequences": 102400,
+            "incremental_samples": 262144,
+            "additional_legend_scene_effect_art": 262144,
+            "engine_integration_tables": 65536,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 228360,
+          "growth_including_reserve_bytes": 1583340
+        }
+      },
+      "all_growth_before_reserve": 8115484,
+      "all_growth_with_reserve": 9688348,
+      "headroom_after_reserve_32MiB": {
+        "on": -2988840,
+        "off": 6427808,
+        "mega_only_off": null
+      },
+      "conditional_64MiB_arithmetic_only": {
+        "on": 30565592,
+        "off": 39982240
+      }
+    },
+    "content_rich": {
+      "maps": [
+        [
+          [
+            28,
+            60,
+            48
+          ],
+          [
+            50,
+            80,
+            50
+          ],
+          [
+            130,
+            48,
+            40
+          ],
+          [
+            260,
+            22,
+            18
+          ]
+        ],
+        [
+          [
+            34,
+            60,
+            48
+          ],
+          [
+            60,
+            80,
+            50
+          ],
+          [
+            180,
+            48,
+            40
+          ],
+          [
+            360,
+            22,
+            18
+          ]
+        ],
+        [
+          [
+            30,
+            80,
+            50
+          ],
+          [
+            60,
+            48,
+            40
+          ],
+          [
+            50,
+            22,
+            18
+          ]
+        ]
+      ],
+      "event_bytes_per_map": 440,
+      "script_text_bytes_per_map": 4096,
+      "trainers": [
+        900,
+        1000,
+        400
+      ],
+      "mons_per_trainer": 5,
+      "tileset_families": [
+        24,
+        28,
+        14
+      ],
+      "bytes_per_tileset_family": 32768,
+      "art": [
+        262144,
+        393216,
+        524288
+      ],
+      "songs": [
+        70,
+        80,
+        40
+      ],
+      "bytes_per_song": 8192,
+      "samples": [
+        1048576,
+        1048576,
+        786432
+      ],
+      "late_scene_assets": [
+        262144,
+        262144,
+        524288
+      ],
+      "engine_tables": [
+        131072,
+        262144,
+        131072
+      ],
+      "reserve": 2097152,
+      "regions": {
+        "remaining_averon": {
+          "layouts": [
+            {
+              "count": 28,
+              "width": 60,
+              "height": 48
+            },
+            {
+              "count": 50,
+              "width": 80,
+              "height": 50
+            },
+            {
+              "count": 130,
+              "width": 48,
+              "height": 40
+            },
+            {
+              "count": 260,
+              "width": 22,
+              "height": 18
+            }
+          ],
+          "map_count": 468,
+          "wild_table_count_upper_budget": 208,
+          "categories": {
+            "layout_and_header_tables": 29952,
+            "object_warp_coord_bg_connections": 205920,
+            "encounters": 37440,
+            "scripts_text": 1916928,
+            "trainers_and_parties": 235800,
+            "new_environment_families": 786432,
+            "additional_character_ui_art": 262144,
+            "new_sequences": 573440,
+            "incremental_samples": 1048576,
+            "additional_legend_scene_effect_art": 262144,
+            "engine_integration_tables": 131072,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 1270144,
+          "growth_including_reserve_bytes": 6759992
+        },
+        "full_sinnoh": {
+          "layouts": [
+            {
+              "count": 34,
+              "width": 60,
+              "height": 48
+            },
+            {
+              "count": 60,
+              "width": 80,
+              "height": 50
+            },
+            {
+              "count": 180,
+              "width": 48,
+              "height": 40
+            },
+            {
+              "count": 360,
+              "width": 22,
+              "height": 18
+            }
+          ],
+          "map_count": 634,
+          "wild_table_count_upper_budget": 274,
+          "categories": {
+            "layout_and_header_tables": 40576,
+            "object_warp_coord_bg_connections": 278960,
+            "encounters": 49320,
+            "scripts_text": 2596864,
+            "trainers_and_parties": 262000,
+            "new_environment_families": 917504,
+            "additional_character_ui_art": 393216,
+            "new_sequences": 655360,
+            "incremental_samples": 1048576,
+            "additional_legend_scene_effect_art": 262144,
+            "engine_integration_tables": 262144,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 1657232,
+          "growth_including_reserve_bytes": 8423896
+        },
+        "additional_postgame": {
+          "layouts": [
+            {
+              "count": 30,
+              "width": 80,
+              "height": 50
+            },
+            {
+              "count": 60,
+              "width": 48,
+              "height": 40
+            },
+            {
+              "count": 50,
+              "width": 22,
+              "height": 18
+            }
+          ],
+          "map_count": 140,
+          "wild_table_count_upper_budget": 90,
+          "categories": {
+            "layout_and_header_tables": 8960,
+            "object_warp_coord_bg_connections": 61600,
+            "encounters": 16200,
+            "scripts_text": 573440,
+            "trainers_and_parties": 104800,
+            "new_environment_families": 458752,
+            "additional_character_ui_art": 524288,
+            "new_sequences": 327680,
+            "incremental_samples": 786432,
+            "additional_legend_scene_effect_art": 524288,
+            "engine_integration_tables": 131072,
+            "installed_species_followers_mechanics": 0
+          },
+          "layout_bytes": 511120,
+          "growth_including_reserve_bytes": 4028632
+        }
+      },
+      "all_growth_before_reserve": 19212520,
+      "all_growth_with_reserve": 21309672,
+      "headroom_after_reserve_32MiB": {
+        "on": -14610164,
+        "off": -5193516,
+        "mega_only_off": null
+      },
+      "conditional_64MiB_arithmetic_only": {
+        "on": 18944268,
+        "off": 28360916
+      }
+    }
+  },
+  "matrix": {
+    "result": "NATIVE_MAPPING_SENTINELS_ONLY",
+    "positive_exit": 0,
+    "negative_exit": 1,
+    "positive_rom_sha256": "93242c403b437d23f7a3d362aa0c20c50341e5e71f0b1b77926c92b75534e2ce",
+    "negative_rom_sha256": "a097249991e005c76ff00b2062916c54744e67edb8255e1b59a9eda69e400a51",
+    "source_sha256": "d4ef4710575c7921da09353e29c04fddc065e83bbbff33b8e6d27327afbacea8",
+    "elf_sha256": "6de21633301257273e143ab63c6554d09982c41dbea6b7772db2f8dec8776b21",
+    "runner_sha256": "4304688a0b44007cca23c9e887af17c44530fd602ee3d1e57a232da397bec769",
+    "runner_source_pin": "dbffb46c4e7d2e7a2cbed7c3488cece4c2176d4c",
+    "mgba_source_review": "9660a668f2093cb4aba5983f52bebf8878dc5b8b",
+    "desktop_vbam_source_review": "925f226fdf88c378812ba8b8ab4c8be93b7cbd3b",
+    "delta_gba_core_pin": "869c34aeca9dd2b3fbd329092bb2743b0ae80c98",
+    "delta_vbam_pin": "453fa0decf179360926fb417725a794aa496d6e3",
+    "delta_device": "UNTESTED",
+    "zenulator_device": "UNTESTED"
+  },
+  "forecast_production_reclaim_credit_bytes": 0
+}

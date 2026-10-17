@@ -1,6 +1,8 @@
 """Negative fixtures for linked occupancy and forecast accounting."""
 import struct
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import codex_rom_capacity as c
 
 
@@ -66,6 +68,25 @@ class Budget(unittest.TestCase):
                 c.forecast([row], {}, 0)
         with self.assertRaises(ValueError):
             c.forecast([], {'reserve': -1}, 0)
+
+    def test_samples_count_physical_copies_not_aliases_or_inactive_branches(self):
+        class Linked:
+            symbols = {'Cry_One': (4,), 'Cry_Alias': (4,), 'Cry_Copy': (8,), 'Cry_Inactive': (12,)}
+
+            def at_symbol(self, name, size):
+                return b'WRONG' if name == 'Cry_Inactive' else b'ABCD'
+
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root/'sound/direct_sound_samples/cries').mkdir(parents=True)
+            (root/'sound/direct_sound_samples/cries/a.bin').write_bytes(b'ABCD')
+            lines = []
+            for label in ('Cry_One', 'Cry_Alias', 'Cry_Copy', 'Cry_Inactive'):
+                lines.extend([label+'::', ' .incbin "sound/direct_sound_samples/cries/a.bin"'])
+            (root/'sound/direct_sound_data.inc').write_text(chr(10).join(lines))
+            actual = c.samples(root, Linked())
+            self.assertEqual(actual['totals']['cries'], {'count': 2, 'bytes': 8})
+            self.assertEqual([r['label'] for r in actual['blobs']], ['Cry_One', 'Cry_Copy'])
 
 
 if __name__ == '__main__':

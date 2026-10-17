@@ -8,7 +8,6 @@ multiple labels at one address do not count twice. Requires an ELF32 ARM LE
 build, generated sample bins and the matching linker map beside the ELF.
 """
 import argparse
-from collections import defaultdict
 import hashlib
 import json
 from pathlib import Path
@@ -135,6 +134,34 @@ def forecast(layouts, other_categories, free_bytes):
             'headroom_after_reserve_bytes': free_bytes-growth}
 
 
+def map_inventory(engine, elf):
+    """Explicit map JSON graph only; NOT dynamic script/save reachability."""
+    layouts = json.loads((engine/'data/layouts/layouts.json').read_text())['layouts']
+    maps = [json.loads(p.read_text()) for p in sorted((engine/'data/maps').glob('*/map.json'))]
+    names = {m['id']: m['name'] for m in maps}
+    headers = [m for m in maps if m['name'] in elf.symbols]
+    referenced = {m['layout'] for m in maps}
+    rows = []
+    for m in headers:
+        targets = [w['dest_map'] for w in m.get('warp_events', [])]
+        targets += [w['map'] for w in (m.get('connections') or [])]
+        rows.append({'name': m['name'], 'layout_id': m['layout'], 'music': m['music'],
+                     'explicit_edges': sorted({names.get(t, t) for t in targets})})
+    group = json.loads((engine/'data/maps/map_groups.json').read_text())['gMapGroup_AveronOpening']
+    edges = {r['name']: r['explicit_edges'] for r in rows}
+    reached, todo = set(), list(group)
+    while todo:
+        name = todo.pop()
+        if name not in reached:
+            reached.add(name)
+            todo.extend(edges.get(name, []))
+    orphan = [l for l in layouts if l['name'] in elf.symbols and l['id'] not in referenced]
+    return {'scope': 'Explicit warps/connections only; dynamic callers, callbacks, tests and saved IDs are additional roots.',
+            'linked_header_count': len(headers), 'linked_layout_count': sum(l['name'] in elf.symbols for l in layouts),
+            'averon_opening_roots': group, 'explicit_reached': sorted(reached),
+            'orphan_layouts_not_a_removal_list': [l['name'] for l in orphan], 'graph': rows}
+
+
 def inventory(engine, elf_path, rom_path):
     elf_data, rom = elf_path.read_bytes(), rom_path.read_bytes()
     elf = Elf(elf_data)
@@ -153,6 +180,7 @@ def inventory(engine, elf_path, rom_path):
         'input_rodata': input_sections(elf_path.with_suffix('.map').read_text()),
         'songs_count': len(songs), 'song_names_sha256': sha('\n'.join(sorted(songs)).encode()),
         'samples': sample_data,
+        'map_inventory': map_inventory(engine, elf),
     }
 
 
