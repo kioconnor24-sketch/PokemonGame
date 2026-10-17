@@ -490,6 +490,34 @@ def phase_clinic_continued(d):
                                     "partyHealed": lambda o: party_fully_restored(d, o)})
 
 
+def phase_badge_gate(d, tile=(38, 16)):
+    """Before Badge01 the Alderfield east trigger (CoastalBluffs_BadgeGate)
+    must stop the player, say why, step them back, and leave control and the
+    Start menu working. Ordinary walking only."""
+    observe(d, "gate-before", {"FLAG_BADGE01_GET": False})
+    d.travel_to("MAP_ALDERFIELD")
+    d.walk_path("MAP_ALDERFIELD", {(tile[0] - 1, tile[1])}, on_event=lambda s: d.battle())
+    s = d.step("right")
+    d.clear_text(capture="gate-text", frames=4)
+    d.settle()
+    observe(d, "gate-blocked", {"map": "MAP_ALDERFIELD",
+                                "steppedBack": lambda o: o["x"] < tile[0],
+                                "FLAG_BADGE01_GET": False})
+    open_start_menu_action(d, 2)  # BAG, then close: controls still respond
+    time.sleep(1.0)
+    d.shot("gate-bag")
+    back_to_field(d)
+    observe(d, "gate-controls", {"fieldReady": lambda o: d.field_ready(d.state())})
+
+
+def phase_q4_continued(d):
+    """DEV copy, fresh process after the Q4 save: Wobbuffet once, flag set."""
+    wob = d.g.c["SPECIES_WOBBUFFET"]
+    observe(d, "q4-continued", {"FLAG_AVERON_DEV_GIFT_RECEIVED": True,
+                                "oneWobbuffet": lambda o: [m["species"] for m in o["party"]].count(wob) == 1,
+                                "partyOf6": lambda o: len(o["party"]) == 6})
+
+
 def phase_save(d):
     save_game(d, "checkpoint")
 
@@ -966,7 +994,8 @@ PHASES = {"piplup_lead": lambda d: party_swap(d, 1, 0),
           "q3_continued": phase_q3_continued, "q4_gift": phase_q4_gift, "trainer_card": phase_trainer_card,
           "q5_field": phase_q5_field, "q1_full_pocket": phase_q1_full_pocket,
           "q2_full_pocket": phase_q2_full_pocket, "corrupt_fallback": phase_corrupt_fallback,
-          "clinic_continued": phase_clinic_continued,
+          "clinic_continued": phase_clinic_continued, "badge_gate": phase_badge_gate,
+          "q4_continued": phase_q4_continued,
           "sam": make_trainer("sam", "MAP_ORCHARDLANE", (16, 9), "TRAINER_AVERON_FARMER"),
           "lina": make_trainer("lina", "MAP_ORCHARDLANE", (21, 17), "TRAINER_AVERON_PICNIC"),
           "milo": make_trainer("milo", "MAP_ORCHARDLANE", (24, 12), "TRAINER_AVERON_ORCHARD"),
