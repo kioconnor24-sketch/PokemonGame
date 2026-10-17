@@ -1,7 +1,7 @@
 name: Averon staged SCRIPTED-BATTLE core rehearsal
 
 # This tests an ephemeral split; it NEVER pushes a PR, registers a scene,
-# approves a protected source write or changes the QUE​ST graphical gate.
+# approves a protected source write or changes the QUEST graphical gate.
 on:
   pull_request:
     paths:
@@ -90,7 +90,7 @@ jobs:
           import os
           import runpy
           evidence = Path(os.environ['RUNNER_TEMP']) / 'averon-staged-evidence'
-          parser = runpy.run_path('Pokemon Game/scripts/coordination/verify_build_readiness.py')
+          parser = runpy.run_path('../scripts/coordination/verify_build_readiness.py')
           for name in ('native', 'save'):
               outcome = parser['parse_test_log']((evidence / f'{name}.log').read_text(), name)
               print(f"EXECUTED {name}: {outcome['passed']}/{outcome['total']} passed")
