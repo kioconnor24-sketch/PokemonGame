@@ -161,6 +161,8 @@ def save_dialog_verdict(callbacks):
 
 def restored_problems(saved, restored):
     """Fields of a fresh CONTINUE that differ from the state at SAVE."""
+    # Compare as stored: the saved side went through JSON (tuples became lists).
+    restored = json.loads(json.dumps(restored))
     problems = [] if restored.get('cb2') == 'CB2_Overworld' else [f"not in the overworld ({restored.get('cb2')})"]
     for key in RESTORED_KEYS:
         if saved.get(key) != restored.get(key):

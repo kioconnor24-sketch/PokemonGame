@@ -105,6 +105,11 @@ class Continue(unittest.TestCase):
     def test_identical_state_passes_and_frame_is_ignored(self):
         self.assertEqual(restored_problems(self.SAVED, dict(self.SAVED, frame=9)), [])
 
+    def test_json_round_trip_is_not_a_difference(self):
+        saved = dict(self.SAVED, pokeBalls=[[1, 5]])
+        self.assertEqual(restored_problems(saved, dict(saved, pokeBalls=[(1, 5)])), [])
+        self.assertTrue(restored_problems(saved, dict(saved, pokeBalls=[(1, 4)])))
+
     def test_any_lost_field_fails(self):
         for key, value in (('party', []), ('x', 4), ('flags', {'FLAG_AVERON_STARTER': False}),
                            ('money', 0), ('map', 'MAP_ALDERFIELD'), ('cb2', 'CB2_InitTitleScreen')):
