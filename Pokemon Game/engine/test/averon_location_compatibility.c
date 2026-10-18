@@ -41,8 +41,8 @@ TEST("Averon location legacy names and region identities remain unchanged")
 {
     for (u32 section = 0; section <= 0xFF; section++)
     {
-        EXPECT_EQ(IsRegionMapSectionIdValid(section), section < 215);
-        EXPECT_EQ(GetRegionForSectionId(section), section >= KANTO_MAPSEC_START && section < MAPSEC_SPECIAL_AREA
+        EXPECT_EQ(IsRegionMapSectionIdValid(section), section < 215 || section == MAPSEC_SANDGEM_TOWN);
+        EXPECT_EQ(GetRegionForSectionId(section), section == MAPSEC_SANDGEM_TOWN ? REGION_SINNOH : section >= KANTO_MAPSEC_START && section < MAPSEC_SPECIAL_AREA
             ? REGION_KANTO : REGION_HOENN);
     }
     EXPECT_EQ(IsRegionMapSectionIdValid(0x100), FALSE);
@@ -68,6 +68,8 @@ TEST("Averon location legacy names and region identities remain unchanged")
     }
     for (u32 section = MAPSEC_NONE; section <= 0xFF; section++)
     {
+        if (section == MAPSEC_SANDGEM_TOWN)
+            continue; // sole newly approved ordinary code
         GetMapName(name, section, 0);
         for (u32 i = 0; i < 18; i++)
             EXPECT_EQ(name[i], CHAR_SPACE);
