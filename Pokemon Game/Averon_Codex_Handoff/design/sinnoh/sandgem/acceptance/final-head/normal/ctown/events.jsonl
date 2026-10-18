@@ -1,0 +1,24 @@
+{"t": 1792362785.77, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792362785.79, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792362786.33, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792362786.34, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792362788.92, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792362788.93, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792362790.0, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792362790.03, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792362790.56, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792362790.57, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792362791.11, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792362791.13, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792362792.2, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792362792.21, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792362795.79, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792362795.81, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792362796.46, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [11, 15], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792362796.6, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792362796.6, "event": "continue-check", "problems": []}
+{"t": 1792362796.62, "event": "sandgem-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SANDGEM_TOWN", [11, 15]]}
+{"t": 1792362796.67, "event": "sandgem-check", "name": "CONTINUE resumes outside in Sandgem", "ok": true, "at": ["MAP_SANDGEM_TOWN", [11, 15]]}
+{"t": 1792362796.81, "event": "capture", "file": "0010-continued.png"}
+{"t": 1792362796.81, "event": "observe", "label": "continued", "problems": []}
+{"t": 1792362796.81, "event": "sandgem-check", "name": "follower visible (continued)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}

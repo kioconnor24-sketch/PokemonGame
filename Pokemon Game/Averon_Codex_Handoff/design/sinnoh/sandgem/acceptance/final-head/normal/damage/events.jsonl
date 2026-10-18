@@ -1,0 +1,39 @@
+{"t": 1792362544.77, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792362544.81, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792362547.94, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792362547.96, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792362549.05, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792362549.1, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792362549.63, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792362549.67, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792362550.21, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792362550.25, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792362551.3, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792362551.33, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792362554.94, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792362554.99, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792362555.61, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792362564.75, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [17, 0]}
+{"t": 1792362571.72, "event": "battle-start", "flags": "0x4", "foe": [[1313, 6]], "me": [[393, 9, 29]], "moves": [[1, 35], [45, 40], [55, 25]]}
+{"t": 1792362578.36, "event": "capture", "file": "0008-wild000-action.png"}
+{"t": 1792362578.95, "event": "turn", "label": "wild000", "me": [393, 9, 29, 29], "foe": [1313, 6, 20, 20], "move": 1, "pp": 35}
+{"t": 1792362584.17, "event": "capture", "file": "0009-wild000-action.png"}
+{"t": 1792362584.76, "event": "turn", "label": "wild000", "me": [393, 9, 25, 29], "foe": [1313, 6, 14, 20], "move": 1, "pp": 34}
+{"t": 1792362597.22, "event": "capture", "file": "0010-wild000-action.png"}
+{"t": 1792362597.84, "event": "turn", "label": "wild000", "me": [393, 9, 17, 29], "foe": [1313, 6, 12, 20], "move": 1, "pp": 33}
+{"t": 1792362608.02, "event": "turn", "label": "wild000", "me": [393, 9, 17, 29], "foe": [1313, 6, 7, 20], "move": 1, "pp": 32}
+{"t": 1792362619.23, "event": "turn", "label": "wild000", "me": [393, 9, 11, 29], "foe": [1313, 6, 4, 20], "move": 1, "pp": 31}
+{"t": 1792362626.37, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [30, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 11, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792362626.39, "event": "lead", "species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [30, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 11, "maxhp": 29}
+{"t": 1792362626.48, "event": "sandgem-check", "name": "party hurt in a real wild battle", "ok": true, "party": [[393, 11, 29], [161, 22, 22]]}
+{"t": 1792362632.25, "event": "capture", "file": "0011-save-confirm-hurt.png"}
+{"t": 1792362633.39, "event": "capture", "file": "0012-save-step-hurt-01.png"}
+{"t": 1792362634.52, "event": "capture", "file": "0013-save-step-hurt-02.png"}
+{"t": 1792362635.54, "event": "capture", "file": "0014-save-step-hurt-03.png"}
+{"t": 1792362636.53, "event": "capture", "file": "0015-save-step-hurt-04.png"}
+{"t": 1792362637.5, "event": "capture", "file": "0016-save-step-hurt-05.png"}
+{"t": 1792362638.5, "event": "capture", "file": "0017-save-step-hurt-06.png"}
+{"t": 1792362639.52, "event": "capture", "file": "0018-save-step-hurt-07.png"}
+{"t": 1792362640.53, "event": "capture", "file": "0019-save-step-hurt-08.png"}
+{"t": 1792362641.35, "event": "capture", "file": "0020-saved-hurt.png"}
+{"t": 1792362641.35, "event": "release-save", "label": "hurt", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}

@@ -2,7 +2,9 @@
 
 This is Claude's EMULATOR-TESTED evidence from mGBA 0.10.5, played with real controller input and read-only GDB observation. It is not human or third-party QA and not Delta. No ROMs or saves are committed. The maps are those in commit `38100116`; the popup flag is `1739ecf7`.
 
-**Headline:** on the **integrated tree** (this PR + Codex's #132, no shim) every acceptance step passes on both NORMAL and RELEASE cries-OFF. See [Integrated tree](#integrated-tree-133--132-no-shim) below. The shim-build run further down is kept as the first evidence.
+**Final head (this PR merged with `main` `8967b05b`, which contains #132): PASS.** Same-head NORMAL and RELEASE builds, source checks and the full mGBA acceptance all pass at `f3570d73`. See [Final head](#final-head-f3570d73-main--8967b05b). The earlier runs below are kept as history.
+
+**Earlier headline:** on the **integrated tree** (this PR + Codex's #132, no shim) every acceptance step passes on both NORMAL and RELEASE cries-OFF. See [Integrated tree](#integrated-tree-133--132-no-shim) below. The shim-build run further down is kept as the first evidence.
 
 ## Disclosures
 
@@ -52,6 +54,39 @@ Each run's `result.json` and `events.jsonl` is under `normal/` or `release/` (`d
 
 **One QA-script note.** The first nurse A-press sometimes doesn't register right after the door warp. The script now retries until a script actually starts; on the passing run the conversation started on attempt 2. This is input timing in the harness, not a game defect: the nurse script itself is the shared, unchanged `Common_EventScript_PkmnCenterNurse`.
 
+## Final head `f3570d73` (main @ `8967b05b`)
+
+`claude/sandgem-town-maps` with `origin/main` merged in. `main` already contains Codex's #132 (section 216, `MAPSEC_NONE` 215). **No shim and no DEV warp in source.** The tree is clean apart from build outputs.
+
+| Build | ROM sha256 | Linked size (`__rom_end`) | vs `main` `8967b05b` (measured) |
+| --- | --- | --- | --- |
+| NORMAL `make CRIES=off` | `f1d212fe913c0f14821f5b5d8e5880fc7a9567b742df4c94bcca5f6f78748294` | 17,323,640 B | **+2,964 B** over main's 17,320,676 B (`3f1ff795c0bd…`) |
+| RELEASE `make RELEASE=1 CRIES=off` | `d330832786142b5986ae175691147d71c3487e2c1ea29a312738b110283e0efe` | 17,442,244 B | **+2,964 B** over main's 17,439,280 B (`d04d30bfc380…`) |
+
+Both ROMs are **byte-identical** (same sha256) to the integrated-tree builds below, which proves that tree equals this head. The acceptance was still re-run from scratch here.
+
+**Source checks at `f3570d73`**
+
+| Check | Result |
+| --- | --- |
+| `check-averon-map-registry.py --mutations` | **PASS**: 77 groups, 953 pinned IDs, 536 linked maps, 12 mutations detected |
+| `audit-averon-mapsec-namespace.py --check-pins` | **7 saved section values unchanged**; `MAPSEC_NONE`=215; Sandgem 216 |
+| `audit-averon-map-readiness.py --group gMapGroup_Sinnoh` | 2 maps, 80 geometry dependencies, **0 errors, 0 warnings** |
+| Exclusive-files guard (`check_protected_files.py`, fed live open PRs and #15 handoffs) | **PASS**: no unapproved shared-file or frozen-map changes. The 9 changed frozen/protected paths match `HANDOFF_APPROVED PR=#133` exactly |
+| Source regression modules (CI list + mapsec test) and `test_averon_map*` unittests | 8/8 modules PASS; 62 tests OK |
+
+**mGBA acceptance at `f3570d73`** (fresh process per mode)
+
+| Mode | NORMAL | RELEASE |
+| --- | --- | --- |
+| `damage` | 1/1 PASS | 1/1 PASS |
+| `town`: DEV entry, follower, 3 closed exits, walls, closed Mart door, roads, NPC, sign, PC in, nurse heal, Start menu, SAVE inside | **17/17**; heal 11 → 29/29 | **17/17**; heal 13 → 29/29 |
+| `continue-pc` | 5/5 | 5/5 |
+| `continue-town` | 3/3 | 3/3 |
+| Flash verdict | no problems | no problems |
+
+The map-name popup shows "SANDGEM TOWN". Evidence is under `final-head/{normal,release}/…`.
+
 ## Integrated tree (#133 + #132, no shim)
 
 This is a local, unpushed test merge: `7f4a1485` = this branch at `1739ecf7` + Codex's PR #132 at `b899abb1853737bb30e5e37cd3e80a76babc4f98`. Codex's real `MAPSEC_SANDGEM_TOWN` (216) is used and **no local shim** is present (`git status` is clean apart from build outputs). The scripts, fixture and steps are the same as above; each step runs as a fresh process.
@@ -80,7 +115,7 @@ Evidence is under `integrated/{normal,release}/{damage,town,cpc,ctown}/`: `resul
 
 ## Not covered / still open
 
-- **Merged-`main` rerun:** NOT RUN. #132 is not merged yet and `HANDOFF_APPROVED PR=#133` is not recorded. After both land, merge `main` into this branch and re-run the same four modes.
+- **Post-merge status in the SN-T02 register:** pending until this PR is merged; it goes in a separate small tracker PR.
 - **No heal location / respawn for Sandgem:** a whiteout returns to the last Averon healer. That is the Codex and owner interface.
 - **Town Map, Fly, routes and Averon → Sinnoh travel:** not built and not approved here.
 - **Human listening, Delta:** UNTESTED.
