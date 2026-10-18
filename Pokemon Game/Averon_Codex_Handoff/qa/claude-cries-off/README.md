@@ -4,6 +4,19 @@ This is supporting emulator evidence collected by Claude. It is not human listen
 
 ## Builds (this host, from PR #117 source)
 
+**Current head:** `c77fbd69`, which is #117 merged with main `43a95f85`. It includes the clinic-heal fix #124 (`3f754bec`) and the GDB fail-fast driver fix #122. Both profiles build with exit 0 and only the 4 known newlib stub notes:
+
+| ROM | ROM sha256 | ELF sha256 |
+| --- | --- | --- |
+| `make RELEASE=1 CRIES=off` | `06e3e40a9a7f…` | `32531a987b8d…` |
+| `make RELEASE=1 CRIES=on` | `4dbf3be40291…` | `016a8dad1118…` |
+
+The OFF ROM is byte-identical to the one built from the earlier test merge `claude/test-merge-117-124`, so the build is reproducible.
+
+Native `Averon cry safety` on `c77fbd69`: **9/9 PASS** on each profile, both headless (`make CRIES=… check`) and non-headless (hydra on the unpatched test ELF).
+
+The earlier builds, from before the merge:
+
 | ROM | ROM sha256 | ELF sha256 |
 | --- | --- | --- |
 | `make RELEASE=1 CRIES=off` | `7692bb76de28…` | `2c23b1021d47…` |
@@ -39,18 +52,17 @@ This reproduces Codex's result.
 | run03-heal-repro-off | **CRASH reproduced** | Same save, straight to the clinic heal. |
 | run04-heal-repro-on | **CRASH reproduced on cries-ON RELEASE** | So it is **not caused by the cries change**. |
 | run05-normal-battles | **PASS** (normal `make CRIES=off`, ROM `473030df…`, source `19d8fe6c`) | All with real input, starting from the run02 save:<br>• Capture: Sentret caught, party of 2.<br>• 8 wild battles.<br>• Trainer battle: Sam on Orchard Lane, 2 Pokémon, won; Piplup learned Water Gun.<br>• 5 Alderfield clinic heals, no crash.<br>• SAVE: `SaveReturnSuccessCallback`; flash slot counter 2 is valid and newer than 1.<br>• Audio: 910 of 914 one-second windows audible, so music and SFX play with cries off. This is a level meter, not human listening. |
-
 | run06-normal-continue | **PASS** (same ROM; source `90863ffd`, evidence-only change) | • Fresh-process CONTINUE matches run05's saved state: map, position, party, flags, money and Bag.<br>• Talking to the follower (`playfirstmoncry` path): control returned.<br>• Pokédex list, entry, CRY page and 3 replays, then close.<br>• First clinic heal after power-on: no crash. This build still has the unbounded Union Room copy (no fix); it just doesn't crash here.<br>• Audio: 52 of 62 windows audible. |
+| run07-normal-evolve-whiteout | **PASS** (normal `make CRIES=off`, from the natural M1 save `4ca9b7f4…`) | • `evolve_lead`: after 22 wild battles Piplup reached L16 and evolved into Prinplup through the real evolution scene; 6 scene frames kept.<br>• `q3_whiteout`: the whole party fainted, then respawned at the Alderfield clinic. Clinic check passed: healed, follower present, same members, money lost.<br>• SAVE: success callback; both flash slots valid.<br>See `run07-…/RESULT.md`. |
 
 Not yet tested on the OFF build:
-- faint/whiteout and evolution;
-- clinic heal and SAVE→CONTINUE on the **RELEASE** OFF build: blocked on the crash fix below;
+- clinic heal and SAVE→CONTINUE on the **RELEASE** OFF build, now that the fix has landed (run08 onward);
 - Mega Evolution: no Averon content can reach it, so only the native tests cover it;
 - the `playmoncry` script command: no Averon map uses it, so only the native tests cover it.
 
 Human listening and Delta remain **UNTESTED**.
 
-## DEFECT (root cause found, fix in a separate PR): RELEASE build crashes at the Alderfield clinic heal
+## DEFECT (FIXED on main by #124 `3f754bec` and merged into this branch at `c77fbd69`): RELEASE build crashed at the Alderfield clinic heal
 
 **Root cause.** This is a baseline `main` defect. It reproduces on unchanged `main` RELEASE `c918e880…` and has nothing to do with cries. The full trace evidence is in [`debug/clinic-crash-root-cause/`](debug/clinic-crash-root-cause/README.md).
 1. After the heal, the shared nurse script calls `BufferUnionRoomPlayerName`.
