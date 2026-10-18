@@ -482,13 +482,23 @@ def audit(engine, names):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, required=True)
-    parser.add_argument('--map', dest='maps', action='append', required=True, help='Map directory name; repeat for a batch')
+    parser.add_argument('--map', dest='maps', action='append', default=[], help='Map directory name; repeat for a batch')
+    parser.add_argument('--group', dest='groups', action='append', default=[], help='Registered group name; audit every member without creating maps')
     parser.add_argument('--json', type=Path)
     args = parser.parse_args()
     if args.json and args.json.resolve().is_relative_to(args.engine.resolve()):
         parser.error('Write the report outside the read-only engine tree')
     try:
-        result = audit(args.engine, args.maps)
+        names = list(args.maps)
+        if args.groups:
+            registry = json.loads((args.engine/'data/maps/map_groups.json').read_text())
+            for group in args.groups:
+                if group not in registry.get('group_order', []) or not isinstance(registry.get(group), list):
+                    raise ValueError(f'Unknown/invalid registered group: {group}')
+                names.extend(registry[group])
+        if not names:
+            raise ValueError('Select at least one --map or nonempty --group')
+        result = audit(args.engine, names)
     except (OSError, KeyError, TypeError, ValueError) as exc:
         parser.exit(2, f'Preflight input error: {exc}\n')
     if args.json:

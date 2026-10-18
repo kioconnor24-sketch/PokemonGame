@@ -341,6 +341,19 @@ class SourceBatchTests(unittest.TestCase):
             self.assertEqual(result.returncode, expected, result.stderr)
             self.assertIn('SOURCE:', result.stdout)
 
+    def test_cli_registered_group_and_map_selectors_are_deduplicated(self):
+        result = subprocess.run([sys.executable, str(SCRIPT), '--engine', str(ENGINE),
+                                 '--group', 'gMapGroup_AveronOpening', '--map', 'Saltmere'], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('SOURCE: 16 maps;', result.stdout)
+
+    def test_cli_missing_group_and_empty_selection_fail_cleanly(self):
+        for options in ([], ['--group', 'MissingGroup']):
+            result = subprocess.run([sys.executable, str(SCRIPT), '--engine', str(ENGINE), *options], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 2)
+            self.assertIn('Preflight input error', result.stderr)
+            self.assertNotIn('Traceback', result.stderr)
+
     def test_cli_cannot_overwrite_engine_source_with_report(self):
         path = ENGINE / 'data/maps/Saltmere/map.json'
         before = path.read_bytes()
