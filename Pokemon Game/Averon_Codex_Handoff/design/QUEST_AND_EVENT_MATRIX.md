@@ -1,5 +1,8 @@
 # Map and event progression matrix
 
+> **2026-10-17 PROVISIONAL EVENT OVERRIDE:** Q04/Q13/Q16/Q23/Q25 and `RENN_RIGGING_EVIDENCE` entries below belong to the older October 14 plot blueprint, NOT immutable implemented events. The preferred new rival Gym loss is **genuine**, with player suspicion of manipulation, villain confirmation and independent proof still under discussion; avoid implementing rigging flags/revelation until decided. The leader's motive must predate Threshold, while controlling collars and a possible Plate/Arceus-led antagonist continuation into Sinnoh are being explored. See [full narrative working dossier](STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md). Existing technical and already implemented flags remain unchanged by this notice; don't claim old scripts are rewritten.
+
+
 The main quest is *intermittent*. Not all routes have an organization encounter. Every step below needs its own safe save flag, reset-proof script entry and rollback rules if whiteout occurs.
 
 | Key | Approx. point | Player activity | NPC/story consequence | Guard / test |

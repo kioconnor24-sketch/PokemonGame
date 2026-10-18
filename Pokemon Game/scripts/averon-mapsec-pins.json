@@ -1,0 +1,11 @@
+{
+  "comment": "Numeric map-section values that existing Averon saves can hold in each Pokemon's 8-bit metLocation (and TV records). Changing the order of src/data/region_map/region_map_sections.json before these entries would silently re-label every saved Pokemon's met location. Extend only by appending after an owner-approved ID decision.",
+  "pins": {
+    "MAPSEC_SALTMERE": 209,
+    "MAPSEC_COASTAL_MEADOW": 210,
+    "MAPSEC_WINDROW": 211,
+    "MAPSEC_ORCHARD_LANE": 212,
+    "MAPSEC_ALDERFIELD": 213,
+    "MAPSEC_COASTAL_BLUFFS": 214
+  }
+}

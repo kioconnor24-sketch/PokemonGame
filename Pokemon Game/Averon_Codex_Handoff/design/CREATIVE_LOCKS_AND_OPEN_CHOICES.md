@@ -1,5 +1,8 @@
 # Approved creative locks and delegated defaults
 
+> **OVERRIDE / PROVISIONAL STATUS — 2026-10-17:** For latest multi-session **narrative** owner statements versus earlier delegated story choices, consult [STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md](STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md). The entry below claiming *Renn's rigged Gym defeats* as a narrative lock is **historical and currently superseded by a preferred genuine-defeat version**, pending final owner approval. The villain's specific personal reason for eradication **must predate Threshold**; threshold is only the discovered method. Private successor Option B, genuine personal villain mentorship, proposed public control technology, lab misdirection and Arceus Plates appear there with their individual approval levels. Do not treat any unfinished story brainstorming as permission to script/code final canon.
+
+
 The user requested that design be completed without more questions. This file distinguishes **requirements** from choices delegated to the creative lead, so Codex does not mistake a suggestion for a user instruction.
 
 ## User-locked essentials

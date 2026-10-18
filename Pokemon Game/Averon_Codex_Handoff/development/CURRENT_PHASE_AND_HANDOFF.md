@@ -12,6 +12,9 @@ This authorization supersedes historic _M1 is open_, _Codex paused_, _Claude sol
 - **[Sinnoh technical readiness](SINNOH_TECHNICAL_READINESS_20261017.md)** — PR [#111](https://github.com/kioconnor24-sketch/PokemonGame/pull/111) merged at `fe184495`; a *planning assessment*, not maps or capacity proof. RELEASE ROM had **6,699,508 B** remaining; SaveBlock2 **84 B** remaining. Candidate ROM allocations and compression savings are not approved guarantees. The map-section/met-location namespace, Fly and map build inclusion need explicit design and integration.
 - Main's game engine tree for the final M1 evidence was `5d81cc8431cc4c915889b303c22aca2059b78aa3`; later non-engine docs/QA merges were checked for engine equality. For new production changes, regenerate pertinent build/test and current-head evidence.
 
+
+> **Current temporary owner reassignment, 2026-10-17:** Codex's reversible cries safety work stopped at its pushed draft PR #117 checkpoint. The owner now directs Claude to complete that specific audio/graphical-QA lane; consult [CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md](CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md) and the live claim in Issue #15. This is a temporary exact-file handoff, not permanent permission to overlap later Codex work or bypass production review. Default main still includes cries; no-cries remains experimental until accepted and merged.
+
 ## Now-active navigation
 | Purpose | Canonical location | Status |
 | --- | --- | --- |
