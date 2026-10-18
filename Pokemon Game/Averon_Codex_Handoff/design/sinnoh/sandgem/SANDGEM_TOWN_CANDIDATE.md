@@ -2,6 +2,17 @@
 
 **Status: CANDIDATE for owner review (Claude, 2026-10-18).** Nothing here is approved. This candidate creates no map, layout, section, flag, script or saved ID. Tracker row `SN-T02` stays `UNDECIDED / PENDING / NOT_STARTED` until the owner decides. If the owner picks a different first slice, this work is reused for that slice; it is not argued for.
 
+**A local DRY RUN already worked end to end**, from a scratch build with nothing applied to the repo; see [dry-run/README.md](dry-run/README.md). It covered:
+- the real GBA build, with +2,242 B direct contribution;
+- the door warp;
+- the closed edges, the sea and the walls;
+- the Pokémon Center door and heal;
+- the follower;
+- the Start menu;
+- SAVE, then a fresh-process CONTINUE.
+
+It also found the two process items the real PR needs: the protected `event_scripts.s` include lines, and the registry-check fix in #129.
+
 The renders below come from the game's own data: real Emerald-build tilesets, and blocks copied from vanilla maps. They are produced by [`scripts/sinnoh-placeholder-art.py`](../../../../scripts/sinnoh-placeholder-art.py) from [`sandgem-town-candidate.json`](sandgem-town-candidate.json). They show what the map would look like in-game, and they are not emulator screenshots.
 
 | Exterior with review marks | Collision view (red = solid) |
