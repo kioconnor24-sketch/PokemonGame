@@ -15,6 +15,10 @@ SLOT = re.compile(r'REGISTRY_SLOT\((\d+), (\d+), (MAP_\w+), (\w+), ([01])\)')
 # Other event counters have their separate source-defined capacities.
 EVENTS = {'object_events': 64, 'warp_events': 128,
           'coord_events': 255, 'bg_events': 255}
+# Regions mapjson links into the Emerald build (Sinnoh since #126); Kanto maps
+# stay registered but compiled out. Any other region is refused.
+LINKED_REGIONS = ('REGION_HOENN', 'REGION_SINNOH')
+KNOWN_REGIONS = LINKED_REGIONS + ('REGION_KANTO',)
 
 
 def read_pins(path):
@@ -80,9 +84,9 @@ def validate(groups, maps, pins):
             if (group_index, index) == (127, 127):
                 fail('reserved-id', f'{symbol} occupies MAP_DYNAMIC')
             region = data.get('region', 'REGION_HOENN')
-            if region not in ('REGION_HOENN', 'REGION_KANTO'):
+            if region not in KNOWN_REGIONS:
                 fail('unsupported-region', f'{symbol}: {region}')
-            active = int(region == 'REGION_HOENN')
+            active = int(region in LINKED_REGIONS)
             linked.append(active)
             actual_slots.append((group_index, index, constant, symbol, active))
             for event, capacity in EVENTS.items():
@@ -110,8 +114,8 @@ def mutations(groups, maps, pins):
     first, second = groups['group_order'][:2]
     symbol, other = groups[first][:2]
     for name in ('group-reorder', 'map-reorder', 'duplicate-id', 'missing-map',
-                 'symbol-mismatch', 'mixed-region', 'group-overflow',
-                 'map-overflow', 'event-overflow', 'warp-index-overflow'):
+                 'symbol-mismatch', 'mixed-region', 'unknown-region', 'unpinned-sinnoh-group',
+                 'group-overflow', 'map-overflow', 'event-overflow', 'warp-index-overflow'):
         g, m = deepcopy(groups), deepcopy(maps)
         if name == 'group-reorder':
             g['group_order'][:2] = [second, first]
@@ -131,6 +135,13 @@ def mutations(groups, maps, pins):
         elif name == 'mixed-region':
             m[symbol]['region'] = 'REGION_KANTO'
             expected = 'mixed-region-group'
+        elif name == 'unknown-region':
+            m[symbol]['region'] = 'REGION_JOHTO'
+            expected = 'unsupported-region'
+        elif name == 'unpinned-sinnoh-group':
+            # A new Sinnoh group is legal only once its pins are appended.
+            g, m = sinnoh_group(g, m)
+            expected = 'pinned-groups'
         elif name == 'group-overflow':
             for i in range(129 - len(g['group_order'])):
                 key = f'gMapGroup_InMemoryMutation{i}'
@@ -157,7 +168,25 @@ def mutations(groups, maps, pins):
         boundary[symbol][field] = [{}] * capacity
     if validate(groups, boundary, pins):
         raise AssertionError('Valid event-capacity boundary was rejected')
+    # An appended all-Sinnoh group with appended pins is the supported way to
+    # add Sinnoh maps (#126 links REGION_SINNOH into Emerald).
+    g, m = sinnoh_group(groups, maps)
+    index = len(groups['group_order'])
+    appended = (pins[0] + [(index, 'gMapGroup_InMemorySinnoh', 1, 1)],
+                pins[1] + [(index, 0, 'MAP_IN_MEMORY_SINNOH', 'InMemorySinnoh', 1)])
+    if validate(g, m, appended):
+        raise AssertionError('Appended, pinned Sinnoh group was rejected')
+    cases['pinned-sinnoh-group'] = 'ACCEPTED'
     return cases
+
+
+def sinnoh_group(groups, maps):
+    """In-memory copies with one appended all-Sinnoh group (never written)."""
+    g, m = deepcopy(groups), deepcopy(maps)
+    g['group_order'].append('gMapGroup_InMemorySinnoh')
+    g['gMapGroup_InMemorySinnoh'] = ['InMemorySinnoh']
+    m['InMemorySinnoh'] = {'id': 'MAP_IN_MEMORY_SINNOH', 'name': 'InMemorySinnoh', 'region': 'REGION_SINNOH'}
+    return g, m
 
 
 class ArmElf:
@@ -311,7 +340,9 @@ def main():
     if errors:
         raise SystemExit(f'FAIL: {len(errors)} registry errors')
     print(f'PASS: {report["groups"]} groups; {report["map_slots"]} pinned IDs; '
-          f'{report["linked_maps"]} linked maps; {len(report["mutations"])} mutations detected')
+          f'{report["linked_maps"]} linked maps; '
+          f'{sum(v == "DETECTED" for v in report["mutations"].values())} mutations detected; '
+          f'{sum(v == "ACCEPTED" for v in report["mutations"].values())} valid extension accepted')
     print(f'Capacity: {report["signed_group_slots_remaining"]} signed group slots remain; '
           f'minimum per-group headroom {report["smallest_group_headroom"]} '
           f'({report["smallest_linked_group_headroom"]} among linked groups)')
