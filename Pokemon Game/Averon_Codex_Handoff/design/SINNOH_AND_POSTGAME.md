@@ -1,5 +1,8 @@
 # Sinnoh, postgame, Champions' Circuit and Red
 
+> **SINNOH STORY POSSIBILITY — 2026-10-17 (UNFINALIZED):** The owner is exploring a **post-dimensional-battle escape and return of the Averon villain** in Sinnoh, where Averon's publicly known Pokémon-control devices may be advanced by **Arceus Plates** to forcibly restrain/channel Arceus's power, potentially for a second eradication attempt. The dimensional climactic battle in Averon **still happens regardless**, and the first device/organization's scheme must actually fail. The player must still have a full traditional Sinnoh Gym/exploration/Cynthia adventure, Red ultimate, and Arceus's prior *optional Hall of Origin quest* requires reconciliation if the idea is adopted. Nothing about the second villain arc, Plates mechanism, control details or finale is approved for implementation. See [working narrative dossier](STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md).
+
+
 ## The purpose of Sinnoh
 Sinnoh must be a **full second adventure**, not a three-town reference to Platinum. Preserve the recognizable shape and identities of Twinleaf, Sandgem, Jubilife, Oreburgh, Floaroma, Eterna, Hearthome, Solaceon, Veilstone, Pastoria, Canalave, Snowpoint, Sunyshore, Mt. Coronet, the three lakes, Spear Pillar, Victory Road and the Battle Zone. Eight Gym challenges, Cynthia as Champion, and meaningful multi-route exploration are mandatory. Integrate rest stops, optional fishing/caving and active town life. Use a real world map distinct from Averon's map.
 
