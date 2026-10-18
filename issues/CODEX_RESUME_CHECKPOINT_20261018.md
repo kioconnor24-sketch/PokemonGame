@@ -70,9 +70,9 @@ Branch `codex/validation-only-x1-x6-20261018` is an isolated combination of the 
 
 - Combined source SHA `026c598e7c3bbc185601290de281cc9d737b510d`.
 - Engine tree `782e0ab53fa5f9d339d549358cda4dd95b5aeaaf`.
-- Local native result: PENDING.
+- Local native result: **284/284 PASS**, no failing/skipped identities; all264 existing +20 new identities executed together. Full local build/test log SHA256 `e74eb41a4052b640835a0f722fefd7251f00cfe2ee6740d306d4dfe1fb8126aa`.
 - Repeated host checks: healer current 43 / append 44 optional / append 44 nurse PASS under ASan/UBSan; Fly 9/9 and 7/7 mutations killed. `detect_leaks=0` is solely the host environment's LeakSanitizer/ptrace limitation; address/undefined checks remain enabled and native leak checks remain enabled.
-- Dispatched existing authorized workflow without edits: run39174616265, result PENDING.
+- Dispatched existing authorized workflow without edits: [run39174616265](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39174616265), native job117814638822. **IN_PROGRESS at the owner's wrap-up**; do not claim remote284/284 until its actual job log completes. Resume with `gh run view 39174616265 --json status,conclusion,jobs`, then inspect actual logs/artifact. All six individual source PRs already have the completed exact-head CI evidence above.
 - The separate source PRs' actual NORMAL/RELEASE builds are recorded above. The combined CI workflow also builds NORMAL; an additional local combined retail build pair was not started before the owner's wrap-up instruction. Do not attribute either individual PR's ROM hash to the combined tree.
 
 ## Real blockers and next executable actions
@@ -83,6 +83,8 @@ Branch `codex/validation-only-x1-x6-20261018` is an isolated combination of the 
 4. **Town Map/Fly future interface:** real Sinnoh grid/art/cursor bounds and approved destination/heal rows are still missing. #138 intentionally refuses normal unsupported entry. Low-level protected `region_map.c`/debug/Pokédex area APIs remain outside these normal-entry guards; any deeper defense needs signed exact-path approval before editing. Claude should validate refusal/return paths graphically. Do not add synthetic art or destination IDs.
 5. **No long-term save-format adoption:** grouped or 13-bit origins require a separate owner decision. #134/#141 are regression experiments only, not accepted format specifications.
 6. **Claude-only next content:** #135 Route201 and #139 future junction/Route202 work are design proposals, not permission for section217, maps, encounters or story. Preserve Claude's C5 graphical QA files and original #133 nine-path approval scope.
+
+Owner requested wrap-up during combined verification. Local verification completed successfully and all meaningful source work is pushed. No new assignment or extra retail build pair was started afterward. Latest #134 check history includes canceled superseded runs; its subsequent same-head native267/267 and applicable gates succeeded as recorded above. Do not mistake those earlier canceled jobs for a current source failure.
 
 ## Exact new native identities
 
