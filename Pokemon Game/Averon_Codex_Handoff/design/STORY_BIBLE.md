@@ -1,4 +1,7 @@
 # AVERON — Narrative, Cast & Scene Bible
+
+> **STORY STATUS UPDATE — 2026-10-17:** This is the detailed **October 14 original scene blueprint**, *not* final owner-approved story canon. Before drafting any story, read the [multi-session narrative working dossier](STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md), which records newer owner discussion and all unresolved options. In particular, Renn's previously `rigged` Slateford Gym losses are now **provisionally replaced by genuine defeat + later suspicion/questioning**, Vale's personal motive **predates Threshold** (the accident only reveals a potential means), Vale **personally mentors Renn and privately sees a successor** without announcing it, control-collar lab misdirection is under development, and Vale's possible Plate/Arceus Sinnoh return is **not finalized**. Keep these differences visible; do **not** silently build the older rigging/redemption/Sinnoh finale as canon.
+
 **Design version 1.0, 14 October 2026**  
 **Project:** Pokémon Averon — Emerald Expansion, second region Sinnoh
 
