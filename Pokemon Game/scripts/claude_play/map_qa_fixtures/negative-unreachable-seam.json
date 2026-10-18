@@ -1,0 +1,87 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: the loop connection, plus trees across the north path (row 3), so the north seam cannot be reached from the town: static exit-unreachable, and the run cannot walk to the seam.",
+ "expect": "FAIL",
+ "must_fail": [
+  "up seam"
+ ],
+ "static_codes": [
+  "exit-unreachable"
+ ],
+ "edits": [
+  {
+   "op": "connection",
+   "map": "SandgemTown",
+   "add": {
+    "map": "MAP_SANDGEM_TOWN",
+    "offset": 0,
+    "direction": "up"
+   }
+  },
+  {
+   "op": "connection",
+   "map": "SandgemTown",
+   "add": {
+    "map": "MAP_SANDGEM_TOWN",
+    "offset": 0,
+    "direction": "down"
+   }
+  },
+  {
+   "op": "blocks",
+   "layout": "LAYOUT_SANDGEM_TOWN",
+   "set": [
+    [
+     19,
+     3,
+     477,
+     1,
+     0
+    ],
+    [
+     20,
+     3,
+     476,
+     1,
+     0
+    ],
+    [
+     21,
+     3,
+     477,
+     1,
+     0
+    ],
+    [
+     22,
+     3,
+     476,
+     1,
+     0
+    ],
+    [
+     23,
+     3,
+     477,
+     1,
+     0
+    ],
+    [
+     24,
+     3,
+     476,
+     1,
+     0
+    ]
+   ]
+  }
+ ]
+}

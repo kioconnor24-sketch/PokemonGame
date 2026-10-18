@@ -1,0 +1,33 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY placement: Sandgem north edge connected to its own south edge and back (offset 0 both ways), so a reciprocal connection can be walked before any real route exists.",
+ "expect": "PASS",
+ "edits": [
+  {
+   "op": "connection",
+   "map": "SandgemTown",
+   "add": {
+    "map": "MAP_SANDGEM_TOWN",
+    "offset": 0,
+    "direction": "up"
+   }
+  },
+  {
+   "op": "connection",
+   "map": "SandgemTown",
+   "add": {
+    "map": "MAP_SANDGEM_TOWN",
+    "offset": 0,
+    "direction": "down"
+   }
+  }
+ ]
+}
