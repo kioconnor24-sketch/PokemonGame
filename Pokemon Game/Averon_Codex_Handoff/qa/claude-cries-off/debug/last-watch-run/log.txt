@@ -1,0 +1,29 @@
+screen {"cb2": "0x00000000", "i": 0}
+capture {"file": "0001-boot-01.png"}
+screen {"cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+capture {"file": "0002-boot-02.png"}
+screen {"cb2": "CB2_ExpansionIntro", "i": 6}
+capture {"file": "0003-boot-03.png"}
+screen {"cb2": "MainCB2_Intro", "i": 8}
+capture {"file": "0004-boot-04.png"}
+screen {"cb2": "CB2_InitTitleScreen", "i": 9}
+capture {"file": "0005-boot-05.png"}
+screen {"cb2": "MainCB2", "i": 10}
+capture {"file": "0006-boot-06.png"}
+screen {"cb2": "CB2_MainMenu.lto_priv.0", "i": 12}
+capture {"file": "0007-boot-07.png"}
+screen {"cb2": "CB2_Overworld", "i": 15}
+capture {"file": "0008-boot-08.png"}
+field {"map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+map {"map": "MAP_COASTALMEADOW", "pos": [34, 31]}
+map {"map": "MAP_WINDROW", "pos": [19, 25]}
+map {"map": "MAP_ORCHARDLANE", "pos": [19, 31]}
+map {"map": "MAP_ALDERFIELD", "pos": [19, 31]}
+bp HealPlayerParty 0x8233468 OK
+bp HealPlayerParty 0xa233468 OK
+{"n": 0, "stop": "S05k", "pc": "0x8233468", "pc_sym": "HealPlayerParty+0x0", "lr": "0xa22822f", "lr_sym": "[mirror]ScrCmd_special+0x36", "regs": ["0x3000cac", "0x82d1e54", "0x0", "0x8233469", "0x3000cac", "0x3004bc6", "0x3002ca4", "0x3002398", "0x3004bc6", "0x3002ca4", "0x3002398", "0x2029dd4", "0x280", "0x3007c8c", "0xa22822f", "0x8233468"], "tail": "3f000060", "stack": [["0x822fa7d", "RunScriptCommand+0x34"], ["0x30008aa", "sGlobalScriptContextStatus.lto_priv.0+0x0"], ["0x81ba3a3", "OverworldBasic+0x2e"], ["0x30008ab", "sGlobalScriptContextStatus.lto_priv.0+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3001d70", "gMPlayTrack_BGM+0x140"], ["0x8290d01", "_081DD9C8+0x18"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3005c18", "gCgbChans+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3002ca4", "gWirelessCommType+0x0"], ["0x3002398", "gSaveBlock2Ptr+0x0"], ["0x3002424", "gMain+0x0"], ["0x30039b0", "gLinkStatus+0x0"], ["0x81bb5cb", "CB2_Overworld+0xe"], ["0x819e7d1", "UpdateLinkAndCallCallbacks+0x208"], ["0x30063e8", "gSoundInfo+0x6d0"], ["0x8f431e6", "DirectSoundWaveData_sc88pro_fretless_bass+0x492"], ["0x3005d18", "gSoundInfo+0x0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3002398", "gSaveBlock2Ptr+0x0"], ["0x3002424", "gMain+0x0"], ["0x3000914", "sGpuRegBuffer.lto_priv.0+0x0"], ["0x3002424", "gMain+0x0"], ["0x3000914", "sGpuRegBuffer.lto_priv.0+0x0"], ["0x3001840", "sRegIE.lto_priv.0+0x0"], ["0x300177b", "sDma3ManagerLocked.lto_priv.0+0x0"], ["0x8126bcd", "ReadFlashId+0x70"], ["0x3002ca4", "gWirelessCommType+0x0"], ["0x3002424", "gMain+0x0"], ["0x3001f00", "gMPlayTrack_BGM+0x2d0"], ["0x3001f00", "gMPlayTrack_BGM+0x2d0"], ["0x3004bc6", "gLastRecvQueueCount+0x0"], ["0x3002398", "gSaveBlock2Ptr+0x0"]]}
+watch Z2 0x3006eac OK
+watch Z2 0x3006ea8 OK
+watch Z2 0x3006cc8 OK
+watch Z2 0x3006d00 OK
+watch Z2 0x3006d50 OK
