@@ -11,6 +11,7 @@
 | Dependency and production phases | [ROADMAP.md](ROADMAP.md) · [future backlog #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) |
 | Tested M1 native and build facts | [CODEX_M1_NATIVE_CLOSEOUT_20261017.md](CODEX_M1_NATIVE_CLOSEOUT_20261017.md) · [machine-readable details](../../scripts/coordination/codex_m1_evidence_20261017.json) |
 | Tested M1 graphical/owner acceptance | [M1_ACCEPTANCE_REPORT_20261017.md](M1_ACCEPTANCE_REPORT_20261017.md) · [Q1–Q5 evidence](../qa/claude-m1-gameplay/README.md) |
+| **Sinnoh world construction checklist + every-area stage register** | [SINNOH_MAP_BUILD_TRACKER.md](SINNOH_MAP_BUILD_TRACKER.md) · [SINNOH_AREA_REGISTER.csv](SINNOH_AREA_REGISTER.csv) |
 | Sinnoh resource, save/section and mapper study | [SINNOH_TECHNICAL_READINESS_20261017.md](SINNOH_TECHNICAL_READINESS_20261017.md) |
 | QA, **deferred audio** and new graphical issues | [Issue #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) |
 | Cross-agent problem reporting | [Issue #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55) |
