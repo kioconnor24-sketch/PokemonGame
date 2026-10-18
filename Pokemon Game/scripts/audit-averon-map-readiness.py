@@ -81,8 +81,17 @@ def source_limits(fieldmap, global_fieldmap):
 
 def verify_generator(source):
     # This checker models these exact filters, not arbitrary mapjson forks.
-    compact = re.sub(r'\s+', '', source)
-    for pattern in ('version=="emerald"&&region!="REGION_HOENN"',
+    compact = re.sub(r'\s+', '', re.sub(r'//[^\n]*|/\*.*?\*/', '', source, flags=re.S))
+    filters = re.findall(r'if\(([^{};]+)\)\{invalid_maps.push_back\(map_name\);\}', compact)
+    expected = ('(version=="emerald"&&region!="REGION_HOENN"&&region!="REGION_SINNOH")'
+                '||(version=="firered"&&region!="REGION_KANTO")')
+    if filters != [expected]:
+        raise ValueError('mapjson inclusion contract changed; review preflight')
+    # Mixed groups must retain excluded positions rather than compacting IDs.
+    for pattern in ('boolhas_valid_map=false;',
+                    'if(it==invalid_maps.end()){valid_maps.push_back(map_name_str);has_valid_map=true;}'
+                    'else{valid_maps.push_back("NULL");}',
+                    'if(has_valid_map){',
                     'version=="emerald"&&layout_version!="emerald"',
                     'if(!std::filesystem::exists(json_to_string(layout,"border_filepath")))continue;'):
         if pattern not in compact:
@@ -252,7 +261,8 @@ def audit(engine, names):
     namespace, section_values, section_contract = namespace_contract(engine, document)
 
     def enabled(name):
-        return (maps[name].get('region') or 'REGION_HOENN') == 'REGION_HOENN'
+        region = maps[name].get('region')
+        return region is None or region in ('', 'REGION_HOENN', 'REGION_SINNOH')
 
     def problem(name, code, detail, warning=False):
         (warnings if warning else errors).append({'map': name, 'code': code, 'detail': detail})
@@ -299,10 +309,8 @@ def audit(engine, names):
             problem(name, 'map-identity', 'Directory/name mismatch or duplicate map constant')
         if len(slots[name]) != 1:
             problem(name, 'map-registration', f'Expected one registry slot, got {len(slots[name])}')
-        elif any(enabled(other) != enabled(name) for other in groups[slots[name][0][2]]):
-            problem(name, 'mixed-build-group', 'mapjson compacts filtered slots; constants keep source indices')
         if not enabled(name):
-            problem(name, 'map-excluded', 'Current Emerald mapjson excludes non-REGION_HOENN headers')
+            problem(name, 'map-excluded', 'Emerald mapjson includes only REGION_HOENN and REGION_SINNOH headers')
         matched = [l for l in layouts if l.get('id') == data.get('layout')]
         if len(matched) != 1:
             problem(name, 'layout-identity', f'Expected one layout, got {len(matched)}')
