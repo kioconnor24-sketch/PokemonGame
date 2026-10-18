@@ -57,12 +57,12 @@ This reproduces Codex's result.
 | run08-release-heal-battles | **STOPPED, partial** (RELEASE OFF `06e3e40a…`, head `c77fbd69`) | • **First clinic heal after power-on: no crash**, plus 2 more heals on the fixed RELEASE build.<br>• It then exposed a **QA driver defect**: under LTO the battle controller is `HandleInputChooseAction.lto_priv.N`, so the driver's exact-name battle logic never ran (no ball, no move choice) and the catch phase looped.<br>• Fixed in the wrapper (`use_source_function_names`, with a test) and rerun as run09. See `run08-…/STOPPED.md`. |
 | run09-release-battles | **PASS** (RELEASE OFF `06e3e40a…`, wrapper with source function names, `source_unchanged: true`) | From run02's save `73c3b87d`, with real input. **8 battles** (`events.jsonl`):<br>• First clinic heal after power-on, then **6 heals in total**, no crash.<br>• **Capture:** one Poké Ball throw caught a Fletchling, party of 2.<br>• Wild battles trained Piplup to L8; it learned Water Gun.<br>• **Trainer battle:** Sam beaten, no whiteout.<br>• **SAVE:** `SaveSuccessCallback` and `SaveReturnSuccessCallback`; flash slots valid, counter 2 newer than 1.<br>• Audio: 815 of 819 windows non-silent. |
 | run10-release-continue | **PASS** (same ROM) | • **Fresh-process CONTINUE** of run09's save matched the saved state (`continue-check.json`, no problems).<br>• A clinic heal after the reload: no crash. |
+| run11-release-on-check | **PASS** (**cries-ON** RELEASE `4dbf3be4…`) | Checks that the reversible ON profile still runs on the merged head, from save `73c3b87d`:<br>• First clinic heal after power-on: no crash.<br>• **Capture** after 2 ball throws, party of 2.<br>• Pokédex list, entry, **CRY page** and 3 replays (`PlayCry_NormalNoDucking` with cries enabled), then close.<br>This is runtime evidence only. Whether the cries are audible was not judged by a human. |
 
 **Provenance note.** `provenance-*.json` records the checked-out commit, not the ROM's build input. Runs 06 and 07 have `source_unchanged: false` because evidence-only commits landed during the run: 90863ffd..a1acf662 and 3ca8cbc0..a276745e. Neither range touches the engine, driver or wrapper (`git diff --stat` on those paths is empty). The ROM sha256 in each provenance file identifies what actually ran.
 
 Not yet tested on the OFF build:
 - evolution and whiteout on the **RELEASE** OFF build (normal build: run07 PASS);
-- a cries-**ON** RELEASE runtime check (heal, battle, Pokédex cry);
 - Mega Evolution: no Averon content can reach it, so only the native tests cover it;
 - the `playmoncry` script command: no Averon map uses it, so only the native tests cover it.
 
