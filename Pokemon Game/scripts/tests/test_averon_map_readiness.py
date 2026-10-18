@@ -171,11 +171,43 @@ class SourceBatchTests(unittest.TestCase):
         layouts['layouts'].append(deepcopy(next(l for l in layouts['layouts'] if l['id'] == 'LAYOUT_SALTMERE')))
         self.assertIn('layout-identity', self.codes(self.audit_mutated({'data/layouts/layouts.json': layouts})))
 
-    def test_non_hoenn_map_and_mixed_group_fail(self):
+    def test_sinnoh_map_in_mixed_hoenn_group_is_header_eligible(self):
         data = self.map_data()
         data['region'] = 'REGION_SINNOH'
-        codes = self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': data}))
-        self.assertTrue({'map-excluded', 'mixed-build-group'} <= codes)
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': data})
+        self.assertEqual(result['errors'], [])
+        self.assertTrue(result['maps'][0]['header_eligible'])
+
+    def test_kanto_and_unknown_regions_are_excluded_in_mixed_groups(self):
+        for region in ('REGION_KANTO', 'REGION_JOHTO', 'REGION_sinnoh', False, 0, [], {}):
+            data = self.map_data()
+            data['region'] = region
+            with self.subTest(region=region):
+                result = self.audit_mutated({'data/maps/Saltmere/map.json': data})
+                self.assertIn('map-excluded', self.codes(result))
+                self.assertFalse(result['maps'][0]['header_eligible'])
+
+    def test_mixed_disabled_slot_does_not_invalidate_enabled_map(self):
+        data = self.map_data('Alderfield')
+        data['region'] = 'REGION_KANTO'
+        result = self.audit_mutated({'data/maps/Alderfield/map.json': data})
+        self.assertEqual(result['errors'], [])
+
+    def test_sinnoh_still_requires_emerald_layout(self):
+        data = self.map_data()
+        data['region'] = 'REGION_SINNOH'
+        layouts = json.loads((ENGINE / 'data/layouts/layouts.json').read_text())
+        next(l for l in layouts['layouts'] if l['id'] == data['layout'])['layout_version'] = 'frlg'
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': data, 'data/layouts/layouts.json': layouts})
+        self.assertIn('layout-excluded', self.codes(result))
+
+    def test_excluded_warp_and_connection_targets_remain_invalid(self):
+        for target, code in (('SaltmereGreenhouse', 'warp-excluded'), ('CoastalMeadow', 'connection-target')):
+            data = self.map_data(target)
+            data['region'] = 'REGION_KANTO'
+            with self.subTest(target=target):
+                result = self.audit_mutated({f'data/maps/{target}/map.json': data})
+                self.assertIn(code, self.codes(result))
 
     def test_unselected_target_layout_and_border_are_checked(self):
         layouts = json.loads((ENGINE / 'data/layouts/layouts.json').read_text())
@@ -218,8 +250,16 @@ class SourceBatchTests(unittest.TestCase):
 
     def test_generator_filter_drift_fails_closed(self):
         code = (ENGINE / 'tools/mapjson/mapjson.cpp').read_bytes()
-        with self.assertRaisesRegex(ValueError, 'inclusion contract'):
-            self.audit_mutated({'tools/mapjson/mapjson.cpp': code.replace(b'REGION_HOENN', b'REGION_SINNOH')})
+        for before, after in ((b'REGION_HOENN', b'REGION_KANTO'),
+                              (b'&& region != "REGION_SINNOH"', b''),
+                              (b'&& region != "REGION_SINNOH"', b'&& region != "REGION_KANTO"'),
+                              (b'version == "emerald" && region', b'false && version == "emerald" && region'),
+                              (b'valid_maps.push_back("NULL");', b''),
+                              (b'if (has_valid_map)', b'if (valid_maps.size() > 0)')):
+            with self.subTest(mutation=(before, after)):
+                self.assertIn(before, code)
+                with self.assertRaisesRegex(ValueError, 'inclusion contract'):
+                    self.audit_mutated({'tools/mapjson/mapjson.cpp': code.replace(before, after)})
 
     def test_dynamic_and_shared_events_require_review(self):
         source = self.map_data()
