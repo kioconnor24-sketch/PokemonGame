@@ -54,9 +54,21 @@ class GuardTests(unittest.TestCase):
         self.assertFalse(errors)
         self.assertEqual(len(warns), 1)
 
-    def test_frozen_map_fails_on_existing_or_new_layout(self):
+    def test_frozen_map_fails_without_exact_signed_handoff(self):
+        path = "Pokemon Game/engine/data/maps/Alderfield/map.json"
+        self.add(path)
+        self.assertIn("Map-file freeze", GUARD.validate(self.conf)[0][0])
+        self.conf["handoffs"] = [{"pr": 25, "association": "OWNER", "paths": [path]}]
+        self.assertEqual(GUARD.validate(self.conf)[0], [])
+
+    def test_signed_map_handoff_does_not_approve_another_map(self):
+        self.add("Pokemon Game/engine/data/maps/SandgemTown/map.json", "added")
         self.add("Pokemon Game/engine/data/maps/Alderfield/map.json")
-        self.assertIn("NO MAP", GUARD.validate(self.conf)[0][0])
+        self.conf["handoffs"] = [{"pr": 25, "association": "OWNER",
+                                   "paths": ["Pokemon Game/engine/data/maps/SandgemTown/map.json"]}]
+        errors, _ = GUARD.validate(self.conf)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("Alderfield/map.json", errors[0])
 
     def test_historical_quest_grandfathered(self):
         self.conf["pull_request"]["number"] = 14
