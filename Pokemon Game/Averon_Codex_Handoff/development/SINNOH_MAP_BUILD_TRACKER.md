@@ -12,7 +12,7 @@
 - All CSV `SN-*` keys are **tracker-only identifiers**, NOT GBA map IDs, sections, flags, event vars, Pokémon met-location values, or reserved saved identifiers. Existing names and routes are an **inventory for coverage/review**, not owner approval of exact scale, paths, locations or original game plot.
 - **Statuses** for each CSV row: `Adaptation=UNDECIDED|PRESERVE|MODIFY|REDESIGN`; `LayoutApproval=PENDING|APPROVED`; `Structure=NOT_STARTED|IN_PROGRESS|EMULATOR_PASS`; `VisualAssets=UNSOURCED|PLACEHOLDERS|FINAL_REVIEWED`; `Gameplay=DEFERRED|IN_PROGRESS|EMULATOR_PASS`. Record tested ROM SHA, screenshots/run/evidence URL, and linked PR before marking any `EMULATOR_PASS`. A parent location may expand into subrows (e.g., a separate cave floor or city interior) once approved; no invented technical map count ahead of design.
 - Update a row **on meaningful progress**, not on every developer session. Do not mark `EMULATOR_PASS` on the strength of map JSON, a compiler return code, synthetic fixtures, or someone else's unrelated ROM run. `Gameplay=DEFERRED` is intentional, **not** evidence of a blocker.
-- Claude is currently the **sole active developer** for execution, with manager independent review/integration. Issue comments cannot remotely launch Claude. Keep new map source claims disjoint from active PR #117 audio files, and make normal reviewed PRs. Work must respect existing map/file guards; do not weaken them.
+- Follow live #15 exact-file claims: Claude owns #117 audio/runtime evidence; Codex owns independent map preflight/resource tooling in #125, with manager independent review/integration. Issue comments cannot remotely launch Claude. Keep new map source claims disjoint from active PR #117 audio files, and make normal reviewed PRs. Work must respect existing map/file guards; do not weaken them.
 
 ## 1. The **only mandatory gates** before permanent Sinnoh map work
 
@@ -42,7 +42,7 @@
 
 ### Implemented supporting tools (not completed map production)
 
-- [x] **SOURCE/HOST tooling:** [selected-map preflight and comparable linked-resource deltas](SINNOH_SOURCE_AND_PIPELINE_RESEARCH_20261017.md) now check geometry dependencies, metatile bounds, warp targets/arrival bounds and current build inclusion; the existing resource reporter can compare matching profiles. The 16 existing Averon opening maps pass. This does not certify graphics/collision/gameplay or change any area-register status.
+- [x] **SOURCE/HOST tooling:** [selected-map preflight and comparable linked-resource deltas](SINNOH_SOURCE_AND_PIPELINE_RESEARCH_20261017.md) now check geometry, PNG/palette dependencies, metatile bounds, warp arrival/return indices, reciprocal edge geometry, saved-section pins (reusing #123) and current build inclusion; the existing resource reporter compares matching profiles and partial named-object contributions with explicit LTO/padding residuals. The 16 existing Averon opening maps pass. This does not certify converted pixels, collision/gameplay or change any area-register status. Preflight40 + resource18 + event-capacity4 host tests pass; no new map or permanent identifier is approved by this check.
 - **Research only:** the same report pins the Sinnoh donor's 159 map definitions, incomplete coverage, concrete warp conflicts and unresolved asset terms. No third-party map/asset is imported; native construction remains the actionable path pending specific owner decisions.
 
 ## 4. **First real Sinnoh slice** — implement and retain

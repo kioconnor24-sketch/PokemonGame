@@ -13,8 +13,10 @@ import json
 from pathlib import Path
 import re
 import struct
+import sys
 import zlib
 
+sys.dont_write_bytecode = True
 
 def positive_int(value):
     return type(value) is int and value > 0
@@ -291,6 +293,8 @@ def audit(engine, names):
             problem(name, 'map-capacity', 'Map index/group size exceeds signed-byte capacity')
         if any(slot[:2] == (127, 127) for slot in slots[name]):
             problem(name, 'reserved-map-id', 'Selected slot collides with MAP_DYNAMIC')
+        if not isinstance(data.get('id'), str) or not re.fullmatch(r'MAP_[A-Z0-9_]+', data['id']) or data['id'] in ('MAP_NONE', 'MAP_DYNAMIC'):
+            problem(name, 'map-identity', 'Missing/invalid/reserved map constant')
         if data.get('name') != name or len(by_id[data.get('id')]) != 1:
             problem(name, 'map-identity', 'Directory/name mismatch or duplicate map constant')
         if len(slots[name]) != 1:
@@ -352,7 +356,7 @@ def audit(engine, names):
                 problem(name, 'shared-events-reference', 'Missing/invalid shared_events_map source')
             else:
                 problem(name, 'shared-events', 'Events come from shared_events_map; manual event review required', True)
-        source_warps = [] if 'shared_events_map' in data else data.get('warp_events') or []
+        source_warps = [] if 'shared_events_map' in data or data.get('warp_events') is None else data['warp_events']
         if not isinstance(source_warps, list):
             problem(name, 'warp-format', 'warp_events must be an array')
             source_warps = []
@@ -386,7 +390,7 @@ def audit(engine, names):
                 else:
                     problem(name, 'shared-target-events', f'Warp {i}: target uses shared events; manual review required', True)
                 continue
-            warps = target.get('warp_events') or []
+            warps = [] if target.get('warp_events') is None else target['warp_events']
             if not isinstance(warps, list) or any(not isinstance(w, dict) for w in warps):
                 problem(name, 'warp-target-format', f'Warp {i}: target warp_events is not an object array')
                 continue
@@ -426,7 +430,7 @@ def audit(engine, names):
                             problem(name, 'dynamic-return-warp', f'Warp {i}: return uses WARP_ID_NONE; script review required', True)
                     elif not isinstance(back, str) or len([w for w in source_warps if isinstance(w, dict) and w.get('warp_id') == back]) != 1:
                         problem(name, 'warp-return-index', f'Warp {i}: return index {back!r} is unresolved')
-        connections = data.get('connections') or []
+        connections = [] if data.get('connections') is None else data['connections']
         if not isinstance(connections, list):
             problem(name, 'connection-format', 'connections must be an array')
             connections = []

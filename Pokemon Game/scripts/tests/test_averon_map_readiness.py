@@ -159,6 +159,13 @@ class SourceBatchTests(unittest.TestCase):
         data['id'] = 'MAP_SALTMERE'
         self.assertIn('map-identity', self.codes(self.audit_mutated({'data/maps/CoastalMeadow/map.json': data})))
 
+    def test_missing_invalid_and_reserved_map_constants_fail(self):
+        for ident in (None, '', True, 'MAP_DYNAMIC', 'MAP_NONE', 'MAP_bad-name'):
+            source = self.map_data()
+            source['id'] = ident
+            with self.subTest(ident=ident):
+                self.assertIn('map-identity', self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source})))
+
     def test_duplicate_layout_id_is_rejected(self):
         layouts = json.loads((ENGINE / 'data/layouts/layouts.json').read_text())
         layouts['layouts'].append(deepcopy(next(l for l in layouts['layouts'] if l['id'] == 'LAYOUT_SALTMERE')))
@@ -301,8 +308,11 @@ class SourceBatchTests(unittest.TestCase):
 
     def test_unsupported_event_containers_report_errors(self):
         for key, value, expected in (('warp_events', 'bad', 'warp-format'),
+                                     ('warp_events', {}, 'warp-format'),
+                                     ('warp_events', '', 'warp-format'),
                                      ('warp_events', [None], 'warp-format'),
                                      ('connections', 'bad', 'connection-format'),
+                                     ('connections', {}, 'connection-format'),
                                      ('connections', [None], 'connection-format')):
             source = self.map_data()
             source[key] = value
