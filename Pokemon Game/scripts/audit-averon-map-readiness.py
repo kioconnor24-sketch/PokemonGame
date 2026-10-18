@@ -197,13 +197,13 @@ def namespace_contract(engine, document):
     pin_path = path.with_name('averon-mapsec-pins.json')
     pins = json.loads(pin_path.read_text())['pins']
     entries = module.sections(engine)
-    values = {entry['id']: value for value, entry in enumerate(entries)}
+    values = {entry['id']: entry['value'] for entry in entries}
     return module, values, {'saved_pin_errors': module.check_pins(engine, pins),
                             'declared_regions': {entry['id']: entry.get('region') for entry in entries if 'region' in entry},
-                            'saved_pins_checked': len(pins), 'mapsec_none': len(entries),
+                            'saved_pins_checked': len(pins), 'mapsec_none': module.section_none(engine, entries),
                             'audit_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                             'pins_sha256': hashlib.sha256(pin_path.read_bytes()).hexdigest(),
-                            'scope': 'Existing #123 checks reused; no identifier allocation approved'}
+                            'scope': 'Frozen legacy namespace plus owner-approved explicit allocations; no map construction acceptance'}
 
 
 def tileset_dependencies(headers, metatiles, symbol, secondary):

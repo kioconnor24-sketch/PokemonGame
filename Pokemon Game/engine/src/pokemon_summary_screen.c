@@ -3595,6 +3595,30 @@ static void PrintMonTrainerMemo(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_MEMO), gStringVar4, 0, 1, 0, 0);
 }
 
+#if TESTING
+// Native fixture entry: use the real extraction, origin classification and
+// formatter without initializing graphics or replacing the production logic.
+bool32 TestSummaryBufferTrainerMemo(struct Pokemon *mon, u8 *output)
+{
+    struct PokemonSummaryScreenData *previous = sMonSummaryScreen;
+    sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
+    if (sMonSummaryScreen == NULL)
+    {
+        sMonSummaryScreen = previous;
+        return FALSE;
+    }
+    sMonSummaryScreen->monList.mons = mon;
+    sMonSummaryScreen->currentMon = *mon;
+    while (!ExtractMonDataToSummaryStruct(mon))
+        ;
+    BufferMonTrainerMemo();
+    StringCopy(output, gStringVar4);
+    Free(sMonSummaryScreen);
+    sMonSummaryScreen = previous;
+    return TRUE;
+}
+#endif
+
 static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;

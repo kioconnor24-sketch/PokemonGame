@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Inventory the 8-bit map-section / met-location namespace (read-only).
 
-Map sections (MAPSEC_*) are numbered by their order in
+Legacy map sections (MAPSEC_*) retain their original order in
 src/data/region_map/region_map_sections.json. The numeric value is what a
 saved Pokemon keeps in its 8-bit metLocation and what MapHeader stores in its
 8-bit regionMapSectionId; 0xFD-0xFF are reserved met-location codes
-(gametypes.h, constants/region_map_sections.h). MAPSEC_NONE is the count.
+(gametypes.h, constants/region_map_sections.h). MAPSEC_NONE stays 215; approved new sections explicitly allocate 216..252.
 
 For every section this reports which maps use it (Averon's registered group
 versus upstream maps), and which source files name it. It allocates nothing,
@@ -59,7 +59,34 @@ def sections(engine):
         if "region" in entry and (not isinstance(entry["region"], str)
                                   or entry["region"] not in ENGINE_REGIONS | {"REGION_NONE"}):
             raise ValueError(f"{entry['id']}: invalid region metadata; use a declared REGION_* enum")
-    return entries
+    manifest = engine / "src/data/region_map/region_map_sections.legacy.json"
+    if manifest.is_file():
+        legacy = read_json(manifest)
+        if not isinstance(legacy, list) or len(legacy) != 215 or not 215 <= len(entries) <= 252:
+            raise ValueError("expected 215 legacy entries and at most 37 new named sections")
+        for index, entry in enumerate(entries):
+            expected = index if index < 215 else index + 1
+            value = entry.get("value", expected)
+            if type(value) is not int or value != expected:
+                raise ValueError(f"{entry['id']}: duplicate, sparse, reserved or moved value")
+            if not re.fullmatch(r"MAPSEC_[A-Z0-9_]+", entry['id']) or entry['id'] in {"MAPSEC_NONE", "MAPSEC_COUNT"}:
+                raise ValueError("invalid or reserved section identifier")
+            if index < 215:
+                old = legacy[index]
+                if old['value'] != index or old['id'] != entry['id'] or old['name'] != entry.get('name') or 'region' in entry:
+                    raise ValueError(f"{entry['id']}: legacy value, name or region changed")
+            elif ('value' not in entry or entry.get('region') not in ENGINE_REGIONS
+                  or not isinstance(entry.get('name'), str) or not entry['name']):
+                raise ValueError(f"{entry['id']}: new section requires explicit value, name and engine region")
+    elif (any('value' in e for e in entries)
+          or (engine / 'tools/jsonproc/map_sections.h').is_file()):
+        raise ValueError("missing frozen legacy manifest")
+    # Also supports inventories of historical implicit-only trees.
+    return [dict(entry, value=entry.get('value', index)) for index, entry in enumerate(entries)]
+
+
+def section_none(engine, entries):
+    return 215 if (engine / 'src/data/region_map/region_map_sections.legacy.json').is_file() else len(entries)
 
 
 def map_sections(engine, group):
@@ -147,11 +174,12 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
     entries = sections(engine)
     maps = map_sections(engine, group)
     refs = references(engine)
-    values = {entry["id"]: value for value, entry in enumerate(entries)}
+    values = {entry["id"]: entry["value"] for entry in entries}
     fly = fly_rows(engine)
     cells = town_map_cells(engine)
     rows = []
-    for value, entry in enumerate(entries):
+    for entry in entries:
+        value = entry["value"]
         ident = entry["id"]
         averon_maps = sorted(m for m, (sec, mine) in maps.items() if sec == ident and mine)
         other_maps = sorted(m for m, (sec, mine) in maps.items() if sec == ident and not mine)
@@ -168,7 +196,7 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
             town_map_cells=cells.get(ident, 0),
             engine_region=engine_region(value, values, entry.get("region")),
         ))
-    none_value = len(entries)
+    none_value = section_none(engine, entries)
     unknown = sorted({sec for sec, _ in maps.values() if sec and sec not in {e["id"] for e in entries}
                       and sec != "MAPSEC_NONE"})
     averon_rows = [r for r in rows if r["averon_maps"]]
@@ -180,7 +208,7 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
         averon_engine_regions=sorted({r["engine_region"] for r in averon_rows}),
         region_conditioned_evolutions=region_conditioned_evolutions(engine),
         sections=len(entries), mapsec_none=none_value,
-        spare_codes_before_reserved=max(0, FIRST_RESERVED - none_value - 1),
+        spare_codes_before_reserved=max(0, FIRST_RESERVED - len(entries) - 1),
         reserved_met_codes={f"0x{k:02X}": v for k, v in sorted(RESERVED_MET_CODES.items())},
         averon_group=group,
         averon_map_count=sum(1 for _, mine in maps.values() if mine),
@@ -197,10 +225,10 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
 def check_pins(engine, pins):
     """Errors if a pinned (saved) section value moved, or the namespace would
     reach the reserved met-location codes."""
-    values = {entry["id"]: value for value, entry in enumerate(sections(engine))}
+    values = {entry["id"]: entry["value"] for entry in sections(engine)}
     errors = [f"{ident}: pinned {want}, now {values.get(ident, 'missing')}"
               for ident, want in sorted(pins.items()) if values.get(ident) != want]
-    if len(values) >= FIRST_RESERVED:  # MAPSEC_NONE must stay below 0xFD
+    if len(values) >= FIRST_RESERVED:  # Historical implicit-only namespaces too.
         errors.append(f"MAPSEC_NONE would be {len(values)}, colliding with reserved met codes 0xFD-0xFF")
     return errors
 
@@ -223,7 +251,7 @@ def main(argv=None):
     report = inventory(args.engine, args.group)
     if args.json:
         args.json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
-    print(f"{report['sections']} sections (0-{report['sections'] - 1}), MAPSEC_NONE={report['mapsec_none']}, "
+    print(f"{report['sections']} named sections, MAPSEC_NONE={report['mapsec_none']}, "
           f"{report['spare_codes_before_reserved']} spare codes before 0xFD")
     print(f"Averon group {report['averon_group']}: {report['averon_map_count']} maps using "
           f"{len(report['averon_sections'])} sections: {', '.join(report['averon_sections'])}")

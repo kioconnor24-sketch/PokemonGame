@@ -3,6 +3,7 @@
 // https://github.com/pantor/inja
 
 #include "jsonproc.h"
+#include "map_sections.h"
 
 #include <map>
 
@@ -122,7 +123,13 @@ int main(int argc, char *argv[])
 
     try
     {
-        env.write_with_json_file(templateFilepath, jsonfilepath, outputFilepath);
+        std::ifstream input(jsonfilepath);
+        if (!input)
+            throw std::runtime_error("cannot open JSON input: " + jsonfilepath);
+        json data;
+        input >> data;
+        prepare_map_sections(data, jsonfilepath);
+        env.write(templateFilepath, data, outputFilepath);
     }
     catch (const std::exception& e)
     {

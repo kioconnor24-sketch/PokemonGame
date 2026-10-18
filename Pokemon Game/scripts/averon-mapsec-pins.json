@@ -1,11 +1,12 @@
 {
-  "comment": "Numeric map-section values that existing Averon saves can hold in each Pokemon's 8-bit metLocation (and TV records). Changing the order of src/data/region_map/region_map_sections.json before these entries would silently re-label every saved Pokemon's met location. Extend only by appending after an owner-approved ID decision.",
+  "comment": "Immutable saved-origin allocations. All legacy0..214 identities/names are frozen by region_map_sections.legacy.json and native goldens. MAPSEC_NONE stays215; approved explicit additions use216..252, never specialsFD..FF. Extend pins only after owner approval; never alter existing pins.",
   "pins": {
     "MAPSEC_SALTMERE": 209,
     "MAPSEC_COASTAL_MEADOW": 210,
     "MAPSEC_WINDROW": 211,
     "MAPSEC_ORCHARD_LANE": 212,
     "MAPSEC_ALDERFIELD": 213,
-    "MAPSEC_COASTAL_BLUFFS": 214
+    "MAPSEC_COASTAL_BLUFFS": 214,
+    "MAPSEC_SANDGEM_TOWN": 216
   }
 }

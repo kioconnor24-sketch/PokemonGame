@@ -205,6 +205,15 @@ class SurfaceTests(Fixture):
 
 
 class RepositoryPinTests(unittest.TestCase):
+    def test_production_fixed_sentinel_and_explicit_sandgem(self):
+        engine = SCRIPT.resolve().parents[1] / "engine"
+        report = audit.inventory(engine)
+        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (216, 215, 36))
+        row = next(r for r in report['rows'] if r['id'] == 'MAPSEC_SANDGEM_TOWN')
+        self.assertEqual((row['value'], row['name'], row['engine_region']), (216, 'SANDGEM TOWN', 'REGION_SINNOH'))
+        self.assertFalse(row['fly_row'])
+        self.assertEqual(row['town_map_cells'], 0)
+
     def test_current_engine_keeps_every_saved_value(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
         pins = json.loads(SCRIPT.with_name("averon-mapsec-pins.json").read_text())["pins"]
