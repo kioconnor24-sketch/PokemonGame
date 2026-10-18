@@ -1,0 +1,39 @@
+{"t": 1792290285.42, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792290285.54, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792290286.1, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792290286.15, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792290288.34, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792290288.42, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792290290.31, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792290290.44, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792290291.0, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792290291.1, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792290291.68, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792290291.78, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792290292.96, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792290293.06, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792290296.89, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792290297.05, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792290309.15, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792290309.67, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792290309.68, "event": "continue-check", "problems": []}
+{"t": 1792290310.88, "event": "follower-before-talk", "follower": {"species": 393, "graphicsId": 20873, "invisible": false}, "pos": [7, 5]}
+{"t": 1792290312.24, "event": "capture", "file": "0010-follower-talk.png"}
+{"t": 1792290313.39, "event": "capture", "file": "0011-follower-talk-01.png"}
+{"t": 1792290314.84, "event": "capture", "file": "0012-follower-talk-02.png"}
+{"t": 1792290315.35, "event": "follower-talked", "tasks": ["Task_WeatherMain", "Task_RunPerStepCallback", "Task_MuddySlope", "Task_RunTimeBasedEvents"], "field_ready": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792290319.69, "event": "capture", "file": "0013-dex-list.png"}
+{"t": 1792290319.71, "event": "dex", "step": "list", "tasks": ["Task_HandlePokedexInput"]}
+{"t": 1792290322.29, "event": "capture", "file": "0014-dex-entry.png"}
+{"t": 1792290322.32, "event": "dex", "step": "entry", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleInfoScreenInput"], "attempts": 0}
+{"t": 1792290323.92, "event": "dex", "step": "page", "key": "RIGHT", "page": "Task_HandleCryScreenInput"}
+{"t": 1792290324.9, "event": "capture", "file": "0015-dex-cry-page.png"}
+{"t": 1792290324.94, "event": "dex", "step": "cry-page", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleCryScreenInput"]}
+{"t": 1792290326.53, "event": "capture", "file": "0016-dex-cry-replay-1.png"}
+{"t": 1792290328.07, "event": "capture", "file": "0017-dex-cry-replay-2.png"}
+{"t": 1792290329.7, "event": "capture", "file": "0018-dex-cry-replay-3.png"}
+{"t": 1792290337.56, "event": "capture", "file": "0019-dex-closed.png"}
+{"t": 1792290337.56, "event": "dex", "step": "closed"}
+{"t": 1792290346.7, "event": "healed", "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792290346.91, "event": "capture", "file": "0020-end.png"}
+{"t": 1792290346.91, "event": "observe", "label": "end", "problems": []}
