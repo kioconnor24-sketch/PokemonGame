@@ -14,7 +14,9 @@ static const struct HealLocation sHealLocations[NUM_HEAL_LOCATIONS - 1] = {
 #define DEFAULT_POKEMON_CENTER_X 7
 #define DEFAULT_POKEMON_CENTER_Y 4
 
-static const u16 sWhiteoutRespawnHealCenterMapIdxs[][4] = {
+// Parallel tables must cover even a final healer with no nurse respawn.
+// Omitted entries stay zero, selecting the existing raw-anchor fallback.
+static const u16 sWhiteoutRespawnHealCenterMapIdxs[NUM_HEAL_LOCATIONS - 1][4] = {
 ## for heal_location in heal_locations
 {% if existsIn(heal_location, "respawn_map") %}
     [{{ heal_location.id }} - 1] = { MAP_GROUP({{ heal_location.respawn_map }}), MAP_NUM({{ heal_location.respawn_map }}), {% if existsIn(heal_location, "respawn_x") %}{{ heal_location.respawn_x }}{% else %}DEFAULT_POKEMON_CENTER_X{% endif %}, {% if existsIn(heal_location, "respawn_y") %}{{ heal_location.respawn_y }}{% else %}DEFAULT_POKEMON_CENTER_Y{% endif %}},
@@ -25,7 +27,7 @@ static const u16 sWhiteoutRespawnHealCenterMapIdxs[][4] = {
 #undef DEFAULT_POKEMON_CENTER_X
 #undef DEFAULT_POKEMON_CENTER_Y
 
-static const u8 sWhiteoutRespawnHealerNpcIds[] = {
+static const u8 sWhiteoutRespawnHealerNpcIds[NUM_HEAL_LOCATIONS - 1] = {
 ## for heal_location in heal_locations
 {% if existsIn(heal_location, "respawn_npc") %}
     [{{ heal_location.id }} - 1] = {{ heal_location.respawn_npc }},
