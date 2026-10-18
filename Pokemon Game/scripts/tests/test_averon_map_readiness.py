@@ -88,7 +88,8 @@ class VisualContainerTests(unittest.TestCase):
         def chunk(kind, data):
             return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind+data) & 0xffffffff)
         return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, depth, color, 0, 0, 0))
-                + chunk(b'IDAT', zlib.compress(b'\0'*40)) + chunk(b'IEND', b''))
+                + chunk(b'PLTE', b'\0\0\0'*16)
+                + chunk(b'IDAT', zlib.compress(b'\0'*(((width*depth+7)//8+1)*height))) + chunk(b'IEND', b''))
 
     def test_tile_footprint_and_crc(self):
         self.assertEqual(tool.png_geometry(self.png(16, 8))['raw_tiles'], 2)
@@ -307,6 +308,21 @@ class SourceBatchTests(unittest.TestCase):
             source[key] = value
             with self.subTest(key=key, value=value):
                 self.assertIn(expected, self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source})))
+
+    def test_dynamic_return_warp_is_not_silently_certified(self):
+        target = self.map_data('SaltmereGreenhouse')
+        target['warp_events'][0]['dest_warp_id'] = '-1'
+        result = self.audit_mutated({'data/maps/SaltmereGreenhouse/map.json': target})
+        self.assertIn('dynamic-return-warp', {w['code'] for w in result['warnings']})
+
+    def test_map_dynamic_slot_is_reserved_even_within_signed_bounds(self):
+        groups = json.loads((ENGINE / 'data/maps/map_groups.json').read_text())
+        for i in range(128-len(groups['group_order'])):
+            key = f'gMapGroup_InMemory{i}'
+            groups['group_order'].append(key);groups[key] = []
+        last = groups['group_order'][-1]
+        groups[last] = ['CoastalMeadow']*127 + ['Saltmere']
+        self.assertIn('reserved-map-id', self.codes(self.audit_mutated({'data/maps/map_groups.json': groups})))
 
     def test_cli_success_and_missing_map_failure(self):
         for name, expected in (('Saltmere', 0), ('MissingMap', 1)):

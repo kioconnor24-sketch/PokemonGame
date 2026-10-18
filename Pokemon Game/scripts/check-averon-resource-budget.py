@@ -99,7 +99,66 @@ def compare_baseline(current, baseline):
             "baseline_labels": baseline_labels, "memory": changes}
 
 
-def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=None):
+
+def linked_inputs(map_text, used_bytes, capacity_bytes):
+    """Stable named ROM-VMA inputs only; discard/LTO/RAM/alignment stay residual."""
+    marker = 'Linker script and memory map'
+    if marker not in map_text:
+        raise ValueError('Missing GNU linker memory-map body')
+    rows, pending = {}, None
+    for line in map_text.split(marker, 1)[1].splitlines():
+        match = re.fullmatch(r' (\.[^\s]+)\s+(0x[0-9a-fA-F]+)\s+(0x[0-9a-fA-F]+)\s+(.+\.o(?:\))?)', line.rstrip())
+        if not match and pending:
+            match = re.fullmatch(r'\s+(0x[0-9a-fA-F]+)\s+(0x[0-9a-fA-F]+)\s+(.+\.o(?:\))?)', line.rstrip())
+            values = (pending, *match.groups()) if match else None
+        else:
+            values = match.groups() if match else None
+        pending = line.strip() if re.fullmatch(r' \.[^\s]+', line) else None
+        if not values:
+            continue
+        section, address, size, obj = values
+        address, size = int(address, 16), int(size, 16)
+        if not size or not 0x08000000 <= address < 0x08000000 + capacity_bytes:
+            continue
+        if address + size > 0x08000000 + used_bytes:
+            raise ValueError('Map input extends beyond the reported linked ROM usage')
+        # LTO repartitions and temporary absolute paths are not stable source
+        # attribution. Avoid presenting changed partition names as new assets.
+        if obj.startswith(('/', '\\')) or '.ltrans' in obj or re.match(r'[A-Za-z]:', obj):
+            continue
+        obj = re.sub(r'^build/[^/]+/', '', obj)
+        rows[obj] = rows.get(obj, 0) + size
+    if not rows:
+        raise ValueError('No stable linked ROM input objects found')
+    total = sum(rows.values())
+    if total > used_bytes:
+        raise ValueError('Input contributions exceed linked ROM usage')
+    return {'format': 1, 'map_text_sha256': hashlib.sha256(map_text.encode()).hexdigest(),
+            'scope': 'Partial named ROM-VMA inputs; LTO, absolute toolchain paths, initialized RAM loads and padding are not attributed',
+            'objects': dict(sorted(rows.items())), 'attributed_bytes': total,
+            'unattributed_bytes': used_bytes - total}
+
+
+def contribution_changes(current, previous):
+    def checked(row):
+        if not isinstance(row, dict) or type(row.get('format')) is not int or row['format'] != 1 or not isinstance(row.get('objects'), dict):
+            raise ValueError('Malformed linker input inventory')
+        if not row['objects'] or any(not isinstance(k, str) or type(v) is not int or v < 0 for k, v in row['objects'].items()):
+            raise ValueError('Malformed linker object bytes')
+        if row.get('attributed_bytes') != sum(row['objects'].values()) or type(row.get('unattributed_bytes')) is not int or row['unattributed_bytes'] < 0:
+            raise ValueError('Malformed linker contribution totals')
+        return row['objects']
+    now, before = checked(current), checked(previous)
+    rows = [{'object': name, 'baseline_bytes': before.get(name, 0), 'bytes': now.get(name, 0),
+             'delta_bytes': now.get(name, 0) - before.get(name, 0)}
+            for name in sorted(now.keys() | before.keys()) if now.get(name, 0) != before.get(name, 0)]
+    rows.sort(key=lambda row: (-abs(row['delta_bytes']), row['object']))
+    return {'changed_objects': rows,
+            'attributed_delta_bytes': current['attributed_bytes'] - previous['attributed_bytes'],
+            'unattributed_delta_bytes': current['unattributed_bytes'] - previous['unattributed_bytes'],
+            'scope': 'Partial contributions; residual changes are not claimed as content savings'}
+
+def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=None, linker_map=None):
     metadata = {"scope": REPORT_SCOPE,
                 "memory": parse_memory(log_text)}
     labels = build_labels(profile, source_revision)
@@ -107,6 +166,14 @@ def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=N
         metadata["build_labels"] = labels
     if baseline is not None:
         metadata["comparison"] = compare_baseline(metadata, baseline)
+    if linker_map is not None:
+        rom_memory = metadata['memory']['ROM']
+        metadata['linker_inputs'] = linked_inputs(linker_map, rom_memory['used_bytes'], rom_memory['capacity_bytes'])
+        if baseline is not None and 'linker_inputs' in baseline:
+            metadata['comparison']['contributions'] = contribution_changes(metadata['linker_inputs'], baseline['linker_inputs'])
+            previous = baseline['linker_inputs']
+            if previous['attributed_bytes'] + previous['unattributed_bytes'] != baseline['memory']['ROM']['used_bytes']:
+                raise ValueError('Baseline contributions do not match its linked ROM usage')
     if rom is not None:
         path = Path(rom)
         digest = hashlib.sha256()
@@ -125,6 +192,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--log", required=True, type=Path)
     ap.add_argument("--rom", type=Path)
+    ap.add_argument("--linker-map", type=Path, help="Optional matching GNU .map for partial named-object contributions")
     ap.add_argument("--json", required=True, type=Path)
     ap.add_argument("--profile", help="Caller label for the exact build configuration; not verified")
     ap.add_argument("--source-revision", help="Caller source revision label; not verified")
@@ -138,7 +206,8 @@ def main():
             if baseline is None:
                 raise ValueError("Malformed baseline: expected a resource-budget report object")
         result = report(args.log.read_text(encoding="utf-8", errors="replace"), args.rom,
-                        profile=args.profile, source_revision=args.source_revision, baseline=baseline)
+                        profile=args.profile, source_revision=args.source_revision, baseline=baseline,
+                        linker_map=args.linker_map.read_text() if args.linker_map else None)
     except (OSError, ValueError) as exc:
         ap.error(str(exc))
     args.json.parent.mkdir(parents=True, exist_ok=True)
@@ -153,6 +222,11 @@ def main():
     if "comparison" in result:
         for name, row in result["comparison"]["memory"].items():
             print(f"{name}: linked usage change {row['used_bytes_delta']:+d} bytes")
+        contributions = result['comparison'].get('contributions')
+        if contributions:
+            for row in contributions['changed_objects'][:10]:
+                print(f"ROM input {row['object']}: {row['delta_bytes']:+d} bytes")
+            print(f"ROM unattributed change: {contributions['unattributed_delta_bytes']:+d} bytes (includes LTO/padding)")
 
 
 if __name__ == "__main__":

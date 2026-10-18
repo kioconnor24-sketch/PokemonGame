@@ -129,6 +129,67 @@ class ResourceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "source_revision"):
             tool.report(LOG, source_revision=" ")
 
+    @staticmethod
+    def linker_map(size=256, add=True):
+        text = ('Discarded input sections\n .rodata 0x08000000 0x40 data/discarded.o\n'
+                'Linker script and memory map\n'
+                f'.rodata 0x08000000 0x{size+32:x}\n'
+                f' .rodata 0x08000000 0x{size:x} build/emerald-release/data/maps.o\n'
+                f' .rodata.named\n                0x{0x08000000+size:x} 0x20 data/layouts.o\n'
+                ' .text 0x08001000 0x100 /tmp/abcd.ltrans0.ltrans.o\n'
+                ' .bss 0x02000000 0x100 src/save.o\n')
+        if add: text += ' .rodata 0x08002000 0x40 graphics/new_tiles.o\n'
+        return text
+
+    def test_contributions_exclude_outputs_discarded_ram_and_lto(self):
+        row = tool.linked_inputs(self.linker_map(), 26722880, 32*1024*1024)
+        self.assertEqual(row['objects'], {'data/maps.o': 256, 'data/layouts.o': 32, 'graphics/new_tiles.o': 64})
+        self.assertEqual(row['attributed_bytes'], 352)
+        self.assertEqual(row['unattributed_bytes'], 26722880-352)
+
+    def test_contribution_growth_removal_and_residual(self):
+        before = tool.report(LOG, profile=PROFILE, linker_map=self.linker_map(add=False))
+        now = tool.report(log_with_usage(rom=26723040), profile=PROFILE,
+                          linker_map=self.linker_map(352), baseline=before)
+        c = now['comparison']['contributions']
+        self.assertEqual(c['attributed_delta_bytes'], 160)
+        self.assertEqual(c['unattributed_delta_bytes'], 0)
+        self.assertEqual(c['changed_objects'][0]['object'], 'data/maps.o')
+        back = tool.report(LOG, profile=PROFILE, linker_map=self.linker_map(add=False), baseline=now)
+        self.assertEqual(back['comparison']['contributions']['changed_objects'][0]['delta_bytes'], -96)
+
+    def test_missing_attribution_pair_does_not_fake_asset_removal(self):
+        before = tool.report(LOG, profile=PROFILE)
+        now = tool.report(LOG, profile=PROFILE, baseline=before, linker_map=self.linker_map())
+        self.assertNotIn('contributions', now['comparison'])
+
+    def test_invalid_map_and_out_of_range_inputs_fail(self):
+        for text in ('bad map', 'Linker script and memory map\n .bss 0x02000000 0x10 src/foo.o',
+                     'Linker script and memory map\n .rodata 0x09ffffff 0x20 data/foo.o'):
+            with self.assertRaises(ValueError): tool.linked_inputs(text, 26722880, 32*1024*1024)
+
+    def test_bad_baseline_contributions_fail(self):
+        before = tool.report(LOG, profile=PROFILE, linker_map=self.linker_map())
+        for mutation in (lambda r: r.update(objects=[]),
+                         lambda r: r['objects'].update({'bad.o': True}),
+                         lambda r: r.update(attributed_bytes=0),
+                         lambda r: r.update(unattributed_bytes=-1),
+                         lambda r: r.update(unattributed_bytes=r['unattributed_bytes']+1)):
+            bad = copy.deepcopy(before)
+            mutation(bad['linker_inputs'])
+            with self.assertRaises(ValueError):
+                tool.report(LOG, profile=PROFILE, baseline=bad, linker_map=self.linker_map())
+
+    def test_cli_map_attribution(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            log, linker_map, output = root/'build.log', root/'build.map', root/'out.json'
+            log.write_text(LOG);linker_map.write_text(self.linker_map())
+            result = subprocess.run([sys.executable, str(FILE), '--log', str(log), '--json', str(output),
+                                     '--linker-map', str(linker_map)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(json.loads(output.read_text())['linker_inputs']['attributed_bytes'], 352)
+
     def test_cli_previous_report_comparison_and_old_usage(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

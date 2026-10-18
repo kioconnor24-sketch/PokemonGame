@@ -71,6 +71,9 @@ def source_limits(fieldmap, global_fieldmap):
             'primary': constant(fieldmap, 'NUM_METATILES_IN_PRIMARY'),
             'primary_frlg': constant(fieldmap, 'NUM_METATILES_IN_PRIMARY_FRLG'),
             'total': constant(fieldmap, 'NUM_METATILES_TOTAL'),
+            'tile_primary': constant(fieldmap, 'NUM_TILES_IN_PRIMARY'),
+            'tile_primary_frlg': constant(fieldmap, 'NUM_TILES_IN_PRIMARY_FRLG'),
+            'tile_total': constant(fieldmap, 'NUM_TILES_TOTAL'),
             'mask': constant(global_fieldmap, 'MAPGRID_METATILE_ID_MASK')}
 
 
@@ -115,7 +118,7 @@ def png_geometry(data):
     """Check the PNG container/CRC and tile geometry; not a pixel decoder."""
     if data[:8] != b'\x89PNG\r\n\x1a\n':
         raise ValueError('invalid PNG signature')
-    position, header, image, ended = 8, None, False, False
+    position, header, image, ended, palette = 8, None, False, False, False
     while position < len(data):
         if position + 12 > len(data):
             raise ValueError('truncated PNG chunk')
@@ -140,6 +143,14 @@ def png_geometry(data):
                 raise ValueError('PNG must have positive 8-pixel tile dimensions and supported header')
             header = {'width': width, 'height': height, 'bit_depth': depth,
                       'color_type': color, 'raw_tiles': width*height//64}
+        if kind == b'PLTE':
+            if palette or image or not size or size % 3 or size > 768:
+                raise ValueError('invalid PNG palette chunk')
+            if header['color_type'] == 3 and size // 3 > 2 ** header['bit_depth']:
+                raise ValueError('PNG palette exceeds bit-depth capacity')
+            palette = True
+        if kind == b'IDAT' and header['color_type'] == 3 and not palette:
+            raise ValueError('indexed PNG needs a palette before IDAT')
         image |= kind == b'IDAT'
         if kind == b'IEND':
             if size or end != len(data):
@@ -278,6 +289,8 @@ def audit(engine, names):
                 problem(name, 'section-region-mismatch', 'Saved section currently resolves to ' + row['section_engine_region'] + '; Sinnoh routing requires an approved policy', True)
         if len(slots[name]) == 1 and (slots[name][0][1] >= 128 or len(groups[slots[name][0][2]]) > 128):
             problem(name, 'map-capacity', 'Map index/group size exceeds signed-byte capacity')
+        if any(slot[:2] == (127, 127) for slot in slots[name]):
+            problem(name, 'reserved-map-id', 'Selected slot collides with MAP_DYNAMIC')
         if data.get('name') != name or len(by_id[data.get('id')]) != 1:
             problem(name, 'map-identity', 'Directory/name mismatch or duplicate map constant')
         if len(slots[name]) != 1:
@@ -311,7 +324,8 @@ def audit(engine, names):
                 info = png_geometry(tile_data)
                 trim = re.search(r'(?:^|\s)-num_tiles\s+(\d+)(?:\s|$)', options)
                 tile_count = int(trim[1]) if trim else info['raw_tiles']
-                tile_limit = limits['primary'] if not secondary else limits['total'] - limits['primary']
+                primary_tiles = limits['tile_primary_frlg'] if layout.get('layout_version') == 'frlg' else limits['tile_primary']
+                tile_limit = primary_tiles if not secondary else limits['tile_total'] - primary_tiles
                 if not 0 < tile_count <= min(info['raw_tiles'], tile_limit):
                     raise ValueError(f'{layout[field]}: converted tile count {tile_count} exceeds source/VRAM capacity')
                 row.setdefault('graphics', []).append(dict(symbol=layout[field], path=tile_path, encoding=encoding,
@@ -408,6 +422,8 @@ def audit(engine, names):
                     if type(back) in (str, int) and re.fullmatch(r'-?\d+', str(back), re.ASCII):
                         if str(int(back)) != str(back) or not -1 <= int(back) < min(len(source_warps), 128):
                             problem(name, 'warp-return-index', f'Warp {i}: return index {back!r} is invalid')
+                        elif int(back) == -1:
+                            problem(name, 'dynamic-return-warp', f'Warp {i}: return uses WARP_ID_NONE; script review required', True)
                     elif not isinstance(back, str) or len([w for w in source_warps if isinstance(w, dict) and w.get('warp_id') == back]) != 1:
                         problem(name, 'warp-return-index', f'Warp {i}: return index {back!r} is unresolved')
         connections = data.get('connections') or []
