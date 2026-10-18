@@ -18,7 +18,7 @@
 
 // Freeze ALL old identifiers, including upstream/debug locations, not only
 // the six naturally reachable Averon values. Nothing here allocates IDs.
-#define LEGACY_LOCATION(symbol, value) STATIC_ASSERT(symbol == value, symbol##_legacy_value_moved);
+#define LEGACY_LOCATION(symbol, value, name) STATIC_ASSERT(symbol == value, symbol##_legacy_value_moved);
 #include "data/averon_legacy_location_ids.inc"
 #undef LEGACY_LOCATION
 STATIC_ASSERT(MAPSEC_NONE == 215, legacy_none_moved);
@@ -30,6 +30,12 @@ STATIC_ASSERT(sizeof(struct Pokemon) == 100, party_format_changed);
 STATIC_ASSERT(offsetof(struct BoxPokemon, secure) == 32, encrypted_data_offset_changed);
 STATIC_ASSERT(sizeof(((struct PokemonSubstruct3 *)0)->metLocation) == 1, met_width_changed);
 STATIC_ASSERT(sizeof(((struct MapHeader *)0)->regionMapSectionId) == 1, runtime_header_width_changed);
+
+static const struct {u16 id; const u8 *name;} sLegacySectionNames[] = {
+#define LEGACY_LOCATION(symbol, value, name) {symbol, name},
+#include "data/averon_legacy_location_ids.inc"
+#undef LEGACY_LOCATION
+};
 
 TEST("Averon location legacy names and region identities remain unchanged")
 {
@@ -51,6 +57,9 @@ TEST("Averon location legacy names and region identities remain unchanged")
         {MAPSEC_ALDERFIELD, COMPOUND_STRING("ALDERFIELD")},
         {MAPSEC_COASTAL_BLUFFS, COMPOUND_STRING("COASTAL BLUFFS")},
     };
+    EXPECT_EQ(ARRAY_COUNT(sLegacySectionNames), 215);
+    for (u32 i = 0; i < ARRAY_COUNT(sLegacySectionNames); i++)
+        EXPECT_EQ(StringCompare(gRegionMapEntries[sLegacySectionNames[i].id].name, sLegacySectionNames[i].name), 0);
     u8 name[64];
     for (u32 i = 0; i < ARRAY_COUNT(names); i++)
     {

@@ -80,7 +80,7 @@ typedef uint32_t bool32;
 struct RegionMapLocation {u8 x, y, width, height; const u8 *name;};
 ''' + f'#include "{ENGINE / "include/constants/regions.h"}"\n'
                 + '#include "constants.h"\n#include "entries.h"\n'
-                + '#define LEGACY_LOCATION(symbol, value) _Static_assert(symbol == value, "Legacy ID moved");\n'
+                + '#define LEGACY_LOCATION(symbol, value, name) _Static_assert(symbol == value, "Legacy ID moved");\n'
                 + f'#include "{ENGINE / "test/data/averon_legacy_location_ids.inc"}"\n'
                 + '#undef LEGACY_LOCATION\n' + self.runtime
                 + '\nstatic bool32 KnownMet(u32 location) {return ' + self.met_predicate + ';}\n'
