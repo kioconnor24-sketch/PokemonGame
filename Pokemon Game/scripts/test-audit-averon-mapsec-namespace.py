@@ -124,11 +124,72 @@ class SavedValuePinTests(Fixture):
         self.assertEqual(audit.main(["--engine", str(self.engine), "--check-pins", str(pins)]), 1)
 
 
+class SurfaceTests(Fixture):
+    """Fly table, Town Map layout and engine-region classification."""
+
+    def test_fly_rows_come_only_from_the_heal_location_table(self):
+        self.text("src/region_map.c", "\n".join([
+            "static const u8 sMapHealLocations[][3] =",
+            "{",
+            "    [MAPSEC_ROUTE_101] = {1, 2, HEAL_LOCATION_NONE},",
+            "    [MAPSEC_BATTLE_FRONTIER] = {3, 4, HEAL_LOCATION_X},",
+            "};",
+            "static const u8 sOther[] = { [MAPSEC_SALTMERE] = 1 };",
+        ]))
+        report = audit.inventory(self.engine)
+        rows = self.rows(report)
+        self.assertTrue(rows["MAPSEC_BATTLE_FRONTIER"]["fly_row"])
+        self.assertFalse(rows["MAPSEC_SALTMERE"]["fly_row"])  # named only after the table ends
+        self.assertEqual((report["fly_table_rows"], report["fly_table_end"]), (2, 2))
+        self.assertEqual(report["averon_without_fly"], ["MAPSEC_SALTMERE"])
+
+    def test_missing_fly_table_means_no_rows(self):
+        report = audit.inventory(self.engine)
+        self.assertEqual((report["fly_table_rows"], report["fly_table_end"]), (0, 0))
+        self.assertEqual(report["averon_without_fly"], ["MAPSEC_SALTMERE"])
+
+    def test_town_map_cells_are_counted_per_layout_grid(self):
+        self.text("src/data/region_map/region_map_layout_kanto.h", "MAPSEC_SALTMERE, MAPSEC_SALTMERE")
+        report = audit.inventory(self.engine)
+        self.assertEqual(self.rows(report)["MAPSEC_SALTMERE"]["town_map_cells"], 3)
+        self.assertEqual(report["averon_off_town_map"], [])
+        self.text("src/data/region_map/region_map_layout.h", "MAPSEC_UNUSED_CAVE")
+        self.text("src/data/region_map/region_map_layout_kanto.h", "")
+        self.assertEqual(audit.inventory(self.engine)["averon_off_town_map"], ["MAPSEC_SALTMERE"])
+
+    def test_engine_region_uses_the_kanto_range_end_exclusive(self):
+        self.write("src/data/region_map/region_map_sections.json", {"map_sections": [
+            {"id": "MAPSEC_ROUTE_101"}, {"id": "MAPSEC_PALLET_TOWN"}, {"id": "MAPSEC_VIRIDIAN_CITY"},
+            {"id": "MAPSEC_SPECIAL_AREA"}, {"id": "MAPSEC_SALTMERE"}]})
+        rows = self.rows(audit.inventory(self.engine))
+        self.assertEqual([rows[k]["engine_region"] for k in ("MAPSEC_ROUTE_101", "MAPSEC_PALLET_TOWN",
+                                                              "MAPSEC_VIRIDIAN_CITY", "MAPSEC_SPECIAL_AREA",
+                                                              "MAPSEC_SALTMERE")],
+                         ["REGION_HOENN", "REGION_KANTO", "REGION_KANTO", "REGION_HOENN", "REGION_HOENN"])
+
+    def test_region_conditioned_evolutions_are_counted(self):
+        self.text("src/data/pokemon/species_info/gen_1_families.h",
+                  "EVOLUTION({EVO_LEVEL, 0, SPECIES_A, CONDITIONS({IF_REGION, REGION_ALOLA})},\n"
+                  "          {EVO_LEVEL, 0, SPECIES_B, CONDITIONS({IF_NOT_REGION, REGION_ALOLA})})\n"
+                  "EVOLUTION({EVO_ITEM, ITEM_X, SPECIES_C, CONDITIONS({IF_REGION, REGION_HISUI})})")
+        self.assertEqual(audit.inventory(self.engine)["region_conditioned_evolutions"],
+                         {"IF_NOT_REGION REGION_ALOLA": 1, "IF_REGION REGION_ALOLA": 1,
+                          "IF_REGION REGION_HISUI": 1})
+
+
 class RepositoryPinTests(unittest.TestCase):
     def test_current_engine_keeps_every_saved_value(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
         pins = json.loads(SCRIPT.with_name("averon-mapsec-pins.json").read_text())["pins"]
         self.assertEqual(audit.check_pins(engine, pins), [])
+
+    def test_current_engine_surfaces_are_classified(self):
+        engine = SCRIPT.resolve().parents[1] / "engine"
+        report = audit.inventory(engine)
+        self.assertGreater(report["fly_table_rows"], 0)  # the table parser still finds the table
+        self.assertTrue(set(report["averon_engine_regions"]) <= {"REGION_HOENN", "REGION_KANTO"})
+        for row in report["rows"]:
+            self.assertEqual(row["fly_row"], row["fly_row"] and row["value"] < report["fly_table_end"])
 
 
 if __name__ == "__main__":

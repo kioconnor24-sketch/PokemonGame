@@ -30,6 +30,19 @@ DEV-fixture saves made on upstream maps can hold other values, including 215.
 
 **The real limit.** The constraint is the 8-bit *saved* met location and the position of `MAPSEC_NONE`. It is not the number of maps: map IDs are a separate namespace (951 registered).
 
+## 1b. What else a section number reaches
+
+`audit-averon-mapsec-namespace.py` measures all of this, with fixture tests for each parser.
+
+| Surface | Today, for Averon's 6 sections | What a new Averon or Sinnoh section needs |
+| --- | --- | --- |
+| **Fly**: `sMapHealLocations[mapsec][3]` in `src/region_map.c` (protected file) | The table has 154 designated rows and ends before value 192 (`MAPSEC_EMBER_SPA` + 1). Averon's sections have **no row**. `FilterFlyDestination` and `SetFlyDestination` bounds-check against `ARRAY_COUNT`, so Fly to them does nothing. The native test `Averon Fly bounds rejects invalid sections…` asserts this for Saltmere and Alderfield | A row for every section that can be flown to. **Hazard:** adding one row past 214 makes C zero-fill every gap row (`{0, 0, HEAL_LOCATION_NONE = 0}`). `SetFlyDestination` would then warp those sections to map group 0 / num 0, which is **PetalburgCity**. The existing bounds test fails in that case, so keep it. Fill or guard the gap rows in the same change |
+| **Town Map**: `region_map_layout*.h` grids (`mapsec_u8_t`) for Hoenn, Kanto and Sevii | **None** of the six sections appears on any grid. The Town Map and the Fly cursor can't select them | A new layout grid and graphics, plus a `GetRegionMapType` case. The grid's cells are `mapsec_u8_t`, so a 16-bit runtime namespace (option B or C) also has to widen the grid type or give Averon/Sinnoh their own grid |
+| **Engine region**: `GetRegionForSectionId` (`include/regions.h`) | A range check: `[MAPSEC_PALLET_TOWN, MAPSEC_SPECIAL_AREA)` is Kanto, everything else is Hoenn. Averon's sections report **`REGION_HOENN`** | The region feeds 7 call sites: region-conditioned evolution (`IF_REGION` / `IF_NOT_REGION`), egg regional forms in `daycare.c`, Kanto vs Hoenn battle music, and the Town Map type. Species data has 25 such evolution conditions: Alola 6, Galar 4, Hisui 15, **Sinnoh 0**. Reporting Sinnoh sections as `REGION_SINNOH` changes no evolution today. Reporting them as `REGION_HISUI` would enable 8 Hisuian evolutions and block 7. That is a story decision. Either way it needs a per-section region table instead of the range |
+| **Map-name popup**: `sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1]` | Sized from `MAPSEC_COUNT`, so it grows automatically. Averon's sections get the default theme (index 0) | Nothing is required. Set a theme only if one is wanted |
+| **Map registration**: `data/maps/map_groups.json` plus each `map.json` `region_map_section` | 16 maps in `gMapGroup_AveronOpening` | The audit fails on any map that names an unknown section. Map IDs are independent of section values |
+| **Averon's own region record**: `averon_region_save.h` | Region codes `NONE`, `AVERON`, `SINNOH`, stored in SaveBlock3, format 1 | Independent of section values. It is not derived from `GetCurrentRegion()` |
+
 ## 2. Safety net added now (no owner decision needed)
 
 `averon-mapsec-pins.json` together with `audit-averon-mapsec-namespace.py --check-pins` pin the six shipped values (209–214). The check fails if either of these happens:

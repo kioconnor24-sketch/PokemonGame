@@ -84,10 +84,63 @@ def references(engine):
     return found
 
 
+FLY_TABLE_FILE = "src/region_map.c"
+FLY_TABLE = "sMapHealLocations"
+LAYOUT_GLOB = "src/data/region_map/region_map_layout*.h"
+SPECIES_INFO_GLOB = "src/data/pokemon/species_info/*.h"
+# GetRegionForSectionId (include/regions.h): [KANTO_MAPSEC_START,
+# MAPSEC_SPECIAL_AREA) is Kanto, every other section is Hoenn.
+KANTO_RANGE = ("MAPSEC_PALLET_TOWN", "MAPSEC_SPECIAL_AREA")
+REGION_CONDITION = re.compile(r"\b(IF_(?:NOT_)?REGION)\s*,\s*(REGION_[A-Z_]+)")
+
+
+def fly_rows(engine):
+    """Sections with a row in sMapHealLocations. FilterFlyDestination and
+    SetFlyDestination bounds-check against the table, so a section past its
+    last row has no Fly destination. Empty when the table is absent."""
+    path = engine / FLY_TABLE_FILE
+    text = path.read_text(encoding="utf-8", errors="replace") if path.is_file() else ""
+    start = text.find(FLY_TABLE + "[]")
+    if start < 0:
+        return set()
+    body = text[start:text.find("\n};", start)]
+    return set(re.findall(r"\[(MAPSEC_[A-Z0-9_]+)\]\s*=", body))
+
+
+def town_map_cells(engine):
+    """{section id: cells} over the region-map layout grids (Hoenn, Kanto, Sevii)."""
+    cells = defaultdict(int)
+    for path in sorted(engine.glob(LAYOUT_GLOB)):
+        for token in TOKEN.findall(path.read_text(encoding="utf-8", errors="replace")):
+            cells[token] += 1
+    return cells
+
+
+def region_conditioned_evolutions(engine):
+    """{'IF_REGION REGION_X': count} in species data: what a section's engine
+    region (GetCurrentRegion) changes for evolution."""
+    counts = defaultdict(int)
+    for path in sorted(engine.glob(SPECIES_INFO_GLOB)):
+        for condition, region in REGION_CONDITION.findall(path.read_text(encoding="utf-8", errors="replace")):
+            counts[f"{condition} {region}"] += 1
+    return dict(sorted(counts.items()))
+
+
+def engine_region(value, values):
+    """The engine region GetRegionForSectionId gives this section's value."""
+    start, end = (values.get(name) for name in KANTO_RANGE)
+    if start is not None and end is not None and start <= value < end:
+        return "REGION_KANTO"
+    return "REGION_HOENN"
+
+
 def inventory(engine, group=DEFAULT_MAP_GROUP):
     entries = sections(engine)
     maps = map_sections(engine, group)
     refs = references(engine)
+    values = {entry["id"]: value for value, entry in enumerate(entries)}
+    fly = fly_rows(engine)
+    cells = town_map_cells(engine)
     rows = []
     for value, entry in enumerate(entries):
         ident = entry["id"]
@@ -102,11 +155,21 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
             behaviour_files=behaviour,
             saved_by_averon=bool(averon_maps),
             reuse_candidate=not averon_maps and not behaviour,
+            fly_row=ident in fly,
+            town_map_cells=cells.get(ident, 0),
+            engine_region=engine_region(value, values),
         ))
     none_value = len(entries)
     unknown = sorted({sec for sec, _ in maps.values() if sec and sec not in {e["id"] for e in entries}
                       and sec != "MAPSEC_NONE"})
+    averon_rows = [r for r in rows if r["averon_maps"]]
     return dict(
+        fly_table_rows=len(fly),
+        fly_table_end=max((values[s] for s in fly if s in values), default=-1) + 1,
+        averon_without_fly=[r["id"] for r in averon_rows if not r["fly_row"]],
+        averon_off_town_map=[r["id"] for r in averon_rows if not r["town_map_cells"]],
+        averon_engine_regions=sorted({r["engine_region"] for r in averon_rows}),
+        region_conditioned_evolutions=region_conditioned_evolutions(engine),
         sections=len(entries), mapsec_none=none_value,
         spare_codes_before_reserved=max(0, FIRST_RESERVED - none_value - 1),
         reserved_met_codes={f"0x{k:02X}": v for k, v in sorted(RESERVED_MET_CODES.items())},
@@ -158,6 +221,12 @@ def main(argv=None):
     print(f"{report['upstream_only_sections']} sections used only by upstream maps, "
           f"{report['unassigned_sections']} by no map; {report['behaviour_bound']} named outside lookup tables; "
           f"{report['reuse_candidates']} reuse candidates (owner decision required)")
+    print(f"Fly table {FLY_TABLE}: {report['fly_table_rows']} rows, ends before value {report['fly_table_end']}; "
+          f"Averon sections without a Fly row: {', '.join(report['averon_without_fly']) or 'none'}")
+    print(f"Averon sections on no Town Map layout: {', '.join(report['averon_off_town_map']) or 'none'}; "
+          f"engine region for Averon sections: {', '.join(report['averon_engine_regions']) or 'none'}")
+    print("region-conditioned evolutions: " + (", ".join(f"{k} x{v}" for k, v in
+                                                      report["region_conditioned_evolutions"].items()) or "none"))
     if report["unknown_map_sections"]:
         print("maps name unknown sections: " + ", ".join(report["unknown_map_sections"]))
         return 1
