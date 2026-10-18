@@ -6,7 +6,7 @@ For **live status and scope**, read [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE
 | --- | --- | --- |
 | **M1: map-independent pre-Sinnoh backend** | **OWNER-ACCEPTED 2026-10-17** | [Claude consolidated signoff](M1_ACCEPTANCE_REPORT_20261017.md), [Codex native closeout](CODEX_M1_NATIVE_CLOSEOUT_20261017.md); no known M1-blocking engineering defect. Human audio listen explicitly deferred, Gym 1 evidence gap accepted. |
 | **M2: next-phase design contract and technical infrastructure** | **AUTHORIZED TO BEGIN** | [Technical readiness plan](SINNOH_TECHNICAL_READINESS_20261017.md); owner decisions on geography, map IDs/sections, progression, asset resources/rights before those specific details are implemented. |
-| **M2: first approved playable region slices** | **APPROVED IN PRINCIPLE, NOT YET SPECIFIED** | Each concrete map/story/roster/encounter/saved-ID design must receive owner approval, satisfy guarded PR workflow, linked budgets and graphical QA. |
+| **M2: first approved playable region slices** | **SANDGEM #133 APPROVED; REVIEW PENDING** | Sandgem section 216 is on main (#132). Sandgem maps #133 remain open pending source review and normal integration. Later routes still need owner approval; see the [integration queue](INTEGRATION_QUEUE.md). |
 | **Expanded Averon adventure and full Sinnoh second region** | **FUTURE CONTENT BUILD** | Incremental geography, NPCs, gyms, legendary quests, dialogue and pacing; no current claim these areas are implemented or fit on ROM. |
 | **Release candidate / Delta iOS compatibility** | **NOT YET VERIFIED** | Real owner device testing, finished story/world, audio listened to and documented, legal distribution and all relevant save/load/move/graphics tests. |
 

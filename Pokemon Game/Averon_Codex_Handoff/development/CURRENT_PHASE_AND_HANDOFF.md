@@ -1,50 +1,56 @@
-# Pokémon Averon — CURRENT STATUS AND NEXT-PHASE HANDOFF
+# Pokémon Averon — operating contract
+Updated 2026-10-18. This is the single current process and authority contract for Claude + Codex. The owner requested an organizational reset and delegated routine planning, coordination, review and eligible integration to the developers. This document becomes repository policy through its reviewed PR; the reset does not restart paused sessions.
 
-## Live October 18 Phase 2 implementation (supersedes historical task statuses)
+## Read order and authority
+1. Read this contract, refresh main, all open PR heads/files/checks, the [integration queue](INTEGRATION_QUEUE.md), and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
+2. Resume your existing PR before starting another implementation. Inspect its latest handoff and relevant source, not every old runbook.
+3. Explicit owner decisions govern creative scope and permanent identities. Approved source on main governs implemented behavior. Live PR/check/review evidence governs readiness. The queue is a dated index, never a substitute for rechecking GitHub.
+4. Dated manager, sole-Claude, Codex-paused, M1 and freeze orders are historical evidence. Their titles, old priority statements, generated board #31 and legacy tasks.json do not create assignments. Preserve their content and links.
+5. Existing approved product requirements in design records and nested instructions remain in force unless the owner explicitly revises them. A process reset does not approve draft story or change game design.
 
-**M1 remains owner-accepted.** GitHub `main` now includes Sinnoh save-section inventory/legacy pins (#123), map-batch/ROM growth preflight (#125), and explicit `REGION_SINNOH` Emerald map-generator inclusion (#126). **Reversible cry ON/OFF implementation #117 is also merged** after manager source review; `CRIES=default` remains ON, all original cry assets retained, while human listening/Delta and final OFF adoption remain separate UNTESTED/owner decisions. This is not a claim that Sinnoh maps or the final ROM already exist.
+## Developer responsibilities
+Claude and Codex are peer developers. Each plans bounded work, maintains claims and handoffs, reviews the other's work, diagnoses CI, and prepares eligible normal merges. Neither requires routine manager ACK to proceed on an already authorized disjoint scope.
+- Codex normally leads engine/save/region/resource compatibility; Claude normally leads approved maps/content and genuine mGBA QA. These are defaults, not exclusive expertise.
+- The developer who did not author the change leads review and may execute its eligible normal merge. Record the author, reviewer, exact reviewed SHA, scope and evidence in a PR review. Shared GitHub login does not establish independence.
+- No author self-approval or self-merge. A read-only review pass by the author is useful but is not peer review. If a second developer is unavailable, leave review pending; advance another approved task. A manager may supply a real review, but is not a required routine coordinator.
+- A rotating integration steward is chosen by a CLAIM in #15 for one integration batch. The steward refreshes the queue, checks collisions, merges one eligible PR at a time and checks main before the next dependent merge. This does not grant creative authority or permit merging the steward's own unreviewed work.
+- Respect existing paused sessions and reserved work. GitHub comments do not launch agents or authorize paid execution.
 
-**Current independent assignments** are in [Issue #15, October 18 manager directive](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6251950630): **Codex** handles save-safe section/met-location/Fly technical guardrails and meaningful roundtrip proof, without choosing production IDs; **Claude** handles verified in-repo placeholder/biome art and a proposed real Sinnoh exterior+interior, then actual map implementation and emulator QA **once the owner approves** the concrete location, rough geometry/exits, art and initial section-ID policy. These are separate scopes. Continue doing independent assigned work if an owner decision is pending; don't fabricate an approved layout. All 87 Sinnoh area rows remain unbuilt until evidence says otherwise. No new broad technical-preparation milestone is needed.
+## Claims and handoffs
+Post one scoped claim in #15:
+`CLAIM | developer | branch/PR | literal paths | intended outcome | evidence | dependencies`.
+Check live PR file lists and existing claims first. File-disjoint approved work proceeds immediately. Serialize the actual collision, including generator inputs and outputs; preserve dirty worktrees and every contributor's commits. Release a claim after merge, explicit transfer or abandonment.
+A protected-path change requires a genuine authorized `HANDOFF_APPROVED PR=#N PATHS=literal,comma-separated,paths` matching that PR. No globs or directory-only handoffs. Content/map approval must precede its handoff. Do not fabricate approvals; obey the existing checker and its trusted-author rules.
+At a session end, push recoverable work and leave one PR HANDOFF with remote full SHA, files, changes, exact commands and PASS/FAIL/SKIP counts, source/ROM hashes, fixture use, remaining risk, next executable action, and `WAITING_ON / RESUME_WHEN` when blocked. Do not rewrite shared status docs for each test run.
 
-_Live Phase 2 routing verified: 2026-10-18. Older sections below retain their original historical context._
-
-## Owner decision — authoritative
-**Pre-Sinnoh Milestone 1 (M1) is OWNER-ACCEPTED and its map-independent backend engineering is complete.** The owner explicitly accepted Claude's consolidated verdict on 2026-10-17, approved closing M1, and authorized proceeding to the next development phase **with human audio listening postponed**. The documented Gym 1 victory/badge/Save→Continue evidence is accepted despite missing postbattle dialogue screenshots. The other disclosed bounded QA and resource limitations are accepted as planning constraints, not secretly marked tested.
-
-This authorization supersedes historic _M1 is open_, _Codex paused_, _Claude sole M1 executor_, _no new map production under any circumstances_, and _awaiting owner M1 signoff_ notices in dated docs and archived issues. It **does not** approve any invented map geometry, specific Sinnoh/Averon content, plot/canon, dialogue, Gyms/rosters, level curves, permanent saved/map IDs, unlicensed assets, a final ROM release, or bypasses of repository safeguards. Work on new content **may be proposed and executed as individual approved designs**, and necessary technical preparation can proceed. If scope or an actual design is undecided, ask the owner instead of selecting it silently.
-
-## Evidence behind the transition
-- **[Claude final consolidated acceptance](M1_ACCEPTANCE_REPORT_20261017.md)** — PR [#112](https://github.com/kioconnor24-sketch/PokemonGame/pull/112) merged at `275e8591`; Q1–Q5 documented with genuine emulator input/frames and explicit DEV_FIXTURE cases; graphical Gym 1 caveat and postponed audio noted. A separate human/third-party playtest was *not* performed.
-- **[Codex native/backend closeout](CODEX_M1_NATIVE_CLOSEOUT_20261017.md)** — PR [#109](https://github.com/kioconnor24-sketch/PokemonGame/pull/109) merged at `9ae0b32a`; complete **6,107** unfiltered results, **5,332 PASS**, exactly the unchanged **327 normalized expected failing identities / 329 failing results**, no new unexpected differences; actual NORMAL and RELEASE builds and a focused 30/30 save-integrity batch passed. Do **not** report all 6,107 as passing.
-- **[Sinnoh technical readiness](SINNOH_TECHNICAL_READINESS_20261017.md)** — PR [#111](https://github.com/kioconnor24-sketch/PokemonGame/pull/111) merged at `fe184495`; a *planning assessment*, not maps or capacity proof. RELEASE ROM had **6,699,508 B** remaining; SaveBlock2 **84 B** remaining. Candidate ROM allocations and compression savings are not approved guarantees. The map-section/met-location namespace, Fly and map build inclusion need explicit design and integration.
-- Main's game engine tree for the final M1 evidence was `5d81cc8431cc4c915889b303c22aca2059b78aa3`; later non-engine docs/QA merges were checked for engine equality. For new production changes, regenerate pertinent build/test and current-head evidence.
-
-
-> **Current temporary owner reassignment, 2026-10-17:** Codex's reversible cries safety work stopped at its pushed draft PR #117 checkpoint. The owner now directs Claude to complete that specific audio/graphical-QA lane; consult [CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md](CLAUDE_CODEX_CRIES_TAKEOVER_20261017.md) and the live claim in Issue #15. This is a temporary exact-file handoff, not permanent permission to overlap later Codex work or bypass production review. Default main still includes cries; no-cries remains experimental until accepted and merged.
-
-## Now-active navigation
-| Purpose | Canonical location | Status |
+## Risk and review gates
+| Tier | Scope | Minimum gate |
 | --- | --- | --- |
-| Current ownership, proposed work and nonoverlapping claims | [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) | Active coordination hub, **new phase** |
-| Next-phase design/engineering backlog | [Issue #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) and [this handoff](CURRENT_PHASE_AND_HANDOFF.md) | Provisional until owner approves each concrete design |
-| Real emulator/visual QA and deferred **human audio listening** | [Issue #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) | Open; audio not yet certified |
-| Developer questions and evidence-backed blocker triage | [Issue #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55) | Open |
-| M1 acceptance and archived source/CI/QA evidence | [Issue #46](https://github.com/kioconnor24-sketch/PokemonGame/issues/46), [report](M1_ACCEPTANCE_REPORT_20261017.md) | Accepted historical milestone; **not** current work queue |
-| Previous routing/dated handoffs | [INDEX](INDEX.md), old issues and PRs | Historical; retain for provenance |
+| R0 | Prose, routing, metadata | Diff and link/evidence review; applicable guards. No ARM rebuild for unchanged engine. |
+| R1 | Tests/tools and isolated experiments | Peer diff review, meaningful positive/negative tests, actual nonzero counts; no implied production adoption. |
+| R2 | Runtime fixes and approved map content | Peer source review; applicable exact-head CI/native checks, NORMAL/RELEASE and resource/save evidence; actual mGBA for affected visible behavior. |
+| R3 | Save format/migration, permanent IDs, protected policy/workflows, release/security | Concrete owner scope decision where reserved; separate scoped peer review and compatibility/negative proof; existing protections stay enforced. |
 
-## Immediate next-phase work: independent, reviewable lanes
-1. **Owner/manager + designers:** Establish a concrete design/content and resource contract: intended region map order, reachable routes/landmarks, section/met-location policy, progression/badge/Fly/healing semantics, legal asset sources and an explicit ROM reserve. Existing game canon: **Averon is the original region; Sinnoh is the full second region**. Do not silently finalize unsolved story or geography choices.
-2. **Codex — technical foundation, exact file claims:** Build/verify *noncontent* budget tooling and compatibility checks first; prepare append-only map/section registry strategy and save-safe Fly/healer integration only after the relevant owner decisions. Identify applicable native regressions, resource growth per PR, and safe existing-art/audio reuse. Do not reimplement M1 or make speculative refactors. [Technical analysis](SINNOH_TECHNICAL_READINESS_20261017.md) is guidance, not blanket permission for map IDs.
-3. **Claude — approved content and real gameplay QA, exact file claims:** Once design scope is owner-approved, build small playable vertical slices with actual mGBA Save→Continue, warps, menus, follower, Gym/progression and visuals. Before content approval, review design/build contracts and work on independent, nonoverlapping bounded tools/evidence only. No unsupervised new plot/canon, maps or music.
-4. **Manager — integration/coordination:** Keep #15 claims authoritative, review protected-file/code changes, track budget/CI/visual evidence, authorize normal eligible merges; never treat a planning document or green native check as completed gameplay.
-5. **Deferred human QA:** Audio listen (title, areas, battle, fanfare, jingles, effects/cries, audible artifacts) remains open on #23. It is **not** a blocker to beginning the next phase, but **must not be marked PASS** or silently omitted from later release QA.
+Tier is about impact, not file extension: executable workflows are R3; a design proposal can be reviewed as a proposal without authorizing construction.
 
-## Nonnegotiable safety / precision
-- No direct unreviewed `main` edits, forced shared-branch rewrites, bypassed `file-guard`/`exclusive-files`/CI/PR review. Owner approval changes *scope*, not technical protections; if an old map-freeze guard needs revision, propose a **small separately reviewed policy/guard change** rather than disabling it.
-- Two developers can code concurrently in separate branches/worktrees on **disjoint exact paths** after checking recent claims in #15. Notice of an unclaimed ordinary path is not an approval queue; overlapping protected paths require coordination and normal checks.
-- Do not upload playable copyrighted ROMs, private saves, secrets, friend likenesses, unlicensed art/music, or claim Delta verification without an actual owner test.
-- Exact terms: `SOURCE` ≠ `BUILD` ≠ `NATIVE-TESTED` ≠ `EMULATOR-TESTED` ≠ `DELTA-VERIFIED`. Record source/ROM hashes, observed test identities, original fixture/debug use, screenshots and failure caveats.
-- Current resources are **constraints**: RELEASE ROM ~6.39 MiB left, SaveBlock2 84 B, and live sprite/palette/stack peak capacity not exhaustively known. All future additions must measure actual linked deltas; do not promise an entire second region fits.
-- Retain old M1 runbooks, issue history, source artifacts and test evidence in place. Their dates and old instructions are **historical**, not work to be redone. No automated agent sessions are started by GitHub comments.
+Before merging: refresh both full head and base SHAs, inspect the final diff and collisions, ensure non-draft, verify required checks and every applicable test. A new commit invalidates review of changed content. Choose newest applicable check per workflow/job; a superseded canceled run is not a current failure, but missing/pending/skipped required checks are not PASS. Where integration changes tested behavior, reconcile in the feature branch or verify a disposable combined tree and record exact revisions. Never rely only on a mergeable flag.
+Use the normal PR path, preserving history. Never direct-push main, force-rewrite shared branches, bypass rules, disable guards, change failure baselines to hide failures, or merge known failures. Verify main after merge and stop the affected integration lane on a regression. Preserve the prior good commit and repair or revert through a reviewed PR.
+After integration, release claims and update the queue at a real status/dependency change. Do not mark a whole feature accepted from a partial test.
 
-**Before acting:** refresh live main, open PRs/checks and #15 claims, read this page and the relevant feature source, then perform the nearest approved concrete task; do not request another blanket M1 signoff.
+## Owner-only decisions
+The owner retains geography and reference deviations, route openings, plot/canon, dialogue direction, Gym/trainer rosters, encounters/legendary placement, level curves/caps, art/music rights and personal likenesses, permanent map/section/heal/flag identities, origin encoding precision/migration policy, default cry-profile adoption and final release/Delta acceptance.
+Developers present a bounded recommendation with alternatives and implications. They may autonomously implement already approved details, safe generic repairs, tests and tooling; approval of one map is not approval of every route.
+Current decisions awaiting the owner are listed once in the [queue](INTEGRATION_QUEUE.md). Routine review, CI repair, claim arbitration and merge eligibility belong to developers.
+
+## Evidence and accepted baseline
+M1 was owner-accepted on 2026-10-17; do not repeat it without a reproduced regression. [Native closeout](CODEX_M1_NATIVE_CLOSEOUT_20261017.md): 6,107 outcomes, 5,332 PASS and unchanged strict expected-failure identities, not 6,107 PASS. [Graphical acceptance](M1_ACCEPTANCE_REPORT_20261017.md) records accepted Gym 1 dialogue-screenshot limits. Human audio listening remains DEFERRED, NOT PASS, in [#23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23); Delta remains unverified.
+#117 is merged; original cry source is retained and default remains ON. An OFF build's measured size cannot be described as default-ON capacity.
+Labels are distinct: SOURCE / BUILD / NATIVE-TESTED / EMULATOR-TESTED / DELTA-VERIFIED. Record actual controller input/screenshots, source + ROM hashes, build profile/toolchain and DEV_FIXTURE use. Native fixtures do not prove ordinary story reachability, natural whiteout or human listening.
+Measure meaningful ROM/RAM/save changes on actual builds; historic ~6.39 MiB RELEASE ON headroom and 84 B SaveBlock2 free are constraints, not a promise full Sinnoh fits. Preserve legacy IDs and saves. Do not commit full ROMs, ELFs, private saves, secrets or unlicensed media.
+
+## GitHub organization and automation
+- [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15): sole live claim/coordination hub; [#26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26): design candidates; [#23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23): QA; [#55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55): evidence-backed blockers. Avoid duplicate boards/issues for the same work.
+- The [reset audit](ORGANIZATIONAL_RESET_20261018.md) and [branch inventory](BRANCH_AUDIT_20261018.csv) preserve the reset snapshot. Nothing is deleted based on branch age/name. Squash-merged branches may have unreachable tips; merged PR state alone is insufficient deletion proof.
+- No mass branch deletion, stale-PR auto-close, auto-merge, protection changes, scheduled paid agents or automatic restarts. Retain experiment/checkpoint branches until their unique work and evidence are accounted for.
+- Active ruleset observed on 2026-10-18 requires PRs, blocks deletion/force pushes, and requires `file-guard` + `exclusive-files`; zero formal approving reviews are configured. Developer peer review remains required by this contract. Classic protection endpoint was inaccessible (403); do not infer protections absent.
+- The legacy advisory-board correction is a separate reviewed automation PR. Until merged, its outputs can still be stale. #31 stays archived; automation output never authorizes work.

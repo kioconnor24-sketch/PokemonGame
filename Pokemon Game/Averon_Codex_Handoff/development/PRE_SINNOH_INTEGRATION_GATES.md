@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # Pokémon Averon — two-gate pre-Sinnoh integration contract
 
 **Owner decision 2026-10-16/17.** For current routing and exact file claims, read [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). [Issue #46](https://github.com/kioconnor24-sketch/PokemonGame/issues/46) remains the final detailed acceptance contract. Older instructions that say *all QUEST graphical Q1–Q5 cases must finish before any unrelated generic code can merge* are superseded by the **two-gate rule**, not by an exemption from correctness testing.

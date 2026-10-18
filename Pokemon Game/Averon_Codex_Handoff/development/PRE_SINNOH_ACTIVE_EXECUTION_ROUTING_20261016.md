@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # Pokémon Averon — active parallel backend + integration execution (2026-10-16)
 
 > **Execution directive, not implementation or merge approval.** All lanes continue NOW on exclusively claimed exact files. **The latest Issue [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) and current PR commits/CI override this snapshot.** Review the [full acceptance contract #46](https://github.com/kioconnor24-sketch/PokemonGame/issues/46), [technical inventory](BACKEND_TO_SINNOH_EXECUTION.md), [Claude backlog #53](https://github.com/kioconnor24-sketch/PokemonGame/issues/53), [Codex handoff #54](https://github.com/kioconnor24-sketch/PokemonGame/issues/54), [problem desk #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55), and [independent QA #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) only for the section you're executing. The older agent/owner columns in generated board #31 are historical. This document is a manager-authored routing note, **not a completed-code or QA certification**.

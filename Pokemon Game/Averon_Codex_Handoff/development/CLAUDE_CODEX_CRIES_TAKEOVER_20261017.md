@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # CLAUDE — immediate takeover of Codex reversible-cries PR #117
 **Owner-directed handoff · 2026-10-17 · execute immediately in a fresh Claude session.**
 **Scope:** take over **unfinished** Codex PR #117, keep completed evidence intact, finish the alternate-ROM graphical/Save→Continue acceptance and secure reviewed integration. Afterward resume safe Phase 2 map/section technical groundwork. This file is a work order, **not** proof that the draft is complete. Do not automatically launch Codex or wait for its quota to reset.

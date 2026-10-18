@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 > **LATEST OWNER ROUTING — 2026-10-17: CLAUDE ALONE HANDLES ALL M1 ROLES.** Codex and separate Playtest/Manager agents are PAUSED. Claude now owns engineering, genuine mGBA evidence, a distinct read-only second-pass QA assessment, Gate A/B decisions, source/CI review, protected PR-specific handoff administration and **normal merges for genuinely eligible PRs**. No extra agent approval queue. Read the [sole-Claude execution instructions](CLAUDE_SOLE_M1_EXECUTION_20261017.md), Issue #15 and scope-limited Issue #46. All contradictory historical matrices below are superseded. No maps/canon/IDs, artificial PASS or protected-check bypass; GitHub account permissions still apply.
 
 # BACKEND → SINNOH: authoritative execution contract

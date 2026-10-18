@@ -1,3 +1,7 @@
+> **CURRENT ROUTING — 2026-10-18:** Follow the [single operating contract](Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](Averon_Codex_Handoff/development/INTEGRATION_QUEUE.md). Process, ownership, freeze and work-order directions below are historical and superseded, including the old PR #66 takeover and absolute map freeze. Keep approved product/design constraints and evidence requirements. No paused session is restarted by this file.
+
+---
+
 > **CURRENT OPERATING CONTRACT — 2026-10-18:** This nested file contains historical October 16 assumptions and is subordinate to repository-root [AGENTS.md](../AGENTS.md), the [current phase handoff](Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md), and the **newest** [Issue #15 assignments](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6251950630). Pre-Sinnoh M1 is owner-accepted; #123/#125/#126 map tooling and #117 reversible audio are merged. Codex and Claude may work in parallel on disjoint claimed technical and map-art/authoring lanes. A historic hard freeze on *all* map work is **superseded**, but actual unapproved map geometry, production IDs, save changes, scripts and unlicensed assets are still prohibited. Temporary **off-tree synthetic test fixtures** are allowed; don't create a throwaway production region. Human/Delta remain UNTESTED. Issue comments alone do not start agent sessions.
 
 > **LEGACY OCTOBER 16 STATUS BELOW (historical only; not current instructions).**

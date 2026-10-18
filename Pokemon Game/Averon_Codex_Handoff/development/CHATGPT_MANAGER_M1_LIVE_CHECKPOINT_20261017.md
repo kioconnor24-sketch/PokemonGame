@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # POKÉMON AVERON — MANAGER RESTART / LIVE MILESTONE 1 CHECKPOINT
 
 **Written:** 2026-10-17. **Last observed `main`:** `a3d2ad99b27c52eb9acb2e15268ebd953a7a8222` (merge #104). **IMPORTANT:** This is a verified snapshot, not a claim that the repository is still unchanged. Re-fetch live refs, PRs, comments, and checks immediately before each action.

@@ -1,3 +1,7 @@
+> **CURRENT ROUTING — 2026-10-18:** Follow the [single operating contract](development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](development/INTEGRATION_QUEUE.md). Process, ownership, freeze and work-order directions below are historical and superseded, including the old PR #66 takeover and absolute map freeze. Keep approved product/design constraints and evidence requirements. No paused session is restarted by this file.
+
+---
+
 > **HISTORICAL CREATIVE HANDOFF — NOT CURRENT IMPLEMENTATION INSTRUCTIONS (2026-10-15).**
 > This file describes an earlier proposed design package and bootstrap workflow. Its claims of a complete/finalized design and of having no compiled game code are no longer current. **Do not implement its speculative maps, routes, NPCs, story, trainer teams, dialogue, or levels.** The owner has frozen all map development (including temporary map files) and unresolved creative decisions. For current direction see [repository README](../../README.md), [development INDEX](development/INDEX.md), [current TASKS](development/TASKS.md), [active work #24](https://github.com/kioconnor24-sketch/PokemonGame/issues/24) and [owner freeze #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). The material below is preserved intact as historical reference.
 
