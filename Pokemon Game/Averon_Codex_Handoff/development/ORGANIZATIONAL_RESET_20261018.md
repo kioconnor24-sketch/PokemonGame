@@ -27,3 +27,10 @@ This audit and queue are a reviewable repository proposal until merged. Live iss
 No source PR, doc PR or automation PR is auto-merged by the reset. No protection is weakened, baseline changed, agent restarted, paid API configured or new creative decision made.
 The doc and automation PRs require real peer review of their exact heads and passing applicable CI before adoption. This is a developer review gate, not a new owner permission queue. Source PRs remain available for scoped peer review in the [queue](INTEGRATION_QUEUE.md).
 Owner decisions remain Route 201 geometry/deviations/section/connections/grass, Route 202 reference versus schematic/defer, Sandgem permanent respawn allocation/coordinates, future origin format/precision, audio default adoption and release/human/Delta acceptance. Review/testing/normal merge work does not require another owner creative approval.
+
+## Live hygiene enacted
+- [#15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) now links proposed contract/queue/audit, distinguishes pending adoption, and lists developer integration versus owner decisions.
+- #26 and #55 navigation updated with pending reset links; #55 distinguishes historical resolved failures from current integration/QA gates. #31 stays closed and is labelled archival.
+- #133 description corrected to ready/full-head status and final evidence, with natural-respawn and build-profile limitations. Its source head was unchanged.
+- Previous bodies are preserved verbatim in comments: #15 comment 6256551200; #26 6256551718; #55 6256552158; #31 6256552730; #133 6256553320.
+- Reviewable proposals: [#144 docs](https://github.com/kioconnor24-sketch/PokemonGame/pull/144) and [#145 automation](https://github.com/kioconnor24-sketch/PokemonGame/pull/145). Both remain unmerged awaiting independent peer review; author review is not called independent approval.

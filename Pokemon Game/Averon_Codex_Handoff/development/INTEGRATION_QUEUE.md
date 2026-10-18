@@ -45,3 +45,8 @@ All existing PRs were unreviewed in GitHub at snapshot; no owner approval is nee
 - #143: draft; do not mark ready until committed runtime self-test succeeds.
 
 No PR is stale merely because developers paused. Preserve all open work; no closures or branch deletions are justified by this audit. [Branch inventory](BRANCH_AUDIT_20261018.csv) records exact tips and ancestry/PR association separately.
+
+## Reset PRs created after the 11-PR source audit
+- [#144](https://github.com/kioconnor24-sketch/PokemonGame/pull/144): R0 operating-contract/audit proposal, author-reviewed, independent peer review pending. Resolve its current head from GitHub; embedding this document's own final commit SHA is circular.
+- [#145](https://github.com/kioconnor24-sketch/PokemonGame/pull/145): R3 advisory-workflow proposal, head `96114f34115ac11aa8a9789c132dc9423f21948c`; author-reviewed, peer review pending. Local dispatch tests 4/4 plus six embedded-JavaScript fixture scenarios passed. Read live checks before integration.
+These two reset PRs bring the live open count to 13 without closing any original PR. They change no game source; review them independently and preserve every required guard.
