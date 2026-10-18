@@ -65,6 +65,7 @@
 #include "battle.h"
 #include "constants/comparison_operators.h"
 #include "constants/event_objects.h"
+#include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/party_menu.h"
 
@@ -2645,7 +2646,10 @@ bool8 ScrCmd_setrespawn(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    SetLastHealLocationWarp(healLocationId);
+    // Validate the script u16 before the overworld API narrows it to u8.
+    // Otherwise a malformed variable can select an unrelated valid healer.
+    if (healLocationId < NUM_HEAL_LOCATIONS)
+        SetLastHealLocationWarp(healLocationId);
     return FALSE;
 }
 
