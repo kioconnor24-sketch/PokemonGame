@@ -1,0 +1,95 @@
+# Sinnoh next-area junctions (C4 interface specification)
+
+**Status: SPECIFICATION ONLY.** This page adds no map, map/section ID, connection, encounter or story content. It records how the areas next to Sandgem must meet, so each one can be built and tested in isolation once the owner approves it. Rows refer to [`SINNOH_AREA_REGISTER.csv`](../../development/SINNOH_AREA_REGISTER.csv).
+
+## Engine rules every junction follows
+
+- **Connection offset.**
+  - The connected map is drawn at `offset` along the shared edge, in the current map's coordinates (`fieldmap.c` `Fill*Connection`).
+  - Crossing the edge moves the player by `pos -= offset`. Reciprocal entries are therefore exact negatives: for A → B = `k`, B → A = `-k`.
+  - For `up`/`down` connections the offset is along x; for `left`/`right` it is along y.
+- **Seam rule.**
+  - Every walkable tile on A's edge must face a walkable tile on B's edge, and vice versa. Otherwise a player can stand on an edge tile that leads nowhere, or see a road end in a wall.
+  - Unapproved neighbours stay closed: trees on the edge, or a map `border` of trees, which is what the camera shows past an unconnected edge.
+- **Camera margin.** The field camera draws `MAP_OFFSET` = 7 tiles past each edge. A connected neighbour is visible 7 tiles deep, so its first 7 rows/columns along the seam must look coherent (no stray buildings or cut-off roofs).
+- **Map size.** `(width + 15) × (height + 14) ≤ MAX_MAP_DATA_SIZE` (10,240) for every map.
+- **Ledges.** `PlayerJumpLedge` never checks the landing tile, so every ledge must land on walkable ground. The Route 201 proof checks this.
+
+## Junction A: Route 201 ↔ Sandgem Town (east)
+
+| | Route 201 (SN-R201, design #135) | Sandgem Town (SN-T02, #133) |
+| --- | --- | --- |
+| Edge | east, x 63 | west, x 0 |
+| Open rows | 5–8 (road 6–7) | 10–13 (road 11–12), read from the built `map.bin` |
+| Connection entry | `right` → Sandgem, offset **−5** | `left` → Route 201, offset **+5** |
+
+- **Proof.** `verify_route201_plan.py` checks this seam against the built Sandgem layout; it passes, and a −4 offset is caught as a failure.
+- **Hazard.** Both entries are added together, only after Route 201 is approved. A one-sided entry would let the player walk out of one map and arrive at the wrong row, or be unable to return.
+
+## Junction B: Route 201 ↔ Twinleaf Town (south)
+
+| | Route 201 | Twinleaf Town (SN-T01) |
+| --- | --- | --- |
+| Edge | south, y 21 | north, y 0 |
+| Open columns | 15–17, a **3-wide** sand path | **reference unavailable** |
+| Connection entry | `down` → Twinleaf, offset `15 − t` | `up` → Route 201, offset `t − 15` |
+
+Here `t` is the left column of Twinleaf's 3-wide north path.
+
+- **Reference gap.** The only overhead found for this area, the "Route 201 / Twinleaf Town" image, shows Route 201 only. Twinleaf's footprint is not specified here and must not be guessed.
+- **Requirement.** Twinleaf's north edge must be open on exactly 3 columns, ideally a 3-wide road.
+- **Hazard.** Twinleaf is DPPt's player-home town. It is reserved for the owner's story decisions, so no houses or story buildings are reserved here.
+
+## Junction C: Route 201 ↔ Lake Verity side (west)
+
+| | Route 201 | Verity Lakefront (SN-L04) → Lake Verity (SN-L01) |
+| --- | --- | --- |
+| Edge | west, x 0 | east edge of Verity Lakefront |
+| Open rows | **two openings**: 8–11 above the long ledge, 13–14 below it | Lakefront: **reference unavailable** |
+| Connection entry | `left` → Lakefront, offset `8 − v` | `right` → Route 201, offset `v − 8` |
+
+Here `v` is the Lakefront row that meets Route 201 row 8.
+
+- **What the reference shows.** The Lake Verity overhead (864 × 648 px = 54 × 40.5 tiles) covers only the lake map. It is entered from a grass clearing at its south-east, around tiles 38–43 × 33–35, which in DPPt leads from Verity Lakefront. Lakefront itself has no reference.
+- **Hazards.**
+  - Route 201's long ledge reaches the west edge on row 12. The Lakefront side must continue that ledge, or close row 12 with a wall, so both openings stay separate and one-way behaviour stays consistent across the seam.
+  - Lake Verity is a legendary-lake site. Its event content is reserved for owner approval, so only geometry belongs here.
+
+## Junction D: Sandgem Town ↔ Route 202 (north)
+
+| | Sandgem Town (#133, built) | Route 202 (SN-R202) |
+| --- | --- | --- |
+| Edge | north, y 0 | south edge |
+| Open columns | road 21–22 inside the clearing 19–24, from the built layout | **reference unavailable**; see [`route202/ROUTE202_REFERENCE_STATUS.md`](route202/ROUTE202_REFERENCE_STATUS.md) |
+| Connection entry | `up` → Route 202, offset `21 − s` | `down` → Sandgem, offset `s − 21` |
+
+Here `s` is the column of Route 202's south road that meets Sandgem x 21.
+
+- **Requirement.** Route 202's south edge must be open on columns that line up with Sandgem's 6 open columns, 19–24, with its road meeting 21–22. Any other open tile on that edge would face Sandgem's tree line.
+- **Camera.** From Sandgem's north path the camera shows 7 rows of Route 202, so Route 202's first 7 rows should be forest-framed path.
+
+## Junction E: Route 202 ↔ Jubilife City (north)
+
+| | Route 202 | Jubilife City (SN-T03) |
+| --- | --- | --- |
+| Edge | north edge | south, bottom row |
+| Open columns | **reference unavailable** | stairs on columns **44–46**, 3 wide, at the end of the 4-wide central avenue (columns 43–46) |
+| Connection entry | `up` → Jubilife, offset `q − 44` | `down` → Route 202, offset `44 − q` |
+
+Here `q` is the left column of Route 202's 3-wide north opening.
+
+- **What the reference shows.** The Jubilife overhead is 1024 × 772 px, about 64 × 48 tiles. Size check: (64 + 15) × (48 + 14) = 4,898 ≤ 10,240.
+- **Hazards.**
+  - Route 202's opening is 2-wide road while Jubilife's is 3-wide stairs. The Route 202 north edge must still be open on exactly the 3 stair columns. Otherwise one stair tile is a walkable dead end that faces trees.
+  - Jubilife is a large city and is **not** proposed for building; this records only its south interface.
+
+## Accessibility notes for whoever builds these
+
+1. **Twinleaf → Sandgem crosses Route 201's big tall-grass patch.** In DPPt this is the only way through: the short ledge blocks the direct path. Once wild encounters are approved, that walk requires entering grass, so the player must already have a usable party. Today there is no encounter table, so there is no risk.
+2. **One-way ledges must never create a pocket.** Every new map with ledges needs the same reachability proof as Route 201: every tile can return to an exit.
+3. **Two openings on one edge (Route 201 west) need two separate seam checks.**
+4. **Follower:** crossing a connection is a normal step, not a warp, so the follower walks across. Each built seam must still be walked in mGBA in both directions with the follower visible, just as the Sandgem door round trip was.
+
+## What starts next
+
+Building any of these needs explicit owner approval of that map and its section ID (217 and up, allocated by Codex). Route 201 (#135) is the only one with a full original reference and a construction-ready design.
