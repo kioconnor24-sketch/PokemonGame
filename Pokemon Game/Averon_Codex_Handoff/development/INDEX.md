@@ -1,3 +1,5 @@
+> **Manager sessions:** Start at [CHATGPT_MANAGER_ACTIVE_HANDOFF_20261017.md](CHATGPT_MANAGER_ACTIVE_HANDOFF_20261017.md); old M1 manager files are historical. **Story/canon sessions:** Read the [provisional multichat dossier](../design/STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md) before using older story drafts. The villain's earlier motive and rival-defeat revision are not yet final scenes; new Arceus Plates plot remains speculative.
+
 # Pokémon Averon — current documentation index
 
 **Authoritative current read:** [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md). Milestone 1 is owner-accepted; next-phase technical preparation and specifically approved content development may proceed. The human audio listen is deferred and not considered PASS. Older instructions that say "M1 unfinished", "Codex paused", or "all maps forbidden" are historical.
