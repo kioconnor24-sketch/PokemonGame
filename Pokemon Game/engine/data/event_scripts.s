@@ -1764,6 +1764,8 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/AlderfieldGym/scripts.inc"
 
 	.include "data/maps/AlderfieldClinic/scripts.inc"
+	.include "data/maps/SandgemTown/scripts.inc"
+	.include "data/maps/SandgemTown_PokemonCenter_1F/scripts.inc"
 
 	.include "data/maps/AlderfieldSupply/scripts.inc"
 
