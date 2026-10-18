@@ -343,7 +343,37 @@ def pokedex_cry(d):
     d.log('dex', step='closed')
 
 
-EXTRA_PHASES = {'talk_follower': talk_follower, 'pokedex_cry': pokedex_cry}
+def evolve_lead(d):
+    """Wild battles until the lead gains a level; the lead must then have
+    evolved through the real evolution scene (which plays the old and new
+    species' cries). The driver presses A through post-battle screens; B
+    would cancel the evolution. Frames of the scene are kept."""
+    before = play.lead(d)
+    frames = []
+    snapshot = d.state
+
+    def watched(*args, **kwargs):
+        s = snapshot(*args, **kwargs)
+        if 'Evolution' in (s.cb2 or '') and len(frames) < 6 and (
+                not frames or time.monotonic() - frames[-1] > 1.5):
+            frames.append(time.monotonic())
+            d.shot(f'evolution-{len(frames)}')
+        return s
+
+    d.state = watched
+    try:
+        battles = play.grind_until(d, lambda d, s: play.lead(d, s)['level'] > before['level'])
+    finally:
+        d.state = snapshot
+    after = play.lead(d)
+    d.log('evolution', before=[before['species'], before['level']], after=[after['species'], after['level']],
+          battles=battles, frames=len(frames))
+    d.shot('evolved')
+    if after['species'] == before['species'] or not frames:
+        raise driver.Stuck(f'no evolution scene: {before["species"]} -> {after["species"]}, {len(frames)} frames')
+
+
+EXTRA_PHASES = {'talk_follower': talk_follower, 'pokedex_cry': pokedex_cry, 'evolve_lead': evolve_lead}
 
 
 def rom_name(profile, build):

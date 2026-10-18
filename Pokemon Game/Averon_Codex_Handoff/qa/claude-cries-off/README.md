@@ -40,8 +40,9 @@ This reproduces Codex's result.
 | run04-heal-repro-on | **CRASH reproduced on cries-ON RELEASE** | So it is **not caused by the cries change**. |
 | run05-normal-battles | **PASS** (normal `make CRIES=off`, ROM `473030df…`, source `19d8fe6c`) | All with real input, starting from the run02 save:<br>• Capture: Sentret caught, party of 2.<br>• 8 wild battles.<br>• Trainer battle: Sam on Orchard Lane, 2 Pokémon, won; Piplup learned Water Gun.<br>• 5 Alderfield clinic heals, no crash.<br>• SAVE: `SaveReturnSuccessCallback`; flash slot counter 2 is valid and newer than 1.<br>• Audio: 910 of 914 one-second windows audible, so music and SFX play with cries off. This is a level meter, not human listening. |
 
+| run06-normal-continue | **PASS** (same ROM; source `90863ffd`, evidence-only change) | • Fresh-process CONTINUE matches run05's saved state: map, position, party, flags, money and Bag.<br>• Talking to the follower (`playfirstmoncry` path): control returned.<br>• Pokédex list, entry, CRY page and 3 replays, then close.<br>• First clinic heal after power-on: no crash. This build still has the unbounded Union Room copy (no fix); it just doesn't crash here.<br>• Audio: 52 of 62 windows audible. |
+
 Not yet tested on the OFF build:
-- fresh-process CONTINUE of run05's save (run06);
 - faint/whiteout and evolution;
 - clinic heal and SAVE→CONTINUE on the **RELEASE** OFF build: blocked on the crash fix below;
 - Mega Evolution: no Averon content can reach it, so only the native tests cover it;
@@ -58,7 +59,9 @@ Human listening and Delta remain **UNTESTED**.
 4. The next text-printer `Alloc` returns `0x10`.
 5. `RunTextPrinters` then calls a BIOS open-bus value.
 
-**Fix:** branch `claude/clinic-union-room-overflow` makes the buffer `EOS` from boot and adds the native test `test/averon_clinic_union_room.c`.
+**Fix:** PR #124, branch `claude/clinic-union-room-overflow`. It makes the buffer `EOS` from boot and adds the native test `test/averon_clinic_union_room.c`.
+- The test **crashes without the fix** and **passes with it**.
+- The fixed RELEASE ROM healed twice at the clinic on the save that always crashed, with the heap intact; see [`fix-verification/`](debug/clinic-crash-root-cause/fix-verification/README.md).
 
 The investigation notes below are kept as they were written before the cause was known.
 
