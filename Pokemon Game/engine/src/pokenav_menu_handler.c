@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokenav.h"
+#include "regions.h"
 #include "event_data.h"
 #include "main.h"
 #include "sound.h"
@@ -221,6 +222,13 @@ static u32 HandleMainMenuInput(struct Pokenav_Menu *menu)
         switch (sMenuItems[menu->menuType][menu->cursorPos])
         {
         case POKENAV_MENUITEM_MAP:
+            // Reject before scheduling the feature: the PokeNav caller frees
+            // the current menu before initializing the next one.
+            if (!IsRegionMapAvailableForSection(gMapHeader.regionMapSectionId))
+            {
+                PlaySE(SE_FAILURE);
+                return POKENAV_MENU_FUNC_NONE;
+            }
             menu->helpBarIndex = gSaveBlock2Ptr->regionMapZoom ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT;
             SetMenuIdAndCB(menu, POKENAV_REGION_MAP);
             return POKENAV_MENU_FUNC_OPEN_FEATURE;
@@ -511,3 +519,25 @@ u16 GetHelpBarTextId(void)
     struct Pokenav_Menu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU_HANDLER);
     return menu->helpBarIndex;
 }
+
+#ifdef TESTING
+// Execute the actual input handler without allocating graphical PokeNav
+// resources. The caller can verify a refusal leaves the menu unchanged.
+u32 TestPokenavMainMenuMapInput(bool32 *unchanged)
+{
+    struct Pokenav_Menu menu = {
+        .menuType = POKENAV_MENU_TYPE_DEFAULT,
+        .cursorPos = 0,
+        .currMenuItem = POKENAV_MENUITEM_MAP,
+        .helpBarIndex = HELPBAR_NONE,
+        .callback = HandleMainMenuInput,
+    };
+    struct Pokenav_Menu before = menu;
+    u16 keys = gMain.newKeys;
+    gMain.newKeys = A_BUTTON;
+    u32 result = HandleMainMenuInput(&menu);
+    gMain.newKeys = keys;
+    *unchanged = memcmp(&menu, &before, sizeof(menu)) == 0;
+    return result;
+}
+#endif
