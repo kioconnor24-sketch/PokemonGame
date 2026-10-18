@@ -1,0 +1,31 @@
+{"t": 1792279774.06, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792279774.09, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792279774.65, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792279774.68, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792279777.3, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792279777.33, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792279778.44, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792279778.49, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792279779.02, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792279779.06, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792279779.59, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792279779.63, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792279780.69, "event": "screen", "cb2": "CB2_MainMenu.lto_priv.0", "i": 12}
+{"t": 1792279780.72, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792279784.31, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792279784.35, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792279784.98, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792279785.16, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792279785.16, "event": "continue-check", "problems": []}
+{"t": 1792279786.0, "event": "follower-before-talk", "follower": {"species": 393, "graphicsId": 20873, "invisible": false}, "pos": [19, 15]}
+{"t": 1792279787.08, "event": "capture", "file": "0010-follower-talk.png"}
+{"t": 1792279788.05, "event": "capture", "file": "0011-follower-talk-01.png"}
+{"t": 1792279789.45, "event": "capture", "file": "0012-follower-talk-02.png"}
+{"t": 1792279790.82, "event": "capture", "file": "0013-follower-talk-03.png"}
+{"t": 1792279791.27, "event": "follower-talked", "tasks": ["Task_WeatherMain", "Task_RunPerStepCallback", "Task_MuddySlope", "Task_RunTimeBasedEvents", "ScriptMovement_MoveObjects"], "field_ready": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792279795.27, "event": "capture", "file": "0014-dex-list.png"}
+{"t": 1792279795.28, "event": "dex", "step": "list", "tasks": ["Task_HandlePokedexInput"]}
+{"t": 1792279797.62, "event": "capture", "file": "0015-dex-entry.png"}
+{"t": 1792279797.64, "event": "dex", "step": "entry", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleInfoScreenInput"], "attempts": 0}
+{"t": 1792279808.18, "event": "capture", "file": "0016-dex-cry-page.png"}
+{"t": 1792279808.19, "event": "dex", "step": "cry-page", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleSizeScreenInput"]}

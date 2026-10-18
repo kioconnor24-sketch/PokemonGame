@@ -1,0 +1,49 @@
+{"t": 1792300744.75, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792300744.77, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792300745.28, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792300745.3, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792300747.85, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792300747.87, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792300748.96, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792300748.99, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792300749.54, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792300749.56, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792300750.07, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792300750.09, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792300751.11, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792300751.13, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792300754.68, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792300754.72, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792300755.35, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792300764.06, "event": "map", "map": "MAP_COASTALMEADOW", "pos": [34, 31]}
+{"t": 1792300776.62, "event": "map", "map": "MAP_WINDROW", "pos": [19, 25]}
+{"t": 1792300783.73, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [19, 31]}
+{"t": 1792300792.36, "event": "map", "map": "MAP_ALDERFIELD", "pos": [19, 31]}
+{"t": 1792300800.18, "event": "map", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 8]}
+{"t": 1792300811.66, "event": "healed", "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792300815.61, "event": "map", "map": "MAP_ALDERFIELD", "pos": [17, 13]}
+{"t": 1792300820.89, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [17, 0]}
+{"t": 1792300832.48, "event": "battle-start", "flags": "0x4", "foe": [[1313, 7]], "me": [[393, 5, 20]], "moves": [[1, 35], [45, 40]]}
+{"t": 1792300838.92, "event": "capture", "file": "0009-catch01-action.png"}
+{"t": 1792300838.96, "event": "throw-ball", "foe": [1313, 7, 22]}
+{"t": 1792300852.8, "event": "capture", "file": "0010-catch01-action.png"}
+{"t": 1792300852.84, "event": "throw-ball", "foe": [1313, 7, 22]}
+{"t": 1792300878.36, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 6, "hp": 14, "maxhp": 22}, {"species": 1313, "status": 0, "moves": [33, 230, 71, 74], "pp": [35, 20, 24, 20], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792300878.51, "event": "capture", "file": "0011-caught-2.png"}
+{"t": 1792300878.51, "event": "observe", "label": "caught-2", "problems": []}
+{"t": 1792300878.67, "event": "capture", "file": "0012-party-2.png"}
+{"t": 1792300878.67, "event": "observe", "label": "party-2", "problems": []}
+{"t": 1792300882.66, "event": "capture", "file": "0013-dex-list.png"}
+{"t": 1792300882.68, "event": "dex", "step": "list", "tasks": ["Task_HandlePokedexInput"]}
+{"t": 1792300885.64, "event": "capture", "file": "0014-dex-entry.png"}
+{"t": 1792300885.64, "event": "dex", "step": "entry", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleInfoScreenInput"], "attempts": 0}
+{"t": 1792300886.89, "event": "dex", "step": "page", "key": "RIGHT", "page": "Task_HandleCryScreenInput"}
+{"t": 1792300887.72, "event": "capture", "file": "0015-dex-cry-page.png"}
+{"t": 1792300887.75, "event": "dex", "step": "cry-page", "tasks": ["Task_WaitForExitInfoScreen", "Task_HandleCryScreenInput"]}
+{"t": 1792300889.13, "event": "capture", "file": "0016-dex-cry-replay-1.png"}
+{"t": 1792300890.54, "event": "capture", "file": "0017-dex-cry-replay-2.png"}
+{"t": 1792300891.95, "event": "capture", "file": "0018-dex-cry-replay-3.png"}
+{"t": 1792300896.75, "event": "capture", "file": "0019-dex-closed.png"}
+{"t": 1792300896.75, "event": "dex", "step": "closed"}
+{"t": 1792300896.88, "event": "capture", "file": "0020-end.png"}
+{"t": 1792300896.88, "event": "observe", "label": "end", "problems": []}

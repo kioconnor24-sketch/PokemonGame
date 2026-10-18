@@ -1,0 +1,24 @@
+tools/scaninc/scaninc -M build/emerald-cries-off-release/src/sound.d -g build/assets -I include -I tools/agbcc/include src/sound.c
+/usr/lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-cries-off-release/src/sound.o src/sound.c
+cd build/emerald-cries-off-release && arm-none-eabi-gcc -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../pokeemerald-cries-off-release.map -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections -Xlinker -flto=auto -T ../../ld_script_modern.ld -o ../../pokeemerald-cries-off-release.elf <objs> <libs>
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-closer.o): in function `_close_r':
+/build/newlib-Ipb6mw/newlib-4.6.0.20260123/build/arm-none-eabi/thumb/nofp/newlib/../../../../../newlib/libc/reent/closer.c:47:(.text+0xc): warning: _close is not implemented and will always fail
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-closer.o): note: the message above does not take linker garbage collection into account
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-lseekr.o): in function `_lseek_r':
+/build/newlib-Ipb6mw/newlib-4.6.0.20260123/build/arm-none-eabi/thumb/nofp/newlib/../../../../../newlib/libc/reent/lseekr.c:49:(.text+0x10): warning: _lseek is not implemented and will always fail
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-lseekr.o): note: the message above does not take linker garbage collection into account
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-readr.o): in function `_read_r':
+/build/newlib-Ipb6mw/newlib-4.6.0.20260123/build/arm-none-eabi/thumb/nofp/newlib/../../../../../newlib/libc/reent/readr.c:49:(.text+0x10): warning: _read is not implemented and will always fail
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-readr.o): note: the message above does not take linker garbage collection into account
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): in function `_write_r':
+/build/newlib-Ipb6mw/newlib-4.6.0.20260123/build/arm-none-eabi/thumb/nofp/newlib/../../../../../newlib/libc/reent/writer.c:49:(.text+0x10): warning: _write is not implemented and will always fail
+/tmp/cc4rmZl8.s: Assembler messages:
+/tmp/cc4rmZl8.s: Warning: section `.rodata.compound_string.dabab14a276922ea' size (0x16) is not a multiple of its entry size 0xa
+/usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): note: the message above does not take linker garbage collection into account
+Memory region         Used Size  Region Size  %age Used
+           EWRAM:      226486 B       256 KB     86.40%
+           IWRAM:       28336 B        32 KB     86.47%
+             ROM:    17438648 B        32 MB     51.97%
+tools/gbafix/gbafix pokeemerald-cries-off-release.elf -t"POKEMON EMER" -cBPEE -m01 -r0 --silent
+arm-none-eabi-objcopy -O binary pokeemerald-cries-off-release.elf pokeemerald-cries-off-release.gba
+tools/gbafix/gbafix pokeemerald-cries-off-release.gba -p --silent

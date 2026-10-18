@@ -1,0 +1,15 @@
+== game.ss1.base: head=02001918 blocks=6 allocated=11648 B
+  02001918 A size=  2048 magic=A3A3 prev=02001918 next=02002128
+  02002128 A size=  2048 magic=A3A3 prev=02001918 next=02002938
+  02002938 A size=  2048 magic=A3A3 prev=02002128 next=02003148
+  02003148 A size=  2048 magic=A3A3 prev=02002938 next=02003958
+  02003958 A size=  3456 magic=A3A3 prev=02003148 next=020046E8
+  020046E8 - size=104224 magic=A3A3 prev=02003958 next=02001918
+== game.ss2.frame6: head=02001918 blocks=1 allocated=0 B
+  02001918 - size=     0 magic=0000 prev=00000000 next=00000000
+  PROBLEM 02001918: magic 0000
+  PROBLEM block pointer 00000000 outside EWRAM (reached from 02001918)
+== game.ss3.crashframe: head=02001918 blocks=1 allocated=0 B
+  02001918 - size=     0 magic=0000 prev=00000000 next=00000000
+  PROBLEM 02001918: magic 0000
+  PROBLEM block pointer 00000000 outside EWRAM (reached from 02001918)

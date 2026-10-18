@@ -1,0 +1,24 @@
+tools/scaninc/scaninc -M build/emerald-cries-off-test/test/averon_clinic_union_room.d -g build/assets -I include -I tools/agbcc/include test/averon_clinic_union_room.c
+tools/scaninc/scaninc -M build/emerald-cries-off-test/src/union_room.d -g build/assets -I include -I tools/agbcc/include src/union_room.c
+/usr/lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-cries-off-test/src/union_room.o src/union_room.c
+/usr/lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-cries-off-test/test/averon_clinic_union_room.o test/averon_clinic_union_room.c
+cd build/emerald-cries-off-test && arm-none-eabi-ld -T ld_script_test.ld -o ../../pokeemerald-cries-off-test.elf <objects> <test-objects> <lib>
+tools/gbafix/gbafix pokeemerald-cries-off-test.elf -t"POKEMON EMER" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-cries-off-test.elf gTestRunnerArgv "Averon cry safety\0"
+tools/patchelf/patchelf pokeemerald-cries-off-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test arm-none-eabi-objcopy pokeemerald-cries-off-test-headless.elf
+[04] Averon cry safety normal and by-mode cleanup preserve music and effects: PASS
+[07] Averon cry safety script wait and replay restore music: PASS
+[03] Averon cry safety real playmoncry waitmoncry bytecode resumes: PASS
+[02] Averon cry safety absent species completes without a previous player: PASS
+[05] Averon cry safety silent unpaired duck never lowers music: PASS
+[08] Averon cry safety cold stop and completion before any cry: PASS
+CRY_PROFILE enabled=0 headless=1
+[00] Averon cry safety menu and field effects still start: PASS
+[06] Averon cry safety all modes and Mega stop without a seeded player: PASS
+[01] Averon cry safety title town route battle victory heal music starts: PASS
+
+- Tests PASSED:          9
+- Tests TOTAL:           9
+
+EXIT=0

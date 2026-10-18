@@ -1,0 +1,193 @@
+{
+  "source_commit": "d84f6d52ae5ad02c6690fc46487f7ce5a5d9c527",
+  "engine_tree": "4f092611d8039bcd1a7a5790f16f7c890929fb93",
+  "source_status": [],
+  "commands": [
+    "make -j8 -O RELEASE=1 CRIES=on",
+    "make -j8 -O RELEASE=1 CRIES=off"
+  ],
+  "linked_saving_bytes": 9416568,
+  "identical_song_objects": 530,
+  "identical_noncry_samples": 156,
+  "song_objects_sha256": "b5053504055ac6cb367fd7a233180f7877cff951fa48a602749156a569f097ec",
+  "scope": "BUILD/static byte proof; not gameplay, listening, or Delta acceptance",
+  "on": {
+    "linked_used_bytes": 26855116,
+    "free_bytes": 6699316,
+    "rom_sha256": "cec3be3dd3814f7967c59d0c955de026c6323e77af04c2c27a42b83a644a89a1",
+    "elf_sha256": "e427c8dd18511b9e0aeff3f550bea8c2d4f49c880aa801223dc88ab0a2d0fc3b",
+    "sections": {
+      ".text": 2692248,
+      "script_data": 1262288,
+      ".rodata.compound_string": 357418,
+      ".rodata": 22540948,
+      ".data.iwram": 2204,
+      ".data.ewram": 4
+    },
+    "songs_count": 8134,
+    "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+    "sample_totals": {
+      "cries": {
+        "count": 1156,
+        "bytes": 9386416
+      },
+      "phonemes": {
+        "count": 51,
+        "bytes": 111496
+      },
+      "instruments_other": {
+        "count": 105,
+        "bytes": 642204
+      }
+    },
+    "save_headroom": {
+      "SaveBlock1": {
+        "used_bytes": 15568,
+        "limit_bytes": 15872,
+        "free_bytes": 304
+      },
+      "SaveBlock2": {
+        "used_bytes": 3884,
+        "limit_bytes": 3968,
+        "free_bytes": 84
+      },
+      "SaveBlock3": {
+        "used_bytes": 68,
+        "limit_bytes": 1624,
+        "free_bytes": 1556
+      },
+      "PokemonStorage": {
+        "used_bytes": 34144,
+        "limit_bytes": 35712,
+        "free_bytes": 1568
+      }
+    }
+  },
+  "off": {
+    "linked_used_bytes": 17438548,
+    "free_bytes": 16115884,
+    "rom_sha256": "c0ee9c231a6d3bf5fb272b3afe5b5fb302932664fdbdf70b192007d4d04e545d",
+    "elf_sha256": "8c852ac12189b148931603c09355051f067157866d3cbe3ee1ca82499c52390f",
+    "sections": {
+      ".text": 2691496,
+      "script_data": 1262288,
+      ".rodata.compound_string": 357418,
+      ".rodata": 13125132,
+      ".data.iwram": 2204,
+      ".data.ewram": 4
+    },
+    "songs_count": 8134,
+    "song_names_sha256": "1c9854ff066673240512b5b2e4a39149ff6bea4f5434a1363882363051038f2c",
+    "sample_totals": {
+      "cries": {
+        "count": 0,
+        "bytes": 0
+      },
+      "phonemes": {
+        "count": 51,
+        "bytes": 111496
+      },
+      "instruments_other": {
+        "count": 105,
+        "bytes": 642204
+      }
+    },
+    "save_headroom": {
+      "SaveBlock1": {
+        "used_bytes": 15568,
+        "limit_bytes": 15872,
+        "free_bytes": 304
+      },
+      "SaveBlock2": {
+        "used_bytes": 3884,
+        "limit_bytes": 3968,
+        "free_bytes": 84
+      },
+      "SaveBlock3": {
+        "used_bytes": 68,
+        "limit_bytes": 1624,
+        "free_bytes": 1556
+      },
+      "PokemonStorage": {
+        "used_bytes": 34144,
+        "limit_bytes": 35712,
+        "free_bytes": 1568
+      }
+    }
+  },
+  "native": {
+    "red-probe": {
+      "log_sha256": "b3b8011e65f1fc260cfda80d554601706ff3db42d47eed1fe1e6d00f8fa6971c",
+      "results": {
+        "P": 6,
+        "F": 2,
+        "I": 0,
+        "E": 0
+      },
+      "completed": true
+    },
+    "green-final-probe": {
+      "log_sha256": "fe35f1f5991bb3a9317030cd10409a77102aa1977c71a45237cde941168c8ab8",
+      "results": {
+        "P": 10,
+        "F": 0,
+        "I": 0,
+        "E": 0
+      },
+      "completed": true
+    },
+    "off-unwrapped": {
+      "log_sha256": "f216a2c443c1974b3fdf721b63a861ba44e3f4177a3c766fd85306d6a4a51de5",
+      "results": {
+        "P": 9,
+        "F": 0,
+        "I": 0,
+        "E": 0
+      },
+      "completed": true
+    },
+    "on": {
+      "log_sha256": "98d5336e1d825064b573fb67b5853ed60b96c2acfbc0bfc8b75539ed14889559",
+      "results": {
+        "P": 9,
+        "F": 0,
+        "I": 0,
+        "E": 0
+      },
+      "completed": true
+    }
+  },
+  "graphical_on_opening": {
+    "source_sha": "d84f6d52ae5ad02c6690fc46487f7ce5a5d9c527",
+    "engine_tree": "4f092611d8039bcd1a7a5790f16f7c890929fb93",
+    "engine_status": [],
+    "driver_sha": "d84f6d52ae5ad02c6690fc46487f7ce5a5d9c527",
+    "driver_status": [],
+    "rom_sha256": "cec3be3dd3814f7967c59d0c955de026c6323e77af04c2c27a42b83a644a89a1",
+    "elf_sha256": "e427c8dd18511b9e0aeff3f550bea8c2d4f49c880aa801223dc88ab0a2d0fc3b",
+    "cry_profile": "on",
+    "release": true,
+    "phases": [
+      "opening",
+      "save"
+    ],
+    "mgba": "mgba 0.10.5 ((unknown))",
+    "acceptance": "Supporting real emulator evidence; not human listening or Delta",
+    "save_before": null,
+    "completed": false,
+    "error": "Stuck: save failed: status 0",
+    "source_sha_end": "d84f6d52ae5ad02c6690fc46487f7ce5a5d9c527",
+    "engine_status_end": [],
+    "source_unchanged": true,
+    "save_after": "deac4d63c6ce3c562d45efd5e326137ff8f7edb3caeb6b544bf3ccff78b6b176",
+    "note": "Real controller-input opening/starter and saved-game text observed. Driver FALSE FAIL on dead RELEASE-only gSaveAttemptStatus stores; saved slot has all14 IDs/signatures/counter1. Continue not yet verified. No gameplay PASS inferred."
+  },
+  "save_regression_batch": "RUNNING; not a final result",
+  "host": "17/17 PASS",
+  "limits": [
+    "Independent source review pending",
+    "Graphical cries-OFF and full requested scenes pending",
+    "Human listening and Delta UNTESTED",
+    "Default main config remains TRUE; no merge authorized until gates pass"
+  ]
+}

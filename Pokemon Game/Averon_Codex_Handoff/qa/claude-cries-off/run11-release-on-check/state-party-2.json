@@ -1,0 +1,92 @@
+{
+ "map": "MAP_ORCHARDLANE",
+ "cb2": "CB2_Overworld",
+ "mapGroup": 75,
+ "mapNum": 8,
+ "x": 28,
+ "y": 8,
+ "frame": 8189,
+ "flags": {
+  "FLAG_BADGE01_GET": false,
+  "FLAG_BADGE02_GET": false,
+  "FLAG_AVERON_STARTER": true,
+  "FLAG_AVERON_WEST_SLUICE": false,
+  "FLAG_AVERON_EAST_SLUICE": false,
+  "FLAG_AVERON_GYM1_TM": false,
+  "FLAG_AVERON_NOTES_STARTED": false,
+  "FLAG_AVERON_NOTES_RECORDED": false,
+  "FLAG_AVERON_NOTES_REWARDED": false,
+  "FLAG_AVERON_EXP_SHARE": false,
+  "FLAG_AVERON_SKETCH_STARTED": false,
+  "FLAG_AVERON_SKETCH_FOUND": false,
+  "FLAG_AVERON_SKETCH_REWARDED": false,
+  "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+ },
+ "party": [
+  {
+   "species": 393,
+   "status": 0,
+   "moves": [
+    1,
+    45,
+    0,
+    0
+   ],
+   "pp": [
+    35,
+    40,
+    0,
+    0
+   ],
+   "ppBonuses": 0,
+   "level": 6,
+   "hp": 14,
+   "maxhp": 22
+  },
+  {
+   "species": 1313,
+   "status": 0,
+   "moves": [
+    33,
+    230,
+    71,
+    74
+   ],
+   "pp": [
+    35,
+    20,
+    24,
+    20
+   ],
+   "ppBonuses": 0,
+   "level": 7,
+   "hp": 22,
+   "maxhp": 22
+  }
+ ],
+ "follower": {
+  "species": 393,
+  "graphicsId": 20873,
+  "invisible": false
+ },
+ "pokeBalls": [
+  [
+   1,
+   3
+  ]
+ ],
+ "berries": [],
+ "money": 3000,
+ "stack": {
+  "regionBytes": 3984,
+  "usedBytes": 2648,
+  "freeBytes": 1336
+ },
+ "saveAttemptStatus": 0,
+ "screenshot": "0012-party-2.png",
+ "label": "party-2",
+ "expected": {
+  "partySize": "check"
+ },
+ "problems": []
+}
