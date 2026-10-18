@@ -336,6 +336,17 @@ class SourceBatchTests(unittest.TestCase):
         self.assertIn('section-region-mismatch', {e['code'] for e in result['warnings']})
         self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_HOENN')
 
+    def test_explicit_section_region_is_used_without_allocating_ids(self):
+        source = self.map_data()
+        source['region'] = 'REGION_SINNOH'
+        sections = json.loads((ENGINE / 'src/data/region_map/region_map_sections.json').read_text())
+        next(s for s in sections['map_sections'] if s['id'] == source['region_map_section'])['region'] = 'REGION_SINNOH'
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': source,
+            'src/data/region_map/region_map_sections.json': sections})
+        self.assertEqual(result['errors'], [])
+        self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_SINNOH')
+        self.assertNotIn('section-region-mismatch', {e['code'] for e in result['warnings']})
+
     def test_invalid_return_warp_cannot_hide_behind_valid_arrival(self):
         target = self.map_data('SaltmereGreenhouse')
         target['warp_events'][0]['dest_warp_id'] = '999'

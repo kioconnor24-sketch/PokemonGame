@@ -55,6 +55,10 @@ def sections(engine):
     ids = [entry["id"] for entry in entries]
     if len(set(ids)) != len(ids):
         raise ValueError("duplicate MAPSEC ids in region_map_sections.json")
+    for entry in entries:
+        if "region" in entry and (not isinstance(entry["region"], str)
+                                  or entry["region"] not in ENGINE_REGIONS | {"REGION_NONE"}):
+            raise ValueError(f"{entry['id']}: invalid region metadata; use a declared REGION_* enum")
     return entries
 
 
@@ -88,9 +92,12 @@ FLY_TABLE_FILE = "src/region_map.c"
 FLY_TABLE = "sMapHealLocations"
 LAYOUT_GLOB = "src/data/region_map/region_map_layout*.h"
 SPECIES_INFO_GLOB = "src/data/pokemon/species_info/*.h"
-# GetRegionForSectionId (include/regions.h): [KANTO_MAPSEC_START,
-# MAPSEC_SPECIAL_AREA) is Kanto, every other section is Hoenn.
+# GetRegionForSectionId (src/region_map.c): explicit ROM metadata overrides
+# the legacy [KANTO_MAPSEC_START, MAPSEC_SPECIAL_AREA) Kanto / else Hoenn rule.
 KANTO_RANGE = ("MAPSEC_PALLET_TOWN", "MAPSEC_SPECIAL_AREA")
+ENGINE_REGIONS = frozenset("REGION_" + name for name in (
+    "KANTO", "JOHTO", "HOENN", "SINNOH", "UNOVA", "KALOS", "ALOLA",
+    "GALAR", "HISUI", "PALDEA"))
 REGION_CONDITION = re.compile(r"\b(IF_(?:NOT_)?REGION)\s*,\s*(REGION_[A-Z_]+)")
 
 
@@ -126,8 +133,10 @@ def region_conditioned_evolutions(engine):
     return dict(sorted(counts.items()))
 
 
-def engine_region(value, values):
+def engine_region(value, values, declared=None):
     """The engine region GetRegionForSectionId gives this section's value."""
+    if isinstance(declared, str) and declared in ENGINE_REGIONS:
+        return declared
     start, end = (values.get(name) for name in KANTO_RANGE)
     if start is not None and end is not None and start <= value < end:
         return "REGION_KANTO"
@@ -157,7 +166,7 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
             reuse_candidate=not averon_maps and not behaviour,
             fly_row=ident in fly,
             town_map_cells=cells.get(ident, 0),
-            engine_region=engine_region(value, values),
+            engine_region=engine_region(value, values, entry.get("region")),
         ))
     none_value = len(entries)
     unknown = sorted({sec for sec, _ in maps.values() if sec and sec not in {e["id"] for e in entries}

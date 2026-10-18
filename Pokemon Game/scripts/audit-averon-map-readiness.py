@@ -199,6 +199,7 @@ def namespace_contract(engine, document):
     entries = module.sections(engine)
     values = {entry['id']: value for value, entry in enumerate(entries)}
     return module, values, {'saved_pin_errors': module.check_pins(engine, pins),
+                            'declared_regions': {entry['id']: entry.get('region') for entry in entries if 'region' in entry},
                             'saved_pins_checked': len(pins), 'mapsec_none': len(entries),
                             'audit_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                             'pins_sha256': hashlib.sha256(pin_path.read_bytes()).hexdigest(),
@@ -296,8 +297,9 @@ def audit(engine, names):
             problem(name, 'section-none', 'Sentinel is not a named met-location; review intent', True)
         else:
             row['section_value'] = section_values[section]
-            row['section_engine_region'] = namespace.engine_region(section_values[section], section_values)
-            if data.get('region') == 'REGION_SINNOH':
+            row['section_engine_region'] = namespace.engine_region(section_values[section], section_values,
+                section_contract['declared_regions'].get(section))
+            if data.get('region') == 'REGION_SINNOH' and row['section_engine_region'] != 'REGION_SINNOH':
                 problem(name, 'section-region-mismatch', 'Saved section currently resolves to ' + row['section_engine_region'] + '; Sinnoh routing requires an approved policy', True)
         if len(slots[name]) == 1 and (slots[name][0][1] >= 128 or len(groups[slots[name][0][2]]) > 128):
             problem(name, 'map-capacity', 'Map index/group size exceeds signed-byte capacity')
