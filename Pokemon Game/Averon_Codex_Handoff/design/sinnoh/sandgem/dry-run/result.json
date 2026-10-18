@@ -1,0 +1,144 @@
+{
+ "rom_sha256": "d33a5f804fc32e0199e2f861112a9862875377d06d06d370d54e6aebd31dfa42",
+ "checks": [
+  {
+   "name": "door warp into Sandgem",
+   "ok": true,
+   "map": "MAP_SANDGEM_TOWN",
+   "pos": [
+    6,
+    12
+   ]
+  },
+  {
+   "name": "west edge closed (no Route 201 yet)",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     13
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "north edge closed (no Route 202 yet)",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     0
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "sea blocks walking without Surf",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     13,
+     28
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     13,
+     28
+    ]
+   ]
+  },
+  {
+   "name": "house A wall is solid",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     16
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "Pokemon Center door warp in",
+   "ok": true,
+   "map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+   "pos": [
+    6,
+    8
+   ]
+  },
+  {
+   "name": "nurse heals the party",
+   "ok": true,
+   "party": [
+    [
+     393,
+     29,
+     29
+    ],
+    [
+     161,
+     22,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "Pokemon Center exit back to Sandgem door",
+   "ok": true,
+   "map": "MAP_SANDGEM_TOWN",
+   "pos": [
+    6,
+    12
+   ]
+  },
+  {
+   "name": "follower visible after the door round trip and two steps",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   },
+   "pos": [
+    6,
+    16
+   ]
+  },
+  {
+   "name": "start menu returns to field",
+   "ok": true
+  },
+  {
+   "name": "save success dialog in Sandgem",
+   "ok": true
+  }
+ ],
+ "dev_fixture": "Alderfield clinic exit redirected to MAP_SANDGEM_TOWN (scratch only)",
+ "alive": true,
+ "flash": []
+}

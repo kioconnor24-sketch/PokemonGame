@@ -1,0 +1,222 @@
+diff --git a/Pokemon Game/engine/data/event_scripts.s b/Pokemon Game/engine/data/event_scripts.s
+index afe56c15..48726f72 100644
+--- a/Pokemon Game/engine/data/event_scripts.s	
++++ b/Pokemon Game/engine/data/event_scripts.s	
+@@ -1764,6 +1764,8 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
+ 	.include "data/maps/AlderfieldGym/scripts.inc"
+ 
+ 	.include "data/maps/AlderfieldClinic/scripts.inc"
++	.include "data/maps/SandgemTown/scripts.inc"
++	.include "data/maps/SandgemTown_PokemonCenter_1F/scripts.inc"
+ 
+ 	.include "data/maps/AlderfieldSupply/scripts.inc"
+ 
+diff --git a/Pokemon Game/engine/data/layouts/layouts.json b/Pokemon Game/engine/data/layouts/layouts.json
+index a6aadc34..e4b5fcbd 100644
+--- a/Pokemon Game/engine/data/layouts/layouts.json	
++++ b/Pokemon Game/engine/data/layouts/layouts.json	
+@@ -9488,6 +9488,17 @@
+       "border_filepath": "data/layouts/AveronFieldLabUnderwater/border.bin",
+       "blockdata_filepath": "data/layouts/AveronFieldLabUnderwater/map.bin",
+       "layout_version": "emerald"
++    },
++    {
++      "id": "LAYOUT_SANDGEM_TOWN",
++      "name": "SandgemTown_Layout",
++      "width": 32,
++      "height": 30,
++      "primary_tileset": "gTileset_General",
++      "secondary_tileset": "gTileset_Dewford",
++      "border_filepath": "data/layouts/SandgemTown/border.bin",
++      "blockdata_filepath": "data/layouts/SandgemTown/map.bin",
++      "layout_version": "emerald"
+     }
+   ]
+ }
+diff --git a/Pokemon Game/engine/data/maps/SandgemTown/map.json b/Pokemon Game/engine/data/maps/SandgemTown/map.json
+new file mode 100644
+index 00000000..9c797220
+--- /dev/null
++++ b/Pokemon Game/engine/data/maps/SandgemTown/map.json	
+@@ -0,0 +1,52 @@
++{
++  "id": "MAP_SANDGEM_TOWN",
++  "name": "SandgemTown",
++  "layout": "LAYOUT_SANDGEM_TOWN",
++  "music": "MUS_DEWFORD",
++  "region": "REGION_SINNOH",
++  "region_map_section": "MAPSEC_NONE",
++  "weather": "WEATHER_SUNNY",
++  "map_type": "MAP_TYPE_TOWN",
++  "allow_cycling": true,
++  "allow_escaping": false,
++  "allow_running": true,
++  "show_map_name": false,
++  "requires_flash": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "coord_events": [],
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
++      "x": 8,
++      "y": 13,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "SandgemTown_EventScript_Townsfolk",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 6,
++      "y": 11,
++      "elevation": 0,
++      "dest_map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
++      "dest_warp_id": "0"
++    }
++  ],
++  "bg_events": [
++    {
++      "type": "sign",
++      "x": 3,
++      "y": 11,
++      "elevation": 0,
++      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
++      "script": "SandgemTown_EventScript_Sign"
++    }
++  ]
++}
+diff --git a/Pokemon Game/engine/data/maps/SandgemTown/scripts.inc b/Pokemon Game/engine/data/maps/SandgemTown/scripts.inc
+new file mode 100644
+index 00000000..9423c6e2
+--- /dev/null
++++ b/Pokemon Game/engine/data/maps/SandgemTown/scripts.inc	
+@@ -0,0 +1,16 @@
++SandgemTown_MapScripts::
++	.byte 0
++
++SandgemTown_EventScript_Sign::
++	msgbox SandgemTown_Text_Sign, MSGBOX_SIGN
++	end
++
++SandgemTown_EventScript_Townsfolk::
++	msgbox SandgemTown_Text_Townsfolk, MSGBOX_NPC
++	end
++
++SandgemTown_Text_Sign:
++	.string "SANDGEM TOWN (placeholder dry run)$"
++
++SandgemTown_Text_Townsfolk:
++	.string "Placeholder townsfolk: no story yet.$"
+diff --git a/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/map.json b/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/map.json
+new file mode 100644
+index 00000000..5a94d93e
+--- /dev/null
++++ b/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/map.json	
+@@ -0,0 +1,50 @@
++{
++  "id": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
++  "name": "SandgemTown_PokemonCenter_1F",
++  "layout": "LAYOUT_POKEMON_CENTER_1F",
++  "music": "MUS_POKE_CENTER",
++  "region": "REGION_SINNOH",
++  "region_map_section": "MAPSEC_NONE",
++  "weather": "WEATHER_NONE",
++  "map_type": "MAP_TYPE_INDOOR",
++  "allow_cycling": false,
++  "allow_escaping": false,
++  "allow_running": false,
++  "show_map_name": false,
++  "requires_flash": false,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "coord_events": [],
++  "object_events": [
++    {
++      "graphics_id": "OBJ_EVENT_GFX_NURSE",
++      "x": 7,
++      "y": 2,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "SandgemTown_PokemonCenter_1F_EventScript_Nurse",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 6,
++      "y": 8,
++      "elevation": 3,
++      "dest_map": "MAP_SANDGEM_TOWN",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 7,
++      "y": 8,
++      "elevation": 3,
++      "dest_map": "MAP_SANDGEM_TOWN",
++      "dest_warp_id": "0"
++    }
++  ],
++  "bg_events": []
++}
+diff --git a/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/scripts.inc b/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/scripts.inc
+new file mode 100644
+index 00000000..3f6c0872
+--- /dev/null
++++ b/Pokemon Game/engine/data/maps/SandgemTown_PokemonCenter_1F/scripts.inc	
+@@ -0,0 +1,10 @@
++SandgemTown_PokemonCenter_1F_MapScripts::
++	.byte 0
++
++SandgemTown_PokemonCenter_1F_EventScript_Nurse::
++	setvar VAR_0x800B, 1
++	call Common_EventScript_PkmnCenterNurse
++	waitmessage
++	waitbuttonpress
++	release
++	end
+diff --git a/Pokemon Game/engine/data/maps/map_groups.json b/Pokemon Game/engine/data/maps/map_groups.json
+index 47d8ff15..b89bcc5f 100644
+--- a/Pokemon Game/engine/data/maps/map_groups.json	
++++ b/Pokemon Game/engine/data/maps/map_groups.json	
+@@ -75,7 +75,8 @@
+     "gMapGroup_IndoorTwoIslandRoute_Frlg",
+     "gMapGroup_IndoorSixIslandRoute_Frlg",
+     "gMapGroup_IndoorSevenIslandRoute_Frlg",
+-    "gMapGroup_AveronOpening"
++    "gMapGroup_AveronOpening",
++    "gMapGroup_SinnohDryRun"
+   ],
+   "gMapGroup_TownsAndRoutes": [
+     "PetalburgCity",
+@@ -1179,5 +1180,9 @@
+     "CoastalBluffs",
+     "AveronFieldLab",
+     "AveronFieldLabUnderwater"
++  ],
++  "gMapGroup_SinnohDryRun": [
++    "SandgemTown",
++    "SandgemTown_PokemonCenter_1F"
+   ]
+ }
+diff --git a/Pokemon Game/engine/test/data/averon_map_registry_slots.inc b/Pokemon Game/engine/test/data/averon_map_registry_slots.inc
+index 67407aca..be321ebb 100644
+--- a/Pokemon Game/engine/test/data/averon_map_registry_slots.inc	
++++ b/Pokemon Game/engine/test/data/averon_map_registry_slots.inc	
+@@ -1027,3 +1027,6 @@ REGISTRY_SLOT(75, 12, MAP_ALDERFIELDSUPPLY, AlderfieldSupply, 1)
+ REGISTRY_SLOT(75, 13, MAP_COASTALBLUFFS, CoastalBluffs, 1)
+ REGISTRY_SLOT(75, 14, MAP_AVERONFIELDLAB, AveronFieldLab, 1)
+ REGISTRY_SLOT(75, 15, MAP_AVERONFIELDLABUNDERWATER, AveronFieldLabUnderwater, 1)
++REGISTRY_GROUP(76, gMapGroup_SinnohDryRun, 2, 1)
++REGISTRY_SLOT(76, 0, MAP_SANDGEM_TOWN, SandgemTown, 1)
++REGISTRY_SLOT(76, 1, MAP_SANDGEM_TOWN_POKEMON_CENTER_1F, SandgemTown_PokemonCenter_1F, 1)

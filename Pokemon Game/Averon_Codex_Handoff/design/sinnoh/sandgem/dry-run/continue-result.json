@@ -1,0 +1,16 @@
+{
+ "rom_sha256": "d33a5f804fc32e0199e2f861112a9862875377d06d06d370d54e6aebd31dfa42",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the Sandgem save",
+   "ok": true,
+   "map": "MAP_SANDGEM_TOWN",
+   "pos": [
+    6,
+    16
+   ]
+  }
+ ],
+ "dev_fixture": "Alderfield clinic exit redirected to MAP_SANDGEM_TOWN (scratch only)",
+ "alive": true
+}
