@@ -40,6 +40,11 @@
 - [ ] When real art replaces a placeholder, revalidate metatile indices, palette slots, sprite dimensions, animations, collision, lighting and warp sightlines; replacement is a *goal* to be low-rework, not a guarantee of no map change.
 - [ ] All rights and attribution must be reviewed before importing third-party Sinnoh source maps, art, audio or fan-hack packs. An external Sinnoh-on-Emerald project is a **reference candidate**, never an assumed drop-in.
 
+### Implemented supporting tools (not completed map production)
+
+- [x] **SOURCE/HOST tooling:** [selected-map preflight and comparable linked-resource deltas](SINNOH_SOURCE_AND_PIPELINE_RESEARCH_20261017.md) now check geometry dependencies, metatile bounds, warp targets/arrival bounds and current build inclusion; the existing resource reporter can compare matching profiles. The 16 existing Averon opening maps pass. This does not certify graphics/collision/gameplay or change any area-register status.
+- **Research only:** the same report pins the Sinnoh donor's 159 map definitions, incomplete coverage, concrete warp conflicts and unresolved asset terms. No third-party map/asset is imported; native construction remains the actionable path pending specific owner decisions.
+
 ## 4. **First real Sinnoh slice** — implement and retain
 
 - [ ] Create approved first exterior plus a **real connected interior**, using final-ish map dimensions and approved, tracked placeholder assets.
