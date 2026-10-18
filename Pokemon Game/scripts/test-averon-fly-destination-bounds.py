@@ -81,7 +81,8 @@ static void exercise(unsigned section, unsigned gender, unsigned flag, unsigned 
     if (expected != (u32)WARP_ID_NONE) {
         CHECK(healCalls == 1 && warpCalls == 0 && healArg == expected);
         CHECK(groupArg == 12345 && numberArg == 12345 && warpArg == 12345);
-    } else if (section < ARRAY_COUNT(sMapHealLocations)) {
+    } else if (section < ARRAY_COUNT(sMapHealLocations)
+               && (sMapHealLocations[section][0] != 0 || sMapHealLocations[section][1] != 0)) {
         CHECK(healCalls == 0 && warpCalls == 1 && healArg == 0xdead);
         CHECK(groupArg == sMapHealLocations[section][0]);
         CHECK(numberArg == sMapHealLocations[section][1]);
@@ -108,7 +109,7 @@ int main(int argc, char **argv) {
                         exercise(s, g, f, p);
     } else {
         unsigned sections[] = {0, MAPSEC_BATTLE_FRONTIER, MAPSEC_SOUTHERN_ISLAND,
-            count - 1, count, MAPSEC_SALTMERE, MAPSEC_ALDERFIELD, 65535};
+            count - 1, count, MAPSEC_SALTMERE, MAPSEC_ALDERFIELD, 65535, MAPSEC_SANDGEM_TOWN};
         CHECK(id < ARRAY_COUNT(sections));
         exercise(sections[id], FEMALE, 1, 0);
     }
@@ -147,13 +148,13 @@ def main():
             return executable
 
         executable = compile_probe("actual", getter, setter)
-        for case in range(8):
+        for case in range(9):
             run = subprocess.run([str(executable), str(case)], capture_output=True, text=True)
             print(run.stdout, end="")
             if run.returncode:
                 failures += 1
                 print(f"FAIL case={case} exit={run.returncode}\n{run.stderr}")
-        print(f"actual source cases: {8 - failures}/8 PASS", flush=True)
+        print(f"actual source cases: {9 - failures}/9 PASS", flush=True)
         if failures:
             return 1
         high = compile_probe("synthetic-high-special", getter, setter, True)
@@ -164,7 +165,8 @@ def main():
             return 1
         if args.mutations:
             get_guard = "        if (regionMap->mapSecId >= ARRAY_COUNT(sMapHealLocations))\n            return WARP_ID_NONE;\n"
-            put_guard = "else if (regionMap->mapSecId < ARRAY_COUNT(sMapHealLocations))"
+            empty_condition = "\n          && (sMapHealLocations[regionMap->mapSecId][0] != 0 || sMapHealLocations[regionMap->mapSecId][1] != 0)"
+            put_guard = "else if (regionMap->mapSecId < ARRAY_COUNT(sMapHealLocations)" + empty_condition + ")"
             assert get_guard in getter and put_guard in setter, "Guards changed: update reviewed mutations"
             mutations = [
                 ("remove-getter-guard", getter.replace(get_guard, ""), setter, 4),
@@ -172,6 +174,7 @@ def main():
                 ("getter-off-by-one", getter.replace(">= ARRAY_COUNT", "> ARRAY_COUNT"), setter, 4),
                 ("setter-off-by-one", getter, setter.replace("< ARRAY_COUNT", "<= ARRAY_COUNT"), 4),
                 ("early-setter-breaks-frontier", getter, setter.replace("{", "{\n    if (regionMap->mapSecId >= ARRAY_COUNT(sMapHealLocations)) return;", 1), 1),
+                ("remove-empty-row-guard", getter, setter.replace(empty_condition, ""), 0),
                 ("wrong-home-gender", getter.replace("playerGender == MALE", "playerGender != MALE"), setter, 0),
             ]
             killed = 0

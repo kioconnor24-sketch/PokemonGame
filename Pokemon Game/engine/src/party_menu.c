@@ -27,6 +27,7 @@
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "follower_npc.h"
+#include "regions.h"
 #include "frontier_util.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -4335,6 +4336,9 @@ static void DisplayCantUseSurfMessage(void)
 
 bool32 SetUpFieldMove_Fly(void)
 {
+    if (!IsRegionMapAvailableForSection(gMapHeader.regionMapSectionId))
+        return FALSE;
+
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
         return FALSE;
 
