@@ -10,8 +10,11 @@ from codex_cry_gameplay import driver, emu, game, mapdata, play
 profile, scratch, out = sys.argv[1], pathlib.Path(sys.argv[2]), pathlib.Path(sys.argv[3])
 bps = [b for b in sys.argv[4:] if b not in ('poll', 'w')]
 engine = ROOT/'engine'
-src = engine/f'pokeemerald-cries-{profile}-release.gba'
-if profile == 'main':
+src = engine/f'pokeemerald-cries-{profile}-release.gba' if not profile.endswith('.gba') else None
+if profile.endswith('.gba'):
+    src = pathlib.Path(profile)
+    engine = src.parent
+elif profile == 'main':
     engine = pathlib.Path('/root/claude-dev/wt-mainrel/Pokemon Game/engine')
     src = engine/'pokeemerald-release.gba'
 rom = scratch/'game.gba'
