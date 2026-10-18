@@ -1,5 +1,12 @@
 # Pokémon Averon — CURRENT STATUS AND NEXT-PHASE HANDOFF
-_Last verified: 2026-10-17. Read this page before dated M1 task plans._
+
+## Live October 18 Phase 2 implementation (supersedes historical task statuses)
+
+**M1 remains owner-accepted.** GitHub `main` now includes Sinnoh save-section inventory/legacy pins (#123), map-batch/ROM growth preflight (#125), and explicit `REGION_SINNOH` Emerald map-generator inclusion (#126). **Reversible cry ON/OFF implementation #117 is also merged** after manager source review; `CRIES=default` remains ON, all original cry assets retained, while human listening/Delta and final OFF adoption remain separate UNTESTED/owner decisions. This is not a claim that Sinnoh maps or the final ROM already exist.
+
+**Current independent assignments** are in [Issue #15, October 18 manager directive](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6251950630): **Codex** handles save-safe section/met-location/Fly technical guardrails and meaningful roundtrip proof, without choosing production IDs; **Claude** handles verified in-repo placeholder/biome art and a proposed real Sinnoh exterior+interior, then actual map implementation and emulator QA **once the owner approves** the concrete location, rough geometry/exits, art and initial section-ID policy. These are separate scopes. Continue doing independent assigned work if an owner decision is pending; don't fabricate an approved layout. All 87 Sinnoh area rows remain unbuilt until evidence says otherwise. No new broad technical-preparation milestone is needed.
+
+_Live Phase 2 routing verified: 2026-10-18. Older sections below retain their original historical context._
 
 ## Owner decision — authoritative
 **Pre-Sinnoh Milestone 1 (M1) is OWNER-ACCEPTED and its map-independent backend engineering is complete.** The owner explicitly accepted Claude's consolidated verdict on 2026-10-17, approved closing M1, and authorized proceeding to the next development phase **with human audio listening postponed**. The documented Gym 1 victory/badge/Save→Continue evidence is accepted despite missing postbattle dialogue screenshots. The other disclosed bounded QA and resource limitations are accepted as planning constraints, not secretly marked tested.
