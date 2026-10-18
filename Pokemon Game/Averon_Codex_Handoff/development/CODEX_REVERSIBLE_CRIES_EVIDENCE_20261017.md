@@ -1,3 +1,5 @@
+> **Historical (superseded, Claude 2026-10-18).** This is Codex's checkpoint from before the takeover. Its "NOT ELIGIBLE TO MERGE" / "PENDING" status is out of date. For the current evidence and status, see `Pokemon Game/Averon_Codex_Handoff/qa/claude-cries-off/README.md` and the PR #117 description. The text below is unchanged.
+
 # Reversible cry safety — pushed checkpoint, 2026-10-17
 
 PR [#117](https://github.com/kioconnor24-sketch/PokemonGame/pull/117), branch `codex/reversible-cries-safety-20261017`. Build/source evidence pinned to `d84f6d52ae5ad02c6690fc46487f7ce5a5d9c527`, engine tree `4f092611d8039bcd1a7a5790f16f7c890929fb93`. **DRAFT / NOT ELIGIBLE TO MERGE.** The owner requested this immediate durable checkpoint; work continues.

@@ -1,5 +1,6 @@
 import struct
 import unittest
+import unittest.mock
 from codex_cry_gameplay import (SECTOR_SIGNATURE, SECTOR_SIZE, chunk_sizes, flash_slots,
                                 flash_verdict, lto_aliases, restored_problems, rom_name,
                                 save_dialog_verdict, sector_checksum)
@@ -69,6 +70,13 @@ class Flash(unittest.TestCase):
         self.assertTrue(flash_verdict(before, before))  # nothing new written
         self.assertEqual(flash_verdict(flash_slots(b'', SIZES), after), [])
 
+    def test_each_save_must_advance_the_counter(self):
+        before = flash_slots(image(good_slot(7)), SIZES)
+        one = flash_slots(image(good_slot(7), good_slot(8)), SIZES)
+        two = flash_slots(image(good_slot(9), good_slot(8)), SIZES)
+        self.assertEqual(flash_verdict(before, two, saves=2), [])
+        self.assertIn('not 2 newer', flash_verdict(before, one, saves=2)[0])
+
     def test_corrupt_slots_are_refused(self):
         bad_sum = good_slot(8)
         bad_sum[3] = sector(3, 8, b'x', bad_sum=True)
@@ -83,7 +91,12 @@ class Flash(unittest.TestCase):
             with self.subTest(name):
                 slots = flash_slots(image(good_slot(7), slot), SIZES)
                 self.assertEqual(slots[1]['status'], 'invalid')
-                self.assertTrue(flash_verdict(flash_slots(image(good_slot(7)), SIZES), slots))
+                # Slot 0 is newer than before, so only the invalid slot can be reported.
+                newer = flash_slots(image(good_slot(9), slot), SIZES)
+                before = flash_slots(image(good_slot(7)), SIZES)
+                problems = flash_verdict(before, newer)
+                self.assertTrue(problems)
+                self.assertTrue(all(p.startswith('slot 1:') for p in problems), problems)
 
     def test_truncated_image_is_not_valid(self):
         slots = flash_slots(image(good_slot(7))[:5*SECTOR_SIZE], SIZES)
@@ -126,3 +139,20 @@ class Continue(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class Arguments(unittest.TestCase):
+    def test_reused_output_folder_is_refused(self):
+        import contextlib, io, sys, tempfile
+        from pathlib import Path
+        import codex_cry_gameplay
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)/'out'
+            out.mkdir()
+            (out/'events.jsonl').write_text('{}\n')
+            argv = ['codex_cry_gameplay.py', '--engine', str(Path(tmp)/'engine'), '--profile', 'off',
+                    '--scratch', str(Path(tmp)/'scratch'), '--out', str(out)]
+            with unittest.mock.patch.object(sys, 'argv', argv), \
+                    contextlib.redirect_stderr(io.StringIO()) as err, self.assertRaises(SystemExit):
+                codex_cry_gameplay.main()
+            self.assertIn('new or empty directory', err.getvalue())

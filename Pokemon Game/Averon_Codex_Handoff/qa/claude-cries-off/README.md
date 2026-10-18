@@ -35,25 +35,27 @@ This reproduces Codex's result.
 ## RELEASE save check (`scripts/coordination/codex_cry_gameplay.py`)
 
 `gSaveAttemptStatus` cannot be trusted in RELEASE: LTO removes the stores to it. A save now has to pass three checks:
-1. The game's own `SaveSuccessCallback` is observed, and no error callback is observed.
+1. The game's own success callback is observed (`SaveSuccessCallback` or `SaveReturnSuccessCallback`; runs 05 and 07 saw the latter), and no error callback is observed.
 2. The save leaves a complete flash slot (14 ids, checksums valid, one counter) that is newer than the slot before it. Sector sizes come from a `sizeof` probe: SB2/SB1/PC = 3884/15568/34144 B.
-3. A later `--expect-saved` fresh-process CONTINUE restores the map, position, party, flags, money and Bag pockets.
+3. A later `--expect-saved` fresh-process CONTINUE restores the map, position, party, money, **14 named story flags** (`game.py`) and the **Poké Ball and Berry pockets** (`RESTORED_KEYS`). Other flags and pockets are not compared.
 
-13 host tests cover corrupt, mixed, missing, duplicate and truncated slots, error dialogs, and lost state. The wrapper refuses to run with uncommitted engine, driver or wrapper changes.
+14 host tests in `test_codex_cry_gameplay.py` cover corrupt, mixed, missing, duplicate and truncated slots, error dialogs and lost state. `test_codex_cry_profiles.py` adds 5 more. No CI workflow runs either module yet. The wrapper refuses to run with uncommitted engine, driver or wrapper changes.
 
 ## Runs (cries-OFF unless noted)
 
 | Run | Result | Notes |
 | --- | --- | --- |
 | run01-newgame | **PASS** | Real input: naming → harbor → parcel → Piplup → SAVE. Success dialog seen; slot valid at counter 1. |
-| run02a | observer bug (kept) | CONTINUE matched, but my checker compared a JSON list with a tuple. Fixed, with a test. |
-| run02b | stopped (kept) | CONTINUE PASS; follower script PASS; Pokédex entry opened. The wrapper overshot to the SIZE page. Fixed. |
+| run02a | observer bug (kept; written as `run02-continue` and renamed afterwards, so its `mgba.log` names that folder) | CONTINUE matched, but my checker compared a JSON list with a tuple. Fixed, with a test. |
+| run02b | stopped (kept; same renaming as run02a) | CONTINUE PASS; follower script PASS; Pokédex entry opened. The wrapper overshot to the SIZE page. Fixed. |
 | run02-continue | **PARTIAL → CRASH** | CONTINUE == saved state **PASS**. Talking to the follower (`playfirstmoncry`) **PASS**: emote shown, control returned. Pokédex list, entry, CRY page and 3 replays, then close **PASS**. Walk to Alderfield **PASS** (no wild battle happened on the way). **Clinic heal: game crashed.** |
 | run03-heal-repro-off | **CRASH reproduced** | Same save, straight to the clinic heal. |
-| run04-heal-repro-on | **CRASH reproduced on cries-ON RELEASE** | So it is **not caused by the cries change**. |
-| run05-normal-battles | **PASS** (normal `make CRIES=off`, ROM `473030df…`, source `19d8fe6c`) | All with real input, starting from the run02 save:<br>• Capture: Sentret caught, party of 2.<br>• 8 wild battles.<br>• Trainer battle: Sam on Orchard Lane, 2 Pokémon, won; Piplup learned Water Gun.<br>• 5 Alderfield clinic heals, no crash.<br>• SAVE: `SaveReturnSuccessCallback`; flash slot counter 2 is valid and newer than 1.<br>• Audio: 910 of 914 one-second windows audible, so music and SFX play with cries off. This is a level meter, not human listening. |
+| run04-heal-repro-on | **CRASH reproduced on cries-ON RELEASE** | ON and OFF both contain this PR's `sound.c` change, so this run alone does not clear the PR. The proof that the crash is not caused by cries is the later repro on **unchanged main** RELEASE, plus the root cause below. |
+| run05-normal-battles | **PASS** (normal `make CRIES=off`, ROM `473030df…`, source `19d8fe6c`) | All with real input, starting from the run02 save. **12 battles** (`events.jsonl`: 12 `battle-start`):<br>• Capture: Sentret caught, party of 2.<br>• 10 other wild battles. Piplup learned Water Gun at L8 in `wild006`, before the trainer.<br>• Trainer battle: Sam on Orchard Lane, 2 Pokémon, won.<br>• **9** Alderfield clinic heals (`healed` events), no crash.<br>• SAVE: `SaveReturnSuccessCallback`; flash slot counter 2 is valid and newer than 1.<br>• Audio: 910 of 914 one-second windows non-silent with cries off. A level meter can't tell music from SFX, and this is not human listening. |
 | run06-normal-continue | **PASS** (same ROM; source `90863ffd`, evidence-only change) | • Fresh-process CONTINUE matches run05's saved state: map, position, party, flags, money and Bag.<br>• Talking to the follower (`playfirstmoncry` path): control returned.<br>• Pokédex list, entry, CRY page and 3 replays, then close.<br>• First clinic heal after power-on: no crash. This build still has the unbounded Union Room copy (no fix); it just doesn't crash here.<br>• Audio: 52 of 62 windows audible. |
 | run07-normal-evolve-whiteout | **PASS** (normal `make CRIES=off`, from the natural M1 save `4ca9b7f4…`) | • `evolve_lead`: after 22 wild battles Piplup reached L16 and evolved into Prinplup through the real evolution scene; 6 scene frames kept.<br>• `q3_whiteout`: the whole party fainted, then respawned at the Alderfield clinic. Clinic check passed: healed, follower present, same members, money lost.<br>• SAVE: success callback; both flash slots valid.<br>See `run07-…/RESULT.md`. |
+
+**Provenance note.** `provenance-*.json` records the checked-out commit, not the ROM's build input. Runs 06 and 07 have `source_unchanged: false` because evidence-only commits landed during the run: 90863ffd..a1acf662 and 3ca8cbc0..a276745e. Neither range touches the engine, driver or wrapper (`git diff --stat` on those paths is empty). The ROM sha256 in each provenance file identifies what actually ran.
 
 Not yet tested on the OFF build:
 - clinic heal and SAVE→CONTINUE on the **RELEASE** OFF build, now that the fix has landed (run08 onward);
@@ -79,7 +81,7 @@ The investigation notes below are kept as they were written before the cause was
 
 **Symptom:** mGBA 0.10.5 logs `GBA Memory: Jumped to invalid address: E55EC002` (or `E3A02004`) and then `The game crashed!`.
 
-**Reproduction:** with Piplup as the only party member and the follower out, talk to the Alderfield clinic nurse and answer YES. The game has crashed in 6 out of 6 attempts on the RELEASE ROMs, both ON and OFF, and also on unchanged `main` RELEASE. Normal builds have healed at this clinic many times during M1 QA without a crash.
+**Reproduction:** with Piplup as the only party member and the follower out, talk to the Alderfield clinic nurse and answer YES. It crashed on every unfixed RELEASE attempt: the 3 committed runs (02, 03 and 04, ON and OFF) plus the debug runs, including unchanged `main` RELEASE. Normal builds have healed at this clinic many times during M1 QA without a crash.
 
 **Where it crashes** (`debug/crash_regs.py`, hardware breakpoints, key input only):
 1. The nurse script runs normally through `FldEff_PokecenterHeal`, the ball animation, the MUS_HEAL fanfare, `HealPlayerParty` and `UpdateFollowingPokemon`.
@@ -97,7 +99,7 @@ The investigation notes below are kept as they were written before the cause was
 - Script commands tagged `requests_effects=1` correctly run from ROM mirror 1 (`+ROM_SIZE`, `script.c`). That is upstream design, not the bug.
 
 **Next steps:**
-1. Run the same heal on a plain `main` RELEASE ROM to confirm main has it. The ROM was built locally (`/root/claude-dev/wt-mainrel`) but not yet run.
+1. Run the same heal on a plain `main` RELEASE ROM to confirm main has it. The ROM was built locally (`/root/claude-dev/wt-mainrel`) but not yet run. *[Later: done. Main crashes too, and the cause is above.]*
 2. Single-step from `ScrCmd_waitmessage` to the bad jump to find the faulting instruction.
 3. Check whether it also happens without the follower, and with a normal (non-RELEASE) build that has LTO enabled.
 4. Fix it with a focused regression test.

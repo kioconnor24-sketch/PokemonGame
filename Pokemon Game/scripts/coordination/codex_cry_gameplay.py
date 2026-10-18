@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Play an exact cry-profile RELEASE image with the existing read-only driver.
+"""Play an exact cry-profile build (RELEASE or normal) with the existing read-only driver.
 
 No memory/save writes or cheats. Uses ordinary controller input in graphical
 mGBA. New flash saves and captures stay in a scratch directory. Reuses Claude's
@@ -59,7 +59,7 @@ def base_name(name):
     return re.sub(r'(\.(lto_priv|constprop|isra|part|cold)\.[0-9]+)+$', '', name)
 
 
-def save_struct_sizes(engine, workdir, profile):
+def save_struct_sizes(engine, workdir, profile, release=True):
     """sizeof() of each saved block, from the game's own compiler and headers."""
     workdir.mkdir(parents=True, exist_ok=True)
     src, obj = workdir/'save_sizes.c', workdir/'save_sizes.o'
@@ -70,9 +70,10 @@ def save_struct_sizes(engine, workdir, profile):
                              + ['}', '']))
     subprocess.run(['arm-none-eabi-gcc', '-mthumb', '-mthumb-interwork', '-O2', '-mabi=apcs-gnu',
                     '-mtune=arm7tdmi', '-march=armv4t', '-std=gnu17', '-iquote', 'include',
-                    '-I', 'tools/agbcc/include', '-DMODERN=1', '-DTESTING=0', '-DEMERALD', '-DRELEASE',
-                    f"-DP_CRIES_ENABLED={'TRUE' if profile == 'on' else 'FALSE'}",  # sizes match normal builds
-                    '-c', str(src), '-o', str(obj)], cwd=engine, check=True)
+                    '-I', 'tools/agbcc/include', '-DMODERN=1', '-DTESTING=0', '-DEMERALD']
+                   + (['-DRELEASE'] if release else [])  # as the build under test was compiled
+                   + [f"-DP_CRIES_ENABLED={'TRUE' if profile == 'on' else 'FALSE'}",
+                      '-c', str(src), '-o', str(obj)], cwd=engine, check=True)
     found = {}
     for line in subprocess.check_output(['arm-none-eabi-nm', str(obj)], text=True).splitlines():
         match = re.fullmatch(r'([0-9a-f]+) A AVSIZE_(\w+)', line)
@@ -136,15 +137,16 @@ def newest_valid_counter(slots):
     return max(counters) if counters else None
 
 
-def flash_verdict(before, after):
-    """A save must leave a valid slot whose counter is newer than any before it."""
+def flash_verdict(before, after, saves=1):
+    """After `saves` saves, the newest valid slot must be at least that many
+    counters newer than the newest valid slot before the first of them."""
     problems = [f'slot {i}: {"; ".join(slot["problems"])}' for i, slot in enumerate(after)
                 if slot['status'] == 'invalid']
     new, old = newest_valid_counter(after), newest_valid_counter(before)
     if new is None:
         problems.append('no valid save slot')
-    elif old is not None and new <= old:
-        problems.append(f'newest valid counter {new} is not newer than {old}')
+    elif old is not None and new < old + saves:
+        problems.append(f'newest valid counter {new} is not {saves} newer than {old}')
     return problems
 
 
@@ -401,6 +403,9 @@ def main():
     rom_source = engine/rom_name(args.profile, args.build)
     elf = rom_source.with_suffix('.elf')
     scratch.mkdir(parents=True, exist_ok=True)
+    if out.exists() and any(out.iterdir()):
+        # Driver logs append and the flash check trusts saved-checkpoint-*.json here.
+        parser.error('--out must be a new or empty directory')
     out.mkdir(parents=True, exist_ok=True)
     rom = scratch/'game.gba'
     if rom.exists() and play.sha256(rom) != play.sha256(rom_source):
@@ -410,7 +415,7 @@ def main():
     shutil.copyfile(rom_source, rom)
     info = emu.load_build_info(elf, engine, scratch/'symbol-cache')
     # Sector checksum sizes come from the game's own struct layout.
-    sizes = chunk_sizes(*save_struct_sizes(engine, scratch/'save-sizes', args.profile))
+    sizes = chunk_sizes(*save_struct_sizes(engine, scratch/'save-sizes', args.profile, args.build == 'release'))
     flash_path = rom.with_suffix('.sav')
     if args.expect_saved and args.new_game:
         parser.error('--expect-saved checks a CONTINUE boot, not a new game')
@@ -479,7 +484,8 @@ def main():
             if (out/'saved-checkpoint-1.json').exists() else None
         if before is not None:
             record['flash_slots'] = flash_slots(read_flash(flash_path), sizes)
-            record['flash_problems'] = flash_verdict(before, record['flash_slots'])
+            record['flash_problems'] = flash_verdict(before, record['flash_slots'],
+                                                     len(list(out.glob('saved-checkpoint-*.json'))))
             if record['flash_problems']:
                 record['completed'] = False
         (out/'provenance-end.json').write_text(json.dumps(record, indent=2)+'\n')

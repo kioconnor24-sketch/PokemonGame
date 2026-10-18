@@ -1,3 +1,5 @@
+> **Historical (superseded, Claude 2026-10-18).** This is Codex's checkpoint from before the takeover. Its "NOT ELIGIBLE TO MERGE" / "PENDING" status is out of date. For the current evidence and status, see `Pokemon Game/Averon_Codex_Handoff/qa/claude-cries-off/README.md` and the PR #117 description. The text below is unchanged.
+
 # Active Codex audio integration gaps — 2026-10-17
 
 PR117 fixes natively reproduced NULL player calls and silent unpaired BGM ducking. Both RELEASE configurations build and native audio passes. It is not merged. See `Pokemon Game/Averon_Codex_Handoff/development/CODEX_REVERSIBLE_CRIES_EVIDENCE_20261017.md` for exact hashes and counts.
