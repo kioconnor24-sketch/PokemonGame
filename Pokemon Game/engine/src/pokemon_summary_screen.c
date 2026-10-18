@@ -3554,9 +3554,11 @@ static void BufferMonTrainerMemo(void)
     {
         u8 *metLevelString = Alloc(32);
         u8 *metLocationString = Alloc(32);
+        bool32 knownMetLocation = sum->metLocation < METLOC_SPECIAL_EGG
+            && IsRegionMapSectionIdValid(sum->metLocation);
         GetMetLevelString(metLevelString);
 
-        if (sum->metLocation < MAPSEC_NONE)
+        if (knownMetLocation)
         {
             GetMapNameHandleAquaHideout(metLocationString, sum->metLocation);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
@@ -3565,9 +3567,9 @@ static void BufferMonTrainerMemo(void)
         if (DoesMonOTMatchOwner() == TRUE)
         {
             if (sum->metLevel == 0)
-                text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureHatchedSomewhereAt : gText_XNatureHatchedAtYZ;
+                text = !knownMetLocation ? gText_XNatureHatchedSomewhereAt : gText_XNatureHatchedAtYZ;
             else
-                text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ;
+                text = !knownMetLocation ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ;
         }
         else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {
@@ -3575,7 +3577,7 @@ static void BufferMonTrainerMemo(void)
         }
         else if (sum->metLocation != METLOC_IN_GAME_TRADE && DidMonComeFromGBAGames())
         {
-            text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
+            text = !knownMetLocation ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
         }
         else
         {

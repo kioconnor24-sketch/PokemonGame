@@ -34,4 +34,16 @@ const struct RegionMapLocation gRegionMapEntries[] = {
 ## endfor
 };
 
+// Optional ROM-only metadata. No override preserves the legacy Hoenn/Kanto
+// resolver. Assignments in the source JSON require separate owner approval.
+static const u8 sRegionMapSectionRegions[MAPSEC_COUNT] = {
+## for map_section in map_sections
+{% if existsIn(map_section, "region") %}
+    [{{ map_section.id }}] = {{ map_section.region }},
+{% else %}
+    [{{ map_section.id }}] = REGION_NONE,
+{% endif %}
+## endfor
+};
+
 #endif // GUARD_DATA_REGION_MAP_REGION_MAP_ENTRIES_H

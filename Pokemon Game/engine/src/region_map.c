@@ -1863,6 +1863,30 @@ void TrySetPlayerIconBlink(void)
 #undef sVisible
 #undef sTimer
 
+bool32 IsRegionMapSectionIdValid(u32 sectionId)
+{
+    // MAPSEC_NONE is a sentinel, not the last possible named section. Keep
+    // sparse/unassigned slots invalid even if a later approved entry exists.
+    return sectionId < ARRAY_COUNT(gRegionMapEntries)
+        && sectionId != MAPSEC_NONE
+        && gRegionMapEntries[sectionId].name != NULL;
+}
+
+enum Region GetRegionForSectionId(u32 sectionId)
+{
+    if (IsRegionMapSectionIdValid(sectionId) && sectionId < ARRAY_COUNT(sRegionMapSectionRegions))
+    {
+        u32 region = sRegionMapSectionRegions[sectionId];
+        if (region > REGION_NONE && region < REGIONS_COUNT)
+            return region;
+    }
+    // Preserve every legacy section, including the existing invalid-ID
+    // fallback. New regions require explicit, separately approved metadata.
+    if (sectionId >= KANTO_MAPSEC_START && sectionId < MAPSEC_SPECIAL_AREA)
+        return REGION_KANTO;
+    return REGION_HOENN;
+}
+
 u8 *GetMapName(u8 *dest, mapsec_u16_t regionMapId, u16 padLength)
 {
     u8 *str;
@@ -1872,7 +1896,7 @@ u8 *GetMapName(u8 *dest, mapsec_u16_t regionMapId, u16 padLength)
     {
         str = GetSecretBaseMapName(dest);
     }
-    else if (regionMapId < MAPSEC_NONE)
+    else if (IsRegionMapSectionIdValid(regionMapId))
     {
         str = StringCopy(dest, gRegionMapEntries[regionMapId].name);
     }
@@ -2542,6 +2566,10 @@ void SetFlyDestination(struct RegionMap* regionMap)
 
     if (flyDestination != WARP_ID_NONE)
         SetWarpDestinationToHealLocation(flyDestination);
-    else if (regionMap->mapSecId < ARRAY_COUNT(sMapHealLocations))
+    else if (regionMap->mapSecId < ARRAY_COUNT(sMapHealLocations)
+          && (sMapHealLocations[regionMap->mapSecId][0] != 0 || sMapHealLocations[regionMap->mapSecId][1] != 0))
+        // Unspecified designated rows are {0, 0, HEAL_LOCATION_NONE}, not
+        // Petalburg fallback destinations. Petalburg's explicit heal still
+        // takes the first branch above; all existing explicit rows are kept.
         SetWarpDestinationToMapWarp(sMapHealLocations[regionMap->mapSecId][0], sMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
 }

@@ -176,6 +176,20 @@ class SurfaceTests(Fixture):
                          {"IF_NOT_REGION REGION_ALOLA": 1, "IF_REGION REGION_ALOLA": 1,
                           "IF_REGION REGION_HISUI": 1})
 
+    def test_optional_engine_region_override_preserves_fallback(self):
+        data = {"map_sections": [
+            {"id": "MAPSEC_PALLET_TOWN"},
+            {"id": "MAPSEC_VIRIDIAN_CITY", "region": "REGION_KANTO"},
+            {"id": "MAPSEC_SPECIAL_AREA"},
+            {"id": "MAPSEC_SALTMERE", "region": "REGION_SINNOH"}]}
+        self.write("src/data/region_map/region_map_sections.json", data)
+        rows = self.rows(audit.inventory(self.engine))
+        self.assertEqual(rows["MAPSEC_SALTMERE"]["engine_region"], "REGION_SINNOH")
+        self.assertEqual(rows["MAPSEC_VIRIDIAN_CITY"]["engine_region"], "REGION_KANTO")
+        for invalid in ("REGION_NONE", "REGIONS_COUNT", "REGION_TYPO", None):
+            self.assertEqual(audit.engine_region(0, {"MAPSEC_PALLET_TOWN": 0, "MAPSEC_SPECIAL_AREA": 2}, invalid),
+                             "REGION_KANTO")
+
 
 class RepositoryPinTests(unittest.TestCase):
     def test_current_engine_keeps_every_saved_value(self):

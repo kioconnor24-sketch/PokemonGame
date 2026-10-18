@@ -6,12 +6,7 @@
 
 enum KantoSubRegion GetKantoSubregion(u32 mapSecId);
 
-static inline enum Region GetRegionForSectionId(u32 sectionId)
-{
-    if (sectionId >= KANTO_MAPSEC_START && sectionId < MAPSEC_SPECIAL_AREA)
-        return REGION_KANTO;
-    return REGION_HOENN;
-}
+enum Region GetRegionForSectionId(u32 sectionId);
 
 static inline enum Region GetCurrentRegion(void)
 {
