@@ -1,5 +1,8 @@
 # Pokémon Averon — Dialogue director's guide
 
+> **STORY DRAFT NOTE — 2026-10-17:** This is a tonal **example book**, not final dialogue. Example 16 (rigged Gym match records) and related Vale/Renn motives are **earlier proposals now disputed**. Latest owner thinking favors a **genuine Gym loss**, a later mistaken player suspicion and honest villain clarification, an independently motivated antagonist (motivation before Threshold), personal mentorship and private succession, while redemption details remain on hold. The villain's Sinnoh Arceus Plates/control-device continuation is only provisional. See [multi-session working story dossier](STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md). Preserve short, organic Pokémon dialogue and do not drop old lines into a live script verbatim.
+
+
 This game should sound like a **good official Pokémon adventure**, not a grim visual novel and not a chat bot summarizing themes. The writing below is an ORIGINAL tonal sample. Do not copy dialogue from published Pokémon games. Names are provisional (Renn = childhood rival; Mira = easygoing rival; Calder = detective; Tavi = young researcher; Vale = villain leader).
 
 ## The voice test

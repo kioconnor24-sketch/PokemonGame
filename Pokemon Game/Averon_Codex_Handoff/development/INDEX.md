@@ -1,3 +1,5 @@
+> **Manager sessions:** Start at [CHATGPT_MANAGER_ACTIVE_HANDOFF_20261017.md](CHATGPT_MANAGER_ACTIVE_HANDOFF_20261017.md); old M1 manager files are historical. **Story/canon sessions:** Read the [provisional multichat dossier](../design/STORY_DEVELOPMENT_WORKING_DOSSIER_20261017.md) before using older story drafts. The villain's earlier motive and rival-defeat revision are not yet final scenes; new Arceus Plates plot remains speculative.
+
 # Pokémon Averon — current documentation index
 
 **Authoritative current read:** [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md). Milestone 1 is owner-accepted; next-phase technical preparation and specifically approved content development may proceed. The human audio listen is deferred and not considered PASS. Older instructions that say "M1 unfinished", "Codex paused", or "all maps forbidden" are historical.
@@ -9,6 +11,7 @@
 | Dependency and production phases | [ROADMAP.md](ROADMAP.md) · [future backlog #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) |
 | Tested M1 native and build facts | [CODEX_M1_NATIVE_CLOSEOUT_20261017.md](CODEX_M1_NATIVE_CLOSEOUT_20261017.md) · [machine-readable details](../../scripts/coordination/codex_m1_evidence_20261017.json) |
 | Tested M1 graphical/owner acceptance | [M1_ACCEPTANCE_REPORT_20261017.md](M1_ACCEPTANCE_REPORT_20261017.md) · [Q1–Q5 evidence](../qa/claude-m1-gameplay/README.md) |
+| **Sinnoh world construction checklist + every-area stage register** | [SINNOH_MAP_BUILD_TRACKER.md](SINNOH_MAP_BUILD_TRACKER.md) · [SINNOH_AREA_REGISTER.csv](SINNOH_AREA_REGISTER.csv) |
 | Sinnoh resource, save/section and mapper study | [SINNOH_TECHNICAL_READINESS_20261017.md](SINNOH_TECHNICAL_READINESS_20261017.md) |
 | QA, **deferred audio** and new graphical issues | [Issue #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) |
 | Cross-agent problem reporting | [Issue #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55) |
