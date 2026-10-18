@@ -1,0 +1,65 @@
+{
+ "mode": "continue-pc",
+ "build": "release",
+ "rom_sha256": "7c8fda9204c65e7469a9a47b123e7b8968c332316cb5545bff4723fa807ee1e1",
+ "elf_sha256": "7829e1b9a3e5767a09433345a82285d50c6b93f46bf916d24c920971fb450252",
+ "save_before": "2d15a1cd063197cf4f72f407b3a0b767493ec38dff2179fcef65c7bfd1549a3a",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "CONTINUE resumes inside the Pokemon Center",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "exit mat back out to the Pokemon Center door",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (after-door-round-trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "SAVE outside in Sandgem",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     11,
+     15
+    ]
+   ]
+  }
+ ],
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "a2b3676c4e23674efb824c1bde6711282a3debdd8b2cec9d723d05b8f3f6ccf0"
+}

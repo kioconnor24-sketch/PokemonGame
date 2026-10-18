@@ -1,0 +1,47 @@
+{"t": 1792353850.9, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792353850.92, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792353851.45, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792353851.47, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792353854.07, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792353854.08, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792353855.15, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792353855.18, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792353855.69, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792353855.7, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792353856.24, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792353856.26, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792353857.3, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792353857.32, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792353860.88, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792353860.91, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792353861.55, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 661, "status": 0, "moves": [45, 64, 98, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 6, "hp": 21, "maxhp": 21}]}
+{"t": 1792353870.71, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [17, 0]}
+{"t": 1792353877.34, "event": "battle-start", "flags": "0x4", "foe": [[1298, 5]], "me": [[393, 9, 29]], "moves": [[1, 35], [45, 40], [55, 25]]}
+{"t": 1792353884.32, "event": "capture", "file": "0009-battle-action.png"}
+{"t": 1792353884.9, "event": "turn", "label": "battle", "me": [393, 9, 29, 29], "foe": [1298, 5, 20, 20], "move": 55, "pp": 25}
+{"t": 1792353894.45, "event": "capture", "file": "0010-battle-action.png"}
+{"t": 1792353895.04, "event": "turn", "label": "battle", "me": [393, 9, 29, 29], "foe": [1298, 5, 11, 20], "move": 55, "pp": 24}
+{"t": 1792353904.18, "event": "capture", "file": "0011-battle-action.png"}
+{"t": 1792353904.78, "event": "turn", "label": "battle", "me": [393, 9, 29, 29], "foe": [1298, 5, 1, 20], "move": 55, "pp": 23}
+{"t": 1792353913.36, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 22, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 661, "status": 0, "moves": [45, 64, 98, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 6, "hp": 21, "maxhp": 21}]}
+{"t": 1792353918.39, "event": "battle-start", "flags": "0x4", "foe": [[1298, 5]], "me": [[393, 9, 29]], "moves": [[1, 35], [45, 40], [55, 22]]}
+{"t": 1792353924.87, "event": "capture", "file": "0012-wild000-action.png"}
+{"t": 1792353925.49, "event": "turn", "label": "wild000", "me": [393, 9, 29, 29], "foe": [1298, 5, 20, 20], "move": 55, "pp": 22}
+{"t": 1792353932.5, "event": "capture", "file": "0013-wild000-action.png"}
+{"t": 1792353933.1, "event": "turn", "label": "wild000", "me": [393, 9, 25, 29], "foe": [1298, 5, 11, 20], "move": 55, "pp": 21}
+{"t": 1792353941.32, "event": "capture", "file": "0014-wild000-action.png"}
+{"t": 1792353941.94, "event": "turn", "label": "wild000", "me": [393, 9, 23, 29], "foe": [1298, 5, 2, 20], "move": 55, "pp": 20}
+{"t": 1792353951.57, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 19, 0], "ppBonuses": 0, "level": 9, "hp": 23, "maxhp": 29}, {"species": 661, "status": 0, "moves": [45, 64, 98, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 6, "hp": 21, "maxhp": 21}]}
+{"t": 1792353951.61, "event": "lead", "species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 19, 0], "ppBonuses": 0, "level": 9, "hp": 23, "maxhp": 29}
+{"t": 1792353951.68, "event": "sandgem-check", "name": "party hurt in a real wild battle", "ok": true, "party": [[393, 23, 29], [661, 21, 21]]}
+{"t": 1792353957.48, "event": "capture", "file": "0015-save-confirm-hurt.png"}
+{"t": 1792353958.59, "event": "capture", "file": "0016-save-step-hurt-01.png"}
+{"t": 1792353959.72, "event": "capture", "file": "0017-save-step-hurt-02.png"}
+{"t": 1792353960.77, "event": "capture", "file": "0018-save-step-hurt-03.png"}
+{"t": 1792353961.76, "event": "capture", "file": "0019-save-step-hurt-04.png"}
+{"t": 1792353962.76, "event": "capture", "file": "0020-save-step-hurt-05.png"}
+{"t": 1792353963.76, "event": "capture", "file": "0021-save-step-hurt-06.png"}
+{"t": 1792353964.82, "event": "capture", "file": "0022-save-step-hurt-07.png"}
+{"t": 1792353965.92, "event": "capture", "file": "0023-save-step-hurt-08.png"}
+{"t": 1792353966.72, "event": "capture", "file": "0024-saved-hurt.png"}
+{"t": 1792353966.72, "event": "release-save", "label": "hurt", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}

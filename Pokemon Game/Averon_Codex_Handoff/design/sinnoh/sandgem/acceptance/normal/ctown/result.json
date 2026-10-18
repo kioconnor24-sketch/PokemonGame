@@ -1,0 +1,42 @@
+{
+ "mode": "continue-town",
+ "build": "normal",
+ "rom_sha256": "2fcef53188a3f67b5c6646664fd5502477c0d9cb648bd703f696c22526dd63e9",
+ "elf_sha256": "f6ead614f07a133d4f34409bdcb03e96d7126e247fea83d75b5f064fa4c11a5e",
+ "save_before": "3d535372f69fbc6a17d8be31adfa462a467338136592b074beebd0365dcd68bf",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     11,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "CONTINUE resumes outside in Sandgem",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     11,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (continued)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "alive": true,
+ "save_after": "3d535372f69fbc6a17d8be31adfa462a467338136592b074beebd0365dcd68bf"
+}

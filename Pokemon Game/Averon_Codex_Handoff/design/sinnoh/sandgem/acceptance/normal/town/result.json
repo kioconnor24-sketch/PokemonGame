@@ -1,0 +1,234 @@
+{
+ "mode": "town",
+ "build": "normal",
+ "rom_sha256": "2fcef53188a3f67b5c6646664fd5502477c0d9cb648bd703f696c22526dd63e9",
+ "elf_sha256": "f6ead614f07a133d4f34409bdcb03e96d7126e247fea83d75b5f064fa4c11a5e",
+ "save_before": "b5c00f2c9b5cb066cc44f5ebf1eafa11b9594f7c34175e6e0b0ac7a06aab0ae1",
+ "checks": [
+  {
+   "name": "DEV continue-warp lands in Sandgem",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "party still hurt on arrival (so healing is meaningful)",
+   "ok": true,
+   "party": [
+    [
+     393,
+     25,
+     31
+    ],
+    [
+     161,
+     22,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (arrival)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "west-edge-route-201 blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     11
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "north-edge-route-202 blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     21,
+     0
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     21,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "south-edge-route-219 blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     21,
+     27
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     21,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "forest-wall blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     4,
+     16
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     4,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "house-wall blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     7,
+     19
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     7,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "mart-door-without-interior blocks the player",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     25,
+     10
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     25,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "still in the field after the closed Mart door",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     25,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "talking to a townsperson returns control",
+   "ok": true
+  },
+  {
+   "name": "reading the town sign returns control",
+   "ok": true
+  },
+  {
+   "name": "Pokemon Center door warp in",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "nurse conversation starts",
+   "ok": true,
+   "attempts": 2
+  },
+  {
+   "name": "nurse heals the hurt party",
+   "ok": true,
+   "before": [
+    [
+     393,
+     25,
+     31
+    ],
+    [
+     161,
+     22,
+     22
+    ]
+   ],
+   "after": [
+    [
+     393,
+     31,
+     31
+    ],
+    [
+     161,
+     22,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE inside the Pokemon Center",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     7,
+     4
+    ]
+   ]
+  }
+ ],
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "203e35c2e2e602e7e03730babc1b9225595e8c2b0c94cc52d4f6b50d03d718cf"
+}
