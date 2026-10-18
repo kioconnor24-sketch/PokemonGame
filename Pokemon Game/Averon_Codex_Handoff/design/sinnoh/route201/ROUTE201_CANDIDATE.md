@@ -1,27 +1,92 @@
-# Route 201: next-area design candidate (owner review)
+# Route 201: construction-ready design candidate (owner review)
 
-**Status: CANDIDATE.** This is not approved, no map file is built, and it creates no map or section ID, encounter table, trainer or script. It is the next connected area after Sandgem Town (PR #133), proposed because it keeps the original geography.
+**Status: CANDIDATE, design only.** No map file is built. It creates no map or section ID, encounter table, trainer, flag or script, and Sandgem's (#133) west edge stays closed. Building it needs the owner decisions at the end.
 
 ![Route 201 candidate](route201-candidate.png)
 
 ![Route 201 collision](route201-collision.png)
 
-The render comes from [`route201-candidate.json`](route201-candidate.json), which [`make_route201_plan.py`](make_route201_plan.py) generates. It uses the same approved temporary in-repo pieces as Sandgem: grass, the Route 101 dirt road, round trees, tall grass and ledges from the General primary. Marks: yellow = exits, orange = reserved space, magenta = NPC slots.
+The render comes from [`route201-candidate.json`](route201-candidate.json), which [`make_route201_plan.py`](make_route201_plan.py) generates. [`verify_route201_plan.py`](verify_route201_plan.py) proves the collision and access rules below. Marks: yellow = exits, orange = reserved space, magenta = NPC slots. Art is the approved temporary in-repo General primary set used in Sandgem: grass, Route 101 dirt road, round trees, tall grass and ledges.
 
-## Original geography kept (PRESERVE)
+## Reference and method (source vs. this candidate)
 
-The geography follows the original DPPt overhead at the same 16 px tile scale, which comes out to **64 × 22 metatiles**:
-- **East exit:** the path climbs to the east edge at rows 7–8, leading to **Sandgem's west exit**. Sandgem's exit is at rows 11–12, so the map connection uses a vertical offset of 4. No geometry has to change.
-- **South exit:** a sand path drops to the south edge at columns 16–17, leading to **Twinleaf Town**. Twinleaf is not approved, so this edge stays closed.
-- **West exit:** the open corridor at rows 8–11 heads toward **Lake Verity**. Lake Verity is not approved, so this edge stays closed too.
-- **Ledges:** a long south-facing ledge (`MB_JUMP_SOUTH`) crosses the west half, with a walk-around gap at columns 9–10 so the corridor isn't one-way. There is a short ledge near the east end.
-- **Tall grass:** three patches, including the big one beside the eastern path. They are **physical only**: there is no encounter table until wild Pokémon are approved.
+- **Reference.** An original DPPt Route 201 overhead, 1024 × 347 px: [Elite Fourum upload](https://efour.b-cdn.net/uploads/default/original/3X/6/e/6e9fe789a5d327d17875ae0c01bddff4a1b8d9eb.jpeg). That is exactly **64 × 22 tiles of 16 px**, the original scale. It is used **only as a geometry reference**: it is not committed, and no pixels, tiles or palettes are taken from it.
+- **Method.** Each 16 px tile was box-averaged and classified (sand path / light grass / tall grass / tree) with ImageMagick. Ambiguous areas were then read by eye on 3×-zoomed, gridded crops of the west, middle and north-east thirds. Every fill in the generator is one of those tile footprints. Departures are marked `DEVIATION` in the code and listed below.
 
-## Decisions requested
+## Footprints (x, y in metatiles; inclusive)
 
-1. Is Route 201 the next area, or should Route 202 come first? There's no Route 202 overhead reference yet, so it would need one.
-2. Is this geometry acceptable? Should the ledge gap at columns 9–10 stay?
-3. Section ID: Route 201 needs its own met-location section, which is Codex's next allocation from 217 upward.
-4. Twinleaf and Lake Verity edges stay closed until those areas are approved. (Yes / no.)
+| Feature | Footprint | Reference |
+| --- | --- | --- |
+| West corridor (Lake Verity side) | grass 0–17 × 8–11; 18–41 × 10–11; tree-line notches on row 9 | same |
+| Tree clumps in the corridor | 1–2 × 9–10; 10–13 × 9–10; 4–7 × 11–12 | first clump touches x 0 (see deviations) |
+| **Long ledge** (`MB_JUMP_SOUTH`) | row 12, x 0–3 and 8–31 (clump at 4–7) | same, **no gap**: the walk-around is its east end, x 32–35 |
+| Strip below the ledge | grass 0–19 × 13, 0–10 × 14, 9–10 × 15 | same |
+| Lower path → **Twinleaf** | road 11–18 × 14–15; **3 wide**, 15–17 × 16–21 | same |
+| Middle tall grass | 20–29 × 13–14 | same |
+| Upper path + connector | road 29–38 × 10–11; 36–38 × 12–13 | same |
+| Main eastern path | road 32–55 × 14–15 | same |
+| **Big tall-grass patch** | 42–52 × 5–7 and 42–50 × 8–12, tree column 51–52 × 8–12 | same |
+| **Short ledge** | row 10, x 53–57 | same |
+| North-east clearing → **Sandgem** | grass 52–63 × 5–7, 53–57 × 8–9; road 54–63 × 6–7, 54–55 × 8–9 | path rows 7–8, ending at x 60 |
+| Southern tall-grass strip | 46–56 × 17 | same |
+| Signs | (13, 15), (40, 11), (55, 5) | same |
+| Water | none | the reference shows no water on Route 201 |
 
-Building it after approval would cost about 2.8 KB of layout (64 × 22 × 2 B) plus headers. It reuses already-linked art, the placeholder tooling and the acceptance scripts from Sandgem.
+**Original one-way design kept.** The short ledge blocks the path north to Sandgem. Walking east, the only way through is the big tall-grass patch (DPPt's first-encounter grass). Walking west, both ledges are one-way shortcuts down toward Twinleaf.
+
+## Deviations (all minor, each for a stated reason)
+
+1. **East edge open on rows 5–8, not 5–7, and the path rises one row (rows 6–7) and runs to the edge.** This makes the 4 open rows meet Sandgem's built west verge (rows 10–13) exactly, road to road (Sandgem road rows 11–12). Sandgem itself is unchanged.
+2. **The lone tree at the west edge moves one tile in** (x 1–2), so the Lake Verity opening stays 4 rows wide (rows 8–11) for a future Lakefront map.
+3. **The short-ledge verge reaches x 57**, so the ledge's east tile lands on grass. The engine never checks a ledge's landing tile (`PlayerJumpLedge`), so without this, that tile would jump the player onto a tree.
+
+## Connection geometry
+
+![Route 201 to Sandgem seam](route201-sandgem-seam.png)
+
+- **Seam image.** Route 201's east end (left) is placed against Sandgem's built west end (right, from #133) at the proposed offset. The cyan box marks the 4 open seam rows.
+- **Offsets.** The engine moves the player by `pos -= connection->offset` (`fieldmap.c`) when crossing. Route 201's `right` connection to Sandgem gets **`offset: -5`**, and Sandgem's `left` connection to Route 201 gets **`offset: 5`**. They are exact negatives, so either direction lands on the same row: Route (63, y) ↔ Sandgem (0, y + 5).
+
+| Edge | Route 201 tiles | Neighbour | State |
+| --- | --- | --- | --- |
+| East | x 63, rows 5–8 (road 6–7) | Sandgem west, rows 10–13 (road 11–12) | Sandgem built; **both** connection entries are added only after Route 201 is approved |
+| South | y 21, x 15–17 | Twinleaf Town north edge | unapproved; closed |
+| West (upper) | x 0, rows 8–11 | Lake Verity side | unapproved; closed |
+| West (lower) | x 0, rows 13–14 | Lake Verity side, below the ledge | unapproved; closed |
+
+## Collision and access proof
+
+`python3 verify_route201_plan.py --self-test --sandgem-mapbin <#133 engine>/data/layouts/SandgemTown/map.bin`
+
+The movement model is the engine's: collision 0 is walkable, and a south ledge is solid except when entered moving south, which jumps the player to the tile beyond. The Sandgem edge is read from #133's **built** `map.bin` (open rows `[10, 11, 12, 13]`).
+
+**Positive (the candidate): 7/7 PASS**
+- declared exit tiles are walkable;
+- every walkable tile is reachable from the Sandgem exit;
+- the Sandgem exit is reachable again from every walkable tile (no ledge trap);
+- every exit reaches every other exit, in both directions;
+- no walkable edge tile lies outside a declared exit;
+- every ledge lands on walkable ground;
+- the east seam matches Sandgem at offset −5 / +5.
+
+**Negative (deliberately broken copies): 5/5 caught**
+
+| Broken copy | Caught by |
+| --- | --- |
+| Trees over the big grass patch | access to Sandgem lost (checks 2 and 3) |
+| Ledge landing on a tree | check 5 |
+| Trees between the middle grass and the main path, leaving a one-way pocket below the long ledge | checks 2 and 3 |
+| A stray gap in the east tree line | checks 4 and 6 |
+| Offset −4 instead of −5 | check 6 |
+
+This is a static proof of the plan. Emulator traversal (walking both seams, ledge jumps, edges blocked) happens after approval, on the built map, with the Sandgem acceptance driver.
+
+## Decisions requested from the owner
+
+1. **Approve Route 201 as the next permanent map**, with this geometry (64 × 22) and the three deviations?
+2. **Section ID:** Route 201 needs its own met-location section. That is Codex's next allocation from 217 upward and needs owner approval.
+3. **Connection:** approve adding the reciprocal `left`/`right` connections (Route 201 −5, Sandgem +5). This touches Sandgem's `map.json`, which needs a new signed `HANDOFF_APPROVED` path.
+4. **Twinleaf and both Lake Verity openings stay closed** until those areas are approved. (Yes / no.)
+5. **Tall grass stays physical only** (no encounter table) until wild Pokémon are approved. (Yes / no.)
+
+Building it after approval would cost about 2.8 KB of layout (64 × 22 × 2 B) plus headers. It reuses art that is already linked.

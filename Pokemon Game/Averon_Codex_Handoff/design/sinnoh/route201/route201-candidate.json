@@ -30,127 +30,177 @@
    "note": "tree (solid)"
   },
   "E": {
-   "metatile": 484,
-   "collision": 1,
-   "elevation": 0,
-   "note": "tree (solid)"
-  },
-  "F": {
-   "metatile": 485,
-   "collision": 1,
-   "elevation": 0,
-   "note": "tree (solid)"
-  },
-  "G": {
-   "metatile": 1,
-   "collision": 0,
-   "elevation": 3,
-   "note": "grass"
-  },
-  "H": {
    "metatile": 13,
    "collision": 0,
    "elevation": 3,
    "note": "tall grass (no encounter table yet)"
   },
-  "I": {
+  "F": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "G": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  },
+  "H": {
    "metatile": 464,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "J": {
+  "I": {
    "metatile": 465,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
+  "J": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
   "K": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "M": {
    "metatile": 472,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "M": {
+  "N": {
    "metatile": 473,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "N": {
+  "O": {
    "metatile": 481,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "O": {
-   "metatile": 474,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
   "P": {
-   "metatile": 466,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
   },
   "Q": {
-   "metatile": 135,
-   "collision": 1,
-   "elevation": 3,
-   "note": "ledge, jump south only"
-  },
-  "S": {
-   "metatile": 480,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "U": {
-   "metatile": 482,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "V": {
    "metatile": 470,
    "collision": 1,
    "elevation": 0,
    "note": "tree (solid)"
   },
+  "S": {
+   "metatile": 474,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "U": {
+   "metatile": 480,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "V": {
+   "metatile": 482,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
   "W": {
-   "metatile": 471,
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "X": {
+   "metatile": 135,
    "collision": 1,
-   "elevation": 0,
-   "note": "tree (solid)"
+   "elevation": 3,
+   "note": "ledge, jump south only",
+   "jump": "south"
   }
  },
  "rows": [
   "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
   "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
   "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
-  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDEFEFEFEFEFEFEFCDCDCDCDCD",
-  "ABABABABABABABABABABABABABABABABABABABABGGGGGGGGGGGGGGABABABABAB",
-  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDGGHHHHHHHHHHGGEFEFEFEFEF",
-  "ABABABABABABABABABABABABABABABABABABABABGGHHHHHHHHHHGGGGGGGGGGGG",
-  "EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFGGHHHHHHHHHHGGIJJJJJJJJJ",
-  "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGHHHHHHHHHHGGKMNNNNNNNN",
-  "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGHHHHHHHHHHGGKOGGGGGGGG",
-  "GGGGGGGGGGGGGGGGGGGGGGGGGGGGIJJJJJJJJJPGGGHHHHHHHHHHGQKOQQGGGGGG",
-  "GGGGGGGGGGGGGGGGGGGGGGGGGGGGSNNNNNNNNMOGGGHHHHHHHHHHGGKOCDCDCDCD",
-  "QQQQQQQQQGGQQQQQQQQQQQQQQQQQQQQGGGGGGKOGGGHHHHHHHHHHGGKOABABABAB",
-  "CDCDCDCDGGGGGGGGGGGGHHHHHHHHHHGGGGGGGKOGGGGGGGGGGGGGGGKOGGGDCDCD",
-  "ABABABABGGIJJJJJJJPGHHHHHHHHHHGIJJJJJMMJJJJJJJJJJJJJJJMMPGGBABAB",
-  "CDCDCDCDGGSNNNNNMMUGGGGGGGGGGGGSNNNNNNNNNNNNNNNNNNNNNNNNUGGDCDCD",
-  "ABABABABGGGGGGGGKOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGBABAB",
-  "CDCDCDCDCDCDCDGGKOGDCDCDCDCDCDCDCDCDCDCDCDCDCDHHHHHHHHHHHHCDCDCD",
-  "ABABABABABABABGGKOGBABABABABABABABABABABABABABVWVWVWVWVWVWABABAB",
-  "CDCDCDCDCDCDCDGGKOGDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
-  "ABABABABABABABGGKOGBABABABABABABABABABABABABABABABABABABABABABAB",
-  "CDCDCDCDCDCDCDGGKOGDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD"
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFFGFFFFFFFF",
+  "ABABABABABABABABABABABABABABABABABABABABABEEEEEEEEEEEFHIIIIIIIII",
+  "JKJKJKJKJKJKJKJKJKCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFMNOOOOOOOO",
+  "FFFFFFFFFFFFFFFFFFABABABABABABABABABABABABEEEEEEEEEPQFMSFFQPQFFF",
+  "FDCFFFFFFFCDCDFFFFJKJKJKFFJKFFFFJKFFJKJKFFEEEEEEEEEDCFUVFFCDCDCD",
+  "FBAFFFFFFFABABFFFFFFFFFFFFFFFHIIIIIIIIWFFFEEEEEEEEEBAXXXXXABABAB",
+  "FFFFCDCDFFFFFFFFFFFFFFFFFFFFFUOOOOOONNSFGFEEEEEEEEEDCFFFFFCDCDCD",
+  "XXXXABABXXXXXXXXXXXXXXXXXXXXXXXXFFFFMNSFFFEEEEEEEEEBAFHWFFABABAB",
+  "FFFFFFFFFFFFFFFFFFFFEEEEEEEEEEFFFFFFMNSFFFFFFFFFFFFFFFMSFDCDCDCD",
+  "FFFFFFFFFFFHIIIIIIWFEEEEEEEEEEFFHIIINNNIIIIIIIIIIIIIIINSFBABABAB",
+  "CDCDCDCDCFFUVGUNNNVFCDCDCDCDCDCDUOOOOOOOOOOOOOOOOOOOOOOVFDCDCDCD",
+  "ABABABABAPQPQPQMNSQPABABABABABABQPQPQPQPQPQPQFFFFFFFFFFFFBABABAB",
+  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEDCDCDCD",
+  "ABABABABABABABAMNSABABABABABABABABABABABABABABQPQPQPQPQPQBABABAB",
+  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABAMNSABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD"
  ],
  "stamps": [],
+ "exits": [
+  {
+   "name": "east",
+   "edge": "east",
+   "span": [
+    5,
+    8
+   ],
+   "to": "Sandgem Town west edge (rows 10-13)",
+   "offset": -5,
+   "status": "Sandgem built (PR #133); connection only after Route 201 is approved"
+  },
+  {
+   "name": "south",
+   "edge": "south",
+   "span": [
+    15,
+    17
+   ],
+   "to": "Twinleaf Town",
+   "status": "unapproved; closed"
+  },
+  {
+   "name": "west-upper",
+   "edge": "west",
+   "span": [
+    8,
+    11
+   ],
+   "to": "Lake Verity side",
+   "status": "unapproved; closed"
+  },
+  {
+   "name": "west-lower",
+   "edge": "west",
+   "span": [
+    13,
+    14
+   ],
+   "to": "Lake Verity side (below the ledge)",
+   "status": "unapproved; closed"
+  }
+ ],
  "marks": [
   {
    "kind": "exit",
@@ -162,16 +212,28 @@
     1,
     4
    ],
-   "note": "west -> Lake Verity side (unapproved; closed)"
+   "note": "west (upper) -> Lake Verity side (unapproved; closed)"
   },
   {
    "kind": "exit",
    "at": [
-    16,
+    0,
+    13
+   ],
+   "size": [
+    1,
+    2
+   ],
+   "note": "west (lower) -> Lake Verity side (unapproved; closed)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    15,
     21
    ],
    "size": [
-    2,
+    3,
     1
    ],
    "note": "south -> Twinleaf Town (unapproved; closed)"
@@ -180,13 +242,13 @@
    "kind": "exit",
    "at": [
     63,
-    7
+    5
    ],
    "size": [
     1,
-    2
+    4
    ],
-   "note": "east -> Sandgem Town west exit"
+   "note": "east -> Sandgem Town west edge (offset -5)"
   },
   {
    "kind": "reserved",
@@ -195,7 +257,7 @@
     5
    ],
    "size": [
-    10,
+    11,
     8
    ],
    "note": "big grass patch: future first-encounter space (no table yet)"
@@ -203,15 +265,31 @@
   {
    "kind": "npc",
    "at": [
-    33,
-    13
+    28,
+    14
    ],
-   "note": "trainer/NPC slot (no roster yet)"
+   "note": "NPC slot (reference: townsperson in the middle grass)"
   },
   {
    "kind": "npc",
    "at": [
-    57,
+    44,
+    15
+   ],
+   "note": "NPC slot on the main path"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    44,
+    5
+   ],
+   "note": "NPC slot at the top of the big patch"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    56,
     9
    ],
    "note": "NPC slot near the Sandgem end"
