@@ -296,6 +296,50 @@ class GdbReadTests(unittest.TestCase):
         self.assertTrue(g.running)
 
 
+class GdbDisconnectTests(unittest.TestCase):
+    """A closed socket must fail at once: run02/03/04 (cries QA) spun at 100%
+    CPU for 20 minutes after mGBA crashed, because recv() kept returning b""."""
+
+    def read_packet(self, sent, close=True):
+        import socket
+        import threading
+        ours, theirs = socket.socketpair()
+        theirs.sendall(sent)
+        if close:
+            theirs.close()
+        g = emu.Gdb.__new__(emu.Gdb)
+        g.sock = ours
+        result = {}
+
+        def target():
+            try:
+                result["packet"] = g._packet()
+            except Exception as exc:  # recorded for the assertions
+                result["error"] = exc
+        worker = threading.Thread(target=target, daemon=True)
+        worker.start()
+        worker.join(2.0)
+        self.assertFalse(worker.is_alive(), "packet reader hung on a closed connection")
+        ours.close()
+        if not close:
+            self.assertEqual(theirs.recv(1), b"+")  # the packet was acknowledged
+            theirs.close()
+        return result
+
+    def test_closed_before_a_packet_fails_promptly(self):
+        result = self.read_packet(b"")
+        self.assertIsInstance(result.get("error"), emu.Blocked)
+
+    def test_closed_mid_packet_fails_promptly(self):
+        for partial in (b"$S0", b"$OK#9", b"$a}"):
+            with self.subTest(partial=partial):
+                self.assertIsInstance(self.read_packet(partial).get("error"), emu.Blocked)
+
+    def test_complete_packet_still_parses(self):
+        self.assertEqual(self.read_packet(b"+$S05#b8", close=False), {"packet": "S05"})
+        self.assertEqual(self.read_packet(b"$a}]b#00", close=False), {"packet": "a}b"})
+
+
 class AudioReportTests(unittest.TestCase):
     def test_silence_and_tone_are_distinguished(self):
         import math
@@ -313,6 +357,17 @@ class AudioReportTests(unittest.TestCase):
             self.assertEqual(rep["audible_windows"], 1)
             self.assertEqual(rep["timeline"][0]["rms"], 0.0)
             self.assertTrue((pathlib.Path(tmp) / "a.wav").stat().st_size > 44)
+
+
+def synthetic_png():
+    """A real 1x1 grey PNG (valid chunk framing and CRCs): qa_evidence_report
+    rejects a bare signature since 81e95326, so the fixture must be well formed."""
+    import zlib
+
+    def chunk(kind, data):
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data))
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 0, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(b"\x00\x80")) + chunk(b"IEND", b""))
 
 
 def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
@@ -336,7 +391,7 @@ def synthetic_run(root, name, *, source="a" * 40, rom="b" * 64, dirty=False,
     if trace:
         (run_dir / "inputs.jsonl").write_text('{"key": "A", "down": true, "frame": 1}\n')
     if screenshot:
-        (run_dir / "0001-badge.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"SYNTHETIC")
+        (run_dir / "0001-badge.png").write_bytes(synthetic_png())
     (run_dir / "state-badge.json").write_text(json.dumps(dict(
         label="badge", screenshot="0001-badge.png", flags={"FLAG_BADGE01_GET": True},
         expected={"FLAG_BADGE01_GET": True}, problems=list(problems))))
