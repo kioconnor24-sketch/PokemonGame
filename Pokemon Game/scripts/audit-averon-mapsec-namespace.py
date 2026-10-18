@@ -122,12 +122,32 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
     )
 
 
+def check_pins(engine, pins):
+    """Errors if a pinned (saved) section value moved, or the namespace would
+    reach the reserved met-location codes."""
+    values = {entry["id"]: value for value, entry in enumerate(sections(engine))}
+    errors = [f"{ident}: pinned {want}, now {values.get(ident, 'missing')}"
+              for ident, want in sorted(pins.items()) if values.get(ident) != want]
+    if len(values) >= FIRST_RESERVED:  # MAPSEC_NONE must stay below 0xFD
+        errors.append(f"MAPSEC_NONE would be {len(values)}, colliding with reserved met codes 0xFD-0xFF")
+    return errors
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--engine", type=Path, default=Path(__file__).resolve().parents[1] / "engine")
     parser.add_argument("--group", default=DEFAULT_MAP_GROUP)
     parser.add_argument("--json", type=Path, help="write the full inventory here")
+    parser.add_argument("--check-pins", type=Path, nargs="?", const=Path(__file__).with_name("averon-mapsec-pins.json"),
+                        help="fail if a pinned saved section value moved (default pin file next to this script)")
     args = parser.parse_args(argv)
+    if args.check_pins:
+        errors = check_pins(args.engine, read_json(args.check_pins)["pins"])
+        for error in errors:
+            print("PIN ERROR: " + error)
+        if errors:
+            return 1
+        print(f"{len(read_json(args.check_pins)['pins'])} saved section values unchanged")
     report = inventory(args.engine, args.group)
     if args.json:
         args.json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")

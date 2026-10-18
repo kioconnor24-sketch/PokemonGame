@@ -12,7 +12,9 @@ audit = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(audit)
 
 
-class MapsecNamespaceTests(unittest.TestCase):
+class Fixture(unittest.TestCase):
+    """A synthetic engine tree: four sections, Averon group and upstream maps."""
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
@@ -49,6 +51,8 @@ class MapsecNamespaceTests(unittest.TestCase):
     def rows(self, report):
         return {row["id"]: row for row in report["rows"]}
 
+
+class MapsecNamespaceTests(Fixture):
     def test_values_follow_json_order_and_capacity(self):
         report = audit.inventory(self.engine)
         rows = self.rows(report)
@@ -91,6 +95,40 @@ class MapsecNamespaceTests(unittest.TestCase):
             {"id": "MAPSEC_A"}, {"id": "MAPSEC_A"}]})
         with self.assertRaises(ValueError):
             audit.inventory(self.engine)
+
+
+class SavedValuePinTests(Fixture):
+    def test_pins_hold_and_a_shift_is_caught(self):
+        self.assertEqual(audit.check_pins(self.engine, {"MAPSEC_SALTMERE": 3}), [])
+        # Inserting a section before Saltmere moves its saved value.
+        self.write("src/data/region_map/region_map_sections.json", {"map_sections": [
+            {"id": "MAPSEC_NEW"}, {"id": "MAPSEC_ROUTE_101"}, {"id": "MAPSEC_BATTLE_FRONTIER"},
+            {"id": "MAPSEC_UNUSED_CAVE"}, {"id": "MAPSEC_SALTMERE"}]})
+        self.assertEqual(audit.check_pins(self.engine, {"MAPSEC_SALTMERE": 3}),
+                         ["MAPSEC_SALTMERE: pinned 3, now 4"])
+        self.assertEqual(audit.check_pins(self.engine, {"MAPSEC_GONE": 1}),
+                         ["MAPSEC_GONE: pinned 1, now missing"])
+
+    def test_namespace_must_stay_below_reserved_codes(self):
+        self.write("src/data/region_map/region_map_sections.json", {"map_sections": [
+            {"id": f"MAPSEC_S{i}"} for i in range(0xFD)]})
+        errors = audit.check_pins(self.engine, {})
+        self.assertEqual(len(errors), 1)
+        self.assertIn("0xFD", errors[0])
+
+    def test_cli_exit_codes(self):
+        pins = self.engine / "pins.json"
+        pins.write_text(json.dumps({"pins": {"MAPSEC_SALTMERE": 3}}))
+        self.assertEqual(audit.main(["--engine", str(self.engine), "--check-pins", str(pins)]), 0)
+        pins.write_text(json.dumps({"pins": {"MAPSEC_SALTMERE": 2}}))
+        self.assertEqual(audit.main(["--engine", str(self.engine), "--check-pins", str(pins)]), 1)
+
+
+class RepositoryPinTests(unittest.TestCase):
+    def test_current_engine_keeps_every_saved_value(self):
+        engine = SCRIPT.resolve().parents[1] / "engine"
+        pins = json.loads(SCRIPT.with_name("averon-mapsec-pins.json").read_text())["pins"]
+        self.assertEqual(audit.check_pins(engine, pins), [])
 
 
 if __name__ == "__main__":
