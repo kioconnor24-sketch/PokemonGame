@@ -10,7 +10,6 @@
 #include "palette.h"
 #include "pokenav.h"
 #include "region_map.h"
-#include "regions.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -176,11 +175,7 @@ static const struct SpriteTemplate sCityZoomTextSpriteTemplate =
 
 u32 PokenavCallback_Init_RegionMap(void)
 {
-    struct Pokenav_RegionMapMenu *state;
-    if (!IsRegionMapAvailableForSection(gMapHeader.regionMapSectionId))
-        return FALSE;
-
-    state = AllocSubstruct(POKENAV_SUBSTRUCT_REGION_MAP_STATE, sizeof(struct Pokenav_RegionMapMenu));
+    struct Pokenav_RegionMapMenu *state = AllocSubstruct(POKENAV_SUBSTRUCT_REGION_MAP_STATE, sizeof(struct Pokenav_RegionMapMenu));
     if (!state)
         return FALSE;
 

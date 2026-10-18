@@ -435,6 +435,9 @@ void FreeMatchCallSubstruct2(void);
 
 // pokenav_region_map.c
 u32 PokenavCallback_Init_RegionMap(void);
+#ifdef TESTING
+u32 TestPokenavMainMenuMapInput(bool32 *unchanged);
+#endif
 u32 GetRegionMapCallback(void);
 bool32 OpenPokenavRegionMap(void);
 void CreateRegionMapLoopedTask(s32 index);

@@ -58,10 +58,21 @@ TEST("Averon region map access wall map returns without replacing VBlank or allo
     EXPECT(gMain.vblankCallback == vblank);
 }
 
-TEST("Averon region map access PokeNav declines unsupported grid before allocating substructures")
+TEST("Averon region map access PokeNav refuses before changing or freeing the main menu")
 {
-    // No PokeNav resource context is needed on the rejected path: attempting
-    // AllocSubstruct first would dereference an uninitialized parent.
+    bool32 unchanged = FALSE;
     gMapHeader.regionMapSectionId = MAPSEC_SANDGEM_TOWN;
-    EXPECT_EQ(PokenavCallback_Init_RegionMap(), FALSE);
+    EXPECT_EQ(TestPokenavMainMenuMapInput(&unchanged), POKENAV_MENU_FUNC_NONE);
+    EXPECT(unchanged);
+}
+
+TEST("Averon region map access PokeNav still schedules the legacy map feature")
+{
+    u32 section = MAPSEC_SALTMERE;
+    bool32 unchanged = TRUE;
+    PARAMETRIZE { section = MAPSEC_SALTMERE; }
+    PARAMETRIZE { section = MAPSEC_PALLET_TOWN; }
+    gMapHeader.regionMapSectionId = section;
+    EXPECT_EQ(TestPokenavMainMenuMapInput(&unchanged), POKENAV_MENU_FUNC_OPEN_FEATURE);
+    EXPECT(!unchanged);
 }
