@@ -210,7 +210,8 @@ def static_audit(world, map_ids):
             for y in range(m.height):
                 for x in range(m.width):
                     if (x, y) in fwd and any(n in pocket for n in moves(m, x, y)) and (x, y) not in pocket:
-                        pocket_entry = pocket_entry or dict(stand=(x, y), into=[n for n in moves(m, x, y) if n in pocket][0])
+                        pocket_entry = pocket_entry or dict(stand=(x, y), into=[n for n in moves(m, x, y) if n in pocket][0],
+                                                            tiles=pocket)
         plan[map_id] = dict(closed=closed, points=points, pocket=pocket_entry)
     return findings, plan
 
@@ -322,7 +323,13 @@ class Runner:
         return self.check(f"an exit is reachable after {label}", ok, at=(mid, pos))
 
     def go(self, map_id, tile):
-        self.d.walk_path(map_id, {tuple(tile)})
+        """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run."""
+        from driver import Stuck
+        try:
+            self.d.walk_path(map_id, {tuple(tile)})
+        except Stuck as exc:
+            self.d.log("unreachable", map=map_id, tile=tuple(tile), reason=str(exc))
+            return False
         return self.d.here() == (map_id, tuple(tile))
 
     def closed_edge(self, map_id, c):
@@ -388,15 +395,39 @@ class Runner:
         return ok
 
     def pocket(self, map_id, entry):
-        """Deliberately jump into a static one-way pocket; the run must find no way out."""
-        self.go(map_id, entry["stand"])
+        """Jump into a static one-way pocket for real, then try to walk out of it.
+
+        Reaching the entry or landing in the pocket is setup, reported under its own name, so a driver
+        problem can never count as the pocket check the negative fixture expects to fail.
+        """
+        from driver import Stuck
+        if self.d.here()[0] != map_id:
+            self.d.travel_to(map_id)
+        if not self.go(map_id, entry["stand"]):
+            return self.check(f"pocket probe reached {tuple(entry['stand'])} on {map_id}", False, at=self.d.here())
         x, y = entry["stand"]
         direction = next(d for d, (dx, dy) in DIRS.items()
                          if (x + 2 * dx, y + 2 * dy) == tuple(entry["into"]) or (x + dx, y + dy) == tuple(entry["into"]))
         self.press(direction, hold=0.3, after=1.0)
-        stuck = not self.can_leave(f"entering the pocket at {entry['into']}")
-        self.d.shot(f"pocket-{map_id}")
-        return self.check(f"{map_id} has no one-way pocket", not stuck, entry=entry)
+        landed = self.wait_settled()
+        if landed != (map_id, tuple(entry["into"])):
+            return self.check(f"pocket probe landed at {tuple(entry['into'])} on {map_id}", False, got=landed)
+        self.d.shot(f"pocket-{map_id}-in")
+        # Escape attempt with real input: route to any warp/seam point, then push every direction.
+        exits = {tuple(p["tile"]) for p in map_points(self.d.live_map(map_id))}
+        try:
+            self.d.walk_path(map_id, exits)
+        except Stuck as exc:
+            self.d.log("pocket-no-route", reason=str(exc))
+        inside = {tuple(t) for t in entry["tiles"]}
+        for d in DIRS:
+            if self.d.here()[0] != map_id or self.d.here()[1] not in inside:
+                break
+            self.press(d, hold=0.3, after=0.5)
+        end = self.wait_settled()
+        self.d.shot(f"pocket-{map_id}-end")
+        escaped = end[0] != map_id or end[1] not in inside
+        return self.check(f"{map_id} has no one-way pocket", escaped, entry=entry, ended=end)
 
     def run_map(self, map_id):
         if self.d.here()[0] != map_id:

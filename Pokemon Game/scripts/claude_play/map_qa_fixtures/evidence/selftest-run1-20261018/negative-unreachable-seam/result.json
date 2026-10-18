@@ -1,0 +1,168 @@
+{
+ "maps": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "build": "normal",
+ "rom_sha256": "c147c6bcc9df63b347a61bae75af0110cb88cea8bb4129545e78cd145af768b5",
+ "static_findings": [
+  {
+   "map": "MAP_SANDGEM_TOWN",
+   "code": "exit-unreachable",
+   "detail": {
+    "pairs": [
+     [
+      [
+       15,
+       10
+      ],
+      [
+       19,
+       0
+      ]
+     ],
+     [
+      [
+       15,
+       10
+      ],
+      [
+       20,
+       0
+      ]
+     ],
+     [
+      [
+       15,
+       10
+      ],
+      [
+       21,
+       0
+      ]
+     ],
+     [
+      [
+       15,
+       10
+      ],
+      [
+       22,
+       0
+      ]
+     ],
+     [
+      [
+       15,
+       10
+      ],
+      [
+       23,
+       0
+      ]
+     ],
+     [
+      [
+       15,
+       10
+      ],
+      [
+       24,
+       0
+      ]
+     ],
+     [
+      [
+       19,
+       0
+      ],
+      [
+       15,
+       10
+      ]
+     ],
+     [
+      [
+       19,
+       0
+      ],
+      [
+       19,
+       27
+      ]
+     ]
+    ],
+    "count": 84
+   }
+  }
+ ],
+ "save_before": "28ae5e6d9c9c6ccbed3705ff908839602fd166ba6cdb1e5ff11bf0f7aa6eadaf",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_SANDGEM_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN closed left edge at (0, 12) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "run completed without the driver getting stuck",
+   "ok": false,
+   "error": "Stuck('no path on MAP_SANDGEM_TOWN from (0, 12) to [(19, 0)]')",
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": false,
+ "error": "Stuck('no path on MAP_SANDGEM_TOWN from (0, 12) to [(19, 0)]')",
+ "save_after": "28ae5e6d9c9c6ccbed3705ff908839602fd166ba6cdb1e5ff11bf0f7aa6eadaf",
+ "verdict": "FAIL"
+}
