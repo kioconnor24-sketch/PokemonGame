@@ -1,4 +1,4 @@
-> **CURRENT ROUTING — 2026-10-18:** Follow the [single operating contract](development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](development/INTEGRATION_QUEUE.md). Process, ownership, freeze and work-order directions below are historical and superseded, including the old PR #66 takeover and absolute map freeze. Keep approved product/design constraints and evidence requirements. No paused session is restarted by this file.
+> **CURRENT ROUTING — 2026-10-18:** Refresh main, open PRs and live [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) map/source claims. Follow the [single operating contract](development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](development/INTEGRATION_QUEUE.md). Process, ownership, freeze and work-order directions below are historical and superseded, including the old PR #66 takeover and absolute map freeze. Keep approved product/design constraints and evidence requirements. No paused session is restarted by this file.
 
 ---
 
