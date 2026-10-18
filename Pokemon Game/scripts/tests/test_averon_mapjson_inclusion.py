@@ -7,6 +7,8 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
+import struct
 import subprocess
 from tempfile import TemporaryDirectory
 import unittest
@@ -204,6 +206,67 @@ class MapjsonInclusionTests(unittest.TestCase):
         self.assertIn('Emerald_Layout::', headers)
         self.assertNotIn('FRLG_Layout::', headers)
         self.assertNotIn('Unknown_Layout::', headers)
+
+    def test_arm_link_preserves_slots_and_requires_layout_events_and_scripts(self):
+        commands = ('arm-none-eabi-as', 'arm-none-eabi-ld', 'arm-none-eabi-objcopy', 'arm-none-eabi-nm')
+        preproc = ENGINE / 'tools/preproc/preproc'
+        if not all(shutil.which(command) for command in commands) or not preproc.is_file():
+            self.skipTest('ARM binutils and built engine preproc required; run after make all')
+        for name, region in (('Before', 'REGION_KANTO'), ('Hoenn', 'REGION_HOENN'),
+                             ('Middle', 'REGION_KANTO'), ('Sinnoh', 'REGION_SINNOH'),
+                             ('After', 'REGION_KANTO')):
+            self.map(name, region=region, music=0, region_map_section=0, weather=0, map_type=0, battle_scene=0)
+        self.groups(gMixed=['Before', 'Hoenn', 'Middle', 'Sinnoh', 'After'])
+        layout = self.layout(layout_version='emerald')
+        self.write('data/layouts/layouts.json', {'layouts_table_label': 'gMapLayouts', 'layouts': [layout]})
+        border = self.root / layout['border_filepath']
+        border.parent.mkdir(parents=True)
+        border.write_bytes(b'\0' * 8)
+        (self.root / layout['blockdata_filepath']).write_bytes(b'\0' * 2)
+        for name in ('Hoenn', 'Sinnoh'):
+            self.run_tool('map', 'emerald', f'data/maps/{name}/map.json',
+                          'data/layouts/layouts.json', f'data/maps/{name}')
+        self.run_tool('layouts', 'emerald', 'data/layouts/layouts.json', 'data/layouts', 'include/constants')
+        base = (f'.include "{ENGINE}/asm/macros/map.inc"\n'
+                '.equ NULL,0\n.equ TRUE,1\n.equ FALSE,0\n.equ MUS_NONE,0\n.equ LAYOUT_FIXTURE,1\n')
+        includes = ('data/layouts/layouts.inc', 'data/layouts/layouts_table.inc', 'data/maps/groups.inc',
+                    'data/maps/headers.inc', 'data/maps/events.inc', 'data/maps/connections.inc')
+        stubs = '\ngTileset_General: .4byte 0\ngTileset_Petalburg: .4byte 0\nHoenn_MapScripts: .byte 0\n'
+        # Structural link fixtures only: these stubs are not playable content.
+        for missing, expected in ((None, None), ('scripts', 'Sinnoh_MapScripts'),
+                                  ('data/layouts/layouts.inc', 'Fixture_Layout'),
+                                  ('data/maps/events.inc', 'Sinnoh_MapEvents')):
+            with self.subTest(missing=missing):
+                source = base + ''.join(f'.include "{p}"\n' for p in includes if p != missing) + stubs
+                if missing != 'scripts':
+                    source += 'Sinnoh_MapScripts: .byte 0\n'
+                (self.root / 'fixture.s').write_text(source)
+                # Use the production preprocessor for :: global labels/includes.
+                processed = subprocess.check_output([str(preproc), '-s', 'fixture.s', str(ENGINE / 'charmap.txt')],
+                                                    cwd=self.root, timeout=30)
+                (self.root / 'fixture.preprocessed.s').write_bytes(processed)
+                subprocess.run(['arm-none-eabi-as', '-mcpu=arm7tdmi', '-o', 'fixture.o', 'fixture.preprocessed.s'],
+                               cwd=self.root, check=True, capture_output=True, timeout=30)
+                link = subprocess.run(['arm-none-eabi-ld', '-Ttext=0x08000000', '-e', 'Sinnoh',
+                                       '-o', 'fixture.elf', 'fixture.o'], cwd=self.root,
+                                      capture_output=True, text=True, timeout=30)
+                if missing:
+                    self.assertNotEqual(link.returncode, 0)
+                    self.assertIn('undefined reference', link.stderr)
+                    self.assertIn(expected, link.stderr)
+                    continue
+                self.assertEqual(link.returncode, 0, link.stderr)
+                listing = subprocess.check_output(['arm-none-eabi-nm', '-n', 'fixture.elf'],
+                                                  cwd=self.root, text=True, timeout=30)
+                symbols = {fields[2]: int(fields[0], 16) for line in listing.splitlines()
+                           if len(fields := line.split()) == 3 and fields[1] not in ('U', 'u')}
+                subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', 'fixture.elf', 'fixture.bin'],
+                               cwd=self.root, check=True, timeout=30)
+                data = (self.root / 'fixture.bin').read_bytes()
+                self.assertEqual(struct.unpack_from('<5I', data, symbols['gMixed'] - 0x08000000),
+                                 (0, symbols['Hoenn'], 0, symbols['Sinnoh'], 0))
+                self.assertEqual(struct.unpack_from('<3I', data, symbols['Sinnoh'] - 0x08000000),
+                                 tuple(symbols[s] for s in ('Fixture_Layout', 'Sinnoh_MapEvents', 'Sinnoh_MapScripts')))
 
 
 if __name__ == '__main__':
