@@ -97,6 +97,19 @@ class MapsecNamespaceTests(Fixture):
             audit.inventory(self.engine)
 
 
+    def test_invalid_region_metadata_is_rejected_before_generation(self):
+        for value in (None, False, 4, "4", [], {}, "REGION_TYPO", "REGIONS_COUNT"):
+            self.write("src/data/region_map/region_map_sections.json", {"map_sections": [
+                {"id": "MAPSEC_TEST", "region": value}]})
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "region metadata"):
+                    audit.sections(self.engine)
+        for value in ("REGION_NONE", "REGION_HOENN", "REGION_KANTO", "REGION_SINNOH"):
+            self.write("src/data/region_map/region_map_sections.json", {"map_sections": [
+                {"id": "MAPSEC_TEST", "region": value}]})
+            self.assertEqual(audit.sections(self.engine)[0]["region"], value)
+
+
 class SavedValuePinTests(Fixture):
     def test_pins_hold_and_a_shift_is_caught(self):
         self.assertEqual(audit.check_pins(self.engine, {"MAPSEC_SALTMERE": 3}), [])

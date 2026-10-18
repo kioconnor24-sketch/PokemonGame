@@ -55,6 +55,10 @@ def sections(engine):
     ids = [entry["id"] for entry in entries]
     if len(set(ids)) != len(ids):
         raise ValueError("duplicate MAPSEC ids in region_map_sections.json")
+    for entry in entries:
+        if "region" in entry and (not isinstance(entry["region"], str)
+                                  or entry["region"] not in ENGINE_REGIONS | {"REGION_NONE"}):
+            raise ValueError(f"{entry['id']}: invalid region metadata; use a declared REGION_* enum")
     return entries
 
 
