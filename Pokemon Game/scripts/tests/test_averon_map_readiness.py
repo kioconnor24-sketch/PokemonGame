@@ -7,6 +7,7 @@ import struct
 import subprocess
 import sys
 import unittest
+import zlib
 from unittest.mock import patch
 
 
@@ -81,6 +82,32 @@ class GeometryTests(unittest.TestCase):
             tool.tileset_dependencies(headers, metatiles, 'gTileset_Building', True)
 
 
+class VisualContainerTests(unittest.TestCase):
+    @staticmethod
+    def png(width=8, height=8, depth=4, color=3):
+        def chunk(kind, data):
+            return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind+data) & 0xffffffff)
+        return (b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, depth, color, 0, 0, 0))
+                + chunk(b'IDAT', zlib.compress(b'\0'*40)) + chunk(b'IEND', b''))
+
+    def test_tile_footprint_and_crc(self):
+        self.assertEqual(tool.png_geometry(self.png(16, 8))['raw_tiles'], 2)
+        bad = bytearray(self.png());bad[-1] ^= 1
+        for data in (bytes(bad), self.png()[:-2], self.png()+b'extra', self.png(9, 8), self.png(0, 8)):
+            with self.subTest(data=data[:20]):
+                with self.assertRaises(ValueError): tool.png_geometry(data)
+
+    def test_illegal_png_header_is_rejected(self):
+        for data in (self.png(depth=3), self.png(color=9)):
+            with self.assertRaises(ValueError): tool.png_geometry(data)
+
+    def test_palette_color_count_and_components(self):
+        good = b'JASC-PAL\n0100\n16\n' + b'0 0 0\n'*16
+        tool.palette_errors(good)
+        for bad in (good[:-6], good.replace(b'0 0 0', b'256 0 0', 1), good.replace(b'16', b'17', 1), b'bad'):
+            with self.assertRaises(ValueError): tool.palette_errors(bad)
+
+
 class SourceBatchTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -97,6 +124,8 @@ class SourceBatchTests(unittest.TestCase):
         original = Path.read_bytes
 
         def read(path):
+            if not path.is_relative_to(ENGINE.resolve()):
+                return original(path)
             relative = path.relative_to(ENGINE.resolve()).as_posix()
             if relative in changes:
                 value = changes[relative]
@@ -214,6 +243,70 @@ class SourceBatchTests(unittest.TestCase):
             source['shared_events_map'] = value
             with self.subTest(value=value):
                 self.assertIn('shared-events-reference', self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source})))
+
+    def test_missing_and_invalid_visual_dependencies(self):
+        png = 'data/tilesets/primary/general/tiles.png'
+        pal = 'data/tilesets/primary/general/palettes/00.pal'
+        for changes in ({png: None}, {png: b'not PNG'}, {pal: None}, {pal: b'JASC-PAL\n0100\n15\n'}):
+            with self.subTest(changes=list(changes)):
+                self.assertIn('asset-dependency', self.codes(self.audit_mutated(changes)))
+
+    def test_visual_sources_are_recorded_using_actual_symbols(self):
+        row = tool.audit(ENGINE, ['Saltmere'])
+        self.assertEqual(row['errors'], [])
+        self.assertTrue(any(d['kind'] == 'tiles_png' for d in row['geometry_dependencies']))
+        self.assertTrue(any(d['kind'] == 'palette' for d in row['geometry_dependencies']))
+        self.assertEqual(row['namespace_contract']['saved_pins_checked'], 6)
+
+    def test_connection_nonoverlap_and_wrong_inverse_offset(self):
+        source = self.map_data()
+        source['connections'][0]['offset'] = 10000
+        codes = self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source}))
+        self.assertTrue({'connection-overlap', 'connection-offset-return'} <= codes)
+
+    def test_intentional_one_way_connection_requires_review(self):
+        target = self.map_data('CoastalMeadow')
+        target['connections'] = []
+        result = self.audit_mutated({'data/maps/CoastalMeadow/map.json': target})
+        self.assertEqual(result['errors'], [])
+        self.assertIn('connection-return', {e['code'] for e in result['warnings']})
+
+    def test_section_reference_and_reused_saved_pin_checks(self):
+        source = self.map_data()
+        source['region_map_section'] = 'MAPSEC_UNDEFINED_IN_MEMORY'
+        self.assertIn('section-reference', self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source})))
+        sections = json.loads((ENGINE / 'src/data/region_map/region_map_sections.json').read_text())
+        entries = sections['map_sections']
+        entries[-1], entries[-2] = entries[-2], entries[-1]
+        result = self.audit_mutated({'src/data/region_map/region_map_sections.json': sections})
+        self.assertIn('saved-section-pin', self.codes(result))
+
+    def test_section_namespace_mismatch_is_explicit(self):
+        source = self.map_data()
+        source['region'] = 'REGION_SINNOH'
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+        self.assertIn('section-region-mismatch', {e['code'] for e in result['warnings']})
+        self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_HOENN')
+
+    def test_invalid_return_warp_cannot_hide_behind_valid_arrival(self):
+        target = self.map_data('SaltmereGreenhouse')
+        target['warp_events'][0]['dest_warp_id'] = '999'
+        self.assertIn('warp-return-index', self.codes(self.audit_mutated({'data/maps/SaltmereGreenhouse/map.json': target})))
+
+    def test_selected_group_capacity_is_checked(self):
+        groups = json.loads((ENGINE / 'data/maps/map_groups.json').read_text())
+        groups['gMapGroup_AveronOpening'] += ['CoastalMeadow'] * 128
+        self.assertIn('map-capacity', self.codes(self.audit_mutated({'data/maps/map_groups.json': groups})))
+
+    def test_unsupported_event_containers_report_errors(self):
+        for key, value, expected in (('warp_events', 'bad', 'warp-format'),
+                                     ('warp_events', [None], 'warp-format'),
+                                     ('connections', 'bad', 'connection-format'),
+                                     ('connections', [None], 'connection-format')):
+            source = self.map_data()
+            source[key] = value
+            with self.subTest(key=key, value=value):
+                self.assertIn(expected, self.codes(self.audit_mutated({'data/maps/Saltmere/map.json': source})))
 
     def test_cli_success_and_missing_map_failure(self):
         for name, expected in (('Saltmere', 0), ('MissingMap', 1)):
