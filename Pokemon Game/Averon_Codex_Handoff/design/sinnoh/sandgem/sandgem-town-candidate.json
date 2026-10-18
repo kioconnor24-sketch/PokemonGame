@@ -1,0 +1,307 @@
+{
+ "name": "Sandgem Town - design candidate (NOT approved, NOT a map id)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 32,
+ "height": 30,
+ "legend": {
+  ".": {
+   "metatile": 292,
+   "collision": 0,
+   "elevation": 3,
+   "note": "sand (Dewford)"
+  },
+  "T": {
+   "metatile": 579,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "~": {
+   "metatile": 368,
+   "collision": 0,
+   "elevation": 1,
+   "note": "sea (Surf)"
+  },
+  "_": {
+   "metatile": 300,
+   "collision": 0,
+   "elevation": 1,
+   "note": "shore, water south"
+  },
+  "(": {
+   "metatile": 325,
+   "collision": 0,
+   "elevation": 1,
+   "note": "inner shore corner, water south-west"
+  },
+  ")": {
+   "metatile": 326,
+   "collision": 0,
+   "elevation": 1,
+   "note": "inner shore corner, water south-east"
+  },
+  "[": {
+   "metatile": 291,
+   "collision": 0,
+   "elevation": 1,
+   "note": "shore, water west"
+  },
+  "]": {
+   "metatile": 293,
+   "collision": 0,
+   "elevation": 1,
+   "note": "shore, water east"
+  },
+  "s": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  }
+ },
+ "rows": [
+  "TTTTTTTTTTTTTT....TTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTT....TTTTTTTTTTTTTT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT.s..........................TT",
+  "..............................TT",
+  "..............................TT",
+  "..............................TT",
+  "..............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT............................TT",
+  "____________(......)____________",
+  "~~~~~~~~~~~~[......]~~~~~~~~~~~~",
+  "~~~~~~~~~~~~[......]~~~~~~~~~~~~",
+  "~~~~~~~~~~~~[......]~~~~~~~~~~~~"
+ ],
+ "stamps": [
+  {
+   "note": "RESERVED research-lab exterior (story-neutral; interior not built)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    1,
+    0,
+    5,
+    4
+   ],
+   "at": [
+    19,
+    3
+   ]
+  },
+  {
+   "note": "Pokemon Center exterior (door at +1,+3)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    1,
+    7,
+    4,
+    4
+   ],
+   "at": [
+    5,
+    8
+   ]
+  },
+  {
+   "note": "Poke Mart exterior, lower 3 rows of primary-only art (its top row has grass baked in); door at +1,+2",
+   "from": "LAYOUT_MAUVILLE_CITY",
+   "src": [
+    22,
+    12,
+    4,
+    3
+   ],
+   "at": [
+    10,
+    9
+   ]
+  },
+  {
+   "note": "house A",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    16,
+    11,
+    4,
+    4
+   ],
+   "at": [
+    22,
+    12
+   ]
+  },
+  {
+   "note": "house B",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    16,
+    11,
+    4,
+    4
+   ],
+   "at": [
+    4,
+    17
+   ]
+  },
+  {
+   "note": "RESERVED residence C (future story household; neutral now)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    16,
+    11,
+    4,
+    4
+   ],
+   "at": [
+    21,
+    19
+   ]
+  }
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    14,
+    0
+   ],
+   "size": [
+    4,
+    1
+   ],
+   "note": "north exit -> Route 202 (Jubilife)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    0,
+    12
+   ],
+   "size": [
+    1,
+    4
+   ],
+   "note": "west exit -> Route 201 (Twinleaf)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    13,
+    29
+   ],
+   "size": [
+    6,
+    1
+   ],
+   "note": "south exit -> Route 219 beach"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    6,
+    11
+   ],
+   "note": "Pokemon Center door"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    11,
+    11
+   ],
+   "note": "Poke Mart door (interior not in first slice)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    21,
+    6
+   ],
+   "note": "lab door (reserved; no warp until approved)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    23,
+    15
+   ],
+   "note": "house A door"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    5,
+    20
+   ],
+   "note": "house B door"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    22,
+    22
+   ],
+   "note": "residence C door (reserved)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    12,
+    15
+   ],
+   "size": [
+    6,
+    6
+   ],
+   "note": "central plaza: future event/NPC space"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    3,
+    23
+   ],
+   "size": [
+    26,
+    3
+   ],
+   "note": "beach strip: future beach event space"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    8,
+    13
+   ],
+   "note": "ambient NPC slot (placeholder)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    17,
+    7
+   ],
+   "note": "ambient NPC slot (placeholder)"
+  }
+ ]
+}
