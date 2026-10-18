@@ -65,6 +65,9 @@ include config.mk
 # Reversible audio profiles. Keep the source default and all cry assets intact.
 # Isolate BOTH objects and outputs: changing CPPFLAGS alone can reuse stale data.
 CRIES ?= default
+# Strip first: a padded value such as "on " would pass the checks below and
+# then miss the exact comparisons, building OFF under a space-separated name.
+override CRIES := $(strip $(CRIES))
 ifneq ($(words $(CRIES)),1)
   $(error CRIES must be exactly one of default, on, or off)
 endif
@@ -76,7 +79,7 @@ ifneq ($(CRIES),default)
   FILE_NAME := $(FILE_NAME)$(CRY_BUILD_SUFFIX)
   ifeq ($(CRIES),on)
     CRY_CPPFLAGS := -DP_CRIES_ENABLED=TRUE
-  else
+  else ifeq ($(CRIES),off)
     CRY_CPPFLAGS := -DP_CRIES_ENABLED=FALSE
   endif
 endif

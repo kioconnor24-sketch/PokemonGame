@@ -194,3 +194,48 @@ TEST("Averon cry safety menu and field effects still start")
     EXPECT_NE(player->status & MUSICPLAYER_STATUS_TRACK, 0);
     ExpectFullBGMVolume();
 }
+
+static void ExpectBGMVolumeNow(u32 volX)
+{
+    u32 tracks = 0;
+    for (u32 i = 0; i < gMPlayInfo_BGM.trackCount; ++i)
+    {
+        if (gMPlayInfo_BGM.tracks[i].flags & MPT_FLG_EXIST)
+        {
+            ++tracks;
+            EXPECT_EQ(gMPlayInfo_BGM.tracks[i].volX, volX);
+        }
+    }
+    EXPECT_GT(tracks, 0);
+}
+
+// Read straight after each call, before RestoreBGMVolumeAfterPokemonCry's task
+// runs: a duck that is restored later must not pass as "never ducked".
+TEST("Averon cry safety ducking calls lower music only when cries are enabled")
+{
+    u32 duckedVolX = P_CRIES_ENABLED ? 21 : 64;
+    u32 call;
+    PARAMETRIZE { call = 0; }
+    PARAMETRIZE { call = 1; }
+    PARAMETRIZE { call = 2; }
+    for (u32 mode = CRY_MODE_NORMAL; mode <= CRY_MODE_DYNAMAX; ++mode)
+    {
+        if (call != 1 && mode != CRY_MODE_NORMAL)
+            continue;
+        if (mode == CRY_MODE_DOUBLES)
+            continue; // never ducks, in either profile
+        ColdStart();
+        ExpectBGMVolumeNow(64);
+        if (call == 0)
+            PlayCry_Normal(SPECIES_BULBASAUR, 0);
+        else if (call == 1)
+            PlayCry_ByMode(SPECIES_BULBASAUR, 0, mode);
+        else
+            PlayCry_Script(SPECIES_BULBASAUR, mode);
+        ExpectBGMVolumeNow(duckedVolX);
+        StopCryAndClearCrySongs();
+        for (u32 i = 0; i < 4; ++i)
+            RunTasks(); // the restore task frees itself and puts the volume back
+        ExpectFullBGMVolume();
+    }
+}

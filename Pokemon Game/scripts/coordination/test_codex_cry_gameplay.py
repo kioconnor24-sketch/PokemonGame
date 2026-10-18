@@ -1,7 +1,10 @@
+from pathlib import Path
+import shutil
 import struct
+import subprocess
 import unittest
 import unittest.mock
-from codex_cry_gameplay import (SECTOR_SIGNATURE, SECTOR_SIZE, chunk_sizes, flash_slots,
+from codex_cry_gameplay import (use_source_function_names, SECTOR_SIGNATURE, SECTOR_SIZE, chunk_sizes, flash_slots,
                                 flash_verdict, lto_aliases, restored_problems, rom_name,
                                 save_dialog_verdict, sector_checksum)
 
@@ -45,11 +48,48 @@ class Symbols(unittest.TestCase):
 
 
 
+class FunctionNames(unittest.TestCase):
+    def test_lto_statics_report_their_source_names(self):
+        class Observed:
+            by_addr = {0x0806DFD4: 'HandleInputChooseAction', 0x08069184: 'HandleInputChooseAction.lto_priv.0',
+                       0x08069598: 'HandleInputChooseAction.lto_priv.1', 0x08001000: 'CB2_MainMenu.lto_priv.0',
+                       0x08002000: 'Task_Foo.constprop.0.isra.0', 0x08003000: 'CB2_Overworld'}
+        observed = Observed()
+        use_source_function_names(observed)
+        self.assertEqual(observed.by_addr[0x08069598], 'HandleInputChooseAction')
+        self.assertEqual(observed.by_addr[0x08001000], 'CB2_MainMenu')
+        self.assertEqual(observed.by_addr[0x08002000], 'Task_Foo')
+        self.assertEqual(observed.by_addr[0x08003000], 'CB2_Overworld')
+        self.assertEqual(len(observed.by_addr), 6)  # addresses are kept, only names change
+
+
 class Builds(unittest.TestCase):
     def test_rom_names_follow_the_makefile_suffixes(self):
         self.assertEqual(rom_name('off', 'release'), 'pokeemerald-cries-off-release.gba')
         self.assertEqual(rom_name('on', 'release'), 'pokeemerald-cries-on-release.gba')
         self.assertEqual(rom_name('off', 'normal'), 'pokeemerald-cries-off.gba')
+
+
+class MakefileProfiles(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('make'), 'make not installed')
+    def test_cries_value_is_stripped_then_validated(self):
+        """A padded CRIES must build the named profile; anything else must fail."""
+        engine = Path(__file__).resolve().parents[2]/'engine'
+
+        def probe(value):
+            return subprocess.run(['make', '--no-print-directory', 'SETUP_PREREQS=0', 'NODEP=1', 'RELEASE=1',
+                                   f'CRIES={value}', '--eval', 'print-vars: ; @echo $(FILE_NAME) $(CRY_CPPFLAGS)',
+                                   'print-vars'], cwd=engine, capture_output=True, text=True)
+        for value, words in (('on ', ['pokeemerald-cries-on-release', '-DP_CRIES_ENABLED=TRUE']),
+                             (' off', ['pokeemerald-cries-off-release', '-DP_CRIES_ENABLED=FALSE']),
+                             ('default ', ['pokeemerald-release'])):
+            with self.subTest(value=value):
+                result = probe(value)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout.split(), words)
+        for value in ('on off', 'bogus', ''):
+            with self.subTest(value=value):
+                self.assertNotEqual(probe(value).returncode, 0)
 
 
 class Flash(unittest.TestCase):

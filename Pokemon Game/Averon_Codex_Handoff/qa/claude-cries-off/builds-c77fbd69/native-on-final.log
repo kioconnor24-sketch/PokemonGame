@@ -1,0 +1,22 @@
+tools/scaninc/scaninc -M build/emerald-cries-on-test/src/sound.d -g build/assets -I include -I tools/agbcc/include src/sound.c
+/usr/lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-cries-on-test/src/sound.o src/sound.c
+cd build/emerald-cries-on-test && arm-none-eabi-ld -T ld_script_test.ld -o ../../pokeemerald-cries-on-test.elf <objects> <test-objects> <lib>
+tools/gbafix/gbafix pokeemerald-cries-on-test.elf -t"POKEMON EMER" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-cries-on-test.elf gTestRunnerArgv "Averon cry safety\0"
+tools/patchelf/patchelf pokeemerald-cries-on-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test arm-none-eabi-objcopy pokeemerald-cries-on-test-headless.elf
+[03] Averon cry safety absent species completes without a previous player: PASS
+[01] Averon cry safety menu and field effects still start: PASS
+[04] Averon cry safety real playmoncry waitmoncry bytecode resumes: PASS
+[06] Averon cry safety silent unpaired duck never lowers music: PASS
+[05] Averon cry safety normal and by-mode cleanup preserve music and effects: PASS
+[08] Averon cry safety script wait and replay restore music: PASS
+[07] Averon cry safety all modes and Mega stop without a seeded player: PASS
+[09] Averon cry safety cold stop and completion before any cry: PASS
+CRY_PROFILE enabled=1 headless=1
+[02] Averon cry safety title town route battle victory heal music starts: PASS
+[00] Averon cry safety ducking calls lower music only when cries are enabled: PASS
+
+- Tests PASSED:          10
+- Tests TOTAL:           10
+

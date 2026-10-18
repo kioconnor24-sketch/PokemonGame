@@ -11,3 +11,9 @@ Native: make -j12 CRIES=off|on check TESTS="Averon cry safety" (headless) and mg
 # claude/test-merge-117-124 (40b0abb4, same engine tree) RELEASE OFF ROM:
 06e3e40a9a7ff49c372166448333b4337b466c29f19d12e2b176ca90c31226bd  pokeemerald-cries-off-release.gba
 ```
+
+## After the review fixes (Makefile `CRIES` strip and the new ducking test; head after `57a9fcbc`)
+
+- **ROMs unchanged:** rebuilding both RELEASE profiles gives byte-identical ROMs, OFF `06e3e40a…` and ON `4dbf3be4…`, with only the 4 newlib notes. See `build-117r-*.log`.
+- **`Averon cry safety` is now 10/10** on each profile, headless (`native-*-final.log`) and non-headless (`native-*-final-nonheadless.log`).
+- **The new test fails without the fix (RED, `native-off-duck-RED.log`):** with the OFF gating removed from `PlayCry_Normal`, `ByMode` and `Script`, it fails with `EXPECT_EQ(21, 64)`. `sound.c` was restored afterwards and is identical to HEAD.
