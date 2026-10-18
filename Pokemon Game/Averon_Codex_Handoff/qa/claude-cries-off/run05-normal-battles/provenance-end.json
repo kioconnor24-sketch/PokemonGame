@@ -1,0 +1,43 @@
+{
+  "source_sha": "19d8fe6c8a441060266eb426cfb02b98c46a7817",
+  "engine_tree": "4f092611d8039bcd1a7a5790f16f7c890929fb93",
+  "engine_status": [],
+  "driver_sha": "19d8fe6c8a441060266eb426cfb02b98c46a7817",
+  "driver_status": [],
+  "wrapper_status": [],
+  "rom_sha256": "473030df1e3a6b49876ad07707cec738d1510f4d4b987eb650824b2a5b19f42c",
+  "elf_sha256": "7ab8f7b3c488a56c0b0235cec16879262afd14a1325e65c645cb28f9c110481b",
+  "cry_profile": "off",
+  "release": false,
+  "build": "normal",
+  "phases": [
+    "catch2",
+    "train8",
+    "sam",
+    "heal",
+    "save"
+  ],
+  "mgba": "mgba 0.10.5 ((unknown))",
+  "acceptance": "Supporting real emulator evidence; not human listening or Delta",
+  "save_before": "73c3b87db65a0f593ac6f53d8aeb2985ebe8e2301e5719744c0cfe99240a5825",
+  "save_check": "success dialog callback + valid newer flash slot + fresh-process CONTINUE (gSaveAttemptStatus is not used: RELEASE LTO removes its stores)",
+  "saves": 1,
+  "completed": true,
+  "source_sha_end": "19d8fe6c8a441060266eb426cfb02b98c46a7817",
+  "engine_status_end": [],
+  "source_unchanged": true,
+  "save_after": "398a1272740759c49b0ce6199278dfb922273f559e60bb6bd9090687f5f5fe50",
+  "flash_slots": [
+    {
+      "status": "valid",
+      "problems": [],
+      "counter": 2
+    },
+    {
+      "status": "valid",
+      "problems": [],
+      "counter": 1
+    }
+  ],
+  "flash_problems": []
+}

@@ -38,19 +38,33 @@ This reproduces Codex's result.
 | run02-continue | **PARTIAL → CRASH** | CONTINUE == saved state **PASS**. Talking to the follower (`playfirstmoncry`) **PASS**: emote shown, control returned. Pokédex list, entry, CRY page and 3 replays, then close **PASS**. Walk to Alderfield **PASS** (no wild battle happened on the way). **Clinic heal: game crashed.** |
 | run03-heal-repro-off | **CRASH reproduced** | Same save, straight to the clinic heal. |
 | run04-heal-repro-on | **CRASH reproduced on cries-ON RELEASE** | So it is **not caused by the cries change**. |
+| run05-normal-battles | **PASS** (normal `make CRIES=off`, ROM `473030df…`, source `19d8fe6c`) | All with real input, starting from the run02 save:<br>• Capture: Sentret caught, party of 2.<br>• 8 wild battles.<br>• Trainer battle: Sam on Orchard Lane, 2 Pokémon, won; Piplup learned Water Gun.<br>• 5 Alderfield clinic heals, no crash.<br>• SAVE: `SaveReturnSuccessCallback`; flash slot counter 2 is valid and newer than 1.<br>• Audio: 910 of 914 one-second windows audible, so music and SFX play with cries off. This is a level meter, not human listening. |
 
 Not yet tested on the OFF build:
-- wild battles, capture, trainer battle, faint/whiteout, evolution, save after heal;
+- fresh-process CONTINUE of run05's save (run06);
+- faint/whiteout and evolution;
+- clinic heal and SAVE→CONTINUE on the **RELEASE** OFF build: blocked on the crash fix below;
 - Mega Evolution: no Averon content can reach it, so only the native tests cover it;
 - the `playmoncry` script command: no Averon map uses it, so only the native tests cover it.
 
 Human listening and Delta remain **UNTESTED**.
 
-## OPEN DEFECT: RELEASE build crashes at the Alderfield clinic heal
+## DEFECT (root cause found, fix in a separate PR): RELEASE build crashes at the Alderfield clinic heal
+
+**Root cause.** This is a baseline `main` defect. It reproduces on unchanged `main` RELEASE `c918e880…` and has nothing to do with cries. The full trace evidence is in [`debug/clinic-crash-root-cause/`](debug/clinic-crash-root-cause/README.md).
+1. After the heal, the shared nurse script calls `BufferUnionRoomPlayerName`.
+2. Averon clinics never run `InitUnionRoom`, so `sUnionRoomPlayerName` is still zero-filled. Zero is not EOS.
+3. `StringCopy` into `gStringVar1` therefore runs to the next `0xFF`. On RELEASE/LTO that is about 35 KB later, so the copy zeroes every `gHeap` block header.
+4. The next text-printer `Alloc` returns `0x10`.
+5. `RunTextPrinters` then calls a BIOS open-bus value.
+
+**Fix:** branch `claude/clinic-union-room-overflow` makes the buffer `EOS` from boot and adds the native test `test/averon_clinic_union_room.c`.
+
+The investigation notes below are kept as they were written before the cause was known.
 
 **Symptom:** mGBA 0.10.5 logs `GBA Memory: Jumped to invalid address: E55EC002` (or `E3A02004`) and then `The game crashed!`.
 
-**Reproduction:** with Piplup as the only party member and the follower out, talk to the Alderfield clinic nurse and answer YES. The game has crashed in 6 out of 6 attempts on the RELEASE ROMs, both ON and OFF. Normal builds have healed at this clinic many times during M1 QA without a crash.
+**Reproduction:** with Piplup as the only party member and the follower out, talk to the Alderfield clinic nurse and answer YES. The game has crashed in 6 out of 6 attempts on the RELEASE ROMs, both ON and OFF, and also on unchanged `main` RELEASE. Normal builds have healed at this clinic many times during M1 QA without a crash.
 
 **Where it crashes** (`debug/crash_regs.py`, hardware breakpoints, key input only):
 1. The nurse script runs normally through `FldEff_PokecenterHeal`, the ball animation, the MUS_HEAL fanfare, `HealPlayerParty` and `UpdateFollowingPokemon`.
@@ -77,4 +91,6 @@ Until then, the RELEASE build is not acceptable as the playable profile, whether
 
 ## Tooling issue found
 
-When mGBA dies, the driver's `emu.Gdb._packet` spins forever (`recv` returns `b""` on EOF), so a crashed run hangs instead of failing. This is in Claude's driver (`scripts/claude_play/emu.py`). It needs its own claim and a small fix with a test. It is not changed in this PR.
+When mGBA dies, the driver's `emu.Gdb._packet` spins forever (`recv` returns `b""` on EOF), so a crashed run hangs instead of failing. This is in Claude's driver (`scripts/claude_play/emu.py`).
+
+It is fixed separately in PR #122, together with a regression test. A Claude read-only reviewer pass found no blocking issues, but that pass is not independent review. The PR needs the owner to review and merge it, because auto mode blocks Claude from merging its own PRs. This PR does not change `emu.py`.

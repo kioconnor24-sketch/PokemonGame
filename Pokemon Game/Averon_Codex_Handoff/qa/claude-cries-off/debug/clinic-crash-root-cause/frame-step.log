@@ -1,0 +1,134 @@
+ r0: 00000000   r1: 00000000   r2: 00000000   r3: 00000000
+ r4: 00000000   r5: 00000000   r6: 00000000   r7: 00000000
+ r8: 00000000   r9: 00000000  r10: 00000000  r11: 00000000
+r12: 00000000  r13: 03007F00  r14: 00000000  r15: 00000004
+cpsr: 0000001F [-------]
+Cycle: 0
+00000000:  00000000	andeq r0, r0, r0
+> 
+##> load-symbols /root/claude-dev/cries-scratch/st-main/game.sym
+load-symbols /root/claude-dev/cries-scratch/st-main/game.sym
+> 
+##> break 0x0823349c
+break 0x0823349c
+Added breakpoint #1
+> c
+Hit breakpoint 1 at 0x0823349C
+ r0: 03000CAC   r1: 082D2084   r2: 00000000   r3: 0823349D
+ r4: 03000CAC   r5: 03004BC6   r6: 03002C3C   r7: 03002398
+ r8: 03004BC6   r9: 03002C3C  r10: 03002398  r11: 02029DD4
+r12: 00000280  r13: 03007C8C  r14: 0A2281F3  r15: 0823349E
+cpsr: 6000003F [-ZC---T]
+Cycle: 1189977946
+0823349C:  B5F0     	stmdb sp!, {r4-r7,lr}
+> 
+##> delete 1
+delete 1
+> 
+##> r/2 0x04000130
+r/2 0x04000130
+ 0x03FE
+> 
+##> r/2 0x04000130
+r/2 0x04000130
+ 0x03FE
+> 
+## keyinput down/up: 'r/2 0x04000130\r\n 0x03FE\r\n>' / 'r/2 0x04000130\r\n 0x03FE\r\n>'
+
+##> frame
+frame
+ r0: 00000000   r1: 02039100   r2: 020032E0   r3: 00000000
+ r4: 02037350   r5: 00000690   r6: 00000000   r7: 03002398
+ r8: 03004BC6   r9: 03002C3C  r10: 03002398  r11: 02029DD4
+r12: FFFF8000  r13: 03007C78  r14: 0A228293  r15: 0826BC0C
+cpsr: 8000003F [N-----T]
+Cycle: 1190197352
+0826BC0A:  D1F9     	bne 0x0826BC00
+> 
+##> save 3
+save 3
+> 
+##> frame
+frame
+ r0: 00000000   r1: 0203C248   r2: 02006427   r3: 00000000
+ r4: 02037350   r5: 00000690   r6: 00000000   r7: 03002398
+ r8: 03004BC6   r9: 03002C3C  r10: 03002398  r11: 02029DD4
+r12: FFFF8000  r13: 03007C78  r14: 0A228293  r15: 0826BC04
+cpsr: 0000003F [------T]
+Cycle: 1190478250
+0826BC02:  7013     	strb r3, [r2, #0]
+> 
+##> save 2
+save 2
+> 
+##> frame
+frame
+ r0: 00000000   r1: 0203F341   r2: 02009520   r3: 00000000
+ r4: 02037350   r5: 00000690   r6: 00000000   r7: 03002398
+ r8: 03004BC6   r9: 03002C3C  r10: 03002398  r11: 02029DD4
+r12: FFFF8000  r13: 03007C78  r14: 0A228293  r15: 0826BC06
+cpsr: 0000003F [------T]
+Cycle: 1190759144
+0826BC04:  780B     	ldrb r3, [r1, #0]
+> 
+##> save 3
+save 3
+> 
+##> frame
+frame
+ r0: 00000000   r1: 00000001   r2: 00000001   r3: 00000000
+ r4: 03002424   r5: 00000001   r6: 03002C3C   r7: 03007DB8
+ r8: 03004BC6   r9: 000003FF  r10: 03002398  r11: 0000001F
+r12: 04000000  r13: 03007FA0  r14: 000001F8  r15: 00000188
+cpsr: 60000092 [-ZC-I--]
+Cycle: 1191040049
+00000184:  E92D500F	stmdb sp!, {r0-r3,r12,lr}
+> 
+##> save 2
+save 2
+> 
+##> frame
+frame
+ r0: 00000000   r1: 00000001   r2: 00000001   r3: 00000000
+ r4: 03002424   r5: 00000001   r6: 03002C3C   r7: 03007DB8
+ r8: 03004BC6   r9: 000003FF  r10: 03002398  r11: 0000001F
+r12: 04000000  r13: 03007FA0  r14: 000001F8  r15: 00000188
+cpsr: 60000092 [-ZC-I--]
+Cycle: 1191320945
+00000184:  E92D500F	stmdb sp!, {r0-r3,r12,lr}
+> 
+##> save 3
+save 3
+> 
+##> frame
+frame
+ r0: 05000000   r1: 00000000   r2: 00000002   r3: 2B002B00
+ r4: 00000010   r5: 03004BC6   r6: 00002FC7   r7: 03002398
+ r8: 03004BC6   r9: 00000001  r10: 00000000  r11: 02029DD4
+r12: 0000000B  r13: 03007C40  r14: 02029DD4  r15: 08249EC0
+cpsr: 0000003F [------T]
+Cycle: 1191601832
+08249EBE:  2B00     	cmp r3, #0
+> 
+##> save 2
+save 2
+> 
+##> frame
+frame
+ r0: 05000000   r1: 00000000   r2: 00000002   r3: 002B002B
+ r4: 00000010   r5: 03004BC6   r6: 000065C4   r7: 03002398
+ r8: 03004BC6   r9: 00000001  r10: 00000000  r11: 02029DD4
+r12: 0000000B  r13: 03007C40  r14: 02029DD4  r15: 08249EC0
+cpsr: 0000003F [------T]
+Cycle: 1191882727
+08249EBE:  2B00     	cmp r3, #0
+> 
+##> save 3
+save 3
+> 
+##> frame
+frame
+GBA Memory: Jumped to invalid address: E55EC002
+The game crashed!
+
+## RESULT {"frames_completed": 7, "last_saved_slot": 3, "slot_before_crash": 2, "alive": false, "schedule": "A down for frames where (n % 8) < 3, counted from the HealPlayerParty break"}
