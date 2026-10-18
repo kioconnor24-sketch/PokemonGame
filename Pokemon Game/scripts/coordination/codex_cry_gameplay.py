@@ -71,7 +71,7 @@ def save_struct_sizes(engine, workdir, profile):
     subprocess.run(['arm-none-eabi-gcc', '-mthumb', '-mthumb-interwork', '-O2', '-mabi=apcs-gnu',
                     '-mtune=arm7tdmi', '-march=armv4t', '-std=gnu17', '-iquote', 'include',
                     '-I', 'tools/agbcc/include', '-DMODERN=1', '-DTESTING=0', '-DEMERALD', '-DRELEASE',
-                    f"-DP_CRIES_ENABLED={'TRUE' if profile == 'on' else 'FALSE'}",
+                    f"-DP_CRIES_ENABLED={'TRUE' if profile == 'on' else 'FALSE'}",  # sizes match normal builds
                     '-c', str(src), '-o', str(obj)], cwd=engine, check=True)
     found = {}
     for line in subprocess.check_output(['arm-none-eabi-nm', str(obj)], text=True).splitlines():
@@ -346,10 +346,17 @@ def pokedex_cry(d):
 EXTRA_PHASES = {'talk_follower': talk_follower, 'pokedex_cry': pokedex_cry}
 
 
+def rom_name(profile, build):
+    """Output of make [RELEASE=1] CRIES=<profile> (engine Makefile suffixes)."""
+    return f"pokeemerald-cries-{profile}{'-release' if build == 'release' else ''}.gba"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--engine', type=Path, required=True)
     parser.add_argument('--profile', choices=('on', 'off'), required=True)
+    parser.add_argument('--build', choices=('release', 'normal'), default='release',
+                        help='normal = make CRIES=<profile> (no RELEASE/LTO), same cry source')
     parser.add_argument('--scratch', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--new-game', action='store_true')
@@ -361,7 +368,7 @@ def main():
     engine, scratch, out = args.engine.resolve(), args.scratch.resolve(), args.out.resolve()
     if engine == scratch or engine in scratch.parents:
         parser.error('scratch must be outside the engine tree')
-    rom_source = engine/f'pokeemerald-cries-{args.profile}-release.gba'
+    rom_source = engine/rom_name(args.profile, args.build)
     elf = rom_source.with_suffix('.elf')
     scratch.mkdir(parents=True, exist_ok=True)
     out.mkdir(parents=True, exist_ok=True)
@@ -388,7 +395,8 @@ def main():
                   wrapper_status=play.git(Path(__file__).resolve().parent, 'status', '--short', '--',
                                           Path(__file__).name).splitlines(),
                   rom_sha256=play.sha256(rom), elf_sha256=play.sha256(elf),
-                  cry_profile=args.profile, release=True, phases=args.phases,
+                  cry_profile=args.profile, release=args.build == 'release', build=args.build,
+                  phases=args.phases,
                   mgba=subprocess.check_output(['mgba', '--version'], text=True).strip(),
                   acceptance='Supporting real emulator evidence; not human listening or Delta',
                   save_before=play.sha256(flash_path) if flash_path.exists() else None,

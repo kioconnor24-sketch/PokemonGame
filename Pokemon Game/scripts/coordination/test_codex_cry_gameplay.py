@@ -1,7 +1,7 @@
 import struct
 import unittest
 from codex_cry_gameplay import (SECTOR_SIGNATURE, SECTOR_SIZE, chunk_sizes, flash_slots,
-                                flash_verdict, lto_aliases, restored_problems,
+                                flash_verdict, lto_aliases, restored_problems, rom_name,
                                 save_dialog_verdict, sector_checksum)
 
 SIZES = chunk_sizes(3800, 15000, 33744)
@@ -42,6 +42,13 @@ class Symbols(unittest.TestCase):
         self.assertEqual(result['same'], 3)
         self.assertNotIn('other', result)
 
+
+
+class Builds(unittest.TestCase):
+    def test_rom_names_follow_the_makefile_suffixes(self):
+        self.assertEqual(rom_name('off', 'release'), 'pokeemerald-cries-off-release.gba')
+        self.assertEqual(rom_name('on', 'release'), 'pokeemerald-cries-on-release.gba')
+        self.assertEqual(rom_name('off', 'normal'), 'pokeemerald-cries-off.gba')
 
 
 class Flash(unittest.TestCase):
