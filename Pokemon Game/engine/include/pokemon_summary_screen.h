@@ -7,6 +7,11 @@
 
 extern u8 gLastViewedMonIndex;
 
+#if TESTING
+struct Pokemon;
+bool32 TestSummaryBufferTrainerMemo(struct Pokemon *mon, u8 *output);
+#endif
+
 extern const struct SpriteTemplate gSpriteTemplate_MoveTypes;
 extern const struct CompressedSpriteSheet gSpriteSheet_MoveTypes;
 extern const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons;

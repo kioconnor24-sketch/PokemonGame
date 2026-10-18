@@ -6,7 +6,7 @@ INCLUDES := -I .
 
 SRCS := jsonproc.cpp
 
-HEADERS := jsonproc.h inja.hpp nlohmann/json.hpp
+HEADERS := jsonproc.h map_sections.h inja.hpp nlohmann/json.hpp
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe

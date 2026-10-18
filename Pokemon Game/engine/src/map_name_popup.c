@@ -83,10 +83,10 @@ static const u16 sMapPopUp_PaletteTable[][16] =
 
 static const u16 sMapPopUp_Palette_Underwater[16] = INCGFX_U16("graphics/map_popup/underwater.pal", ".gbapal");
 
-// -1 in the size excludes MAPSEC_NONE.
+// NONE is now a stable hole, so allocate through the highest named section.
 // The MAPSEC values for Kanto (between MAPSEC_DYNAMIC and MAPSEC_AQUA_HIDEOUT) are also excluded,
-// and this is then handled by subtracting KANTO_MAPSEC_COUNT here and in LoadMapNamePopUpWindowBg.
-static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
+// and this is then handled by subtracting KANTO_MAPSEC_COUNT here and in GetMapNamePopupTheme.
+static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_WOOD,
@@ -207,7 +207,7 @@ static const u16 sMapPopUpTilesPalette_BW_Black[] = {0};
 static const u16 sMapPopUpTilesPalette_BW_White[] = {0};
 #endif
 
-static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
+static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[MAPSEC_COUNT - KANTO_MAPSEC_COUNT] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = MAPPOPUP_THEME_BW_DEFAULT,
     [MAPSEC_OLDALE_TOWN] = MAPPOPUP_THEME_BW_DEFAULT,
@@ -669,27 +669,34 @@ static void DrawMapNamePopUpFrame(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 un
         FillBgTilemapBufferRect(bg, TILE_BOT_EDGE_START + i, i - 1 + x, y + deltaY, 1, 1, 14);
 }
 
+static u8 GetMapNamePopupTheme(u32 section, bool32 gen5)
+{
+    if (section >= KANTO_MAPSEC_START)
+        section = section > KANTO_MAPSEC_END ? section - KANTO_MAPSEC_COUNT : 0;
+    if (gen5)
+        return section < ARRAY_COUNT(sRegionMapSectionId_To_PopUpThemeIdMapping_BW)
+            ? sRegionMapSectionId_To_PopUpThemeIdMapping_BW[section] : MAPPOPUP_THEME_BW_DEFAULT;
+    return section < ARRAY_COUNT(sMapSectionToThemeId) ? sMapSectionToThemeId[section] : MAPPOPUP_THEME_WOOD;
+}
+
+#if TESTING
+u8 TestMapNamePopupTheme(u32 section, bool32 gen5)
+{
+    return GetMapNamePopupTheme(section, gen5);
+}
+#endif
+
 static void LoadMapNamePopUpWindowBg(void)
 {
-    u8 popUpThemeId;
+    u8 popUpThemeId = GetMapNamePopupTheme(gMapHeader.regionMapSectionId, OW_POPUP_GENERATION == GEN_5);
     u8 popupWindowId = GetMapNamePopUpWindowId();
-    mapsec_u16_t regionMapSectionId = gMapHeader.regionMapSectionId;
     u8 secondaryPopUpWindowId;
 
     if (OW_POPUP_GENERATION == GEN_5)
         secondaryPopUpWindowId = GetSecondaryPopUpWindowId();
 
-    if (regionMapSectionId >= KANTO_MAPSEC_START)
-    {
-        if (regionMapSectionId > KANTO_MAPSEC_END)
-            regionMapSectionId -= KANTO_MAPSEC_COUNT;
-        else
-            regionMapSectionId = 0; // Discard kanto region sections;
-    }
-
     if (OW_POPUP_GENERATION == GEN_5)
     {
-        popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping_BW[regionMapSectionId];
         switch (popUpThemeId)
         {
         // add additional gen 5-style pop-up themes as cases here
@@ -709,7 +716,6 @@ static void LoadMapNamePopUpWindowBg(void)
     }
     else
     {
-        popUpThemeId = sMapSectionToThemeId[regionMapSectionId];
         LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);
         CallWindowFunction(popupWindowId, DrawMapNamePopUpFrame);
         PutWindowTilemap(popupWindowId);

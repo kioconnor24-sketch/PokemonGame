@@ -326,8 +326,8 @@ class SourceBatchTests(unittest.TestCase):
         sections = json.loads((ENGINE / 'src/data/region_map/region_map_sections.json').read_text())
         entries = sections['map_sections']
         entries[-1], entries[-2] = entries[-2], entries[-1]
-        result = self.audit_mutated({'src/data/region_map/region_map_sections.json': sections})
-        self.assertIn('saved-section-pin', self.codes(result))
+        with self.assertRaisesRegex(ValueError, 'legacy|moved value'):
+            self.audit_mutated({'src/data/region_map/region_map_sections.json': sections})
 
     def test_section_namespace_mismatch_is_explicit(self):
         source = self.map_data()
@@ -339,10 +339,9 @@ class SourceBatchTests(unittest.TestCase):
     def test_explicit_section_region_is_used_without_allocating_ids(self):
         source = self.map_data()
         source['region'] = 'REGION_SINNOH'
-        sections = json.loads((ENGINE / 'src/data/region_map/region_map_sections.json').read_text())
-        next(s for s in sections['map_sections'] if s['id'] == source['region_map_section'])['region'] = 'REGION_SINNOH'
-        result = self.audit_mutated({'data/maps/Saltmere/map.json': source,
-            'src/data/region_map/region_map_sections.json': sections})
+        source['region_map_section'] = 'MAPSEC_SANDGEM_TOWN'
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+        self.assertEqual(result['maps'][0]['section_value'], 216)
         self.assertEqual(result['errors'], [])
         self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_SINNOH')
         self.assertNotIn('section-region-mismatch', {e['code'] for e in result['warnings']})
