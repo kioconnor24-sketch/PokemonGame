@@ -9,7 +9,7 @@
 
 **Why it was stopped (a QA driver defect, not a game defect):**
 - LTO renames static functions, so on RELEASE the battle controller is `HandleInputChooseAction.lto_priv.N`.
-- The driver compares controller names exactly, so its battle-menu logic never ran: no Poké Ball, no run, no move choice. The default A presses picked FIGHT and the first move every turn.
+- The driver compares controller names exactly, so its **action-menu** logic never ran: no Poké Ball and no run. The default A presses picked FIGHT. The move menu (`HandleInputChooseMove`, plain name under LTO) still worked, so the driver chose moves normally: there are 46 `turn` events.
 - With no Pokémon caught, the catch phase then looped toward the shop. The log showed no new events for 18 minutes, so the wrapper was interrupted (SIGINT).
 
 **Fix:** the wrapper now reports functions by their source names (`use_source_function_names`, with a test) and the driver is unchanged. Normal builds were never affected. Battles, capture, trainer and save on RELEASE are rerun as run09.

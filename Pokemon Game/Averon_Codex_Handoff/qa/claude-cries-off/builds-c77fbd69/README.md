@@ -14,6 +14,8 @@ Native: make -j12 CRIES=off|on check TESTS="Averon cry safety" (headless) and mg
 
 ## After the review fixes (Makefile `CRIES` strip and the new ducking test; head after `57a9fcbc`)
 
-- **ROMs unchanged:** rebuilding both RELEASE profiles gives byte-identical ROMs, OFF `06e3e40a…` and ON `4dbf3be4…`, with only the 4 newlib notes. See `build-117r-*.log`.
+- **ROMs unchanged:** rebuilding both RELEASE profiles gives byte-identical ROMs, OFF `06e3e40a…` and ON `4dbf3be4…`, with the 4 newlib stub notes plus 1 assembler warning (`.rodata.compound_string… size is not a multiple of its entry size`). The assembler warning is pre-existing: main's RELEASE build has it too. See `build-117r-*.log`.
 - **`Averon cry safety` is now 10/10** on each profile, headless (`native-*-final.log`) and non-headless (`native-*-final-nonheadless.log`).
 - **The new test fails without the fix (RED, `native-off-duck-RED.log`):** with the OFF gating removed from `PlayCry_Normal`, `ByMode` and `Script`, it fails with `EXPECT_EQ(21, 64)`. `sound.c` was restored afterwards and is identical to HEAD.
+
+**Correction (2026-10-18):** earlier notes, including the #124 evidence comment, said "only the 4 newlib notes". Those notes came from a case-sensitive `grep warning:`, which missed the assembler's `Warning:` line. That warning is present on every RELEASE build here and on main.

@@ -177,9 +177,6 @@ class Continue(unittest.TestCase):
                 self.assertTrue(restored_problems(self.SAVED, dict(self.SAVED, **{key: value})))
 
 
-if __name__ == '__main__':
-    unittest.main()
-
 
 class Arguments(unittest.TestCase):
     def test_reused_output_folder_is_refused(self):
@@ -196,3 +193,6 @@ class Arguments(unittest.TestCase):
                     contextlib.redirect_stderr(io.StringIO()) as err, self.assertRaises(SystemExit):
                 codex_cry_gameplay.main()
             self.assertIn('new or empty directory', err.getvalue())
+
+if __name__ == '__main__':
+    unittest.main()

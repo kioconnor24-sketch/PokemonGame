@@ -62,7 +62,7 @@ def base_name(name):
 def use_source_function_names(observed):
     """Report functions by their source names. LTO renames statics, for example
     HandleInputChooseAction.lto_priv.1, and the driver compares exact names, so
-    on RELEASE its battle-menu logic never ran (run08: no ball, no move choice)."""
+    on RELEASE its action-menu logic never ran (run08: no ball, no run)."""
     observed.by_addr = {addr: base_name(name) for addr, name in observed.by_addr.items()}
 
 
