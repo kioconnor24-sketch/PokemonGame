@@ -1,0 +1,27 @@
+{"t": 1792290139.5, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792290139.55, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792290140.09, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792290140.14, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792290142.24, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792290142.31, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792290144.11, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792290144.21, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792290144.75, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792290144.81, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792290145.34, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792290145.42, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792290146.54, "event": "screen", "cb2": "CB2_MainMenu.lto_priv.0", "i": 12}
+{"t": 1792290146.59, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792290150.2, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792290150.3, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792290150.94, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792290150.95, "event": "memory-check", "label": "after-continue", "heap_head": "02001924", "heap_blocks": 7, "sFirstTextPrinter": "00000000", "union_room_name0": "FF", "problems": []}
+{"t": 1792290159.92, "event": "map", "map": "MAP_COASTALMEADOW", "pos": [34, 31]}
+{"t": 1792290172.69, "event": "map", "map": "MAP_WINDROW", "pos": [19, 25]}
+{"t": 1792290180.02, "event": "map", "map": "MAP_ORCHARDLANE", "pos": [19, 31]}
+{"t": 1792290189.12, "event": "map", "map": "MAP_ALDERFIELD", "pos": [19, 31]}
+{"t": 1792290197.28, "event": "map", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 8]}
+{"t": 1792290209.19, "event": "healed", "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792290209.27, "event": "memory-check", "label": "after-heal-1", "heap_head": "02001924", "heap_blocks": 6, "sFirstTextPrinter": "00000000", "union_room_name0": "FF", "problems": []}
+{"t": 1792290220.07, "event": "healed", "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792290220.2, "event": "memory-check", "label": "after-heal-2", "heap_head": "02001924", "heap_blocks": 6, "sFirstTextPrinter": "00000000", "union_room_name0": "FF", "problems": []}

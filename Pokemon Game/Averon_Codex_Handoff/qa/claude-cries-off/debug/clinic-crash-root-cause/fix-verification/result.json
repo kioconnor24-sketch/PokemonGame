@@ -1,0 +1,84 @@
+{
+ "rom_sha256": "6e37d30ef82455374b5720fb480383eeeac76632acd274f4be91c3a37f134814",
+ "elf_sha256": "ce214d7b6f4d1a074aa56ec2854c0d535b6176e9d4ae47813392c5b90fa296bc",
+ "save_sha256": "73c3b87db65a0f593ac6f53d8aeb2985ebe8e2301e5719744c0cfe99240a5825",
+ "addresses": {
+  "sHeapStart": "030008AC",
+  "sFirstTextPrinter": "0200002C",
+  "sUnionRoomPlayerName": "02000004",
+  "gHeap": "02001924"
+ },
+ "checks": [
+  {
+   "label": "after-continue",
+   "heap_head": "02001924",
+   "heap_blocks": 7,
+   "sFirstTextPrinter": "00000000",
+   "union_room_name0": "FF",
+   "problems": []
+  },
+  {
+   "label": "after-heal-1",
+   "heap_head": "02001924",
+   "heap_blocks": 6,
+   "sFirstTextPrinter": "00000000",
+   "union_room_name0": "FF",
+   "problems": []
+  },
+  {
+   "label": "after-heal-2",
+   "heap_head": "02001924",
+   "heap_blocks": 6,
+   "sFirstTextPrinter": "00000000",
+   "union_room_name0": "FF",
+   "problems": []
+  }
+ ],
+ "heal1_party": [
+  {
+   "species": 393,
+   "status": 0,
+   "moves": [
+    1,
+    45,
+    0,
+    0
+   ],
+   "pp": [
+    35,
+    40,
+    0,
+    0
+   ],
+   "ppBonuses": 0,
+   "level": 5,
+   "hp": 20,
+   "maxhp": 20
+  }
+ ],
+ "heal2_party": [
+  {
+   "species": 393,
+   "status": 0,
+   "moves": [
+    1,
+    45,
+    0,
+    0
+   ],
+   "pp": [
+    35,
+    40,
+    0,
+    0
+   ],
+   "ppBonuses": 0,
+   "level": 5,
+   "hp": 20,
+   "maxhp": 20
+  }
+ ],
+ "field_ready": true,
+ "alive": true,
+ "problems": []
+}
