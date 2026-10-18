@@ -194,7 +194,10 @@ enum {
     PLIST_CONTACTED,
 };
 
-static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
+// Empty (EOS) from boot: the nurse script reads this through
+// BufferUnionRoomPlayerName even in centers that never ran InitUnionRoom
+// (Averon's clinics), and a zero-filled buffer is not a terminated string.
+static EWRAM_INIT u8 sUnionRoomPlayerName[12] = {EOS};
 EWRAM_DATA u8 gPlayerCurrActivity = 0;
 static EWRAM_DATA u8 sPlayerActivityGroupSize = 0;
 static EWRAM_DATA union
