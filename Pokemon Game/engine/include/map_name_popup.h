@@ -1,6 +1,10 @@
 #ifndef GUARD_MAP_NAME_POPUP_H
 #define GUARD_MAP_NAME_POPUP_H
 
+#if TESTING
+u8 TestMapNamePopupTheme(u32 section, bool32 gen5);
+#endif
+
 // Exported type declarations
 
 // Exported RAM declarations
