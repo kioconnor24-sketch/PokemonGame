@@ -87,7 +87,7 @@ class MakefileProfiles(unittest.TestCase):
                 result = probe(value)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual(result.stdout.split(), words)
-        for value in ('on off', 'bogus', ''):
+        for value in ('on off', 'bogus', '', 'o%', '%', '%n', '%f'):  # % would act as a filter pattern
             with self.subTest(value=value):
                 self.assertNotEqual(probe(value).returncode, 0)
 

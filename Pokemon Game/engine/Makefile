@@ -71,7 +71,8 @@ override CRIES := $(strip $(CRIES))
 ifneq ($(words $(CRIES)),1)
   $(error CRIES must be exactly one of default, on, or off)
 endif
-ifeq ($(filter $(CRIES),default on off),)
+# CRIES is the text here, not the pattern: "o%" must not match "on"/"off".
+ifneq ($(filter-out default on off,$(CRIES)),)
   $(error CRIES must be default, on, or off)
 endif
 ifneq ($(CRIES),default)
@@ -81,6 +82,8 @@ ifneq ($(CRIES),default)
     CRY_CPPFLAGS := -DP_CRIES_ENABLED=TRUE
   else ifeq ($(CRIES),off)
     CRY_CPPFLAGS := -DP_CRIES_ENABLED=FALSE
+  else
+    $(error CRIES must be default, on, or off)
   endif
 endif
 
