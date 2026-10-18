@@ -182,18 +182,27 @@ class Gdb:
         self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self.running = False
 
+    def _recv1(self):
+        ch = self.sock.recv(1)
+        if not ch:
+            # recv() returns b"" forever once the emulator closes the socket
+            # (it exited or crashed): fail now instead of spinning.
+            raise Blocked("GDB connection closed by the emulator (exited or crashed; see mgba.log)")
+        return ch
+
     def _packet(self):
-        while self.sock.recv(1) != b"$":
+        while self._recv1() != b"$":
             pass
         buf = bytearray()
         while True:
-            ch = self.sock.recv(1)
+            ch = self._recv1()
             if ch == b"#":
-                self.sock.recv(2)
+                self._recv1()  # two checksum digits
+                self._recv1()
                 self.sock.sendall(b"+")
                 return bytes(buf).decode("ascii")
             if ch == b"}":
-                buf.append(self.sock.recv(1)[0] ^ 0x20)
+                buf.append(self._recv1()[0] ^ 0x20)
             else:
                 buf.extend(ch)
 
