@@ -55,10 +55,11 @@ def validate(snapshot: dict) -> tuple[list[str], list[str]]:
         elif collisions:
             warnings.append(f"PR #{number} shares paths with PR #{peer['number']}: {', '.join(sorted(collisions)[:5])}")
     if number not in GRANDFATHERED_PR:
-        frozen = sorted(x for x in paths if frozen_map(x))
-        if frozen:
-            failures.append("Owner's NO MAP freeze forbids modifications: " + ", ".join(frozen))
+        # Phase 2 permits owner-approved permanent map construction, but ONLY
+        # for exact PR/file paths in a signed Issue #15 handoff. No prefix or
+        # global map waiver: old and new assets are treated identically.
         protected_paths = {x for x in paths if protected(x)}
+        frozen_paths = {x for x in paths if frozen_map(x)}
         valid_approvals = set()
         for approval in snapshot.get("handoffs", []):
             if int(approval.get("pr", -1)) != number:
@@ -69,6 +70,10 @@ def validate(snapshot: dict) -> tuple[list[str], list[str]]:
         uncovered = sorted(protected_paths.difference(valid_approvals))
         if uncovered:
             failures.append("Exclusive shared-file handoff NOT recorded in #15: " + ", ".join(uncovered))
+        unapproved_maps = sorted(frozen_paths.difference(valid_approvals))
+        if unapproved_maps:
+            failures.append("Map-file freeze: exact PR/file handoff NOT recorded in #15: "
+                            + ", ".join(unapproved_maps))
     return failures, warnings
 
 
