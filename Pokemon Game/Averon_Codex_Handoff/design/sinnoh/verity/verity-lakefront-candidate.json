@@ -1,0 +1,207 @@
+{
+ "name": "Verity Lakefront - DESIGN CANDIDATE (not approved; original DPPt geography)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 22,
+ "height": 18,
+ "legend": {
+  "A": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "B": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "C": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "D": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "E": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "F": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "G": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  },
+  "H": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "I": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "J": {
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "K": {
+   "metatile": 133,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge, jump west only",
+   "jump": "west"
+  },
+  "M": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "N": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "O": {
+   "metatile": 141,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge corner (solid; not a jump in this engine)"
+  },
+  "P": {
+   "metatile": 135,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge, jump south only",
+   "jump": "south"
+  }
+ },
+ "rows": [
+  "ABABABCCABABABABABABAB",
+  "DEDEDECCDEDEDEDEDEDEDE",
+  "ABABABCCABABABABABABAB",
+  "DEDEDECCDEDEDEDEDEDEDE",
+  "ABABABCCABABABABABABAB",
+  "DEDEFGCCFHFHFHFHDEDEDE",
+  "ABABCCIJCCCCCCCCABABAB",
+  "DEDECCCCCCKCCCCCFHFHFH",
+  "ABABCCCCCCKCCCCCCCCCCC",
+  "DEDECCCCCCKCCCCCCCCCCC",
+  "ABABCCCCCCKCCCCCMNCCCC",
+  "DEDECCCCCCKCCCCCFHCCCC",
+  "ABABMNCCCCOPPPPPPPPPPP",
+  "DEDEDECCCCCCCCCCCCCCCC",
+  "ABABABMNCCCCCCCCCCCCCC",
+  "DEDEDEDEDEDEDEDEDEDEDE",
+  "ABABABABABABABABABABAB",
+  "DEDEDEDEDEDEDEDEDEDEDE"
+ ],
+ "stamps": [],
+ "exits": [
+  {
+   "name": "east-upper",
+   "edge": "east",
+   "span": [
+    8,
+    11
+   ],
+   "to": "Route 201 west edge, upper (rows 8-11)",
+   "offset": 0,
+   "status": "Route 201 built (#150); Lakefront right 0 / Route 201 left 0, only after approval"
+  },
+  {
+   "name": "east-lower",
+   "edge": "east",
+   "span": [
+    13,
+    14
+   ],
+   "to": "Route 201 west edge, below the ledge (rows 13-14)",
+   "offset": 0,
+   "status": "same connection as east-upper"
+  },
+  {
+   "name": "north",
+   "edge": "north",
+   "span": [
+    6,
+    7
+   ],
+   "to": "Lake Verity south gap (x 38-39)",
+   "offset": -32,
+   "status": "unapproved; both maps new"
+  }
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    21,
+    8
+   ],
+   "size": [
+    1,
+    4
+   ],
+   "note": "east (upper) -> Route 201 rows 8-11 (offset 0)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    21,
+    13
+   ],
+   "size": [
+    1,
+    2
+   ],
+   "note": "east (lower) -> Route 201 rows 13-14 (offset 0)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    6,
+    0
+   ],
+   "size": [
+    2,
+    1
+   ],
+   "note": "north -> Lake Verity (offset -32)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    6,
+    1
+   ],
+   "size": [
+    2,
+    5
+   ],
+   "note": "lake entrance: DPPt story scenes here (not adopted)"
+  }
+ ]
+}
