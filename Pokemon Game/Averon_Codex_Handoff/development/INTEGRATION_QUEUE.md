@@ -1,0 +1,43 @@
+# Integration queue — live checkpoint 2026-10-19
+
+**Snapshot main:** `de127dff378abe720bba8b627dd123c4db478fb8` (#146, Pokémon cries OFF by default). **Do not assume these PR heads or statuses remain current.** Refresh [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls), the exact diff, checks and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) before touching a branch or merging.
+
+**Owner-confirmed process change:** [Issue #15 comment 6258091946](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6258091946) adopts **tiered option 2**, not blanket cross-review. Low-risk, non-draft PRs containing **only** docs, trackers, design proposals or isolated test/QA tooling may be self-merged after all applicable checks and a head-pinned evidence comment with files and real tests. Game/engine production source, maps, saves, permanent IDs, protected files, and CI/workflows still need nonauthor peer review. Author uses `--match-head-commit` or the merge API's exact expected SHA. The [operating contract](CURRENT_PHASE_AND_HANDOFF.md) specifies the gates. Shared GitHub account login alone proves no peer identity. No creative or content approval follows from merging a design PR.
+
+## Current open pull requests at this checkpoint
+
+| PR | Head at checkpoint | Scope / evidence | Risk and next action |
+| --- | --- | --- | --- |
+| [#143](https://github.com/kioconnor24-sketch/PokemonGame/pull/143) | `484c12e962ccb781c0844a37cd646f6ae1021800` | Claude map QA tools, run-2 6/6 fixture outcomes; draft flag cleared; offline tests, NORMAL mGBA smoke and limitations documented. | **R1 low risk** if current diff still only test/QA tooling. Claude may head-pin and self-merge after verifying latest applicable checks and exact-head evidence. No gameplay-region acceptance follows automatically. |
+| [#147](https://github.com/kioconnor24-sketch/PokemonGame/pull/147) | `1f6cdb21e24a6885dfa6e72838512c69776e9142` | Claude SN-T02 tracker: Sandgem structure EMULATOR_PASS, gameplay DEFERRED, merged-main NORMAL/RELEASE 26/26. | **R0 low risk** if tracker-only; Claude may verify and self-merge with exact-head evidence. Do not label full gameplay complete. |
+| [#139](https://github.com/kioconnor24-sketch/PokemonGame/pull/139) | `1fb0082f5a287d776a0e49de5c70a299b8da296a` | Claude junction spec / Route 202 reference status. Previously requested corrections applied, incl. Route 201 `±4` seam and tree phase. | **R0 low risk** if docs only; Claude may self-merge with evidence. Route 202 still lacks a reliable full reference and no route is approved for production. |
+| [#135](https://github.com/kioconnor24-sketch/PokemonGame/pull/135) | `c957344d75b740ddf70eb3e6d025decfd32776f6` | Claude Route 201 *design only*; corrected offset to route right -4 / Sandgem left +4 after real mGBA dry run, 35/35 checks, 3/3 fresh Continue, +2,948 B test growth. | **R0/R1 design-only** if no production map/ID edit; Claude may self-merge as proposal after exact-head evidence. Owner must explicitly approve geometry, section ID, route connection, closed edges and encounter policy before construction. |
+| [#148](https://github.com/kioconnor24-sketch/PokemonGame/pull/148) | `5e3997a54c9a88fb194d72d83f860e32565b4a84` | Codex Sandgem + four-profile X7 measurement report, one docs file. Claude requested corrections to outdated #143/#139 descriptions. | **R0 low risk**; Codex should correct stale text, verify exact head, tests and links, then may self-merge docs-only report. Do not imply graphics, runtime peaks or Delta verified. |
+| [#144](https://github.com/kioconnor24-sketch/PokemonGame/pull/144) | **Manager updating head; fetch live** | Organizational reset across root instructions, operative contract, queue and archive; it was stale about OFF default, merged PRs and blanket cross-review. | **R3 governance-sensitive**, not routine doc self-merge. Obtain independent Claude or Codex review of the final updated head and current links/checks before eligible normal merge. This is the branch containing this queue and the [manager handoff](CHATGPT_MANAGER_HANDOFF_20261019.md). |
+
+The table records **six** PRs open in the observed response. There were **no current failed CI conclusions** for those observed PR heads, but a green or path-skipped check never replaces the PR's applicable acceptance requirements. Pending reviews/author evidence must be evaluated individually. The separate [reset audit](ORGANIZATIONAL_RESET_20261018.md) is an immutable **October 18** snapshot, not live PR state.
+
+## Already merged — do not reassign or reopen
+
+- **#133 Sandgem Town + Center:** merged `ce0c505d4ae3103680f96482881b9589bced14c0`. Closed Route 201/202/219 exits, DEV-only initial entry, real nurse heal and Save→fresh Continue verified; **no natural respawn or ordinary Averon→Sinnoh entrance**.
+- **#145 automation advisory:** merged `8e67abf76a2d9829e76b840778e37c5e26412907`, live read-only workflow; old #31 board remains archived.
+- **Codex backend six #136/#138/#137/#140/#134/#141 and checkpoint #142:** all merged by Claude after attributed independent review. Combined production/source tests **284/284 focused native**, with documented real ROM and sanitizer checks; this is *not* a full 6,107-result baseline rerun.
+- **#146 cries OFF default:** merged `de127dff378abe720bba8b627dd123c4db478fb8`, original assets retained and explicit ON restoration available. Human audio listening and Delta acceptance still unverified.
+- **#132 Sandgem location name/section 216**, and earlier map guard/registry toolchain already on main.
+
+## Next developer actions: finish/integrate, then build
+
+1. **Claude**: head-pin verify and self-merge eligible tracker/docs/map QA PRs **#147, #139, #135, #143** one at a time, only if no protected/production file sneaked into a diff and no applicable check or evidence is missing. Verify main after each merge. Repair #148 content is **Codex's** responsibility.
+2. **Codex**: fix stale #148 sentences and self-integrate only if final diff stays docs-only, with real evidence. Do not restore blanket review or rewrite Claude-owned geometry/map QA.
+3. **Claude or Codex**: independently review governance PR **#144 after its final head**, including owner tier-2 option, cries OFF, latest merged status and the manager handoff. Manager may assist only on requested exceptions. Do not merge a stale reviewed SHA.
+4. **Owner approval: Route 201**: latest [original decision packet](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6257061171), **superseded offset** [`±4` correction](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6257962578). Approve/revise 64×22 original-inspired layout and 3 deviations; exact 217 section allocation; connection Route201 right -4 ↔ Sandgem left +4; keep Twinleaf/Verity closed; grass physical only/no encounters yet. **No signed map-file handoff until the owner approves actual scope**. Once approved, Codex handles section 217 and Claude constructs route with normal/GBA graphical route-and-return QA.
+5. **Owner approval: Sandgem whiteout**: choose a verified free permanent healer ID and destination anchor/interior nurse coordinates; Codex and Claude coordinate approved narrow source/maps. Ordinary heal alone currently preserves previous respawn anchor.
+6. **Route 202**: request a trustworthy full reference or explicit permission for a labeled schematic; do not fabricate canonical map details. Future Fly/Town Map UI and origin-encoding precision are separate engineering/owner decisions.
+
+## Scope and correctness reminders
+
+- **Averon is the first region; Sinnoh is the full second region.** The next useful vertical slice is connected Sandgem ↔ Route 201, not a large batch of untested maps. Accessible story travel and Gyms remain deferred until explicitly designed.
+- **M1 accepted**, original benchmark 6,107 results / 5,332 PASS + expected failures; human audio and owner Delta tests deferred/unverified.
+- Retain SaveBlock2 headroom awareness (~84 B at documented measurements), 8-bit met-origin identity constraints (36 free ordinary codes 217–252 after Sandgem216), ROM-resource and save-compatibility proof for meaningful implementation.
+- No direct main push, force rewrite, mass branch deletion, undocumented claim collision, unapproved asset/ID/story/route change, fabricated emulator pass or copyrighted ROM commit.
+- An issue comment does not start a paused Claude/Codex session. Preserve exact full SHAs in PR handoffs, author claims and actual test labels. The reviewer identity may be asserted only from evidence, not inferred from a shared login.

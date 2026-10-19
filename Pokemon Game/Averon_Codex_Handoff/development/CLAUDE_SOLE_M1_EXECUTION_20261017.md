@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # OWNER DIRECTIVE — Claude sole active M1 executor (updated 2026-10-17)
 
 > **LATEST OWNER REQUEST: FINISH EVERY REMAINING PRE-SINNOH TASK — 2026-10-17.** Read **[M1_EXHAUSTIVE_REMAINING_WORK_20261017.md](M1_EXHAUSTIVE_REMAINING_WORK_20261017.md)** in FULL. It is the single comprehensive source for all currently unfinished QA, old PR #20/#71 integration, active PR #97, original-trainer egg risk #100, reusable engine verification, final builds, resource limits, and exact M1 acceptance. The older five-step work order below is a summary, **not a replacement for the detailed final checklist**. Do not redo merged #14/#25/#95/#96 or wait for paused workers. Claude has permission for eligible normal merges subject to actual GitHub/host checks; no bypass of Auto-mode denials. Never begin maps/Sinnoh until owner approves.

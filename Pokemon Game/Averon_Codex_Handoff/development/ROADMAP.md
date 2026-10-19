@@ -1,12 +1,12 @@
 # Pokémon Averon — high-level roadmap (owner-approved transition)
 
-For **live status and scope**, read [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md) first; for actual assignments read [TASKS.md](TASKS.md) and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). Older pre-Sinnoh dependency/PR schedules are retained in dated runbooks for history.
+For **live status and scope**, read [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md) first; for current integration priorities read [INTEGRATION_QUEUE.md](INTEGRATION_QUEUE.md) and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). Older pre-Sinnoh dependency/PR schedules are retained in dated runbooks for history.
 
 | Stage | Status | Evidence / next gate |
 | --- | --- | --- |
 | **M1: map-independent pre-Sinnoh backend** | **OWNER-ACCEPTED 2026-10-17** | [Claude consolidated signoff](M1_ACCEPTANCE_REPORT_20261017.md), [Codex native closeout](CODEX_M1_NATIVE_CLOSEOUT_20261017.md); no known M1-blocking engineering defect. Human audio listen explicitly deferred, Gym 1 evidence gap accepted. |
 | **M2: next-phase design contract and technical infrastructure** | **AUTHORIZED TO BEGIN** | [Technical readiness plan](SINNOH_TECHNICAL_READINESS_20261017.md); owner decisions on geography, map IDs/sections, progression, asset resources/rights before those specific details are implemented. |
-| **M2: first approved playable region slices** | **APPROVED IN PRINCIPLE, NOT YET SPECIFIED** | Each concrete map/story/roster/encounter/saved-ID design must receive owner approval, satisfy guarded PR workflow, linked budgets and graphical QA. |
+| **M2: first approved playable region slices** | **SANDGEM #133 MERGED; CLOSED-EDGE SLICE VERIFIED** | Section 216 (#132) and Sandgem maps/Center (#133, merge `ce0c505d`) are on main; Claude re-tested main NORMAL/RELEASE OFF 26/26. DEV-only entry, no natural whiteout anchor or story travel. Later routes still require owner approval; Later routes still need owner approval; see the [integration queue](INTEGRATION_QUEUE.md). |
 | **Expanded Averon adventure and full Sinnoh second region** | **FUTURE CONTENT BUILD** | Incremental geography, NPCs, gyms, legendary quests, dialogue and pacing; no current claim these areas are implemented or fit on ROM. |
 | **Release candidate / Delta iOS compatibility** | **NOT YET VERIFIED** | Real owner device testing, finished story/world, audio listened to and documented, legal distribution and all relevant save/load/move/graphics tests. |
 

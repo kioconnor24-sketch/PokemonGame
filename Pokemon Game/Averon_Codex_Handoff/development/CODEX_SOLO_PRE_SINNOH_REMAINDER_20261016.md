@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # CODEX — SOLO PRE-SINNOH BACKEND AND INTEGRATION TAKEOVER
 **Owner-directed, 2026-10-16.** Claude's current manual session has finished per owner. **Codex is assigned all remaining feasible backend implementation and integration**, not merely small test tasks. This file is a handoff on a new documentation branch, **not completed or merged game code**. First re-read fresh main, open PR changed paths/reviews/checks/heads, live Issue #15, full completion contract #46, Codex handoff #54, Playtest QA #23 and problem desk #55. Newer source wins over this snapshot.
 

@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # CURRENT INTEGRATION STATUS — 2026-10-16 (latest integrated checkpoint)
 
 > **Snapshot only:** confirm actual code against [main](https://github.com/kioconnor24-sketch/PokemonGame/tree/main), [open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls), live ownership in [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [Issue #31](https://github.com/kioconnor24-sketch/PokemonGame/issues/31) and [TASKS](TASKS.md). Older checkpoints below remain preserved **as historical evidence**; never follow their superseded "current" labels or code permissions.

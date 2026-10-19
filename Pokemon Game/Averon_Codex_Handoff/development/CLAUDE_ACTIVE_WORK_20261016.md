@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # CLAUDE — ACTIVE INDEPENDENT CAPACITY / CI ASSIGNMENT
 
 Issued at the owner's request on 2026-10-16. **The owner is reactivating Claude for this narrowly disjoint work lane, not the historical co-lead engine development or any autonomous schedule.** First read newest [Issue #15 claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [Issue #55 problem reports](https://github.com/kioconnor24-sketch/PokemonGame/issues/55), current PR list and this file. Snapshot SHAs are not guaranteed current; do not act on old role assignments from #31/#53/legacy documents.

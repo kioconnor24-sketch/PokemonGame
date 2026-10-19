@@ -1,3 +1,7 @@
+> **ARCHIVED MANAGER HANDOFF — superseded by [2026-10-19 manager handoff](CHATGPT_MANAGER_HANDOFF_20261019.md).** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # POKÉMON AVERON — ACTIVE CHATGPT MANAGER HANDOFF
 **Snapshot:** October 17, 2026 (US local); GitHub last checked after merged story PR #119. **Read live sources again.** This is the *current manager restart document* and supersedes the obsolete actionable M1 queues and old role assignments in `CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261016.md`, `CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261017.md`, `CHATGPT_MANAGER_M1_LIVE_CHECKPOINT_20261017.md` and older runbooks. They remain accessible as historical evidence. Do not execute their outdated open-PR lists.
 

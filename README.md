@@ -2,11 +2,11 @@
 
 The source project for an original **Averon** region followed by a full **Sinnoh** second region. This is actively developed source, **not** a complete playable game or verified Delta iOS release.
 
-## Start here — CURRENT source of truth
+## Start here — current operating contract
 
-1. **[Owner-approved current phase, readiness and developer handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md)** — the single canonical status. **Pre-Sinnoh Milestone 1 is accepted; the next phase is authorized.** Human audio listening is deferred; detailed map/story/ID design still requires approval.
+1. **[Owner-approved current phase, readiness and developer handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md)** — the single process authority. **Pre-Sinnoh Milestone 1 is accepted; the next phase is authorized.** Human audio listening is deferred; detailed map/story/ID design still requires approval.
 2. [Repository-wide agent rules](AGENTS.md) and [Claude-specific rules](CLAUDE.md), then [documentation index](Pokemon%20Game/Averon_Codex_Handoff/development/INDEX.md).
-3. [Current Phase 2 task queue](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md), [milestone roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/ROADMAP.md) and [Sinnoh technical readiness](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_TECHNICAL_READINESS_20261017.md).
+3. [Prioritized integration queue](Pokemon%20Game/Averon_Codex_Handoff/development/INTEGRATION_QUEUE.md), [reset audit](Pokemon%20Game/Averon_Codex_Handoff/development/ORGANIZATIONAL_RESET_20261018.md), [task navigation](Pokemon%20Game/Averon_Codex_Handoff/development/TASKS.md), [milestone roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/ROADMAP.md) and [Sinnoh technical readiness](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_TECHNICAL_READINESS_20261017.md).
 4. [Developer ownership hub — Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15) · [future design backlog #26](https://github.com/kioconnor24-sketch/PokemonGame/issues/26) · [QA / deferred human audio #23](https://github.com/kioconnor24-sketch/PokemonGame/issues/23) · [problem desk #55](https://github.com/kioconnor24-sketch/PokemonGame/issues/55).
 5. [Pull requests](https://github.com/kioconnor24-sketch/PokemonGame/pulls) · [GitHub Actions](https://github.com/kioconnor24-sketch/PokemonGame/actions) · [workflow rules](Pokemon%20Game/Averon_Codex_Handoff/development/WORKFLOW.md).
 

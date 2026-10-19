@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # Pokémon Averon — Milestone 1 parallel execution: Claude + Codex
 
 **Owner direction: 2026-10-17. This document explicitly replaces the old "Claude sole active M1 executor / Codex paused" division for unfinished M1 work only.** Both agents may now work *simultaneously* in the disjoint lanes below. Claude remains the sole local **graphical mGBA/gameplay driver and Gate B case-verdict owner**. Codex is independently assigned **native/backend audit, targeted tests, release/save/resource verification**. No standalone Playtest agent is reinstated. The manager may review/merge normal eligible PRs but is not an extra mandatory blocking signoff.

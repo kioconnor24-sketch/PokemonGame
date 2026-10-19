@@ -1,3 +1,7 @@
+> **ARCHIVED PROCESS / SNAPSHOT — superseded 2026-10-18.** Use the [single operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). All prior “current”, “authoritative”, pause, freeze, manager-only and resume commands below are historical. Retained evidence and approved product constraints are preserved; this file grants no new work or content approval.
+
+---
+
 # CODEX — ACTIVE SOLE ENGINE / INTEGRATION ASSIGNMENT
 
 Issued at the owner's request on 2026-10-16. **Read newest Issue #15 claims, Issue #46 acceptance, Issue #54 last handoff, Issue #55 new reports and live GitHub heads before any write.** This document assigns work; it is not evidence of execution, an approval to bypass a gate, or an automatic agent start. Live source facts and newer owner commands supersede these pinned snapshots.
