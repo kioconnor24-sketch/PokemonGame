@@ -17,7 +17,10 @@ Checks:
      accident once a neighbour is connected);
   5. every ledge lands on walkable ground;
   6. the east seam: with the declared offset, each open Route 201 edge row
-     faces an open Sandgem west-edge row and vice versa.
+     faces an open Sandgem west-edge row and vice versa;
+  7. the east seam keeps the 2x2 round trees in phase: wherever both edge tiles
+     are trees they are the same half (top or bottom). An odd offset splits every
+     tree row across the seam (found in the mGBA dry run).
 
 usage: verify_route201_plan.py [PLAN_JSON] [--sandgem-mapbin MAP.BIN] [--self-test]
 --self-test also proves each check fails on a deliberately broken copy of the plan.
@@ -32,6 +35,10 @@ from pathlib import Path
 # 38100116): rows 10-13 are open (grass verge, road rows 11-12), all others trees.
 SANDGEM_W, SANDGEM_H = 32, 28
 SANDGEM_WEST_OPEN = {10, 11, 12, 13}
+# Sandgem's x = 0 metatiles, rows 0-27, from the built map.bin (merged main).
+SANDGEM_WEST_TILES = [468, 476, 468, 476, 468, 476, 468, 476, 468, 484, 1, 465, 481, 1,
+                      470, 476, 468, 476, 468, 476, 468, 476, 468, 476, 468, 476, 468, 476]
+TREE_TOP, TREE_BOTTOM = {468, 469, 470, 471}, {476, 477, 484, 485}
 
 STEPS = {'N': (0, -1), 'S': (0, 1), 'W': (-1, 0), 'E': (1, 0)}
 
@@ -87,7 +94,7 @@ def reach(w, h, walk, ledge, starts, reverse=False):
     return seen
 
 
-def verify(plan, sandgem_west_open=SANDGEM_WEST_OPEN):
+def verify(plan, sandgem_west_open=SANDGEM_WEST_OPEN, sandgem_west_tiles=SANDGEM_WEST_TILES):
     w, h, walk, ledge = load(plan)
     exits = exit_tiles(plan, w, h)
     results = []
@@ -131,6 +138,16 @@ def verify(plan, sandgem_west_open=SANDGEM_WEST_OPEN):
         if not 0 <= sy + offset < h:
             mismatch.append(('sandgem row off route', sy))
     check(f'6 east seam matches Sandgem west edge at offset {offset} (Sandgem side {-offset})', not mismatch, mismatch)
+    half = lambda m: 'top' if m in TREE_TOP else 'bottom' if m in TREE_BOTTOM else None
+    split = []
+    for y in range(h):
+        sy = y - offset
+        if 0 <= sy < SANDGEM_H:
+            a = half(plan['legend'][plan['rows'][y][w - 1]]['metatile'])
+            b = half(sandgem_west_tiles[sy])
+            if a and b and a != b:
+                split.append((y, a, sy, b))
+    check('7 east seam keeps the round trees in phase (same half on both sides)', not split, split[:6])
     return results
 
 
@@ -138,7 +155,8 @@ def mutated(plan, kind, cells, **change):
     """Copy of the plan with cells repainted as solid tree, grass or ledge."""
     legend = dict(plan['legend'])
     pick = {'tree': ('t', {'metatile': 468, 'collision': 1, 'elevation': 0}),
-            'grass': ('g', {'metatile': 1, 'collision': 0, 'elevation': 3})}[kind]
+            'grass': ('g', {'metatile': 1, 'collision': 0, 'elevation': 3}),
+            'treebottom': ('b', {'metatile': 476, 'collision': 1, 'elevation': 0})}[kind]
     legend[pick[0]] = pick[1]
     rows = [list(r) for r in plan['rows']]
     for x0, y0, x1, y1 in cells:
@@ -157,14 +175,16 @@ NEGATIVE = [  # (label, mutation, check that must FAIL)
     ('trees between the middle grass and the main path: below the long ledge becomes a one-way pocket',
      ('tree', [(30, 12, 31, 15)]), '2 '),
     ('an accidental gap in the east tree line opens an undeclared edge', ('grass', [(62, 12, 63, 12)]), '4 '),
-    ('wrong connection offset misaligns the Sandgem seam', ('tree', [], {'offset': -4}), '6 '),
+    ('wrong (odd) connection offset misaligns the Sandgem seam', ('tree', [], {'offset': -5}), '6 '),
+    ('a bottom-half tree on an even edge row splits the round trees at the seam',
+     ('treebottom', [(63, 10, 63, 10)]), '7 '),
 ]
 
 
-def self_test(plan, open_rows):
+def self_test(plan, open_rows, tiles=SANDGEM_WEST_TILES):
     bad = 0
     for label, (kind, cells, *extra), must_fail in NEGATIVE:
-        res = verify(mutated(plan, kind, cells, **(extra[0] if extra else {})), open_rows)
+        res = verify(mutated(plan, kind, cells, **(extra[0] if extra else {})), open_rows, tiles)
         failed = [n for n, ok, _ in res if not ok]
         ok = any(n.startswith(must_fail) for n in failed)
         bad += not ok
@@ -178,20 +198,21 @@ def main():
     parser.add_argument('--self-test', action='store_true')
     parser.add_argument('--sandgem-mapbin', type=Path, help="read Sandgem's west edge from its built map.bin")
     args = parser.parse_args()
-    open_rows = SANDGEM_WEST_OPEN
+    open_rows, tiles = SANDGEM_WEST_OPEN, SANDGEM_WEST_TILES
     if args.sandgem_mapbin:
         raw = args.sandgem_mapbin.read_bytes()
         blocks = struct.unpack(f'<{SANDGEM_W * SANDGEM_H}H', raw)
         open_rows = {y for y in range(SANDGEM_H) if (blocks[y * SANDGEM_W] >> 10) & 3 == 0}
+        tiles = [blocks[y * SANDGEM_W] & 0x3FF for y in range(SANDGEM_H)]
         print(f'Sandgem west edge from {args.sandgem_mapbin}: open rows {sorted(open_rows)}')
     plan = json.loads(args.plan.read_text())
-    results = verify(plan, open_rows)
+    results = verify(plan, open_rows, tiles)
     for name, ok, detail in results:
         print(('PASS ' if ok else 'FAIL ') + name + ('' if ok else f'  {detail}'))
     failed = sum(not ok for _, ok, _ in results)
     print(f'{len(results) - failed}/{len(results)} checks pass')
     if args.self_test:
-        missed = self_test(plan, open_rows)
+        missed = self_test(plan, open_rows, tiles)
         print(f'{len(NEGATIVE) - missed}/{len(NEGATIVE)} broken plans caught')
         failed += missed
     return 1 if failed else 0

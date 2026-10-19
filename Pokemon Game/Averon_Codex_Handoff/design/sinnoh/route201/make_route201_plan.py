@@ -45,8 +45,9 @@ fill(56, 13, 56, 15, G)
 fill(45, 16, 56, 16, G)        # strip above the southern tall grass
 fill(52, 5, 63, 7, G)          # north-east clearing, open to the Sandgem (east) edge
 fill(53, 8, 57, 9, G)
-fill(61, 8, 63, 8, G)          # DEVIATION: one extra open row at the edge so it spans
-                               # Sandgem's whole west verge (rows 10-13); offset 5
+fill(61, 8, 63, 9, G)          # DEVIATION: the edge opening spans rows 6-9 so it meets Sandgem's
+fill(60, 5, 63, 5, F)          # whole west verge (rows 10-13) at offset 4; row 5 closes with trees
+fill(58, 9, 60, 9, G)          # open the verge so no tree is cut in half under the road
 
 # --- Trees inside the corridors (reference clumps) ---
 fill(1, 9, 2, 10, F)          # DEVIATION: reference tree touches x 0; moved one tile in so the
@@ -72,8 +73,9 @@ fill(29, 10, 38, 11, R)        # upper path
 fill(36, 12, 38, 13, R)        # joins the upper and lower paths east of the long ledge
 fill(32, 14, 55, 15, R)        # main eastern path
 fill(54, 12, 55, 13, R)        # up to the short ledge (which blocks it: north access is via the grass)
-fill(54, 6, 63, 7, R)          # DEVIATION: reference path is rows 7-8 and stops at x 60; one row higher and
-                               # run to the edge so it meets Sandgem's road (rows 11-12)
+fill(54, 7, 63, 8, R)          # DEVIATION: reference path rows 7-8 kept; it runs on from x 60 to the
+                               # edge to meet Sandgem's road (rows 11-12). An even offset (4) keeps the
+                               # 2x2 trees in phase across the seam (an odd offset splits every tree row)
 fill(54, 8, 55, 9, R)          # down to the short ledge
 
 # --- Signs (reference positions) ---
@@ -140,8 +142,8 @@ plan = {
     'primary': 'gTileset_General', 'secondary': 'gTileset_Dewford',
     'width': W, 'height': H, 'legend': legend, 'rows': rows, 'stamps': [],
     'exits': [
-        {'name': 'east', 'edge': 'east', 'span': [5, 8], 'to': 'Sandgem Town west edge (rows 10-13)',
-         'offset': -5, 'status': 'Sandgem built (PR #133); connection only after Route 201 is approved'},
+        {'name': 'east', 'edge': 'east', 'span': [6, 9], 'to': 'Sandgem Town west edge (rows 10-13)',
+         'offset': -4, 'status': 'Sandgem built (PR #133); connection only after Route 201 is approved'},
         {'name': 'south', 'edge': 'south', 'span': [15, 17], 'to': 'Twinleaf Town', 'status': 'unapproved; closed'},
         {'name': 'west-upper', 'edge': 'west', 'span': [8, 11], 'to': 'Lake Verity side', 'status': 'unapproved; closed'},
         {'name': 'west-lower', 'edge': 'west', 'span': [13, 14], 'to': 'Lake Verity side (below the ledge)',
@@ -151,7 +153,7 @@ plan = {
         {'kind': 'exit', 'at': [0, 8], 'size': [1, 4], 'note': 'west (upper) -> Lake Verity side (unapproved; closed)'},
         {'kind': 'exit', 'at': [0, 13], 'size': [1, 2], 'note': 'west (lower) -> Lake Verity side (unapproved; closed)'},
         {'kind': 'exit', 'at': [15, 21], 'size': [3, 1], 'note': 'south -> Twinleaf Town (unapproved; closed)'},
-        {'kind': 'exit', 'at': [63, 5], 'size': [1, 4], 'note': 'east -> Sandgem Town west edge (offset -5)'},
+        {'kind': 'exit', 'at': [63, 6], 'size': [1, 4], 'note': 'east -> Sandgem Town west edge (offset -4)'},
         {'kind': 'reserved', 'at': [42, 5], 'size': [11, 8], 'note': 'big grass patch: future first-encounter space (no table yet)'},
         {'kind': 'npc', 'at': [28, 14], 'note': 'NPC slot (reference: townsperson in the middle grass)'},
         {'kind': 'npc', 'at': [44, 15], 'note': 'NPC slot on the main path'},

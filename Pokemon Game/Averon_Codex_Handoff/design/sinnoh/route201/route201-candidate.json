@@ -48,89 +48,89 @@
    "note": "sign"
   },
   "H": {
-   "metatile": 464,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "I": {
-   "metatile": 465,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "J": {
    "metatile": 484,
    "collision": 1,
    "elevation": 0,
    "note": "tree (solid)"
   },
-  "K": {
+  "I": {
    "metatile": 485,
    "collision": 1,
    "elevation": 0,
    "note": "tree (solid)"
   },
+  "J": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "K": {
+   "metatile": 465,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
   "M": {
-   "metatile": 472,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "N": {
-   "metatile": 473,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "O": {
-   "metatile": 481,
-   "collision": 0,
-   "elevation": 3,
-   "note": "dirt road"
-  },
-  "P": {
    "metatile": 471,
    "collision": 1,
    "elevation": 0,
    "note": "tree (solid)"
   },
-  "Q": {
+  "N": {
    "metatile": 470,
    "collision": 1,
    "elevation": 0,
    "note": "tree (solid)"
   },
-  "S": {
-   "metatile": 474,
+  "O": {
+   "metatile": 472,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "U": {
+  "P": {
+   "metatile": 473,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "Q": {
+   "metatile": 481,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "S": {
    "metatile": 480,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "V": {
+  "U": {
    "metatile": 482,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "W": {
+  "V": {
    "metatile": 466,
    "collision": 0,
    "elevation": 3,
    "note": "dirt road"
   },
-  "X": {
+  "W": {
    "metatile": 135,
    "collision": 1,
    "elevation": 3,
    "note": "ledge, jump south only",
    "jump": "south"
+  },
+  "X": {
+   "metatile": 474,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
   }
  },
  "rows": [
@@ -139,23 +139,23 @@
   "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
   "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
   "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
-  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFFGFFFFFFFF",
-  "ABABABABABABABABABABABABABABABABABABABABABEEEEEEEEEEEFHIIIIIIIII",
-  "JKJKJKJKJKJKJKJKJKCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFMNOOOOOOOO",
-  "FFFFFFFFFFFFFFFFFFABABABABABABABABABABABABEEEEEEEEEPQFMSFFQPQFFF",
-  "FDCFFFFFFFCDCDFFFFJKJKJKFFJKFFFFJKFFJKJKFFEEEEEEEEEDCFUVFFCDCDCD",
-  "FBAFFFFFFFABABFFFFFFFFFFFFFFFHIIIIIIIIWFFFEEEEEEEEEBAXXXXXABABAB",
-  "FFFFCDCDFFFFFFFFFFFFFFFFFFFFFUOOOOOONNSFGFEEEEEEEEEDCFFFFFCDCDCD",
-  "XXXXABABXXXXXXXXXXXXXXXXXXXXXXXXFFFFMNSFFFEEEEEEEEEBAFHWFFABABAB",
-  "FFFFFFFFFFFFFFFFFFFFEEEEEEEEEEFFFFFFMNSFFFFFFFFFFFFFFFMSFDCDCDCD",
-  "FFFFFFFFFFFHIIIIIIWFEEEEEEEEEEFFHIIINNNIIIIIIIIIIIIIIINSFBABABAB",
-  "CDCDCDCDCFFUVGUNNNVFCDCDCDCDCDCDUOOOOOOOOOOOOOOOOOOOOOOVFDCDCDCD",
-  "ABABABABAPQPQPQMNSQPABABABABABABQPQPQPQPQPQPQFFFFFFFFFFFFBABABAB",
-  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEDCDCDCD",
-  "ABABABABABABABAMNSABABABABABABABABABABABABABABQPQPQPQPQPQBABABAB",
-  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
-  "ABABABABABABABAMNSABABABABABABABABABABABABABABABABABABABABABABAB",
-  "CDCDCDCDCDCDCDCMNSCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD"
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFFGFFFFHIHI",
+  "ABABABABABABABABABABABABABABABABABABABABABEEEEEEEEEEEFFFFFFFFFFF",
+  "HIHIHIHIHIHIHIHIHICDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFJKKKKKKKKK",
+  "FFFFFFFFFFFFFFFFFFABABABABABABABABABABABABEEEEEEEEEMNFOPQQQQQQQQ",
+  "FDCFFFFFFFCDCDFFFFHIHIHIFFHIFFFFHIFFHIHIFFEEEEEEEEEDCFSUFFFFFFFF",
+  "FBAFFFFFFFABABFFFFFFFFFFFFFFFJKKKKKKKKVFFFEEEEEEEEEBAWWWWWNMNMNM",
+  "FFFFCDCDFFFFFFFFFFFFFFFFFFFFFSQQQQQQPPXFGFEEEEEEEEEDCFFFFFCDCDCD",
+  "WWWWABABWWWWWWWWWWWWWWWWWWWWWWWWFFFFOPXFFFEEEEEEEEEBAFJVFFABABAB",
+  "FFFFFFFFFFFFFFFFFFFFEEEEEEEEEEFFFFFFOPXFFFFFFFFFFFFFFFOXFDCDCDCD",
+  "FFFFFFFFFFFJKKKKKKVFEEEEEEEEEEFFJKKKPPPKKKKKKKKKKKKKKKPXFBABABAB",
+  "CDCDCDCDCFFSUGSPPPUFCDCDCDCDCDCDSQQQQQQQQQQQQQQQQQQQQQQUFDCDCDCD",
+  "ABABABABAMNMNMNOPXNMABABABABABABNMNMNMNMNMNMNFFFFFFFFFFFFBABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEDCDCDCD",
+  "ABABABABABABABAOPXABABABABABABABABABABABABABABNMNMNMNMNMNBABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABAOPXABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD"
  ],
  "stamps": [],
  "exits": [
@@ -163,11 +163,11 @@
    "name": "east",
    "edge": "east",
    "span": [
-    5,
-    8
+    6,
+    9
    ],
    "to": "Sandgem Town west edge (rows 10-13)",
-   "offset": -5,
+   "offset": -4,
    "status": "Sandgem built (PR #133); connection only after Route 201 is approved"
   },
   {
@@ -242,13 +242,13 @@
    "kind": "exit",
    "at": [
     63,
-    5
+    6
    ],
    "size": [
     1,
     4
    ],
-   "note": "east -> Sandgem Town west edge (offset -5)"
+   "note": "east -> Sandgem Town west edge (offset -4)"
   },
   {
    "kind": "reserved",
