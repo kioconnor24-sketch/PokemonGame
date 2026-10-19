@@ -1,0 +1,298 @@
+{
+ "name": "Route 201 - DESIGN CANDIDATE (not approved; original DPPt geography)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 64,
+ "height": 22,
+ "legend": {
+  "A": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "B": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "C": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "D": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "E": {
+   "metatile": 13,
+   "collision": 0,
+   "elevation": 3,
+   "note": "tall grass (no encounter table yet)"
+  },
+  "F": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "G": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  },
+  "H": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "I": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "J": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "K": {
+   "metatile": 465,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "M": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "N": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "O": {
+   "metatile": 472,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "P": {
+   "metatile": 473,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "Q": {
+   "metatile": 481,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "S": {
+   "metatile": 480,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "U": {
+   "metatile": 482,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "V": {
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "W": {
+   "metatile": 135,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge, jump south only",
+   "jump": "south"
+  },
+  "X": {
+   "metatile": 474,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  }
+ },
+ "rows": [
+  "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFFGFFFFHIHI",
+  "ABABABABABABABABABABABABABABABABABABABABABEEEEEEEEEEEFFFFFFFFFFF",
+  "HIHIHIHIHIHIHIHIHICDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEFJKKKKKKKKK",
+  "FFFFFFFFFFFFFFFFFFABABABABABABABABABABABABEEEEEEEEEMNFOPQQQQQQQQ",
+  "FDCFFFFFFFCDCDFFFFHIHIHIFFHIFFFFHIFFHIHIFFEEEEEEEEEDCFSUFFFFFFFF",
+  "FBAFFFFFFFABABFFFFFFFFFFFFFFFJKKKKKKKKVFFFEEEEEEEEEBAWWWWWNMNMNM",
+  "FFFFCDCDFFFFFFFFFFFFFFFFFFFFFSQQQQQQPPXFGFEEEEEEEEEDCFFFFFCDCDCD",
+  "WWWWABABWWWWWWWWWWWWWWWWWWWWWWWWFFFFOPXFFFEEEEEEEEEBAFJVFFABABAB",
+  "FFFFFFFFFFFFFFFFFFFFEEEEEEEEEEFFFFFFOPXFFFFFFFFFFFFFFFOXFDCDCDCD",
+  "FFFFFFFFFFFJKKKKKKVFEEEEEEEEEEFFJKKKPPPKKKKKKKKKKKKKKKPXFBABABAB",
+  "CDCDCDCDCFFSUGSPPPUFCDCDCDCDCDCDSQQQQQQQQQQQQQQQQQQQQQQUFDCDCDCD",
+  "ABABABABAMNMNMNOPXNMABABABABABABNMNMNMNMNMNMNFFFFFFFFFFFFBABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDEEEEEEEEEEEDCDCDCD",
+  "ABABABABABABABAOPXABABABABABABABABABABABABABABNMNMNMNMNMNBABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABAOPXABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCOPXCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD"
+ ],
+ "stamps": [],
+ "exits": [
+  {
+   "name": "east",
+   "edge": "east",
+   "span": [
+    6,
+    9
+   ],
+   "to": "Sandgem Town west edge (rows 10-13)",
+   "offset": -4,
+   "status": "Sandgem built (PR #133); connection only after Route 201 is approved"
+  },
+  {
+   "name": "south",
+   "edge": "south",
+   "span": [
+    15,
+    17
+   ],
+   "to": "Twinleaf Town",
+   "status": "unapproved; closed"
+  },
+  {
+   "name": "west-upper",
+   "edge": "west",
+   "span": [
+    8,
+    11
+   ],
+   "to": "Lake Verity side",
+   "status": "unapproved; closed"
+  },
+  {
+   "name": "west-lower",
+   "edge": "west",
+   "span": [
+    13,
+    14
+   ],
+   "to": "Lake Verity side (below the ledge)",
+   "status": "unapproved; closed"
+  }
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    0,
+    8
+   ],
+   "size": [
+    1,
+    4
+   ],
+   "note": "west (upper) -> Lake Verity side (unapproved; closed)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    0,
+    13
+   ],
+   "size": [
+    1,
+    2
+   ],
+   "note": "west (lower) -> Lake Verity side (unapproved; closed)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    15,
+    21
+   ],
+   "size": [
+    3,
+    1
+   ],
+   "note": "south -> Twinleaf Town (unapproved; closed)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    63,
+    6
+   ],
+   "size": [
+    1,
+    4
+   ],
+   "note": "east -> Sandgem Town west edge (offset -4)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    42,
+    5
+   ],
+   "size": [
+    11,
+    8
+   ],
+   "note": "big grass patch: future first-encounter space (no table yet)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    28,
+    14
+   ],
+   "note": "NPC slot (reference: townsperson in the middle grass)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    44,
+    15
+   ],
+   "note": "NPC slot on the main path"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    44,
+    5
+   ],
+   "note": "NPC slot at the top of the big patch"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    56,
+    9
+   ],
+   "note": "NPC slot near the Sandgem end"
+  }
+ ]
+}
