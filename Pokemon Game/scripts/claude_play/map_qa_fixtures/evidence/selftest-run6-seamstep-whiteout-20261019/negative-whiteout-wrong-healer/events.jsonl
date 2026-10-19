@@ -1,0 +1,84 @@
+{"t": 1792384478.57, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792384478.59, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792384479.12, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792384479.14, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792384481.71, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792384481.73, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792384482.83, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792384482.86, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792384483.38, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792384483.4, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792384483.91, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792384483.93, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792384484.97, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792384484.99, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792384488.53, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792384488.56, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792384489.21, "event": "field", "map": "MAP_ALDERFIELDCLINIC", "pos": [7, 5], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792384489.74, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ALDERFIELDCLINIC", [7, 5]]}
+{"t": 1792384490.13, "event": "capture", "file": "0009-start.png"}
+{"t": 1792384490.13, "event": "observe", "label": "start", "problems": []}
+{"t": 1792384490.13, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792384490.2, "event": "map-qa-check", "name": "reached MAP_ALDERFIELDCLINIC", "ok": true, "at": ["MAP_ALDERFIELDCLINIC", [7, 4]]}
+{"t": 1792384493.45, "event": "capture", "file": "0010-edge-MAP_ALDERFIELDCLINIC-down.png"}
+{"t": 1792384493.45, "event": "map-qa-check", "name": "MAP_ALDERFIELDCLINIC closed down edge at (3, 8) blocks", "ok": true, "before": ["MAP_ALDERFIELDCLINIC", [3, 8]], "after": ["MAP_ALDERFIELDCLINIC", [3, 8]]}
+{"t": 1792384496.95, "event": "capture", "file": "0011-edge-MAP_ALDERFIELDCLINIC-down.png"}
+{"t": 1792384496.95, "event": "map-qa-check", "name": "MAP_ALDERFIELDCLINIC closed down edge at (10, 8) blocks", "ok": true, "before": ["MAP_ALDERFIELDCLINIC", [10, 8]], "after": ["MAP_ALDERFIELDCLINIC", [10, 8]]}
+{"t": 1792384501.71, "event": "capture", "file": "0012-edge-MAP_ALDERFIELDCLINIC-left.png"}
+{"t": 1792384501.71, "event": "map-qa-check", "name": "MAP_ALDERFIELDCLINIC closed left edge at (0, 4) blocks", "ok": true, "before": ["MAP_ALDERFIELDCLINIC", [0, 4]], "after": ["MAP_ALDERFIELDCLINIC", [0, 4]]}
+{"t": 1792384505.89, "event": "blocked", "map": "MAP_ALDERFIELDCLINIC", "tile": [1, 6]}
+{"t": 1792384508.16, "event": "capture", "file": "0013-edge-MAP_ALDERFIELDCLINIC-left.png"}
+{"t": 1792384508.16, "event": "map-qa-check", "name": "MAP_ALDERFIELDCLINIC closed left edge at (0, 7) blocks", "ok": true, "before": ["MAP_ALDERFIELDCLINIC", [0, 7]], "after": ["MAP_ALDERFIELDCLINIC", [0, 7]]}
+{"t": 1792384513.2, "event": "capture", "file": "0014-edge-MAP_ALDERFIELDCLINIC-right.png"}
+{"t": 1792384513.2, "event": "map-qa-check", "name": "MAP_ALDERFIELDCLINIC closed right edge at (13, 5) blocks", "ok": true, "before": ["MAP_ALDERFIELDCLINIC", [13, 5]], "after": ["MAP_ALDERFIELDCLINIC", [13, 5]]}
+{"t": 1792384513.2, "event": "map-qa-check", "name": "whiteout: HEAL_LOCATION_OLDALE_TOWN exists in this tree", "ok": true}
+{"t": 1792384513.22, "event": "map-qa-check", "name": "whiteout: ordinary play set the HEAL_LOCATION_OLDALE_TOWN anchor", "ok": false, "got": ["MAP_ALDERFIELD", 17, 13], "expected": ["MAP_OLDALE_TOWN", 6, 17]}
+{"t": 1792384513.34, "event": "capture", "file": "0015-whiteout-before.png"}
+{"t": 1792384513.34, "event": "observe", "label": "whiteout-before", "problems": []}
+{"t": 1792384518.55, "event": "map", "map": "MAP_ALDERFIELD", "pos": [17, 13]}
+{"t": 1792384523.42, "event": "map-qa-check", "name": "whiteout: the TEST-ONLY wild battle started", "ok": true, "npc": ["MAP_ALDERFIELD", 16, 17]}
+{"t": 1792384523.47, "event": "battle-start", "flags": "0x4", "foe": [[445, 80]], "me": [[393, 9, 29]], "moves": [[1, 35], [45, 40], [55, 25]]}
+{"t": 1792384529.91, "event": "capture", "file": "0016-whiteout-loss-action.png"}
+{"t": 1792384530.52, "event": "turn", "label": "whiteout-loss", "me": [393, 9, 29, 29], "foe": [445, 80, 262, 262], "move": 45, "pp": 40}
+{"t": 1792384541.18, "event": "replacement", "slot": 1, "mon": {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}}
+{"t": 1792384546.08, "event": "capture", "file": "0017-whiteout-loss-action.png"}
+{"t": 1792384546.66, "event": "turn", "label": "whiteout-loss", "me": [161, 7, 22, 22], "foe": [445, 80, 262, 262], "move": 111, "pp": 40}
+{"t": 1792384564.88, "event": "capture", "file": "0018-whiteout-loss-action.png"}
+{"t": 1792384565.49, "event": "turn", "label": "whiteout-loss", "me": [161, 7, 21, 22], "foe": [445, 80, 262, 262], "move": 111, "pp": 39}
+{"t": 1792384581.95, "event": "turn", "label": "whiteout-loss", "me": [161, 7, 20, 22], "foe": [445, 80, 262, 262], "move": 111, "pp": 38}
+{"t": 1792384586.72, "event": "capture", "file": "0019-whiteout-loss-defeat.png"}
+{"t": 1792384587.76, "event": "capture", "file": "0020-whiteout-loss-defeat.png"}
+{"t": 1792384588.81, "event": "capture", "file": "0021-whiteout-loss-defeat.png"}
+{"t": 1792384589.82, "event": "capture", "file": "0022-whiteout-loss-defeat.png"}
+{"t": 1792384590.87, "event": "capture", "file": "0023-whiteout-loss-defeat.png"}
+{"t": 1792384591.9, "event": "capture", "file": "0024-whiteout-loss-defeat.png"}
+{"t": 1792384592.99, "event": "capture", "file": "0025-whiteout-loss-defeat.png"}
+{"t": 1792384594.03, "event": "capture", "file": "0026-whiteout-loss-defeat.png"}
+{"t": 1792384595.06, "event": "capture", "file": "0027-whiteout-loss-defeat.png"}
+{"t": 1792384596.08, "event": "capture", "file": "0028-whiteout-loss-defeat.png"}
+{"t": 1792384597.06, "event": "capture", "file": "0029-whiteout-loss-defeat.png"}
+{"t": 1792384599.13, "event": "battle-end", "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792384599.16, "event": "capture", "file": "0030-whiteout-after-1.png"}
+{"t": 1792384599.89, "event": "capture", "file": "0031-whiteout-after-2.png"}
+{"t": 1792384600.61, "event": "capture", "file": "0032-whiteout-after-3.png"}
+{"t": 1792384601.33, "event": "capture", "file": "0033-whiteout-after-4.png"}
+{"t": 1792384603.01, "event": "capture", "file": "0034-whiteout-nurse-01.png"}
+{"t": 1792384604.41, "event": "capture", "file": "0035-whiteout-nurse-02.png"}
+{"t": 1792384605.82, "event": "capture", "file": "0036-whiteout-nurse-03.png"}
+{"t": 1792384607.22, "event": "capture", "file": "0037-whiteout-nurse-04.png"}
+{"t": 1792384608.56, "event": "capture", "file": "0038-whiteout-nurse-05.png"}
+{"t": 1792384609.96, "event": "capture", "file": "0039-whiteout-nurse-06.png"}
+{"t": 1792384611.35, "event": "capture", "file": "0040-whiteout-nurse-07.png"}
+{"t": 1792384612.73, "event": "capture", "file": "0041-whiteout-nurse-08.png"}
+{"t": 1792384614.11, "event": "capture", "file": "0042-whiteout-nurse-09.png"}
+{"t": 1792384615.5, "event": "capture", "file": "0043-whiteout-nurse-10.png"}
+{"t": 1792384616.91, "event": "capture", "file": "0044-whiteout-nurse-11.png"}
+{"t": 1792384618.32, "event": "capture", "file": "0045-whiteout-nurse-12.png"}
+{"t": 1792384629.32, "event": "map-qa-check", "name": "whiteout: respawned in front of the HEAL_LOCATION_OLDALE_TOWN nurse", "ok": false, "got": ["MAP_ALDERFIELDCLINIC", [7, 4]], "expected": ["MAP_OLDALE_TOWN_POKEMON_CENTER_1F", [7, 4]]}
+{"t": 1792384629.53, "event": "capture", "file": "0046-whiteout-after.png"}
+{"t": 1792384629.53, "event": "observe", "label": "whiteout-after", "problems": []}
+{"t": 1792384629.53, "event": "map-qa-check", "name": "whiteout: party fully healed", "ok": true}
+{"t": 1792384629.53, "event": "map-qa-check", "name": "whiteout: money lost (or none to lose)", "ok": true, "before": 3128, "after": 3056}
+{"t": 1792384629.58, "event": "map-qa-check", "name": "an exit is reachable after the whiteout to MAP_OLDALE_TOWN_POKEMON_CENTER_1F", "ok": true, "at": ["MAP_ALDERFIELDCLINIC", [7, 4]]}
+{"t": 1792384630.58, "event": "capture", "file": "0047-start-menu.png"}
+{"t": 1792384631.36, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}

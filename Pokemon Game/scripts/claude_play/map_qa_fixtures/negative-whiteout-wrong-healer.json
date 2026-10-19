@@ -1,0 +1,30 @@
+{
+ "batch": [
+  "MAP_ALDERFIELDCLINIC"
+ ],
+ "entry": [
+  "MAP_ALDERFIELDCLINIC",
+  7,
+  5
+ ],
+ "description": "TEST-ONLY: the same wild battle and loss, but the run claims the respawn is HEAL_LOCATION_OLDALE_TOWN. The anchor and landing checks must both fail: the whiteout check can't pass for the wrong healer.",
+ "expect": "FAIL",
+ "run_args": [
+  "--whiteout",
+  "HEAL_LOCATION_OLDALE_TOWN",
+  "--whiteout-npc",
+  "MAP_ALDERFIELD,16,17"
+ ],
+ "edits": [
+  {
+   "op": "wildbattle",
+   "map": "AlderfieldGym",
+   "script": "Alderfield_Market",
+   "species": "SPECIES_GARCHOMP",
+   "level": 80
+  }
+ ],
+ "must_fail": [
+  "whiteout"
+ ]
+}
