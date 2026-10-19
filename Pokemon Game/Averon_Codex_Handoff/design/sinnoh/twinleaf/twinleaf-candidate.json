@@ -1,0 +1,356 @@
+{
+ "name": "Twinleaf Town - DESIGN CANDIDATE (not approved; original DPPt geography)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 32,
+ "height": 36,
+ "legend": {
+  "A": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "B": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "C": {
+   "metatile": 472,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "D": {
+   "metatile": 473,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "E": {
+   "metatile": 474,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "F": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "G": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "H": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "I": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "J": {
+   "metatile": 480,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "K": {
+   "metatile": 481,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "M": {
+   "metatile": 482,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "N": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "O": {
+   "metatile": 22,
+   "collision": 1,
+   "elevation": 3,
+   "note": "shrub (fence stand-in, solid)"
+  },
+  "P": {
+   "metatile": 4,
+   "collision": 1,
+   "elevation": 3,
+   "note": "flowers inside the fence (solid: not enterable, as in DPPt)"
+  },
+  "Q": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "S": {
+   "metatile": 465,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "U": {
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "V": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  },
+  "W": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "X": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "Y": {
+   "metatile": 176,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  },
+  "Z": {
+   "metatile": 177,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  },
+  "a": {
+   "metatile": 178,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  },
+  "b": {
+   "metatile": 184,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  },
+  "c": {
+   "metatile": 161,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  },
+  "d": {
+   "metatile": 186,
+   "collision": 0,
+   "elevation": 1,
+   "note": "pond water (Surf only; closed while Surf is unavailable)"
+  }
+ },
+ "rows": [
+  "ABABABABABABABACDEABABABABABABAB",
+  "FGFGFGHIHIHIHIHJKMHIHIHIHIFGFGFG",
+  "ABABABNOOOOONNNNNNNNNOOOOOABABAB",
+  "FGFGFGNOPPPONNNNNNNNNOPPPOFGFGFG",
+  "ABABABNOPPPONNNNNNNNNOPPPOABABAB",
+  "FGFGFGNOOOOONNNQSUNNNOOOOOFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDEVNNNNNNNFGFGFG",
+  "ABABABNNNQSSSSSDDDSSSSSUNNABABAB",
+  "FGFGFGNNNJKKKKKDDDKKKKKMNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNNNNNNNCDENNNNNNNNABABAB",
+  "FGFGFGNNNNNNNNNCDENNNNNNNNFGFGFG",
+  "ABABABNNNQSSSSSDDDSSSSSUNNABABAB",
+  "FGFGFGNNNCDDDDDDDDDDDDDENNFGFGFG",
+  "ABABABNNNJKKKKKKKKKKKKKMNNABABAB",
+  "FGFGFGNNNNNNNNNNNNNNNNNNNNFGFGFG",
+  "ABABABWXWXWXYZZZZZZaWXWXWXABABAB",
+  "FGFGFGFGFGFGbccccccdFGFGFGFGFGFG",
+  "ABABABABABABbccccccdABABABABABAB",
+  "FGFGFGFGFGFGbccccccdFGFGFGFGFGFG",
+  "ABABABABABABWXWXWXWXABABABABABAB",
+  "FGFGFGFGFGFGFGFGFGFGFGFGFGFGFGFG"
+ ],
+ "stamps": [
+  {
+   "note": "north-west house, two-storey in DPPt (UNASSIGNED residence; no interior, no warp)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    1,
+    0,
+    5,
+    4
+   ],
+   "at": [
+    8,
+    10
+   ]
+  },
+  {
+   "note": "north-east house (UNASSIGNED; no interior, no warp)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    16,
+    11,
+    4,
+    4
+   ],
+   "at": [
+    20,
+    10
+   ]
+  },
+  {
+   "note": "south-west house (UNASSIGNED; no interior, no warp)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    16,
+    11,
+    4,
+    4
+   ],
+   "at": [
+    10,
+    20
+   ]
+  },
+  {
+   "note": "south-east house, two-storey in DPPt (UNASSIGNED residence; no interior, no warp)",
+   "from": "LAYOUT_DEWFORD_TOWN",
+   "src": [
+    1,
+    0,
+    5,
+    4
+   ],
+   "at": [
+    19,
+    20
+   ]
+  }
+ ],
+ "exits": [
+  {
+   "name": "north",
+   "edge": "north",
+   "span": [
+    15,
+    17
+   ],
+   "to": "Route 201 south edge (x 15-17)",
+   "offset": 0,
+   "status": "Route 201 built (#150); connection only after Twinleaf is approved"
+  }
+ ],
+ "doors": [
+  [
+   10,
+   13
+  ],
+  [
+   21,
+   13
+  ],
+  [
+   11,
+   23
+  ],
+  [
+   21,
+   23
+  ]
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    15,
+    0
+   ],
+   "size": [
+    3,
+    1
+   ],
+   "note": "north -> Route 201 (offset 0; unapproved, closed)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    10,
+    13
+   ],
+   "note": "north-west house door (no interior)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    21,
+    13
+   ],
+   "note": "north-east house door (no interior)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    11,
+    23
+   ],
+   "note": "south-west house door (no interior)"
+  },
+  {
+   "kind": "warp",
+   "at": [
+    21,
+    23
+   ],
+   "note": "south-east house door (no interior)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    12,
+    30
+   ],
+   "size": [
+    8,
+    4
+   ],
+   "note": "pond: Surf-only space (Odd Keystone spot in DPPt; unapproved)"
+  }
+ ]
+}
