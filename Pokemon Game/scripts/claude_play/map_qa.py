@@ -42,6 +42,7 @@ usage:
 import argparse
 import json
 import pathlib
+import re
 import shutil
 import struct
 import subprocess
@@ -242,8 +243,66 @@ def apply_fixture(engine, fixture):
                 struct.pack_into("<H", data, 2 * (y * layout["width"] + x),
                                  (metatile & 0x3FF) | (collision << 10) | (elevation << 12))
             path.write_bytes(bytes(data))
+        elif edit["op"] == "grant":
+            grant_script(engine, edit["map"], edit.get("flags", []), edit.get("items", []))
+        elif edit["op"] == "section":
+            path = engine / "data/maps" / edit["map"] / "map.json"
+            info = json.loads(path.read_text())
+            info["region_map_section"] = edit["section"]
+            path.write_text(json.dumps(info, indent=2) + "\n")
         else:
             raise SystemExit(f"unknown fixture op {edit['op']}")
+
+
+def grant_script(engine, name, flags, items):
+    """TEST-ONLY: an on-transition script that sets flags and gives items once (throwaway trees only)."""
+    path = pathlib.Path(engine) / "data/maps" / name / "scripts.inc"
+    text = path.read_text()
+    head = f"{name}_MapScripts::\n"
+    if head not in text:
+        raise SystemExit(f"{path}: no {head.strip()} block")
+    start = text.index(head) + len(head)
+    end = text.index(".byte 0", start)
+    if "MAP_SCRIPT_ON_TRANSITION" in text[start:end]:
+        raise SystemExit(f"{name} already has an on-transition script; grant would shadow it")
+    label = f"{name}_OnTransition_MapQaGrant"
+    body = [f"{label}:"] + [f"\tsetflag {f}" for f in flags]
+    for i, item in enumerate(items):
+        skip = f"{label}_Have{i}"
+        body += [f"\tcheckitem {item}", f"\tgoto_if_eq VAR_RESULT, TRUE, {skip}", f"\tadditem {item}", f"{skip}:"]
+    body.append("\tend")
+    text = text[:start] + f"\tmap_script MAP_SCRIPT_ON_TRANSITION, {label}\n" + text[start:]
+    path.write_text(text + "\n@ TEST-ONLY map_qa fixture grant (throwaway tree)\n" + "\n".join(body) + "\n")
+
+
+def enum_values(text, anchor):
+    """Values of a simple sequential C enum containing `anchor`."""
+    start = text.rfind("enum", 0, text.index(anchor))
+    body = text[text.index("{", start) + 1:text.index("}", start)]
+    names = [m.group(1) for m in (re.match(r"\s*(\w+)", part) for part in body.split(",")) if m]
+    return {n: i for i, n in enumerate(names)}
+
+
+def party_menu_layout(engine):
+    """Offsets of sPartyMenuInternal->actions/numActions and sMenu.cursorPos, read from source.
+
+    Both structs are private to their .c files, so the offset probe cannot see them; fail closed if
+    their leading fields ever change instead of reading the wrong bytes.
+    """
+    engine = pathlib.Path(engine)
+    src = (engine / "src/party_menu.c").read_text()
+    head = re.search(r"struct PartyMenuInternal\s*\{\s*TaskFunc task;\s*MainCallback exitCallback;\s*"
+                     r"u32 chooseHalf:1;\s*u32 lastSelectedSlot:3;[^\n]*\n\s*u32 spriteIdConfirmPokeball:7;\s*"
+                     r"u32 spriteIdCancelPokeball:7;\s*u32 messageId:14;\s*u8 windowId\[3\];\s*"
+                     r"u8 actions\[(\d+)\];[^\n]*\n\s*u8 numActions;", src)
+    menu_c = (engine / "src/menu.c").read_text()
+    cursor = re.search(r"struct Menu\s*\{\s*u8 left;\s*u8 top;\s*s8 cursorPos;", menu_c)
+    if not head or not cursor:
+        raise SystemExit("party/menu struct layout changed: update map_qa.party_menu_layout")
+    out = dict(actions=4 + 4 + 4 + 3, count=int(head.group(1)), cursor=2)
+    out.update(enum_values(src, "MENU_FIELD_TOOLKIT,"))
+    out.update(enum_values((engine / "include/constants/field_move.h").read_text(), "FIELD_MOVE_FLY,"))
+    return out
 
 
 def continue_warp_fixture(engine, src, dst, group, num, x, y, scratch):
@@ -429,6 +488,133 @@ class Runner:
         escaped = end[0] != map_id or end[1] not in inside
         return self.check(f"{map_id} has no one-way pocket", escaped, entry=entry, ended=end)
 
+    # --- unsupported-region UI (Town Map item, PokeNav map, Field Kit Fly) -----------------------
+    def flag(self, name):
+        n = self.d.g.c[name]
+        sb1 = struct.unpack("<I", self.d.g.gdb.read(self.d.g.sym["gSaveBlock1Ptr"], 4))[0]
+        return bool(self.d.g.gdb.read(sb1 + self.d.g.off["sb1.flags"] + n // 8, 1)[0] & (1 << (n % 8)))
+
+    def ui_back(self, label, opened, expect):
+        """After a UI path: back to the field, screen not black, a real step moves the player."""
+        import run as play
+        from driver import Stuck
+        try:
+            play.back_to_field(self.d, limit=16)
+        except Stuck:
+            pass
+        self.d.settle()
+        faded = self.d.g.gdb.read(self.d.g.sym["gPlttBufferFaded"], 0x200)
+        black = not any(faded)
+        moved = self.follower_step()
+        want_open = expect == "opens"
+        self.check(f"region UI: {label} {'opens its map' if want_open else 'refused'}", opened == want_open, opened=opened)
+        self.check(f"region UI: back in the field after {label} (not black, player can move)",
+                   self.d.field_ready(self.d.state()) and not black and moved, black=black, moved=moved)
+
+    def follower_step(self):
+        mid, pos = self.d.here()
+        m = self.d.live_map(mid)
+        for direction, (dx, dy) in DIRS.items():
+            n = (pos[0] + dx, pos[1] + dy)
+            if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
+                if self.d.step(direction) is not None:
+                    self.d.step(OPPOSITE[direction])
+                    return True
+        return False
+
+    def timeline(self, seconds, press_a_when_locked=False):
+        names, end = [], time.monotonic() + seconds
+        while time.monotonic() < end:
+            s = self.d.state()
+            if not names or names[-1] != s.cb2:
+                names.append(s.cb2)
+            if press_a_when_locked and s.cb2 == "CB2_Overworld" and s.locked:
+                self.d.e.tap("A", after=0.4)
+            time.sleep(0.2)
+        return names
+
+    def region_ui(self, map_id, expect, engine):
+        """Drive the three region-map entry points with real input in map_id.
+
+        expect="refused" for regions without an approved Town Map/Fly grid (Sinnoh today, #138);
+        expect="opens" for regions that have one. Needs the TEST-ONLY `grant` fixture (PokeNav flag,
+        Fly licence, Town Map item); without it the run fails closed on the precondition check.
+        """
+        import run as play
+        w = _wrapper(engine)
+        if self.d.here()[0] != map_id:
+            self.d.travel_to(map_id)
+        g, gd, sym = self.d.g, self.d.g.gdb, self.d.g.sym
+        town = g.c["ITEM_TOWN_MAP"]
+        keys = [i for i, q in g.bag_pocket("bag.keyItems", "BAG_KEYITEMS_COUNT") if i]
+        ready = (self.d.here()[0] == map_id and self.flag("FLAG_SYS_POKENAV_GET")
+                 and self.flag("FLAG_AVERON_LICENSE_FLY") and town in keys)
+        if not self.check(f"region UI: fixture grant present in {map_id}", ready, at=self.d.here(), key_items=keys):
+            return
+        # PokeNav -> MAP. The PokeNav map runs under generic looped tasks; what changes is that the
+        # main menu's own tasks are freed when the map feature replaces it.
+        play.open_start_menu_action(self.d, 3)
+        self.timeline(3.0)
+        menu_tasks = {"Task_MoveBgDots", "Task_CurrentMenuOptionGlow"}
+        before = set(w.active_tasks(g))
+        self.d.e.tap("A", after=0.2)
+        self.timeline(4.0)
+        self.d.shot(f"region-ui-pokenav-{map_id}")
+        after = set(w.active_tasks(g))
+        self.ui_back("PokeNav MAP", bool(menu_tasks & before) and not (menu_tasks & after), expect)
+        # Bag -> Key Items -> Town Map -> USE
+        play.open_start_menu_action(self.d, 2)
+        time.sleep(1.0)
+        pos, pocket = sym["gBagPosition"], g.c["POCKET_KEY_ITEMS"]
+        for _ in range(6):
+            if gd.read(pos + g.off["bagpos.pocket"], 1)[0] == pocket:
+                break
+            self.d.e.tap("RIGHT", after=0.8)
+        index = keys.index(town)
+        for _ in range(40):
+            cur = struct.unpack("<H", gd.read(pos + g.off["bagpos.cursor"] + 2 * pocket, 2))[0]
+            scr = struct.unpack("<H", gd.read(pos + g.off["bagpos.scroll"] + 2 * pocket, 2))[0]
+            if cur + scr == index:
+                break
+            self.d.e.tap("DOWN" if cur + scr < index else "UP", after=0.3)
+        self.d.e.tap("A", after=0.8)
+        self.d.e.tap("A", after=0.5)
+        seen = self.timeline(10.0, press_a_when_locked=True)
+        self.d.shot(f"region-ui-townmap-{map_id}")
+        self.ui_back("Town Map", any("RegionMap" in c for c in seen), expect)
+        # Party -> FIELD KIT -> FLY (Averon's licence-unlocked moves live in the Field Kit)
+        menu = party_menu_layout(engine)
+        play.open_start_menu_action(self.d, 1)
+        time.sleep(1.0)
+        self.d.e.tap("A", after=0.8)
+        internal = struct.unpack("<I", gd.read(sym["sPartyMenuInternal"], 4))[0]
+
+        def actions():
+            raw = gd.read(internal + menu["actions"], menu["count"] + 1)
+            return list(raw[:menu["count"]])[:raw[menu["count"]]]
+
+        def cursor_to(i):
+            for _ in range(12):
+                cur = struct.unpack("<b", gd.read(sym["sMenu"] + menu["cursor"], 1))[0]
+                if cur == i:
+                    return
+                self.d.e.tap("DOWN" if cur < i else "UP", after=0.25)
+
+        first = actions()
+        if menu["MENU_FIELD_TOOLKIT"] not in first:
+            return self.check("region UI: FIELD KIT listed in the party menu", False, actions=first)
+        cursor_to(first.index(menu["MENU_FIELD_TOOLKIT"]))
+        self.d.e.tap("A", after=0.8)
+        kit = actions()
+        fly = menu["MENU_FIELD_MOVES"] + menu["FIELD_MOVE_FLY"]
+        if fly not in kit:
+            return self.check("region UI: FLY listed in the FIELD KIT", False, actions=kit)
+        cursor_to(kit.index(fly))
+        self.d.e.tap("A", after=0.3)
+        seen = self.timeline(5.0)
+        self.d.shot(f"region-ui-fly-{map_id}")
+        self.ui_back("Fly", any("Fly" in c or "RegionMap" in c for c in seen), expect)
+
     def run_map(self, map_id):
         if self.d.here()[0] != map_id:
             self.d.travel_to(map_id)
@@ -489,6 +675,8 @@ def cmd_run(args):
         if not args.expect:
             for map_id in args.map:
                 r.run_map(map_id)
+            if args.region_ui:
+                r.region_ui(args.region_ui_map or args.map[0], args.region_ui, engine)
             for map_id in args.map:
                 if plan[map_id]["pocket"]:
                     r.pocket(map_id, plan[map_id]["pocket"])
@@ -560,7 +748,8 @@ def cmd_selftest(args):
                 "--build", "normal", "--scratch", str(scratch)] + sum((["--map", m] for m in spec["batch"]), [])
         play_out = out / fx.stem
         shutil.rmtree(play_out, ignore_errors=True)
-        cmd = base + ["--out", str(play_out)] + (["--save", "map-qa"] if spec["expect"] == "PASS" else [])
+        cmd = (base + ["--out", str(play_out)] + (["--save", "map-qa"] if spec["expect"] == "PASS" else [])
+               + spec.get("run_args", []))
         subprocess.run(cmd, timeout=args.timeout)
         res = json.loads((play_out / "result.json").read_text())
         failed = [c["name"] for c in res["checks"] if not c["ok"]]
@@ -621,6 +810,9 @@ def main(argv=None):
     r.add_argument("--map", action="append", required=True)
     r.add_argument("--save")
     r.add_argument("--expect")
+    r.add_argument("--region-ui", choices=("refused", "opens"),
+                   help="drive PokeNav MAP, the Town Map item and Field Kit FLY (needs the TEST-ONLY grant fixture)")
+    r.add_argument("--region-ui-map", help="outdoor map for --region-ui (default: first --map)")
     st = sub.add_parser("selftest")
     st.add_argument("--engine", required=True)
     st.add_argument("--save", required=True)

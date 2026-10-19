@@ -1,0 +1,40 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: the same grant, but Sandgem relabelled with a Hoenn section (MAPSEC_LITTLEROOT_TOWN) so the region-map UIs open; --region-ui refused must FAIL on the region UI checks.",
+ "expect": "FAIL",
+ "must_fail": [
+  "region UI"
+ ],
+ "run_args": [
+  "--region-ui",
+  "refused",
+  "--region-ui-map",
+  "MAP_SANDGEM_TOWN"
+ ],
+ "edits": [
+  {
+   "op": "grant",
+   "map": "SandgemTown",
+   "flags": [
+    "FLAG_SYS_POKENAV_GET",
+    "FLAG_AVERON_LICENSE_FLY"
+   ],
+   "items": [
+    "ITEM_TOWN_MAP"
+   ]
+  },
+  {
+   "op": "section",
+   "map": "SandgemTown",
+   "section": "MAPSEC_LITTLEROOT_TOWN"
+  }
+ ]
+}
