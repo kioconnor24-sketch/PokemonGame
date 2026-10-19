@@ -94,6 +94,9 @@ TwinleafTown_Text_TownSign:
     anchor = '\t.include "data/maps/Route201/scripts.inc"\n'
     assert text.count(anchor) == 1
     es.write_text(text.replace(anchor, anchor + '\t.include "data/maps/TwinleafTown/scripts.inc"\n'))
+    # The 3-wide north path leaves one lone tree quarter on each of rows 0-1 at x 14: make those bushes.
+    subprocess.run([sys.executable, str(ENGINE.parent / "scripts/sinnoh-tree-repair.py"), "--engine", str(ENGINE),
+                    "LAYOUT_TWINLEAF_TOWN", "--fix"], check=True)
     print("Twinleaf written; Route201 down 0 / Twinleaf up 0")
 
 
