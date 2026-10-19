@@ -13,7 +13,13 @@
   "show_map_name": true,
   "requires_flash": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": [
+    {
+      "map": "MAP_ROUTE201",
+      "offset": 4,
+      "direction": "left"
+    }
+  ],
   "coord_events": [],
   "object_events": [
     {
