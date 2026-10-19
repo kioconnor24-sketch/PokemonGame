@@ -25,6 +25,7 @@ MACROS = {
     'P_PRIMAL_REVERSIONS': 'FALSE',
     'P_ULTRA_BURST_FORMS': 'FALSE',
     'P_REGIONAL_FORMS': 'TRUE',
+    'P_CRIES_ENABLED': 'FALSE',
     **{f'P_GEN_{i}_POKEMON': 'TRUE' for i in range(1, 10)},
 }
 INCLUDES = '''#include "global.h"
@@ -210,6 +211,7 @@ def main():
             'P_PRIMAL_REVERSIONS': 'TRUE',
             'P_ULTRA_BURST_FORMS': 'TRUE',
             'P_REGIONAL_FORMS': 'FALSE',
+            'P_CRIES_ENABLED': 'TRUE',
             'P_GEN_9_POKEMON': 'FALSE',
             'DEBUG_OVERWORLD_MENU': 'TRUE',
             'DEBUG_BATTLE_MENU': 'TRUE',
