@@ -1,0 +1,46 @@
+{
+ "maps": [
+  "MAP_ALDERFIELDCLINIC"
+ ],
+ "build": "normal",
+ "rom_sha256": "72a396752686bc4479c2ed3ac8597e30832746daeaa4aae45f5099b33ec4ef80",
+ "static_findings": [],
+ "save_before": "e91491083020a74b1a949d57cf3e65fdca3853d652400489f8cb7c2cd7d4372a",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "e91491083020a74b1a949d57cf3e65fdca3853d652400489f8cb7c2cd7d4372a",
+ "verdict": "PASS"
+}
