@@ -1,0 +1,24 @@
+{"t": 1792381530.44, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792381530.46, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792381531.0, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792381531.02, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792381533.59, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792381533.61, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792381534.7, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792381534.73, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792381535.25, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792381535.28, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792381535.79, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792381535.81, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792381536.85, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792381536.87, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792381540.39, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792381540.41, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792381541.03, "event": "field", "map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "pos": [6, 7], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 661, "status": 0, "moves": [45, 64, 98, 0], "pp": [40, 35, 30, 0], "ppBonuses": 0, "level": 6, "hp": 21, "maxhp": 21}]}
+{"t": 1792381541.17, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792381541.17, "event": "continue-check", "problems": []}
+{"t": 1792381541.2, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 7]]}
+{"t": 1792381541.73, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 7]]}
+{"t": 1792381541.96, "event": "capture", "file": "0010-start.png"}
+{"t": 1792381541.96, "event": "observe", "label": "start", "problems": []}
+{"t": 1792381541.96, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}

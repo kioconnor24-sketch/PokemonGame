@@ -1,0 +1,26 @@
+[
+ {
+  "fixture": "positive-route201-region-ui-refused",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "6ddf0e53a3686a1e00b88005ba46341a18b7cf29548cf6d7b815f667458c223b",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 24,
+  "failed": [
+   "MAP_SANDGEM_TOWN left seam (0, 10) -> MAP_ROUTE201 (63, 6) and back",
+   "MAP_SANDGEM_TOWN left seam (0, 12) -> MAP_ROUTE201 (63, 8) and back",
+   "MAP_SANDGEM_TOWN left seam (0, 13) -> MAP_ROUTE201 (63, 9) and back"
+  ],
+  "ok": false
+ }
+]
