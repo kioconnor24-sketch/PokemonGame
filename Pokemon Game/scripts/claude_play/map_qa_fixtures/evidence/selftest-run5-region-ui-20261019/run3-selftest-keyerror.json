@@ -1,0 +1,184 @@
+[
+ {
+  "fixture": "negative-ledge-pocket",
+  "expect": "FAIL",
+  "static_codes": [
+   "one-way-pocket"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "16eeef706727e088b4c46161df7f1b2d5bbfd597d9f2ec5aa9547dc25dd7a183",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 25,
+  "failed": [
+   "MAP_SANDGEM_TOWN has no one-way pocket"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "negative-one-way-connection",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "e8b19830b256f7733d6578d6994fad9e79f7f5eb978733a2fc9e29347d566340",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 27,
+  "failed": [
+   "MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "negative-region-ui-legacy-section",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "9f6712b847e5a1817d79d613f6212603d001c2bc8ed4374050efccd3e214ede6",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 25,
+  "failed": [
+   "run completed without the driver getting stuck"
+  ],
+  "ok": false
+ },
+ {
+  "fixture": "negative-unreachable-seam",
+  "expect": "FAIL",
+  "static_codes": [
+   "exit-unreachable"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "a0839a8aaf1ccde0fbaedc0846f8ae7782d38dd39f77b90fb990d3221de9a946",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 29,
+  "failed": [
+   "MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "negative-warp-return",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "6ab8b004185ad1eb803b7eb700c9d061e956357f827ebd39f41c31ec8db6dbcc",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 28,
+  "failed": [
+   "MAP_SANDGEM_TOWN warp 1 (25, 9) -> MAP_SANDGEM_TOWN_POKEMON_CENTER_1F and back"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "positive-loop-connection",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "a1fc5ed85365ec727d1012edd93cb544c5ae0e160fec9d6d2721e495d3d52546",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 30,
+  "failed": [],
+  "continue_verdict": "PASS",
+  "ok": true
+ },
+ {
+  "fixture": "positive-sandgem",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "1cc8182b8e5fe80bda2745117791ad900db33a580c82b0a773348fa414aef77c",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 26,
+  "failed": [],
+  "continue_verdict": "PASS",
+  "ok": true
+ },
+ {
+  "fixture": "positive-sinnoh-region-ui-refused",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "f38fc89f1669bb7a9594aa9751b888e6879067f59341072cf6c53e086800d1f8",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 25,
+  "failed": [
+   "run completed without the driver getting stuck"
+  ],
+  "ok": false
+ }
+]

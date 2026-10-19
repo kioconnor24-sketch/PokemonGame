@@ -161,6 +161,39 @@ class Fixtures(unittest.TestCase):
         block = struct.unpack_from("<H", (root / "data/layouts/Town/map.bin").read_bytes(), 2 * (1 * 4 + 3))[0]
         self.assertEqual(block, 135 | (1 << 10) | (3 << 12))
 
+    def test_grant_adds_one_on_transition_script_and_section_relabels(self):
+        root = self._tree(marker=True)
+        (root / "data/maps/Town/scripts.inc").write_text("Town_MapScripts::\n\t.byte 0\n\nTown_EventScript_Sign::\n\tend\n")
+        map_qa.apply_fixture(root, {"edits": [
+            {"op": "grant", "map": "Town", "flags": ["FLAG_A"], "items": ["ITEM_B", "ITEM_C"]},
+            {"op": "section", "map": "Town", "section": "MAPSEC_X"}]})
+        text = (root / "data/maps/Town/scripts.inc").read_text()
+        self.assertIn("Town_MapScripts::\n\tmap_script MAP_SCRIPT_ON_TRANSITION, Town_OnTransition_MapQaGrant\n"
+                      "\t.byte 0\n", text)
+        self.assertIn("\tsetflag FLAG_A\n", text)
+        # Each item is given once: guarded by checkitem so re-entering the map doesn't stack copies.
+        self.assertEqual(text.count("\tadditem "), 2)
+        self.assertEqual(text.count("\tcheckitem "), 2)
+        self.assertIn("Town_EventScript_Sign::", text)        # existing scripts untouched
+        self.assertEqual(json.loads((root / "data/maps/Town/map.json").read_text())["region_map_section"], "MAPSEC_X")
+
+    def test_grant_refuses_to_shadow_an_existing_on_transition_script(self):
+        root = self._tree(marker=True)
+        original = "Town_MapScripts::\n\tmap_script MAP_SCRIPT_ON_TRANSITION, Town_OnTransition\n\t.byte 0\n"
+        (root / "data/maps/Town/scripts.inc").write_text(original)
+        with self.assertRaises(SystemExit):
+            map_qa.apply_fixture(root, {"edits": [{"op": "grant", "map": "Town", "flags": ["FLAG_A"]}]})
+        self.assertEqual((root / "data/maps/Town/scripts.inc").read_text(), original)
+
+    def test_party_menu_layout_matches_engine_source(self):
+        engine = map_qa.HERE.parents[1] / "engine"
+        if not (engine / "src/party_menu.c").exists():
+            self.skipTest("engine source not present")
+        menu = map_qa.party_menu_layout(engine)
+        self.assertEqual((menu["actions"], menu["cursor"]), (15, 2))
+        self.assertGreaterEqual(menu["count"], 8)
+        self.assertGreater(menu["MENU_FIELD_MOVES"], menu["MENU_FIELD_TOOLKIT"])
+
     def test_shipped_fixtures_are_well_formed(self):
         files = sorted((map_qa.HERE / "map_qa_fixtures").glob("*.json"))
         self.assertGreaterEqual(len(files), 4)

@@ -1,0 +1,454 @@
+{
+ "maps": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "build": "normal",
+ "rom_sha256": "a1fc5ed85365ec727d1012edd93cb544c5ae0e160fec9d6d2721e495d3d52546",
+ "static_findings": [],
+ "save_before": "28ae5e6d9c9c6ccbed3705ff908839602fd166ba6cdb1e5ff11bf0f7aa6eadaf",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_SANDGEM_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN closed left edge at (0, 12) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN down seam (19, 27) -> MAP_SANDGEM_TOWN (19, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     27
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN down seam (22, 27) -> MAP_SANDGEM_TOWN (22, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     27
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN down seam (24, 27) -> MAP_SANDGEM_TOWN (24, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     27
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN warp 0 (15, 9) -> MAP_SANDGEM_TOWN_POKEMON_CENTER_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     [
+      15,
+      10
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed down edge at (3, 8) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     3,
+     8
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     3,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed down edge at (10, 8) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     10,
+     8
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     10,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed left edge at (0, 4) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     0,
+     4
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     0,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed left edge at (0, 7) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     0,
+     7
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     0,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed right edge at (13, 5) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     13,
+     5
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     13,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F warp 0 (6, 8) -> MAP_SANDGEM_TOWN and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     [
+      6,
+      8
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     15,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F warp 1 (7, 8) -> MAP_SANDGEM_TOWN and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     [
+      6,
+      8
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (map-qa)",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     7
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "048221949de2fb693b628fdef6da13a3b77bd76d8e1c2d19e4f6f196c60bbe88",
+ "verdict": "PASS"
+}

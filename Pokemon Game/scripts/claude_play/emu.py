@@ -70,6 +70,7 @@ OFFSET_EXPRS = {
     "bagpos.pocket": "offsetof(struct BagPosition, pocket)",
     "bagpos.cursor": "offsetof(struct BagPosition, cursorPosition)",
     "bagpos.scroll": "offsetof(struct BagPosition, scrollPosition)",
+    "bag.keyItems": "offsetof(struct Bag, keyItems)",
 }
 
 
@@ -91,6 +92,8 @@ CONSTANTS = [
     "STAT_ATK", "DEFAULT_STAT_STAGE", "MOVE_BABY_DOLL_EYES", "MOVE_CHARM", "MOVE_RETALIATE",
     "TYPE_NORMAL", "TYPE_WATER", "TYPE_FIRE", "TYPE_GRASS", "TYPE_GHOST",
     "POCKET_POKE_BALLS", "POCKET_BERRIES",
+    # map_qa --region-ui (Town Map item, PokeNav, Fly licence)
+    "ITEM_TOWN_MAP", "BAG_KEYITEMS_COUNT", "POCKET_KEY_ITEMS", "FLAG_SYS_POKENAV_GET", "FLAG_AVERON_LICENSE_FLY",
 ]
 
 

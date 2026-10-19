@@ -156,3 +156,17 @@ python3 map_qa.py selftest --engine "/tmp/qa-tree/Pokemon Game/engine" --save RE
 ```
 
 `test_map_qa.py` covers the static layer and fixture safety offline (`python3 test_map_qa.py`).
+
+### Region-map UI check (`--region-ui`)
+
+Sinnoh has no approved Town Map or Fly grid yet. Since #138 the game refuses the three ways into a region map there: PokéNav **MAP**, the **Town Map** item, and **FLY** from the party menu's FIELD KIT. `run --region-ui refused --region-ui-map MAP_X` drives all three on `MAP_X` with real input. For each one it checks that:
+- no map opens: for PokéNav, the main menu's tasks survive; for the Town Map and Fly, no region-map or Fly callback runs;
+- the player ends up back in the field;
+- the screen is not left black (`gPlttBufferFaded` is not all zero);
+- a real step still moves the player.
+
+`--region-ui opens` asserts the opposite, for regions that do have a map.
+
+The check needs the PokéNav flag, the Fly licence and a Town Map. The TEST-ONLY fixture op `grant` adds an on-transition script that sets those flags and gives the items once. It refuses a map that already has an on-transition script, and, like every fixture, it only runs in a throwaway tree. The `section` op relabels a map's section. The negative fixture uses it to give Sandgem a Hoenn section, so the maps open and `--region-ui refused` must fail.
+
+The party-menu and menu-cursor offsets come from private structs that the offset probe can't see. `party_menu_layout()` reads them from source, and stops with an error if those structs' leading fields ever change.

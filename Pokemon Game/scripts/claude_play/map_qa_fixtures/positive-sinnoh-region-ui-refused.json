@@ -1,0 +1,32 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: an on-transition grant (PokeNav flag, Fly licence, Town Map) lets the run drive PokeNav MAP, the Town Map item and Field Kit FLY in Sinnoh Sandgem; all three must be refused (#138) and each must return to a normal, non-black field.",
+ "expect": "PASS",
+ "run_args": [
+  "--region-ui",
+  "refused",
+  "--region-ui-map",
+  "MAP_SANDGEM_TOWN"
+ ],
+ "edits": [
+  {
+   "op": "grant",
+   "map": "SandgemTown",
+   "flags": [
+    "FLAG_SYS_POKENAV_GET",
+    "FLAG_AVERON_LICENSE_FLY"
+   ],
+   "items": [
+    "ITEM_TOWN_MAP"
+   ]
+  }
+ ]
+}
