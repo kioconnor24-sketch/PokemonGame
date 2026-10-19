@@ -1,0 +1,7 @@
+normal run PASS 35 / 35 d15f8db355e8 []
+normal continue PASS 3 / 3 d15f8db355e8 []
+release run PASS 35 / 35 963e4f093be5 []
+release continue PASS 3 / 3 963e4f093be5 []
+OK   negative-sandgem-whiteout-no-setrespawn: expect FAIL, run FAIL, static clean, failed ['whiteout: ordinary play set the HEAL_LOCATION_SANDGEM_TOWN anchor', 'whiteout: respawned in front of the HEAL_LOCATION_SANDGEM_TOWN nurse']
+OK   positive-sandgem-whiteout: expect PASS, run PASS, static clean, failed []
+2/2 fixtures behaved as expected
