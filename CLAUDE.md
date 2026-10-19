@@ -1,7 +1,7 @@
 @AGENTS.md
 
 # Claude entry point
-Use the [operating contract](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](Pokemon%20Game/Averon_Codex_Handoff/development/INTEGRATION_QUEUE.md). Cross-review Codex work and own approved content/mGBA evidence under exact claims. The organizational reset does not resume a paused session.
+Use the [operating contract](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md) and [integration queue](Pokemon%20Game/Averon_Codex_Handoff/development/INTEGRATION_QUEUE.md). Review Codex's high-risk production work when needed; Claude may self-merge only low-risk docs/trackers/design proposals or isolated test/QA tooling under the owner-approved tiered option-2 exact-head evidence/check rules. Own approved content/mGBA evidence under exact claims. The organizational reset does not resume a paused session.
 ## Native test pitfalls (found 2026-10-16)
 
 - `SINGLE_BATTLE_TEST` / `DOUBLE_BATTLE_TEST` are recorded **link** battles (`TRAINER_LINK_OPPONENT`): no whiteout money, no in-game trainer behaviour. Use `AI_SINGLE_BATTLE_TEST` / `AI_DOUBLE_BATTLE_TEST` for real trainer battles (opponent moves come from the AI; give it one move and use `EXPECT_MOVE`).
