@@ -1,0 +1,32 @@
+{
+ "batch": [
+  "MAP_ROUTE201",
+  "MAP_SANDGEM_TOWN"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: an on-transition grant (PokeNav flag, Fly licence, Town Map) on Route 201 lets the run drive PokeNav MAP, the Town Map item and Field Kit FLY there; all three must be refused in section 217 (#138) and each must return to a normal, non-black field.",
+ "expect": "PASS",
+ "run_args": [
+  "--region-ui",
+  "refused",
+  "--region-ui-map",
+  "MAP_ROUTE201"
+ ],
+ "edits": [
+  {
+   "op": "grant",
+   "map": "Route201",
+   "flags": [
+    "FLAG_SYS_POKENAV_GET",
+    "FLAG_AVERON_LICENSE_FLY"
+   ],
+   "items": [
+    "ITEM_TOWN_MAP"
+   ]
+  }
+ ]
+}
