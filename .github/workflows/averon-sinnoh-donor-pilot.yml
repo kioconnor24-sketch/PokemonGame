@@ -1,0 +1,122 @@
+name: Averon Sinnoh donor pilot (read-only)
+
+on:
+  pull_request:
+    paths:
+      - "Pokemon Game/scripts/sinnoh-donor-map-pilot.py"
+      - "Pokemon Game/scripts/sinnoh-donor-bank-audit.py"
+      - "Pokemon Game/scripts/tests/test_sinnoh_donor_map_pilot.py"
+      - ".github/workflows/averon-sinnoh-donor-pilot.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout project (no write credentials)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile and execute all 15 synthetic pilot tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile "Pokemon Game/scripts/sinnoh-donor-map-pilot.py" "Pokemon Game/scripts/sinnoh-donor-bank-audit.py"
+          python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_sinnoh_donor_map_pilot.py" -v
+
+      - name: Fetch exact donor Route 202 sources into temporary working space
+        shell: bash
+        run: |
+          set -euo pipefail
+          donor_sha=38228bb574a3557345852b758d5f1a65eb01bb22
+          donor_base="https://raw.githubusercontent.com/LiderMorti00/Sinnoh-pokeemerald-expansion/$donor_sha"
+          target="$RUNNER_TEMP/sinnoh-donor"
+          mkdir -p "$target/data/maps/Route202" "$target/data/layouts/Route202"
+          curl --fail --location --silent --show-error --retry 3 \
+            "$donor_base/data/maps/Route202/map.json" -o "$target/data/maps/Route202/map.json"
+          curl --fail --location --silent --show-error --retry 3 \
+            "$donor_base/data/layouts/layouts.json" -o "$target/data/layouts/layouts.json"
+          curl --fail --location --silent --show-error --retry 3 \
+            "$donor_base/data/layouts/Route202/map.bin" -o "$target/data/layouts/Route202/map.bin"
+          test "$(git hash-object "$target/data/maps/Route202/map.json")" = "0e1db3730ff8a3283168a70c0c25385233cb3098"
+          test "$(git hash-object "$target/data/layouts/layouts.json")" = "bf4648d4f52e01811be68f1811c1d696b4582f4a"
+          test "$(git hash-object "$target/data/layouts/Route202/map.bin")" = "25c724524810a7a188d30947cb885a4e5e44e8b9"
+          for family in primary/general secondary/petalburg; do
+            mkdir -p "$target/data/tilesets/$family"
+            for filename in metatiles.bin metatile_attributes.bin tiles.png; do
+              curl --fail --location --silent --show-error --retry 3 \
+                "$donor_base/data/tilesets/$family/$filename" \
+                -o "$target/data/tilesets/$family/$filename"
+            done
+          done
+          test "$(git hash-object "$target/data/tilesets/primary/general/metatiles.bin")" = "d164dc1fb2a7d822a9e66bd4e02f90373f72a575"
+          test "$(git hash-object "$target/data/tilesets/primary/general/metatile_attributes.bin")" = "0c227aca4b1e84b73a5791e0ffc18acf2a362a1c"
+          test "$(git hash-object "$target/data/tilesets/secondary/petalburg/metatiles.bin")" = "e2c70d2a47dd35b09817b9b2b66e3861b371549d"
+          test "$(git hash-object "$target/data/tilesets/secondary/petalburg/metatile_attributes.bin")" = "1f2320cf2a62e133992e221e9fbff9963c827da0"
+          test "$(git hash-object "$target/data/tilesets/primary/general/tiles.png")" = "8a112698d0d7e542e29e2cabfd9fa3b5b5579f3e"
+          test "$(git hash-object "$target/data/tilesets/secondary/petalburg/tiles.png")" = "a9c26c044a87ae7874fbf707fddd89b78796c93c"
+          python3 "Pokemon Game/scripts/sinnoh-donor-map-pilot.py" inspect \
+            --donor-root "$target" --map Route202 --donor-revision "$donor_sha" \
+            --template-out "$RUNNER_TEMP/route202-unverified-remap.json" \
+            > "$RUNNER_TEMP/route202-inspection.json"
+          python3 - "$RUNNER_TEMP/route202-inspection.json" "$RUNNER_TEMP/route202-unverified-remap.json" <<'PY'
+          import json, sys
+          report = json.load(open(sys.argv[1]))
+          manifest = json.load(open(sys.argv[2]))
+          assert report["dimensions"] == [30, 34], report["dimensions"]
+          assert report["source_map_id"] == "MAP_ROUTE202"
+          assert report["source_layout_id"] == "LAYOUT_ROUTE202"
+          assert report["tilesets"] == ["gTileset_General", "gTileset_Petalburg"]
+          assert sum(report["metatile_frequency"].values()) == 1020
+          assert report["status"] == "SOURCE_ANALYSIS_ONLY"
+          assert all(v["target"] is None and v["graphics_verified"] is False and
+                     v["behavior_verified"] is False for v in manifest["metatiles"].values())
+          print("Pinned Route202 Git blobs verified; no assets were imported into Averon.")
+          print("Distinct donor metatiles:", len(report["metatile_frequency"]))
+          PY
+          # Real binary roundtrip through the conversion function, using the
+          # donor's own assets as both source and destination. This proves only
+          # identity-format handling, NEVER donor-to-Averon visual compatibility.
+          python3 - "$RUNNER_TEMP/route202-unverified-remap.json" "$RUNNER_TEMP/route202-donor-identity.json" <<'PY'
+          import json, sys
+          m = json.load(open(sys.argv[1]))
+          m["target_map_id"] = "MAP_ROUTE202_DONOR_SELFTEST_ONLY"
+          m["target_primary_tileset"] = "DONOR_SELFTEST_General"
+          m["target_secondary_tileset"] = "DONOR_SELFTEST_Petalburg"
+          for raw_id, entry in m["metatiles"].items():
+              entry.update(target=int(raw_id), behavior_verified=True, graphics_verified=True)
+          with open(sys.argv[2], "w") as out:
+              json.dump(m, out, indent=2)
+          PY
+          python3 "Pokemon Game/scripts/sinnoh-donor-map-pilot.py" convert \
+            --donor-root "$target" --map Route202 \
+            --mapping-json "$RUNNER_TEMP/route202-donor-identity.json" \
+            --output "$RUNNER_TEMP/route202-donor-selftest/map.bin" \
+            > "$RUNNER_TEMP/route202-donor-selftest-result.json"
+          cmp "$target/data/layouts/Route202/map.bin" "$RUNNER_TEMP/route202-donor-selftest/map.bin"
+          python3 - "$RUNNER_TEMP/route202-donor-selftest-result.json" <<'PY'
+          import json, sys
+          r = json.load(open(sys.argv[1]))
+          assert r["status"] == "STAGED_NOT_INTEGRATED_OR_PLAYTESTED"
+          assert r["source_sha256"] == r["output_sha256"]
+          assert r["mapped_unique_metatiles"] == 25
+          assert r["preserved_collision_elevation"] is True
+          print("Actual donor map.bin converted to exact byte-identical DONOR-ONLY self-test (no Averon asset equivalence claimed).")
+          PY
+          python3 "Pokemon Game/scripts/sinnoh-donor-bank-audit.py" \
+            --donor-root "$target" --engine-root "Pokemon Game/engine" \
+            --map Route202 --output "$RUNNER_TEMP/route202-bank-comparison.json"
+
+      - name: Upload analysis JSON only (no donor map binary or third-party art)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sinnoh-route202-donor-inspection
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/route202-inspection.json
+            ${{ runner.temp }}/route202-bank-comparison.json
