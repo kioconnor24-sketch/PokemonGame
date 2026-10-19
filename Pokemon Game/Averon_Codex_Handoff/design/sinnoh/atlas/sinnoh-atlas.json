@@ -1,0 +1,2121 @@
+{
+ "about": "SOURCE layer only: Bulbapedia infobox facts per area, with page revision. Not an approval of any Averon map, connection or ID.",
+ "api": "https://bulbapedia.bulbagarden.net/w/api.php",
+ "areas": [
+  {
+   "key": "SN-T01",
+   "name": "Twinleaf Town",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Twinleaf Town",
+    "resolved": "Twinleaf Town",
+    "revid": 4615815,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Twinleaf_Town",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 201"
+    ]
+   },
+   "infobox": {
+    "image": "Twinleaf Town BDSP Concept Art.jpg",
+    "mapdesc": "A small town with the fresh scent of new leaves in the air. It feels like a place where adventures start.<br>Your own home and your best friend's house are located here."
+   }
+  },
+  {
+   "key": "SN-T02",
+   "name": "Sandgem Town",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Sandgem Town",
+    "resolved": "Sandgem Town",
+    "revid": 4594572,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sandgem_Town",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 202"
+    ],
+    "south": [
+     "Route 219"
+    ],
+    "west": [
+     "Route 201"
+    ]
+   },
+   "infobox": {
+    "image": "Sandgem Town BDSP Concept Art.jpg",
+    "mapdesc": "A sandy town that is located right next to a beach. It is redolent with the salty scent of the sea.<br>Prof. Rowan's lab is the town's landmark. He conducts his studies on Pokémon here."
+   }
+  },
+  {
+   "key": "SN-T03",
+   "name": "Jubilife City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Jubilife City",
+    "resolved": "Jubilife City",
+    "revid": 4609301,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Jubilife_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 204"
+    ],
+    "east": [
+     "Route 203"
+    ],
+    "south": [
+     "Route 202"
+    ],
+    "west": [
+     "Route 218"
+    ]
+   },
+   "infobox": {
+    "image": "Jubilife City BDSP Concept Art.jpg",
+    "mapdesc": "The most modernized city in the Sinnoh region. It is bustling with people on the go.<br>\nThe Pokétch Company, the developer and manufacturer of the Pokétch, is located here.<br>\nJubilife TV, Sinnoh's TV network, is located here. It is an entertaining place to visit.<br>\nThe Global Trade Station—GTS for short—is located here.{{sup/4|DP}}<br>\nThe Global Terminal is located here. It is your connection to the entire world.{{sup/4|Pt}}<br>\nThe Global Wonder Station—GWS for short—is located here.{{sup/8|BDSP}}<br>\nLocated here is the Trainers' School. Drop in to study up on the basics of Pokémon."
+   }
+  },
+  {
+   "key": "SN-T04",
+   "name": "Oreburgh City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Oreburgh City",
+    "resolved": "Oreburgh City",
+    "revid": 4521456,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Oreburgh_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 207"
+    ],
+    "south": [
+     "Oreburgh Mine"
+    ],
+    "west": [
+     "Oreburgh Gate"
+    ]
+   },
+   "infobox": {
+    "image": "Oreburgh City BDSP Concept Art.jpg",
+    "mapdesc": "A vibrant and energetic mining town that is blessed with a precious natural resource.<br>There is a Gym where mine workers take breaks in between their exhausting work shifts.<br>There is a museum that specializes in exhibits related to the town's coal mine.<br>Huge deposits of coal still sleep underneath the ground. The entrance to the Oreburgh Mine is here."
+   }
+  },
+  {
+   "key": "SN-T05",
+   "name": "Floaroma Town",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Floaroma Town",
+    "resolved": "Floaroma Town",
+    "revid": 4541353,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Floaroma_Town",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Fuego Ironworks"
+    ],
+    "east": [
+     "Route 205"
+    ],
+    "south": [
+     "Route 204"
+    ]
+   },
+   "infobox": {
+    "image": "Floaroma Town BDSP.png",
+    "mapdesc": "A town of flower lovers, Floaroma Town is always perfumed with the sweet scent of flowers.<br>A short, floral pathway opens up to a sprawling sea of flowers in bloom.<br>In the center of town is the flower shop called Pick a Peck of Colors."
+   }
+  },
+  {
+   "key": "SN-T06",
+   "name": "Eterna City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Eterna City",
+    "resolved": "Eterna City",
+    "revid": 4538432,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Eterna_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 211"
+    ],
+    "south": [
+     "Route 206"
+    ],
+    "west": [
+     "Route 205"
+    ]
+   },
+   "infobox": {
+    "image": "Eterna City BDSP Concept Art.jpg",
+    "mapdesc": "An old city that shows fading and almost-forgotten vestiges of ancient history.<br>A Gym is indispensable in any town that has many people coming and going. This city is no exception.<br>The Cycle Shop is located here. There is also a big building with a slightly sinister atmosphere.<br>A statue of an ancient Pokémon is prominently and reverently displayed."
+   }
+  },
+  {
+   "key": "SN-T07",
+   "name": "Hearthome City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Hearthome City",
+    "resolved": "Hearthome City",
+    "revid": 4536010,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Hearthome_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Amity Square"
+    ],
+    "east": [
+     "Route 209"
+    ],
+    "south": [
+     "Route 212"
+    ],
+    "west": [
+     "Route 208"
+    ]
+   },
+   "infobox": {
+    "image": "Hearthome City BDSP Concept Art.jpg",
+    "mapdesc": "This friendly city started as a place where people and Pokémon gathered, then grew into a center of commerce.<br>If you care about the looks of your Pokémon, head for the Contest Hall. For toughness, go to the Gym.<br>The entrance to Amity Square is here. The square is a place where Trainers can stroll peacefully with Pokémon.<br>There is a building here that is symbolic of the city's status as a place where different cultures meet.<br>A nice fountain with benches, as well as the Pokémon Fan Club, are among the city's amenities."
+   }
+  },
+  {
+   "key": "SN-T08",
+   "name": "Solaceon Town",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Solaceon Town",
+    "resolved": "Solaceon Town",
+    "revid": 4650214,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Solaceon_Town",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 210"
+    ],
+    "east": [
+     "Solaceon Ruins"
+    ],
+    "south": [
+     "Route 209"
+    ]
+   },
+   "infobox": {
+    "image": "Solaceon Town BDSP Concept Art.jpg",
+    "mapdesc": "The temperate climate makes this town a relaxed and casual place for people and Pokémon to live in.<br>There is a Pokémon Day Care and a Pokémon Center here.<br>Beyond a path hemmed by stands of trees, one can find the entrance to the Solaceon Ruins."
+   }
+  },
+  {
+   "key": "SN-T09",
+   "name": "Veilstone City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Veilstone City",
+    "resolved": "Veilstone City",
+    "revid": 4559221,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Veilstone_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "south": [
+     "Route 214"
+    ],
+    "west": [
+     "Route 215"
+    ]
+   },
+   "infobox": {
+    "image": "Veilstone City BDSP Concept Art.jpg",
+    "mapdesc": "This city was made by carving out steep, rocky mountains. Its isolation limits its contact with other cities.<br>The city puts effort into providing entertainment. Naturally, one can find a Gym here.<br>Conveniently located right next door to the Game Corner is the Prize Exchange.<br>At the highest point in the city is Team Galactic's headquarters.<br>There are warehouses for storing a variety of goods. There is also a major department store."
+   }
+  },
+  {
+   "key": "SN-T10",
+   "name": "Pastoria City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Pastoria City",
+    "resolved": "Pastoria City",
+    "revid": 4633710,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pastoria_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Great Marsh"
+    ],
+    "east": [
+     "Route 213"
+    ],
+    "west": [
+     "Route 212"
+    ]
+   },
+   "infobox": {
+    "image": "Pastoria City BDSP Concept Art.jpg",
+    "mapdesc": "This city was originally founded to protect the Great Marsh. It has grown naturally over the years.<br>The Gym is a good example of the abundant water resources available to the city.<br>There is a lookout that affords views of the Great Marsh. The gates to the Safari Zone are also here."
+   }
+  },
+  {
+   "key": "SN-T11",
+   "name": "Celestic Town",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Celestic Town",
+    "resolved": "Celestic Town",
+    "revid": 4509692,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Celestic_Town",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 210"
+    ],
+    "west": [
+     "Route 211"
+    ]
+   },
+   "infobox": {
+    "image": "Celestic Town BDSP Concept Art.jpg",
+    "mapdesc": "A tiny town that preserves the history of Sinnoh and the old ways of life.<br>In the center of the town is a small shrine that dates to ancient times."
+   }
+  },
+  {
+   "key": "SN-T12",
+   "name": "Canalave City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Canalave City",
+    "resolved": "Canalave City",
+    "revid": 4638842,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Canalave_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 218"
+    ]
+   },
+   "infobox": {
+    "image": "Canalave City BDSP.png",
+    "mapdesc": "A port city that is bisected by a canal. It has a distinctly exotic air of foreign culture.<br>Head to the library if you want a workout for the mind. Head to the Gym if you just want to work out.<br>Large ships can always be seen moored at the town's piers."
+   }
+  },
+  {
+   "key": "SN-T13",
+   "name": "Snowpoint City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Snowpoint City",
+    "resolved": "Snowpoint City",
+    "revid": 4521465,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Snowpoint_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Snowpoint Temple"
+    ],
+    "west": [
+     "Acuity Lakefront"
+    ]
+   },
+   "infobox": {
+    "image": "Snowpoint City BDSP.png",
+    "mapdesc": "A winter wonderland of a city where stout trees and buildings are blanketed in thick snow.<br>The Gym is at the heart of the city. To the north is the Snowpoint Temple."
+   }
+  },
+  {
+   "key": "SN-T14",
+   "name": "Sunyshore City",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Sunyshore City",
+    "resolved": "Sunyshore City",
+    "revid": 4535233,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sunyshore_City",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 223"
+    ],
+    "west": [
+     "Route 222"
+    ]
+   },
+   "infobox": {
+    "image": "Sunyshore City BDSP Concept Art.jpg",
+    "mapdesc": "A port city that was built around the bay portion of the cape. It is criss-crossed by elevated walkways.<br>The Gym is located atop a rocky outcropping. Down on the beach is a festive bazaar.<br>The Vista Lighthouse's bright beacon illuminates the Sinnoh region."
+   }
+  },
+  {
+   "key": "SN-T15",
+   "name": "Pokémon League",
+   "kind": "SETTLEMENT",
+   "source": {
+    "page": "Pokémon League (Sinnoh)",
+    "resolved": "Pokémon League (Sinnoh)",
+    "revid": 4623652,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pokémon_League_(Sinnoh)",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "south": [
+     "Route 223"
+    ]
+   },
+   "infobox": {
+    "image": "Sinnoh Pokemon League BDSP.png",
+    "mapdesc": "Trainers seeking to become the best arrive here after enduring a long and grueling journey.{{sup/4|DP}}{{sup/8|BDSP}}<br/>Trainers seeking to be the best arrive here after a long and grueling journey.{{sup/4|Pt}}<br/>Victory Road is the last and toughest of the challenges leading up to the Pokémon League.<br/>The Pokémon League reception counter is located here. Only those who have beaten all the Gyms may enter."
+   }
+  },
+  {
+   "key": "SN-T16",
+   "name": "Fight Area",
+   "kind": "POSTGAME_HUB",
+   "source": {
+    "page": "Fight Area",
+    "resolved": "Fight Area",
+    "revid": 4613662,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Fight_Area",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 225"
+    ],
+    "east": [
+     "Route 230"
+    ]
+   },
+   "infobox": {
+    "image": "Fight Area BDSP.png",
+    "mapdesc": "A tiny port town where Trainers who love battling more than eating gather.{{sup/4|DP}}{{sup/8|BDSP}}<br>The gateway to the Battle Park is located here.{{sup/4|DP}}{{sup/8|BDSP}}<br>A tiny port city where Trainers who love battling more than eating gather.{{sup/4|Pt}}<br>The gateway to the Battle Frontier is located here.{{sup/4|Pt}}<br>Moored at the pier is the ferry to Snowpoint City."
+   }
+  },
+  {
+   "key": "SN-T17",
+   "name": "Survival Area",
+   "kind": "POSTGAME_HUB",
+   "source": {
+    "page": "Survival Area",
+    "resolved": "Survival Area",
+    "revid": 4613661,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Survival_Area",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 226"
+    ],
+    "west": [
+     "Route 225"
+    ]
+   },
+   "infobox": {
+    "image": "Survival Area BDSP.png",
+    "mapdesc": "A city where hot-blooded Trainers gather to work out and hone their battling skills.{{sup/4|DP}}<br>A town where hot-blooded Trainers gather to work out and hone their battling skills.{{sup/4|Pt}}"
+   }
+  },
+  {
+   "key": "SN-T18",
+   "name": "Resort Area",
+   "kind": "POSTGAME_HUB",
+   "source": {
+    "page": "Resort Area",
+    "resolved": "Resort Area",
+    "revid": 4603687,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Resort_Area",
+    "template": "Town infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 229"
+    ]
+   },
+   "infobox": {
+    "image": "Resort Area BDSP.png",
+    "mapdesc": "A city that attracts Trainers who know there are other ways of enjoying Pokémon than battling.{{sup/4|DP}}{{sup/8|BDSP}}<br>A town that attracts Trainers who know there are other ways of enjoying Pokémon than battling.{{sup/4|Pt}}"
+   }
+  },
+  {
+   "key": "SN-R201",
+   "name": "Route 201",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 201",
+    "resolved": "Sinnoh Route 201",
+    "revid": 4633683,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_201",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Sandgem Town"
+    ],
+    "south": [
+     "Twinleaf Town"
+    ],
+    "west": [
+     "Verity Lakefront"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 201 BDSP.png",
+    "imageiv": "Sinnoh Route 201 Pt.png",
+    "mapdesc": "A small path through a lush, green, wooded area. The densely grown trees give off a thick aroma."
+   }
+  },
+  {
+   "key": "SN-R202",
+   "name": "Route 202",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 202",
+    "resolved": "Sinnoh Route 202",
+    "revid": 4613216,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_202",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Jubilife City"
+    ],
+    "south": [
+     "Sandgem Town"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 202 BDSP.png",
+    "mapdesc": "A winding path that twists through grassy fields. Young Trainers like to test their battle skills here."
+   }
+  },
+  {
+   "key": "SN-R203",
+   "name": "Route 203",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 203",
+    "resolved": "Sinnoh Route 203",
+    "revid": 4613217,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_203",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Oreburgh Gate"
+    ],
+    "west": [
+     "Jubilife City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 203 BDSP.png",
+    "imageiv": "Sinnoh Route 203 Pt.png",
+    "mapdesc": "Despite being so close to a big town, this path retains its relaxed, natural atmosphere.<br>Once one gets through the tunnel, the city of Oreburgh is just a stone's throw away."
+   }
+  },
+  {
+   "key": "SN-R204",
+   "name": "Route 204",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 204",
+    "resolved": "Sinnoh Route 204",
+    "revid": 4613218,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_204",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Floaroma Town"
+    ],
+    "south": [
+     "Jubilife City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 204 BDSP.png",
+    "mapdesc": "A charming natural path that wanders past many ponds and groves of trees.<br>The Ravaged Path was hewn through a rocky outcropping. It is a shortcut that leads straight to Floaroma Town."
+   }
+  },
+  {
+   "key": "SN-R205",
+   "name": "Route 205",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 205",
+    "resolved": "Sinnoh Route 205",
+    "revid": 4590442,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_205",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Eterna Forest"
+    ],
+    "east": [
+     "Eterna City"
+    ],
+    "west": [
+     "Fuego Ironworks"
+    ]
+   },
+   "infobox": {
+    "type": "mountain",
+    "image": "Sinnoh Route 205 BDSP.png",
+    "imageiv": "Sinnoh Route 205 Pt.png",
+    "mapdesc": "A quietly following stream and hilly terrain with one-way ledges make this a fun area for adventure.<br>Near the entrance of the Eterna Forest is a cabin whose keepers offer rest to weary travelers that stop by.<br>A wide, wooden walkway spans a large pond. Fishermen idle their time away dangling lines from the walkway."
+   }
+  },
+  {
+   "key": "SN-R206",
+   "name": "Route 206",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 206",
+    "resolved": "Sinnoh Route 206",
+    "revid": 4590443,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_206",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Eterna City"
+    ],
+    "south": [
+     "Route 207"
+    ]
+   },
+   "infobox": {
+    "type": "road",
+    "image": "Sinnoh Route 206 BDSP.png",
+    "mapdesc": "Smoothly paved in asphalt, the Cycling Road is heavenly for bicycle lovers.<br/>Below the Cycling Road, one can see the entrance to Wayward Cave."
+   }
+  },
+  {
+   "key": "SN-R207",
+   "name": "Route 207",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 207",
+    "resolved": "Sinnoh Route 207",
+    "revid": 4596196,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_207",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 206"
+    ],
+    "east": [
+     "Mount Coronet"
+    ],
+    "south": [
+     "Oreburgh City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "mountain",
+    "image": "Sinnoh Route 207 BDSP.png",
+    "imageiv": "Sinnoh Route 207 Pt.png",
+    "mapdesc": "Located at the foot of Mt. Coronet, this road is carved into the rugged, rocky terrain.{{sup/4|DPPt}}<br>Located at the foot of Mount Coronet, this road is carved into the rugged, rocky terrain.{{sup/8|BDSP}}"
+   }
+  },
+  {
+   "key": "SN-R208",
+   "name": "Route 208",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 208",
+    "resolved": "Sinnoh Route 208",
+    "revid": 4596197,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_208",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Hearthome City"
+    ],
+    "west": [
+     "Mount Coronet"
+    ]
+   },
+   "infobox": {
+    "size": "300",
+    "type": "mountain",
+    "image": "Sinnoh Route 208 BDSP.png",
+    "imageiv": "Sinnoh Route 208 DP.png",
+    "mapdesc": "A lush field of grass spreads from Mt. Coronet's sheer rock face, creating a vista of contrasts.{{sup/4|DPPt}}<br/>A lush field of grass spreads from Mount Coronet's sheer rock face, creating a vista of contrasts.{{sup/8|BDSP}}<br/>The Berry Master, an old man who loves nature, Pokémon, and Berries, makes his home here."
+   }
+  },
+  {
+   "key": "SN-R209",
+   "name": "Route 209",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 209",
+    "resolved": "Sinnoh Route 209",
+    "revid": 4612392,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_209",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Solaceon Town"
+    ],
+    "west": [
+     "Hearthome City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 209 BDSP.png",
+    "mapdesc": "The streams forded by this path wind past copses and grassy patches in a serene and soothing manner.<br>The Lost Tower is where Pokémon are laid to rest when their lives come to an end."
+   }
+  },
+  {
+   "key": "SN-R210",
+   "name": "Route 210",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 210",
+    "resolved": "Sinnoh Route 210",
+    "revid": 4613680,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_210",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 215"
+    ],
+    "south": [
+     "Solaceon Town"
+    ],
+    "west": [
+     "Celestic Town"
+    ]
+   },
+   "infobox": {
+    "type": "{{#switch: {{#expr: {{#time: s}} mod 2}}|0=land|1=fog}}",
+    "image": "Sinnoh Route 210 BDSP.png",
+    "imageiv": "Route 210.jpg",
+    "mapdesc": "This narrow route is lined with deep, tall grass that tickles the noses of people straying off the path.<br>The Cafe Cabin stands in a wood. The house special is freshly milked Moomoo Milk.<br>A path made by clearing an overgrown canyon between mountains. It is always shrouded by a dense fog.{{sup/4|DP}}{{sup/8|BDSP}}<br>A canyon covered in untamed nature. It is always shrouded by a dense fog.{{sup/4|Pt}}<br>Grandma Wilma's house stands alone in an isolated spot deep among mountains."
+   }
+  },
+  {
+   "key": "SN-R211",
+   "name": "Route 211",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 211",
+    "resolved": "Sinnoh Route 211",
+    "revid": 4595959,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_211",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Mount Coronet"
+    ],
+    "east": [
+     "Celestic Town"
+    ],
+    "south": [
+     "Mount Coronet"
+    ],
+    "west": [
+     "Eterna City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "mountain",
+    "image": "Sinnoh Route 211 BDSP.png",
+    "mapdesc": "A mountain path that tunnels through Mt. Coronet, one of the tallest mountains in Sinnoh.{{sup/4|DPPt}}<br>A mountain path that tunnels through Mount Coronet, one of the tallest mountains in Sinnoh.{{sup/8|BDSP}}"
+   }
+  },
+  {
+   "key": "SN-R212",
+   "name": "Route 212",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 212",
+    "resolved": "Sinnoh Route 212",
+    "revid": 4375363,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_212",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Hearthome City"
+    ],
+    "east": [
+     "Pastoria City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "{{#switch: {{#expr: {{#time: s}} mod 2}}|0=land|1=marsh}}",
+    "image": "Sinnoh Route 212.png",
+    "imageiv": "Sinnoh Route 212 Pt.png",
+    "mapdesc": "A tall, sturdy wall surrounds an expansive estate that takes up nearly half of the road space.<br>Beyond the wall, one can see the stately Pokémon Mansion and the owner's prized garden behind it.<br>This path weaves among deep puddles made by the unending rainfall. It is wet and miserable for Trainers.<br>There is a house here whose residents offer to trade TMs for Red, Blue, Yellow, or Green Shards.{{sup/4|DP}}{{sup/8|BDSP}}<br>There is a house here whose residents offer [[Move Tutor|tutor moves]] to your Pokémon for Red, Blue, Yellow, or Green Shards.{{sup/4|Pt}}"
+   }
+  },
+  {
+   "key": "SN-R213",
+   "name": "Route 213",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 213",
+    "resolved": "Sinnoh Route 213",
+    "revid": 4637914,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_213",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Valor Lakefront"
+    ],
+    "west": [
+     "Pastoria City"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "sand",
+    "image": "Sinnoh Route 213 BDSP.png",
+    "imageiv": "Sinnoh Route 213 Pt.png",
+    "mapdesc": "Offshore boulders form a jetty that becalms waves reaching the beach. A resort hotel overlooks the water.<br>In a small house on the beach lives a single man who refers to himself as Dr. Footstep."
+   }
+  },
+  {
+   "key": "SN-R214",
+   "name": "Route 214",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 214",
+    "resolved": "Sinnoh Route 214",
+    "revid": 4613196,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_214",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Veilstone City"
+    ],
+    "east": [
+     "Spring Path"
+    ],
+    "south": [
+     "Valor Lakefront"
+    ],
+    "west": [
+     "Maniac Tunnel"
+    ]
+   },
+   "infobox": {
+    "type": "land",
+    "image": "Sinnoh Route 214 BDSP.png",
+    "mapdesc": "The road joining Veilstone City and a lake is described as either \"wildly natural\" or simply \"a mess.\"<br>There is a cave hewn into the sheer rock wall at the roadside. The hole was made by a Ruin Maniac."
+   }
+  },
+  {
+   "key": "SN-R215",
+   "name": "Route 215",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 215",
+    "resolved": "Sinnoh Route 215",
+    "revid": 4613219,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_215",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Veilstone City"
+    ],
+    "west": [
+     "Route 210"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "land",
+    "image": "Sinnoh Route 215 BDSP.png",
+    "imageiv": "Sinnoh Route 215 Pt.png",
+    "mapdesc": "This area is always inundated by heavy rainfall. Only hardy Trainers that can take the rain gather here."
+   }
+  },
+  {
+   "key": "SN-R216",
+   "name": "Route 216",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 216",
+    "resolved": "Sinnoh Route 216",
+    "revid": 4624697,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_216",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 217"
+    ],
+    "east": [
+     "Mount Coronet"
+    ]
+   },
+   "infobox": {
+    "type": "snow",
+    "image": "Sinnoh Route 216 BDSP.png",
+    "imageiv": "Sinnoh Route 216 Pt.png",
+    "mapdesc": "This mountainous road leads from Mt. Coronet. Its constant snowfall and deep snowdrifts impede travelers.{{sup/4|DPPt}}<br>This mountainous road leads from Mount Coronet. Its constant snowfall and deep snowdrifts impede travelers.{{sup/8|BDSP}}"
+   }
+  },
+  {
+   "key": "SN-R217",
+   "name": "Route 217",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 217",
+    "resolved": "Sinnoh Route 217",
+    "revid": 4626966,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_217",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Acuity Lakefront"
+    ],
+    "south": [
+     "Route 216"
+    ]
+   },
+   "infobox": {
+    "type": "snow",
+    "image": "Sinnoh Route 217 BDSP.png",
+    "imageiv": "Sinnoh Route 217 Pt.png",
+    "mapdesc": "Snow blows down from Mt. Coronet and grows into a harsh, ceaseless blizzard. Be prepared for the worst."
+   }
+  },
+  {
+   "key": "SN-R218",
+   "name": "Route 218",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 218",
+    "resolved": "Sinnoh Route 218",
+    "revid": 4613754,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_218",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Jubilife City"
+    ],
+    "west": [
+     "Canalave City"
+    ]
+   },
+   "infobox": {
+    "type": "water",
+    "image": "Sinnoh Route 218 BDSP.png",
+    "imageiv": "Sinnoh Route 218 Pt.png",
+    "mapdesc": "Despite its shortness, this road is revered by fishing enthusiasts as a great, yet little known, fishing spot."
+   }
+  },
+  {
+   "key": "SN-R219",
+   "name": "Route 219",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 219",
+    "resolved": "Sinnoh Route 219",
+    "revid": 4630033,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_219",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Sandgem Town"
+    ],
+    "south": [
+     "Route 220"
+    ]
+   },
+   "infobox": {
+    "type": "water",
+    "image": "Sinnoh Route 219 BDSP.png",
+    "mapdesc": "A beautiful white-sand beach only five seconds on foot from Sandgem Town. A pleasant breeze flows from the sea."
+   }
+  },
+  {
+   "key": "SN-R220",
+   "name": "Route 220",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 220",
+    "resolved": "Sinnoh Route 220",
+    "revid": 4646776,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_220",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 219"
+    ],
+    "east": [
+     "Route 221"
+    ]
+   },
+   "infobox": {
+    "size": "300",
+    "type": "ocean",
+    "image": "Sinnoh Route 220 BDSP.png",
+    "imageiv": "Sinnoh Route 220 Pt.png",
+    "mapdesc": "The sea here is perfect for swimming, with gentle winds and tides. There are sandbars for resting too."
+   }
+  },
+  {
+   "key": "SN-R221",
+   "name": "Route 221",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 221",
+    "resolved": "Sinnoh Route 221",
+    "revid": 4339852,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_221",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Pal Park"
+    ],
+    "west": [
+     "Route 220"
+    ]
+   },
+   "infobox": {
+    "size": "300",
+    "type": "land",
+    "image": "Sinnoh Route 221 BDSP.png",
+    "imageiv": "Sinnoh Route 221 Pt.png",
+    "mapdesc": "A straight path hemmed by green grass and sparse stands of trees.<br/>At the end of the path stands the gateway to Pal Park.{{sup/4|DPPt}}<br>A straight path hemmed by green grass and sparse stands of trees.<br/>At the end of the path stands the gateway to Ramanas Park.{{sup/8|BDSP}}"
+   }
+  },
+  {
+   "key": "SN-R222",
+   "name": "Route 222",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 222",
+    "resolved": "Sinnoh Route 222",
+    "revid": 4520775,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_222",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Sunyshore City"
+    ],
+    "west": [
+     "Valor Lakefront"
+    ]
+   },
+   "infobox": {
+    "type": "land",
+    "image": "Sinnoh Route 222 BDSP.png",
+    "mapdesc": "A sandy beach extends from the road. The beach is busy with avid Fishermen happily casting at the water's edge.<br>A man who loves fishing lives near here. There is also a man who will compare sizes of caught fish."
+   }
+  },
+  {
+   "key": "SN-R223",
+   "name": "Route 223",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 223",
+    "resolved": "Sinnoh Route 223",
+    "revid": 4228073,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_223",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Pokémon League"
+    ],
+    "south": [
+     "Sunyshore City"
+    ]
+   },
+   "infobox": {
+    "size": "150",
+    "type": "ocean",
+    "image": "Sinnoh Route 223 Pt.png",
+    "imageiv": "Sinnoh Route 223 Pt.png",
+    "mapdesc": "A marine route that requires travelers to navigate around jutting rocks and sandbars."
+   }
+  },
+  {
+   "key": "SN-R224",
+   "name": "Route 224",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 224",
+    "resolved": "Sinnoh Route 224",
+    "revid": 4646777,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_224",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Seabreak Path"
+    ],
+    "west": [
+     "Victory Road"
+    ]
+   },
+   "infobox": {
+    "size": "250",
+    "type": "land",
+    "image": "Sinnoh Route 224 DP.png",
+    "imageiv": "Sinnoh Route 224 DP.png",
+    "mapdesc": "With grass fields, rocky outcroppings, the sea, and sandbars, this area is like a miniature of the Sinnoh Region."
+   }
+  },
+  {
+   "key": "SN-R225",
+   "name": "Route 225",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 225",
+    "resolved": "Sinnoh Route 225",
+    "revid": 4349736,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_225",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Survival Area"
+    ],
+    "south": [
+     "Fight Area"
+    ]
+   },
+   "infobox": {
+    "type": "land",
+    "image": "Sinnoh Route 225 BDSP.png",
+    "imageiv": "Sinnoh Route 225 Pt.png",
+    "mapdesc": "The path makes its way up and down among rocky outcroppings. It is physically challenging."
+   }
+  },
+  {
+   "key": "SN-R226",
+   "name": "Route 226",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 226",
+    "resolved": "Sinnoh Route 226",
+    "revid": 4387983,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_226",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 227"
+    ],
+    "east": [
+     "Route 228"
+    ],
+    "west": [
+     "Survival Area"
+    ]
+   },
+   "infobox": {
+    "size": "290",
+    "type": "ocean",
+    "image": "Sinnoh Route 226 BDSP.png",
+    "imageiv": "Sinnoh Route 226 Pt.png",
+    "mapdesc": "A path that winds precariously along sheer cliffs that go right to the edge of the sea's pounding waves.<br>There is a small island in the bay. An odd man who speaks foreign languages lives there."
+   }
+  },
+  {
+   "key": "SN-R227",
+   "name": "Route 227",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 227",
+    "resolved": "Sinnoh Route 227",
+    "revid": 4392888,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_227",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Stark Mountain"
+    ],
+    "south": [
+     "Route 226"
+    ]
+   },
+   "infobox": {
+    "type": "ash",
+    "image": "Sinnoh Route 227 BDSP.png",
+    "imageiv": "Sinnoh Route 227 Pt.png",
+    "mapdesc": "A rugged and steep mountain path where vision is limited by steadily falling volcanic ash."
+   }
+  },
+  {
+   "key": "SN-R228",
+   "name": "Route 228",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 228",
+    "resolved": "Sinnoh Route 228",
+    "revid": 4392969,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_228",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "south": [
+     "Route 229"
+    ],
+    "west": [
+     "Route 226"
+    ]
+   },
+   "infobox": {
+    "type": "sand",
+    "image": "Sinnoh Route 228 BDSP.png",
+    "imageiv": "Route 228.jpg",
+    "mapdesc": "This rough path is harshly raked by a horizontally blowing sandstorm driven by strong winds off the sea."
+   }
+  },
+  {
+   "key": "SN-R229",
+   "name": "Route 229",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 229",
+    "resolved": "Sinnoh Route 229",
+    "revid": 4646778,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_229",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 228"
+    ],
+    "south": [
+     "Resort Area"
+    ],
+    "west": [
+     "Route 230"
+    ]
+   },
+   "infobox": {
+    "size": "300",
+    "type": "land",
+    "image": "Sinnoh Route 229 BDSP.png",
+    "mapdesc": "A seaside path that makes its way through wildly growing trees and plants."
+   }
+  },
+  {
+   "key": "SN-R230",
+   "name": "Route 230",
+   "kind": "ROUTE",
+   "source": {
+    "page": "Sinnoh Route 230",
+    "resolved": "Sinnoh Route 230",
+    "revid": 4515254,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_230",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Route 229"
+    ],
+    "west": [
+     "Fight Area"
+    ]
+   },
+   "infobox": {
+    "size": "300",
+    "type": "ocean",
+    "image": "Sinnoh Route 230 BDSP.png",
+    "imageiv": "Sinnoh Route 230 Pt.png",
+    "mapdesc": "A sea route that stretches from west to east. There is an island that is rich with plant life along the way."
+   }
+  },
+  {
+   "key": "SN-L01",
+   "name": "Lake Verity",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Lake Verity",
+    "resolved": "Lake Verity",
+    "revid": 4556699,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lake_Verity",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "West end of {{rt|201|Sinnoh}} <br>Western [[Obsidian Fieldlands]]",
+   "located_links": [
+    "Route 201"
+   ],
+   "infobox": {
+    "type": "fieldlands",
+    "image": "Lake Verity BDSP Concept Art.jpg"
+   }
+  },
+  {
+   "key": "SN-L02",
+   "name": "Lake Valor",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Lake Valor",
+    "resolved": "Lake Valor",
+    "revid": 4649593,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lake_Valor",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "South end of {{rt|214|Sinnoh}}<br>Northeastern [[Crimson Mirelands]]",
+   "located_links": [
+    "Route 214"
+   ],
+   "infobox": {
+    "type": "mirelands",
+    "image": "Lake Valor BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L03",
+   "name": "Lake Acuity",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Lake Acuity",
+    "resolved": "Lake Acuity",
+    "revid": 4598639,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lake_Acuity",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "North end of {{rt|217|Sinnoh}} <br>North [[Alabaster Icelands]]",
+   "located_links": [
+    "Route 217"
+   ],
+   "infobox": {
+    "type": "icelands",
+    "image": "Lake Acuity BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L04",
+   "name": "Verity Lakefront",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Verity Lakefront",
+    "resolved": "Verity Lakefront",
+    "revid": 4613226,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Verity_Lakefront",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Lake Verity"
+    ],
+    "east": [
+     "Route 201"
+    ]
+   },
+   "infobox": {
+    "type": "land",
+    "image": "Verity Lakefront BDSP.png",
+    "mapdesc": "One of the lakes that is symbolic of the water-rich Sinnoh Region. There is an odd legend associated with it. It is possible to enter the cave underneath the lake from the island in the middle."
+   }
+  },
+  {
+   "key": "SN-L05",
+   "name": "Valor Lakefront",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Valor Lakefront",
+    "resolved": "Valor Lakefront",
+    "revid": 4613197,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Valor_Lakefront",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Route 214"
+    ],
+    "east": [
+     "Route 222"
+    ],
+    "south": [
+     "Route 213"
+    ],
+    "west": [
+     "Lake Valor"
+    ]
+   },
+   "infobox": {
+    "type": "land",
+    "image": "Valor Lakefront BDSP.png",
+    "mapdesc": "One of the lakes that is symbolic of the water-rich Sinnoh Region. There is an odd legend associated with it. A high-class restaurant is located on a hill overlooking the lake."
+   }
+  },
+  {
+   "key": "SN-L06",
+   "name": "Acuity Lakefront",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Acuity Lakefront",
+    "resolved": "Acuity Lakefront",
+    "revid": 4347594,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Acuity_Lakefront",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Lake Acuity"
+    ],
+    "east": [
+     "Snowpoint City"
+    ],
+    "south": [
+     "Route 217"
+    ]
+   },
+   "infobox": {
+    "type": "snow",
+    "image": "Acuity Lakefront BDSP.png",
+    "mapdesc": "One of the lakes that is symbolic of the water-rich Sinnoh Region. There is an odd legend associated with it. It is possible to enter the cave underneath the lake from the island in the middle."
+   }
+  },
+  {
+   "key": "SN-L07",
+   "name": "Mt. Coronet",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Mt. Coronet",
+    "resolved": "Mount Coronet",
+    "revid": 4624270,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Mount_Coronet",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Center of [[Sinnoh]]/[[Hisui]] Between {{rt|207|Sinnoh|Routes 207}} and {{rtn|208|Sinnoh}}, center of {{rt|211|Sinnoh}}, east of {{rt|216|Sinnoh}}",
+   "located_links": [
+    "Route 207",
+    "Route 211",
+    "Route 216"
+   ],
+   "infobox": {
+    "type": "mountain",
+    "image": "Mt. Coronet.png",
+    "mapdesc": "A sacred mountain that is capped the year round with snow. A gigantic maze sprawls inside it.<br>There is an ancient ruin named the [[Spear Pillar]] located here."
+   }
+  },
+  {
+   "key": "SN-L08",
+   "name": "Spear Pillar",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Spear Pillar",
+    "resolved": "Spear Pillar",
+    "revid": 4633935,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Spear_Pillar",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Mount Coronet]]",
+   "located_links": [],
+   "infobox": {
+    "type": "highlands",
+    "image": "Spear Pillar BDSP Concept Art.jpg"
+   }
+  },
+  {
+   "key": "SN-L09",
+   "name": "Oreburgh Gate",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Oreburgh Gate",
+    "resolved": "Oreburgh Gate",
+    "revid": 4339856,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Oreburgh_Gate",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Oreburgh City"
+    ],
+    "west": [
+     "Route 203"
+    ]
+   },
+   "infobox": {
+    "size": "295",
+    "type": "cave",
+    "image": "Sinnoh Oreburgh Gate BDSP.png",
+    "imageiv": "Oreburgh Gate 1F DPPt.png",
+    "mapdesc": "Once one gets through the tunnel, the city of Oreburgh is just a stone's throw away."
+   }
+  },
+  {
+   "key": "SN-L10",
+   "name": "Oreburgh Mine",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Oreburgh Mine",
+    "resolved": "Oreburgh Mine",
+    "revid": 4591312,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Oreburgh_Mine",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Oreburgh City]]",
+   "located_links": [
+    "Oreburgh City"
+   ],
+   "infobox": {
+    "type": "cave",
+    "image": "Oreburgh Mine BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L11",
+   "name": "Ravaged Path",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Ravaged Path",
+    "resolved": "Ravaged Path",
+    "revid": 4541354,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Ravaged_Path",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{rt|204|Sinnoh}}",
+   "located_links": [
+    "Route 204"
+   ],
+   "infobox": {
+    "type": "cave",
+    "image": "Ravaged Path Pt.png"
+   }
+  },
+  {
+   "key": "SN-L12",
+   "name": "Floaroma Meadow",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Floaroma Meadow",
+    "resolved": "Floaroma Meadow",
+    "revid": 4636262,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Floaroma_Meadow",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "In northern [[Floaroma Town]]",
+   "located_links": [],
+   "infobox": {
+    "type": "land",
+    "image": "Floaroma Meadow BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L13",
+   "name": "Valley Windworks",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Valley Windworks",
+    "resolved": "Valley Windworks",
+    "revid": 4631282,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Valley_Windworks",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "East of [[Floaroma Town]]",
+   "located_links": [],
+   "infobox": {
+    "type": "building",
+    "image": "Valley Windworks BDSP.png",
+    "mapdesc": "Numerous wind turbines stand in the vicinity of the Valley Windworks. Winds blowing through the canyon feed the wind turbines to generate clean electricity."
+   }
+  },
+  {
+   "key": "SN-L14",
+   "name": "Eterna Forest",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Eterna Forest",
+    "resolved": "Eterna Forest",
+    "revid": 4624286,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Eterna_Forest",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{rt|205|Sinnoh}}",
+   "located_links": [
+    "Route 205"
+   ],
+   "infobox": {
+    "type": "forest",
+    "image": "Eterna Forest BDSP Concept Art.jpg",
+    "mapdesc": "A forest enveloped in chilly air. Thick stands of trees turn the forest into a natural maze.<br/>Deep in the forest is the Old Chateau. It is falling into disrepair after being abandoned by its owner."
+   }
+  },
+  {
+   "key": "SN-L15",
+   "name": "Old Chateau",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Old Chateau",
+    "resolved": "Old Chateau",
+    "revid": 4518870,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Old_Chateau",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Eterna Forest]]<br>[[Canalave City]] ({{aniseries|PTS}})",
+   "located_links": [
+    "Canalave City",
+    "Eterna Forest"
+   ],
+   "infobox": {
+    "type": "ghost",
+    "image": "Old Chateau BDSP.png",
+    "mapdesc": "Deep in the forest is the Old Chateau. It is falling into disrepair after being abandoned by its owner."
+   }
+  },
+  {
+   "key": "SN-L16",
+   "name": "Fuego Ironworks",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Fuego Ironworks",
+    "resolved": "Fuego Ironworks",
+    "revid": 4564207,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Fuego_Ironworks",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "West of {{rt|205|Sinnoh}}, north of [[Floaroma Town]]",
+   "located_links": [
+    "Route 205"
+   ],
+   "infobox": {
+    "type": "building",
+    "image": "Fuego Ironworks BDSP.png",
+    "mapdesc": "The sprawling ironworks is located with the forest at its back.<br/>The ironworks refines iron ore mined from Mt. Coronet to make iron and to manufacture mechanical parts."
+   }
+  },
+  {
+   "key": "SN-L17",
+   "name": "Wayward Cave",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Wayward Cave",
+    "resolved": "Wayward Cave",
+    "revid": 4596195,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Wayward_Cave",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Beneath [[Sinnoh Route 206|Sinnoh's Cycling Road]] <br>Southern [[Coronet Highlands]]",
+   "located_links": [],
+   "infobox": {
+    "type": "highlands",
+    "image": "Wayward Cave BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L18",
+   "name": "Cycling Road",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Sinnoh Route 206",
+    "resolved": "Sinnoh Route 206",
+    "revid": 4590443,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sinnoh_Route_206",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "north": [
+     "Eterna City"
+    ],
+    "south": [
+     "Route 207"
+    ]
+   },
+   "infobox": {
+    "type": "road",
+    "image": "Sinnoh Route 206 BDSP.png",
+    "mapdesc": "Smoothly paved in asphalt, the Cycling Road is heavenly for bicycle lovers.<br/>Below the Cycling Road, one can see the entrance to Wayward Cave."
+   }
+  },
+  {
+   "key": "SN-L19",
+   "name": "Amity Square",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Amity Square",
+    "resolved": "Amity Square",
+    "revid": 4631942,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Amity_Square",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Hearthome City]]",
+   "located_links": [
+    "Hearthome City"
+   ],
+   "infobox": {
+    "type": "land",
+    "image": "Amity Square BDSP.png",
+    "mapdesc": "The square is a place where {{pkmn|Trainer}}s can [[Walking Pokémon|stroll]] peacefully with {{OBP|Pokémon|species}}."
+   }
+  },
+  {
+   "key": "SN-L20",
+   "name": "Lost Tower",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Lost Tower",
+    "resolved": "Lost Tower",
+    "revid": 4612633,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lost_Tower",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{rt|209|Sinnoh}}",
+   "located_links": [
+    "Route 209"
+   ],
+   "infobox": {
+    "type": "ghost",
+    "image": "Lost Tower BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L21",
+   "name": "Solaceon Ruins",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Solaceon Ruins",
+    "resolved": "Solaceon Ruins",
+    "revid": 4612799,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Solaceon_Ruins",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Between [[Solaceon Town]] and [[Maniac Tunnel]] <br>Central [[Crimson Mirelands]]",
+   "located_links": [],
+   "infobox": {
+    "type": "mirelands",
+    "image": "Solaceon Ruins BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L22",
+   "name": "Great Marsh",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Great Marsh",
+    "resolved": "Great Marsh",
+    "revid": 4614031,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Great_Marsh",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Pastoria City]]",
+   "located_links": [
+    "Pastoria City"
+   ],
+   "infobox": {
+    "type": "Marsh",
+    "image": "Great Marsh BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L23",
+   "name": "Trophy Garden",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Trophy Garden",
+    "resolved": "Trophy Garden",
+    "revid": 4623792,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Trophy_Garden",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{si|Pokémon Mansion}}",
+   "located_links": [],
+   "infobox": {
+    "type": "land",
+    "image": "Trophy Garden BDSP.png"
+   }
+  },
+  {
+   "key": "SN-L24",
+   "name": "Sendoff Spring",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Sendoff Spring",
+    "resolved": "Sendoff Spring",
+    "revid": 4541358,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Sendoff_Spring",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "East of {{rt|214|Sinnoh}}",
+   "located_links": [
+    "Route 214"
+   ],
+   "infobox": {
+    "type": "lake",
+    "image": "Sendoff Spring Pt.png"
+   }
+  },
+  {
+   "key": "SN-L25",
+   "name": "Spring Path",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Spring Path",
+    "resolved": "Spring Path",
+    "revid": 4591833,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Spring_Path",
+    "template": "Route infobox"
+   },
+   "neighbours": {
+    "east": [
+     "Sendoff Spring"
+    ],
+    "west": [
+     "Route 214"
+    ]
+   },
+   "infobox": {
+    "type": "coastlands",
+    "image": "Spring Path Pt.png",
+    "mapdesc": "The fourth lake of Sinnoh that was kept secret.<br>Beneath the lake's surface is a cave where dimensions are distorted."
+   }
+  },
+  {
+   "key": "SN-L26",
+   "name": "Turnback Cave",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Turnback Cave",
+    "resolved": "Turnback Cave",
+    "revid": 4604697,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Turnback_Cave",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Sendoff Spring]]<br>[[Spring Path]]",
+   "located_links": [
+    "Sendoff Spring",
+    "Spring Path"
+   ],
+   "infobox": {
+    "type": "coastlands",
+    "image": "Turnback Cave Giratina Pt.png"
+   }
+  },
+  {
+   "key": "SN-L27",
+   "name": "Iron Island",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Iron Island",
+    "resolved": "Iron Island",
+    "revid": 4613755,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Iron_Island",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Off the western coast of [[Sinnoh]]",
+   "located_links": [],
+   "infobox": {
+    "type": "cave",
+    "image": "Iron Island BDSP.png",
+    "mapdesc": "A small, ore-rich island that is off the coast of Eterna City.<br/>Inside the island are remnants of an iron ore mining operation from the past."
+   }
+  },
+  {
+   "key": "SN-L28",
+   "name": "Snowpoint Temple",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Snowpoint Temple",
+    "resolved": "Snowpoint Temple",
+    "revid": 4572184,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Snowpoint_Temple",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Snowpoint City]]<br>Northern [[Alabaster Icelands]]",
+   "located_links": [
+    "Snowpoint City"
+   ],
+   "infobox": {
+    "type": "icelands",
+    "image": "Snowpoint Temple LA.png"
+   }
+  },
+  {
+   "key": "SN-L29",
+   "name": "Victory Road",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Victory Road (Sinnoh)",
+    "resolved": "Victory Road (Sinnoh)",
+    "revid": 4580359,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Victory_Road_(Sinnoh)",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{si|Pokémon League}}",
+   "located_links": [],
+   "infobox": {
+    "type": "cave",
+    "image": "Victory Road Sinnoh exterior BDSP.png",
+    "mapdesc": "Trainers seeking to become the best arrive here after enduring a long and grueling journey.{{sup/4|DP}}<br/>Trainers seeking to be the best arrive here after a long and grueling journey.{{sup/4|Pt}}<br/>Victory Road is the last and toughest of the challenges leading up to the Pokémon League."
+   }
+  },
+  {
+   "key": "SN-L30",
+   "name": "Stark Mountain",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Stark Mountain",
+    "resolved": "Stark Mountain",
+    "revid": 4604700,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Stark_Mountain",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "End of {{rt|227|Sinnoh}}",
+   "located_links": [
+    "Route 227"
+   ],
+   "infobox": {
+    "type": "volcano",
+    "image": "Stark Mountain Exterior BDSP.png",
+    "mapdesc": "A rugged, seemingly indestructible rock mountain that is thickly blanketed by the volcanic ash it spews.<br/>Inside the mountain, fissures in spilled and hardened lava form enormous caverns."
+   }
+  },
+  {
+   "key": "SN-L31",
+   "name": "Fullmoon Island",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Fullmoon Island",
+    "resolved": "Fullmoon Island",
+    "revid": 4541360,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Fullmoon_Island",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Off the west coast of Sinnoh",
+   "located_links": [],
+   "infobox": {
+    "type": "land",
+    "image": "Fullmoon Island BDSP.png",
+    "mapdesc": "A small, crescent-shaped pond that lies inside a closed-off forest."
+   }
+  },
+  {
+   "key": "SN-L32",
+   "name": "Newmoon Island",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Newmoon Island",
+    "resolved": "Newmoon Island",
+    "revid": 4520047,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Newmoon_Island",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Off the west coast of Sinnoh",
+   "located_links": [],
+   "infobox": {
+    "type": "land",
+    "image": "Newmoon Island Pt.png",
+    "mapdesc": "A small, round pond that lies inside a closed-off forest."
+   }
+  },
+  {
+   "key": "SN-L33",
+   "name": "Pal Park",
+   "kind": "LANDMARK",
+   "source": {
+    "page": "Pal Park",
+    "resolved": "Pal Park",
+    "revid": 4541362,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pal_Park",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "{{rt|221|Sinnoh}}, [[Fuchsia City]]",
+   "located_links": [
+    "Route 221"
+   ],
+   "infobox": {
+    "type": "land",
+    "image": "Pal Park HGSS.png",
+    "mapdesc": "This used to be the location of the Safari Zone, but is now the Pal Park.{{sup/4|HGSS}}"
+   }
+  },
+  {
+   "key": "SN-O01",
+   "name": "Flower Paradise",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Flower Paradise",
+    "resolved": "Flower Paradise",
+    "revid": 4382574,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Flower_Paradise",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "North of [[Seabreak Path]]",
+   "located_links": [],
+   "infobox": {
+    "type": "land",
+    "image": "Flower Paradise BDSP.png",
+    "mapdesc": "A speck of an island far from any civilization. It is covered in an abundance of flowers."
+   }
+  },
+  {
+   "key": "SN-O02",
+   "name": "Hall of Origin",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Hall of Origin",
+    "resolved": "Hall of Origin",
+    "revid": 4556700,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Hall_of_Origin",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "Above [[Spear Pillar]]<br>Above [[Temple of Sinnoh]]",
+   "located_links": [],
+   "infobox": {
+    "type": "highlands",
+    "image": "Hall of Origin PLA.png"
+   }
+  },
+  {
+   "key": "SN-O03",
+   "name": "Eterna Galactic Building",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Galactic Eterna Building",
+    "resolved": "Team Galactic Eterna Building",
+    "revid": 4631283,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Team_Galactic_Eterna_Building",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Eterna City]]",
+   "located_links": [
+    "Eterna City"
+   ],
+   "infobox": {
+    "type": "building",
+    "image": "Galactic Eterna Building BDSP.png"
+   }
+  },
+  {
+   "key": "SN-O04",
+   "name": "Veilstone Galactic Headquarters",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Galactic HQ",
+    "resolved": "Team Galactic HQ",
+    "revid": 4631284,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Team_Galactic_HQ",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Veilstone City]]",
+   "located_links": [
+    "Veilstone City"
+   ],
+   "infobox": {
+    "type": "building",
+    "image": "Team Galactic HQ BDSP.png"
+   }
+  },
+  {
+   "key": "SN-O05",
+   "name": "Battle Park / Battle Frontier",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Battle Frontier (Generation IV)",
+    "resolved": "Battle Frontier (Generation IV)",
+    "revid": 4633021,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Battle_Frontier_(Generation_IV)",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "[[Fight Area]] (Sinnoh)<br>{{rt|40|Johto}} (Johto)",
+   "located_links": [
+    "Fight Area"
+   ],
+   "infobox": {
+    "type": "road",
+    "image": "Battle Frontier GenIV.png",
+    "mapdesc": "The Battle Frontier--where the best of the best Trainers gather to test their skills--is located here.{{sup/4|Pt}}<br>A place where people from all over come to show off their strength.{{sup/4|HGSS}}"
+   }
+  },
+  {
+   "key": "SN-O06",
+   "name": "Distortion World",
+   "kind": "STORY_OR_OPTIONAL_SITE",
+   "source": {
+    "page": "Distortion World",
+    "resolved": "Distortion World",
+    "revid": 4604699,
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Distortion_World",
+    "template": "Infobox location"
+   },
+   "neighbours": {},
+   "located": "The other side of the {{pkmn|world}}",
+   "located_links": [],
+   "infobox": {
+    "type": "distortion",
+    "image": "Distortion World.png"
+   }
+  }
+ ]
+}
