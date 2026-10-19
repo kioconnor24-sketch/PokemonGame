@@ -1,5 +1,5 @@
 # Documentation index
-Start with the [operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md), [reset audit](ORGANIZATIONAL_RESET_20261018.md) and [#15 claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
+Start with the [operating contract](CURRENT_PHASE_AND_HANDOFF.md), [integration queue](INTEGRATION_QUEUE.md), [manager handoff (2026-10-19)](CHATGPT_MANAGER_HANDOFF_20261019.md), [reset audit](ORGANIZATIONAL_RESET_20261018.md) and [#15 claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15).
 
 | Need | Record |
 | --- | --- |
