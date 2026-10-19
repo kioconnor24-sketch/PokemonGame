@@ -1,5 +1,6 @@
 #include "global.h"
 #include "regions.h"
+#include "region_map.h"
 
 
 static const u16 sKantoSubregionMapsecs[KANTO_SUBREGION_COUNT][30] = {
@@ -85,6 +86,10 @@ enum KantoSubRegion GetKantoSubregion(u32 mapSecId)
 
 bool32 IsRegionMapAvailableForSection(u32 sectionId)
 {
+    // Unknown sections use Hoenn's display fallback, but that must not
+    // authorize its travel grid for NONE or an unallocated saved origin.
+    if (!IsRegionMapSectionIdValid(sectionId))
+        return FALSE;
     switch (GetRegionForSectionId(sectionId))
     {
     case REGION_HOENN:
