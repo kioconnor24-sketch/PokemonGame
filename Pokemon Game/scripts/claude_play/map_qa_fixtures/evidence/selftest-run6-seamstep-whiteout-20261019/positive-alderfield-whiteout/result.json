@@ -1,0 +1,218 @@
+{
+ "maps": [
+  "MAP_ALDERFIELDCLINIC"
+ ],
+ "build": "normal",
+ "rom_sha256": "72a396752686bc4479c2ed3ac8597e30832746daeaa4aae45f5099b33ec4ef80",
+ "static_findings": [],
+ "save_before": "854030dcb886a5963089ff35aa16851ceb18d7498d100a1a6f4797b3b70c22b5",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ALDERFIELDCLINIC",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ALDERFIELDCLINIC closed down edge at (3, 8) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     3,
+     8
+    ]
+   ],
+   "after": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     3,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ALDERFIELDCLINIC closed down edge at (10, 8) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     10,
+     8
+    ]
+   ],
+   "after": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     10,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ALDERFIELDCLINIC closed left edge at (0, 4) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     0,
+     4
+    ]
+   ],
+   "after": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     0,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ALDERFIELDCLINIC closed left edge at (0, 7) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     0,
+     7
+    ]
+   ],
+   "after": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     0,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ALDERFIELDCLINIC closed right edge at (13, 5) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     13,
+     5
+    ]
+   ],
+   "after": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     13,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "whiteout: HEAL_LOCATION_ALDERFIELD exists in this tree",
+   "ok": true
+  },
+  {
+   "name": "whiteout: ordinary play set the HEAL_LOCATION_ALDERFIELD anchor",
+   "ok": true,
+   "got": [
+    "MAP_ALDERFIELD",
+    17,
+    13
+   ],
+   "expected": [
+    "MAP_ALDERFIELD",
+    17,
+    13
+   ]
+  },
+  {
+   "name": "whiteout: the TEST-ONLY wild battle started",
+   "ok": true,
+   "npc": [
+    "MAP_ALDERFIELD",
+    16,
+    17
+   ]
+  },
+  {
+   "name": "whiteout: respawned in front of the HEAL_LOCATION_ALDERFIELD nurse",
+   "ok": true,
+   "got": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ],
+   "expected": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "whiteout: party fully healed",
+   "ok": true
+  },
+  {
+   "name": "whiteout: money lost (or none to lose)",
+   "ok": true,
+   "before": 3128,
+   "after": 3056
+  },
+  {
+   "name": "an exit is reachable after the whiteout to MAP_ALDERFIELDCLINIC",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (map-qa)",
+   "ok": true,
+   "at": [
+    "MAP_ALDERFIELDCLINIC",
+    [
+     7,
+     4
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "e91491083020a74b1a949d57cf3e65fdca3853d652400489f8cb7c2cd7d4372a",
+ "verdict": "PASS"
+}

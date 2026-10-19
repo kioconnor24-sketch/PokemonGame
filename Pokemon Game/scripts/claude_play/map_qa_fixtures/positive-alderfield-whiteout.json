@@ -1,0 +1,27 @@
+{
+ "batch": [
+  "MAP_ALDERFIELDCLINIC"
+ ],
+ "entry": [
+  "MAP_ALDERFIELDCLINIC",
+  7,
+  5
+ ],
+ "description": "TEST-ONLY: the Alderfield market NPC starts a level-80 wild battle. Entering the clinic during the run sets HEAL_LOCATION_ALDERFIELD; the run loses on purpose and the game's own whiteout must land in front of the clinic nurse, healed.",
+ "expect": "PASS",
+ "run_args": [
+  "--whiteout",
+  "HEAL_LOCATION_ALDERFIELD",
+  "--whiteout-npc",
+  "MAP_ALDERFIELD,16,17"
+ ],
+ "edits": [
+  {
+   "op": "wildbattle",
+   "map": "AlderfieldGym",
+   "script": "Alderfield_Market",
+   "species": "SPECIES_GARCHOMP",
+   "level": 80
+  }
+ ]
+}
