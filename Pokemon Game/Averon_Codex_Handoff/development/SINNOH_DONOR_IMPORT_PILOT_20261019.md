@@ -23,6 +23,28 @@ On donor revision `38228bb574a3557345852b758d5f1a65eb01bb22`:
 
 The importer intentionally does not claim the caller-supplied 40-hex donor revision is authenticated from the checkout's Git HEAD. Before production approval, the developer must compare the local `git rev-parse HEAD` with the declared revision and confirm the actual binary's Git blob identity as well as the SHA-256 recorded by the tool.
 
+## Executed acceptance — real Route202 source and donor banks
+
+**REAL GitHub Actions validation: [run #39306303130](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39306303130), job `inspect-only`** at source head `00856b35d9caa8bda4a61807a299880ca722b44a`. The job executed all 15 synthetic Python tests successfully, downloaded the *actual* donor `Route202` header/layout/block and the relevant primary/secondary metatile records, attributes and PNGs from pinned commit `38228bb574a3557345852b758d5f1a65eb01bb22`, verified the expected Git blob hashes for all nine files, and emitted JSON-only results. Its source checksum for donor `Route202/map.bin` is SHA-256 `9f58a62052998ed869259356c395302ef5bfa35624b612c0e68ae1922e00437b`. [Artifact #12213163352](https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39306303130/artifacts/12213163352) contains the inspect and bank-compatibility JSON, **not** donor binaries.
+
+| Read-only Route202 metric | Verified result |
+| --- | --- |
+| Layout/cell count | 30×34, 1,020 real blocks |
+| Distinct source metatile references | 25 |
+| References to donor primary/general | **25** |
+| References to donor secondary/petalburg | **0** |
+| Primary source records / Averon target records | 512 / 512 |
+| Primary source metatiles whose record+behavior bytes match Averon at identical index | **15/25** |
+| Primary source metatiles with no same-record+attribute match anywhere in destination primary | **10/25** |
+| Ten structurally unmatched source IDs | 3, 454, 455, 462, 463, 470, 471, 478, 479, 487 |
+| Secondary records donor / Averon | 512 / 144 (**unused by this specific route**) |
+| Primary donor vs Averon PNG | **Different** SHA-256 |
+| Secondary donor vs Averon PNG | **Different** SHA-256 |
+
+**Technical conclusion:** Copying map.bin unchanged into Averon with `gTileset_General` is *not* visually verified. Importing this particular route is more tractable than importing a city with buildings: it uses only 25 primary records, and none of the donor's 512 secondary-bank records. But the donor/Averon **primary graphic images differ**, so matching *tile indices or raw metatile records* is not sufficient to prove identical visuals or collisions/animations. The ten unmatched primary records require real graphics/behavior remapping or a dedicated, rights-cleared Sinnoh primary-family asset strategy. Crucially, **do not overwrite Averon's global shared General tileset**: doing so would silently alter older regions.
+
+**Next bounded production experiment:** create a special isolated Sinnoh tileset-family sandbox or draw explicit visually/behaviorally validated equivalences for the ten source records; compare output rendering with the donor screenshot in a true GBA/mGBA ROM. Treat the previously merged #167 34×34 candidate as an alternate layout rather than claiming the donor 30×34 is already accepted. No map files, global registry, licenses, saves, events or gameplay changed in this pilot. No final emulator QA or converted donor→Averon map is claimed.
+
 ## Implemented in this isolated PR
 
 - `scripts/sinnoh-donor-map-pilot.py`: reads a **local, pinned donor checkout** and cross-references `data/maps/<MapName>/map.json`, `data/layouts/layouts.json`, and the declared 16-bit `map.bin`. `inspect` reports dimensions, actual referenced metatile IDs/frequencies, donor tileset symbols, event/connection counts and SHA-256 of the precise binary; optionally generates a deliberately *unverified* map manifest.
