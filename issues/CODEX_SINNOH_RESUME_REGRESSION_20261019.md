@@ -67,3 +67,23 @@ make -j4 -O RELEASE=1 all
 ```
 
 The ROMTEST override identifies this environment's actual runner; elsewhere use the bundled executable. Run resource-budget/save-headroom tools on each actual log/ROM/ELF as documented in #148. Default-OFF source/ROM hashes above refer to82d5d8d7; documentation-only follow-ups do not relabel those measurements as a later main build.
+
+## Combined-source native/build proof (not main acceptance)
+
+Temporary recoverable branch `codex/sinnoh-combined-proof-20261019`, source **`81ddd4235c9b8f7a41fc8e59e89c89ed637bd196`**, engine **`555758f9f52f9c8ff14f35499d0f7818f40b9218`**, merges the existing #150 `af28cc6e1a85769714a07f750949c4103ba6349b` and #151 `b2e45a0c04a710e63212f0212105096a75e73051` heads with #154. No manual Claude-file changes, new identity or new map design. This experiment is not a main merge or authorization to skip the authors' remaining acceptance.
+
+Actual complete focused Averon **293/293 PASS** (284 existing +2 Route201 +3 Sandgem +4 Codex). The four dynamic Codex identities now execute **135 parameter combinations**, including90 interruption/control combinations over all3 linked Sinnoh endpoints, both slot parities and the real healer44. All previous saved IDs/origins, legacy-format migration and storage tests remain included. Source registry954pins/537maps passes12 mutations +1 valid extension; actual NORMAL ELF537 headers and3 harmful pointer mutations PASS. Sinnoh preflight3maps/82geometry dependencies/0errors/0warnings;8 saved section pins unchanged;35 spare ordinary codes. No full unfiltered M1 or fresh graphical run is claimed.
+
+Same local toolchain, ordinary cries-OFF combined builds:
+
+| Profile | Linked used | ROM free | EWRAM / IWRAM | Warnings |
+| --- | ---: | ---: | ---: | ---: |
+| normal | 17,326,872 B | 16,227,560 B | 226,480 / 28,392 B | 0 |
+| release | 17,446,008 B | 16,108,424 B | 226,482 / 28,336 B | 4 |
+
+Measured combined addition relative to82d5d8d7: **+3,096 linked B in each profile**, unchanged RAM and all four SaveBlock/storage headrooms.
+
+- Combined normal ROM SHA256: `dc9c46e72a72735e49079e31031452a200c83e06cabe5d6f4dd49dba641e192c`.
+- Combined release ROM SHA256: `4c1c079dec72d89be5c8469734af9680f26d9f91097e96b623e4b833de8f7b3e`.
+
+Recheck actual main after #150/#151 integration; exact engine-tree equality may reuse this proof, otherwise rerun the affected compatibility checks. This does not make either draft eligible without its own genuine whiteout/Continue/handoff/CI evidence. #157 was independently reviewed and merged as `aebdd89bd368f7e7ec49b4d2c28cc2f82011dc08`; the newer roadmap delegates ordinary geography but keeps identity/encoding decisions reserved. Next independent claimed work is X02's read-only named-origin demand tool; no production encoding is adopted.
