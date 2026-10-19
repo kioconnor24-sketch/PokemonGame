@@ -13,6 +13,16 @@
 5. Do a small visual/behavior and memory pilot **before** scaling to multi-map connected batches. Never use a full donor map_groups.json: the donor prepends 18 groups and would renumber Averon's accepted IDs.
 6. A successful pilot should produce a repeatable dependency-closure manifest and converter, allowing faster import of later source-grounded connected regions instead of rewriting map-specific generators.
 
+## First pinned Route 202 dependency inspection (GitHub source read)
+
+On donor revision `38228bb574a3557345852b758d5f1a65eb01bb22`:
+- **Donor Route202:** `MAP_ROUTE202` / `LAYOUT_ROUTE202`, **30 × 34** cells; primary `gTileset_General`, secondary `gTileset_Petalburg`. Its declared binary is `data/layouts/Route202/map.bin` (Git blob `25c724524810a7a188d30947cb885a4e5e44e8b9`); actual raw bytes/behavior remain to be checked via an ordinary local Git clone, not guessed from the connector's binary transport.
+- **Connections:** down to Sandgem at donor offset −2; up to Jubilife at donor offset −38. These are donor-relative offsets, NOT authorized Averon seam values. Re-evaluate against current Sandgem geometry and the yet-unbuilt Jubilife.
+- **Story/event baggage excluded from converter:** six object events, no warp events, ten coordinate events and four background events.
+- **Independent local candidate:** #167 Route202 is **34 × 34**, not the same footprint. Before selecting one, compare faithful visual geography, practical seam positions, donor-family graphic quality, and the total dependency closure, not merely width.
+
+The importer intentionally does not claim the caller-supplied 40-hex donor revision is authenticated from the checkout's Git HEAD. Before production approval, the developer must compare the local `git rev-parse HEAD` with the declared revision and confirm the actual binary's Git blob identity as well as the SHA-256 recorded by the tool.
+
 ## Implemented in this isolated PR
 
 - `scripts/sinnoh-donor-map-pilot.py`: reads a **local, pinned donor checkout** and cross-references `data/maps/<MapName>/map.json`, `data/layouts/layouts.json`, and the declared 16-bit `map.bin`. `inspect` reports dimensions, actual referenced metatile IDs/frequencies, donor tileset symbols, event/connection counts and SHA-256 of the precise binary; optionally generates a deliberately *unverified* map manifest.
