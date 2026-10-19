@@ -25,7 +25,7 @@ GRASS, ROAD, BUSH = 1, 2, 22
 # Ids next to the tree quarters that must never be mistaken for trees.
 NEAR_MISSES = (467, 472, 473, 474, 475, 478, 479, 483, 486)
 # Sandgem's committed map.bin (main) has this many orphans. Set it to 0 once the repaired map lands.
-SANDGEM_ORPHANS = 57
+SANDGEM_ORPHANS = 0  # repaired in the Route 201 + Sandgem tree-repair PR (was 57)
 
 
 def high_bits(x, y):
