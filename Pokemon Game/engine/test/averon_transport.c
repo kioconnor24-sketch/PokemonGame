@@ -3,6 +3,7 @@
 #include "averon_transport.h"
 #include "averon_region_save.h"
 #include "event_data.h"
+#include "heal_location.h"
 #include "load_save.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -248,6 +249,26 @@ TEST("Averon transport refuses an indexed departure even with matching inconsist
     Snapshot(&before);
     EXPECT(!AveronTransport_Begin(&indexed, &sAveron, FALSE));
     ExpectUnchanged(&before);
+}
+
+TEST("Averon transport refuses a physically wrong departing healer before caching its return")
+{
+    // Inject an inconsistent state, not a claimed natural gameplay route.
+    StartAt(&sSinnoh);
+    SetLastHealLocationWarp(HEAL_LOCATION_ALDERFIELD);
+    struct TransportSnapshot before;
+    Snapshot(&before);
+    EXPECT(!AveronTransport_Begin(&sSinnoh, &sAveron, FALSE));
+    ExpectUnchanged(&before);
+    // Correct only the active source healer, then prove the normal round trip
+    // captures44 and permits return. No automatic repair/migration is adopted.
+    SetLastHealLocationWarp(HEAL_LOCATION_SANDGEM_TOWN);
+    EXPECT(AveronTransport_Begin(&sSinnoh, &sAveron, FALSE));
+    Arrive();
+    EXPECT_EQ(AveronRegion_GetHealLocation(AVERON_SAVE_REGION_SINNOH), HEAL_LOCATION_SANDGEM_TOWN);
+    EXPECT(AveronTransport_Begin(&sAveron, &sSinnoh, TRUE));
+    Arrive();
+    EXPECT_EQ(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation), HEAL_LOCATION_SANDGEM_TOWN);
 }
 
 TEST("Averon transport saved return validation remains usable after an actual flash reload")
