@@ -294,13 +294,15 @@ def audit(engine, names, *, strict_connections=False):
         if section != 'MAPSEC_NONE' and section not in section_values:
             problem(name, 'section-reference', f'Unknown map-section {section!r}')
         elif section == 'MAPSEC_NONE':
-            problem(name, 'section-none', 'Sentinel is not a named met-location; review intent', True)
+            problem(name, 'section-none', 'Sentinel is not a named met-location; review intent',
+                    data.get('region') != 'REGION_SINNOH')
         else:
             row['section_value'] = section_values[section]
             row['section_engine_region'] = namespace.engine_region(section_values[section], section_values,
                 section_contract['declared_regions'].get(section))
             if data.get('region') == 'REGION_SINNOH' and row['section_engine_region'] != 'REGION_SINNOH':
-                problem(name, 'section-region-mismatch', 'Saved section currently resolves to ' + row['section_engine_region'] + '; Sinnoh routing requires an approved policy', True)
+                problem(name, 'section-region-mismatch', 'Saved section resolves to ' + row['section_engine_region']
+                        + '; Sinnoh headers require an approved Sinnoh parent section')
         if len(slots[name]) == 1 and (slots[name][0][1] >= 128 or len(groups[slots[name][0][2]]) > 128):
             problem(name, 'map-capacity', 'Map index/group size exceeds signed-byte capacity')
         if any(slot[:2] == (127, 127) for slot in slots[name]):

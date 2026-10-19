@@ -174,9 +174,42 @@ class SourceBatchTests(unittest.TestCase):
     def test_sinnoh_map_in_mixed_hoenn_group_is_header_eligible(self):
         data = self.map_data()
         data['region'] = 'REGION_SINNOH'
+        data['region_map_section'] = 'MAPSEC_SANDGEM_TOWN'
         result = self.audit_mutated({'data/maps/Saltmere/map.json': data})
         self.assertEqual(result['errors'], [])
         self.assertTrue(result['maps'][0]['header_eligible'])
+
+    def test_sinnoh_header_rejects_legacy_region_section_fallback(self):
+        for section in ('MAPSEC_SALTMERE', 'MAPSEC_PALLET_TOWN', 'MAPSEC_DYNAMIC'):
+            source = self.map_data()
+            source.update(region='REGION_SINNOH', region_map_section=section)
+            with self.subTest(section=section):
+                result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+                self.assertIn('section-region-mismatch', self.codes(result))
+
+    def test_unnamed_sinnoh_section_fails_but_legacy_none_still_requires_review(self):
+        for region in ('REGION_HOENN', 'REGION_SINNOH'):
+            source = self.map_data()
+            source.update(region=region, region_map_section='MAPSEC_NONE')
+            with self.subTest(region=region):
+                result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+                self.assertEqual('section-none' in self.codes(result), region == 'REGION_SINNOH')
+                self.assertEqual('section-none' in {e['code'] for e in result['warnings']}, region == 'REGION_HOENN')
+
+    def test_two_physical_maps_can_share_one_approved_sinnoh_parent_origin(self):
+        # Existing documents changed only in memory: this does not place either
+        # real Averon map in Sinnoh or approve any new geography/section alias.
+        changes = {}
+        for name in ('Saltmere', 'SaltmereGreenhouse'):
+            source = self.map_data(name)
+            source.update(region='REGION_SINNOH', region_map_section='MAPSEC_SANDGEM_TOWN')
+            changes[f'data/maps/{name}/map.json'] = source
+        result = self.audit_mutated(changes, names=('Saltmere', 'SaltmereGreenhouse'))
+        self.assertEqual(result['errors'], [])
+        self.assertEqual(result['warnings'], [])
+        self.assertEqual(len({row['id'] for row in result['maps']}), 2)
+        self.assertEqual({row['section_value'] for row in result['maps']}, {216})
+        self.assertEqual({row['section_engine_region'] for row in result['maps']}, {'REGION_SINNOH'})
 
     def test_kanto_and_unknown_regions_are_excluded_in_mixed_groups(self):
         for region in ('REGION_KANTO', 'REGION_JOHTO', 'REGION_sinnoh', False, 0, [], {}):
@@ -388,7 +421,8 @@ class SourceBatchTests(unittest.TestCase):
         source = self.map_data()
         source['region'] = 'REGION_SINNOH'
         result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
-        self.assertIn('section-region-mismatch', {e['code'] for e in result['warnings']})
+        self.assertIn('section-region-mismatch', self.codes(result))
+        self.assertNotIn('section-region-mismatch', {e['code'] for e in result['warnings']})
         self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_HOENN')
 
     def test_explicit_section_region_is_used_without_allocating_ids(self):
