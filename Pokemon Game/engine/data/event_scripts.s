@@ -1768,6 +1768,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/SandgemTown_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/Route201/scripts.inc"
 	.include "data/maps/TwinleafTown/scripts.inc"
+	.include "data/maps/TwinleafTown_House1/scripts.inc"
+	.include "data/maps/TwinleafTown_House2/scripts.inc"
+	.include "data/maps/TwinleafTown_House3/scripts.inc"
+	.include "data/maps/TwinleafTown_House4/scripts.inc"
 
 	.include "data/maps/AlderfieldSupply/scripts.inc"
 
