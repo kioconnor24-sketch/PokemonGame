@@ -121,7 +121,7 @@ class SourceBatchTests(unittest.TestCase):
                                       'src/data/tilesets/headers.h', 'src/data/tilesets/metatiles.h')]
         cls.snapshot = {p.relative_to(ENGINE).as_posix(): p.read_bytes() for p in paths}
 
-    def audit_mutated(self, changes, names=('Saltmere',)):
+    def audit_mutated(self, changes, names=('Saltmere',), **options):
         original = Path.read_bytes
 
         def read(path):
@@ -135,7 +135,7 @@ class SourceBatchTests(unittest.TestCase):
                 return value if isinstance(value, bytes) else json.dumps(value).encode()
             return self.snapshot[relative] if relative in self.snapshot else original(path)
         with patch.object(Path, 'read_bytes', read):
-            return tool.audit(ENGINE, names)
+            return tool.audit(ENGINE, names, **options)
 
     def codes(self, result):
         return {e['code'] for e in result['errors']}
@@ -174,9 +174,42 @@ class SourceBatchTests(unittest.TestCase):
     def test_sinnoh_map_in_mixed_hoenn_group_is_header_eligible(self):
         data = self.map_data()
         data['region'] = 'REGION_SINNOH'
+        data['region_map_section'] = 'MAPSEC_SANDGEM_TOWN'
         result = self.audit_mutated({'data/maps/Saltmere/map.json': data})
         self.assertEqual(result['errors'], [])
         self.assertTrue(result['maps'][0]['header_eligible'])
+
+    def test_sinnoh_header_rejects_legacy_region_section_fallback(self):
+        for section in ('MAPSEC_SALTMERE', 'MAPSEC_PALLET_TOWN', 'MAPSEC_DYNAMIC'):
+            source = self.map_data()
+            source.update(region='REGION_SINNOH', region_map_section=section)
+            with self.subTest(section=section):
+                result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+                self.assertIn('section-region-mismatch', self.codes(result))
+
+    def test_unnamed_sinnoh_section_fails_but_legacy_none_still_requires_review(self):
+        for region in ('REGION_HOENN', 'REGION_SINNOH'):
+            source = self.map_data()
+            source.update(region=region, region_map_section='MAPSEC_NONE')
+            with self.subTest(region=region):
+                result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
+                self.assertEqual('section-none' in self.codes(result), region == 'REGION_SINNOH')
+                self.assertEqual('section-none' in {e['code'] for e in result['warnings']}, region == 'REGION_HOENN')
+
+    def test_two_physical_maps_can_share_one_approved_sinnoh_parent_origin(self):
+        # Existing documents changed only in memory: this does not place either
+        # real Averon map in Sinnoh or approve any new geography/section alias.
+        changes = {}
+        for name in ('Saltmere', 'SaltmereGreenhouse'):
+            source = self.map_data(name)
+            source.update(region='REGION_SINNOH', region_map_section='MAPSEC_SANDGEM_TOWN')
+            changes[f'data/maps/{name}/map.json'] = source
+        result = self.audit_mutated(changes, names=('Saltmere', 'SaltmereGreenhouse'))
+        self.assertEqual(result['errors'], [])
+        self.assertEqual(result['warnings'], [])
+        self.assertEqual(len({row['id'] for row in result['maps']}), 2)
+        self.assertEqual({row['section_value'] for row in result['maps']}, {216})
+        self.assertEqual({row['section_engine_region'] for row in result['maps']}, {'REGION_SINNOH'})
 
     def test_kanto_and_unknown_regions_are_excluded_in_mixed_groups(self):
         for region in ('REGION_KANTO', 'REGION_JOHTO', 'REGION_sinnoh', False, 0, [], {}):
@@ -320,6 +353,60 @@ class SourceBatchTests(unittest.TestCase):
         self.assertEqual(result['errors'], [])
         self.assertIn('connection-return', {e['code'] for e in result['warnings']})
 
+    def test_strict_seams_reject_missing_return_in_an_unselected_target(self):
+        target = self.map_data('CoastalMeadow')
+        target['connections'] = []
+        changes = {'data/maps/CoastalMeadow/map.json': target}
+        default = self.audit_mutated(changes)
+        strict = self.audit_mutated(changes, strict_connections=True)
+        self.assertEqual(default['errors'], [])
+        self.assertIn('connection-return', self.codes(strict))
+        self.assertNotIn('connection-return', {e['code'] for e in strict['warnings']})
+
+    def test_strict_seams_reject_ambiguous_reciprocal_edges(self):
+        target = self.map_data('CoastalMeadow')
+        back = next(c for c in target['connections'] if c['map'] == 'MAP_SALTMERE')
+        target['connections'].append(deepcopy(back))
+        changes = {'data/maps/CoastalMeadow/map.json': target}
+        self.assertEqual(self.audit_mutated(changes)['errors'], [])
+        self.assertIn('connection-return-ambiguous',
+                      self.codes(self.audit_mutated(changes, strict_connections=True)))
+
+    def test_strict_seams_do_not_accept_one_good_offset_beside_a_wrong_return(self):
+        target = self.map_data('CoastalMeadow')
+        back = deepcopy(next(c for c in target['connections'] if c['map'] == 'MAP_SALTMERE'))
+        back['offset'] = int(back['offset']) + 1
+        target['connections'].append(back)
+        result = self.audit_mutated({'data/maps/CoastalMeadow/map.json': target}, strict_connections=True)
+        self.assertIn('connection-return-ambiguous', self.codes(result))
+
+    def test_strict_seams_keep_wrong_inverse_offset_and_nonoverlap_errors(self):
+        source = self.map_data()
+        source['connections'][0]['offset'] = 10000
+        result = self.audit_mutated({'data/maps/Saltmere/map.json': source}, strict_connections=True)
+        self.assertTrue({'connection-overlap', 'connection-offset-return'} <= self.codes(result))
+
+    def test_integrated_sinnoh_and_averon_strict_seams_pass_without_new_ids(self):
+        registry = json.loads((ENGINE / 'data/maps/map_groups.json').read_text())
+        for group in ('gMapGroup_AveronOpening', 'gMapGroup_Sinnoh'):
+            names = registry[group]
+            with self.subTest(group=group):
+                result = tool.audit(ENGINE, names, strict_connections=True)
+                self.assertEqual(result['errors'], [])
+                self.assertEqual(result['warnings'], [])
+                self.assertEqual(len(result['maps']), len(names))
+                self.assertEqual(result['connection_policy'], 'strict reciprocal cardinal seams')
+
+    def test_strict_cli_forwards_policy_and_exits_nonzero_on_a_broken_seam(self):
+        broken = dict(errors=[dict(code='connection-return', map='Saltmere', detail='fixture')],
+                      warnings=[], maps=[{}], geometry_dependencies=[])
+        with patch.object(sys, 'argv', [str(SCRIPT), '--engine', str(ENGINE), '--map', 'Saltmere',
+                                       '--strict-connections']), patch.object(tool, 'audit', return_value=broken) as run:
+            with self.assertRaises(SystemExit) as result:
+                tool.main()
+            self.assertEqual(result.exception.code, 1)
+            run.assert_called_once_with(ENGINE, ['Saltmere'], strict_connections=True)
+
     def test_section_reference_and_reused_saved_pin_checks(self):
         source = self.map_data()
         source['region_map_section'] = 'MAPSEC_UNDEFINED_IN_MEMORY'
@@ -334,7 +421,8 @@ class SourceBatchTests(unittest.TestCase):
         source = self.map_data()
         source['region'] = 'REGION_SINNOH'
         result = self.audit_mutated({'data/maps/Saltmere/map.json': source})
-        self.assertIn('section-region-mismatch', {e['code'] for e in result['warnings']})
+        self.assertIn('section-region-mismatch', self.codes(result))
+        self.assertNotIn('section-region-mismatch', {e['code'] for e in result['warnings']})
         self.assertEqual(result['maps'][0]['section_engine_region'], 'REGION_HOENN')
 
     def test_explicit_section_region_is_used_without_allocating_ids(self):

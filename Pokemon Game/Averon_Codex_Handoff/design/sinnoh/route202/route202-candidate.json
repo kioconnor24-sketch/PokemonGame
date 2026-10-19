@@ -1,0 +1,291 @@
+{
+ "name": "Route 202 - DESIGN CANDIDATE (not approved; original DPPt geography)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 34,
+ "height": 34,
+ "legend": {
+  "A": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "B": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "C": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "D": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "E": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "F": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "G": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "H": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "I": {
+   "metatile": 465,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "J": {
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "K": {
+   "metatile": 472,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "M": {
+   "metatile": 473,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "N": {
+   "metatile": 474,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "O": {
+   "metatile": 3,
+   "collision": 1,
+   "elevation": 0,
+   "note": "sign"
+  },
+  "P": {
+   "metatile": 13,
+   "collision": 0,
+   "elevation": 3,
+   "note": "tall grass (no encounter table yet)"
+  },
+  "Q": {
+   "metatile": 481,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "S": {
+   "metatile": 482,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "U": {
+   "metatile": 480,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "V": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "W": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "X": {
+   "metatile": 135,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge, jump south only",
+   "jump": "south"
+  }
+ },
+ "rows": [
+  "ABABABABABABABCCCBABABABABABABABAB",
+  "DEDEDEDEDEFGFGCCCGDEDEDEDEDEDEDEDE",
+  "ABABABABABCCCCCCCCABABABABABABABAB",
+  "DEDEDEDEDECCCHIJCCDEDEDEDEDEDEDEDE",
+  "ABABABABABCCCKMNCCABABABABABABABAB",
+  "DEFGFGFGFGCCCKMNOCFGFGFGFGFGFGDEDE",
+  "ABPPPPPPCCCCCKMNCCCPPPPPCCCCCCABAB",
+  "DEPPPPPPCHIIIMMMIIJPPPPPHIIIIJDEDE",
+  "ABPPPPPPCKMMQQQQQQSPPPPPUQQMMNABAB",
+  "DEPPPPPPCKMNCCCCCCCPPPPPCCCKMNDEDE",
+  "ABVWVWVWCUQSCWVWVWVWVPPPCCCKMNABAB",
+  "DEDEDEFGCCCCCEDEDEDEDCCCCCCKMNFGDE",
+  "ABABABCCXXXXXBABABABAXXXXXXUQSPPAB",
+  "DEFGFGCCCCCCCGFGFEDEDPPPPPPPPPPPDE",
+  "ABCCCCCCCCCCCCCCCBABAPPPPPPPPPPPAB",
+  "DECCCCCCCHIJCCCCCEDEDPPPPPPPPPPPDE",
+  "ABCCCCCCCKMNCCCCCBABAPPPPPPPPPPPAB",
+  "DECCCCCCCKMNCCOCCEDEDPPPPPPPPPPPDE",
+  "ABCCCCCCCKMNCCCCCBABAPPPPPPPPPPPAB",
+  "DECCCCCCCKMNCCCCCGFGFPPPPPPPPPPPDE",
+  "ABCCCCCCCKMNCCCCCCCCCHJPPPPPPPPPAB",
+  "DEPPPPDECKMMIIIIIIIIIMNPPPPPPPPPDE",
+  "ABPPPPABCKMMQQQQQQQQQQQIJPPPPPVWAB",
+  "DEPPPPDECKMNCCCCCCCCCCCCCCCCPPDEDE",
+  "ABPPPPABCUQSCWVWVWVWVCCCCCCCCCABAB",
+  "DEPPPPFGXXXXXGFGFGFGFXXOXXXXXXDEDE",
+  "ABPPPPPPCCCCCCCCCCCCCCCCCCCCCCABAB",
+  "DEPPPPPPCHIJCCPPPPPPCCCCCCCCCCDEDE",
+  "ABPPPPPPCKMMIJPPPPPPHIIIIIIJCCABAB",
+  "DEPPPPPPCUQQQSPPPPPPUQQQQMMNCCDEDE",
+  "ABVWVWVWVWVWVWVWVWVWVWVCCKMNCWABAB",
+  "DEDEDEDEDEDEDEDEDEDEDEDCCKMSCEDEDE",
+  "ABABABABABABABABABABABACCKNCCBABAB",
+  "DEDEDEDEDEDEDEDEDEDEDEDCCKNCCEDEDE"
+ ],
+ "stamps": [],
+ "exits": [
+  {
+   "name": "south",
+   "edge": "south",
+   "span": [
+    23,
+    28
+   ],
+   "to": "Sandgem Town north edge (x 19-24, road 21-22)",
+   "offset": 4,
+   "status": "Sandgem built (#133); Route 202 down +4 / Sandgem up -4, only after approval"
+  },
+  {
+   "name": "north",
+   "edge": "north",
+   "span": [
+    14,
+    16
+   ],
+   "to": "Jubilife City south stairs (x 44-46; not built)",
+   "offset": -30,
+   "status": "unapproved; closed until Jubilife exists"
+  }
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    23,
+    33
+   ],
+   "size": [
+    6,
+    1
+   ],
+   "note": "south -> Sandgem Town north edge (offset +4; unapproved)"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    14,
+    0
+   ],
+   "size": [
+    3,
+    1
+   ],
+   "note": "north -> Jubilife City (offset -30 proposed; closed)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    21,
+    12
+   ],
+   "size": [
+    11,
+    12
+   ],
+   "note": "east tall-grass field (no encounter table yet)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    2,
+    21
+   ],
+   "size": [
+    6,
+    9
+   ],
+   "note": "south-west tall grass: the walking route north (no table yet)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    23,
+    31
+   ],
+   "size": [
+    6,
+    2
+   ],
+   "note": "DPPt catching-tutorial spot at the Sandgem end (story; not adopted)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    9,
+    9
+   ],
+   "note": "NPC slot (reference: trainer on the west path)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    25,
+    6
+   ],
+   "note": "NPC slot (reference: trainer at the flower verge)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    6,
+    14
+   ],
+   "note": "NPC slot (reference: trainer below the west ledge)"
+  },
+  {
+   "kind": "npc",
+   "at": [
+    21,
+    19
+   ],
+   "note": "NPC slot (reference: trainer at the field edge)"
+  }
+ ]
+}

@@ -2,6 +2,7 @@
 import copy
 import importlib.util
 import json
+import struct
 import subprocess
 import sys
 import tempfile
@@ -28,6 +29,90 @@ def log_with_usage(rom=26722880, ewram=226416, iwram=28376, rom_mb=32):
             ("ROM", rom, rom_mb, "MB", rom_mb * 1024 * 1024),
             ("EWRAM", ewram, 256, "KB", 256 * 1024),
             ("IWRAM", iwram, 32, "KB", 32 * 1024)))
+
+
+class LinkedArtifactTests(unittest.TestCase):
+    @staticmethod
+    def image(segments=None):
+        # (physical address, bytes, memory size); BSS bytes are empty.
+        if segments is None:
+            segments = [(tool.ROM_BASE, b'ABCD', 4),
+                        (tool.ROM_BASE + 8, b'WXYZ', 4), (0x02000000, b'', 128)]
+        elf = bytearray(52 + 32 * len(segments))
+        elf[:7] = b'\x7fELF\x01\x01\x01'
+        struct.pack_into('<HHIIIIIHHHHHH', elf, 16, 2, 40, 1, tool.ROM_BASE, 52, 0, 0,
+                         52, 32, len(segments), 0, 0, 0)
+        for index, (address, data, memsize) in enumerate(segments):
+            offset = len(elf)
+            struct.pack_into('<IIIIIIII', elf, 52 + 32 * index, 1, offset, address, address,
+                             len(data), memsize, 5, 1)
+            elf.extend(data)
+        return bytes(elf)
+
+    def test_multiple_segments_gaps_padding_and_ram_bss(self):
+        rom = b'ABCD....WXYZ' + b'\xff' * 20
+        result = tool.verify_linked_rom(self.image(), rom, 12, 32)
+        self.assertEqual(result['matched_load_segments'], 2)
+        self.assertEqual(result['matched_load_bytes'], 8)
+        self.assertEqual(result['linked_rom_extent_bytes'], 12)
+        self.assertEqual(len(result['elf_sha256']), 64)
+        self.assertIn('not certified', result['scope'])
+
+    def test_wrong_rom_bytes_fail_even_when_sizes_match(self):
+        with self.assertRaisesRegex(ValueError, 'load bytes differ'):
+            tool.verify_linked_rom(self.image(), b'ABCD....FAIL', 12, 32)
+
+    def test_wrong_linker_log_extent_is_refused(self):
+        with self.assertRaisesRegex(ValueError, 'differs from linker log'):
+            tool.verify_linked_rom(self.image(), b'ABCD....WXYZ', 11, 32)
+
+    def test_truncated_or_wrong_elf_contract_fails_closed(self):
+        for position, value in ((4, 2), (5, 2), (16, 1), (18, 3), (40, 51), (42, 31), (44, 0)):
+            bad = bytearray(self.image()); bad[position] = value
+            with self.subTest(position=position), self.assertRaises(ValueError):
+                tool.verify_linked_rom(bytes(bad), b'ABCD....WXYZ', 12, 32)
+        for bad in (b'not ELF', self.image()[:51], self.image()[:60], self.image()[:-1]):
+            with self.subTest(size=len(bad)), self.assertRaises(ValueError):
+                tool.verify_linked_rom(bad, b'ABCD....WXYZ', 12, 32)
+
+    def test_segment_bounds_and_invalid_file_memory_sizes(self):
+        for segments, rom in (([(tool.ROM_BASE, b'ABCD', 3)], b'ABCD'),
+                              ([(tool.ROM_BASE - 1, b'ABCD', 4)], b'ABCD'),
+                              ([(tool.ROM_BASE, b'ABCD', 4)], b'ABC'),
+                              ([(tool.ROM_BASE, b'ABCD', 4), (tool.ROM_BASE + 32, b'Z', 1)], b'ABCD' + b'.' * 28 + b'Z')):
+            with self.subTest(segments=segments), self.assertRaises(ValueError):
+                tool.verify_linked_rom(self.image(segments), rom, len(rom), 32)
+
+    def test_overlapping_segments_or_missing_rom_start_are_refused(self):
+        for segments, rom in (([(tool.ROM_BASE, b'ABCD', 4), (tool.ROM_BASE + 2, b'CD', 2)], b'ABCD'),
+                              ([(0x02000000, b'', 128)], b'ABCD'),
+                              ([(tool.ROM_BASE + 1, b'BCD', 3)], b'ABCD')):
+            with self.subTest(segments=segments), self.assertRaises(ValueError):
+                tool.verify_linked_rom(self.image(segments), rom, 4, 32)
+
+    def test_optional_report_binding_preserves_legacy_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            elf, rom = Path(directory) / 'game.elf', Path(directory) / 'game.gba'
+            elf.write_bytes(self.image()); rom.write_bytes(b'ABCD....WXYZ')
+            log = log_with_usage(rom=12)
+            self.assertNotIn('linked_artifact_verification', tool.report(log, rom))
+            result = tool.report(log, rom, elf=elf)
+            self.assertEqual(result['linked_artifact_verification']['rom_sha256'], result['rom_artifact']['sha256'])
+            with self.assertRaisesRegex(ValueError, 'requires --rom'):
+                tool.report(log, elf=elf)
+
+    def test_cli_refuses_mixed_artifacts_without_publishing_json(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'game.elf').write_bytes(self.image())
+            (root / 'game.gba').write_bytes(b'ABCD....FAIL')
+            (root / 'build.log').write_text(log_with_usage(rom=12))
+            result = subprocess.run([sys.executable, str(FILE), '--log', str(root / 'build.log'),
+                                     '--rom', str(root / 'game.gba'), '--elf', str(root / 'game.elf'),
+                                     '--json', str(root / 'report.json')], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 2)
+            self.assertIn('load bytes differ', result.stderr)
+            self.assertFalse((root / 'report.json').exists())
 
 
 class ResourceTests(unittest.TestCase):

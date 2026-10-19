@@ -2,6 +2,12 @@
 
 # Claude entry point
 Read [live Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), the [operating contract](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md), [Sinnoh master roadmap](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_MASTER_PRODUCTION_ROADMAP.md) and [developer work packages](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_DEVELOPER_WORK_PACKAGES.md), then current PR heads/changed paths and your active handoffs. Under explicit owner delegation, design and construct ordinary Sinnoh geography for later owner revision while preserving story/encounter/level/saved-identity restrictions. You may personally merge **all eligible Fast Lane A and strictly bounded Fast Lane B** work after genuine applicable evidence/checks; broader high-risk changes still need an attributed independent Codex review before normal author-driven merge. Avoid duplicated reviews and manager bottlenecks. Native testing tips below remain relevant. GitHub comments cannot restart paused sessions.
+## Pull request readiness (2026-10-19)
+
+- Open PRs **non-draft** (`gh pr create` without `--draft`), and only once the change and its required evidence exist. Until then, push the branch without a PR. Check `gh pr view N --json isDraft` after creating one.
+- Claude's local auto-mode classifier denies `gh pr ready` (GitHub itself allows it). That denial left #150 and #151 stranded as drafts until the owner clicked "Ready for review". Don't route around it, and don't edit permissions for it. If a draft ever does need readiness, record the blocker and ask for that one UI click.
+- Ready for review is not permission to merge: Fast Lane rules, handoffs, tests and review gates still apply. A PR opened early so a handoff can name it must say in its body what still blocks the merge.
+
 ## Native test pitfalls (found 2026-10-16)
 
 - `SINGLE_BATTLE_TEST` / `DOUBLE_BATTLE_TEST` are recorded **link** battles (`TRAINER_LINK_OPPONENT`): no whiteout money, no in-game trainer behaviour. Use `AI_SINGLE_BATTLE_TEST` / `AI_DOUBLE_BATTLE_TEST` for real trainer battles (opponent moves come from the AI; give it one move and use `EXPECT_MOVE`).
