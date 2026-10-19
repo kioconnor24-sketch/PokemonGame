@@ -1,0 +1,36 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: the same loss with the Center's `setrespawn HEAL_LOCATION_SANDGEM_TOWN` stripped (main before #151). The anchor is never set, so the whiteout must not reach the Sandgem nurse.",
+ "expect": "FAIL",
+ "run_args": [
+  "--whiteout",
+  "HEAL_LOCATION_SANDGEM_TOWN",
+  "--whiteout-npc",
+  "MAP_SANDGEM_TOWN,27,12"
+ ],
+ "edits": [
+  {
+   "op": "wildbattle",
+   "map": "SandgemTown",
+   "script": "SandgemTown_EventScript_Man",
+   "species": "SPECIES_GARCHOMP",
+   "level": 80
+  },
+  {
+   "op": "strip",
+   "file": "data/maps/SandgemTown_PokemonCenter_1F/scripts.inc",
+   "line": "\tsetrespawn HEAL_LOCATION_SANDGEM_TOWN"
+  }
+ ],
+ "must_fail": [
+  "whiteout"
+ ]
+}
