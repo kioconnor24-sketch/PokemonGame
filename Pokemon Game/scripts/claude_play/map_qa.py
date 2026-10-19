@@ -57,6 +57,8 @@ import mapdata  # noqa: E402
 
 DIRS = mapdata.DIRS
 OPPOSITE = {"up": "down", "down": "up", "left": "right", "right": "left"}
+REGION_UI_CONSTANTS = ("ITEM_TOWN_MAP", "BAG_KEYITEMS_COUNT", "POCKET_KEY_ITEMS",
+                       "FLAG_SYS_POKENAV_GET", "FLAG_AVERON_LICENSE_FLY")
 JUMP = {"MB_JUMP_SOUTH": "down", "MB_JUMP_NORTH": "up", "MB_JUMP_EAST": "right", "MB_JUMP_WEST": "left"}
 MARKER = ".map_qa_throwaway"
 
@@ -641,6 +643,12 @@ def cmd_run(args):
     engine = pathlib.Path(args.engine).resolve()
     w = _wrapper(engine)
     from codex_cry_gameplay import driver, emu, game, play
+    # The driver modules come from the engine tree under test (_wrapper), which may predate these
+    # probe entries; register them here so --region-ui works against any tree.
+    emu.OFFSET_EXPRS.setdefault("bag.keyItems", "offsetof(struct Bag, keyItems)")
+    for name in REGION_UI_CONSTANTS:
+        if name not in emu.CONSTANTS:
+            emu.CONSTANTS.append(name)
     scratch, out = pathlib.Path(args.scratch).resolve(), pathlib.Path(args.out).resolve()
     if out.exists() and any(out.iterdir()):
         raise SystemExit("OUT must be new or empty")
