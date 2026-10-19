@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import shlex
 import subprocess
+import sys
 import tempfile
 
 MACROS = {
@@ -25,6 +26,7 @@ MACROS = {
     'P_PRIMAL_REVERSIONS': 'FALSE',
     'P_ULTRA_BURST_FORMS': 'FALSE',
     'P_REGIONAL_FORMS': 'TRUE',
+    'P_CRIES_ENABLED': 'FALSE',
     **{f'P_GEN_{i}_POKEMON': 'TRUE' for i in range(1, 10)},
 }
 INCLUDES = '''#include "global.h"
@@ -180,6 +182,11 @@ def main():
     parser.add_argument('--report', type=Path)
     args = parser.parse_args()
     engine = args.engine.resolve()
+    # Exercise ordinary Make defaults as well as explicit profile restoration.
+    # Auditing the header alone would miss a future Make default of CRIES=on.
+    subprocess.run([sys.executable, str(Path(__file__).parent / 'coordination/test_codex_cry_default.py'), '-v'],
+                   env={**os.environ, 'AVERON_CRY_TEST_ENGINE': str(engine), 'PYTHONDONTWRITEBYTECODE': '1'},
+                   check=True)
     compiler = shlex.split(os.environ.get('ARM_CC', 'arm-none-eabi-gcc'))
     host = shlex.split(os.environ.get('CC', 'cc'))
     report = {'engine': str(engine), 'testing': 0, 'modes': {}, 'mutations': {},
@@ -210,6 +217,7 @@ def main():
             'P_PRIMAL_REVERSIONS': 'TRUE',
             'P_ULTRA_BURST_FORMS': 'TRUE',
             'P_REGIONAL_FORMS': 'FALSE',
+            'P_CRIES_ENABLED': 'TRUE',
             'P_GEN_9_POKEMON': 'FALSE',
             'DEBUG_OVERWORLD_MENU': 'TRUE',
             'DEBUG_BATTLE_MENU': 'TRUE',
