@@ -33,14 +33,14 @@
 | --- | --- | --- |
 | A | Sandgem (Route 201 is west) | Route 201's eastern 7 columns, x 57–63 |
 | A | Route 201 (Sandgem is east) | Sandgem's western 8 columns, x 0–7 |
-| B | Route 201 (Twinleaf is south) | Twinleaf's northern 7 rows: unknown, reference unavailable |
+| B | Route 201 (Twinleaf is south) | Twinleaf's northern 7 rows: sourced in [`twinleaf/`](twinleaf/TWINLEAF_TOWN_CANDIDATE.md) (built in #166) |
 | B | Twinleaf (Route 201 is north) | Route 201's southern 7 rows, y 15–21 |
-| C | Route 201 (Lakefront is west) | Lakefront's eastern 7 columns: unknown |
+| C | Route 201 (Lakefront is west) | Lakefront's eastern 7 columns: candidate in [`verity/`](verity/VERITY_CANDIDATE.md) |
 | C | Lakefront (Route 201 is east) | Route 201's western 8 columns, x 0–7 |
-| D | Sandgem (Route 202 is north) | Route 202's southern 7 rows: unknown |
+| D | Sandgem (Route 202 is north) | Route 202's southern 7 rows: candidate in [`route202/`](route202/ROUTE202_CANDIDATE.md) |
 | D | Route 202 (Sandgem is south) | Sandgem's northern 7 rows, y 0–6 |
 | E | Route 202 (Jubilife is north) | Jubilife's southern 7 rows, about y 41–47 |
-| E | Jubilife (Route 202 is south) | Route 202's northern 7 rows: unknown |
+| E | Jubilife (Route 202 is south) | Route 202's northern 7 rows: candidate in [`route202/`](route202/ROUTE202_CANDIDATE.md) |
 
 ## Junction A: Route 201 ↔ Sandgem Town (east)
 
@@ -58,12 +58,12 @@
 | | Route 201 | Twinleaf Town (SN-T01) |
 | --- | --- | --- |
 | Edge | south, y 21 | north, y 0 |
-| Open columns | 15–17, a **3-wide** sand path | **reference unavailable** |
+| Open columns | 15–17, a **3-wide** sand path | 15–17 (Bulbapedia DP overhead; candidate #156, built #166): offset **0** |
 | Connection entry | `down` → Twinleaf, offset `15 − t` | `up` → Route 201, offset `t − 15` |
 
 Here `t` is the left column of Twinleaf's 3-wide north path.
 
-- **Reference gap.** The only overhead found for this area, the "Route 201 / Twinleaf Town" image, shows Route 201 only. Twinleaf's footprint is not specified here and must not be guessed.
+- **Reference (resolved 2026-10-19).** Bulbapedia's `File:Twinleaf_Town_DP.png` gives Twinleaf's full overhead; its north path sits on columns 15–17, so the junction offset is 0 (see [`twinleaf/TWINLEAF_TOWN_CANDIDATE.md`](twinleaf/TWINLEAF_TOWN_CANDIDATE.md)).
 - **Requirement.** Twinleaf's north edge must be open on exactly 3 columns, ideally a 3-wide road.
 - **Hazard.** Twinleaf is DPPt's player-home town. It is reserved for the owner's story decisions, so no houses or story buildings are reserved here.
 
@@ -72,7 +72,7 @@ Here `t` is the left column of Twinleaf's 3-wide north path.
 | | Route 201 | Verity Lakefront (SN-L04) → Lake Verity (SN-L01) |
 | --- | --- | --- |
 | Edge | west, x 0 | east edge of Verity Lakefront |
-| Open rows | **two openings**: 8–11 above the long ledge, 13–14 below it | Lakefront: **reference unavailable** |
+| Open rows | **two openings**: 8–11 above the long ledge, 13–14 below it | Lakefront candidate: the same rows at offset **0**, with the row-12 ledge continued ([`verity/`](verity/VERITY_CANDIDATE.md)) |
 | Connection entry | `left` → Lakefront, offset `8 − v` | `right` → Route 201, offset `v − 8` |
 
 Here `v` is the Lakefront row that meets Route 201 row 8.
@@ -87,7 +87,7 @@ Here `v` is the Lakefront row that meets Route 201 row 8.
 | | Sandgem Town (#133, built) | Route 202 (SN-R202) |
 | --- | --- | --- |
 | Edge | north, y 0 | south edge |
-| Open columns | road 21–22 inside the clearing 19–24, from the built layout | **reference unavailable**; see [`route202/ROUTE202_REFERENCE_STATUS.md`](route202/ROUTE202_REFERENCE_STATUS.md) |
+| Open columns | road 21–22 inside the clearing 19–24, re-measured from the built `map.bin` | candidate south clearing 23–28 (road 25–26): Route 202 `down` **+4** ↔ Sandgem `up` **−4** ([`route202/`](route202/ROUTE202_CANDIDATE.md)) |
 | Connection entry | `up` → Route 202, offset `21 − s` | `down` → Sandgem, offset `s − 21` |
 
 Here `s` is the column of Route 202's south road that meets Sandgem x 21.
@@ -100,7 +100,7 @@ Here `s` is the column of Route 202's south road that meets Sandgem x 21.
 | | Route 202 | Jubilife City (SN-T03) |
 | --- | --- | --- |
 | Edge | north edge | south, bottom row |
-| Open columns | **reference unavailable** | stairs on columns **44–46**, 3 wide, at the end of the 4-wide central avenue (columns 43–46) |
+| Open columns | candidate north opening 14–16 (provisional; Jubilife unbuilt) | stairs on columns **44–46**, 3 wide, at the end of the 4-wide central avenue (columns 43–46) |
 | Connection entry | `up` → Jubilife, offset `q − 44` | `down` → Route 202, offset `44 − q` |
 
 Here `q` is the left column of Route 202's 3-wide north opening.
