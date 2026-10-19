@@ -1,40 +1,34 @@
-# Route 202: reference status (C3). No candidate geometry yet
+# Route 202: reference status (C3)
 
-**Status: BLOCKED ON A TRUSTWORTHY REFERENCE.** I could not obtain a full original DPPt overhead of Route 202. Without one, drawing its path, ledges and grass would be invention, which the assignment rules out ("if unavailable say so, do not hallucinate"). So no Route 202 overhead or collision candidate is proposed yet. Its two ends are fixed by built or referenced neighbours and are specified in [`../SINNOH_JUNCTIONS.md`](../SINNOH_JUNCTIONS.md) (junctions D and E).
+**Status: RESOLVED (2026-10-19).** A full original DPPt overhead of Route 202 was obtained and hash-verified. The construction-ready candidate built from it is in [`ROUTE202_CANDIDATE.md`](ROUTE202_CANDIDATE.md): generator, plan JSON, renders, a Sandgem seam preview, and a reachability proof with negative self-tests. Junctions D and E in [`../SINNOH_JUNCTIONS.md`](../SINNOH_JUNCTIONS.md) can now be filled in from that document.
 
-## What was searched (2026-10-18)
+## Sources used (geometry only; not committed)
 
-| Source | Result |
-| --- | --- |
-| Elite Fourum "Mapping out Gen 4 cards…" thread (the source of the Route 201, Sandgem, Lake Verity and Jubilife overheads) | Has sections for Route 201 / Twinleaf, Sandgem, Lake Verity, Jubilife and Route 203. **No Route 202 section.** |
-| Serebii Pokéarth, DPPt page (`/pokearth/sinnoh/4th/route202.shtml`) | Only map image is `maps/sinnoh-pt/2.png`, **256 × 192 px: one DS screen (16 × 12 tiles)**, not the route |
-| Serebii Pokéarth, BDSP page | `maps/sinnoh-bdsp/2.jpg`, a 640 × 360 3D screenshot, not an overhead |
-| The Spriters Resource (DP and Platinum map sheets) | HTTP 403 to the fetcher |
-| Bulbapedia / Bulbagarden Archives | blocked to the fetcher earlier in this project (403) |
-| pokemondb.net location page and maps index | encounter tables only; maps only for caves and gyms |
+Both URLs and SHA-1 values come from the Bulbagarden Archives MediaWiki API (`action=query&list=allimages&aiprop=size|url|sha1`), and the downloaded files hash to the same values.
 
-## What *is* reliable
+| File | Size | SHA-1 | Role |
+| --- | --- | --- | --- |
+| [`Sinnoh_Route_202_DP.png`](https://bulbapedia.bulbagarden.net/wiki/File:Sinnoh_Route_202_DP.png), `https://archives.bulbagarden.net/media/upload/3/39/Sinnoh_Route_202_DP.png` | 592 × 416 | `deffab27d40d430ae1dedac8958d2929f78edcdd` | primary reference: every footprint |
+| [`Sinnoh_Route_202_Pt.png`](https://bulbapedia.bulbagarden.net/wiki/File:Sinnoh_Route_202_Pt.png), `https://archives.bulbagarden.net/media/upload/0/09/Sinnoh_Route_202_Pt.png` | 610 × 452 | `67674efa0c162974728964ba3a5988138fef0126` | cross-check: topology, and Jubilife's stairs above the north clearing |
 
-- **Ends.**
-  - **North: Jubilife City.** The overhead gives a 3-wide stair exit at columns 44–46 of a ~64 × 48 map.
-  - **South: Sandgem Town.** The built #133 layout's north edge is open on columns 19–24, with the road on 21–22.
-- **Shape (Serebii text).** "a north-facing route between Sandgem Town and Jubilife City … a fairly short route which zigzags when going north."
-- **One-screen fragment (Serebii DPPt image).**
-  - a 2-wide sand path that turns;
-  - a sign on a small light-grass pad;
-  - a 2 × 3 tree block;
-  - tall grass on the east side;
-  - a south-facing ledge with a tree row on it;
-  - a route sign below the ledge.
+Both are foreshortened 3D renders: 16 px per tile across, about 12.3 px down. The candidate document states which footprints are measured (flat ground: sand, ledges, tall-grass edges) and which are ±1 (trees, signs, NPCs).
 
-  The fragment's position within the route is unknown, so it fixes no coordinates.
+## What changed since the blocked note (2026-10-18)
 
-## Decision needed (owner)
+- **Reachable source.** The earlier search could not reach Bulbapedia or Bulbagarden Archives (HTTP 403 to the fetcher). The archive's API and file URLs are reachable with a plain browser user agent, and the files' hashes are checked against the archive's own record.
+- **Superseded content.** The earlier one-screen Serebii fragment and the text description ("a fairly short route which zigzags when going north") are superseded. The full overhead shows that zigzag:
+  1. west along the south strip;
+  2. north through the south-west grass;
+  3. east along the cross path;
+  4. north through the east field;
+  5. back west along the upper paths.
+- **Sandgem's north edge** was re-measured from the built `map.bin`: open on x 19–24, road 21–22. The old note was right.
+- **Jubilife's stairs** (x 44–46 in SINNOH_JUNCTIONS.md) are not re-measured here. The Platinum overhead confirms only that they land on Route 202's north clearing.
 
-Choose one:
+## Remaining owner decisions
 
-1. **Provide or approve a full reference**, for example a Bulbapedia/Bulbagarden map image of Route 202 saved into the session. I'll then produce the same construction-ready package as Route 201: tile-by-tile footprints, generator, collision render, seam previews, and a reachability proof with negative self-tests.
-2. **Approve a schematic Route 202.** I'd make an original-shaped zigzag between the two fixed ends, clearly labelled *not reference-accurate*. This trades the "original layout" rule for progress, so it needs your explicit yes.
-3. **Keep Route 201 first** (#135 is construction-ready) and revisit Route 202 later.
-
-My recommendation is 3, then 1. Route 201 already has a verified original geometry.
+These are listed in `ROUTE202_CANDIDATE.md` section 6:
+- the geometry;
+- Route 202's **section ID**, which is not owner-approved and not allocated or named by this work;
+- the Sandgem connection;
+- keeping the north edge closed until Jubilife exists.
