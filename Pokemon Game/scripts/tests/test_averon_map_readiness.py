@@ -304,7 +304,8 @@ class SourceBatchTests(unittest.TestCase):
         self.assertEqual(row['errors'], [])
         self.assertTrue(any(d['kind'] == 'tiles_png' for d in row['geometry_dependencies']))
         self.assertTrue(any(d['kind'] == 'palette' for d in row['geometry_dependencies']))
-        self.assertEqual(row['namespace_contract']['saved_pins_checked'], 7)
+        pins = json.loads((SCRIPT.parent / 'averon-mapsec-pins.json').read_text())['pins']
+        self.assertEqual(row['namespace_contract']['saved_pins_checked'], len(pins))
 
     def test_connection_nonoverlap_and_wrong_inverse_offset(self):
         source = self.map_data()

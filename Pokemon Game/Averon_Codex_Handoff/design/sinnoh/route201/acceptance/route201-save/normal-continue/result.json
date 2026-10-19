@@ -1,0 +1,46 @@
+{
+ "maps": [
+  "MAP_ROUTE201"
+ ],
+ "build": "normal",
+ "rom_sha256": "a93de28404069e2794ada13977bd0c62f0af8a1cd72055f94e9f4d3d59e8266d",
+ "static_findings": [],
+ "save_before": "d7a299c3238567ea9dd67a881bd72220c63c0fffa2a5d67da9ccb79fb754bc52",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "d7a299c3238567ea9dd67a881bd72220c63c0fffa2a5d67da9ccb79fb754bc52",
+ "verdict": "PASS"
+}

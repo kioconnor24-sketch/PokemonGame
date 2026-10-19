@@ -205,14 +205,15 @@ class SurfaceTests(Fixture):
 
 
 class RepositoryPinTests(unittest.TestCase):
-    def test_production_fixed_sentinel_and_explicit_sandgem(self):
+    def test_production_fixed_sentinel_and_explicit_sinnoh_sections(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
         report = audit.inventory(engine)
-        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (216, 215, 36))
-        row = next(r for r in report['rows'] if r['id'] == 'MAPSEC_SANDGEM_TOWN')
-        self.assertEqual((row['value'], row['name'], row['engine_region']), (216, 'SANDGEM TOWN', 'REGION_SINNOH'))
-        self.assertFalse(row['fly_row'])
-        self.assertEqual(row['town_map_cells'], 0)
+        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (217, 215, 35))
+        for ident, value, name in (('MAPSEC_SANDGEM_TOWN', 216, 'SANDGEM TOWN'), ('MAPSEC_ROUTE_201', 217, 'ROUTE 201')):
+            row = next(r for r in report['rows'] if r['id'] == ident)
+            self.assertEqual((row['value'], row['name'], row['engine_region']), (value, name, 'REGION_SINNOH'))
+            self.assertFalse(row['fly_row'])
+            self.assertEqual(row['town_map_cells'], 0)
 
     def test_current_engine_keeps_every_saved_value(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
