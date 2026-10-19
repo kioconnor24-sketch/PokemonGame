@@ -222,7 +222,7 @@ def tileset_dependencies(headers, metatiles, symbol, secondary):
     return paths
 
 
-def audit(engine, names):
+def audit(engine, names, *, strict_connections=False):
     engine = Path(engine).resolve()
     hashes, dependencies, errors, warnings, rows = {}, {}, [], [], []
 
@@ -469,7 +469,13 @@ def audit(engine, names):
                         back = [c for c in returns if isinstance(c, dict) and c.get('map') == data.get('id')
                                 and c.get('direction') == reverse] if isinstance(returns, list) else []
                         if not back:
-                            problem(name, 'connection-return', 'No reciprocal edge; review intentional one-way behavior', True)
+                            problem(name, 'connection-return',
+                                    'No reciprocal edge; strict seams require a return' if strict_connections
+                                    else 'No reciprocal edge; review intentional one-way behavior',
+                                    not strict_connections)
+                        elif strict_connections and len(back) != 1:
+                            problem(name, 'connection-return-ambiguous',
+                                    'Strict seams require exactly one reciprocal edge to this map')
                         elif not any(str(c.get('offset')) == str(-int(offset)) for c in back):
                             problem(name, 'connection-offset-return', 'Reciprocal edge offset does not undo this connection')
                 except (OSError, KeyError, ValueError) as exc:
@@ -483,6 +489,7 @@ def audit(engine, names):
             'format': 'Current Averon Emerald mapjson; conditional C linkage requires a real build',
             'target_scope': 'Targets checked for registration, layout inclusion and arrival bounds; '
                             'select each target with --map for full geometry/dependency checks',
+            'connection_policy': 'strict reciprocal cardinal seams' if strict_connections else 'one-way cardinal seams require review',
             'limits': limits, 'namespace_contract': section_contract, 'maps': rows, 'errors': errors, 'warnings': warnings,
             'geometry_dependencies': sorted(dependencies.values(), key=lambda d: d['path']),
             'duplicate_byte_candidates': [paths for paths in duplicates.values() if len(paths) > 1],
@@ -494,6 +501,8 @@ def main():
     parser.add_argument('--engine', type=Path, required=True)
     parser.add_argument('--map', dest='maps', action='append', default=[], help='Map directory name; repeat for a batch')
     parser.add_argument('--group', dest='groups', action='append', default=[], help='Registered group name; audit every member without creating maps')
+    parser.add_argument('--strict-connections', action='store_true',
+                        help='Require exactly one reciprocal cardinal seam; default allows reviewed one-way edges')
     parser.add_argument('--json', type=Path)
     args = parser.parse_args()
     if args.json and args.json.resolve().is_relative_to(args.engine.resolve()):
@@ -508,7 +517,7 @@ def main():
                 names.extend(registry[group])
         if not names:
             raise ValueError('Select at least one --map or nonempty --group')
-        result = audit(args.engine, names)
+        result = audit(args.engine, names, strict_connections=args.strict_connections)
     except (OSError, KeyError, TypeError, ValueError) as exc:
         parser.exit(2, f'Preflight input error: {exc}\n')
     if args.json:
