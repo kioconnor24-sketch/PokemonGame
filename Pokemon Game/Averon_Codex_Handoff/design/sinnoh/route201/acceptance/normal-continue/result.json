@@ -1,0 +1,48 @@
+{
+ "maps": [
+  "MAP_ROUTE201",
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "build": "normal",
+ "rom_sha256": "a93de28404069e2794ada13977bd0c62f0af8a1cd72055f94e9f4d3d59e8266d",
+ "static_findings": [],
+ "save_before": "b90baccd55b3e22b61abc0607f27595f41ba48b359f4107c8ce1f48076d637b8",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    [
+     6,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "b90baccd55b3e22b61abc0607f27595f41ba48b359f4107c8ce1f48076d637b8",
+ "verdict": "PASS"
+}
