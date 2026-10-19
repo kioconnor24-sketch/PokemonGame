@@ -1,0 +1,26 @@
+{
+ "batch": [
+  "MAP_TWINLEAF_TOWN",
+  "MAP_ROUTE201"
+ ],
+ "entry": [
+  "MAP_TWINLEAF_TOWN",
+  16,
+  10
+ ],
+ "description": "TEST-ONLY: Twinleaf's up connection is shifted to offset 2 while Route 201's down stays 0, so the pair is no longer reciprocal. Crossing the Twinleaf/Route 201 seam must fail its exact landing or return check.",
+ "expect": "FAIL",
+ "must_fail": [
+  "seam"
+ ],
+ "edits": [
+  {
+   "op": "connection",
+   "map": "TwinleafTown",
+   "index": 0,
+   "set": {
+    "offset": 2
+   }
+  }
+ ]
+}

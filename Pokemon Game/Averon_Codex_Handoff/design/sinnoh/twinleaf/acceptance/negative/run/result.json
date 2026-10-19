@@ -1,0 +1,116 @@
+{
+ "maps": [
+  "MAP_TWINLEAF_TOWN",
+  "MAP_ROUTE201"
+ ],
+ "build": "normal",
+ "rom_sha256": "52b878780b6372e65fc8a6833f6c57d51569d849387dfefbae720ca71bb7ae19",
+ "static_findings": [
+  {
+   "map": "MAP_TWINLEAF_TOWN",
+   "code": "seam-mismatch",
+   "detail": {
+    "direction": "up",
+    "tile": [
+     15,
+     0
+    ],
+    "faces": [
+     "MAP_ROUTE201",
+     [
+      13,
+      21
+     ]
+    ]
+   }
+  },
+  {
+   "map": "MAP_TWINLEAF_TOWN",
+   "code": "seam-mismatch",
+   "detail": {
+    "direction": "up",
+    "tile": [
+     16,
+     0
+    ],
+    "faces": [
+     "MAP_ROUTE201",
+     [
+      14,
+      21
+     ]
+    ]
+   }
+  }
+ ],
+ "save_before": "3720619e675c926d6c63798e8c93798cc0aaf85c56030bd808713ebc0631f635",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_TWINLEAF_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (15, 21) and back",
+   "ok": false,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     17,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     15,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "run completed without the driver getting stuck",
+   "ok": false,
+   "error": "Stuck('no path on MAP_TWINLEAF_TOWN from (15, 0) to [(17, 0)]')",
+   "at": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     15,
+     0
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": false,
+ "error": "Stuck('no path on MAP_TWINLEAF_TOWN from (15, 0) to [(17, 0)]')",
+ "save_after": "3720619e675c926d6c63798e8c93798cc0aaf85c56030bd808713ebc0631f635",
+ "verdict": "FAIL"
+}

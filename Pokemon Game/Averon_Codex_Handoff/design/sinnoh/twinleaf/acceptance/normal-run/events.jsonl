@@ -1,0 +1,60 @@
+{"t": 1792425957.74, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792425957.76, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792425958.3, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792425958.32, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792425960.89, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792425960.91, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792425962.0, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792425962.03, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792425962.56, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792425962.58, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792425963.11, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792425963.13, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792425964.15, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792425964.17, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792425967.73, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792425967.76, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792425968.4, "event": "field", "map": "MAP_TWINLEAF_TOWN", "pos": [16, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792425968.94, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_TWINLEAF_TOWN", [16, 10]]}
+{"t": 1792425969.35, "event": "capture", "file": "0009-start.png"}
+{"t": 1792425969.35, "event": "observe", "label": "start", "problems": []}
+{"t": 1792425969.35, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792425969.44, "event": "map-qa-check", "name": "reached MAP_TWINLEAF_TOWN", "ok": true, "at": ["MAP_TWINLEAF_TOWN", [16, 9]]}
+{"t": 1792425972.73, "event": "capture", "file": "0010-seam-MAP_TWINLEAF_TOWN-up.png"}
+{"t": 1792425973.47, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN up seam (15, 0) -> MAP_ROUTE201 (15, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN", [15, 0]], "got": ["MAP_TWINLEAF_TOWN", [15, 0]]}
+{"t": 1792425974.67, "event": "capture", "file": "0011-seam-MAP_TWINLEAF_TOWN-up.png"}
+{"t": 1792425975.43, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN up seam (16, 0) -> MAP_ROUTE201 (16, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN", [16, 0]], "got": ["MAP_TWINLEAF_TOWN", [16, 0]]}
+{"t": 1792425976.63, "event": "capture", "file": "0012-seam-MAP_TWINLEAF_TOWN-up.png"}
+{"t": 1792425977.38, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (17, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN", [17, 0]], "got": ["MAP_TWINLEAF_TOWN", [17, 0]]}
+{"t": 1792425978.11, "event": "map", "map": "MAP_ROUTE201", "pos": [17, 21]}
+{"t": 1792425978.21, "event": "map-qa-check", "name": "reached MAP_ROUTE201", "ok": true, "at": ["MAP_ROUTE201", [17, 21]]}
+{"t": 1792425994.85, "event": "capture", "file": "0013-edge-MAP_ROUTE201-left.png"}
+{"t": 1792425994.85, "event": "map-qa-check", "name": "MAP_ROUTE201 closed left edge at (0, 10) blocks", "ok": true, "before": ["MAP_ROUTE201", [0, 10]], "after": ["MAP_ROUTE201", [0, 10]]}
+{"t": 1792426014.28, "event": "capture", "file": "0014-edge-MAP_ROUTE201-left.png"}
+{"t": 1792426014.28, "event": "map-qa-check", "name": "MAP_ROUTE201 closed left edge at (0, 14) blocks", "ok": true, "before": ["MAP_ROUTE201", [0, 14]], "after": ["MAP_ROUTE201", [0, 14]]}
+{"t": 1792426033.64, "event": "capture", "file": "0015-seam-MAP_ROUTE201-right.png"}
+{"t": 1792426034.38, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 6]], "got": ["MAP_ROUTE201", [63, 6]]}
+{"t": 1792426035.89, "event": "capture", "file": "0016-seam-MAP_ROUTE201-right.png"}
+{"t": 1792426036.67, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 8]], "got": ["MAP_ROUTE201", [63, 8]]}
+{"t": 1792426037.78, "event": "capture", "file": "0017-seam-MAP_ROUTE201-right.png"}
+{"t": 1792426038.48, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 9]], "got": ["MAP_ROUTE201", [63, 9]]}
+{"t": 1792426055.85, "event": "capture", "file": "0018-seam-MAP_ROUTE201-down.png"}
+{"t": 1792426056.63, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (15, 21) -> MAP_TWINLEAF_TOWN (15, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [15, 21]], "got": ["MAP_ROUTE201", [15, 21]]}
+{"t": 1792426057.85, "event": "capture", "file": "0019-seam-MAP_ROUTE201-down.png"}
+{"t": 1792426058.57, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (16, 21) -> MAP_TWINLEAF_TOWN (16, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [16, 21]], "got": ["MAP_ROUTE201", [16, 21]]}
+{"t": 1792426059.66, "event": "capture", "file": "0020-seam-MAP_ROUTE201-down.png"}
+{"t": 1792426060.4, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (17, 21) -> MAP_TWINLEAF_TOWN (17, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [17, 21]], "got": ["MAP_ROUTE201", [17, 21]]}
+{"t": 1792426061.39, "event": "capture", "file": "0021-start-menu.png"}
+{"t": 1792426062.18, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792426067.95, "event": "capture", "file": "0022-save-confirm-tw-normal.png"}
+{"t": 1792426069.06, "event": "capture", "file": "0023-save-step-tw-normal-01.png"}
+{"t": 1792426070.13, "event": "capture", "file": "0024-save-step-tw-normal-02.png"}
+{"t": 1792426071.16, "event": "capture", "file": "0025-save-step-tw-normal-03.png"}
+{"t": 1792426072.13, "event": "capture", "file": "0026-save-step-tw-normal-04.png"}
+{"t": 1792426073.13, "event": "capture", "file": "0027-save-step-tw-normal-05.png"}
+{"t": 1792426074.1, "event": "capture", "file": "0028-save-step-tw-normal-06.png"}
+{"t": 1792426075.15, "event": "capture", "file": "0029-save-step-tw-normal-07.png"}
+{"t": 1792426076.2, "event": "capture", "file": "0030-save-step-tw-normal-08.png"}
+{"t": 1792426077.09, "event": "capture", "file": "0031-saved-tw-normal.png"}
+{"t": 1792426077.09, "event": "release-save", "label": "tw-normal", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792426077.12, "event": "map-qa-check", "name": "SAVE (tw-normal)", "ok": true, "at": ["MAP_ROUTE201", [17, 21]]}

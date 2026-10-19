@@ -1,0 +1,47 @@
+{
+ "maps": [
+  "MAP_TWINLEAF_TOWN",
+  "MAP_ROUTE201"
+ ],
+ "build": "release",
+ "rom_sha256": "57d6a8a544372d63565a913a8a27ef0ea2f4e15339eccfa2813b95a9d8b15dba",
+ "static_findings": [],
+ "save_before": "059d039cdd06faf97229ee3fc3ef6b5915bd7ae8f5c45566e26d7b57e7ce63bb",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "059d039cdd06faf97229ee3fc3ef6b5915bd7ae8f5c45566e26d7b57e7ce63bb",
+ "verdict": "PASS"
+}

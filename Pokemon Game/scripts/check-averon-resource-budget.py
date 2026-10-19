@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import re
+import struct
 from pathlib import Path
 
 MEMORY = re.compile(
@@ -19,6 +20,50 @@ MEMORY = re.compile(
 REGIONS = {"ROM", "EWRAM", "IWRAM"}
 REPORT_SCOPE = "Native build and linker footprints, not game runtime"
 LABEL_SCOPE = "Caller-supplied labels; build configuration and source revision are not verified"
+ROM_BASE = 0x08000000
+
+
+def verify_linked_rom(elf, rom, used_bytes, capacity_bytes):
+    """Bind this ARM ELF's ROM load image and extent to the ROM/linker log.
+
+    Zero-file-size BSS segments are not ROM data. Padding and gaps are not
+    claimed as ELF-verified bytes; the full ROM checksum still identifies them.
+    This does not authenticate caller profile/source labels or RAM measurements.
+    """
+    if len(elf) < 52 or elf[:7] != b'\x7fELF\x01\x01\x01':
+        raise ValueError('Expected a complete little-endian ELF32 ARM executable')
+    fields = struct.unpack_from('<HHIIIIIHHHHHH', elf, 16)
+    kind, machine, version, _, phoff, _, _, ehsize, phsize, phnum, _, _, _ = fields
+    if (kind, machine, version, ehsize, phsize) != (2, 40, 1, 52, 32) or not phnum:
+        raise ValueError('Unsupported ELF executable/program-header contract')
+    if phoff < 52 or phoff + phsize * phnum > len(elf):
+        raise ValueError('Truncated ELF program-header table')
+    segments = []
+    for index in range(phnum):
+        ptype, offset, _, address, size, memsize, _, _ = struct.unpack_from('<IIIIIIII', elf, phoff + index * phsize)
+        if ptype != 1 or not size:
+            continue
+        if size > memsize or offset + size > len(elf):
+            raise ValueError('Truncated/invalid ELF load segment')
+        start = address - ROM_BASE
+        end = start + size
+        if start < 0 or end > capacity_bytes or end > len(rom):
+            raise ValueError('ELF load segment outside supplied ROM/capacity')
+        if elf[offset:offset + size] != rom[start:end]:
+            raise ValueError(f'ELF and ROM load bytes differ at segment {index}')
+        segments.append((start, end))
+    segments.sort()
+    if not segments or segments[0][0] != 0:
+        raise ValueError('ELF has no ROM load image starting at the cartridge base')
+    if any(left[1] > right[0] for left, right in zip(segments, segments[1:])):
+        raise ValueError('Overlapping ELF ROM load segments')
+    extent = segments[-1][1]
+    if extent != used_bytes:
+        raise ValueError(f'ELF linked ROM extent {extent} differs from linker log {used_bytes}')
+    return dict(elf_sha256=hashlib.sha256(elf).hexdigest(), rom_sha256=hashlib.sha256(rom).hexdigest(),
+                matched_load_segments=len(segments), matched_load_bytes=sum(end - start for start, end in segments),
+                linked_rom_extent_bytes=extent,
+                scope='ROM load bytes and linker ROM extent verified; gaps/padding, RAM, caller source/profile and gameplay are not certified')
 
 
 def parse_memory(log_text):
@@ -158,7 +203,7 @@ def contribution_changes(current, previous):
             'unattributed_delta_bytes': current['unattributed_bytes'] - previous['unattributed_bytes'],
             'scope': 'Partial contributions; residual changes are not claimed as content savings'}
 
-def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=None, linker_map=None):
+def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=None, linker_map=None, elf=None):
     metadata = {"scope": REPORT_SCOPE,
                 "memory": parse_memory(log_text)}
     labels = build_labels(profile, source_revision)
@@ -185,6 +230,15 @@ def report(log_text, rom=None, *, profile=None, source_revision=None, baseline=N
         if length <= 0 or length > metadata["memory"]["ROM"]["capacity_bytes"]:
             raise ValueError("ROM binary size outside GBA address space")
         metadata["rom_artifact"] = {"size_bytes": length, "sha256": digest.hexdigest()}
+    if elf is not None:
+        if rom is None:
+            raise ValueError('ELF verification requires --rom')
+        memory = metadata['memory']['ROM']
+        verified = verify_linked_rom(Path(elf).read_bytes(), Path(rom).read_bytes(),
+                                     memory['used_bytes'], memory['capacity_bytes'])
+        if verified['rom_sha256'] != metadata['rom_artifact']['sha256']:
+            raise ValueError('ROM changed while reporting; rebuild a coherent artifact set')
+        metadata['linked_artifact_verification'] = verified
     return metadata
 
 
@@ -192,6 +246,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--log", required=True, type=Path)
     ap.add_argument("--rom", type=Path)
+    ap.add_argument("--elf", type=Path, help="Optional matching ARM ELF: verify ROM load bytes and linker ROM extent")
     ap.add_argument("--linker-map", type=Path, help="Optional matching GNU .map for partial named-object contributions")
     ap.add_argument("--json", required=True, type=Path)
     ap.add_argument("--profile", help="Caller label for the exact build configuration; not verified")
@@ -207,7 +262,7 @@ def main():
                 raise ValueError("Malformed baseline: expected a resource-budget report object")
         result = report(args.log.read_text(encoding="utf-8", errors="replace"), args.rom,
                         profile=args.profile, source_revision=args.source_revision, baseline=baseline,
-                        linker_map=args.linker_map.read_text() if args.linker_map else None)
+                        linker_map=args.linker_map.read_text() if args.linker_map else None, elf=args.elf)
     except (OSError, ValueError) as exc:
         ap.error(str(exc))
     args.json.parent.mkdir(parents=True, exist_ok=True)

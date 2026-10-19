@@ -1,0 +1,6 @@
+normal run PASS 17 / 17 dc79c2e09685 []
+normal continue PASS 3 / 3 dc79c2e09685 []
+release run PASS 17 / 17 57d6a8a54437 []
+release continue PASS 3 / 3 57d6a8a54437 []
+OK   negative-twinleaf-wrong-offset: expect FAIL, run FAIL, static ['seam-mismatch'], failed ['MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (15, 21) and back', 'run completed without the driver getting stuck']
+1/1 fixtures behaved as expected

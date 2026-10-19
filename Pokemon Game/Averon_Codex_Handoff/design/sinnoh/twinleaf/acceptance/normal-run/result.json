@@ -1,0 +1,281 @@
+{
+ "maps": [
+  "MAP_TWINLEAF_TOWN",
+  "MAP_ROUTE201"
+ ],
+ "build": "normal",
+ "rom_sha256": "dc79c2e09685379738538e7136bee4df09d2d7143b7ec1ad443192eb4a7c5d1d",
+ "static_findings": [],
+ "save_before": "3720619e675c926d6c63798e8c93798cc0aaf85c56030bd808713ebc0631f635",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_TWINLEAF_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN up seam (15, 0) -> MAP_ROUTE201 (15, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     15,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     15,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN up seam (16, 0) -> MAP_ROUTE201 (16, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     16,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (17, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     17,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN",
+    [
+     17,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_ROUTE201",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 closed left edge at (0, 10) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE201",
+    [
+     0,
+     10
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE201",
+    [
+     0,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 closed left edge at (0, 14) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (15, 21) -> MAP_TWINLEAF_TOWN (15, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     15,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     15,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (16, 21) -> MAP_TWINLEAF_TOWN (16, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (17, 21) -> MAP_TWINLEAF_TOWN (17, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (tw-normal)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "373d865aa4b4dc63f66cafe27bef7f90a43f926282efbd0956f9452252bc9fb7",
+ "verdict": "PASS"
+}

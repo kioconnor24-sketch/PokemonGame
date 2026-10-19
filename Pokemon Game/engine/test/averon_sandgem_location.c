@@ -12,7 +12,8 @@
 STATIC_ASSERT(MAPSEC_SANDGEM_TOWN == 216, sandgem_owner_approved_value);
 STATIC_ASSERT(MAPSEC_NONE == 215, sandgem_preserves_none);
 STATIC_ASSERT(MAPSEC_ROUTE_201 == 217, route201_owner_approved_value);
-STATIC_ASSERT(MAPSEC_COUNT == 218, no_other_allocations);
+STATIC_ASSERT(MAPSEC_TWINLEAF_TOWN == 218, twinleaf_owner_approved_value);
+STATIC_ASSERT(MAPSEC_COUNT == 219, no_other_allocations);
 
 static bool32 Contains(const u8 *text, const u8 *needle)
 {
@@ -35,7 +36,8 @@ TEST("Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or futur
     EXPECT(IsRegionMapSectionIdValid(MAPSEC_SANDGEM_TOWN));
     EXPECT(!IsRegionMapSectionIdValid(MAPSEC_NONE));
     EXPECT(IsRegionMapSectionIdValid(MAPSEC_ROUTE_201));
-    for (u32 i = 218; i <= 255; i++)
+    EXPECT(IsRegionMapSectionIdValid(MAPSEC_TWINLEAF_TOWN));
+    for (u32 i = 219; i <= 255; i++)
         EXPECT(!IsRegionMapSectionIdValid(i));
 }
 
@@ -72,7 +74,7 @@ TEST("Averon Sandgem summary keeps NONE unassigned and special met values unname
     gSaveBlock2Ptr->playerGender = MALE;
     CreateMon(&mon, SPECIES_PIPLUP, 12, 0, OTID_STRUCT_PLAYER_ID);
     u8 text[1024];
-    static const u8 values[] = {215, 218, 252, 253, 254, 255};
+    static const u8 values[] = {215, 219, 252, 253, 254, 255};
     for (u32 i = 0; i < ARRAY_COUNT(values); i++)
     {
         u32 value = values[i];
