@@ -247,6 +247,8 @@ def apply_fixture(engine, fixture):
             path.write_bytes(bytes(data))
         elif edit["op"] == "grant":
             grant_script(engine, edit["map"], edit.get("flags", []), edit.get("items", []))
+        elif edit["op"] == "wildbattle":
+            wildbattle_script(engine, edit["map"], edit["script"], edit["species"], edit["level"])
         elif edit["op"] == "section":
             path = engine / "data/maps" / edit["map"] / "map.json"
             info = json.loads(path.read_text())
@@ -275,6 +277,17 @@ def grant_script(engine, name, flags, items):
     body.append("\tend")
     text = text[:start] + f"\tmap_script MAP_SCRIPT_ON_TRANSITION, {label}\n" + text[start:]
     path.write_text(text + "\n@ TEST-ONLY map_qa fixture grant (throwaway tree)\n" + "\n".join(body) + "\n")
+
+
+def wildbattle_script(engine, name, label, species, level):
+    """TEST-ONLY: make an existing NPC/sign script start a wild battle (throwaway trees only)."""
+    path = pathlib.Path(engine) / "data/maps" / name / "scripts.inc"
+    text = path.read_text()
+    head = f"{label}::\n"
+    if text.count(head) != 1:
+        raise SystemExit(f"{path}: expected exactly one {label}:: label")
+    battle = f"\tlock\n\tsetwildbattle {species}, {level}\n\tdowildbattle\n\trelease\n\tend\n"
+    path.write_text(text.replace(head, head + "@ TEST-ONLY map_qa fixture wild battle (throwaway tree)\n" + battle))
 
 
 def enum_values(text, anchor):
@@ -410,12 +423,13 @@ class Runner:
         name = f"{map_id} {p['direction']} seam {tuple(p['tile'])} -> {p['dest']} {expect} and back"
         if not self.go(map_id, p["tile"]):
             return self.check(name, False, reason="could not reach the seam tile", at=self.d.here())
-        self.press(p["direction"], hold=0.3, after=0.4)
+        # One real step, released as soon as the tile changes: a timed hold can start a second step.
+        self.d.step(p["direction"])
         there = self.wait_settled()
         self.d.shot(f"seam-{map_id}-{p['direction']}")
         if there != (p["dest"], expect):
             return self.check(name, False, leg="out", expected=(p["dest"], expect), got=there)
-        self.press(OPPOSITE[p["direction"]], hold=0.3, after=0.4)
+        self.d.step(OPPOSITE[p["direction"]])
         back = self.wait_settled()
         return self.check(name, back == (map_id, tuple(p["tile"])), leg="back", expected=(map_id, p["tile"]), got=back)
 
@@ -495,6 +509,62 @@ class Runner:
         n = self.d.g.c[name]
         sb1 = struct.unpack("<I", self.d.g.gdb.read(self.d.g.sym["gSaveBlock1Ptr"], 4))[0]
         return bool(self.d.g.gdb.read(sb1 + self.d.g.off["sb1.flags"] + n // 8, 1)[0] & (1 << (n % 8)))
+
+    def last_heal(self):
+        """gSaveBlock1Ptr->lastHealLocation as (map id, x, y): the whiteout anchor."""
+        g = self.d.g
+        sb1 = struct.unpack("<I", g.gdb.read(g.sym["gSaveBlock1Ptr"], 4))[0]
+        group, num, _, x, y = struct.unpack("<bbbxhh", g.gdb.read(sb1 + g.off["sb1.lastHealLocation"], 8))
+        return self.d.w.by_num.get((group, num)), x, y
+
+    def whiteout(self, heal_id, npc, engine):
+        """Lose a real battle on purpose and require the whiteout to land at heal_id's nurse.
+
+        Needs the TEST-ONLY `wildbattle` fixture on the NPC (map, x, y): ordinary input talks to it,
+        the battle is played with the weakest move every turn, and the game's own whiteout runs.
+        The anchor itself must already be set by ordinary play (e.g. entering the Center).
+        """
+        import run as play
+        from driver import Stuck
+        heals = json.loads((pathlib.Path(engine) / "src/data/heal_locations.json").read_text())["heal_locations"]
+        heal = next((h for h in heals if h["id"] == heal_id), None)
+        if not self.check(f"whiteout: {heal_id} exists in this tree", heal is not None):
+            return
+        anchor = self.last_heal()
+        self.check(f"whiteout: ordinary play set the {heal_id} anchor", anchor == (heal["map"], heal["x"], heal["y"]),
+                   got=anchor, expected=(heal["map"], heal["x"], heal["y"]))
+        before = play.observe(self.d, "whiteout-before")
+        npc_map, x, y = npc
+        try:
+            if self.d.here()[0] != npc_map:
+                self.d.travel_to(npc_map)
+            self.d.talk(npc_map, (x, y), clear=False)
+        except Stuck as exc:
+            return self.check("whiteout: the TEST-ONLY wild battle started", False, reason=str(exc))
+        started = False
+        for _ in range(40):
+            if self.d.state().in_battle:
+                started = True
+                break
+            time.sleep(0.25)
+        if not self.check("whiteout: the TEST-ONLY wild battle started", started, npc=npc):
+            return
+        self.d.battle(choose_move=play.weakest_move(self.d), label="whiteout-loss", never_b=True)
+        for n in range(4):  # the whiteout message prints slowly over black
+            self.d.shot(f"whiteout-after-{n + 1}")
+            time.sleep(0.7)
+        self.d.clear_text(capture="whiteout-nurse", frames=12)
+        landed = self.wait_settled()
+        want = (heal["respawn_map"], (heal.get("respawn_x", 7), heal.get("respawn_y", 4)))
+        self.check(f"whiteout: respawned in front of the {heal_id} nurse", landed == want, got=landed, expected=want)
+        try:
+            after = play.observe(self.d, "whiteout-after")
+        except play.ExpectationFailed as exc:
+            return self.check("whiteout: back in the overworld", False, reason=str(exc))
+        self.check("whiteout: party fully healed", play.party_fully_restored(self.d, after))
+        self.check("whiteout: money lost (or none to lose)", after["money"] < before["money"] or not before["money"],
+                   before=before["money"], after=after["money"])
+        self.can_leave(f"the whiteout to {heal['respawn_map']}")
 
     def ui_back(self, label, opened, expect):
         """After a UI path: back to the field, screen not black, a real step moves the player."""
@@ -646,6 +716,7 @@ def cmd_run(args):
     # The driver modules come from the engine tree under test (_wrapper), which may predate these
     # probe entries; register them here so --region-ui works against any tree.
     emu.OFFSET_EXPRS.setdefault("bag.keyItems", "offsetof(struct Bag, keyItems)")
+    emu.OFFSET_EXPRS.setdefault("sb1.lastHealLocation", "offsetof(struct SaveBlock1, lastHealLocation)")
     for name in REGION_UI_CONSTANTS:
         if name not in emu.CONSTANTS:
             emu.CONSTANTS.append(name)
@@ -685,6 +756,11 @@ def cmd_run(args):
                 r.run_map(map_id)
             if args.region_ui:
                 r.region_ui(args.region_ui_map or args.map[0], args.region_ui, engine)
+            if args.whiteout:
+                if not args.whiteout_npc:
+                    raise SystemExit("--whiteout needs --whiteout-npc MAP_ID,X,Y")
+                npc_map, x, y = args.whiteout_npc.split(",")
+                r.whiteout(args.whiteout, (npc_map, int(x), int(y)), engine)
             for map_id in args.map:
                 if plan[map_id]["pocket"]:
                     r.pocket(map_id, plan[map_id]["pocket"])
@@ -821,6 +897,9 @@ def main(argv=None):
     r.add_argument("--region-ui", choices=("refused", "opens"),
                    help="drive PokeNav MAP, the Town Map item and Field Kit FLY (needs the TEST-ONLY grant fixture)")
     r.add_argument("--region-ui-map", help="outdoor map for --region-ui (default: first --map)")
+    r.add_argument("--whiteout", metavar="HEAL_LOCATION_ID",
+                   help="lose a battle on purpose and require a respawn at this healer (needs the TEST-ONLY wildbattle fixture)")
+    r.add_argument("--whiteout-npc", metavar="MAP_ID,X,Y", help="the NPC the wildbattle fixture was put on")
     st = sub.add_parser("selftest")
     st.add_argument("--engine", required=True)
     st.add_argument("--save", required=True)

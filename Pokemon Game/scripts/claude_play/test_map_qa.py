@@ -1,4 +1,5 @@
 """Offline tests for map_qa's static layer and fixture safety (no ROM, no emulator)."""
+import inspect
 import json
 import pathlib
 import struct
@@ -184,6 +185,32 @@ class Fixtures(unittest.TestCase):
         with self.assertRaises(SystemExit):
             map_qa.apply_fixture(root, {"edits": [{"op": "grant", "map": "Town", "flags": ["FLAG_A"]}]})
         self.assertEqual((root / "data/maps/Town/scripts.inc").read_text(), original)
+
+    def test_wildbattle_takes_over_one_existing_script(self):
+        root = self._tree(marker=True)
+        (root / "data/maps/Town/scripts.inc").write_text(
+            "Town_MapScripts::\n\t.byte 0\n\nTown_EventScript_Boy::\n\tmsgbox Town_Text_Boy, MSGBOX_NPC\n\tend\n")
+        map_qa.apply_fixture(root, {"edits": [
+            {"op": "wildbattle", "map": "Town", "script": "Town_EventScript_Boy", "species": "SPECIES_X", "level": 80}]})
+        text = (root / "data/maps/Town/scripts.inc").read_text()
+        self.assertIn("Town_EventScript_Boy::\n@ TEST-ONLY", text)
+        self.assertIn("\tsetwildbattle SPECIES_X, 80\n\tdowildbattle\n\trelease\n\tend\n", text)
+        self.assertLess(text.index("dowildbattle"), text.index("msgbox Town_Text_Boy"))
+
+    def test_wildbattle_refuses_a_missing_script(self):
+        root = self._tree(marker=True)
+        original = "Town_MapScripts::\n\t.byte 0\n"
+        (root / "data/maps/Town/scripts.inc").write_text(original)
+        with self.assertRaises(SystemExit):
+            map_qa.apply_fixture(root, {"edits": [
+                {"op": "wildbattle", "map": "Town", "script": "Town_EventScript_Boy", "species": "SPECIES_X", "level": 5}]})
+        self.assertEqual((root / "data/maps/Town/scripts.inc").read_text(), original)
+
+    def test_seam_legs_take_single_real_steps(self):
+        # A timed hold can start a second step (seen on Route 201: one run overshot to (62, 6)).
+        source = inspect.getsource(map_qa.Runner.seam)
+        self.assertEqual(source.count("self.d.step("), 2)
+        self.assertNotIn("self.press(", source)
 
     def test_party_menu_layout_matches_engine_source(self):
         engine = map_qa.HERE.parents[1] / "engine"
