@@ -59,6 +59,17 @@ code/tests/prose only, no donor assets or ROMs.
   Full primary metatiles+attributes9216bytes and16x16-color palettes512bytes:
   **17580 bytes of payload**, before alignment/header/linking, plus2040-byte map
   and8-byte border. Not an actual linked ROM delta or a full-region forecast.
+- Generated family source actually passed the engine's cpp→preproc→ARMcc1→as
+  pipeline, using real converted/compressed graphics and all16 converted palettes.
+  GCC14.2.1 (20241119), ARMv4T/apcs-gnu; **17604 bytes read-only,0 data,0 BSS**
+  (17580-byte payload+24-byte Tileset header). Object SHA256
+  `4baa82c92f7a866ab9f55d065654e4396f90a438693b3a6bab2af9c5eff79a0c`.
+  Generated constants include paths were reused from the existing local native
+  build; no map/header/registry was changed and no ROM link is claimed.
+- **Actual GitHub Actions run39326076386/job118312144210 PASS** at implementation
+  `342d40b24d0239492d0bf1c9885232d81ce4a30e`: completed logs confirm15 retained
+  tests+19 new tests, real pinned sparse checkout, source/staged map+border cmp,
+  exact dependency/pixel assertions. Other applicable guards/source checks PASS.
 - No runtime changes: NORMAL/RELEASE/native/gameplay tests are not rerun or
   claimed here. Production registration later needs actual paired ROM builds,
   resource measurement, native and genuine mGBA seam/Save→fresh Continue evidence.
