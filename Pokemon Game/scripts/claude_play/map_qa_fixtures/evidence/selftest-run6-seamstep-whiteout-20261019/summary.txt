@@ -1,0 +1,11 @@
+OK   negative-ledge-pocket: expect FAIL, run FAIL, static ['one-way-pocket'], failed ['MAP_SANDGEM_TOWN has no one-way pocket']
+OK   negative-one-way-connection: expect FAIL, run FAIL, static clean, failed ['MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back', 'MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back', 'MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back']
+OK   negative-region-ui-legacy-section: expect FAIL, run FAIL, static clean, failed ['region UI: PokeNav MAP refused', 'region UI: Town Map refused', 'region UI: Fly refused']
+OK   negative-unreachable-seam: expect FAIL, run FAIL, static ['exit-unreachable'], failed ['MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back', 'MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back', 'MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back']
+OK   negative-warp-return: expect FAIL, run FAIL, static clean, failed ['MAP_SANDGEM_TOWN warp 1 (25, 9) -> MAP_SANDGEM_TOWN_POKEMON_CENTER_1F and back']
+OK   negative-whiteout-wrong-healer: expect FAIL, run FAIL, static clean, failed ['whiteout: ordinary play set the HEAL_LOCATION_OLDALE_TOWN anchor', 'whiteout: respawned in front of the HEAL_LOCATION_OLDALE_TOWN nurse']
+OK   positive-alderfield-whiteout: expect PASS, run PASS, static clean, failed []
+OK   positive-loop-connection: expect PASS, run PASS, static clean, failed []
+OK   positive-sandgem: expect PASS, run PASS, static clean, failed []
+OK   positive-sinnoh-region-ui-refused: expect PASS, run PASS, static clean, failed []
+10/10 fixtures behaved as expected
