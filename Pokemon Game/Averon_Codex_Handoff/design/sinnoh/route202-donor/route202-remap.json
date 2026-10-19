@@ -1,0 +1,138 @@
+{
+  "source_map": "Route202",
+  "source_map_id": "MAP_ROUTE202",
+  "source_layout_id": "LAYOUT_ROUTE202",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "block_sha256": "9f58a62052998ed869259356c395302ef5bfa35624b612c0e68ae1922e00437b",
+  "target_map_id": "MAP_ROUTE202",
+  "target_primary_tileset": "gTileset_General",
+  "target_secondary_tileset": "gTileset_Petalburg",
+  "metatiles": {
+    "1": {
+      "target": 1,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "3": {
+      "target": 3,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "13": {
+      "target": 13,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "135": {
+      "target": 135,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "213": {
+      "target": 213,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "214": {
+      "target": 214,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "280": {
+      "target": 280,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "281": {
+      "target": 281,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "282": {
+      "target": 282,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "288": {
+      "target": 288,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "289": {
+      "target": 289,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "290": {
+      "target": 290,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "296": {
+      "target": 296,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "297": {
+      "target": 297,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "298": {
+      "target": 298,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "454": {
+      "target": 454,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "455": {
+      "target": 455,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "462": {
+      "target": 462,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "463": {
+      "target": 463,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "470": {
+      "target": 470,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "471": {
+      "target": 471,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "478": {
+      "target": 478,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "479": {
+      "target": 479,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "486": {
+      "target": 486,
+      "behavior_verified": true,
+      "graphics_verified": true
+    },
+    "487": {
+      "target": 487,
+      "behavior_verified": true,
+      "graphics_verified": true
+    }
+  },
+  "verification": "Identity into Averon gTileset_General. behavior: metatile_attributes compared per ID -- 24/25 identical words; ID 3 (sign) differs only in layer-type bits 0x1000 (draw layering), behavior byte 0x00 on both. collision/elevation are in map.bin and preserved. graphics: rendered both banks; every ID keeps its role (grass/tall grass/path/ledge/tree/sign) -- donor pine trees and sign draw as Averon round trees and sign, matching built Sandgem/Route 201. Averon art style, not donor art."
+}
