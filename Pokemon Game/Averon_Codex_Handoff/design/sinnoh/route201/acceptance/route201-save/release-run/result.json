@@ -1,0 +1,173 @@
+{
+ "maps": [
+  "MAP_ROUTE201"
+ ],
+ "build": "release",
+ "rom_sha256": "4e085926b947d923e1bf9cee56cd6b0864f012316a000d3cde1ba0427ab87827",
+ "static_findings": [],
+ "save_before": "f8e4ecbb00511deff7d3a412387bad21812cb942070c2a06d6b10679c65965ad",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     20,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE201",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     20,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 closed down edge at (16, 21) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 closed left edge at (0, 10) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE201",
+    [
+     0,
+     10
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE201",
+    [
+     0,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 closed left edge at (0, 14) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (r201route-release)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "8608d254854118969423e40dce93a12332551f8f18202d6529587c8c14ed62c4",
+ "verdict": "PASS"
+}
