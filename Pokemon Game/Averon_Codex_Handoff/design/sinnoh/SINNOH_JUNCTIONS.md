@@ -19,6 +19,11 @@
   | south | `FillSouthConnection` | its **first (northern) 7 rows** |
   | west | `FillWestConnection` | its **last (eastern) 7 columns**, `x2 = cWidth − 7` |
   | east | `FillEastConnection` | its **first (western) 8 columns** (`MAP_OFFSET + 1`) |
+- **Tree phase.** The placeholder round trees are 2 × 2 metatiles: top halves on even rows, left halves on even columns. Two rules keep them whole across a seam:
+  - the connection **offset**, which runs along the seam, must be **even**;
+  - the map on the west or north side needs an **even width or height**, so its edge column or row is a right or bottom half.
+
+  Otherwise every tree facing the seam pairs mismatched halves. The Route 201 mGBA dry run (#135) found this at offset −5. −4 fixes it (Route 201 is 64 wide), and `verify_route201_plan.py` check 7 enforces it.
 - **Map size.** `(width + 15) × (height + 14) ≤ MAX_MAP_DATA_SIZE` (10,240) for every map.
 - **Ledges.** `PlayerJumpLedge` never checks the landing tile, so every ledge must land on walkable ground. The Route 201 proof checks this.
 
@@ -42,10 +47,10 @@
 | | Route 201 (SN-R201, design #135) | Sandgem Town (SN-T02, #133) |
 | --- | --- | --- |
 | Edge | east, x 63 | west, x 0 |
-| Open rows | 5–8 (road 6–7) | 10–13 (road 11–12), read from the built `map.bin` |
-| Connection entry | `right` → Sandgem, offset **−5** | `left` → Route 201, offset **+5** |
+| Open rows | 6–9 (road 7–8) | 10–13 (road 11–12), read from the built `map.bin` |
+| Connection entry | `right` → Sandgem, offset **−4** | `left` → Route 201, offset **+4** |
 
-- **Proof.** `verify_route201_plan.py` checks this seam against the built Sandgem layout; it passes, and a −4 offset is caught as a failure.
+- **Proof.** `verify_route201_plan.py` checks this seam against the built Sandgem layout, including tree phase. It passes, and an odd −5 offset is caught. A throwaway mGBA dry run crossed rows 6, 8 and 9 in both directions and landed exactly at Route (63, y) ↔ Sandgem (0, y + 4) ([#135 `dry-run/`](https://github.com/kioconnor24-sketch/PokemonGame/pull/135)).
 - **Hazard.** Both entries are added together, only after Route 201 is approved. A one-sided entry would let the player walk out of one map and arrive at the wrong row, or be unable to return.
 
 ## Junction B: Route 201 ↔ Twinleaf Town (south)
