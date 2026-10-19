@@ -11,9 +11,31 @@
 - **Seam rule.**
   - Every walkable tile on A's edge must face a walkable tile on B's edge, and vice versa. Otherwise a player can stand on an edge tile that leads nowhere, or see a road end in a wall.
   - Unapproved neighbours stay closed: trees on the edge, or a map `border` of trees, which is what the camera shows past an unconnected edge.
-- **Camera margin.** The field camera draws `MAP_OFFSET` = 7 tiles past each edge. A connected neighbour is visible 7 tiles deep, so its first 7 rows/columns along the seam must look coherent (no stray buildings or cut-off roofs).
+- **Camera margin (directional).** The map buffer extends `MAP_OFFSET` = 7 tiles past the north, south and west edges and 8 past the east edge (`MAP_OFFSET_W` = 15 = 7 + 8). Each `Fill*Connection` copies the neighbour's strip **adjacent to the seam**, and that strip must look coherent (no stray buildings or cut-off roofs):
+
+  | Neighbour lies to the… | Function | Neighbour strip copied |
+  | --- | --- | --- |
+  | north | `FillNorthConnection` | its **last (southern) 7 rows**, `y2 = cHeight − 7` |
+  | south | `FillSouthConnection` | its **first (northern) 7 rows** |
+  | west | `FillWestConnection` | its **last (eastern) 7 columns**, `x2 = cWidth − 7` |
+  | east | `FillEastConnection` | its **first (western) 8 columns** (`MAP_OFFSET + 1`) |
 - **Map size.** `(width + 15) × (height + 14) ≤ MAX_MAP_DATA_SIZE` (10,240) for every map.
 - **Ledges.** `PlayerJumpLedge` never checks the landing tile, so every ledge must land on walkable ground. The Route 201 proof checks this.
+
+**Camera strips at each junction** (per the table above; sizes from the built Sandgem 28-row layout, the Route 201 64 × 22 candidate and the ~64 × 48 Jubilife reference):
+
+| Junction | Standing in | Buffer holds |
+| --- | --- | --- |
+| A | Sandgem (Route 201 is west) | Route 201's eastern 7 columns, x 57–63 |
+| A | Route 201 (Sandgem is east) | Sandgem's western 8 columns, x 0–7 |
+| B | Route 201 (Twinleaf is south) | Twinleaf's northern 7 rows: unknown, reference unavailable |
+| B | Twinleaf (Route 201 is north) | Route 201's southern 7 rows, y 15–21 |
+| C | Route 201 (Lakefront is west) | Lakefront's eastern 7 columns: unknown |
+| C | Lakefront (Route 201 is east) | Route 201's western 8 columns, x 0–7 |
+| D | Sandgem (Route 202 is north) | Route 202's southern 7 rows: unknown |
+| D | Route 202 (Sandgem is south) | Sandgem's northern 7 rows, y 0–6 |
+| E | Route 202 (Jubilife is north) | Jubilife's southern 7 rows, about y 41–47 |
+| E | Jubilife (Route 202 is south) | Route 202's northern 7 rows: unknown |
 
 ## Junction A: Route 201 ↔ Sandgem Town (east)
 
@@ -66,7 +88,7 @@ Here `v` is the Lakefront row that meets Route 201 row 8.
 Here `s` is the column of Route 202's south road that meets Sandgem x 21.
 
 - **Requirement.** Route 202's south edge must be open on columns that line up with Sandgem's 6 open columns, 19–24, with its road meeting 21–22. Any other open tile on that edge would face Sandgem's tree line.
-- **Camera.** From Sandgem's north path the camera shows 7 rows of Route 202, so Route 202's first 7 rows should be forest-framed path.
+- **Camera.** Seen from Sandgem, Route 202 is a north neighbour, so the buffer holds Route 202's **last (southern) 7 rows**; those rows must read as forest-framed path. From Route 202, Sandgem is a south neighbour, so the buffer holds Sandgem's **first (northern) 7 rows**, which already exist in the built layout.
 
 ## Junction E: Route 202 ↔ Jubilife City (north)
 
@@ -80,7 +102,7 @@ Here `q` is the left column of Route 202's 3-wide north opening.
 
 - **What the reference shows.** The Jubilife overhead is 1024 × 772 px, about 64 × 48 tiles. Size check: (64 + 15) × (48 + 14) = 4,898 ≤ 10,240.
 - **Hazards.**
-  - Route 202's opening is 2-wide road while Jubilife's is 3-wide stairs. The Route 202 north edge must still be open on exactly the 3 stair columns. Otherwise one stair tile is a walkable dead end that faces trees.
+  - Route 202's north opening is **unobserved** (see the reference status). The requirement is that its north edge is open on exactly the 3 Jubilife stair columns. **If** a reference later shows a 2-wide road there, the third stair column still needs a walkable Route 202 tile; otherwise that stair tile is a walkable dead end facing trees. This is a proposed matching requirement, not evidence of the Route 202 endpoint.
   - Jubilife is a large city and is **not** proposed for building; this records only its south interface.
 
 ## Accessibility notes for whoever builds these
