@@ -1,0 +1,2890 @@
+{
+ "snapshot_utc": "2026-10-19T15:49:48.392645+00:00",
+ "main": "bc55711215126fc5f6f95e3ea2875f92ceb356ab",
+ "scope": "Frozen165-branch snapshot; review-only recommendations; no deletion authority",
+ "branches": [
+  {
+   "name": "chatgpt/agent-coordination-framework",
+   "protected": false,
+   "sha": "36ded17a8116967e5a783f9dcb002b794c5bf6f9"
+  },
+  {
+   "name": "chatgpt/agent-entrypoints-current-20261019",
+   "protected": false,
+   "sha": "0e595c870e5ab78b301ac206576487c1cb1277de"
+  },
+  {
+   "name": "chatgpt/agent-message-routing-20261015",
+   "protected": false,
+   "sha": "6897e97b1ca146fc092f4815666469051c9ae2b5"
+  },
+  {
+   "name": "chatgpt/agent-orders-20261015-q1",
+   "protected": false,
+   "sha": "8d0b69e20b26ed386efd286f128a0e321bfc65a4"
+  },
+  {
+   "name": "chatgpt/agent-tooling-bootstrap",
+   "protected": false,
+   "sha": "ee53feeda999897b0d2f517d25c715d7baffa8f9"
+  },
+  {
+   "name": "chatgpt/approved-sinnoh-map-file-guard-20261018",
+   "protected": false,
+   "sha": "118cf6a11472f2b8d79cb51101bc9736fb689cff"
+  },
+  {
+   "name": "chatgpt/backend-first-production-roadmap",
+   "protected": false,
+   "sha": "e92d19954a0fcf36e5eb66e6da06bf5f33546fc3"
+  },
+  {
+   "name": "chatgpt/backend-sinnoh-execution",
+   "protected": false,
+   "sha": "90fea7ca1956379a4e30d832bba9fbaa7ffeb6e7"
+  },
+  {
+   "name": "chatgpt/claude-codex-co-lead-roles",
+   "protected": false,
+   "sha": "94b05073aa05147c8cde53f81dc6716f306e1ea3"
+  },
+  {
+   "name": "chatgpt/claude-cry-takeover-20261017",
+   "protected": false,
+   "sha": "31237a3da7714a659d8cabe9c3062db823e1ee41"
+  },
+  {
+   "name": "chatgpt/codex-rom-capacity-brief-20261017",
+   "protected": false,
+   "sha": "8f20e18a662b791dadb9ce76b599c1c5390a3dfb"
+  },
+  {
+   "name": "chatgpt/combined-runtime-readiness",
+   "protected": false,
+   "sha": "328b740f68096d725ecd5e9fe4a1709d8f498177"
+  },
+  {
+   "name": "chatgpt/current-navigation-sinnoh-20261019",
+   "protected": false,
+   "sha": "5200b2f9bb72073f20232315182ac98ce2614d39"
+  },
+  {
+   "name": "chatgpt/early-quests-and-world-progression",
+   "protected": false,
+   "sha": "80e6034af20f7235115a22313092c36c347b9eb5"
+  },
+  {
+   "name": "chatgpt/emulator-smoke-playtest",
+   "protected": false,
+   "sha": "e46beacf003fe8052697751cef44539b2d22747a"
+  },
+  {
+   "name": "chatgpt/engine-readiness-gates",
+   "protected": false,
+   "sha": "6d04dd2907d6819169c69aa5c2f91277b1493e8a"
+  },
+  {
+   "name": "chatgpt/forms-graphics-readiness",
+   "protected": false,
+   "sha": "01a3d5f8b382efb1a35bf63ae6bfd119448f758a"
+  },
+  {
+   "name": "chatgpt/integration-contract-checks",
+   "protected": false,
+   "sha": "55042b0ad7ffd141f94014e478d0ac62d4327159"
+  },
+  {
+   "name": "chatgpt/integration-status-postreview",
+   "protected": false,
+   "sha": "3a6eac4bb25ae95d3cd1bdb4fa7800244e163a44"
+  },
+  {
+   "name": "chatgpt/large-agent-epics-20261015",
+   "protected": false,
+   "sha": "75119521021f7e8c205dfbccc925841a40d1764c"
+  },
+  {
+   "name": "chatgpt/level-economy-source-data",
+   "protected": false,
+   "sha": "6cdd50c75e0baf2388874a993e490301018a4579"
+  },
+  {
+   "name": "chatgpt/live-pr-advisory-20261018",
+   "protected": false,
+   "sha": "96114f34115ac11aa8a9789c132dc9423f21948c"
+  },
+  {
+   "name": "chatgpt/local-playtest-packaging",
+   "protected": false,
+   "sha": "61ace191611284b5712b8f7629ecfd77696a4ce5"
+  },
+  {
+   "name": "chatgpt/m1-claude-all-roles-autonomy-20261017",
+   "protected": false,
+   "sha": "8a98b2f032d509f4bf8aff45c4c0a19e024f6533"
+  },
+  {
+   "name": "chatgpt/m1-claude-full-backend-autonomy-20261017",
+   "protected": false,
+   "sha": "8ee90432d944a18633c7ba2f3c2874139d939aad"
+  },
+  {
+   "name": "chatgpt/m1-comprehensive-finish-20261017",
+   "protected": false,
+   "sha": "1c4617e85e6292386209043c62b11ef4219e11c0"
+  },
+  {
+   "name": "chatgpt/m1-evidence-integrity-cleanup-20261017",
+   "protected": false,
+   "sha": "779333d1dcbbf11a6492852ca0759023ec880598"
+  },
+  {
+   "name": "chatgpt/m1-evidence-tooling-20261017",
+   "protected": false,
+   "sha": "7cefdc5ec0db757bdf7bccc042a556d40991c7f2"
+  },
+  {
+   "name": "chatgpt/m1-fluid-claude-codex-20261017",
+   "protected": false,
+   "sha": "7282b83ea51988b0405cbb4a4ca3a6cad7a3b56a"
+  },
+  {
+   "name": "chatgpt/m1-post-integration-qa-handoff-20261017",
+   "protected": false,
+   "sha": "d830aa9b05770ea50a756414bec88c865356e86e"
+  },
+  {
+   "name": "chatgpt/manager-live-handoff-20261017",
+   "protected": false,
+   "sha": "c661c9db848b205b69da8faf88921b596d79b1c5"
+  },
+  {
+   "name": "chatgpt/manager-m1-current-handoff-20261017",
+   "protected": false,
+   "sha": "8b04bea2303a579578015435e1e265cd1135b20d"
+  },
+  {
+   "name": "chatgpt/native-baseline-ci-coverage",
+   "protected": false,
+   "sha": "b68d9699758e79193031b14a2c29813cdd201e7a"
+  },
+  {
+   "name": "chatgpt/next-manager-handoff-20261017",
+   "protected": false,
+   "sha": "7f2a7464e6a783cd1203f21adc9ecd8a74dd27b8"
+  },
+  {
+   "name": "chatgpt/organizational-reset-20261018",
+   "protected": false,
+   "sha": "36cff492d5d76128369466cf0b52078beaad8e40"
+  },
+  {
+   "name": "chatgpt/parallel-development-first-20261015",
+   "protected": false,
+   "sha": "784e67160b17a3bd0f21e48fcab79eed231349b7"
+  },
+  {
+   "name": "chatgpt/phase2-coordination-consolidation-20261017",
+   "protected": false,
+   "sha": "e136067eec0a3ef834f7a446d24711469d7d4e15"
+  },
+  {
+   "name": "chatgpt/phase2-sinnoh-parallel-20261018",
+   "protected": false,
+   "sha": "b5364d0b698bed1e84fd0e529a6fef4da11dbd71"
+  },
+  {
+   "name": "chatgpt/qa-owns-mgba-acceptance",
+   "protected": false,
+   "sha": "42664f525ae087e02aa885c0a84592d6c737e6e7"
+  },
+  {
+   "name": "chatgpt/quest-milestone-handoff",
+   "protected": false,
+   "sha": "42c1864112ab964492242dcaff11e87626c06e81"
+  },
+  {
+   "name": "chatgpt/repo-navigation-hygiene-20261015",
+   "protected": false,
+   "sha": "26931bdfc0538b092cc2c68ef828f993a1339f3e"
+  },
+  {
+   "name": "chatgpt/repository-operations-v2",
+   "protected": false,
+   "sha": "c493c4f439128ee6817622191f58728b217729da"
+  },
+  {
+   "name": "chatgpt/repository-workflow-hygiene",
+   "protected": false,
+   "sha": "2c39844abe33850b1c513371c36619be5576dab8"
+  },
+  {
+   "name": "chatgpt/reversible-no-cries-policy-20261017",
+   "protected": false,
+   "sha": "582c7383895b73c6fe7b11d17e1994536a2c5da3"
+  },
+  {
+   "name": "chatgpt/sinnoh-delegated-geography-contract-20261019",
+   "protected": false,
+   "sha": "cf0963cbd3380cca792f4b0fffcaa96b2515fc57"
+  },
+  {
+   "name": "chatgpt/sinnoh-map-build-tracker-20261017",
+   "protected": false,
+   "sha": "ca375e33372e6cd72520b0b4750c9ac56de01544"
+  },
+  {
+   "name": "chatgpt/sinnoh-master-production-roadmap-20261019",
+   "protected": false,
+   "sha": "85dcac8d45edd71778d9096d81cf09fe9a15bc8c"
+  },
+  {
+   "name": "chatgpt/solo-evolution-readiness",
+   "protected": false,
+   "sha": "01c6731edfde0fcf62459e0f3fe43d527cac574e"
+  },
+  {
+   "name": "chatgpt/species-inventory-audit",
+   "protected": false,
+   "sha": "5825d4d703f94204711b838c139deec79b45e00c"
+  },
+  {
+   "name": "chatgpt/story-working-dossier-20261017",
+   "protected": false,
+   "sha": "93605cdca197a100bc6902b852253f1618e5a543"
+  },
+  {
+   "name": "chatgpt/streamlined-merges-owner-20261019",
+   "protected": false,
+   "sha": "fa6a3ce54fb6fcbc5b15ca087f2ed2d655f133b7"
+  },
+  {
+   "name": "claude/agent-tooling-setup",
+   "protected": false,
+   "sha": "e968fa8f1eaf1cc7ca63e15a0752a71c16dd775a"
+  },
+  {
+   "name": "claude/clinic-union-room-overflow",
+   "protected": false,
+   "sha": "983290909c5e5a5223ba99717566f2cbe76bb10d"
+  },
+  {
+   "name": "claude/egg-hatch-ot",
+   "protected": false,
+   "sha": "9f0efe031f7998f796ba14478a9881ba8af1a6c2"
+  },
+  {
+   "name": "claude/evidence-20261017",
+   "protected": false,
+   "sha": "26d9dc0f1527ed9fe3dc2dea7433ff8ed1b1087c"
+  },
+  {
+   "name": "claude/gdb-eof-fail-fast",
+   "protected": false,
+   "sha": "c6ecb6a05f1bb6985a755f67cc77c4224c0313b1"
+  },
+  {
+   "name": "claude/handoff-20261017",
+   "protected": false,
+   "sha": "2b5571ba54af4c22bbd03373778968096fafe8c3"
+  },
+  {
+   "name": "claude/legend-encounter-state",
+   "protected": false,
+   "sha": "cf2a1aaf35ac46e5f8eb39c1bc228eac50764933"
+  },
+  {
+   "name": "claude/legend-registration",
+   "protected": false,
+   "sha": "901a3533863de40794fec3772feda1172d07f58d"
+  },
+  {
+   "name": "claude/local-playthrough",
+   "protected": false,
+   "sha": "a1abb4593b40ba68d1efd89667ab6ccdf10b3f1a"
+  },
+  {
+   "name": "claude/m1-final-acceptance",
+   "protected": false,
+   "sha": "206faa3dd465e39c182cb124021489d9381a21ea"
+  },
+  {
+   "name": "claude/map-qa",
+   "protected": false,
+   "sha": "484c12e962ccb781c0844a37cd646f6ae1021800"
+  },
+  {
+   "name": "claude/map-qa-region-ui",
+   "protected": false,
+   "sha": "4e388678d096286afbecdd5ea06735127e351a7c"
+  },
+  {
+   "name": "claude/map-qa-seam-step",
+   "protected": false,
+   "sha": "2f147e6de78ce7e7f3650ca0b73df8f9fd7dffb6"
+  },
+  {
+   "name": "claude/map-registry-sinnoh",
+   "protected": false,
+   "sha": "49197a59e01071e7b6dd8089b67130ee53cb2187"
+  },
+  {
+   "name": "claude/mapsec-inventory",
+   "protected": false,
+   "sha": "78b9e6109688aec27d03c1b74e1c0ce9be71816d"
+  },
+  {
+   "name": "claude/mystery-gift-overread",
+   "protected": false,
+   "sha": "91516ae58c64d0f0716269b358c80200c904505e"
+  },
+  {
+   "name": "claude/native-test-baseline",
+   "protected": false,
+   "sha": "c235b1062f6bc426bdc4a76af1e3a4c11177d2bc"
+  },
+  {
+   "name": "claude/no-primal-reversion",
+   "protected": false,
+   "sha": "9087bf0046341355e6cf90f50ab034c6b6ee07ea"
+  },
+  {
+   "name": "claude/pokemon-readiness",
+   "protected": false,
+   "sha": "ee6e4f5c9120d2267914f4dce37d6d671e676cd6"
+  },
+  {
+   "name": "claude/qa-evidence-m1",
+   "protected": false,
+   "sha": "91a83cdd8098ff1b2f9f26327ba123c71d44ca8e"
+  },
+  {
+   "name": "claude/qa-stack-on-main",
+   "protected": false,
+   "sha": "b06534d590825ef0f3ab57843598685c78adbe04"
+  },
+  {
+   "name": "claude/quest-support",
+   "protected": false,
+   "sha": "232ae8df12d32d3dbf50e463d4da5c7f4396737d"
+  },
+  {
+   "name": "claude/region-progression",
+   "protected": false,
+   "sha": "e81f575d971a91810dbab983f12ae4f7fd3dff7b"
+  },
+  {
+   "name": "claude/region-save",
+   "protected": false,
+   "sha": "67bcec7ed8fcf40b5b64b65c658ea0bf36b034f6"
+  },
+  {
+   "name": "claude/region-save-negatives",
+   "protected": false,
+   "sha": "d17731c06a0b67ebbfcd1551685908a440a0ace5"
+  },
+  {
+   "name": "claude/region-save-paths",
+   "protected": false,
+   "sha": "01ba8ef319892aacbea0c1b12e1b925f6d85a664"
+  },
+  {
+   "name": "claude/region-travel",
+   "protected": false,
+   "sha": "bf3574b1da8fafbe5db1bee31589a4dd7c52b6fa"
+  },
+  {
+   "name": "claude/release-decl-mismatch",
+   "protected": false,
+   "sha": "35d3848606b6b298a0b9d16264329deeb0f18c31"
+  },
+  {
+   "name": "claude/route201-build",
+   "protected": false,
+   "sha": "af28cc6e1a85769714a07f750949c4103ba6349b"
+  },
+  {
+   "name": "claude/route201-candidate",
+   "protected": false,
+   "sha": "c957344d75b740ddf70eb3e6d025decfd32776f6"
+  },
+  {
+   "name": "claude/safety-integration",
+   "protected": false,
+   "sha": "7feda0c429cad7e872312b684068b0ae6aa5190b"
+  },
+  {
+   "name": "claude/sandgem-respawn",
+   "protected": false,
+   "sha": "e2b43d9f74b05a6073bfbf295dd80132df522bed"
+  },
+  {
+   "name": "claude/sandgem-town-maps",
+   "protected": false,
+   "sha": "a91d7096efe7a857a74ca5fdfc6d96669e1f69ed"
+  },
+  {
+   "name": "claude/save-headroom-report",
+   "protected": false,
+   "sha": "e96a46c10f7d6e2293ea62561b54b356fc3c0b2f"
+  },
+  {
+   "name": "claude/scripted-battle",
+   "protected": false,
+   "sha": "0c8fa6a265917e28dcee156b57e992a08e5f594e"
+  },
+  {
+   "name": "claude/scripted-battle-after-quest",
+   "protected": false,
+   "sha": "f6873eca52fc3eec003a37fee7d7ba5b99700f78"
+  },
+  {
+   "name": "claude/sinnoh-atlas",
+   "protected": false,
+   "sha": "bc52b50c3438ba17f347bdfb4569afab31348c9e"
+  },
+  {
+   "name": "claude/sinnoh-interfaces",
+   "protected": false,
+   "sha": "1fb0082f5a287d776a0e49de5c70a299b8da296a"
+  },
+  {
+   "name": "claude/sinnoh-placeholder-foundation",
+   "protected": false,
+   "sha": "0df4ee09fb77dd3d2e1af8513fe257c42a17f92c"
+  },
+  {
+   "name": "claude/sn-t02-tracker",
+   "protected": false,
+   "sha": "1f6cdb21e24a6885dfa6e72838512c69776e9142"
+  },
+  {
+   "name": "claude/test-merge-117-124",
+   "protected": false,
+   "sha": "40b0abb4541a069fdbd9af9e97da8f82cd76a1a4"
+  },
+  {
+   "name": "claude/twinleaf-build",
+   "protected": false,
+   "sha": "fee5bf2f8584ee5666e536e567d5abaec5924365"
+  },
+  {
+   "name": "claude/twinleaf-candidate",
+   "protected": false,
+   "sha": "55900488a207fb01ca481d98f3412d4e464b842b"
+  },
+  {
+   "name": "claude/verify-negatives-on-main",
+   "protected": false,
+   "sha": "13e2a183164b87ad04ee0e2e4d799c8ba0bc1f69"
+  },
+  {
+   "name": "codex/backend-checkpoint-20261018",
+   "protected": false,
+   "sha": "01e0b8f89913ca7e796c7eb231824d2c7499cfdf"
+  },
+  {
+   "name": "codex/backend-integration",
+   "protected": false,
+   "sha": "3318b59ceec059ac58e5b0146bfdf81c20c09b3c"
+  },
+  {
+   "name": "codex/backend-safety-integration",
+   "protected": false,
+   "sha": "c1d3460297a289a0e7fa7db62bdbeb2a8e5914b3"
+  },
+  {
+   "name": "codex/cloud-handoff",
+   "protected": false,
+   "sha": "1236d26c7b704dbb5fbfa6f032c8293123775e56"
+  },
+  {
+   "name": "codex/cloud-release-parity-20261016",
+   "protected": false,
+   "sha": "3536aa2565d69396c7f34ea56ab3acab9ac08bfa"
+  },
+  {
+   "name": "codex/connection-contract-20261018",
+   "protected": false,
+   "sha": "32c9f98047cbff455ab043946419dba10a6adad7"
+  },
+  {
+   "name": "codex/cries-off-default-20261018",
+   "protected": false,
+   "sha": "3083758282e07ff1a795e19430ec07bc2b1523c4"
+  },
+  {
+   "name": "codex/extended-location-tests-20261018",
+   "protected": false,
+   "sha": "b6dd5dabdb1592ad7d533252dd26a2ed78fa8372"
+  },
+  {
+   "name": "codex/field-fly-fixture",
+   "protected": false,
+   "sha": "1ba7bf9cf2adf629a1e5456863e746bd2c9c2127"
+  },
+  {
+   "name": "codex/field-licenses",
+   "protected": false,
+   "sha": "84302bfbb0f8981c8038b381c2d709d97c6ac626"
+  },
+  {
+   "name": "codex/first-gym-verification",
+   "protected": false,
+   "sha": "0466c38240335c1e152897eae3360bcd5deeec41"
+  },
+  {
+   "name": "codex/fly-destination-bounds",
+   "protected": false,
+   "sha": "476ba941c671cf6fdae709726c50a658d4dbcd08"
+  },
+  {
+   "name": "codex/grouped-origin-experiment-20261018",
+   "protected": false,
+   "sha": "17449dfc61e929ac09f47912622735bf5de52ace"
+  },
+  {
+   "name": "codex/gym-reward-flash-20261017",
+   "protected": false,
+   "sha": "f6b9d1ba024bc6d170252cf409f3c5791b9252c1"
+  },
+  {
+   "name": "codex/healer-table-contract-20261018",
+   "protected": false,
+   "sha": "86356d3d7679ef1de5269d6604b8a9461e85abf2"
+  },
+  {
+   "name": "codex/legacy-link-save-refusal-20261017",
+   "protected": false,
+   "sha": "704df9b7ecdf9b711d82523f05b66a4e9e324a44"
+  },
+  {
+   "name": "codex/location-save-region-safety-20261018",
+   "protected": false,
+   "sha": "ec068470fc22c4787e092ad6ca98ad076d704e80"
+  },
+  {
+   "name": "codex/m1-final-evidence-20261017",
+   "protected": false,
+   "sha": "498fe973b6e743c52ecc6d9304dee91e15b6aa1a"
+  },
+  {
+   "name": "codex/m1-native-closeout-20261017",
+   "protected": false,
+   "sha": "1a61b28f1f259df2a599d1c5c0d74f1e658cffce"
+  },
+  {
+   "name": "codex/map-registry-contract-20261016",
+   "protected": false,
+   "sha": "2e3a5c13052609b6325d8490b107d735e464bd7c"
+  },
+  {
+   "name": "codex/pc-delivery-flash-20261017",
+   "protected": false,
+   "sha": "1d8bb047b9431a09bdfda9309fc5bebad3874b02"
+  },
+  {
+   "name": "codex/pc-item-boundaries-20261016",
+   "protected": false,
+   "sha": "5ead8c826eede7c683c8ce49ad9d37b96aa080a6"
+  },
+  {
+   "name": "codex/pc-remove-compaction-20261017",
+   "protected": false,
+   "sha": "e61bf8d319506fbd61dc50d8411151b3dd16d551"
+  },
+  {
+   "name": "codex/quest-event-framework",
+   "protected": false,
+   "sha": "db6baaea45e54100cdcbe220f575d28a824bb229"
+  },
+  {
+   "name": "codex/region-exp-share-20261017",
+   "protected": false,
+   "sha": "ca7dde3473c5de8413cd67b80c8b6260ca63a56d"
+  },
+  {
+   "name": "codex/region-save-integration",
+   "protected": false,
+   "sha": "c1d3460297a289a0e7fa7db62bdbeb2a8e5914b3"
+  },
+  {
+   "name": "codex/release-parity-resume-20261016",
+   "protected": false,
+   "sha": "4331c990075675c45e9d9968328396c632712e36"
+  },
+  {
+   "name": "codex/reversible-cries-safety-20261017",
+   "protected": false,
+   "sha": "15c1699784821745f122ca9b3f1c12f52b714b41"
+  },
+  {
+   "name": "codex/rom-capacity-20261017",
+   "protected": false,
+   "sha": "1ecdfb4a21604dfeb1d7a4712eede3c01d3986e3"
+  },
+  {
+   "name": "codex/rom-capacity-no-cries-experiment-20261017",
+   "protected": false,
+   "sha": "c9ddb7f47f57ed7cae30d2ceb4f4a397b8c5000f"
+  },
+  {
+   "name": "codex/rom-capacity-normal-cries-experiment-20261017",
+   "protected": false,
+   "sha": "d764fc2122d4ab720488508698583ef646f013d1"
+  },
+  {
+   "name": "codex/sandgem-review-x7-20261018",
+   "protected": false,
+   "sha": "d027fe5092498be51bdaf0a8ddc999de7f435234"
+  },
+  {
+   "name": "codex/sandgem-section-216-20261018",
+   "protected": false,
+   "sha": "b899abb1853737bb30e5e37cd3e80a76babc4f98"
+  },
+  {
+   "name": "codex/save-sector-bounds",
+   "protected": false,
+   "sha": "3c9d43de89eb41b4198a1c5056ee7cd8af1086ea"
+  },
+  {
+   "name": "codex/scripted-core-only-20261017",
+   "protected": false,
+   "sha": "64ee82eefa4b9edad9decd1e8378610ed3ff1fd1"
+  },
+  {
+   "name": "codex/shared-agent-tooling",
+   "protected": false,
+   "sha": "e6dc6841b099523bdf66d9b0d67627a9cd8169b8"
+  },
+  {
+   "name": "codex/sinnoh-combined-proof-20261019",
+   "protected": false,
+   "sha": "81ddd4235c9b8f7a41fc8e59e89c89ed637bd196"
+  },
+  {
+   "name": "codex/sinnoh-map-inclusion-20261018",
+   "protected": false,
+   "sha": "d508fd18d634495c20864aaecebe855896a83385"
+  },
+  {
+   "name": "codex/sinnoh-map-preflight-20261017",
+   "protected": false,
+   "sha": "ae965a29d94984169b491eeea1b830c2b2a4c00b"
+  },
+  {
+   "name": "codex/sinnoh-origin-demand-20261019",
+   "protected": false,
+   "sha": "14bf10ba42160ad1ade9c1cf3b02531b432e23e4"
+  },
+  {
+   "name": "codex/sinnoh-runtime-resource-boundaries-20261019",
+   "protected": false,
+   "sha": "d2110852efcd7b7cf0e87160038ee2f51d9dea9d"
+  },
+  {
+   "name": "codex/sinnoh-technical-readiness-20261017",
+   "protected": false,
+   "sha": "b17e6f3e86f977b48576c3a034e07f61ab7c66aa"
+  },
+  {
+   "name": "codex/sinnoh-travel-save-regression-20261019",
+   "protected": false,
+   "sha": "873496b076957ec5f70f7e196f33fe21aec0a33a"
+  },
+  {
+   "name": "codex/trade-save-refusal-20261017",
+   "protected": false,
+   "sha": "a13b1cfba25771094e92b59eb8d2f207df559e6a"
+  },
+  {
+   "name": "codex/transport-point-safety-20261019",
+   "protected": false,
+   "sha": "54d5f26188431cff0b4e14056849306ef93f22d1"
+  },
+  {
+   "name": "codex/travel-boundaries-20261018",
+   "protected": false,
+   "sha": "b35e3f222328bb02d375713f5fc2c26934cebc3f"
+  },
+  {
+   "name": "codex/two-region-groundwork",
+   "protected": false,
+   "sha": "fc3e4a5f7d3d2ff57763bf08383f5609b2ede04f"
+  },
+  {
+   "name": "codex/unsupported-region-map-access-20261018",
+   "protected": false,
+   "sha": "f309adf3f4479984b1befce98ae75d097318f7e1"
+  },
+  {
+   "name": "codex/validation-only-x1-x6-20261018",
+   "protected": false,
+   "sha": "026c598e7c3bbc185601290de281cc9d737b510d"
+  },
+  {
+   "name": "codex/whiteout-follower-flash-20261017",
+   "protected": false,
+   "sha": "f0c9653ef0ed761da6a0174c72eb368c54695269"
+  },
+  {
+   "name": "main",
+   "protected": true,
+   "sha": "bc55711215126fc5f6f95e3ea2875f92ceb356ab"
+  },
+  {
+   "name": "manager/claude-solo-closeout-20261016",
+   "protected": false,
+   "sha": "a990c2475c7270ceb25dd83e622a727c45d94ac7"
+  },
+  {
+   "name": "manager/claude-unblocked-closeout-20261017",
+   "protected": false,
+   "sha": "727690b7c6b7afebcc14d8604535c6ffb2d4c10b"
+  },
+  {
+   "name": "manager/codex-solo-remainder-20261016",
+   "protected": false,
+   "sha": "e11d133832ad2be2a90701471a94ac38fcb23653"
+  },
+  {
+   "name": "manager/combined-build-manual-only-20261016",
+   "protected": false,
+   "sha": "ac541660e12a64468fdec1cc63304f5af9d10691"
+  },
+  {
+   "name": "manager/content-linkage-gate-20261017",
+   "protected": false,
+   "sha": "21b579d5248a5c4c7080f470c843b67c2a9cb87b"
+  },
+  {
+   "name": "manager/disjoint-codex-claude-assignments-20261016",
+   "protected": false,
+   "sha": "b63e3095d167043d0ca7ef573d6b5c22eb957404"
+  },
+  {
+   "name": "manager/dispatch-throughput-20261016",
+   "protected": false,
+   "sha": "47acf9d7cabb8676fea2c0f834a168f6a3b6bd7d"
+  },
+  {
+   "name": "manager/legacy-board-authority-20261016",
+   "protected": false,
+   "sha": "13b4251075e2443b5b8da08fa5557090ae352a2c"
+  },
+  {
+   "name": "manager/live-agent-entrypoints-20261016",
+   "protected": false,
+   "sha": "225dc45b584157e5cd2067c7e8e56c3a37b9bc8a"
+  },
+  {
+   "name": "manager/live-next-chat-handoff-20261017",
+   "protected": false,
+   "sha": "66a19b4157ed63c9ea3bb3962ecd27a58f8efc48"
+  },
+  {
+   "name": "manager/live-pr48-quest-gates-20261017",
+   "protected": false,
+   "sha": "3915966921c82964b7595fe92adaecae0ba872d7"
+  },
+  {
+   "name": "manager/m1-claude-codex-parallel-20261017",
+   "protected": false,
+   "sha": "c1afed9c51652a66bf1cf9e4379fbb71c8124dbf"
+  },
+  {
+   "name": "manager/map-capacity-source-trigger-20261016",
+   "protected": false,
+   "sha": "dd90d1a0d4ff5786afa03d77854dc3d929ed70cf"
+  },
+  {
+   "name": "manager/next-chat-manager-handoff-20261016",
+   "protected": false,
+   "sha": "526757d1fe09eebaeed0d098055008ea6df901da"
+  },
+  {
+   "name": "manager/object-event-capacity-guard-20261016",
+   "protected": false,
+   "sha": "358675c9181139ea2ac45eca6aa21d55b4b0a063"
+  },
+  {
+   "name": "manager/pr48-full-native-proof-20261017",
+   "protected": false,
+   "sha": "1ee7b36a08d7d6e3acd562d04799a22cda391425"
+  },
+  {
+   "name": "manager/pre-sinnoh-active-routing-20261016",
+   "protected": false,
+   "sha": "a80e392a406673fece23f05d7030a4aff01d6c36"
+  },
+  {
+   "name": "manager/qa-clinic-heal-contract-20261016",
+   "protected": false,
+   "sha": "f34eab2184c40a7f6ab1bd74274c3058c7c0fdc9"
+  },
+  {
+   "name": "manager/quest-scripted-staged-core-20261016",
+   "protected": false,
+   "sha": "1c55577ae329f8cf1f3106ba85a7debb7eb42e11"
+  }
+ ],
+ "prs": [
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/transport-point-safety-20261019",
+    "sha": "54d5f26188431cff0b4e14056849306ef93f22d1"
+   },
+   "merge_commit_sha": "b6020f21e67236072b6889c2b19ff613611b7a51",
+   "merged_at": null,
+   "number": 163,
+   "state": "open",
+   "title": "feat(travel): validate neutral transport points and saved return safety"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-runtime-resource-boundaries-20261019",
+    "sha": "d2110852efcd7b7cf0e87160038ee2f51d9dea9d"
+   },
+   "merge_commit_sha": "bc55711215126fc5f6f95e3ea2875f92ceb356ab",
+   "merged_at": "2026-10-19T15:38:34Z",
+   "number": 162,
+   "state": "closed",
+   "title": "test(resources): verify heap sprite palette and live menu allocation boundaries"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-origin-demand-20261019",
+    "sha": "14bf10ba42160ad1ade9c1cf3b02531b432e23e4"
+   },
+   "merge_commit_sha": "0375f91cbb5353f72396bb873a6cc2de1c5b3c34",
+   "merged_at": "2026-10-19T08:00:37Z",
+   "number": 161,
+   "state": "closed",
+   "title": "test(capacity): audit full-region named-origin demand without allocating IDs"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/agent-entrypoints-current-20261019",
+    "sha": "0e595c870e5ab78b301ac206576487c1cb1277de"
+   },
+   "merge_commit_sha": "7048f7f069e2cf7e74d0afcf99f389aa2ffb180c",
+   "merged_at": "2026-10-19T07:56:56Z",
+   "number": 160,
+   "state": "closed",
+   "title": "policy: remove stale root agent instructions and point to current contract"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/current-navigation-sinnoh-20261019",
+    "sha": "5200b2f9bb72073f20232315182ac98ce2614d39"
+   },
+   "merge_commit_sha": "b452b1dd4e57fffe7351ea702417ae26af68188a",
+   "merged_at": "2026-10-19T07:36:54Z",
+   "number": 159,
+   "state": "closed",
+   "title": "docs: restore accurate live project navigation without losing history"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sinnoh-atlas",
+    "sha": "bc52b50c3438ba17f347bdfb4569afab31348c9e"
+   },
+   "merge_commit_sha": "0b46609cf94d03c117a4c221e7a7271425f90d9d",
+   "merged_at": "2026-10-19T07:39:53Z",
+   "number": 158,
+   "state": "closed",
+   "title": "design(sinnoh): C02 topology atlas \u2014 cited adjacency for all 87 areas + audit"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/sinnoh-delegated-geography-contract-20261019",
+    "sha": "cf0963cbd3380cca792f4b0fffcaa96b2515fc57"
+   },
+   "merge_commit_sha": "aebdd89bd368f7e7ec49b4d2c28cc2f82011dc08",
+   "merged_at": "2026-10-19T07:30:10Z",
+   "number": 157,
+   "state": "closed",
+   "title": "policy(sinnoh): align construction autonomy with owner roadmap"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/twinleaf-candidate",
+    "sha": "55900488a207fb01ca481d98f3412d4e464b842b"
+   },
+   "merge_commit_sha": "2a6a8ae871e8fb2839edc07b3c5c65479d89768b",
+   "merged_at": "2026-10-19T07:34:41Z",
+   "number": 156,
+   "state": "closed",
+   "title": "design(sinnoh): source-grounded Twinleaf Town candidate (design only)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/sinnoh-master-production-roadmap-20261019",
+    "sha": "85dcac8d45edd71778d9096d81cf09fe9a15bc8c"
+   },
+   "merge_commit_sha": "adea7ba2b40340cdd5332308d569de56887bfae0",
+   "merged_at": "2026-10-19T07:24:49Z",
+   "number": 155,
+   "state": "closed",
+   "title": "plan(sinnoh): full-region master roadmap and autonomous execution packages"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-travel-save-regression-20261019",
+    "sha": "873496b076957ec5f70f7e196f33fe21aec0a33a"
+   },
+   "merge_commit_sha": "e1bf5a76b20da7c21a36ba4818768fa857391db6",
+   "merged_at": "2026-10-19T07:57:35Z",
+   "number": 154,
+   "state": "closed",
+   "title": "fix(region-map): reject invalid sections and verify Sinnoh resume recovery"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/streamlined-merges-owner-20261019",
+    "sha": "fa6a3ce54fb6fcbc5b15ca087f2ed2d655f133b7"
+   },
+   "merge_commit_sha": "a7d87067cef500afc0e8ee1ea1ba26d9a5cd9f6d",
+   "merged_at": "2026-10-19T06:49:44Z",
+   "number": 153,
+   "state": "closed",
+   "title": "policy: streamline owner-approved production merges"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/map-qa-seam-step",
+    "sha": "2f147e6de78ce7e7f3650ca0b73df8f9fd7dffb6"
+   },
+   "merge_commit_sha": "862f8205cd1964b05ce928733c2218336d78cfc4",
+   "merged_at": "2026-10-19T06:51:09Z",
+   "number": 152,
+   "state": "closed",
+   "title": "qa(map): single-step seam legs + real --whiteout check (10/10 selftest)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sandgem-respawn",
+    "sha": "e2b43d9f74b05a6073bfbf295dd80132df522bed"
+   },
+   "merge_commit_sha": "106df005528697eddc1e8235edb882953924f429",
+   "merged_at": null,
+   "number": 151,
+   "state": "open",
+   "title": "sinnoh(sandgem): whiteout anchor HEAL_LOCATION_SANDGEM_TOWN = 44 (owner-approved)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/route201-build",
+    "sha": "af28cc6e1a85769714a07f750949c4103ba6349b"
+   },
+   "merge_commit_sha": "e6d4a2f060d6aacc79ed3ec08c5b9ff9f6465f2a",
+   "merged_at": null,
+   "number": 150,
+   "state": "open",
+   "title": "sinnoh: permanent Route 201 + Sandgem connection (section 217)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/map-qa-region-ui",
+    "sha": "4e388678d096286afbecdd5ea06735127e351a7c"
+   },
+   "merge_commit_sha": "b0219d88fad0216da99619b397ef507e94ac9fcc",
+   "merged_at": "2026-10-19T03:09:31Z",
+   "number": 149,
+   "state": "closed",
+   "title": "qa(map): --region-ui check for Sinnoh PokeNav/Town Map/Fly refusals (+ fixtures, 8/8)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sandgem-review-x7-20261018",
+    "sha": "d027fe5092498be51bdaf0a8ddc999de7f435234"
+   },
+   "merge_commit_sha": "019944988a2c3f6b3cdec08a90906425de68d8d4",
+   "merged_at": "2026-10-19T06:37:19Z",
+   "number": 148,
+   "state": "closed",
+   "title": "docs: record Sandgem integration and default-OFF X7 evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sn-t02-tracker",
+    "sha": "1f6cdb21e24a6885dfa6e72838512c69776e9142"
+   },
+   "merge_commit_sha": "57448645cb0b8a6b762c5619efcab1c71d3c4d56",
+   "merged_at": "2026-10-19T02:06:09Z",
+   "number": 147,
+   "state": "closed",
+   "title": "tracker(sinnoh): SN-T02 Sandgem merged + emulator-tested (structure only; gameplay deferred)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/cries-off-default-20261018",
+    "sha": "3083758282e07ff1a795e19430ec07bc2b1523c4"
+   },
+   "merge_commit_sha": "de127dff378abe720bba8b627dd123c4db478fb8",
+   "merged_at": "2026-10-19T01:02:30Z",
+   "number": 146,
+   "state": "closed",
+   "title": "fix(audio): make cries OFF the default while retaining restoration builds"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/live-pr-advisory-20261018",
+    "sha": "96114f34115ac11aa8a9789c132dc9423f21948c"
+   },
+   "merge_commit_sha": "8e67abf76a2d9829e76b840778e37c5e26412907",
+   "merged_at": "2026-10-19T00:47:32Z",
+   "number": 145,
+   "state": "closed",
+   "title": "ci: replace stale M1 dispatch with read-only live PR snapshot"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/organizational-reset-20261018",
+    "sha": "36cff492d5d76128369466cf0b52078beaad8e40"
+   },
+   "merge_commit_sha": "0c9ec0c361a45ff24a6d4c72711e0e95b2f3bb1a",
+   "merged_at": "2026-10-19T02:14:19Z",
+   "number": 144,
+   "state": "closed",
+   "title": "docs: adopt owner tiered workflow and refresh manager handoff"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/map-qa",
+    "sha": "484c12e962ccb781c0844a37cd646f6ae1021800"
+   },
+   "merge_commit_sha": "db45baf26b5a26680aba09acbd251adfe393463a",
+   "merged_at": "2026-10-19T02:07:55Z",
+   "number": 143,
+   "state": "closed",
+   "title": "qa(map): C5 connected-area graphical map QA (map_qa.py) with positive/negative fixtures"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/backend-checkpoint-20261018",
+    "sha": "01e0b8f89913ca7e796c7eb231824d2c7499cfdf"
+   },
+   "merge_commit_sha": "66b182e47fc452c717797c204cc6d06a1bb4d6c2",
+   "merged_at": "2026-10-19T00:58:02Z",
+   "number": 142,
+   "state": "closed",
+   "title": "docs: checkpoint Codex backend fixes tests and integration gates"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/grouped-origin-experiment-20261018",
+    "sha": "17449dfc61e929ac09f47912622735bf5de52ace"
+   },
+   "merge_commit_sha": "384e0209a0e59826a5542357f0f1678af0c0049e",
+   "merged_at": "2026-10-19T00:54:50Z",
+   "number": 141,
+   "state": "closed",
+   "title": "test(origins): compare grouped byte persistence and precision costs"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/connection-contract-20261018",
+    "sha": "32c9f98047cbff455ab043946419dba10a6adad7"
+   },
+   "merge_commit_sha": "f430c4da790a9b8f15440daa43dd58f6bce1661e",
+   "merged_at": "2026-10-19T00:54:40Z",
+   "number": 140,
+   "state": "closed",
+   "title": "test(connections): verify reciprocal camera moves and Sinnoh edge lookup"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sinnoh-interfaces",
+    "sha": "1fb0082f5a287d776a0e49de5c70a299b8da296a"
+   },
+   "merge_commit_sha": "37648757a842f1c5aa4bb9bc86b8b43955e34771",
+   "merged_at": "2026-10-19T02:06:32Z",
+   "number": 139,
+   "state": "closed",
+   "title": "sinnoh: next-area junction spec (C4) + Route 202 reference status (C3); docs only"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/unsupported-region-map-access-20261018",
+    "sha": "f309adf3f4479984b1befce98ae75d097318f7e1"
+   },
+   "merge_commit_sha": "17b2718901a91a34fa39cf201059e8c3f4fd44d5",
+   "merged_at": "2026-10-19T00:52:16Z",
+   "number": 138,
+   "state": "closed",
+   "title": "fix(region-map): reject unsupported Sinnoh map and Fly entry"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/travel-boundaries-20261018",
+    "sha": "b35e3f222328bb02d375713f5fc2c26934cebc3f"
+   },
+   "merge_commit_sha": "1f5ba11bbd0dc8dfb64944c229fe6f34814ecf0c",
+   "merged_at": "2026-10-19T00:54:35Z",
+   "number": 137,
+   "state": "closed",
+   "title": "test(travel): verify refused warps indexed arrivals and regional PC saves"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/healer-table-contract-20261018",
+    "sha": "86356d3d7679ef1de5269d6604b8a9461e85abf2"
+   },
+   "merge_commit_sha": "09fcd6c2a2ab1dc28d9fac97fca5de902197f75b",
+   "merged_at": "2026-10-19T00:50:12Z",
+   "number": 136,
+   "state": "closed",
+   "title": "fix(respawn): validate script IDs and bound optional healer tables"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/route201-candidate",
+    "sha": "c957344d75b740ddf70eb3e6d025decfd32776f6"
+   },
+   "merge_commit_sha": "89454ce5c616e8c2563ea3bfdbc012e20450ecde",
+   "merged_at": "2026-10-19T02:07:08Z",
+   "number": 135,
+   "state": "closed",
+   "title": "sinnoh: Route 201 construction-ready design (original geometry, access proof; no maps)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/extended-location-tests-20261018",
+    "sha": "b6dd5dabdb1592ad7d533252dd26a2ed78fa8372"
+   },
+   "merge_commit_sha": "26ff5d3af7226bdcf248140687ccb5d2a4340de6",
+   "merged_at": "2026-10-19T00:54:45Z",
+   "number": 134,
+   "state": "closed",
+   "title": "test(locations): probe extended origins across permutations and hatching"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sandgem-town-maps",
+    "sha": "a91d7096efe7a857a74ca5fdfc6d96669e1f69ed"
+   },
+   "merge_commit_sha": "ce0c505d4ae3103680f96482881b9589bced14c0",
+   "merged_at": "2026-10-19T00:00:24Z",
+   "number": 133,
+   "state": "closed",
+   "title": "sinnoh: permanent Sandgem Town + Pok\u00e9mon Center 1F (original road layout)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sandgem-section-216-20261018",
+    "sha": "b899abb1853737bb30e5e37cd3e80a76babc4f98"
+   },
+   "merge_commit_sha": "8967b05b951c63dca9ffa39325ac53f240e3d9ba",
+   "merged_at": "2026-10-18T22:12:11Z",
+   "number": 132,
+   "state": "closed",
+   "title": "feat(locations): integrate Sandgem 216 with a fixed save sentinel"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/approved-sinnoh-map-file-guard-20261018",
+    "sha": "118cf6a11472f2b8d79cb51101bc9736fb689cff"
+   },
+   "merge_commit_sha": "203a89cc9414ad3ac7a911b154a0471e1daea43e",
+   "merged_at": "2026-10-18T19:30:46Z",
+   "number": 131,
+   "state": "closed",
+   "title": "policy: allow only signed exact-path Phase 2 Sinnoh map changes"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/location-save-region-safety-20261018",
+    "sha": "ec068470fc22c4787e092ad6ca98ad076d704e80"
+   },
+   "merge_commit_sha": "010c236980088ce35a4a17ca9299d51d08c3d1e0",
+   "merged_at": "2026-10-18T19:24:39Z",
+   "number": 130,
+   "state": "closed",
+   "title": "fix(locations): preserve legacy origins and reject empty Fly destinations"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/map-registry-sinnoh",
+    "sha": "49197a59e01071e7b6dd8089b67130ee53cb2187"
+   },
+   "merge_commit_sha": "4976f29e660cfdca04fe083c33a06b6c2f098842",
+   "merged_at": "2026-10-18T19:23:27Z",
+   "number": 129,
+   "state": "closed",
+   "title": "map-registry: accept REGION_SINNOH as a linked Emerald region (#126)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/sinnoh-placeholder-foundation",
+    "sha": "0df4ee09fb77dd3d2e1af8513fe257c42a17f92c"
+   },
+   "merge_commit_sha": "712962b314d56c123280e14403d3460c5347d640",
+   "merged_at": "2026-10-18T19:23:31Z",
+   "number": 128,
+   "state": "closed",
+   "title": "sinnoh: in-repo placeholder art foundation + Sandgem Town candidate (owner review)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/phase2-sinnoh-parallel-20261018",
+    "sha": "b5364d0b698bed1e84fd0e529a6fef4da11dbd71"
+   },
+   "merge_commit_sha": "de1d350c1cb1fdd6021352ab986ce7eeb435d034",
+   "merged_at": "2026-10-18T15:57:31Z",
+   "number": 127,
+   "state": "closed",
+   "title": "docs(phase2): synchronize current Sinnoh work lanes and merged audio status"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-map-inclusion-20261018",
+    "sha": "d508fd18d634495c20864aaecebe855896a83385"
+   },
+   "merge_commit_sha": "f1cb19f503e1cda5570f8a39ada529373e85435d",
+   "merged_at": "2026-10-18T10:11:10Z",
+   "number": 126,
+   "state": "closed",
+   "title": "fix(mapjson): include Sinnoh headers and preserve filtered map slots"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-map-preflight-20261017",
+    "sha": "ae965a29d94984169b491eeea1b830c2b2a4c00b"
+   },
+   "merge_commit_sha": "43a95f85195975bd1f36293d39b99d5e07e3b741",
+   "merged_at": "2026-10-18T03:41:22Z",
+   "number": 125,
+   "state": "closed",
+   "title": "tools: validate Sinnoh map batches and compare linked resource growth"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/clinic-union-room-overflow",
+    "sha": "983290909c5e5a5223ba99717566f2cbe76bb10d"
+   },
+   "merge_commit_sha": "3f754bec5af1c173f7298443266e00547c185b42",
+   "merged_at": "2026-10-18T02:52:19Z",
+   "number": 124,
+   "state": "closed",
+   "title": "fix: RELEASE clinic-heal crash \u2014 Union Room name buffer must start as EOS"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/mapsec-inventory",
+    "sha": "78b9e6109688aec27d03c1b74e1c0ce9be71816d"
+   },
+   "merge_commit_sha": "80aac4c140dbc4212d93c637fd5fecfc07da256c",
+   "merged_at": "2026-10-18T02:52:51Z",
+   "number": 123,
+   "state": "closed",
+   "title": "tools/docs: map-section namespace inventory, saved-value pins and research (no IDs)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/gdb-eof-fail-fast",
+    "sha": "c6ecb6a05f1bb6985a755f67cc77c4224c0313b1"
+   },
+   "merge_commit_sha": "0694b8eed6385be26f20415e6980dd1ba5564775",
+   "merged_at": "2026-10-18T02:52:24Z",
+   "number": 122,
+   "state": "closed",
+   "title": "claude_play: fail fast when the emulator closes the GDB connection"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/sinnoh-map-build-tracker-20261017",
+    "sha": "ca375e33372e6cd72520b0b4750c9ac56de01544"
+   },
+   "merge_commit_sha": "30a322038f42f23cb81aae62fd8f6496314a8db3",
+   "merged_at": "2026-10-18T01:36:39Z",
+   "number": 121,
+   "state": "closed",
+   "title": "docs(sinnoh): canonical map construction checklist and area-stage register"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/manager-live-handoff-20261017",
+    "sha": "c661c9db848b205b69da8faf88921b596d79b1c5"
+   },
+   "merge_commit_sha": "ab6d1695820895db6edf73edfae3f9700cf26602",
+   "merged_at": "2026-10-18T00:56:37Z",
+   "number": 120,
+   "state": "closed",
+   "title": "docs(manager): refresh live handoff for Claude cries takeover and provisional story"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/story-working-dossier-20261017",
+    "sha": "93605cdca197a100bc6902b852253f1618e5a543"
+   },
+   "merge_commit_sha": "e3eda7553fe72da7b11a543b560bc953f7bdf069",
+   "merged_at": "2026-10-18T00:45:50Z",
+   "number": 119,
+   "state": "closed",
+   "title": "docs(story): consolidate multi-session Averon narrative and mark unresolved arcs"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/claude-cry-takeover-20261017",
+    "sha": "31237a3da7714a659d8cabe9c3062db823e1ee41"
+   },
+   "merge_commit_sha": "447b67c880b4f6ec1ff5400d0e927d97dc821add",
+   "merged_at": "2026-10-17T23:15:03Z",
+   "number": 118,
+   "state": "closed",
+   "title": "docs: hand unfinished reversible cries PR #117 from Codex to Claude"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/reversible-cries-safety-20261017",
+    "sha": "15c1699784821745f122ca9b3f1c12f52b714b41"
+   },
+   "merge_commit_sha": "456a45016446c8b103f373b2d7b6fe082cd757c7",
+   "merged_at": "2026-10-18T15:52:11Z",
+   "number": 117,
+   "state": "closed",
+   "title": "fix: make cries-off audio safe and reproducibly reversible"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/reversible-no-cries-policy-20261017",
+    "sha": "582c7383895b73c6fe7b11d17e1994536a2c5da3"
+   },
+   "merge_commit_sha": "cd126f7f8f041ae1637c58168c9dfc2b4ff0238a",
+   "merged_at": "2026-10-17T22:31:08Z",
+   "number": 116,
+   "state": "closed",
+   "title": "docs: approve reversible cries-off policy and retain all cry sources"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/rom-capacity-20261017",
+    "sha": "1ecdfb4a21604dfeb1d7a4712eede3c01d3986e3"
+   },
+   "merge_commit_sha": "9cd3a61e593db5d03bb88692d3491d65584853e3",
+   "merged_at": "2026-10-17T22:23:52Z",
+   "number": 115,
+   "state": "closed",
+   "title": "tools: measure cry-only ROM savings and forecast both complete regions"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/codex-rom-capacity-brief-20261017",
+    "sha": "8f20e18a662b791dadb9ce76b599c1c5390a3dfb"
+   },
+   "merge_commit_sha": "8ed13f12f6e60a92f42daff9dba0b0c5c0df7e77",
+   "merged_at": "2026-10-17T21:37:45Z",
+   "number": 114,
+   "state": "closed",
+   "title": "docs: direct Codex ROM/no-cries experiments and two-region space forecast"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/phase2-coordination-consolidation-20261017",
+    "sha": "e136067eec0a3ef834f7a446d24711469d7d4e15"
+   },
+   "merge_commit_sha": "54c17b15f3b3773aa0422d032ad7d9df7db0119a",
+   "merged_at": "2026-10-17T20:10:42Z",
+   "number": 113,
+   "state": "closed",
+   "title": "docs: consolidate owner-approved Phase 2 status, agent rules and queues"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/m1-final-acceptance",
+    "sha": "206faa3dd465e39c182cb124021489d9381a21ea"
+   },
+   "merge_commit_sha": "275e8591d9ebb049eba4eaa0b8554f0f76cb0b90",
+   "merged_at": "2026-10-17T19:59:15Z",
+   "number": 112,
+   "state": "closed",
+   "title": "docs: consolidated M1 acceptance report (BACKEND_READY: CONDITIONAL on audio listen) + RELEASE boot evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/sinnoh-technical-readiness-20261017",
+    "sha": "b17e6f3e86f977b48576c3a034e07f61ab7c66aa"
+   },
+   "merge_commit_sha": "fe184495472101535050d46c2c8a9e3e86fa8765",
+   "merged_at": "2026-10-17T20:04:30Z",
+   "number": 111,
+   "state": "closed",
+   "title": "docs: Sinnoh technical readiness and resource plan"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/qa-evidence-m1",
+    "sha": "91a83cdd8098ff1b2f9f26327ba123c71d44ca8e"
+   },
+   "merge_commit_sha": "d50de2ce427ff8a12a9554761afac022e94e9aa0",
+   "merged_at": "2026-10-17T19:05:39Z",
+   "number": 110,
+   "state": "closed",
+   "title": "QA evidence: Claude M1 Gate B gameplay runs + M1 acceptance report (graphical lane)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/m1-final-evidence-20261017",
+    "sha": "498fe973b6e743c52ecc6d9304dee91e15b6aa1a"
+   },
+   "merge_commit_sha": "9ae0b32a4b53e552c82bf67f5dfd7a9742a0a3bb",
+   "merged_at": "2026-10-17T19:17:20Z",
+   "number": 109,
+   "state": "closed",
+   "title": "docs: final integrated M1 native and release evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/local-playthrough",
+    "sha": "a1abb4593b40ba68d1efd89667ab6ccdf10b3f1a"
+   },
+   "merge_commit_sha": "6140a397beba6e8faa1869b500c724a523b77dc0",
+   "merged_at": "2026-10-17T19:04:28Z",
+   "number": 108,
+   "state": "closed",
+   "title": "claude_play: Q3 check allows evolution; only a written save carries fixture taint"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/m1-native-closeout-20261017",
+    "sha": "1a61b28f1f259df2a599d1c5c0d74f1e658cffce"
+   },
+   "merge_commit_sha": "4f8f987be4adc18ef9fb7637cbd7fbc3e43cb0d7",
+   "merged_at": "2026-10-17T18:33:52Z",
+   "number": 107,
+   "state": "closed",
+   "title": "Verify torn PC save recovery across quest, encrypted Bag, party and follower state"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/m1-claude-codex-parallel-20261017",
+    "sha": "c1afed9c51652a66bf1cf9e4379fbb71c8124dbf"
+   },
+   "merge_commit_sha": "103d05dd712bb4f0271e9c78050fa642cee0830d",
+   "merged_at": "2026-10-17T18:07:22Z",
+   "number": 106,
+   "state": "closed",
+   "title": "M1: activate disjoint Claude gameplay + Codex backend closeout lanes"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/manager-m1-current-handoff-20261017",
+    "sha": "8b04bea2303a579578015435e1e265cd1135b20d"
+   },
+   "merge_commit_sha": "4ca4df7a35d12beda2541d005a3959ec56527f72",
+   "merged_at": "2026-10-17T17:43:39Z",
+   "number": 105,
+   "state": "closed",
+   "title": "docs: refresh manager M1 startup with latest local Claude evidence and PR queue"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/next-manager-handoff-20261017",
+    "sha": "7f2a7464e6a783cd1203f21adc9ecd8a74dd27b8"
+   },
+   "merge_commit_sha": "a3d2ad99b27c52eb9acb2e15268ebd953a7a8222",
+   "merged_at": "2026-10-17T08:52:27Z",
+   "number": 104,
+   "state": "closed",
+   "title": "docs: current ChatGPT manager handoff for post-#103 M1 completion"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-comprehensive-finish-20261017",
+    "sha": "1c4617e85e6292386209043c62b11ef4219e11c0"
+   },
+   "merge_commit_sha": "998b8e117c528aed79383fa6fb906efc36eee9a9",
+   "merged_at": "2026-10-17T08:44:05Z",
+   "number": 103,
+   "state": "closed",
+   "title": "docs: authoritative exhaustive checklist for all remaining pre-Sinnoh M1 work"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/qa-stack-on-main",
+    "sha": "b06534d590825ef0f3ab57843598685c78adbe04"
+   },
+   "merge_commit_sha": "95ac045bbf7ffd53e739e9f5251b6250f40334ad",
+   "merged_at": "2026-10-17T17:55:50Z",
+   "number": 102,
+   "state": "closed",
+   "title": "QA: bring #20/#71 graphical QA tooling onto main (+ GDB interrupt fix)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/egg-hatch-ot",
+    "sha": "9f0efe031f7998f796ba14478a9881ba8af1a6c2"
+   },
+   "merge_commit_sha": "c708d6db553be18dd580ba3526b81fb0c865b941",
+   "merged_at": "2026-10-17T17:54:49Z",
+   "number": 101,
+   "state": "closed",
+   "title": "Keep a hatched foreign-OT egg's data (fixes #100)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-post-integration-qa-handoff-20261017",
+    "sha": "d830aa9b05770ea50a756414bec88c865356e86e"
+   },
+   "merge_commit_sha": "27f91919d4872faa4cc719309e8beb22ad80ea34",
+   "merged_at": "2026-10-17T08:26:26Z",
+   "number": 99,
+   "state": "closed",
+   "title": "docs: rebase sole-Claude M1 work order on merged backend and authentic QA checkpoint"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-claude-all-roles-autonomy-20261017",
+    "sha": "8a98b2f032d509f4bf8aff45c4c0a19e024f6533"
+   },
+   "merge_commit_sha": "607f4c0a6280f9c525542b39c8ec934700c677e1",
+   "merged_at": "2026-10-17T07:17:12Z",
+   "number": 98,
+   "state": "closed",
+   "title": "Owner directive: Claude sole executor for every pre-Sinnoh M1 role"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/local-playthrough",
+    "sha": "a96761595591e58e0db5277ee086c46c7f2c3de1"
+   },
+   "merge_commit_sha": "4153ce5aa80d5b59d477bbb6d5c7d868df9483f8",
+   "merged_at": "2026-10-17T18:24:58Z",
+   "number": 97,
+   "state": "closed",
+   "title": "Local mGBA playthrough driver for Gate B supporting evidence (QA tooling, no game changes)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/pc-delivery-flash-20261017",
+    "sha": "1d8bb047b9431a09bdfda9309fc5bebad3874b02"
+   },
+   "merge_commit_sha": "9e410fed4c284c3ce0c94f75227f580cb465303a",
+   "merged_at": "2026-10-17T08:13:57Z",
+   "number": 96,
+   "state": "closed",
+   "title": "Preserve encrypted Pok\u00e9mon data when delivery changes the original trainer"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/whiteout-follower-flash-20261017",
+    "sha": "f0c9653ef0ed761da6a0174c72eb368c54695269"
+   },
+   "merge_commit_sha": "7b194ac8241a173a8df90624b40833cbc7365667",
+   "merged_at": "2026-10-17T08:13:05Z",
+   "number": 95,
+   "state": "closed",
+   "title": "Verify whiteout healing and follower persistence through regional flash saves"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/region-exp-share-20261017",
+    "sha": "ca7dde3473c5de8413cd67b80c8b6260ca63a56d"
+   },
+   "merge_commit_sha": "15606a04adf15ba312058e77982a965bd3fcca54",
+   "merged_at": "2026-10-17T06:27:35Z",
+   "number": 94,
+   "state": "closed",
+   "title": "Verify six-party EXP Share against regional badge level caps"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/gym-reward-flash-20261017",
+    "sha": "f6b9d1ba024bc6d170252cf409f3c5791b9252c1"
+   },
+   "merge_commit_sha": "6864b3ba7db68c75a8819b7844d311ecf203b784",
+   "merged_at": "2026-10-17T06:27:29Z",
+   "number": 93,
+   "state": "closed",
+   "title": "Verify Gym reward retry and nonduplication across regional flash saves"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/trade-save-refusal-20261017",
+    "sha": "a13b1cfba25771094e92b59eb8d2f207df559e6a"
+   },
+   "merge_commit_sha": "16363efd96a7d47d1d95eea913508a5f5821e983",
+   "merged_at": "2026-10-17T06:53:55Z",
+   "number": 92,
+   "state": "closed",
+   "title": "Abort blocked trade-save UI before advancing completion state"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-evidence-integrity-cleanup-20261017",
+    "sha": "779333d1dcbbf11a6492852ca0759023ec880598"
+   },
+   "merge_commit_sha": "d83342b78d5e3ed799aa0a26880dd0319f97045d",
+   "merged_at": "2026-10-17T05:10:32Z",
+   "number": 91,
+   "state": "closed",
+   "title": "M1 evidence: reject malformed PNGs and dirty generator inputs"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-fluid-claude-codex-20261017",
+    "sha": "7282b83ea51988b0405cbb4a4ca3a6cad7a3b56a"
+   },
+   "merge_commit_sha": "049c77a14f7d24b91550af82bc97d73c67f8f07f",
+   "merged_at": "2026-10-17T05:03:42Z",
+   "number": 90,
+   "state": "closed",
+   "title": "M1: fluid Claude/Codex handoff with Codex-majority native regression queue"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-evidence-tooling-20261017",
+    "sha": "7cefdc5ec0db757bdf7bccc042a556d40991c7f2"
+   },
+   "merge_commit_sha": "8f0db77b0dcbfb0aa9811a67f696483234ad5b4e",
+   "merged_at": "2026-10-17T04:26:33Z",
+   "number": 89,
+   "state": "closed",
+   "title": "M1: provenance and conservative QA evidence reporting"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/m1-claude-full-backend-autonomy-20261017",
+    "sha": "8ee90432d944a18633c7ba2f3c2874139d939aad"
+   },
+   "merge_commit_sha": "abb13f29fd7c409fc5447231aa9e6c3d67a64e08",
+   "merged_at": "2026-10-17T04:13:57Z",
+   "number": 88,
+   "state": "closed",
+   "title": "M1: grant Claude sole backend autonomy and retire stale Codex routing"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/handoff-20261017",
+    "sha": "2b5571ba54af4c22bbd03373778968096fafe8c3"
+   },
+   "merge_commit_sha": "369c1070343d1819c5cf8c1b363e2a04f44eb4dd",
+   "merged_at": "2026-10-17T03:31:39Z",
+   "number": 87,
+   "state": "closed",
+   "title": "Docs: Claude 2026-10-17 sole-integrator handoff and evidence index"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/claude-unblocked-closeout-20261017",
+    "sha": "727690b7c6b7afebcc14d8604535c6ffb2d4c10b"
+   },
+   "merge_commit_sha": "ebcd54a91082a2d53e2497ac1418ff5dd244970c",
+   "merged_at": "2026-10-17T02:39:49Z",
+   "number": 86,
+   "state": "closed",
+   "title": "Record Claude unblocked: merged #48, clear QUEST overlap, true Q3 evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/content-linkage-gate-20261017",
+    "sha": "21b579d5248a5c4c7080f470c843b67c2a9cb87b"
+   },
+   "merge_commit_sha": "3b9cba688b31b304d01dce28c9f235e6f362077a",
+   "merged_at": "2026-10-17T02:37:36Z",
+   "number": 85,
+   "state": "closed",
+   "title": "Clarify pre-content LEGEND/SCRIPTED linker acceptance without lowering gameplay QA"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/live-pr48-quest-gates-20261017",
+    "sha": "3915966921c82964b7595fe92adaecae0ba872d7"
+   },
+   "merge_commit_sha": "71cbbba078177b234e1abbc9f830e48f68dbe09c",
+   "merged_at": "2026-10-17T02:10:49Z",
+   "number": 84,
+   "state": "closed",
+   "title": "docs(manager): checkpoint PR48 full regression and real QUEST registry blocker"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/live-next-chat-handoff-20261017",
+    "sha": "66a19b4157ed63c9ea3bb3962ecd27a58f8efc48"
+   },
+   "merge_commit_sha": "d3fcbb12e5372668f05c43dce447181a7d254cee",
+   "merged_at": "2026-10-17T02:00:42Z",
+   "number": 83,
+   "state": "closed",
+   "title": "Refresh live manager handoff and agent startup for Claude sole integration"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/pr48-full-native-proof-20261017",
+    "sha": "1ee7b36a08d7d6e3acd562d04799a22cda391425"
+   },
+   "merge_commit_sha": "bfb35f812271ea6bb907073604785473e6c8cebc",
+   "merged_at": null,
+   "number": 82,
+   "state": "closed",
+   "title": "Run complete strict PR48 native regression independently of engine work"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/scripted-core-only-20261017",
+    "sha": "64ee82eefa4b9edad9decd1e8378610ed3ff1fd1"
+   },
+   "merge_commit_sha": "6d5c0967a5cf60d0c448319afc74ad522b0f2d24",
+   "merged_at": "2026-10-17T01:53:48Z",
+   "number": 81,
+   "state": "closed",
+   "title": "Stage tested scripted-battle core without QUEST registry overlap"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/release-decl-mismatch",
+    "sha": "35d3848606b6b298a0b9d16264329deeb0f18c31"
+   },
+   "merge_commit_sha": "aece7c6bf69d6fe94ed9351b6ba17a77cdf46739",
+   "merged_at": "2026-10-17T01:50:01Z",
+   "number": 80,
+   "state": "closed",
+   "title": "Match Faraway Island and Colosseum multiboot declarations"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/mystery-gift-overread",
+    "sha": "91516ae58c64d0f0716269b358c80200c904505e"
+   },
+   "merge_commit_sha": "4ac95cab8b980f50b287be248c9b768879e25c6d",
+   "merged_at": "2026-10-17T01:49:50Z",
+   "number": 79,
+   "state": "closed",
+   "title": "Copy only the Mystery Gift init script's own bytes"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/map-capacity-source-trigger-20261016",
+    "sha": "dd90d1a0d4ff5786afa03d77854dc3d929ed70cf"
+   },
+   "merge_commit_sha": "0a33f69b26d59a3fa5ecdd1da5bed9bdfa8b7a6c",
+   "merged_at": "2026-10-17T01:23:48Z",
+   "number": 78,
+   "state": "closed",
+   "title": "Ensure saved map-event capacity guard runs on constants/global.h changes"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/quest-support",
+    "sha": "232ae8df12d32d3dbf50e463d4da5c7f4396737d"
+   },
+   "merge_commit_sha": "3bb4b5854fdda9bf0e7a20ebc2a315bfac07e795",
+   "merged_at": "2026-10-17T04:58:19Z",
+   "number": 77,
+   "state": "closed",
+   "title": "QUEST support: CI clinic whiteout \u2192 nurse \u2192 Save \u2192 Continue observer (evidence for Playtest)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/quest-scripted-staged-core-20261016",
+    "sha": "1c55577ae329f8cf1f3106ba85a7debb7eb42e11"
+   },
+   "merge_commit_sha": "0e84720a8228aaddb2d0212505c5437f1abead92",
+   "merged_at": "2026-10-17T01:24:07Z",
+   "number": 76,
+   "state": "closed",
+   "title": "Rehearse safe core-only scripted battle integration before QUEST QA"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/pc-remove-compaction-20261017",
+    "sha": "e61bf8d319506fbd61dc50d8411151b3dd16d551"
+   },
+   "merge_commit_sha": "7cc1b6940b6a72a3c9110f537da822963017ef75",
+   "merged_at": "2026-10-17T01:23:24Z",
+   "number": 75,
+   "state": "closed",
+   "title": "Compact PC item slots when direct removal empties a stack"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/disjoint-codex-claude-assignments-20261016",
+    "sha": "b63e3095d167043d0ca7ef573d6b5c22eb957404"
+   },
+   "merge_commit_sha": "a9a952270fbea5a0bfe9d18a8aecb15b30e5eca5",
+   "merged_at": "2026-10-17T00:22:27Z",
+   "number": 74,
+   "state": "closed",
+   "title": "Assign nonoverlapping Codex engine and Claude capacity/CI work"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/object-event-capacity-guard-20261016",
+    "sha": "358675c9181139ea2ac45eca6aa21d55b4b0a063"
+   },
+   "merge_commit_sha": "4b0e5c684e4008fedcd4ee4e3b49ba42bd6ee611",
+   "merged_at": "2026-10-17T00:22:12Z",
+   "number": 73,
+   "state": "closed",
+   "title": "Prevent map object counts exceeding saved template capacity"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/save-headroom-report",
+    "sha": "e96a46c10f7d6e2293ea62561b54b356fc3c0b2f"
+   },
+   "merge_commit_sha": "59a23eeb2cd557bd9b1464f14df1c383a8aece8d",
+   "merged_at": "2026-10-17T00:32:30Z",
+   "number": 72,
+   "state": "closed",
+   "title": "Report free bytes in each save block of a built ELF"
+  },
+  {
+   "base": {
+    "ref": "chatgpt/emulator-smoke-playtest"
+   },
+   "head": {
+    "ref": "manager/qa-clinic-heal-contract-20261016",
+    "sha": "f34eab2184c40a7f6ab1bd74274c3058c7c0fdc9"
+   },
+   "merge_commit_sha": "535f63d703789bf1a768fdfc9b49fd416ee42350",
+   "merged_at": null,
+   "number": 71,
+   "state": "closed",
+   "title": "QA: fix Alderfield clinic heal-location false negative"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/next-chat-manager-handoff-20261016",
+    "sha": "526757d1fe09eebaeed0d098055008ea6df901da"
+   },
+   "merge_commit_sha": "13e214820e551d87005b16d16e210c55660c0f13",
+   "merged_at": "2026-10-17T01:24:16Z",
+   "number": 70,
+   "state": "closed",
+   "title": "Preserve current ChatGPT manager handoff for Pok\u00e9mon Averon"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/combined-build-manual-only-20261016",
+    "sha": "ac541660e12a64468fdec1cc63304f5af9d10691"
+   },
+   "merge_commit_sha": "8ce2580853e7af45400476f5b30c3fd1e7c163d9",
+   "merged_at": null,
+   "number": 69,
+   "state": "closed",
+   "title": "Stop no-op combined GBA workflow runs on unrelated comments"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/live-agent-entrypoints-20261016",
+    "sha": "225dc45b584157e5cd2067c7e8e56c3a37b9bc8a"
+   },
+   "merge_commit_sha": "7593b0f051d94f9a26487ee57272c5415befbba7",
+   "merged_at": "2026-10-16T19:02:04Z",
+   "number": 68,
+   "state": "closed",
+   "title": "Correct outdated agent startup instructions after Codex takeover"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/dispatch-throughput-20261016",
+    "sha": "47acf9d7cabb8676fea2c0f834a168f6a3b6bd7d"
+   },
+   "merge_commit_sha": "603251ae257eb861e11f5ca2b602b49b6bb360e3",
+   "merged_at": "2026-10-16T19:01:52Z",
+   "number": 67,
+   "state": "closed",
+   "title": "Prevent agent-board CI cancellation storms and duplicate merge triggers"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/codex-solo-remainder-20261016",
+    "sha": "e11d133832ad2be2a90701471a94ac38fcb23653"
+   },
+   "merge_commit_sha": "f05075e216d9d13a3261bbae6fed7d2f20073e33",
+   "merged_at": "2026-10-16T18:48:14Z",
+   "number": 66,
+   "state": "closed",
+   "title": "Codex takeover: exhaustive remaining pre-Sinnoh backend and integration work"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/claude-solo-closeout-20261016",
+    "sha": "a990c2475c7270ceb25dd83e622a727c45d94ac7"
+   },
+   "merge_commit_sha": "21bde8022d53d85be38a85c49680ea3795227ded",
+   "merged_at": "2026-10-16T18:48:03Z",
+   "number": 65,
+   "state": "closed",
+   "title": "Document exhaustive Claude-solo pre-Sinnoh closeout and merge permissions"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/region-progression",
+    "sha": "e81f575d971a91810dbab983f12ae4f7fd3dff7b"
+   },
+   "merge_commit_sha": "9d32324580ea9e1d528cefc3bfe53f087b9f5962",
+   "merged_at": "2026-10-16T19:13:50Z",
+   "number": 64,
+   "state": "closed",
+   "title": "TWO-REGION: select level cap and obedience by the active region's badges"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/map-registry-contract-20261016",
+    "sha": "2e3a5c13052609b6325d8490b107d735e464bd7c"
+   },
+   "merge_commit_sha": "31546a80e59d64329d2665ea94e8d4e96dde75a2",
+   "merged_at": "2026-10-16T18:38:21Z",
+   "number": 63,
+   "state": "closed",
+   "title": "Verify stable saved map IDs and linked registry capacity"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/pre-sinnoh-active-routing-20261016",
+    "sha": "a80e392a406673fece23f05d7030a4aff01d6c36"
+   },
+   "merge_commit_sha": "f4d6ae7506a5aa993707c60bfc355c4820445652",
+   "merged_at": "2026-10-16T18:47:51Z",
+   "number": 62,
+   "state": "closed",
+   "title": "Document active Claude-first backend and parallel integration routing"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/region-save-paths",
+    "sha": "01ba8ef319892aacbea0c1b12e1b925f6d85a664"
+   },
+   "merge_commit_sha": "8f9e9b9e29950c3bf05361791de5136b5a681f3d",
+   "merged_at": "2026-10-16T19:12:04Z",
+   "number": 61,
+   "state": "closed",
+   "title": "REGION-SAVE: test the Hall of Fame, overwrite and link save paths"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/pc-item-boundaries-20261016",
+    "sha": "5ead8c826eede7c683c8ce49ad9d37b96aa080a6"
+   },
+   "merge_commit_sha": "460763a475e7888d1daced145add823a33a7fdc2",
+   "merged_at": "2026-10-16T18:37:25Z",
+   "number": 60,
+   "state": "closed",
+   "title": "Test PC item deposit atomicity, retry and Bag key isolation"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "manager/legacy-board-authority-20261016",
+    "sha": "13b4251075e2443b5b8da08fa5557090ae352a2c"
+   },
+   "merge_commit_sha": "9a172815203c8c607ccbb3885ca464bfcab58fb2",
+   "merged_at": "2026-10-16T18:47:10Z",
+   "number": 59,
+   "state": "closed",
+   "title": "Fix stale agent ownership in automatically regenerated coordination board"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/release-parity-resume-20261016",
+    "sha": "4331c990075675c45e9d9968328396c632712e36"
+   },
+   "merge_commit_sha": "8f315facbf362ed05631d01cfb3a8fdbce5bdbb9",
+   "merged_at": "2026-10-16T18:37:02Z",
+   "number": 58,
+   "state": "closed",
+   "title": "Test production release configuration outside native-test overrides"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/region-travel",
+    "sha": "bf3574b1da8fafbe5db1bee31589a4dd7c52b6fa"
+   },
+   "merge_commit_sha": "ef74bb111216b96c9cf33d0bdfb7b51886f0dfba",
+   "merged_at": "2026-10-16T19:12:17Z",
+   "number": 57,
+   "state": "closed",
+   "title": "Region travel transaction on the two-region save (stacked on #56)"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/region-save",
+    "sha": "67bcec7ed8fcf40b5b64b65c658ea0bf36b034f6"
+   },
+   "merge_commit_sha": "c8aa84d73a782ca3f9876f066c6cacb4b9ee4df0",
+   "merged_at": "2026-10-16T19:10:03Z",
+   "number": 56,
+   "state": "closed",
+   "title": "TWO-REGION save: whole-slot recovery, legacy migration and fail-closed refusal"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/fly-destination-bounds",
+    "sha": "476ba941c671cf6fdae709726c50a658d4dbcd08"
+   },
+   "merge_commit_sha": "be092ea9569ea2c591001dcaa5317b6c192f83b7",
+   "merged_at": "2026-10-16T18:46:53Z",
+   "number": 52,
+   "state": "closed",
+   "title": "Reject out-of-range Fly sections in both destination lookups"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/field-fly-fixture",
+    "sha": "1ba7bf9cf2adf629a1e5456863e746bd2c9c2127"
+   },
+   "merge_commit_sha": "4e82c4be4cfdbf054180a628fa7c0ccd47756bb1",
+   "merged_at": "2026-10-16T18:40:42Z",
+   "number": 51,
+   "state": "closed",
+   "title": "Keep Fly test map state off the IWRAM stack"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/save-sector-bounds",
+    "sha": "3c9d43de89eb41b4198a1c5056ee7cd8af1086ea"
+   },
+   "merge_commit_sha": "daa3a313e9092e9078896897d81fcb91d9455536",
+   "merged_at": null,
+   "number": 50,
+   "state": "closed",
+   "title": "Reject invalid save-sector IDs before table access"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/backend-sinnoh-execution",
+    "sha": "90fea7ca1956379a4e30d832bba9fbaa7ffeb6e7"
+   },
+   "merge_commit_sha": "7f4ecc44270e98b2363fc49cb708aa4d9a3527fa",
+   "merged_at": "2026-10-16T04:10:13Z",
+   "number": 49,
+   "state": "closed",
+   "title": "Coordinate nonoverlapping backend-to-Sinnoh work with fail-safe no-wait agent fallbacks"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/pokemon-readiness",
+    "sha": "ee6e4f5c9120d2267914f4dce37d6d671e676cd6"
+   },
+   "merge_commit_sha": "cc2524472b96a1635be11937269a5222c4486f6e",
+   "merged_at": "2026-10-17T02:34:20Z",
+   "number": 48,
+   "state": "closed",
+   "title": "Pok\u00e9mon readiness regressions and held-item ownership repair"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/legend-encounter-state",
+    "sha": "cf2a1aaf35ac46e5f8eb39c1bc228eac50764933"
+   },
+   "merge_commit_sha": "3d99a8b1ed1ba77ae2038b7d8cc09ffee8842143",
+   "merged_at": "2026-10-16T18:40:32Z",
+   "number": 47,
+   "state": "closed",
+   "title": "LEGEND: fail-closed outcome contract for one-of-a-kind encounters"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/local-playtest-packaging",
+    "sha": "61ace191611284b5712b8f7629ecfd77696a4ce5"
+   },
+   "merge_commit_sha": "229a7912f64fb7ca5537800ce52042521dde312d",
+   "merged_at": "2026-10-16T03:25:41Z",
+   "number": 45,
+   "state": "closed",
+   "title": "Package clean local Averon development ROMs with verified native/save evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/combined-runtime-readiness",
+    "sha": "328b740f68096d725ecd5e9fe4a1709d8f498177"
+   },
+   "merge_commit_sha": "d36be46611cf264be2f7393d9f465b0b4804f49e",
+   "merged_at": "2026-10-16T03:20:59Z",
+   "number": 44,
+   "state": "closed",
+   "title": "Build real disposable Codex plus Claude GBA integrations with native/save checks and playtest readiness evidence"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/parallel-development-first-20261015",
+    "sha": "784e67160b17a3bd0f21e48fcab79eed231349b7"
+   },
+   "merge_commit_sha": "0dd026f6084872a366d0dc25b101020087ff9d38",
+   "merged_at": "2026-10-16T02:54:37Z",
+   "number": 43,
+   "state": "closed",
+   "title": "Let Codex and Claude develop independently while protecting shared-file merges"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/integration-contract-checks",
+    "sha": "55042b0ad7ffd141f94014e478d0ac62d4327159"
+   },
+   "merge_commit_sha": "dbf460bc8b42504769021cd6a163f2901eeca719",
+   "merged_at": "2026-10-16T02:38:03Z",
+   "number": 40,
+   "state": "closed",
+   "title": "Add independent QUEST plus SCRIPTED-BATTLE source contracts to disposable integration rehearsal"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/integration-status-postreview",
+    "sha": "3a6eac4bb25ae95d3cd1bdb4fa7800244e163a44"
+   },
+   "merge_commit_sha": "c6fe2ca4d6b00f576379b53965c252c478ac7ab0",
+   "merged_at": "2026-10-16T02:10:30Z",
+   "number": 39,
+   "state": "closed",
+   "title": "Refresh integration milestone after reviewing and merging agent tooling and baseline CI"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/native-baseline-ci-coverage",
+    "sha": "b68d9699758e79193031b14a2c29813cdd201e7a"
+   },
+   "merge_commit_sha": "da3144a9130836f6209f6ad38e85009362c8036d",
+   "merged_at": "2026-10-16T02:07:34Z",
+   "number": 38,
+   "state": "closed",
+   "title": "Run native-baseline parser regression tests in standard source CI"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/large-agent-epics-20261015",
+    "sha": "75119521021f7e8c205dfbccc925841a40d1764c"
+   },
+   "merge_commit_sha": "b93a6b5e92221e06deb693461637a92f14daac7a",
+   "merged_at": "2026-10-16T01:53:21Z",
+   "number": 37,
+   "state": "closed",
+   "title": "Assign three major agent epics and update live blockers and routing"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/agent-message-routing-20261015",
+    "sha": "6897e97b1ca146fc092f4815666469051c9ae2b5"
+   },
+   "merge_commit_sha": "b4167f1b6d7f0630912008c7c0c19492e21bf70e",
+   "merged_at": "2026-10-16T01:43:41Z",
+   "number": 33,
+   "state": "closed",
+   "title": "Route Codex, Claude and Playtest messages into GitHub agent inboxes"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/agent-coordination-framework",
+    "sha": "36ded17a8116967e5a783f9dcb002b794c5bf6f9"
+   },
+   "merge_commit_sha": "046286b56e1c495235e76fc0ff814845aa0f52c0",
+   "merged_at": "2026-10-16T01:22:59Z",
+   "number": 32,
+   "state": "closed",
+   "title": "Add GitHub-first agent board, QA gates, shared-file safety and integration rehearsal"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/no-primal-reversion",
+    "sha": "9087bf0046341355e6cf90f50ab034c6b6ee07ea"
+   },
+   "merge_commit_sha": "3f64a54a79f0a009b0e9ca7bc701e609ae4bb94f",
+   "merged_at": "2026-10-16T02:30:50Z",
+   "number": 30,
+   "state": "closed",
+   "title": "Enforce locked rule: turn off Primal Reversion"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/native-test-baseline",
+    "sha": "c235b1062f6bc426bdc4a76af1e3a4c11177d2bc"
+   },
+   "merge_commit_sha": "96dd43ef63151b98dd4ba137d0afb5e6a0a9ffaa",
+   "merged_at": "2026-10-16T02:05:40Z",
+   "number": 29,
+   "state": "closed",
+   "title": "Native test baseline: check full-suite runs against Averon's 282 expected failures"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/agent-orders-20261015-q1",
+    "sha": "8d0b69e20b26ed386efd286f128a0e321bfc65a4"
+   },
+   "merge_commit_sha": "ca9d60846d2af8eeaac7b1be71672ece28992bf9",
+   "merged_at": "2026-10-16T00:45:21Z",
+   "number": 28,
+   "state": "closed",
+   "title": "Publish current source-checked commands for Codex, Claude and Playtest"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/repo-navigation-hygiene-20261015",
+    "sha": "26931bdfc0538b092cc2c68ef828f993a1339f3e"
+   },
+   "merge_commit_sha": "f907b6d44c999fbcb434731e2d7dabfc9fb90e40",
+   "merged_at": "2026-10-15T22:21:55Z",
+   "number": 27,
+   "state": "closed",
+   "title": "Organize active Averon roadmap and add non-destructive documentation checks"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/scripted-battle",
+    "sha": "0c8fa6a265917e28dcee156b57e992a08e5f594e"
+   },
+   "merge_commit_sha": "0a3a3552c16c9e56f6a1b123cc878151c3ccce12",
+   "merged_at": "2026-10-17T08:15:53Z",
+   "number": 25,
+   "state": "closed",
+   "title": "SCRIPTED-BATTLE registration: include the merged core's macros (after QUEST #14)"
+  },
+  {
+   "base": {
+    "ref": "codex/quest-event-framework"
+   },
+   "head": {
+    "ref": "chatgpt/emulator-smoke-playtest",
+    "sha": "e46beacf003fe8052697751cef44539b2d22747a"
+   },
+   "merge_commit_sha": "ded8590a4ce166f0ea40b3507ee7786f7ab7be5c",
+   "merged_at": null,
+   "number": 20,
+   "state": "closed",
+   "title": "QA: isolated graphical mGBA smoke evidence for QUEST"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/agent-tooling-bootstrap",
+    "sha": "ee53feeda999897b0d2f517d25c715d7baffa8f9"
+   },
+   "merge_commit_sha": "af13f67ac60b487e79055b1e900b3a33eb357403",
+   "merged_at": "2026-10-16T02:01:30Z",
+   "number": 19,
+   "state": "closed",
+   "title": "Add reusable Averon agent skills and opt-in tooling setup"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "claude/agent-tooling-setup",
+    "sha": "e968fa8f1eaf1cc7ca63e15a0752a71c16dd775a"
+   },
+   "merge_commit_sha": "72e307d05cddc768f24a2a183b4bdee54dd3ac3e",
+   "merged_at": "2026-10-16T18:52:52Z",
+   "number": 18,
+   "state": "closed",
+   "title": "Add CLAUDE.md and agent tooling report"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/qa-owns-mgba-acceptance",
+    "sha": "42664f525ae087e02aa885c0a84592d6c737e6e7"
+   },
+   "merge_commit_sha": "36cb7ca9039f4203642a44d7bf147a15ac515a3f",
+   "merged_at": "2026-10-15T19:49:00Z",
+   "number": 17,
+   "state": "closed",
+   "title": "Clarify ChatGPT QA owns manual emulator acceptance, not Codex"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/claude-codex-co-lead-roles",
+    "sha": "94b05073aa05147c8cde53f81dc6716f306e1ea3"
+   },
+   "merge_commit_sha": "b131214cc83a0fb80ebc309f3cceeab6a4189784",
+   "merged_at": "2026-10-15T19:42:37Z",
+   "number": 16,
+   "state": "closed",
+   "title": "Document Codex + Claude co-lead development and four-agent GitHub workflow"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/quest-event-framework",
+    "sha": "db6baaea45e54100cdcbe220f575d28a824bb229"
+   },
+   "merge_commit_sha": "bcfeb28dbc0f92b929747d41ffc66e4f1712c6e6",
+   "merged_at": "2026-10-17T07:59:24Z",
+   "number": 14,
+   "state": "closed",
+   "title": "Strengthen native optional events and vary Berry Tree Sketch"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/repository-operations-v2",
+    "sha": "c493c4f439128ee6817622191f58728b217729da"
+   },
+   "merge_commit_sha": "3be9f1d617e55900893d4b4750e895e7b456e004",
+   "merged_at": "2026-10-15T08:31:18Z",
+   "number": 12,
+   "state": "closed",
+   "title": "Establish lasting low-maintenance GitHub operations for all Averon AI developers"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/repository-workflow-hygiene",
+    "sha": "2c39844abe33850b1c513371c36619be5576dab8"
+   },
+   "merge_commit_sha": "6f7acb0ec3222573a5ca5cda512a07f27b191d1b",
+   "merged_at": "2026-10-15T08:17:07Z",
+   "number": 11,
+   "state": "closed",
+   "title": "Streamline GitHub workflow and add automatic safe-PR safeguards"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/field-licenses",
+    "sha": "84302bfbb0f8981c8038b381c2d709d97c6ac626"
+   },
+   "merge_commit_sha": "42c1864112ab964492242dcaff11e87626c06e81",
+   "merged_at": "2026-10-15T16:40:53Z",
+   "number": 10,
+   "state": "closed",
+   "title": "Add move-free field licenses with native and mGBA acceptance"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/backend-integration",
+    "sha": "3318b59ceec059ac58e5b0146bfdf81c20c09b3c"
+   },
+   "merge_commit_sha": "b1c56a501fd20a3cf84ef6269e9a812b879218d1",
+   "merged_at": "2026-10-15T07:58:22Z",
+   "number": 9,
+   "state": "closed",
+   "title": "Integrate backend baseline, restore native CI runner, and preserve contributor quests"
+  },
+  {
+   "base": {
+    "ref": "codex/first-gym-verification"
+   },
+   "head": {
+    "ref": "chatgpt/backend-first-production-roadmap",
+    "sha": "e92d19954a0fcf36e5eb66e6da06bf5f33546fc3"
+   },
+   "merge_commit_sha": "14e79ca6ed1e20100303219ee3934d2277c3e746",
+   "merged_at": null,
+   "number": 8,
+   "state": "closed",
+   "title": "Define authoritative backend-first production roadmap and worldbuilding pause"
+  },
+  {
+   "base": {
+    "ref": "codex/first-gym-verification"
+   },
+   "head": {
+    "ref": "chatgpt/solo-evolution-readiness",
+    "sha": "01c6731edfde0fcf62459e0f3fe43d527cac574e"
+   },
+   "merge_commit_sha": "023c65328b148d9c9e55620c82d9822d61cde6d6",
+   "merged_at": null,
+   "number": 7,
+   "state": "closed",
+   "title": "Add Linking Cord evolutions for Karrablast and Shelmet; audit all trade routes"
+  },
+  {
+   "base": {
+    "ref": "codex/first-gym-verification"
+   },
+   "head": {
+    "ref": "chatgpt/level-economy-source-data",
+    "sha": "6cdd50c75e0baf2388874a993e490301018a4579"
+   },
+   "merge_commit_sha": "640b374d7de787572738d158f18d4014aa19fc74",
+   "merged_at": null,
+   "number": 6,
+   "state": "closed",
+   "title": "Add source-driven trainer and growth-curve data for Averon balance"
+  },
+  {
+   "base": {
+    "ref": "codex/first-gym-verification"
+   },
+   "head": {
+    "ref": "chatgpt/engine-readiness-gates",
+    "sha": "6d04dd2907d6819169c69aa5c2f91277b1493e8a"
+   },
+   "merge_commit_sha": "ac93012d35adfff564c09f7e2faebb110c553373",
+   "merged_at": null,
+   "number": 5,
+   "state": "closed",
+   "title": "Restore reproducible GBA build, test core engine invariants and track resource budgets"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/forms-graphics-readiness",
+    "sha": "01a3d5f8b382efb1a35bf63ae6bfd119448f758a"
+   },
+   "merge_commit_sha": "ef26984322fee57a4573b17d3d3b3bc177053479",
+   "merged_at": "2026-10-15T07:58:24Z",
+   "number": 4,
+   "state": "closed",
+   "title": "Audit Gen I\u2013IX species graphics references and real follower asset files"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/early-quests-and-world-progression",
+    "sha": "80e6034af20f7235115a22313092c36c347b9eb5"
+   },
+   "merge_commit_sha": "6772e0cf6f722833184b30f65b3dea211e204593",
+   "merged_at": "2026-10-15T07:58:24Z",
+   "number": 3,
+   "state": "closed",
+   "title": "Add two optional early-game quests and full-region progression audit"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "chatgpt/species-inventory-audit",
+    "sha": "5825d4d703f94204711b838c139deec79b45e00c"
+   },
+   "merge_commit_sha": "fe19436cf230e0b87d87e119a4e36c4f95e4c797",
+   "merged_at": "2026-10-15T07:58:24Z",
+   "number": 2,
+   "state": "closed",
+   "title": "Add Pok\u00e9mon species, Averon encounters, and evolution-source audits"
+  },
+  {
+   "base": {
+    "ref": "main"
+   },
+   "head": {
+    "ref": "codex/first-gym-verification",
+    "sha": "0466c38240335c1e152897eae3360bcd5deeec41"
+   },
+   "merge_commit_sha": "528df9283cd1e731819aa8a8bcea2f7610103d91",
+   "merged_at": "2026-10-15T07:57:51Z",
+   "number": 1,
+   "state": "closed",
+   "title": "Stabilize opening and Gym 1; add harvest fair and bounded coastal preview"
+  }
+ ],
+ "active": [
+  "codex/transport-point-safety-20261019",
+  "codex/repo-preservation-audit-20261019",
+  "claude/route201-build",
+  "claude/sandgem-respawn",
+  "claude/twinleaf-build"
+ ],
+ "retained": [
+  "codex/backend-checkpoint-20261018",
+  "codex/cloud-release-parity-20261016",
+  "codex/gym-reward-flash-20261017",
+  "codex/legacy-link-save-refusal-20261017",
+  "codex/pc-delivery-flash-20261017",
+  "codex/region-exp-share-20261017",
+  "codex/repo-preservation-audit-20261019",
+  "codex/reversible-cries-safety-20261017",
+  "codex/rom-capacity-normal-cries-experiment-20261017",
+  "codex/sandgem-review-x7-20261018",
+  "codex/scripted-core-only-20261017",
+  "codex/sinnoh-combined-proof-20261019",
+  "codex/trade-save-refusal-20261017",
+  "codex/transport-point-safety-20261019",
+  "codex/whiteout-follower-flash-20261017",
+  "main"
+ ],
+ "active_claim_note": "Twinleaf construction assigned by owner6271044156; never a deletion candidate"
+}
