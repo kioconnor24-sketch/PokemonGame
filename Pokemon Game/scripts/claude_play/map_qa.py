@@ -249,6 +249,13 @@ def apply_fixture(engine, fixture):
             grant_script(engine, edit["map"], edit.get("flags", []), edit.get("items", []))
         elif edit["op"] == "wildbattle":
             wildbattle_script(engine, edit["map"], edit["script"], edit["species"], edit["level"])
+        elif edit["op"] == "strip":
+            path = engine / edit["file"]
+            lines = path.read_text().split("\n")
+            if lines.count(edit["line"]) != 1:
+                raise SystemExit(f"{path}: expected exactly one line {edit['line']!r}")
+            lines.remove(edit["line"])
+            path.write_text("\n".join(lines))
         elif edit["op"] == "section":
             path = engine / "data/maps" / edit["map"] / "map.json"
             info = json.loads(path.read_text())

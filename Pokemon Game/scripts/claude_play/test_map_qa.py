@@ -206,6 +206,17 @@ class Fixtures(unittest.TestCase):
                 {"op": "wildbattle", "map": "Town", "script": "Town_EventScript_Boy", "species": "SPECIES_X", "level": 5}]})
         self.assertEqual((root / "data/maps/Town/scripts.inc").read_text(), original)
 
+    def test_strip_removes_exactly_one_line(self):
+        root = self._tree(marker=True)
+        path = root / "data/maps/Town/scripts.inc"
+        path.write_text("Town_OnTransition:\n\tsetrespawn HEAL_X\n\tend\n")
+        map_qa.apply_fixture(root, {"edits": [
+            {"op": "strip", "file": "data/maps/Town/scripts.inc", "line": "\tsetrespawn HEAL_X"}]})
+        self.assertEqual(path.read_text(), "Town_OnTransition:\n\tend\n")
+        with self.assertRaises(SystemExit):  # gone now: a stale fixture must not pass silently
+            map_qa.apply_fixture(root, {"edits": [
+                {"op": "strip", "file": "data/maps/Town/scripts.inc", "line": "\tsetrespawn HEAL_X"}]})
+
     def test_seam_legs_take_single_real_steps(self):
         # A timed hold can start a second step (seen on Route 201: one run overshot to (62, 6)).
         source = inspect.getsource(map_qa.Runner.seam)
