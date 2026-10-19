@@ -10,6 +10,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "region_map.h"
+#include "regions.h"
 #include "sound.h"
 #include "strings.h"
 #include "text.h"
@@ -97,6 +98,12 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
 
 void FieldInitRegionMap(MainCallback callback)
 {
+    if (!IsRegionMapAvailableForSection(gMapHeader.regionMapSectionId))
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+
     SetVBlankCallback(NULL);
     sFieldRegionMapHandler = Alloc(sizeof(*sFieldRegionMapHandler));
     sFieldRegionMapHandler->state = 0;

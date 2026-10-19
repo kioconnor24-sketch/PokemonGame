@@ -82,3 +82,15 @@ enum KantoSubRegion GetKantoSubregion(u32 mapSecId)
     }
     return KANTO_SUBREGION_KANTO;
 }
+
+bool32 IsRegionMapAvailableForSection(u32 sectionId)
+{
+    switch (GetRegionForSectionId(sectionId))
+    {
+    case REGION_HOENN:
+    case REGION_KANTO:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
