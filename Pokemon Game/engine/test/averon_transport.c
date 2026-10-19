@@ -3,6 +3,7 @@
 #include "averon_transport.h"
 #include "averon_region_save.h"
 #include "event_data.h"
+#include "heal_location.h"
 #include "load_save.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -21,6 +22,8 @@ static const struct AveronTransportPoint sSinnoh = {
 struct TransportSnapshot
 {
     struct AveronRegionState region;
+    u8 record[AVERON_REGION_RECORD_SIZE];
+    u8 anchor[AVERON_REGION_ANCHOR_SIZE];
     struct WarpData location, heal, escape;
     struct Coords16 pos;
 };
@@ -29,6 +32,8 @@ static void Snapshot(struct TransportSnapshot *s)
 {
     memset(s, 0, sizeof(*s));
     EXPECT(AveronRegionSave_GetState(&s->region));
+    memcpy(s->record, gSaveBlock3Ptr->averonRegionRecord, sizeof(s->record));
+    memcpy(s->anchor, gSaveBlock2Ptr->averonRegionAnchor, sizeof(s->anchor));
     s->location = gSaveBlock1Ptr->location;
     s->heal = gSaveBlock1Ptr->lastHealLocation;
     s->escape = gSaveBlock1Ptr->escapeWarp;
@@ -45,6 +50,7 @@ static void ExpectUnchanged(const struct TransportSnapshot *before)
     ApplyCurrentWarp();
     EXPECT_EQ(gSaveBlock1Ptr->location.mapGroup, before->location.mapGroup);
     EXPECT_EQ(gSaveBlock1Ptr->location.mapNum, before->location.mapNum);
+    EXPECT_EQ(gSaveBlock1Ptr->location.warpId, before->location.warpId);
     EXPECT_EQ(gSaveBlock1Ptr->location.x, before->location.x);
     EXPECT_EQ(gSaveBlock1Ptr->location.y, before->location.y);
 }
@@ -66,7 +72,7 @@ static void StartAt(const struct AveronTransportPoint *point)
     if (point->region == AVERON_SAVE_REGION_AVERON)
         SetLastHealLocationWarp(HEAL_LOCATION_ALDERFIELD);
     else
-        gSaveBlock1Ptr->lastHealLocation = point->warp;
+        SetLastHealLocationWarp(HEAL_LOCATION_SANDGEM_TOWN);
     gSaveBlock1Ptr->escapeWarp = point->warp;
 }
 
@@ -127,7 +133,14 @@ TEST("Averon transport rejects invalid activation descriptors and leaves all tra
     StartAt(&sAveron);
     struct AveronTransportPoint departure = sAveron, arrival = sSinnoh;
     if (which == 0) departure.warp.x++;
-    if (which == 1) departure.warp.mapNum++;
+    if (which == 1)
+    {
+        // A real same-region map that contains (18,18): failure must reach
+        // the active-map identity check, not an earlier geometry rejection.
+        departure.warp.mapGroup = MAP_GROUP(MAP_ALDERFIELD);
+        departure.warp.mapNum = MAP_NUM(MAP_ALDERFIELD);
+        EXPECT(AveronTransport_IsPointValid(&departure));
+    }
     if (which == 2) EXPECT(AveronRegion_SetActive(AVERON_SAVE_REGION_SINNOH));
     if (which == 3) arrival.region = AVERON_SAVE_REGION_AVERON;
     if (which == 4) arrival.warp.x = -1;
@@ -198,14 +211,64 @@ TEST("Averon transport accepts an indexed first arrival without substituting coo
 
 TEST("Averon transport refuses a wrong region cached healer without changing the transaction")
 {
-    StartAt(&sAveron);
-    EXPECT(AveronRegion_SetHealLocation(AVERON_SAVE_REGION_SINNOH, HEAL_LOCATION_ALDERFIELD));
+    u32 reverse = 0;
+    PARAMETRIZE { reverse = 0; }
+    PARAMETRIZE { reverse = 1; }
+    const struct AveronTransportPoint *from = reverse ? &sSinnoh : &sAveron;
+    const struct AveronTransportPoint *to = reverse ? &sAveron : &sSinnoh;
+    u32 wrongHeal = reverse ? HEAL_LOCATION_SANDGEM_TOWN : HEAL_LOCATION_ALDERFIELD;
+    u32 rightHeal = reverse ? HEAL_LOCATION_ALDERFIELD : HEAL_LOCATION_SANDGEM_TOWN;
+    StartAt(from);
+    EXPECT(AveronRegion_SetHealLocation(to->region, wrongHeal));
     struct TransportSnapshot before;
     Snapshot(&before);
-    EXPECT(!AveronTransport_Begin(&sAveron, &sSinnoh, FALSE));
+    EXPECT(!AveronTransport_Begin(from, to, FALSE));
     ExpectUnchanged(&before);
-    EXPECT(AveronRegion_SetHealLocation(AVERON_SAVE_REGION_SINNOH, HEAL_LOCATION_NONE));
-    EXPECT(AveronTransport_Begin(&sAveron, &sSinnoh, FALSE));
+    EXPECT(AveronRegion_SetHealLocation(to->region, rightHeal));
+    EXPECT(AveronTransport_Begin(from, to, FALSE));
+    Arrive();
+    EXPECT_EQ(AveronRegion_GetHealLocation(to->region), rightHeal);
+    // Leaving and revisiting the correctly healed region must stay usable:
+    // BeginTravel captures the departing lastHealLocation into its record.
+    EXPECT(AveronTransport_Begin(to, from, TRUE));
+    Arrive();
+    EXPECT(AveronTransport_Begin(from, to, TRUE));
+    Arrive();
+    EXPECT_EQ(AveronRegion_GetHealLocation(to->region), rightHeal);
+}
+
+TEST("Averon transport refuses an indexed departure even with matching inconsistent player coordinates")
+{
+    StartAt(&sSinnoh);
+    struct AveronTransportPoint indexed = sSinnoh;
+    indexed.warp.warpId = 0;
+    indexed.warp.x = indexed.warp.y = -1;
+    EXPECT(AveronTransport_IsPointValid(&indexed));
+    gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->pos.y = -1;
+    struct TransportSnapshot before;
+    Snapshot(&before);
+    EXPECT(!AveronTransport_Begin(&indexed, &sAveron, FALSE));
+    ExpectUnchanged(&before);
+}
+
+TEST("Averon transport refuses a physically wrong departing healer before caching its return")
+{
+    // Inject an inconsistent state, not a claimed natural gameplay route.
+    StartAt(&sSinnoh);
+    SetLastHealLocationWarp(HEAL_LOCATION_ALDERFIELD);
+    struct TransportSnapshot before;
+    Snapshot(&before);
+    EXPECT(!AveronTransport_Begin(&sSinnoh, &sAveron, FALSE));
+    ExpectUnchanged(&before);
+    // Correct only the active source healer, then prove the normal round trip
+    // captures44 and permits return. No automatic repair/migration is adopted.
+    SetLastHealLocationWarp(HEAL_LOCATION_SANDGEM_TOWN);
+    EXPECT(AveronTransport_Begin(&sSinnoh, &sAveron, FALSE));
+    Arrive();
+    EXPECT_EQ(AveronRegion_GetHealLocation(AVERON_SAVE_REGION_SINNOH), HEAL_LOCATION_SANDGEM_TOWN);
+    EXPECT(AveronTransport_Begin(&sAveron, &sSinnoh, TRUE));
+    Arrive();
+    EXPECT_EQ(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation), HEAL_LOCATION_SANDGEM_TOWN);
 }
 
 TEST("Averon transport saved return validation remains usable after an actual flash reload")

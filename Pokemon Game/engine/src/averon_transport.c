@@ -41,6 +41,15 @@ bool32 AveronTransport_Begin(const struct AveronTransportPoint *departure,
             || !AveronTransport_IsPointValid(&destination)))
         return FALSE;
 
+    // BeginTravel caches a recognized departing healer. Refuse an inconsistent
+    // source now, rather than storing a wrong-region healer that blocks return.
+    if (GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation) != HEAL_LOCATION_NONE)
+    {
+        struct AveronTransportPoint healer = {departure->region, gSaveBlock1Ptr->lastHealLocation};
+        if (!AveronTransport_IsPointValid(&healer))
+            return FALSE;
+    }
+
     u32 healIndex = AveronRegion_GetHealLocation(arrival->region);
     if (healIndex != HEAL_LOCATION_NONE)
     {
