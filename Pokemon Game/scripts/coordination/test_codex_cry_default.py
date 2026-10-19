@@ -1,5 +1,6 @@
 """Check the actual Make overrides and production default, without building ROMs."""
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import unittest
@@ -7,14 +8,16 @@ import unittest
 
 @unittest.skipUnless(shutil.which('make') and shutil.which('cc'), 'make and C preprocessor required')
 class CryDefault(unittest.TestCase):
-    engine = Path(__file__).resolve().parents[2] / 'engine'
+    engine = Path(os.environ.get('AVERON_CRY_TEST_ENGINE', Path(__file__).resolve().parents[2] / 'engine'))
 
     def enabled(self, profile, release):
+        env = os.environ.copy()
+        env.pop('CRIES', None)  # Test the repository fallback, not a caller's restoration request.
         flags = subprocess.run(
             ['make', '--no-print-directory', 'SETUP_PREREQS=0', 'NODEP=1',
-             f'RELEASE={release}', f'CRIES={profile}', '--eval',
+             f'RELEASE={release}', *([f'CRIES={profile}'] if profile is not None else []), '--eval',
              'show-cry-flags: ; @echo $(CRY_CPPFLAGS)', 'show-cry-flags'],
-            cwd=self.engine, capture_output=True, text=True, check=True).stdout.split()
+            cwd=self.engine, env=env, capture_output=True, text=True, check=True).stdout.split()
         source = '#include "gba/defines.h"\n#include "config/pokemon.h"\nP_CRIES_ENABLED\n'
         result = subprocess.run(
             ['cc', '-E', '-P', '-x', 'c', '-I', 'include', *flags,
@@ -22,7 +25,12 @@ class CryDefault(unittest.TestCase):
             cwd=self.engine, input=source, capture_output=True, text=True, check=True)
         return int(result.stdout.splitlines()[-1])
 
-    def test_default_is_off_in_normal_and_release(self):
+    def test_ordinary_build_is_off_in_normal_and_release(self):
+        for release in (0, 1):
+            with self.subTest(release=release):
+                self.assertEqual(self.enabled(None, release), 0)
+
+    def test_explicit_default_is_off_in_normal_and_release(self):
         for release in (0, 1):
             with self.subTest(release=release):
                 self.assertEqual(self.enabled('default', release), 0)
