@@ -1,0 +1,27 @@
+[
+ {
+  "fixture": "negative-twinleaf-wrong-offset",
+  "expect": "FAIL",
+  "static_codes": [
+   "seam-mismatch"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "52b878780b6372e65fc8a6833f6c57d51569d849387dfefbae720ca71bb7ae19",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 3,
+   "x": 16,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 5,
+  "failed": [
+   "MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (15, 21) and back",
+   "run completed without the driver getting stuck"
+  ],
+  "ok": true
+ }
+]

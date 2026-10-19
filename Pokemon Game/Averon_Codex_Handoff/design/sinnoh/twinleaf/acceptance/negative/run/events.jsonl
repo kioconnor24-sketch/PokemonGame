@@ -1,0 +1,25 @@
+{"t": 1792426420.79, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792426420.81, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792426421.35, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792426421.36, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792426423.94, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792426423.95, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792426425.03, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792426425.05, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792426425.58, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792426425.6, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792426426.13, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792426426.15, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792426427.2, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792426427.21, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792426430.81, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792426430.83, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792426431.48, "event": "field", "map": "MAP_TWINLEAF_TOWN", "pos": [16, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792426432.01, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_TWINLEAF_TOWN", [16, 10]]}
+{"t": 1792426432.45, "event": "capture", "file": "0009-start.png"}
+{"t": 1792426432.45, "event": "observe", "label": "start", "problems": []}
+{"t": 1792426432.45, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792426432.52, "event": "map-qa-check", "name": "reached MAP_TWINLEAF_TOWN", "ok": true, "at": ["MAP_TWINLEAF_TOWN", [16, 9]]}
+{"t": 1792426435.85, "event": "capture", "file": "0010-seam-MAP_TWINLEAF_TOWN-up.png"}
+{"t": 1792426436.56, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN up seam (17, 0) -> MAP_ROUTE201 (15, 21) and back", "ok": false, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN", [17, 0]], "got": ["MAP_TWINLEAF_TOWN", [15, 0]]}
+{"t": 1792426436.76, "event": "map-qa-check", "name": "run completed without the driver getting stuck", "ok": false, "error": "Stuck('no path on MAP_TWINLEAF_TOWN from (15, 0) to [(17, 0)]')", "at": ["MAP_TWINLEAF_TOWN", [15, 0]]}
