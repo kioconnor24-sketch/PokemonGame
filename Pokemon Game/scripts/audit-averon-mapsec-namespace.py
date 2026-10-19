@@ -240,7 +240,20 @@ def main(argv=None):
     parser.add_argument("--json", type=Path, help="write the full inventory here")
     parser.add_argument("--check-pins", type=Path, nargs="?", const=Path(__file__).with_name("averon-mapsec-pins.json"),
                         help="fail if a pinned saved section value moved (default pin file next to this script)")
+    parser.add_argument("--planned-area-register", type=Path,
+                        help="audit an explicit per-name planning scenario from TrackerKey/LocationOrZone CSV")
+    parser.add_argument("--origin-aliases", type=Path,
+                        help="optional JSON object of area key to proposed shared origin name; allocates nothing")
+    parser.add_argument("--additional-origins", type=Path,
+                        help="optional JSON list of extra named child origins absent from the area register")
+    parser.add_argument("--origin-reserve", type=int, default=0,
+                        help="reserve byte codes for other future names (Averon/children), not an allocation")
+    parser.add_argument("--origin-kinds",
+                        help="optional comma-separated register Kind subset, e.g. SETTLEMENT,ROUTE")
     args = parser.parse_args(argv)
+    if (args.origin_aliases or args.additional_origins or args.origin_reserve
+            or args.origin_kinds is not None) and not args.planned_area_register:
+        parser.error("origin scenario options require --planned-area-register")
     if args.check_pins:
         errors = check_pins(args.engine, read_json(args.check_pins)["pins"])
         for error in errors:
@@ -249,6 +262,27 @@ def main(argv=None):
             return 1
         print(f"{len(read_json(args.check_pins)['pins'])} saved section values unchanged")
     report = inventory(args.engine, args.group)
+    scenario_status = 0
+    if args.planned_area_register:
+        from averon_origin_demand import origin_demand, read_area_register
+        try:
+            all_rows = read_area_register(args.planned_area_register)
+            kinds = set()
+            rows = all_rows
+            if args.origin_kinds is not None:
+                kinds = {kind.strip() for kind in args.origin_kinds.split(",") if kind.strip()}
+                if not kinds or kinds - {row.get("Kind") for row in all_rows}:
+                    raise ValueError("origin kinds must name existing register Kind values")
+                rows = [row for row in all_rows if row.get("Kind") in kinds]
+            demand = origin_demand(rows, sections(args.engine),
+                                   aliases=read_json(args.origin_aliases) if args.origin_aliases else None,
+                                   additional=read_json(args.additional_origins) if args.additional_origins else (),
+                                   reserve=args.origin_reserve)
+            demand["source_register_areas"] = len(all_rows)
+            demand["selected_kinds"] = sorted(kinds)
+        except (ValueError, OSError) as error:
+            parser.error(str(error))
+        report["planned_origin_demand"] = demand
     if args.json:
         args.json.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     print(f"{report['sections']} named sections, MAPSEC_NONE={report['mapsec_none']}, "
@@ -264,10 +298,20 @@ def main(argv=None):
           f"engine region for Averon sections: {', '.join(report['averon_engine_regions']) or 'none'}")
     print("region-conditioned evolutions: " + (", ".join(f"{k} x{v}" for k, v in
                                                       report["region_conditioned_evolutions"].items()) or "none"))
+    if args.planned_area_register:
+        demand = report["planned_origin_demand"]
+        print(f"PLANNING SCENARIO: {demand['registered_areas']} areas / "
+              f"{demand['distinct_proposed_names']} distinct names; "
+              f"{demand['new_names_required']} new + {demand['other_future_reserve']} reserved vs "
+              f"{demand['remaining_ordinary_codes']} available; shortfall {demand['shortfall']}")
+        print("No IDs allocated; child maps and future Averon names are not a complete inventory.")
+        if not demand["fits_current_byte_pool"]:
+            print("PLANNING BUDGET EXCEEDED: owner origin-policy decision required, not a current ROM failure")
+            scenario_status = 1
     if report["unknown_map_sections"]:
         print("maps name unknown sections: " + ", ".join(report["unknown_map_sections"]))
         return 1
-    return 0
+    return scenario_status
 
 
 if __name__ == "__main__":
