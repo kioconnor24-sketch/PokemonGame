@@ -1,0 +1,29 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: the Mart door becomes a warp into the Center (warp 1), whose mat returns to the Center door, so leaving puts the player at the wrong door.",
+ "expect": "FAIL",
+ "must_fail": [
+  "warp 1"
+ ],
+ "edits": [
+  {
+   "op": "warp",
+   "map": "SandgemTown",
+   "add": {
+    "x": 25,
+    "y": 9,
+    "elevation": 0,
+    "dest_map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F",
+    "dest_warp_id": "1"
+   }
+  }
+ ]
+}

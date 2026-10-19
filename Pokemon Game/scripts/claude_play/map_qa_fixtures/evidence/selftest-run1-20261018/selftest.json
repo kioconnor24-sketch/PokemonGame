@@ -1,0 +1,136 @@
+[
+ {
+  "fixture": "negative-ledge-pocket",
+  "expect": "FAIL",
+  "static_codes": [
+   "one-way-pocket"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "29ea353890b6b9b7f254c6b5dff330c87cc073bfb4a55d3187d7afb2c1a7adb4",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 26,
+  "failed": [],
+  "ok": false
+ },
+ {
+  "fixture": "negative-one-way-connection",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "a48536d4ad39dee5c5a3ff1c17beea68768b81967ef0f0fbb658d6906926f16b",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 27,
+  "failed": [
+   "MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_SANDGEM_TOWN (19, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_SANDGEM_TOWN (22, 27) and back",
+   "MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_SANDGEM_TOWN (24, 27) and back"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "negative-unreachable-seam",
+  "expect": "FAIL",
+  "static_codes": [
+   "exit-unreachable"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "c147c6bcc9df63b347a61bae75af0110cb88cea8bb4129545e78cd145af768b5",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 5,
+  "failed": [
+   "run completed without the driver getting stuck"
+  ],
+  "ok": false
+ },
+ {
+  "fixture": "negative-warp-return",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "872cfb6b03420a37842c436a0cd005cabb276d084a49a2b48621664b8335770c",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 28,
+  "failed": [
+   "MAP_SANDGEM_TOWN warp 1 (25, 9) -> MAP_SANDGEM_TOWN_POKEMON_CENTER_1F and back"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "positive-loop-connection",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "a722788fb5c4d5930e21488bed7e91f566a036225794c391fc51edca453b0ce3",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 30,
+  "failed": [],
+  "continue_verdict": "PASS",
+  "ok": true
+ },
+ {
+  "fixture": "positive-sandgem",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "f1d212fe913c0f14821f5b5d8e5880fc7a9567b742df4c94bcca5f6f78748294",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 26,
+  "failed": [],
+  "continue_verdict": "PASS",
+  "ok": true
+ }
+]

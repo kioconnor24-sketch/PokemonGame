@@ -1,0 +1,69 @@
+{"t": 1792364337.13, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792364337.17, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792364339.81, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792364339.84, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792364341.52, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792364341.58, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792364342.11, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792364342.16, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792364342.71, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792364342.76, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792364343.83, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792364343.86, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792364347.47, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792364347.52, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792364348.19, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [15, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792364348.75, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792364349.06, "event": "capture", "file": "0008-start.png"}
+{"t": 1792364349.06, "event": "observe", "label": "start", "problems": []}
+{"t": 1792364349.06, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364349.12, "event": "map-qa-check", "name": "reached MAP_SANDGEM_TOWN", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 11]]}
+{"t": 1792364355.11, "event": "capture", "file": "0009-edge-MAP_SANDGEM_TOWN-up.png"}
+{"t": 1792364355.11, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed up edge at (22, 0) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [22, 0]], "after": ["MAP_SANDGEM_TOWN", [22, 0]]}
+{"t": 1792364363.43, "event": "capture", "file": "0010-edge-MAP_SANDGEM_TOWN-down.png"}
+{"t": 1792364363.43, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed down edge at (22, 27) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [22, 27]], "after": ["MAP_SANDGEM_TOWN", [22, 27]]}
+{"t": 1792364374.34, "event": "capture", "file": "0011-edge-MAP_SANDGEM_TOWN-left.png"}
+{"t": 1792364374.34, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed left edge at (0, 12) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [0, 12]], "after": ["MAP_SANDGEM_TOWN", [0, 12]]}
+{"t": 1792364382.63, "event": "capture", "file": "0012-warp-MAP_SANDGEM_TOWN-0.png"}
+{"t": 1792364382.94, "event": "capture", "file": "0013-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F via warp.png"}
+{"t": 1792364382.94, "event": "observe", "label": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F via warp", "problems": []}
+{"t": 1792364382.94, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364382.99, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 7]]}
+{"t": 1792364386.2, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN warp 0 (15, 9) -> MAP_SANDGEM_TOWN_POKEMON_CENTER_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN", [[15, 10]]], "got": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792364386.45, "event": "capture", "file": "0014-MAP_SANDGEM_TOWN after warp round trip.png"}
+{"t": 1792364386.46, "event": "observe", "label": "MAP_SANDGEM_TOWN after warp round trip", "problems": []}
+{"t": 1792364386.46, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364389.56, "event": "map", "map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "pos": [6, 8]}
+{"t": 1792364389.66, "event": "map-qa-check", "name": "reached MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792364391.59, "event": "capture", "file": "0015-edge-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-down.png"}
+{"t": 1792364391.59, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed down edge at (3, 8) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [3, 8]], "after": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [3, 8]]}
+{"t": 1792364395.13, "event": "capture", "file": "0016-edge-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-down.png"}
+{"t": 1792364395.13, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed down edge at (10, 8) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [10, 8]], "after": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [10, 8]]}
+{"t": 1792364399.86, "event": "capture", "file": "0017-edge-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-left.png"}
+{"t": 1792364399.86, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed left edge at (0, 4) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [0, 4]], "after": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [0, 4]]}
+{"t": 1792364404.06, "event": "blocked", "map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "tile": [1, 6]}
+{"t": 1792364406.38, "event": "capture", "file": "0018-edge-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-left.png"}
+{"t": 1792364406.38, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed left edge at (0, 7) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [0, 7]], "after": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [0, 7]]}
+{"t": 1792364411.46, "event": "capture", "file": "0019-edge-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-right.png"}
+{"t": 1792364411.46, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F closed right edge at (13, 5) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [13, 5]], "after": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [13, 5]]}
+{"t": 1792364417.06, "event": "capture", "file": "0020-warp-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-0.png"}
+{"t": 1792364417.36, "event": "capture", "file": "0021-MAP_SANDGEM_TOWN via warp.png"}
+{"t": 1792364417.36, "event": "observe", "label": "MAP_SANDGEM_TOWN via warp", "problems": []}
+{"t": 1792364417.36, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364417.44, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 11]]}
+{"t": 1792364421.45, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F warp 0 (6, 8) -> MAP_SANDGEM_TOWN and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [[6, 8], [7, 8]]], "got": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792364421.74, "event": "capture", "file": "0022-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip.png"}
+{"t": 1792364421.74, "event": "observe", "label": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip", "problems": []}
+{"t": 1792364421.74, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364425.27, "event": "capture", "file": "0023-warp-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F-1.png"}
+{"t": 1792364425.56, "event": "capture", "file": "0024-MAP_SANDGEM_TOWN via warp.png"}
+{"t": 1792364425.56, "event": "observe", "label": "MAP_SANDGEM_TOWN via warp", "problems": []}
+{"t": 1792364425.56, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364425.65, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SANDGEM_TOWN", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 11]]}
+{"t": 1792364429.68, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F warp 1 (7, 8) -> MAP_SANDGEM_TOWN and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [[6, 8], [7, 8]]], "got": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792364429.97, "event": "capture", "file": "0025-MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip.png"}
+{"t": 1792364429.97, "event": "observe", "label": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip", "problems": []}
+{"t": 1792364429.97, "event": "map-qa-check", "name": "follower visible (MAP_SANDGEM_TOWN_POKEMON_CENTER_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364431.4, "event": "map-qa-check", "name": "an exit is reachable after entering the pocket at (4, 16)", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792364431.43, "event": "capture", "file": "0026-pocket-MAP_SANDGEM_TOWN.png"}
+{"t": 1792364431.43, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN has no one-way pocket", "ok": true, "entry": {"stand": [4, 14], "into": [4, 16]}}

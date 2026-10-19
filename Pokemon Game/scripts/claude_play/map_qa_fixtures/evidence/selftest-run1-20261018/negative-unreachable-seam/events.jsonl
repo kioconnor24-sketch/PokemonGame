@@ -1,0 +1,23 @@
+{"t": 1792364699.36, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792364699.39, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792364702.5, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792364702.53, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792364703.66, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792364703.71, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792364704.24, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792364704.28, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792364704.82, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792364704.86, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792364705.91, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792364705.94, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792364709.57, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792364709.62, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792364710.25, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [15, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792364710.8, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792364711.1, "event": "capture", "file": "0008-start.png"}
+{"t": 1792364711.1, "event": "observe", "label": "start", "problems": []}
+{"t": 1792364711.1, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792364711.17, "event": "map-qa-check", "name": "reached MAP_SANDGEM_TOWN", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 11]]}
+{"t": 1792364716.4, "event": "capture", "file": "0009-edge-MAP_SANDGEM_TOWN-left.png"}
+{"t": 1792364716.4, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed left edge at (0, 12) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [0, 12]], "after": ["MAP_SANDGEM_TOWN", [0, 12]]}
+{"t": 1792364716.58, "event": "map-qa-check", "name": "run completed without the driver getting stuck", "ok": false, "error": "Stuck('no path on MAP_SANDGEM_TOWN from (0, 12) to [(19, 0)]')", "at": ["MAP_SANDGEM_TOWN", [0, 12]]}

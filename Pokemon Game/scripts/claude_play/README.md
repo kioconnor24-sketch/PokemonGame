@@ -113,3 +113,46 @@ them fail.
 - **The static map isn't the live map.** Scripts change the map at runtime
   (`setmetatile`, for example the Gym gate). Routing on the current map reads
   `gBackupMapLayout`.
+
+## Connected-area map QA (`map_qa.py`)
+
+This is a reusable check for each **approved** batch of new maps, such as Sandgem plus its Center, or a future route plus its seams. It has two layers, both derived from the batch's built source (warps, connections, `map.bin` collision, tileset behaviours):
+
+- **`static`**: collision and pathfinding only, the part the #125 source preflight explicitly leaves out. It reports:
+  - ledges that land on a solid tile (the engine never checks);
+  - seam tiles that face a solid tile across a connection;
+  - entry/exit pairs cut off from each other inside a map;
+  - one-way pockets (reachable but no way back to any exit).
+
+  Warp targets, return indices and offset reciprocity stay with #125.
+- **`run`**: real mGBA with controller input, observed read-only. For every map in the batch it:
+  - checks that each closed-edge run blocks;
+  - walks connection seams out and back (first, middle and last passable tile);
+  - takes every warp in and back (a Center's two mats returning through one door is accepted);
+  - after each arrival, checks the follower is visible and an exit is still reachable;
+  - probes any static pocket (the run must find no way out);
+  - opens and closes the Start menu, and can `--save`.
+
+  `--expect saved-*.json` in a fresh process checks CONTINUE.
+
+```bash
+python3 map_qa.py static --engine ../../engine --map MAP_SANDGEM_TOWN --map MAP_SANDGEM_TOWN_POKEMON_CENTER_1F
+python3 map_qa.py fixture-save --engine ../../engine REAL.sav /tmp/qa/game.sav MAP_SANDGEM_TOWN 15 10   # DEV-only entry, disclose it
+python3 map_qa.py run --engine ../../engine --rom ../../engine/pokeemerald-cries-off.gba --build normal \
+    --scratch /tmp/qa --out /tmp/qa/run1 --map MAP_SANDGEM_TOWN --map MAP_SANDGEM_TOWN_POKEMON_CENTER_1F --save qa
+python3 map_qa.py run ... --out /tmp/qa/run2 --expect /tmp/qa/run1/saved-qa.json                          # fresh CONTINUE
+```
+
+**Self-test with test-only placements.** `map_qa_fixtures/*.json` holds positive and negative placements: a loop connection, a one-way connection, a wrong warp return, a ledge pocket and a walled-off seam. `fixture` and `selftest` refuse any engine tree without a `.map_qa_throwaway` marker, so they only ever edit a disposable `git worktree`, never production map data. `selftest` handles each fixture as follows:
+1. restores the tree and applies the fixture;
+2. runs `static`, then rebuilds (`CRIES=off`);
+3. enters with the DEV continue-warp save and runs in a fresh process;
+4. requires positives to PASS, including a second-process CONTINUE, and negatives to FAIL on the named check.
+
+```bash
+git worktree add --detach /tmp/qa-tree <sha-with-the-batch>
+touch "/tmp/qa-tree/Pokemon Game/engine/.map_qa_throwaway"
+python3 map_qa.py selftest --engine "/tmp/qa-tree/Pokemon Game/engine" --save REAL.sav --out /tmp/qa/selftest
+```
+
+`test_map_qa.py` covers the static layer and fixture safety offline (`python3 test_map_qa.py`).

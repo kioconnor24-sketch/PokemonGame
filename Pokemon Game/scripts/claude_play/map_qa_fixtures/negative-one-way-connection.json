@@ -1,0 +1,27 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: only the north->south half of the loop. Walking out works; walking back must fail the round trip.",
+ "expect": "FAIL",
+ "must_fail": [
+  "seam"
+ ],
+ "edits": [
+  {
+   "op": "connection",
+   "map": "SandgemTown",
+   "add": {
+    "map": "MAP_SANDGEM_TOWN",
+    "offset": 0,
+    "direction": "up"
+   }
+  }
+ ]
+}
