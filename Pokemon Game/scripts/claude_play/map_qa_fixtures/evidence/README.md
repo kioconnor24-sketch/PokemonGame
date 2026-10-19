@@ -54,6 +54,25 @@ Run 1 is kept unchanged as the record of what the self-test caught.
 | negative-ledge-pocket | FAIL | `one-way-pocket` | FAIL | `has no one-way pocket`. The probe stood at (4, 14), really jumped to (4, 16), tried routing and every direction, and ended trapped at (4, 17) |
 | negative-unreachable-seam | FAIL | `exit-unreachable` | FAIL | `up seam …` with `could not reach the seam tile`, with no driver crash |
 
+## Region-map UI fixtures, run 5 (`selftest-run5-region-ui-20261019/`): **8/8 as expected**
+
+- **Tool:** `map_qa.py` at `20fecce8`.
+- **Throwaway tree:** main `0c9ec0c3` (after #136/#138/#146; cries OFF by default).
+- **Scope:** all eight fixtures, the six earlier ones as a regression run plus the two new ones.
+
+| New fixture | Expect | Run | Detail |
+| --- | --- | --- | --- |
+| positive-sinnoh-region-ui-refused | PASS | PASS + fresh CONTINUE PASS | In Sinnoh Sandgem, PokéNav MAP, the Town Map item and Field Kit FLY are all refused. Each returns to a non-black field where the player can move. FLY shows "Can't use that here." |
+| negative-region-ui-legacy-section | FAIL | FAIL on `region UI: … refused` ×3 | Sandgem relabelled `MAPSEC_LITTLEROOT_TOWN`. All three open the Hoenn map ("FLY to where?" at Littleroot). The back-to-field checks still pass, so the detector separates "opened" from "stuck" |
+
+The six earlier fixtures all behaved as in run 2.
+
+**Bug caught on the way: run 3** ([`run3-selftest-keyerror.json`](selftest-run5-region-ui-20261019/run3-selftest-keyerror.json)), at `8626c3ad`.
+- **Symptom:** the six old fixtures passed, but both new ones stopped with `KeyError('ITEM_TOWN_MAP')`.
+- **Cause:** `map_qa run` imports the driver modules (`emu`, `game`) from the **engine tree under test**, which predated the new probe constants.
+- **Fix** (`20fecce8`): register them on the imported `emu` at run time.
+- Run 4 then confirmed both region fixtures before this full run 5.
+
 ## Limitations
 
 - The fixture entry uses the DEV continue-warp save, so there is no ordinary story entrance.

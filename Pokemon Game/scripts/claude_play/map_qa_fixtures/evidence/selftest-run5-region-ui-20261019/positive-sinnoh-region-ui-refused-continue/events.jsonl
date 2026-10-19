@@ -1,0 +1,24 @@
+{"t": 1792379278.98, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792379279.0, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792379279.54, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792379279.56, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792379282.14, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792379282.17, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792379283.28, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792379283.33, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792379283.85, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792379283.89, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792379284.41, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792379284.43, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792379285.45, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792379285.48, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792379289.02, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792379289.06, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792379289.69, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [15, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792379289.84, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792379289.84, "event": "continue-check", "problems": []}
+{"t": 1792379289.85, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792379290.38, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792379290.8, "event": "capture", "file": "0010-start.png"}
+{"t": 1792379290.8, "event": "observe", "label": "start", "problems": []}
+{"t": 1792379290.8, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
