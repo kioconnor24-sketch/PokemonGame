@@ -55,7 +55,7 @@ Reference grid from the tool (`T` tree, `S` sand, `G` grass, `g` tall grass, `o`
 | Sand stub | x 13–15, y 3–6 | c 15–17, r 3–6 | measured |
 | Upper sand paths | x 9–18 and 24–29, y 7–8 | c 11–20 and 26–31, r 7–8 | measured |
 | Path turns | west x 9–11, y 9–10; east x 27–29, y 9–12 | c 11–13 r 9–10; c 29–31 r 9–12 | measured |
-| North tall grass | x 2–7, y 6–10; x 19–23, y 6–9 and 21–23, y 10 | c 4–9 r 6–10; c 21–25 r 6–10 | measured; row 10 lies under the canopy |
+| North tall grass | x 2–7, y 6–9; x 19–23, y 6–9 and 21–23, y 10 | c 4–9 r 6–9; c 21–25 r 6–9 and c 23–25 r 10 | measured |
 | **Upper ledges** (`MB_JUMP_SOUTH`) | y 12: x 8–12 and 21–26 | r 12: c 10–14 and 23–28 | measured |
 | East tall-grass field | x 21–31, y 12–23, stepped lower edge | c 23–33, r 12–23 | measured, ±1 on the steps |
 | West sand path | x 9–11, y 15–24 | c 11–13, r 15–24 | measured |
@@ -65,7 +65,7 @@ Reference grid from the tool (`T` tree, `S` sand, `G` grass, `g` tall grass, `o`
 | South tall grass | x 14–19, y 27–29 | c 16–21, r 27–29 | measured |
 | South sand | bay x 9–13, y 27–29; path x 20–27, y 28–29 | c 11–15 and 22–29, r 27–29 | measured |
 | **South exit → Sandgem** | clearing x 23–28, road x 25–27 → 25–26, y 30–33 | clearing c 26–31, sand c 27–29 | deviation 2 |
-| Tree clumps | x 2–7 y 11–12 and 2–5 y 13–14; x 13–20 y 10–13 and 17–20 y 14–19; x 6–7 y 20–25; x 13–20 y 24–25 | same, in reference columns | ±1 row (canopies) |
+| Tree clumps | x 2–7 y 10–11 and 2–5 y 12–13; x 13–20 y 10–13 and 17–20 y 14–19; x 6–7 y 20–25; x 13–20 y 24–25 | c 4–9 r 11–12 and c 4–7 r 13–14; c 15–22 r 10–13 and c 19–22 r 14–19; c 8–9 r 20–25; c 15–22 r 24–25 | ±1 row (canopies); the west clump sits one row up so its trees are whole. Columns are exact, so clumps starting on an odd column show a half tree at that edge, as Route 201's do |
 | Signs | (16, 5) route sign; (14, 17) trainer tips; (23, 25) route sign | (18, 5); (16, 17); (25, 26) | ±1 row; deviation 3 |
 | Water | none | none | — |
 

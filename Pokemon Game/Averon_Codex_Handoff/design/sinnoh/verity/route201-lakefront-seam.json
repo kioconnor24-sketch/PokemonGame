@@ -1,0 +1,112 @@
+{
+ "name": "Junction C preview (not a map): Verity Lakefront x 12-21 | Route 201 x 0-9, rows 4-17, offset 0",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 20,
+ "height": 14,
+ "legend": {
+  "!": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "#": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "$": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "%": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "&": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "'": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "(": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  ")": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "*": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "+": {
+   "metatile": 135,
+   "collision": 1,
+   "elevation": 3,
+   "note": "ledge, jump south only"
+  }
+ },
+ "rows": [
+  "!#!#!#!#!#!#!#!#!#!#",
+  "$%$%&'&'&'&'&'&'&'&'",
+  "((((!#!#!#!#!#!#!#!#",
+  "(((($%$%$%$%$%$%$%$%",
+  "((((((((((((((((((((",
+  "((((((((((('&(((((((",
+  "(((()*(((((#!(((((((",
+  "(((($%((((((((&'&'((",
+  "++++++++++++++!#!#++",
+  "((((((((((((((((((((",
+  "((((((((((((((((((((",
+  "&'&'&'&'&'&'&'&'&'&(",
+  "!#!#!#!#!#!#!#!#!#!*",
+  "&'&'&'&'&'&'&'&'&'&'"
+ ],
+ "stamps": [],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    9,
+    4
+   ],
+   "size": [
+    2,
+    4
+   ],
+   "note": "seam, upper: rows 8-11"
+  },
+  {
+   "kind": "exit",
+   "at": [
+    9,
+    9
+   ],
+   "size": [
+    2,
+    2
+   ],
+   "note": "seam, lower: rows 13-14"
+  }
+ ]
+}

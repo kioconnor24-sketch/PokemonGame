@@ -1,0 +1,291 @@
+{
+ "name": "Lake Verity - DESIGN CANDIDATE (not approved; original DPPt geography)",
+ "primary": "gTileset_General",
+ "secondary": "gTileset_Dewford",
+ "width": 50,
+ "height": 44,
+ "legend": {
+  "A": {
+   "metatile": 468,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "B": {
+   "metatile": 469,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "C": {
+   "metatile": 476,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "D": {
+   "metatile": 477,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "E": {
+   "metatile": 484,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "F": {
+   "metatile": 485,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "G": {
+   "metatile": 176,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "H": {
+   "metatile": 177,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "I": {
+   "metatile": 178,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "J": {
+   "metatile": 184,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "K": {
+   "metatile": 161,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "M": {
+   "metatile": 186,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "N": {
+   "metatile": 192,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "O": {
+   "metatile": 194,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "P": {
+   "metatile": 203,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "Q": {
+   "metatile": 470,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "S": {
+   "metatile": 471,
+   "collision": 1,
+   "elevation": 0,
+   "note": "tree (solid)"
+  },
+  "U": {
+   "metatile": 204,
+   "collision": 0,
+   "elevation": 1,
+   "note": "lake water (Surf only; elevation 1)",
+   "surf": true
+  },
+  "V": {
+   "metatile": 1,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass"
+  },
+  "W": {
+   "metatile": 13,
+   "collision": 0,
+   "elevation": 3,
+   "note": "tall grass (no encounter table yet)"
+  },
+  "X": {
+   "metatile": 2,
+   "collision": 0,
+   "elevation": 3,
+   "note": "grass with the shoreline above"
+  },
+  "Y": {
+   "metatile": 464,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "Z": {
+   "metatile": 466,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "a": {
+   "metatile": 480,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  },
+  "b": {
+   "metatile": 482,
+   "collision": 0,
+   "elevation": 3,
+   "note": "dirt road"
+  }
+ },
+ "rows": [
+  "ABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+  "ABABABABABABABABABABABABABABABABABABABABABABABABAB",
+  "CDCDCDCDCDCDCDEFEFEFEFEFEFEFEFEFEFCDCDCDCDCDCDCDCD",
+  "ABABABABABABABGHHHHHHHHHHHHHHHHHHIABABABABABABABAB",
+  "CDCDCDCDCDCDEFJKKKKKKKKKKKKKKKKKKMEFCDCDCDCDCDCDCD",
+  "ABABABABABABGHNKKKKKKKKKKKKKKKKKKOHIABABABABABABAB",
+  "CDCDCDCDCDEFJKKKKKKKKKKKKKKKKKKKKKKMEFCDCDCDCDCDCD",
+  "ABABABABABGHNKKKKKKKKKKKKKKKKKKKKKKOHIABABABABABAB",
+  "CDCDCDCDEFJKKKKKKKKKKKKKKKKKKKKKKKKKKMEFCDCDCDCDCD",
+  "ABABABABGHNKKKKKKKKKKKKKKKKKKKKKKKKKKOHIABABABABAB",
+  "CDCDCDEFJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMEFCDCDCDCD",
+  "ABABABGHNKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOHIABABABAB",
+  "CDCDCDJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMCDCDCDCD",
+  "ABABABJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMABABABAB",
+  "CDCDCDJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMCDCDCDCD",
+  "ABABABJKKKKKKKKKKKKPQSQSQSQSUKKKKKKKKKKKKMABABABAB",
+  "CDCDCDJKKKKKKKKKKKKMCDCDCDCDJKKKKKKKKKKKKMCDCDCDCD",
+  "ABABABJKKKKKKKKKKKKMABABABABJKKKKKKKKKKKKMABABABAB",
+  "CDCDCDJKKKKKKKKKKKKMCDCDCDCDJKKKKKKKKKKKKMCDCDCDCD",
+  "ABABABJKKKKKKKKKKKKMABABABABJKKKKKKKKKKKKMABABABAB",
+  "CDCDCDJKKKKKKKKKKKKMCDCDCDCDJKKKKKKKKKKKKMCDCDCDCD",
+  "ABABABJKKKKKKKKKKKKMABABABABJKKKKKKKKKKKKMABABABAB",
+  "CDCDCDJKKKKKKKKKKKKMEFEFEFEFJKKKKKKKKKKKKMEFEFCDCD",
+  "ABABABJKKKKKKKKKKKKOHHHHHHHHNKKKKKKKKKKKKMVVVVABAB",
+  "CDCDCDJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMVVVVEFCD",
+  "ABABABJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMVVVVVVAB",
+  "CDCDCDJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMVVVVVVCD",
+  "ABABABJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMWWVVVVAB",
+  "CDCDCDJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMWWVVVVCD",
+  "ABABABQSUKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKPWWWWVVQSAB",
+  "CDCDEFEFJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKMVWWWVVCDCD",
+  "ABABWWWVQSUKKKKKKKKKKKKKKKKKKKKKKKKKKPXWWWWWQSABAB",
+  "CDEFWWWVEFJKKKKKKKKKKKKKKKKKKKKKKKKKKMVWWWWVCDCDCD",
+  "ABWWWWWWVVXXUKKKKKKKKKKKKKKKKKKKKKKPXXVWWWVVABABAB",
+  "CDWWWWWWWWWVJKKKKKKKKKKKKKKKKKKKKKKMVVVVVVVVCDCDCD",
+  "ABWWWWWWWWWVQSUKKKKKKKKKKKKKKKKKKPQSVVVVVVQSABABAB",
+  "CDWWWWWWWWWVEFJKKKKKKKKKKKKKKKKKKMCDVVVVVVCDCDCDCD",
+  "ABWWWWWWWWWWVVQSQSQSQSQSQSQSQSQSQSABVVVVVVABABABAB",
+  "CDWWWWWWWWWWWVEFEFCDCDCDCDCDCDCDCDCDVVYZVVCDCDCDCD",
+  "ABWWWWWWWWWWWWWWWWABABABABABABABABABQSabQSABABABAB",
+  "CDWWWWWWWWWWWWWWWWCDCDCDCDCDCDCDCDCDCDVVCDCDCDCDCD",
+  "ABQSQSQSQSQSQSQSQSABABABABABABABABABABVVABABABABAB",
+  "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDVVCDCDCDCDCD"
+ ],
+ "stamps": [],
+ "exits": [
+  {
+   "name": "south",
+   "edge": "south",
+   "span": [
+    38,
+    39
+   ],
+   "to": "Verity Lakefront north gap (x 6-7)",
+   "offset": 32,
+   "status": "unapproved; both maps new"
+  }
+ ],
+ "marks": [
+  {
+   "kind": "exit",
+   "at": [
+    38,
+    43
+   ],
+   "size": [
+    2,
+    1
+   ],
+   "note": "south -> Verity Lakefront (offset +32)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    20,
+    16
+   ],
+   "size": [
+    8,
+    8
+   ],
+   "note": "central island and cavern: story-reserved, closed (no warp, no event)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    2,
+    32
+   ],
+   "size": [
+    16,
+    10
+   ],
+   "note": "south-west shore: tall grass reachable only by Surf (no encounter table yet)"
+  },
+  {
+   "kind": "reserved",
+   "at": [
+    39,
+    28
+   ],
+   "size": [
+    5,
+    7
+   ],
+   "note": "south-east tall grass (no encounter table yet)"
+  }
+ ],
+ "surf_only": [
+  2,
+  32,
+  17,
+  41
+ ],
+ "island": [
+  20,
+  16,
+  27,
+  23
+ ]
+}

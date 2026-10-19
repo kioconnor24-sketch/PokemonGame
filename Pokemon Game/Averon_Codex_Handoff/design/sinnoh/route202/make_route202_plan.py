@@ -54,7 +54,7 @@ fill(14, 0, 16, 1, G)          # DEVIATION: rows 0-1 open only on x 14-16, the 3
                                # 3 open tiles, and q = 14 makes the Jubilife offset even (-30); the stairs'
                                # column is itself +-1 (only the Platinum render shows them)
 fill(13, 3, 15, 6, R)          # sand stub from the clearing (reference c 15-17, r 3-6)
-fill(2, 6, 7, 10, T)           # north-west tall grass (reference c 4-9, r 6-10; row 10 under the canopy)
+fill(2, 6, 7, 9, T)            # north-west tall grass (reference c 4-9, r 6-9)
 fill(8, 6, 12, 6, G)           # verge (reference c 10-14, r 6)
 fill(8, 7, 8, 11, G)           # verge west of the sand (reference c 10, r 7-11)
 fill(16, 6, 18, 6, G)          # verge by the route sign (reference c 18-20, r 6)
@@ -85,6 +85,8 @@ fill(23, 20, 31, 21, T)        # (reference c 25-33, r 20-21)
 fill(25, 22, 29, 22, T)        # (reference c 27-31, r 22)
 fill(28, 23, 29, 23, T)        # (reference c 30-31, r 23)
 fill(6, 13, 12, 14, G)         # below the west ledge (reference c 8-14, r 13-14)
+fill(6, 12, 7, 12, G)          # opened by the west clump's one-row shift (reference c 8-9, r 12)
+fill(2, 14, 5, 14, G)          # (reference c 4-7, r 14): the same shift; see the clump list below
 fill(2, 15, 8, 20, G)          # west meadow with flowers and a light pad (reference c 4-10, r 15-20)
 fill(8, 21, 8, 24, G)          # (reference c 10, r 21-24)
 fill(12, 14, 16, 20, G)        # meadow by the trainer-tips sign (reference c 14-18, r 14-20)
@@ -115,13 +117,15 @@ fill(25, 32, 26, 33, R)        # DEVIATION: the last two rows narrow to 2 wide (
                                # Sandgem's built 2-wide road (x 21-22) road to road
 
 # Tree clumps kept at their measured columns (forest by default, listed for review):
-#   x 2-7 / y 11-12 and x 2-5 / y 13-14 (reference c 4-9 r 11-12, c 4-7 r 13-14), west clump
+#   x 2-7 / y 10-11 and x 2-5 / y 12-13, west clump (reference c 4-9 r 11-12, c 4-7 r 13-14: placed one
+#     row up, within the +-1 of a canopy-hidden footprint, so its trees sit whole on the 2x2 grid)
 #   x 13-20 / y 10-13 and x 17-20 / y 14-19 (reference c 15-22 r 10-13, c 19-22 r 14-19), central clump
 #   x 6-7 / y 20-25 (reference c 8-9 r 20-25), tree column between the west meadow and the sand path
 #   x 13-20 / y 24-25 (reference c 15-22 r 24-25), trees between the two lower ledges
-# Round trees are drawn on a fixed 2x2 grid (left halves on even x, top halves on even y). A clump that
-# starts on an odd column or row therefore shows a half tree at that edge, exactly as Route 201's clumps
-# and Sandgem's own north opening do; only the seams are phase-checked (verify_route202_plan.py).
+# Round trees are drawn on a fixed 2x2 grid (left halves on even x, top halves on even y). Rows are +-1,
+# so clumps sit on even rows; columns are measured exactly, so a clump that starts on an odd column keeps
+# it and shows a half tree at that edge, as Route 201's clumps and Sandgem's own north opening do. Only
+# the seams are phase-checked (verify_route202_plan.py).
 
 SIGNS = [(16, 5),              # route sign by the north clearing (reference c 18, r 5)
          (14, 17),             # trainer-tips sign on its light pad (reference c 16, r 17)
