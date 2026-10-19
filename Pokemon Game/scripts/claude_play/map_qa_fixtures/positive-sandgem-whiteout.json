@@ -1,0 +1,28 @@
+{
+ "batch": [
+  "MAP_SANDGEM_TOWN",
+  "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F"
+ ],
+ "entry": [
+  "MAP_SANDGEM_TOWN",
+  15,
+  10
+ ],
+ "description": "TEST-ONLY: the Sandgem man at (27, 12) starts a level-80 wild battle. Walking into the Center during the run must set HEAL_LOCATION_SANDGEM_TOWN (44); the run loses on purpose and the game's own whiteout must land in front of the Sandgem nurse at (7, 4), healed, then SAVE and a fresh Continue.",
+ "expect": "PASS",
+ "run_args": [
+  "--whiteout",
+  "HEAL_LOCATION_SANDGEM_TOWN",
+  "--whiteout-npc",
+  "MAP_SANDGEM_TOWN,27,12"
+ ],
+ "edits": [
+  {
+   "op": "wildbattle",
+   "map": "SandgemTown",
+   "script": "SandgemTown_EventScript_Man",
+   "species": "SPECIES_GARCHOMP",
+   "level": 80
+  }
+ ]
+}

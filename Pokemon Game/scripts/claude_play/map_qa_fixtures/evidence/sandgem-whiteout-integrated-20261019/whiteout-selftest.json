@@ -1,0 +1,46 @@
+[
+ {
+  "fixture": "negative-sandgem-whiteout-no-setrespawn",
+  "expect": "FAIL",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "6038da393288c14fe5b9dc4d19bd55a5e08d07ceb083f82d4704eb04e73aebe1",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "FAIL",
+  "checks": 34,
+  "failed": [
+   "whiteout: ordinary play set the HEAL_LOCATION_SANDGEM_TOWN anchor",
+   "whiteout: respawned in front of the HEAL_LOCATION_SANDGEM_TOWN nurse"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "positive-sandgem-whiteout",
+  "expect": "PASS",
+  "static_codes": [],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "efa5b373dc5e1d589ac0746d20cee2c945f2cde21af80a9090bc23178f9cbd8c",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 0,
+   "x": 15,
+   "y": 10
+  },
+  "verdict": "PASS",
+  "checks": 35,
+  "failed": [],
+  "continue_verdict": "PASS",
+  "ok": true
+ }
+]
