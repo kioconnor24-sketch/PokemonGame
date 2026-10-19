@@ -77,6 +77,35 @@ jobs:
           print("Pinned Route202 Git blobs verified; no assets were imported into Averon.")
           print("Distinct donor metatiles:", len(report["metatile_frequency"]))
           PY
+          # Real binary roundtrip through the conversion function, using the
+          # donor's own assets as both source and destination. This proves only
+          # identity-format handling, NEVER donor-to-Averon visual compatibility.
+          python3 - "$RUNNER_TEMP/route202-unverified-remap.json" "$RUNNER_TEMP/route202-donor-identity.json" <<'PY'
+          import json, sys
+          m = json.load(open(sys.argv[1]))
+          m["target_map_id"] = "MAP_ROUTE202_DONOR_SELFTEST_ONLY"
+          m["target_primary_tileset"] = "DONOR_SELFTEST_General"
+          m["target_secondary_tileset"] = "DONOR_SELFTEST_Petalburg"
+          for raw_id, entry in m["metatiles"].items():
+              entry.update(target=int(raw_id), behavior_verified=True, graphics_verified=True)
+          with open(sys.argv[2], "w") as out:
+              json.dump(m, out, indent=2)
+          PY
+          python3 "Pokemon Game/scripts/sinnoh-donor-map-pilot.py" convert \
+            --donor-root "$target" --map Route202 \
+            --mapping-json "$RUNNER_TEMP/route202-donor-identity.json" \
+            --output "$RUNNER_TEMP/route202-donor-selftest/map.bin" \
+            > "$RUNNER_TEMP/route202-donor-selftest-result.json"
+          cmp "$target/data/layouts/Route202/map.bin" "$RUNNER_TEMP/route202-donor-selftest/map.bin"
+          python3 - "$RUNNER_TEMP/route202-donor-selftest-result.json" <<'PY'
+          import json, sys
+          r = json.load(open(sys.argv[1]))
+          assert r["status"] == "STAGED_NOT_INTEGRATED_OR_PLAYTESTED"
+          assert r["source_sha256"] == r["output_sha256"]
+          assert r["mapped_unique_metatiles"] == 25
+          assert r["preserved_collision_elevation"] is True
+          print("Actual donor map.bin converted to exact byte-identical DONOR-ONLY self-test (no Averon asset equivalence claimed).")
+          PY
           python3 "Pokemon Game/scripts/sinnoh-donor-bank-audit.py" \
             --donor-root "$target" --engine-root "Pokemon Game/engine" \
             --map Route202 --output "$RUNNER_TEMP/route202-bank-comparison.json"
