@@ -1,0 +1,28 @@
+{
+ "mode": "damage",
+ "build": "release",
+ "rom_sha256": "7c8fda9204c65e7469a9a47b123e7b8968c332316cb5545bff4723fa807ee1e1",
+ "elf_sha256": "7829e1b9a3e5767a09433345a82285d50c6b93f46bf916d24c920971fb450252",
+ "save_before": "c96dc3c1b0c03e519ee02d77455c68f61adac69bd39ba37bb6822cfca4845507",
+ "checks": [
+  {
+   "name": "party hurt in a real wild battle",
+   "ok": true,
+   "party": [
+    [
+     393,
+     23,
+     29
+    ],
+    [
+     661,
+     21,
+     21
+    ]
+   ]
+  }
+ ],
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "c521e7a1c531695c6420150479b2d1dd1ac43619c8de80757bd8a9db1286b59c"
+}

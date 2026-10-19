@@ -1,0 +1,61 @@
+{"t": 1792357090.92, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792357090.94, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792357091.48, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792357091.5, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792357094.09, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792357094.11, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792357095.2, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792357095.23, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792357095.75, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792357095.77, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792357096.31, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792357096.35, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792357097.4, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792357097.43, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792357100.99, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792357101.01, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792357101.66, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [15, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 22, 0], "ppBonuses": 0, "level": 9, "hp": 22, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792357101.98, "event": "capture", "file": "0009-arrived-sandgem.png"}
+{"t": 1792357102.03, "event": "sandgem-check", "name": "DEV continue-warp lands in Sandgem", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792357102.05, "event": "sandgem-check", "name": "party still hurt on arrival (so healing is meaningful)", "ok": true, "party": [[393, 22, 29], [161, 22, 22]]}
+{"t": 1792357103.97, "event": "capture", "file": "0010-arrival.png"}
+{"t": 1792357103.97, "event": "observe", "label": "arrival", "problems": []}
+{"t": 1792357103.97, "event": "sandgem-check", "name": "follower visible (arrival)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792357109.08, "event": "capture", "file": "0011-west-edge-route-201.png"}
+{"t": 1792357109.08, "event": "sandgem-check", "name": "west-edge-route-201 blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [0, 11]], "after": ["MAP_SANDGEM_TOWN", [0, 11]]}
+{"t": 1792357118.38, "event": "capture", "file": "0012-north-edge-route-202.png"}
+{"t": 1792357118.38, "event": "sandgem-check", "name": "north-edge-route-202 blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [21, 0]], "after": ["MAP_SANDGEM_TOWN", [21, 0]]}
+{"t": 1792357126.63, "event": "capture", "file": "0013-south-road.png"}
+{"t": 1792357132.29, "event": "capture", "file": "0014-south-edge-route-219.png"}
+{"t": 1792357132.29, "event": "sandgem-check", "name": "south-edge-route-219 blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [21, 27]], "after": ["MAP_SANDGEM_TOWN", [21, 27]]}
+{"t": 1792357140.54, "event": "capture", "file": "0015-forest-wall.png"}
+{"t": 1792357140.54, "event": "sandgem-check", "name": "forest-wall blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [4, 16]], "after": ["MAP_SANDGEM_TOWN", [4, 16]]}
+{"t": 1792357143.1, "event": "capture", "file": "0016-house-wall.png"}
+{"t": 1792357143.1, "event": "sandgem-check", "name": "house-wall blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [7, 19]], "after": ["MAP_SANDGEM_TOWN", [7, 19]]}
+{"t": 1792357151.02, "event": "capture", "file": "0017-mart-door-without-interior.png"}
+{"t": 1792357151.02, "event": "sandgem-check", "name": "mart-door-without-interior blocks the player", "ok": true, "before": ["MAP_SANDGEM_TOWN", [25, 10]], "after": ["MAP_SANDGEM_TOWN", [25, 10]]}
+{"t": 1792357151.09, "event": "sandgem-check", "name": "still in the field after the closed Mart door", "ok": true, "at": ["MAP_SANDGEM_TOWN", [25, 10]]}
+{"t": 1792357154.84, "event": "capture", "file": "0018-talk-fisherman.png"}
+{"t": 1792357156.6, "event": "sandgem-check", "name": "talking to a townsperson returns control", "ok": true}
+{"t": 1792357160.89, "event": "capture", "file": "0019-town-sign.png"}
+{"t": 1792357161.79, "event": "sandgem-check", "name": "reading the town sign returns control", "ok": true}
+{"t": 1792357165.35, "event": "capture", "file": "0020-inside-pokemon-center.png"}
+{"t": 1792357165.37, "event": "sandgem-check", "name": "Pokemon Center door warp in", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792357167.92, "event": "nurse-retry", "attempt": 0}
+{"t": 1792357169.33, "event": "sandgem-check", "name": "nurse conversation starts", "ok": true, "attempts": 2}
+{"t": 1792357179.01, "event": "capture", "file": "0021-healed.png"}
+{"t": 1792357179.01, "event": "sandgem-check", "name": "nurse heals the hurt party", "ok": true, "before": [[393, 22, 29], [161, 22, 22]], "after": [[393, 29, 29], [161, 22, 22]]}
+{"t": 1792357179.99, "event": "capture", "file": "0022-start-menu.png"}
+{"t": 1792357180.78, "event": "sandgem-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792357186.49, "event": "capture", "file": "0023-save-confirm-inside-pc.png"}
+{"t": 1792357187.63, "event": "capture", "file": "0024-save-step-inside-pc-01.png"}
+{"t": 1792357188.75, "event": "capture", "file": "0025-save-step-inside-pc-02.png"}
+{"t": 1792357189.75, "event": "capture", "file": "0026-save-step-inside-pc-03.png"}
+{"t": 1792357190.69, "event": "capture", "file": "0027-save-step-inside-pc-04.png"}
+{"t": 1792357191.68, "event": "capture", "file": "0028-save-step-inside-pc-05.png"}
+{"t": 1792357192.65, "event": "capture", "file": "0029-save-step-inside-pc-06.png"}
+{"t": 1792357193.69, "event": "capture", "file": "0030-save-step-inside-pc-07.png"}
+{"t": 1792357194.81, "event": "capture", "file": "0031-save-step-inside-pc-08.png"}
+{"t": 1792357195.6, "event": "capture", "file": "0032-saved-inside-pc.png"}
+{"t": 1792357195.6, "event": "release-save", "label": "inside-pc", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792357195.62, "event": "sandgem-check", "name": "SAVE inside the Pokemon Center", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [7, 4]]}

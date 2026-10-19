@@ -1,0 +1,38 @@
+{"t": 1792353786.78, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792353786.8, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792353787.34, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792353787.35, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792353789.93, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792353789.94, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792353791.06, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792353791.09, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792353791.61, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792353791.63, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792353792.17, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792353792.19, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792353793.23, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792353793.25, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792353796.77, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792353796.79, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792353797.44, "event": "field", "map": "MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", "pos": [7, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 10, "hp": 31, "maxhp": 31}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792353797.58, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792353797.58, "event": "continue-check", "problems": []}
+{"t": 1792353797.62, "event": "sandgem-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [7, 4]]}
+{"t": 1792353797.65, "event": "sandgem-check", "name": "CONTINUE resumes inside the Pokemon Center", "ok": true, "at": ["MAP_SANDGEM_TOWN_POKEMON_CENTER_1F", [7, 4]]}
+{"t": 1792353801.37, "event": "sandgem-check", "name": "exit mat back out to the Pokemon Center door", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792353803.26, "event": "capture", "file": "0010-after-door-round-trip.png"}
+{"t": 1792353803.26, "event": "observe", "label": "after-door-round-trip", "problems": []}
+{"t": 1792353803.26, "event": "sandgem-check", "name": "follower visible (after-door-round-trip)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792353805.09, "event": "capture", "file": "0011-outside-before-save.png"}
+{"t": 1792353810.79, "event": "capture", "file": "0012-save-confirm-outside.png"}
+{"t": 1792353811.93, "event": "capture", "file": "0013-save-step-outside-01.png"}
+{"t": 1792353813.06, "event": "capture", "file": "0014-save-step-outside-02.png"}
+{"t": 1792353814.11, "event": "capture", "file": "0015-save-step-outside-03.png"}
+{"t": 1792353815.07, "event": "capture", "file": "0016-save-step-outside-04.png"}
+{"t": 1792353816.05, "event": "capture", "file": "0017-save-step-outside-05.png"}
+{"t": 1792353817.02, "event": "capture", "file": "0018-save-step-outside-06.png"}
+{"t": 1792353818.05, "event": "capture", "file": "0019-save-step-outside-07.png"}
+{"t": 1792353819.19, "event": "capture", "file": "0020-save-step-outside-08.png"}
+{"t": 1792353820.05, "event": "capture", "file": "0021-saved-outside.png"}
+{"t": 1792353820.05, "event": "release-save", "label": "outside", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792353820.07, "event": "sandgem-check", "name": "SAVE outside in Sandgem", "ok": true, "at": ["MAP_SANDGEM_TOWN", [11, 15]]}
