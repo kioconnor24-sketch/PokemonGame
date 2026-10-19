@@ -1,0 +1,60 @@
+{"t": 1792382481.81, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792382481.83, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792382482.36, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792382482.38, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792382484.96, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792382484.99, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792382486.1, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792382486.15, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792382486.68, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792382486.71, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792382487.25, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792382487.27, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792382488.29, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792382488.31, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792382491.86, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792382491.9, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792382492.54, "event": "field", "map": "MAP_SANDGEM_TOWN", "pos": [15, 10], "party": [{"species": 393, "status": 0, "moves": [1, 45, 55, 0], "pp": [35, 40, 25, 0], "ppBonuses": 0, "level": 9, "hp": 29, "maxhp": 29}, {"species": 161, "status": 0, "moves": [10, 111, 98, 0], "pp": [35, 40, 30, 0], "ppBonuses": 0, "level": 7, "hp": 22, "maxhp": 22}]}
+{"t": 1792382493.07, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SANDGEM_TOWN", [15, 10]]}
+{"t": 1792382493.33, "event": "capture", "file": "0009-start.png"}
+{"t": 1792382493.33, "event": "observe", "label": "start", "problems": []}
+{"t": 1792382493.33, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 20873, "invisible": false}}
+{"t": 1792382498.02, "event": "map", "map": "MAP_ROUTE201", "pos": [63, 7]}
+{"t": 1792382498.11, "event": "map-qa-check", "name": "reached MAP_ROUTE201", "ok": true, "at": ["MAP_ROUTE201", [63, 7]]}
+{"t": 1792382514.98, "event": "capture", "file": "0010-edge-MAP_ROUTE201-down.png"}
+{"t": 1792382514.98, "event": "map-qa-check", "name": "MAP_ROUTE201 closed down edge at (16, 21) blocks", "ok": true, "before": ["MAP_ROUTE201", [16, 21]], "after": ["MAP_ROUTE201", [16, 21]]}
+{"t": 1792382532.09, "event": "capture", "file": "0011-edge-MAP_ROUTE201-left.png"}
+{"t": 1792382532.09, "event": "map-qa-check", "name": "MAP_ROUTE201 closed left edge at (0, 10) blocks", "ok": true, "before": ["MAP_ROUTE201", [0, 10]], "after": ["MAP_ROUTE201", [0, 10]]}
+{"t": 1792382551.46, "event": "capture", "file": "0012-edge-MAP_ROUTE201-left.png"}
+{"t": 1792382551.46, "event": "map-qa-check", "name": "MAP_ROUTE201 closed left edge at (0, 14) blocks", "ok": true, "before": ["MAP_ROUTE201", [0, 14]], "after": ["MAP_ROUTE201", [0, 14]]}
+{"t": 1792382570.67, "event": "capture", "file": "0013-seam-MAP_ROUTE201-right.png"}
+{"t": 1792382571.44, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 6]], "got": ["MAP_ROUTE201", [63, 6]]}
+{"t": 1792382572.78, "event": "capture", "file": "0014-seam-MAP_ROUTE201-right.png"}
+{"t": 1792382573.57, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 8]], "got": ["MAP_ROUTE201", [63, 8]]}
+{"t": 1792382574.76, "event": "capture", "file": "0015-seam-MAP_ROUTE201-right.png"}
+{"t": 1792382575.52, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 9]], "got": ["MAP_ROUTE201", [63, 9]]}
+{"t": 1792382576.16, "event": "map", "map": "MAP_SANDGEM_TOWN", "pos": [0, 13]}
+{"t": 1792382576.24, "event": "map-qa-check", "name": "reached MAP_SANDGEM_TOWN", "ok": true, "at": ["MAP_SANDGEM_TOWN", [0, 13]]}
+{"t": 1792382586.51, "event": "capture", "file": "0016-edge-MAP_SANDGEM_TOWN-up.png"}
+{"t": 1792382586.51, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed up edge at (22, 0) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [22, 0]], "after": ["MAP_SANDGEM_TOWN", [22, 0]]}
+{"t": 1792382594.79, "event": "capture", "file": "0017-edge-MAP_SANDGEM_TOWN-down.png"}
+{"t": 1792382594.79, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN closed down edge at (22, 27) blocks", "ok": true, "before": ["MAP_SANDGEM_TOWN", [22, 27]], "after": ["MAP_SANDGEM_TOWN", [22, 27]]}
+{"t": 1792382605.77, "event": "capture", "file": "0018-seam-MAP_SANDGEM_TOWN-left.png"}
+{"t": 1792382606.51, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN left seam (0, 10) -> MAP_ROUTE201 (63, 6) and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN", [0, 10]], "got": ["MAP_SANDGEM_TOWN", [0, 10]]}
+{"t": 1792382607.85, "event": "capture", "file": "0019-seam-MAP_SANDGEM_TOWN-left.png"}
+{"t": 1792382608.64, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN left seam (0, 12) -> MAP_ROUTE201 (63, 8) and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN", [0, 12]], "got": ["MAP_SANDGEM_TOWN", [0, 12]]}
+{"t": 1792382609.75, "event": "capture", "file": "0020-seam-MAP_SANDGEM_TOWN-left.png"}
+{"t": 1792382610.49, "event": "map-qa-check", "name": "MAP_SANDGEM_TOWN left seam (0, 13) -> MAP_ROUTE201 (63, 9) and back", "ok": true, "leg": "back", "expected": ["MAP_SANDGEM_TOWN", [0, 13]], "got": ["MAP_SANDGEM_TOWN", [0, 13]]}
+{"t": 1792382611.2, "event": "map", "map": "MAP_ROUTE201", "pos": [63, 9]}
+{"t": 1792382611.32, "event": "map-qa-check", "name": "region UI: fixture grant present in MAP_ROUTE201", "ok": true, "at": ["MAP_ROUTE201", [63, 9]], "key_items": [713]}
+{"t": 1792382623.01, "event": "capture", "file": "0021-region-ui-pokenav-MAP_ROUTE201.png"}
+{"t": 1792382626.34, "event": "map-qa-check", "name": "region UI: PokeNav MAP refused", "ok": true, "opened": false}
+{"t": 1792382626.35, "event": "map-qa-check", "name": "region UI: back in the field after PokeNav MAP (not black, player can move)", "ok": true, "black": false, "moved": true}
+{"t": 1792382648.8, "event": "capture", "file": "0022-region-ui-townmap-MAP_ROUTE201.png"}
+{"t": 1792382649.79, "event": "map-qa-check", "name": "region UI: Town Map refused", "ok": true, "opened": false}
+{"t": 1792382649.82, "event": "map-qa-check", "name": "region UI: back in the field after Town Map (not black, player can move)", "ok": true, "black": false, "moved": true}
+{"t": 1792382666.28, "event": "capture", "file": "0023-region-ui-fly-MAP_ROUTE201.png"}
+{"t": 1792382670.38, "event": "map-qa-check", "name": "region UI: Fly refused", "ok": true, "opened": false}
+{"t": 1792382670.39, "event": "map-qa-check", "name": "region UI: back in the field after Fly (not black, player can move)", "ok": true, "black": false, "moved": true}
+{"t": 1792382671.37, "event": "capture", "file": "0024-start-menu.png"}
+{"t": 1792382672.17, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}

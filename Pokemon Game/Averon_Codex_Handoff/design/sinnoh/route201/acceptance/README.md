@@ -24,6 +24,6 @@ Batch: `MAP_ROUTE201`, `MAP_SANDGEM_TOWN`, `MAP_SANDGEM_TOWN_POKEMON_CENTER_1F`.
 
 **Entry is a disclosed DEV-only fixture.** `map_qa fixture-save` sets the engine's own CONTINUE_GAME_WARP to Sandgem (15, 10) on a copy of a real save. There is still no ordinary Averon → Sinnoh entrance. No ROMs, ELFs, saves or savestates are committed. The `state-*.json` files are decoded field summaries.
 
-Region UI on Route 201: see `region-ui/` (added once that run completes).
+**Region UI on Route 201:** PokéNav MAP, the Town Map and Fly are all refused, and each returns to a working field. See `region-ui/`, which also covers the harness timing flake found and fixed on the way.
 
 Native: Averon suite **286/286**, including `averon_route201_location.c` (2 tests).
