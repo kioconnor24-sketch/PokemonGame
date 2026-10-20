@@ -92,7 +92,7 @@ def warp_stand(m, x, y):
 
 def warp_arrive(m, x, y):
     """Where a warp into (x, y) lands the player: on a step-on (trigger) warp, the warp tile itself."""
-    return (x, y) if mapdata.trigger_entry(m, x, y) else warp_stand(m, x, y)
+    return mapdata.warp_arrival(m, x, y)
 
 
 def moves(m, x, y):
@@ -115,16 +115,7 @@ def edge_tiles(m, direction):
     return [(x, y) for y in range(m.height) if m.walkable(x, y)]
 
 
-def across(m, other, direction, offset, tile):
-    """Where stepping off m at tile lands in the connected map (fieldmap: pos -= offset)."""
-    x, y = tile
-    if direction == "up":
-        return (x - offset, other.height - 1)
-    if direction == "down":
-        return (x - offset, 0)
-    if direction == "left":
-        return (other.width - 1, y - offset)
-    return (0, y - offset)
+across = mapdata.across
 
 
 def reach(m, starts, reverse=False):

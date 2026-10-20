@@ -107,6 +107,28 @@ class StaticLayer(unittest.TestCase):
         split, _ = map_qa.static_audit(FakeWorld(route, sealed), ["ROUTE", "CAVE"])
         self.assertIn("exit-unreachable", codes(split))
 
+    def test_driver_routes_through_a_cave_when_the_edge_is_in_the_other_half(self):
+        import driver as drv
+        route = FakeMap("ROUTE", ["#.D.#",
+                                  "#...#",
+                                  "#####",
+                                  "#.D.#",
+                                  "#...#"], warps=[(2, 3, "CAVE", 0), (2, 0, "CAVE", 1)],
+                        connections=[("up", "TOWN", 0)])
+        cave = FakeMap("CAVE", ["#M.M#",
+                                "#...#"], warps=[(1, 0, "ROUTE", 0), (3, 0, "ROUTE", 1)])
+        town = FakeMap("TOWN", ["#...#"])
+        world = FakeWorld(route, cave, town)
+        world.map_ids = {"ROUTE": 0, "CAVE": 1, "TOWN": 2}
+        for m in (route, cave, town):
+            m.world = world
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = world
+        legs = d.map_route("ROUTE", "TOWN", (2, 4))            # south half: the north edge is not walkable from here
+        self.assertEqual([leg[:2] for leg in legs], [("ROUTE", "warp"), ("CAVE", "warp"), ("ROUTE", "edge")])
+        self.assertEqual(legs[0][2], (2, 3))                    # the south door, not the unreachable north one
+        self.assertEqual(d.map_route("ROUTE", "TOWN", (2, 1))[0][:2], ("ROUTE", "edge"))   # north half: straight up
+
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",
                 "#.....#",
