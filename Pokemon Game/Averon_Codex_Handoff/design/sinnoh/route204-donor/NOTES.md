@@ -19,8 +19,23 @@ directions are flagged; there is no ledge between the halves.
 The audit and the runtime driver's `go` are per-map. Accepting this batch therefore needs batch-level
 (cross-map) reachability in `map_qa`, not a geography edit.
 
+## Throwaway mGBA check (2026-10-20)
+
+This is a NORMAL-only run in an uncommitted throwaway tree: maps registered locally, section shown as ROUTE 201,
+no IDs allocated. ROM `bb6e7cc6…`, 0 compiler warnings. The tooling is `claude/map-qa-batch` @ `c547ddfd`.
+
+**Result: 25/25 PASS, 0 static findings.** The batch-aware audit joins Route 204's halves through Ravaged Path.
+- **Warps:** all four, both ways, with the follower visible after each arrival and an exit still reachable.
+- **Edges:** both north and the south closed edges block.
+- **Menus:** Start menu and SAVE work.
+
+The first runs found the unenterable north cave door, now fixed in `ACCESS_EDITS`. They also showed that the driver
+routed through an unreachable door, which `c547ddfd` fixes.
+
+Not yet run: RELEASE, Continue, and negatives. Those belong to the production PR, once IDs are approved.
+
 ## Open before production
 
-1. **`map_qa`:** treat two exits as connected when another map in the batch links them, both statically and at runtime.
-2. **Door collision:** the north cave door (19, 24) carries the collision bit in the donor. Check in mGBA whether it can be entered, and clear the bit as a documented access fix if not.
+1. **`map_qa` batch reachability:** done on `claude/map-qa-batch`.
+2. **Door collision:** done. The north cave door's collision bit is cleared, and the door was verified in mGBA.
 3. **IDs and sections:** none allocated. The ends stay closed until Jubilife (Codex #184) and Floaroma exist.
