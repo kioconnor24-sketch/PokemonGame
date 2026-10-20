@@ -1,0 +1,48 @@
+{
+ "maps": [
+  "MAP_VERITY_LAKEFRONT",
+  "MAP_LAKE_VERITY",
+  "MAP_ROUTE201"
+ ],
+ "build": "release",
+ "rom_sha256": "a55cf3d9157d58385c4378a1e56cd529dfb9209d12e4f8fd059e2e73bfcfee1d",
+ "static_findings": [],
+ "save_before": "dfe7f6538a709269e67d199ca1568da31d94de9bd4632fc9b246a170050510dc",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     34,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     34,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "dfe7f6538a709269e67d199ca1568da31d94de9bd4632fc9b246a170050510dc",
+ "verdict": "PASS"
+}

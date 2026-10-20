@@ -1,0 +1,12 @@
+Verity acceptance: local integration on #181 head 962a472e; integration commit 2498a036, engine tree d62eba534302e36250a47d1fb78d73a4aa6af095
+NORMAL/RELEASE: 0 compiler warnings; linked 17,337,356 / 17,456,500 B
+d08695c7e940a7c32bc2eb49f5f10ceb8ce58c95bcb2e5bd68e8e43927d98adc  pokeemerald.gba
+a55cf3d9157d58385c4378a1e56cd529dfb9209d12e4f8fd059e2e73bfcfee1d  pokeemerald-release.gba
+normal run PASS 40 / 40 d08695c7e940 [] static []
+normal continue PASS 3 / 3 d08695c7e940 [] static []
+release run PASS 40 / 40 a55cf3d9157d [] static []
+release continue PASS 3 / 3 a55cf3d9157d [] static []
+- Tests PASSED:          316
+- Tests TOTAL:           316
+OK   negative-verity-warp-landing: expect FAIL, run FAIL, static ['exit-not-walkable', 'exit-unreachable'], failed ['MAP_VERITY_LAKEFRONT warp 0 (2, 4) -> MAP_LAKE_VERITY and back', 'MAP_VERITY_LAKEFRONT warp 1 (3, 4) -> MAP_LAKE_VERITY and back', 'MAP_LAKE_VERITY warp 0 (36, 43) -> MAP_VERITY_LAKEFRONT and back']
+OK   negative-verity-wrong-offset: expect FAIL, run FAIL, static ['seam-mismatch'], failed ['MAP_VERITY_LAKEFRONT right seam (19, 8) -> MAP_ROUTE201 (0, 8) and back', 'MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 10) and back', 'MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 13) and back']

@@ -1,0 +1,28 @@
+[
+ {
+  "fixture": "negative-verity-wrong-offset",
+  "expect": "FAIL",
+  "static_codes": [
+   "seam-mismatch"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "e3c2612f7df05e20a9131f367bb4bdebc15880839b826b5895e9c57f8b6ebb71",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 5,
+   "x": 14,
+   "y": 13
+  },
+  "verdict": "FAIL",
+  "checks": 8,
+  "failed": [
+   "MAP_VERITY_LAKEFRONT right seam (19, 8) -> MAP_ROUTE201 (0, 8) and back",
+   "MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 10) and back",
+   "MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 13) and back"
+  ],
+  "ok": true
+ }
+]
