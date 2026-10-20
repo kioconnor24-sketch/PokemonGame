@@ -162,6 +162,14 @@ class Driver:
                     if mid == map_id and pos in goals:
                         s = self.step(d)
                         self.settle()
+                elif mapdata.trigger_entry(m, *rest[0]):
+                    # Step-on warp: walking onto the tile is the warp, so approach it and step once.
+                    before, push = mapdata.trigger_entry(m, *rest[0])
+                    mid, pos = self.walk_path(map_id, {before}, on_event=on_event)
+                    if mid == map_id and pos == before:
+                        self.step(push)
+                        time.sleep(1.0)
+                        self.settle()
                 else:
                     tile, push = rest[0], rest[1]
                     mid, pos = self.walk_path(map_id, {tile}, on_event=on_event)

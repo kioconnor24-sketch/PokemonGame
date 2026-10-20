@@ -70,6 +70,9 @@ def is_door(m, x, y):
 
 def warp_push(m, x, y):
     """Direction to press to take the warp at (x, y)."""
+    entry = mapdata.trigger_entry(m, x, y)
+    if entry:
+        return entry[1]
     b = m.behavior(x, y)
     for word, d in (("SOUTH", "down"), ("NORTH", "up"), ("EAST", "right"), ("WEST", "left")):
         if word + "_ARROW" in b:
@@ -78,10 +81,18 @@ def warp_push(m, x, y):
 
 
 def warp_stand(m, x, y):
-    """Tile the player stands on to take the warp, which is also where it arrives."""
+    """Tile the player stands on to take the warp (for arrow warps and doors, also where it arrives)."""
+    entry = mapdata.trigger_entry(m, x, y)
+    if entry:
+        return entry[0]
     if is_door(m, x, y) or not m.walkable(x, y):
         return (x, y + 1)
     return (x, y)
+
+
+def warp_arrive(m, x, y):
+    """Where a warp into (x, y) lands the player: on a step-on (trigger) warp, the warp tile itself."""
+    return (x, y) if mapdata.trigger_entry(m, x, y) else warp_stand(m, x, y)
 
 
 def moves(m, x, y):
@@ -445,7 +456,7 @@ class Runner:
         dx, dy, dpush = None, None, None
         if p["dest_warp"] < len(dest.warps):
             wx, wy = dest.warps[p["dest_warp"]][:2]
-            arrive = warp_stand(dest, wx, wy)
+            arrive, dstand = warp_arrive(dest, wx, wy), warp_stand(dest, wx, wy)
             dpush = warp_push(dest, wx, wy)
         else:
             arrive = None
@@ -462,7 +473,7 @@ class Runner:
             return self.check(name, False, leg="in", expected=(p["dest"], arrive), got=there)
         self.follower(f"{p['dest']} via warp")
         self.can_leave(f"warping into {p['dest']}")
-        self.go(p["dest"], arrive)
+        self.go(p["dest"], dstand)
         for _ in range(4):
             self.press(dpush, hold=0.3, after=1.2)
             if self.d.here()[0] != p["dest"]:
@@ -470,7 +481,7 @@ class Runner:
         back = self.wait_settled()
         # Several warps may share one destination (a Center's two exit mats); any of them is a correct return.
         m = self.w.map(map_id)
-        group = {warp_stand(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
+        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         ok = self.check(name, back[0] == map_id and back[1] in group, leg="back", expected=(map_id, sorted(group)), got=back)
         if ok:
             self.follower(f"{map_id} after warp round trip")

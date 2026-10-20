@@ -70,6 +70,24 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(warp["tile"], (3, 3))   # stand below a door
         self.assertEqual(warp["push"], "up")
 
+    def test_step_on_trigger_warps_are_entered_from_their_approach_tile(self):
+        # A warp tile with a coord trigger (no arrow/door metatile) is walked onto; the player lands on it.
+        lake = FakeMap("LAKE", ["####",
+                                "#..#",
+                                "#..#",
+                                "##.#"], warps=[(2, 3, "FRONT", 0)])
+        lake.triggers = {(2, 3)}
+        self.assertEqual(map_qa.warp_stand(lake, 2, 3), (2, 2))
+        self.assertEqual(map_qa.warp_push(lake, 2, 3), "down")
+        self.assertEqual(map_qa.warp_arrive(lake, 2, 3), (2, 3))
+        # Without the trigger it is an ordinary walkable warp tile: stand and arrive on it.
+        lake.triggers = set()
+        self.assertEqual((map_qa.warp_stand(lake, 2, 3), map_qa.warp_arrive(lake, 2, 3)), ((2, 3), (2, 3)))
+        # A trigger with no warp is not a warp; a door keeps its doorstep arrival.
+        lake.triggers = {(1, 1)}
+        self.assertIsNone(map_qa.mapdata.trigger_entry(lake, 1, 1))
+        self.assertEqual(map_qa.warp_arrive(town(), 3, 2), (3, 3))
+
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",
                 "#.....#",
