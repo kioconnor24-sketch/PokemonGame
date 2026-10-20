@@ -1,14 +1,13 @@
 {
  "batch": [
-  "MAP_ROUTE202",
-  "MAP_SANDGEM_TOWN"
+  "MAP_ROUTE202"
  ],
  "entry": [
   "MAP_ROUTE202",
   24,
   31
  ],
- "description": "TEST-ONLY: Route 202's down connection is shifted to offset 6 while Sandgem's up stays -3, so the pair is no longer reciprocal. Crossing the Route 202/Sandgem seam must fail its exact landing or return check.",
+ "description": "TEST-ONLY: Route 202's down connection is shifted to offset 6 while Sandgem's up stays -3, so the pair is no longer reciprocal. Crossing the Route 202/Sandgem seam must fail its exact landing or return check. The batch is Route 202 alone so the runner never travels through the broken seam afterwards.",
  "expect": "FAIL",
  "must_fail": [
   "seam"

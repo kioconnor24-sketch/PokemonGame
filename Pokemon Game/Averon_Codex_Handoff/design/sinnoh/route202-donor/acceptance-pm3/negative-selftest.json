@@ -1,0 +1,28 @@
+[
+ {
+  "fixture": "negative-route202-wrong-offset",
+  "expect": "FAIL",
+  "static_codes": [
+   "seam-mismatch"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "9852650f6877396ba5e21d24f9ae0f8c050a63b8c4b2e21c793ac8dc13257f84",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 4,
+   "x": 24,
+   "y": 31
+  },
+  "verdict": "FAIL",
+  "checks": 11,
+  "failed": [
+   "MAP_ROUTE202 down seam (25, 33) -> MAP_SANDGEM_TOWN (19, 0) and back",
+   "MAP_ROUTE202 down seam (26, 33) -> MAP_SANDGEM_TOWN (20, 0) and back",
+   "MAP_ROUTE202 down seam (27, 33) -> MAP_SANDGEM_TOWN (21, 0) and back"
+  ],
+  "ok": true
+ }
+]

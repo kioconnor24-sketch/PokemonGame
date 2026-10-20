@@ -1,0 +1,335 @@
+{
+ "maps": [
+  "MAP_ROUTE202",
+  "MAP_SANDGEM_TOWN"
+ ],
+ "build": "normal",
+ "rom_sha256": "f9c172d9beea85a9753e7b6cd65ef9c2ae005f5c29b98054d464cd9ab92639b8",
+ "static_findings": [],
+ "save_before": "ebe683716c8bd412b34368e113ac4ea8fdf9f0692b60f3d29bae7b82000d930a",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE202",
+    [
+     24,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE202",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE202",
+    [
+     24,
+     30
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 closed up edge at (12, 0) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE202",
+    [
+     12,
+     0
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE202",
+    [
+     12,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 closed left edge at (0, 7) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE202",
+    [
+     0,
+     7
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE202",
+    [
+     0,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 closed left edge at (0, 22) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE202",
+    [
+     0,
+     22
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE202",
+    [
+     0,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 closed right edge at (29, 17) blocks",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE202",
+    [
+     29,
+     17
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE202",
+    [
+     29,
+     17
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 down seam (22, 33) -> MAP_SANDGEM_TOWN (19, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE202",
+    [
+     22,
+     33
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE202",
+    [
+     22,
+     33
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 down seam (25, 33) -> MAP_SANDGEM_TOWN (22, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE202",
+    [
+     25,
+     33
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE202",
+    [
+     25,
+     33
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE202 down seam (27, 33) -> MAP_SANDGEM_TOWN (24, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE202",
+    [
+     27,
+     33
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE202",
+    [
+     27,
+     33
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_SANDGEM_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN closed down edge at (22, 27) blocks",
+   "ok": true,
+   "before": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     27
+    ]
+   ],
+   "after": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN left seam (0, 10) -> MAP_ROUTE201 (63, 6) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     10
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN left seam (0, 12) -> MAP_ROUTE201 (63, 8) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN left seam (0, 13) -> MAP_ROUTE201 (63, 9) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     13
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     0,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (19, 0) -> MAP_ROUTE202 (22, 33) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     19,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (22, 0) -> MAP_ROUTE202 (25, 33) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     22,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SANDGEM_TOWN up seam (24, 0) -> MAP_ROUTE202 (27, 33) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (r202-normal)",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "c11269f534d85125c7937f8cd5ec73daeb6a10d28c2047e02ed2d561080d6732",
+ "verdict": "PASS"
+}

@@ -1,0 +1,47 @@
+{
+ "maps": [
+  "MAP_ROUTE202",
+  "MAP_SANDGEM_TOWN"
+ ],
+ "build": "normal",
+ "rom_sha256": "f9c172d9beea85a9753e7b6cd65ef9c2ae005f5c29b98054d464cd9ab92639b8",
+ "static_findings": [],
+ "save_before": "c11269f534d85125c7937f8cd5ec73daeb6a10d28c2047e02ed2d561080d6732",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SANDGEM_TOWN",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 20873,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "c11269f534d85125c7937f8cd5ec73daeb6a10d28c2047e02ed2d561080d6732",
+ "verdict": "PASS"
+}
