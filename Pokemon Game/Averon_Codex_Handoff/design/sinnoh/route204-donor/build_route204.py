@@ -11,7 +11,7 @@ Conversion (every change listed and asserted):
 - primary metatiles keep their IDs (attribute words differ only on 3, layer type; 215; 510), except the
   two fence junctions 438 and 215, whose Averon art is blank/rock, which become the fence post below them;
 - the four donor Rustboro metatiles Route 204 uses become Averon General equivalents (SECONDARY);
-- collision/elevation bits are the donor's, cell for cell.
+- collision/elevation bits are the donor's, cell for cell, except ACCESS_EDITS (one unenterable door).
 Warps are engine-native (cave doors on Route 204, south arrow warps in Ravaged Path): the donor's two pairs.
 Both Route 204 ends stay closed: Jubilife (south) is Codex's staged #184 and Floaroma (north) is unbuilt.
 Excluded: donor trainers/NPCs/items (15 + 2 objects), scripts, music, flags and map/section IDs.
@@ -46,6 +46,9 @@ SECONDARY = {
     },
     "RavagedPath": {},        # its Cave metatiles are identical to Averon's: kept as they are
 }
+# Access fix measured in mGBA: the donor's north cave door carries the collision bit, so stepping into it
+# from its doorstep does nothing. Its twin door (11, 31) has no collision bit. Clear it.
+ACCESS_EDITS = {"Route204": {(19, 24): (167 | (1 << 10), 167)}}
 
 
 def git_blob(raw):
@@ -59,9 +62,13 @@ def convert(donor):
         assert git_blob(raw) == blob and (layout["width"], layout["height"]) == (w, h), name
         remap = SECONDARY[name]
         cells = [(c & 0xFC00) | remap.get(c & 1023, c & 1023) for c in blocks]
+        for (x, y), (was, new) in ACCESS_EDITS.get(name, {}).items():
+            assert cells[y * w + x] == was, (name, x, y, cells[y * w + x])
+            cells[y * w + x] = new
         if name == "Route204":
             assert all(c & 1023 < 512 and c & 1023 not in (438, 215) for c in cells), "an unmapped metatile survived"
-        assert all((a ^ b) & 0xFC00 == 0 for a, b in zip(blocks, cells)), "collision/elevation changed"
+        fixed = {y * w + x for x, y in ACCESS_EDITS.get(name, {})}
+        assert all((a ^ b) & 0xFC00 == 0 for i, (a, b) in enumerate(zip(blocks, cells)) if i not in fixed), "collision changed"
         data = struct.pack("<%dH" % len(cells), *cells)
         out[name] = data
         receipt["maps"][name] = {"git_blob": blob, "source_sha256": hashlib.sha256(raw).hexdigest(),
