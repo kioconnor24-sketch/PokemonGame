@@ -1,0 +1,86 @@
+{
+  "id": "MAP_FLOAROMA_TOWN",
+  "name": "FloaromaTown",
+  "layout": "LAYOUT_FLOAROMA_TOWN",
+  "music": "MUS_LILYCOVE",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE204",
+      "offset": 2,
+      "direction": "down"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_FLOAROMA_MEADOW",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_FLOAROMA_MEADOW",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "FloaromaTown_EventScript_ToMeadow0"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "FloaromaTown_EventScript_ToMeadow1"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FloaromaTown_EventScript_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FloaromaTown_EventScript_Sign"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FloaromaTown_EventScript_Sign"
+    }
+  ]
+}

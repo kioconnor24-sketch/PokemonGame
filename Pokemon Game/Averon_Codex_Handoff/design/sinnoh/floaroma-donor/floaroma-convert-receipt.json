@@ -1,0 +1,69 @@
+{
+  "town": {
+    "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+    "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+    "map": "FloaromaTown",
+    "git_blob": "0bc532f6ac4fdd6d0b57c3ed66837d56c9b473ed",
+    "source_sha256": "25f69107ad39612fb5ddb1b8dd502233b054952938025004d6265ffcdd332620",
+    "output_sha256": "b4fa7b6d341247cf9a1f91c5e12ee18c42c42f69c0a1478a73329b7004e7e8da",
+    "changed_cells": 103,
+    "buildings": [
+      "center",
+      "flower_shop",
+      "house1",
+      "house2",
+      "mart"
+    ],
+    "excluded_donor_warps": [
+      [
+        18,
+        28,
+        "MAP_FLOAROMA_TOWN_POKEMON_CENTER_1F"
+      ],
+      [
+        26,
+        28,
+        "MAP_FLOAROMA_TOWN_HOUSE2"
+      ],
+      [
+        13,
+        16,
+        "MAP_FLOAROMA_TOWN_HOUSE1"
+      ],
+      [
+        22,
+        13,
+        "MAP_FLOAROMA_TOWN_FLOWER_SHOP"
+      ],
+      [
+        26,
+        19,
+        "MAP_FLOAROMA_TOWN_MART"
+      ]
+    ]
+  },
+  "meadow": {
+    "map": "FloaromaMeadow",
+    "git_blob": "6ed0b03973020ca45fca8442c70f5cafaaa67c72",
+    "source_sha256": "a0556f17b07e35566f94552a08b076a435c43add796cb4051078b017778e2f3d",
+    "output_sha256": "2bf4b776856355c8c63ff1b0780d10f9dd6429567c7be4ef51c4bbffcaedcbc1",
+    "changed_cells": 54,
+    "excluded_donor_warps": [
+      [
+        35,
+        41,
+        "MAP_FLOAROMA_MEADOW_HOUSE"
+      ],
+      [
+        48,
+        10,
+        "MAP_FLOAROMA_MEADOW"
+      ],
+      [
+        49,
+        10,
+        "MAP_FLOAROMA_MEADOW"
+      ]
+    ]
+  }
+}
