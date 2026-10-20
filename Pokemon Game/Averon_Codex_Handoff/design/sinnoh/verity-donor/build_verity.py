@@ -127,8 +127,8 @@ def scripts(map_id, extra=""):
     name, other = NAME[map_id], OTHER[map_id]
     text = f"{name}_MapScripts::\n\t.byte 0\n"
     for i in range(2):
-        # DoWarp locks field controls itself; no waitstate, so a missing warp line can't freeze the player.
-        text += f"\n{name}_EventScript_ToWarp{i}::\n\twarp {other}, {i}\n\tend\n"
+        # Measured in mGBA: without waitstate the trigger ends before the warp runs and the player stays put.
+        text += f"\n{name}_EventScript_ToWarp{i}::\n\twarp {other}, {i}\n\twaitstate\n\tend\n"
     return text + extra
 
 
