@@ -1,5 +1,8 @@
 # Documentation index
-Start with the [operating contract](CURRENT_PHASE_AND_HANDOFF.md), [Sinnoh master roadmap](SINNOH_MASTER_PRODUCTION_ROADMAP.md), [22 developer work packages](SINNOH_DEVELOPER_WORK_PACKAGES.md), [87-place coverage](SINNOH_FULL_AREA_COVERAGE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). The [integration queue](INTEGRATION_QUEUE.md), [manager handoff](CHATGPT_MANAGER_HANDOFF_20261019.md) and [reset audit](ORGANIZATIONAL_RESET_20261018.md) are dated snapshots, **not current work orders**.
+
+**Latest manager/current-start document:** [**October 20 concise manager handoff**](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261020.md) (**Route202 #181 requires verified seam correction + genuine owner eight-path guard approval; tested Verity maps are held, Codex #184 remains staging-only/paused**). The [October 19 extended handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261019.md) and [manager reset snapshot](CHATGPT_MANAGER_HANDOFF_20261019.md) are historical references, **not** current work orders. Refresh live GitHub before acting.
+
+Start with the [operating contract](CURRENT_PHASE_AND_HANDOFF.md), [Sinnoh master roadmap](SINNOH_MASTER_PRODUCTION_ROADMAP.md), [22 developer work packages](SINNOH_DEVELOPER_WORK_PACKAGES.md), [87-place coverage](SINNOH_FULL_AREA_COVERAGE.md) and [#15 live claims](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). The [integration queue](INTEGRATION_QUEUE.md), [historical manager handoff](CHATGPT_MANAGER_HANDOFF_20261019.md) and [reset audit](ORGANIZATIONAL_RESET_20261018.md) are dated snapshots, **not current work orders**.
 
 | Need | Record |
 | --- | --- |

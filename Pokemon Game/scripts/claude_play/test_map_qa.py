@@ -88,6 +88,25 @@ class StaticLayer(unittest.TestCase):
         self.assertIsNone(map_qa.mapdata.trigger_entry(lake, 1, 1))
         self.assertEqual(map_qa.warp_arrive(town(), 3, 2), (3, 3))
 
+    def test_a_route_split_by_a_cliff_is_joined_through_a_cave_in_the_batch(self):
+        # Route: south half (rows 3-4) and north half (rows 0-1) split by a wall; each half has a cave door.
+        route = FakeMap("ROUTE", ["#D###",
+                                  "#...#",
+                                  "#####",
+                                  "#..D#",
+                                  "#...#"], warps=[(3, 3, "CAVE", 0), (1, 0, "CAVE", 1)])
+        cave = FakeMap("CAVE", ["#M.M#",
+                                "#...#"], warps=[(1, 0, "ROUTE", 0), (3, 0, "ROUTE", 1)])
+        joined, _ = map_qa.static_audit(FakeWorld(route, cave), ["ROUTE", "CAVE"])
+        self.assertNotIn("exit-unreachable", codes(joined))
+        alone, _ = map_qa.static_audit(FakeWorld(route, cave), ["ROUTE"])
+        self.assertIn("exit-unreachable", codes(alone))
+        # The cave's own two exits really are joined inside it; walling it off splits the batch again.
+        sealed = FakeMap("CAVE", ["#M#M#",
+                                  "#.#.#"], warps=cave.warps)
+        split, _ = map_qa.static_audit(FakeWorld(route, sealed), ["ROUTE", "CAVE"])
+        self.assertIn("exit-unreachable", codes(split))
+
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",
                 "#.....#",

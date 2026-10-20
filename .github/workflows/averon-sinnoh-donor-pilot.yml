@@ -6,6 +6,8 @@ on:
       - "Pokemon Game/scripts/sinnoh-donor-map-pilot.py"
       - "Pokemon Game/scripts/sinnoh-donor-bank-audit.py"
       - "Pokemon Game/scripts/sinnoh-isolated-tileset.py"
+      - "Pokemon Game/scripts/sinnoh-dual-bank-family.py"
+      - "Pokemon Game/scripts/tests/test_sinnoh_dual_bank_family.py"
       - "Pokemon Game/scripts/tests/test_sinnoh_isolated_tileset.py"
       - "Pokemon Game/scripts/tests/test_sinnoh_donor_map_pilot.py"
       - ".github/workflows/averon-sinnoh-donor-pilot.yml"
@@ -121,7 +123,7 @@ jobs:
           donor="$RUNNER_TEMP/sinnoh-git"
           git clone --filter=blob:none --no-checkout https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion.git "$donor"
           git -C "$donor" sparse-checkout init --no-cone
-          git -C "$donor" sparse-checkout set --no-cone /data/maps/Route202/ /data/layouts/Route202/ /data/layouts/layouts.json /data/tilesets/primary/general/ /include/fieldmap.h /include/constants/metatile_behaviors.h /src/tileset_anims.c
+          git -C "$donor" sparse-checkout set --no-cone /data/maps/Route202/ /data/layouts/Route202/ /data/layouts/layouts.json /data/tilesets/primary/general/ /data/tilesets/secondary/petalburg/ /include/fieldmap.h /include/constants/metatile_behaviors.h /src/tileset_anims.c
           git -C "$donor" checkout --detach 38228bb574a3557345852b758d5f1a65eb01bb22
           PYTHONDONTWRITEBYTECODE=1 python3 "Pokemon Game/scripts/sinnoh-isolated-tileset.py" \
             --donor-root "$donor" --engine-root "Pokemon Game/engine" \
@@ -140,6 +142,27 @@ jobs:
           print("Real Route202 static family staged; source pixels/map/border preserved. NOT gameplay acceptance.")
           PYTEST
 
+      - name: Verify paired banks and namespaced animation closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_sinnoh_dual_bank_family.py" -v
+          PYTHONDONTWRITEBYTECODE=1 python3 "Pokemon Game/scripts/sinnoh-dual-bank-family.py" \
+            --donor-root "$RUNNER_TEMP/sinnoh-git" --engine-root "Pokemon Game/engine" \
+            --revision 38228bb574a3557345852b758d5f1a65eb01bb22 --map Route202 \
+            --output "$RUNNER_TEMP/route202-dual-family" > "$RUNNER_TEMP/route202-dual-family.json"
+          cmp "$RUNNER_TEMP/sinnoh-git/data/layouts/Route202/map.bin" "$RUNNER_TEMP/route202-dual-family/map.bin"
+          cmp "$RUNNER_TEMP/sinnoh-git/data/layouts/Route202/border.bin" "$RUNNER_TEMP/route202-dual-family/border.bin"
+          python3 - "$RUNNER_TEMP/route202-static-family.json" "$RUNNER_TEMP/route202-dual-family.json" <<'PYTEST'
+          import json, sys
+          old, new = [json.load(open(p)) for p in sys.argv[1:]]
+          assert new["animation_frames"] == 26
+          assert new["map_sha256"] == old["source_map_sha256"]
+          assert new["static_rgb_sha256"] == old["preview_rgb_sha256"]
+          assert new["dependencies"] == old["dependencies"]
+          print("Paired family preserves real Route202 bytes and static pixels; callback fixture passes256ticks/80transfers. NOT gameplay acceptance.")
+          PYTEST
+
       - name: Upload analysis JSON only (no donor map binary or third-party art)
         if: always()
         uses: actions/upload-artifact@v4
@@ -151,3 +174,4 @@ jobs:
             ${{ runner.temp }}/route202-inspection.json
             ${{ runner.temp }}/route202-bank-comparison.json
             ${{ runner.temp }}/route202-static-family.json
+            ${{ runner.temp }}/route202-dual-family.json

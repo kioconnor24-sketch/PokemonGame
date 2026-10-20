@@ -1,3 +1,7 @@
+> **CURRENT MANAGER UPDATE — 2026-10-19, after Sinnoh donor-import work:** This document is now a **historical organizational-reset snapshot**, not the live task queue. Start with the [Current manager handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261019.md), which reflects merged Twinleaf #166, donor tools #176–#178, closed/unmerged visual PR #175, active `claude/route202-donor`, stopped Codex and low-usage execution. The older blanket peer-review/self-merge limitations and open-PR statuses below have been superseded by the [live contract](CURRENT_PHASE_AND_HANDOFF.md) and [Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). **Preserve this text as historical evidence; do not execute its obsolete queue.**
+
+---
+
 # Pokémon Averon — ChatGPT manager handoff (2026-10-19)
 
 **Repository:** https://github.com/kioconnor24-sketch/PokemonGame  
