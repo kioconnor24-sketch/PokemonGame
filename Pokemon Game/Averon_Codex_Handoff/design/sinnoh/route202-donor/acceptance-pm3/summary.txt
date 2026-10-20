@@ -1,0 +1,19 @@
+Route 202 +3/-3 acceptance | source 46466255 (engine tree 8a60e891, identical to its merge with main d75860b7); negative rerun at 772c936e (fixture-only change)
+normal=0
+f9c172d9beea85a9753e7b6cd65ef9c2ae005f5c29b98054d464cd9ab92639b8  pokeemerald.gba
+normal linked=17331728
+normal compiler warnings=0
+release=0
+64b8b63ba495b79c76878efdfebdbd2a3e121c565653634da2dcfa3ff80327e0  pokeemerald-release.gba
+release linked=17450864
+release compiler warnings=0
+check=0
+- Tests PASSED:          313
+- Tests TOTAL:           313
+static: PASS: 0 findings
+normal run PASS 20 / 20 f9c172d9beea [] static []
+normal continue PASS 3 / 3 f9c172d9beea [] static []
+release run PASS 20 / 20 64b8b63ba495 [] static []
+release continue PASS 3 / 3 64b8b63ba495 [] static []
+OK   negative-route202-wrong-offset: expect FAIL, run FAIL, static ['seam-mismatch'], failed ['MAP_ROUTE202 down seam (25, 33) -> MAP_SANDGEM_TOWN (19, 0) and back', 'MAP_ROUTE202 down seam (26, 33) -> MAP_SANDGEM_TOWN (20, 0) and back', 'MAP_ROUTE202 down seam (27, 33) -> MAP_SANDGEM_TOWN (21, 0) and back']
+1/1 fixtures behaved as expected
