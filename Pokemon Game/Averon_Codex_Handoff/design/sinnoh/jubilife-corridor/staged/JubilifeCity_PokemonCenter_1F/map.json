@@ -1,0 +1,195 @@
+{
+  "name": "JubilifeCity_PokemonCenter_1F",
+  "status": "UNREGISTERED_CANDIDATE",
+  "dimensions": [
+    14,
+    9
+  ],
+  "section": null,
+  "section_parent": "JubilifeCity",
+  "source_tilesets": [
+    "gTileset_Building",
+    "gTileset_PokemonCenter"
+  ],
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "JubilifeCity",
+      "dest_warp_id": 0,
+      "source_collision": 0
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "JubilifeCity",
+      "dest_warp_id": 0,
+      "source_collision": 0
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "scripts": [],
+  "encounters": [],
+  "services": [],
+  "collision_closures": [
+    {
+      "x": 0,
+      "y": 2,
+      "before": 12824,
+      "after": 13848,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 13,
+      "y": 2,
+      "before": 12831,
+      "after": 13855,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "before": 12832,
+      "after": 13856,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "before": 12839,
+      "after": 13863,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "before": 12832,
+      "after": 13856,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 13,
+      "y": 4,
+      "before": 12839,
+      "after": 13863,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "before": 12928,
+      "after": 13952,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "before": 12839,
+      "after": 13863,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "before": 17033,
+      "after": 18057,
+      "reason": "unbuilt door/exit"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "before": 12839,
+      "after": 13863,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "before": 12944,
+      "after": 13968,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "before": 12839,
+      "after": 13863,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 2,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 4,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "before": 12838,
+      "after": 13862,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "before": 12852,
+      "after": 13876,
+      "reason": "unbuilt boundary down"
+    }
+  ]
+}

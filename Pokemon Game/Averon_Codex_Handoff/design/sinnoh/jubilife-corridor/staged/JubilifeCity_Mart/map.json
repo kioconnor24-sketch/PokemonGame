@@ -1,0 +1,139 @@
+{
+  "name": "JubilifeCity_Mart",
+  "status": "UNREGISTERED_CANDIDATE",
+  "dimensions": [
+    11,
+    8
+  ],
+  "section": null,
+  "section_parent": "JubilifeCity",
+  "source_tilesets": [
+    "gTileset_Building",
+    "gTileset_Shop"
+  ],
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "JubilifeCity",
+      "dest_warp_id": 1,
+      "source_collision": 0
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "JubilifeCity",
+      "dest_warp_id": 1,
+      "source_collision": 0
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "scripts": [],
+  "encounters": [],
+  "services": [],
+  "collision_closures": [
+    {
+      "x": 0,
+      "y": 2,
+      "before": 12832,
+      "after": 13856,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 10,
+      "y": 2,
+      "before": 12837,
+      "after": 13861,
+      "reason": "unbuilt boundary right"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "before": 792,
+      "after": 1816,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "before": 12810,
+      "after": 13834,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "before": 12810,
+      "after": 13834,
+      "reason": "unbuilt boundary left"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "before": 12820,
+      "after": 13844,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "before": 12801,
+      "after": 13825,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "before": 12801,
+      "after": 13825,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "before": 12801,
+      "after": 13825,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "before": 12815,
+      "after": 13839,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "before": 12808,
+      "after": 13832,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "before": 12802,
+      "after": 13826,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "before": 12801,
+      "after": 13825,
+      "reason": "unbuilt boundary down"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "before": 12828,
+      "after": 13852,
+      "reason": "unbuilt boundary down"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "OreburghGate_1F",
+  "status": "UNREGISTERED_CANDIDATE",
+  "dimensions": [
+    29,
+    27
+  ],
+  "section": null,
+  "section_parent": "OreburghGate_1F",
+  "source_tilesets": [
+    "gTileset_General",
+    "gTileset_Cave"
+  ],
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "Route203",
+      "dest_warp_id": 0,
+      "source_collision": 0
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "scripts": [],
+  "encounters": [],
+  "services": [],
+  "collision_closures": [
+    {
+      "x": 25,
+      "y": 20,
+      "before": 12807,
+      "after": 13831,
+      "reason": "unbuilt door/exit"
+    }
+  ]
+}

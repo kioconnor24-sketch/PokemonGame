@@ -1,0 +1,39 @@
+{
+  "name": "Route203",
+  "status": "UNREGISTERED_CANDIDATE",
+  "dimensions": [
+    64,
+    30
+  ],
+  "section": null,
+  "section_parent": "Route203",
+  "source_tilesets": [
+    "gTileset_General",
+    "gTileset_Rustboro"
+  ],
+  "connections": [
+    {
+      "from": "Route203",
+      "direction": "left",
+      "to": "JubilifeCity",
+      "offset": 0
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 53,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "OreburghGate_1F",
+      "dest_warp_id": 0,
+      "source_collision": 0
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "scripts": [],
+  "encounters": [],
+  "services": [],
+  "collision_closures": []
+}

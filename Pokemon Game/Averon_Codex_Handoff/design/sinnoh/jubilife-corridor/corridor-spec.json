@@ -1,0 +1,17 @@
+{
+  "donor_revision":"38228bb574a3557345852b758d5f1a65eb01bb22",
+  "status":"UNREGISTERED_GEOGRAPHY_CANDIDATES",
+  "maps":{
+    "JubilifeCity":{"blob":"12595aaa72d215853f86582e1d7433f34b47bc4b","dimensions":[70,64],"retain_warps":[1,2,4],"close_edges":["up","left"],"parent":"JubilifeCity"},
+    "Route203":{"blob":"495ce46a43e485738f55c3786f30303be35f2930","dimensions":[64,30],"retain_warps":[0],"close_edges":["up","right","down"],"parent":"Route203"},
+    "OreburghGate_1F":{"blob":"1bc0f35104e168d9ed2f2cb024b077af4cc4ccf1","dimensions":[29,27],"retain_warps":[0],"close_edges":["up","right","left","down"],"parent":"OreburghGate_1F"},
+    "JubilifeCity_PokemonCenter_1F":{"blob":"5201dde15f5fcea03a81352588afc22ff96eb97e","dimensions":[14,9],"retain_warps":[0,1],"close_edges":["up","right","left","down"],"parent":"JubilifeCity"},
+    "JubilifeCity_Mart":{"blob":"08f3932644fc3ef6c466ce8ff19a05b1e78b1ef8","dimensions":[11,8],"retain_warps":[0,1],"close_edges":["up","right","left","down"],"parent":"JubilifeCity"},
+    "JubilifeCity_PokemonSchool":{"blob":"3f3b183d3739565ebcf9853d6776e431fde517e5","dimensions":[12,11],"retain_warps":[0,1],"close_edges":["up","right","left","down"],"parent":"JubilifeCity"}
+  },
+  "connections":[
+    {"from":"JubilifeCity","direction":"right","to":"Route203","offset":0},
+    {"from":"Route203","direction":"left","to":"JubilifeCity","offset":0}
+  ],
+  "external_connection":{"from":"JubilifeCity","direction":"down","to":"Route202","donor_offset":38,"status":"REQUIRES_ACTUAL_ROUTE202_SEAM_AND_BANK_ADAPTATION"}
+}
