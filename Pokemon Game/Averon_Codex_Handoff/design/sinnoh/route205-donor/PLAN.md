@@ -21,7 +21,7 @@ bank.
 - **Floaroma end (rows 64–95):** 12 IDs, ≈40 cells.
 - **North:** 28 IDs.
 
-Side-by-side sheets, in ID order: `secondary-ids-donor-art.png` (donor art) and `secondary-ids-averon-same-id.png`
+The contact sheet `secondary-ids-averon-same-id.png` shows Averon's art at these IDs, in ID order (a donor-art sheet is kept private: its redistribution is not documented)
 (Averon's art at the same IDs).
 
 ## Role families and the planned Averon equivalent
