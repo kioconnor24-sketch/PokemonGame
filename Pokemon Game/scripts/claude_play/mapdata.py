@@ -175,6 +175,28 @@ def trigger_entry(m, x, y):
     return None
 
 
+def across(m, other, direction, offset, tile):
+    """Where stepping off m at tile lands in the connected map (fieldmap: pos -= offset)."""
+    x, y = tile
+    if direction == "up":
+        return (x - offset, other.height - 1)
+    if direction == "down":
+        return (x - offset, 0)
+    if direction == "left":
+        return (other.width - 1, y - offset)
+    return (0, y - offset)
+
+
+def warp_arrival(m, x, y):
+    """Where a warp into (x, y) of m lands the player: on a step-on (trigger) warp or an arrow mat, the tile
+    itself; at a door or any solid warp tile, the doorstep below it."""
+    if trigger_entry(m, x, y):
+        return (x, y)
+    if "DOOR" in m.behavior(x, y) or not m.walkable(x, y):
+        return (x, y + 1)
+    return (x, y)
+
+
 def edge_exits(m, direction):
     """Tiles on m's edge from which stepping `direction` enters the connected map."""
     conn = next((c for c in m.connections if c[0] == direction), None)
