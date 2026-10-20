@@ -1,0 +1,4043 @@
+{
+  "main_sha": "ac4f6b1e479e2753be45dde006969c219c99f744",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "maps": {
+    "VerityLakefront": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "blob_git_sha1": "916c66be28572f75c70af7a0ff25bcec17a78c05",
+      "sha256": "e97bc235094ae3513c3d95b5c7203cd0f3b304dfe4559c4e24647547c98e2214",
+      "bytes": 800,
+      "banks_petalburg": [
+        {
+          "family": "primary/general",
+          "destination_family": "primary/general",
+          "source_records": 512,
+          "destination_records": 512,
+          "source_referenced": 22,
+          "identical_index_record_and_attribute": 14,
+          "record_matches_any_destination": 14,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            3,
+            462,
+            463,
+            470,
+            471,
+            478,
+            479,
+            487
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "f4ad9974e0a38afb08fb24ebf6fbb628db6cc0c12bb537ecf346adbe0470fad4",
+          "target_graphics_sha256": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5"
+        },
+        {
+          "family": "secondary/petalburg",
+          "destination_family": "secondary/petalburg",
+          "source_records": 512,
+          "destination_records": 144,
+          "source_referenced": 12,
+          "identical_index_record_and_attribute": 0,
+          "record_matches_any_destination": 0,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            574,
+            575,
+            589,
+            590,
+            597,
+            598,
+            605,
+            606,
+            619,
+            620,
+            621,
+            622
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "c694ee52c3e480b648d1a665cd77e39f2ab40d0183dc721628cd6ab3c4f977ec",
+          "target_graphics_sha256": "5f7427dfdd227f6f048b5ee9aa167144672a228dbc5bd25a84a6e348d62429d9"
+        }
+      ],
+      "banks_dewford": [
+        {
+          "family": "primary/general",
+          "destination_family": "primary/general",
+          "source_records": 512,
+          "destination_records": 512,
+          "source_referenced": 22,
+          "identical_index_record_and_attribute": 14,
+          "record_matches_any_destination": 14,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            3,
+            462,
+            463,
+            470,
+            471,
+            478,
+            479,
+            487
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "f4ad9974e0a38afb08fb24ebf6fbb628db6cc0c12bb537ecf346adbe0470fad4",
+          "target_graphics_sha256": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5"
+        },
+        {
+          "family": "secondary/petalburg",
+          "destination_family": "secondary/dewford",
+          "source_records": 512,
+          "destination_records": 379,
+          "source_referenced": 12,
+          "identical_index_record_and_attribute": 0,
+          "record_matches_any_destination": 0,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            574,
+            575,
+            589,
+            590,
+            597,
+            598,
+            605,
+            606,
+            619,
+            620,
+            621,
+            622
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "c694ee52c3e480b648d1a665cd77e39f2ab40d0183dc721628cd6ab3c4f977ec",
+          "target_graphics_sha256": "f6550056c13ac5cc2082547ce834deddcd50624fd62cec61148db1b75698328b"
+        }
+      ],
+      "primary_cells": 380,
+      "secondary_cells": 20,
+      "used_records": [
+        {
+          "id": 1,
+          "bank": 0,
+          "cells": 128,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            1
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 128
+          },
+          "source_static_rgb_sha256": "44588f6768b480ce111bb43b3740b375278ac2f4762590a2072b752c4e2e5d20",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              1
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              1
+            ],
+            "dewford": [
+              1
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 3,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            309,
+            310,
+            325,
+            326
+          ],
+          "palette_ids": [
+            1,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "971be370f2141ffeec8a7a44246d485c40a9f005a80a548e8ea258d35d4dd9c3",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 133,
+          "bank": 0,
+          "cells": 4,
+          "attribute_u16": 4153,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            103,
+            119
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            133
+          ],
+          "behavior": "MB_JUMP_WEST",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 4
+          },
+          "source_static_rgb_sha256": "21d55b140c089edbd6b3d9f60fe32b906a91b115c207081631b504698c04e948",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              133
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 135,
+          "bank": 0,
+          "cells": 9,
+          "attribute_u16": 4155,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            136,
+            137
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            135
+          ],
+          "behavior": "MB_JUMP_SOUTH",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 9
+          },
+          "source_static_rgb_sha256": "7f6ce011bf69994a359f5f3b8b229bcbbf7692ffdb6571c3e31dad681251065a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              135
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 141,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4159,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            119,
+            135,
+            136
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            141
+          ],
+          "behavior": "MB_JUMP_SOUTHWEST",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "70523de2bd6e10eee3818e3a7b34cbd6ae68a852a484014c37bb0595e56b840d",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              141
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 213,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4155,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            120,
+            136
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            213
+          ],
+          "behavior": "MB_JUMP_SOUTH",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "2b329fdd26535d7ee0942358b8b9a866c39b400d6b5bfba42ac4d77f47463171",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              213
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 214,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4155,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            121,
+            137
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            214
+          ],
+          "behavior": "MB_JUMP_SOUTH",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "5c572066f92a7f958cc8ce6e32afd0c787eb5c6ea24801e38bee0e2d74e217c8",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              214
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 254,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4153,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            87,
+            119
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            254
+          ],
+          "behavior": "MB_JUMP_WEST",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "27926a89513afdd4c771980f52c0d062cd1fb67cf20b917e05dcf1c15aeb6178",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              254
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 280,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            247,
+            248,
+            263,
+            264
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            280
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "a3ab7d37fb3c7e5a0bea98535d7abf9bafc3483797799388d46363012f12cb40",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              280
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              280
+            ],
+            "dewford": [
+              280
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 282,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            279,
+            280,
+            295,
+            296
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            282
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "c8d630e0fc0dbfb540e313e167524ef3d5ce9fe4d84fbf0001f38b04130eff1e",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              282
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              282
+            ],
+            "dewford": [
+              282
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 288,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            263,
+            264,
+            279,
+            280
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            288
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "0ef483c9814f19a034b11f95b46bec426c4cc3e713ca67cc66a3eba7fd523df1",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              288
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              288
+            ],
+            "dewford": [
+              288
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 290,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            263,
+            264,
+            279,
+            280
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            290
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "aba650ca002ea6e9cc9fecb83fceb095187f32d2c75f50fc71ec5fafc4e87731",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              290
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              290
+            ],
+            "dewford": [
+              290
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 296,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            279,
+            280,
+            295,
+            296
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            296
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "7ca35c2f72205cb156788b574ab27beb4ff3667e936fcf1c190b9b7b48c51a6a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              296
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              296
+            ],
+            "dewford": [
+              296
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 298,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            247,
+            248,
+            263,
+            264
+          ],
+          "palette_ids": [
+            0,
+            5
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            298
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 1
+          },
+          "source_static_rgb_sha256": "7765d5958a9b9f62bd16010b2b63857009d538b3f1474148084ab9d66ad2798f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              298
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              298
+            ],
+            "dewford": [
+              298
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 462,
+          "bank": 0,
+          "cells": 14,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            26,
+            42,
+            58
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 14
+          },
+          "source_static_rgb_sha256": "ea613a27d0aefb400280c3de249db1ac76fd2889d3c20e3d1a3acbbd5cd6700f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 463,
+          "bank": 0,
+          "cells": 14,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            26,
+            43,
+            59
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 14
+          },
+          "source_static_rgb_sha256": "7cc1f4a7c079c8a3a8e5bea277eb76dd22de8f2ecdbb3304a2f5e08ed3e23e0e",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 470,
+          "bank": 0,
+          "cells": 51,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            2,
+            3,
+            8,
+            9,
+            24,
+            25
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 51
+          },
+          "source_static_rgb_sha256": "c320ef8dc60944ad7826e8490d78d88dd78fcdd17874e9c07991a28379be1108",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 471,
+          "bank": 0,
+          "cells": 51,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            2,
+            3,
+            8,
+            9,
+            24,
+            25
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 51
+          },
+          "source_static_rgb_sha256": "8e4118fa5c8ab985fcc65213f4a07b48dfa07ecb302117bef98d8cf20e083b6b",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 478,
+          "bank": 0,
+          "cells": 37,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            40,
+            41,
+            42,
+            56,
+            57,
+            58
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 37
+          },
+          "source_static_rgb_sha256": "ca4e0487a69d927d66679a779ce045b17dabfb5b56cca1b45b3e12519fd14fa0",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 479,
+          "bank": 0,
+          "cells": 37,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            40,
+            41,
+            43,
+            56,
+            57,
+            59
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 37
+          },
+          "source_static_rgb_sha256": "a43cf05885074122fcb6b96515a23dfca5ac93578d9a7b4b7f5cd1cb526c670a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 486,
+          "bank": 0,
+          "cells": 12,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            40,
+            41,
+            56,
+            57
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            486
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 12
+          },
+          "source_static_rgb_sha256": "d70fc9c514753a5f86933d67574147b4a0ccb4f460531afba1ba2105d391bdf8",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              486
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 487,
+          "bank": 0,
+          "cells": 12,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            40,
+            41,
+            56,
+            57
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 12
+          },
+          "source_static_rgb_sha256": "1a54076d44884b937b5cb14d5617d7534935eda18d805730e6a733097c0f6d14",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 574,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4196,
+          "graphic_tile_ids": [
+            0,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORTH_ARROW_WARP",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:0": 2
+          },
+          "source_static_rgb_sha256": "65b4a0ef403b4765bf111dc49c65b3d4a067ce484f6b82f6836b363c05618946",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 575,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            475
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 2
+          },
+          "source_static_rgb_sha256": "761bd3d396b364e7948cc19be52684b0ad8c787a7d758d2193d6bc0f0c2b8e0a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 589,
+          "bank": 1,
+          "cells": 3,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            762,
+            763,
+            778,
+            779
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 3
+          },
+          "source_static_rgb_sha256": "abbbfdde46eb76684896d250f5e953691fb05015658dbede65a411bb1e49e46b",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 590,
+          "bank": 1,
+          "cells": 3,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            732,
+            733,
+            748,
+            749
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 3
+          },
+          "source_static_rgb_sha256": "17ffbeff495f1322866c7e79afa3ab7709123b89d7378542f120647527bde437",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 597,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "f0f7ed153da208b2644d1063f34fa5f27252c9e396a9614d6253ca4b49df4d59",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 598,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "93f626ef97674c0306110f0c775b8d5480bb7721d71e19c0bbb3d259f87760ba",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 605,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            730,
+            731,
+            746,
+            747
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "1cd86164285e07a56b8997527ec6a0e1d1e19784676d0a9bfefd43dfa0b824f6",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 606,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            730,
+            731,
+            746,
+            747
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "80291b552c1db9cd84d64b4478be5f96486bf3eadb48962a1fd62297c1a19f5d",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 619,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            475,
+            730,
+            731,
+            746,
+            747
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "2db8694e83fa24d9c8ef9a60a837ced1938cdedd82cf6df1773fe1749cb0821f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 620,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            475,
+            730,
+            731,
+            746,
+            747
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "2ea40ee456473d889865e97fe849f7c2c7feadda8688a0d313b3b3998f9e257b",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 621,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "5c02862c129e3ce59255bf88ed5737a9e91a66599c68b59984c8b1eb769dd76f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 622,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "9aaac089f01e2933d43e5874c508e1a3c20c2ddacc405d452ca479086331e3f3",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        }
+      ],
+      "warps": [
+        {
+          "index": 0,
+          "x": 2,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_LAKE_VERITY",
+          "dest_warp_id": "0",
+          "cell_u16": 574,
+          "metatile": 574,
+          "collision": 0,
+          "elevation_bits": 0,
+          "behavior": "MB_NORTH_ARROW_WARP"
+        },
+        {
+          "index": 1,
+          "x": 3,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_LAKE_VERITY",
+          "dest_warp_id": "1",
+          "cell_u16": 574,
+          "metatile": 574,
+          "collision": 0,
+          "elevation_bits": 0,
+          "behavior": "MB_NORTH_ARROW_WARP"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE201",
+          "offset": 0,
+          "direction": "right"
+        }
+      ],
+      "events_excluded": {
+        "object_events": 0,
+        "coord_events": 0,
+        "bg_events": 2
+      },
+      "border_ids": [
+        470,
+        471,
+        478,
+        479
+      ],
+      "east_edge": [
+        {
+          "y": 0,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 1,
+          "id": 479,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 2,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 3,
+          "id": 479,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 4,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 5,
+          "id": 487,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 6,
+          "id": 1,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 7,
+          "id": 463,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 8,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 9,
+          "id": 487,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 10,
+          "id": 1,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 11,
+          "id": 135,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 12,
+          "id": 1,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 13,
+          "id": 1,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 14,
+          "id": 1,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 15,
+          "id": 463,
+          "collision": 0,
+          "elevation": 3
+        },
+        {
+          "y": 16,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 17,
+          "id": 479,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 18,
+          "id": 471,
+          "collision": 1,
+          "elevation": 0
+        },
+        {
+          "y": 19,
+          "id": 479,
+          "collision": 1,
+          "elevation": 0
+        }
+      ],
+      "staging": {
+        "status": "PAIRED_FAMILY_STAGED_NOT_GAMEPLAY_ACCEPTED",
+        "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+        "map_sha256": "e97bc235094ae3513c3d95b5c7203cd0f3b304dfe4559c4e24647547c98e2214",
+        "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+        "static_rgb_sha256": "27d4832e74e71cdba6c88fdff1bc642b53803984f2631dfef6e9922225acc8bc",
+        "animation_frames": 26
+      },
+      "collision_elevation_preserved": true
+    },
+    "LakeVerity": {
+      "dimensions": [
+        48,
+        46
+      ],
+      "blob_git_sha1": "1fba9218763961d1e2298f404d2bed0ed6a13c41",
+      "sha256": "29a1730c54287d2217202cfc204a2d24950ab70dc968a8c79cf16bc224cadd5c",
+      "bytes": 4416,
+      "banks_petalburg": [
+        {
+          "family": "primary/general",
+          "destination_family": "primary/general",
+          "source_records": 512,
+          "destination_records": 512,
+          "source_referenced": 41,
+          "identical_index_record_and_attribute": 8,
+          "record_matches_any_destination": 8,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            2,
+            108,
+            109,
+            114,
+            121,
+            122,
+            124,
+            125,
+            161,
+            176,
+            177,
+            178,
+            184,
+            186,
+            192,
+            194,
+            203,
+            204,
+            227,
+            228,
+            454,
+            455,
+            462,
+            463,
+            470,
+            471,
+            478,
+            479,
+            487,
+            508,
+            509,
+            510,
+            511
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "f4ad9974e0a38afb08fb24ebf6fbb628db6cc0c12bb537ecf346adbe0470fad4",
+          "target_graphics_sha256": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5"
+        },
+        {
+          "family": "secondary/petalburg",
+          "destination_family": "secondary/petalburg",
+          "source_records": 512,
+          "destination_records": 144,
+          "source_referenced": 11,
+          "identical_index_record_and_attribute": 0,
+          "record_matches_any_destination": 0,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            532,
+            533,
+            589,
+            590,
+            597,
+            598,
+            624,
+            625,
+            626,
+            628,
+            629
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "c694ee52c3e480b648d1a665cd77e39f2ab40d0183dc721628cd6ab3c4f977ec",
+          "target_graphics_sha256": "5f7427dfdd227f6f048b5ee9aa167144672a228dbc5bd25a84a6e348d62429d9"
+        }
+      ],
+      "banks_dewford": [
+        {
+          "family": "primary/general",
+          "destination_family": "primary/general",
+          "source_records": 512,
+          "destination_records": 512,
+          "source_referenced": 41,
+          "identical_index_record_and_attribute": 8,
+          "record_matches_any_destination": 8,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            2,
+            108,
+            109,
+            114,
+            121,
+            122,
+            124,
+            125,
+            161,
+            176,
+            177,
+            178,
+            184,
+            186,
+            192,
+            194,
+            203,
+            204,
+            227,
+            228,
+            454,
+            455,
+            462,
+            463,
+            470,
+            471,
+            478,
+            479,
+            487,
+            508,
+            509,
+            510,
+            511
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "f4ad9974e0a38afb08fb24ebf6fbb628db6cc0c12bb537ecf346adbe0470fad4",
+          "target_graphics_sha256": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5"
+        },
+        {
+          "family": "secondary/petalburg",
+          "destination_family": "secondary/dewford",
+          "source_records": 512,
+          "destination_records": 379,
+          "source_referenced": 11,
+          "identical_index_record_and_attribute": 0,
+          "record_matches_any_destination": 0,
+          "out_of_destination_range": 0,
+          "unmatched_structural_ids": [
+            532,
+            533,
+            589,
+            590,
+            597,
+            598,
+            624,
+            625,
+            626,
+            628,
+            629
+          ],
+          "graphics_png_sha256_equal": false,
+          "donor_graphics_sha256": "c694ee52c3e480b648d1a665cd77e39f2ab40d0183dc721628cd6ab3c4f977ec",
+          "target_graphics_sha256": "f6550056c13ac5cc2082547ce834deddcd50624fd62cec61148db1b75698328b"
+        }
+      ],
+      "primary_cells": 2191,
+      "secondary_cells": 17,
+      "used_records": [
+        {
+          "id": 1,
+          "bank": 0,
+          "cells": 117,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            1
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 117
+          },
+          "source_static_rgb_sha256": "44588f6768b480ce111bb43b3740b375278ac2f4762590a2072b752c4e2e5d20",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              1
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              1
+            ],
+            "dewford": [
+              1
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 2,
+          "bank": 0,
+          "cells": 12,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            174
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 12
+          },
+          "source_static_rgb_sha256": "3b7bc868f92e98a5c973cc313fb10a30f77c7c5605925a3d6d22e104c1fe9f30",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 13,
+          "bank": 0,
+          "cells": 129,
+          "attribute_u16": 2,
+          "graphic_tile_ids": [
+            0,
+            16,
+            17,
+            32,
+            33
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            13
+          ],
+          "behavior": "MB_TALL_GRASS",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 129
+          },
+          "source_static_rgb_sha256": "b81300c1bcdecd5f6e62c7659af7786a3a7d0a04534109863adcf43895370389",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              13
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 107,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            70,
+            71,
+            81,
+            86
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            107
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "75362bdcfe7171dd1b0e6f3fcbdb68533e545c09f51afd9a0ae1f102bb564256",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              107
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 108,
+          "bank": 0,
+          "cells": 8,
+          "attribute_u16": 12,
+          "graphic_tile_ids": [
+            0,
+            72,
+            73,
+            82,
+            417
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_MOUNTAIN_TOP",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 8
+          },
+          "source_static_rgb_sha256": "370d2804f92f85b9564f94ff6243f92872dcdfa08c4aaf1109bb4effd755aec2",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 109,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            74,
+            75,
+            81,
+            91
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "6662e891121209556d8b2f6256a06e405280c873d6040ae4c756242c37ac7f85",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 112,
+          "bank": 0,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            96,
+            97,
+            112,
+            113
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            112
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "2dfd7bf47b00810673915265e6d893e5069b9d145769a327ff97c2ab55d5e5a1",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              112
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 114,
+          "bank": 0,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            96,
+            97,
+            112,
+            113
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "0c5a17ad066d01078d049816cb221c515735daf32fa362107906f69e3f1cf223",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 120,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            128,
+            129,
+            144,
+            145
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            120,
+            139
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "925279e4db3554facd9563cf5f841f8938579226123498cf0e504c5d67a9c5ea",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              120,
+              139
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 121,
+          "bank": 0,
+          "cells": 4,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            130,
+            146,
+            400,
+            416
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 4
+          },
+          "source_static_rgb_sha256": "122c7027639346266020210bce2194b916f753e759db86493cbdd7861a35bef3",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 122,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            2,
+            3,
+            128,
+            129,
+            144,
+            145
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "d031df48ce247d501fb4095290a3aed0870d58491168d314ad8c7b3dcd1f90ca",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 123,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            129,
+            134,
+            150,
+            151
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            123
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "018f7e0d5ad9c51f6191059281f30ce37e8c465d27ebd1b98b5de856886dac40",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              123
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 124,
+          "bank": 0,
+          "cells": 3,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            130,
+            146,
+            400,
+            416
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 3
+          },
+          "source_static_rgb_sha256": "122c7027639346266020210bce2194b916f753e759db86493cbdd7861a35bef3",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 125,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            129,
+            134,
+            150,
+            151
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "b1de6e2da718c41f7ecb690be675ac237d897f30f3a1aaa2a44d9b21462c66d5",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 161,
+          "bank": 0,
+          "cells": 934,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            286
+          ],
+          "palette_ids": [
+            0
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 934
+          },
+          "source_static_rgb_sha256": "b178e2e022a39025cbe14bef597f3fa059f2da0106a5075620fa7907017a9751",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              161
+            ],
+            "dewford": [
+              161
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 167,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 96,
+          "graphic_tile_ids": [
+            0,
+            176,
+            177,
+            192,
+            193
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            167
+          ],
+          "behavior": "MB_NON_ANIMATED_DOOR",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:0": 1
+          },
+          "source_static_rgb_sha256": "e919fa64ec523b313a361a220521e166d654b3079363ba9c8a67f88796b35e28",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              167
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": [],
+          "source_coordinates": [
+            [
+              23,
+              19
+            ]
+          ]
+        },
+        {
+          "id": 176,
+          "bank": 0,
+          "cells": 6,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            108,
+            109,
+            124,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 6
+          },
+          "source_static_rgb_sha256": "2c6ba04eaa17b914cb0d4cc0d201fcc6bc7d8a58a6d0ff330a2dbeb86fb6b7cf",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              176
+            ],
+            "dewford": [
+              176
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 177,
+          "bank": 0,
+          "cells": 33,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            109,
+            110,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 33
+          },
+          "source_static_rgb_sha256": "e877e706f1a3b75817fe299ede114d690e0b840f7e53e09b78da1d13c4887d34",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              177
+            ],
+            "dewford": [
+              177
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 178,
+          "bank": 0,
+          "cells": 6,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            110,
+            111,
+            127,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 6
+          },
+          "source_static_rgb_sha256": "3d261f550d2233cfa0e099a0821c198c649319ee7566962b762b0c1bca731057",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              178
+            ],
+            "dewford": [
+              178
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 184,
+          "bank": 0,
+          "cells": 27,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            124,
+            140,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 27
+          },
+          "source_static_rgb_sha256": "c14cc85a0282f7fff3157ae12b8fc91143d398421a2fb61def3740f3f315de65",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              184
+            ],
+            "dewford": [
+              184
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 186,
+          "bank": 0,
+          "cells": 30,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            127,
+            143,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 30
+          },
+          "source_static_rgb_sha256": "d8237aa2ba7b1fe25e6071f178579e7702279a38ad21e4c1df7bb87ceaca433d",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              186
+            ],
+            "dewford": [
+              186
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 192,
+          "bank": 0,
+          "cells": 6,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            156,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 6
+          },
+          "source_static_rgb_sha256": "d2bd84123ace6b7e3f221fb93184eb4bfc673392c916722727486dcb6faebced",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              192
+            ],
+            "dewford": [
+              192
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 194,
+          "bank": 0,
+          "cells": 6,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            159,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 6
+          },
+          "source_static_rgb_sha256": "cea88dcd2b814861d57292788205f1f611604af22f8fde7b581eea89dc86222f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              194
+            ],
+            "dewford": [
+              194
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 203,
+          "bank": 0,
+          "cells": 5,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            48,
+            143,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 5
+          },
+          "source_static_rgb_sha256": "1897940bfc5c6d1f25e1b90ad6ce3cd494e4cfb68fe864d46aa98e5d196a2ad0",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              203
+            ],
+            "dewford": [
+              203
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 204,
+          "bank": 0,
+          "cells": 5,
+          "attribute_u16": 4112,
+          "graphic_tile_ids": [
+            0,
+            51,
+            140,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 5
+          },
+          "source_static_rgb_sha256": "cd35a4cf5323b932191981bd1304734b6b822166951e2662946c02891c582553",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [
+              204
+            ],
+            "dewford": [
+              204
+            ]
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 227,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            65,
+            80,
+            81,
+            174
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "191fb6df848d25f465a6b8bf79ff068123fab924f1b02610b9a72d4c5bac3a10",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 228,
+          "bank": 0,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            65,
+            80,
+            81,
+            174
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "6835f63621ea33fc3a496ace91c296652ad9fc5137ae5fbf185a2cb459a2a09a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 454,
+          "bank": 0,
+          "cells": 8,
+          "attribute_u16": 2,
+          "graphic_tile_ids": [
+            0,
+            16,
+            17,
+            26,
+            32,
+            33,
+            42,
+            58
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_TALL_GRASS",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 8
+          },
+          "source_static_rgb_sha256": "708c38e1036a4c314047ef537f2c31a73393ab4737f9ad8dc99e69974090a3ef",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 455,
+          "bank": 0,
+          "cells": 8,
+          "attribute_u16": 2,
+          "graphic_tile_ids": [
+            0,
+            16,
+            17,
+            26,
+            32,
+            33,
+            43,
+            59
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_TALL_GRASS",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 8
+          },
+          "source_static_rgb_sha256": "8f6d3d3386f47ae68f785de0a66f20c5b6a8b1864479eb8a333ccef30126f5d4",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 462,
+          "bank": 0,
+          "cells": 7,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            26,
+            42,
+            58
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 7
+          },
+          "source_static_rgb_sha256": "ea613a27d0aefb400280c3de249db1ac76fd2889d3c20e3d1a3acbbd5cd6700f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 463,
+          "bank": 0,
+          "cells": 7,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            2,
+            3,
+            26,
+            43,
+            59
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:3": 7
+          },
+          "source_static_rgb_sha256": "7cc1f4a7c079c8a3a8e5bea277eb76dd22de8f2ecdbb3304a2f5e08ed3e23e0e",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 470,
+          "bank": 0,
+          "cells": 185,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            2,
+            3,
+            8,
+            9,
+            24,
+            25
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 185
+          },
+          "source_static_rgb_sha256": "c320ef8dc60944ad7826e8490d78d88dd78fcdd17874e9c07991a28379be1108",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 471,
+          "bank": 0,
+          "cells": 185,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            2,
+            3,
+            8,
+            9,
+            24,
+            25
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 185
+          },
+          "source_static_rgb_sha256": "8e4118fa5c8ab985fcc65213f4a07b48dfa07ecb302117bef98d8cf20e083b6b",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 478,
+          "bank": 0,
+          "cells": 171,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            40,
+            41,
+            42,
+            56,
+            57,
+            58
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 171
+          },
+          "source_static_rgb_sha256": "ca4e0487a69d927d66679a779ce045b17dabfb5b56cca1b45b3e12519fd14fa0",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 479,
+          "bank": 0,
+          "cells": 171,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            40,
+            41,
+            43,
+            56,
+            57,
+            59
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 171
+          },
+          "source_static_rgb_sha256": "a43cf05885074122fcb6b96515a23dfca5ac93578d9a7b4b7f5cd1cb526c670a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 486,
+          "bank": 0,
+          "cells": 29,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            40,
+            41,
+            56,
+            57
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": true,
+          "matching_destination_ids": [
+            486
+          ],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 29
+          },
+          "source_static_rgb_sha256": "d70fc9c514753a5f86933d67574147b4a0ccb4f460531afba1ba2105d391bdf8",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": true,
+            "matching_destination_ids": [
+              486
+            ]
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 487,
+          "bank": 0,
+          "cells": 29,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            40,
+            41,
+            56,
+            57
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 29
+          },
+          "source_static_rgb_sha256": "1a54076d44884b937b5cb14d5617d7534935eda18d805730e6a733097c0f6d14",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 508,
+          "bank": 0,
+          "cells": 13,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            8,
+            9,
+            25,
+            174,
+            362
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 13
+          },
+          "source_static_rgb_sha256": "9d04abcc9ef8223d739e3d71b537c811a773bd9110b4a9f5b467630491e1692a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 509,
+          "bank": 0,
+          "cells": 13,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            8,
+            9,
+            25,
+            27,
+            174,
+            362
+          ],
+          "palette_ids": [
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 13
+          },
+          "source_static_rgb_sha256": "9cae4faba139ce950f28a7913d8d1416639396b165c52ac1f7efaa5902de4aae",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 510,
+          "bank": 0,
+          "cells": 9,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            42,
+            58,
+            286
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 9
+          },
+          "source_static_rgb_sha256": "395b7727143a548781112b58271a58de72b50e7dfb26f622340dd7eeb809fb5a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 511,
+          "bank": 0,
+          "cells": 12,
+          "attribute_u16": 8208,
+          "graphic_tile_ids": [
+            0,
+            26,
+            43,
+            59,
+            286
+          ],
+          "palette_ids": [
+            0,
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_POND_WATER",
+          "layer": 2,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 12
+          },
+          "source_static_rgb_sha256": "1f80c425b47cb1d1c7a1964633a182e240e0292523ae7f025f25931c033acfae",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 532,
+          "bank": 1,
+          "cells": 4,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            42,
+            58,
+            124,
+            140,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 4
+          },
+          "source_static_rgb_sha256": "3d018be680e82baf7c98c76f1b1384a0f8fd00d9ea7b49beabae978f626032dd",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 533,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            42,
+            58,
+            124,
+            140,
+            270,
+            286
+          ],
+          "palette_ids": [
+            0,
+            2,
+            3
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:1": 1
+          },
+          "source_static_rgb_sha256": "2d84c31f1114f0ffc2a73c04dd77ba114dc77ebf914907f511f7d2a248957959",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 589,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            762,
+            763,
+            778,
+            779
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "abbbfdde46eb76684896d250f5e953691fb05015658dbede65a411bb1e49e46b",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 590,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            477,
+            732,
+            733,
+            748,
+            749
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "17ffbeff495f1322866c7e79afa3ab7709123b89d7378542f120647527bde437",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 597,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "f0f7ed153da208b2644d1063f34fa5f27252c9e396a9614d6253ca4b49df4d59",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 598,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4096,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 2
+          },
+          "source_static_rgb_sha256": "93f626ef97674c0306110f0c775b8d5480bb7721d71e19c0bbb3d259f87760ba",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 624,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            42,
+            58,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "52585d7c2e014e4adbc66be8b6d17f26085f46b4daff3ec6aa1af8159614990a",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 625,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            0,
+            26,
+            43,
+            59,
+            477
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "15c719a04989ecb43a4f2432f4dce111163d59928482ada7c42ecad5f5ed066f",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 626,
+          "bank": 1,
+          "cells": 2,
+          "attribute_u16": 4197,
+          "graphic_tile_ids": [
+            0,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_SOUTH_ARROW_WARP",
+          "layer": 1,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "0:0": 2
+          },
+          "source_static_rgb_sha256": "542b89e84b50bbd170110faf8ba05cff48d3bc88b7b31023cfebf69a8d461afe",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 628,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "3d01b6ede5e4732b4c40ab81d7b334ae88091c501a608d73645de7eb89c1e942",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        },
+        {
+          "id": 629,
+          "bank": 1,
+          "cells": 1,
+          "attribute_u16": 0,
+          "graphic_tile_ids": [
+            8,
+            9,
+            24,
+            25,
+            475,
+            476
+          ],
+          "palette_ids": [
+            2
+          ],
+          "destination_index_available": true,
+          "same_index_record_and_attribute": false,
+          "matching_destination_ids": [],
+          "behavior": "MB_NORMAL",
+          "layer": 0,
+          "unused_attribute_bits_8_11": 0,
+          "collision_elevation_counts": {
+            "1:0": 1
+          },
+          "source_static_rgb_sha256": "d6b7e950a0f691b5d625c3add8786633f03e3a532968ddeec01c651f45bc01df",
+          "dewford_record_comparison": {
+            "destination_index_available": true,
+            "same_index_record_and_attribute": false,
+            "matching_destination_ids": []
+          },
+          "static_pixel_and_attribute_candidates": {
+            "petalburg": [],
+            "dewford": []
+          },
+          "general_animation_dependencies": []
+        }
+      ],
+      "warps": [
+        {
+          "index": 0,
+          "x": 38,
+          "y": 43,
+          "elevation": 0,
+          "dest_map": "MAP_VERITY_LAKEFRONT",
+          "dest_warp_id": "0",
+          "cell_u16": 626,
+          "metatile": 626,
+          "collision": 0,
+          "elevation_bits": 0,
+          "behavior": "MB_SOUTH_ARROW_WARP"
+        },
+        {
+          "index": 1,
+          "x": 39,
+          "y": 43,
+          "elevation": 0,
+          "dest_map": "MAP_VERITY_LAKEFRONT",
+          "dest_warp_id": "1",
+          "cell_u16": 626,
+          "metatile": 626,
+          "collision": 0,
+          "elevation_bits": 0,
+          "behavior": "MB_SOUTH_ARROW_WARP"
+        }
+      ],
+      "connections": null,
+      "events_excluded": {
+        "object_events": 3,
+        "coord_events": 34,
+        "bg_events": 1
+      },
+      "border_ids": [
+        470,
+        471,
+        478,
+        479
+      ],
+      "staging": {
+        "status": "PAIRED_FAMILY_STAGED_NOT_GAMEPLAY_ACCEPTED",
+        "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+        "map_sha256": "29a1730c54287d2217202cfc204a2d24950ab70dc968a8c79cf16bc224cadd5c",
+        "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+        "static_rgb_sha256": "1f278f397a052d0111656f790da87124b63c2d4e907700ad8454aa38943453fe",
+        "animation_frames": 26
+      },
+      "collision_elevation_preserved": true
+    }
+  },
+  "scope": "STATIC_HOST_PREFLIGHT_NOT_GAMEPLAY_ACCEPTANCE",
+  "route201_west_edge": [
+    {
+      "y": 0,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 1,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 2,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 3,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 4,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 5,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 6,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 7,
+      "id": 484,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 8,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 9,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 10,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 11,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 12,
+      "id": 135,
+      "collision": 1,
+      "elevation": 3
+    },
+    {
+      "y": 13,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 14,
+      "id": 1,
+      "collision": 0,
+      "elevation": 3
+    },
+    {
+      "y": 15,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 16,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 17,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 18,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 19,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 20,
+      "id": 468,
+      "collision": 1,
+      "elevation": 0
+    },
+    {
+      "y": 21,
+      "id": 476,
+      "collision": 1,
+      "elevation": 0
+    }
+  ],
+  "route201_connections": [
+    {
+      "map": "MAP_SANDGEM_TOWN",
+      "offset": -4,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_TWINLEAF_TOWN",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
+  "seam_findings": {
+    "route201_general_dewford_no_north_arrow_warp_record": true,
+    "engine_copies_connection_strip_ids_without_tileset_translation": true,
+    "offset_zero_walkable_rows_shared": [
+      10,
+      13,
+      14
+    ],
+    "offset_zero_route201_only_open_rows": [
+      8,
+      9,
+      11
+    ],
+    "offset_zero_lakefront_only_open_rows": [
+      6,
+      7,
+      12,
+      15
+    ],
+    "scope": "source/cell and static flattened pixel analysis only; no natural gameplay accepted"
+  }
+}
