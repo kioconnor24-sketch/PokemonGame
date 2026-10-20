@@ -3,12 +3,10 @@ VerityLakefront_MapScripts::
 
 VerityLakefront_EventScript_ToWarp0::
 	warp MAP_LAKE_VERITY, 0
-	waitstate
 	end
 
 VerityLakefront_EventScript_ToWarp1::
 	warp MAP_LAKE_VERITY, 1
-	waitstate
 	end
 
 VerityLakefront_EventScript_Sign::
