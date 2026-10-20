@@ -54,7 +54,12 @@ SECONDARY = {
 }
 # Access fix measured in mGBA: the donor's north cave door carries the collision bit, so stepping into it
 # from its doorstep does nothing. Its twin door (11, 31) has no collision bit. Clear it.
-ACCESS_EDITS = {"Route204": {(19, 24): (167 | (1 << 10), 167)}}
+# Seam fix for the corridor: Route 204's top row has walkable grass (x 4-7, above a fence) and one flower
+# cell (x 21) facing Floaroma's tree line at the -2 offset (static seam-mismatch). They become solid bushes.
+BUSH = 22 | (1 << 10) | (3 << 12)
+ACCESS_EDITS = {"Route204": {(19, 24): (167 | (1 << 10), 167),
+                             (4, 0): (0x3001, BUSH), (5, 0): (0x3001, BUSH), (6, 0): (0x3001, BUSH),
+                             (7, 0): (0x3001, BUSH), (21, 0): (0x3004, BUSH)}}
 
 
 def git_blob(raw):
@@ -91,11 +96,15 @@ HEADER = {  # donor name -> (map id, layout id, map type, music, weather, escape
     "RavagedPath": ("MAP_RAVAGED_PATH", "LAYOUT_RAVAGED_PATH", "MAP_TYPE_UNDERGROUND", "MUS_CAVE_OF_ORIGIN", "WEATHER_NONE", False),
 }
 SIGNS = {"Route204": [(17, 7), (10, 32), (4, 39), (14, 48)], "RavagedPath": []}  # the donor's sign cells (metatile 3)
+# Edge connections inside the corridor batch (Route 204 -> Floaroma -> Meadow, staged together under
+# floaroma-donor/): Route 204's north path meets Floaroma's south path at the donor's -2 / +2 offsets.
+# The south edge (Jubilife, Codex #184) stays closed. Install this batch together.
+CONNECTIONS = {"Route204": [{"map": "MAP_FLOAROMA_TOWN", "offset": -2, "direction": "up"}], "RavagedPath": []}
 
 
 def headers(donor, blocks, sections):
-    """map.json + scripts.inc per map: the donor's two reciprocal warp pairs, neutral signs, no edge connections
-    (Jubilife and Floaroma are not built), no objects/coord events/hidden items/encounters."""
+    """map.json + scripts.inc per map: the donor's two reciprocal warp pairs, neutral signs, the corridor's
+    Floaroma connection (CONNECTIONS), no objects/coord events/hidden items/encounters."""
     out = {}
     for name, (map_id, layout_id, kind, music, weather, escape) in HEADER.items():
         donor_header = pilot.read_donor_map(donor, name)[0]
@@ -106,7 +115,7 @@ def headers(donor, blocks, sections):
             "id": map_id, "name": name, "layout": layout_id, "music": music, "region": "REGION_SINNOH",
             "region_map_section": sections[name], "weather": weather, "map_type": kind, "allow_cycling": kind == "MAP_TYPE_ROUTE",
             "allow_escaping": escape, "allow_running": True, "show_map_name": True, "requires_flash": False,
-            "battle_scene": "MAP_BATTLE_SCENE_NORMAL", "connections": [], "object_events": [], "coord_events": [],
+            "battle_scene": "MAP_BATTLE_SCENE_NORMAL", "connections": CONNECTIONS[name], "object_events": [], "coord_events": [],
             "warp_events": [{"x": e["x"], "y": e["y"], "elevation": e["elevation"], "dest_map": e["dest_map"],
                              "dest_warp_id": str(e["dest_warp_id"])} for e in donor_header["warp_events"]],
             "bg_events": [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
