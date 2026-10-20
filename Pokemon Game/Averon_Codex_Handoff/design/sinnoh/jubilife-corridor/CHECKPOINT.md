@@ -128,3 +128,68 @@ Building+interior existing callbacks still need in-game observation after real
 registration. Raw Rustboro city/203 adaptation remains unfinished:94/57 used
 primary IDs respectively; city157secondary IDs with9 absent destination slots.
 No global General replacement or automatic approximate matching performed.
+
+## Continued checkpoint — existing-art city and coherent corridor bank
+
+Owner explicitly directed using existing Averon art/original adaptations until
+redistribution of specific donor graphics is verified (Issue15/6283227749).
+No new donor art uploaded. `build_city_art_draft.py` now authors a full70x64
+Averon-art alternative: existing neutral facade templates replace the two broken
+landmark envelopes; existing Center/Mart facades preserve active door anchors;
+existing fountain restores the nine source records absent from Averon Rustboro;
+existing tree screens close northern/western unbuilt roads. Streets, park and
+residential pattern remain source-grounded outside explicit recorded edits.
+Two landmarks reuse the same neutral existing facade: this is a disclosed
+silhouette/style adaptation, not a claim of exact Platinum artwork. No company,
+Gym, service, story or character is assigned. Everything remains PROVISIONAL.
+
+`build_corridor_banks.py` resolves source behavior/layer mismatches WITHOUT
+changing global General: corridor Rustboro clones its350 existing records and
+appends19 existing-Averon tile-word records with explicit source semantic/layer
+attributes. Final369records, under512capacity; no new graphic/palette source.
+This preserves source sideways stair behavior and other unchanged terrain
+semantics while keeping actual original primary bank byte-identical. New local
+metatile numbers are NOT persistent met-location identifiers or old map IDs.
+The authored region edits and semantic packing are separate from176's original
+source identity conversion; no false donor→Averon identity assertion is made.
+
+City+203 share this secondary. Final City rows57–63 (490cells) are primary-only,
+so Route202's FillNorthConnection sees no incompatible secondary IDs. Incoming
+Route202 source uses only General too. This is bank-compatibility proof, not a
+final offset/traversal/collision/mGBA acceptance. Actual181 source/head and
+upper/south seam opening still need integrated tests before enabling a connection.
+
+20/20 host tests PASS:14 earlier/source-negative checks +6 real generated bank
+invariants. Added a negative that reopens an unbuilt edge AND updates its hash;
+the verifier now rejects it semantically instead of relying only on checksums.
+Existing350 record meanings preserved; all cloned glyph words are existing art;
+active city doors55,36 /54,26 /43,36 preserved; all new IDs in range; semantic
+packing preserves upper6bits. No supplied native failure baseline changed.
+
+Generated bank compiled through actual Emerald cpp→preproc→ARMcc1→assembler,
+GCC14.2.1/apcs-gnu:6668B read-only,0data,0BSS. Object SHA256
+6ba5b6a0f658f6513befef5cb3980a744390dcb926f1248c6c52335f6458e619.
+No ROM linkage or runtime acceptance implied. Exported bank definition references
+existing Rustboro graphics/palettes/callback; source binaries stay untouched.
+
+Current best CITY/203 candidates are `corridor-banks/{JubilifeCity,Route203}/map.bin`
+and their Averon renders. Four other maps remain `averon-adapted/`. Earlier
+`staged/` and `city-art-draft/` preserve provenance/intermediate states; do not
+confuse them with final registered engine maps. Still need natural cave/door/
+stair/grass behavior, visible closures, animations, follower/menus and complete
+Save→fresh Continue after protected production registration. Upper cave ladder
+is currently inert without a warp and still needs an intentional closed visual.
+
+Reproduce added stages:
+```
+python3 "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/jubilife-corridor/adapt_existing_assets.py" --donor DONOR --engine "Pokemon Game/engine" --staged STAGED --output NEW_FOUR_MAPS
+python3 "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/jubilife-corridor/build_city_art_draft.py" --engine "Pokemon Game/engine" --staged STAGED --output NEW_CITY_ART
+python3 "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/jubilife-corridor/build_corridor_banks.py" --engine "Pokemon Game/engine" --donor DONOR --staged STAGED --city-art NEW_CITY_ART --output NEW_BANKS
+python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p 'test_sinnoh_corridor*.py' -v
+```
+
+NEXT: prepare six engine-shaped neutral headers/layout/script fragments and bank
+registration inputs, preserving section221/222/223 and parent-city interiors;
+serialize global registrars with existing181/ClaudeVerity instead of editing their
+claimed files. Then concrete protected PR, actual paired ROMs/native and real
+mGBA route-through/save acceptance. Existing draft184 is still not merge-ready.

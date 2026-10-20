@@ -1,0 +1,145 @@
+{
+  "status": "PROVISIONAL_CORRIDOR_CANDIDATES_NOT_INTEGRATED_OR_PLAYTESTED",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "primary": "existing gTileset_General unchanged",
+  "secondary": "gTileset_AveronCorridorRustboro",
+  "existing_secondary_records": 350,
+  "appended_records": 19,
+  "final_secondary_records": 369,
+  "allocation": [
+    {
+      "base_existing_id": 3,
+      "attribute_u16": 4096,
+      "target_id": 862
+    },
+    {
+      "base_existing_id": 93,
+      "attribute_u16": 4195,
+      "target_id": 863
+    },
+    {
+      "base_existing_id": 101,
+      "attribute_u16": 4096,
+      "target_id": 864
+    },
+    {
+      "base_existing_id": 147,
+      "attribute_u16": 4170,
+      "target_id": 865
+    },
+    {
+      "base_existing_id": 148,
+      "attribute_u16": 4169,
+      "target_id": 866
+    },
+    {
+      "base_existing_id": 155,
+      "attribute_u16": 4170,
+      "target_id": 867
+    },
+    {
+      "base_existing_id": 156,
+      "attribute_u16": 4169,
+      "target_id": 868
+    },
+    {
+      "base_existing_id": 163,
+      "attribute_u16": 4170,
+      "target_id": 869
+    },
+    {
+      "base_existing_id": 164,
+      "attribute_u16": 4169,
+      "target_id": 870
+    },
+    {
+      "base_existing_id": 171,
+      "attribute_u16": 0,
+      "target_id": 871
+    },
+    {
+      "base_existing_id": 172,
+      "attribute_u16": 0,
+      "target_id": 872
+    },
+    {
+      "base_existing_id": 566,
+      "attribute_u16": 4096,
+      "target_id": 873
+    },
+    {
+      "base_existing_id": 567,
+      "attribute_u16": 4096,
+      "target_id": 874
+    },
+    {
+      "base_existing_id": 704,
+      "attribute_u16": 2,
+      "target_id": 875
+    },
+    {
+      "base_existing_id": 737,
+      "attribute_u16": 4096,
+      "target_id": 876
+    },
+    {
+      "base_existing_id": 744,
+      "attribute_u16": 4096,
+      "target_id": 877
+    },
+    {
+      "base_existing_id": 746,
+      "attribute_u16": 4096,
+      "target_id": 878
+    },
+    {
+      "base_existing_id": 753,
+      "attribute_u16": 4096,
+      "target_id": 879
+    },
+    {
+      "base_existing_id": 790,
+      "attribute_u16": 4096,
+      "target_id": 880
+    }
+  ],
+  "maps": {
+    "JubilifeCity": {
+      "dimensions": [
+        70,
+        64
+      ],
+      "input_sha256": "23ceef9d9df1268ff1cd32e8dddb44f29d94833256f91a7b5dca23fdefa13933",
+      "output_sha256": "33c34598b46ef7b11826d45d5d6031d43b26d056d372b73c186ebea22e59ca08",
+      "semantic_cells_reassigned": 92,
+      "upper_six_bits_preserved": true
+    },
+    "Route203": {
+      "dimensions": [
+        64,
+        30
+      ],
+      "input_sha256": "3eed926d33bdb4dbfc970409bac7c4bdd8faeaf1152d7097f115b46d61b9bebb",
+      "output_sha256": "f624956e15ef12a09dcd1b78503673bea39712e145587ea4f216dd6e6c776436",
+      "semantic_cells_reassigned": 22,
+      "upper_six_bits_preserved": true
+    }
+  },
+  "limits": [
+    "original Averon style adaptation; source art equality not claimed",
+    "sideways stairs behavior retained but in-game appearance/traversal pending",
+    "new bank-local metatile IDs are not saved location IDs",
+    "full runtime/map/SaveContinue acceptance pending"
+  ],
+  "route202_seam_primary_bank_only": {
+    "rows": [
+      57,
+      63
+    ],
+    "cells": 490,
+    "all_primary": true,
+    "scope": "bank compatibility only; actual offsets/collision traversal still require integrated Route202 checks"
+  },
+  "metatiles_sha256": "31b5e9ce8c8d2db209a5de4cd25b312d602205293db9a50db09dcb6046661c6a",
+  "attributes_sha256": "50c9175ad3e6d77fa14c0e06269953e1edbba0c889f21c5e4dfd8adb1b8facd3"
+}

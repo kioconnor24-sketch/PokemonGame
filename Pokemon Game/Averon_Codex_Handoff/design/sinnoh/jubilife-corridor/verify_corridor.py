@@ -8,7 +8,7 @@ import struct
 
 OPPOSITE={'left':'right','right':'left','up':'down','down':'up'}
 def verify(root):
- root=Path(root);receipt=json.loads((root/'receipt.json').read_text());maps={n:json.loads((root/n/'map.json').read_text()) for n in receipt['maps']}
+ root=Path(root);spec=json.loads((Path(__file__).with_name('corridor-spec.json')).read_text());receipt=json.loads((root/'receipt.json').read_text());maps={n:json.loads((root/n/'map.json').read_text()) for n in receipt['maps']}
  for name,h in maps.items():
   w,ht=h['dimensions'];raw=(root/name/'source.bin').read_bytes();candidate=(root/name/'map.bin').read_bytes();m=receipt['maps'][name]
   if len(raw)!=2*w*ht or len(candidate)!=len(raw):raise ValueError('invalid geometry length')
@@ -28,6 +28,10 @@ def verify(root):
   for c in h['connections']:
    if c['to'] not in maps:raise ValueError('unbuilt connection')
    if not any(v['to']==name and v['direction']==OPPOSITE[c['direction']] and v['offset']==-c['offset'] for v in maps[c['to']]['connections']):raise ValueError('nonreciprocal seam offset')
+  retained={(v['x'],v['y']) for v in h['warp_events']}
+  for direction in spec['maps'][name]['close_edges']:
+   coords=([(x,0 if direction=='up' else ht-1) for x in range(w)] if direction in ('up','down') else [(0 if direction=='left' else w-1,y) for y in range(ht)])
+   if any(((after[y*w+x]>>10)&3)==0 for x,y in coords if (x,y) not in retained):raise ValueError('unbuilt boundary is open')
   for warp in h['warp_events']:
    if warp['dest_map'] not in maps:raise ValueError('unbuilt warp destination')
    target=maps[warp['dest_map']];index=warp['dest_warp_id']
@@ -35,6 +39,7 @@ def verify(root):
    if target['warp_events'][index]['dest_map']!=name:raise ValueError('missing return warp')
    x,y=warp['x'],warp['y']
    if not 0<=x<w or not 0<=y<ht or ((after[y*w+x]>>10)&3)!=warp['source_collision']:raise ValueError('warp is blocked/out of bounds')
+   if not any(0<=nx<w and 0<=ny<ht and ((after[ny*w+nx]>>10)&3)==0 for nx,ny in ((x-1,y),(x+1,y),(x,y-1),(x,y+1))):raise ValueError('warp has no ordinary walkable approach')
  return {'maps':len(maps),'cells':sum(v['source_cells'] for v in receipt['maps'].values()),'warps':sum(len(v['warp_events']) for v in maps.values()),'connections':sum(len(v['connections']) for v in maps.values()),'status':'HOST_VALIDATED_NOT_INTEGRATED_OR_PLAYTESTED'}
 
 if __name__=='__main__':
