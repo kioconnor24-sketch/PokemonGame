@@ -12,7 +12,7 @@ decision "Append, share sub-areas", recorded in #15); Sandgem junction D from th
 
 Writes: data/layouts/Route202/{map.bin,border.bin}, LAYOUT_ROUTE202, the gMapGroup_Sinnoh slot,
 data/maps/Route202/{map.json,scripts.inc} (three route signs), the scripts.inc include,
-Route 202 `down` +4 <-> Sandgem `up` -4. The north edge (toward unbuilt Jubilife) stays closed.
+Route 202 `down` +3 <-> Sandgem `up` -3. The north edge (toward unbuilt Jubilife) stays closed.
 """
 import argparse
 import hashlib
@@ -67,7 +67,7 @@ def main():
         "region": "REGION_SINNOH", "region_map_section": "MAPSEC_ROUTE_202", "weather": "WEATHER_SUNNY",
         "map_type": "MAP_TYPE_ROUTE", "allow_cycling": True, "allow_escaping": False, "allow_running": True,
         "show_map_name": True, "requires_flash": False, "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-        "connections": [{"map": "MAP_SANDGEM_TOWN", "offset": 4, "direction": "down"}],
+        "connections": [{"map": "MAP_SANDGEM_TOWN", "offset": 3, "direction": "down"}],
         "coord_events": [], "object_events": [], "warp_events": [],
         "bg_events": [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
                        "script": text.replace("_Text_", "_EventScript_")} for x, y, text in SIGNS]})
@@ -81,7 +81,7 @@ def main():
     sj = ENGINE / "data/maps/SandgemTown/map.json"
     town = json.loads(sj.read_text())
     assert not any(c["direction"] == "up" for c in town["connections"])
-    town["connections"].append({"map": "MAP_ROUTE202", "offset": -4, "direction": "up"})
+    town["connections"].append({"map": "MAP_ROUTE202", "offset": -3, "direction": "up"})
     dump(sj, town)
 
     es = ENGINE / "data/event_scripts.s"
@@ -89,7 +89,7 @@ def main():
     anchor = '\t.include "data/maps/TwinleafTown/scripts.inc"\n'
     assert text.count(anchor) == 1
     es.write_text(text.replace(anchor, anchor + '\t.include "data/maps/Route202/scripts.inc"\n'))
-    print("Route202 written; Route202 down +4 / Sandgem up -4")
+    print("Route202 written; Route202 down +3 / Sandgem up -3")
 
 
 if __name__ == "__main__":

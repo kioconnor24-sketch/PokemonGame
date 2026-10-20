@@ -44,5 +44,5 @@ text, music, the donor connections (Sandgem −2, Jubilife −38) and the donor 
 | Signs | Three route signs on the donor's sign cells (14, 3), (11, 14) and (21, 25), with neutral text: `ROUTE 202`, and `SOUTH: SANDGEM TOWN` on the north sign |
 | Music | `MUS_ROUTE101`, like Route 201 |
 | Section | 219 `MAPSEC_ROUTE_202` |
-| Sandgem junction | Route 202 `down` **+4** ↔ Sandgem `up` **−4**. The donor's south opening x 22–27 meets Sandgem's north opening x 19–24, giving a 5-wide walkable overlap (Sandgem x 19–23) that includes Sandgem's road. The offset is even, so tree columns stay aligned. |
+| Sandgem junction | Route 202 `down` **+3** ↔ Sandgem `up` **−3**. The donor's south opening x 22–27 now maps precisely to Sandgem's north opening x 19–24 (six walkable columns in both directions). The prior +4/−4 header alignment had two static seam-mismatch findings at the opposing tree columns. Tree columns stagger by one cell at the seam, but tree shapes remain intact. Targeted both-profile in-game/seam and fresh-process Continue retesting is required before acceptance. |
 | North edge | The opening (x 8–15) stays **closed** until Jubilife exists |
