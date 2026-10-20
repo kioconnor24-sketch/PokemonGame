@@ -79,6 +79,7 @@ class MapInfo:
                             for c in (info.get("connections") or [])]
         self.objects = [(o["x"], o["y"], o.get("script", ""), o.get("graphics_id", ""))
                         for o in info.get("object_events", [])]
+        self.triggers = {(c["x"], c["y"]) for c in info.get("coord_events", []) if c.get("type", "trigger") == "trigger"}
 
     def _derive_behaviors(self):
         self.behaviors = []
@@ -156,6 +157,21 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
                     path.append(step)
                 return path[::-1]
             q.append(nxt)
+    return None
+
+
+def trigger_entry(m, x, y):
+    """A warp tile that also carries a coord trigger is a step-on warp (no arrow/door metatile).
+
+    Returns (approach tile, direction to step onto the warp) or None. The player arrives on the warp tile.
+    """
+    triggers = getattr(m, "triggers", ())
+    if (x, y) not in triggers or m.warp_at(x, y) is None:
+        return None
+    for d, (dx, dy) in DIRS.items():
+        approach = (x - dx, y - dy)
+        if m.walkable(*approach) and approach not in triggers:
+            return approach, d
     return None
 
 
