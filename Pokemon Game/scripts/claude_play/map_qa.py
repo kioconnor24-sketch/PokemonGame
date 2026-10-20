@@ -70,6 +70,9 @@ def is_door(m, x, y):
 
 def warp_push(m, x, y):
     """Direction to press to take the warp at (x, y)."""
+    entry = mapdata.trigger_entry(m, x, y)
+    if entry:
+        return entry[1]
     b = m.behavior(x, y)
     for word, d in (("SOUTH", "down"), ("NORTH", "up"), ("EAST", "right"), ("WEST", "left")):
         if word + "_ARROW" in b:
@@ -78,10 +81,18 @@ def warp_push(m, x, y):
 
 
 def warp_stand(m, x, y):
-    """Tile the player stands on to take the warp, which is also where it arrives."""
+    """Tile the player stands on to take the warp (for arrow warps and doors, also where it arrives)."""
+    entry = mapdata.trigger_entry(m, x, y)
+    if entry:
+        return entry[0]
     if is_door(m, x, y) or not m.walkable(x, y):
         return (x, y + 1)
     return (x, y)
+
+
+def warp_arrive(m, x, y):
+    """Where a warp into (x, y) lands the player: on a step-on (trigger) warp, the warp tile itself."""
+    return (x, y) if mapdata.trigger_entry(m, x, y) else warp_stand(m, x, y)
 
 
 def moves(m, x, y):
@@ -149,6 +160,44 @@ def map_points(m):
     return points
 
 
+def batch_arrival(world, map_ids, p):
+    """(map, tile) where taking exit point p lands the player, if its destination is in the batch."""
+    if p["dest"] not in map_ids:
+        return None
+    dest = world.map(p["dest"])
+    if p["kind"] == "warp":
+        if p["dest_warp"] >= len(dest.warps):
+            return None
+        return p["dest"], warp_arrive(dest, *dest.warps[p["dest_warp"]][:2])
+    return None  # connections need the source map: batch_reach resolves them
+
+
+def batch_reach(world, map_ids, map_id, tile):
+    """Every (map, tile) reachable from (map_id, tile) on foot, through warps and seams inside the batch."""
+    seen_regions, seen, queue = [], set(), deque([(map_id, tuple(tile))])
+    while queue:
+        mid, start = queue.popleft()
+        if (mid, start) in seen:
+            continue
+        m = world.map(mid)
+        region = reach(m, [start])
+        seen |= {(mid, t) for t in region}
+        for p in map_points(m):
+            if tuple(p["tile"]) not in region:
+                continue
+            if p["kind"] == "warp":
+                nxt = batch_arrival(world, map_ids, p)
+            elif p["dest"] in map_ids:
+                other = world.map(p["dest"])
+                o = across(m, other, p["direction"], p["offset"], p["tile"])
+                nxt = (p["dest"], tuple(o)) if other.inside(*o) and other.walkable(*o) else None
+            else:
+                nxt = None
+            if nxt and nxt not in seen:
+                queue.append(nxt)
+    return seen
+
+
 def static_audit(world, map_ids):
     findings, plan = [], {}
 
@@ -184,6 +233,8 @@ def static_audit(world, map_ids):
         for p in points:
             got = reach(m, [p["tile"]])
             cut += [(p["tile"], q["tile"]) for q in points if q["tile"] not in got]
+        # A pair split inside this map is fine when the batch joins it (e.g. a route's halves through a cave).
+        cut = [(a, b) for a, b in cut if (map_id, tuple(b)) not in batch_reach(world, map_ids, map_id, a)]
         if cut:
             find(map_id, "exit-unreachable", dict(pairs=cut[:8], count=len(cut)))
         # Pockets: tiles a player can get into but never back out of.
@@ -403,15 +454,59 @@ class Runner:
         ok = bool(reach(m, [pos]) & exits)
         return self.check(f"an exit is reachable after {label}", ok, at=(mid, pos))
 
-    def go(self, map_id, tile):
-        """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run."""
+    def go(self, map_id, tile, _depth=0):
+        """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run.
+
+        When the tile is in another part of the map than the player (a route split by a cliff and joined
+        by a cave), enter that part through a batch warp whose arrival can reach it, then walk.
+        """
         from driver import Stuck
+        tile = tuple(tile)
+        if self.d.here()[0] == map_id and tile not in reach(self.d.live_map(map_id), [self.d.here()[1]]) and _depth < 2:
+            self.enter_region(map_id, tile, _depth)
         try:
-            self.d.walk_path(map_id, {tuple(tile)})
+            self.d.walk_path(map_id, {tile})
         except Stuck as exc:
-            self.d.log("unreachable", map=map_id, tile=tuple(tile), reason=str(exc))
+            self.d.log("unreachable", map=map_id, tile=tile, reason=str(exc))
             return False
-        return self.d.here() == (map_id, tuple(tile))
+        return self.d.here() == (map_id, tile)
+
+    def enter_region(self, map_id, tile, depth):
+        target = self.w.map(map_id)
+        for src in self.plan:
+            for p in self.plan[src]["points"]:
+                if p["kind"] != "warp" or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
+                    continue
+                arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
+                if tile not in reach(target, [arrive]):
+                    continue
+                self.d.log("enter-region", map=map_id, tile=tile, via=(src, tuple(p["tile"])))
+                if self.d.here()[0] != src:
+                    self.d.travel_to(src)
+                if not self.go(src, p["tile"], depth + 1):
+                    continue
+                for _ in range(4):
+                    self.press(p["push"], hold=0.3, after=1.2)
+                    if self.d.here()[0] != src:
+                        break
+                self.wait_settled()
+                if self.d.here()[0] == map_id:
+                    return True
+        return False
+
+    def blocked(self, map_id, x, y, direction):
+        """Targeted probe (e.g. a shore facing water without Surf): stand there, push, must not move."""
+        tile = (int(x), int(y))
+        name = f"{map_id} {tile} pushing {direction} is blocked"
+        if self.d.here()[0] != map_id:
+            self.d.travel_to(map_id)
+        if not self.go(map_id, tile):
+            return self.check(name, False, reason="could not reach the probe tile", at=self.d.here())
+        before = self.d.here()
+        self.press(direction, hold=0.35, after=0.6)
+        after = self.d.here()
+        self.d.shot(f"blocked-{map_id}-{tile[0]}-{tile[1]}-{direction}")
+        return self.check(name, after == before, before=before, after=after)
 
     def closed_edge(self, map_id, c):
         name = f"{map_id} closed {c['direction']} edge at {tuple(c['tile'])} blocks"
@@ -445,7 +540,7 @@ class Runner:
         dx, dy, dpush = None, None, None
         if p["dest_warp"] < len(dest.warps):
             wx, wy = dest.warps[p["dest_warp"]][:2]
-            arrive = warp_stand(dest, wx, wy)
+            arrive, dstand = warp_arrive(dest, wx, wy), warp_stand(dest, wx, wy)
             dpush = warp_push(dest, wx, wy)
         else:
             arrive = None
@@ -462,7 +557,7 @@ class Runner:
             return self.check(name, False, leg="in", expected=(p["dest"], arrive), got=there)
         self.follower(f"{p['dest']} via warp")
         self.can_leave(f"warping into {p['dest']}")
-        self.go(p["dest"], arrive)
+        self.go(p["dest"], dstand)
         for _ in range(4):
             self.press(dpush, hold=0.3, after=1.2)
             if self.d.here()[0] != p["dest"]:
@@ -470,7 +565,7 @@ class Runner:
         back = self.wait_settled()
         # Several warps may share one destination (a Center's two exit mats); any of them is a correct return.
         m = self.w.map(map_id)
-        group = {warp_stand(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
+        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         ok = self.check(name, back[0] == map_id and back[1] in group, leg="back", expected=(map_id, sorted(group)), got=back)
         if ok:
             self.follower(f"{map_id} after warp round trip")
@@ -761,6 +856,8 @@ def cmd_run(args):
         if not args.expect:
             for map_id in args.map:
                 r.run_map(map_id)
+            for probe in args.blocked or []:
+                r.blocked(*probe.split(","))
             if args.region_ui:
                 r.region_ui(args.region_ui_map or args.map[0], args.region_ui, engine)
             if args.whiteout:
@@ -901,6 +998,8 @@ def main(argv=None):
     r.add_argument("--map", action="append", required=True)
     r.add_argument("--save")
     r.add_argument("--expect")
+    r.add_argument("--blocked", action="append", metavar="MAP_ID,X,Y,DIR",
+                   help="after the map checks: walk to (X, Y), push DIR, and require the player not to move")
     r.add_argument("--region-ui", choices=("refused", "opens"),
                    help="drive PokeNav MAP, the Town Map item and Field Kit FLY (needs the TEST-ONLY grant fixture)")
     r.add_argument("--region-ui-map", help="outdoor map for --region-ui (default: first --map)")
