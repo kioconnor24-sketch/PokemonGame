@@ -1,0 +1,55 @@
+[
+ {
+  "fixture": "negative-verity-warp-landing",
+  "expect": "FAIL",
+  "static_codes": [
+   "exit-not-walkable",
+   "exit-unreachable"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "9bf7fe9a93cdff8d7af0dc15b615245f90a3e29b35122d597e8f01a88f841a20",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 5,
+   "x": 2,
+   "y": 7
+  },
+  "verdict": "FAIL",
+  "checks": 11,
+  "failed": [
+   "MAP_VERITY_LAKEFRONT warp 0 (2, 4) -> MAP_LAKE_VERITY and back",
+   "MAP_VERITY_LAKEFRONT warp 1 (3, 4) -> MAP_LAKE_VERITY and back",
+   "run completed without the driver getting stuck"
+  ],
+  "ok": true
+ },
+ {
+  "fixture": "negative-verity-wrong-offset",
+  "expect": "FAIL",
+  "static_codes": [
+   "seam-mismatch"
+  ],
+  "static_ok": true,
+  "build": 0,
+  "rom_sha256": "311ed51264952bcada6e1251171edac93c219b925f524675c5ce3ca5a5c21f83",
+  "dev_entry": {
+   "slot": 0,
+   "counter": 2,
+   "group": 76,
+   "num": 5,
+   "x": 14,
+   "y": 13
+  },
+  "verdict": "FAIL",
+  "checks": 8,
+  "failed": [
+   "MAP_VERITY_LAKEFRONT right seam (19, 8) -> MAP_ROUTE201 (0, 8) and back",
+   "MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 10) and back",
+   "MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 13) and back"
+  ],
+  "ok": true
+ }
+]
