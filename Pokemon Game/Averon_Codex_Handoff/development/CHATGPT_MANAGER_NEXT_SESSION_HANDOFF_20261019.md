@@ -1,5 +1,7 @@
-# Pokémon Averon — authoritative next ChatGPT manager session handoff
+# Pokémon Averon — October 19 manager handoff (historical extended reference)
 
+> **SUPERSEDED AS THE CURRENT START DOCUMENT on 2026-10-20.** Read the shorter [October 20 manager handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261020.md) first. This October 19 file retains valuable historical evidence, but its snapshot SHAs and open-PR counts must never override live GitHub.
+>
 > **LATEST VERIFIED EXECUTION CHECKPOINT — 2026-10-20, about 01:19 America/New_York.** This section **supersedes** every older "one open PR", "Codex stopped by owner", outdated engine SHA and "sole blocker" claim elsewhere in this historical handoff. Fetch current main/PRs again before acting.
 >
 > - **Main**: `21086c44e56fa9262440859a1e49b960cfc37125` after [#183 Verity preflight](https://github.com/kioconnor24-sketch/PokemonGame/pull/183). Earlier #176–#178 donor tooling and #166 Twinleaf are merged. PR #175 is **closed unmerged**; do not assume its tree repair is on main.
