@@ -32,7 +32,20 @@ no IDs allocated. ROM `bb6e7cc6…`, 0 compiler warnings. The tooling is `claude
 The first runs found the unenterable north cave door, now fixed in `ACCESS_EDITS`. They also showed that the driver
 routed through an unreachable door, which `c547ddfd` fixes.
 
-Not yet run: RELEASE, Continue, and negatives. Those belong to the production PR, once IDs are approved.
+**Rerun with the builder's production headers** (staged map.json/scripts.inc, installed by `--engine` with
+stand-in sections in a throwaway on main `eadd5ef1`; ROM `eedc3429…`, 0 warnings):
+
+| Check | Result |
+| --- | --- |
+| Static | 0 findings |
+| NORMAL mGBA | **25/25** |
+| Save → fresh Continue | **3/3** |
+| `negative-route204-warp-swap` | **FAIL as required**: static `exit-unreachable`, and the warp 1 round trip fails |
+
+That negative points Ravaged Path's north exit at the south door. It also stranded the player in the wrong half, so
+the north-edge checks failed too.
+
+**Not run:** RELEASE. It belongs to the production PR, once IDs are approved.
 
 ## Open before production
 
