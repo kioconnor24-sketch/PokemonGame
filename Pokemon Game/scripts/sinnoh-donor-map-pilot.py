@@ -75,7 +75,7 @@ def analyze(root, map_name, revision):
             key: len(header.get(key, []))
             for key in ("object_events", "warp_events", "coord_events", "bg_events")
         },
-        "connection_count": len(header.get("connections", [])),
+        "connection_count": len(header.get("connections") or []),
         "status": "SOURCE_ANALYSIS_ONLY",
     }
 

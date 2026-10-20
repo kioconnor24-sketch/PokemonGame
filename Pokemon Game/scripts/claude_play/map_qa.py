@@ -160,6 +160,44 @@ def map_points(m):
     return points
 
 
+def batch_arrival(world, map_ids, p):
+    """(map, tile) where taking exit point p lands the player, if its destination is in the batch."""
+    if p["dest"] not in map_ids:
+        return None
+    dest = world.map(p["dest"])
+    if p["kind"] == "warp":
+        if p["dest_warp"] >= len(dest.warps):
+            return None
+        return p["dest"], warp_arrive(dest, *dest.warps[p["dest_warp"]][:2])
+    return None  # connections need the source map: batch_reach resolves them
+
+
+def batch_reach(world, map_ids, map_id, tile):
+    """Every (map, tile) reachable from (map_id, tile) on foot, through warps and seams inside the batch."""
+    seen_regions, seen, queue = [], set(), deque([(map_id, tuple(tile))])
+    while queue:
+        mid, start = queue.popleft()
+        if (mid, start) in seen:
+            continue
+        m = world.map(mid)
+        region = reach(m, [start])
+        seen |= {(mid, t) for t in region}
+        for p in map_points(m):
+            if tuple(p["tile"]) not in region:
+                continue
+            if p["kind"] == "warp":
+                nxt = batch_arrival(world, map_ids, p)
+            elif p["dest"] in map_ids:
+                other = world.map(p["dest"])
+                o = across(m, other, p["direction"], p["offset"], p["tile"])
+                nxt = (p["dest"], tuple(o)) if other.inside(*o) and other.walkable(*o) else None
+            else:
+                nxt = None
+            if nxt and nxt not in seen:
+                queue.append(nxt)
+    return seen
+
+
 def static_audit(world, map_ids):
     findings, plan = [], {}
 
@@ -195,6 +233,8 @@ def static_audit(world, map_ids):
         for p in points:
             got = reach(m, [p["tile"]])
             cut += [(p["tile"], q["tile"]) for q in points if q["tile"] not in got]
+        # A pair split inside this map is fine when the batch joins it (e.g. a route's halves through a cave).
+        cut = [(a, b) for a, b in cut if (map_id, tuple(b)) not in batch_reach(world, map_ids, map_id, a)]
         if cut:
             find(map_id, "exit-unreachable", dict(pairs=cut[:8], count=len(cut)))
         # Pockets: tiles a player can get into but never back out of.
@@ -414,15 +454,45 @@ class Runner:
         ok = bool(reach(m, [pos]) & exits)
         return self.check(f"an exit is reachable after {label}", ok, at=(mid, pos))
 
-    def go(self, map_id, tile):
-        """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run."""
+    def go(self, map_id, tile, _depth=0):
+        """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run.
+
+        When the tile is in another part of the map than the player (a route split by a cliff and joined
+        by a cave), enter that part through a batch warp whose arrival can reach it, then walk.
+        """
         from driver import Stuck
+        tile = tuple(tile)
+        if self.d.here()[0] == map_id and tile not in reach(self.d.live_map(map_id), [self.d.here()[1]]) and _depth < 2:
+            self.enter_region(map_id, tile, _depth)
         try:
-            self.d.walk_path(map_id, {tuple(tile)})
+            self.d.walk_path(map_id, {tile})
         except Stuck as exc:
-            self.d.log("unreachable", map=map_id, tile=tuple(tile), reason=str(exc))
+            self.d.log("unreachable", map=map_id, tile=tile, reason=str(exc))
             return False
-        return self.d.here() == (map_id, tuple(tile))
+        return self.d.here() == (map_id, tile)
+
+    def enter_region(self, map_id, tile, depth):
+        target = self.w.map(map_id)
+        for src in self.plan:
+            for p in self.plan[src]["points"]:
+                if p["kind"] != "warp" or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
+                    continue
+                arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
+                if tile not in reach(target, [arrive]):
+                    continue
+                self.d.log("enter-region", map=map_id, tile=tile, via=(src, tuple(p["tile"])))
+                if self.d.here()[0] != src:
+                    self.d.travel_to(src)
+                if not self.go(src, p["tile"], depth + 1):
+                    continue
+                for _ in range(4):
+                    self.press(p["push"], hold=0.3, after=1.2)
+                    if self.d.here()[0] != src:
+                        break
+                self.wait_settled()
+                if self.d.here()[0] == map_id:
+                    return True
+        return False
 
     def blocked(self, map_id, x, y, direction):
         """Targeted probe (e.g. a shore facing water without Surf): stand there, push, must not move."""

@@ -171,20 +171,24 @@ class Driver:
                         time.sleep(1.0)
                         self.settle()
                 else:
-                    tile, push = rest[0], rest[1]
-                    mid, pos = self.walk_path(map_id, {tile}, on_event=on_event)
-                    if mid == map_id and pos == tile:
-                        self.step(push)
-                        time.sleep(1.0)
-                        self.settle()
-                    elif mid == map_id:
-                        # Stand next to the door and walk into it.
+                    # A map split by a cliff can have the leg's warp out of reach: any of its warps to the
+                    # same destination will do (e.g. a route's two cave doors). Doors are entered from
+                    # their doorstep.
+                    dest = (m.warp_at(*rest[0]) or (None,))[0]
+                    tiles = [tuple(rest[0])] + [(x, y) for x, y, d, _ in m.warps if d == dest and (x, y) != tuple(rest[0])]
+                    for tile in tiles:
+                        push = self.warp_push(m, tile)
                         before = (tile[0] - mapdata.DIRS[push][0], tile[1] - mapdata.DIRS[push][1])
-                        mid, pos = self.walk_path(map_id, {before}, on_event=on_event)
-                        if mid == map_id and pos == before:
+                        goal = tile if m.walkable(*tile) and "DOOR" not in m.behavior(*tile) else before
+                        try:
+                            mid, pos = self.walk_path(map_id, {goal}, on_event=on_event)
+                        except Stuck:
+                            continue
+                        if mid == map_id and pos == goal:
                             self.step(push)
                             time.sleep(1.0)
                             self.settle()
+                        break
             mid, pos = self.here()
             self.log("map", map=mid, pos=pos)
 
