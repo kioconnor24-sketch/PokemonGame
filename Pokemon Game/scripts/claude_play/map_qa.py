@@ -424,6 +424,20 @@ class Runner:
             return False
         return self.d.here() == (map_id, tuple(tile))
 
+    def blocked(self, map_id, x, y, direction):
+        """Targeted probe (e.g. a shore facing water without Surf): stand there, push, must not move."""
+        tile = (int(x), int(y))
+        name = f"{map_id} {tile} pushing {direction} is blocked"
+        if self.d.here()[0] != map_id:
+            self.d.travel_to(map_id)
+        if not self.go(map_id, tile):
+            return self.check(name, False, reason="could not reach the probe tile", at=self.d.here())
+        before = self.d.here()
+        self.press(direction, hold=0.35, after=0.6)
+        after = self.d.here()
+        self.d.shot(f"blocked-{map_id}-{tile[0]}-{tile[1]}-{direction}")
+        return self.check(name, after == before, before=before, after=after)
+
     def closed_edge(self, map_id, c):
         name = f"{map_id} closed {c['direction']} edge at {tuple(c['tile'])} blocks"
         if not self.go(map_id, c["tile"]):
@@ -772,6 +786,8 @@ def cmd_run(args):
         if not args.expect:
             for map_id in args.map:
                 r.run_map(map_id)
+            for probe in args.blocked or []:
+                r.blocked(*probe.split(","))
             if args.region_ui:
                 r.region_ui(args.region_ui_map or args.map[0], args.region_ui, engine)
             if args.whiteout:
@@ -912,6 +928,8 @@ def main(argv=None):
     r.add_argument("--map", action="append", required=True)
     r.add_argument("--save")
     r.add_argument("--expect")
+    r.add_argument("--blocked", action="append", metavar="MAP_ID,X,Y,DIR",
+                   help="after the map checks: walk to (X, Y), push DIR, and require the player not to move")
     r.add_argument("--region-ui", choices=("refused", "opens"),
                    help="drive PokeNav MAP, the Town Map item and Field Kit FLY (needs the TEST-ONLY grant fixture)")
     r.add_argument("--region-ui-map", help="outdoor map for --region-ui (default: first --map)")

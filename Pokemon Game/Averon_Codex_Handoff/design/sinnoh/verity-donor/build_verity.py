@@ -127,7 +127,8 @@ def scripts(map_id, extra=""):
     name, other = NAME[map_id], OTHER[map_id]
     text = f"{name}_MapScripts::\n\t.byte 0\n"
     for i in range(2):
-        text += f"\n{name}_EventScript_ToWarp{i}::\n\twarp {other}, {i}\n\twaitstate\n\tend\n"
+        # DoWarp locks field controls itself; no waitstate, so a missing warp line can't freeze the player.
+        text += f"\n{name}_EventScript_ToWarp{i}::\n\twarp {other}, {i}\n\tend\n"
     return text + extra
 
 
