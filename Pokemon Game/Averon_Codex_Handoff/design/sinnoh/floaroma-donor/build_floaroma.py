@@ -14,7 +14,7 @@ What is replaced:
 - the Meadow tunnel's donor Petalburg-style secondary cells by Averon General tree halves and grass. Its two
   north arrow warps become step-on warps (coord triggers), as on Verity: Averon has no north arrow warp art here.
 Buildings are closed shells (no interiors yet: no door warps). Edges: Route 204 (south, +2) is in this batch;
-Route 205 South (east) stays closed. Excluded: donor NPCs, hidden item, scripts, music, flags and IDs.
+Route 205 South (east, -64) is in the batch too. Excluded: donor NPCs, hidden item, scripts, music, flags and IDs.
 
   build_floaroma.py --donor-root DONOR --stage DIR     off-engine: map.bin + map.json/scripts.inc (section pending)
 """
@@ -128,7 +128,8 @@ def headers(data, section):
         "region": "REGION_SINNOH", "region_map_section": section, "weather": "WEATHER_SUNNY", "map_type": "MAP_TYPE_TOWN",
         "allow_cycling": True, "allow_escaping": False, "allow_running": True, "show_map_name": True,
         "requires_flash": False, "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-        "connections": [{"map": "MAP_ROUTE204", "offset": 2, "direction": "down"}],
+        "connections": [{"map": "MAP_ROUTE204", "offset": 2, "direction": "down"},
+                        {"map": "MAP_ROUTE205_SOUTH", "offset": -64, "direction": "right"}],
         "object_events": [],
         "warp_events": [{"x": x, "y": y, "elevation": 0, "dest_map": "MAP_FLOAROMA_MEADOW", "dest_warp_id": str(i)}
                         for i, (x, y) in enumerate(MEADOW_WARPS)],
