@@ -58,6 +58,10 @@ SECONDARY = {
 TUNNEL_IDS = {539, 540, 541, 542, 543, 547, 548, 549, 550, 557, 565, 567}   # sealed with tree halves
 HOUSE = (19, 19, 23, 22, 21, 22, "house")
 SIGNS = [(17, 18), (23, 85)]
+# West-edge mountain floor that faces nothing across the Floaroma seam (Floaroma only spans rows 64-99 here):
+# solid rock, so the edge is closed instead of a walk into an invisible wall (static seam-mismatch).
+SEAM_EDITS = {(0, 16): (0x310C, 0x3000 | (1 << 10) | 137), (0, 17): (0x310C, 0x3000 | (1 << 10) | 137),
+              (0, 21): (0x310C, 0x3000 | (1 << 10) | 137)}
 
 
 def git_blob(raw):
@@ -90,6 +94,10 @@ def convert(donor):
     for j, row in enumerate(block):
         for i, c in enumerate(row):
             cells[(dy - ddy + j) * W + dx - ddx + i] = c
+    for (x, y), (was, new) in SEAM_EDITS.items():
+        assert cells[y * W + x] == was, (x, y, hex(cells[y * W + x]))
+        cells[y * W + x] = new
+        owned.add((x, y))
     for x, y in SIGNS:
         assert cells[y * W + x] & 1023 == 3, (x, y)
     survived = sorted({c & 1023 for i, c in enumerate(cells) if c & 1023 >= 512 and (i % W, i // W) not in owned}
