@@ -47,6 +47,25 @@ the north-edge checks failed too.
 
 **Not run:** RELEASE. It belongs to the production PR, once IDs are approved.
 
+## Corridor throwaway check (Route 204 + Ravaged Path + Floaroma Town + Floaroma Meadow)
+
+Installed with stand-in sections in an uncommitted throwaway on main `eadd5ef1`, using the region-aware driver from
+`claude/map-qa-regions` `498fc37e`. ROM `d26e051b…`, 0 warnings.
+
+| Check | Result |
+| --- | --- |
+| Static, whole corridor | 0 findings |
+| NORMAL mGBA | **48/48** |
+| Save → fresh Continue | **3/3** |
+
+The runs covered the Route 204 ↔ Floaroma seams both ways, all Ravaged Path and Meadow step-on warps with the
+follower, and the closed edges.
+
+Earlier corridor runs found and fixed:
+1. dead-end seam cells, now Route 204 bushes;
+2. a one-tile nook reachable only from Floaroma, now bushes on both sides;
+3. a driver that walked toward an edge reachable only through the cave, now region-aware routing.
+
 ## Open before production
 
 1. **`map_qa` batch reachability:** done on `claude/map-qa-batch`.
