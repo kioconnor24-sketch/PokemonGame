@@ -64,6 +64,13 @@ class DonorPilotTests(unittest.TestCase):
         self.assertEqual(a["metatile_frequency"], {"0": 2, "512": 2, "1": 2})
         self.assertIn("block_sha256", a)
 
+    def test_null_connections_are_zero_like_real_lake_verity(self):
+        path = self.donor / "data/maps/Route202/map.json"
+        header = json.loads(path.read_text())
+        header["connections"] = None
+        path.write_text(json.dumps(header))
+        self.assertEqual(pilot.analyze(self.donor, "Route202", self.revision)["connection_count"], 0)
+
     def test_manifest_defaults_to_unverified(self):
         m = pilot.draft_manifest(self.audit)
         self.assertIsNone(m["target_map_id"])
