@@ -103,3 +103,28 @@ used dependency sets, adapt city+203 coherent banks and Route202 seam, regenerat
 candidates/previews with real verified mappings. Continue this assignment, not
 old Verity preflight/manager cleanup. All three new section identities are now
 approved, but that does not waive source protections or graphical acceptance.
+
+## Continued checkpoint — four actual Averon-asset conversions
+
+`adapt_existing_assets.py` now proves every used metatile record, full attribute,
+indexed graphic8x8 and selected palette against existing Averon assets for Gate1F,
+Center1F, Mart and School, including border dependencies. All4 pass. Unused
+Building palette4 differs, but none of these maps uses it; blanket PNG/palette
+hash rejection would incorrectly block an exact USED dependency match.
+
+Actual176 converter ran for all4 using graphics/behavior attestations backed by
+these comparisons; geometry remains identical before documented closures.
+`averon-adapted/` contains real converted map binaries, manifests, hash receipts
+and static previews rendered solely with already present Averon assets. No donor
+art is added. Gate preview inspected: cave terrain/entry geometry retained;
+visible upper ladder has no source warp, so its future-floor treatment needs
+explicit neutral closure/adaptation before gameplay acceptance.
+
+7/7 additional tests PASS: used record/attribute/pixel/palette changes and missing
+records rejected; unrelated unused palette/tile changes accepted. Together with
+6 prior corridor checks:13/13. This is static graphics verification, NOT actual
+runtime animation/door/follower/warp/GBA acceptance. General+Cave and
+Building+interior existing callbacks still need in-game observation after real
+registration. Raw Rustboro city/203 adaptation remains unfinished:94/57 used
+primary IDs respectively; city157secondary IDs with9 absent destination slots.
+No global General replacement or automatic approximate matching performed.
