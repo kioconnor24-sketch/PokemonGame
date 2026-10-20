@@ -1,4 +1,33 @@
-# Route 205 South: measured conversion plan (Phase C)
+# Route 205 South: conversion (done) and plan record
+
+## Status (2026-10-20): converted and tested in a throwaway build
+
+`build_route205.py` converts all 40 donor Mauville IDs to Averon tiles of the same movement behavior. Changed
+cells: 166, every one listed and asserted. The table below is the plan this followed.
+
+**Five-map corridor throwaway**, installed with stand-in sections and never committed; ROM `9e08dbc9…`, 0 warnings.
+The corridor is Route 204 → Ravaged Path → Route 204 north → Floaroma Town (+ Meadow) → Route 205 South.
+
+| Check | Result |
+| --- | --- |
+| Static | **0 findings** |
+| NORMAL mGBA | **56/56**, including the Floaroma ↔ Route 205 seam both ways with the follower |
+| Save → fresh Continue | **3/3** |
+| `negative-route205-wrong-offset` | **FAIL as required**: static `seam-mismatch`, and both seam crossings fail |
+
+Fixed while building:
+- Route 205's west mountain floor at (0, 16/17/21) faced nothing across the seam. It is solid rock now.
+
+Documented departures:
+- **Sideways stair:** the donor's 3-cell sideways stair (MB_SIDEWAYS_STAIRS_RIGHT_SIDE) is plain walkable ground.
+  Averon's General has no such metatile.
+- **South plank bridge:** drawn with Averon's log bridge (MB_BRIDGE_OVER_OCEAN). The kept elevation-3 bits govern
+  crossing.
+
+Not run: RELEASE, which belongs to the production PR. Section IDs: see `SECTION_RECOMMENDATION.md`.
+
+---
+
 
 **Source:** LiderMorti00 rev `38228bb5`, `data/layouts/Route205_South/map.bin` (git blob `569eaa93…`).
 32×96 cells, `gTileset_General` + `gTileset_Mauville`, the same banks as Floaroma.
