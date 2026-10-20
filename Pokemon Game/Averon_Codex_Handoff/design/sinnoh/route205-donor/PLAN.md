@@ -75,3 +75,22 @@ The contact sheet `secondary-ids-averon-same-id.png` shows Averon's art at these
    - a throwaway mGBA run before any production PR.
 
 No section IDs are assigned; that is an owner decision covering the whole corridor.
+
+## Next batch assessment: Valley Windworks (Route 205 South's east edge)
+
+Donor `ValleyWindworks`: 32×99 cells, General + Mauville. It uses **55 secondary IDs over 170 cells** of 3,168.
+Connections: left Route 205 South (0), up Route 205 North (−9). It has 1 interior warp, 4 objects and 2 triggers,
+none of which are imported.
+
+| Area | In Averon's banks | Needs |
+| --- | --- | --- |
+| Top two-thirds | Solid mountain filler | Nothing |
+| Facility building | Draws acceptably as an Averon-style building | Closed shell |
+| Riverbank and grass | Fine | Nothing |
+| **Wind turbines** (the row of structures at the bottom, plus pieces on the right) | **No Averon equivalent**; they draw as teal stripes | New compatible art, or a deliberate neutral substitute (e.g. solid rock or posts). This is a visual design decision, not a behavior-preserving remap. |
+
+The site is a story location in the original games, so it would stay neutral: no Galactic content.
+
+**Recommended order:** convert the non-turbine area with the same behavior-matched method. Ask the owner whether the
+turbines may be replaced by neutral solid scenery until compatible art exists. Then connect it to Route 205 South's
+east edge.
