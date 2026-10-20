@@ -59,7 +59,9 @@ SECONDARY = {
 BUSH = 22 | (1 << 10) | (3 << 12)
 ACCESS_EDITS = {"Route204": {(19, 24): (167 | (1 << 10), 167),
                              (4, 0): (0x3001, BUSH), (5, 0): (0x3001, BUSH), (6, 0): (0x3001, BUSH),
-                             (7, 0): (0x3001, BUSH), (21, 0): (0x3004, BUSH)}}
+                             (7, 0): (0x3001, BUSH), (21, 0): (0x3004, BUSH),
+                             # (8, 0) was then a one-tile nook reachable only from Floaroma's (10, 35): both solid.
+                             (8, 0): (0x3001, BUSH)}}
 
 
 def git_blob(raw):

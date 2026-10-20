@@ -58,6 +58,9 @@ TUNNEL = {(3, 0): 471, (3, 1): 479, (3, 2): 471, (3, 3): 487,
           (4, 2): 1, (5, 2): 1, (4, 3): 1, (5, 3): 1}
 MEADOW_WARPS = [(4, 2), (5, 2)]
 SIGNS = [(19, 13), (31, 17), (15, 20)]
+# Seam with Route 204 (+2): (10, 35) faced a one-tile nook at Route 204 (8, 0) beside the path fence; both become
+# solid bushes (Route 204's side is in route204-donor ACCESS_EDITS).
+SEAM_EDITS = {(10, 35): (1 | (3 << 12), 22 | (1 << 10) | (3 << 12))}
 KEPT_SECONDARY = {521, 528}  # flower beds: identical in both banks
 
 
@@ -98,6 +101,10 @@ def convert(donor):
                 owned.add((tx + i, ty + j))
     for (x, y), mid in TUNNEL.items():
         cells[y * W + x] = (blocks[y * W + x] & 0xFC00) | mid
+        owned.add((x, y))
+    for (x, y), (was, new) in SEAM_EDITS.items():
+        assert cells[y * W + x] == was, (x, y, hex(cells[y * W + x]))
+        cells[y * W + x] = new
         owned.add((x, y))
     for x, y in SIGNS:
         assert cells[y * W + x] & 1023 == 3, (x, y)
