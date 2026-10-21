@@ -12,13 +12,13 @@ Route 204 installer refuses sections that don't exist.
 - A section sets two things players see: the **map-name popup** on entry, and the **met location** on a caught
   Pokémon's summary. Sharing a section means both show the shared name.
 
-## Recommendation: 3 codes for 5 maps
+## Recommendation: 3 codes for 6 maps
 
 | Proposed | Name shown | Maps | What players see |
 | --- | --- | --- | --- |
 | next free (224) | ROUTE 204 | Route 204, **Ravaged Path** | Inside the cave, the popup and met location say ROUTE 204 instead of RAVAGED PATH. |
 | next free (225) | FLOAROMA TOWN | Floaroma Town, **Floaroma Meadow** | The meadow shows FLOAROMA TOWN (same pattern as Lake Verity's two maps). |
-| next free (226) | ROUTE 205 | Route 205 South, later Route 205 North | Both halves show ROUTE 205, as in the original games. |
+| next free (226) | ROUTE 205 | Route 205 South and North | Both halves show ROUTE 205, as in the original games. |
 
 **Alternative: 5 codes.** Give Ravaged Path and Floaroma Meadow their own names. That is more faithful to the
 original games (both had distinct names), but it spends 2 more of the scarce codes on side areas.

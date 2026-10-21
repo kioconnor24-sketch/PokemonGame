@@ -1,3 +1,5 @@
+> **2026-10-21 verified status:** Both205 halves are now preserved and connected-scratch-tested: paired67/67, fresh Continue3/3 and supplementary bridge/walkway69/69 each. [Exact-source checkpoint](CHECKPOINT.md). Production saved-location identities remain owner-pending. The earlier conversion plan below is historical context.
+
 # Route 205 South: conversion (done) and plan record
 
 ## Status (2026-10-20): converted and tested in a throwaway build

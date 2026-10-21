@@ -1,0 +1,388 @@
+{"t": 1792587187.9, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792587187.96, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792587188.53, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792587188.56, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792587190.65, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792587190.68, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792587192.37, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792587192.41, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792587192.95, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792587192.98, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792587193.5, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792587193.54, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792587194.59, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792587194.61, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792587198.27, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792587198.31, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792587198.99, "event": "field", "map": "MAP_ROUTE205_NORTH", "pos": [3, 57], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792587199.64, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE205_NORTH", [3, 57]]}
+{"t": 1792587200.03, "event": "capture", "file": "0009-start.png"}
+{"t": 1792587200.03, "event": "observe", "label": "start", "problems": []}
+{"t": 1792587200.03, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587200.1, "event": "map-qa-check", "name": "reached MAP_ROUTE205_NORTH", "ok": true, "at": ["MAP_ROUTE205_NORTH", [3, 56]]}
+{"t": 1792587221.23, "event": "blocked", "map": "MAP_ROUTE205_NORTH", "tile": [38, 26]}
+{"t": 1792587225.4, "event": "blocked", "map": "MAP_ROUTE205_NORTH", "tile": [37, 26]}
+{"t": 1792587243.48, "event": "capture", "file": "0010-edge-MAP_ROUTE205_NORTH-right.png"}
+{"t": 1792587243.48, "event": "map-qa-check", "name": "MAP_ROUTE205_NORTH closed right edge at (79, 15) blocks", "ok": true, "before": ["MAP_ROUTE205_NORTH", [79, 15]], "after": ["MAP_ROUTE205_NORTH", [79, 15]]}
+{"t": 1792587246.84, "event": "capture", "file": "0011-edge-MAP_ROUTE205_NORTH-right.png"}
+{"t": 1792587246.84, "event": "map-qa-check", "name": "MAP_ROUTE205_NORTH closed right edge at (79, 19) blocks", "ok": true, "before": ["MAP_ROUTE205_NORTH", [79, 19]], "after": ["MAP_ROUTE205_NORTH", [79, 19]]}
+{"t": 1792587281.41, "event": "capture", "file": "0012-seam-MAP_ROUTE205_NORTH-down.png"}
+{"t": 1792587282.19, "event": "map-qa-check", "name": "MAP_ROUTE205_NORTH down seam (2, 59) -> MAP_ROUTE205_SOUTH (22, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_NORTH", [2, 59]], "got": ["MAP_ROUTE205_NORTH", [2, 59]]}
+{"t": 1792587283.8, "event": "capture", "file": "0013-seam-MAP_ROUTE205_NORTH-down.png"}
+{"t": 1792587284.51, "event": "map-qa-check", "name": "MAP_ROUTE205_NORTH down seam (3, 59) -> MAP_ROUTE205_SOUTH (23, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_NORTH", [3, 59]], "got": ["MAP_ROUTE205_NORTH", [3, 59]]}
+{"t": 1792587286.18, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [3, 56]], "actual": ["MAP_ROUTE205_NORTH", [3, 56]]}
+{"t": 1792587286.88, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [4, 56]], "actual": ["MAP_ROUTE205_NORTH", [4, 56]]}
+{"t": 1792587287.5, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [5, 56]], "actual": ["MAP_ROUTE205_NORTH", [5, 56]]}
+{"t": 1792587288.08, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [6, 56]], "actual": ["MAP_ROUTE205_NORTH", [6, 56]]}
+{"t": 1792587288.7, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [7, 56]], "actual": ["MAP_ROUTE205_NORTH", [7, 56]]}
+{"t": 1792587289.33, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [8, 56]], "actual": ["MAP_ROUTE205_NORTH", [8, 56]]}
+{"t": 1792587290.05, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 55]], "actual": ["MAP_ROUTE205_NORTH", [8, 55]]}
+{"t": 1792587290.68, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 54]], "actual": ["MAP_ROUTE205_NORTH", [8, 54]]}
+{"t": 1792587291.28, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 53]], "actual": ["MAP_ROUTE205_NORTH", [8, 53]]}
+{"t": 1792587291.88, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 52]], "actual": ["MAP_ROUTE205_NORTH", [8, 52]]}
+{"t": 1792587292.51, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 51]], "actual": ["MAP_ROUTE205_NORTH", [8, 51]]}
+{"t": 1792587293.27, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [9, 51]], "actual": ["MAP_ROUTE205_NORTH", [9, 51]]}
+{"t": 1792587293.87, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [10, 51]], "actual": ["MAP_ROUTE205_NORTH", [10, 51]]}
+{"t": 1792587294.48, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [11, 51]], "actual": ["MAP_ROUTE205_NORTH", [11, 51]]}
+{"t": 1792587295.1, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [12, 51]], "actual": ["MAP_ROUTE205_NORTH", [12, 51]]}
+{"t": 1792587295.7, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [13, 51]], "actual": ["MAP_ROUTE205_NORTH", [13, 51]]}
+{"t": 1792587296.32, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [14, 51]], "actual": ["MAP_ROUTE205_NORTH", [14, 51]]}
+{"t": 1792587296.92, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [15, 51]], "actual": ["MAP_ROUTE205_NORTH", [15, 51]]}
+{"t": 1792587297.55, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [16, 51]], "actual": ["MAP_ROUTE205_NORTH", [16, 51]]}
+{"t": 1792587298.38, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [16, 52]], "actual": ["MAP_ROUTE205_NORTH", [16, 52]]}
+{"t": 1792587299.14, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [17, 52]], "actual": ["MAP_ROUTE205_NORTH", [17, 52]]}
+{"t": 1792587299.77, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [18, 52]], "actual": ["MAP_ROUTE205_NORTH", [18, 52]]}
+{"t": 1792587300.43, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [19, 52]], "actual": ["MAP_ROUTE205_NORTH", [19, 52]]}
+{"t": 1792587301.03, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [20, 52]], "actual": ["MAP_ROUTE205_NORTH", [20, 52]]}
+{"t": 1792587301.68, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [21, 52]], "actual": ["MAP_ROUTE205_NORTH", [21, 52]]}
+{"t": 1792587302.33, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [22, 52]], "actual": ["MAP_ROUTE205_NORTH", [22, 52]]}
+{"t": 1792587302.93, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [23, 52]], "actual": ["MAP_ROUTE205_NORTH", [23, 52]]}
+{"t": 1792587303.65, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [23, 53]], "actual": ["MAP_ROUTE205_NORTH", [23, 53]]}
+{"t": 1792587304.27, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [23, 54]], "actual": ["MAP_ROUTE205_NORTH", [23, 54]]}
+{"t": 1792587304.99, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [22, 54]], "actual": ["MAP_ROUTE205_NORTH", [22, 54]]}
+{"t": 1792587305.64, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [21, 54]], "actual": ["MAP_ROUTE205_NORTH", [21, 54]]}
+{"t": 1792587306.26, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [20, 54]], "actual": ["MAP_ROUTE205_NORTH", [20, 54]]}
+{"t": 1792587306.93, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [19, 54]], "actual": ["MAP_ROUTE205_NORTH", [19, 54]]}
+{"t": 1792587307.58, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [18, 54]], "actual": ["MAP_ROUTE205_NORTH", [18, 54]]}
+{"t": 1792587308.18, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [17, 54]], "actual": ["MAP_ROUTE205_NORTH", [17, 54]]}
+{"t": 1792587308.8, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [16, 54]], "actual": ["MAP_ROUTE205_NORTH", [16, 54]]}
+{"t": 1792587309.43, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [15, 54]], "actual": ["MAP_ROUTE205_NORTH", [15, 54]]}
+{"t": 1792587310.04, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [14, 54]], "actual": ["MAP_ROUTE205_NORTH", [14, 54]]}
+{"t": 1792587310.66, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [13, 54]], "actual": ["MAP_ROUTE205_NORTH", [13, 54]]}
+{"t": 1792587311.38, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 55]], "actual": ["MAP_ROUTE205_NORTH", [13, 55]]}
+{"t": 1792587312.01, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 56]], "actual": ["MAP_ROUTE205_NORTH", [13, 56]]}
+{"t": 1792587312.63, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 57]], "actual": ["MAP_ROUTE205_NORTH", [13, 57]]}
+{"t": 1792587313.24, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 58]], "actual": ["MAP_ROUTE205_NORTH", [13, 58]]}
+{"t": 1792587314.04, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [12, 58]], "actual": ["MAP_ROUTE205_NORTH", [12, 58]]}
+{"t": 1792587314.62, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [11, 58]], "actual": ["MAP_ROUTE205_NORTH", [11, 58]]}
+{"t": 1792587315.23, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [10, 58]], "actual": ["MAP_ROUTE205_NORTH", [10, 58]]}
+{"t": 1792587315.85, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [9, 58]], "actual": ["MAP_ROUTE205_NORTH", [9, 58]]}
+{"t": 1792587316.48, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [8, 58]], "actual": ["MAP_ROUTE205_NORTH", [8, 58]]}
+{"t": 1792587317.09, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [7, 58]], "actual": ["MAP_ROUTE205_NORTH", [7, 58]]}
+{"t": 1792587317.72, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [6, 58]], "actual": ["MAP_ROUTE205_NORTH", [6, 58]]}
+{"t": 1792587318.37, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [5, 58]], "actual": ["MAP_ROUTE205_NORTH", [5, 58]]}
+{"t": 1792587319.11, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [5, 59]], "actual": ["MAP_ROUTE205_NORTH", [5, 59]]}
+{"t": 1792587320.1, "event": "capture", "file": "0014-seam-MAP_ROUTE205_NORTH-down.png"}
+{"t": 1792587320.87, "event": "map-qa-check", "name": "MAP_ROUTE205_NORTH down seam (5, 59) -> MAP_ROUTE205_SOUTH (25, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_NORTH", [5, 59]], "got": ["MAP_ROUTE205_NORTH", [5, 59]]}
+{"t": 1792587321.52, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [5, 58]], "actual": ["MAP_ROUTE205_NORTH", [5, 58]]}
+{"t": 1792587322.25, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [6, 58]], "actual": ["MAP_ROUTE205_NORTH", [6, 58]]}
+{"t": 1792587322.86, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [7, 58]], "actual": ["MAP_ROUTE205_NORTH", [7, 58]]}
+{"t": 1792587323.46, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [8, 58]], "actual": ["MAP_ROUTE205_NORTH", [8, 58]]}
+{"t": 1792587324.08, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [9, 58]], "actual": ["MAP_ROUTE205_NORTH", [9, 58]]}
+{"t": 1792587324.68, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [10, 58]], "actual": ["MAP_ROUTE205_NORTH", [10, 58]]}
+{"t": 1792587325.28, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [11, 58]], "actual": ["MAP_ROUTE205_NORTH", [11, 58]]}
+{"t": 1792587325.89, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [12, 58]], "actual": ["MAP_ROUTE205_NORTH", [12, 58]]}
+{"t": 1792587326.51, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [13, 58]], "actual": ["MAP_ROUTE205_NORTH", [13, 58]]}
+{"t": 1792587327.23, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 57]], "actual": ["MAP_ROUTE205_NORTH", [13, 57]]}
+{"t": 1792587327.83, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 56]], "actual": ["MAP_ROUTE205_NORTH", [13, 56]]}
+{"t": 1792587328.45, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 55]], "actual": ["MAP_ROUTE205_NORTH", [13, 55]]}
+{"t": 1792587329.01, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 54]], "actual": ["MAP_ROUTE205_NORTH", [13, 54]]}
+{"t": 1792587329.75, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [14, 54]], "actual": ["MAP_ROUTE205_NORTH", [14, 54]]}
+{"t": 1792587330.39, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [15, 54]], "actual": ["MAP_ROUTE205_NORTH", [15, 54]]}
+{"t": 1792587331.02, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [16, 54]], "actual": ["MAP_ROUTE205_NORTH", [16, 54]]}
+{"t": 1792587331.65, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [17, 54]], "actual": ["MAP_ROUTE205_NORTH", [17, 54]]}
+{"t": 1792587332.27, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [18, 54]], "actual": ["MAP_ROUTE205_NORTH", [18, 54]]}
+{"t": 1792587332.92, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [19, 54]], "actual": ["MAP_ROUTE205_NORTH", [19, 54]]}
+{"t": 1792587333.55, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [20, 54]], "actual": ["MAP_ROUTE205_NORTH", [20, 54]]}
+{"t": 1792587334.22, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [21, 54]], "actual": ["MAP_ROUTE205_NORTH", [21, 54]]}
+{"t": 1792587334.78, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [22, 54]], "actual": ["MAP_ROUTE205_NORTH", [22, 54]]}
+{"t": 1792587335.4, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [23, 54]], "actual": ["MAP_ROUTE205_NORTH", [23, 54]]}
+{"t": 1792587336.12, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [23, 53]], "actual": ["MAP_ROUTE205_NORTH", [23, 53]]}
+{"t": 1792587336.72, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [23, 52]], "actual": ["MAP_ROUTE205_NORTH", [23, 52]]}
+{"t": 1792587337.45, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [22, 52]], "actual": ["MAP_ROUTE205_NORTH", [22, 52]]}
+{"t": 1792587338.04, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [21, 52]], "actual": ["MAP_ROUTE205_NORTH", [21, 52]]}
+{"t": 1792587338.67, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [20, 52]], "actual": ["MAP_ROUTE205_NORTH", [20, 52]]}
+{"t": 1792587339.3, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [19, 52]], "actual": ["MAP_ROUTE205_NORTH", [19, 52]]}
+{"t": 1792587339.97, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [18, 52]], "actual": ["MAP_ROUTE205_NORTH", [18, 52]]}
+{"t": 1792587340.59, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [17, 52]], "actual": ["MAP_ROUTE205_NORTH", [17, 52]]}
+{"t": 1792587341.21, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [16, 52]], "actual": ["MAP_ROUTE205_NORTH", [16, 52]]}
+{"t": 1792587341.95, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [16, 51]], "actual": ["MAP_ROUTE205_NORTH", [16, 51]]}
+{"t": 1792587342.67, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [15, 51]], "actual": ["MAP_ROUTE205_NORTH", [15, 51]]}
+{"t": 1792587343.3, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [14, 51]], "actual": ["MAP_ROUTE205_NORTH", [14, 51]]}
+{"t": 1792587343.93, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [13, 51]], "actual": ["MAP_ROUTE205_NORTH", [13, 51]]}
+{"t": 1792587344.54, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [12, 51]], "actual": ["MAP_ROUTE205_NORTH", [12, 51]]}
+{"t": 1792587345.16, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [11, 51]], "actual": ["MAP_ROUTE205_NORTH", [11, 51]]}
+{"t": 1792587345.76, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [10, 51]], "actual": ["MAP_ROUTE205_NORTH", [10, 51]]}
+{"t": 1792587346.38, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [9, 51]], "actual": ["MAP_ROUTE205_NORTH", [9, 51]]}
+{"t": 1792587347.01, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [8, 51]], "actual": ["MAP_ROUTE205_NORTH", [8, 51]]}
+{"t": 1792587347.77, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 52]], "actual": ["MAP_ROUTE205_NORTH", [8, 52]]}
+{"t": 1792587348.38, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 53]], "actual": ["MAP_ROUTE205_NORTH", [8, 53]]}
+{"t": 1792587349.01, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 54]], "actual": ["MAP_ROUTE205_NORTH", [8, 54]]}
+{"t": 1792587349.61, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 55]], "actual": ["MAP_ROUTE205_NORTH", [8, 55]]}
+{"t": 1792587350.26, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 56]], "actual": ["MAP_ROUTE205_NORTH", [8, 56]]}
+{"t": 1792587351.02, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [7, 56]], "actual": ["MAP_ROUTE205_NORTH", [7, 56]]}
+{"t": 1792587351.6, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [6, 56]], "actual": ["MAP_ROUTE205_NORTH", [6, 56]]}
+{"t": 1792587352.25, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [5, 56]], "actual": ["MAP_ROUTE205_NORTH", [5, 56]]}
+{"t": 1792587352.85, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [4, 56]], "actual": ["MAP_ROUTE205_NORTH", [4, 56]]}
+{"t": 1792587353.45, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [3, 56]], "actual": ["MAP_ROUTE205_NORTH", [3, 56]]}
+{"t": 1792587354.2, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [3, 57]], "actual": ["MAP_ROUTE205_NORTH", [3, 57]]}
+{"t": 1792587355.74, "event": "map", "map": "MAP_ROUTE205_SOUTH", "pos": [22, 0]}
+{"t": 1792587355.81, "event": "map-qa-check", "name": "reached MAP_ROUTE205_SOUTH", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [22, 0]]}
+{"t": 1792587386.21, "event": "capture", "file": "0015-edge-MAP_ROUTE205_SOUTH-right.png"}
+{"t": 1792587386.21, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH closed right edge at (31, 88) blocks", "ok": true, "before": ["MAP_ROUTE205_SOUTH", [31, 88]], "after": ["MAP_ROUTE205_SOUTH", [31, 88]]}
+{"t": 1792587396.24, "event": "capture", "file": "0016-seam-MAP_ROUTE205_SOUTH-left.png"}
+{"t": 1792587396.98, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH left seam (0, 85) -> MAP_FLOAROMA_TOWN (33, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [0, 85]], "got": ["MAP_ROUTE205_SOUTH", [0, 85]]}
+{"t": 1792587398.65, "event": "capture", "file": "0017-seam-MAP_ROUTE205_SOUTH-left.png"}
+{"t": 1792587399.38, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH left seam (0, 87) -> MAP_FLOAROMA_TOWN (33, 23) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [0, 87]], "got": ["MAP_ROUTE205_SOUTH", [0, 87]]}
+{"t": 1792587400.88, "event": "capture", "file": "0018-seam-MAP_ROUTE205_SOUTH-left.png"}
+{"t": 1792587401.6, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH left seam (0, 88) -> MAP_FLOAROMA_TOWN (33, 24) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [0, 88]], "got": ["MAP_ROUTE205_SOUTH", [0, 88]]}
+{"t": 1792587436.4, "event": "capture", "file": "0019-seam-MAP_ROUTE205_SOUTH-up.png"}
+{"t": 1792587437.13, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH up seam (22, 0) -> MAP_ROUTE205_NORTH (2, 59) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [22, 0]], "got": ["MAP_ROUTE205_SOUTH", [22, 0]]}
+{"t": 1792587438.7, "event": "capture", "file": "0020-seam-MAP_ROUTE205_SOUTH-up.png"}
+{"t": 1792587439.5, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH up seam (23, 0) -> MAP_ROUTE205_NORTH (3, 59) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [23, 0]], "got": ["MAP_ROUTE205_SOUTH", [23, 0]]}
+{"t": 1792587440.92, "event": "map", "map": "MAP_ROUTE205_NORTH", "pos": [2, 59]}
+{"t": 1792587443.26, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [3, 56]], "actual": ["MAP_ROUTE205_NORTH", [3, 56]]}
+{"t": 1792587444.02, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [4, 56]], "actual": ["MAP_ROUTE205_NORTH", [4, 56]]}
+{"t": 1792587444.7, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [5, 56]], "actual": ["MAP_ROUTE205_NORTH", [5, 56]]}
+{"t": 1792587445.55, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [6, 56]], "actual": ["MAP_ROUTE205_NORTH", [6, 56]]}
+{"t": 1792587446.21, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [7, 56]], "actual": ["MAP_ROUTE205_NORTH", [7, 56]]}
+{"t": 1792587446.83, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [8, 56]], "actual": ["MAP_ROUTE205_NORTH", [8, 56]]}
+{"t": 1792587447.62, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 55]], "actual": ["MAP_ROUTE205_NORTH", [8, 55]]}
+{"t": 1792587448.27, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 54]], "actual": ["MAP_ROUTE205_NORTH", [8, 54]]}
+{"t": 1792587448.89, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 53]], "actual": ["MAP_ROUTE205_NORTH", [8, 53]]}
+{"t": 1792587449.52, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 52]], "actual": ["MAP_ROUTE205_NORTH", [8, 52]]}
+{"t": 1792587450.12, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [8, 51]], "actual": ["MAP_ROUTE205_NORTH", [8, 51]]}
+{"t": 1792587450.81, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [9, 51]], "actual": ["MAP_ROUTE205_NORTH", [9, 51]]}
+{"t": 1792587451.44, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [10, 51]], "actual": ["MAP_ROUTE205_NORTH", [10, 51]]}
+{"t": 1792587452.08, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [11, 51]], "actual": ["MAP_ROUTE205_NORTH", [11, 51]]}
+{"t": 1792587452.66, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [12, 51]], "actual": ["MAP_ROUTE205_NORTH", [12, 51]]}
+{"t": 1792587453.3, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [13, 51]], "actual": ["MAP_ROUTE205_NORTH", [13, 51]]}
+{"t": 1792587453.92, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [14, 51]], "actual": ["MAP_ROUTE205_NORTH", [14, 51]]}
+{"t": 1792587454.57, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [15, 51]], "actual": ["MAP_ROUTE205_NORTH", [15, 51]]}
+{"t": 1792587455.19, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [16, 51]], "actual": ["MAP_ROUTE205_NORTH", [16, 51]]}
+{"t": 1792587455.91, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [16, 52]], "actual": ["MAP_ROUTE205_NORTH", [16, 52]]}
+{"t": 1792587456.63, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [17, 52]], "actual": ["MAP_ROUTE205_NORTH", [17, 52]]}
+{"t": 1792587457.28, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [18, 52]], "actual": ["MAP_ROUTE205_NORTH", [18, 52]]}
+{"t": 1792587457.95, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [19, 52]], "actual": ["MAP_ROUTE205_NORTH", [19, 52]]}
+{"t": 1792587458.52, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [20, 52]], "actual": ["MAP_ROUTE205_NORTH", [20, 52]]}
+{"t": 1792587459.15, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [21, 52]], "actual": ["MAP_ROUTE205_NORTH", [21, 52]]}
+{"t": 1792587459.75, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [22, 52]], "actual": ["MAP_ROUTE205_NORTH", [22, 52]]}
+{"t": 1792587460.33, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [23, 52]], "actual": ["MAP_ROUTE205_NORTH", [23, 52]]}
+{"t": 1792587461.07, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [23, 53]], "actual": ["MAP_ROUTE205_NORTH", [23, 53]]}
+{"t": 1792587461.67, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [23, 54]], "actual": ["MAP_ROUTE205_NORTH", [23, 54]]}
+{"t": 1792587462.39, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [22, 54]], "actual": ["MAP_ROUTE205_NORTH", [22, 54]]}
+{"t": 1792587463.02, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [21, 54]], "actual": ["MAP_ROUTE205_NORTH", [21, 54]]}
+{"t": 1792587463.62, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [20, 54]], "actual": ["MAP_ROUTE205_NORTH", [20, 54]]}
+{"t": 1792587464.27, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [19, 54]], "actual": ["MAP_ROUTE205_NORTH", [19, 54]]}
+{"t": 1792587464.89, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [18, 54]], "actual": ["MAP_ROUTE205_NORTH", [18, 54]]}
+{"t": 1792587465.49, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [17, 54]], "actual": ["MAP_ROUTE205_NORTH", [17, 54]]}
+{"t": 1792587466.14, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [16, 54]], "actual": ["MAP_ROUTE205_NORTH", [16, 54]]}
+{"t": 1792587466.79, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [15, 54]], "actual": ["MAP_ROUTE205_NORTH", [15, 54]]}
+{"t": 1792587467.42, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [14, 54]], "actual": ["MAP_ROUTE205_NORTH", [14, 54]]}
+{"t": 1792587468.02, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [13, 54]], "actual": ["MAP_ROUTE205_NORTH", [13, 54]]}
+{"t": 1792587468.84, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 55]], "actual": ["MAP_ROUTE205_NORTH", [13, 55]]}
+{"t": 1792587469.51, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 56]], "actual": ["MAP_ROUTE205_NORTH", [13, 56]]}
+{"t": 1792587470.14, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 57]], "actual": ["MAP_ROUTE205_NORTH", [13, 57]]}
+{"t": 1792587470.76, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [13, 58]], "actual": ["MAP_ROUTE205_NORTH", [13, 58]]}
+{"t": 1792587471.5, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [12, 58]], "actual": ["MAP_ROUTE205_NORTH", [12, 58]]}
+{"t": 1792587472.13, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [11, 58]], "actual": ["MAP_ROUTE205_NORTH", [11, 58]]}
+{"t": 1792587472.78, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [10, 58]], "actual": ["MAP_ROUTE205_NORTH", [10, 58]]}
+{"t": 1792587473.47, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [9, 58]], "actual": ["MAP_ROUTE205_NORTH", [9, 58]]}
+{"t": 1792587474.1, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [8, 58]], "actual": ["MAP_ROUTE205_NORTH", [8, 58]]}
+{"t": 1792587474.71, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [7, 58]], "actual": ["MAP_ROUTE205_NORTH", [7, 58]]}
+{"t": 1792587475.35, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [6, 58]], "actual": ["MAP_ROUTE205_NORTH", [6, 58]]}
+{"t": 1792587475.96, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [5, 58]], "actual": ["MAP_ROUTE205_NORTH", [5, 58]]}
+{"t": 1792587476.68, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [5, 59]], "actual": ["MAP_ROUTE205_NORTH", [5, 59]]}
+{"t": 1792587478.47, "event": "capture", "file": "0021-seam-MAP_ROUTE205_SOUTH-up.png"}
+{"t": 1792587479.23, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH up seam (25, 0) -> MAP_ROUTE205_NORTH (5, 59) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE205_SOUTH", [25, 0]], "got": ["MAP_ROUTE205_SOUTH", [25, 0]]}
+{"t": 1792587480.55, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [5, 58]], "actual": ["MAP_ROUTE205_NORTH", [5, 58]]}
+{"t": 1792587481.29, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [6, 58]], "actual": ["MAP_ROUTE205_NORTH", [6, 58]]}
+{"t": 1792587481.94, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [7, 58]], "actual": ["MAP_ROUTE205_NORTH", [7, 58]]}
+{"t": 1792587482.52, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [8, 58]], "actual": ["MAP_ROUTE205_NORTH", [8, 58]]}
+{"t": 1792587483.15, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [9, 58]], "actual": ["MAP_ROUTE205_NORTH", [9, 58]]}
+{"t": 1792587483.75, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [10, 58]], "actual": ["MAP_ROUTE205_NORTH", [10, 58]]}
+{"t": 1792587484.36, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [11, 58]], "actual": ["MAP_ROUTE205_NORTH", [11, 58]]}
+{"t": 1792587485.01, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [12, 58]], "actual": ["MAP_ROUTE205_NORTH", [12, 58]]}
+{"t": 1792587485.63, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [13, 58]], "actual": ["MAP_ROUTE205_NORTH", [13, 58]]}
+{"t": 1792587486.39, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 57]], "actual": ["MAP_ROUTE205_NORTH", [13, 57]]}
+{"t": 1792587487.11, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 56]], "actual": ["MAP_ROUTE205_NORTH", [13, 56]]}
+{"t": 1792587487.76, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 55]], "actual": ["MAP_ROUTE205_NORTH", [13, 55]]}
+{"t": 1792587488.39, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [13, 54]], "actual": ["MAP_ROUTE205_NORTH", [13, 54]]}
+{"t": 1792587489.15, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [14, 54]], "actual": ["MAP_ROUTE205_NORTH", [14, 54]]}
+{"t": 1792587489.82, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [15, 54]], "actual": ["MAP_ROUTE205_NORTH", [15, 54]]}
+{"t": 1792587490.45, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [16, 54]], "actual": ["MAP_ROUTE205_NORTH", [16, 54]]}
+{"t": 1792587491.07, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [17, 54]], "actual": ["MAP_ROUTE205_NORTH", [17, 54]]}
+{"t": 1792587491.69, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [18, 54]], "actual": ["MAP_ROUTE205_NORTH", [18, 54]]}
+{"t": 1792587492.32, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [19, 54]], "actual": ["MAP_ROUTE205_NORTH", [19, 54]]}
+{"t": 1792587492.94, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [20, 54]], "actual": ["MAP_ROUTE205_NORTH", [20, 54]]}
+{"t": 1792587493.52, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [21, 54]], "actual": ["MAP_ROUTE205_NORTH", [21, 54]]}
+{"t": 1792587494.15, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [22, 54]], "actual": ["MAP_ROUTE205_NORTH", [22, 54]]}
+{"t": 1792587494.77, "event": "elevation-route-step", "direction": "right", "expected": ["MAP_ROUTE205_NORTH", [23, 54]], "actual": ["MAP_ROUTE205_NORTH", [23, 54]]}
+{"t": 1792587495.47, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [23, 53]], "actual": ["MAP_ROUTE205_NORTH", [23, 53]]}
+{"t": 1792587496.07, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [23, 52]], "actual": ["MAP_ROUTE205_NORTH", [23, 52]]}
+{"t": 1792587496.81, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [22, 52]], "actual": ["MAP_ROUTE205_NORTH", [22, 52]]}
+{"t": 1792587497.41, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [21, 52]], "actual": ["MAP_ROUTE205_NORTH", [21, 52]]}
+{"t": 1792587498.04, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [20, 52]], "actual": ["MAP_ROUTE205_NORTH", [20, 52]]}
+{"t": 1792587498.66, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [19, 52]], "actual": ["MAP_ROUTE205_NORTH", [19, 52]]}
+{"t": 1792587499.24, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [18, 52]], "actual": ["MAP_ROUTE205_NORTH", [18, 52]]}
+{"t": 1792587499.86, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [17, 52]], "actual": ["MAP_ROUTE205_NORTH", [17, 52]]}
+{"t": 1792587500.46, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [16, 52]], "actual": ["MAP_ROUTE205_NORTH", [16, 52]]}
+{"t": 1792587501.2, "event": "elevation-route-step", "direction": "up", "expected": ["MAP_ROUTE205_NORTH", [16, 51]], "actual": ["MAP_ROUTE205_NORTH", [16, 51]]}
+{"t": 1792587501.97, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [15, 51]], "actual": ["MAP_ROUTE205_NORTH", [15, 51]]}
+{"t": 1792587502.57, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [14, 51]], "actual": ["MAP_ROUTE205_NORTH", [14, 51]]}
+{"t": 1792587503.19, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [13, 51]], "actual": ["MAP_ROUTE205_NORTH", [13, 51]]}
+{"t": 1792587503.79, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [12, 51]], "actual": ["MAP_ROUTE205_NORTH", [12, 51]]}
+{"t": 1792587504.44, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [11, 51]], "actual": ["MAP_ROUTE205_NORTH", [11, 51]]}
+{"t": 1792587505.16, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [10, 51]], "actual": ["MAP_ROUTE205_NORTH", [10, 51]]}
+{"t": 1792587505.74, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [9, 51]], "actual": ["MAP_ROUTE205_NORTH", [9, 51]]}
+{"t": 1792587506.4, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [8, 51]], "actual": ["MAP_ROUTE205_NORTH", [8, 51]]}
+{"t": 1792587507.15, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 52]], "actual": ["MAP_ROUTE205_NORTH", [8, 52]]}
+{"t": 1792587507.77, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 53]], "actual": ["MAP_ROUTE205_NORTH", [8, 53]]}
+{"t": 1792587508.37, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 54]], "actual": ["MAP_ROUTE205_NORTH", [8, 54]]}
+{"t": 1792587509.0, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 55]], "actual": ["MAP_ROUTE205_NORTH", [8, 55]]}
+{"t": 1792587509.6, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [8, 56]], "actual": ["MAP_ROUTE205_NORTH", [8, 56]]}
+{"t": 1792587510.32, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [7, 56]], "actual": ["MAP_ROUTE205_NORTH", [7, 56]]}
+{"t": 1792587510.92, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [6, 56]], "actual": ["MAP_ROUTE205_NORTH", [6, 56]]}
+{"t": 1792587511.55, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [5, 56]], "actual": ["MAP_ROUTE205_NORTH", [5, 56]]}
+{"t": 1792587512.17, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [4, 56]], "actual": ["MAP_ROUTE205_NORTH", [4, 56]]}
+{"t": 1792587512.77, "event": "elevation-route-step", "direction": "left", "expected": ["MAP_ROUTE205_NORTH", [3, 56]], "actual": ["MAP_ROUTE205_NORTH", [3, 56]]}
+{"t": 1792587513.49, "event": "elevation-route-step", "direction": "down", "expected": ["MAP_ROUTE205_NORTH", [3, 57]], "actual": ["MAP_ROUTE205_NORTH", [3, 57]]}
+{"t": 1792587515.07, "event": "map", "map": "MAP_ROUTE205_SOUTH", "pos": [22, 0]}
+{"t": 1792587548.85, "event": "map", "map": "MAP_FLOAROMA_TOWN", "pos": [33, 21]}
+{"t": 1792587548.92, "event": "map-qa-check", "name": "reached MAP_FLOAROMA_TOWN", "ok": true, "at": ["MAP_FLOAROMA_TOWN", [33, 21]]}
+{"t": 1792587559.25, "event": "capture", "file": "0022-seam-MAP_FLOAROMA_TOWN-down.png"}
+{"t": 1792587559.97, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN down seam (12, 35) -> MAP_ROUTE204 (10, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [12, 35]], "got": ["MAP_FLOAROMA_TOWN", [12, 35]]}
+{"t": 1792587561.35, "event": "capture", "file": "0023-seam-MAP_FLOAROMA_TOWN-down.png"}
+{"t": 1792587562.19, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN down seam (13, 35) -> MAP_ROUTE204 (11, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [13, 35]], "got": ["MAP_FLOAROMA_TOWN", [13, 35]]}
+{"t": 1792587563.66, "event": "capture", "file": "0024-seam-MAP_FLOAROMA_TOWN-down.png"}
+{"t": 1792587564.41, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN down seam (14, 35) -> MAP_ROUTE204 (12, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [14, 35]], "got": ["MAP_FLOAROMA_TOWN", [14, 35]]}
+{"t": 1792587574.16, "event": "capture", "file": "0025-seam-MAP_FLOAROMA_TOWN-right.png"}
+{"t": 1792587574.91, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN right seam (33, 21) -> MAP_ROUTE205_SOUTH (0, 85) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [33, 21]], "got": ["MAP_FLOAROMA_TOWN", [33, 21]]}
+{"t": 1792587576.5, "event": "capture", "file": "0026-seam-MAP_FLOAROMA_TOWN-right.png"}
+{"t": 1792587577.25, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN right seam (33, 23) -> MAP_ROUTE205_SOUTH (0, 87) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [33, 23]], "got": ["MAP_FLOAROMA_TOWN", [33, 23]]}
+{"t": 1792587578.5, "event": "capture", "file": "0027-seam-MAP_FLOAROMA_TOWN-right.png"}
+{"t": 1792587579.23, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN right seam (33, 24) -> MAP_ROUTE205_SOUTH (0, 88) and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [33, 24]], "got": ["MAP_FLOAROMA_TOWN", [33, 24]]}
+{"t": 1792587594.83, "event": "capture", "file": "0028-warp-MAP_FLOAROMA_TOWN-0.png"}
+{"t": 1792587595.24, "event": "capture", "file": "0029-MAP_FLOAROMA_MEADOW via warp.png"}
+{"t": 1792587595.24, "event": "observe", "label": "MAP_FLOAROMA_MEADOW via warp", "problems": []}
+{"t": 1792587595.24, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_MEADOW via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587595.46, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_FLOAROMA_MEADOW", "ok": true, "at": ["MAP_FLOAROMA_MEADOW", [10, 49]]}
+{"t": 1792587597.75, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN warp 0 (4, 2) -> MAP_FLOAROMA_MEADOW and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [[4, 2]]], "got": ["MAP_FLOAROMA_TOWN", [4, 2]]}
+{"t": 1792587598.0, "event": "capture", "file": "0030-MAP_FLOAROMA_TOWN after warp round trip.png"}
+{"t": 1792587598.0, "event": "observe", "label": "MAP_FLOAROMA_TOWN after warp round trip", "problems": []}
+{"t": 1792587598.0, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_TOWN after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587600.69, "event": "capture", "file": "0031-warp-MAP_FLOAROMA_TOWN-1.png"}
+{"t": 1792587601.1, "event": "capture", "file": "0032-MAP_FLOAROMA_MEADOW via warp.png"}
+{"t": 1792587601.1, "event": "observe", "label": "MAP_FLOAROMA_MEADOW via warp", "problems": []}
+{"t": 1792587601.1, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_MEADOW via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587601.3, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_FLOAROMA_MEADOW", "ok": true, "at": ["MAP_FLOAROMA_MEADOW", [11, 49]]}
+{"t": 1792587603.57, "event": "map-qa-check", "name": "MAP_FLOAROMA_TOWN warp 1 (5, 2) -> MAP_FLOAROMA_MEADOW and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_TOWN", [[5, 2]]], "got": ["MAP_FLOAROMA_TOWN", [5, 2]]}
+{"t": 1792587603.84, "event": "capture", "file": "0033-MAP_FLOAROMA_TOWN after warp round trip.png"}
+{"t": 1792587603.84, "event": "observe", "label": "MAP_FLOAROMA_TOWN after warp round trip", "problems": []}
+{"t": 1792587603.84, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_TOWN after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587606.37, "event": "map", "map": "MAP_FLOAROMA_MEADOW", "pos": [10, 50]}
+{"t": 1792587606.44, "event": "map-qa-check", "name": "reached MAP_FLOAROMA_MEADOW", "ok": true, "at": ["MAP_FLOAROMA_MEADOW", [10, 50]]}
+{"t": 1792587609.42, "event": "capture", "file": "0034-warp-MAP_FLOAROMA_MEADOW-0.png"}
+{"t": 1792587609.75, "event": "capture", "file": "0035-MAP_FLOAROMA_TOWN via warp.png"}
+{"t": 1792587609.75, "event": "observe", "label": "MAP_FLOAROMA_TOWN via warp", "problems": []}
+{"t": 1792587609.75, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_TOWN via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587609.85, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_FLOAROMA_TOWN", "ok": true, "at": ["MAP_FLOAROMA_TOWN", [4, 3]]}
+{"t": 1792587612.04, "event": "map-qa-check", "name": "MAP_FLOAROMA_MEADOW warp 0 (10, 50) -> MAP_FLOAROMA_TOWN and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_MEADOW", [[10, 50]]], "got": ["MAP_FLOAROMA_MEADOW", [10, 50]]}
+{"t": 1792587612.5, "event": "capture", "file": "0036-MAP_FLOAROMA_MEADOW after warp round trip.png"}
+{"t": 1792587612.5, "event": "observe", "label": "MAP_FLOAROMA_MEADOW after warp round trip", "problems": []}
+{"t": 1792587612.5, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_MEADOW after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587615.31, "event": "capture", "file": "0037-warp-MAP_FLOAROMA_MEADOW-1.png"}
+{"t": 1792587615.57, "event": "capture", "file": "0038-MAP_FLOAROMA_TOWN via warp.png"}
+{"t": 1792587615.57, "event": "observe", "label": "MAP_FLOAROMA_TOWN via warp", "problems": []}
+{"t": 1792587615.57, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_TOWN via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587615.69, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_FLOAROMA_TOWN", "ok": true, "at": ["MAP_FLOAROMA_TOWN", [5, 3]]}
+{"t": 1792587617.94, "event": "map-qa-check", "name": "MAP_FLOAROMA_MEADOW warp 1 (11, 50) -> MAP_FLOAROMA_TOWN and back", "ok": true, "leg": "back", "expected": ["MAP_FLOAROMA_MEADOW", [[11, 50]]], "got": ["MAP_FLOAROMA_MEADOW", [11, 50]]}
+{"t": 1792587618.33, "event": "capture", "file": "0039-MAP_FLOAROMA_MEADOW after warp round trip.png"}
+{"t": 1792587618.33, "event": "observe", "label": "MAP_FLOAROMA_MEADOW after warp round trip", "problems": []}
+{"t": 1792587618.33, "event": "map-qa-check", "name": "follower visible (MAP_FLOAROMA_MEADOW after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587620.88, "event": "map", "map": "MAP_FLOAROMA_TOWN", "pos": [4, 2]}
+{"t": 1792587632.19, "event": "map", "map": "MAP_ROUTE204", "pos": [10, 0]}
+{"t": 1792587632.28, "event": "map-qa-check", "name": "reached MAP_ROUTE204", "ok": true, "at": ["MAP_ROUTE204", [10, 0]]}
+{"t": 1792587633.24, "event": "capture", "file": "0040-seam-MAP_ROUTE204-up.png"}
+{"t": 1792587634.0, "event": "map-qa-check", "name": "MAP_ROUTE204 up seam (10, 0) -> MAP_FLOAROMA_TOWN (12, 35) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [10, 0]], "got": ["MAP_ROUTE204", [10, 0]]}
+{"t": 1792587635.41, "event": "capture", "file": "0041-seam-MAP_ROUTE204-up.png"}
+{"t": 1792587636.09, "event": "map-qa-check", "name": "MAP_ROUTE204 up seam (11, 0) -> MAP_FLOAROMA_TOWN (13, 35) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [11, 0]], "got": ["MAP_ROUTE204", [11, 0]]}
+{"t": 1792587637.49, "event": "capture", "file": "0042-seam-MAP_ROUTE204-up.png"}
+{"t": 1792587638.23, "event": "map-qa-check", "name": "MAP_ROUTE204 up seam (12, 0) -> MAP_FLOAROMA_TOWN (14, 35) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [12, 0]], "got": ["MAP_ROUTE204", [12, 0]]}
+{"t": 1792587638.42, "event": "enter-region", "map": "MAP_ROUTE204", "tile": [12, 63], "via": ["MAP_RAVAGED_PATH", [19, 40]]}
+{"t": 1792587653.51, "event": "map", "map": "MAP_RAVAGED_PATH", "pos": [28, 35]}
+{"t": 1792587670.08, "event": "capture", "file": "0043-seam-MAP_ROUTE204-down.png"}
+{"t": 1792587670.76, "event": "map-qa-check", "name": "MAP_ROUTE204 down seam (12, 63) -> MAP_JUBILIFE_CITY (48, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [12, 63]], "got": ["MAP_ROUTE204", [12, 63]]}
+{"t": 1792587672.38, "event": "capture", "file": "0044-seam-MAP_ROUTE204-down.png"}
+{"t": 1792587673.19, "event": "map-qa-check", "name": "MAP_ROUTE204 down seam (14, 63) -> MAP_JUBILIFE_CITY (50, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [14, 63]], "got": ["MAP_ROUTE204", [14, 63]]}
+{"t": 1792587674.72, "event": "capture", "file": "0045-seam-MAP_ROUTE204-down.png"}
+{"t": 1792587675.49, "event": "map-qa-check", "name": "MAP_ROUTE204 down seam (15, 63) -> MAP_JUBILIFE_CITY (51, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [15, 63]], "got": ["MAP_ROUTE204", [15, 63]]}
+{"t": 1792587687.81, "event": "capture", "file": "0046-warp-MAP_ROUTE204-0.png"}
+{"t": 1792587688.11, "event": "capture", "file": "0047-MAP_RAVAGED_PATH via warp.png"}
+{"t": 1792587688.11, "event": "observe", "label": "MAP_RAVAGED_PATH via warp", "problems": []}
+{"t": 1792587688.11, "event": "map-qa-check", "name": "follower visible (MAP_RAVAGED_PATH via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587688.29, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_RAVAGED_PATH", "ok": true, "at": ["MAP_RAVAGED_PATH", [19, 39]]}
+{"t": 1792587691.9, "event": "map-qa-check", "name": "MAP_ROUTE204 warp 0 (11, 31) -> MAP_RAVAGED_PATH and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [[11, 32]]], "got": ["MAP_ROUTE204", [11, 32]]}
+{"t": 1792587692.24, "event": "capture", "file": "0048-MAP_ROUTE204 after warp round trip.png"}
+{"t": 1792587692.24, "event": "observe", "label": "MAP_ROUTE204 after warp round trip", "problems": []}
+{"t": 1792587692.24, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE204 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587692.42, "event": "enter-region", "map": "MAP_ROUTE204", "tile": [19, 25], "via": ["MAP_RAVAGED_PATH", [28, 35]]}
+{"t": 1792587695.96, "event": "map", "map": "MAP_RAVAGED_PATH", "pos": [19, 40]}
+{"t": 1792587706.04, "event": "capture", "file": "0049-warp-MAP_ROUTE204-1.png"}
+{"t": 1792587706.43, "event": "capture", "file": "0050-MAP_RAVAGED_PATH via warp.png"}
+{"t": 1792587706.43, "event": "observe", "label": "MAP_RAVAGED_PATH via warp", "problems": []}
+{"t": 1792587706.43, "event": "map-qa-check", "name": "follower visible (MAP_RAVAGED_PATH via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587706.5, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_RAVAGED_PATH", "ok": true, "at": ["MAP_RAVAGED_PATH", [28, 34]]}
+{"t": 1792587710.2, "event": "map-qa-check", "name": "MAP_ROUTE204 warp 1 (19, 24) -> MAP_RAVAGED_PATH and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE204", [[19, 25]]], "got": ["MAP_ROUTE204", [19, 25]]}
+{"t": 1792587710.55, "event": "capture", "file": "0051-MAP_ROUTE204 after warp round trip.png"}
+{"t": 1792587710.55, "event": "observe", "label": "MAP_ROUTE204 after warp round trip", "problems": []}
+{"t": 1792587710.55, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE204 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587714.08, "event": "map", "map": "MAP_RAVAGED_PATH", "pos": [28, 35]}
+{"t": 1792587714.16, "event": "map-qa-check", "name": "reached MAP_RAVAGED_PATH", "ok": true, "at": ["MAP_RAVAGED_PATH", [28, 35]]}
+{"t": 1792587721.36, "event": "capture", "file": "0052-warp-MAP_RAVAGED_PATH-0.png"}
+{"t": 1792587721.65, "event": "capture", "file": "0053-MAP_ROUTE204 via warp.png"}
+{"t": 1792587721.65, "event": "observe", "label": "MAP_ROUTE204 via warp", "problems": []}
+{"t": 1792587721.65, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE204 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587721.85, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE204", "ok": true, "at": ["MAP_ROUTE204", [11, 33]]}
+{"t": 1792587725.5, "event": "map-qa-check", "name": "MAP_RAVAGED_PATH warp 0 (19, 40) -> MAP_ROUTE204 and back", "ok": true, "leg": "back", "expected": ["MAP_RAVAGED_PATH", [[19, 40]]], "got": ["MAP_RAVAGED_PATH", [19, 40]]}
+{"t": 1792587725.93, "event": "capture", "file": "0054-MAP_RAVAGED_PATH after warp round trip.png"}
+{"t": 1792587725.93, "event": "observe", "label": "MAP_RAVAGED_PATH after warp round trip", "problems": []}
+{"t": 1792587725.93, "event": "map-qa-check", "name": "follower visible (MAP_RAVAGED_PATH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587732.95, "event": "capture", "file": "0055-warp-MAP_RAVAGED_PATH-1.png"}
+{"t": 1792587733.25, "event": "capture", "file": "0056-MAP_ROUTE204 via warp.png"}
+{"t": 1792587733.25, "event": "observe", "label": "MAP_ROUTE204 via warp", "problems": []}
+{"t": 1792587733.25, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE204 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587733.52, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE204", "ok": true, "at": ["MAP_ROUTE204", [19, 26]]}
+{"t": 1792587737.13, "event": "map-qa-check", "name": "MAP_RAVAGED_PATH warp 1 (28, 35) -> MAP_ROUTE204 and back", "ok": true, "leg": "back", "expected": ["MAP_RAVAGED_PATH", [[28, 35]]], "got": ["MAP_RAVAGED_PATH", [28, 35]]}
+{"t": 1792587737.5, "event": "capture", "file": "0057-MAP_RAVAGED_PATH after warp round trip.png"}
+{"t": 1792587737.5, "event": "observe", "label": "MAP_RAVAGED_PATH after warp round trip", "problems": []}
+{"t": 1792587737.5, "event": "map-qa-check", "name": "follower visible (MAP_RAVAGED_PATH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792587741.3, "event": "map", "map": "MAP_ROUTE204", "pos": [19, 25]}
+{"t": 1792587754.75, "event": "map", "map": "MAP_FLOAROMA_TOWN", "pos": [12, 35]}
+{"t": 1792587764.73, "event": "map", "map": "MAP_ROUTE205_SOUTH", "pos": [0, 85]}
+{"t": 1792587774.95, "event": "capture", "file": "0058-blocked-MAP_ROUTE205_SOUTH-26-81-right.png"}
+{"t": 1792587774.95, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH (26, 81) pushing right is blocked", "ok": true, "before": ["MAP_ROUTE205_SOUTH", [26, 81]], "after": ["MAP_ROUTE205_SOUTH", [26, 81]]}
+{"t": 1792587776.09, "event": "capture", "file": "0059-start-menu.png"}
+{"t": 1792587776.93, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792587782.81, "event": "capture", "file": "0060-save-confirm-northern-corridor.png"}
+{"t": 1792587784.0, "event": "capture", "file": "0061-save-step-northern-corridor-01.png"}
+{"t": 1792587785.22, "event": "capture", "file": "0062-save-step-northern-corridor-02.png"}
+{"t": 1792587786.85, "event": "capture", "file": "0063-save-step-northern-corridor-03.png"}
+{"t": 1792587787.94, "event": "capture", "file": "0064-save-step-northern-corridor-04.png"}
+{"t": 1792587788.94, "event": "capture", "file": "0065-save-step-northern-corridor-05.png"}
+{"t": 1792587789.95, "event": "capture", "file": "0066-save-step-northern-corridor-06.png"}
+{"t": 1792587791.18, "event": "capture", "file": "0067-save-step-northern-corridor-07.png"}
+{"t": 1792587792.28, "event": "capture", "file": "0068-save-step-northern-corridor-08.png"}
+{"t": 1792587793.13, "event": "capture", "file": "0069-saved-northern-corridor.png"}
+{"t": 1792587793.13, "event": "release-save", "label": "northern-corridor", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792587793.18, "event": "map-qa-check", "name": "SAVE (northern-corridor)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [26, 81]]}
