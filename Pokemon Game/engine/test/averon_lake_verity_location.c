@@ -10,6 +10,7 @@
 #include "constants/map_groups.h"
 #include "averon_region_save.h"
 #include "save.h"
+#include "load_save.h"
 #include "gba/flash_internal.h"
 
 // Owner decision 6272466493 (Issue #15): Lake Verity is section 220, shared by Verity Lakefront and Lake Verity.
