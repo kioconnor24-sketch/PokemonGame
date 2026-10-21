@@ -1,0 +1,992 @@
+{
+  "maps": [
+    "MAP_ROUTE205_NORTH",
+    "MAP_ROUTE205_SOUTH",
+    "MAP_FLOAROMA_TOWN",
+    "MAP_FLOAROMA_MEADOW",
+    "MAP_ROUTE204",
+    "MAP_RAVAGED_PATH"
+  ],
+  "build": "release",
+  "rom_sha256": "afaaf49e1aa5105d798c56cfcb96a6b26af4f0195686a6c5980ace305e0f2a1c",
+  "static_findings": [],
+  "navigation": "hash-pinned52-step height route; existing checks unchanged, ordinary controller only",
+  "dev_entry": "continue-warp DEV fixture unless --expect; no production origin-name acceptance",
+  "alive": true,
+  "checks": [
+    {
+      "name": "starts inside the batch",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          57
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (start)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "reached MAP_ROUTE205_NORTH",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          56
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH closed right edge at (79, 15) blocks",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          15
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          15
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH closed right edge at (79, 19) blocks",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          19
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          19
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (2, 59) -> MAP_ROUTE205_SOUTH (22, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          2,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          2,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (3, 59) -> MAP_ROUTE205_SOUTH (23, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (5, 59) -> MAP_ROUTE205_SOUTH (25, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          5,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          5,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "reached MAP_ROUTE205_SOUTH",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          22,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH closed right edge at (31, 88) blocks",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          31,
+          88
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          31,
+          88
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH left seam (0, 85) -> MAP_FLOAROMA_TOWN (33, 21) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          85
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          85
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH left seam (0, 87) -> MAP_FLOAROMA_TOWN (33, 23) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          87
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          87
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH left seam (0, 88) -> MAP_FLOAROMA_TOWN (33, 24) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          88
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          0,
+          88
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH up seam (22, 0) -> MAP_ROUTE205_NORTH (2, 59) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          22,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          22,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH up seam (23, 0) -> MAP_ROUTE205_NORTH (3, 59) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          23,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          23,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH up seam (25, 0) -> MAP_ROUTE205_NORTH (5, 59) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "reached MAP_FLOAROMA_TOWN",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          21
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN down seam (12, 35) -> MAP_ROUTE204 (10, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          12,
+          35
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          12,
+          35
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN down seam (13, 35) -> MAP_ROUTE204 (11, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          13,
+          35
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          13,
+          35
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN down seam (14, 35) -> MAP_ROUTE204 (12, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          14,
+          35
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          14,
+          35
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN right seam (33, 21) -> MAP_ROUTE205_SOUTH (0, 85) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          21
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          21
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN right seam (33, 23) -> MAP_ROUTE205_SOUTH (0, 87) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          23
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          23
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN right seam (33, 24) -> MAP_ROUTE205_SOUTH (0, 88) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          24
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          33,
+          24
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_MEADOW via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_FLOAROMA_MEADOW",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          10,
+          49
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN warp 0 (4, 2) -> MAP_FLOAROMA_MEADOW and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          [
+            4,
+            2
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          4,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_TOWN after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_MEADOW via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_FLOAROMA_MEADOW",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          11,
+          49
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_TOWN warp 1 (5, 2) -> MAP_FLOAROMA_MEADOW and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          [
+            5,
+            2
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          5,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_TOWN after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "reached MAP_FLOAROMA_MEADOW",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          10,
+          50
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_TOWN via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_FLOAROMA_TOWN",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_MEADOW warp 0 (10, 50) -> MAP_FLOAROMA_TOWN and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          [
+            10,
+            50
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          10,
+          50
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_MEADOW after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_TOWN via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_FLOAROMA_TOWN",
+      "ok": true,
+      "at": [
+        "MAP_FLOAROMA_TOWN",
+        [
+          5,
+          3
+        ]
+      ]
+    },
+    {
+      "name": "MAP_FLOAROMA_MEADOW warp 1 (11, 50) -> MAP_FLOAROMA_TOWN and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          [
+            11,
+            50
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_FLOAROMA_MEADOW",
+        [
+          11,
+          50
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_FLOAROMA_MEADOW after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "reached MAP_ROUTE204",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE204",
+        [
+          10,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 up seam (10, 0) -> MAP_FLOAROMA_TOWN (12, 35) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          10,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          10,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 up seam (11, 0) -> MAP_FLOAROMA_TOWN (13, 35) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          11,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          11,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 up seam (12, 0) -> MAP_FLOAROMA_TOWN (14, 35) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          12,
+          0
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          12,
+          0
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 down seam (12, 63) -> MAP_JUBILIFE_CITY (48, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          12,
+          63
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          12,
+          63
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 down seam (14, 63) -> MAP_JUBILIFE_CITY (50, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          14,
+          63
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          14,
+          63
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 down seam (15, 63) -> MAP_JUBILIFE_CITY (51, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          15,
+          63
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          15,
+          63
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_RAVAGED_PATH via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_RAVAGED_PATH",
+      "ok": true,
+      "at": [
+        "MAP_RAVAGED_PATH",
+        [
+          19,
+          39
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 warp 0 (11, 31) -> MAP_RAVAGED_PATH and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          [
+            11,
+            32
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          11,
+          32
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_ROUTE204 after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "follower visible (MAP_RAVAGED_PATH via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_RAVAGED_PATH",
+      "ok": true,
+      "at": [
+        "MAP_RAVAGED_PATH",
+        [
+          28,
+          34
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE204 warp 1 (19, 24) -> MAP_RAVAGED_PATH and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE204",
+        [
+          [
+            19,
+            25
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE204",
+        [
+          19,
+          25
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_ROUTE204 after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "reached MAP_RAVAGED_PATH",
+      "ok": true,
+      "at": [
+        "MAP_RAVAGED_PATH",
+        [
+          28,
+          35
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_ROUTE204 via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_ROUTE204",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE204",
+        [
+          11,
+          33
+        ]
+      ]
+    },
+    {
+      "name": "MAP_RAVAGED_PATH warp 0 (19, 40) -> MAP_ROUTE204 and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_RAVAGED_PATH",
+        [
+          [
+            19,
+            40
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_RAVAGED_PATH",
+        [
+          19,
+          40
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_RAVAGED_PATH after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "follower visible (MAP_ROUTE204 via warp)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "an exit is reachable after warping into MAP_ROUTE204",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE204",
+        [
+          19,
+          26
+        ]
+      ]
+    },
+    {
+      "name": "MAP_RAVAGED_PATH warp 1 (28, 35) -> MAP_ROUTE204 and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_RAVAGED_PATH",
+        [
+          [
+            28,
+            35
+          ]
+        ]
+      ],
+      "got": [
+        "MAP_RAVAGED_PATH",
+        [
+          28,
+          35
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (MAP_RAVAGED_PATH after warp round trip)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH (26, 81) pushing right is blocked",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ]
+    },
+    {
+      "name": "Start menu opens and returns to the field",
+      "ok": true
+    },
+    {
+      "name": "SAVE (northern-corridor)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ]
+    }
+  ],
+  "flash_problems": [],
+  "verdict": "PASS"
+}

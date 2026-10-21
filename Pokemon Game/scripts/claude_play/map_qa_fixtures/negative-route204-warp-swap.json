@@ -1,0 +1,26 @@
+{
+ "batch": [
+  "MAP_ROUTE204",
+  "MAP_RAVAGED_PATH"
+ ],
+ "entry": [
+  "MAP_ROUTE204",
+  11,
+  32
+ ],
+ "description": "TEST-ONLY: Ravaged Path's north exit (warp 1) is pointed at Route 204's south cave door (warp 0) instead of the north one, so the two pairs are no longer reciprocal. Leaving the cave by its north exit must land at the wrong door.",
+ "expect": "FAIL",
+ "must_fail": [
+  "warp 1"
+ ],
+ "edits": [
+  {
+   "op": "warp",
+   "map": "RavagedPath",
+   "index": 1,
+   "set": {
+    "dest_warp_id": "0"
+   }
+  }
+ ]
+}

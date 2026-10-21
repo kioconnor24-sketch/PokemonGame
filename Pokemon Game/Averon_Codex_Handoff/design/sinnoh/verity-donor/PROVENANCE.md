@@ -42,7 +42,7 @@ choice of secondary bank cannot break the seam.
 | Item | Detail |
 | --- | --- |
 | **Route 201 west ↔ Lakefront east** | Lakefront `right` **−1** ↔ Route 201 `left` **+1**. The donor's ledge (Lakefront row 11) meets Route 201's (row 12). |
-| **Seam cell edits** (7) | Make walkability exactly reciprocal (zero `map_qa` static findings): remove the edge tree at x 18–19, rows 7–9; a bush at (19, 6) and (19, 14); collision on the canopy at (19, 15). |
+| **Seam cell edits** (9) | Make walkability exactly reciprocal (zero `map_qa` static findings): remove the edge tree at x 18–19, rows 7–9; a bush at (19, 6) and (19, 14); collision on the canopy at (19, 15). |
 | **Access edits** (2) | Open the top of the donor's L-shaped ledge, (6, 6) → grass, with the cap moved to (6, 7). Every Lakefront exit is then reachable on foot from the lake entrance, and both ledges remain one-way shortcuts. |
 | **Lakefront ↔ Lake** | The donor's two reciprocal pairs: Lakefront (2, 4)/(3, 4) ↔ Lake (38, 43)/(39, 43), warp IDs 0/1. Averon's General and Dewford have **no north arrow warp**, so each tunnel floor is a step-on warp: a coord trigger (`VAR_TEMP_1` = 0) runs exactly `warp <map>, <id>` / `waitstate` / `end`. In mGBA, dropping `waitstate` stopped the warp from happening, so it stays. `map_qa` enters these from the approach tile and expects arrival on the warp tile. |
 | **Island cave mouth** (23, 19) | Non-animated door with no warp: story-reserved. Collision set; art kept. |

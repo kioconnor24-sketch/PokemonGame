@@ -1,0 +1,29 @@
+{
+  "profile": "normal",
+  "rom_sha256": "68d40c282709e89aa41c23ea2ef7584f495f0a72220ea606a576d4be6e2e159e",
+  "checks": [
+    {
+      "name": "south-bridge-south-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          84
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-south-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    }
+  ],
+  "error": "RuntimeError('cannot reach south-bridge-south-ground')",
+  "scope": "ordinary walking/followers over and under bridges, no-Surf water refusal and converted walkway; NOT Surf or production-origin acceptance",
+  "verdict": "FAIL"
+}

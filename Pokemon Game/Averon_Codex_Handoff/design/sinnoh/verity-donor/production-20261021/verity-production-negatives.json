@@ -1,0 +1,21 @@
+[
+  {
+    "name": "negative-verity-warp-landing",
+    "result": "REJECTED_AS_EXPECTED",
+    "returncode": 1,
+    "codes": [
+      "exit-not-walkable",
+      "exit-unreachable"
+    ],
+    "source": "current Verity map/header bytes; isolated scratch mutation, not a production edit or runtime negative"
+  },
+  {
+    "name": "negative-verity-wrong-offset",
+    "result": "REJECTED_AS_EXPECTED",
+    "returncode": 1,
+    "codes": [
+      "seam-mismatch"
+    ],
+    "source": "current Verity map/header bytes; isolated scratch mutation, not a production edit or runtime negative"
+  }
+]

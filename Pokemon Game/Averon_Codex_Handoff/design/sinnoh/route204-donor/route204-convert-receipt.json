@@ -1,0 +1,48 @@
+{
+  "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+  "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "maps": {
+    "Route204": {
+      "git_blob": "fcc49242b015046580e62d6b9a400c41c8fac226",
+      "source_sha256": "7d1174809515fa0210b5642e731128095764d318098de8257f775879927c21c5",
+      "output_sha256": "893f3202653ba735a30d2d8a6f3ba652574f1327b37aa4482e1c5dea7f9f7180",
+      "secondary": "gTileset_Rustboro",
+      "changed_cells": 16,
+      "warps": [
+        [
+          11,
+          31,
+          "MAP_RAVAGED_PATH",
+          "0"
+        ],
+        [
+          19,
+          24,
+          "MAP_RAVAGED_PATH",
+          "1"
+        ]
+      ]
+    },
+    "RavagedPath": {
+      "git_blob": "0940999d1e557750867fbe3e1c83131ed866849d",
+      "source_sha256": "313a3bf49262ec2de17003a5d5bdbaaf11f5fccf48336c093f9fc8a0e045b47d",
+      "output_sha256": "313a3bf49262ec2de17003a5d5bdbaaf11f5fccf48336c093f9fc8a0e045b47d",
+      "secondary": "gTileset_Cave",
+      "changed_cells": 0,
+      "warps": [
+        [
+          19,
+          40,
+          "MAP_ROUTE204",
+          "0"
+        ],
+        [
+          28,
+          35,
+          "MAP_ROUTE204",
+          "1"
+        ]
+      ]
+    }
+  }
+}
