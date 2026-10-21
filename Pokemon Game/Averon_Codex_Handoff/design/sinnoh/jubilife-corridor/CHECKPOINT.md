@@ -282,3 +282,21 @@ seam negatives PASS. Exact38-file reproduction verified again. Final-source
 NORMAL66/66 + fresh Continue3/3 PASS; final RELEASE complete batch is running.
 Authoritative final-source evidence begins at evidence/20261021/final/. Earlier
 44945713 evidence is retained as history. Source/default cries OFF unchanged.
+
+## FINAL VERIFIED SCRATCH HANDOFF — 2026-10-21
+Final1f21747e source: NORMAL66/66 + Continue3/3; RELEASE66/66 + Continue3/3;
+generated pre-corridor Averon save loads3/3 in EACH final profile. Native37/37,
+save4/4, host28/28, static0 and source negatives2/2 PASS. Exact38-file reproduction.
+Full hashes, linked metrics and commands: evidence/20261021/final/README.md.
+Legacy Continue artifacts retain an unchanged raw-source Saltmere seam warning,
+reproduced on production engine base and baseline; no new runtime defect claimed.
+Production BLOCKED on genuine owner181 protected-path approval. No unsafe merge,
+new donor art, save format or >=224 ID. Claude branches unchanged.
+WAITING_ON: owner181 path authorization, followed by eligible merge and separate
+scoped Verity/corridor approvals. RESUME_WHEN: refresh refs/claims, integrate181
+only when eligible, reconcile Verity on a new Codex branch, then serialize this
+corridor after those map-slot appends; regenerate goldens and run exact-head
+production evidence. Do not restart converter or publish scratch saves/map slots.
+Latest main ca5b47ec is docs-only beyond tested base9fa2f1d3. No new independent
+geography started while this authorized batch waits. Two-hour instruction scan
+is enabled by explicit owner request; it does not start competing sessions.

@@ -1,0 +1,66 @@
+{
+  "status": "UNCHANGED_RAW_SOURCE_WARNING_NOT_RUNTIME_REPRODUCED",
+  "results": {
+    "production_engine_base": [
+      {
+        "map": "MAP_SALTMERE",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "up",
+          "tile": [
+            7,
+            0
+          ],
+          "faces": [
+            "MAP_COASTALMEADOW",
+            [
+              7,
+              31
+            ]
+          ]
+        }
+      }
+    ],
+    "pre_corridor_baseline": [
+      {
+        "map": "MAP_SALTMERE",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "up",
+          "tile": [
+            7,
+            0
+          ],
+          "faces": [
+            "MAP_COASTALMEADOW",
+            [
+              7,
+              31
+            ]
+          ]
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "map": "MAP_SALTMERE",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "up",
+          "tile": [
+            7,
+            0
+          ],
+          "faces": [
+            "MAP_COASTALMEADOW",
+            [
+              7,
+              31
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "scope": "Legacy-save checks exercise Continue only; this does not accept the raw Saltmere seam."
+}

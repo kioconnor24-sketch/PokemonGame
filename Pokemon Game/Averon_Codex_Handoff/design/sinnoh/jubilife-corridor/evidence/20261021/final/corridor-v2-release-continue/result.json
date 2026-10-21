@@ -1,0 +1,46 @@
+{
+ "maps": [
+  "MAP_OREBURGH_GATE_1F"
+ ],
+ "build": "release",
+ "rom_sha256": "a3f1003a39d1b62d26fbca9fd5a9c73852b468a4177c898adee6518d103561d9",
+ "static_findings": [],
+ "save_before": "d89e4920b0f3edca18ad2faa165d43e8c1681bb7ea4c6cca9683b535d1355c86",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "d89e4920b0f3edca18ad2faa165d43e8c1681bb7ea4c6cca9683b535d1355c86",
+ "verdict": "PASS"
+}

@@ -1,5 +1,5 @@
 {
-  "status": "FINAL_SOURCE_BUILT_AND_NATIVE_TESTED; RELEASE_GAMEPLAY_RECHECK_RUNNING",
+  "status": "SCRATCH_ROM_TESTED_NOT_PRODUCTION_MERGED",
   "scratch_source_sha": "1f21747e60b139d275ab4196f957dc854d618f53",
   "normal_rom_sha256": "6b5db1684efbaf80e52d3cd5a38fa7c0f15412722d934b671efaa8ebcc35d1f2",
   "normal_file_bytes": 33554432,
@@ -9,8 +9,8 @@
   "toolchain": "arm-none-eabi GCC 14.2.1; NORMAL default cries-off",
   "native_result": "PASS37/37 relevant+4/4 save layout on final source",
   "release_result": "PASS_SCRATCH_BUILD",
-  "runtime_result": "Final-source NORMAL66/66+Continue3/3; RELEASE final-source run pending. Prior44945713 records remain historical.",
-  "production_integration": "BLOCKED: Route202 genuine owner path authorization missing; no protected integration PR opened",
+  "runtime_result": "PASS NORMAL66/66+fresh Continue3/3; RELEASE66/66+fresh Continue3/3",
+  "production_integration": "BLOCKED genuine owner-only #181 protected-path handoff; then serialize Verity and corridor on refreshed main with new scoped approvals",
   "release_rom_sha256": "a3f1003a39d1b62d26fbca9fd5a9c73852b468a4177c898adee6518d103561d9",
   "release_file_bytes": 33554432,
   "release_linked_rom_bytes": 17473332,
@@ -21,6 +21,6 @@
   "normal_baseline_rom_sha256": "06b94e9f902b3daab33e416f64f9cd2d7a346214e2566500d9078366a9cb9dec",
   "reproduction": "PASS38 final-source files byte-identical from committed helper",
   "release_linked_growth_bytes": 22532,
-  "legacy_save_result": "PENDING actual generated pre-corridor save loading",
+  "legacy_save_result": "PASS generated pre-corridor Averon save loads in final NORMAL3/3 and RELEASE3/3; no DEV transport used in these legacy checks",
   "host_result": "PASS28/28;static0;2/2 seam negatives rejected"
 }
