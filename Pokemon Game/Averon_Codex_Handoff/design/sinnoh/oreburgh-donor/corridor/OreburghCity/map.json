@@ -1,0 +1,72 @@
+{
+  "name": "OreburghCity",
+  "status": "OFF_ENGINE_GEOMETRY_ONLY_GRAPHICS_PENDING",
+  "dimensions": [
+    70,
+    59
+  ],
+  "section": null,
+  "source_warp_events": [
+    {
+      "source_warp_id": 0,
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_GATE_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "source_warp_id": 11,
+      "x": 50,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "source_warp_id": 12,
+      "x": 51,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "source_warp_id": 13,
+      "x": 52,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "source_warp_id": 14,
+      "x": 53,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "1"
+    }
+  ],
+  "source_connection_events": [
+    {
+      "map": "MAP_ROUTE207",
+      "offset": 35,
+      "direction": "up"
+    }
+  ],
+  "collision_closures": [
+    {
+      "x": 54,
+      "y": 14,
+      "before": 682,
+      "after": 1706,
+      "reason": "unbuilt source destination"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "scripts": [],
+  "encounters": []
+}
