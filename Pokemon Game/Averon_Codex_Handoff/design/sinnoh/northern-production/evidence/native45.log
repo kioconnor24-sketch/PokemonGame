@@ -1,0 +1,60 @@
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_route202_location.o test/averon_route202_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_map_registry_contract.o test/averon_map_registry_contract.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_northern_location.o test/averon_northern_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_region_travel.o test/averon_region_travel.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_region_save.o test/averon_region_save.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/save.o test/save.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o ../../pokeemerald-test.elf <objects> <test-objects> <lib>
+tools/gbafix/gbafix pokeemerald-test.elf -t"POKEMON EMER" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test.elf gTestRunnerArgv "Averon\0"
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra /workspace/.onboarding/mgba-rom-test arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[0] Averon corridor approved origins have names and survive boxed summary reads: [32mPASS[0m
+[0] Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group: [32mPASS[0m
+[2] Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically: [32mPASS[0m
+[2] Averon Lake Verity is section 220 in Sinnoh with its own name and popup: [32mPASS[0m
+[2] Averon location 13-bit experiment exposes legacy API truncation and special aliases: [32mPASS[0m
+[2] Averon Sandgem popup theme stays in bounds with fixed NONE and future codes: [32mPASS[0m
+[2] Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names: [32mPASS[0m
+[2] Averon map registry IDs round trip through the actual signed warp fields: [32mPASS[0m
+[2] Averon region adapters keep both badge banks independent and fail closed: [32mPASS[0m
+[2] Averon region save refuses a newer format: loads nothing and never overwrites it: [32mPASS[0m
+[1] Averon Verity flash reload preserves the new map position origin and regional return destination: [32mPASS[0m
+[1] Averon Lake Verity origin survives the real summary formatter unchanged: [32mPASS[0m
+[0] Averon location flash reload preserves all 256 PC origins party TV specials and region state: [32mPASS[0m
+[1] Averon location battle controller preserves all legacy bytes but not a new 13-bit identity: [32mPASS[0m
+[1] Averon location legacy names and region identities remain unchanged: [32mPASS[0m
+[1] Averon Sandgem real summary formatter names caught hatched and traded origins: [32mPASS[0m
+[1] Averon Route 202 is section 219 in Sinnoh with its own name and popup: [32mPASS[0m
+[1] Averon map registry preserves group slots and disabled-region null entries: [32mPASS[0m
+[0] Averon location every 8-bit origin survives encryption PC withdrawal and rekeying: [32mPASS[0m
+[0] Averon Sandgem summary keeps NONE unassigned and special met values unnamed: [32mPASS[0m
+[0] Averon Route 202 origin survives the real summary formatter unchanged: [32mPASS[0m
+[0] Averon map registry resolves every linked numeric ID within its original group: [32mPASS[0m
+[0] Averon region adapters reject disabled map groups without changing the return warp: [32mPASS[0m
+[0] Averon region save rolls back across save counter wrap: [32mPASS[0m
+[0] Averon region save rejects a record copied from the other slot: [32mPASS[0m
+[2] Averon region save rejects a slot whose sectors come from two different saves: [32mPASS[0m
+[2] Averon region save rejects every anchor bit flip even under a recomputed sector checksum: [32mPASS[0m
+[2] Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash: [32mPASS[0m
+[2] Averon region travel runs from an overworld script through the registered special: [32mPASS[0m
+[2] Averon region travel special validates script values before narrowing: [32mPASS[0m
+[2] Averon region travel stores the departure and arms the target region's warps: [32mPASS[0m
+[2] Averon northern map headers share only the three approved origin names: [32mPASS[0m
+[0] Averon region save rejects every single-bit flip in the record and loads the older slot: [32mPASS[0m
+[0] Averon region save round-trips both regions through flash without writing on load: [32mPASS[0m
+[0] Averon region travel power loss while saving keeps region and location together: [32mPASS[0m
+[0] Averon region travel rejects invalid requests and changes nothing: [32mPASS[0m
+[0] Averon northern flash reload preserves party PC legacy special origins and regional position: [32mPASS[0m
+[1] Averon region save power loss at any sector write keeps the last whole slot: [32mPASS[0m
+[1] Averon region save reports both slots corrupt instead of mixing them: [32mPASS[0m
+[1] Averon region save rejects CRC-valid semantic corruption and loads the older slot: [32mPASS[0m
+[1] Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save: [32mPASS[0m
+[1] Averon region save layout: anchor replaces filler_90 and the record fits sector 0: [32mPASS[0m
+[1] Averon region travel survives a save and load through flash: [32mPASS[0m
+[1] Averon region travel whiteout uses the healer of the region the player is in: [32mPASS[0m
+[1] Averon northern summary names caught hatched and traded origins without changing encrypted data: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          45
+- Tests [34mTOTAL[0m:           45
+
