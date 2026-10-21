@@ -1,0 +1,64 @@
+{
+  "id": "MAP_OREBURGH_MINE_B1F",
+  "name": "OreburghMine_B1F",
+  "layout": "LAYOUT_OREBURGH_MINE_B1F",
+  "music": "MUS_CAVE_OF_ORIGIN",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 11,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY",
+      "dest_warp_id": "11"
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY",
+      "dest_warp_id": "14"
+    },
+    {
+      "x": 11,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B2F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 12,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B2F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B2F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 13,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B2F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
