@@ -16,6 +16,17 @@ class OverlayTests(unittest.TestCase):
   self.assertEqual(b[20*29+25],a[4*29+19])
   for x in (24,25,26):
    self.assertEqual(b[21*29+x],a[21*29+23]);self.assertEqual((b[21*29+x]>>10)&3,1)
+ def test_center_escalator_removal_preserves_both_real_doors(self):
+  raw=(ROOT/'averon-adapted/JubilifeCity_PokemonCenter_1F/map.bin').read_bytes();a=struct.unpack('<126H',raw);b=struct.unpack('<126H',o.finish_center(raw))
+  self.assertEqual({(i%14,i//14) for i in range(126) if a[i]!=b[i]}, {(0,5),(1,5),(0,6),(1,6),(0,7),(1,7),(2,6)})
+  for y in (5,6,7):
+   self.assertEqual(b[y*14],a[4*14]);self.assertEqual(b[y*14+1],a[5*14+2])
+  for x in (6,7):self.assertEqual(b[8*14+x],a[8*14+x])
+ def test_changed_center_source_rejected(self):
+  raw=bytearray((ROOT/'averon-adapted/JubilifeCity_PokemonCenter_1F/map.bin').read_bytes());raw[(6*14+1)*2]=0
+  with self.assertRaisesRegex(ValueError,'source changed'):o.finish_center(raw)
+ def test_committed_center_matches_generator(self):
+  self.assertEqual((ROOT/'engine-overlay/data/layouts/JubilifeCity_PokemonCenter_1F/map.bin').read_bytes(),o.finish_center((ROOT/'averon-adapted/JubilifeCity_PokemonCenter_1F/map.bin').read_bytes()))
  def test_changed_gate_source_rejected(self):
   raw=bytearray((ROOT/'averon-adapted/OreburghGate_1F/map.bin').read_bytes());raw[(5*29+19)*2]=0
   with self.assertRaisesRegex(ValueError,'source changed'):o.finish_gate(raw)

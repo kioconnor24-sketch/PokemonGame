@@ -1,5 +1,5 @@
 {
-  "status": "SCRATCH_NORMAL_BUILT_NOT_PRODUCTION",
+  "status": "CENTER_VISUAL_FIX_SOURCE_TESTED; UPDATED_ROM_RUNTIME_RECHECK_IN_PROGRESS",
   "scratch_source_sha": "44945713517e5e87b6c5ae8bb7ab075e701f3ffb",
   "normal_rom_sha256": "4151a11ffc6f17065554e8889c2b45d2201db9e4c6d46dfa94c88446cef86cf6",
   "normal_file_bytes": 33554432,
@@ -19,5 +19,8 @@
   "normal_linked_growth_bytes": 22540,
   "normal_baseline_linked_rom_bytes": 17331656,
   "normal_baseline_rom_sha256": "06b94e9f902b3daab33e416f64f9cd2d7a346214e2566500d9078366a9cb9dec",
-  "reproduction": "38 changed scratch source files reproduced byte-for-byte; see source manifest"
+  "reproduction": "38 changed scratch source files reproduced byte-for-byte; see source manifest",
+  "release_linked_growth_bytes": 22532,
+  "legacy_save_result": "PENDING actual generated pre-corridor save loading",
+  "pending_source_change": "7 Center cells replace unsupported escalator; prior evidence remains pinned to44945713; final retest on1f21747e pending"
 }

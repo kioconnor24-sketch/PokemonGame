@@ -37,6 +37,23 @@ def finish_gate(raw):
  for x in (24,25,26):cells[21*29+x]=wall
  return struct.pack('<783H',*cells)
 
+def finish_center(raw):
+ """Replace the unused escalator to an unbuilt floor with a continuous wall.
+
+ Both real outside doors are unchanged. Reuse the adjacent wall/floor cells;
+ restore the old escalator approach's transition elevation to ordinary floor.
+ """
+ cells=list(struct.unpack('<126H',raw))
+ expected={(0,5):0x280,(1,5):0x281,(0,6):0x288,(1,6):0x289,(0,7):0x290,(1,7):0x291,(2,6):0x202}
+ for (x,y),mid in expected.items():
+  if cells[y*14+x]&1023!=mid:raise ValueError('Center closure source changed')
+ wall=cells[4*14];floor=cells[5*14+2]
+ if wall!=0x3620 or floor!=0x3202:raise ValueError('Center reference terrain changed')
+ if cells[6*14+2]>>12!=0:raise ValueError('Center approach source changed')
+ for y in (5,6,7):cells[y*14]=wall;cells[y*14+1]=floor
+ cells[6*14+2]=floor
+ return struct.pack('<126H',*cells)
+
 def prepare(donor,root,output):
  donor,root,output=map(Path,(donor,root,output))
  if output.exists() or 'engine' in output.resolve().parts:raise ValueError('new off-engine output required')
@@ -52,6 +69,7 @@ def prepare(donor,root,output):
   selected=(root/'corridor-banks'/name) if city or route else (root/'averon-adapted'/name)
   raw=(selected/'map.bin').read_bytes();w,h=config['dimensions']
   if cave:raw=finish_gate(raw)
+  if name=='JubilifeCity_PokemonCenter_1F':raw=finish_center(raw)
   if len(raw)!=w*h*2:raise ValueError('invalid map length')
   layout_id='LAYOUT_'+ids[name].removeprefix('MAP_')
   target_tilesets=['gTileset_General','gTileset_AveronCorridorRustboro'] if city or route else stage['source_tilesets']

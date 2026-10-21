@@ -267,3 +267,11 @@ Native automation "Check Averon task instructions" is enabled every two hours
 and supplements this task without spawning competing edits or restarting Claude.
 This explicit owner request supersedes older no-scheduler directions only for
 the requested instruction scan. No autonomous production merge is authorized.
+
+Subsequent actual scene inspection identified Center's unused escalator still
+visually open to an unbuilt floor. A narrow seven-cell overlay-only repair now
+reuses its adjacent wall/floor and restores the old approach elevation. Both real
+doors unchanged. Host28/28 PASS; static seven-map audit0. Updated NORMAL built;
+RELEASE and complete paired graphical/native rechecks are IN PROGRESS. Prior
+37/4 native and63/3 profile evidence remains tied to44945713, not this new
+1f21747e source. No prior evidence is relabeled as final acceptance.
