@@ -13,6 +13,23 @@ import subprocess
 ROUTE202='b4c1d39f0476b004f772506abd1b378e055ad03e'
 VERITY='4ed99916f0aeb6bee81e9aedf51f40fb6d66730e'
 SECTION='Pokemon Game/engine/src/data/region_map/region_map_sections.json'
+def update_fixture_expectations(engine):
+ """Extend approved namespace expectations without changing legacy goldens."""
+ e=Path(engine)
+ p=e/'test/averon_sandgem_location.c';s=p.read_text()
+ s=s.replace('MAPSEC_COUNT == 220','MAPSEC_COUNT == 224').replace('i = 220;','i = 224;').replace('{215, 220, 252, 253, 254, 255}','{215, 224, 252, 253, 254, 255}')
+ p.write_text(s)
+ p=e/'test/averon_location_compatibility.c';s=p.read_text()
+ s=s.replace('section == MAPSEC_ROUTE_202;', 'section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE;')
+ s=s.replace('section == MAPSEC_ROUTE_202)', 'section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE)')
+ p.write_text(s)
+ p=e/'test/data/averon_map_registry_slots.inc';s=p.read_text().replace('REGISTRY_GROUP(76, gMapGroup_Sinnoh, 5, 1)','REGISTRY_GROUP(76, gMapGroup_Sinnoh, 11, 1)')
+ names=['JubilifeCity','Route203','OreburghGate_1F','JubilifeCity_PokemonCenter_1F','JubilifeCity_Mart','JubilifeCity_PokemonSchool']
+ for n,name in enumerate(names,5):
+  symbol=json.loads((e/'data/maps'/name/'map.json').read_text())['id']
+  s+='REGISTRY_SLOT(76, %d, %s, %s, 1)\n'%(n,symbol,name)
+ p.write_text(s)
+
 def apply(repo,overlay):
  repo,overlay=Path(repo).resolve(),Path(overlay).resolve();e=repo/'Pokemon Game/engine'
  def git(*args):return subprocess.check_output(['git','-C',str(repo),*args])
@@ -30,7 +47,7 @@ def apply(repo,overlay):
  current=json.loads((e/'src/data/region_map/region_map_sections.json').read_text())
  if any(s.get('value',0)>=220 for s in current['map_sections']):raise ValueError('unexpected section namespace')
  # All preconditions precede writes. Reuse files, do not reconvert geography.
- for rel in ('data/maps','data/layouts','data/tilesets'):shutil.copytree(overlay/rel,e/rel,dirs_exist_ok=True)
+ for rel in ('data/maps','data/layouts','data/tilesets','test'):shutil.copytree(overlay/rel,e/rel,dirs_exist_ok=True)
  def edit(rel,fn):
   p=e/rel;v=json.loads(p.read_text());fn(v);p.write_text(json.dumps(v,indent=2)+'\n')
  edit('data/maps/map_groups.json',lambda v:v['gMapGroup_Sinnoh'].extend(f['append_map_names']))
@@ -44,6 +61,7 @@ def apply(repo,overlay):
  with (e/'src/data/tilesets/metatiles.h').open('a') as p:p.write('\n'+constants)
  with (e/'src/data/tilesets/headers.h').open('a') as p:p.write('\n'+header)
  with (e/'include/tilesets.h').open('a') as p:p.write('\nextern const struct Tileset gTileset_AveronCorridorRustboro;\n')
+ update_fixture_expectations(e)
  return {'status':'SCRATCH_SOURCE_ONLY','base':git('rev-parse','HEAD').decode().strip(),'route202':ROUTE202,'verity_section_source':VERITY,'production_authorization':False}
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',required=True);p.add_argument('--overlay',required=True);a=p.parse_args()
