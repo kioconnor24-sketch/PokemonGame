@@ -1,0 +1,45 @@
+{
+  "profile": "release",
+  "rom_sha256": "20fb3f1efe9911dfb94fc8888912b24e7ef4e47946c1172ae427c325b6b04d18",
+  "checks": [
+    {
+      "name": "MAP_LAKE_VERITY (42, 27) pushing left is blocked",
+      "ok": true,
+      "before": [
+        "MAP_LAKE_VERITY",
+        [
+          42,
+          27
+        ]
+      ],
+      "after": [
+        "MAP_LAKE_VERITY",
+        [
+          42,
+          27
+        ]
+      ]
+    },
+    {
+      "name": "MAP_LAKE_VERITY (34, 37) pushing left is blocked",
+      "ok": true,
+      "before": [
+        "MAP_LAKE_VERITY",
+        [
+          34,
+          37
+        ]
+      ],
+      "after": [
+        "MAP_LAKE_VERITY",
+        [
+          34,
+          37
+        ]
+      ]
+    }
+  ],
+  "error": null,
+  "scope": "supplementary shore probes only; unchanged Runner.blocked, graphical input/read-only observation",
+  "verdict": "PASS"
+}
