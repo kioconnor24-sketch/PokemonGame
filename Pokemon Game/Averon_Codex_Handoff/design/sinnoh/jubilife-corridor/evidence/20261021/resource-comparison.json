@@ -1,0 +1,60 @@
+{
+  "status": "PASS_ACTUAL_PAIRED_BUILDS",
+  "toolchain": "arm-none-eabi GCC 14.2.1",
+  "baseline_source_sha": "0e52bb6da5169188ee1fd4f0de6f0f8c8273be41",
+  "candidate_source_sha": "44945713517e5e87b6c5ae8bb7ab075e701f3ffb",
+  "baseline_scope": "main9fa2f1d3+Route202 b4c1d39f+existing Verity section220 only; excludes corridor; not production main",
+  "asset_input_verification": "24103 working asset inputs byte-identical; caches copied, not shared/hardlinked",
+  "profiles": {
+    "normal": {
+      "baseline": {
+        "linked_bytes": {
+          "EWRAM": 226480,
+          "IWRAM": 28392,
+          "ROM": 17331656
+        },
+        "rom_sha256": "06b94e9f902b3daab33e416f64f9cd2d7a346214e2566500d9078366a9cb9dec",
+        "padded_file_bytes": 33554432
+      },
+      "candidate": {
+        "linked_bytes": {
+          "EWRAM": 226480,
+          "IWRAM": 28392,
+          "ROM": 17354196
+        },
+        "rom_sha256": "4151a11ffc6f17065554e8889c2b45d2201db9e4c6d46dfa94c88446cef86cf6",
+        "padded_file_bytes": 33554432
+      },
+      "delta_linked_bytes": {
+        "ROM": 22540,
+        "EWRAM": 0,
+        "IWRAM": 0
+      }
+    },
+    "release": {
+      "baseline": {
+        "linked_bytes": {
+          "EWRAM": 226482,
+          "IWRAM": 28336,
+          "ROM": 17450800
+        },
+        "rom_sha256": "5c32943432c2381182546185214616c9f5ef02ae2ae875dfa25ae4aaef956b28",
+        "padded_file_bytes": 33554432
+      },
+      "candidate": {
+        "linked_bytes": {
+          "EWRAM": 226482,
+          "IWRAM": 28336,
+          "ROM": 17473332
+        },
+        "rom_sha256": "3f10a15235328a884ad987b630006325ea775ea02e658307cb1c7df5e39370c3",
+        "padded_file_bytes": 33554432
+      },
+      "delta_linked_bytes": {
+        "ROM": 22532,
+        "EWRAM": 0,
+        "IWRAM": 0
+      }
+    }
+  }
+}
