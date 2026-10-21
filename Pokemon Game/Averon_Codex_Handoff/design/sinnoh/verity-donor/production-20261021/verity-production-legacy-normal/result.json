@@ -1,0 +1,65 @@
+{
+ "maps": [
+  "MAP_SALTMERE"
+ ],
+ "build": "normal",
+ "rom_sha256": "cf5f9cae1cb35a56d0ca7eaf45279d23e912825c69071c994b1e1aa0821584e0",
+ "static_findings": [
+  {
+   "map": "MAP_SALTMERE",
+   "code": "seam-mismatch",
+   "detail": {
+    "direction": "up",
+    "tile": [
+     7,
+     0
+    ],
+    "faces": [
+     "MAP_COASTALMEADOW",
+     [
+      7,
+      31
+     ]
+    ]
+   }
+  }
+ ],
+ "save_before": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SALTMERE",
+    [
+     19,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SALTMERE",
+    [
+     19,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+ "verdict": "PASS"
+}

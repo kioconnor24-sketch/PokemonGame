@@ -1,0 +1,26 @@
+{"t": 1792570140.78, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792570140.96, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792570144.54, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792570144.64, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792570145.84, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792570145.96, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792570147.17, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792570147.26, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792570147.88, "event": "screen", "cb2": "MainCB2", "i": 11}
+{"t": 1792570147.98, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792570149.15, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 13}
+{"t": 1792570149.25, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792570150.47, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792570150.57, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792570154.67, "event": "screen", "cb2": "CB2_ReturnToFieldLocal", "i": 17}
+{"t": 1792570154.85, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792570155.4, "event": "screen", "cb2": "CB2_Overworld", "i": 18}
+{"t": 1792570155.49, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792570156.16, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792570156.47, "event": "capture", "file": "0010-continued.png"}
+{"t": 1792570156.47, "event": "continue-check", "problems": []}
+{"t": 1792570156.53, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792570157.17, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792570158.14, "event": "capture", "file": "0011-start.png"}
+{"t": 1792570158.14, "event": "observe", "label": "start", "problems": []}
+{"t": 1792570158.14, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}

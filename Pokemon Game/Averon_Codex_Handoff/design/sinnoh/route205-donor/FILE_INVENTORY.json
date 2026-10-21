@@ -1,0 +1,488 @@
+{
+  "scope": "PR192 source-only staging, QA and evidence; inventory excludes itself to avoid self-reference",
+  "base": "d182c7b53f2566cba175e2ad01549af617e04032",
+  "qa_code": "6879dc20f7098d98132268a48424b6e607df3bb9",
+  "production_merged": false,
+  "files": [
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/build_floaroma.py",
+      "bytes": 13477,
+      "sha256": "ff4a0e538ae7614813af2869e68446fdb635df2ceb4729769bf15a8286ea3ed2"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/floaroma-convert-receipt.json",
+      "bytes": 1550,
+      "sha256": "787abae3d6b8af518b72b8a4724ed8cd4d1f00d410b5902194744491034b9b07"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/floaroma-meadow-built.png",
+      "bytes": 51950,
+      "sha256": "8d30bf25b8353f3a8fed5f997fe2d804c0407ccc638765793aa22c79f2c62a62"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/floaroma-town-built.png",
+      "bytes": 24734,
+      "sha256": "2c295c1155e330c86a7a29e89cfacf059727a5ee0f20ffdd3f3e48bbbe46a6be"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaMeadow.bin",
+      "bytes": 7200,
+      "sha256": "2bf4b776856355c8c63ff1b0780d10f9dd6429567c7be4ef51c4bbffcaedcbc1"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaMeadow/map.json",
+      "bytes": 1198,
+      "sha256": "5adf73c453bf8837b7f0586fa40987b9d837580e4f15f2618c4e69551f7ac7b4"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaMeadow/scripts.inc",
+      "bytes": 199,
+      "sha256": "e785ddf6be1e70b741c51b4a6d9083a4c7b91986c1cfb8081c23103f69037b60"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaTown.bin",
+      "bytes": 2448,
+      "sha256": "4f45e6660886d8c7865bf4be674292845c5aaacfc05ce75dcaf7374359a752b5"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaTown/map.json",
+      "bytes": 1950,
+      "sha256": "f2f8f3d7e5480ff544f295cc5d2cc08c0c3ecef5dcded09f6b63345f36ed1caa"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/floaroma-donor/staged/FloaromaTown/scripts.inc",
+      "bytes": 334,
+      "sha256": "9fc56e9c6499cfe475744db3af3e328c1ea52758c2f34078498bd77ba40a7d3f"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/NOTES.md",
+      "bytes": 3657,
+      "sha256": "abcdbf01a58f882d4c878afd751255847390d1a0ed1cbab3a559aa679b75cc4d"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/build_route204.py",
+      "bytes": 12097,
+      "sha256": "d13af02ae3f9536b7420b61ae2ef774c240d154041854465a77b0cd5e155531a"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/ravaged-path-built.png",
+      "bytes": 21583,
+      "sha256": "b6125eb8b35c42301b1638647b8431615d243b8181e5010f4c22bf21f0f27dc3"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/route204-built.png",
+      "bytes": 41807,
+      "sha256": "e5678377e65ba5d666f8c9a6bac0c86a84caa62a5fcd4bfbb966fda364535d44"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/route204-convert-receipt.json",
+      "bytes": 1234,
+      "sha256": "28afae67da2918370055414f3f3bfa48556411a3f56567e5fc219c10b60418e8"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/RavagedPath.bin",
+      "bytes": 2880,
+      "sha256": "313a3bf49262ec2de17003a5d5bdbaaf11f5fccf48336c093f9fc8a0e045b47d"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/RavagedPath/map.json",
+      "bytes": 801,
+      "sha256": "25f36978a7e300c35e5e56c23fa5fa01463483a12abac8d1ccad6e7ab050a2e5"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/RavagedPath/scripts.inc",
+      "bytes": 34,
+      "sha256": "f81be714bc8013031cc8f46b9c2c788d1003fdbd77e591caf5c27f22bb2aa805"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/Route204.bin",
+      "bytes": 4096,
+      "sha256": "893f3202653ba735a30d2d8a6f3ba652574f1327b37aa4482e1c5dea7f9f7180"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/Route204/map.json",
+      "bytes": 1631,
+      "sha256": "ff3265c050b8df865529ce28c201b6e6c1170637bd73b5c40877b7c34093b585"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route204-donor/staged/Route204/scripts.inc",
+      "bytes": 148,
+      "sha256": "5e42dfa2b808de9e7a2227ce696d9b3cba8f1eca15b0d9bf918cbfdf2f15e09e"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/CHECKPOINT.md",
+      "bytes": 8558,
+      "sha256": "1f7e14c4e4827aa499b44bf2fb2781acfddd9ca57af8770b19bbc348966a3607"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/PLAN.md",
+      "bytes": 5718,
+      "sha256": "d08b51ebe3c939442b749694943241203f6d1ca882220c24dd45b8b321de0e2c"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/SECTION_RECOMMENDATION.md",
+      "bytes": 1791,
+      "sha256": "492da88388281b187e3482915371223f4361564f3beabde09499aa7e87056203"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/build_route205.py",
+      "bytes": 8600,
+      "sha256": "c2b21263ee3fcb280a7f5e39609b329279535ee2ac810b4defe2ba626bb89349"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/build_route205n.py",
+      "bytes": 5916,
+      "sha256": "c2f89a0d9800634f94c8771067c25157e5b9250a215e818b4d6b1ef2ada1e49b"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/additional-negatives.json",
+      "bytes": 3245,
+      "sha256": "ac5433ace1e431c3b5277d12d4e20fed5eaad24308f1fc34f9370e4f3dd5541d"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/bridge-normal/events.jsonl",
+      "bytes": 43443,
+      "sha256": "6ea4e84f137a1c3d201c0e18887b5c03cf056bd19e70bdf6bd71416d3e62630a"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/bridge-normal/result.json",
+      "bytes": 13184,
+      "sha256": "e6e4b9dff04b19abeb2c88f3e7389d255174eb7517d55de0993f8c45be6d66a8"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/bridge-release/events.jsonl",
+      "bytes": 43575,
+      "sha256": "99923424e30fb5c7bde66626d3ca6f94ee6785acc1bfaae459b00e802aace70e"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/bridge-release/result.json",
+      "bytes": 13185,
+      "sha256": "45931049d7dab5390b6342a44e3a26c14d8f853666d0fd8e224bf8a085673829"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-height-shortcut-events.jsonl",
+      "bytes": 19435,
+      "sha256": "6408fd3f87ec13811a172ccf170e7a553635fe79546aec0349b7108708f27002"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-height-shortcut50of51.json",
+      "bytes": 9840,
+      "sha256": "760509dfd55963b200c11ec01f9977b2bba1982cd0f6f33c244de187667ac7bc"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-height-travel-events.jsonl",
+      "bytes": 23249,
+      "sha256": "e6d856f2d36bf2c4af8a639ac6cbc36771223b02c4292733174c8f7f17cfca81"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-height-travel.json",
+      "bytes": 11307,
+      "sha256": "921d6d4c422907c11add1449bdf9bfc74a6a6c4f9dfc9c0303a7f5bca0981094"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-missing-travel.json",
+      "bytes": 11484,
+      "sha256": "9fba9c83fc119eaf621503aa679f52da766e8a734acd76c76cdd3721e31548ad"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/bridge-post-follower.json",
+      "bytes": 743,
+      "sha256": "d3ac28514a55e0df037662168f1f07edcf95f089ad989fd8a1cd79a5e86555c7"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/unguided-events.jsonl",
+      "bytes": 23536,
+      "sha256": "c0f159ad295a2598bc6ae35863ccecc66e31e4bd29c929e25edaca929e658063"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/failures/unguided65of67.json",
+      "bytes": 14922,
+      "sha256": "21625a50b571433d50fadf5fee85eb68f382905f5e13739be3fec82acf7acbaf"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/host19.log",
+      "bytes": 3590,
+      "sha256": "0bb04f537c445a80369e7b605d9a6875a7a1e8a8d9d4814ba6ce97047b3cb8d0"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/native-registry.log",
+      "bytes": 226587,
+      "sha256": "0d0580d5c9af0a9423b9764f08297a373707a00e6bbc54617ffdef2df8c1a6d0"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/native-save.log",
+      "bytes": 827,
+      "sha256": "033217c690c090cf13b05bf3207950b9310c12c8506985c5d2603a0702d5b5a5"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/negative-offset.json",
+      "bytes": 241,
+      "sha256": "aa1380874d41da654d4904eeecdeb3264d31978ddc18ce384a8aaa1383a093ae"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/negative-reentry.json",
+      "bytes": 141,
+      "sha256": "c9df808ddea007814c1c05d4053837b7cfc47efed49b4bb87a62a120ee204546"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal-continue/events.jsonl",
+      "bytes": 1959,
+      "sha256": "100dcc4f41a66c702fc2a287ded4510a7c215c6f315a5a6ecb9b1b6f5ff4b3dd"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal-continue/result.json",
+      "bytes": 1094,
+      "sha256": "5528a92a5b11c9310f8bef7304ee468778577e8919e655df92899ece7d803d38"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal-link-tail.log",
+      "bytes": 17464,
+      "sha256": "456d39bb8fd5a10ecfe836782293394ca1973dcb50f3e9fdfcc80260b88af53b"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal-resource.json",
+      "bytes": 43450,
+      "sha256": "b82a1494f2314d159e8498d4f2544624527f7e77610340455b810629c9127fdb"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal/events.jsonl",
+      "bytes": 57820,
+      "sha256": "293dad7d57f1ed0c18774d9e6e8e20737555a078a14bf6f892c96286db469f54"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/normal/result.json",
+      "bytes": 18461,
+      "sha256": "cf31b97ea4865bb76f54f3c29193c07972ef71f46e945bae5ecbfd2ffeb8b968"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/registry.json",
+      "bytes": 115502,
+      "sha256": "6d83bb8182aca85a01a104d8fcf2fc4d49c8615ba61a1e94f634c9769f7cefad"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release-continue/events.jsonl",
+      "bytes": 1958,
+      "sha256": "c2f4ca1d94fa07712cc52fc8649c391ef3356147d9273f696e141a3cf7310617"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release-continue/result.json",
+      "bytes": 1095,
+      "sha256": "4d44b36e32894f3f9b5f6f9ef35d282e06719417cf7b604e8b1973a0e810ddc6"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release-link-tail.log",
+      "bytes": 19170,
+      "sha256": "8b330e770e6131f8d3d4e924a8884ca32f16bd880a2a66d90e3d5b5bace321cf"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release-resource.json",
+      "bytes": 29809,
+      "sha256": "0897ca2d323c2a2302f33e3904b6c8126c3437f33ef15fff3ddbb3f57f28b3da"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release/events.jsonl",
+      "bytes": 57706,
+      "sha256": "95766008611594e19fd3ea0558cdd45b33b86c7addd513f61cdf1bea6670d0ed"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/release/result.json",
+      "bytes": 18462,
+      "sha256": "f038f42c73e5eb1fa9f7802ff2ad98eafe709a7fb46d776c541ee9d1019795dc"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/reproduced-registration.json",
+      "bytes": 1655,
+      "sha256": "02728981879139b33fda191466f11dd854992a5250ec34c1651abff35f0218d3"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/scratch-registration.json",
+      "bytes": 1652,
+      "sha256": "e1dbfd3604576c42a3fdd42fd742b8c669b2d0aa0d1424dbdb542e4778625f94"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/0014-seam-MAP_ROUTE205_NORTH-down.png",
+      "bytes": 5109,
+      "sha256": "967b0a6b0851085a72af2d39594761dd601c59972a211d2e10851540b836ba2c"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/0029-MAP_FLOAROMA_MEADOW via warp.png",
+      "bytes": 4540,
+      "sha256": "d530e7d61532bc21841e9e37084138811a2556084d2e2fa691c14c0325979693"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/0044-seam-MAP_ROUTE204-down.png",
+      "bytes": 5704,
+      "sha256": "05a3a065fcb893b93b7e382e452cdffcdee9910dca88e6543533b57e74df2488"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/bridge-over.png",
+      "bytes": 4552,
+      "sha256": "a5593c3aa536192cdb82e6df83f79ca95bad1a87aa3ba0cbcd088300dae03379"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/bridge-under.png",
+      "bytes": 4736,
+      "sha256": "cc6a09f81b9345cc0b5b2ef1944c4a1085fca7515ec98303c0b7ba0d368f3d5e"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/screens/north-walkway.png",
+      "bytes": 2877,
+      "sha256": "9e36dbcbbdb28d02651f3e2024d5ae67e932102a68bb8010c9f4354c6614d2d5"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/source-manifest.json",
+      "bytes": 9590,
+      "sha256": "0ebe825483851ea3f5776d02cdf07beec556ddd1e488fd88cd1f21fe5687cf60"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/startup/direct-gdb-video.log",
+      "bytes": 20,
+      "sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/startup/display77-failure.log",
+      "bytes": 796,
+      "sha256": "fb2cc268c0080843877254d6f6d2eec4edaaa8f97ab94e8dcfba0e3629840bfa"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/startup/display77-mgba.log",
+      "bytes": 46,
+      "sha256": "85bae0703bd9dc71248743c565f6881ae69136067478db888e599806e7a52f87"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/startup/display83-failure.log",
+      "bytes": 840,
+      "sha256": "5d79ff80202f3fab8a09d6c5a402a0a2c47016d0f2e0065bf8b23d5338201dbd"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/startup/display83-mgba.log",
+      "bytes": 46,
+      "sha256": "85bae0703bd9dc71248743c565f6881ae69136067478db888e599806e7a52f87"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/evidence/20261021/static.json",
+      "bytes": 9951,
+      "sha256": "6b7ab005253195176bb1732d416bee5e25112bd70deba1fdb184a726727536ef"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/north-elevation-route.json",
+      "bytes": 967,
+      "sha256": "9cdb20aedc3071f71e3785cd595ef79d6b865d60cefb5328d71a760e148160c8"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/prepare_connected_scratch.py",
+      "bytes": 8043,
+      "sha256": "99e61916433bff770c18b9fdcb7442bc7f01ee45bfe959870916537ae5a73917"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/route205-convert-receipt.json",
+      "bytes": 629,
+      "sha256": "b90555dce1fcebeda89e01c76c3544b735d56c85c914a147e0bf4004d34ff656"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/route205-north-built.png",
+      "bytes": 85981,
+      "sha256": "501a5b4270879d8ec150936ab5348e071cbd07b7a0ce53cc8d2f9d7a87bb2a54"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/route205-south-averon-banks-unconverted.png",
+      "bytes": 69685,
+      "sha256": "f3692f173b625bd2f3ca907d251031ecb3b7827a67c0f422804c50bead7ba716"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/route205-south-built.png",
+      "bytes": 65669,
+      "sha256": "5582d651c661abd54ce77f2c4793015652f0decd74f3d55999d5733d578a2190"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/route205n-convert-receipt.json",
+      "bytes": 568,
+      "sha256": "e618a76f48c964bc3a56001174f29de78315999c82b48ea4bf574e1b70a7c8ba"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_bridge_qa.py",
+      "bytes": 6419,
+      "sha256": "d92a950462f8506164c39d470bd4371682f574b2449aa8e2872397d7287b24ee"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py",
+      "bytes": 9221,
+      "sha256": "28445372bcc822c2e2038543375fb83e7947dca7040cd8b04c134c8bc0c6762c"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/secondary-ids-averon-same-id.png",
+      "bytes": 3929,
+      "sha256": "5ab9bae1802d93684084c2a2bffa0284fbd4ee9aa68cd8cfb6f6422cabe35a69"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/south-exit-route.json",
+      "bytes": 1389,
+      "sha256": "712dc0f124adea22444f30b9f746dc70db86660c9b86526bcf95caa8f5f29f9f"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/south-lower-route.json",
+      "bytes": 562,
+      "sha256": "bc16738113d769e9db6198d6de53c6c49c5fb23d8f309bbcdf8daa9aafee1ef1"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_North.bin",
+      "bytes": 9600,
+      "sha256": "d2e633381a6151785f2e57e175ef3df506e36df04b9fa7b4f690e8091e2ce6e8"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_North/map.json",
+      "bytes": 1224,
+      "sha256": "baebedf43b671551c4bbb260aa0cf51807822d5ec3a902de9c0fdd26ed0225d5"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_North/scripts.inc",
+      "bytes": 172,
+      "sha256": "4a3d55c6ed4fc227d5bbb1d2834ef8dccd555a249635bfd21d9cdfab22faecdb"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_South.bin",
+      "bytes": 6144,
+      "sha256": "d15886ef1ac6fd223d9628d1e65ed623ebfd3bb69f666e9e208895155c969661"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_South/map.json",
+      "bytes": 1121,
+      "sha256": "7bf445da8fa87ac7c4df4ef4c62c4ffa6d64f5c0fd157675af95b54744d01c07"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/staged/Route205_South/scripts.inc",
+      "bytes": 172,
+      "sha256": "650469ff5fc9f53d01172cc5bacf9df5428bc99e78b928c6e2571204bc757105"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/development/INTEGRATION_QUEUE.md",
+      "bytes": 5588,
+      "sha256": "62a713b28b7005993c8466a2b563331f20375474788168c9bdc565f10eacfce3"
+    },
+    {
+      "path": "Pokemon Game/scripts/claude_play/map_qa_fixtures/negative-route204-warp-swap.json",
+      "bytes": 524,
+      "sha256": "0b4421a163a2c8849193761f7b3bee5f490d51ce1a0e3f58c27656bc8d54d7d9"
+    },
+    {
+      "path": "Pokemon Game/scripts/claude_play/map_qa_fixtures/negative-route205-wrong-offset.json",
+      "bytes": 598,
+      "sha256": "293b90c9c796a6c9ae775d93a3740311bbb724b7539f65cd47e14435bc180756"
+    },
+    {
+      "path": "Pokemon Game/scripts/claude_play/map_qa_fixtures/negative-route205n-wrong-offset.json",
+      "bytes": 603,
+      "sha256": "3eece5fa4ca61d8a5e7b0fd2be5d2fc15c8ece804323c8c7e6ef710059ac44eb"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_route205_north.py",
+      "bytes": 13975,
+      "sha256": "2cba5f4468b0c05fee388e36a0490464eb1fc9dee0fa40f9295cf1bbe59a6c1b"
+    },
+    {
+      "path": "issues/CODEX_SINNOH_INTEGRATION_20261021.md",
+      "bytes": 3587,
+      "sha256": "9244e234ef38a0273835891c20748cfb69459a032d2b499061445be96313ea88"
+    }
+  ]
+}

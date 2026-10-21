@@ -1,0 +1,618 @@
+{
+  "profile": "normal",
+  "rom_sha256": "68d40c282709e89aa41c23ea2ef7584f495f0a72220ea606a576d4be6e2e159e",
+  "checks": [
+    {
+      "name": "south-bridge-south-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          84
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-south-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "south-bridge-up-(25, 83)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          83
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-up-(25, 83))",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "south-bridge-up-(25, 82)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          82
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-up-(25, 82))",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "south-bridge-up-(25, 81)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          81
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-up-(25, 81))",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "south-bridge-up-(25, 80)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          80
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-up-(25, 80))",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "south-bridge-up-(25, 79)",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          79
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-up-(25, 79))",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "MAP_ROUTE205_SOUTH (26, 81) pushing right is blocked",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ]
+    },
+    {
+      "name": "south-bridge-return",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          25,
+          84
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (south-bridge-return)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-lower-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          20,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-lower-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-transition",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          19,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-transition)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-upper-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          18,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-upper-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-south-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          48
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-south-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-north-ground",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          39
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-north-ground)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-40",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          40
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-40)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-41",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          41
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-41)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-42",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          42
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-42)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-43",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          43
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-43)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-44",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-44)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-45",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          45
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-45)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-46",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          46
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-46)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-47",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          47
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-47)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-over-48",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          48
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-over-48)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-upper-return",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          18,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-upper-return)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-transition-return",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          19,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-transition-return)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "stair-lower-return",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          20,
+          61
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (stair-lower-return)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-east-grass",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          17,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-east-grass)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-under-16",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          16,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-under-16)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-under-15",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          15,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-under-15)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-under-14",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          14,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-under-14)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "upper-bridge-under-13",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          13,
+          44
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (upper-bridge-under-13)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "north-converted-walkway-(60, 16)",
+      "ok": false,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          13,
+          43
+        ]
+      ]
+    }
+  ],
+  "error": "RuntimeError('cannot reach north-converted-walkway-(60, 16)')",
+  "scope": "ordinary walking/followers over and under bridges, no-Surf water refusal and converted walkway; NOT Surf or production-origin acceptance",
+  "verdict": "FAIL"
+}

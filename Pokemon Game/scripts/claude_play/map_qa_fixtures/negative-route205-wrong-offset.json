@@ -1,0 +1,25 @@
+{
+ "batch": [
+  "MAP_ROUTE205_SOUTH"
+ ],
+ "entry": [
+  "MAP_ROUTE205_SOUTH",
+  4,
+  86
+ ],
+ "description": "TEST-ONLY: Route 205 South's left connection is shifted to offset 62 while Floaroma's right stays -64, so the pair is no longer reciprocal. Crossing the Route 205/Floaroma seam must fail its exact landing or return check. The batch is Route 205 alone so the runner never travels through the broken seam afterwards.",
+ "expect": "FAIL",
+ "must_fail": [
+  "seam"
+ ],
+ "edits": [
+  {
+   "op": "connection",
+   "map": "Route205_South",
+   "index": 0,
+   "set": {
+    "offset": 62
+   }
+  }
+ ]
+}
