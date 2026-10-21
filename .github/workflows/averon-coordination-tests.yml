@@ -43,6 +43,10 @@ jobs:
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_qa_frame_gate.py" -v
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_m1_evidence_reporting.py" -v
           python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_combined_dispatch.py" -v
+      - name: Verify original and delegated exclusive-file handoffs
+        run: |
+          python3 -m unittest discover -s "Pokemon Game/scripts/coordination" -p "test_check_protected_files.py" -v
+          python3 -m unittest discover -s "Pokemon Game/scripts/coordination" -p "test_manager_delegation_guard.py" -v
       - name: Validate disposable integration runner shell syntax
         run: |
           bash -n "Pokemon Game/scripts/coordination/run_combined_build.sh"

@@ -27,6 +27,24 @@ Check live PR file lists and existing claims first. File-disjoint approved work 
 A protected-path change requires a genuine authorized `HANDOFF_APPROVED PR=#N PATHS=literal,comma-separated,paths` matching that PR. No globs or directory-only handoffs. Content/map approval must precede its handoff. Do not fabricate approvals; obey the existing checker and its trusted-author rules.
 At a session end, push recoverable work and leave one PR HANDOFF with remote full SHA, files, changes, exact commands and PASS/FAIL/SKIP counts, source/ROM hashes, fixture use, remaining risk, next executable action, and `WAITING_ON / RESUME_WHEN` when blocked. Do not rewrite shared status docs for each test run.
 
+### Project-wide routine approval delegation (owner directive, 2026-10-21)
+
+The owner explicitly delegated routine repository management and routine protected-file authorization to ChatGPT in [Issue #15 comment 6322129730](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6322129730), superseding geographic-only management scope. [The narrower Sinnoh instruction](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6322090313) remains consistent. **This policy becomes operational only after its governance PR receives genuinely independent consequential-change review, passes required checks and merges into `main`.** Until then the existing owner-specific `HANDOFF_APPROVED` gate remains unchanged.
+
+For subsequent **routine**, eligible work anywhere in Averon, the ChatGPT manager may issue an explicit, independently auditable delegation marker in the existing Issue #15 hub:
+
+```text
+MANAGER_HANDOFF_APPROVED PR=#<actual-number> HEAD=<full-40-character-current-head-SHA> PATHS=<exact,comma-separated,changed-protected-paths>
+```
+
+This marker means **ChatGPT manager authorization pursuant to the owner's standing delegation, not a direct owner signature**. The trusted-main `exclusive-files` job must verify the specific owner directive, nonrevocation, the manager marker's PR number, full exact PR-head SHA and exact named paths. It does not grant directory/glob waivers, waive PR overlap or override test/review requirements. A new head invalidates the manager marker. After posting, the manager must trigger/recheck the ordinary GitHub PR workflow (for example via an accurate PR-body edit), confirm all applicable latest required checks and only then consider a pinned normal merge.
+
+Delegated manager handoffs **must not** authorize governance, GitHub Actions or security changes; saved Pokémon layout/schema/encoding/migrations; permanent map/section/healer/flag identity allocation or policy changes; globally sensitive engine save/identity/security files; third-party asset rights; or major creative story, roster, progression or release decisions. The guard itself rejects manager markers for configured reserved paths; creative/risk classification and presence of a distinct **prior genuine owner decision** for any identities reused elsewhere must additionally be reviewed. For high-risk changes, obtain owner consent where needed and substantive nonauthor review. The owner's separate [Verity #191 exact handoff](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6322061688) is unaffected by this delegation.
+
+**Identity limitation:** Both agents currently write through the same GitHub login. A comment's username and `OWNER` association cannot technically prove whether the human or assistant wrote it. The separate `MANAGER_HANDOFF_APPROVED` syntax makes the claimed role explicit but is not independent authentication. For enforceable principal separation, the owner must authorize a distinct GitHub App/bot identity and review its narrowly scoped permissions before the workflow is extended to trust it. Never claim a manager marker was personally signed by the human owner. The owner can halt this manager approval path by posting the exact standalone line `MANAGER_DELEGATION_REVOKED` in Issue #15; the trusted workflow then fails closed for new manager-only handoffs. This does not nullify historical human-signed owner approvals.
+
+The delegation does not launch paid agents, circumvent required review, change GitHub rulesets or eliminate legitimate future owner-only decisions. Claude remains paused until the owner explicitly changes that assignment.
+
 ## Risk and review gates
 | Tier | Scope | Minimum gate |
 | --- | --- | --- |
