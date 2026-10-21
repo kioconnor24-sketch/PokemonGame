@@ -103,6 +103,41 @@ class ManagerDelegationTest(unittest.TestCase):
         data["handoffs"] = [{"pr": 203, "paths": [MAP], "association": "OWNER"}]
         self.assertEqual(guard.validate(data)[0], [])
 
+    def test_reserved_change_without_any_manager_marker_is_rejected(self):
+        for path in (REGION_IDS, PINS, SAVE, WORKFLOW,
+                     ROOT + "scripts/coordination/check_protected_files.py"):
+            with self.subTest(path=path):
+                data = snapshot([path])
+                data["manager_handoffs"] = []
+                errors, _ = guard.validate(data)
+                self.assertTrue(any("Owner-reserved change lacks" in e and path in e
+                                    for e in errors), errors)
+
+    def test_reserved_rename_without_marker_checks_both_names(self):
+        data = snapshot([ROOT + "engine/src/retired_save.c"])
+        data["manager_handoffs"] = []
+        data["pull_request"]["files"][0].update(
+            status="renamed", previous_filename=SAVE)
+        errors, _ = guard.validate(data)
+        self.assertTrue(any("Owner-reserved change lacks" in e and SAVE in e
+                            for e in errors), errors)
+
+    def test_reserved_change_with_genuine_exact_owner_handoff_is_allowed(self):
+        for path in (REGION_IDS, PINS, SAVE, WORKFLOW):
+            with self.subTest(path=path):
+                data = snapshot([path])
+                data["manager_handoffs"] = []
+                data["handoffs"] = [{
+                    "pr": 203, "paths": [path], "association": "OWNER"}]
+                self.assertEqual(guard.validate(data)[0], [])
+
+    def test_preapproved_paired_files_cannot_pass_without_manager_marker(self):
+        data = ApprovedIdentityAppendTest().make_data()
+        data["manager_handoffs"] = []
+        errors, _ = guard.validate(data)
+        self.assertTrue(any("Owner-reserved change lacks" in e and REGION_IDS in e
+                            and PINS in e for e in errors), errors)
+
 # Exercise the actual trusted-workflow JavaScript with inert API/FS doubles.
 # No GitHub credentials, network calls or files under /tmp are used here.
 import json
