@@ -1,10 +1,16 @@
 {
-  "scope": "PARTIAL OFF-ENGINE B2 existing-art candidate; no production or runtime acceptance",
+  "scope": "OFF-ENGINE mine pair; source tested, not production/runtime accepted; inventory excludes itself",
+  "builder_source": "12f6960a61cff8c626821160d49eb79e907b1ff6",
   "files": [
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/CHECKPOINT.md",
-      "bytes": 2601,
-      "sha256": "d9bb19544a613241817447d126644406fe411665ba7877bcf94a8ac94ab11648"
+      "bytes": 3390,
+      "sha256": "1983a2570863e5c02a13644135155c818b907c9a9f38d237f38a90ee611cef18"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/OreburghMine_B1F-averon.png",
+      "bytes": 16071,
+      "sha256": "d0200bc1b0cd4f780964d20e82ebc8c909d5374de3abe1b841f5896d4f5b9061"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/OreburghMine_B2F-averon.png",
@@ -13,28 +19,73 @@
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/banks/cave/metatile_attributes.bin",
-      "bytes": 840,
-      "sha256": "8d9d3e1d4868d00564f1a9f00ca863d4f9e6da66bfe8b8376744dd52fa935c71"
+      "bytes": 884,
+      "sha256": "60b72a04207a73a136c6ab139d928a6d49c87e63eddea8b9e91d9e97dfe55056"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/banks/cave/metatiles.bin",
-      "bytes": 6720,
-      "sha256": "41dbc65d536822fa6347f640d87b8a5507f082e1c0ab33e16ccad1129aef687e"
+      "bytes": 7072,
+      "sha256": "fd61e783aaaa3074bd82aabfd0f26b910aa531b5c70989079756bc1eb5dbdb83"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/banks/primary/metatile_attributes.bin",
+      "bytes": 1024,
+      "sha256": "af06d5c5c3180a92cca5bb09ad6fe8a600f011ee456e6d770af76f7a387b5341"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/banks/primary/metatiles.bin",
+      "bytes": 8192,
+      "sha256": "9b8f5d59ccf68579e7bac13c2d77f7baa7457f799200c848dfb882467b31bfd2"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/build_oreburgh.py",
-      "bytes": 9414,
-      "sha256": "a1d1dea9d9277607d5e8e175167b54451b479c1f88a7b8493637534fe75d390a"
+      "bytes": 19749,
+      "sha256": "b18c649e5cea8912ea7ebb4b07cb4010637f643c83704f15f443bfacc0e943b7"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/conversion-receipt.json",
-      "bytes": 7237,
-      "sha256": "c3d6b6801c2e75a8ad2fcca5d154ec4b41a879ce9f1059134ae8673b8d42d334"
+      "bytes": 12878,
+      "sha256": "387b635f3a12028a407595b5e1c38d2f9b41ada36c9d55ecaf07cb5b98a2b82a"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/source-inspection.json",
       "bytes": 9686,
       "sha256": "000cb581445fe6cf21f2fba51fbac2d3ba6c26f65265b4f3566391ee1e95fbcb"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B1F/border.bin",
+      "bytes": 8,
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B1F/map.json",
+      "bytes": 1362,
+      "sha256": "4086079140dbb12955496c21f9eed57e2ca877cc7fed14ec475b80e1e6679c52"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B1F/scripts.inc",
+      "bytes": 39,
+      "sha256": "5b91e19a9891989b99af21efd24522d7e182735cd5de6e5a773f58662b856daa"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B1F.bin",
+      "bytes": 1248,
+      "sha256": "b774ff7598b65ac8bb8b85f7f7ba1dc6e399690e495bb11d85d026df12145836"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B2F/border.bin",
+      "bytes": 8,
+      "sha256": "a8fb987bcf19f3554623d70e41906b5eb019ae568cb1b0d5eed634c70b24f12a"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B2F/map.json",
+      "bytes": 699,
+      "sha256": "31f60930b2f8f04f2175746e37629ecfce2ca9f4d6fab62dc5feb5cd3bd4a9c6"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B2F/scripts.inc",
+      "bytes": 39,
+      "sha256": "0ea46a04203b311049a385cfb6e7439b6af255cb95da7d98192dccb3663ae087"
     },
     {
       "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/staged/OreburghMine_B2F.bin",
@@ -43,8 +94,8 @@
     },
     {
       "path": "Pokemon Game/scripts/tests/test_sinnoh_oreburgh_geography.py",
-      "bytes": 3834,
-      "sha256": "0fa337752e9862f4b176f066d3f19848a05a33cd3bd74db99801f90a6d82a67f"
+      "bytes": 9420,
+      "sha256": "dcd436197ebb9d7842bc47c5fd9e91c9203d453988b261981a557422dc9a6967"
     }
   ]
 }
