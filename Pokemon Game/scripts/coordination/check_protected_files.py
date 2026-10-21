@@ -203,6 +203,13 @@ def validate(snapshot: dict) -> tuple[list[str], list[str]]:
                     failures.append("Manager delegation excludes owner-reserved/governance paths: "
                                     + ", ".join(forbidden))
                 valid_approvals.update(x for x in approved if x not in forbidden)
+        uncovered = sorted(protected_paths.difference(valid_approvals))
+        if uncovered:
+            failures.append("Exclusive shared-file handoff NOT recorded in #15: " + ", ".join(uncovered))
+        unapproved_maps = sorted(frozen_paths.difference(valid_approvals))
+        if unapproved_maps:
+            failures.append("Map-file freeze: exact PR/file handoff NOT recorded in #15: "
+                            + ", ".join(unapproved_maps))
         # A PR without a manager marker must NOT bypass the manager-reserved
         # inventory by simply changing those files without any approval.
         # This includes removed/renamed paths, as well as additions/edits.
@@ -211,13 +218,6 @@ def validate(snapshot: dict) -> tuple[list[str], list[str]]:
         if missing_reserved:
             failures.append("Owner-reserved change lacks a valid exact-path handoff: "
                             + ", ".join(missing_reserved))
-        uncovered = sorted(protected_paths.difference(valid_approvals))
-        if uncovered:
-            failures.append("Exclusive shared-file handoff NOT recorded in #15: " + ", ".join(uncovered))
-        unapproved_maps = sorted(frozen_paths.difference(valid_approvals))
-        if unapproved_maps:
-            failures.append("Map-file freeze: exact PR/file handoff NOT recorded in #15: "
-                            + ", ".join(unapproved_maps))
     return failures, warnings
 
 
