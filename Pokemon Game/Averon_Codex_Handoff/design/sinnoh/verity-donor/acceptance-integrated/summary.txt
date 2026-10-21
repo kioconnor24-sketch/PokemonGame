@@ -1,0 +1,21 @@
+Integrated Verity acceptance | hold 99d96b98 = main eadd5ef1 + #181 (Route 202 +3/-3) + Verity | engine tree 36c4103a
+normal=0
+7ecdbc962579cc6b9c5e5d0f8e6de90c51ace9c10fac3d29039b12293f7f3a77  pokeemerald.gba
+normal linked=17337356
+normal compiler warnings=0
+release=0
+6582de651736157833b0c9bd8b832a83c62c1ba34648a236bd4d3063c2b731af  pokeemerald-release.gba
+release linked=17456500
+release compiler warnings=0
+check=0
+- Tests PASSED:          316
+- Tests TOTAL:           316
+static (Verity + Route 201/202 + Sandgem + Twinleaf): PASS: 0 findings
+normal run PASS 40 / 40 7ecdbc962579 [] static []
+normal continue PASS 3 / 3 7ecdbc962579 [] static []
+release run PASS 40 / 40 6582de651736 [] static []
+release continue PASS 3 / 3 6582de651736 [] static []
+OK   negative-verity-warp-landing: expect FAIL, run FAIL, static ['exit-not-walkable', 'exit-unreachable'], failed ['MAP_VERITY_LAKEFRONT warp 0 (2, 4) -> MAP_LAKE_VERITY and back', 'MAP_VERITY_LAKEFRONT warp 1 (3, 4) -> MAP_LAKE_VERITY and back', 'run completed without the driver getting stuck']
+OK   negative-verity-wrong-offset: expect FAIL, run FAIL, static ['seam-mismatch'], failed ['MAP_VERITY_LAKEFRONT right seam (19, 8) -> MAP_ROUTE201 (0, 8) and back', 'MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 10) and back', 'MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 13) and back']
+2/2 fixtures behaved as expected
+Note: a first attempt (verity-int2) is void: its builds failed on a truncated working-copy heal_locations.json and its mGBA runs used stale ROMs; this is the clean rerun with build-exit gating.

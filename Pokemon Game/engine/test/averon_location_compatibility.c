@@ -42,7 +42,7 @@ TEST("Averon location legacy names and region identities remain unchanged")
     for (u32 section = 0; section <= 0xFF; section++)
     {
         bool32 sinnoh = section == MAPSEC_SANDGEM_TOWN || section == MAPSEC_ROUTE_201 || section == MAPSEC_TWINLEAF_TOWN
-            || section == MAPSEC_ROUTE_202;
+            || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY;
         EXPECT_EQ(IsRegionMapSectionIdValid(section), section < 215 || sinnoh);
         EXPECT_EQ(GetRegionForSectionId(section), sinnoh ? REGION_SINNOH : section >= KANTO_MAPSEC_START && section < MAPSEC_SPECIAL_AREA
             ? REGION_KANTO : REGION_HOENN);
@@ -71,8 +71,8 @@ TEST("Averon location legacy names and region identities remain unchanged")
     for (u32 section = MAPSEC_NONE; section <= 0xFF; section++)
     {
         if (section == MAPSEC_SANDGEM_TOWN || section == MAPSEC_ROUTE_201 || section == MAPSEC_TWINLEAF_TOWN
-         || section == MAPSEC_ROUTE_202)
-            continue; // the owner-approved ordinary codes (216 Sandgem, 217 Route 201, 218 Twinleaf, 219 Route 202)
+         || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY)
+            continue; // the owner-approved ordinary codes (216 Sandgem, 217 Route 201, 218 Twinleaf, 219 Route 202, 220 Lake Verity)
         GetMapName(name, section, 0);
         for (u32 i = 0; i < 18; i++)
             EXPECT_EQ(name[i], CHAR_SPACE);
