@@ -71,6 +71,9 @@ def frozen_map(path: str) -> bool:
 def validate(snapshot: dict) -> tuple[list[str], list[str]]:
     own = snapshot["pull_request"]
     number = int(own["number"])
+    changed_paths = {normalize(path) for f in own["files"]
+                     for path in (f["filename"], f.get("previous_filename"))
+                     if isinstance(path, str)}
     paths = {normalize(f["filename"]) for f in own["files"] if f.get("status") != "removed"}
     failures, warnings = [], []
     for peer in snapshot.get("other_open_prs", []):
@@ -105,7 +108,12 @@ def validate(snapshot: dict) -> tuple[list[str], list[str]]:
                         or len(head) != 40):
                     continue
                 approved = {normalize(x) for x in approval.get("paths", [])}
-                forbidden = sorted(x for x in approved if manager_reserved(x))
+                # A mixed PR cannot omit reserved files from its marker to
+                # turn a non-routine change into a routine authorization.
+                # A separate genuine legacy handoff may cover those files.
+                forbidden = sorted({x for x in approved if manager_reserved(x)}
+                    | {x for x in changed_paths.difference(valid_approvals)
+                       if manager_reserved(x)})
                 if forbidden:
                     failures.append("Manager delegation excludes owner-reserved/governance paths: "
                                     + ", ".join(forbidden))

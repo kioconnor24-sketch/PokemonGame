@@ -78,7 +78,7 @@ jobs:
             }
             fs.writeFileSync('/tmp/averon-guard.json',JSON.stringify({
               pull_request:{number,head_sha:pr.head.sha,
-                files:own.map(f=>({filename:f.filename,status:f.status}))},
+                files:own.map(f=>({filename:f.filename,status:f.status,previous_filename:f.previous_filename}))},
               other_open_prs,handoffs,manager_delegation_active,manager_handoffs
             },null,2));
       - name: Enforce exclusive handoffs, prevent overlap and freeze violations
