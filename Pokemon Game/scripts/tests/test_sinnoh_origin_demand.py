@@ -115,6 +115,24 @@ class OriginDemandTests(unittest.TestCase):
         self.assertFalse(over["fits_current_byte_pool"])
         self.assertEqual(over["shortfall"], 1)
 
+    def test_allocating_a_planned_origin_does_not_change_the_forecast_gap(self):
+        # In-memory codebook fixtures only, not production identities.
+        rows = [area(str(i), f"Candidate {i}") for i in range(48)]
+        before = origin_demand(rows, [])
+        after = origin_demand(rows, [section(name="Candidate 0")])
+        self.assertEqual((before["new_names_required"], before["remaining_ordinary_codes"]), (48, 37))
+        self.assertEqual((after["new_names_required"], after["remaining_ordinary_codes"]), (47, 36))
+        self.assertEqual((before["shortfall"], after["shortfall"]), (11, 11))
+
+    def test_allocating_an_excluded_lake_increases_the_filtered_forecast_gap(self):
+        rows = [area(str(i), f"Candidate {i}") for i in range(48)]
+        after = origin_demand(rows, [section(name="Excluded lake")])
+        self.assertEqual(after["new_names_required"], 48)
+        self.assertEqual(after["remaining_ordinary_codes"], 36)
+        self.assertEqual(after["shortfall"], 12)
+        self.assertFalse(after["fits_current_byte_pool"])
+        self.assertEqual(after["production_allocations"], [])
+
     def test_extra_child_names_and_future_averon_reserve_are_explicit(self):
         result = origin_demand([area("A", "Town")], [], additional=["Town", "New child"], reserve=36)
         self.assertEqual(result["distinct_proposed_names"], 2)
@@ -174,7 +192,18 @@ class OriginDemandTests(unittest.TestCase):
             demand = json.loads(output.read_text())["planned_origin_demand"]
             self.assertEqual(demand["registered_areas"], 48)
             self.assertEqual(demand["distinct_proposed_names"], 48)
-            self.assertEqual(demand["shortfall"], 11)
+            # An allocated lake/cave outside this filtered scenario still
+            # consumes the same byte pool. Lake Verity made the old fixed11
+            # assertion stale; future approved off-scenario origins also count.
+            kinds = {"SETTLEMENT", "POSTGAME_HUB", "ROUTE"}
+            names = {" ".join(row["LocationOrZone"].upper().split())
+                     for row in read_area_register(REGISTER) if row["Kind"] in kinds}
+            excluded_allocations = sum(
+                1 for entry in audit.sections(ENGINE)
+                if 216 <= entry["value"] <= 252 and not (
+                    entry.get("region") == "REGION_SINNOH"
+                    and " ".join(entry.get("name", "").upper().split()) in names))
+            self.assertEqual(demand["shortfall"], len(names) - 37 + excluded_allocations)
             self.assertEqual(demand["source_register_areas"], 87)
 
     def test_unknown_or_empty_kind_filter_cannot_report_false_capacity(self):
