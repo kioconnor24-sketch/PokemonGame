@@ -192,6 +192,32 @@ class NorthConversionTests(unittest.TestCase):
             with self.subTest(key=key, value=value), self.assertRaises(ValueError):
                 connected_qa.validate_route(changed, raw)
 
+    def test_lower_bridge_approach_stays_on_lower_ground_and_reverses(self):
+        route = json.loads((HERE / "south-lower-route.json").read_text())
+        raw = (HERE / "staged/Route205_South.bin").read_bytes()
+        points = connected_qa.validate_route(route, raw)
+        cells = struct.unpack("<%dH" % (len(raw) // 2), raw)
+        self.assertEqual(points[0], (20, 61))
+        self.assertEqual(points[-1], (17, 44))
+        self.assertEqual(len(points), 31)
+        self.assertTrue(all(cells[y * 32 + x] >> 12 == 3 for x, y in points))
+        reverse = deepcopy(route)
+        reverse['start'], reverse['goal'] = route['goal'], route['start']
+        reverse['steps'] = [connected_qa.REVERSE[d] for d in reversed(route['steps'])]
+        self.assertEqual(connected_qa.validate_route(reverse, raw), points[::-1])
+
+    def test_lower_bridge_approach_rejects_new_collision_or_height_barrier(self):
+        route = json.loads((HERE / "south-lower-route.json").read_text())
+        raw = (HERE / "staged/Route205_South.bin").read_bytes()
+        # Updating the hash alone must not bless a newly blocked approach.
+        for value, error in [(0x3401, "collision"), (0x4001, "incompatible elevation")]:
+            changed = bytearray(raw)
+            struct.pack_into('<H', changed, 2 * (60 * 32 + 20), value)
+            candidate = deepcopy(route)
+            candidate['map_sha256'] = hashlib.sha256(changed).hexdigest()
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, error):
+                connected_qa.validate_route(candidate, changed)
+
 
 if __name__ == "__main__":
     unittest.main()
