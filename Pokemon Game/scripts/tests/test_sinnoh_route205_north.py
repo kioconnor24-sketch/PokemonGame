@@ -6,6 +6,7 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from copy import deepcopy
 from unittest.mock import patch
 
 PROJECT = Path(__file__).resolve().parents[2]
@@ -16,6 +17,9 @@ spec.loader.exec_module(north)
 spec = importlib.util.spec_from_file_location("connected_scratch", HERE / "prepare_connected_scratch.py")
 scratch = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(scratch)
+spec = importlib.util.spec_from_file_location("connected_qa", HERE / "run_connected_qa.py")
+connected_qa = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(connected_qa)
 
 
 class NorthConversionTests(unittest.TestCase):
@@ -159,6 +163,34 @@ class NorthConversionTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "refresh the owner decision"):
                     scratch.prepare(repo)
             self.assertEqual(before, {p.relative_to(engine): p.read_bytes() for p in engine.rglob("*") if p.is_file()})
+
+    def test_real_high_seam_route_uses_a_transition_in_both_directions(self):
+        route = json.loads((HERE / "north-elevation-route.json").read_text())
+        raw = (HERE / "staged/Route205_North.bin").read_bytes()
+        points = connected_qa.validate_route(route, raw)
+        self.assertEqual(len(points), 53)
+        self.assertIn((23, 53), points)  # the existing elevation0 stair transition
+        self.assertEqual(points[-1], (5, 59))
+        reverse = deepcopy(route)
+        reverse['start'], reverse['goal'] = route['goal'], route['start']
+        reverse['steps'] = [connected_qa.REVERSE[d] for d in reversed(route['steps'])]
+        self.assertEqual(connected_qa.validate_route(reverse, raw), points[::-1])
+
+    def test_high_seam_direct_shortcut_is_rejected_by_real_source_elevations(self):
+        route = json.loads((HERE / "north-elevation-route.json").read_text())
+        route['start'], route['steps'] = [5, 57], ['down', 'down']
+        with self.assertRaisesRegex(ValueError, "incompatible elevation"):
+            connected_qa.validate_route(route, (HERE / "staged/Route205_North.bin").read_bytes())
+
+    def test_route_refuses_stale_bytes_bad_controls_and_outside_endpoints(self):
+        route = json.loads((HERE / "north-elevation-route.json").read_text())
+        raw = (HERE / "staged/Route205_North.bin").read_bytes()
+        with self.assertRaisesRegex(ValueError, "source changed"):
+            connected_qa.validate_route(route, b'\0' + raw[1:])
+        for key, value in [('start', [-1, 0]), ('goal', [80, 0]), ('steps', ['teleport']), ('steps', [])]:
+            changed = deepcopy(route); changed[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                connected_qa.validate_route(changed, raw)
 
 
 if __name__ == "__main__":
