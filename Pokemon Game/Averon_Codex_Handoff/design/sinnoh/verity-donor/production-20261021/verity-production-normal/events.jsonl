@@ -1,0 +1,109 @@
+{"t": 1792569016.14, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792569016.18, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792569019.77, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792569019.89, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792569022.05, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792569022.26, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792569022.94, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792569023.04, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792569023.68, "event": "screen", "cb2": "MainCB2", "i": 11}
+{"t": 1792569023.78, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792569025.03, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 13}
+{"t": 1792569025.09, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792569026.37, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792569026.55, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792569030.47, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792569030.57, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792569031.97, "event": "field", "map": "MAP_VERITY_LAKEFRONT", "pos": [14, 13], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792569032.78, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_VERITY_LAKEFRONT", [14, 13]]}
+{"t": 1792569033.9, "event": "capture", "file": "0009-start.png"}
+{"t": 1792569033.9, "event": "observe", "label": "start", "problems": []}
+{"t": 1792569033.9, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569034.2, "event": "map-qa-check", "name": "reached MAP_VERITY_LAKEFRONT", "ok": true, "at": ["MAP_VERITY_LAKEFRONT", [14, 12]]}
+{"t": 1792569043.94, "event": "capture", "file": "0010-edge-MAP_VERITY_LAKEFRONT-left.png"}
+{"t": 1792569043.94, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT closed left edge at (0, 10) blocks", "ok": true, "before": ["MAP_VERITY_LAKEFRONT", [0, 10]], "after": ["MAP_VERITY_LAKEFRONT", [0, 10]]}
+{"t": 1792569055.36, "event": "capture", "file": "0011-seam-MAP_VERITY_LAKEFRONT-right.png"}
+{"t": 1792569056.28, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT right seam (19, 7) -> MAP_ROUTE201 (0, 8) and back", "ok": true, "leg": "back", "expected": ["MAP_VERITY_LAKEFRONT", [19, 7]], "got": ["MAP_VERITY_LAKEFRONT", [19, 7]]}
+{"t": 1792569059.33, "event": "capture", "file": "0012-seam-MAP_VERITY_LAKEFRONT-right.png"}
+{"t": 1792569060.37, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 11) and back", "ok": true, "leg": "back", "expected": ["MAP_VERITY_LAKEFRONT", [19, 10]], "got": ["MAP_VERITY_LAKEFRONT", [19, 10]]}
+{"t": 1792569078.84, "event": "capture", "file": "0013-seam-MAP_VERITY_LAKEFRONT-right.png"}
+{"t": 1792569079.95, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 14) and back", "ok": true, "leg": "back", "expected": ["MAP_VERITY_LAKEFRONT", [19, 13]], "got": ["MAP_VERITY_LAKEFRONT", [19, 13]]}
+{"t": 1792569094.39, "event": "capture", "file": "0014-warp-MAP_VERITY_LAKEFRONT-0.png"}
+{"t": 1792569095.24, "event": "capture", "file": "0015-MAP_LAKE_VERITY via warp.png"}
+{"t": 1792569095.24, "event": "observe", "label": "MAP_LAKE_VERITY via warp", "problems": []}
+{"t": 1792569095.24, "event": "map-qa-check", "name": "follower visible (MAP_LAKE_VERITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569095.85, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_LAKE_VERITY", "ok": true, "at": ["MAP_LAKE_VERITY", [38, 42]]}
+{"t": 1792569099.24, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT warp 0 (2, 4) -> MAP_LAKE_VERITY and back", "ok": true, "leg": "back", "expected": ["MAP_VERITY_LAKEFRONT", [[2, 4]]], "got": ["MAP_VERITY_LAKEFRONT", [2, 4]]}
+{"t": 1792569099.87, "event": "capture", "file": "0016-MAP_VERITY_LAKEFRONT after warp round trip.png"}
+{"t": 1792569099.87, "event": "observe", "label": "MAP_VERITY_LAKEFRONT after warp round trip", "problems": []}
+{"t": 1792569099.87, "event": "map-qa-check", "name": "follower visible (MAP_VERITY_LAKEFRONT after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569103.48, "event": "capture", "file": "0017-warp-MAP_VERITY_LAKEFRONT-1.png"}
+{"t": 1792569104.56, "event": "capture", "file": "0018-MAP_LAKE_VERITY via warp.png"}
+{"t": 1792569104.59, "event": "observe", "label": "MAP_LAKE_VERITY via warp", "problems": []}
+{"t": 1792569104.59, "event": "map-qa-check", "name": "follower visible (MAP_LAKE_VERITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569104.95, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_LAKE_VERITY", "ok": true, "at": ["MAP_LAKE_VERITY", [39, 42]]}
+{"t": 1792569107.89, "event": "map-qa-check", "name": "MAP_VERITY_LAKEFRONT warp 1 (3, 4) -> MAP_LAKE_VERITY and back", "ok": true, "leg": "back", "expected": ["MAP_VERITY_LAKEFRONT", [[3, 4]]], "got": ["MAP_VERITY_LAKEFRONT", [3, 4]]}
+{"t": 1792569108.54, "event": "capture", "file": "0019-MAP_VERITY_LAKEFRONT after warp round trip.png"}
+{"t": 1792569108.54, "event": "observe", "label": "MAP_VERITY_LAKEFRONT after warp round trip", "problems": []}
+{"t": 1792569108.54, "event": "map-qa-check", "name": "follower visible (MAP_VERITY_LAKEFRONT after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569112.18, "event": "map", "map": "MAP_LAKE_VERITY", "pos": [38, 43]}
+{"t": 1792569112.45, "event": "map-qa-check", "name": "reached MAP_LAKE_VERITY", "ok": true, "at": ["MAP_LAKE_VERITY", [38, 43]]}
+{"t": 1792569124.14, "event": "capture", "file": "0020-edge-MAP_LAKE_VERITY-right.png"}
+{"t": 1792569124.14, "event": "map-qa-check", "name": "MAP_LAKE_VERITY closed right edge at (47, 30) blocks", "ok": true, "before": ["MAP_LAKE_VERITY", [47, 30]], "after": ["MAP_LAKE_VERITY", [47, 30]]}
+{"t": 1792569137.37, "event": "capture", "file": "0021-warp-MAP_LAKE_VERITY-0.png"}
+{"t": 1792569138.46, "event": "capture", "file": "0022-MAP_VERITY_LAKEFRONT via warp.png"}
+{"t": 1792569138.46, "event": "observe", "label": "MAP_VERITY_LAKEFRONT via warp", "problems": []}
+{"t": 1792569138.46, "event": "map-qa-check", "name": "follower visible (MAP_VERITY_LAKEFRONT via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569138.88, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_VERITY_LAKEFRONT", "ok": true, "at": ["MAP_VERITY_LAKEFRONT", [2, 5]]}
+{"t": 1792569142.28, "event": "map-qa-check", "name": "MAP_LAKE_VERITY warp 0 (38, 43) -> MAP_VERITY_LAKEFRONT and back", "ok": true, "leg": "back", "expected": ["MAP_LAKE_VERITY", [[38, 43]]], "got": ["MAP_LAKE_VERITY", [38, 43]]}
+{"t": 1792569143.38, "event": "capture", "file": "0023-MAP_LAKE_VERITY after warp round trip.png"}
+{"t": 1792569143.38, "event": "observe", "label": "MAP_LAKE_VERITY after warp round trip", "problems": []}
+{"t": 1792569143.38, "event": "map-qa-check", "name": "follower visible (MAP_LAKE_VERITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569147.99, "event": "capture", "file": "0024-warp-MAP_LAKE_VERITY-1.png"}
+{"t": 1792569149.28, "event": "capture", "file": "0025-MAP_VERITY_LAKEFRONT via warp.png"}
+{"t": 1792569149.28, "event": "observe", "label": "MAP_VERITY_LAKEFRONT via warp", "problems": []}
+{"t": 1792569149.28, "event": "map-qa-check", "name": "follower visible (MAP_VERITY_LAKEFRONT via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569149.38, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_VERITY_LAKEFRONT", "ok": true, "at": ["MAP_VERITY_LAKEFRONT", [3, 5]]}
+{"t": 1792569152.24, "event": "map-qa-check", "name": "MAP_LAKE_VERITY warp 1 (39, 43) -> MAP_VERITY_LAKEFRONT and back", "ok": true, "leg": "back", "expected": ["MAP_LAKE_VERITY", [[39, 43]]], "got": ["MAP_LAKE_VERITY", [39, 43]]}
+{"t": 1792569153.33, "event": "capture", "file": "0026-MAP_LAKE_VERITY after warp round trip.png"}
+{"t": 1792569153.34, "event": "observe", "label": "MAP_LAKE_VERITY after warp round trip", "problems": []}
+{"t": 1792569153.34, "event": "map-qa-check", "name": "follower visible (MAP_LAKE_VERITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792569157.08, "event": "map", "map": "MAP_VERITY_LAKEFRONT", "pos": [2, 4]}
+{"t": 1792569166.14, "event": "map", "map": "MAP_ROUTE201", "pos": [0, 8]}
+{"t": 1792569166.23, "event": "map-qa-check", "name": "reached MAP_ROUTE201", "ok": true, "at": ["MAP_ROUTE201", [0, 8]]}
+{"t": 1792569197.89, "event": "capture", "file": "0027-seam-MAP_ROUTE201-right.png"}
+{"t": 1792569198.96, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 6]], "got": ["MAP_ROUTE201", [63, 6]]}
+{"t": 1792569202.04, "event": "capture", "file": "0028-seam-MAP_ROUTE201-right.png"}
+{"t": 1792569203.26, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 8]], "got": ["MAP_ROUTE201", [63, 8]]}
+{"t": 1792569206.14, "event": "capture", "file": "0029-seam-MAP_ROUTE201-right.png"}
+{"t": 1792569207.24, "event": "map-qa-check", "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [63, 9]], "got": ["MAP_ROUTE201", [63, 9]]}
+{"t": 1792569238.77, "event": "capture", "file": "0030-seam-MAP_ROUTE201-down.png"}
+{"t": 1792569240.14, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (15, 21) -> MAP_TWINLEAF_TOWN (15, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [15, 21]], "got": ["MAP_ROUTE201", [15, 21]]}
+{"t": 1792569243.38, "event": "capture", "file": "0031-seam-MAP_ROUTE201-down.png"}
+{"t": 1792569244.48, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (16, 21) -> MAP_TWINLEAF_TOWN (16, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [16, 21]], "got": ["MAP_ROUTE201", [16, 21]]}
+{"t": 1792569247.26, "event": "capture", "file": "0032-seam-MAP_ROUTE201-down.png"}
+{"t": 1792569248.54, "event": "map-qa-check", "name": "MAP_ROUTE201 down seam (17, 21) -> MAP_TWINLEAF_TOWN (17, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [17, 21]], "got": ["MAP_ROUTE201", [17, 21]]}
+{"t": 1792569278.56, "event": "capture", "file": "0033-seam-MAP_ROUTE201-left.png"}
+{"t": 1792569279.55, "event": "map-qa-check", "name": "MAP_ROUTE201 left seam (0, 8) -> MAP_VERITY_LAKEFRONT (19, 7) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [0, 8]], "got": ["MAP_ROUTE201", [0, 8]]}
+{"t": 1792569283.34, "event": "capture", "file": "0034-seam-MAP_ROUTE201-left.png"}
+{"t": 1792569284.35, "event": "map-qa-check", "name": "MAP_ROUTE201 left seam (0, 11) -> MAP_VERITY_LAKEFRONT (19, 10) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [0, 11]], "got": ["MAP_ROUTE201", [0, 11]]}
+{"t": 1792569315.46, "event": "capture", "file": "0035-seam-MAP_ROUTE201-left.png"}
+{"t": 1792569316.46, "event": "map-qa-check", "name": "MAP_ROUTE201 left seam (0, 14) -> MAP_VERITY_LAKEFRONT (19, 13) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE201", [0, 14]], "got": ["MAP_ROUTE201", [0, 14]]}
+{"t": 1792569347.18, "event": "map", "map": "MAP_VERITY_LAKEFRONT", "pos": [19, 7]}
+{"t": 1792569358.79, "event": "map", "map": "MAP_LAKE_VERITY", "pos": [38, 43]}
+{"t": 1792569368.45, "event": "capture", "file": "0036-blocked-MAP_LAKE_VERITY-40-31-up.png"}
+{"t": 1792569368.45, "event": "map-qa-check", "name": "MAP_LAKE_VERITY (40, 31) pushing up is blocked", "ok": true, "before": ["MAP_LAKE_VERITY", [40, 31]], "after": ["MAP_LAKE_VERITY", [40, 31]]}
+{"t": 1792569369.7, "event": "capture", "file": "0037-start-menu.png"}
+{"t": 1792569370.7, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792569377.74, "event": "capture", "file": "0038-save-confirm-verity-production.png"}
+{"t": 1792569379.57, "event": "capture", "file": "0039-save-step-verity-production-01.png"}
+{"t": 1792569380.96, "event": "capture", "file": "0040-save-step-verity-production-02.png"}
+{"t": 1792569382.38, "event": "capture", "file": "0041-save-step-verity-production-03.png"}
+{"t": 1792569383.84, "event": "capture", "file": "0042-save-step-verity-production-04.png"}
+{"t": 1792569385.16, "event": "capture", "file": "0043-save-step-verity-production-05.png"}
+{"t": 1792569386.65, "event": "capture", "file": "0044-save-step-verity-production-06.png"}
+{"t": 1792569387.87, "event": "capture", "file": "0045-save-step-verity-production-07.png"}
+{"t": 1792569389.49, "event": "capture", "file": "0046-save-step-verity-production-08.png"}
+{"t": 1792569390.69, "event": "capture", "file": "0047-saved-verity-production.png"}
+{"t": 1792569390.69, "event": "release-save", "label": "verity-production", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792569390.83, "event": "map-qa-check", "name": "SAVE (verity-production)", "ok": true, "at": ["MAP_LAKE_VERITY", [40, 31]]}
