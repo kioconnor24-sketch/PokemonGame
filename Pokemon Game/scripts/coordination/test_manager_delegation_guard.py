@@ -78,6 +78,12 @@ class ManagerDelegationTest(unittest.TestCase):
         data["pull_request"]["files"][1]["status"] = "removed"
         self.assertTrue(any("Manager delegation excludes" in e for e in guard.validate(data)[0]))
 
+    def test_renamed_reserved_path_cannot_use_routine_manager_marker(self):
+        data = snapshot([MAP, ROOT + "engine/src/retired_save.c"], signed_paths=[MAP])
+        data["pull_request"]["files"][1].update(status="renamed", previous_filename=SAVE)
+        self.assertTrue(any("Manager delegation excludes" in e and SAVE in e
+                            for e in guard.validate(data)[0]))
+
     def test_separate_legacy_handoff_can_cover_reserved_change(self):
         data = snapshot([MAP, SAVE], signed_paths=[MAP])
         data["handoffs"] = [{"pr": 203, "paths": [SAVE], "association": "OWNER"}]
@@ -105,7 +111,7 @@ import textwrap
 
 
 class WorkflowDelegationTest(unittest.TestCase):
-    def workflow_snapshot(self, comments, *, head=HEAD):
+    def workflow_snapshot(self, comments, *, head=HEAD, files=None):
         workflow = Path(__file__).resolve().parents[3] / '.github/workflows/averon-shared-file-guard.yml'
         source = workflow.read_text()
         script = textwrap.dedent(source.split('          script: |\n', 1)[1]
@@ -117,7 +123,7 @@ const input=JSON.parse(require('fs').readFileSync(0,'utf8'));
 let captured;
 const github={rest:{pulls:{get:async()=>({data:{head:{sha:input.head}}}),
                          listFiles:'files',list:'prs'},issues:{listComments:'comments'}},
- paginate:async(method)=>method==='files'?[{filename:input.map,status:'modified'}]:
+ paginate:async(method)=>method==='files'?input.files:
                         method==='prs'?[]:input.comments};
 const context={repo:{owner:'kioconnor24-sketch',repo:'PokemonGame'},
                eventName:'pull_request_target',issue:{number:203}};
@@ -132,7 +138,8 @@ const inertRequire=(name)=>{
 })().catch(e=>{process.stderr.write(String(e));process.exit(1);});
 '''
         result = subprocess.run([node, '-e', harness], input=json.dumps(dict(
-            script=script, comments=comments, head=head, map=MAP)), text=True,
+            script=script, comments=comments, head=head,
+            files=files if files is not None else [{"filename": MAP, "status": "modified"}])), text=True,
             capture_output=True, check=True, timeout=10)
         return json.loads(result.stdout)
 
@@ -177,6 +184,15 @@ const inertRequire=(name)=>{
         self.assertTrue(guard.validate(data)[0])
         data = self.workflow_snapshot([self.directive(), self.marker()], head='b'*40)
         self.assertTrue(guard.validate(data)[0])
+
+    def test_live_workflow_retains_previous_name_for_reserved_rename(self):
+        files = [{"filename": MAP, "status": "modified"},
+                 {"filename": ROOT + "engine/src/retired_save.c", "status": "renamed",
+                  "previous_filename": SAVE}]
+        data = self.workflow_snapshot([self.directive(), self.marker()], files=files)
+        self.assertEqual(data['pull_request']['files'][1]['previous_filename'], SAVE)
+        self.assertTrue(any("Manager delegation excludes" in e and SAVE in e
+                            for e in guard.validate(data)[0]))
 
     def test_live_workflow_preserves_legacy_without_directive(self):
         data = self.workflow_snapshot([self.comment(f'HANDOFF_APPROVED PR=#203 PATHS={MAP}')])
