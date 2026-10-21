@@ -1,0 +1,227 @@
+{
+  "base": "f77bc9511f0afdbab665165d49c2f7433c92e41d",
+  "scratch_source": "f803d3d085f5084b234c3c4fcd15950c10c50e03",
+  "scratch_engine_tree": "4edc7114dce2e85afff71d83ffed149a21320903",
+  "helper_revision": "db25db1ec6d9343e659382be9bb6071ba8a87ef8",
+  "verified_engine_files": 30441,
+  "mismatches": [],
+  "tracked_engine_hash_manifest_sha256": "abe3031e638d88e800bd8f78cac4d8355cae27f7707b5e8ed81329c00dc7737c",
+  "engine_delta_sha256": {
+    "Pokemon Game/engine/data/event_scripts.s": "06d4abf49e8018d28229bf59356a6cc6f741359c1faf5716accf87e6e339a635",
+    "Pokemon Game/engine/data/layouts/FloaromaMeadow/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "Pokemon Game/engine/data/layouts/FloaromaMeadow/map.bin": "2bf4b776856355c8c63ff1b0780d10f9dd6429567c7be4ef51c4bbffcaedcbc1",
+    "Pokemon Game/engine/data/layouts/FloaromaTown/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "Pokemon Game/engine/data/layouts/FloaromaTown/map.bin": "4f45e6660886d8c7865bf4be674292845c5aaacfc05ce75dcaf7374359a752b5",
+    "Pokemon Game/engine/data/layouts/JubilifeCity/map.bin": "1409ab0c4ba0a2c747a02126f7ba0a309cb9c0fb016ff1e9686336504f3067c4",
+    "Pokemon Game/engine/data/layouts/RavagedPath/border.bin": "a8fb987bcf19f3554623d70e41906b5eb019ae568cb1b0d5eed634c70b24f12a",
+    "Pokemon Game/engine/data/layouts/RavagedPath/map.bin": "313a3bf49262ec2de17003a5d5bdbaaf11f5fccf48336c093f9fc8a0e045b47d",
+    "Pokemon Game/engine/data/layouts/Route204/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "Pokemon Game/engine/data/layouts/Route204/map.bin": "f1728262bea8218a7fb5f4ed81fd5617b4472fb4bcc6df774c5427d2f15e5fac",
+    "Pokemon Game/engine/data/layouts/Route205_North/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "Pokemon Game/engine/data/layouts/Route205_North/map.bin": "d2e633381a6151785f2e57e175ef3df506e36df04b9fa7b4f690e8091e2ce6e8",
+    "Pokemon Game/engine/data/layouts/Route205_South/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "Pokemon Game/engine/data/layouts/Route205_South/map.bin": "d15886ef1ac6fd223d9628d1e65ed623ebfd3bb69f666e9e208895155c969661",
+    "Pokemon Game/engine/data/layouts/layouts.json": "089517d03842c8d11711630ba06e2490cec1e70feaf0ae0aed30492bc2f362e3",
+    "Pokemon Game/engine/data/maps/FloaromaMeadow/map.json": "5d43de0c7ee99c43bcea768fe30d59e8a6228fdf5a421adf253b63c34a195e41",
+    "Pokemon Game/engine/data/maps/FloaromaMeadow/scripts.inc": "e785ddf6be1e70b741c51b4a6d9083a4c7b91986c1cfb8081c23103f69037b60",
+    "Pokemon Game/engine/data/maps/FloaromaTown/map.json": "fadc154e1d23541d88af05e1f955726eb22438e126520ae708134bda9d83a691",
+    "Pokemon Game/engine/data/maps/FloaromaTown/scripts.inc": "9fc56e9c6499cfe475744db3af3e328c1ea52758c2f34078498bd77ba40a7d3f",
+    "Pokemon Game/engine/data/maps/JubilifeCity/map.json": "fbaa241fbaf5dd7730e82ca313fc1218a6d9351711637f689f6a17b4dc04a66d",
+    "Pokemon Game/engine/data/maps/RavagedPath/map.json": "2eb0b96442b92092f6c43f7024e82c11645025f449d0cf5bd7b4b195bf92ced7",
+    "Pokemon Game/engine/data/maps/RavagedPath/scripts.inc": "f81be714bc8013031cc8f46b9c2c788d1003fdbd77e591caf5c27f22bb2aa805",
+    "Pokemon Game/engine/data/maps/Route204/map.json": "15ae6d098ec708ebf23d4d31e54d4e2e521888e4e3d0561a03f86fb815c9716a",
+    "Pokemon Game/engine/data/maps/Route204/scripts.inc": "5e42dfa2b808de9e7a2227ce696d9b3cba8f1eca15b0d9bf918cbfdf2f15e09e",
+    "Pokemon Game/engine/data/maps/Route205_North/map.json": "1be6920484b83c0c9428d86862af8ba92dbd185a629d9a24f09eb3cbd279a7f9",
+    "Pokemon Game/engine/data/maps/Route205_North/scripts.inc": "4a3d55c6ed4fc227d5bbb1d2834ef8dccd555a249635bfd21d9cdfab22faecdb",
+    "Pokemon Game/engine/data/maps/Route205_South/map.json": "883a3468ec39306ae857527496abcd6c5cc3c03fdb0dc2ce519cc404b4451687",
+    "Pokemon Game/engine/data/maps/Route205_South/scripts.inc": "650469ff5fc9f53d01172cc5bacf9df5428bc99e78b928c6e2571204bc757105",
+    "Pokemon Game/engine/data/maps/map_groups.json": "4494e63db7e0cbff15fca13659efc05c9514300843c531dbe1ec64bf2c55418c",
+    "Pokemon Game/engine/test/data/averon_map_registry_slots.inc": "59cd0d068ec8aa7cbc7cbd2d7f2355873a68bffcf631f2e0bc584c1b533a8550"
+  },
+  "production_merged": false,
+  "scope": "Scratch engine reproduced from published queued Jubilife source and guarded helper; 30441 tracked engine files byte-identical. No local-only scratch commit required to reproduce.",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "preserved_claude_staging": "7f24a0c310cb3f94a8ccdac22bd051156cb2ee78",
+  "qa_code_revision": "6879dc20f7098d98132268a48424b6e607df3bb9",
+  "save_headroom_from_normal_elf": {
+    "SaveBlock1": {
+      "used_bytes": 15568,
+      "limit_bytes": 15872,
+      "free_bytes": 304
+    },
+    "SaveBlock2": {
+      "used_bytes": 3884,
+      "limit_bytes": 3968,
+      "free_bytes": 84
+    },
+    "SaveBlock3": {
+      "used_bytes": 68,
+      "limit_bytes": 1624,
+      "free_bytes": 1556
+    },
+    "PokemonStorage": {
+      "used_bytes": 34144,
+      "limit_bytes": 35712,
+      "free_bytes": 1568
+    }
+  },
+  "save_headroom_command": "python \"Pokemon Game/scripts/report-averon-save-headroom.py\" --elf <scratch-engine>/pokeemerald.elf --json <out>/save-headroom.json",
+  "observed_stack_samples": {
+    "normal": {
+      "minimum_free_bytes": 1376,
+      "scope": "Nine sampled walking/warp state receipts, NOT a game-wide worst-case stack bound",
+      "samples": [
+        {
+          "receipt": "state-MAP_FLOAROMA_MEADOW after warp round trip.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2384,
+            "freeBytes": 1544
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_MEADOW via warp.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2372,
+            "freeBytes": 1556
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_TOWN after warp round trip.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2372,
+            "freeBytes": 1556
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_TOWN via warp.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2384,
+            "freeBytes": 1544
+          }
+        },
+        {
+          "receipt": "state-MAP_RAVAGED_PATH after warp round trip.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2552,
+            "freeBytes": 1376
+          }
+        },
+        {
+          "receipt": "state-MAP_RAVAGED_PATH via warp.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2552,
+            "freeBytes": 1376
+          }
+        },
+        {
+          "receipt": "state-MAP_ROUTE204 after warp round trip.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2552,
+            "freeBytes": 1376
+          }
+        },
+        {
+          "receipt": "state-MAP_ROUTE204 via warp.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2552,
+            "freeBytes": 1376
+          }
+        },
+        {
+          "receipt": "state-start.json",
+          "stack": {
+            "regionBytes": 3928,
+            "usedBytes": 2372,
+            "freeBytes": 1556
+          }
+        }
+      ]
+    },
+    "release": {
+      "minimum_free_bytes": 1032,
+      "scope": "Nine sampled walking/warp state receipts, NOT a game-wide worst-case stack bound",
+      "samples": [
+        {
+          "receipt": "state-MAP_FLOAROMA_MEADOW after warp round trip.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_MEADOW via warp.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_TOWN after warp round trip.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_FLOAROMA_TOWN via warp.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_RAVAGED_PATH after warp round trip.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_RAVAGED_PATH via warp.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_ROUTE204 after warp round trip.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-MAP_ROUTE204 via warp.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2952,
+            "freeBytes": 1032
+          }
+        },
+        {
+          "receipt": "state-start.json",
+          "stack": {
+            "regionBytes": 3984,
+            "usedBytes": 2652,
+            "freeBytes": 1332
+          }
+        }
+      ]
+    }
+  }
+}
