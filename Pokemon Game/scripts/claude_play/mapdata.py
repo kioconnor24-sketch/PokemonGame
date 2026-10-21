@@ -79,6 +79,7 @@ class MapInfo:
                             for c in (info.get("connections") or [])]
         self.objects = [(o["x"], o["y"], o.get("script", ""), o.get("graphics_id", ""))
                         for o in info.get("object_events", [])]
+        self.triggers = {(c["x"], c["y"]) for c in info.get("coord_events", []) if c.get("type", "trigger") == "trigger"}
 
     def _derive_behaviors(self):
         self.behaviors = []
@@ -157,6 +158,43 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
                 return path[::-1]
             q.append(nxt)
     return None
+
+
+def trigger_entry(m, x, y):
+    """A warp tile that also carries a coord trigger is a step-on warp (no arrow/door metatile).
+
+    Returns (approach tile, direction to step onto the warp) or None. The player arrives on the warp tile.
+    """
+    triggers = getattr(m, "triggers", ())
+    if (x, y) not in triggers or m.warp_at(x, y) is None:
+        return None
+    for d, (dx, dy) in DIRS.items():
+        approach = (x - dx, y - dy)
+        if m.walkable(*approach) and approach not in triggers:
+            return approach, d
+    return None
+
+
+def across(m, other, direction, offset, tile):
+    """Where stepping off m at tile lands in the connected map (fieldmap: pos -= offset)."""
+    x, y = tile
+    if direction == "up":
+        return (x - offset, other.height - 1)
+    if direction == "down":
+        return (x - offset, 0)
+    if direction == "left":
+        return (other.width - 1, y - offset)
+    return (0, y - offset)
+
+
+def warp_arrival(m, x, y):
+    """Where a warp into (x, y) of m lands the player: on a step-on (trigger) warp or an arrow mat, the tile
+    itself; at a door or any solid warp tile, the doorstep below it."""
+    if trigger_entry(m, x, y):
+        return (x, y)
+    if "DOOR" in m.behavior(x, y) or not m.walkable(x, y):
+        return (x, y + 1)
+    return (x, y)
 
 
 def edge_exits(m, direction):

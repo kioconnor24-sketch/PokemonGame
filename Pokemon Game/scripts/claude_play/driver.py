@@ -157,26 +157,38 @@ class Driver:
                 m = self.w.map(map_id)
                 if how == "edge":
                     d = rest[0]
-                    goals = set(mapdata.edge_exits(m, d))
+                    goals = set(rest[1]) if len(rest) > 1 else set(mapdata.edge_exits(m, d))
                     mid, pos = self.walk_path(map_id, goals, on_event=on_event)
                     if mid == map_id and pos in goals:
                         s = self.step(d)
                         self.settle()
-                else:
-                    tile, push = rest[0], rest[1]
-                    mid, pos = self.walk_path(map_id, {tile}, on_event=on_event)
-                    if mid == map_id and pos == tile:
+                elif mapdata.trigger_entry(m, *rest[0]):
+                    # Step-on warp: walking onto the tile is the warp, so approach it and step once.
+                    before, push = mapdata.trigger_entry(m, *rest[0])
+                    mid, pos = self.walk_path(map_id, {before}, on_event=on_event)
+                    if mid == map_id and pos == before:
                         self.step(push)
                         time.sleep(1.0)
                         self.settle()
-                    elif mid == map_id:
-                        # Stand next to the door and walk into it.
+                else:
+                    # A map split by a cliff can have the leg's warp out of reach: any of its warps to the
+                    # same destination will do (e.g. a route's two cave doors). Doors are entered from
+                    # their doorstep.
+                    dest = (m.warp_at(*rest[0]) or (None,))[0]
+                    tiles = [tuple(rest[0])] + [(x, y) for x, y, d, _ in m.warps if d == dest and (x, y) != tuple(rest[0])]
+                    for tile in tiles:
+                        push = self.warp_push(m, tile)
                         before = (tile[0] - mapdata.DIRS[push][0], tile[1] - mapdata.DIRS[push][1])
-                        mid, pos = self.walk_path(map_id, {before}, on_event=on_event)
-                        if mid == map_id and pos == before:
+                        goal = tile if m.walkable(*tile) and "DOOR" not in m.behavior(*tile) else before
+                        try:
+                            mid, pos = self.walk_path(map_id, {goal}, on_event=on_event)
+                        except Stuck:
+                            continue
+                        if mid == map_id and pos == goal:
                             self.step(push)
                             time.sleep(1.0)
                             self.settle()
+                        break
             mid, pos = self.here()
             self.log("map", map=mid, pos=pos)
 
@@ -193,8 +205,76 @@ class Driver:
                 return d
         return "up" if "DOOR" in b else "down"
 
-    def map_route(self, src, dst):
-        """Breadth-first route over map connections and warps."""
+    def warp_goal(self, m, tile):
+        """(tile to walk to, direction to press) to take the warp at tile."""
+        entry = mapdata.trigger_entry(m, *tile)
+        if entry:
+            return entry
+        push = self.warp_push(m, tile)
+        before = (tile[0] - mapdata.DIRS[push][0], tile[1] - mapdata.DIRS[push][1])
+        return (tile if m.walkable(*tile) and "DOOR" not in m.behavior(*tile) else before), push
+
+    def map_route(self, src, dst, pos=None):
+        """Breadth-first route over map connections and warps.
+
+        With pos (the player's tile on src), the search is over (map, position): a leg is only used if its
+        exit is reachable on foot from there, so a map split by a cliff (a route whose halves only meet
+        through a cave) is handled. Without pos it is the plain map-level search.
+        """
+        from collections import deque
+        if pos is None:
+            return self._map_route_maps(src, dst)
+        start = (src, tuple(pos))
+        prev, seen = {start: None}, {}
+        q = deque([start])
+        goal = None
+        while q:
+            cur = q.popleft()
+            mid, pos = cur
+            if mid == dst:
+                goal = cur
+                break
+            m = self.w.map(mid)
+            # Skip a position already covered by an explored one in the same part of this map.
+            if any(mapdata.bfs(m, p, {pos}) is not None for p in seen.get(mid, [])):
+                continue
+            seen.setdefault(mid, []).append(pos)
+            nexts = []
+            for d, other, off in m.connections:
+                if other not in self.w.map_ids:
+                    continue
+                om = self.w.map(other)
+                exits = [t for t in mapdata.edge_exits(m, d) if mapdata.bfs(m, pos, {t}) is not None]
+                by_arrival = {}
+                for t in exits:
+                    a = mapdata.across(m, om, d, off, t)
+                    if om.inside(*a) and om.walkable(*a):
+                        by_arrival.setdefault(a, []).append(t)
+                for a, ts in by_arrival.items():
+                    nexts.append(((mid, "edge", d, tuple(ts)), (other, a)))
+            for x, y, dest, dw in m.warps:
+                if dest not in self.w.map_ids:
+                    continue
+                stand, push = self.warp_goal(m, (x, y))
+                if mapdata.bfs(m, pos, {stand}) is None:
+                    continue
+                dm = self.w.map(dest)
+                if dw >= len(dm.warps):
+                    continue
+                nexts.append(((mid, "warp", (x, y), push), (dest, mapdata.warp_arrival(dm, *dm.warps[dw][:2]))))
+            for leg, nxt in nexts:
+                if nxt not in prev:
+                    prev[nxt] = (cur, leg)
+                    q.append(nxt)
+        if goal is None:
+            raise Stuck(f"no map route {src} -> {dst}")
+        route, node = [], goal
+        while prev[node]:
+            node, leg = prev[node]
+            route.append(leg)
+        return route[::-1]
+
+    def _map_route_maps(self, src, dst):
         from collections import deque
         prev = {src: None}
         q = deque([src])
@@ -222,10 +302,10 @@ class Driver:
     def travel_to(self, dst, on_event=None):
         on_event = on_event or (lambda s: self.battle())
         for _ in range(12):
-            mid, _ = self.here()
+            mid, pos = self.here()
             if mid == dst:
                 return
-            for leg in self.map_route(mid, dst):
+            for leg in self.map_route(mid, dst, pos):
                 self.go_map([leg], on_event=on_event)
                 if self.here()[0] != leg[0] and self.here()[0] == dst:
                     return

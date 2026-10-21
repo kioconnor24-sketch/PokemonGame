@@ -70,6 +70,65 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(warp["tile"], (3, 3))   # stand below a door
         self.assertEqual(warp["push"], "up")
 
+    def test_step_on_trigger_warps_are_entered_from_their_approach_tile(self):
+        # A warp tile with a coord trigger (no arrow/door metatile) is walked onto; the player lands on it.
+        lake = FakeMap("LAKE", ["####",
+                                "#..#",
+                                "#..#",
+                                "##.#"], warps=[(2, 3, "FRONT", 0)])
+        lake.triggers = {(2, 3)}
+        self.assertEqual(map_qa.warp_stand(lake, 2, 3), (2, 2))
+        self.assertEqual(map_qa.warp_push(lake, 2, 3), "down")
+        self.assertEqual(map_qa.warp_arrive(lake, 2, 3), (2, 3))
+        # Without the trigger it is an ordinary walkable warp tile: stand and arrive on it.
+        lake.triggers = set()
+        self.assertEqual((map_qa.warp_stand(lake, 2, 3), map_qa.warp_arrive(lake, 2, 3)), ((2, 3), (2, 3)))
+        # A trigger with no warp is not a warp; a door keeps its doorstep arrival.
+        lake.triggers = {(1, 1)}
+        self.assertIsNone(map_qa.mapdata.trigger_entry(lake, 1, 1))
+        self.assertEqual(map_qa.warp_arrive(town(), 3, 2), (3, 3))
+
+    def test_a_route_split_by_a_cliff_is_joined_through_a_cave_in_the_batch(self):
+        # Route: south half (rows 3-4) and north half (rows 0-1) split by a wall; each half has a cave door.
+        route = FakeMap("ROUTE", ["#D###",
+                                  "#...#",
+                                  "#####",
+                                  "#..D#",
+                                  "#...#"], warps=[(3, 3, "CAVE", 0), (1, 0, "CAVE", 1)])
+        cave = FakeMap("CAVE", ["#M.M#",
+                                "#...#"], warps=[(1, 0, "ROUTE", 0), (3, 0, "ROUTE", 1)])
+        joined, _ = map_qa.static_audit(FakeWorld(route, cave), ["ROUTE", "CAVE"])
+        self.assertNotIn("exit-unreachable", codes(joined))
+        alone, _ = map_qa.static_audit(FakeWorld(route, cave), ["ROUTE"])
+        self.assertIn("exit-unreachable", codes(alone))
+        # The cave's own two exits really are joined inside it; walling it off splits the batch again.
+        sealed = FakeMap("CAVE", ["#M#M#",
+                                  "#.#.#"], warps=cave.warps)
+        split, _ = map_qa.static_audit(FakeWorld(route, sealed), ["ROUTE", "CAVE"])
+        self.assertIn("exit-unreachable", codes(split))
+
+    def test_driver_routes_through_a_cave_when_the_edge_is_in_the_other_half(self):
+        import driver as drv
+        route = FakeMap("ROUTE", ["#.D.#",
+                                  "#...#",
+                                  "#####",
+                                  "#.D.#",
+                                  "#...#"], warps=[(2, 3, "CAVE", 0), (2, 0, "CAVE", 1)],
+                        connections=[("up", "TOWN", 0)])
+        cave = FakeMap("CAVE", ["#M.M#",
+                                "#...#"], warps=[(1, 0, "ROUTE", 0), (3, 0, "ROUTE", 1)])
+        town = FakeMap("TOWN", ["#...#"])
+        world = FakeWorld(route, cave, town)
+        world.map_ids = {"ROUTE": 0, "CAVE": 1, "TOWN": 2}
+        for m in (route, cave, town):
+            m.world = world
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = world
+        legs = d.map_route("ROUTE", "TOWN", (2, 4))            # south half: the north edge is not walkable from here
+        self.assertEqual([leg[:2] for leg in legs], [("ROUTE", "warp"), ("CAVE", "warp"), ("ROUTE", "edge")])
+        self.assertEqual(legs[0][2], (2, 3))                    # the south door, not the unreachable north one
+        self.assertEqual(d.map_route("ROUTE", "TOWN", (2, 1))[0][:2], ("ROUTE", "edge"))   # north half: straight up
+
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",
                 "#.....#",
