@@ -275,3 +275,10 @@ doors unchanged. Host28/28 PASS; static seven-map audit0. Updated NORMAL built;
 RELEASE and complete paired graphical/native rechecks are IN PROGRESS. Prior
 37/4 native and63/3 profile evidence remains tied to44945713, not this new
 1f21747e source. No prior evidence is relabeled as final acceptance.
+
+Final candidate source1f21747e60b139d275ab4196f957dc854d618f53 is now built
+in both profiles. Host28/28, native37/37, save-layout4/4, static0 and two source
+seam negatives PASS. Exact38-file reproduction verified again. Final-source
+NORMAL66/66 + fresh Continue3/3 PASS; final RELEASE complete batch is running.
+Authoritative final-source evidence begins at evidence/20261021/final/. Earlier
+44945713 evidence is retained as history. Source/default cries OFF unchanged.

@@ -1,0 +1,51 @@
+{
+  "source_sha": "1f21747e60b139d275ab4196f957dc854d618f53",
+  "cases": {
+    "wrong_offset": {
+      "verdict": "REJECTED_AS_EXPECTED",
+      "findings": [
+        {
+          "map": "MAP_ROUTE202",
+          "code": "seam-mismatch",
+          "detail": {
+            "direction": "up",
+            "tile": [
+              8,
+              0
+            ],
+            "faces": [
+              "MAP_JUBILIFE_CITY",
+              [
+                45,
+                63
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "blocked_north_cell": {
+      "verdict": "REJECTED_AS_EXPECTED",
+      "findings": [
+        {
+          "map": "MAP_JUBILIFE_CITY",
+          "code": "seam-mismatch",
+          "detail": {
+            "direction": "down",
+            "tile": [
+              46,
+              63
+            ],
+            "faces": [
+              "MAP_ROUTE202",
+              [
+                8,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
