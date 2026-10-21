@@ -1,0 +1,25 @@
+{
+ "batch": [
+  "MAP_ROUTE205_NORTH"
+ ],
+ "entry": [
+  "MAP_ROUTE205_NORTH",
+  3,
+  57
+ ],
+ "description": "TEST-ONLY: Route 205 North's down connection is shifted to offset -18 while Route 205 South's up stays +20, so the pair is no longer reciprocal. Crossing the North/South seam must fail its exact landing or return check. The batch is Route 205 North alone so the runner never travels through the broken seam afterwards.",
+ "expect": "FAIL",
+ "must_fail": [
+  "seam"
+ ],
+ "edits": [
+  {
+   "op": "connection",
+   "map": "Route205_North",
+   "index": 0,
+   "set": {
+    "offset": -18
+   }
+  }
+ ]
+}
