@@ -250,3 +250,20 @@ NORMAL build currently in progress; no ROM/runtime/native PASS claimed yet.
 `apply_scratch_overlay.py` reproduces this source assembly with exact pins and
 requires explicit disposable marker/scratch branch; it is NOT production approval.
 Route202 production exclusive-files gate still fails for missing owner authority.
+
+Paired scratch builds now PASS at local source44945713 (full SHA in evidence):
+NORMAL linked17354196B, EWRAM226480/IWRAM28392, ROM SHA256
+4151a11ffc6f17065554e8889c2b45d2201db9e4c6d46dfa94c88446cef86cf6.
+RELEASE linked17473332B, EWRAM226482/IWRAM28336, ROM SHA256
+3f10a15235328a884ad987b630006325ea775ea02e658307cb1c7df5e39370c3.
+GCC14.2.1, default cries OFF; no ROM uploaded. Native subset compiling; actual
+graphical normal traversal ongoing. Xvfb initially could not bind display sockets
+inside restricted sandbox; network-enabled execution permits local X/GDB sockets.
+Do not claim initial no-window attempt as game defect or acceptance.
+
+Owner explicitly requested recurring instruction checks during this session.
+Native automation "Check Averon task instructions" is enabled every two hours
+(America/New_York); it reads latest15/PR assignments, reports meaningful changes,
+and supplements this task without spawning competing edits or restarting Claude.
+This explicit owner request supersedes older no-scheduler directions only for
+the requested instruction scan. No autonomous production merge is authorized.

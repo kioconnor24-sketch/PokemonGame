@@ -7,8 +7,17 @@
   "ewram_bytes": 226480,
   "iwram_bytes": 28392,
   "toolchain": "arm-none-eabi GCC 14.2.1; NORMAL default cries-off",
-  "native_result": "PENDING",
-  "release_result": "PENDING",
-  "runtime_result": "PENDING",
-  "production_integration": "BLOCKED: Route202 genuine owner path authorization missing; no protected integration PR opened"
+  "native_result": "PASS:37/37 relevant Averon native;4/4 save layout;0 failures/skips",
+  "release_result": "PASS_SCRATCH_BUILD",
+  "runtime_result": "SCRATCH: NORMAL63/63+Continue3/3;RELEASE63/63+Continue3/3;Gate7/7+Continue3/3. DEV entry fixture disclosed.",
+  "production_integration": "BLOCKED: Route202 genuine owner path authorization missing; no protected integration PR opened",
+  "release_rom_sha256": "3f10a15235328a884ad987b630006325ea775ea02e658307cb1c7df5e39370c3",
+  "release_file_bytes": 33554432,
+  "release_linked_rom_bytes": 17473332,
+  "release_ewram_bytes": 226482,
+  "release_iwram_bytes": 28336,
+  "normal_linked_growth_bytes": 22540,
+  "normal_baseline_linked_rom_bytes": 17331656,
+  "normal_baseline_rom_sha256": "06b94e9f902b3daab33e416f64f9cd2d7a346214e2566500d9078366a9cb9dec",
+  "reproduction": "38 changed scratch source files reproduced byte-for-byte; see source manifest"
 }

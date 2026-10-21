@@ -1,0 +1,98 @@
+{
+ "maps": [
+  "MAP_OREBURGH_GATE_1F"
+ ],
+ "build": "release",
+ "rom_sha256": "3f10a15235328a884ad987b630006325ea775ea02e658307cb1c7df5e39370c3",
+ "static_findings": [],
+ "save_before": "fd9c41ffebcfc0800f5816ba1db2b1b3b2ff79f463cd8517849fb3dd325db765",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     17
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_GATE_1F (19, 4) pushing up is blocked",
+   "ok": true,
+   "before": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     19,
+     4
+    ]
+   ],
+   "after": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     19,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_GATE_1F (25, 20) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ],
+   "after": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (gate-closure)",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "6a75deac60cc3b137348fa53115f1adaea240f246de806b24d7b992aa43193de",
+ "verdict": "PASS"
+}

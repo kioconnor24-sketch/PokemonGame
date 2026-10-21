@@ -1,0 +1,51 @@
+{
+ "maps": [
+  "MAP_JUBILIFE_CITY",
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+  "MAP_JUBILIFE_CITY_MART",
+  "MAP_JUBILIFE_CITY_POKEMON_SCHOOL"
+ ],
+ "build": "normal",
+ "rom_sha256": "4151a11ffc6f17065554e8889c2b45d2201db9e4c6d46dfa94c88446cef86cf6",
+ "static_findings": [],
+ "save_before": "79178c9391e1213ed6925e7a3c93fb8e676cb25769f86b6ac517d7bd254bdd53",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "79178c9391e1213ed6925e7a3c93fb8e676cb25769f86b6ac517d7bd254bdd53",
+ "verdict": "PASS"
+}

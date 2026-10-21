@@ -1,0 +1,867 @@
+{
+ "maps": [
+  "MAP_JUBILIFE_CITY",
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+  "MAP_JUBILIFE_CITY_MART",
+  "MAP_JUBILIFE_CITY_POKEMON_SCHOOL"
+ ],
+ "build": "release",
+ "rom_sha256": "3f10a15235328a884ad987b630006325ea775ea02e658307cb1c7df5e39370c3",
+ "static_findings": [],
+ "save_before": "79178c9391e1213ed6925e7a3c93fb8e676cb25769f86b6ac517d7bd254bdd53",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     43,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY right seam (69, 19) -> MAP_ROUTE203 (0, 19) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     19
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY right seam (69, 21) -> MAP_ROUTE203 (0, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY right seam (69, 22) -> MAP_ROUTE203 (0, 22) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     22
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     69,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY down seam (46, 63) -> MAP_ROUTE202 (8, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     46,
+     63
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     46,
+     63
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY down seam (50, 63) -> MAP_ROUTE202 (12, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     50,
+     63
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     50,
+     63
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY down seam (53, 63) -> MAP_ROUTE202 (15, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     53,
+     63
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     53,
+     63
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     6,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY warp 0 (55, 36) -> MAP_JUBILIFE_CITY_POKEMON_CENTER_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     [
+      55,
+      37
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     55,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_MART via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_MART",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     3,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY warp 1 (54, 26) -> MAP_JUBILIFE_CITY_MART and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     [
+      54,
+      27
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     54,
+     27
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY warp 2 (43, 36) -> MAP_JUBILIFE_CITY_POKEMON_SCHOOL and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY",
+    [
+     [
+      43,
+      37
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY",
+    [
+     43,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE203",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE203",
+    [
+     0,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     19
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     22
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     [
+      53,
+      7
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     53,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE203 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE203 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE203",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE203",
+    [
+     53,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     [
+      3,
+      19
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     55,
+     38
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F warp 0 (6, 8) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     [
+      6,
+      8
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     55,
+     38
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F warp 1 (7, 8) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     [
+      6,
+      8
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+    [
+     6,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_JUBILIFE_CITY_MART",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     3,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     54,
+     28
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_MART warp 0 (3, 7) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     3,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_MART after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     54,
+     28
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_MART warp 1 (4, 7) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_MART",
+    [
+     3,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_MART after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     43,
+     38
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL warp 0 (5, 10) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     [
+      5,
+      10
+     ],
+     [
+      6,
+      10
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY",
+    [
+     43,
+     38
+    ]
+   ]
+  },
+  {
+   "name": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL warp 1 (6, 10) -> MAP_JUBILIFE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     [
+      5,
+      10
+     ],
+     [
+      6,
+      10
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (corridor)",
+   "ok": true,
+   "at": [
+    "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+    [
+     5,
+     9
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "b598f4158359b63b6a195a0b3bcb94743df65c519dc394efc565127d5fb30bde",
+ "verdict": "PASS"
+}
