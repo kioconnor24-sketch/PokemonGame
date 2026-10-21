@@ -1,0 +1,573 @@
+{
+ "maps": [
+  "MAP_ROUTE202",
+  "MAP_JUBILIFE_CITY",
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+  "MAP_JUBILIFE_CITY_MART",
+  "MAP_JUBILIFE_CITY_POKEMON_SCHOOL"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ROUTE202": {
+   "closed": [
+    {
+     "tile": [
+      0,
+      7
+     ],
+     "direction": "left",
+     "span": [
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       9
+      ]
+     ]
+    },
+    {
+     "tile": [
+      0,
+      22
+     ],
+     "direction": "left",
+     "span": [
+      [
+       0,
+       14
+      ],
+      [
+       0,
+       29
+      ]
+     ]
+    },
+    {
+     "tile": [
+      29,
+      17
+     ],
+     "direction": "right",
+     "span": [
+      [
+       29,
+       12
+      ],
+      [
+       29,
+       21
+      ]
+     ]
+    }
+   ],
+   "points": [
+    {
+     "kind": "connection",
+     "tile": [
+      22,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      23,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      24,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      25,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      26,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      27,
+      33
+     ],
+     "direction": "down",
+     "dest": "MAP_SANDGEM_TOWN",
+     "offset": 3
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      8,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      9,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      10,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      11,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      12,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      13,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      14,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      15,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -38
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_JUBILIFE_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      55,
+      37
+     ],
+     "warp": [
+      55,
+      36
+     ],
+     "dest": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      54,
+      27
+     ],
+     "warp": [
+      54,
+      26
+     ],
+     "dest": "MAP_JUBILIFE_CITY_MART",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      43,
+      37
+     ],
+     "warp": [
+      43,
+      36
+     ],
+     "dest": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      19
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      20
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      21
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      22
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      46,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      47,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      48,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      49,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      50,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      51,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      52,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      53,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE203": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      53,
+      7
+     ],
+     "warp": [
+      53,
+      6
+     ],
+     "dest": "MAP_OREBURGH_GATE_1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      19
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      20
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      21
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      22
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OREBURGH_GATE_1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      3,
+      19
+     ],
+     "warp": [
+      3,
+      19
+     ],
+     "dest": "MAP_ROUTE203",
+     "dest_warp": 0,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      6,
+      8
+     ],
+     "warp": [
+      6,
+      8
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      7,
+      8
+     ],
+     "warp": [
+      7,
+      8
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 0,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_JUBILIFE_CITY_MART": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      3,
+      7
+     ],
+     "warp": [
+      3,
+      7
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 1,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      4,
+      7
+     ],
+     "warp": [
+      4,
+      7
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 1,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_JUBILIFE_CITY_POKEMON_SCHOOL": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      5,
+      10
+     ],
+     "warp": [
+      5,
+      10
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 2,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      6,
+      10
+     ],
+     "warp": [
+      6,
+      10
+     ],
+     "dest": "MAP_JUBILIFE_CITY",
+     "dest_warp": 2,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}

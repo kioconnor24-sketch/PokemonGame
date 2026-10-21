@@ -14,6 +14,29 @@ HERE=Path(__file__).resolve().parent
 s=importlib.util.spec_from_file_location('corridor',HERE/'build_corridor.py');b=importlib.util.module_from_spec(s);s.loader.exec_module(b)
 SECTIONS={'JubilifeCity':('MAPSEC_JUBILIFE_CITY',221,'JUBILIFE CITY'),'Route203':('MAPSEC_ROUTE_203',222,'ROUTE 203'),'OreburghGate_1F':('MAPSEC_OREBURGH_GATE',223,'OREBURGH GATE')}
 
+ROUTE202_HEAD='b4c1d39f0476b004f772506abd1b378e055ad03e'
+MUSIC={'JubilifeCity':'MUS_RUSTBORO','Route203':'MUS_ROUTE104',
+       'OreburghGate_1F':'MUS_PETALBURG_WOODS',
+       'JubilifeCity_PokemonCenter_1F':'MUS_POKE_CENTER',
+       'JubilifeCity_Mart':'MUS_POKE_MART','JubilifeCity_PokemonSchool':'MUS_SCHOOL'}
+
+def finish_gate(raw):
+ """Remove the unused ladder and seal the unbuilt exit with existing cave art.
+
+ Input is the immutable staged candidate; reject moved/changed source cells.
+ The south-facing mouth is replaced with the adjacent continuous cave wall.
+ No new warp, destination, art or saved identity is introduced.
+ """
+ cells=list(struct.unpack('<783H',raw))
+ expected={(19,5):575,(25,20):519,(24,21):600,(25,21):601,(26,21):602}
+ for (x,y),mid in expected.items():
+  if cells[y*29+x]&1023!=mid:raise ValueError('Gate closure source changed')
+ floor=cells[4*29+19];wall=cells[21*29+23]
+ if floor!=0x3201 or wall!=0x0609:raise ValueError('Gate reference terrain changed')
+ cells[5*29+19]=floor;cells[20*29+25]=floor
+ for x in (24,25,26):cells[21*29+x]=wall
+ return struct.pack('<783H',*cells)
+
 def prepare(donor,root,output):
  donor,root,output=map(Path,(donor,root,output))
  if output.exists() or 'engine' in output.resolve().parts:raise ValueError('new off-engine output required')
@@ -28,13 +51,14 @@ def prepare(donor,root,output):
   city=name=='JubilifeCity';route=name=='Route203';cave=name=='OreburghGate_1F';inside=not(city or route or cave)
   selected=(root/'corridor-banks'/name) if city or route else (root/'averon-adapted'/name)
   raw=(selected/'map.bin').read_bytes();w,h=config['dimensions']
+  if cave:raw=finish_gate(raw)
   if len(raw)!=w*h*2:raise ValueError('invalid map length')
   layout_id='LAYOUT_'+ids[name].removeprefix('MAP_')
   target_tilesets=['gTileset_General','gTileset_AveronCorridorRustboro'] if city or route else stage['source_tilesets']
   layouts.append({'id':layout_id,'name':name+'_Layout','width':w,'height':h,'primary_tileset':target_tilesets[0],'secondary_tileset':target_tilesets[1],
                   'border_filepath':'data/layouts/'+name+'/border.bin','blockdata_filepath':'data/layouts/'+name+'/map.bin','layout_version':'emerald'})
   warp_events=[{k:v for k,v in warp.items() if k in ('x','y','elevation','dest_warp_id')}|{'dest_map':ids[warp['dest_map']],'dest_warp_id':str(warp['dest_warp_id'])} for warp in stage['warp_events']]
-  header={'id':ids[name],'name':name,'layout':layout_id,'music':'MUS_DUMMY','region':'REGION_SINNOH','region_map_section':section,
+  header={'id':ids[name],'name':name,'layout':layout_id,'music':MUSIC[name],'region':'REGION_SINNOH','region_map_section':section,
           'weather':'WEATHER_SUNNY','map_type':'MAP_TYPE_CITY' if city else 'MAP_TYPE_ROUTE' if route else 'MAP_TYPE_UNDERGROUND' if cave else 'MAP_TYPE_INDOOR',
           'allow_cycling':city or route,'allow_escaping':cave,'allow_running':True,'show_map_name':True,'requires_flash':False,'battle_scene':'MAP_BATTLE_SCENE_NORMAL',
           'connections':[{'map':ids[c['to']],'direction':c['direction'],'offset':c['offset']} for c in stage['connections']],
@@ -52,8 +76,8 @@ def prepare(donor,root,output):
            'append_map_names':list(spec['maps']),'append_layouts':layouts,'append_event_includes':includes,
            'append_sections':[{'id':symbol,'value':value,'name':label,'region':'REGION_SINNOH'} for symbol,value,label in SECTIONS.values()],
            'tileset_symbol':'gTileset_AveronCorridorRustboro',
-           'route202_header_patch':{'expected_source_head':'962a472eb42f5c0d8c549bd67f3dab8fd7497430','append_connection':{'map':ids['JubilifeCity'],'direction':'up','offset':-38},'preserve_all_existing_connections':True},
-           'deferred':['actual map-group indices depend on current main; append only','section221/222/223 approved; preserve legacy/sentinel/special codes','source/pins/required protected-path authorization','paired ROM/native and genuine graphical/save acceptance','no healer/services/music/encounters introduced']}
+           'route202_header_patch':{'expected_source_head':ROUTE202_HEAD,'append_connection':{'map':ids['JubilifeCity'],'direction':'up','offset':-38},'preserve_all_existing_connections':True},
+           'deferred':['actual map-group indices depend on current main; append only','section221/222/223 approved; preserve legacy/sentinel/special codes','source/pins/required protected-path authorization','paired ROM/native and genuine graphical/save acceptance','no healer/services/encounters introduced; existing Averon music reused']}
  b.dump(output/'registration-fragments.json',fragment)
  return fragment
 

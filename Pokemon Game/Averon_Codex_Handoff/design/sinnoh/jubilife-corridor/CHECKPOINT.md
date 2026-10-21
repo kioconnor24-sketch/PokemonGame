@@ -230,3 +230,23 @@ NEXT EXECUTABLE TASK on explicit resumption: refresh live main/claims/PR181,
 review `engine-overlay/registration-fragments.json`, then prepare a serialized
 production registration change under the applicable safeguards. Do not apply
 fragments blindly or mistake staged candidates for accepted gameplay.
+
+
+## Active resumption — 2026-10-21
+Owner resumed Codex as sole active developer (Issue15 comment6308769794).
+Main refreshed to9fa2f1d366b7c386910b9173967faeba86b51396, PR181 source
+b4c1d39f0476b004f772506abd1b378e055ad03e. Scratch branch
+`codex/corridor-scratch-integration-20261021` preserves Claude refs.
+Gate overlay removes inert ladder19,5 and replaces unbuilt exit mouth24–26,21
+with adjacent existing cave wall, removing arrow25,20. Exactly five changed cells;
+source candidates retained. All six overlay headers reuse existing Averon music.
+25/25 focused host tests PASS. Seven-map existing map_qa static: zero findings,
+including8 reciprocal Route202/City openings and all neutral warp paths.
+Initial build correctly rejected missing220 before221. Scratch only now includes
+exact Verity220 definition from4ed99916f0aeb6bee81e9aedf51f40fb6d66730e.
+Standalone C bank was invisible to existing QA parser; scratch uses conventional
+headers.h/metatiles.h definitions instead. No QA infrastructure change needed.
+NORMAL build currently in progress; no ROM/runtime/native PASS claimed yet.
+`apply_scratch_overlay.py` reproduces this source assembly with exact pins and
+requires explicit disposable marker/scratch branch; it is NOT production approval.
+Route202 production exclusive-files gate still fails for missing owner authority.
