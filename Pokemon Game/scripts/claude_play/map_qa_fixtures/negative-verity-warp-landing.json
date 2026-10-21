@@ -1,0 +1,26 @@
+{
+ "batch": [
+  "MAP_VERITY_LAKEFRONT",
+  "MAP_LAKE_VERITY"
+ ],
+ "entry": [
+  "MAP_VERITY_LAKEFRONT",
+  2,
+  7
+ ],
+ "description": "TEST-ONLY: Lake Verity's warp 0 is moved from the tunnel floor (38, 43) into the tree at (36, 43), so the Lakefront's step-on warp 0 lands the player in the wrong place. The warp 0 round trip must fail.",
+ "expect": "FAIL",
+ "must_fail": [
+  "warp 0"
+ ],
+ "edits": [
+  {
+   "op": "warp",
+   "map": "LakeVerity",
+   "index": 0,
+   "set": {
+    "x": 36
+   }
+  }
+ ]
+}
