@@ -64,7 +64,24 @@ class ManagerDelegationTest(unittest.TestCase):
             with self.subTest(path=path):
                 errors, _ = guard.validate(snapshot([MAP, path]))
                 self.assertTrue(any("Manager delegation excludes" in e for e in errors))
-                self.assertTrue(any("Map-file freeze" in e for e in errors))
+                self.assertFalse(any("Map-file freeze" in e for e in errors))
+
+    def test_omitting_changed_reserved_path_cannot_launder_mixed_pr(self):
+        for path in (REGION_IDS, SAVE, WORKFLOW):
+            with self.subTest(path=path):
+                errors, _ = guard.validate(snapshot([MAP, path], signed_paths=[MAP]))
+                self.assertTrue(any("Manager delegation excludes" in e and path in e
+                                    for e in errors))
+
+    def test_removed_reserved_path_cannot_use_routine_manager_marker(self):
+        data = snapshot([MAP, WORKFLOW], signed_paths=[MAP])
+        data["pull_request"]["files"][1]["status"] = "removed"
+        self.assertTrue(any("Manager delegation excludes" in e for e in guard.validate(data)[0]))
+
+    def test_separate_legacy_handoff_can_cover_reserved_change(self):
+        data = snapshot([MAP, SAVE], signed_paths=[MAP])
+        data["handoffs"] = [{"pr": 203, "paths": [SAVE], "association": "OWNER"}]
+        self.assertEqual(guard.validate(data)[0], [])
 
     def test_governance_and_security_are_reserved(self):
         for path in (WORKFLOW, ROOT + "scripts/coordination/check_protected_files.py"):
