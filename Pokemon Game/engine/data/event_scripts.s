@@ -1799,3 +1799,10 @@ AveronFieldLab_Gift::
 AveronFieldLab_TryGift::
 	end
 #endif
+
+	.include "data/maps/JubilifeCity/scripts.inc"
+	.include "data/maps/Route203/scripts.inc"
+	.include "data/maps/OreburghGate_1F/scripts.inc"
+	.include "data/maps/JubilifeCity_PokemonCenter_1F/scripts.inc"
+	.include "data/maps/JubilifeCity_Mart/scripts.inc"
+	.include "data/maps/JubilifeCity_PokemonSchool/scripts.inc"

@@ -208,10 +208,12 @@ class RepositoryPinTests(unittest.TestCase):
     def test_production_fixed_sentinel_and_explicit_sinnoh_sections(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
         report = audit.inventory(engine)
-        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (220, 215, 32))
+        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (223, 215, 29))
         for ident, value, name in (('MAPSEC_SANDGEM_TOWN', 216, 'SANDGEM TOWN'), ('MAPSEC_ROUTE_201', 217, 'ROUTE 201'),
                                    ('MAPSEC_TWINLEAF_TOWN', 218, 'TWINLEAF TOWN'), ('MAPSEC_ROUTE_202', 219, 'ROUTE 202'),
-                                   ('MAPSEC_LAKE_VERITY', 220, 'LAKE VERITY')):
+                                   ('MAPSEC_LAKE_VERITY', 220, 'LAKE VERITY'),
+                                   ('MAPSEC_JUBILIFE_CITY', 221, 'JUBILIFE CITY'), ('MAPSEC_ROUTE_203', 222, 'ROUTE 203'),
+                                   ('MAPSEC_OREBURGH_GATE', 223, 'OREBURGH GATE')):
             row = next(r for r in report['rows'] if r['id'] == ident)
             self.assertEqual((row['value'], row['name'], row['engine_region']), (value, name, 'REGION_SINNOH'))
             self.assertFalse(row['fly_row'])
