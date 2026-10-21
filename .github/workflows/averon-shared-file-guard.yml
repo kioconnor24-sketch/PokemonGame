@@ -76,10 +76,31 @@ jobs:
                   paths:match[3].split(',').map(x=>x.trim()),comment_id:c.id});
               }
             }
+            // Read production and PR registry JSON as DATA only. The verifier is
+            // trusted code from main, never code supplied by the PR.
+            const identityPaths=[
+              'Pokemon Game/engine/src/data/region_map/region_map_sections.json',
+              'Pokemon Game/scripts/averon-mapsec-pins.json'
+            ];
+            const identity_files={};
+            if(identityPaths.some(path=>own.some(f=>f.filename===path || f.previous_filename===path))){
+              for(const path of identityPaths){
+                const [mainFile, proposedFile]=await Promise.all([
+                  github.rest.repos.getContent({owner,repo,path,ref:'main'}),
+                  github.rest.repos.getContent({owner,repo,path,ref:pr.head.sha})
+                ]);
+                function parseFile(response){
+                  if(response.data.type!=='file' || response.data.encoding!=='base64' ||
+                     typeof response.data.content!=='string') throw Error('Unexpected registry source '+path);
+                  return JSON.parse(Buffer.from(response.data.content,'base64').toString('utf8'));
+                }
+                identity_files[path]={base:parseFile(mainFile),head:parseFile(proposedFile)};
+              }
+            }
             fs.writeFileSync('/tmp/averon-guard.json',JSON.stringify({
               pull_request:{number,head_sha:pr.head.sha,
                 files:own.map(f=>({filename:f.filename,status:f.status,previous_filename:f.previous_filename}))},
-              other_open_prs,handoffs,manager_delegation_active,manager_handoffs
+              other_open_prs,handoffs,manager_delegation_active,manager_handoffs,identity_files
             },null,2));
       - name: Enforce exclusive handoffs, prevent overlap and freeze violations
         run: python3 "Pokemon Game/scripts/coordination/check_protected_files.py" /tmp/averon-guard.json
