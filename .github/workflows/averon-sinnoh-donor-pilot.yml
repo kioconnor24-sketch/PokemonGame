@@ -7,9 +7,8 @@ on:
       - "Pokemon Game/scripts/sinnoh-donor-bank-audit.py"
       - "Pokemon Game/scripts/sinnoh-isolated-tileset.py"
       - "Pokemon Game/scripts/sinnoh-dual-bank-family.py"
-      - "Pokemon Game/scripts/tests/test_sinnoh_dual_bank_family.py"
-      - "Pokemon Game/scripts/tests/test_sinnoh_isolated_tileset.py"
-      - "Pokemon Game/scripts/tests/test_sinnoh_donor_map_pilot.py"
+      - "Pokemon Game/scripts/tests/test_sinnoh_*.py"
+      - "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/**"
       - ".github/workflows/averon-sinnoh-donor-pilot.yml"
   workflow_dispatch:
 
@@ -140,6 +139,20 @@ jobs:
           assert r["dependencies"]["palettes"] == [0, 1, 2, 3, 5]
           assert r["source_map_sha256"] == "9f58a62052998ed869259356c395302ef5bfa35624b612c0e68ae1922e00437b"
           print("Real Route202 static family staged; source pixels/map/border preserved. NOT gameplay acceptance.")
+          PYTEST
+
+      - name: Execute every Sinnoh source host regression (no ROM or gameplay claim)
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python3 - <<'PYTEST'
+          import unittest
+          suite = unittest.TestLoader().discover("Pokemon Game/scripts/tests", pattern="test_sinnoh_*.py")
+          if suite.countTestCases() == 0:
+              raise SystemExit("No Sinnoh source host tests discovered")
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          print(f"Sinnoh source host outcomes: {result.testsRun}; skipped: {len(result.skipped)}")
+          raise SystemExit(0 if result.wasSuccessful() else 1)
           PYTEST
 
       - name: Verify paired banks and namespaced animation closure
