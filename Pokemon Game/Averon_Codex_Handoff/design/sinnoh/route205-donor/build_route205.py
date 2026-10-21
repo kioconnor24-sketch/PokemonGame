@@ -16,8 +16,8 @@ Conversion, every change listed and asserted:
 - the Eterna Forest tunnel is sealed with Averon tree halves (Eterna Forest is not built); its warps are dropped;
 - the house is replaced by the Averon house template door-on-door (closed shell; no interior yet);
 - collision/elevation bits are the donor's, cell for cell, except the sealed tunnel (solid).
-Connections in the corridor batch: Floaroma Town (left, +64). Route 205 North (up) and Valley Windworks (right)
-stay closed. Excluded: donor trainers/NPCs (16 objects), 24 coord events, hidden item, scripts, music, IDs.
+Connections in the corridor batch: Floaroma Town (left, +64) and Route 205 North (up, +20). Valley Windworks
+(right) stays closed. Excluded: donor trainers/NPCs (16 objects), 24 coord events, hidden item, scripts, music, IDs.
 
   build_route205.py --donor-root DONOR --stage DIR      map.bin + map.json/scripts.inc (section pending owner)
 """
@@ -61,7 +61,10 @@ SIGNS = [(17, 18), (23, 85)]
 # West-edge mountain floor that faces nothing across the Floaroma seam (Floaroma only spans rows 64-99 here):
 # solid rock, so the edge is closed instead of a walk into an invisible wall (static seam-mismatch).
 SEAM_EDITS = {(0, 16): (0x310C, 0x3000 | (1 << 10) | 137), (0, 17): (0x310C, 0x3000 | (1 << 10) | 137),
-              (0, 21): (0x310C, 0x3000 | (1 << 10) | 137)}
+              (0, 21): (0x310C, 0x3000 | (1 << 10) | 137),
+              # North seam: the 2-wide mountain-top path (x 25-26) meets a 1-wide one on Route 205 North (x 5) at
+              # +20; (26, 0) faced North's rock (6, 59). Same art, now solid: the path narrows at the seam.
+              (26, 0): (0x4071, 0x4071 | (1 << 10))}
 
 
 def git_blob(raw):
@@ -119,7 +122,8 @@ def headers(section):
         "region": "REGION_SINNOH", "region_map_section": section, "weather": "WEATHER_SUNNY", "map_type": "MAP_TYPE_ROUTE",
         "allow_cycling": True, "allow_escaping": False, "allow_running": True, "show_map_name": True,
         "requires_flash": False, "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-        "connections": [{"map": "MAP_FLOAROMA_TOWN", "offset": 64, "direction": "left"}],
+        "connections": [{"map": "MAP_FLOAROMA_TOWN", "offset": 64, "direction": "left"},
+                        {"map": "MAP_ROUTE205_NORTH", "offset": 20, "direction": "up"}],
         "object_events": [], "warp_events": [], "coord_events": [],
         "bg_events": [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
                        "script": f"{NAME}_EventScript_Sign"} for x, y in SIGNS]}
