@@ -84,7 +84,11 @@ TEST("Averon Verity return warp accepts both real entrances and refuses an absen
     AveronRegionSave_InitNewGame();
     EXPECT(AveronRegion_SetReturnWarp(AVERON_SAVE_REGION_SINNOH, &warp));
     EXPECT(AveronRegion_GetReturnWarp(AVERON_SAVE_REGION_SINNOH, &observed));
-    EXPECT_EQ(memcmp(&warp, &observed, sizeof(warp)), 0);
+    EXPECT_EQ(warp.mapGroup, observed.mapGroup);
+    EXPECT_EQ(warp.mapNum, observed.mapNum);
+    EXPECT_EQ(warp.warpId, observed.warpId);
+    EXPECT_EQ(warp.x, observed.x);
+    EXPECT_EQ(warp.y, observed.y);
     EXPECT(AveronRegionSave_GetState(&before));
     warp.warpId = 2; // Only entrances 0 and 1 exist in either linked map.
     EXPECT(!AveronRegion_SetReturnWarp(AVERON_SAVE_REGION_SINNOH, &warp));
@@ -125,7 +129,11 @@ TEST("Averon Verity flash reload preserves the new map position origin and regio
     struct WarpData observed;
     EXPECT_EQ(AveronRegion_GetActive(), AVERON_SAVE_REGION_SINNOH);
     EXPECT(AveronRegion_GetReturnWarp(AVERON_SAVE_REGION_SINNOH, &observed));
-    EXPECT_EQ(memcmp(&position, &observed, sizeof(position)), 0);
+    EXPECT_EQ(position.mapGroup, observed.mapGroup);
+    EXPECT_EQ(position.mapNum, observed.mapNum);
+    EXPECT_EQ(position.warpId, observed.warpId);
+    EXPECT_EQ(position.x, observed.x);
+    EXPECT_EQ(position.y, observed.y);
     EXPECT_EQ(memcmp(&before, &gParties[B_TRAINER_PLAYER][0].box, sizeof(before)), 0);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION), MAPSEC_LAKE_VERITY);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_BAD_EGG), FALSE);
