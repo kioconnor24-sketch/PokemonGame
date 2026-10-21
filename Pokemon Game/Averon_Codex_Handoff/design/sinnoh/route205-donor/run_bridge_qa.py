@@ -24,8 +24,10 @@ def run(args):
     from codex_cry_gameplay import driver, emu, game, play
     spec = json.loads((HERE / "south-lower-route.json").read_text())
     points = validate_route(spec, (engine / "data/layouts/Route205_South/map.bin").read_bytes())
+    exit_spec = json.loads((HERE / "south-exit-route.json").read_text())
+    exit_points = validate_route(exit_spec, (engine / "data/layouts/Route205_South/map.bin").read_bytes(), allow_bridges=True)
     world = qa.mapdata.World(engine)
-    if any(not world.map(spec["map"]).walkable(*p) for p in points):
+    if any(not world.map(spec["map"]).walkable(*p) for p in points + exit_points):
         raise ValueError("lower approach crosses non-walking terrain")
     args.out.mkdir(parents=True, exist_ok=True)
     if any(args.out.iterdir()):
@@ -39,7 +41,7 @@ def run(args):
     findings, plan = qa.static_audit(world, ["MAP_ROUTE205_SOUTH", "MAP_ROUTE205_NORTH"])
     if findings:
         raise ValueError("source must pass static audit before bridge gameplay")
-    e = emu.Emulator(rom, args.out, audio=False)
+    e = emu.Emulator(rom, args.out, display=args.display, audio=False)
     g = game.Game(e, info)
     w.use_source_function_names(g)
     d = driver.Driver(e, g, world, args.out / "events.jsonl")
@@ -49,6 +51,8 @@ def run(args):
     error = None
 
     def go(mid, tile, label):
+        if d.here()[0] != mid:
+            d.travel_to(mid)
         ok = r.go(mid, tile)
         actual = r.wait_settled()
         reached = ok and actual == (mid, tile)
@@ -89,6 +93,17 @@ def run(args):
         go(mid, (17, 44), "upper-bridge-east-grass")
         for x in range(16, 12, -1):
             go(mid, (x, 44), "upper-bridge-under-" + str(x))
+        if not r.go(mid, exit_points[0]) or d.here() != (mid, exit_points[0]):
+            raise RuntimeError("North exit approach started on the wrong tile")
+        for direction, target in zip(exit_spec["steps"], exit_points[1:]):
+            d.step(direction)
+            actual = r.wait_settled()
+            d.log("north-exit-route-step", direction=direction, expected=(mid, target), actual=actual)
+            if actual != (mid, target):
+                raise RuntimeError("North exit approach missed its exact next tile")
+        d.step("up")
+        if r.wait_settled() != ("MAP_ROUTE205_NORTH", (2, 59)):
+            raise RuntimeError("North exit approach missed its exact seam landing")
         mid = "MAP_ROUTE205_NORTH"
         for tile in [(60, 16), (60, 17), (60, 18), (61, 18), (62, 18)]:
             go(mid, tile, "north-converted-walkway-" + str(tile))
@@ -109,4 +124,5 @@ if __name__ == "__main__":
     for arg in ("engine", "rom", "save", "scratch", "out"):
         parser.add_argument("--" + arg, type=Path, required=True)
     parser.add_argument("--profile", choices=("normal", "release"), required=True)
+    parser.add_argument("--display", type=int, default=77)
     sys.exit(run(parser.parse_args()))

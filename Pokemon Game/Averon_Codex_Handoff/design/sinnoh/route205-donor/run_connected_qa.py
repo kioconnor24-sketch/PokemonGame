@@ -20,7 +20,7 @@ DIRS = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
 REVERSE = {"up": "down", "down": "up", "left": "right", "right": "left"}
 
 
-def validate_route(spec, raw):
+def validate_route(spec, raw, *, allow_bridges=False):
     if hashlib.sha256(raw).hexdigest() != spec["map_sha256"]:
         raise ValueError("North source changed; revalidate elevation route")
     width, height = spec["width"], spec["height"]
@@ -39,20 +39,26 @@ def validate_route(spec, raw):
     x, y = spec["start"]
     points = [(x, y)]
     elevation = cells[y * width + x] >> 12
+    if elevation == 15:
+        raise ValueError("route must start on an unambiguous ground elevation")
     for direction in spec["steps"]:
         if direction not in DIRS:
             raise ValueError("unsupported controller direction")
+        previous_level = cells[y * width + x] >> 12
         dx, dy = DIRS[direction]
         x, y = x + dx, y + dy
         if not (0 <= x < width and 0 <= y < height):
             raise ValueError("route escapes map")
         cell = cells[y * width + x]
         level = cell >> 12
-        if (cell >> 10) & 3 or level == 15:
+        if (cell >> 10) & 3 or (level == 15 and not allow_bridges):
             raise ValueError("route crosses collision or an ambiguous bridge")
-        if elevation and level not in (0, elevation):
+        if elevation and level not in (0, 15, elevation):
             raise ValueError("route crosses an incompatible elevation")
-        elevation = level
+        # Mirrors ObjectEventUpdateElevation: both entering multi-level tiles
+        # and the first step off them retain the prior object elevation.
+        if level != 15 and previous_level != 15:
+            elevation = level
         points.append((x, y))
     if (x, y) != tuple(spec["goal"]):
         raise ValueError("route misses the high seam")

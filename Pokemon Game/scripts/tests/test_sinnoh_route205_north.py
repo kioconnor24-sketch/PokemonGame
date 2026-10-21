@@ -218,6 +218,37 @@ class NorthConversionTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaisesRegex(ValueError, error):
                 connected_qa.validate_route(candidate, changed)
 
+    def test_multi_level_bridge_retains_both_valid_object_elevations(self):
+        for level in (3, 4):
+            raw = struct.pack('<4H', (level << 12) | 1, 0xF2C3, 0xF2CB, (level << 12) | 1)
+            route = dict(width=4, height=1, start=[0, 0], goal=[3, 0], steps=['right'] * 3,
+                         map_sha256=hashlib.sha256(raw).hexdigest())
+            self.assertEqual(connected_qa.validate_route(route, raw, allow_bridges=True),
+                             [(0, 0), (1, 0), (2, 0), (3, 0)])
+            with self.assertRaisesRegex(ValueError, "ambiguous bridge"):
+                connected_qa.validate_route(route, raw)
+
+    def test_multi_level_bridge_cannot_change_elevation_or_guess_initial_level(self):
+        raw = struct.pack('<4H', 0x3001, 0xF2C3, 0xF2CB, 0x4001)
+        route = dict(width=4, height=1, start=[0, 0], goal=[3, 0], steps=['right'] * 3,
+                     map_sha256=hashlib.sha256(raw).hexdigest())
+        with self.assertRaisesRegex(ValueError, "incompatible elevation"):
+            connected_qa.validate_route(route, raw, allow_bridges=True)
+        route['start'], route['steps'] = [1, 0], ['right'] * 2
+        with self.assertRaisesRegex(ValueError, "unambiguous ground"):
+            connected_qa.validate_route(route, raw, allow_bridges=True)
+
+    def test_real_south_exit_route_uses_stairs_and_preserves_bridge_level(self):
+        route = json.loads((HERE / "south-exit-route.json").read_text())
+        raw = (HERE / "staged/Route205_South.bin").read_bytes()
+        points = connected_qa.validate_route(route, raw, allow_bridges=True)
+        self.assertEqual(len(points), 106)
+        self.assertEqual(points[-1], (22, 0))
+        reverse = deepcopy(route)
+        reverse['start'], reverse['goal'] = route['goal'], route['start']
+        reverse['steps'] = [connected_qa.REVERSE[d] for d in reversed(route['steps'])]
+        self.assertEqual(connected_qa.validate_route(reverse, raw, allow_bridges=True), points[::-1])
+
 
 if __name__ == "__main__":
     unittest.main()
