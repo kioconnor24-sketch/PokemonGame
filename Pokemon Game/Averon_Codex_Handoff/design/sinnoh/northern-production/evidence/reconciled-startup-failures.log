@@ -1,0 +1,53 @@
+=== northern-reconciled-normal.log ===
+Traceback (most recent call last):
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 185, in <module>
+    sys.exit(run(parser.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 131, in run
+    e = emu.Emulator(rom, args.out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window
+
+=== northern-reconciled-xvfb.log ===
+_XSERVTransSocketCreateListener: failed to bind listener
+_XSERVTransSocketUNIXCreateListener: ...SocketCreateListener() failed
+_XSERVTransMakeAllCOTSServerListeners: failed to create listener for local
+_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
+_XSERVTransSocketCreateListener: failed to bind listener
+_XSERVTransSocketUNIXCreateListener: ...SocketCreateListener() failed
+_XSERVTransMakeAllCOTSServerListeners: failed to create listener for unix
+(EE) 
+Fatal server error:
+(EE) Cannot establish any listening sockets - Make sure an X server isn't already running(EE) 
+
+=== northern-reconciled-net-normal.log ===
+Traceback (most recent call last):
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 185, in <module>
+    sys.exit(run(parser.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 131, in run
+    e = emu.Emulator(rom, args.out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window
+
+=== northern-reconciled-serial-normal.log ===
+Traceback (most recent call last):
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 185, in <module>
+    sys.exit(run(parser.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_connected_qa.py", line 131, in run
+    e = emu.Emulator(rom, args.out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-northern-integration/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window
