@@ -1,5 +1,9 @@
 # Pokémon Averon — ChatGPT manager next-session handoff (2026-10-21)
 
+> **HISTORICAL SNAPSHOT — superseded as the default manager start document on October 22, 2026.** Read the [current October 22 manager handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261022.md) first. The old statements below that #202/#194 remain open, #184 remains an active draft, and northern saved origins224–226 lack an owner choice are outdated. Preserve this document as historical evidence; refresh live main, PR checks and Issue #15 before acting.
+
+
+
 **CURRENT DEFAULT MANAGER START DOCUMENT. READ IN FULL.** The previous [October 20 handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261020.md) and older dated manager documents are historical checkpoints, not live task assignments. The [operating contract](CURRENT_PHASE_AND_HANDOFF.md) remains the source of authority for permission, review, owner approvals, and preservation; this file gives **dated, evidence-scoped state and execution order**, not a policy override. Always refresh GitHub first. Do **not** infer that an issue comment, scheduled task, or this handoff starts a Codex session.
 
 **Repository:** https://github.com/kioconnor24-sketch/PokemonGame  
