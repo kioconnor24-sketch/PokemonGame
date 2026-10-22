@@ -10,6 +10,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import re
 import subprocess
 
 HERE=Path(__file__).resolve().parent
@@ -22,6 +23,17 @@ art=importlib.util.module_from_spec(spec);spec.loader.exec_module(art)
 base=art.pack.accepted.base
 sha=lambda data:hashlib.sha256(data).hexdigest()
 encode=lambda data:(json.dumps(data,indent=2)+'\n').encode()
+
+
+def asset_bindings(headers,name):
+    block=re.search(r'const struct Tileset gTileset_'+re.escape(name)+r' =\s*\{(.*?)\};',headers,re.S)
+    if not block:raise ValueError('existing tileset declaration missing: '+name)
+    result={}
+    for field in ('tiles','palettes','callback'):
+        value=re.search(r'\.'+field+r'\s*=\s*(\w+)\s*,',block[1])
+        if not value:raise ValueError('existing asset binding missing: '+name+'/'+field)
+        result[field]=value[1]
+    return result
 
 
 def inputs(repo):
@@ -41,19 +53,20 @@ def assemble(repo):
     if pins.count(marker)!=1:raise ValueError('registry count mismatch')
     pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 24, 1)')
     files={};symbols={};declarations='\n';headers='\n';metatiles='\n';includes=[]
-    for family,secondary,graphics,callback,folder in (
-            ('OutdoorPrimary',False,'General','InitTilesetAnim_General','city-family'),
-            ('OutdoorSecondary',True,'Rustboro','InitTilesetAnim_Rustboro','city-family'),
-            ('GatePrimary',False,'Building','NULL','gate-art'),
-            ('GateSecondary',True,'Shop','NULL','gate-art')):
+    for family,secondary,graphics,folder in (
+            ('OutdoorPrimary',False,'General','city-family'),
+            ('OutdoorSecondary',True,'Rustboro','city-family'),
+            ('GatePrimary',False,'Building','gate-art'),
+            ('GateSecondary',True,'Shop','gate-art')):
         bank='secondary' if secondary else 'primary';symbol='EternaDev'+family;path=f'data/tilesets/{bank}/eterna_dev_{family.lower()}/'
         records=(HERE/folder/(bank+'-metatiles.bin')).read_bytes();attrs=(HERE/folder/(bank+'-attributes.bin')).read_bytes()
         if not records or len(records)%16 or len(records)>8192 or len(attrs)*8!=len(records):raise ValueError('invalid metadata bank')
         files[path+'metatiles.bin']=records;files[path+'metatile_attributes.bin']=attrs
         symbols[family]='gTileset_'+symbol
+        bindings=asset_bindings(before['src/data/tilesets/headers.h'].decode(),graphics)
         declarations+=f'extern const struct Tileset gTileset_{symbol};\n'
         metatiles+=f'const u16 gMetatiles_{symbol}[] = INCBIN_U16("{path}metatiles.bin");\nconst u16 gMetatileAttributes_{symbol}[] = INCBIN_U16("{path}metatile_attributes.bin");\n'
-        headers+=f'const struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary else "FALSE"}, .tiles=gTilesetTiles_{graphics}, .palettes=gTilesetPalettes_{graphics}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={callback} }};\n'
+        headers+=f'const struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n'
     source_headers={};layout_ids={d['id'] for d in layouts['layouts']}
     for slot,(name,(w,h)) in enumerate(MAPS.items(),19):
         folder=HERE/'staged'/name;header=json.loads((folder/'map.json').read_text());source_headers[name]=copy.deepcopy(header)

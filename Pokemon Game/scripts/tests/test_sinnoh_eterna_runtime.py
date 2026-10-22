@@ -42,6 +42,13 @@ class RuntimeTest(unittest.TestCase):
             for key in ('primary_tileset','secondary_tileset'):self.assertEqual(d[name+'_Layout'][key],d['EternaCity_Layout'][key])
         self.assertNotEqual(d['Route206_North_Layout']['primary_tileset'],d['EternaCity_Layout']['primary_tileset'])
 
+    def test_existing_building_asset_alias_and_animation_callback_are_reused(self):
+        bindings=a.asset_bindings(self.before['src/data/tilesets/headers.h'].decode(),'Building')
+        self.assertEqual(bindings,dict(tiles='gTilesetTiles_InsideBuilding',palettes='gTilesetPalettes_InsideBuilding',callback='InitTilesetAnim_Building'))
+        header=self.files['src/data/tilesets/headers.h'].decode().split('const struct Tileset gTileset_EternaDevGatePrimary')[1]
+        for value in bindings.values():self.assertIn(value,header)
+        with self.assertRaises(ValueError):a.asset_bindings('', 'Missing')
+
     def test_no_save_id_general_northern_or_existing_gate_writes(self):
         self.assertEqual(len(self.files),36)
         for p in self.files:
