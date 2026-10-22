@@ -1,0 +1,151 @@
+{
+  "status": "BEFORE_AFTER_SAME_CAMERA_VISUAL_DIAGNOSTIC_NOT_FULL_GAMEPLAY_ACCEPTANCE",
+  "before": [
+    {
+      "status": "VISUAL_PROBE_OBSERVATION_NOT_GAMEPLAY_ACCEPTANCE",
+      "profile": "normal",
+      "rom_sha256": "3a47208887a0a9d295e1a46f9916db31c06e39d606179ad754274a692190cf3a",
+      "driver_sha256": "7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6",
+      "baseline": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+      "observations": [
+        {
+          "label": "immediate",
+          "delay_seconds": 0,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 548,
+          "image": "0008-entrance-immediate.png"
+        },
+        {
+          "label": "settled",
+          "delay_seconds": 3,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 1024,
+          "image": "0009-entrance-settled.png"
+        }
+      ],
+      "dev_entry": true
+    },
+    {
+      "status": "VISUAL_PROBE_OBSERVATION_NOT_GAMEPLAY_ACCEPTANCE",
+      "profile": "release",
+      "rom_sha256": "942443014e0eae9c7ecf6ca53d51aede939fef6cd80394e57dd3b5d6c895158c",
+      "driver_sha256": "7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6",
+      "baseline": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+      "observations": [
+        {
+          "label": "immediate",
+          "delay_seconds": 0,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 548,
+          "image": "0008-entrance-immediate.png"
+        },
+        {
+          "label": "settled",
+          "delay_seconds": 3,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 1024,
+          "image": "0009-entrance-settled.png"
+        }
+      ],
+      "dev_entry": true
+    }
+  ],
+  "after": [
+    {
+      "status": "VISUAL_PROBE_OBSERVATION_NOT_GAMEPLAY_ACCEPTANCE",
+      "profile": "normal",
+      "rom_sha256": "0d3f92944d02c9c0d0ff5fcba249f46f9217de3eec0336b56fb0f84c697c760e",
+      "driver_sha256": "7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6",
+      "baseline": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+      "observations": [
+        {
+          "label": "immediate",
+          "delay_seconds": 0,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 0,
+          "image": "0010-entrance-immediate.png"
+        },
+        {
+          "label": "settled",
+          "delay_seconds": 3,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 0,
+          "image": "0011-entrance-settled.png"
+        }
+      ],
+      "dev_entry": true
+    },
+    {
+      "status": "VISUAL_PROBE_OBSERVATION_NOT_GAMEPLAY_ACCEPTANCE",
+      "profile": "release",
+      "rom_sha256": "d2a8723a67ca94d923b8d3f199e263595d7d4417c7393c927abb974a67dc2aca",
+      "driver_sha256": "7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6",
+      "baseline": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+      "observations": [
+        {
+          "label": "immediate",
+          "delay_seconds": 0,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 0,
+          "image": "0009-entrance-immediate.png"
+        },
+        {
+          "label": "settled",
+          "delay_seconds": 3,
+          "at": [
+            "MAP_OLD_CHATEAU_ENTRANCE",
+            [
+              9,
+              16
+            ]
+          ],
+          "magenta_pixels": 0,
+          "image": "0010-entrance-settled.png"
+        }
+      ],
+      "dev_entry": true
+    }
+  ]
+}
