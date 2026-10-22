@@ -1,0 +1,149 @@
+{
+  "maps": [
+    "MAP_ROUTE205_NORTH",
+    "MAP_ROUTE205_SOUTH",
+    "MAP_FLOAROMA_TOWN",
+    "MAP_FLOAROMA_MEADOW",
+    "MAP_ROUTE204",
+    "MAP_RAVAGED_PATH"
+  ],
+  "build": "normal",
+  "rom_sha256": "5bf7e16f41bf2e6e1e55538f45412699ab20493e62566e2b26db9c9c6577c259",
+  "static_findings": [],
+  "navigation": "hash-pinned52-step height route; existing checks unchanged, ordinary controller only",
+  "dev_entry": "continue-warp DEV fixture unless --expect; no production origin-name acceptance",
+  "alive": false,
+  "error": "expected 67 unchanged checks, got 9",
+  "checks": [
+    {
+      "name": "starts inside the batch",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          57
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (start)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "reached MAP_ROUTE205_NORTH",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          56
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH closed right edge at (79, 15) blocks",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          15
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          15
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH closed right edge at (79, 19) blocks",
+      "ok": true,
+      "before": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          19
+        ]
+      ],
+      "after": [
+        "MAP_ROUTE205_NORTH",
+        [
+          79,
+          19
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (2, 59) -> MAP_ROUTE205_SOUTH (22, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          2,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          2,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (3, 59) -> MAP_ROUTE205_SOUTH (23, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          3,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "MAP_ROUTE205_NORTH down seam (5, 59) -> MAP_ROUTE205_SOUTH (25, 0) and back",
+      "ok": true,
+      "leg": "back",
+      "expected": [
+        "MAP_ROUTE205_NORTH",
+        [
+          5,
+          59
+        ]
+      ],
+      "got": [
+        "MAP_ROUTE205_NORTH",
+        [
+          5,
+          59
+        ]
+      ]
+    },
+    {
+      "name": "run completed without the driver getting stuck",
+      "ok": false,
+      "error": "RuntimeError('controller route did not reach its exact next tile')"
+    }
+  ],
+  "verdict": "FAIL"
+}

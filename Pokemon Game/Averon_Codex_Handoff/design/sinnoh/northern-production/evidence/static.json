@@ -1,0 +1,674 @@
+{
+ "maps": [
+  "MAP_ROUTE205_NORTH",
+  "MAP_ROUTE205_SOUTH",
+  "MAP_FLOAROMA_TOWN",
+  "MAP_FLOAROMA_MEADOW",
+  "MAP_ROUTE204",
+  "MAP_RAVAGED_PATH",
+  "MAP_JUBILIFE_CITY"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ROUTE205_NORTH": {
+   "closed": [
+    {
+     "tile": [
+      79,
+      15
+     ],
+     "direction": "right",
+     "span": [
+      [
+       79,
+       14
+      ],
+      [
+       79,
+       15
+      ]
+     ]
+    },
+    {
+     "tile": [
+      79,
+      19
+     ],
+     "direction": "right",
+     "span": [
+      [
+       79,
+       17
+      ],
+      [
+       79,
+       21
+      ]
+     ]
+    }
+   ],
+   "points": [
+    {
+     "kind": "connection",
+     "tile": [
+      2,
+      59
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -20
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      3,
+      59
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -20
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      5,
+      59
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -20
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE205_SOUTH": {
+   "closed": [
+    {
+     "tile": [
+      31,
+      88
+     ],
+     "direction": "right",
+     "span": [
+      [
+       31,
+       86
+      ],
+      [
+       31,
+       89
+      ]
+     ]
+    }
+   ],
+   "points": [
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      85
+     ],
+     "direction": "left",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": 64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      86
+     ],
+     "direction": "left",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": 64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      87
+     ],
+     "direction": "left",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": 64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      88
+     ],
+     "direction": "left",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": 64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      22,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE205_NORTH",
+     "offset": 20
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      23,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE205_NORTH",
+     "offset": 20
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      25,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE205_NORTH",
+     "offset": 20
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_FLOAROMA_TOWN": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      3
+     ],
+     "warp": [
+      4,
+      2
+     ],
+     "dest": "MAP_FLOAROMA_MEADOW",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      5,
+      3
+     ],
+     "warp": [
+      5,
+      2
+     ],
+     "dest": "MAP_FLOAROMA_MEADOW",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      12,
+      35
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE204",
+     "offset": 2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      13,
+      35
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE204",
+     "offset": 2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      14,
+      35
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE204",
+     "offset": 2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      33,
+      21
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      33,
+      22
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      33,
+      23
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -64
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      33,
+      24
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE205_SOUTH",
+     "offset": -64
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_FLOAROMA_MEADOW": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      10,
+      49
+     ],
+     "warp": [
+      10,
+      50
+     ],
+     "dest": "MAP_FLOAROMA_TOWN",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      11,
+      49
+     ],
+     "warp": [
+      11,
+      50
+     ],
+     "dest": "MAP_FLOAROMA_TOWN",
+     "dest_warp": 1,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE204": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      11,
+      32
+     ],
+     "warp": [
+      11,
+      31
+     ],
+     "dest": "MAP_RAVAGED_PATH",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      19,
+      25
+     ],
+     "warp": [
+      19,
+      24
+     ],
+     "dest": "MAP_RAVAGED_PATH",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      10,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": -2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      11,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": -2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      12,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_FLOAROMA_TOWN",
+     "offset": -2
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      12,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      13,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      14,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      15,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": -36
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_RAVAGED_PATH": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      19,
+      40
+     ],
+     "warp": [
+      19,
+      40
+     ],
+     "dest": "MAP_ROUTE204",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      28,
+      35
+     ],
+     "warp": [
+      28,
+      35
+     ],
+     "dest": "MAP_ROUTE204",
+     "dest_warp": 1,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_JUBILIFE_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      55,
+      37
+     ],
+     "warp": [
+      55,
+      36
+     ],
+     "dest": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      54,
+      27
+     ],
+     "warp": [
+      54,
+      26
+     ],
+     "dest": "MAP_JUBILIFE_CITY_MART",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      43,
+      37
+     ],
+     "warp": [
+      43,
+      36
+     ],
+     "dest": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      19
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      20
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      21
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      69,
+      22
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE203",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      46,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      47,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      48,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      49,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      50,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      51,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      52,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      53,
+      63
+     ],
+     "direction": "down",
+     "dest": "MAP_ROUTE202",
+     "offset": 38
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      48,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE204",
+     "offset": 36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      49,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE204",
+     "offset": 36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      50,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE204",
+     "offset": 36
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      51,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE204",
+     "offset": 36
+    }
+   ],
+   "pocket": null
+  }
+ }
+}

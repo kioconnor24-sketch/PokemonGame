@@ -1806,3 +1806,10 @@ AveronFieldLab_TryGift::
 	.include "data/maps/JubilifeCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/JubilifeCity_Mart/scripts.inc"
 	.include "data/maps/JubilifeCity_PokemonSchool/scripts.inc"
+
+	.include "data/maps/Route204/scripts.inc"
+	.include "data/maps/RavagedPath/scripts.inc"
+	.include "data/maps/FloaromaTown/scripts.inc"
+	.include "data/maps/FloaromaMeadow/scripts.inc"
+	.include "data/maps/Route205_South/scripts.inc"
+	.include "data/maps/Route205_North/scripts.inc"

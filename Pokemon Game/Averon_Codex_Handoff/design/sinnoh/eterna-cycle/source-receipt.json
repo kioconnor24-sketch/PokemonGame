@@ -1,0 +1,889 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/EternaCity/map.json": "23ba87fc2e4301b215e5baea12ca3f3a54509cddf09e72fa5d98775683c6f363",
+    "data/layouts/EternaCity/map.bin": "3e510bec3d4479e761a05c585b82c9c1feba10c33dcded923443009bcba35064",
+    "data/layouts/EternaCity/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/Route206_North/map.json": "959fd5e01370aa86707c87d4074c04e4dd7bd04dbadb83aadd5575d254c0cecc",
+    "data/layouts/Route206_North/map.bin": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+    "data/layouts/Route206_North/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route206/map.json": "1b9c6c4fc759c1ad2e130b01e09a872473781e2b4a869ce62d2aa80aee677b58",
+    "data/layouts/Route206/map.bin": "78a861acf428dc3764afee5630d52b24505fb6181f8a566ca1ce40e26a096ac9",
+    "data/layouts/Route206/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/Route206_South/map.json": "4e6f6362a25528696dda06b23fc19e82189daab8dc86840deefdda4ac7d2f10c",
+    "data/layouts/Route206_South/map.bin": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+    "data/layouts/Route206_South/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route211_West/map.json": "d0c69a8555cef02961754da4ba3011be2bc74b6e57acc342d80a51701afc8ade",
+    "data/layouts/Route211_West/map.bin": "7815d84f586c9aeae4ad1e1b8fe99320adfb344608e630680299a3535121e35a",
+    "data/layouts/Route211_West/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/jubilife/metatile_attributes.bin": "9bd943f643aa81d907fb00e8db9c16f85962fb9c2d82a8a200d7bce53b241512",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/pasos/metatile_attributes.bin": "3efe3d6118ddb28de6083531ec1304f5b4db5b54731609dc31e68ea8ccb9aaac",
+    "data/tilesets/secondary/sunnyshore/metatile_attributes.bin": "9f70c8c3b5288e5e99736d6cfaf32965eab66c844341b1ad9048847b68146640"
+  },
+  "identity_roundtrips": {
+    "EternaCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ETERNA_CITY",
+      "target_map": "MAP_ETERNA_CITY",
+      "source_sha256": "3e510bec3d4479e761a05c585b82c9c1feba10c33dcded923443009bcba35064",
+      "output_sha256": "3e510bec3d4479e761a05c585b82c9c1feba10c33dcded923443009bcba35064",
+      "mapped_unique_metatiles": 250,
+      "dimensions": [
+        60,
+        55
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route206_North": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE206_NORTH",
+      "target_map": "MAP_ROUTE206_NORTH",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "output_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "mapped_unique_metatiles": 41,
+      "dimensions": [
+        9,
+        11
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route206": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE206",
+      "target_map": "MAP_ROUTE206",
+      "source_sha256": "78a861acf428dc3764afee5630d52b24505fb6181f8a566ca1ce40e26a096ac9",
+      "output_sha256": "78a861acf428dc3764afee5630d52b24505fb6181f8a566ca1ce40e26a096ac9",
+      "mapped_unique_metatiles": 125,
+      "dimensions": [
+        28,
+        120
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route206_South": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE206_SOUTH",
+      "target_map": "MAP_ROUTE206_SOUTH",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "output_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "mapped_unique_metatiles": 41,
+      "dimensions": [
+        9,
+        11
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route211_West": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE211_WEST",
+      "target_map": "MAP_ROUTE211_WEST",
+      "source_sha256": "7815d84f586c9aeae4ad1e1b8fe99320adfb344608e630680299a3535121e35a",
+      "output_sha256": "7815d84f586c9aeae4ad1e1b8fe99320adfb344608e630680299a3535121e35a",
+      "mapped_unique_metatiles": 40,
+      "dimensions": [
+        36,
+        28
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "EternaCity": {
+      "id": "MAP_ETERNA_CITY",
+      "name": "EternaCity",
+      "layout": "LAYOUT_ETERNA_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 16,
+          "y": 17,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_POKEMON_CENTER_F1",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 19,
+          "y": 33,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_MART",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 22,
+          "y": 44,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_GYM",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 19,
+          "y": 25,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_CYCLE_SHOP",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 20,
+          "y": 25,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_CYCLE_SHOP",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 25,
+          "y": 33,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_FLAT1_F1",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 21,
+          "y": 17,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_UNDERGROUND_MAN_HOUSE",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 27,
+          "y": 8,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_HERB_SHOP",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 9,
+          "y": 44,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_HOUSE1",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 39,
+          "y": 22,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_HOUSE2",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 16,
+          "y": 6,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY_GALACTIC_BUILDING_1F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 15,
+          "y": 48,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_NORTH",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE205_NORTH",
+          "offset": 0,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE211_WEST",
+          "offset": 0,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE206",
+          "offset": 1,
+          "direction": "down"
+        }
+      ]
+    },
+    "Route206_North": {
+      "id": "MAP_ROUTE206_NORTH",
+      "name": "Route206_North",
+      "layout": "LAYOUT_ROUTE206_NORTH",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY",
+          "dest_warp_id": "11"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "Route206": {
+      "id": "MAP_ROUTE206",
+      "name": "Route206",
+      "layout": "LAYOUT_ROUTE206",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 14,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_NORTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 12,
+          "y": 96,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 13,
+          "y": 96,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 12,
+          "y": 102,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 13,
+          "y": 102,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": -1,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_ROUTE207",
+          "offset": -2,
+          "direction": "down"
+        }
+      ]
+    },
+    "Route206_South": {
+      "id": "MAP_ROUTE206_SOUTH",
+      "name": "Route206_South",
+      "layout": "LAYOUT_ROUTE206_SOUTH",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "3"
+        }
+      ],
+      "connections": null
+    },
+    "Route211_West": {
+      "id": "MAP_ROUTE211_WEST",
+      "name": "Route211_West",
+      "layout": "LAYOUT_ROUTE211_WEST",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 29,
+          "y": 8,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": 0,
+          "direction": "left"
+        }
+      ]
+    }
+  },
+  "warp_index_translation": {
+    "EternaCity": {
+      "11": 0
+    },
+    "Route206_North": {
+      "0": 0,
+      "1": 1
+    },
+    "Route206": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4
+    },
+    "Route206_South": {
+      "0": 0,
+      "1": 1
+    },
+    "Route211_West": {}
+  },
+  "closure_changes": {
+    "EternaCity": [
+      {
+        "x": 19,
+        "y": 25,
+        "before": 825,
+        "after": 1849,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 20,
+        "y": 25,
+        "before": 825,
+        "after": 1849,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "before": 12409,
+        "after": 13433,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "before": 12409,
+        "after": 13433,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "before": 13027,
+        "after": 14051,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "before": 13028,
+        "after": 14052,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "before": 13028,
+        "after": 14052,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "before": 13028,
+        "after": 14052,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 0,
+        "before": 13029,
+        "after": 14053,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 0,
+        "before": 12409,
+        "after": 13433,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 14,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 15,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 16,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 17,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 18,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 19,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 20,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 21,
+        "before": 12555,
+        "after": 13579,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 59,
+        "y": 17,
+        "before": 12289,
+        "after": 13313,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      }
+    ],
+    "Route206_North": [
+      {
+        "x": 0,
+        "y": 2,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "before": 12818,
+        "after": 13842,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route206": [
+      {
+        "x": 11,
+        "y": 119,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 119,
+        "before": 12576,
+        "after": 13600,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 119,
+        "before": 12577,
+        "after": 13601,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 119,
+        "before": 12577,
+        "after": 13601,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 119,
+        "before": 12577,
+        "after": 13601,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 119,
+        "before": 12578,
+        "after": 13602,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 119,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 119,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 119,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route206_South": [
+      {
+        "x": 0,
+        "y": 2,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "before": 12818,
+        "after": 13842,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route211_West": [
+      {
+        "x": 29,
+        "y": 8,
+        "before": 167,
+        "after": 1191,
+        "reason": "unbuilt source destination"
+      }
+    ]
+  },
+  "maps": {
+    "EternaCity": {
+      "dimensions": [
+        60,
+        55
+      ],
+      "source_blob": "97a89e5859ba1eadce5edd3933113f1e5ad854b7",
+      "source_sha256": "3e510bec3d4479e761a05c585b82c9c1feba10c33dcded923443009bcba35064",
+      "staged_sha256": "192d712ae744ef68e832124f353b41de8cd36713487b3b5464c56c5448d09a33",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 19,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_ROUTE211_WEST",
+          "offset": 0,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE206",
+          "offset": 1,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route206_North": {
+      "dimensions": [
+        9,
+        11
+      ],
+      "source_blob": "38af8d53086c00edfee9778c2b17a9d5a12c1872",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "staged_sha256": "948782bb1af05f437faf408b275f746795b1b8531de203a6d2e9a2a1e9876278",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 10,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route206": {
+      "dimensions": [
+        28,
+        120
+      ],
+      "source_blob": "be22592888868f46afd1c6270a103aa0c5ad791d",
+      "source_sha256": "78a861acf428dc3764afee5630d52b24505fb6181f8a566ca1ce40e26a096ac9",
+      "staged_sha256": "4917e801218acb11cdd2f0451488b03bf5b26dd3b4f232b3e71d6dd3be18311a",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 9,
+      "warp_count": 5,
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": -1,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 271
+    },
+    "Route206_South": {
+      "dimensions": [
+        9,
+        11
+      ],
+      "source_blob": "38af8d53086c00edfee9778c2b17a9d5a12c1872",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "staged_sha256": "948782bb1af05f437faf408b275f746795b1b8531de203a6d2e9a2a1e9876278",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 10,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route211_West": {
+      "dimensions": [
+        36,
+        28
+      ],
+      "source_blob": "3e9730a4a2bc44fd0334f00bbdfc894db4439db5",
+      "source_sha256": "7815d84f586c9aeae4ad1e1b8fe99320adfb344608e630680299a3535121e35a",
+      "staged_sha256": "9a795ce62db7bdc0ef19c7256b65366bec1cec8ba33123be0806863f68890215",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 1,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": 0,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 19
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ]
+}
