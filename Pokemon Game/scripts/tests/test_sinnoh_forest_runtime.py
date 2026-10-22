@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import sys
+import types
 import unittest
 from unittest import mock
 
@@ -78,6 +80,31 @@ class ForestRuntimeTest(unittest.TestCase):
             for name,(width,height) in a.MAPS.items():
                 info=w.map(self.receipt['source_headers'][name]['id'])
                 self.assertEqual((info.width,info.height),(width,height));self.assertTrue(info._primary and info._secondary)
+
+    def test_follower_returns_after_a_real_falsey_state_snapshot(self):
+        self.follower_fixture(False)
+
+    def test_follower_does_not_send_a_return_for_a_failed_step(self):
+        self.follower_fixture(True)
+
+    def follower_fixture(self,fail):
+        scripts=ROOT/'Pokemon Game/scripts/claude_play';sys.path.insert(0,str(scripts))
+        import map_qa as qa
+        import game
+        d=types.SimpleNamespace(position=('MAP_TEST',(1,1)),steps=[])
+        d.here=lambda:d.position;d.log=lambda *args,**kwargs:None
+        d.live_map=lambda mid:types.SimpleNamespace(walkable=lambda x,y:True,warp_at=lambda x,y:None,objects=[])
+        def step(direction):
+            d.steps.append(direction)
+            if fail:return None
+            mid,(x,y)=d.position;dx,dy=qa.DIRS[direction];d.position=(mid,(x+dx,y+dy))
+            state=game.State();state.cb2='CB2_Overworld';state.x=x+dx;state.y=y+dy
+            self.assertFalse(bool(state));return state
+        d.step=step
+        runner=qa.Runner(d,types.SimpleNamespace(map=d.live_map),{},None)
+        play=types.SimpleNamespace(observe=lambda driver,label:dict(follower=dict(invisible=False)))
+        with mock.patch.dict(sys.modules,{'run':play}):self.assertTrue(runner.follower('actual State fixture'))
+        self.assertEqual(d.steps,['up'] if fail else ['up','down']);self.assertEqual(d.position,('MAP_TEST',(1,1)))
 
     def test_plan_reproduces_without_writing_any_input(self):
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
