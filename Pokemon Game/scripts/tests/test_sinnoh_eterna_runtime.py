@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import types
 import unittest
 from unittest import mock
 
@@ -109,6 +110,66 @@ class RuntimeTest(unittest.TestCase):
                               [b'codex/eterna-runtime-scratch-test\n',(a.BASE+'\n').encode(),b' M source.c\n']):
                 with mock.patch.object(a.base,'git',side_effect=responses),self.assertRaises(ValueError):a.install(repo)
             self.assertEqual(list(engine.iterdir()),[engine/'.map_qa_throwaway'])
+
+
+class ElevationNavigationTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec=importlib.util.spec_from_file_location('eterna_height_navigation',HERE/'run_runtime_qa.py')
+        cls.q=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.q)
+
+    def grid(self,rows,solids=(),warps=()):
+        return types.SimpleNamespace(
+            inside=lambda x,y:0<=y<len(rows) and 0<=x<len(rows[0]),
+            walkable=lambda x,y:0<=y<len(rows) and 0<=x<len(rows[0]) and (x,y) not in solids,
+            elevation=lambda x,y:rows[y][x],warp_at=lambda x,y:(x,y) if (x,y) in warps else None)
+
+    def test_bridge_does_not_allow_deck4_to_ground3_shortcut(self):
+        m=self.grid([[4,15,3]])
+        self.assertIsNone(self.q.elevation_path(m,(0,0),{(2,0)},start_elevation=4))
+        self.assertEqual(self.q.elevation_path(m,(2,0),{(1,0)},start_elevation=3),['left'])
+
+    def test_transition0_allows_a_real_change_between_layers(self):
+        m=self.grid([[3,0,4]])
+        self.assertEqual(self.q.elevation_path(m,(0,0),{(2,0)},start_elevation=3),['right','right'])
+
+    def test_leaving15_preserves_layer_for_that_step_like_native_update(self):
+        m=self.grid([[3,15,0,4]])
+        self.assertIsNone(self.q.elevation_path(m,(0,0),{(3,0)},start_elevation=3))
+        m=self.grid([[3,15,0,0,4]])
+        self.assertEqual(self.q.elevation_path(m,(0,0),{(4,0)},start_elevation=3),['right']*4)
+
+    def test_path_search_keeps_same_coordinate_on_different_layers_distinct(self):
+        m=self.grid([[3,15,4],[0,0,4]])
+        path=self.q.elevation_path(m,(0,0),{(2,0)},start_elevation=3)
+        self.assertIsNotNone(path);self.assertEqual(len(path),4);self.assertEqual(path[0],'down')
+        self.assertEqual(tuple(sum(self.q.DIRS[d][i] for d in path) for i in (0,1)),(2,0))
+
+    def test_solids_warps_and_invalid_elevation_still_refuse_bad_paths(self):
+        self.assertIsNone(self.q.elevation_path(self.grid([[3,3,3]],solids={(1,0)}),(0,0),{(2,0)},start_elevation=3))
+        self.assertIsNone(self.q.elevation_path(self.grid([[3,3,3]],warps={(1,0)}),(0,0),{(2,0)},start_elevation=3))
+        with self.assertRaises(ValueError):self.q.elevation_path(self.grid([[3]]),(0,0),{(0,0)},start_elevation=16)
+
+    def test_read_only_observation_uses_compiled_offsets_and_actual_object_ids(self):
+        raw=bytearray(16*16);raw[2*16+11]=0xA4;raw[5*16]=1;raw[5*16+8]=123;raw[5*16+11]=0xB3
+        calls=[]
+        def read(address,size):
+            calls.append((address,size))
+            return b'\x02' if address==103 else bytes(raw)
+        g=types.SimpleNamespace(off={'oe.size':16,'avatar.objectEventId':3,'oe.elevationByte':11,'oe.localId':8},
+            sym={'gPlayerAvatar':100,'gObjectEvents':200},c={'OBJ_EVENT_ID_FOLLOWER':123},gdb=types.SimpleNamespace(read=read))
+        self.assertEqual(self.q.observed_elevations(types.SimpleNamespace(g=g)),dict(player=4,follower=3))
+        self.assertEqual(calls,[(103,1),(200,256)])
+
+    def test_source_guard_rejects_unmarked_changed_and_escaping_runtime(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);recipe=dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',files={})
+            with self.assertRaises(ValueError):self.q.validate_source(root,recipe)
+            (root/'.map_qa_throwaway').touch();recipe['files']={'../outside':'bad'}
+            with self.assertRaises(ValueError):self.q.validate_source(root,recipe)
+            (root/'inside').write_bytes(b'good');recipe['files']={'inside':a.sha(b'bad')}
+            with self.assertRaises(ValueError):self.q.validate_source(root,recipe)
+            recipe['files']={'inside':a.sha(b'good')};self.q.validate_source(root,recipe)
 
 
 if __name__=='__main__':unittest.main()
