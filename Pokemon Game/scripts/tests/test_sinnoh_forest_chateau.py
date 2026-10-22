@@ -120,4 +120,30 @@ class ExistingArtTest(unittest.TestCase):
             with Image.open(HERE/'staged'/name/'averon.png') as published:self.assertEqual(published.convert('RGB').tobytes(),image.convert('RGB').tobytes())
 
 
+class EntranceArtTest(unittest.TestCase):
+    def test_source_geometry_attributes_and_substitution_footprint_are_exact(self):
+        receipt=json.loads((HERE/'entrance-graphics-compatibility.json').read_text())
+        folder=HERE/'staged/OldChateau_Entrance';raw=(folder/'map.bin').read_bytes()
+        self.assertEqual(stage.base.sha(raw),receipt['geometry_sha256'])
+        self.assertEqual(receipt['substituted_graphic_tile_ids'],[916,917,932,933])
+        affected=[[i%19,i//19] for i,(v,) in enumerate(struct.iter_unpack('<H',raw)) if (v&1023)==660]
+        self.assertEqual(affected,receipt['affected_cells']);self.assertEqual(len(affected),12)
+        engine=HERE.parents[3]/'engine';banks=[(engine/'data/tilesets/primary/building/metatile_attributes.bin').read_bytes(),(HERE/'entrance-attributes.bin').read_bytes()]
+        source=json.loads((folder/'attributes.json').read_text())['used_source_attribute_words']
+        for mid,attr in source.items():
+            bank,i=divmod(int(mid),512);self.assertEqual(struct.unpack_from('<H',banks[bank],i*2)[0],attr)
+        self.assertTrue(receipt['all_other_used_patterns_identical'] and receipt['all_used_palette_colors_equal'])
+
+    def test_existing_averon_museum_render_reproduces_without_donor_art(self):
+        from PIL import Image
+        spec=importlib.util.spec_from_file_location('entrance_art',HERE/'render_entrance.py');art=importlib.util.module_from_spec(spec);spec.loader.exec_module(art)
+        engine=HERE.parents[3]/'engine';primary='data/tilesets/primary/building/';secondary='data/tilesets/secondary/lilycove_museum/';d=art.shared.dual
+        receipt=json.loads((HERE/'entrance-graphics-compatibility.json').read_text())
+        images=[d.indexed((engine/f/'tiles.png').read_bytes()) for f in (primary,secondary)]
+        records=[(engine/primary/'metatiles.bin').read_bytes(),(HERE/'entrance-metatiles.bin').read_bytes()]
+        palettes={i:d.base.palette((engine/(primary if i<6 else secondary)/('palettes/%02d.pal'%i)).read_bytes()) for i in receipt['dependencies']['palettes']}
+        image=d.render((HERE/'staged/OldChateau_Entrance/map.bin').read_bytes(),records,images,palettes,19,17)
+        with Image.open(HERE/'staged/OldChateau_Entrance/averon.png') as published:self.assertEqual(image.tobytes(),published.tobytes())
+
+
 if __name__=='__main__':unittest.main()
