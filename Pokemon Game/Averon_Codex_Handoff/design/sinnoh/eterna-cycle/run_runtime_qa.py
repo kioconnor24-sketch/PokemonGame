@@ -15,6 +15,14 @@ MAPS=('MAP_ETERNA_CITY','MAP_ROUTE206_NORTH','MAP_ROUTE206','MAP_ROUTE206_SOUTH'
 DIRS={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}
 
 
+def arrow_direction(m,tile):
+    if not m.warp_at(*tile):return None
+    behavior=getattr(m,'behavior',lambda x,y:'')(*tile)
+    for word,direction in (('NORTH','up'),('SOUTH','down'),('WEST','left'),('EAST','right')):
+        if word+'_ARROW' in behavior:return direction
+    return None
+
+
 def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,start_elevation=0):
     """Host path planning follows IsElevationMismatchAt/ObjectEventUpdateElevation.
 
@@ -29,6 +37,9 @@ def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,
     while queue:
         x,y,z=queue.popleft();prior=m.elevation(x,y)
         for direction,(dx,dy) in DIRS.items():
+            # The native TryArrowWarp tests the CURRENT tile. Taking its arrow
+            # direction warps; it is not an ordinary step out of this square.
+            if arrow_direction(m,(x,y))==direction:continue
             tile=(x+dx,y+dy)
             if tile in blocked or not m.inside(*tile):continue
             if not m.walkable(*tile) and not (allow_goal_unwalkable and tile in goals):continue
@@ -129,8 +140,15 @@ def run(args):
                 if (not m.walkable(*tile) or m.warp_at(*tile)
                     or tile in {(o[0],o[1]) for o in m.objects}):continue
                 path=self.path(mid,tile)
-                if path!=[direction] or not self.d.step(direction):continue
-                self.d.step(qa.OPPOSITE[direction]);break
+                if path!=[direction]:continue
+                moved=self.d.step(direction)
+                if not moved:continue
+                if not self.d.field_ready(moved) or self.d.here(moved)!=(mid,tile):
+                    return self.check('follower visible ('+label+')',False,reason='ordinary foot probe unexpectedly left its map/tile',at=self.d.here(moved))
+                returned=self.d.step(qa.OPPOSITE[direction])
+                if not returned or not self.d.field_ready(returned) or self.d.here(returned)!=(mid,(x,y)):
+                    return self.check('follower visible ('+label+')',False,reason='ordinary foot probe did not return to the exact source tile',at=self.d.here())
+                break
             observation=w.play.observe(self.d,label);follower=observation.get('follower') or {}
             return self.check('follower visible ('+label+')',bool(follower) and not follower.get('invisible'),follower=follower,elevations=observed_elevations(self.d))
 

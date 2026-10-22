@@ -150,6 +150,11 @@ class ElevationNavigationTest(unittest.TestCase):
         self.assertIsNone(self.q.elevation_path(self.grid([[3,3,3]],warps={(1,0)}),(0,0),{(2,0)},start_elevation=3))
         with self.assertRaises(ValueError):self.q.elevation_path(self.grid([[3]]),(0,0),{(0,0)},start_elevation=16)
 
+    def test_arrow_warp_at_current_tile_cannot_be_used_as_an_ordinary_footstep(self):
+        m=self.grid([[3],[3],[3]],warps={(0,1)});m.behavior=lambda x,y:'MB_NORTH_ARROW_WARP' if (x,y)==(0,1) else 'MB_NORMAL'
+        self.assertIsNone(self.q.elevation_path(m,(0,1),{(0,0)},start_elevation=3))
+        self.assertEqual(self.q.elevation_path(m,(0,1),{(0,2)},start_elevation=3),['down'])
+
     def test_read_only_observation_uses_compiled_offsets_and_actual_object_ids(self):
         raw=bytearray(16*16);raw[2*16+11]=0xA4;raw[5*16]=1;raw[5*16+8]=123;raw[5*16+11]=0xB3
         calls=[]
