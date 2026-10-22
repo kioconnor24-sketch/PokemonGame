@@ -1,0 +1,547 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/Route210_North/map.json": "f7cf0b3c4d4bac8c232f71ea6d5d9435fcc1302b40f093359f69994feb9b3975",
+    "data/layouts/Route210_North/map.bin": "b7b1906b9392327f8593249e76e4fc801d0392c2a0bd4a662b8c41f5cbff9f1e",
+    "data/layouts/Route210_North/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/CelesticTown/map.json": "dea62eeeebfb014695de014ddd914a6245df817e71a9c7e3c7ee8bfa0d8fa4c4",
+    "data/layouts/CelesticTown/map.bin": "4d04516fb285c8afff2c08718e850369a80e0cf022b017e9bb0e68d589af1580",
+    "data/layouts/CelesticTown/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/Route211_East/map.json": "1611d7aff4d1142914c92c68754b20ab72524197ab367f331be20b0a5f31de44",
+    "data/layouts/Route211_East/map.bin": "d054ce9024e32abcd065e218a121a29102a52c19b4ace930ad87c936923c10b0",
+    "data/layouts/Route211_East/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/MtCoronet_1F_North_Room1/map.json": "b89db69df8edd89b83a6d12fdb2a4e0371bee82097d74d69c8b70f8f954492f6",
+    "data/layouts/MtCoronet_1F_North_Room1/map.bin": "f71d5ae4792368ec671d68db77144ad6419150776e2a3d5ebfaabab07b904f14",
+    "data/layouts/MtCoronet_1F_North_Room1/border.bin": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+    "data/maps/MtCoronet_1F_North_Room2/map.json": "2185f7050e52a3714fd4eba2530c6b10c89fa365690b9e6c46beec5a83c0a24b",
+    "data/layouts/MtCoronet_1F_North_Room2/map.bin": "20691d92bd5088ac25be04aef099d1a48b0ae76f43b5acb6eb4c539435db8a6a",
+    "data/layouts/MtCoronet_1F_North_Room2/border.bin": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+    "data/maps/MtCoronet_B1F/map.json": "4707dc7ffd4d76728916fe9f821f8ee9960fb3663894c1edddd43a45aad51104",
+    "data/layouts/MtCoronet_B1F/map.bin": "d92b3a50d8bd6890a29e4b58dd2907a4c0ae95591a3354d98ae8aa8343dbdfde",
+    "data/layouts/MtCoronet_B1F/border.bin": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/celestic/metatile_attributes.bin": "eaead554f5bdde8202c8efd97372fc1f356a365a70e133f4633eea99859682ad",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "b07b2b2a732f70339ba165ba8126b3ccf18f4fcbc7cdf800bdb4cb36e8b855c7"
+  },
+  "identity_roundtrips": {
+    "Route210_North": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE210_NORTH",
+      "target_map": "MAP_ROUTE210_NORTH",
+      "source_sha256": "b7b1906b9392327f8593249e76e4fc801d0392c2a0bd4a662b8c41f5cbff9f1e",
+      "output_sha256": "b7b1906b9392327f8593249e76e4fc801d0392c2a0bd4a662b8c41f5cbff9f1e",
+      "mapped_unique_metatiles": 128,
+      "dimensions": [
+        99,
+        29
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "CelesticTown": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_CELESTIC_TOWN",
+      "target_map": "MAP_CELESTIC_TOWN",
+      "source_sha256": "4d04516fb285c8afff2c08718e850369a80e0cf022b017e9bb0e68d589af1580",
+      "output_sha256": "4d04516fb285c8afff2c08718e850369a80e0cf022b017e9bb0e68d589af1580",
+      "mapped_unique_metatiles": 143,
+      "dimensions": [
+        38,
+        35
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route211_East": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE211_EAST",
+      "target_map": "MAP_ROUTE211_EAST",
+      "source_sha256": "d054ce9024e32abcd065e218a121a29102a52c19b4ace930ad87c936923c10b0",
+      "output_sha256": "d054ce9024e32abcd065e218a121a29102a52c19b4ace930ad87c936923c10b0",
+      "mapped_unique_metatiles": 48,
+      "dimensions": [
+        32,
+        32
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "MtCoronet_1F_North_Room1": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+      "target_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+      "source_sha256": "f71d5ae4792368ec671d68db77144ad6419150776e2a3d5ebfaabab07b904f14",
+      "output_sha256": "f71d5ae4792368ec671d68db77144ad6419150776e2a3d5ebfaabab07b904f14",
+      "mapped_unique_metatiles": 36,
+      "dimensions": [
+        36,
+        51
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "MtCoronet_1F_North_Room2": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+      "target_map": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+      "source_sha256": "20691d92bd5088ac25be04aef099d1a48b0ae76f43b5acb6eb4c539435db8a6a",
+      "output_sha256": "20691d92bd5088ac25be04aef099d1a48b0ae76f43b5acb6eb4c539435db8a6a",
+      "mapped_unique_metatiles": 18,
+      "dimensions": [
+        19,
+        16
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "MtCoronet_B1F": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_MT_CORONET_B1F",
+      "target_map": "MAP_MT_CORONET_B1F",
+      "source_sha256": "d92b3a50d8bd6890a29e4b58dd2907a4c0ae95591a3354d98ae8aa8343dbdfde",
+      "output_sha256": "d92b3a50d8bd6890a29e4b58dd2907a4c0ae95591a3354d98ae8aa8343dbdfde",
+      "mapped_unique_metatiles": 38,
+      "dimensions": [
+        32,
+        65
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "Route210_North": {
+      "id": "MAP_ROUTE210_NORTH",
+      "name": "Route210_North",
+      "layout": "LAYOUT_ROUTE210_NORTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ROUTE210_SOUTH",
+          "offset": 57,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -6,
+          "direction": "left"
+        }
+      ]
+    },
+    "CelesticTown": {
+      "id": "MAP_CELESTIC_TOWN",
+      "name": "CelesticTown",
+      "layout": "LAYOUT_CELESTIC_TOWN",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ROUTE210_NORTH",
+          "offset": 6,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE211_EAST",
+          "offset": 3,
+          "direction": "left"
+        }
+      ]
+    },
+    "Route211_East": {
+      "id": "MAP_ROUTE211_EAST",
+      "name": "Route211_East",
+      "layout": "LAYOUT_ROUTE211_EAST",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 10,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -3,
+          "direction": "right"
+        }
+      ]
+    },
+    "MtCoronet_1F_North_Room1": {
+      "id": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+      "name": "MtCoronet_1F_North_Room1",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM1",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 3,
+          "y": 33,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE211_WEST",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 32,
+          "y": 33,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE211_EAST",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_B1F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "MtCoronet_1F_North_Room2": {
+      "id": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+      "name": "MtCoronet_1F_North_Room2",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM2",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 12,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_B1F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE216",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "MtCoronet_B1F": {
+      "id": "MAP_MT_CORONET_B1F",
+      "name": "MtCoronet_B1F",
+      "layout": "LAYOUT_MT_CORONET_B1F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 60,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 8,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": 0
+    }
+  },
+  "warp_index_translation": {
+    "Route210_North": {},
+    "CelesticTown": {},
+    "Route211_East": {
+      "0": 0
+    },
+    "MtCoronet_1F_North_Room1": {
+      "1": 0,
+      "2": 1
+    },
+    "MtCoronet_1F_North_Room2": {
+      "0": 0
+    },
+    "MtCoronet_B1F": {
+      "0": 0,
+      "1": 1
+    }
+  },
+  "closure_changes": {
+    "Route210_North": [
+      {
+        "x": 48,
+        "y": 0,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 50,
+        "y": 0,
+        "before": 4498,
+        "after": 5522,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 83,
+        "y": 28,
+        "before": 12576,
+        "after": 13600,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 84,
+        "y": 28,
+        "before": 12577,
+        "after": 13601,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 85,
+        "y": 28,
+        "before": 12578,
+        "after": 13602,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 86,
+        "y": 28,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "CelesticTown": [],
+    "Route211_East": [],
+    "MtCoronet_1F_North_Room1": [
+      {
+        "x": 3,
+        "y": 33,
+        "before": 12807,
+        "after": 13831,
+        "reason": "unbuilt source destination"
+      }
+    ],
+    "MtCoronet_1F_North_Room2": [
+      {
+        "x": 3,
+        "y": 4,
+        "before": 12807,
+        "after": 13831,
+        "reason": "unbuilt source destination"
+      }
+    ],
+    "MtCoronet_B1F": []
+  },
+  "maps": {
+    "Route210_North": {
+      "dimensions": [
+        99,
+        29
+      ],
+      "source_blob": "60d9586757efe560c5808418d05c4c91e53ea258",
+      "source_sha256": "b7b1906b9392327f8593249e76e4fc801d0392c2a0bd4a662b8c41f5cbff9f1e",
+      "staged_sha256": "4a60b6e553b32d17a1813ec72226e92fcacab5319a91fd2ff90b86cd6c16af13",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 6,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -6,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 48
+    },
+    "CelesticTown": {
+      "dimensions": [
+        38,
+        35
+      ],
+      "source_blob": "510a7a21efed727805bb7db13f5cbca5c34e7dd3",
+      "source_sha256": "4d04516fb285c8afff2c08718e850369a80e0cf022b017e9bb0e68d589af1580",
+      "staged_sha256": "4d04516fb285c8afff2c08718e850369a80e0cf022b017e9bb0e68d589af1580",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 0,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ROUTE210_NORTH",
+          "offset": 6,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE211_EAST",
+          "offset": 3,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route211_East": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "source_blob": "fe18fa5a0c1bceff72658bbde3414361ac503382",
+      "source_sha256": "d054ce9024e32abcd065e218a121a29102a52c19b4ace930ad87c936923c10b0",
+      "staged_sha256": "d054ce9024e32abcd065e218a121a29102a52c19b4ace930ad87c936923c10b0",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 0,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -3,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "MtCoronet_1F_North_Room1": {
+      "dimensions": [
+        36,
+        51
+      ],
+      "source_blob": "077741fab7d11819896b5a49a7c3b12d311e0f5d",
+      "source_sha256": "f71d5ae4792368ec671d68db77144ad6419150776e2a3d5ebfaabab07b904f14",
+      "staged_sha256": "6c67b9db55fb41b5b3cd838e0f459167d81a7a8323cbdf49022b13b64fc5bdba",
+      "border_sha256": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+      "closed_cells": 1,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "MtCoronet_1F_North_Room2": {
+      "dimensions": [
+        19,
+        16
+      ],
+      "source_blob": "f2c39cf2d36185beb1bec3caec4a79fe2a96382a",
+      "source_sha256": "20691d92bd5088ac25be04aef099d1a48b0ae76f43b5acb6eb4c539435db8a6a",
+      "staged_sha256": "23a98b9605f0f3b66d93d302e826552e39b2394e9275a4a156b314f317fc1b54",
+      "border_sha256": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+      "closed_cells": 1,
+      "warp_count": 1,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "MtCoronet_B1F": {
+      "dimensions": [
+        32,
+        65
+      ],
+      "source_blob": "33dea8eb454992463d78b2f90692ba2993bbbe78",
+      "source_sha256": "d92b3a50d8bd6890a29e4b58dd2907a4c0ae95591a3354d98ae8aa8343dbdfde",
+      "staged_sha256": "d92b3a50d8bd6890a29e4b58dd2907a4c0ae95591a3354d98ae8aa8343dbdfde",
+      "border_sha256": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+      "closed_cells": 0,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ]
+}
