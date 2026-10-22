@@ -106,6 +106,20 @@ class ForestRuntimeTest(unittest.TestCase):
         with mock.patch.dict(sys.modules,{'run':play}):self.assertTrue(runner.follower('actual State fixture'))
         self.assertEqual(d.steps,['up'] if fail else ['up','down']);self.assertEqual(d.position,('MAP_TEST',(1,1)))
 
+    def test_runtime_floor_repair_is_opaque_and_preserves_source_attributes(self):
+        import struct
+        records=(HERE/'entrance-metatiles.bin').read_bytes()
+        self.assertEqual(records[(660-512)*16:(661-512)*16],records[(649-512)*16:(650-512)*16])
+        source=json.loads((HERE/'staged/OldChateau_Entrance/attributes.json').read_text())['used_source_attribute_words']
+        self.assertEqual(struct.unpack_from('<H',(HERE/'entrance-attributes.bin').read_bytes(),(660-512)*2)[0],source['660'])
+        images=[a.art.pack.accepted.dual.indexed((ROOT/a.ENGINE/('data/tilesets/'+p+'/tiles.png')).read_bytes()) for p in ('primary/building','secondary/lilycove_museum')]
+        # Every pixel in the repaired lower layer must cover the GBA backdrop;
+        # transparent color0 is valid in the upper layer only.
+        for word in struct.unpack_from('<8H',records,(660-512)*16)[:4]:
+            bank,tile=divmod(word&1023,512)
+            pixels=images[bank].crop((tile%16*8,tile//16*8,tile%16*8+8,tile//16*8+8))
+            self.assertNotIn(0,set(pixels.getdata()))
+
     def test_plan_reproduces_without_writing_any_input(self):
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
         self.assertEqual(a.inputs(ROOT),self.before)
