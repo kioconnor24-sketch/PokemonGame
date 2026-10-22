@@ -1,0 +1,24 @@
+{"t": 1792690869.16, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792690869.19, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792690869.72, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792690869.77, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792690871.93, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792690871.96, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792690873.67, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792690873.78, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792690874.35, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792690874.48, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792690875.04, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792690875.09, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792690876.16, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792690876.2, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792690879.8, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792690880.05, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792690880.68, "event": "field", "map": "MAP_OREBURGH_MINE_B2F", "pos": [15, 3], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792690880.91, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792690880.91, "event": "continue-check", "problems": []}
+{"t": 1792690880.92, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792690881.45, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792690882.61, "event": "capture", "file": "0010-start.png"}
+{"t": 1792690882.61, "event": "observe", "label": "start", "problems": []}
+{"t": 1792690882.61, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
