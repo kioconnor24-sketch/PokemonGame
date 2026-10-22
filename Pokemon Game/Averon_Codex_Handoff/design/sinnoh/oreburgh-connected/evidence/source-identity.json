@@ -30,7 +30,7 @@
     "failed-seam-static.json": "4c702dcfcb943da20143948b9116cd28a6536ac2cdde0819af0422582c8e87e8",
     "failed-unmerged-seed/events.jsonl": "4b084c54f234f1806676f506eacff3e45f07ee74cacc48399893b23f6d372ba2",
     "failed-unmerged-seed/result.json": "5e3522964159c392d71ec061490414280483f5b2fd073d11afb7c79e5faa4f46",
-    "native29.log": "6a301beea75f4a3040509018685d0ae4ea23b10d2cf1a149f02522448fd3b7c1",
+    "native29.log": "4c87584eacc45114ad71535a8bea1b96004458b25285f2c2d9aa41b07daae7df",
     "normal/events.jsonl": "48d8381029cb14d59baf2bd94b80ca64cddcc9ebca430647ca9e4c53ae8a02bf",
     "normal/result.json": "f1e8aed872d8300a4af284175fcfd8acc4586f2ce4c538d5f89af0ce500eabf4",
     "normal-build.log": "6e15f1f6cd37d1d7705d95d34c90c2b340ce70bdea9e8bf221645ff99e4e0803",
@@ -51,7 +51,7 @@
     "release-resource.json": "1be6bec565f3e7dfb727b3b1349a4e02c52081a54d576de94f30a3694fb3bcbf",
     "release-upper/events.jsonl": "29c54ccfc485d15e94286c145b2d84c15402ba977d657be747ff0c73bb0ac6ec",
     "release-upper/result.json": "57c538bc7f4accbe532a381637b788193657fe57721fd18aab91f2f617975827",
-    "save4.log": "b439551a5e4b5d012d4e53b2d4f7af91bd27b6ccd7aa16e801bdd8979df79101",
+    "save4.log": "cab76aa5f0d337f304a4858c6e626a97b8fcefe41966712ca9e1d2eb0c3b286e",
     "screens/normal-city-route207.png": "0f5b1dab0c4aee2608f3742a769135c2553aad2bc41554ea219507f67f3a58c7",
     "screens/normal-city-to-mine.png": "ae7430c393f8e3ef0d302dc5720806746dd5a32b63b326ec0ca319e2bb618c27",
     "screens/normal-coronet-closed.png": "b5b60ecaba633861975ab8868ccd925e60ee2307409284422ef89f42dd7984b8",
@@ -65,5 +65,10 @@
     "screens/release-mine-b1-b2.png": "748d96cdf88f695f216f31ba07c7d39b54012eda20d3b6ae95439f1b413d8f07",
     "screens/release-mine-b2-return.png": "e3b4109191bb2397a1b9579b7ee89e3f0e8c7cd00bacd00144715f3ffa75afc5",
     "static.json": "c2ed0300235d27bdb64c6ca89f1bf0a64e549ef8653a01255921bfb53ebc7eb6"
-  }
+  },
+  "verbatim_native_stdout_sha256": {
+    "native29.log": "6a301beea75f4a3040509018685d0ae4ea23b10d2cf1a149f02522448fd3b7c1",
+    "save4.log": "b439551a5e4b5d012d4e53b2d4f7af91bd27b6ccd7aa16e801bdd8979df79101"
+  },
+  "log_publication_normalization": "Only trailing blank lines removed from two native stdout files for git whitespace hygiene; complete original stdout hashes retained above."
 }
