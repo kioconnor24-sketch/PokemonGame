@@ -1,0 +1,1526 @@
+{
+ "maps": [
+  "MAP_ROUTE208"
+ ],
+ "build": "release",
+ "rom_sha256": "833b349d7ed6d42b096e1048bfb1cf060bd705bd5a1b68a45f9a3169d2657271",
+ "static_findings": [],
+ "save_before": "c216c2bbc9e8c23c9eea05b22e4691e577b61f13930a68a56c542cfb99d04eca",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "exact upper probe after DEV entry/follower placement",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "upper down step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     13
+    ]
+   ],
+   "expected": [
+    22,
+    13
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     14
+    ]
+   ],
+   "expected": [
+    22,
+    14
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     15
+    ]
+   ],
+   "expected": [
+    22,
+    15
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     16
+    ]
+   ],
+   "expected": [
+    22,
+    16
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 5",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     17
+    ]
+   ],
+   "expected": [
+    22,
+    17
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 6",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     18
+    ]
+   ],
+   "expected": [
+    22,
+    18
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 7",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     19
+    ]
+   ],
+   "expected": [
+    22,
+    19
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 8",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     20
+    ]
+   ],
+   "expected": [
+    22,
+    20
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper down step 9",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     21
+    ]
+   ],
+   "expected": [
+    22,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (upper after down)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     21
+    ]
+   ],
+   "expected": [
+    22,
+    21
+   ]
+  },
+  {
+   "name": "upper left step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     21,
+     21
+    ]
+   ],
+   "expected": [
+    21,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     20,
+     21
+    ]
+   ],
+   "expected": [
+    20,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     19,
+     21
+    ]
+   ],
+   "expected": [
+    19,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     18,
+     21
+    ]
+   ],
+   "expected": [
+    18,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 5",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     17,
+     21
+    ]
+   ],
+   "expected": [
+    17,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 6",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     16,
+     21
+    ]
+   ],
+   "expected": [
+    16,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 7",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     15,
+     21
+    ]
+   ],
+   "expected": [
+    15,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 8",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     21
+    ]
+   ],
+   "expected": [
+    14,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 9",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     13,
+     21
+    ]
+   ],
+   "expected": [
+    13,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 10",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     12,
+     21
+    ]
+   ],
+   "expected": [
+    12,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 11",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     11,
+     21
+    ]
+   ],
+   "expected": [
+    11,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 12",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     10,
+     21
+    ]
+   ],
+   "expected": [
+    10,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (upper after left)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     10,
+     21
+    ]
+   ],
+   "expected": [
+    10,
+    21
+   ]
+  },
+  {
+   "name": "upper right step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     11,
+     21
+    ]
+   ],
+   "expected": [
+    11,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     12,
+     21
+    ]
+   ],
+   "expected": [
+    12,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     13,
+     21
+    ]
+   ],
+   "expected": [
+    13,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     21
+    ]
+   ],
+   "expected": [
+    14,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 5",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     15,
+     21
+    ]
+   ],
+   "expected": [
+    15,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 6",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     16,
+     21
+    ]
+   ],
+   "expected": [
+    16,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 7",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     17,
+     21
+    ]
+   ],
+   "expected": [
+    17,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 8",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     18,
+     21
+    ]
+   ],
+   "expected": [
+    18,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 9",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     19,
+     21
+    ]
+   ],
+   "expected": [
+    19,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 10",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     20,
+     21
+    ]
+   ],
+   "expected": [
+    20,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 11",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     21,
+     21
+    ]
+   ],
+   "expected": [
+    21,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 12",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     21
+    ]
+   ],
+   "expected": [
+    22,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 13",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     23,
+     21
+    ]
+   ],
+   "expected": [
+    23,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 14",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     24,
+     21
+    ]
+   ],
+   "expected": [
+    24,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 15",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     25,
+     21
+    ]
+   ],
+   "expected": [
+    25,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 16",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     26,
+     21
+    ]
+   ],
+   "expected": [
+    26,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 17",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     27,
+     21
+    ]
+   ],
+   "expected": [
+    27,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 18",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     28,
+     21
+    ]
+   ],
+   "expected": [
+    28,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 19",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     29,
+     21
+    ]
+   ],
+   "expected": [
+    29,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 20",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     30,
+     21
+    ]
+   ],
+   "expected": [
+    30,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 21",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     31,
+     21
+    ]
+   ],
+   "expected": [
+    31,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 22",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     32,
+     21
+    ]
+   ],
+   "expected": [
+    32,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 23",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     33,
+     21
+    ]
+   ],
+   "expected": [
+    33,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 24",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     34,
+     21
+    ]
+   ],
+   "expected": [
+    34,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right step 25",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     35,
+     21
+    ]
+   ],
+   "expected": [
+    35,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (upper after right)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     35,
+     21
+    ]
+   ],
+   "expected": [
+    35,
+    21
+   ]
+  },
+  {
+   "name": "upper left step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     34,
+     21
+    ]
+   ],
+   "expected": [
+    34,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     33,
+     21
+    ]
+   ],
+   "expected": [
+    33,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     32,
+     21
+    ]
+   ],
+   "expected": [
+    32,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     31,
+     21
+    ]
+   ],
+   "expected": [
+    31,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 5",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     30,
+     21
+    ]
+   ],
+   "expected": [
+    30,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 6",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     29,
+     21
+    ]
+   ],
+   "expected": [
+    29,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 7",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     28,
+     21
+    ]
+   ],
+   "expected": [
+    28,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 8",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     27,
+     21
+    ]
+   ],
+   "expected": [
+    27,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 9",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     26,
+     21
+    ]
+   ],
+   "expected": [
+    26,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 10",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     25,
+     21
+    ]
+   ],
+   "expected": [
+    25,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 11",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     24,
+     21
+    ]
+   ],
+   "expected": [
+    24,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 12",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     23,
+     21
+    ]
+   ],
+   "expected": [
+    23,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left step 13",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     21
+    ]
+   ],
+   "expected": [
+    22,
+    21
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (upper after left)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     21
+    ]
+   ],
+   "expected": [
+    22,
+    21
+   ]
+  },
+  {
+   "name": "upper up step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     20
+    ]
+   ],
+   "expected": [
+    22,
+    20
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     19
+    ]
+   ],
+   "expected": [
+    22,
+    19
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     18
+    ]
+   ],
+   "expected": [
+    22,
+    18
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     17
+    ]
+   ],
+   "expected": [
+    22,
+    17
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 5",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     16
+    ]
+   ],
+   "expected": [
+    22,
+    16
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 6",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     15
+    ]
+   ],
+   "expected": [
+    22,
+    15
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 7",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     14
+    ]
+   ],
+   "expected": [
+    22,
+    14
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 8",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     13
+    ]
+   ],
+   "expected": [
+    22,
+    13
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper up step 9",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     12
+    ]
+   ],
+   "expected": [
+    22,
+    12
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (upper after up)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     22,
+     12
+    ]
+   ],
+   "expected": [
+    22,
+    12
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "c216c2bbc9e8c23c9eea05b22e4691e577b61f13930a68a56c542cfb99d04eca",
+ "verdict": "PASS"
+}

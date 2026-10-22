@@ -56,5 +56,14 @@
     "SolaceonTown": 23,
     "Route210_South": 24,
     "Route209_Access": 25
+  },
+  "qa_modules": {
+    "Pokemon Game/scripts/claude_play/driver.py": "20a9dc7f4025646896e15e74da4b4033ec8a591f451d6fcf7cc2efd9a02af547",
+    "Pokemon Game/scripts/claude_play/map_qa.py": "75abf7411f8d9d95b3892ef8e552a4d681ce1a5831cd22b1550061b8d83d6902"
+  },
+  "qa_provenance": {
+    "normal_traversal_and_continue": "b9005e4a5c3c508bd18eeabfab85c8d96a26086c launcher; legacy uses existing source map_qa run",
+    "final_upper_lower_and_release": "2aa16c82b5ce290efe7ff584ccfa3fe33d9da6e3 launcher; QA-only neighbour repair, engine/ROM unchanged",
+    "failed_lower": "15/16 pre-repair QA expectation; preserved, NOT ACCEPTED"
   }
 }
