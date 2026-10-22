@@ -59,6 +59,17 @@ def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,
     return None
 
 
+def follower_neighbors(m,position,layer=None):
+    """Uniform-layer probes must not place the follower on transition0."""
+    x,y=position
+    objects={(o[0],o[1]) for o in m.objects}
+    for direction,(dx,dy) in DIRS.items():
+        tile=(x+dx,y+dy)
+        if not m.walkable(*tile) or m.warp_at(*tile) or tile in objects:continue
+        if layer is not None and m.elevation(*tile)!=layer:continue
+        yield direction,tile
+
+
 def observed_elevations(d):
     g=d.g;off=g.off;size=off['oe.size'];avatar=g.gdb.read(g.sym['gPlayerAvatar']+off['avatar.objectEventId'],1)[0]
     if avatar>=16:raise ValueError('invalid live player object index')
@@ -140,12 +151,9 @@ def run(args):
                     if there[0]==map_id and self.path(map_id,tile) is not None:return True
             return False
 
-        def follower(self,label):
+        def follower(self,label,expected_layer=None):
             mid,(x,y)=self.d.here();m=self.d.live_map(mid)
-            for direction,(dx,dy) in qa.DIRS.items():
-                tile=(x+dx,y+dy)
-                if (not m.walkable(*tile) or m.warp_at(*tile)
-                    or tile in {(o[0],o[1]) for o in m.objects}):continue
+            for direction,tile in follower_neighbors(m,(x,y),expected_layer):
                 path=self.path(mid,tile)
                 if path!=[direction]:continue
                 moved=self.d.step(direction)
@@ -170,7 +178,8 @@ def run(args):
             upper=args.bridge_probe=='upper';entry=(22,12) if upper else (14,16);z=4 if upper else 3
             self.go(map_id,entry);self.d.settle()
             if not self.check('exact '+args.bridge_probe+' probe after DEV entry/follower placement',self.d.here()==(map_id,entry),at=self.d.here()):return
-            directions=[('down',9),('up',9)] if upper else [('down',3),('up',3)]
+            # Source upper T-bridge: both east/west spans plus vertical arm.
+            directions=[('down',9),('left',12),('right',25),('left',13),('up',9)] if upper else [('down',3),('up',3)]
             for direction,count in directions:
                 start=self.d.here()[1];dx,dy=qa.DIRS[direction]
                 for index in range(count):
@@ -178,7 +187,7 @@ def run(args):
                     moved=self.d.step(direction);self.d.settle();at=self.d.here();elev=observed_elevations(self.d)
                     if not self.check(args.bridge_probe+' '+direction+' step '+str(index+1),moved is not None and at==(map_id,expected) and elev['player']==z,at=at,expected=expected,elevations=elev):
                         self.d.shot('failed-'+args.bridge_probe+'-step');return
-                self.follower(args.bridge_probe+' after '+direction)
+                self.follower(args.bridge_probe+' after '+direction,expected_layer=z)
                 elev=observed_elevations(self.d)
                 self.check(args.bridge_probe+' player and follower layer',elev['player']==z and elev['follower']==z,elevations=elev)
                 self.d.shot(args.bridge_probe+'-'+direction+'-layer')

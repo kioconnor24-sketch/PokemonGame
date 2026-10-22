@@ -1,0 +1,56 @@
+{
+ "maps": [
+  "MAP_HEARTHOME_CITY",
+  "MAP_ROUTE208",
+  "MAP_ROUTE208_ACCESS",
+  "MAP_ROUTE209",
+  "MAP_SOLACEON_TOWN",
+  "MAP_ROUTE210_SOUTH",
+  "MAP_ROUTE209_ACCESS"
+ ],
+ "build": "normal",
+ "rom_sha256": "1fa065a9a5e05f1548c2847753aee35082865b316c8c2d973e22992ce4a232a5",
+ "static_findings": [],
+ "save_before": "b6d05336e68808c2696599dbbfd9154046bea05b885dfa3cbb7461f246744b27",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE209_ACCESS",
+    [
+     11,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE209_ACCESS",
+    [
+     11,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "b6d05336e68808c2696599dbbfd9154046bea05b885dfa3cbb7461f246744b27",
+ "verdict": "PASS"
+}

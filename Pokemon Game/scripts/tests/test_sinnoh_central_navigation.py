@@ -33,12 +33,29 @@ class CentralNavigation(unittest.TestCase):
         self.assertEqual(qa.elevation_path(m,(0,0),{(0,9)},start_elevation=4),['down']*9)
         self.assertEqual(qa.elevation_path(m,(0,9),{(0,0)},start_elevation=4),['up']*9)
         self.assertIsNone(qa.elevation_path(m,(0,0),{(0,9)},start_elevation=3))
+        horizontal=[cells[21*68+x]>>12 for x in range(10,36)]
+        self.assertEqual(horizontal,[4]+[15]*11+[4]*3+[15]*10+[4])
+        self.assertTrue(all(((cells[21*68+x]>>10)&3)==0 for x in range(10,36)))
+        self.assertEqual(qa.elevation_path(Strip(horizontal),(0,0),{(0,25)},start_elevation=4),['down']*25)
+        self.assertEqual(qa.elevation_path(Strip(horizontal),(0,25),{(0,0)},start_elevation=4),['up']*25)
 
     def test_real_lower_soil_probe_keeps_elevation_three(self):
         cells=struct.unpack('<2584H',(HERE/'staged/Route208/averon-map.bin').read_bytes())
         heights=[cells[y*68+14]>>12 for y in range(16,20)]
         self.assertEqual(heights,[3]*4)
         self.assertEqual(qa.elevation_path(Strip(heights),(0,0),{(0,3)},start_elevation=3),['down']*3)
+
+    def test_real_lower_probe_zero_transition_is_not_uniform_layer_placement(self):
+        cells=struct.unpack('<2584H',(HERE/'staged/Route208/averon-map.bin').read_bytes())
+        m=types.SimpleNamespace(objects=[],warp_at=lambda x,y:None,
+            walkable=lambda x,y:0<=x<68 and 0<=y<38 and not ((cells[y*68+x]>>10)&3),
+            elevation=lambda x,y:cells[y*68+x]>>12)
+        self.assertEqual(m.elevation(14,15),0)
+        self.assertEqual(m.elevation(14,17),3)
+        self.assertIn(('up',(14,15)),list(qa.follower_neighbors(m,(14,16))))
+        placed=list(qa.follower_neighbors(m,(14,16),layer=3))
+        self.assertNotIn(('up',(14,15)),placed)
+        self.assertEqual(placed[0],('down',(14,17)))
 
     def test_fifteen_does_not_permit_layer_change_or_collision(self):
         self.assertIsNone(qa.elevation_path(Strip([4,15,15,3]),(0,0),{(0,3)},start_elevation=4))
