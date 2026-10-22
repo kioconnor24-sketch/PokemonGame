@@ -142,11 +142,11 @@ def run(args):
                 path=self.path(mid,tile)
                 if path!=[direction]:continue
                 moved=self.d.step(direction)
-                if not moved:continue
+                if moved is None:continue
                 if not self.d.field_ready(moved) or self.d.here(moved)!=(mid,tile):
                     return self.check('follower visible ('+label+')',False,reason='ordinary foot probe unexpectedly left its map/tile',at=self.d.here(moved))
                 returned=self.d.step(qa.OPPOSITE[direction])
-                if not returned or not self.d.field_ready(returned) or self.d.here(returned)!=(mid,(x,y)):
+                if returned is None or not self.d.field_ready(returned) or self.d.here(returned)!=(mid,(x,y)):
                     return self.check('follower visible ('+label+')',False,reason='ordinary foot probe did not return to the exact source tile',at=self.d.here())
                 break
             observation=w.play.observe(self.d,label);follower=observation.get('follower') or {}
@@ -161,18 +161,22 @@ def run(args):
         def run_map(self,map_id):
             if not args.bridge_probe:return super().run_map(map_id)
             upper=args.bridge_probe=='upper';entry=(10,15) if upper else (20,70);z=4 if upper else 3
-            if not self.check('explicit '+args.bridge_probe+' DEV entry',self.d.here()==(map_id,entry),at=self.d.here()):return
+            self.go(map_id,entry);self.d.settle()
+            if not self.check('exact '+args.bridge_probe+' probe after DEV entry/follower placement',self.d.here()==(map_id,entry),at=self.d.here()):return
             directions=[('down',70),('up',70)] if upper else [('left',16),('right',16)]
             for direction,count in directions:
+                start=self.d.here()[1];dx,dy=qa.DIRS[direction]
                 for index in range(count):
-                    before=self.d.here()[1];dx,dy=qa.DIRS[direction];expected=(before[0]+dx,before[1]+dy)
-                    moved=self.d.step(direction);at=self.d.here();elev=observed_elevations(self.d)
-                    if not self.check(args.bridge_probe+' '+direction+' step '+str(index+1),bool(moved) and at==(map_id,expected) and elev['player']==z,at=at,expected=expected,elevations=elev):
+                    expected=(start[0]+(index+1)*dx,start[1]+(index+1)*dy)
+                    moved=self.d.step(direction);self.d.settle();at=self.d.here();elev=observed_elevations(self.d)
+                    if not self.check(args.bridge_probe+' '+direction+' step '+str(index+1),moved is not None and at==(map_id,expected) and elev['player']==z,at=at,expected=expected,elevations=elev):
                         self.d.shot('failed-'+args.bridge_probe+'-step');return
                 self.follower(args.bridge_probe+' after '+direction)
                 elev=observed_elevations(self.d)
                 self.check(args.bridge_probe+' player and follower layer',elev['player']==z and elev['follower']==z,elevations=elev)
                 self.d.shot(args.bridge_probe+'-'+direction+'-layer')
+                self.go(map_id,expected);self.d.settle()
+                self.check(args.bridge_probe+' exact endpoint after follower probe',self.d.here()==(map_id,expected),at=self.d.here(),expected=expected)
 
     cmd=['run','--engine',str(engine),'--rom',str(args.rom),'--scratch',str(args.scratch),'--out',str(args.out),'--build',args.profile]
     for mid in (('MAP_ROUTE206',) if args.bridge_probe else MAPS):cmd+=['--map',mid]

@@ -166,6 +166,19 @@ class ElevationNavigationTest(unittest.TestCase):
         self.assertEqual(self.q.observed_elevations(types.SimpleNamespace(g=g)),dict(player=4,follower=3))
         self.assertEqual(calls,[(103,1),(200,256)])
 
+    def test_driver_state_is_falsey_even_when_it_contains_live_attributes(self):
+        # Real game.State inherits dict but stores snapshots as attributes.
+        # A successful Driver.step therefore returns an empty/falsey dict.
+        path=ROOT/'Pokemon Game/scripts/claude_play/game.py'
+        spec=importlib.util.spec_from_file_location('eterna_actual_state',path)
+        game=importlib.util.module_from_spec(spec);spec.loader.exec_module(game)
+        state=game.State();state.cb2='CB2_Overworld';state.x=10;state.y=16
+        self.assertFalse(bool(state));self.assertIsNotNone(state)
+        launcher=(HERE/'run_runtime_qa.py').read_text()
+        self.assertIn('moved is not None and at==',launcher)
+        self.assertIn('if moved is None:continue',launcher)
+        self.assertIn('if returned is None or not self.d.field_ready(returned)',launcher)
+
     def test_source_guard_rejects_unmarked_changed_and_escaping_runtime(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);recipe=dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',files={})
