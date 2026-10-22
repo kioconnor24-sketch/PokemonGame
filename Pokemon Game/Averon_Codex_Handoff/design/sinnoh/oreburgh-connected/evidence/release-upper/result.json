@@ -1,0 +1,77 @@
+{
+ "maps": [
+  "MAP_ROUTE207"
+ ],
+ "build": "release",
+ "rom_sha256": "7f1b592e34775c83e168e5a75018c035620e2fe96ae9ea55b1fc69c249564686",
+ "static_findings": [],
+ "save_before": "bfeea95328069502b233d716aa9f52f7b02278ddf2aab4b78127747f7cd381e1",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE207",
+    [
+     52,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "upper plateau navigation reaches exact probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE207",
+    [
+     52,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE207 (52, 6) pushing up is blocked",
+   "ok": true,
+   "before": [
+    "MAP_ROUTE207",
+    [
+     52,
+     6
+    ]
+   ],
+   "after": [
+    "MAP_ROUTE207",
+    [
+     52,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (upper plateau after closed Coronet probe)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "bfeea95328069502b233d716aa9f52f7b02278ddf2aab4b78127747f7cd381e1",
+ "verdict": "PASS"
+}
