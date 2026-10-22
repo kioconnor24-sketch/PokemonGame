@@ -17,9 +17,10 @@ MAPS={'Route208_Access':(13,9),'Route209_Access':(13,9)}
 FLOOR=616;WALL_TOP=648;WALL_FACE=656;COUNTER=680;MAT=534
 
 
-def candidate(raw,width,height,warps,source_attrs,primary,primary_attrs,secondary,secondary_attrs):
+def candidate(raw,width,height,warps,source_attrs,primary,primary_attrs,secondary,secondary_attrs,*,expected_anchors=None):
     if len(raw)!=width*height*2 or width<3 or height<3:raise ValueError('invalid gate dimensions')
-    if len(warps)!=2 or [(w['x'],w['y']) for w in warps]!=[(1,5),(11,5)]:raise ValueError('source gate anchors changed')
+    expected=[(1,5),(11,5)] if expected_anchors is None else list(expected_anchors)
+    if not expected or len(set(expected))!=len(expected) or [(w['x'],w['y']) for w in warps]!=expected:raise ValueError('source gate anchors changed')
     for w in warps:
         if not 0<=w['x']<width or not 0<=w['y']<height:raise ValueError('warp outside gate')
     desired=[];anchors={(w['x'],w['y']) for w in warps}
@@ -39,7 +40,7 @@ def candidate(raw,width,height,warps,source_attrs,primary,primary_attrs,secondar
     return result,records,attrs
 
 
-def build(engine,out):
+def build(engine,out,*,source_root=None,maps=None,expected_anchors=None):
     engine,out=Path(engine).resolve(),Path(out).resolve()
     if out.exists() or out.is_relative_to(engine) or 'engine' in out.parts:raise ValueError('new off-engine output required')
     base=pack.accepted.base;dual=pack.accepted.dual
@@ -55,14 +56,17 @@ def build(engine,out):
     if not {FLOOR,WALL_TOP,WALL_FACE,COUNTER,MAT}<={v[0]&1023 for v in struct.iter_unpack('<H',stock)}:raise ValueError('stock gate template disappeared')
     images=[dual.indexed(read(f+'tiles.png')) for f in (ppath,spath)]
     palettes={i:base.palette(read((ppath if i<6 else spath)+'palettes/%02d.pal'%i)) for i in range(16)}
+    source_root=HERE if source_root is None else Path(source_root)
+    dimensions=MAPS if maps is None else maps
     maps={};source_sha={};verified=0
-    for name,(w,h) in MAPS.items():
-        folder=HERE/'staged'/name;raw=(folder/'map.bin').read_bytes();header=json.loads((folder/'map.json').read_text());source_sha[name]=base.sha(raw)
+    for name,(w,h) in dimensions.items():
+        folder=source_root/'staged'/name;raw=(folder/'map.bin').read_bytes();header=json.loads((folder/'map.json').read_text());source_sha[name]=base.sha(raw)
         if header['region_map_section']!='MAPSEC_PENDING_OWNER' or header['object_events']:raise ValueError('not a neutral source stage')
         source=json.loads((folder/'attributes.json').read_text())['used_source_attribute_words'];source_attrs=[bytearray(1024),bytearray(1024)]
         for mid,value in source.items():
             b,i=divmod(int(mid),512);struct.pack_into('<H',source_attrs[b],i*2,value)
-        adapted,secondary,sa=candidate(raw,w,h,header['warp_events'],source_attrs,primary,pa,secondary,sa)
+        anchors=None if expected_anchors is None else expected_anchors[name]
+        adapted,secondary,sa=candidate(raw,w,h,header['warp_events'],source_attrs,primary,pa,secondary,sa,expected_anchors=anchors)
         maps[name]=adapted;verified+=w*h
     # pack_art accepts a512-record working primary. Its unused zero padding
     # is not an asset: retain only the real Building prefix in published output.
@@ -70,7 +74,7 @@ def build(engine,out):
     out.mkdir(parents=True)
     dependencies={}
     for name,raw in maps.items():
-        w,h=MAPS[name];border=(HERE/'staged'/name/'border.bin').read_bytes();dependencies[name]=dual.closure(raw+border,[primary,secondary],images)
+        w,h=dimensions[name];border=(source_root/'staged'/name/'border.bin').read_bytes();dependencies[name]=dual.closure(raw+border,[primary,secondary],images)
         (out/(name+'.bin')).write_bytes(raw);dual.render(raw,[primary,secondary],images,palettes,w,h).save(out/(name+'.png'))
     for name,data in [('primary-metatiles.bin',primary),('primary-attributes.bin',pa),('secondary-metatiles.bin',secondary),('secondary-attributes.bin',sa)]:
         (out/name).write_bytes(data)

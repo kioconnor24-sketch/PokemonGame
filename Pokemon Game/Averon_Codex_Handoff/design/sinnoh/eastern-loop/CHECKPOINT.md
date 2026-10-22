@@ -1,0 +1,29 @@
+# Eastern/southern connected Sinnoh geography — source-only
+
+Twelve real donor maps at38228bb574a3557345852b758d5f1a65eb01bb22, **34,720 cells**: Route212_Access, Route212_North, Route212_South, Route213, Route213_Access, Route214, Route214_Access, Route215, Route215_Access, ValorLakefront, VeilstoneCity and PastoriaCity. Exact immutable map blobs/dimensions, original source headers, map/border/attribute fingerprints and coupled warp translations are committed in source-receipt.json and stage_eastern.py. Reuses the existing merged converter and cluster stager; no new converter or full donor clone.
+
+Preserves all original map metatile identities/elevations and **97 elevation15 cells**. Only **340 explicitly listed collision closures** seal absent or nonoverlapping destinations. Seventeen technical warps remain coupled to their real source return indices, including paired City/gateway mats. No source scripts/objects/encounters/trainers/story/art/music imported. Hearthome/210South/222/LakeValor/hotel/store destinations are closed in this isolated package, not speculatively joined to older staged neighbours or invented interiors. Existing staged/production maps remain untouched. All sections are MAPSEC_PENDING_OWNER; no map registration or permanent origin allocation.
+
+All source reciprocal connection offsets retained: North212↔South212 zero, South212↔Pastoria±32, Pastoria↔213±2,213↔Valor±40,Valor↔214±24,214↔Veilstone±26,Veilstone↔215±1. Both original Route215_Access header numeric connections0 and absent/None gateway connections are correctly normalized by the existing stager. Largest padded map footprint is Route213 **8510/10240** cells. This proves the source field-buffer bound only, not actual RAM/ROM or gameplay.
+
+## Reproduced seam defect repaired
+
+First focused host run7/8 PASS found Route213 left(0,57) kept open based on original Pastoria right(67,59), but that target was closed later because Pastoria's bottom edge has no constructed destination. The shared stager now checks final mutually reachable seam cells to a fixed point after original closures; it only closes newly dangling collision endpoints. Retained real warp anchors, source metatile IDs, elevations, full attributes and every existing source fixture remain unchanged. One additional Route213 collision closure resolves this case (339→340); no production engine or runtime ROM is changed by the tool repair.
+
+A small two-map offset/corner regression reproduces the same failure and also proves actual paired corner warp anchors remain open. The real12-map test independently walks every final open boundary endpoint, verifies in-bounds/uncollided destination cells and reciprocal offsets. First full source run243/245 passed; its only two failures were this new package's pre-repair published bytes/old339 count, with all older237 source cases unchanged. Regenerated only the new eastern package after the proven repair. Original failed logs/output packages remain privately preserved.
+
+Executed final focused **9/9 PASS**: every original Git blob/cell/header, coupled17 warps, all final seam endpoints,97 bridge cells, hardware footprints, map/border attributes, immutable inputs/determinism, malformed/duplicate warps, invalid/removed returns and nonreciprocal offsets. Two complete final generations reproduce **61/61 output files byte-for-byte**. Full final source result is appended after execution. Collision previews are original schematics, not game art.
+
+Reproduce `stage_eastern.py --donor PINNED_DONOR_CHECKOUT --out NEW_OFF_ENGINE_DIR`, then test_sinnoh_eastern_loop.py and all test_sinnoh_*.py. Actual Git blobs may require normal authorized sparse fetching. No donor PNG/palette is published.
+
+NEXT: adapt the already staged four neutral gateway interiors with permitted existing Building/Shop art, preserving original warp arrays/physics; then build one shared permitted outdoor family around the actual City/route/Valor/Pastoria sources. Existing source ordinals never prove pixel compatibility. Only after actual art and current-main DEV assembly run native/NORMAL/RELEASE/real controller traversal/save tests. This PR claims **SOURCE ONLY**, no ROM/native/mGBA/first-arrival/production acceptance. Manager handles review/integration; permanent227+ origins remain owner-reserved.
+
+## Four neutral gateway artwork candidates
+
+Route212_Access,213_Access,214_Access and215_Access now have actual `averon-map.bin` and textured previews, all four inspected. Reuses the existing central Building/Shop/Route110 art packer with optional explicit source-root/map/anchor inputs; original central defaults reproduce **8/8 committed art files byte-for-byte**. Route212 retains only its real southern exit while the closed northern doorway stays blocked; no fabricated second warp. Source orders for both horizontal gateways are pinned, not silently reordered.
+
+Every one of **432 cells** retains source collision/elevation/full behavior-layer words. Published primary8 records is exactly the real Building prefix, not512 padded records. Shared secondary298/512 leaves214 metadata slots; stock Shop prefix unchanged. All map/border graphics/palette dependencies verified. Two full art generations reproduce13/13 files byte-identically; original source map/border/header/warps remain unchanged. Focused art5/5 PASS. No native/ROM/mGBA gate acceptance or linked storage inference; outdoor source graphics remain unadapted.
+
+Final pure geography suite **246/246 PASS**,0skips, including all older237 cases plus9 new source/negative cases. The full combined suite after gateway art is recorded next.
+
+Final complete combined Sinnoh source suite actually PASS **251/251**,0skips: the237 reused earlier cases plus9 eastern source and5 gate-art cases. No historical source fixtures needed regeneration; only this new package received the one demonstrated final-seam closure. Runtime/build acceptance remains explicitly pending for the eastern maps.

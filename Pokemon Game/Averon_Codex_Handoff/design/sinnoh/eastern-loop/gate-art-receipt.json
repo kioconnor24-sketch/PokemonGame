@@ -1,0 +1,201 @@
+{
+  "status": "NEUTRAL_EXISTING_AVERON_GATE_ADAPTATION_NOT_DONOR_VISUAL_OR_RUNTIME_ACCEPTANCE",
+  "engine_source": "22919e59f4d4ae43bb6d6d1c32c51a7305a1565a",
+  "existing_averon_sha256": {
+    "data/tilesets/primary/building/metatiles.bin": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/shop/metatiles.bin": "f7a58c91b3c84e2c9fc5f6e24d851dccff7a29f1b730d53ab73b76ff31a0a399",
+    "data/tilesets/secondary/shop/metatile_attributes.bin": "195c8f4e535fe202c57331445a5aeb69a5fa95f739def300982f84c7a4246f63",
+    "data/layouts/Route110_SeasideCyclingRoadEntrance/map.bin": "36140d418343358135549ff1b8b73501b56895abcedae83dbb98516022e26214",
+    "data/tilesets/primary/building/tiles.png": "355d5dc8625e332ceb34cbe685092d96540ece0b7a39293e493d27c02b6db300",
+    "data/tilesets/secondary/shop/tiles.png": "126543a3d5b56c106749de8cf3cbde20597898bbea7a991fc7887a2d868f7739",
+    "data/tilesets/primary/building/palettes/00.pal": "6008920965897f0fe9e901ab795aacb4c6a6869ea300db6cfb6411da42f750ee",
+    "data/tilesets/primary/building/palettes/01.pal": "88bf97cf6eca47f21bbf0859fccc60172fc09fd715eb3d9266b8a9d4af715e72",
+    "data/tilesets/primary/building/palettes/02.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/03.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/04.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/05.pal": "b81a37f041aeb04428ce37ad1f7a7a476cdc822f534a4cda12f360c4ca5d0a58",
+    "data/tilesets/secondary/shop/palettes/06.pal": "91c6471d2d5c8ed31bd09afe6560f5b03a36e0fbb2ac64f05e0af8dbc71f9468",
+    "data/tilesets/secondary/shop/palettes/07.pal": "fe0c98bf6ebe2577814ba88bb46009b4a68e5c42a30f58f1069bd159f27a80e2",
+    "data/tilesets/secondary/shop/palettes/08.pal": "71560cea7b2102a71f4f2196d85648cdd2b2e15037cf4fdb3e7bbefb0e4ddbbc",
+    "data/tilesets/secondary/shop/palettes/09.pal": "cb0b85a65027df3c046bfd4c34cac6d2842a9377f051eca18360a5f5c07e026f",
+    "data/tilesets/secondary/shop/palettes/10.pal": "6b46b7fa85f33254179365a12ea6be6d78345a39ee11508bd5689d0ed046d8d8",
+    "data/tilesets/secondary/shop/palettes/11.pal": "b4223acde3ce4440ba1025f8a7fabb2bf9d4ed623ea4f0f36c389eec258250c1",
+    "data/tilesets/secondary/shop/palettes/12.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/13.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/14.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/15.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675"
+  },
+  "source_map_sha256": {
+    "Route212_Access": "6f3b2c7af53cf886a82f8968537375c919aa6b50c3065ad2c12809ceb5af0044",
+    "Route213_Access": "c08399de7d2ee78b0991b5b237d40c8455a0fac727151a46ff79374adc096353",
+    "Route214_Access": "948782bb1af05f437faf408b275f746795b1b8531de203a6d2e9a2a1e9876278",
+    "Route215_Access": "6157827bdf6a84b75732dceb9b1c08747f08fb9e92d410c2ad8698eebce5dbe4"
+  },
+  "verified_physics_behavior_cells": 432,
+  "primary_records": 8,
+  "packing_padding_removed_bytes": 9072,
+  "secondary_records": 298,
+  "remaining_secondary_slots": 214,
+  "source_maps_headers_warps_unchanged": true,
+  "templates": {
+    "floor": 616,
+    "wall_top": 648,
+    "wall_face": 656,
+    "counter": 680,
+    "exit_mat": 534
+  },
+  "dependencies": {
+    "Route212_Access": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        804,
+        805,
+        806
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "Route213_Access": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        803,
+        804,
+        806,
+        807,
+        808
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "Route214_Access": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        803,
+        804,
+        805,
+        806,
+        809
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "Route215_Access": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        803,
+        804,
+        806,
+        807,
+        808
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    }
+  },
+  "limits": [
+    "Only existing Building/Shop/Route110 gate art; no donor pixels or colors imported",
+    "No engine install, saved identity, ROM or genuine gameplay acceptance",
+    "Source Pasos visual appearance intentionally replaced by neutral Averon gate art"
+  ]
+}
