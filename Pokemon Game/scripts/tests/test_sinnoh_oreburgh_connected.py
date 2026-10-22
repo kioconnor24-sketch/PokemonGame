@@ -107,6 +107,20 @@ class AssemblyTest(unittest.TestCase):
             with mock.patch.object(a,'HERE',Path(temp)),self.assertRaisesRegex(ValueError,'cache changed'):
                 a.blob(ROOT,a.ART,a.SOURCE+'city-family/warp-plan.json')
 
+    def test_frozen_candidate_replays_after_production_base_advances(self):
+        # A later main may have extra maps. This fixture remains explicitly bound
+        # to BASE, not a claim of runtime acceptance on that newer production tree.
+        with tempfile.TemporaryDirectory() as temp, mock.patch.object(a,'git',side_effect=AssertionError('unexpected history fetch')):
+            self.assertEqual((self.files,self.receipt),a.assemble(temp))
+
+    def test_corrupted_pinned_base_cache_rejected(self):
+        with tempfile.TemporaryDirectory() as temp, tempfile.TemporaryDirectory() as repo:
+            folder=Path(temp);(folder/'base-inputs.zip').write_bytes(b'changed')
+            (folder/'base-input-hashes.json').write_bytes((a.HERE/'base-input-hashes.json').read_bytes())
+            path=next(iter(json.loads((folder/'base-input-hashes.json').read_text())))
+            with mock.patch.object(a,'HERE',folder),self.assertRaisesRegex(ValueError,'base cache changed'):
+                a.blob(repo,a.BASE,path)
+
     def test_source_assembly_is_deterministic(self):self.assertEqual((self.files,self.receipt),a.assemble(ROOT))
 
     def test_install_refuses_unmarked_checkout_before_writes(self):

@@ -20,6 +20,7 @@ BASE = 'f0a8bcaa10b410245d240b6014779ba69eb31c74'
 ART = '0005ba56711ba5c73e4d1b31402b62b1a7863800'
 SOURCE = 'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/'
 ENGINE = 'Pokemon Game/engine/'
+BASE_CACHE_SHA256 = '79c53813a74f979875e1f9c5e4a163659001e5fc0f14cbabad94eccd8fbf121a'
 ART_CACHE_SHA256 = '73ed064f3570c31a1eb6cf09bddf474e20fe547d9de972bf004fe071e9b42409'
 MAPS = {'OreburghCity': (70,59), 'Route207': (64,32),
         'OreburghMine_B1F': (24,26), 'OreburghMine_B2F': (32,28)}
@@ -42,6 +43,12 @@ def blob(repo, revision, path):
     if revision==BASE and path in pins:
         local=Path(repo)/path
         if local.is_file() and sha(local.read_bytes())==pins[path]:return local.read_bytes()
+        cache=(HERE/'base-inputs.zip').read_bytes()
+        if sha(cache)!=BASE_CACHE_SHA256:raise ValueError('pinned base cache changed')
+        with zipfile.ZipFile(io.BytesIO(cache)) as archive:
+            data=archive.read(path)
+        if sha(data)!=pins[path]:raise ValueError('base input does not match its pin')
+        return data
     return git(repo,'show',revision+':'+path)
 
 
