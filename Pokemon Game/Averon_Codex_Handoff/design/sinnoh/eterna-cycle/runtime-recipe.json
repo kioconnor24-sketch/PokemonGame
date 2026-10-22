@@ -1,0 +1,275 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North"
+  ],
+  "temporary_map_slots": {
+    "EternaCity": 19,
+    "Route206_North": 20,
+    "Route206": 21,
+    "Route206_South": 22,
+    "Route211_West": 23
+  },
+  "source_headers": {
+    "EternaCity": {
+      "id": "MAP_ETERNA_CITY",
+      "name": "EternaCity",
+      "layout": "LAYOUT_ETERNA_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_RUSTBORO",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ROUTE211_WEST",
+          "offset": 0,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE206",
+          "offset": 1,
+          "direction": "down"
+        }
+      ],
+      "warp_events": [
+        {
+          "x": 15,
+          "y": 48,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_NORTH",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route206_North": {
+      "id": "MAP_ROUTE206_NORTH",
+      "name": "Route206_North",
+      "layout": "LAYOUT_ROUTE206_NORTH",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_CITY",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route206": {
+      "id": "MAP_ROUTE206",
+      "name": "Route206",
+      "layout": "LAYOUT_ROUTE206",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": -1,
+          "direction": "up"
+        }
+      ],
+      "warp_events": [
+        {
+          "x": 14,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_NORTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 12,
+          "y": 96,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 13,
+          "y": 96,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 12,
+          "y": 102,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 13,
+          "y": 102,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206_SOUTH",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route206_South": {
+      "id": "MAP_ROUTE206_SOUTH",
+      "name": "Route206_South",
+      "layout": "LAYOUT_ROUTE206_SOUTH",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE206",
+          "dest_warp_id": "3"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route211_West": {
+      "id": "MAP_ROUTE211_WEST",
+      "name": "Route211_West",
+      "layout": "LAYOUT_ROUTE211_WEST",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ETERNA_CITY",
+          "offset": 0,
+          "direction": "left"
+        }
+      ],
+      "warp_events": [],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "dev_surrogate": "MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance",
+  "files": {
+    "data/event_scripts.s": "78c2c3800d505914d99ae1894eb1e09e9eebfc562abd5e6261db1c40ee281314",
+    "data/layouts/EternaCity/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/EternaCity/map.bin": "d1690f9c42186a9cda7df5f6b42e7c235b6ef022e000f8bb59e174b709185782",
+    "data/layouts/Route206/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/layouts/Route206/map.bin": "61f31e1c6666ba2652939d7825cd6e2afc651b53e87c58044dba684c717d9dae",
+    "data/layouts/Route206_North/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/layouts/Route206_North/map.bin": "5086591ec083ec54eecbba065abccc073fb9092c3043129a1a8dd70280617f3f",
+    "data/layouts/Route206_South/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/layouts/Route206_South/map.bin": "5086591ec083ec54eecbba065abccc073fb9092c3043129a1a8dd70280617f3f",
+    "data/layouts/Route211_West/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/Route211_West/map.bin": "fe6dbd3c979859a0771b70134788d8419c17b9f830f042704fbff61262cea441",
+    "data/layouts/layouts.json": "d4c2c94a17ee604682832fe160c18b25f471027a7878d7da094f292f72dce7db",
+    "data/maps/EternaCity/map.json": "28330c5ffee147068783775824566ba114ef441a310a0b4932f403d9d7879002",
+    "data/maps/EternaCity/scripts.inc": "1695a913751dffb0920e0e815d3d493bae36248b1b62e3fcdcfdf05712057fa9",
+    "data/maps/Route206/map.json": "b35ceae5691babf75669c75d435322f5ab0885fce980ae1d5e1b90ec98c41a0d",
+    "data/maps/Route206/scripts.inc": "50fbd0910881404fe68bc26b355bb4b73a9fcca153cd4859cd22fb973614eef6",
+    "data/maps/Route206_North/map.json": "28e686fb0ba73113b8ec0df7a764661d5921ae357d98926ed26e673061509d4b",
+    "data/maps/Route206_North/scripts.inc": "df23005c76300347a1484d7726b9ce695c9a70fb21f9f7c49a2e2821f590cafd",
+    "data/maps/Route206_South/map.json": "ce74c86ab0d3f007d51007b3d4ca4c392e3501d9d09a7704029cd69560bce466",
+    "data/maps/Route206_South/scripts.inc": "d4c6d19bb84f977dcb308375fcabef3345e5c93571293de47f356215611cd256",
+    "data/maps/Route211_West/map.json": "f80502075975dbd60e7de686e705b99dac3f632296c24b63e9b26c29ca8e8a68",
+    "data/maps/Route211_West/scripts.inc": "dafcc3fb19d1193033a8b01a12b1b1018ee60586b883b51a9baaaac3f756f1a9",
+    "data/maps/map_groups.json": "9fc0a7a2d81a3679f999edabf4a3ca7544988125202bbdf7696abbe6fa180074",
+    "data/tilesets/primary/eterna_dev_gateprimary/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/primary/eterna_dev_gateprimary/metatiles.bin": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1",
+    "data/tilesets/primary/eterna_dev_outdoorprimary/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/primary/eterna_dev_outdoorprimary/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/eterna_dev_gatesecondary/metatile_attributes.bin": "5a66e041c7badcdf9fb84e60e30544e9ede6a4c0cf99dee1c6d2e433603b10ed",
+    "data/tilesets/secondary/eterna_dev_gatesecondary/metatiles.bin": "339e2584016ce4f7a7f6ae57e413dc2efa4962f789f61ece91e02beff7afbf90",
+    "data/tilesets/secondary/eterna_dev_outdoorsecondary/metatile_attributes.bin": "e4f78aa958f3fa23e7e1013a698822d6105417d94dc7c4086e6425ed7e2d9401",
+    "data/tilesets/secondary/eterna_dev_outdoorsecondary/metatiles.bin": "ca269824e8d5f58290b4308c3bd06a3bd69ddb7aea824e1c62b5b6d591ee4468",
+    "include/tilesets.h": "b4248511dc17337f83162af76aa50325452f94390703d1f98cf12d3bd1e63f62",
+    "src/data/tilesets/headers.h": "9ea1b811a5515fd35f1a8ebc76c623433e740b38ca8b95738f5fc67b76e18d13",
+    "src/data/tilesets/metatiles.h": "31f3112ec8d7ae03792e0ccb86bb1b0d6f4c6383b1dbb587b089be0e6972e5d4",
+    "test/averon_eterna_runtime.c": "0c13571a4313cd3da32d920319eddff8749bb045219dfd9246c4beee7c43bedd",
+    "test/data/averon_map_registry_slots.inc": "fdc1e5fd0ecbe502c4e3131e9e3b563ce8ce64300ce6d0cf7dacbefe15b62bc2"
+  }
+}
