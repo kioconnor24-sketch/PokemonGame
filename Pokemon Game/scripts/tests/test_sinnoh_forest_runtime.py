@@ -110,6 +110,18 @@ class ForestRuntimeTest(unittest.TestCase):
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
         self.assertEqual(a.inputs(ROOT),self.before)
 
+    def test_runtime_launcher_refuses_unmarked_changed_or_escaping_source(self):
+        spec=importlib.util.spec_from_file_location('forest_actual_driver_launcher',HERE/'run_runtime_qa.py')
+        launcher=importlib.util.module_from_spec(spec);spec.loader.exec_module(launcher)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);recipe=dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',files={})
+            with self.assertRaises(ValueError):launcher.validate_source(root,recipe)
+            (root/'.map_qa_throwaway').touch();recipe['files']={'../outside':'bad'}
+            with self.assertRaises(ValueError):launcher.validate_source(root,recipe)
+            (root/'inside').write_bytes(b'actual');recipe['files']={'inside':a.sha(b'wrong')}
+            with self.assertRaises(ValueError):launcher.validate_source(root,recipe)
+            recipe['files']={'inside':a.sha(b'actual')};launcher.validate_source(root,recipe)
+
     def test_foreign_or_invalid_self_warp_rejected_before_writing(self):
         read_text=Path.read_text;target=HERE/'staged/OldChateau_2F/map.json'
         for key,value in [('dest_map','MAP_MISSING'),('dest_warp_id','99')]:
