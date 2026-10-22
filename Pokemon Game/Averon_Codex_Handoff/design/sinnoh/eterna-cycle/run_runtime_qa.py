@@ -111,7 +111,8 @@ def run(args):
             tile=tuple(tile)
             if self.d.here()[0]==map_id and self.path(map_id,tile) is None and _depth<2:
                 self.enter_region(map_id,tile,_depth)
-            try:self.d.walk_path(map_id,{tile})
+            try:
+                self.d.walk_path(map_id,{tile});self.d.settle()
             except Stuck as exc:
                 self.d.log('unreachable',map=map_id,tile=tile,reason=str(exc));return False
             return self.d.here()==(map_id,tile)
