@@ -1,0 +1,97 @@
+{
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "scope": "11 actual header blobs read; 8 extra labels if these 3 future parents were split. Not a claim of geometry, graphical or full Sinnoh source coverage.",
+  "headers": [
+    {
+      "map": "MtCoronet_1F_North_Room1",
+      "path": "data/maps/MtCoronet_1F_North_Room1/map.json",
+      "git_blob": "b303abf69e20eea9794a4e1b49cd5ff96bf7c450",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM1"
+    },
+    {
+      "map": "MtCoronet_1F_North_Room2",
+      "path": "data/maps/MtCoronet_1F_North_Room2/map.json",
+      "git_blob": "aca6ed299b03161d9862185e490033b32c0cdaeb",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM2"
+    },
+    {
+      "map": "MtCoronet_1F_South",
+      "path": "data/maps/MtCoronet_1F_South/map.json",
+      "git_blob": "489af82440735a9545d4ec2baf60b3e21fca6984",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "layout": "LAYOUT_MT_CORONET_1F_SOUTH"
+    },
+    {
+      "map": "MtCoronet_B1F",
+      "path": "data/maps/MtCoronet_B1F/map.json",
+      "git_blob": "4d21c483deb5236206d9a7bd680173315f04a720",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "layout": "LAYOUT_MT_CORONET_B1F"
+    },
+    {
+      "map": "OldChateau_2F",
+      "path": "data/maps/OldChateau_2F/map.json",
+      "git_blob": "c4e38153bdcc359670a2948c7e4c943ca1dc74b3",
+      "region_map_section": "MAPSEC_OLD_CHATEAU",
+      "layout": "LAYOUT_OLD_CHATEAU_2F"
+    },
+    {
+      "map": "OldChateau_DiningRoom",
+      "path": "data/maps/OldChateau_DiningRoom/map.json",
+      "git_blob": "45b107e87723bd26ca90d69eebc22bbc43916bf8",
+      "region_map_section": "MAPSEC_OLD_CHATEAU",
+      "layout": "LAYOUT_OLD_CHATEAU_DINING_ROOM"
+    },
+    {
+      "map": "OldChateau_Entrance",
+      "path": "data/maps/OldChateau_Entrance/map.json",
+      "git_blob": "01763cdf4e406fb155f0856a378afa6065d33123",
+      "region_map_section": "MAPSEC_OLD_CHATEAU",
+      "layout": "LAYOUT_OLD_CHATEAU_ENTRANCE"
+    },
+    {
+      "map": "OldChateau_SideRoom_1",
+      "path": "data/maps/OldChateau_SideRoom_1/map.json",
+      "git_blob": "6d6db4bc3d7a81e33fe0f411cc0c7106b3315c37",
+      "region_map_section": "MAPSEC_OLD_CHATEAU",
+      "layout": "LAYOUT_OLD_CHATEAU_SIDE_ROOM_1"
+    },
+    {
+      "map": "OldChateau_SideRoom_2",
+      "path": "data/maps/OldChateau_SideRoom_2/map.json",
+      "git_blob": "ee32a808b78c90226cb7cc93df97481d2700d901",
+      "region_map_section": "MAPSEC_OLD_CHATEAU",
+      "layout": "LAYOUT_OLD_CHATEAU_SIDE_ROOM_2"
+    },
+    {
+      "map": "OreburghMine_B1F",
+      "path": "data/maps/OreburghMine_B1F/map.json",
+      "git_blob": "53f9a905b642879de158d4cca9065cf4ab0c62be",
+      "region_map_section": "MAPSEC_OREBURGH_MINE",
+      "layout": "LAYOUT_OREBURGH_MINE_B1F"
+    },
+    {
+      "map": "OreburghMine_B2F",
+      "path": "data/maps/OreburghMine_B2F/map.json",
+      "git_blob": "48462bdf6cb950b859a8803836594936740747b2",
+      "region_map_section": "MAPSEC_OREBURGH_MINE",
+      "layout": "LAYOUT_OREBURGH_MINE_B2F"
+    }
+  ],
+  "proposed_high_labels": {
+    "MtCoronet_1F_North_Room1": "MT CORONET 1F N1",
+    "MtCoronet_1F_North_Room2": "MT CORONET 1F N2",
+    "MtCoronet_1F_South": "MT CORONET 1F S",
+    "MtCoronet_B1F": "MT CORONET B1F",
+    "OldChateau_2F": "CHATEAU 2F",
+    "OldChateau_DiningRoom": "CHATEAU DINING",
+    "OldChateau_Entrance": "CHATEAU ENTRY",
+    "OldChateau_SideRoom_1": "CHATEAU ROOM 1",
+    "OldChateau_SideRoom_2": "CHATEAU ROOM 2",
+    "OreburghMine_B1F": "OREBURGH MINE B1",
+    "OreburghMine_B2F": "OREBURGH MINE B2"
+  },
+  "excluded": "Hoenn/FRLG VictoryRoad header names are ambiguous and excluded. No exact-prefixed WaywardCave/IronIsland/StarkMountain header found in this bounded tree search; other naming remains uninvestigated."
+}
