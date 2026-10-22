@@ -1,0 +1,2537 @@
+{
+  "scope": "PLANNING_ONLY_NOT_A_FULL_AVERON_OR_CHILD_INVENTORY",
+  "raw_no_grouping": {
+    "scope": "Planning scenario only; not approval or a complete child/Averon inventory",
+    "registered_areas": 87,
+    "distinct_proposed_names": 87,
+    "already_allocated_sinnoh_names": [
+      {
+        "id": "MAPSEC_FLOAROMA_TOWN",
+        "value": 225,
+        "name": "FLOAROMA TOWN"
+      },
+      {
+        "id": "MAPSEC_JUBILIFE_CITY",
+        "value": 221,
+        "name": "JUBILIFE CITY"
+      },
+      {
+        "id": "MAPSEC_LAKE_VERITY",
+        "value": 220,
+        "name": "LAKE VERITY"
+      },
+      {
+        "id": "MAPSEC_OREBURGH_GATE",
+        "value": 223,
+        "name": "OREBURGH GATE"
+      },
+      {
+        "id": "MAPSEC_ROUTE_201",
+        "value": 217,
+        "name": "ROUTE 201"
+      },
+      {
+        "id": "MAPSEC_ROUTE_202",
+        "value": 219,
+        "name": "ROUTE 202"
+      },
+      {
+        "id": "MAPSEC_ROUTE_203",
+        "value": 222,
+        "name": "ROUTE 203"
+      },
+      {
+        "id": "MAPSEC_ROUTE_204",
+        "value": 224,
+        "name": "ROUTE 204"
+      },
+      {
+        "id": "MAPSEC_ROUTE_205",
+        "value": 226,
+        "name": "ROUTE 205"
+      },
+      {
+        "id": "MAPSEC_SANDGEM_TOWN",
+        "value": 216,
+        "name": "SANDGEM TOWN"
+      },
+      {
+        "id": "MAPSEC_TWINLEAF_TOWN",
+        "value": 218,
+        "name": "TWINLEAF TOWN"
+      }
+    ],
+    "new_names_required": 76,
+    "new_names": [
+      "Acuity Lakefront",
+      "Amity Square",
+      "Battle Park / Battle Frontier",
+      "Canalave City",
+      "Celestic Town",
+      "Cycling Road",
+      "Distortion World",
+      "Eterna City",
+      "Eterna Forest",
+      "Eterna Galactic Building",
+      "Fight Area",
+      "Floaroma Meadow",
+      "Flower Paradise",
+      "Fuego Ironworks",
+      "Fullmoon Island",
+      "Great Marsh",
+      "Hall of Origin",
+      "Hearthome City",
+      "Iron Island",
+      "Lake Acuity",
+      "Lake Valor",
+      "Lost Tower",
+      "Mt. Coronet",
+      "Newmoon Island",
+      "Old Chateau",
+      "Oreburgh City",
+      "Oreburgh Mine",
+      "Pal Park",
+      "Pastoria City",
+      "Pokémon League",
+      "Ravaged Path",
+      "Resort Area",
+      "Route 206",
+      "Route 207",
+      "Route 208",
+      "Route 209",
+      "Route 210",
+      "Route 211",
+      "Route 212",
+      "Route 213",
+      "Route 214",
+      "Route 215",
+      "Route 216",
+      "Route 217",
+      "Route 218",
+      "Route 219",
+      "Route 220",
+      "Route 221",
+      "Route 222",
+      "Route 223",
+      "Route 224",
+      "Route 225",
+      "Route 226",
+      "Route 227",
+      "Route 228",
+      "Route 229",
+      "Route 230",
+      "Sendoff Spring",
+      "Snowpoint City",
+      "Snowpoint Temple",
+      "Solaceon Ruins",
+      "Solaceon Town",
+      "Spear Pillar",
+      "Spring Path",
+      "Stark Mountain",
+      "Sunyshore City",
+      "Survival Area",
+      "Trophy Garden",
+      "Turnback Cave",
+      "Valley Windworks",
+      "Valor Lakefront",
+      "Veilstone City",
+      "Veilstone Galactic Headquarters",
+      "Verity Lakefront",
+      "Victory Road",
+      "Wayward Cave"
+    ],
+    "remaining_ordinary_codes": 26,
+    "available_values": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252
+    ],
+    "other_future_reserve": 0,
+    "codes_required_with_reserve": 76,
+    "shortfall": 50,
+    "fits_current_byte_pool": false,
+    "name_groups": [
+      {
+        "name": "Acuity Lakefront",
+        "area_keys": [
+          "SN-L06"
+        ]
+      },
+      {
+        "name": "Amity Square",
+        "area_keys": [
+          "SN-L19"
+        ]
+      },
+      {
+        "name": "Battle Park / Battle Frontier",
+        "area_keys": [
+          "SN-O05"
+        ]
+      },
+      {
+        "name": "Canalave City",
+        "area_keys": [
+          "SN-T12"
+        ]
+      },
+      {
+        "name": "Celestic Town",
+        "area_keys": [
+          "SN-T11"
+        ]
+      },
+      {
+        "name": "Cycling Road",
+        "area_keys": [
+          "SN-L18"
+        ]
+      },
+      {
+        "name": "Distortion World",
+        "area_keys": [
+          "SN-O06"
+        ]
+      },
+      {
+        "name": "Eterna City",
+        "area_keys": [
+          "SN-T06"
+        ]
+      },
+      {
+        "name": "Eterna Forest",
+        "area_keys": [
+          "SN-L14"
+        ]
+      },
+      {
+        "name": "Eterna Galactic Building",
+        "area_keys": [
+          "SN-O03"
+        ]
+      },
+      {
+        "name": "Fight Area",
+        "area_keys": [
+          "SN-T16"
+        ]
+      },
+      {
+        "name": "Floaroma Meadow",
+        "area_keys": [
+          "SN-L12"
+        ]
+      },
+      {
+        "name": "Floaroma Town",
+        "area_keys": [
+          "SN-T05"
+        ]
+      },
+      {
+        "name": "Flower Paradise",
+        "area_keys": [
+          "SN-O01"
+        ]
+      },
+      {
+        "name": "Fuego Ironworks",
+        "area_keys": [
+          "SN-L16"
+        ]
+      },
+      {
+        "name": "Fullmoon Island",
+        "area_keys": [
+          "SN-L31"
+        ]
+      },
+      {
+        "name": "Great Marsh",
+        "area_keys": [
+          "SN-L22"
+        ]
+      },
+      {
+        "name": "Hall of Origin",
+        "area_keys": [
+          "SN-O02"
+        ]
+      },
+      {
+        "name": "Hearthome City",
+        "area_keys": [
+          "SN-T07"
+        ]
+      },
+      {
+        "name": "Iron Island",
+        "area_keys": [
+          "SN-L27"
+        ]
+      },
+      {
+        "name": "Jubilife City",
+        "area_keys": [
+          "SN-T03"
+        ]
+      },
+      {
+        "name": "Lake Acuity",
+        "area_keys": [
+          "SN-L03"
+        ]
+      },
+      {
+        "name": "Lake Valor",
+        "area_keys": [
+          "SN-L02"
+        ]
+      },
+      {
+        "name": "Lake Verity",
+        "area_keys": [
+          "SN-L01"
+        ]
+      },
+      {
+        "name": "Lost Tower",
+        "area_keys": [
+          "SN-L20"
+        ]
+      },
+      {
+        "name": "Mt. Coronet",
+        "area_keys": [
+          "SN-L07"
+        ]
+      },
+      {
+        "name": "Newmoon Island",
+        "area_keys": [
+          "SN-L32"
+        ]
+      },
+      {
+        "name": "Old Chateau",
+        "area_keys": [
+          "SN-L15"
+        ]
+      },
+      {
+        "name": "Oreburgh City",
+        "area_keys": [
+          "SN-T04"
+        ]
+      },
+      {
+        "name": "Oreburgh Gate",
+        "area_keys": [
+          "SN-L09"
+        ]
+      },
+      {
+        "name": "Oreburgh Mine",
+        "area_keys": [
+          "SN-L10"
+        ]
+      },
+      {
+        "name": "Pal Park",
+        "area_keys": [
+          "SN-L33"
+        ]
+      },
+      {
+        "name": "Pastoria City",
+        "area_keys": [
+          "SN-T10"
+        ]
+      },
+      {
+        "name": "Pokémon League",
+        "area_keys": [
+          "SN-T15"
+        ]
+      },
+      {
+        "name": "Ravaged Path",
+        "area_keys": [
+          "SN-L11"
+        ]
+      },
+      {
+        "name": "Resort Area",
+        "area_keys": [
+          "SN-T18"
+        ]
+      },
+      {
+        "name": "Route 201",
+        "area_keys": [
+          "SN-R201"
+        ]
+      },
+      {
+        "name": "Route 202",
+        "area_keys": [
+          "SN-R202"
+        ]
+      },
+      {
+        "name": "Route 203",
+        "area_keys": [
+          "SN-R203"
+        ]
+      },
+      {
+        "name": "Route 204",
+        "area_keys": [
+          "SN-R204"
+        ]
+      },
+      {
+        "name": "Route 205",
+        "area_keys": [
+          "SN-R205"
+        ]
+      },
+      {
+        "name": "Route 206",
+        "area_keys": [
+          "SN-R206"
+        ]
+      },
+      {
+        "name": "Route 207",
+        "area_keys": [
+          "SN-R207"
+        ]
+      },
+      {
+        "name": "Route 208",
+        "area_keys": [
+          "SN-R208"
+        ]
+      },
+      {
+        "name": "Route 209",
+        "area_keys": [
+          "SN-R209"
+        ]
+      },
+      {
+        "name": "Route 210",
+        "area_keys": [
+          "SN-R210"
+        ]
+      },
+      {
+        "name": "Route 211",
+        "area_keys": [
+          "SN-R211"
+        ]
+      },
+      {
+        "name": "Route 212",
+        "area_keys": [
+          "SN-R212"
+        ]
+      },
+      {
+        "name": "Route 213",
+        "area_keys": [
+          "SN-R213"
+        ]
+      },
+      {
+        "name": "Route 214",
+        "area_keys": [
+          "SN-R214"
+        ]
+      },
+      {
+        "name": "Route 215",
+        "area_keys": [
+          "SN-R215"
+        ]
+      },
+      {
+        "name": "Route 216",
+        "area_keys": [
+          "SN-R216"
+        ]
+      },
+      {
+        "name": "Route 217",
+        "area_keys": [
+          "SN-R217"
+        ]
+      },
+      {
+        "name": "Route 218",
+        "area_keys": [
+          "SN-R218"
+        ]
+      },
+      {
+        "name": "Route 219",
+        "area_keys": [
+          "SN-R219"
+        ]
+      },
+      {
+        "name": "Route 220",
+        "area_keys": [
+          "SN-R220"
+        ]
+      },
+      {
+        "name": "Route 221",
+        "area_keys": [
+          "SN-R221"
+        ]
+      },
+      {
+        "name": "Route 222",
+        "area_keys": [
+          "SN-R222"
+        ]
+      },
+      {
+        "name": "Route 223",
+        "area_keys": [
+          "SN-R223"
+        ]
+      },
+      {
+        "name": "Route 224",
+        "area_keys": [
+          "SN-R224"
+        ]
+      },
+      {
+        "name": "Route 225",
+        "area_keys": [
+          "SN-R225"
+        ]
+      },
+      {
+        "name": "Route 226",
+        "area_keys": [
+          "SN-R226"
+        ]
+      },
+      {
+        "name": "Route 227",
+        "area_keys": [
+          "SN-R227"
+        ]
+      },
+      {
+        "name": "Route 228",
+        "area_keys": [
+          "SN-R228"
+        ]
+      },
+      {
+        "name": "Route 229",
+        "area_keys": [
+          "SN-R229"
+        ]
+      },
+      {
+        "name": "Route 230",
+        "area_keys": [
+          "SN-R230"
+        ]
+      },
+      {
+        "name": "Sandgem Town",
+        "area_keys": [
+          "SN-T02"
+        ]
+      },
+      {
+        "name": "Sendoff Spring",
+        "area_keys": [
+          "SN-L24"
+        ]
+      },
+      {
+        "name": "Snowpoint City",
+        "area_keys": [
+          "SN-T13"
+        ]
+      },
+      {
+        "name": "Snowpoint Temple",
+        "area_keys": [
+          "SN-L28"
+        ]
+      },
+      {
+        "name": "Solaceon Ruins",
+        "area_keys": [
+          "SN-L21"
+        ]
+      },
+      {
+        "name": "Solaceon Town",
+        "area_keys": [
+          "SN-T08"
+        ]
+      },
+      {
+        "name": "Spear Pillar",
+        "area_keys": [
+          "SN-L08"
+        ]
+      },
+      {
+        "name": "Spring Path",
+        "area_keys": [
+          "SN-L25"
+        ]
+      },
+      {
+        "name": "Stark Mountain",
+        "area_keys": [
+          "SN-L30"
+        ]
+      },
+      {
+        "name": "Sunyshore City",
+        "area_keys": [
+          "SN-T14"
+        ]
+      },
+      {
+        "name": "Survival Area",
+        "area_keys": [
+          "SN-T17"
+        ]
+      },
+      {
+        "name": "Trophy Garden",
+        "area_keys": [
+          "SN-L23"
+        ]
+      },
+      {
+        "name": "Turnback Cave",
+        "area_keys": [
+          "SN-L26"
+        ]
+      },
+      {
+        "name": "Twinleaf Town",
+        "area_keys": [
+          "SN-T01"
+        ]
+      },
+      {
+        "name": "Valley Windworks",
+        "area_keys": [
+          "SN-L13"
+        ]
+      },
+      {
+        "name": "Valor Lakefront",
+        "area_keys": [
+          "SN-L05"
+        ]
+      },
+      {
+        "name": "Veilstone City",
+        "area_keys": [
+          "SN-T09"
+        ]
+      },
+      {
+        "name": "Veilstone Galactic Headquarters",
+        "area_keys": [
+          "SN-O04"
+        ]
+      },
+      {
+        "name": "Verity Lakefront",
+        "area_keys": [
+          "SN-L04"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "area_keys": [
+          "SN-L29"
+        ]
+      },
+      {
+        "name": "Wayward Cave",
+        "area_keys": [
+          "SN-L17"
+        ]
+      }
+    ],
+    "legacy_same_name_not_reused": [
+      {
+        "name": "Pokémon League",
+        "legacy_ids": [
+          "MAPSEC_POKEMON_LEAGUE"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "legacy_ids": [
+          "MAPSEC_KANTO_VICTORY_ROAD",
+          "MAPSEC_VICTORY_ROAD"
+        ]
+      }
+    ],
+    "inventory_complete": false,
+    "production_allocations": []
+  },
+  "low": {
+    "scope": "Planning scenario only; not approval or a complete child/Averon inventory",
+    "registered_areas": 87,
+    "distinct_proposed_names": 33,
+    "already_allocated_sinnoh_names": [
+      {
+        "id": "MAPSEC_FLOAROMA_TOWN",
+        "value": 225,
+        "name": "FLOAROMA TOWN"
+      },
+      {
+        "id": "MAPSEC_JUBILIFE_CITY",
+        "value": 221,
+        "name": "JUBILIFE CITY"
+      },
+      {
+        "id": "MAPSEC_LAKE_VERITY",
+        "value": 220,
+        "name": "LAKE VERITY"
+      },
+      {
+        "id": "MAPSEC_OREBURGH_GATE",
+        "value": 223,
+        "name": "OREBURGH GATE"
+      },
+      {
+        "id": "MAPSEC_ROUTE_201",
+        "value": 217,
+        "name": "ROUTE 201"
+      },
+      {
+        "id": "MAPSEC_ROUTE_202",
+        "value": 219,
+        "name": "ROUTE 202"
+      },
+      {
+        "id": "MAPSEC_ROUTE_203",
+        "value": 222,
+        "name": "ROUTE 203"
+      },
+      {
+        "id": "MAPSEC_ROUTE_204",
+        "value": 224,
+        "name": "ROUTE 204"
+      },
+      {
+        "id": "MAPSEC_ROUTE_205",
+        "value": 226,
+        "name": "ROUTE 205"
+      },
+      {
+        "id": "MAPSEC_SANDGEM_TOWN",
+        "value": 216,
+        "name": "SANDGEM TOWN"
+      },
+      {
+        "id": "MAPSEC_TWINLEAF_TOWN",
+        "value": 218,
+        "name": "TWINLEAF TOWN"
+      }
+    ],
+    "new_names_required": 22,
+    "new_names": [
+      "Canalave City",
+      "Celestic Town",
+      "Eterna City",
+      "Fight Area",
+      "Hearthome City",
+      "Iron Island",
+      "Lake Acuity",
+      "Lake Valor",
+      "Mt. Coronet",
+      "Oreburgh City",
+      "Pal Park",
+      "Pastoria City",
+      "Pokémon League",
+      "Resort Area",
+      "Sendoff Spring",
+      "Snowpoint City",
+      "Solaceon Town",
+      "Stark Mountain",
+      "Sunyshore City",
+      "Survival Area",
+      "Valley Windworks",
+      "Veilstone City"
+    ],
+    "remaining_ordinary_codes": 26,
+    "available_values": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252
+    ],
+    "other_future_reserve": 4,
+    "codes_required_with_reserve": 26,
+    "shortfall": 0,
+    "fits_current_byte_pool": true,
+    "name_groups": [
+      {
+        "name": "Canalave City",
+        "area_keys": [
+          "SN-R218",
+          "SN-T12"
+        ]
+      },
+      {
+        "name": "Celestic Town",
+        "area_keys": [
+          "SN-R211",
+          "SN-T11"
+        ]
+      },
+      {
+        "name": "Eterna City",
+        "area_keys": [
+          "SN-L14",
+          "SN-L15",
+          "SN-L17",
+          "SN-L18",
+          "SN-O03",
+          "SN-R206",
+          "SN-T06"
+        ]
+      },
+      {
+        "name": "Fight Area",
+        "area_keys": [
+          "SN-O05",
+          "SN-R225",
+          "SN-T16"
+        ]
+      },
+      {
+        "name": "Floaroma Town",
+        "area_keys": [
+          "SN-L12",
+          "SN-T05"
+        ]
+      },
+      {
+        "name": "Hearthome City",
+        "area_keys": [
+          "SN-L19",
+          "SN-L23",
+          "SN-R208",
+          "SN-R212",
+          "SN-T07"
+        ]
+      },
+      {
+        "name": "Iron Island",
+        "area_keys": [
+          "SN-L27",
+          "SN-L31",
+          "SN-L32"
+        ]
+      },
+      {
+        "name": "Jubilife City",
+        "area_keys": [
+          "SN-T03"
+        ]
+      },
+      {
+        "name": "Lake Acuity",
+        "area_keys": [
+          "SN-L03",
+          "SN-L06"
+        ]
+      },
+      {
+        "name": "Lake Valor",
+        "area_keys": [
+          "SN-L02",
+          "SN-L05"
+        ]
+      },
+      {
+        "name": "Lake Verity",
+        "area_keys": [
+          "SN-L01",
+          "SN-L04"
+        ]
+      },
+      {
+        "name": "Mt. Coronet",
+        "area_keys": [
+          "SN-L07",
+          "SN-L08",
+          "SN-O02"
+        ]
+      },
+      {
+        "name": "Oreburgh City",
+        "area_keys": [
+          "SN-L10",
+          "SN-R207",
+          "SN-T04"
+        ]
+      },
+      {
+        "name": "Oreburgh Gate",
+        "area_keys": [
+          "SN-L09"
+        ]
+      },
+      {
+        "name": "Pal Park",
+        "area_keys": [
+          "SN-L33",
+          "SN-R219",
+          "SN-R220",
+          "SN-R221"
+        ]
+      },
+      {
+        "name": "Pastoria City",
+        "area_keys": [
+          "SN-L22",
+          "SN-R213",
+          "SN-T10"
+        ]
+      },
+      {
+        "name": "Pokémon League",
+        "area_keys": [
+          "SN-L29",
+          "SN-O01",
+          "SN-R223",
+          "SN-R224",
+          "SN-T15"
+        ]
+      },
+      {
+        "name": "Resort Area",
+        "area_keys": [
+          "SN-R228",
+          "SN-R229",
+          "SN-R230",
+          "SN-T18"
+        ]
+      },
+      {
+        "name": "Route 201",
+        "area_keys": [
+          "SN-R201"
+        ]
+      },
+      {
+        "name": "Route 202",
+        "area_keys": [
+          "SN-R202"
+        ]
+      },
+      {
+        "name": "Route 203",
+        "area_keys": [
+          "SN-R203"
+        ]
+      },
+      {
+        "name": "Route 204",
+        "area_keys": [
+          "SN-L11",
+          "SN-R204"
+        ]
+      },
+      {
+        "name": "Route 205",
+        "area_keys": [
+          "SN-R205"
+        ]
+      },
+      {
+        "name": "Sandgem Town",
+        "area_keys": [
+          "SN-T02"
+        ]
+      },
+      {
+        "name": "Sendoff Spring",
+        "area_keys": [
+          "SN-L24",
+          "SN-L25",
+          "SN-L26",
+          "SN-O06"
+        ]
+      },
+      {
+        "name": "Snowpoint City",
+        "area_keys": [
+          "SN-L28",
+          "SN-R216",
+          "SN-R217",
+          "SN-T13"
+        ]
+      },
+      {
+        "name": "Solaceon Town",
+        "area_keys": [
+          "SN-L20",
+          "SN-L21",
+          "SN-R209",
+          "SN-R210",
+          "SN-T08"
+        ]
+      },
+      {
+        "name": "Stark Mountain",
+        "area_keys": [
+          "SN-L30",
+          "SN-R227"
+        ]
+      },
+      {
+        "name": "Sunyshore City",
+        "area_keys": [
+          "SN-R222",
+          "SN-T14"
+        ]
+      },
+      {
+        "name": "Survival Area",
+        "area_keys": [
+          "SN-R226",
+          "SN-T17"
+        ]
+      },
+      {
+        "name": "Twinleaf Town",
+        "area_keys": [
+          "SN-T01"
+        ]
+      },
+      {
+        "name": "Valley Windworks",
+        "area_keys": [
+          "SN-L13",
+          "SN-L16"
+        ]
+      },
+      {
+        "name": "Veilstone City",
+        "area_keys": [
+          "SN-O04",
+          "SN-R214",
+          "SN-R215",
+          "SN-T09"
+        ]
+      }
+    ],
+    "legacy_same_name_not_reused": [
+      {
+        "name": "Pokémon League",
+        "legacy_ids": [
+          "MAPSEC_POKEMON_LEAGUE"
+        ]
+      }
+    ],
+    "inventory_complete": false,
+    "production_allocations": []
+  },
+  "base": {
+    "scope": "Planning scenario only; not approval or a complete child/Averon inventory",
+    "registered_areas": 87,
+    "distinct_proposed_names": 84,
+    "already_allocated_sinnoh_names": [
+      {
+        "id": "MAPSEC_FLOAROMA_TOWN",
+        "value": 225,
+        "name": "FLOAROMA TOWN"
+      },
+      {
+        "id": "MAPSEC_JUBILIFE_CITY",
+        "value": 221,
+        "name": "JUBILIFE CITY"
+      },
+      {
+        "id": "MAPSEC_LAKE_VERITY",
+        "value": 220,
+        "name": "LAKE VERITY"
+      },
+      {
+        "id": "MAPSEC_OREBURGH_GATE",
+        "value": 223,
+        "name": "OREBURGH GATE"
+      },
+      {
+        "id": "MAPSEC_ROUTE_201",
+        "value": 217,
+        "name": "ROUTE 201"
+      },
+      {
+        "id": "MAPSEC_ROUTE_202",
+        "value": 219,
+        "name": "ROUTE 202"
+      },
+      {
+        "id": "MAPSEC_ROUTE_203",
+        "value": 222,
+        "name": "ROUTE 203"
+      },
+      {
+        "id": "MAPSEC_ROUTE_204",
+        "value": 224,
+        "name": "ROUTE 204"
+      },
+      {
+        "id": "MAPSEC_ROUTE_205",
+        "value": 226,
+        "name": "ROUTE 205"
+      },
+      {
+        "id": "MAPSEC_SANDGEM_TOWN",
+        "value": 216,
+        "name": "SANDGEM TOWN"
+      },
+      {
+        "id": "MAPSEC_TWINLEAF_TOWN",
+        "value": 218,
+        "name": "TWINLEAF TOWN"
+      }
+    ],
+    "new_names_required": 73,
+    "new_names": [
+      "Acuity Lakefront",
+      "Amity Square",
+      "Battle Park / Battle Frontier",
+      "Canalave City",
+      "Celestic Town",
+      "Cycling Road",
+      "Distortion World",
+      "Eterna City",
+      "Eterna Forest",
+      "Eterna Galactic Building",
+      "Fight Area",
+      "Flower Paradise",
+      "Fuego Ironworks",
+      "Fullmoon Island",
+      "Great Marsh",
+      "Hall of Origin",
+      "Hearthome City",
+      "Iron Island",
+      "Lake Acuity",
+      "Lake Valor",
+      "Lost Tower",
+      "Mt. Coronet",
+      "Newmoon Island",
+      "Old Chateau",
+      "Oreburgh City",
+      "Oreburgh Mine",
+      "Pal Park",
+      "Pastoria City",
+      "Pokémon League",
+      "Resort Area",
+      "Route 206",
+      "Route 207",
+      "Route 208",
+      "Route 209",
+      "Route 210",
+      "Route 211",
+      "Route 212",
+      "Route 213",
+      "Route 214",
+      "Route 215",
+      "Route 216",
+      "Route 217",
+      "Route 218",
+      "Route 219",
+      "Route 220",
+      "Route 221",
+      "Route 222",
+      "Route 223",
+      "Route 224",
+      "Route 225",
+      "Route 226",
+      "Route 227",
+      "Route 228",
+      "Route 229",
+      "Route 230",
+      "Sendoff Spring",
+      "Snowpoint City",
+      "Snowpoint Temple",
+      "Solaceon Ruins",
+      "Solaceon Town",
+      "Spear Pillar",
+      "Spring Path",
+      "Stark Mountain",
+      "Sunyshore City",
+      "Survival Area",
+      "Trophy Garden",
+      "Turnback Cave",
+      "Valley Windworks",
+      "Valor Lakefront",
+      "Veilstone City",
+      "Veilstone Galactic Headquarters",
+      "Victory Road",
+      "Wayward Cave"
+    ],
+    "remaining_ordinary_codes": 26,
+    "available_values": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252
+    ],
+    "other_future_reserve": 4,
+    "codes_required_with_reserve": 77,
+    "shortfall": 51,
+    "fits_current_byte_pool": false,
+    "name_groups": [
+      {
+        "name": "Acuity Lakefront",
+        "area_keys": [
+          "SN-L06"
+        ]
+      },
+      {
+        "name": "Amity Square",
+        "area_keys": [
+          "SN-L19"
+        ]
+      },
+      {
+        "name": "Battle Park / Battle Frontier",
+        "area_keys": [
+          "SN-O05"
+        ]
+      },
+      {
+        "name": "Canalave City",
+        "area_keys": [
+          "SN-T12"
+        ]
+      },
+      {
+        "name": "Celestic Town",
+        "area_keys": [
+          "SN-T11"
+        ]
+      },
+      {
+        "name": "Cycling Road",
+        "area_keys": [
+          "SN-L18"
+        ]
+      },
+      {
+        "name": "Distortion World",
+        "area_keys": [
+          "SN-O06"
+        ]
+      },
+      {
+        "name": "Eterna City",
+        "area_keys": [
+          "SN-T06"
+        ]
+      },
+      {
+        "name": "Eterna Forest",
+        "area_keys": [
+          "SN-L14"
+        ]
+      },
+      {
+        "name": "Eterna Galactic Building",
+        "area_keys": [
+          "SN-O03"
+        ]
+      },
+      {
+        "name": "Fight Area",
+        "area_keys": [
+          "SN-T16"
+        ]
+      },
+      {
+        "name": "Floaroma Town",
+        "area_keys": [
+          "SN-L12",
+          "SN-T05"
+        ]
+      },
+      {
+        "name": "Flower Paradise",
+        "area_keys": [
+          "SN-O01"
+        ]
+      },
+      {
+        "name": "Fuego Ironworks",
+        "area_keys": [
+          "SN-L16"
+        ]
+      },
+      {
+        "name": "Fullmoon Island",
+        "area_keys": [
+          "SN-L31"
+        ]
+      },
+      {
+        "name": "Great Marsh",
+        "area_keys": [
+          "SN-L22"
+        ]
+      },
+      {
+        "name": "Hall of Origin",
+        "area_keys": [
+          "SN-O02"
+        ]
+      },
+      {
+        "name": "Hearthome City",
+        "area_keys": [
+          "SN-T07"
+        ]
+      },
+      {
+        "name": "Iron Island",
+        "area_keys": [
+          "SN-L27"
+        ]
+      },
+      {
+        "name": "Jubilife City",
+        "area_keys": [
+          "SN-T03"
+        ]
+      },
+      {
+        "name": "Lake Acuity",
+        "area_keys": [
+          "SN-L03"
+        ]
+      },
+      {
+        "name": "Lake Valor",
+        "area_keys": [
+          "SN-L02"
+        ]
+      },
+      {
+        "name": "Lake Verity",
+        "area_keys": [
+          "SN-L01",
+          "SN-L04"
+        ]
+      },
+      {
+        "name": "Lost Tower",
+        "area_keys": [
+          "SN-L20"
+        ]
+      },
+      {
+        "name": "Mt. Coronet",
+        "area_keys": [
+          "SN-L07"
+        ]
+      },
+      {
+        "name": "Newmoon Island",
+        "area_keys": [
+          "SN-L32"
+        ]
+      },
+      {
+        "name": "Old Chateau",
+        "area_keys": [
+          "SN-L15"
+        ]
+      },
+      {
+        "name": "Oreburgh City",
+        "area_keys": [
+          "SN-T04"
+        ]
+      },
+      {
+        "name": "Oreburgh Gate",
+        "area_keys": [
+          "SN-L09"
+        ]
+      },
+      {
+        "name": "Oreburgh Mine",
+        "area_keys": [
+          "SN-L10"
+        ]
+      },
+      {
+        "name": "Pal Park",
+        "area_keys": [
+          "SN-L33"
+        ]
+      },
+      {
+        "name": "Pastoria City",
+        "area_keys": [
+          "SN-T10"
+        ]
+      },
+      {
+        "name": "Pokémon League",
+        "area_keys": [
+          "SN-T15"
+        ]
+      },
+      {
+        "name": "Resort Area",
+        "area_keys": [
+          "SN-T18"
+        ]
+      },
+      {
+        "name": "Route 201",
+        "area_keys": [
+          "SN-R201"
+        ]
+      },
+      {
+        "name": "Route 202",
+        "area_keys": [
+          "SN-R202"
+        ]
+      },
+      {
+        "name": "Route 203",
+        "area_keys": [
+          "SN-R203"
+        ]
+      },
+      {
+        "name": "Route 204",
+        "area_keys": [
+          "SN-L11",
+          "SN-R204"
+        ]
+      },
+      {
+        "name": "Route 205",
+        "area_keys": [
+          "SN-R205"
+        ]
+      },
+      {
+        "name": "Route 206",
+        "area_keys": [
+          "SN-R206"
+        ]
+      },
+      {
+        "name": "Route 207",
+        "area_keys": [
+          "SN-R207"
+        ]
+      },
+      {
+        "name": "Route 208",
+        "area_keys": [
+          "SN-R208"
+        ]
+      },
+      {
+        "name": "Route 209",
+        "area_keys": [
+          "SN-R209"
+        ]
+      },
+      {
+        "name": "Route 210",
+        "area_keys": [
+          "SN-R210"
+        ]
+      },
+      {
+        "name": "Route 211",
+        "area_keys": [
+          "SN-R211"
+        ]
+      },
+      {
+        "name": "Route 212",
+        "area_keys": [
+          "SN-R212"
+        ]
+      },
+      {
+        "name": "Route 213",
+        "area_keys": [
+          "SN-R213"
+        ]
+      },
+      {
+        "name": "Route 214",
+        "area_keys": [
+          "SN-R214"
+        ]
+      },
+      {
+        "name": "Route 215",
+        "area_keys": [
+          "SN-R215"
+        ]
+      },
+      {
+        "name": "Route 216",
+        "area_keys": [
+          "SN-R216"
+        ]
+      },
+      {
+        "name": "Route 217",
+        "area_keys": [
+          "SN-R217"
+        ]
+      },
+      {
+        "name": "Route 218",
+        "area_keys": [
+          "SN-R218"
+        ]
+      },
+      {
+        "name": "Route 219",
+        "area_keys": [
+          "SN-R219"
+        ]
+      },
+      {
+        "name": "Route 220",
+        "area_keys": [
+          "SN-R220"
+        ]
+      },
+      {
+        "name": "Route 221",
+        "area_keys": [
+          "SN-R221"
+        ]
+      },
+      {
+        "name": "Route 222",
+        "area_keys": [
+          "SN-R222"
+        ]
+      },
+      {
+        "name": "Route 223",
+        "area_keys": [
+          "SN-R223"
+        ]
+      },
+      {
+        "name": "Route 224",
+        "area_keys": [
+          "SN-R224"
+        ]
+      },
+      {
+        "name": "Route 225",
+        "area_keys": [
+          "SN-R225"
+        ]
+      },
+      {
+        "name": "Route 226",
+        "area_keys": [
+          "SN-R226"
+        ]
+      },
+      {
+        "name": "Route 227",
+        "area_keys": [
+          "SN-R227"
+        ]
+      },
+      {
+        "name": "Route 228",
+        "area_keys": [
+          "SN-R228"
+        ]
+      },
+      {
+        "name": "Route 229",
+        "area_keys": [
+          "SN-R229"
+        ]
+      },
+      {
+        "name": "Route 230",
+        "area_keys": [
+          "SN-R230"
+        ]
+      },
+      {
+        "name": "Sandgem Town",
+        "area_keys": [
+          "SN-T02"
+        ]
+      },
+      {
+        "name": "Sendoff Spring",
+        "area_keys": [
+          "SN-L24"
+        ]
+      },
+      {
+        "name": "Snowpoint City",
+        "area_keys": [
+          "SN-T13"
+        ]
+      },
+      {
+        "name": "Snowpoint Temple",
+        "area_keys": [
+          "SN-L28"
+        ]
+      },
+      {
+        "name": "Solaceon Ruins",
+        "area_keys": [
+          "SN-L21"
+        ]
+      },
+      {
+        "name": "Solaceon Town",
+        "area_keys": [
+          "SN-T08"
+        ]
+      },
+      {
+        "name": "Spear Pillar",
+        "area_keys": [
+          "SN-L08"
+        ]
+      },
+      {
+        "name": "Spring Path",
+        "area_keys": [
+          "SN-L25"
+        ]
+      },
+      {
+        "name": "Stark Mountain",
+        "area_keys": [
+          "SN-L30"
+        ]
+      },
+      {
+        "name": "Sunyshore City",
+        "area_keys": [
+          "SN-T14"
+        ]
+      },
+      {
+        "name": "Survival Area",
+        "area_keys": [
+          "SN-T17"
+        ]
+      },
+      {
+        "name": "Trophy Garden",
+        "area_keys": [
+          "SN-L23"
+        ]
+      },
+      {
+        "name": "Turnback Cave",
+        "area_keys": [
+          "SN-L26"
+        ]
+      },
+      {
+        "name": "Twinleaf Town",
+        "area_keys": [
+          "SN-T01"
+        ]
+      },
+      {
+        "name": "Valley Windworks",
+        "area_keys": [
+          "SN-L13"
+        ]
+      },
+      {
+        "name": "Valor Lakefront",
+        "area_keys": [
+          "SN-L05"
+        ]
+      },
+      {
+        "name": "Veilstone City",
+        "area_keys": [
+          "SN-T09"
+        ]
+      },
+      {
+        "name": "Veilstone Galactic Headquarters",
+        "area_keys": [
+          "SN-O04"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "area_keys": [
+          "SN-L29"
+        ]
+      },
+      {
+        "name": "Wayward Cave",
+        "area_keys": [
+          "SN-L17"
+        ]
+      }
+    ],
+    "legacy_same_name_not_reused": [
+      {
+        "name": "Pokémon League",
+        "legacy_ids": [
+          "MAPSEC_POKEMON_LEAGUE"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "legacy_ids": [
+          "MAPSEC_KANTO_VICTORY_ROAD",
+          "MAPSEC_VICTORY_ROAD"
+        ]
+      }
+    ],
+    "inventory_complete": false,
+    "production_allocations": []
+  },
+  "high": {
+    "scope": "Planning scenario only; not approval or a complete child/Averon inventory",
+    "registered_areas": 87,
+    "distinct_proposed_names": 92,
+    "already_allocated_sinnoh_names": [
+      {
+        "id": "MAPSEC_FLOAROMA_TOWN",
+        "value": 225,
+        "name": "FLOAROMA TOWN"
+      },
+      {
+        "id": "MAPSEC_JUBILIFE_CITY",
+        "value": 221,
+        "name": "JUBILIFE CITY"
+      },
+      {
+        "id": "MAPSEC_LAKE_VERITY",
+        "value": 220,
+        "name": "LAKE VERITY"
+      },
+      {
+        "id": "MAPSEC_OREBURGH_GATE",
+        "value": 223,
+        "name": "OREBURGH GATE"
+      },
+      {
+        "id": "MAPSEC_ROUTE_201",
+        "value": 217,
+        "name": "ROUTE 201"
+      },
+      {
+        "id": "MAPSEC_ROUTE_202",
+        "value": 219,
+        "name": "ROUTE 202"
+      },
+      {
+        "id": "MAPSEC_ROUTE_203",
+        "value": 222,
+        "name": "ROUTE 203"
+      },
+      {
+        "id": "MAPSEC_ROUTE_204",
+        "value": 224,
+        "name": "ROUTE 204"
+      },
+      {
+        "id": "MAPSEC_ROUTE_205",
+        "value": 226,
+        "name": "ROUTE 205"
+      },
+      {
+        "id": "MAPSEC_SANDGEM_TOWN",
+        "value": 216,
+        "name": "SANDGEM TOWN"
+      },
+      {
+        "id": "MAPSEC_TWINLEAF_TOWN",
+        "value": 218,
+        "name": "TWINLEAF TOWN"
+      }
+    ],
+    "new_names_required": 81,
+    "new_names": [
+      "Acuity Lakefront",
+      "Amity Square",
+      "Battle Park / Battle Frontier",
+      "Canalave City",
+      "Celestic Town",
+      "CHATEAU 2F",
+      "CHATEAU DINING",
+      "CHATEAU ENTRY",
+      "CHATEAU ROOM 1",
+      "CHATEAU ROOM 2",
+      "Cycling Road",
+      "Distortion World",
+      "Eterna City",
+      "Eterna Forest",
+      "Eterna Galactic Building",
+      "Fight Area",
+      "Flower Paradise",
+      "Fuego Ironworks",
+      "Fullmoon Island",
+      "Great Marsh",
+      "Hall of Origin",
+      "Hearthome City",
+      "Iron Island",
+      "Lake Acuity",
+      "Lake Valor",
+      "Lost Tower",
+      "MT CORONET 1F N1",
+      "MT CORONET 1F N2",
+      "MT CORONET 1F S",
+      "MT CORONET B1F",
+      "Newmoon Island",
+      "Oreburgh City",
+      "OREBURGH MINE B1",
+      "OREBURGH MINE B2",
+      "Pal Park",
+      "Pastoria City",
+      "Pokémon League",
+      "Resort Area",
+      "Route 206",
+      "Route 207",
+      "Route 208",
+      "Route 209",
+      "Route 210",
+      "Route 211",
+      "Route 212",
+      "Route 213",
+      "Route 214",
+      "Route 215",
+      "Route 216",
+      "Route 217",
+      "Route 218",
+      "Route 219",
+      "Route 220",
+      "Route 221",
+      "Route 222",
+      "Route 223",
+      "Route 224",
+      "Route 225",
+      "Route 226",
+      "Route 227",
+      "Route 228",
+      "Route 229",
+      "Route 230",
+      "Sendoff Spring",
+      "Snowpoint City",
+      "Snowpoint Temple",
+      "Solaceon Ruins",
+      "Solaceon Town",
+      "Spear Pillar",
+      "Spring Path",
+      "Stark Mountain",
+      "Sunyshore City",
+      "Survival Area",
+      "Trophy Garden",
+      "Turnback Cave",
+      "Valley Windworks",
+      "Valor Lakefront",
+      "Veilstone City",
+      "Veilstone Galactic Headquarters",
+      "Victory Road",
+      "Wayward Cave"
+    ],
+    "remaining_ordinary_codes": 26,
+    "available_values": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252
+    ],
+    "other_future_reserve": 8,
+    "codes_required_with_reserve": 89,
+    "shortfall": 63,
+    "fits_current_byte_pool": false,
+    "name_groups": [
+      {
+        "name": "Acuity Lakefront",
+        "area_keys": [
+          "SN-L06"
+        ]
+      },
+      {
+        "name": "Amity Square",
+        "area_keys": [
+          "SN-L19"
+        ]
+      },
+      {
+        "name": "Battle Park / Battle Frontier",
+        "area_keys": [
+          "SN-O05"
+        ]
+      },
+      {
+        "name": "Canalave City",
+        "area_keys": [
+          "SN-T12"
+        ]
+      },
+      {
+        "name": "Celestic Town",
+        "area_keys": [
+          "SN-T11"
+        ]
+      },
+      {
+        "name": "CHATEAU 2F",
+        "area_keys": [
+          "SN-L15"
+        ]
+      },
+      {
+        "name": "CHATEAU DINING",
+        "area_keys": []
+      },
+      {
+        "name": "CHATEAU ENTRY",
+        "area_keys": []
+      },
+      {
+        "name": "CHATEAU ROOM 1",
+        "area_keys": []
+      },
+      {
+        "name": "CHATEAU ROOM 2",
+        "area_keys": []
+      },
+      {
+        "name": "Cycling Road",
+        "area_keys": [
+          "SN-L18"
+        ]
+      },
+      {
+        "name": "Distortion World",
+        "area_keys": [
+          "SN-O06"
+        ]
+      },
+      {
+        "name": "Eterna City",
+        "area_keys": [
+          "SN-T06"
+        ]
+      },
+      {
+        "name": "Eterna Forest",
+        "area_keys": [
+          "SN-L14"
+        ]
+      },
+      {
+        "name": "Eterna Galactic Building",
+        "area_keys": [
+          "SN-O03"
+        ]
+      },
+      {
+        "name": "Fight Area",
+        "area_keys": [
+          "SN-T16"
+        ]
+      },
+      {
+        "name": "Floaroma Town",
+        "area_keys": [
+          "SN-L12",
+          "SN-T05"
+        ]
+      },
+      {
+        "name": "Flower Paradise",
+        "area_keys": [
+          "SN-O01"
+        ]
+      },
+      {
+        "name": "Fuego Ironworks",
+        "area_keys": [
+          "SN-L16"
+        ]
+      },
+      {
+        "name": "Fullmoon Island",
+        "area_keys": [
+          "SN-L31"
+        ]
+      },
+      {
+        "name": "Great Marsh",
+        "area_keys": [
+          "SN-L22"
+        ]
+      },
+      {
+        "name": "Hall of Origin",
+        "area_keys": [
+          "SN-O02"
+        ]
+      },
+      {
+        "name": "Hearthome City",
+        "area_keys": [
+          "SN-T07"
+        ]
+      },
+      {
+        "name": "Iron Island",
+        "area_keys": [
+          "SN-L27"
+        ]
+      },
+      {
+        "name": "Jubilife City",
+        "area_keys": [
+          "SN-T03"
+        ]
+      },
+      {
+        "name": "Lake Acuity",
+        "area_keys": [
+          "SN-L03"
+        ]
+      },
+      {
+        "name": "Lake Valor",
+        "area_keys": [
+          "SN-L02"
+        ]
+      },
+      {
+        "name": "Lake Verity",
+        "area_keys": [
+          "SN-L01",
+          "SN-L04"
+        ]
+      },
+      {
+        "name": "Lost Tower",
+        "area_keys": [
+          "SN-L20"
+        ]
+      },
+      {
+        "name": "MT CORONET 1F N1",
+        "area_keys": [
+          "SN-L07"
+        ]
+      },
+      {
+        "name": "MT CORONET 1F N2",
+        "area_keys": []
+      },
+      {
+        "name": "MT CORONET 1F S",
+        "area_keys": []
+      },
+      {
+        "name": "MT CORONET B1F",
+        "area_keys": []
+      },
+      {
+        "name": "Newmoon Island",
+        "area_keys": [
+          "SN-L32"
+        ]
+      },
+      {
+        "name": "Oreburgh City",
+        "area_keys": [
+          "SN-T04"
+        ]
+      },
+      {
+        "name": "Oreburgh Gate",
+        "area_keys": [
+          "SN-L09"
+        ]
+      },
+      {
+        "name": "OREBURGH MINE B1",
+        "area_keys": [
+          "SN-L10"
+        ]
+      },
+      {
+        "name": "OREBURGH MINE B2",
+        "area_keys": []
+      },
+      {
+        "name": "Pal Park",
+        "area_keys": [
+          "SN-L33"
+        ]
+      },
+      {
+        "name": "Pastoria City",
+        "area_keys": [
+          "SN-T10"
+        ]
+      },
+      {
+        "name": "Pokémon League",
+        "area_keys": [
+          "SN-T15"
+        ]
+      },
+      {
+        "name": "Resort Area",
+        "area_keys": [
+          "SN-T18"
+        ]
+      },
+      {
+        "name": "Route 201",
+        "area_keys": [
+          "SN-R201"
+        ]
+      },
+      {
+        "name": "Route 202",
+        "area_keys": [
+          "SN-R202"
+        ]
+      },
+      {
+        "name": "Route 203",
+        "area_keys": [
+          "SN-R203"
+        ]
+      },
+      {
+        "name": "Route 204",
+        "area_keys": [
+          "SN-L11",
+          "SN-R204"
+        ]
+      },
+      {
+        "name": "Route 205",
+        "area_keys": [
+          "SN-R205"
+        ]
+      },
+      {
+        "name": "Route 206",
+        "area_keys": [
+          "SN-R206"
+        ]
+      },
+      {
+        "name": "Route 207",
+        "area_keys": [
+          "SN-R207"
+        ]
+      },
+      {
+        "name": "Route 208",
+        "area_keys": [
+          "SN-R208"
+        ]
+      },
+      {
+        "name": "Route 209",
+        "area_keys": [
+          "SN-R209"
+        ]
+      },
+      {
+        "name": "Route 210",
+        "area_keys": [
+          "SN-R210"
+        ]
+      },
+      {
+        "name": "Route 211",
+        "area_keys": [
+          "SN-R211"
+        ]
+      },
+      {
+        "name": "Route 212",
+        "area_keys": [
+          "SN-R212"
+        ]
+      },
+      {
+        "name": "Route 213",
+        "area_keys": [
+          "SN-R213"
+        ]
+      },
+      {
+        "name": "Route 214",
+        "area_keys": [
+          "SN-R214"
+        ]
+      },
+      {
+        "name": "Route 215",
+        "area_keys": [
+          "SN-R215"
+        ]
+      },
+      {
+        "name": "Route 216",
+        "area_keys": [
+          "SN-R216"
+        ]
+      },
+      {
+        "name": "Route 217",
+        "area_keys": [
+          "SN-R217"
+        ]
+      },
+      {
+        "name": "Route 218",
+        "area_keys": [
+          "SN-R218"
+        ]
+      },
+      {
+        "name": "Route 219",
+        "area_keys": [
+          "SN-R219"
+        ]
+      },
+      {
+        "name": "Route 220",
+        "area_keys": [
+          "SN-R220"
+        ]
+      },
+      {
+        "name": "Route 221",
+        "area_keys": [
+          "SN-R221"
+        ]
+      },
+      {
+        "name": "Route 222",
+        "area_keys": [
+          "SN-R222"
+        ]
+      },
+      {
+        "name": "Route 223",
+        "area_keys": [
+          "SN-R223"
+        ]
+      },
+      {
+        "name": "Route 224",
+        "area_keys": [
+          "SN-R224"
+        ]
+      },
+      {
+        "name": "Route 225",
+        "area_keys": [
+          "SN-R225"
+        ]
+      },
+      {
+        "name": "Route 226",
+        "area_keys": [
+          "SN-R226"
+        ]
+      },
+      {
+        "name": "Route 227",
+        "area_keys": [
+          "SN-R227"
+        ]
+      },
+      {
+        "name": "Route 228",
+        "area_keys": [
+          "SN-R228"
+        ]
+      },
+      {
+        "name": "Route 229",
+        "area_keys": [
+          "SN-R229"
+        ]
+      },
+      {
+        "name": "Route 230",
+        "area_keys": [
+          "SN-R230"
+        ]
+      },
+      {
+        "name": "Sandgem Town",
+        "area_keys": [
+          "SN-T02"
+        ]
+      },
+      {
+        "name": "Sendoff Spring",
+        "area_keys": [
+          "SN-L24"
+        ]
+      },
+      {
+        "name": "Snowpoint City",
+        "area_keys": [
+          "SN-T13"
+        ]
+      },
+      {
+        "name": "Snowpoint Temple",
+        "area_keys": [
+          "SN-L28"
+        ]
+      },
+      {
+        "name": "Solaceon Ruins",
+        "area_keys": [
+          "SN-L21"
+        ]
+      },
+      {
+        "name": "Solaceon Town",
+        "area_keys": [
+          "SN-T08"
+        ]
+      },
+      {
+        "name": "Spear Pillar",
+        "area_keys": [
+          "SN-L08"
+        ]
+      },
+      {
+        "name": "Spring Path",
+        "area_keys": [
+          "SN-L25"
+        ]
+      },
+      {
+        "name": "Stark Mountain",
+        "area_keys": [
+          "SN-L30"
+        ]
+      },
+      {
+        "name": "Sunyshore City",
+        "area_keys": [
+          "SN-T14"
+        ]
+      },
+      {
+        "name": "Survival Area",
+        "area_keys": [
+          "SN-T17"
+        ]
+      },
+      {
+        "name": "Trophy Garden",
+        "area_keys": [
+          "SN-L23"
+        ]
+      },
+      {
+        "name": "Turnback Cave",
+        "area_keys": [
+          "SN-L26"
+        ]
+      },
+      {
+        "name": "Twinleaf Town",
+        "area_keys": [
+          "SN-T01"
+        ]
+      },
+      {
+        "name": "Valley Windworks",
+        "area_keys": [
+          "SN-L13"
+        ]
+      },
+      {
+        "name": "Valor Lakefront",
+        "area_keys": [
+          "SN-L05"
+        ]
+      },
+      {
+        "name": "Veilstone City",
+        "area_keys": [
+          "SN-T09"
+        ]
+      },
+      {
+        "name": "Veilstone Galactic Headquarters",
+        "area_keys": [
+          "SN-O04"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "area_keys": [
+          "SN-L29"
+        ]
+      },
+      {
+        "name": "Wayward Cave",
+        "area_keys": [
+          "SN-L17"
+        ]
+      }
+    ],
+    "legacy_same_name_not_reused": [
+      {
+        "name": "Pokémon League",
+        "legacy_ids": [
+          "MAPSEC_POKEMON_LEAGUE"
+        ]
+      },
+      {
+        "name": "Victory Road",
+        "legacy_ids": [
+          "MAPSEC_KANTO_VICTORY_ROAD",
+          "MAPSEC_VICTORY_ROAD"
+        ]
+      }
+    ],
+    "inventory_complete": false,
+    "production_allocations": []
+  },
+  "production_allocations": []
+}
