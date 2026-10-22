@@ -58,5 +58,132 @@
       "after": 12289
     }
   ],
-  "claim": "Selective patch; no aggregate branch merge. Old evidence remains bound to original source until fresh checks recorded."
+  "claim": "Selective patch; no aggregate branch merge. Old evidence remains bound to original source until fresh checks recorded.",
+  "asset_cache_reuse": {
+    "engine_source_tree": "c2e26cce0a00af43251e0672fef708c796b7a918",
+    "compared_identical": 27361,
+    "mismatches": [],
+    "copied_missing_files": 1992,
+    "copied_bytes": 1970700,
+    "scope": "Stopped redundant asset regeneration; reuse only generated assets from byte-identical engine. Runtime objects are NOT copied; compile/link/runtime checks remain required."
+  },
+  "fresh_host_outcomes": {
+    "sinnoh": 167,
+    "namespace": 13,
+    "namespace_audit": 18,
+    "static_findings": 0,
+    "registry_invalid_mutations_rejected": 12,
+    "registry_valid_extension_accepted": 1,
+    "elf_pointer_mutations_rejected": 3
+  },
+  "fresh_local_native": {
+    "filter": "Averon; targeted14-source-list",
+    "passed": 45,
+    "save_goldens_passed": 4,
+    "full_M1_baseline_rerun": false
+  },
+  "fresh_builds": {
+    "normal": {
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226480,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35664,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28392,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4376,
+          "used_percent": 86.65,
+          "linker_reported_percent": 86.65
+        },
+        "ROM": {
+          "used_bytes": 17393344,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 16161088,
+          "used_percent": 51.84,
+          "linker_reported_percent": 51.84
+        }
+      },
+      "build_labels": {
+        "profile": "normal-CRIES-off",
+        "source_revision": "79f2070e71b1358947ea87c0178914ec2c25e86a",
+        "scope": "Caller-supplied labels; build configuration and source revision are not verified"
+      },
+      "rom_artifact": {
+        "size_bytes": 33554432,
+        "sha256": "5bf7e16f41bf2e6e1e55538f45412699ab20493e62566e2b26db9c9c6577c259"
+      },
+      "elf_sha256": "e430d6d755fe9419cc07caa8a1b4e34c270e27b3dd822155f5f5aa9527077ada",
+      "matching_elf_load_bytes_verified": true
+    },
+    "release": {
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226482,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35662,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28336,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4432,
+          "used_percent": 86.47,
+          "linker_reported_percent": 86.47
+        },
+        "ROM": {
+          "used_bytes": 17512464,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 16041968,
+          "used_percent": 52.19,
+          "linker_reported_percent": 52.19
+        }
+      },
+      "build_labels": {
+        "profile": "release-CRIES-off",
+        "source_revision": "79f2070e71b1358947ea87c0178914ec2c25e86a",
+        "scope": "Caller-supplied labels; build configuration and source revision are not verified"
+      },
+      "rom_artifact": {
+        "size_bytes": 33554432,
+        "sha256": "64c4ab1d5052804612092080ce08066a72e502571d76c64f03f78adb1e088130"
+      },
+      "elf_sha256": "5b5fd7b4e4a81e5cbe2fbff75e0130f26050afec966b745a69106eba2e7b3af6",
+      "matching_elf_load_bytes_verified": true
+    }
+  },
+  "source_head_ci_native": {
+    "head": "79f2070e71b1358947ea87c0178914ec2c25e86a",
+    "job": 119548299520,
+    "passed": 322,
+    "filter": "Averon",
+    "scope": "Actual implementation-head run322/322. Final docs-head checks must independently finish; see PR206 current checks/comments.",
+    "run": 39694448244,
+    "url": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39694448244/job/119548299520"
+  },
+  "fresh_graphical": {
+    "normal": {
+      "traversal_passed": 67,
+      "fresh_continue_passed": 3,
+      "genuine_pre_corridor_save_load_passed": 3,
+      "initial_entry": "disclosed DEV continue-warp fixture; old-save case unmodified genuine game-written Save",
+      "preexisting_legacy_static_warnings": 1
+    },
+    "release": {
+      "traversal_passed": 67,
+      "fresh_continue_passed": 3,
+      "genuine_pre_corridor_save_load_passed": 3,
+      "initial_entry": "disclosed DEV continue-warp fixture; old-save case unmodified genuine game-written Save",
+      "preexisting_legacy_static_warnings": 1
+    }
+  },
+  "failures_preserved": [
+    "Three startup failures before gameplay; correct recipe uses local-network permission and a noreset Xvfb77 server without warm-up reset races",
+    "First actual normal run FAIL8/9: one held-arrow polling overshoot while native compile active. Complete unchanged serialized normal/release reruns PASS67/67 each; cause not proven as engine defect, no expectations weakened"
+  ],
+  "graphical_reproduction": "SDL x11/software; writable XDG_RUNTIME_DIR; Xvfb :77 -screen 0 800x600x24 -nolisten tcp -ac -noreset; existing unchanged run_connected_qa.py67 then --expect3, then unmodified genuine old-save map_qa.py3. One emulator/GDB2345, no concurrent heavy build."
 }
