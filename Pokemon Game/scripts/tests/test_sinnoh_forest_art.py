@@ -85,7 +85,10 @@ class ForestArtTest(unittest.TestCase):
         base=a.pack.accepted.base
         root=Path(base.git(ENGINE,'rev-parse','--show-toplevel').decode().strip())
         for path,h in self.receipt['existing_averon_sha256'].items():
-            data=base.verified_file(root,ENGINE.relative_to(root)/path,self.receipt['engine_source'])
+            # Historical receipt provenance need not exist in a shallow PR clone.
+            # Verify current tracked bytes, then independently require the exact
+            # immutable published asset hash; never fetch history to run fixtures.
+            data=base.verified_file(root,ENGINE.relative_to(root)/path,'HEAD')
             self.assertEqual(base.sha(data),h)
 
 
