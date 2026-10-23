@@ -1,4 +1,4 @@
-"""Twelve-map current-main DEV plan reuses art and preserves production prefixes."""
+"""Thirteen-map current-main DEV plan reuses art and preserves production prefixes."""
 import copy
 import importlib.util
 import json
@@ -22,7 +22,7 @@ class RuntimeTest(unittest.TestCase):
         before=json.loads(self.before['data/maps/map_groups.json']);after=json.loads(self.files['data/maps/map_groups.json'])
         self.assertEqual(len(before['gMapGroup_Sinnoh']),19)
         for k,v in before.items():self.assertEqual(after[k][:len(v)] if k=='gMapGroup_Sinnoh' else after[k],v)
-        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(19,31))))
+        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(19,32))))
         before=json.loads(self.before['data/layouts/layouts.json'])['layouts'];after=json.loads(self.files['data/layouts/layouts.json'])['layouts']
         self.assertEqual(before,after[:len(before)])
         for p in ('data/event_scripts.s','include/tilesets.h','src/data/tilesets/headers.h','src/data/tilesets/metatiles.h'):
@@ -30,18 +30,18 @@ class RuntimeTest(unittest.TestCase):
 
     def test_installed_geometry_and_all_warp_arrays_reuse_exact_artifacts(self):
         for name in a.MAPS:
-            folder=HERE/'staged'/name
+            folder=(HERE/'hotel-link/staged'/name) if name=='HotelGrandLake' else (HERE/'staged'/name)
             for p,suffix in [('map.bin','map'),('border.bin','border')]:
-                self.assertEqual(self.files[f'data/layouts/{name}/{p}'],(folder/('border.bin' if p=='border.bin' and name.endswith('_Access') else f'averon-{suffix}.bin')).read_bytes())
-            source=json.loads((folder/'map.json').read_text());target=json.loads(self.files[f'data/maps/{name}/map.json'])
+                self.assertEqual(self.files[f'data/layouts/{name}/{p}'],(HERE/'hotel-link/valor-map.bin' if p=='map.bin' and name=='ValorLakefront' else HERE/'hotel-link/route213-map.bin' if p=='map.bin' and name=='Route213' else folder/('border.bin' if p=='border.bin' and (name.endswith('_Access') or name=='HotelGrandLake') else f'averon-{suffix}.bin')).read_bytes())
+            source=json.loads((HERE/'hotel-link/route213-map.json' if name=='Route213' else folder/'map.json').read_text());target=json.loads(self.files[f'data/maps/{name}/map.json'])
             self.assertEqual(source,self.receipt['source_headers'][name]);source['region_map_section']='MAPSEC_ROUTE_201'
             self.assertEqual(source,target)
             self.assertEqual(self.files[f'data/maps/{name}/scripts.inc'],(name+'_MapScripts::\n\t.byte 0\n').encode())
 
-    def test_all_eight_outdoors_and_four_gate_families_are_separate_and_coherent(self):
-        layouts=json.loads(self.files['data/layouts/layouts.json'])['layouts'][-12:];d={v['name']:v for v in layouts}
-        groups=([n for n in a.MAPS if not n.endswith('_Access')],[n for n in a.MAPS if n.endswith('_Access')])
-        self.assertEqual(tuple(map(len,groups)),(8,4))
+    def test_all_eight_outdoors_and_five_gate_families_are_separate_and_coherent(self):
+        layouts=json.loads(self.files['data/layouts/layouts.json'])['layouts'][-13:];d={v['name']:v for v in layouts}
+        groups=([n for n in a.MAPS if not n.endswith('_Access') and n!='HotelGrandLake'],[n for n in a.MAPS if n.endswith('_Access') or n=='HotelGrandLake'])
+        self.assertEqual(tuple(map(len,groups)),(8,5))
         for names in groups:
             for name in names:
                 for key in ('primary_tileset','secondary_tileset'):
@@ -53,7 +53,7 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual(len(self.files['data/tilesets/primary/eastern_dev_gateprimary/metatiles.bin']),8*16)
 
     def test_no_save_id_general_northern_or_existing_gate_writes(self):
-        self.assertEqual(len(self.files),64)
+        self.assertEqual(len(self.files),68)
         for p in self.files:
             self.assertFalse('region_map_sections' in p or 'mapsec-pins' in p or 'pokemon.h' in p or 'global.h' in p or '/general/' in p)
             self.assertFalse(any('/'+n+'/' in p for n in self.receipt['existing_map_names_preserved']))
@@ -90,7 +90,7 @@ class RuntimeTest(unittest.TestCase):
                 data=original(path,*args,**kwargs)
                 if path==target and mode!='connection':
                     h=json.loads(data);h['warp_events'][0]['dest_map' if mode=='foreign' else 'dest_warp_id']='MAP_MISSING' if mode=='foreign' else '99';return json.dumps(h)
-                if mode=='connection' and path==HERE/'staged/Route213/map.json':
+                if mode=='connection' and path==HERE/'hotel-link/route213-map.json':
                     h=json.loads(data);h['connections'][0]['offset']=1;return json.dumps(h)
                 return data
             with self.subTest(mode=mode),mock.patch.object(Path,'read_text',new=read),self.assertRaises(ValueError):a.assemble(ROOT)
@@ -99,7 +99,7 @@ class RuntimeTest(unittest.TestCase):
         original=Path.read_bytes
         def read(path):
             data=original(path)
-            return data[:-1] if path==HERE/'outdoor-family/secondary-metatiles.bin' else data
+            return data[:-1] if path==HERE/'hotel-link/outdoor-family/secondary-metatiles.bin' else data
         with mock.patch.object(Path,'read_bytes',new=read),self.assertRaises(ValueError):a.assemble(ROOT)
         with mock.patch.object(a.base,'verified_file',return_value=b'changed'),self.assertRaises(ValueError):a.inputs(ROOT)
 

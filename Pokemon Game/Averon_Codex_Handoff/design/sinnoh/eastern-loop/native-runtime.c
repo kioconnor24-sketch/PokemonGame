@@ -9,10 +9,10 @@ STATIC_ASSERT(MAPSEC_NONE == 215, eastern_none_preserved);
 STATIC_ASSERT(MAPSEC_COUNT == 227, eastern_no_origins);
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, eastern_box_unchanged);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, eastern_party_unchanged);
-TEST("Averon DEV eastern appends twelve compiled headers without allocating origins")
+TEST("Averon DEV eastern appends thirteen compiled headers without allocating origins")
 {
-    static const u16 maps[] = {MAP_ROUTE212_ACCESS,MAP_ROUTE212_NORTH,MAP_ROUTE212_SOUTH,MAP_ROUTE213,MAP_ROUTE213_ACCESS,MAP_ROUTE214,MAP_ROUTE214_ACCESS,MAP_ROUTE215,MAP_ROUTE215_ACCESS,MAP_VALOR_LAKEFRONT,MAP_VEILSTONE_CITY,MAP_PASTORIA_CITY};
-    static const u8 warps[] = {1,2,0,1,2,2,2,1,2,0,3,1};
+    static const u16 maps[] = {MAP_ROUTE212_ACCESS,MAP_ROUTE212_NORTH,MAP_ROUTE212_SOUTH,MAP_ROUTE213,MAP_ROUTE213_ACCESS,MAP_ROUTE214,MAP_ROUTE214_ACCESS,MAP_ROUTE215,MAP_ROUTE215_ACCESS,MAP_VALOR_LAKEFRONT,MAP_VEILSTONE_CITY,MAP_PASTORIA_CITY,MAP_HOTEL_GRAND_LAKE};
+    static const u8 warps[] = {1,2,0,3,2,2,2,1,2,0,3,1,2};
     for (u32 i=0; i<ARRAY_COUNT(maps); i++)
     {
         const struct MapHeader *h = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(maps[i]),MAP_NUM(maps[i]));
@@ -25,6 +25,7 @@ TEST("Averon DEV eastern appends twelve compiled headers without allocating orig
         EXPECT((h->mapLayout->width+15)*(h->mapLayout->height+14)<=10240);
     }
     EXPECT_EQ(MAP_NUM(MAP_ROUTE205_NORTH),18);
+    EXPECT_EQ(MAP_NUM(MAP_HOTEL_GRAND_LAKE),31);
 }
 TEST("Averon DEV eastern gateways and outdoors stream separate coherent families")
 {

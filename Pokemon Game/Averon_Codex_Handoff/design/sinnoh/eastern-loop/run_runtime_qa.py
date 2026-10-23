@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Eastern twelve-map DEV QA, reusing #221 native-rule navigation and source-grounded bridge probes.
+"""Eastern hotel-linked thirteen-map DEV QA, reusing #221 native-rule navigation and source-grounded bridge probes.
 
 The engine/map/flash is never patched. Only marked recipe-verified DEV source
 is accepted; real player/follower elevation is read from matching-build offsets.
@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import sys
 
-MAPS=('MAP_VEILSTONE_CITY', 'MAP_ROUTE215_ACCESS', 'MAP_ROUTE215', 'MAP_ROUTE214_ACCESS', 'MAP_ROUTE214', 'MAP_VALOR_LAKEFRONT', 'MAP_ROUTE213', 'MAP_ROUTE213_ACCESS', 'MAP_PASTORIA_CITY', 'MAP_ROUTE212_SOUTH', 'MAP_ROUTE212_NORTH', 'MAP_ROUTE212_ACCESS')
+MAPS=('MAP_VEILSTONE_CITY', 'MAP_ROUTE215_ACCESS', 'MAP_ROUTE215', 'MAP_ROUTE214_ACCESS', 'MAP_ROUTE214', 'MAP_VALOR_LAKEFRONT', 'MAP_ROUTE213', 'MAP_HOTEL_GRAND_LAKE', 'MAP_ROUTE213_ACCESS', 'MAP_PASTORIA_CITY', 'MAP_ROUTE212_SOUTH', 'MAP_ROUTE212_NORTH', 'MAP_ROUTE212_ACCESS')
 
 DIRS={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}
 
@@ -218,7 +218,7 @@ def run(args):
     cmd=['run','--engine',str(engine),'--rom',str(args.rom),'--scratch',str(args.scratch),'--out',str(args.out),'--build',args.profile]
     for mid in MAPS:cmd+=['--map',mid]
     if args.expect:cmd+=['--expect',str(args.expect)]
-    else:cmd+=['--save','eastern-twelve']
+    else:cmd+=['--save','eastern-thirteen']
     qa.mapdata.bfs=bfs;qa.mapdata.trigger_entry=trigger;qa.Runner=HeightRunner
     try:return qa.main(cmd)
     finally:qa.mapdata.bfs=original_bfs;qa.mapdata.trigger_entry=original_trigger;qa.Runner=original_runner

@@ -15,7 +15,7 @@ import subprocess
 HERE=Path(__file__).resolve().parent
 BASE='c6ac2f967b02473741791eb24b5cc9b11bda3904'
 ENGINE='Pokemon Game/engine/'
-MAPS={'Route212_Access': (9, 11), 'Route212_North': (34, 100), 'Route212_South': (130, 34), 'Route213': (100, 60), 'Route213_Access': (13, 9), 'Route214': (44, 91), 'Route214_Access': (9, 11), 'Route215': (100, 42), 'Route215_Access': (13, 9), 'ValorLakefront': (56, 66), 'VeilstoneCity': (66, 68), 'PastoriaCity': (68, 60)}
+MAPS={'Route212_Access': (9, 11), 'Route212_North': (34, 100), 'Route212_South': (130, 34), 'Route213': (100, 60), 'Route213_Access': (13, 9), 'Route214': (44, 91), 'Route214_Access': (9, 11), 'Route215': (100, 42), 'Route215_Access': (13, 9), 'ValorLakefront': (56, 66), 'VeilstoneCity': (66, 68), 'PastoriaCity': (68, 60), 'HotelGrandLake': (15, 12)}
 
 spec=importlib.util.spec_from_file_location('eastern_runtime_pack',HERE/'adapt_outdoor_art.py')
 art=importlib.util.module_from_spec(spec);spec.loader.exec_module(art)
@@ -50,13 +50,13 @@ def assemble(repo):
     if len(names)!=19 or len(set(names))!=19 or set(MAPS)&set(names):raise ValueError('exact current19-slot prefix required')
     pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 19, 1)'
     if pins.count(marker)!=1:raise ValueError('registry count mismatch')
-    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 31, 1)')
+    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 32, 1)')
     files={};symbols={};declarations='\n';headers='\n';metatiles='\n';includes=[]
     for family,secondary,graphics,folder in (
-            ('OutdoorPrimary',False,'General','outdoor-family'),
-            ('OutdoorSecondary',True,'Rustboro','outdoor-family'),
-            ('GatePrimary',False,'Building','gate-art'),
-            ('GateSecondary',True,'Shop','gate-art')):
+            ('OutdoorPrimary',False,'General','hotel-link/outdoor-family'),
+            ('OutdoorSecondary',True,'Rustboro','hotel-link/outdoor-family'),
+            ('GatePrimary',False,'Building','hotel-link/gate-art'),
+            ('GateSecondary',True,'Shop','hotel-link/gate-art')):
         bank='secondary' if secondary else 'primary';symbol='EasternDev'+family;path=f'data/tilesets/{bank}/eastern_dev_{family.lower()}/'
         records=(HERE/folder/(bank+'-metatiles.bin')).read_bytes();attrs=(HERE/folder/(bank+'-attributes.bin')).read_bytes()
         if not records or len(records)%16 or len(records)>8192 or len(attrs)*8!=len(records):raise ValueError('invalid metadata bank')
@@ -68,16 +68,17 @@ def assemble(repo):
         headers+=f'const struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n'
     source_headers={};layout_ids={d['id'] for d in layouts['layouts']}
     for slot,(name,(w,h)) in enumerate(MAPS.items(),19):
-        folder=HERE/'staged'/name;header=json.loads((folder/'map.json').read_text());source_headers[name]=copy.deepcopy(header)
+        folder=(HERE/'hotel-link/staged'/name) if name=='HotelGrandLake' else (HERE/'staged'/name)
+        header=json.loads((HERE/'hotel-link/route213-map.json' if name=='Route213' else folder/'map.json').read_text());source_headers[name]=copy.deepcopy(header)
         if header['region_map_section']!='MAPSEC_PENDING_OWNER' or header['layout'] in layout_ids:
             raise ValueError('not an unregistered pending source map')
         if any(header[k] for k in ('object_events','coord_events','bg_events')):raise ValueError('unexpected gameplay events')
-        raw=(folder/'averon-map.bin').read_bytes();border=(folder/('border.bin' if name.endswith('_Access') else 'averon-border.bin')).read_bytes()
+        raw=(HERE/'hotel-link/valor-map.bin' if name=='ValorLakefront' else HERE/'hotel-link/route213-map.bin' if name=='Route213' else folder/'averon-map.bin').read_bytes();border=(folder/('border.bin' if name.endswith('_Access') or name=='HotelGrandLake' else 'averon-border.bin')).read_bytes()
         if len(raw)!=w*h*2 or (w+15)*(h+14)>10240:raise ValueError('map footprint/buffer exceeded')
         header['region_map_section']='MAPSEC_ROUTE_201'
         files[f'data/maps/{name}/map.json']=encode(header);files[f'data/maps/{name}/scripts.inc']=(name+'_MapScripts::\n\t.byte 0\n').encode()
         files[f'data/layouts/{name}/map.bin']=raw;files[f'data/layouts/{name}/border.bin']=border
-        family='Gate' if name.endswith('_Access') else 'Outdoor'
+        family='Gate' if name.endswith('_Access') or name=='HotelGrandLake' else 'Outdoor'
         layouts['layouts'].append(dict(id=header['layout'],name=name+'_Layout',width=w,height=h,primary_tileset=symbols[family+'Primary'],
             secondary_tileset=symbols[family+'Secondary'],layout_version='emerald',border_filepath=f'data/layouts/{name}/border.bin',blockdata_filepath=f'data/layouts/{name}/map.bin'))
         layout_ids.add(header['layout']);names.append(name)
