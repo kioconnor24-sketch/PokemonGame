@@ -1,0 +1,87 @@
+{"t": 1792737921.33, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792737921.36, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792737921.89, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792737921.92, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792737924.07, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792737924.11, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792737925.77, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792737925.81, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792737926.35, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792737926.39, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792737926.95, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792737927.01, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792737928.06, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792737928.11, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792737931.75, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792737931.8, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792737932.44, "event": "field", "map": "MAP_ROUTE212_SOUTH", "pos": [36, 12], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792737933.0, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]]}
+{"t": 1792737934.9, "event": "capture", "file": "0009-start.png"}
+{"t": 1792737934.9, "event": "observe", "label": "start", "problems": []}
+{"t": 1792737934.92, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792737935.24, "event": "map-qa-check", "name": "starts on genuine lower ground3 approach", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792737935.26, "event": "map-qa-check", "name": "explicit fixture grants exactly one Acro", "ok": true}
+{"t": 1792737943.58, "event": "map-qa-check", "name": "ordinary foot route reaches upper layer4", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [43, 11]], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737951.29, "event": "capture", "file": "0010-acro-key-item.png"}
+{"t": 1792737953.65, "event": "map-qa-check", "name": "upper bridge mounted through ordinary Bag USE", "ok": true}
+{"t": 1792737955.34, "event": "map-qa-check", "name": "upper left (42, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [42, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737956.26, "event": "map-qa-check", "name": "upper left (41, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [41, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737957.14, "event": "map-qa-check", "name": "upper left (40, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [40, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737958.08, "event": "map-qa-check", "name": "upper left (39, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [39, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737959.08, "event": "map-qa-check", "name": "upper left (38, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [38, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737960.21, "event": "map-qa-check", "name": "upper left (37, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [37, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737961.26, "event": "map-qa-check", "name": "upper left (36, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737962.49, "event": "map-qa-check", "name": "upper left (35, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [35, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737963.45, "event": "map-qa-check", "name": "upper left (34, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [34, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737964.45, "event": "map-qa-check", "name": "upper left (33, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [33, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737965.53, "event": "map-qa-check", "name": "upper left (32, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [32, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737966.57, "event": "map-qa-check", "name": "upper left (31, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [31, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737967.59, "event": "map-qa-check", "name": "upper left (30, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [30, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737968.92, "event": "map-qa-check", "name": "upper left (29, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [29, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737970.01, "event": "map-qa-check", "name": "upper left (28, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [28, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737970.96, "event": "map-qa-check", "name": "upper left (27, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [27, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737971.01, "event": "capture", "file": "0011-upper-left-endpoint.png"}
+{"t": 1792737972.63, "event": "map-qa-check", "name": "upper right (28, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [28, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737973.65, "event": "map-qa-check", "name": "upper right (29, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [29, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737974.63, "event": "map-qa-check", "name": "upper right (30, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [30, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737975.52, "event": "map-qa-check", "name": "upper right (31, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [31, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737976.42, "event": "map-qa-check", "name": "upper right (32, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [32, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737977.44, "event": "map-qa-check", "name": "upper right (33, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [33, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737978.32, "event": "map-qa-check", "name": "upper right (34, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [34, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737979.24, "event": "map-qa-check", "name": "upper right (35, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [35, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737980.19, "event": "map-qa-check", "name": "upper right (36, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737981.07, "event": "map-qa-check", "name": "upper right (37, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [37, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737981.95, "event": "map-qa-check", "name": "upper right (38, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [38, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737982.88, "event": "map-qa-check", "name": "upper right (39, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [39, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737983.67, "event": "map-qa-check", "name": "upper right (40, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [40, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737984.55, "event": "map-qa-check", "name": "upper right (41, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [41, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737985.53, "event": "map-qa-check", "name": "upper right (42, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [42, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737986.52, "event": "map-qa-check", "name": "upper right (43, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [43, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737986.57, "event": "capture", "file": "0012-upper-right-endpoint.png"}
+{"t": 1792737989.55, "event": "capture", "file": "0013-acro-key-item.png"}
+{"t": 1792737991.93, "event": "map-qa-check", "name": "upper ordinary Bag USE dismounts", "ok": true}
+{"t": 1792737994.02, "event": "capture", "file": "0014-upper bridge returned.png"}
+{"t": 1792737994.02, "event": "observe", "label": "upper bridge returned", "problems": []}
+{"t": 1792737994.02, "event": "map-qa-check", "name": "follower visible (upper bridge returned)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737994.04, "event": "map-qa-check", "name": "upper player and follower retain native layer4 after dismount", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792738004.54, "event": "capture", "file": "0015-back to lower.png"}
+{"t": 1792738004.54, "event": "observe", "label": "back to lower", "problems": []}
+{"t": 1792738004.56, "event": "map-qa-check", "name": "follower visible (back to lower)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792738004.62, "event": "map-qa-check", "name": "back to lower foot transition preserves both actors", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792738014.83, "event": "capture", "file": "0016-back to upper.png"}
+{"t": 1792738014.83, "event": "observe", "label": "back to upper", "problems": []}
+{"t": 1792738014.84, "event": "map-qa-check", "name": "follower visible (back to upper)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792738014.89, "event": "map-qa-check", "name": "back to upper foot transition preserves both actors", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [43, 11]], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792738015.9, "event": "capture", "file": "0017-start-menu.png"}
+{"t": 1792738016.68, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792738021.59, "event": "capture", "file": "0018-save-confirm-eastern-subset-upper-rail-acro-dev.png"}
+{"t": 1792738022.71, "event": "capture", "file": "0019-save-step-eastern-subset-upper-rail-acro-dev-01.png"}
+{"t": 1792738023.85, "event": "capture", "file": "0020-save-step-eastern-subset-upper-rail-acro-dev-02.png"}
+{"t": 1792738025.07, "event": "capture", "file": "0021-save-step-eastern-subset-upper-rail-acro-dev-03.png"}
+{"t": 1792738026.65, "event": "capture", "file": "0022-save-step-eastern-subset-upper-rail-acro-dev-04.png"}
+{"t": 1792738027.66, "event": "capture", "file": "0023-save-step-eastern-subset-upper-rail-acro-dev-05.png"}
+{"t": 1792738028.67, "event": "capture", "file": "0024-save-step-eastern-subset-upper-rail-acro-dev-06.png"}
+{"t": 1792738029.8, "event": "capture", "file": "0025-save-step-eastern-subset-upper-rail-acro-dev-07.png"}
+{"t": 1792738030.6, "event": "capture", "file": "0026-saved-eastern-subset-upper-rail-acro-dev.png"}
+{"t": 1792738030.6, "event": "release-save", "label": "eastern-subset-upper-rail-acro-dev", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792738030.62, "event": "map-qa-check", "name": "SAVE (eastern-subset-upper-rail-acro-dev)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [43, 11]]}

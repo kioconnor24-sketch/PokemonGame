@@ -1,0 +1,62 @@
+{
+ "maps": [
+  "MAP_VEILSTONE_CITY",
+  "MAP_ROUTE215_ACCESS",
+  "MAP_ROUTE215",
+  "MAP_ROUTE214_ACCESS",
+  "MAP_ROUTE214",
+  "MAP_VALOR_LAKEFRONT",
+  "MAP_ROUTE213",
+  "MAP_HOTEL_GRAND_LAKE",
+  "MAP_ROUTE213_ACCESS",
+  "MAP_PASTORIA_CITY",
+  "MAP_ROUTE212_SOUTH",
+  "MAP_ROUTE212_NORTH",
+  "MAP_ROUTE212_ACCESS"
+ ],
+ "build": "release",
+ "rom_sha256": "4ae2996c67db4512526a7788f331f9d14db5338df1ae998c17c172cfe17a82a4",
+ "static_findings": [],
+ "save_before": "1140316dfdbfb279f4eaec177d7b91a532ab4a3a1c562513c5edca25389b3338",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_ACCESS",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_ACCESS",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "1140316dfdbfb279f4eaec177d7b91a532ab4a3a1c562513c5edca25389b3338",
+ "verdict": "PASS"
+}

@@ -40,7 +40,14 @@ def run(args):
             acro.bike_use(d,w.play);self.require('upper bridge mounted through ordinary Bag USE',acro.avatar(d)['flags']&g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE'])
             for direction,points in (('left',cells[1:]),('right',list(reversed(cells[:-1])))):
                 for point in points:
-                    common.ordinary_step(d,direction)
+                    # The generic held walking step can span multiple native
+                    # cycling tiles before a GDB observation. Send short real
+                    # d-pad taps and inspect only after release; do not relax
+                    # the exact one-cell or layer assertions.
+                    before=d.here()
+                    for _ in range(12):
+                        d.e.tap(direction.upper(),hold=.008,after=.25);d.settle()
+                        if d.here()!=before:break
                     self.require('upper '+direction+' '+str(point),d.here()==(mid,point) and common.observed_elevations(d)['player']==4,at=d.here(),source_elevation=d.live_map(mid).elevation(*point),elevations=common.observed_elevations(d))
                 d.shot('upper-'+direction+'-endpoint')
             acro.bike_use(d,w.play);self.require('upper ordinary Bag USE dismounts',not acro.avatar(d)['flags']&g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE'])
