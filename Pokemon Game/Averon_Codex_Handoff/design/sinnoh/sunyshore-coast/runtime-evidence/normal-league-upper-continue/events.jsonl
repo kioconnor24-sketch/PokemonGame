@@ -1,0 +1,25 @@
+{"t": 1792797047.81, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792797047.88, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792797048.48, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792797048.53, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792797050.59, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792797050.65, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792797052.35, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792797052.4, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792797052.96, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792797052.99, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792797053.52, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792797053.55, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792797054.7, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792797054.81, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792797058.56, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792797058.6, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792797059.25, "event": "field", "map": "MAP_POKMON_LEAGUE", "pos": [16, 35], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792797059.4, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792797059.4, "event": "continue-check", "problems": []}
+{"t": 1792797059.48, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_POKMON_LEAGUE", [16, 35]]}
+{"t": 1792797059.99, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_POKMON_LEAGUE", [16, 35]]}
+{"t": 1792797061.8, "event": "capture", "file": "0010-start.png"}
+{"t": 1792797061.8, "event": "observe", "label": "start", "problems": []}
+{"t": 1792797061.8, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792797061.8, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}

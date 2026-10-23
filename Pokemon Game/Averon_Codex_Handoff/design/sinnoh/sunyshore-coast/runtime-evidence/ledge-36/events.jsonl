@@ -1,0 +1,38 @@
+{"t": 1792796838.88, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792796838.98, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792796841.75, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792796841.81, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792796843.66, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792796843.76, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792796844.32, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792796844.38, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792796844.95, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792796845.02, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792796846.12, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792796846.19, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792796849.86, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792796850.37, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792796851.01, "event": "field", "map": "MAP_ROUTE222", "pos": [36, 15], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792796851.55, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE222", [36, 15]]}
+{"t": 1792796853.79, "event": "capture", "file": "0008-start.png"}
+{"t": 1792796853.79, "event": "observe", "label": "start", "problems": []}
+{"t": 1792796853.81, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796853.81, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796854.47, "event": "map-qa-check", "name": "reached source ledge approach", "ok": true, "at": ["MAP_ROUTE222", [36, 15]]}
+{"t": 1792796854.55, "event": "capture", "file": "0009-source-ledge-before.png"}
+{"t": 1792796856.59, "event": "capture", "file": "0010-source-ledge-after.png"}
+{"t": 1792796856.59, "event": "map-qa-check", "name": "source ledge does not land inside solid terrain", "ok": false, "at": ["MAP_ROUTE222", [36, 17]], "landing_collision": 1, "source_ledge": [36, 16]}
+{"t": 1792796857.65, "event": "capture", "file": "0011-start-menu.png"}
+{"t": 1792796858.47, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792796864.72, "event": "capture", "file": "0012-save-confirm-coronet-six.png"}
+{"t": 1792796865.91, "event": "capture", "file": "0013-save-step-coronet-six-01.png"}
+{"t": 1792796867.1, "event": "capture", "file": "0014-save-step-coronet-six-02.png"}
+{"t": 1792796868.19, "event": "capture", "file": "0015-save-step-coronet-six-03.png"}
+{"t": 1792796869.21, "event": "capture", "file": "0016-save-step-coronet-six-04.png"}
+{"t": 1792796870.21, "event": "capture", "file": "0017-save-step-coronet-six-05.png"}
+{"t": 1792796871.21, "event": "capture", "file": "0018-save-step-coronet-six-06.png"}
+{"t": 1792796872.2, "event": "capture", "file": "0019-save-step-coronet-six-07.png"}
+{"t": 1792796873.29, "event": "capture", "file": "0020-save-step-coronet-six-08.png"}
+{"t": 1792796874.11, "event": "capture", "file": "0021-saved-coronet-six.png"}
+{"t": 1792796874.11, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792796874.12, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_ROUTE222", [36, 17]]}

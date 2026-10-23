@@ -1,0 +1,117 @@
+{
+ "maps": [
+  "MAP_ROUTE222",
+  "MAP_ROUTE222_ACCESS",
+  "MAP_SUNYSHORE_CITY"
+ ],
+ "findings": [
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     36,
+     16
+    ],
+    "lands": [
+     36,
+     17
+    ]
+   }
+  },
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     37,
+     16
+    ],
+    "lands": [
+     37,
+     17
+    ]
+   }
+  }
+ ],
+ "plan": {
+  "MAP_ROUTE222": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      89,
+      23
+     ],
+     "warp": [
+      89,
+      23
+     ],
+     "dest": "MAP_ROUTE222_ACCESS",
+     "dest_warp": 0,
+     "push": "right"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE222_ACCESS": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      1,
+      5
+     ],
+     "warp": [
+      1,
+      5
+     ],
+     "dest": "MAP_ROUTE222",
+     "dest_warp": 0,
+     "push": "left"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      11,
+      5
+     ],
+     "warp": [
+      11,
+      5
+     ],
+     "dest": "MAP_SUNYSHORE_CITY",
+     "dest_warp": 0,
+     "push": "right"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_SUNYSHORE_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      48
+     ],
+     "warp": [
+      4,
+      48
+     ],
+     "dest": "MAP_ROUTE222_ACCESS",
+     "dest_warp": 1,
+     "push": "left"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}

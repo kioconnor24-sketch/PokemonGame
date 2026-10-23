@@ -1,0 +1,27 @@
+{"t": 1792796371.69, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792796371.79, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792796375.28, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792796375.55, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792796377.91, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792796378.26, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792796379.3, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792796379.69, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792796380.46, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792796381.19, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792796381.76, "event": "screen", "cb2": "CB2_GoToMainMenu", "i": 11}
+{"t": 1792796381.89, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792796383.15, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792796383.29, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792796387.38, "event": "screen", "cb2": "CB2_ReturnToFieldLocal", "i": 15}
+{"t": 1792796387.57, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792796388.21, "event": "screen", "cb2": "CB2_Overworld", "i": 16}
+{"t": 1792796388.39, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792796389.08, "event": "field", "map": "MAP_SUNYSHORE_CITY", "pos": [30, 45], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792796389.59, "event": "capture", "file": "0010-continued.png"}
+{"t": 1792796389.6, "event": "continue-check", "problems": []}
+{"t": 1792796389.65, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [30, 45]]}
+{"t": 1792796390.3, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [30, 45]]}
+{"t": 1792796394.7, "event": "capture", "file": "0011-start.png"}
+{"t": 1792796394.7, "event": "observe", "label": "start", "problems": []}
+{"t": 1792796394.71, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796394.71, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
