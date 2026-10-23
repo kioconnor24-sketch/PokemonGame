@@ -1,0 +1,22 @@
+{"t": 1792717999.72, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792717999.79, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792718002.72, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792718002.85, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792718004.15, "event": "screen", "cb2": "MainCB2_Intro", "i": 7}
+{"t": 1792718004.41, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792718004.97, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 8}
+{"t": 1792718005.07, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792718005.63, "event": "screen", "cb2": "MainCB2", "i": 9}
+{"t": 1792718005.86, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792718007.02, "event": "screen", "cb2": "CB2_MainMenu", "i": 11}
+{"t": 1792718007.07, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792718010.96, "event": "screen", "cb2": "CB2_Overworld", "i": 14}
+{"t": 1792718011.01, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792718011.65, "event": "field", "map": "MAP_MT_CORONET_1F_NORTH_ROOM2", "pos": [8, 13], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792718011.81, "event": "capture", "file": "0008-continued.png"}
+{"t": 1792718011.81, "event": "continue-check", "problems": []}
+{"t": 1792718011.83, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 13]]}
+{"t": 1792718012.36, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 13]]}
+{"t": 1792718014.05, "event": "capture", "file": "0009-start.png"}
+{"t": 1792718014.06, "event": "observe", "label": "start", "problems": []}
+{"t": 1792718014.07, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}

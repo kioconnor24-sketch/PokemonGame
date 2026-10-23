@@ -1,0 +1,3 @@
+DEV fixture setup defect reproduced against exact compiled source tree c3c51b1bfe3ff4422a091a257c96ec20fc5be974:
+Celestic (8,16) is source-blocked, elevation0, MB_NORMAL. Fixture entry was chosen there without checking walkability. The ordinary first right step escaped onto (9,16), walkable layer4, but the reverse was correctly blocked. This is not an intermittent engine/follower defect.
+Correct DEV entry: (9,16), verified walkable layer4 with ordinary (9,15) neighbour. No source geometry/physics/warp/save-format changes required. Earlier motion-settle hypothesis was incomplete; the native step-on ladder harness defect was separate and actually reproduced.

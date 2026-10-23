@@ -1,0 +1,55 @@
+{
+ "maps": [
+  "MAP_CELESTIC_TOWN",
+  "MAP_ROUTE210_NORTH",
+  "MAP_ROUTE211_EAST",
+  "MAP_MT_CORONET_1F_NORTH_ROOM1",
+  "MAP_MT_CORONET_B1F",
+  "MAP_MT_CORONET_1F_NORTH_ROOM2"
+ ],
+ "build": "normal",
+ "rom_sha256": "3ef9056857f7e99fcf2f26fcb967bb40d0e6a88fa1c1ff6faea4560437e0f17a",
+ "static_findings": [],
+ "save_before": "288069ff5a6e4a3fec5a3c685d1b5c8c68023ae443b6cc731adfa0710b082df0",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "288069ff5a6e4a3fec5a3c685d1b5c8c68023ae443b6cc731adfa0710b082df0",
+ "verdict": "PASS"
+}

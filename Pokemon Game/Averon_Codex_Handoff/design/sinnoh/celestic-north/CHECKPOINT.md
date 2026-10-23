@@ -33,3 +33,11 @@ Reproduce adapt_outdoor_art.py --engine ENGINE --out NEW_OFF_ENGINE_DIRECTORY, t
 Pinned donor cave metatile blob49ffce9add138149775280b96067e727a662a993 (440 records) versus actual c6ac Averon Cave blobcc8b117e20f6477dfdeb92612730fb3136372523 (414). Across the three staged caves,54 used secondary IDs:36 raw structural matches;922 differs;17 used records932–942 and944–949 lie beyond the existing bank. Raw record matches do NOT establish pixel/visual equivalence. No donor pixels were read/imported for this audit.
 
 NEXT executable work: explicitly adapt these actual used cave dependencies with verified current Averon Cave/General art, preserving full original attrs/C/E and all6 coupled warp events; source933 has ladder behavior,934–942 pond-water variants. Verify their graphic roles/lighting/animation and the remaining neutral structures rather than guessing from numeric equality or transplanting an unrelated bank. Keep unchanged outdoor family as a separate streaming family. Only then prepare coherent six-map current-main DEV builds/native/real cave traversal/ladder/follower/Save→freshContinue/legacy checks. Permanent origins and any production promotion remain separate gates; no extra geographic conversion is needed.
+
+## Cave adaptation and six-map runtime follow-up
+
+The three cave art families and guarded six-map DEV overlay are now implemented on codex/coronet-cave-art-runtime-20261023; see RUNTIME_CHECKPOINT.md for actual executed evidence and outstanding gates. The earlier read-only cave preflight above is superseded by this implementation. Production maps and saved identities remain unchanged.
+
+## Completed northern Coronet follow-up
+
+PR229 now supplies permitted cave art and paired six-map DEV evidence:268 source,29 focused native,4 save goldens; each NORMAL/RELEASE46 traversal+3freshContinue+3genuinelegacy PASS. See RUNTIME_CHECKPOINT.md and runtime-evidence/EVIDENCE_INVENTORY.json for exact identities, limits and preserved failures. Earlier unfinished cave/runtime notes above are superseded; production promotion and origins remain separate.

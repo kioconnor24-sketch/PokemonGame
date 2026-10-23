@@ -1,0 +1,266 @@
+{
+  "status": "ACTUAL_DEV_RUNTIME_NOT_PRODUCTION_OR_ORIGIN_APPROVAL",
+  "files": {
+    "source-identity.json": {
+      "bytes": 7139,
+      "sha256": "43033abab2d222b6ef37ad632b0093fe9e13efcbc6642c2b1ca162aea41c5805",
+      "source": "/workspace/averon-session-evidence/coronet-source-identity.json"
+    },
+    "runtime-recipe.json": {
+      "bytes": 11082,
+      "sha256": "607f4cc2b582baef1ba9d31d34a6ef44ccc1015dde97f5de8cc362bd02f2f488",
+      "source": "/workspace/averon-session-evidence/coronet-runtime-installed-recipe.json"
+    },
+    "static.json": {
+      "bytes": 6600,
+      "sha256": "bae37ab6346a0c7ee2bae7a6795bed8cd5373cafea18105ef28e49ed4f1716ab",
+      "source": "/workspace/averon-session-evidence/coronet-static.json"
+    },
+    "normal-capacity.json": {
+      "bytes": 249790,
+      "sha256": "62c818ff52f9bc47d33517aa1ead81a8a05748db448a4de134ca3d3f3c903470",
+      "source": "/workspace/averon-session-evidence/coronet-normal-capacity.json"
+    },
+    "release-capacity.json": {
+      "bytes": 234401,
+      "sha256": "ea98f408a46fd32f78798ba53c63e839dcc37121082459167538c8053addec62",
+      "source": "/workspace/averon-session-evidence/coronet-release-capacity.json"
+    },
+    "normal-build.log": {
+      "bytes": 244436,
+      "sha256": "4e99f905cabc4c25cd978a2088df93092076999e93c0a66b13d7a3662e1bd8d7",
+      "source": "/workspace/averon-session-evidence/coronet-normal-build.log"
+    },
+    "release-build.log": {
+      "bytes": 119930,
+      "sha256": "f53639e85b77940735999fecacee147133abfd879cbad6061fee94a394e63ada",
+      "source": "/workspace/averon-session-evidence/coronet-release-build.log"
+    },
+    "native.log": {
+      "bytes": 120475,
+      "sha256": "fe9b6765f16176c592a90ae4b9f677008014aa75b90251be0f20d6a2860298a3",
+      "source": "/workspace/averon-session-evidence/coronet-native.log"
+    },
+    "save-goldens.log": {
+      "bytes": 836,
+      "sha256": "42822187f43b691632fa9604cf82914797cd488e0e49995a4472b5c44fc801c0",
+      "source": "/workspace/averon-session-evidence/coronet-save-goldens.log"
+    },
+    "host-targeted-initial.log": {
+      "bytes": 3586,
+      "sha256": "a568169770c65416ea95820d9d454232d39c6179078d3c2b5fe80ce376659a38",
+      "source": "/workspace/averon-session-evidence/coronet-host-targeted-initial.log"
+    },
+    "host-complete.log": {
+      "bytes": 41943,
+      "sha256": "0679f05a0fc4ed126a49e259d55ed9034a985285303c115f3d69e83ea929bf55",
+      "source": "/workspace/averon-session-evidence/coronet-host-valid.log"
+    },
+    "ladder-regression-complete.log": {
+      "bytes": 2915,
+      "sha256": "db990378b01255a0ac58fcce389e9d8edcfeca2c7444ea99a38b2fb4fd2df8d0",
+      "source": "/workspace/averon-session-evidence/coronet-runtime-host-final.log"
+    },
+    "normal-approach-prelaunch-failed.log": {
+      "bytes": 2311,
+      "sha256": "caa9b428c9efa5d38a84ff7c9a22cae17d91be21ab81c50e9163e8117e9febe7",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-replay.log"
+    },
+    "entry-reproduction.txt": {
+      "bytes": 665,
+      "sha256": "f857d34b8edbca94b269465a962687261527a5230cf46c62f60be40462dce446",
+      "source": "/workspace/averon-session-evidence/coronet-entry-defect.txt"
+    },
+    "normal/result.json": {
+      "bytes": 11610,
+      "sha256": "d5317f01a139aaf764903427016817acade54c668acae0a7ed4e09f35364366c",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/result.json"
+    },
+    "normal/events.jsonl": {
+      "bytes": 17372,
+      "sha256": "23697845c8124d6b112251a7921a03f264077f71b7ce992f399417a698ee3fee",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/events.jsonl"
+    },
+    "normal-continue/result.json": {
+      "bytes": 1113,
+      "sha256": "d6772ac6dbada9252dfeab42b21bc6f006e00ece5e19ba361462bb609c024ab7",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-continue/result.json"
+    },
+    "normal-continue/events.jsonl": {
+      "bytes": 2036,
+      "sha256": "f39226489c1c76a5159d67997e31955b1d603eb022645b6d144db355a5ba5786",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-continue/events.jsonl"
+    },
+    "normal-legacy/result.json": {
+      "bytes": 1097,
+      "sha256": "17d0c7f3618b03fa35a5e712e49950a7bc055351bec12cf28877623aad474e76",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-legacy/result.json"
+    },
+    "normal-legacy/events.jsonl": {
+      "bytes": 1945,
+      "sha256": "3f82644f09e882013482a982966e20cdd123795a124a3a8a1f7851fcc3c72af7",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-legacy/events.jsonl"
+    },
+    "screens/normal-celestic.png": {
+      "bytes": 5124,
+      "sha256": "c6537b217dc6992ac9516d46d9e766ff5fd9f0eba4ffb05031e60b6b73a20330",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0008-start.png"
+    },
+    "screens/normal-route210-north.png": {
+      "bytes": 3751,
+      "sha256": "b4dd2088cb9ed8ca30f354c38f3ce8abaf1c639984bceead6ab62eaf82b49beb",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0009-seam-MAP_CELESTIC_TOWN-right.png"
+    },
+    "screens/normal-route211-east.png": {
+      "bytes": 4437,
+      "sha256": "0976d70cfc01f3ffe66860dabf28621a24711e5a01247918fecbe8a171649e37",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0012-seam-MAP_CELESTIC_TOWN-left.png"
+    },
+    "screens/normal-coronet-room1.png": {
+      "bytes": 3739,
+      "sha256": "7a8277b063a6a3ef53d63413e0f7f4e79480cb5c614d52c2d2cf7124f4304027",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0022-MAP_MT_CORONET_1F_NORTH_ROOM1 via warp.png"
+    },
+    "screens/normal-coronet-basement.png": {
+      "bytes": 3477,
+      "sha256": "6bf1e4b2064685f2f2f4ae471c37845b89823bd721497bfd521de09323c1b885",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0028-MAP_MT_CORONET_B1F via warp.png"
+    },
+    "screens/normal-coronet-room2.png": {
+      "bytes": 3189,
+      "sha256": "5bb462682c0f010e9ae8b49f9fb0847a1e48308093866a802ccc5f784b040deb",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0034-MAP_MT_CORONET_1F_NORTH_ROOM2 via warp.png"
+    },
+    "screens/normal-menu.png": {
+      "bytes": 3819,
+      "sha256": "3a735166d1e314e60684eb7cbe32eeac261cb176c3b78ac769424a99e530f2f4",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0039-start-menu.png"
+    },
+    "screens/normal-save.png": {
+      "bytes": 3176,
+      "sha256": "24132e8c9804a9a46371bc6657661b7bc82a053ff79586d3c22edffa8ed784a4",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid/0049-saved-coronet-six.png"
+    },
+    "screens/normal-continue.png": {
+      "bytes": 3831,
+      "sha256": "6fbcc0fb4f1ea18343a499c9542cd4d7686389ce1ffedbd7c45859291aa78a13",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-continue/0008-continued.png"
+    },
+    "screens/normal-legacy.png": {
+      "bytes": 4043,
+      "sha256": "f5d6c0e531b758093334aaf309a83fedd984556c67e0dc4a74f874a353036b86",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-valid-legacy/0008-continued.png"
+    },
+    "release/result.json": {
+      "bytes": 11611,
+      "sha256": "aaaa12253f306e2bc259cfa0989a610188ca977bdb594f2ae7c709414e0878b0",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/result.json"
+    },
+    "release/events.jsonl": {
+      "bytes": 17651,
+      "sha256": "5e9b1455ad825a1399d7630bb14cc74a1f3036c11b11a13ffbc26b3869de1157",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/events.jsonl"
+    },
+    "release-continue/result.json": {
+      "bytes": 1114,
+      "sha256": "be6981acb6acd83f8f1ff07a27ba06c3f6ce36a62b5c14e5ba9f640403aaf1f7",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-continue/result.json"
+    },
+    "release-continue/events.jsonl": {
+      "bytes": 2035,
+      "sha256": "ca144caf77ff7aa25f3b129b7048e6cb58d354bdb57f814ce7e8dbcb045c7b9f",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-continue/events.jsonl"
+    },
+    "release-legacy/result.json": {
+      "bytes": 1098,
+      "sha256": "22b054da6fb82ff7bb1e21e137fe587d093a3efb81d5f5fdbcad7b01731c975d",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-legacy/result.json"
+    },
+    "release-legacy/events.jsonl": {
+      "bytes": 2080,
+      "sha256": "52e47a8c2920504bdbf6d3d06ecc1e720192a55c33fca549853ac99a37e9cc33",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-legacy/events.jsonl"
+    },
+    "screens/release-celestic.png": {
+      "bytes": 5124,
+      "sha256": "c6537b217dc6992ac9516d46d9e766ff5fd9f0eba4ffb05031e60b6b73a20330",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0010-start.png"
+    },
+    "screens/release-route210-north.png": {
+      "bytes": 3803,
+      "sha256": "aecc129073ac58bd46132469873fdf290ac6a06ddcbcbc7c0c052198d4755891",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0011-seam-MAP_CELESTIC_TOWN-right.png"
+    },
+    "screens/release-route211-east.png": {
+      "bytes": 4434,
+      "sha256": "61d7c78740dbc2369fa9e0119b568b3584018d54c313c93c09b6965fe34c7d0a",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0014-seam-MAP_CELESTIC_TOWN-left.png"
+    },
+    "screens/release-coronet-room1.png": {
+      "bytes": 3739,
+      "sha256": "7a8277b063a6a3ef53d63413e0f7f4e79480cb5c614d52c2d2cf7124f4304027",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0024-MAP_MT_CORONET_1F_NORTH_ROOM1 via warp.png"
+    },
+    "screens/release-coronet-basement.png": {
+      "bytes": 3477,
+      "sha256": "6bf1e4b2064685f2f2f4ae471c37845b89823bd721497bfd521de09323c1b885",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0030-MAP_MT_CORONET_B1F via warp.png"
+    },
+    "screens/release-coronet-room2.png": {
+      "bytes": 3180,
+      "sha256": "87fed63158eb05367b9fd7a649b531fe4515fc764c4f99b5125c782e5f78d375",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0036-MAP_MT_CORONET_1F_NORTH_ROOM2 via warp.png"
+    },
+    "screens/release-menu.png": {
+      "bytes": 3818,
+      "sha256": "9700be8eaead16b5226c35d4664507212b4954b6f424591c458e51115c09d92b",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0041-start-menu.png"
+    },
+    "screens/release-save.png": {
+      "bytes": 3180,
+      "sha256": "87fed63158eb05367b9fd7a649b531fe4515fc764c4f99b5125c782e5f78d375",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid/0051-saved-coronet-six.png"
+    },
+    "screens/release-continue.png": {
+      "bytes": 3841,
+      "sha256": "04fa0b0cfe5c090f65fab68b481706baafa05d52fa47b92a2950da74c7e604a7",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-continue/0008-continued.png"
+    },
+    "screens/release-legacy.png": {
+      "bytes": 4043,
+      "sha256": "f5d6c0e531b758093334aaf309a83fedd984556c67e0dc4a74f874a353036b86",
+      "source": "/workspace/averon-session-evidence/coronet-six-release-qa-valid-legacy/0009-continued.png"
+    },
+    "normal-initial-failed/result.json": {
+      "bytes": 8497,
+      "sha256": "81cfc6e69e0afa56dcbd0dc295f521207e6e30baa20a6ba48e647432c0bae2c9",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa/result.json"
+    },
+    "normal-initial-failed/events.jsonl": {
+      "bytes": 12598,
+      "sha256": "97bf39d1dc1d09f0daaf9ef43ab74de168b8b4c79c3503d95ec3e211e86f09c2",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa/events.jsonl"
+    },
+    "normal-ladder-follower-failed/result.json": {
+      "bytes": 10364,
+      "sha256": "0ebe9767ba7a304b9f9165b09227bb993f0b5d889c6c77e5dbc22275996e6472",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-replay2/result.json"
+    },
+    "normal-ladder-follower-failed/events.jsonl": {
+      "bytes": 14047,
+      "sha256": "b37c8fc132de70c7468fdd295a5d4add304a52dc9ba58bb118532eeb3fd1e87f",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-replay2/events.jsonl"
+    },
+    "normal-entry-fixture-failed/result.json": {
+      "bytes": 11606,
+      "sha256": "f5cd67c010d555141e7a4ae359712d94f56cb4698892e5e728e2f98d99d914ab",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-final/result.json"
+    },
+    "normal-entry-fixture-failed/events.jsonl": {
+      "bytes": 17202,
+      "sha256": "03d7cbcdb85993ab0ce72f5a422385279d00daaa565fd5f03636fd84e366ec7c",
+      "source": "/workspace/averon-session-evidence/coronet-six-normal-qa-final/events.jsonl"
+    }
+  },
+  "text_normalization": "Trailing newlines normalized only; raw private originals retained; no records omitted"
+}
