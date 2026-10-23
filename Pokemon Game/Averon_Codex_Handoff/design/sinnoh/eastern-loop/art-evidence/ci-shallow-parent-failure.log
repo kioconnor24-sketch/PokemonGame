@@ -1,0 +1,26 @@
+2026-10-23T01:46:45.1801795Z ERROR: test_previous_four_gate_artifacts_and_source_metadata_are_unchanged (test_sinnoh_eastern_art.OutdoorArtTest.test_previous_four_gate_artifacts_and_source_metadata_are_unchanged)
+2026-10-23T01:46:45.1803264Z ----------------------------------------------------------------------
+2026-10-23T01:46:45.1803711Z Traceback (most recent call last):
+2026-10-23T01:46:45.1804689Z   File "/home/runner/work/PokemonGame/PokemonGame/Pokemon Game/scripts/tests/test_sinnoh_eastern_art.py", line 141, in test_previous_four_gate_artifacts_and_source_metadata_are_unchanged
+2026-10-23T01:46:45.1806318Z     self.assertEqual(p.read_bytes(),base.git(root,'show','ea801a08bb6de9ad7d9a528a37843a102302db00:'+str(p.relative_to(root))))
+2026-10-23T01:46:45.1807057Z                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T01:46:45.1807791Z   File "/home/runner/work/PokemonGame/PokemonGame/Pokemon Game/scripts/sinnoh-isolated-tileset.py", line 33, in git
+2026-10-23T01:46:45.1808601Z     return subprocess.check_output(['git', '-C', str(root), *args], stderr=subprocess.PIPE)
+2026-10-23T01:46:45.1809142Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T01:46:45.1809607Z   File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+2026-10-23T01:46:45.1810110Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-23T01:46:45.1810532Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-23T01:46:45.1810924Z   File "/usr/lib/python3.12/subprocess.py", line 571, in run
+2026-10-23T01:46:45.1811326Z     raise CalledProcessError(retcode, process.args,
+2026-10-23T01:46:45.1812809Z subprocess.CalledProcessError: Command '['git', '-C', '/home/runner/work/PokemonGame/PokemonGame', 'show', 'ea801a08bb6de9ad7d9a528a37843a102302db00:Pokemon Game/Averon_Codex_Handoff/design/sinnoh/eastern-loop/gate-art/primary-attributes.bin']' returned non-zero exit status 128.
+2026-10-23T01:46:45.1814150Z 
+2026-10-23T01:46:45.1814314Z ----------------------------------------------------------------------
+2026-10-23T01:46:45.1814692Z Ran 263 tests in 45.578s
+2026-10-23T01:46:45.1814860Z 
+2026-10-23T01:46:45.1814954Z FAILED (errors=1)
+2026-10-23T01:46:45.1815276Z /tmp/tmp15j7wq4a/p.png: 32x30 metatiles (512x480 px), 6 stamps
+2026-10-23T01:46:45.1815694Z Sinnoh source host outcomes: 263; skipped: 0
+2026-10-23T01:46:45.2033813Z ##[error]Process completed with exit code 1.
+2026-10-23T01:46:45.2140508Z ##[group]Run actions/upload-artifact@v4
+2026-10-23T01:46:45.2140824Z with:
+2026-10-23T01:46:45.2141050Z   name: sinnoh-route202-donor-inspection

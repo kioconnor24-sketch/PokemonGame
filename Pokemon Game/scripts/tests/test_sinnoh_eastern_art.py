@@ -12,6 +12,21 @@ spec=importlib.util.spec_from_file_location('eastern_outdoor_art_test',HERE/'ada
 a=importlib.util.module_from_spec(spec);spec.loader.exec_module(a)
 ENGINE=HERE.parents[3]/'engine'
 
+# Immutable bytes from #226ea801a08; tests need no old Git objects in shallow CI.
+GATE_PINS={'gate-art/secondary-metatiles.bin': 'f1e7c15bb14e39758d016cc63d4ceefeb1f59e783633e3f959aacaa770cc73fd',
+ 'gate-art/secondary-attributes.bin': '4d8613a028bdf54b89dd3a0af57f042751e3e1163548d0aedcf7ad8a67a757a4',
+ 'gate-art/primary-attributes.bin': '7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128',
+ 'gate-art/primary-metatiles.bin': '65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1',
+ 'gate-art-receipt.json': '7d61422370a11d8967dfd066ed7a8c33fc60a5fb0e25ea4f00e911bb11e2bfaa',
+ 'staged/Route212_Access/averon-map.bin': '8d757deaff50f16554ffef15299275736519bf66030ad41e67306a77bfeafc81',
+ 'staged/Route212_Access/averon.png': '0a67a4f411e6dc66060bbe49a57a319c50396b026c60c6ef5c06a6ad13b1c2e0',
+ 'staged/Route213_Access/averon-map.bin': '243cbe05b3c984c243d03d40be6be8c3f7178ca3d8a1b925263af345bed67e28',
+ 'staged/Route213_Access/averon.png': '23aa7d7d20f203fd7fc85b1e9a5d00169d5b18d5aa81e266d1c3e2d704c3d9ff',
+ 'staged/Route214_Access/averon-map.bin': '1b636aeaee97e5b9aa2617167e08d0639f230950226be4155e04067a4fdfbb89',
+ 'staged/Route214_Access/averon.png': 'c414d410f271d1795aba2097ab4d2a22c91e47a43566a9b15e655564338a592a',
+ 'staged/Route215_Access/averon-map.bin': '243cbe05b3c984c243d03d40be6be8c3f7178ca3d8a1b925263af345bed67e28',
+ 'staged/Route215_Access/averon.png': '23aa7d7d20f203fd7fc85b1e9a5d00169d5b18d5aa81e266d1c3e2d704c3d9ff'}
+
 
 class OutdoorArtTest(unittest.TestCase):
     @classmethod
@@ -132,13 +147,13 @@ class OutdoorArtTest(unittest.TestCase):
         self.assertGreater(paving,200);self.assertGreater(sand,100)
 
     def test_previous_four_gate_artifacts_and_source_metadata_are_unchanged(self):
-        base=a.pack.accepted.base;root=HERE.parents[4];prefix=str(HERE.relative_to(root))
         paths=list((HERE/'gate-art').glob('*.bin'))+[HERE/'gate-art-receipt.json']
         for name in ('Route212_Access','Route213_Access','Route214_Access','Route215_Access'):
             paths += [HERE/'staged'/name/f for f in ('averon-map.bin','averon.png')]
         self.assertEqual(len(paths),13)
+        self.assertEqual({str(p.relative_to(HERE)) for p in paths},set(GATE_PINS))
         for p in paths:
-            self.assertEqual(p.read_bytes(),base.git(root,'show','ea801a08bb6de9ad7d9a528a37843a102302db00:'+str(p.relative_to(root))))
+            self.assertEqual(a.pack.accepted.base.sha(p.read_bytes()),GATE_PINS[str(p.relative_to(HERE))])
         self.assertEqual(sum(len(__import__('json').loads(p.read_text())['warp_events']) for p in (HERE/'staged').glob('*/map.json')),17)
         for name in a.MAPS:
             h=__import__('json').loads((HERE/'staged'/name/'map.json').read_text())
