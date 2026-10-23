@@ -1,0 +1,434 @@
+{
+ "maps": [
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_OREBURGH_CITY",
+  "MAP_ROUTE207",
+  "MAP_OREBURGH_MINE_B1F",
+  "MAP_OREBURGH_MINE_B2F"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ROUTE203": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      53,
+      7
+     ],
+     "warp": [
+      53,
+      6
+     ],
+     "dest": "MAP_OREBURGH_GATE_1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      19
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      20
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      21
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      22
+     ],
+     "direction": "left",
+     "dest": "MAP_JUBILIFE_CITY",
+     "offset": 0
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OREBURGH_GATE_1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      3,
+      19
+     ],
+     "warp": [
+      3,
+      19
+     ],
+     "dest": "MAP_ROUTE203",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      25,
+      20
+     ],
+     "warp": [
+      25,
+      20
+     ],
+     "dest": "MAP_OREBURGH_CITY",
+     "dest_warp": 0,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OREBURGH_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      6,
+      13
+     ],
+     "warp": [
+      6,
+      12
+     ],
+     "dest": "MAP_OREBURGH_GATE_1F",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      50,
+      57
+     ],
+     "warp": [
+      50,
+      57
+     ],
+     "dest": "MAP_OREBURGH_MINE_B1F",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      51,
+      57
+     ],
+     "warp": [
+      51,
+      57
+     ],
+     "dest": "MAP_OREBURGH_MINE_B1F",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      52,
+      57
+     ],
+     "warp": [
+      52,
+      57
+     ],
+     "dest": "MAP_OREBURGH_MINE_B1F",
+     "dest_warp": 1,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      53,
+      57
+     ],
+     "warp": [
+      53,
+      57
+     ],
+     "dest": "MAP_OREBURGH_MINE_B1F",
+     "dest_warp": 1,
+     "push": "down"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      44,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      45,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      46,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      47,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      49,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      50,
+      0
+     ],
+     "direction": "up",
+     "dest": "MAP_ROUTE207",
+     "offset": 35
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE207": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "connection",
+     "tile": [
+      9,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      10,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      11,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      12,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      14,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      15,
+      31
+     ],
+     "direction": "down",
+     "dest": "MAP_OREBURGH_CITY",
+     "offset": -35
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OREBURGH_MINE_B1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      11,
+      1
+     ],
+     "warp": [
+      11,
+      1
+     ],
+     "dest": "MAP_OREBURGH_CITY",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      12,
+      1
+     ],
+     "warp": [
+      12,
+      1
+     ],
+     "dest": "MAP_OREBURGH_CITY",
+     "dest_warp": 4,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      11,
+      21
+     ],
+     "warp": [
+      11,
+      21
+     ],
+     "dest": "MAP_OREBURGH_MINE_B2F",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      12,
+      21
+     ],
+     "warp": [
+      12,
+      21
+     ],
+     "dest": "MAP_OREBURGH_MINE_B2F",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      10,
+      21
+     ],
+     "warp": [
+      10,
+      21
+     ],
+     "dest": "MAP_OREBURGH_MINE_B2F",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 5,
+     "tile": [
+      13,
+      21
+     ],
+     "warp": [
+      13,
+      21
+     ],
+     "dest": "MAP_OREBURGH_MINE_B2F",
+     "dest_warp": 0,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OREBURGH_MINE_B2F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      15,
+      2
+     ],
+     "warp": [
+      15,
+      1
+     ],
+     "dest": "MAP_OREBURGH_MINE_B1F",
+     "dest_warp": 2,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}
