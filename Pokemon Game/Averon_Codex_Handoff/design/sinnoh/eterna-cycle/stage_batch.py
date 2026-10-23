@@ -9,6 +9,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import struct
 import subprocess
@@ -86,6 +87,7 @@ def sanitize(headers,layouts,raws):
   for direction,points in edges.items():
    connection=next((c for c in connections if c['direction']==direction),None)
    for x,y in points:
+    if (x,y) in retained:continue # An approved paired warp is a real boundary exit.
     reason='unbuilt external edge'
     if connection:
      target=ids[connection['map']];tw,th=layouts[target]['width'],layouts[target]['height'];tx,ty=destination((x,y),direction,connection['offset'],tw,th)
@@ -108,13 +110,20 @@ def schematic(raw,width,height):
  return im.resize((width*4,height*4),Image.Resampling.NEAREST)
 
 
-def build(donor,out,maps=MAPS):
+def repair_border(original,spec,replacement):
+ if sha(original)!=spec['expected_sha256'] or not original or len(original)%2 or len(replacement)!=len(original):
+  raise ValueError('border repair precondition changed')
+ return replacement
+
+
+def build(donor,out,maps=MAPS,border_overrides=None):
  donor,out=Path(donor).resolve(),Path(out).resolve()
  if out.exists() or out.is_relative_to(donor) or 'engine' in out.parts:raise ValueError('new off-engine output required')
  def read(path):
   value=subprocess.check_output(['git','-C',str(donor),'show',REVISION+':'+path],stderr=subprocess.PIPE)
   consumed[path]=sha(value);return value
  if subprocess.check_output(['git','-C',str(donor),'rev-parse','HEAD'],text=True).strip()!=REVISION:raise ValueError('wrong donor revision')
+ border_overrides=border_overrides or {}
  consumed={};table=json.loads(read('data/layouts/layouts.json'))['layouts'];headers={};layouts={};raws={};borders={};identities={}
  with tempfile.TemporaryDirectory() as temp:
   source=Path(temp)/'donor-identity';converted=Path(temp)/'converted';source.mkdir();converted.mkdir()
@@ -128,6 +137,9 @@ def build(donor,out,maps=MAPS):
    actual=subprocess.check_output(['git','-C',str(donor),'rev-parse',REVISION+':'+layout['blockdata_filepath']],text=True).strip()
    if actual!=expected_blob:raise ValueError('source map blob pin changed')
    borders[name]=read(layout['border_filepath'])
+   if name in border_overrides:
+    spec=border_overrides[name]
+    borders[name]=repair_border(borders[name],spec,read(spec['replacement_source_path']))
    for path,value in [('data/maps/'+name+'/map.json',header),(layout['blockdata_filepath'],raw)]:
     dest=source/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(value)
   p=source/'data/layouts/layouts.json';p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(encode({'layouts':list(layouts.values())}))
@@ -140,19 +152,20 @@ def build(donor,out,maps=MAPS):
    if (converted/(name+'.bin')).read_bytes()!=raws[name]:raise ValueError('existing converter identity mismatch')
   staged,closures,translations=sanitize(headers,layouts,raws)
   receipt=dict(status='OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING',donor_revision=REVISION,donor_sha256=consumed,identity_roundtrips=identities,source_geometry_headers={name:{k:copy.deepcopy(h[k]) for k in ('id','name','layout','map_type','requires_flash','allow_cycling','allow_escaping','allow_running','battle_scene','warp_events','connections') if k in h} for name,h in headers.items()},warp_index_translation=translations,closure_changes=closures,maps={},limits=['No donor pixels/palettes/scripts/objects/trainers/encounters copied','No production registry, saved ID, ROM or mGBA acceptance','Yellow collision preview means elevation15, not actual art'])
+  if border_overrides:receipt['border_substitutions']=border_overrides
   out.mkdir(parents=True)
   for name,(raw,h) in staged.items():
    folder=out/'staged'/name;folder.mkdir(parents=True);(folder/'map.bin').write_bytes(raw);(folder/'border.bin').write_bytes(borders[name]);(folder/'map.json').write_bytes(encode(h))
    w,height=maps[name][:2];schematic(raw,w,height).save(folder/'collision.png')
    attrs={}
    for secondary,key in ((False,'primary_tileset'),(True,'secondary_tileset')):
-    symbol=layouts[name][key].removeprefix('gTileset_').lower();path='data/tilesets/'+('secondary/' if secondary else 'primary/')+symbol+'/metatile_attributes.bin'
+    symbol=re.sub(r'(?<=[a-z0-9])(?=[A-Z])','_',layouts[name][key].removeprefix('gTileset_')).lower();path='data/tilesets/'+('secondary/' if secondary else 'primary/')+symbol+'/metatile_attributes.bin'
     bank=read(path)
     for (cell,) in struct.iter_unpack('<H',raw+borders[name]):
      mid=cell&1023
      if (mid>=512)!=secondary:continue
      i=mid%512
-     if len(bank)<(i+1)*2:raise ValueError('source attribute bank too short')
+     if len(bank)<(i+1)*2:raise ValueError(f'{name} source metatile {mid} outside {path} ({len(bank)//2} records)')
      attrs[str(mid)]=struct.unpack_from('<H',bank,i*2)[0]
    (folder/'attributes.json').write_bytes(encode(dict(source_tilesets=[layouts[name]['primary_tileset'],layouts[name]['secondary_tileset']],used_source_attribute_words=attrs,averon_art_compatibility='UNVERIFIED')))
    receipt['maps'][name]=dict(dimensions=[w,height],source_blob=maps[name][2],source_sha256=sha(raws[name]),staged_sha256=sha(raw),border_sha256=sha(borders[name]),closed_cells=len(closures[name]),warp_count=len(h['warp_events']),connections=h['connections'],elevation15_cells=sum(v[0]>>12==15 for v in struct.iter_unpack('<H',raw)))

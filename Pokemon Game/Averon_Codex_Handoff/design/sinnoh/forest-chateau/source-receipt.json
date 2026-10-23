@@ -1,0 +1,1958 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/EternaForest/map.json": "365dd1a5111d2da817cfe180172aa1baf27fb983883cf2d12bcb161b12bb91c7",
+    "data/layouts/EternaForest/map.bin": "e747e01d8df24ea7682460516ad57b0a46e3d9c1b0fcd04e87c4b79c05d9bb9d",
+    "data/layouts/EternaForest/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/OldChateau_Entrance/map.json": "127bc5141c5dc2ea7a38a05aee27514dd9fb3eca69b0f0dd5c699b6cd266b148",
+    "data/layouts/OldChateau_Entrance/map.bin": "faec9c60b85a70e24cc36445ede92f934f6afaabdb2be5bc85c3e20fa5a0bbbe",
+    "data/layouts/OldChateau_Entrance/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/OldChateau_DiningRoom/map.json": "35f6f56d6e09190a2ea7a482cf795926fa27b8305a84a3c552096ce7dc45c3bd",
+    "data/layouts/OldChateau_DiningRoom/map.bin": "27aba3e8004b641d4aaf022bb5aa6ecf2bd103b8f65eca25705fe3a7472668d5",
+    "data/layouts/OldChateau_DiningRoom/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/OldChateau_2F/map.json": "56a47b8b540d24507f0bf88b41763c430b1309796507f61d2f664d5abbda2b76",
+    "data/layouts/OldChateau_2F/map.bin": "3c24ba19e75b7b24d9c7f48259c86c01ead7e193f302eb1106eccc80f3e4cfd1",
+    "data/layouts/OldChateau_2F/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/OldChateau_SideRoom_1/map.json": "1943d70f83c910f085c965c1ab64ca229220617e4fa9a53ee770618482e66222",
+    "data/layouts/OldChateau_SideRoom_1/map.bin": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+    "data/layouts/OldChateau_SideRoom_1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/OldChateau_SideRoom_2/map.json": "ed8c994f544d1f7a8abc97efd31ecab54c366960c9f06f9e021d648487c9f4ce",
+    "data/layouts/OldChateau_SideRoom_2/map.bin": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+    "data/layouts/OldChateau_SideRoom_2/border.bin": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/valor/metatile_attributes.bin": "7caf539d04510ede13b84b0b6648d887faf6fd075b73a26f38b7dbb890ec2089",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/lilycove_museum/metatile_attributes.bin": "ca6a811a86ddef6337bdf430b2cadb5d28f8c1242b4d3b7004921ca17f96308e",
+    "data/tilesets/secondary/generic_building/metatile_attributes.bin": "64e0965378336815428e4f3d7cbb0cb75dd88d84448d4fdb04d3e2a666d5ff23"
+  },
+  "identity_roundtrips": {
+    "EternaForest": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ETERNA_FOREST",
+      "target_map": "MAP_ETERNA_FOREST",
+      "source_sha256": "e747e01d8df24ea7682460516ad57b0a46e3d9c1b0fcd04e87c4b79c05d9bb9d",
+      "output_sha256": "e747e01d8df24ea7682460516ad57b0a46e3d9c1b0fcd04e87c4b79c05d9bb9d",
+      "mapped_unique_metatiles": 103,
+      "dimensions": [
+        82,
+        84
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "OldChateau_Entrance": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_OLD_CHATEAU_ENTRANCE",
+      "target_map": "MAP_OLD_CHATEAU_ENTRANCE",
+      "source_sha256": "faec9c60b85a70e24cc36445ede92f934f6afaabdb2be5bc85c3e20fa5a0bbbe",
+      "output_sha256": "faec9c60b85a70e24cc36445ede92f934f6afaabdb2be5bc85c3e20fa5a0bbbe",
+      "mapped_unique_metatiles": 27,
+      "dimensions": [
+        19,
+        17
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "OldChateau_DiningRoom": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_OLD_CHATEAU_DINING_ROOM",
+      "target_map": "MAP_OLD_CHATEAU_DINING_ROOM",
+      "source_sha256": "27aba3e8004b641d4aaf022bb5aa6ecf2bd103b8f65eca25705fe3a7472668d5",
+      "output_sha256": "27aba3e8004b641d4aaf022bb5aa6ecf2bd103b8f65eca25705fe3a7472668d5",
+      "mapped_unique_metatiles": 35,
+      "dimensions": [
+        40,
+        10
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "OldChateau_2F": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_OLD_CHATEAU_2F",
+      "target_map": "MAP_OLD_CHATEAU_2F",
+      "source_sha256": "3c24ba19e75b7b24d9c7f48259c86c01ead7e193f302eb1106eccc80f3e4cfd1",
+      "output_sha256": "3c24ba19e75b7b24d9c7f48259c86c01ead7e193f302eb1106eccc80f3e4cfd1",
+      "mapped_unique_metatiles": 40,
+      "dimensions": [
+        38,
+        14
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "OldChateau_SideRoom_1": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+      "target_map": "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+      "source_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "output_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "mapped_unique_metatiles": 13,
+      "dimensions": [
+        10,
+        10
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "OldChateau_SideRoom_2": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+      "target_map": "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+      "source_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "output_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "mapped_unique_metatiles": 13,
+      "dimensions": [
+        10,
+        10
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "EternaForest": {
+      "id": "MAP_ETERNA_FOREST",
+      "name": "EternaForest",
+      "layout": "LAYOUT_ETERNA_FOREST",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 16,
+          "y": 80,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE205_SOUTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 17,
+          "y": 80,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE205_SOUTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 70,
+          "y": 27,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE205_NORTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 70,
+          "y": 26,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE205_NORTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 59,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "OldChateau_Entrance": {
+      "id": "MAP_OLD_CHATEAU_ENTRANCE",
+      "name": "OldChateau_Entrance",
+      "layout": "LAYOUT_OLD_CHATEAU_ENTRANCE",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+      "warp_events": [
+        {
+          "x": 9,
+          "y": 16,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_FOREST",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 8,
+          "y": 16,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_FOREST",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 10,
+          "y": 16,
+          "elevation": 0,
+          "dest_map": "MAP_ETERNA_FOREST",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 9,
+          "y": 11,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_DINING_ROOM",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 9,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 16,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "OldChateau_DiningRoom": {
+      "id": "MAP_OLD_CHATEAU_DINING_ROOM",
+      "name": "OldChateau_DiningRoom",
+      "layout": "LAYOUT_OLD_CHATEAU_DINING_ROOM",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+      "warp_events": [
+        {
+          "x": 20,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "3"
+        },
+        {
+          "x": 21,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "3"
+        }
+      ],
+      "connections": null
+    },
+    "OldChateau_2F": {
+      "id": "MAP_OLD_CHATEAU_2F",
+      "name": "OldChateau_2F",
+      "layout": "LAYOUT_OLD_CHATEAU_2F",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+      "warp_events": [
+        {
+          "x": 18,
+          "y": 13,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "5"
+        },
+        {
+          "x": 19,
+          "y": 13,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "5"
+        },
+        {
+          "x": 3,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "3"
+        },
+        {
+          "x": 3,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 2,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 9,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "6"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "5"
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "5"
+        },
+        {
+          "x": 18,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "9"
+        },
+        {
+          "x": 18,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "8"
+        },
+        {
+          "x": 19,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "8"
+        },
+        {
+          "x": 28,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "12"
+        },
+        {
+          "x": 28,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "11"
+        },
+        {
+          "x": 27,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "11"
+        },
+        {
+          "x": 35,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "15"
+        },
+        {
+          "x": 35,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "14"
+        },
+        {
+          "x": 34,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_2F",
+          "dest_warp_id": "14"
+        }
+      ],
+      "connections": null
+    },
+    "OldChateau_SideRoom_1": {
+      "id": "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+      "name": "OldChateau_SideRoom_1",
+      "layout": "LAYOUT_OLD_CHATEAU_SIDE_ROOM_1",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 5,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "4"
+        }
+      ],
+      "connections": null
+    },
+    "OldChateau_SideRoom_2": {
+      "id": "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+      "name": "OldChateau_SideRoom_2",
+      "layout": "LAYOUT_OLD_CHATEAU_SIDE_ROOM_2",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "6"
+        },
+        {
+          "x": 5,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+          "dest_warp_id": "6"
+        }
+      ],
+      "connections": null
+    }
+  },
+  "warp_index_translation": {
+    "EternaForest": {
+      "4": 0
+    },
+    "OldChateau_Entrance": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6
+    },
+    "OldChateau_DiningRoom": {
+      "0": 0,
+      "1": 1
+    },
+    "OldChateau_2F": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "11": 11,
+      "12": 12,
+      "13": 13,
+      "14": 14,
+      "15": 15,
+      "16": 16
+    },
+    "OldChateau_SideRoom_1": {
+      "0": 0,
+      "1": 1
+    },
+    "OldChateau_SideRoom_2": {
+      "0": 0,
+      "1": 1
+    }
+  },
+  "closure_changes": {
+    "EternaForest": [
+      {
+        "x": 16,
+        "y": 80,
+        "before": 738,
+        "after": 1762,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 17,
+        "y": 80,
+        "before": 738,
+        "after": 1762,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 70,
+        "y": 27,
+        "before": 730,
+        "after": 1754,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 70,
+        "y": 26,
+        "before": 732,
+        "after": 1756,
+        "reason": "unbuilt source destination"
+      }
+    ],
+    "OldChateau_Entrance": [
+      {
+        "x": 0,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 16,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 12935,
+        "after": 13959,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 12,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 13,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 14,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 15,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 3,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 4,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 5,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 6,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 7,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 8,
+        "before": 12943,
+        "after": 13967,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 12,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 13,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 14,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 15,
+        "before": 12954,
+        "after": 13978,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "OldChateau_DiningRoom": [
+      {
+        "x": 0,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 38,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 12997,
+        "after": 14021,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 2,
+        "before": 13194,
+        "after": 14218,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "OldChateau_2F": [
+      {
+        "x": 0,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 13,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 13193,
+        "after": 14217,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 11,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 12,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 2,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 11,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 12,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "OldChateau_SideRoom_1": [
+      {
+        "x": 0,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 13136,
+        "after": 14160,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "OldChateau_SideRoom_2": [
+      {
+        "x": 0,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 9,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 13136,
+        "after": 14160,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 2,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 7,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 13099,
+        "after": 14123,
+        "reason": "unbuilt external edge"
+      }
+    ]
+  },
+  "maps": {
+    "EternaForest": {
+      "dimensions": [
+        82,
+        84
+      ],
+      "source_blob": "828c593d96ab44bea1362d6ae74cb601d16b98ba",
+      "source_sha256": "e747e01d8df24ea7682460516ad57b0a46e3d9c1b0fcd04e87c4b79c05d9bb9d",
+      "staged_sha256": "03effe94e8f19ed0ab3b948f114752e2c53da40bc2b2a11def66cb3c981eae68",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 4,
+      "warp_count": 1,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "OldChateau_Entrance": {
+      "dimensions": [
+        19,
+        17
+      ],
+      "source_blob": "b2b9df5c563591c49f503e76e6d86070de1a380e",
+      "source_sha256": "faec9c60b85a70e24cc36445ede92f934f6afaabdb2be5bc85c3e20fa5a0bbbe",
+      "staged_sha256": "8f786be414c6986a7a625f72eefc89bd1f41bbd33f67d4575e4b9cd0b67112ab",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 36,
+      "warp_count": 7,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "OldChateau_DiningRoom": {
+      "dimensions": [
+        40,
+        10
+      ],
+      "source_blob": "312060ed0a5009dd002dfa98d58c4f171ba0c487",
+      "source_sha256": "27aba3e8004b641d4aaf022bb5aa6ecf2bd103b8f65eca25705fe3a7472668d5",
+      "staged_sha256": "787227496952486e3b3f83c56054f4c8f263e5d54daee229378b2fabd4bd4794",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 52,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "OldChateau_2F": {
+      "dimensions": [
+        38,
+        14
+      ],
+      "source_blob": "6838b9e34ed395577c8dab346d1c67422dae51c8",
+      "source_sha256": "3c24ba19e75b7b24d9c7f48259c86c01ead7e193f302eb1106eccc80f3e4cfd1",
+      "staged_sha256": "ea8dc0e37f0ce92a1f25803aa839ca5eeecad6c575a7fe15ff8ae540a6afa5b5",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 48,
+      "warp_count": 17,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "OldChateau_SideRoom_1": {
+      "dimensions": [
+        10,
+        10
+      ],
+      "source_blob": "d3881b97e1fd899bbed143f15bdba2223f7a12fb",
+      "source_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "staged_sha256": "8c5e054dd0f6fe1cf742acc7289d8c5be2020dc290f6fa04ca3042112a2a28e6",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 22,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "OldChateau_SideRoom_2": {
+      "dimensions": [
+        10,
+        10
+      ],
+      "source_blob": "d3881b97e1fd899bbed143f15bdba2223f7a12fb",
+      "source_sha256": "5125fc31896a5018fc3a11a0f8aeb9688010af16758696cc238f1c8ff32c9497",
+      "staged_sha256": "8c5e054dd0f6fe1cf742acc7289d8c5be2020dc290f6fa04ca3042112a2a28e6",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 22,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ],
+  "border_substitutions": {
+    "OldChateau_SideRoom_2": {
+      "expected_sha256": "aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe",
+      "replacement_source_path": "data/layouts/OldChateau_SideRoom_1/border.bin",
+      "reason": "source SideRoom2 erroneously uses General trees468/469/476/477 beyond its 8-record Building primary; identical SideRoom1 geometry supplies the valid Building border"
+    }
+  }
+}

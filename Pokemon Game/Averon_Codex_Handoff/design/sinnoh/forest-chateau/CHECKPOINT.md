@@ -1,0 +1,32 @@
+# Eterna Forest / neutral Chateau physical geography
+
+Stacked source package on Eterna/Cycling #213 `feabcaed7951d308b4849402eee9848046a5e189`. No engine installation, permanent location ID, story/ghost scripts, trainers, encounters or gameplay acceptance. Donor source fixed at `38228bb574a3557345852b758d5f1a65eb01bb22`.
+
+Six real maps: EternaForest82×84, OldChateau_Entrance19×17, DiningRoom40×10, 2F38×14 and SideRoom1/2 each10×10: **8,343 cells**. Uses the same existing donor converter and connected staging implementation, not another converter. Geometry, sanitized headers, full used source attribute words and non-art collision/elevation previews are included. Every original cell's metatile/elevation is preserved, except explicitly recorded collision closures at unused exterior edges/Route205 mouths. Four Forest external warps close; source Forest4→candidate0 is coupled with all three Entrance returns. All31 internal warps, all17 upstairs/self-room events and11 valid boundary warp cells remain.
+
+Necessary tested shared-stager fixes: retain validated active warps on map edges; correctly resolve CamelCase tileset directories. Both complete Eterna26-file outputs still reproduce byte-identically after these changes. Source donor was sparse; one missing blob needed an ordinary authorized fetch, not another clone.
+
+Actual donor defect reproduced: SideRoom2's border uses primary468/469/476/477 although Building defines only8 primary records. SideRoom1 has the **identical map.bin geometry**, but a valid Building1×4 border. The isolated stage substitutes that exact source border only when the old SHA matches `aa298641e3346d9c7ac51454222ff057768946e61980fd82e4db65912df412fe`; replacementSHA `efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70`. Wrong original bytes or replacement length fail closed. No production source or save is altered.
+
+## Permitted graphics implemented
+
+Four interiors (DiningRoom,2F,SideRoom1/2) now have actual textured `averon.png` previews plus an isolated400-record metadata bank. Building and GenericBuilding indexed PNGs are byte-identical between pinned donor and existing Averon. **All eight palettes actually used parse to equal colors** (0,1,5,6,7,8,9,10); unused Building4 differs and is not assumed compatible. Used source metadata is isolated, not written over global GenericBuilding. The renderer independently compares final RGB with full source metadata/source parsed colors **in memory**; all four match. Only current Averon pixels/colors render the uploaded previews. Donor image/palette files are never copied or uploaded. Four actual static previews have been inspected; this is not emulator acceptance.
+
+Forest's Valor graphics and Entrance's modified Museum graphics remain **unadapted**. Do not install those two with blind same-index remapping. The metadata still explicitly says UNVERIFIED for general Averon compatibility; `graphics-compatibility.json` narrows the verified four-room case. No animation/runtime compatibility or live warp behavior is claimed from a PNG.
+
+## Executed tests / reproduction
+
+- Focused11/11 source/art tests PASS,0skips. Check all8343 cells,31 warp identities,17 upstairs events,11 boundary warps, removed/malformed return negatives, no gameplay, complete attribute dependency closure, guarded border repair, current-asset hashes and actual four published RGB renders.
+- Full suite before art additions187/187; current complete suite with the two added art cases is running and its actual result will be attached to the PR.
+- Two complete geometry stages:31/31 output files identical. Two permitted-art stages:7/7 output files identical. Existing Eterna five-map regeneration remains26/26 identical.
+- The first art-hash test caught the declared PAL CRLF checkout differing from committed blob bytes. Receipt hashes are canonical tracked bytes, as enforced by the existing verified_file helper; the test now compares that exact declared text normalization. Actual parsed colors/RGB already matched; no source palette was changed.
+
+Activate `/workspace/.onboarding/activate.sh`; run `stage_forest.py --donor /workspace/sinnoh-donor-pinned --out NEW_DIR`, then `render_existing.py --donor ... --engine 'Pokemon Game/engine' --out NEW_ART_DIR`; execute `test_sinnoh_forest_chateau.py` and all `test_sinnoh_*.py`. No donor-history fetch is needed for fixture unit tests. Receipts contain input/output hashes, source footprints and exact changes. Source-only artifacts need no ROM rebuild; no native/ROM/mGBA claims are made for this batch.
+
+Next executable construction: adapt Forest/Entrance with permitted Averon art, retaining valid paired boundaries and all room/self-warps. Later scratch integration must reconcile actual merged #206 Route205 source, use only explicit DEV temporary met-location mappings until the owner decides saved origins, and run real NORMAL/RELEASE, follower/warp/menu/Save→fresh Continue. Do not repurpose the Chateau into a story or copy donor events to make it lively.
+
+## Chateau entrance art now resolved with a bounded substitution
+
+`render_entrance.py` produces an actual current-Averon Museum preview and isolated155-record metadata family. All source map cells, warps, collision/elevation and complete behavior/layer words remain unchanged. Of48 used secondary graphic patterns,44 are identical to current Museum; all5 used parsed palettes match. The only four differing patterns916/917/932/933 are explicitly replaced by existing Museum patterns, affecting only metatile660 at12 cells (3,072 rendered pixels). This is a disclosed cosmetic substitution, not full RGB equivalence. No portrait/story significance is inferred; no donor art/color is imported. Museum's existing callback is NULL; no new animation is installed.
+
+The actual entrance preview was inspected and reproduces deterministically:4/4 files identical across two complete render executions. Two extra tests validate exact substitution scope, geometry/attribute identity and the published RGB image from existing assets. Focused13/13, full current source215/215,0skips. Thus all5 physical Chateau interior maps now have permitted static artwork; Forest Valor outdoor art remains the only unadapted family in this six-map source cluster. No in-engine build, warp/follower/save or graphical gameplay acceptance is claimed for these rooms. Future isolated runtime QA must still exercise the17 same-map upstairs warps, which the shared runtime runner currently assumes change map IDs.
