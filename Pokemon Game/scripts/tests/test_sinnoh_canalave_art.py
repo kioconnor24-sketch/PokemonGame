@@ -39,7 +39,7 @@ class CanalaveArtTest(unittest.TestCase):
         self.assertLessEqual(len(self.banks[1]),8192);self.assertEqual(len(self.banks[1]),len(self.attrs[1])*8)
         self.assertEqual(len(self.banks[1])//16,self.receipt['secondary_records']);self.assertEqual(self.receipt['remaining_secondary_slots'],512-len(self.banks[1])//16)
         base=a.pack.accepted.base;root=HERE.parents[4]
-        for p,h in self.receipt['existing_averon_sha256'].items():self.assertEqual(base.sha(base.verified_file(root,ENGINE.relative_to(root)/p,self.receipt['engine_source'])),h)
+        for p,h in self.receipt['existing_averon_sha256'].items():self.assertEqual(base.sha(base.verified_file(root,ENGINE.relative_to(root)/p,'HEAD')),h)
         self.assertEqual(self.receipt['status'],'EXISTING_AVERON_CANALAVE_ART_NOT_RUNTIME_ACCEPTANCE')
 
     def test_actual_two_previews_resolve_every_graphic_tile_and_palette(self):
