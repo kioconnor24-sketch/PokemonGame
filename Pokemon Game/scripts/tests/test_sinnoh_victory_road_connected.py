@@ -1,6 +1,7 @@
 """Pinned real League cave doors coupled to authored core; no terrain rewrite."""
 from collections import deque
 import copy
+import hashlib
 import importlib.util
 import json
 import os
@@ -23,10 +24,30 @@ import mapdata
 
 def words(raw):return struct.unpack('<%dH'%(len(raw)//2),raw)
 
+def frozen_inputs(repo,pins,read=lambda p:p.read_bytes()):
+    """CI's shallow checkout need not fetch history to verify frozen packets.
+
+    The production CLI still reads immutable Git revisions. Tests bind all
+    checked-out inputs to the actual receipt's hashes, with no silent fallback.
+    """
+    files={}
+    for name in c.NAMES:
+        coast=name=='PokmonLeague'
+        folder=repo/c.PREFIX/('sunyshore-coast' if coast else 'victory-road-shell')/'staged'/name
+        for suffix in ('map.bin','border.bin','map.json','attributes.json','averon.png'):
+            filename='averon-map.bin' if coast and suffix=='map.bin' else 'averon-border.bin' if coast and suffix=='border.bin' else suffix
+            files[name+'/'+suffix]=read(folder/filename)
+    for bank in ('primary','secondary'):
+        files['league-'+bank+'-attributes.bin']=read(repo/c.PREFIX/'sunyshore-coast/outdoor-family'/(bank+'-attributes.bin'))
+    if set(files)!=set(pins):raise ValueError('exact frozen source packet set required')
+    if any(hashlib.sha256(v).hexdigest()!=pins[p] for p,v in files.items()):raise ValueError('frozen source packet hash differs')
+    return files
+
 class ConnectedTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.inputs=c.read_packet(ROOT)
+        cls.pins=json.loads((PACKET/'connected-receipt.json').read_text())['input_sha256']
+        cls.inputs=frozen_inputs(ROOT,cls.pins)
         cls.general=(ENGINE/'data/tilesets/primary/general/metatile_attributes.bin').read_bytes()
         cls.cave=(ENGINE/'data/tilesets/secondary/cave/metatile_attributes.bin').read_bytes()
         cls.output,cls.changes=c.couple(cls.inputs,cls.cave,cls.general)
@@ -98,6 +119,15 @@ class ConnectedTests(unittest.TestCase):
         import hashlib
         for p,h in r['output_sha256'].items():self.assertEqual(hashlib.sha256((PACKET/'connected'/p).read_bytes()).hexdigest(),h)
         self.assertEqual(r['core_changes'],self.changes)
+
+    def test_frozen_fixture_needs_no_git_history_but_rejects_tampering_and_bad_set(self):
+        with patch.object(c,'read_packet',side_effect=AssertionError('history must not be consulted')):
+            self.assertEqual(frozen_inputs(ROOT,self.pins),self.inputs)
+        def altered(path):
+            data=path.read_bytes()
+            return bytes([data[0]^1])+data[1:] if path.name=='averon-map.bin' else data
+        with self.assertRaisesRegex(ValueError,'hash differs'):frozen_inputs(ROOT,self.pins,altered)
+        with self.assertRaisesRegex(ValueError,'packet set'):frozen_inputs(ROOT,{})
 
     def test_altered_existing_warp_door_behavior_or_sealed_anchor_refused(self):
         for kind in ('events','outside','sealed','native'):
