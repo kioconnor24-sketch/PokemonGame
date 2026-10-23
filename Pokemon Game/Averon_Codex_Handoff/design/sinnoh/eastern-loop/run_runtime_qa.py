@@ -7,6 +7,7 @@ is accepted; real player/follower elevation is read from matching-build offsets.
 import argparse
 from collections import deque
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import sys
@@ -110,6 +111,26 @@ def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,
     return None
 
 
+def acro_crossing_plan(m,start,goal,layer):
+    """Only the real, input-proven Route212South ground-layer rail portal.
+
+    Walking remains rail-blocked. Two ordinary sideways hops connect the exact
+    C0/E3 approaches across unchanged C0/E15; never synthesize a floor edge.
+    """
+    if m.id!='MAP_ROUTE212_SOUTH':return None
+    south,north,rail=(36,12),(36,10),(36,11)
+    if any(not m.inside(*tile) for tile in (south,north,rail)):return None
+    if any(m.collision(*tile)!=0 or m.elevation(*tile)!=3 or not foot_walkable(m,*tile) for tile in (south,north)):
+        raise ValueError('source Acro approaches changed')
+    if (m.collision(*rail),m.elevation(*rail),m.behavior(*rail))!=(0,15,'MB_HORIZONTAL_RAIL'):
+        raise ValueError('source Acro rail portal changed')
+    for approach,landing,direction in ((south,north,'up'),(north,south,'down')):
+        if (elevation_path(m,start,{approach},start_elevation=layer) is not None
+                and elevation_path(m,landing,{tuple(goal)},start_elevation=3) is not None):
+            return dict(approach=approach,rail=rail,landing=landing,direction=direction)
+    return None
+
+
 def follower_neighbors(m,position,layer=None):
     """Uniform-layer probes must not place the follower on transition0."""
     x,y=position
@@ -145,8 +166,13 @@ def validate_source(engine,recipe):
 
 def run(args):
     selected,save_label=select_scope(getattr(args,'map',None),getattr(args,'subset_label',None))
-    print('QA coverage',json.dumps(dict(maps=selected,label=save_label,complete_batch=selected==MAPS)),flush=True)
-    engine=args.engine.resolve();validate_source(engine,json.loads(args.recipe.read_text()))
+    engine=args.engine.resolve();receipt=json.loads(args.recipe.read_text());validate_source(engine,receipt)
+    acro=None
+    if getattr(args,'acro_route',False):
+        spec=importlib.util.spec_from_file_location('eastern_acro_controls',Path(__file__).with_name('run_rail_probe.py'))
+        acro=importlib.util.module_from_spec(spec);spec.loader.exec_module(acro)
+        acro.validate_recipe(engine,receipt);save_label+='-acro-dev'
+    print('QA coverage',json.dumps(dict(maps=selected,label=save_label,complete_batch=selected==MAPS,movement_mode='declared Acro fixture' if acro else 'ordinary foot',continue_only=bool(args.expect))),flush=True)
     scripts=Path(__file__).resolve().parent.parents[3]/'scripts/claude_play'
     sys.path.insert(0,str(scripts))
     import driver
@@ -157,6 +183,13 @@ def run(args):
     if w.driver.mapdata is not qa.mapdata:raise ValueError('shared driver planner module differs')
     for module in (qa,driver):
         path=Path(module.__file__);print('QA source',str(path),hashlib.sha256(path.read_bytes()).hexdigest(),flush=True)
+    if acro is not None:
+        w.emu.OFFSET_EXPRS.update({'bag.keyItems':'offsetof(struct Bag, keyItems)',
+            'avatar.flags':'offsetof(struct PlayerAvatar, flags)',
+            'avatar.acroState':'offsetof(struct PlayerAvatar, acroBikeState)',
+            'oe.directionByte':'offsetof(struct ObjectEvent, range) - 1'})
+        for c in ('ITEM_ACRO_BIKE','PLAYER_AVATAR_FLAG_ACRO_BIKE','DIR_EAST'):
+            if c not in w.emu.CONSTANTS:w.emu.CONSTANTS.append(c)
     w.emu.OFFSET_EXPRS['avatar.objectEventId']='offsetof(struct PlayerAvatar, objectEventId)'
     # On this actual GCC/GBA ABI, the current/previous elevation byte is the
     # byte immediately before initialCoords; its offset is compiler-derived.
@@ -182,12 +215,35 @@ def run(args):
             from driver import Stuck
             tile=tuple(tile)
             if self.d.here()[0]==map_id and self.path(map_id,tile) is None and _depth<2:
-                self.enter_region(map_id,tile,_depth)
+                if not (acro is not None and self.acro_portal(map_id,tile)):
+                    self.enter_region(map_id,tile,_depth)
             try:
                 self.d.walk_path(map_id,{tile});self.d.settle()
             except Stuck as exc:
                 self.d.log('unreachable',map=map_id,tile=tile,reason=str(exc));return False
             return self.d.here()==(map_id,tile)
+
+        def acro_portal(self,map_id,tile):
+            from driver import Stuck
+            mid,start=self.d.here()
+            if mid!=map_id:return False
+            plan=acro_crossing_plan(self.d.live_map(mid),start,tile,observed_elevations(self.d)['player'])
+            if plan is None:return False
+            self.d.log('declared-acro-portal',map=mid,goal=tile,plan=plan,dev_only=True)
+            self.d.walk_path(mid,{plan['approach']});self.d.settle()
+            acro.bike_use(self.d,w.play)
+            if not acro.avatar(self.d)['flags']&self.d.g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE']:raise Stuck('Acro did not mount through Bag USE')
+            self.d.e.tap('RIGHT',hold=.025,after=.4);self.d.settle()
+            if self.d.here()!=(mid,plan['approach']) or acro.avatar(self.d)['facing']!=self.d.g.c['DIR_EAST']:
+                raise Stuck('Acro facing-only setup changed location or facing')
+            for stage,expected in (('rail',plan['rail']),('landing',plan['landing'])):
+                got=acro.sidehop(self.d,plan['direction'])
+                if not self.check('declared Acro '+stage+' toward '+str(tile),got==(mid,expected),at=got,elevations=observed_elevations(self.d)):
+                    raise Stuck('real Acro input did not reach source '+stage)
+            acro.bike_use(self.d,w.play)
+            if acro.avatar(self.d)['flags']&self.d.g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE']:raise Stuck('Acro did not dismount through Bag USE')
+            self.follower('after declared Acro portal')
+            return True
 
         def enter_region(self,map_id,tile,depth):
             target=self.w.map(map_id)
@@ -248,6 +304,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('engine','rom','scratch','out','recipe'):p.add_argument('--'+name,required=True,type=Path)
     p.add_argument('--map',action='append',choices=MAPS,help='explicit bounded subset; full thirteen remains the default')
+    p.add_argument('--acro-route',action='store_true',help='declared Acro fixture and real-input portal; never ordinary foot acceptance')
     p.add_argument('--subset-label',help='required with --map; keeps subset save evidence distinct')
     p.add_argument('--profile',required=True,choices=('normal','release'));p.add_argument('--expect',type=Path)
     sys.exit(run(p.parse_args()))

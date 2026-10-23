@@ -140,6 +140,14 @@ class RuntimeTest(unittest.TestCase):
             self.assertIsNone(qa.elevation_path(m,(36,12),{(36,11)},start_elevation=3))
             self.assertIsNotNone(qa.elevation_path(m,(36,12),{(37,12)},start_elevation=3))
             self.assertNotIn(('up',(36,11)),list(qa.follower_neighbors(m,(36,12))))
+            plan=qa.acro_crossing_plan(m,(129,15),(10,0),3)
+            self.assertEqual(plan,dict(approach=(36,12),rail=(36,11),landing=(36,10),direction='up'))
+            self.assertEqual(qa.acro_crossing_plan(m,(10,0),(129,15),3)['direction'],'down')
+            self.assertIsNone(qa.acro_crossing_plan(m,(36,12),(37,12),3))
+            changed=list(m.blocks);changed[11*m.width+36]^=0x1000
+            with self.assertRaisesRegex(ValueError,'rail portal changed'):
+                qa.acro_crossing_plan(m.with_live_blocks(changed),(129,15),(10,0),3)
+
 
     def test_subset_evidence_cannot_silently_replace_full_corridor_scope(self):
         spec=importlib.util.spec_from_file_location('eastern_scope_qa',HERE/'run_runtime_qa.py')
@@ -150,6 +158,23 @@ class RuntimeTest(unittest.TestCase):
                            (['MAP_ROUTE212_NORTH']*2,'north'),(['MAP_INVALID'],'bad'),
                            (['MAP_ROUTE212_NORTH'],'../full')):
             with self.subTest(maps=maps,label=label),self.assertRaises(ValueError):qa.select_scope(maps,label)
+
+    def test_explicit_acro_fixture_reuses_existing_grant_without_geometry_or_default_changes(self):
+        before={p:bytes(d) for p,d in self.files.items()};files,receipt=a.assemble(ROOT,acro_fixture=True)
+        changed=[p for p in files if files[p]!=before[p]]
+        self.assertEqual(changed,['data/maps/Route212_South/scripts.inc'])
+        script=files[changed[0]].decode()
+        self.assertEqual(script.count('additem ITEM_ACRO_BIKE'),1)
+        self.assertIn('checkitem ITEM_ACRO_BIKE',script)
+        self.assertNotIn('setflag',script)
+        self.assertIn('TEST-ONLY map_qa fixture grant',script)
+        self.assertEqual(receipt['dev_fixture']['item_grants'],['ITEM_ACRO_BIKE'])
+        self.assertEqual(receipt['dev_fixture']['flag_grants'],[])
+        self.assertEqual(set(files),set(before));self.assertEqual(len(files),66)
+        self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
+        self.assertNotIn('dev_fixture',self.receipt)
+        for bad in (1,'yes',None):
+            with self.subTest(value=bad),self.assertRaises(ValueError):a.assemble(ROOT,acro_fixture=bad)
 
     def test_install_requires_marker_current_branch_head_and_clean_engine(self):
         with tempfile.TemporaryDirectory() as tmp:

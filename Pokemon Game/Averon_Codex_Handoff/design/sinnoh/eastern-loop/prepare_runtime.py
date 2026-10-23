@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 
 HERE=Path(__file__).resolve().parent
 BASE='c6ac2f967b02473741791eb24b5cc9b11bda3904'
@@ -43,7 +44,24 @@ def inputs(repo):
     return data
 
 
-def assemble(repo):
+def acro_script(original):
+    """Use the existing marked QA fixture tool; grant only one explicit item.
+
+    The temporary file holds generated DEV text, never a production map. No
+    flash, geometry, progression flag or shared QA implementation is changed.
+    """
+    script=HERE.parents[3]/'scripts/claude_play/map_qa.py'
+    spec=importlib.util.spec_from_file_location('eastern_existing_qa_fixture',script)
+    qa=importlib.util.module_from_spec(spec);spec.loader.exec_module(qa)
+    with tempfile.TemporaryDirectory() as tmp:
+        engine=Path(tmp);(engine/qa.MARKER).touch()
+        path=engine/'data/maps/Route212_South/scripts.inc';path.parent.mkdir(parents=True);path.write_bytes(original)
+        qa.apply_fixture(engine,dict(edits=[dict(op='grant',map='Route212_South',flags=[],items=['ITEM_ACRO_BIKE'])]))
+        return path.read_bytes()
+
+
+def assemble(repo,acro_fixture=False):
+    if type(acro_fixture) is not bool:raise ValueError('explicit boolean Acro fixture required')
     repo=Path(repo).resolve();before=inputs(repo)
     groups=json.loads(before['data/maps/map_groups.json']);layouts=json.loads(before['data/layouts/layouts.json'])
     names=groups['gMapGroup_Sinnoh'];prior=list(names);group=groups['group_order'].index('gMapGroup_Sinnoh')
@@ -104,19 +122,24 @@ def assemble(repo):
                        ('data/event_scripts.s','\n'+'\n'.join(includes)+'\n')]:files[path]=before[path]+extra.encode()
     files['data/maps/map_groups.json']=encode(groups);files['data/layouts/layouts.json']=encode(layouts)
     files['test/data/averon_map_registry_slots.inc']=pins.encode();files['test/averon_eastern_runtime.c']=(HERE/'native-runtime.c').read_bytes()
-    return files,dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',base=BASE,existing_map_names_preserved=prior,
+    if acro_fixture:
+        path='data/maps/Route212_South/scripts.inc'
+        files[path]=acro_script(files[path])
+    receipt=dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',base=BASE,existing_map_names_preserved=prior,
         temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers=source_headers,
         dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance',files={p:sha(d) for p,d in sorted(files.items())})
+    if acro_fixture:receipt['dev_fixture']=dict(item_grants=['ITEM_ACRO_BIKE'],flag_grants=[],map='Route212_South',method='existing map_qa.apply_fixture grant; disposable source only')
+    return files,receipt
 
 
-def install(repo):
+def install(repo,acro_fixture=False):
     repo=Path(repo).resolve();engine=repo/ENGINE
     if not base.git(repo,'branch','--show-current').decode().strip().startswith('codex/eastern-runtime-scratch-') or not (engine/'.map_qa_throwaway').is_file():
         raise ValueError('explicit disposable Eastern branch and marker required')
     if base.git(repo,'rev-parse','HEAD').decode().strip()!=BASE:raise ValueError('exact production baseline required')
     status=base.git(repo,'status','--porcelain','--untracked-files=normal','--',ENGINE).decode().splitlines()
     if status not in ([],['?? "Pokemon Game/engine/.map_qa_throwaway"']):raise ValueError('refusing dirty runtime source')
-    files,receipt=assemble(repo)
+    files,receipt=assemble(repo,acro_fixture=acro_fixture)
     for path in files:
         target=(engine/path).resolve()
         if not target.is_relative_to(engine.resolve()):raise ValueError('output path escapes engine')
@@ -129,5 +152,5 @@ def install(repo):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',type=Path,required=True);p.add_argument('--install',action='store_true');args=p.parse_args()
-    print(json.dumps(install(args.repo) if args.install else assemble(args.repo)[1],indent=2))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--repo',type=Path,required=True);p.add_argument('--install',action='store_true');p.add_argument('--acro-fixture',action='store_true',help='explicit disposable ITEM_ACRO_BIKE grant, not production progression');args=p.parse_args()
+    print(json.dumps(install(args.repo,acro_fixture=args.acro_fixture) if args.install else assemble(args.repo,acro_fixture=args.acro_fixture)[1],indent=2))

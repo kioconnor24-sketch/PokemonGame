@@ -1,5 +1,13 @@
 # Eastern hotel-linked DEV — bounded evidence, through-route unresolved
 
+## Active continuation — explicit Acro fixture, not production progression
+
+Current continuation adds optional `prepare_runtime.py --acro-fixture`, using the EXISTING marked map_qa grant helper. It grants exactly one ITEM_ACRO_BIKE on Route212South transition, no flags/other items. Default66 outputs remain byte-identical; the optional variant changes only that disposable script. Actual NORMAL/RELEASE builds pass, each exactly32B above the matching no-grant DEV build; RAM unchanged. Host focused13/13 and pre-portal complete282/282 (0skips) passed; updated exact-head full CI will verify the final portal assertions.
+
+New real-input run_rail_probe.py: initial split-key timing attempt failed6/7 and is preserved privately. Source native Acro trick window is4frames; one actual keyboard chord successfully executes north and south sideways hops over the unchanged E15 rail while preserving actual player/follower layer3. NORMAL focused13/13 PASS, including normal Bag Use/mount/dismount, follower restoration and real Save; fresh-process Continue2/2 PASS, including unchanged single-item quantity. No memory/register/geometry/flag writes and no human audio claim.
+
+The full13-map wrapper now has an explicit --acro-route mode with a separate `eastern-thirteen-acro-dev` save label. It uses the exact controller-proven portal only when ordinary rail-aware pathfinding has no route, validates its actual C/E/behavior, then dismounts and resumes ordinary walking/follower checks. Default on-foot tests are unchanged, and the older103/107 failure is retained. The complete NORMAL traversal is running; RELEASE full traversal, final native/goldens and exact hashes/evidence publication remain pending. Do NOT call focused-hop success complete-corridor acceptance. No source/run results are overwritten.
+
 ## Current recovery checkpoint — 2026-10-23
 
 **PR #231 remains DRAFT:** full NORMAL13-map run103/107 FAIL because native Acro rails block foot through-travel from Route212South to North. No weakened source attributes, movement-capability grants or full-corridor acceptance. Later bounded successes do not supersede that failure. All prior state below is historical unless restated here.
