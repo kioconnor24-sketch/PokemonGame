@@ -1,0 +1,176 @@
+{"t": 1792695625.26, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792695625.29, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792695625.84, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792695625.88, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792695628.0, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792695628.02, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792695629.64, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792695629.69, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792695630.22, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792695630.28, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792695630.81, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792695630.85, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792695631.9, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792695631.93, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792695635.52, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792695635.56, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792695636.21, "event": "field", "map": "MAP_ROUTE206", "pos": [10, 15], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792695636.72, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE206", [10, 15]]}
+{"t": 1792695637.92, "event": "capture", "file": "0009-start.png"}
+{"t": 1792695637.92, "event": "observe", "label": "start", "problems": []}
+{"t": 1792695637.94, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695638.64, "event": "map-qa-check", "name": "exact upper probe after DEV entry/follower placement", "ok": true, "at": ["MAP_ROUTE206", [10, 15]]}
+{"t": 1792695639.13, "event": "map-qa-check", "name": "upper down step 1", "ok": true, "at": ["MAP_ROUTE206", [10, 16]], "expected": [10, 16], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695639.59, "event": "map-qa-check", "name": "upper down step 2", "ok": true, "at": ["MAP_ROUTE206", [10, 17]], "expected": [10, 17], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695640.06, "event": "map-qa-check", "name": "upper down step 3", "ok": true, "at": ["MAP_ROUTE206", [10, 18]], "expected": [10, 18], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695640.5, "event": "map-qa-check", "name": "upper down step 4", "ok": true, "at": ["MAP_ROUTE206", [10, 19]], "expected": [10, 19], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695640.96, "event": "map-qa-check", "name": "upper down step 5", "ok": true, "at": ["MAP_ROUTE206", [10, 20]], "expected": [10, 20], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695641.43, "event": "map-qa-check", "name": "upper down step 6", "ok": true, "at": ["MAP_ROUTE206", [10, 21]], "expected": [10, 21], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695641.84, "event": "map-qa-check", "name": "upper down step 7", "ok": true, "at": ["MAP_ROUTE206", [10, 22]], "expected": [10, 22], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695642.33, "event": "map-qa-check", "name": "upper down step 8", "ok": true, "at": ["MAP_ROUTE206", [10, 23]], "expected": [10, 23], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695642.79, "event": "map-qa-check", "name": "upper down step 9", "ok": true, "at": ["MAP_ROUTE206", [10, 24]], "expected": [10, 24], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695643.26, "event": "map-qa-check", "name": "upper down step 10", "ok": true, "at": ["MAP_ROUTE206", [10, 25]], "expected": [10, 25], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695643.68, "event": "map-qa-check", "name": "upper down step 11", "ok": true, "at": ["MAP_ROUTE206", [10, 26]], "expected": [10, 26], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695644.14, "event": "map-qa-check", "name": "upper down step 12", "ok": true, "at": ["MAP_ROUTE206", [10, 27]], "expected": [10, 27], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695644.65, "event": "map-qa-check", "name": "upper down step 13", "ok": true, "at": ["MAP_ROUTE206", [10, 28]], "expected": [10, 28], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695645.13, "event": "map-qa-check", "name": "upper down step 14", "ok": true, "at": ["MAP_ROUTE206", [10, 29]], "expected": [10, 29], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695645.59, "event": "map-qa-check", "name": "upper down step 15", "ok": true, "at": ["MAP_ROUTE206", [10, 30]], "expected": [10, 30], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695646.06, "event": "map-qa-check", "name": "upper down step 16", "ok": true, "at": ["MAP_ROUTE206", [10, 31]], "expected": [10, 31], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695646.48, "event": "map-qa-check", "name": "upper down step 17", "ok": true, "at": ["MAP_ROUTE206", [10, 32]], "expected": [10, 32], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695646.92, "event": "map-qa-check", "name": "upper down step 18", "ok": true, "at": ["MAP_ROUTE206", [10, 33]], "expected": [10, 33], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695647.36, "event": "map-qa-check", "name": "upper down step 19", "ok": true, "at": ["MAP_ROUTE206", [10, 34]], "expected": [10, 34], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695647.85, "event": "map-qa-check", "name": "upper down step 20", "ok": true, "at": ["MAP_ROUTE206", [10, 35]], "expected": [10, 35], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695648.26, "event": "map-qa-check", "name": "upper down step 21", "ok": true, "at": ["MAP_ROUTE206", [10, 36]], "expected": [10, 36], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695648.68, "event": "map-qa-check", "name": "upper down step 22", "ok": true, "at": ["MAP_ROUTE206", [10, 37]], "expected": [10, 37], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695649.17, "event": "map-qa-check", "name": "upper down step 23", "ok": true, "at": ["MAP_ROUTE206", [10, 38]], "expected": [10, 38], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695649.61, "event": "map-qa-check", "name": "upper down step 24", "ok": true, "at": ["MAP_ROUTE206", [10, 39]], "expected": [10, 39], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695650.12, "event": "map-qa-check", "name": "upper down step 25", "ok": true, "at": ["MAP_ROUTE206", [10, 40]], "expected": [10, 40], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695650.61, "event": "map-qa-check", "name": "upper down step 26", "ok": true, "at": ["MAP_ROUTE206", [10, 41]], "expected": [10, 41], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695651.15, "event": "map-qa-check", "name": "upper down step 27", "ok": true, "at": ["MAP_ROUTE206", [10, 42]], "expected": [10, 42], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695651.63, "event": "map-qa-check", "name": "upper down step 28", "ok": true, "at": ["MAP_ROUTE206", [10, 43]], "expected": [10, 43], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695652.05, "event": "map-qa-check", "name": "upper down step 29", "ok": true, "at": ["MAP_ROUTE206", [10, 44]], "expected": [10, 44], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695652.47, "event": "map-qa-check", "name": "upper down step 30", "ok": true, "at": ["MAP_ROUTE206", [10, 45]], "expected": [10, 45], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695652.94, "event": "map-qa-check", "name": "upper down step 31", "ok": true, "at": ["MAP_ROUTE206", [10, 46]], "expected": [10, 46], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695653.4, "event": "map-qa-check", "name": "upper down step 32", "ok": true, "at": ["MAP_ROUTE206", [10, 47]], "expected": [10, 47], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695653.86, "event": "map-qa-check", "name": "upper down step 33", "ok": true, "at": ["MAP_ROUTE206", [10, 48]], "expected": [10, 48], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695654.32, "event": "map-qa-check", "name": "upper down step 34", "ok": true, "at": ["MAP_ROUTE206", [10, 49]], "expected": [10, 49], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695654.76, "event": "map-qa-check", "name": "upper down step 35", "ok": true, "at": ["MAP_ROUTE206", [10, 50]], "expected": [10, 50], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695655.18, "event": "map-qa-check", "name": "upper down step 36", "ok": true, "at": ["MAP_ROUTE206", [10, 51]], "expected": [10, 51], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695655.59, "event": "map-qa-check", "name": "upper down step 37", "ok": true, "at": ["MAP_ROUTE206", [10, 52]], "expected": [10, 52], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695656.03, "event": "map-qa-check", "name": "upper down step 38", "ok": true, "at": ["MAP_ROUTE206", [10, 53]], "expected": [10, 53], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695656.54, "event": "map-qa-check", "name": "upper down step 39", "ok": true, "at": ["MAP_ROUTE206", [10, 54]], "expected": [10, 54], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695656.98, "event": "map-qa-check", "name": "upper down step 40", "ok": true, "at": ["MAP_ROUTE206", [10, 55]], "expected": [10, 55], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695657.56, "event": "map-qa-check", "name": "upper down step 41", "ok": true, "at": ["MAP_ROUTE206", [10, 56]], "expected": [10, 56], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695658.06, "event": "map-qa-check", "name": "upper down step 42", "ok": true, "at": ["MAP_ROUTE206", [10, 57]], "expected": [10, 57], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695658.54, "event": "map-qa-check", "name": "upper down step 43", "ok": true, "at": ["MAP_ROUTE206", [10, 58]], "expected": [10, 58], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695659.02, "event": "map-qa-check", "name": "upper down step 44", "ok": true, "at": ["MAP_ROUTE206", [10, 59]], "expected": [10, 59], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695659.46, "event": "map-qa-check", "name": "upper down step 45", "ok": true, "at": ["MAP_ROUTE206", [10, 60]], "expected": [10, 60], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695659.93, "event": "map-qa-check", "name": "upper down step 46", "ok": true, "at": ["MAP_ROUTE206", [10, 61]], "expected": [10, 61], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695660.37, "event": "map-qa-check", "name": "upper down step 47", "ok": true, "at": ["MAP_ROUTE206", [10, 62]], "expected": [10, 62], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695660.86, "event": "map-qa-check", "name": "upper down step 48", "ok": true, "at": ["MAP_ROUTE206", [10, 63]], "expected": [10, 63], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695661.34, "event": "map-qa-check", "name": "upper down step 49", "ok": true, "at": ["MAP_ROUTE206", [10, 64]], "expected": [10, 64], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695661.79, "event": "map-qa-check", "name": "upper down step 50", "ok": true, "at": ["MAP_ROUTE206", [10, 65]], "expected": [10, 65], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695662.28, "event": "map-qa-check", "name": "upper down step 51", "ok": true, "at": ["MAP_ROUTE206", [10, 66]], "expected": [10, 66], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695662.74, "event": "map-qa-check", "name": "upper down step 52", "ok": true, "at": ["MAP_ROUTE206", [10, 67]], "expected": [10, 67], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695663.23, "event": "map-qa-check", "name": "upper down step 53", "ok": true, "at": ["MAP_ROUTE206", [10, 68]], "expected": [10, 68], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695663.71, "event": "map-qa-check", "name": "upper down step 54", "ok": true, "at": ["MAP_ROUTE206", [10, 69]], "expected": [10, 69], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695664.17, "event": "map-qa-check", "name": "upper down step 55", "ok": true, "at": ["MAP_ROUTE206", [10, 70]], "expected": [10, 70], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695664.58, "event": "map-qa-check", "name": "upper down step 56", "ok": true, "at": ["MAP_ROUTE206", [10, 71]], "expected": [10, 71], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695665.1, "event": "map-qa-check", "name": "upper down step 57", "ok": true, "at": ["MAP_ROUTE206", [10, 72]], "expected": [10, 72], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695665.59, "event": "map-qa-check", "name": "upper down step 58", "ok": true, "at": ["MAP_ROUTE206", [10, 73]], "expected": [10, 73], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695666.08, "event": "map-qa-check", "name": "upper down step 59", "ok": true, "at": ["MAP_ROUTE206", [10, 74]], "expected": [10, 74], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695666.54, "event": "map-qa-check", "name": "upper down step 60", "ok": true, "at": ["MAP_ROUTE206", [10, 75]], "expected": [10, 75], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695667.07, "event": "map-qa-check", "name": "upper down step 61", "ok": true, "at": ["MAP_ROUTE206", [10, 76]], "expected": [10, 76], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695667.54, "event": "map-qa-check", "name": "upper down step 62", "ok": true, "at": ["MAP_ROUTE206", [10, 77]], "expected": [10, 77], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695667.95, "event": "map-qa-check", "name": "upper down step 63", "ok": true, "at": ["MAP_ROUTE206", [10, 78]], "expected": [10, 78], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695668.37, "event": "map-qa-check", "name": "upper down step 64", "ok": true, "at": ["MAP_ROUTE206", [10, 79]], "expected": [10, 79], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695668.81, "event": "map-qa-check", "name": "upper down step 65", "ok": true, "at": ["MAP_ROUTE206", [10, 80]], "expected": [10, 80], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695669.28, "event": "map-qa-check", "name": "upper down step 66", "ok": true, "at": ["MAP_ROUTE206", [10, 81]], "expected": [10, 81], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695669.69, "event": "map-qa-check", "name": "upper down step 67", "ok": true, "at": ["MAP_ROUTE206", [10, 82]], "expected": [10, 82], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695670.11, "event": "map-qa-check", "name": "upper down step 68", "ok": true, "at": ["MAP_ROUTE206", [10, 83]], "expected": [10, 83], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695670.6, "event": "map-qa-check", "name": "upper down step 69", "ok": true, "at": ["MAP_ROUTE206", [10, 84]], "expected": [10, 84], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695671.01, "event": "map-qa-check", "name": "upper down step 70", "ok": true, "at": ["MAP_ROUTE206", [10, 85]], "expected": [10, 85], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695672.17, "event": "capture", "file": "0010-upper after down.png"}
+{"t": 1792695672.17, "event": "observe", "label": "upper after down", "problems": []}
+{"t": 1792695672.17, "event": "map-qa-check", "name": "follower visible (upper after down)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695672.17, "event": "map-qa-check", "name": "upper player and follower layer", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695672.21, "event": "capture", "file": "0011-upper-down-layer.png"}
+{"t": 1792695672.94, "event": "map-qa-check", "name": "upper exact endpoint after follower probe", "ok": true, "at": ["MAP_ROUTE206", [10, 85]], "expected": [10, 85]}
+{"t": 1792695673.47, "event": "map-qa-check", "name": "upper up step 1", "ok": true, "at": ["MAP_ROUTE206", [10, 84]], "expected": [10, 84], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695673.95, "event": "map-qa-check", "name": "upper up step 2", "ok": true, "at": ["MAP_ROUTE206", [10, 83]], "expected": [10, 83], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695674.39, "event": "map-qa-check", "name": "upper up step 3", "ok": true, "at": ["MAP_ROUTE206", [10, 82]], "expected": [10, 82], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695674.86, "event": "map-qa-check", "name": "upper up step 4", "ok": true, "at": ["MAP_ROUTE206", [10, 81]], "expected": [10, 81], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695675.32, "event": "map-qa-check", "name": "upper up step 5", "ok": true, "at": ["MAP_ROUTE206", [10, 80]], "expected": [10, 80], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695675.76, "event": "map-qa-check", "name": "upper up step 6", "ok": true, "at": ["MAP_ROUTE206", [10, 79]], "expected": [10, 79], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695676.18, "event": "map-qa-check", "name": "upper up step 7", "ok": true, "at": ["MAP_ROUTE206", [10, 78]], "expected": [10, 78], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695676.67, "event": "map-qa-check", "name": "upper up step 8", "ok": true, "at": ["MAP_ROUTE206", [10, 77]], "expected": [10, 77], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695677.14, "event": "map-qa-check", "name": "upper up step 9", "ok": true, "at": ["MAP_ROUTE206", [10, 76]], "expected": [10, 76], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695677.58, "event": "map-qa-check", "name": "upper up step 10", "ok": true, "at": ["MAP_ROUTE206", [10, 75]], "expected": [10, 75], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695678.0, "event": "map-qa-check", "name": "upper up step 11", "ok": true, "at": ["MAP_ROUTE206", [10, 74]], "expected": [10, 74], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695678.46, "event": "map-qa-check", "name": "upper up step 12", "ok": true, "at": ["MAP_ROUTE206", [10, 73]], "expected": [10, 73], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695678.9, "event": "map-qa-check", "name": "upper up step 13", "ok": true, "at": ["MAP_ROUTE206", [10, 72]], "expected": [10, 72], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695679.36, "event": "map-qa-check", "name": "upper up step 14", "ok": true, "at": ["MAP_ROUTE206", [10, 71]], "expected": [10, 71], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695679.89, "event": "map-qa-check", "name": "upper up step 15", "ok": true, "at": ["MAP_ROUTE206", [10, 70]], "expected": [10, 70], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695680.31, "event": "map-qa-check", "name": "upper up step 16", "ok": true, "at": ["MAP_ROUTE206", [10, 69]], "expected": [10, 69], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695680.71, "event": "map-qa-check", "name": "upper up step 17", "ok": true, "at": ["MAP_ROUTE206", [10, 68]], "expected": [10, 68], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695681.12, "event": "map-qa-check", "name": "upper up step 18", "ok": true, "at": ["MAP_ROUTE206", [10, 67]], "expected": [10, 67], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695681.54, "event": "map-qa-check", "name": "upper up step 19", "ok": true, "at": ["MAP_ROUTE206", [10, 66]], "expected": [10, 66], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695682.0, "event": "map-qa-check", "name": "upper up step 20", "ok": true, "at": ["MAP_ROUTE206", [10, 65]], "expected": [10, 65], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695682.44, "event": "map-qa-check", "name": "upper up step 21", "ok": true, "at": ["MAP_ROUTE206", [10, 64]], "expected": [10, 64], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695682.91, "event": "map-qa-check", "name": "upper up step 22", "ok": true, "at": ["MAP_ROUTE206", [10, 63]], "expected": [10, 63], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695683.31, "event": "map-qa-check", "name": "upper up step 23", "ok": true, "at": ["MAP_ROUTE206", [10, 62]], "expected": [10, 62], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695683.77, "event": "map-qa-check", "name": "upper up step 24", "ok": true, "at": ["MAP_ROUTE206", [10, 61]], "expected": [10, 61], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695684.27, "event": "map-qa-check", "name": "upper up step 25", "ok": true, "at": ["MAP_ROUTE206", [10, 60]], "expected": [10, 60], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695684.71, "event": "map-qa-check", "name": "upper up step 26", "ok": true, "at": ["MAP_ROUTE206", [10, 59]], "expected": [10, 59], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695685.15, "event": "map-qa-check", "name": "upper up step 27", "ok": true, "at": ["MAP_ROUTE206", [10, 58]], "expected": [10, 58], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695685.62, "event": "map-qa-check", "name": "upper up step 28", "ok": true, "at": ["MAP_ROUTE206", [10, 57]], "expected": [10, 57], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695686.08, "event": "map-qa-check", "name": "upper up step 29", "ok": true, "at": ["MAP_ROUTE206", [10, 56]], "expected": [10, 56], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695686.54, "event": "map-qa-check", "name": "upper up step 30", "ok": true, "at": ["MAP_ROUTE206", [10, 55]], "expected": [10, 55], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695686.98, "event": "map-qa-check", "name": "upper up step 31", "ok": true, "at": ["MAP_ROUTE206", [10, 54]], "expected": [10, 54], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695687.4, "event": "map-qa-check", "name": "upper up step 32", "ok": true, "at": ["MAP_ROUTE206", [10, 53]], "expected": [10, 53], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695687.84, "event": "map-qa-check", "name": "upper up step 33", "ok": true, "at": ["MAP_ROUTE206", [10, 52]], "expected": [10, 52], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695688.28, "event": "map-qa-check", "name": "upper up step 34", "ok": true, "at": ["MAP_ROUTE206", [10, 51]], "expected": [10, 51], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695688.69, "event": "map-qa-check", "name": "upper up step 35", "ok": true, "at": ["MAP_ROUTE206", [10, 50]], "expected": [10, 50], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695689.12, "event": "map-qa-check", "name": "upper up step 36", "ok": true, "at": ["MAP_ROUTE206", [10, 49]], "expected": [10, 49], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695689.54, "event": "map-qa-check", "name": "upper up step 37", "ok": true, "at": ["MAP_ROUTE206", [10, 48]], "expected": [10, 48], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695689.96, "event": "map-qa-check", "name": "upper up step 38", "ok": true, "at": ["MAP_ROUTE206", [10, 47]], "expected": [10, 47], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695690.42, "event": "map-qa-check", "name": "upper up step 39", "ok": true, "at": ["MAP_ROUTE206", [10, 46]], "expected": [10, 46], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695690.89, "event": "map-qa-check", "name": "upper up step 40", "ok": true, "at": ["MAP_ROUTE206", [10, 45]], "expected": [10, 45], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695691.33, "event": "map-qa-check", "name": "upper up step 41", "ok": true, "at": ["MAP_ROUTE206", [10, 44]], "expected": [10, 44], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695691.81, "event": "map-qa-check", "name": "upper up step 42", "ok": true, "at": ["MAP_ROUTE206", [10, 43]], "expected": [10, 43], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695692.3, "event": "map-qa-check", "name": "upper up step 43", "ok": true, "at": ["MAP_ROUTE206", [10, 42]], "expected": [10, 42], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695692.74, "event": "map-qa-check", "name": "upper up step 44", "ok": true, "at": ["MAP_ROUTE206", [10, 41]], "expected": [10, 41], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695693.21, "event": "map-qa-check", "name": "upper up step 45", "ok": true, "at": ["MAP_ROUTE206", [10, 40]], "expected": [10, 40], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695693.69, "event": "map-qa-check", "name": "upper up step 46", "ok": true, "at": ["MAP_ROUTE206", [10, 39]], "expected": [10, 39], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695694.14, "event": "map-qa-check", "name": "upper up step 47", "ok": true, "at": ["MAP_ROUTE206", [10, 38]], "expected": [10, 38], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695694.7, "event": "map-qa-check", "name": "upper up step 48", "ok": true, "at": ["MAP_ROUTE206", [10, 37]], "expected": [10, 37], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695695.18, "event": "map-qa-check", "name": "upper up step 49", "ok": true, "at": ["MAP_ROUTE206", [10, 36]], "expected": [10, 36], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695695.68, "event": "map-qa-check", "name": "upper up step 50", "ok": true, "at": ["MAP_ROUTE206", [10, 35]], "expected": [10, 35], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695696.18, "event": "map-qa-check", "name": "upper up step 51", "ok": true, "at": ["MAP_ROUTE206", [10, 34]], "expected": [10, 34], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695696.64, "event": "map-qa-check", "name": "upper up step 52", "ok": true, "at": ["MAP_ROUTE206", [10, 33]], "expected": [10, 33], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695697.1, "event": "map-qa-check", "name": "upper up step 53", "ok": true, "at": ["MAP_ROUTE206", [10, 32]], "expected": [10, 32], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695697.56, "event": "map-qa-check", "name": "upper up step 54", "ok": true, "at": ["MAP_ROUTE206", [10, 31]], "expected": [10, 31], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695698.06, "event": "map-qa-check", "name": "upper up step 55", "ok": true, "at": ["MAP_ROUTE206", [10, 30]], "expected": [10, 30], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695698.6, "event": "map-qa-check", "name": "upper up step 56", "ok": true, "at": ["MAP_ROUTE206", [10, 29]], "expected": [10, 29], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695699.16, "event": "map-qa-check", "name": "upper up step 57", "ok": true, "at": ["MAP_ROUTE206", [10, 28]], "expected": [10, 28], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695699.68, "event": "map-qa-check", "name": "upper up step 58", "ok": true, "at": ["MAP_ROUTE206", [10, 27]], "expected": [10, 27], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695700.19, "event": "map-qa-check", "name": "upper up step 59", "ok": true, "at": ["MAP_ROUTE206", [10, 26]], "expected": [10, 26], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695700.65, "event": "map-qa-check", "name": "upper up step 60", "ok": true, "at": ["MAP_ROUTE206", [10, 25]], "expected": [10, 25], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695701.18, "event": "map-qa-check", "name": "upper up step 61", "ok": true, "at": ["MAP_ROUTE206", [10, 24]], "expected": [10, 24], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695701.76, "event": "map-qa-check", "name": "upper up step 62", "ok": true, "at": ["MAP_ROUTE206", [10, 23]], "expected": [10, 23], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695702.38, "event": "map-qa-check", "name": "upper up step 63", "ok": true, "at": ["MAP_ROUTE206", [10, 22]], "expected": [10, 22], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695702.96, "event": "map-qa-check", "name": "upper up step 64", "ok": true, "at": ["MAP_ROUTE206", [10, 21]], "expected": [10, 21], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695703.51, "event": "map-qa-check", "name": "upper up step 65", "ok": true, "at": ["MAP_ROUTE206", [10, 20]], "expected": [10, 20], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695704.15, "event": "map-qa-check", "name": "upper up step 66", "ok": true, "at": ["MAP_ROUTE206", [10, 19]], "expected": [10, 19], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695704.76, "event": "map-qa-check", "name": "upper up step 67", "ok": true, "at": ["MAP_ROUTE206", [10, 18]], "expected": [10, 18], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695705.26, "event": "map-qa-check", "name": "upper up step 68", "ok": true, "at": ["MAP_ROUTE206", [10, 17]], "expected": [10, 17], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695705.84, "event": "map-qa-check", "name": "upper up step 69", "ok": true, "at": ["MAP_ROUTE206", [10, 16]], "expected": [10, 16], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695706.38, "event": "map-qa-check", "name": "upper up step 70", "ok": true, "at": ["MAP_ROUTE206", [10, 15]], "expected": [10, 15], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695708.47, "event": "capture", "file": "0012-upper after up.png"}
+{"t": 1792695708.47, "event": "observe", "label": "upper after up", "problems": []}
+{"t": 1792695708.53, "event": "map-qa-check", "name": "follower visible (upper after up)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695708.55, "event": "map-qa-check", "name": "upper player and follower layer", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792695708.67, "event": "capture", "file": "0013-upper-up-layer.png"}
+{"t": 1792695709.94, "event": "map-qa-check", "name": "upper exact endpoint after follower probe", "ok": true, "at": ["MAP_ROUTE206", [10, 15]], "expected": [10, 15]}
+{"t": 1792695711.35, "event": "capture", "file": "0014-start-menu.png"}
+{"t": 1792695712.32, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
