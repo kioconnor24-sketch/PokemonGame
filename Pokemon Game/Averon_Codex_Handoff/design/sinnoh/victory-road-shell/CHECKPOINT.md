@@ -18,3 +18,5 @@ python3 -m unittest discover -s 'Pokemon Game/scripts/tests' -p 'test_sinnoh_vic
 ```
 
 No new227+ origin, permanent registry slots, encounters, trainers, plot, item placement, boulder/Surf/Waterfall grants or global art changes. Next executable task: guarded three-floor DEV scene, paired real builds/native/stair/follower/Save→fresh Continue/old-flash checks; then a separate reviewed exact League approach adaptation before enabling natural exterior arrivals. Owner-only full namespace policy still pending; physical work need not wait.
+
+Build-driven correction: original prototype music token MUS_GRANITE_CAVE was undefined and the first actual NORMAL link failed. Replaced only the generated source header field with existing Granite Cave/Oreburgh Gate MUS_PETALBURG_WOODS; full physical geometry/art identical. Added real C constant-domain compile positive/negative; focused source7 plus installer5 =12/12 PASS. See RUNTIME_CHECKPOINT for failed/new exact engine identities and pending build status.

@@ -65,7 +65,7 @@ def construct(recipe,reference):
                 grid[i]=(shape[i]&0xFC00)|tile
         header=dict(id=IDS[name],name=name,layout='LAYOUT_'+IDS[name][4:],map_type='MAP_TYPE_UNDERGROUND',requires_flash=False,
             allow_cycling=False,allow_escaping=False,allow_running=True,battle_scene='MAP_BATTLE_SCENE_NORMAL',region='REGION_SINNOH',
-            region_map_section='MAPSEC_PENDING_OWNER',music='MUS_GRANITE_CAVE',weather='WEATHER_NONE',show_map_name=True,
+            region_map_section='MAPSEC_PENDING_OWNER',music='MUS_PETALBURG_WOODS',weather='WEATHER_NONE',show_map_name=True,
             connections=[],warp_events=warps,object_events=[],coord_events=[],bg_events=[])
         result[name]=(struct.pack('<%dH'%len(grid),*grid),struct.pack('<4H',*[WALL|0xC00]*4),header)
     by_id={v[2]['id']:v[2] for v in result.values()}

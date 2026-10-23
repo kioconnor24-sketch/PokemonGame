@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import subprocess
 import tempfile
 import unittest
 
@@ -101,5 +102,17 @@ class VictoryShellTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             with self.assertRaisesRegex(ValueError,'new off-engine'):s.build(ENGINE,Path(t))
             with self.assertRaisesRegex(ValueError,'new off-engine'):s.build(ENGINE,ENGINE/'forbidden-victory-shell')
+
+    def test_actual_header_music_constants_compile_and_unknown_track_fails(self):
+        music=[h['music'] for _,_,h in self.result.values()]
+        def compile_tracks(names):
+            text='#include "constants/songs.h"\nconst unsigned short map_tracks[]={'+','.join(names)+'};\n'
+            return subprocess.run(['cc','-fsyntax-only','-x','c','-I',str(ENGINE/'include'),'-'],input=text,text=True,capture_output=True)
+        good=compile_tracks(music)
+        self.assertEqual(good.returncode,0,good.stderr)
+        # This exact invalid token previously survived staging and failed ROM
+        # linking. Keep its negative before any expensive build is attempted.
+        bad=compile_tracks(['MUS_GRANITE_CAVE'])
+        self.assertNotEqual(bad.returncode,0)
 
 if __name__=='__main__':unittest.main()
