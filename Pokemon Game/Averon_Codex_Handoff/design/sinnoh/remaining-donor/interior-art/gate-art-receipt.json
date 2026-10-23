@@ -1,0 +1,1738 @@
+{
+  "status": "NEUTRAL_SHARED_AVERON_INTERIOR_TEST_ART_NOT_FINAL_OR_RUNTIME_ACCEPTANCE",
+  "engine_source": "86713bdfca4afbb8839c4fffd30c2ef11db50908",
+  "existing_averon_sha256": {
+    "data/tilesets/primary/building/metatiles.bin": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/shop/metatiles.bin": "f7a58c91b3c84e2c9fc5f6e24d851dccff7a29f1b730d53ab73b76ff31a0a399",
+    "data/tilesets/secondary/shop/metatile_attributes.bin": "195c8f4e535fe202c57331445a5aeb69a5fa95f739def300982f84c7a4246f63",
+    "data/layouts/Route110_SeasideCyclingRoadEntrance/map.bin": "36140d418343358135549ff1b8b73501b56895abcedae83dbb98516022e26214",
+    "data/tilesets/primary/building/tiles.png": "355d5dc8625e332ceb34cbe685092d96540ece0b7a39293e493d27c02b6db300",
+    "data/tilesets/secondary/shop/tiles.png": "126543a3d5b56c106749de8cf3cbde20597898bbea7a991fc7887a2d868f7739",
+    "data/tilesets/primary/building/palettes/00.pal": "6008920965897f0fe9e901ab795aacb4c6a6869ea300db6cfb6411da42f750ee",
+    "data/tilesets/primary/building/palettes/01.pal": "88bf97cf6eca47f21bbf0859fccc60172fc09fd715eb3d9266b8a9d4af715e72",
+    "data/tilesets/primary/building/palettes/02.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/03.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/04.pal": "b2290ff85f9e19b2b55cf306b381c1e5a927d6efa3de416bcc02132ba78dc8c1",
+    "data/tilesets/primary/building/palettes/05.pal": "b81a37f041aeb04428ce37ad1f7a7a476cdc822f534a4cda12f360c4ca5d0a58",
+    "data/tilesets/secondary/shop/palettes/06.pal": "91c6471d2d5c8ed31bd09afe6560f5b03a36e0fbb2ac64f05e0af8dbc71f9468",
+    "data/tilesets/secondary/shop/palettes/07.pal": "fe0c98bf6ebe2577814ba88bb46009b4a68e5c42a30f58f1069bd159f27a80e2",
+    "data/tilesets/secondary/shop/palettes/08.pal": "71560cea7b2102a71f4f2196d85648cdd2b2e15037cf4fdb3e7bbefb0e4ddbbc",
+    "data/tilesets/secondary/shop/palettes/09.pal": "cb0b85a65027df3c046bfd4c34cac6d2842a9377f051eca18360a5f5c07e026f",
+    "data/tilesets/secondary/shop/palettes/10.pal": "6b46b7fa85f33254179365a12ea6be6d78345a39ee11508bd5689d0ed046d8d8",
+    "data/tilesets/secondary/shop/palettes/11.pal": "b4223acde3ce4440ba1025f8a7fabb2bf9d4ed623ea4f0f36c389eec258250c1",
+    "data/tilesets/secondary/shop/palettes/12.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/13.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/14.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675",
+    "data/tilesets/secondary/shop/palettes/15.pal": "226f0ddc9a6d3b26b78e138333dfde67d39aa7ac95a257e9e53c766fb6035675"
+  },
+  "source_map_sha256": {
+    "Route222_Access": "c08399de7d2ee78b0991b5b237d40c8455a0fac727151a46ff79374adc096353",
+    "ValleyWindoworks_Indoor": "5d44f3b985ccef027f037bad18486e882dbddeaec647fe3189aa1f487b23274a",
+    "TwinleafTown_MainHouse_1F": "c58c0ad0fda6f54a4b96442691f03fd0cb51cbe5b218d4498272510c532cabca",
+    "TwinleafTown_MainHouse_2F": "1ec78e184b8fe124657ec8ff83cf4f4da29b2e5e3ad9dd673daa8375637c0f39",
+    "Twinleaf_Town_RivalsHouse_F1": "85050cd7f5afdf0bd13636bf8e1fdafc89bbc961763ae998f424c8dc623fcd30",
+    "Twinleaf_Town_RivalsHouse_F2": "67407d4b2e107fdc90ff3069782db10007f4d55cea631a9f25ab798af93da977",
+    "SandgemTown_RivalHouse_F1": "85050cd7f5afdf0bd13636bf8e1fdafc89bbc961763ae998f424c8dc623fcd30",
+    "SandgemTown_RivalHouse_F2": "f0f37c4af59b1893542dc22f0e0d2bb78ef955b3c3a9be6daa465e8e576dbbf6",
+    "JubilifeCity_JubilifeTV_F1": "12e726908c269c58806b9a95e80616010a03d3edc4c4d0b0e6f1a646b74b7142",
+    "JubilifeCity_JubilifeTV_F2": "7ee720c0d7cace6134e3ce2aa45bb9c842ec75bcf6bd0e5c4972a265227e6b53",
+    "JubilifeCity_JubilifeTV_F3": "3e51792c62e8479aa691e7bf1ab836e93937e81231244509b53228735dbf6ec6",
+    "JubilifeCity_JubilifeTV_F4": "c3d7cf161852d9639c5f4aa224fa03a37ff1ad8912873c2c47eedccb9d3b293c",
+    "JubilifeCity_PoketchCompany_F1": "4e46fd8d9cc3e25a96ec784ed8f4e3e01862292a2f0053f8a52364740adcffb3",
+    "JubilifeCity_PoketchCompany_F2": "f9b979fd7d148b83dfa38d21fa234daed37d2462a39e3baa4bd3e0db1f89a2b1",
+    "JubilifeCity_PoketchCompany_F3": "7efbdb3b6857f0cad523c40ebace0e6c13f0edb159b19906b1c58b93d0b2f338",
+    "JubilifeCity_Flat1_F1": "a0c9a996145253053616b842a6dce4fb9030144e10f295600a47c55b5ed0543a",
+    "JubilifeCity_Flat1_F2": "fdeaad54e7e0de5e8b0b9a2f57028ac8a81fb3544d5fe6528f92fdebbcce7d98",
+    "JubilifeCity_Flat1_F3": "edc2395202a8307c94a62f1b69c33934d158f5324125fabc2d320bca87562d3a",
+    "JubilifeCity_Flat2_F1": "a0c9a996145253053616b842a6dce4fb9030144e10f295600a47c55b5ed0543a",
+    "JubilifeCity_Flat2_F2": "fdeaad54e7e0de5e8b0b9a2f57028ac8a81fb3544d5fe6528f92fdebbcce7d98",
+    "JubilifeCity_Flat2_F3": "edc2395202a8307c94a62f1b69c33934d158f5324125fabc2d320bca87562d3a",
+    "JubilifeCity_Flat3_F1": "a0c9a996145253053616b842a6dce4fb9030144e10f295600a47c55b5ed0543a",
+    "JubilifeCity_Flat3_F2": "fdeaad54e7e0de5e8b0b9a2f57028ac8a81fb3544d5fe6528f92fdebbcce7d98",
+    "JubilifeCity_Flat3_F3": "edc2395202a8307c94a62f1b69c33934d158f5324125fabc2d320bca87562d3a",
+    "OreburghCity_Flat1_F1": "7619783a5fd41de445e7d4f67e01925bff8782105403d009032b7fa7752da227",
+    "OreburghCity_Flat1_F2": "5de1c583bd8c095ae6bc7e3feff9b1388fdbc9a30e0a218a9411990f39e79c26",
+    "OreburghCity_Flat2_F1": "7619783a5fd41de445e7d4f67e01925bff8782105403d009032b7fa7752da227",
+    "OreburghCity_Flat2_F2": "5de1c583bd8c095ae6bc7e3feff9b1388fdbc9a30e0a218a9411990f39e79c26",
+    "OreburghCity_PokemonCenter_1F": "faa08fa0384c8b804c83340a7d18dfc3638f03ec9bc216363dc0c5316a9dc96b",
+    "OreburghCity_PokemonCenter_2F": "f85eae90717c7e1793a384abffd9099981769b9cd631a52066441d70e280a205",
+    "FloaromaTown_PokemonCenter_1F": "faa08fa0384c8b804c83340a7d18dfc3638f03ec9bc216363dc0c5316a9dc96b",
+    "FloaromaTwon_PokemonCenter_2F": "f85eae90717c7e1793a384abffd9099981769b9cd631a52066441d70e280a205",
+    "EternaCity_Flat1_F1": "25beff7df999043a01babcbb8bbb11cccc23bb85e17481f90ac188cc78350cd9",
+    "EternaCity_Flat1_F2": "e7d15de531e7f40f324b79e9eddf951f569ed95be377381a82864e3ad3ba331e",
+    "EternaCity_Flat1_F3": "3b1ba23866954f8eb3c6c3c638b614e8ab2fb842b363ce71c77444f281617bab",
+    "EternaCity_PokemonCenter_F1": "faa08fa0384c8b804c83340a7d18dfc3638f03ec9bc216363dc0c5316a9dc96b",
+    "EternaCity_PokemonCenter_F2": "f85eae90717c7e1793a384abffd9099981769b9cd631a52066441d70e280a205",
+    "EternaCity_GalacticBuilding_1F": "1ae2ba27d11b64a07088c89fbfbb942929cac186ad3a8423271568478d924abd",
+    "EternaCity_GalacticBuilding_2F": "559dfcd161dd36adff3a9323da922dce48f5730487849b8a11bf226e145b7cbc",
+    "EternaCity_GalacticBuilding_3F": "309b3d62d5b91334c877f662cae9294ded826be22c201938f76e1fbe6c785bf4",
+    "EternaCity_GalacticBuilding_4F": "76e61030ada43cb75413a91102dcfa1a775fa3a4525d673109bb2b60ce123b52",
+    "EternaCity_GalacticBuilding_B1F": "a617e6a5f01f1a9434850a613ecad8a73ef8671980bc528d0ef2be68df50364b"
+  },
+  "verified_physics_behavior_cells": 5811,
+  "primary_records": 8,
+  "packing_padding_removed_bytes": 9072,
+  "secondary_records": 331,
+  "remaining_secondary_slots": 181,
+  "source_maps_headers_warps_unchanged": true,
+  "templates": {
+    "floor": 616,
+    "wall_top": 648,
+    "wall_face": 656,
+    "counter": 680,
+    "exit_mat": 534
+  },
+  "dependencies": {
+    "Route222_Access": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        804,
+        805
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "ValleyWindoworks_Indoor": {
+      "metatiles": [
+        1,
+        534,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        807,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "TwinleafTown_MainHouse_1F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        814,
+        815,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "TwinleafTown_MainHouse_2F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        814,
+        817,
+        818,
+        819,
+        820,
+        821,
+        822
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "Twinleaf_Town_RivalsHouse_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        814,
+        815,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "Twinleaf_Town_RivalsHouse_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        814,
+        817,
+        818,
+        819,
+        820,
+        821,
+        822
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "SandgemTown_RivalHouse_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        814,
+        815,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "SandgemTown_RivalHouse_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        814,
+        817,
+        818,
+        819,
+        820,
+        821,
+        822
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_JubilifeTV_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        814,
+        816,
+        823,
+        824,
+        825
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_JubilifeTV_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        811,
+        814,
+        823
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_JubilifeTV_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        811,
+        814,
+        823
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_JubilifeTV_F4": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        811,
+        814,
+        823,
+        824
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_PoketchCompany_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        806,
+        811,
+        814,
+        816,
+        826
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_PoketchCompany_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        814,
+        827,
+        828
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_PoketchCompany_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        811,
+        814
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat1_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat1_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat1_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        829,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat2_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat2_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat2_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        829,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat3_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat3_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "JubilifeCity_Flat3_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        829,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_Flat1_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_Flat1_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        808,
+        809,
+        811,
+        814,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_Flat2_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_Flat2_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        808,
+        809,
+        811,
+        814,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_PokemonCenter_1F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        817,
+        826,
+        831,
+        832,
+        833,
+        834
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "OreburghCity_PokemonCenter_2F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        826,
+        835,
+        836,
+        837,
+        838,
+        839,
+        840,
+        841
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "FloaromaTown_PokemonCenter_1F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        817,
+        826,
+        831,
+        832,
+        833,
+        834
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "FloaromaTwon_PokemonCenter_2F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        826,
+        835,
+        836,
+        837,
+        838,
+        839,
+        840,
+        841
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_Flat1_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        808,
+        809,
+        811,
+        814,
+        816
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_Flat1_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        808,
+        809,
+        811,
+        814,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_Flat1_F3": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        808,
+        809,
+        811,
+        814,
+        830
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_PokemonCenter_F1": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        803,
+        806,
+        811,
+        817,
+        826,
+        831,
+        832,
+        833,
+        834
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_PokemonCenter_F2": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        801,
+        802,
+        803,
+        806,
+        811,
+        826,
+        835,
+        836,
+        837,
+        838,
+        839,
+        840,
+        841
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_GalacticBuilding_1F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        814,
+        816,
+        828,
+        842
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_GalacticBuilding_2F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        811,
+        814,
+        842
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_GalacticBuilding_3F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        811,
+        814,
+        842
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_GalacticBuilding_4F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        811,
+        814,
+        842
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    "EternaCity_GalacticBuilding_B1F": {
+      "metatiles": [
+        1,
+        616,
+        648,
+        656,
+        802,
+        814,
+        828,
+        842
+      ],
+      "graphic_tiles": [
+        0,
+        16,
+        519,
+        520,
+        522,
+        523,
+        538,
+        539,
+        550,
+        566,
+        582,
+        598,
+        620,
+        621
+      ],
+      "palettes": [
+        0,
+        5,
+        6,
+        8,
+        9
+      ]
+    }
+  },
+  "limits": [
+    "Only existing Building/Shop/Route110 gate art; no donor pixels or colors imported",
+    "No engine install, saved identity, ROM or genuine gameplay acceptance",
+    "Source Pasos visual appearance intentionally replaced by neutral Averon gate art",
+    "Shared stock floor/wall/counter/mat adaptation, not final donor appearance",
+    "Every retained stair/door portal uses a mat; labels/services/story remain absent",
+    "Closed exterior exits remain collision barriers; no natural accessibility claimed"
+  ]
+}

@@ -1,0 +1,11 @@
+# Actual four-floor DEV evidence, 2026-10-23
+
+NORMAL and RELEASE each: main house14/14, fresh Continue3/3; rival house14/14, fresh Continue3/3; genuine unchanged original-flash load3/3. Total74/74 controller-driven checks. Native29/29; unchanged strict SaveBlock1/2/3/PC compatibility goldens4/4. Source host461/461, zero skips, independently verified Actions job120635247505 at93f4c5ddb0ac0f26432ae76e86abfe80515f2c76. This is a curated native regression, not a rerun of the full unfiltered M1 suite.
+
+Exact engine source tree8ca8bfc246ce6d39f3c40da4e7d0445d4ea38b97, reconstructed from main d855ff86785a744264788ff39815cc70581e4c94 plus26 recipe files. Tree identity is not a production Git commit or merge. Recipe and source-identity manifest include every installed SHA256; build reports verify matching ARM ELF/ROM load bytes and linker extent. GCC14.2.1/MODERN1, criesOFF default, mGBA0.10.5. Caller labels alone are not source/profile proof; actual commands/logs/recipe accompany them.
+
+NORMAL linked17,400,448B, +7,104B vs measured matching baseline17,393,344; RELEASE17,519,568B, +7,104B vs17,512,464. EWRAM/IWRAM unchanged:226480/28392 NORMAL,226482/28336 RELEASE. RELEASE16,034,864B free under32MiB. No saved structure or encoding changes.
+
+Two initial GUI launches were BLOCKED before gameplay: the private caller started persistent display78, while the existing Emulator defaults to77. Logs under launch-blocks preserve both `x11 not available` startup errors. Corrected caller starts persistent `Xvfb :77 -screen 0 800x600x24 -nolisten tcp -ac -noreset`; fresh-process checks then passed. No engine/emulator memory patch, helper rewrite or hidden gameplay failure was used. Existing runner internal save label is coronet-six; it is not a map-identity assertion.
+
+Only the two source-connected floor pairs are compiled/tested here, not all42 art candidates or91 new source maps. Separate copied-save DEV entries,217 met-origin surrogate and temporary19–22 slots; closed exterior doors remain closed. Neutral stock proxy art/mats are not final donor appearance or owner production acceptance. Music remains placeholder stock. Original private save remains unchanged with SHA25644cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d. No ROM, ELF, map linker dump, private save or expected-save snapshot is published.

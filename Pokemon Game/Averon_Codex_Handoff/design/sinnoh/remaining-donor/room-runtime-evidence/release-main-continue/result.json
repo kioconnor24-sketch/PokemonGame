@@ -1,0 +1,51 @@
+{
+ "maps": [
+  "MAP_TWINLEAF_TOWN_MAIN_HOUSE_1F",
+  "MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F"
+ ],
+ "build": "release",
+ "rom_sha256": "dcd6a543117edede8671a6af6f9c886bca52f9ce20de2627112334c628cb3660",
+ "static_findings": [],
+ "save_before": "cc44e2e5581e19d31c5b03bce31f66c954596221d5d5d77d1f4a777aec103e2b",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F",
+    [
+     7,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F",
+    [
+     7,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "cc44e2e5581e19d31c5b03bce31f66c954596221d5d5d77d1f4a777aec103e2b",
+ "verdict": "PASS"
+}

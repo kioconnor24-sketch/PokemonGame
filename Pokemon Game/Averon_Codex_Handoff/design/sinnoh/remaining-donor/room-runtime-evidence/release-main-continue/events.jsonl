@@ -1,0 +1,22 @@
+{"t": 1792787219.9, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792787219.97, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792787222.66, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792787222.72, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792787224.57, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792787224.76, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792787225.36, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792787225.89, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792787226.5, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792787226.61, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792787227.72, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792787227.79, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792787231.48, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792787231.56, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792787232.26, "event": "field", "map": "MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F", "pos": [7, 2], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792787232.9, "event": "capture", "file": "0008-continued.png"}
+{"t": 1792787232.91, "event": "continue-check", "problems": []}
+{"t": 1792787232.95, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F", [7, 2]]}
+{"t": 1792787233.51, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_TWINLEAF_TOWN_MAIN_HOUSE_2F", [7, 2]]}
+{"t": 1792787235.4, "event": "capture", "file": "0009-start.png"}
+{"t": 1792787235.4, "event": "observe", "label": "start", "problems": []}
+{"t": 1792787235.42, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
