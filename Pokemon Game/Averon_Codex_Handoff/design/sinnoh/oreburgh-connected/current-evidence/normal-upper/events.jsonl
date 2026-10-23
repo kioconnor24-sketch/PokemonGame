@@ -1,0 +1,29 @@
+{"t": 1792690489.03, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792690489.07, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792690489.62, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792690489.67, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792690491.83, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792690491.87, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792690493.55, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792690493.6, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792690494.13, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792690494.24, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792690494.78, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792690494.84, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792690495.93, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792690495.97, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792690499.6, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792690499.65, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792690500.32, "event": "field", "map": "MAP_ROUTE207", "pos": [52, 6], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792690500.9, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE207", [52, 6]]}
+{"t": 1792690501.46, "event": "capture", "file": "0009-start.png"}
+{"t": 1792690501.46, "event": "observe", "label": "start", "problems": []}
+{"t": 1792690501.46, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792690502.37, "event": "map-qa-check", "name": "upper plateau navigation reaches exact probe", "ok": true, "at": ["MAP_ROUTE207", [52, 6]]}
+{"t": 1792690503.68, "event": "capture", "file": "0010-blocked-MAP_ROUTE207-52-6-up.png"}
+{"t": 1792690503.68, "event": "map-qa-check", "name": "MAP_ROUTE207 (52, 6) pushing up is blocked", "ok": true, "before": ["MAP_ROUTE207", [52, 6]], "after": ["MAP_ROUTE207", [52, 6]]}
+{"t": 1792690504.34, "event": "capture", "file": "0011-upper plateau after closed Coronet probe.png"}
+{"t": 1792690504.34, "event": "observe", "label": "upper plateau after closed Coronet probe", "problems": []}
+{"t": 1792690504.34, "event": "map-qa-check", "name": "follower visible (upper plateau after closed Coronet probe)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792690505.34, "event": "capture", "file": "0012-start-menu.png"}
+{"t": 1792690506.11, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}

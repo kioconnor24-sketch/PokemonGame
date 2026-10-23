@@ -1,0 +1,51 @@
+{
+ "maps": [
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_OREBURGH_CITY",
+  "MAP_ROUTE207",
+  "MAP_OREBURGH_MINE_B1F",
+  "MAP_OREBURGH_MINE_B2F"
+ ],
+ "build": "release",
+ "rom_sha256": "77db1bbe9a48fcd635dea5e44aadcec41bf8f14ccf544815aea3cc9b566c1dda",
+ "static_findings": [],
+ "save_before": "3143ea4b752e4a002deb27b53f4ae3cc3a69496c8c9e73474f9b0714dd68056c",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "3143ea4b752e4a002deb27b53f4ae3cc3a69496c8c9e73474f9b0714dd68056c",
+ "verdict": "PASS"
+}

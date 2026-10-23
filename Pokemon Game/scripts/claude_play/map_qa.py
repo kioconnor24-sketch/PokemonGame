@@ -431,7 +431,7 @@ class Runner:
         for direction, (dx, dy) in DIRS.items():
             n = (x + dx, y + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
-                if self.d.step(direction):
+                if self.d.step(direction) is not None:
                     self.d.step(OPPOSITE[direction])
                 break
         obs = play.observe(self.d, label)
@@ -478,10 +478,11 @@ class Runner:
                     continue
                 for _ in range(4):
                     self.press(p["push"], hold=0.3, after=1.2)
-                    if self.d.here()[0] != src:
+                    here = self.d.here()
+                    if here[0] != src or (src == map_id and here == (map_id, arrive)):
                         break
-                self.wait_settled()
-                if self.d.here()[0] == map_id:
+                here = self.wait_settled()
+                if here[0] == map_id and (src != map_id or here[1] == arrive):
                     return True
         return False
 
@@ -540,7 +541,8 @@ class Runner:
             return self.check(name, False, reason="could not reach the warp", at=self.d.here())
         for _ in range(4):
             self.press(p["push"], hold=0.3, after=1.2)
-            if self.d.here()[0] != map_id:
+            here = self.d.here()
+            if here[0] != map_id or (p["dest"] == map_id and here == (p["dest"], arrive)):
                 break
         there = self.wait_settled()
         self.d.shot(f"warp-{map_id}-{p['index']}")
@@ -549,14 +551,18 @@ class Runner:
         self.follower(f"{p['dest']} via warp")
         self.can_leave(f"warping into {p['dest']}")
         self.go(p["dest"], dstand)
+        # A same-map warp changes coordinates, not its map ID. Stop on the
+        # exact accepted source-derived return group before another input moves
+        # the player away; shared exit mats remain valid as before.
+        m = self.w.map(map_id)
+        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         for _ in range(4):
             self.press(dpush, hold=0.3, after=1.2)
-            if self.d.here()[0] != p["dest"]:
+            here = self.d.here()
+            if here[0] != p["dest"] or (p["dest"] == map_id and here[0] == map_id and here[1] in group):
                 break
         back = self.wait_settled()
         # Several warps may share one destination (a Center's two exit mats); any of them is a correct return.
-        m = self.w.map(map_id)
-        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         ok = self.check(name, back[0] == map_id and back[1] in group, leg="back", expected=(map_id, sorted(group)), got=back)
         if ok:
             self.follower(f"{map_id} after warp round trip")

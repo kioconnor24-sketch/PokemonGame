@@ -1,0 +1,40 @@
+{"t": 1792709788.38, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792709788.41, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792709791.68, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792709791.76, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792709792.98, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792709793.08, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792709793.6, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792709793.66, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792709794.24, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792709794.27, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792709795.39, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792709795.45, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792709799.13, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792709799.24, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792709799.88, "event": "field", "map": "MAP_ROUTE208", "pos": [14, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792709800.39, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE208", [14, 16]]}
+{"t": 1792709801.67, "event": "capture", "file": "0008-start.png"}
+{"t": 1792709801.67, "event": "observe", "label": "start", "problems": []}
+{"t": 1792709801.68, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 0}}
+{"t": 1792709802.58, "event": "map-qa-check", "name": "exact lower probe after DEV entry/follower placement", "ok": true, "at": ["MAP_ROUTE208", [14, 16]]}
+{"t": 1792709803.15, "event": "map-qa-check", "name": "lower down step 1", "ok": true, "at": ["MAP_ROUTE208", [14, 17]], "expected": [14, 17], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709803.64, "event": "map-qa-check", "name": "lower down step 2", "ok": true, "at": ["MAP_ROUTE208", [14, 18]], "expected": [14, 18], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709804.08, "event": "map-qa-check", "name": "lower down step 3", "ok": true, "at": ["MAP_ROUTE208", [14, 19]], "expected": [14, 19], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709805.13, "event": "capture", "file": "0009-lower after down.png"}
+{"t": 1792709805.13, "event": "observe", "label": "lower after down", "problems": []}
+{"t": 1792709805.14, "event": "map-qa-check", "name": "follower visible (lower after down)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709805.15, "event": "map-qa-check", "name": "lower player and follower layer", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709805.19, "event": "capture", "file": "0010-lower-down-layer.png"}
+{"t": 1792709806.07, "event": "map-qa-check", "name": "lower exact endpoint after follower probe", "ok": true, "at": ["MAP_ROUTE208", [14, 19]], "expected": [14, 19]}
+{"t": 1792709806.6, "event": "map-qa-check", "name": "lower up step 1", "ok": true, "at": ["MAP_ROUTE208", [14, 18]], "expected": [14, 18], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709807.06, "event": "map-qa-check", "name": "lower up step 2", "ok": true, "at": ["MAP_ROUTE208", [14, 17]], "expected": [14, 17], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709807.48, "event": "map-qa-check", "name": "lower up step 3", "ok": true, "at": ["MAP_ROUTE208", [14, 16]], "expected": [14, 16], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709808.47, "event": "capture", "file": "0011-lower after up.png"}
+{"t": 1792709808.47, "event": "observe", "label": "lower after up", "problems": []}
+{"t": 1792709808.48, "event": "map-qa-check", "name": "follower visible (lower after up)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709808.48, "event": "map-qa-check", "name": "lower player and follower layer", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792709808.54, "event": "capture", "file": "0012-lower-up-layer.png"}
+{"t": 1792709809.37, "event": "map-qa-check", "name": "lower exact endpoint after follower probe", "ok": true, "at": ["MAP_ROUTE208", [14, 16]], "expected": [14, 16]}
+{"t": 1792709810.38, "event": "capture", "file": "0013-start-menu.png"}
+{"t": 1792709811.15, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}

@@ -1,0 +1,331 @@
+{
+  "findings": [],
+  "plan": {
+    "MAP_CELESTIC_TOWN": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            37,
+            18
+          ],
+          "direction": "right",
+          "dest": "MAP_ROUTE210_NORTH",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            37,
+            19
+          ],
+          "direction": "right",
+          "dest": "MAP_ROUTE210_NORTH",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            37,
+            20
+          ],
+          "direction": "right",
+          "dest": "MAP_ROUTE210_NORTH",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            37,
+            21
+          ],
+          "direction": "right",
+          "dest": "MAP_ROUTE210_NORTH",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            37,
+            22
+          ],
+          "direction": "right",
+          "dest": "MAP_ROUTE210_NORTH",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            16
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE211_EAST",
+          "offset": 3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            17
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE211_EAST",
+          "offset": 3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            18
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE211_EAST",
+          "offset": 3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            19
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE211_EAST",
+          "offset": 3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            20
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE211_EAST",
+          "offset": 3
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE210_NORTH": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            12
+          ],
+          "direction": "left",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            13
+          ],
+          "direction": "left",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            14
+          ],
+          "direction": "left",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            15
+          ],
+          "direction": "left",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            16
+          ],
+          "direction": "left",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -6
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE211_EAST": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            11
+          ],
+          "warp": [
+            4,
+            10
+          ],
+          "dest": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp": 0,
+          "push": "up"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            13
+          ],
+          "direction": "right",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            14
+          ],
+          "direction": "right",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            15
+          ],
+          "direction": "right",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            16
+          ],
+          "direction": "right",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -3
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            17
+          ],
+          "direction": "right",
+          "dest": "MAP_CELESTIC_TOWN",
+          "offset": -3
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_MT_CORONET_1F_NORTH_ROOM1": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            32,
+            33
+          ],
+          "warp": [
+            32,
+            33
+          ],
+          "dest": "MAP_ROUTE211_EAST",
+          "dest_warp": 0,
+          "push": "down"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            8,
+            4
+          ],
+          "warp": [
+            8,
+            4
+          ],
+          "dest": "MAP_MT_CORONET_B1F",
+          "dest_warp": 0,
+          "push": "up"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_MT_CORONET_B1F": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            8,
+            60
+          ],
+          "warp": [
+            8,
+            60
+          ],
+          "dest": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp": 1,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            8,
+            2
+          ],
+          "warp": [
+            8,
+            2
+          ],
+          "dest": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+          "dest_warp": 0,
+          "push": "up"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_MT_CORONET_1F_NORTH_ROOM2": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            8,
+            12
+          ],
+          "warp": [
+            8,
+            12
+          ],
+          "dest": "MAP_MT_CORONET_B1F",
+          "dest_warp": 1,
+          "push": "up"
+        }
+      ],
+      "pocket": null
+    }
+  }
+}

@@ -42,3 +42,11 @@ Exported bank metadata10710B and map/border68640B are staged bytes, NOT linked R
 
 
 CI follow-up: first exact-head job120193590067 ran263 source cases,262passed/1ERROR because the new13-file gateway immutability test requested parent Git objects absent in the shallow CI checkout. Fixed by pinning the exact same13 original #226 SHA256 values in the test, not relaxing equality or increasing fetch/network. Focused history-free check1/1 PASS; unchanged art/geometry/reproduction assets. Original real CI failure and corrected focused output preserved in art-evidence/. New exact-head source CI must pass before final readiness handoff. Public reproduction receipt records the earlier full local pass, not this CI failure as a pass.
+
+## Current-main reconciliation — 2026-10-23
+
+Manager6361394314 Priority A completed by ordinary merge (no history rewrite): main `d120ca148fa27112b22ccc2cf562a1c06c0cf920` into the preserved #226 branch, merge `64578de3faa87071439a0d853976ee791857d1ca`, tree `14870f9165fab1649493e60d78a4f36ae7761a85`. Final diff remains the same81 bounded #226 paths; no production engine/registry/identity/workflow change. Shared fixed-point stager and optional gate helper remain exactly their reviewed #226 versions; merging needed no manual conflict resolution.
+
+Actual complete Sinnoh host suite **423/423 PASS,0skips** (51.675s), including newly merged Canalave/Snowpoint replay/negative tests. Focused donor suite23/23 PASS. Hygiene extension/source-scope and `git diff --check` PASS. Rebuilt independently from pinned donor38228bb574a3557345852b758d5f1a65eb01bb22: eastern61/61, Canalave21/21, Snowpoint21/21 committed files identical, each two fresh generations identical. Exact per-file SHA256s in `reconciliation/reproduction.json`; complete logs alongside. No changed cells/closures/headers/receipts, no silently revised accepted output.
+
+This establishes SOURCE integration compatibility, not new ROM/native/mGBA acceptance. Existing later #230/#231 evidence remains on its own exact sources; reconcile those only after manager normally integrates #226. No expensive ROM rebuild for unchanged engine data. Manager source review/merge remains pending; no merge by Codex.

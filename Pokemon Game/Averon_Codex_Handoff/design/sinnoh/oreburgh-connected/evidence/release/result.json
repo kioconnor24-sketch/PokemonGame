@@ -1,0 +1,1107 @@
+{
+ "maps": [
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_OREBURGH_CITY",
+  "MAP_ROUTE207",
+  "MAP_OREBURGH_MINE_B1F",
+  "MAP_OREBURGH_MINE_B2F"
+ ],
+ "build": "release",
+ "rom_sha256": "7f1b592e34775c83e168e5a75018c035620e2fe96ae9ea55b1fc69c249564686",
+ "static_findings": [],
+ "save_before": "a696517ccac3146b7c0ee63f1a80386250d1de9b53be0d61f21402df1770f7f3",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE203",
+    [
+     51,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE203",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE203",
+    [
+     50,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     19
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     0,
+     22
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     0,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE203",
+    [
+     [
+      53,
+      7
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE203",
+    [
+     53,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE203 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE203 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE203",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE203",
+    [
+     54,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     [
+      3,
+      19
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     3,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_CITY",
+    [
+     7,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_GATE_1F warp 1 (25, 20) -> MAP_OREBURGH_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     [
+      25,
+      20
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_OREBURGH_CITY",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_CITY",
+    [
+     6,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY up seam (44, 0) -> MAP_ROUTE207 (9, 31) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     44,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     44,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY up seam (47, 0) -> MAP_ROUTE207 (12, 31) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     47,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     47,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY up seam (50, 0) -> MAP_ROUTE207 (15, 31) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     50,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     50,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_GATE_1F",
+    [
+     25,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY warp 0 (6, 12) -> MAP_OREBURGH_GATE_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     [
+      6,
+      13
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     6,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY warp 1 (50, 57) -> MAP_OREBURGH_MINE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     [
+      50,
+      57
+     ],
+     [
+      51,
+      57
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     50,
+     57
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY warp 2 (51, 57) -> MAP_OREBURGH_MINE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     [
+      50,
+      57
+     ],
+     [
+      51,
+      57
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     50,
+     57
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     12,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY warp 3 (52, 57) -> MAP_OREBURGH_MINE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     [
+      52,
+      57
+     ],
+     [
+      53,
+      57
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     53,
+     57
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     12,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_CITY warp 4 (53, 57) -> MAP_OREBURGH_MINE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_CITY",
+    [
+     [
+      52,
+      57
+     ],
+     [
+      53,
+      57
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_CITY",
+    [
+     53,
+     57
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE207",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE207",
+    [
+     9,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE207 down seam (9, 31) -> MAP_OREBURGH_CITY (44, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE207",
+    [
+     9,
+     31
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE207",
+    [
+     9,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE207 down seam (12, 31) -> MAP_OREBURGH_CITY (47, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE207",
+    [
+     12,
+     31
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE207",
+    [
+     12,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE207 down seam (15, 31) -> MAP_OREBURGH_CITY (50, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE207",
+    [
+     15,
+     31
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE207",
+    [
+     15,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_CITY",
+    [
+     50,
+     56
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 0 (11, 1) -> MAP_OREBURGH_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      11,
+      1
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_CITY",
+    [
+     53,
+     56
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 1 (12, 1) -> MAP_OREBURGH_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      12,
+      1
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     12,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 2 (11, 21) -> MAP_OREBURGH_MINE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      10,
+      21
+     ],
+     [
+      11,
+      21
+     ],
+     [
+      12,
+      21
+     ],
+     [
+      13,
+      21
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 3 (12, 21) -> MAP_OREBURGH_MINE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      10,
+      21
+     ],
+     [
+      11,
+      21
+     ],
+     [
+      12,
+      21
+     ],
+     [
+      13,
+      21
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 4 (10, 21) -> MAP_OREBURGH_MINE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      10,
+      21
+     ],
+     [
+      11,
+      21
+     ],
+     [
+      12,
+      21
+     ],
+     [
+      13,
+      21
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B1F warp 5 (13, 21) -> MAP_OREBURGH_MINE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     [
+      10,
+      21
+     ],
+     [
+      11,
+      21
+     ],
+     [
+      12,
+      21
+     ],
+     [
+      13,
+      21
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_OREBURGH_MINE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B1F",
+    [
+     11,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "MAP_OREBURGH_MINE_B2F warp 0 (15, 1) -> MAP_OREBURGH_MINE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     [
+      15,
+      2
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_OREBURGH_MINE_B2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (oreburgh-corridor)",
+   "ok": true,
+   "at": [
+    "MAP_OREBURGH_MINE_B2F",
+    [
+     15,
+     3
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "51e7b52db35021e3cfe655df70a84e7d82b239e9458668ed5487b45e69c51879",
+ "verdict": "PASS"
+}

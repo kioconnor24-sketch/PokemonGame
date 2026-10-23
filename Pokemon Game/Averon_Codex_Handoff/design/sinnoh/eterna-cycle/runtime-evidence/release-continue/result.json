@@ -1,0 +1,54 @@
+{
+ "maps": [
+  "MAP_ETERNA_CITY",
+  "MAP_ROUTE206_NORTH",
+  "MAP_ROUTE206",
+  "MAP_ROUTE206_SOUTH",
+  "MAP_ROUTE211_WEST"
+ ],
+ "build": "release",
+ "rom_sha256": "f00e37527b27c55c5cd20f5377d5b426a869d874deb715e7b7dc9ea337f2ad4c",
+ "static_findings": [],
+ "save_before": "eb67351e4a95d3aef2666bfd3ccb774c31421b3c90297b644eca7b5fb7422dd9",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "eb67351e4a95d3aef2666bfd3ccb774c31421b3c90297b644eca7b5fb7422dd9",
+ "verdict": "PASS"
+}

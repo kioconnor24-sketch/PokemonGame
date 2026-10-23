@@ -1,0 +1,252 @@
+{
+ "maps": [
+  "MAP_ETERNA_CITY",
+  "MAP_ROUTE206_NORTH",
+  "MAP_ROUTE206",
+  "MAP_ROUTE206_SOUTH",
+  "MAP_ROUTE211_WEST"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ETERNA_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      15,
+      48
+     ],
+     "warp": [
+      15,
+      48
+     ],
+     "dest": "MAP_ROUTE206_NORTH",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      59,
+      18
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE211_WEST",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      59,
+      19
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE211_WEST",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      59,
+      20
+     ],
+     "direction": "right",
+     "dest": "MAP_ROUTE211_WEST",
+     "offset": 0
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE206_NORTH": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      1
+     ],
+     "warp": [
+      4,
+      1
+     ],
+     "dest": "MAP_ETERNA_CITY",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      4,
+      9
+     ],
+     "warp": [
+      4,
+      9
+     ],
+     "dest": "MAP_ROUTE206",
+     "dest_warp": 0,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE206": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      14,
+      5
+     ],
+     "warp": [
+      14,
+      5
+     ],
+     "dest": "MAP_ROUTE206_NORTH",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      12,
+      96
+     ],
+     "warp": [
+      12,
+      96
+     ],
+     "dest": "MAP_ROUTE206_SOUTH",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      13,
+      96
+     ],
+     "warp": [
+      13,
+      96
+     ],
+     "dest": "MAP_ROUTE206_SOUTH",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      12,
+      102
+     ],
+     "warp": [
+      12,
+      102
+     ],
+     "dest": "MAP_ROUTE206_SOUTH",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      13,
+      102
+     ],
+     "warp": [
+      13,
+      102
+     ],
+     "dest": "MAP_ROUTE206_SOUTH",
+     "dest_warp": 1,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE206_SOUTH": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      1
+     ],
+     "warp": [
+      4,
+      1
+     ],
+     "dest": "MAP_ROUTE206",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      4,
+      9
+     ],
+     "warp": [
+      4,
+      9
+     ],
+     "dest": "MAP_ROUTE206",
+     "dest_warp": 3,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE211_WEST": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      18
+     ],
+     "direction": "left",
+     "dest": "MAP_ETERNA_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      19
+     ],
+     "direction": "left",
+     "dest": "MAP_ETERNA_CITY",
+     "offset": 0
+    },
+    {
+     "kind": "connection",
+     "tile": [
+      0,
+      20
+     ],
+     "direction": "left",
+     "dest": "MAP_ETERNA_CITY",
+     "offset": 0
+    }
+   ],
+   "pocket": null
+  }
+ }
+}
