@@ -126,6 +126,14 @@ def fake_run(args):
 m.shared.run=fake_run
 assert m.run(SimpleNamespace(engine=engine))==0
 assert m.shared.MAPS==original_maps
+# Each optional scope is explicit and restored, never a hidden water grant.
+for opts,expected in [({'dry_league':True},('MAP_POKMON_LEAGUE',)),({'ledge_x':36},('MAP_ROUTE222',))]:
+ def scoped_run(args):
+  assert m.shared.MAPS==expected
+  return 0
+ m.shared.run=scoped_run
+ assert m.run(SimpleNamespace(engine=engine,**opts))==0
+ assert m.shared.MAPS==original_maps
 """
         result=subprocess.run([sys.executable,'-c',code,str(ROOT/'Pokemon Game/engine'),str(HERE/'run_runtime_qa.py')],capture_output=True,text=True)
         self.assertEqual(0,result.returncode,result.stdout+result.stderr)
