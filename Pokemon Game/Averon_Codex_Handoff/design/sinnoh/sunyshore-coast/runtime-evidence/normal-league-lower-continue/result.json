@@ -1,0 +1,57 @@
+{
+ "maps": [
+  "MAP_POKMON_LEAGUE"
+ ],
+ "build": "normal",
+ "rom_sha256": "317deaa9a49aab59059c65ff1334b7b1e0de8ac2ebaeb9baeb35ef03c304935b",
+ "static_findings": [],
+ "save_before": "c6af10ee7b9010ca9b5db31ff8e6b14d31795ffc498bd597aca72d833d675608",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     11,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     11,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "c6af10ee7b9010ca9b5db31ff8e6b14d31795ffc498bd597aca72d833d675608",
+ "verdict": "PASS"
+}

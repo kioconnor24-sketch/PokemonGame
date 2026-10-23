@@ -1,0 +1,31 @@
+[0] Averon map registry IDs round trip through the actual signed warp fields: PASS
+[2] Averon map registry preserves group slots and disabled-region null entries: PASS
+[2] Averon location 13-bit experiment exposes legacy API truncation and special aliases: PASS
+[2] Averon region adapters reject disabled map groups without changing the return warp: PASS
+[3] Averon corridor approved origins have names and survive boxed summary reads: PASS
+[1] Averon map registry resolves every linked numeric ID within its original group: PASS
+[1] Averon location battle controller preserves all legacy bytes but not a new 13-bit identity: PASS
+[1] Averon region adapters keep both badge banks independent and fail closed: PASS
+[3] Averon location every 8-bit origin survives encryption PC withdrawal and rekeying: PASS
+[1] Averon region save rolls back across save counter wrap: PASS
+[2] Averon region save reports both slots corrupt instead of mixing them: PASS
+[0] Averon location flash reload preserves all 256 PC origins party TV specials and region state: PASS
+[0] Averon location legacy names and region identities remain unchanged: PASS
+[0] Averon region save refuses a newer format: loads nothing and never overwrites it: PASS
+[0] Averon region save rejects a record copied from the other slot: PASS
+[0] Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save: PASS
+[0] Averon northern flash reload preserves party PC legacy special origins and regional position: PASS
+[0] Averon DEV Sunyshore appends five maps preserving origins and original graphics: PASS
+[2] Averon region save rejects every anchor bit flip even under a recomputed sector checksum: PASS
+[2] Averon region save round-trips both regions through flash without writing on load: PASS
+[2] Averon northern map headers share only the three approved origin names: PASS
+[1] Averon region save rejects CRC-valid semantic corruption and loads the older slot: PASS
+[1] Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash: PASS
+[1] Averon northern summary names caught hatched and traded origins without changing encrypted data: PASS
+[3] Averon region save power loss at any sector write keeps the last whole slot: PASS
+[3] Averon region save rejects a slot whose sectors come from two different saves: PASS
+[3] Averon region save rejects every single-bit flip in the record and loads the older slot: PASS
+[3] Averon region save layout: anchor replaces filler_90 and the record fits sector 0: PASS
+[3] Averon DEV Sunyshore gateway preserves both reciprocal source warp pairs: PASS
+- Tests PASSED:          29
+- Tests TOTAL:           29

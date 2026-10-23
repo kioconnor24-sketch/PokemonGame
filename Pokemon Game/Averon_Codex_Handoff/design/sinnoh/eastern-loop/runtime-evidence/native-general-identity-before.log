@@ -1,0 +1,17 @@
+tools/scaninc/scaninc -M build/emerald-test/test/averon_eastern_runtime.d -g build/assets -I include -I tools/agbcc/include test/averon_eastern_runtime.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_eastern_runtime.o test/averon_eastern_runtime.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o ../../pokeemerald-test.elf <objects> <test-objects> <lib>
+tools/gbafix/gbafix pokeemerald-test.elf -t"POKEMON EMER" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test.elf gTestRunnerArgv "Averon DEV eastern animated doors\0"
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra /workspace/.onboarding/mgba-rom-test arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[0] Averon DEV eastern animated doors retain native General identity: [31mFAIL[0m
+test/averon_eastern_runtime.c:46: EXPECT failed
+
+  [31mFAILED[0m tests:
+  - [31mtest/averon_eastern_runtime.c:43[0m: Averon DEV eastern animated doors retain native General identity: 46: EXPECT failed
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [34mTOTAL[0m:           1
+
+make: *** [Makefile:391: check] Error 1

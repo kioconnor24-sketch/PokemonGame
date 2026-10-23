@@ -1,0 +1,320 @@
+{"t": 1792735072.58, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792735072.61, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792735073.19, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792735073.22, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792735075.42, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792735075.5, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792735077.27, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792735077.35, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792735077.87, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792735077.91, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792735078.5, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792735078.59, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792735079.65, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792735079.69, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792735083.42, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792735083.45, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792735084.11, "event": "field", "map": "MAP_VEILSTONE_CITY", "pos": [30, 57], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792735084.6, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_VEILSTONE_CITY", [30, 57]]}
+{"t": 1792735086.62, "event": "capture", "file": "0009-start.png"}
+{"t": 1792735086.62, "event": "observe", "label": "start", "problems": []}
+{"t": 1792735086.62, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735086.75, "event": "map-qa-check", "name": "reached MAP_VEILSTONE_CITY", "ok": true, "at": ["MAP_VEILSTONE_CITY", [30, 57]]}
+{"t": 1792735094.27, "event": "capture", "file": "0010-warp-MAP_VEILSTONE_CITY-0.png"}
+{"t": 1792735096.03, "event": "capture", "file": "0011-MAP_ROUTE214_ACCESS via warp.png"}
+{"t": 1792735096.03, "event": "observe", "label": "MAP_ROUTE214_ACCESS via warp", "problems": []}
+{"t": 1792735096.04, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735096.13, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE214_ACCESS", "ok": true, "at": ["MAP_ROUTE214_ACCESS", [4, 1]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735098.57, "event": "map-qa-check", "name": "MAP_VEILSTONE_CITY warp 0 (42, 62) -> MAP_ROUTE214_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_VEILSTONE_CITY", [[42, 62], [43, 62]]], "got": ["MAP_VEILSTONE_CITY", [42, 62]]}
+{"t": 1792735100.76, "event": "capture", "file": "0012-MAP_VEILSTONE_CITY after warp round trip.png"}
+{"t": 1792735100.76, "event": "observe", "label": "MAP_VEILSTONE_CITY after warp round trip", "problems": []}
+{"t": 1792735100.76, "event": "map-qa-check", "name": "follower visible (MAP_VEILSTONE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735104.04, "event": "capture", "file": "0013-warp-MAP_VEILSTONE_CITY-1.png"}
+{"t": 1792735105.86, "event": "capture", "file": "0014-MAP_ROUTE214_ACCESS via warp.png"}
+{"t": 1792735105.86, "event": "observe", "label": "MAP_ROUTE214_ACCESS via warp", "problems": []}
+{"t": 1792735105.88, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735105.95, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE214_ACCESS", "ok": true, "at": ["MAP_ROUTE214_ACCESS", [4, 1]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735108.45, "event": "map-qa-check", "name": "MAP_VEILSTONE_CITY warp 1 (43, 62) -> MAP_ROUTE214_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_VEILSTONE_CITY", [[42, 62], [43, 62]]], "got": ["MAP_VEILSTONE_CITY", [42, 62]]}
+{"t": 1792735110.55, "event": "capture", "file": "0015-MAP_VEILSTONE_CITY after warp round trip.png"}
+{"t": 1792735110.55, "event": "observe", "label": "MAP_VEILSTONE_CITY after warp round trip", "problems": []}
+{"t": 1792735110.56, "event": "map-qa-check", "name": "follower visible (MAP_VEILSTONE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735134.45, "event": "capture", "file": "0016-warp-MAP_VEILSTONE_CITY-2.png"}
+{"t": 1792735137.48, "event": "capture", "file": "0017-MAP_ROUTE215_ACCESS via warp.png"}
+{"t": 1792735137.49, "event": "observe", "label": "MAP_ROUTE215_ACCESS via warp", "problems": []}
+{"t": 1792735137.53, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735137.66, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE215_ACCESS", "ok": true, "at": ["MAP_ROUTE215_ACCESS", [11, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735140.58, "event": "map-qa-check", "name": "MAP_VEILSTONE_CITY warp 2 (4, 26) -> MAP_ROUTE215_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_VEILSTONE_CITY", [[4, 26]]], "got": ["MAP_VEILSTONE_CITY", [4, 26]]}
+{"t": 1792735143.97, "event": "capture", "file": "0018-MAP_VEILSTONE_CITY after warp round trip.png"}
+{"t": 1792735143.97, "event": "observe", "label": "MAP_VEILSTONE_CITY after warp round trip", "problems": []}
+{"t": 1792735143.98, "event": "map-qa-check", "name": "follower visible (MAP_VEILSTONE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735145.78, "event": "map", "map": "MAP_ROUTE215_ACCESS", "pos": [11, 5]}
+{"t": 1792735145.98, "event": "map-qa-check", "name": "reached MAP_ROUTE215_ACCESS", "ok": true, "at": ["MAP_ROUTE215_ACCESS", [11, 5]]}
+{"t": 1792735149.06, "event": "capture", "file": "0019-warp-MAP_ROUTE215_ACCESS-0.png"}
+{"t": 1792735153.05, "event": "capture", "file": "0020-MAP_VEILSTONE_CITY via warp.png"}
+{"t": 1792735153.05, "event": "observe", "label": "MAP_VEILSTONE_CITY via warp", "problems": []}
+{"t": 1792735153.09, "event": "map-qa-check", "name": "follower visible (MAP_VEILSTONE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735153.67, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_VEILSTONE_CITY", "ok": true, "at": ["MAP_VEILSTONE_CITY", [4, 26]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735157.33, "event": "map-qa-check", "name": "MAP_ROUTE215_ACCESS warp 0 (11, 5) -> MAP_VEILSTONE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE215_ACCESS", [[11, 5]]], "got": ["MAP_ROUTE215_ACCESS", [11, 5]]}
+{"t": 1792735160.77, "event": "capture", "file": "0021-MAP_ROUTE215_ACCESS after warp round trip.png"}
+{"t": 1792735160.77, "event": "observe", "label": "MAP_ROUTE215_ACCESS after warp round trip", "problems": []}
+{"t": 1792735161.03, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735168.96, "event": "capture", "file": "0022-warp-MAP_ROUTE215_ACCESS-1.png"}
+{"t": 1792735172.78, "event": "capture", "file": "0023-MAP_ROUTE215 via warp.png"}
+{"t": 1792735172.78, "event": "observe", "label": "MAP_ROUTE215 via warp", "problems": []}
+{"t": 1792735172.79, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735173.48, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE215", "ok": true, "at": ["MAP_ROUTE215", [95, 27]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735176.77, "event": "map-qa-check", "name": "MAP_ROUTE215_ACCESS warp 1 (1, 5) -> MAP_ROUTE215 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE215_ACCESS", [[1, 5]]], "got": ["MAP_ROUTE215_ACCESS", [1, 5]]}
+{"t": 1792735179.49, "event": "capture", "file": "0024-MAP_ROUTE215_ACCESS after warp round trip.png"}
+{"t": 1792735179.49, "event": "observe", "label": "MAP_ROUTE215_ACCESS after warp round trip", "problems": []}
+{"t": 1792735179.54, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735183.18, "event": "map", "map": "MAP_ROUTE215", "pos": [95, 27]}
+{"t": 1792735183.39, "event": "map-qa-check", "name": "reached MAP_ROUTE215", "ok": true, "at": ["MAP_ROUTE215", [95, 27]]}
+{"t": 1792735187.43, "event": "capture", "file": "0025-warp-MAP_ROUTE215-0.png"}
+{"t": 1792735190.55, "event": "capture", "file": "0026-MAP_ROUTE215_ACCESS via warp.png"}
+{"t": 1792735190.55, "event": "observe", "label": "MAP_ROUTE215_ACCESS via warp", "problems": []}
+{"t": 1792735190.57, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735190.66, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE215_ACCESS", "ok": true, "at": ["MAP_ROUTE215_ACCESS", [1, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735193.96, "event": "map-qa-check", "name": "MAP_ROUTE215 warp 0 (95, 27) -> MAP_ROUTE215_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE215", [[95, 27]]], "got": ["MAP_ROUTE215", [95, 27]]}
+{"t": 1792735198.17, "event": "capture", "file": "0027-MAP_ROUTE215 after warp round trip.png"}
+{"t": 1792735198.17, "event": "observe", "label": "MAP_ROUTE215 after warp round trip", "problems": []}
+{"t": 1792735198.19, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE215 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735201.54, "event": "map", "map": "MAP_ROUTE215_ACCESS", "pos": [1, 5]}
+{"t": 1792735207.94, "event": "map", "map": "MAP_VEILSTONE_CITY", "pos": [4, 26]}
+{"t": 1792735244.13, "event": "map", "map": "MAP_ROUTE214_ACCESS", "pos": [4, 1]}
+{"t": 1792735244.44, "event": "map-qa-check", "name": "reached MAP_ROUTE214_ACCESS", "ok": true, "at": ["MAP_ROUTE214_ACCESS", [4, 1]]}
+{"t": 1792735247.56, "event": "capture", "file": "0028-warp-MAP_ROUTE214_ACCESS-0.png"}
+{"t": 1792735251.09, "event": "capture", "file": "0029-MAP_VEILSTONE_CITY via warp.png"}
+{"t": 1792735251.09, "event": "observe", "label": "MAP_VEILSTONE_CITY via warp", "problems": []}
+{"t": 1792735251.13, "event": "map-qa-check", "name": "follower visible (MAP_VEILSTONE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735251.66, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_VEILSTONE_CITY", "ok": true, "at": ["MAP_VEILSTONE_CITY", [42, 62]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735255.08, "event": "map-qa-check", "name": "MAP_ROUTE214_ACCESS warp 0 (4, 1) -> MAP_VEILSTONE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214_ACCESS", [[4, 1]]], "got": ["MAP_ROUTE214_ACCESS", [4, 1]]}
+{"t": 1792735258.14, "event": "capture", "file": "0030-MAP_ROUTE214_ACCESS after warp round trip.png"}
+{"t": 1792735258.14, "event": "observe", "label": "MAP_ROUTE214_ACCESS after warp round trip", "problems": []}
+{"t": 1792735258.16, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735264.87, "event": "capture", "file": "0031-warp-MAP_ROUTE214_ACCESS-1.png"}
+{"t": 1792735269.24, "event": "capture", "file": "0032-MAP_ROUTE214 via warp.png"}
+{"t": 1792735269.24, "event": "observe", "label": "MAP_ROUTE214 via warp", "problems": []}
+{"t": 1792735269.26, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735269.94, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE214", "ok": true, "at": ["MAP_ROUTE214", [16, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735273.99, "event": "map-qa-check", "name": "MAP_ROUTE214_ACCESS warp 1 (4, 9) -> MAP_ROUTE214 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214_ACCESS", [[4, 9]]], "got": ["MAP_ROUTE214_ACCESS", [4, 9]]}
+{"t": 1792735276.93, "event": "capture", "file": "0033-MAP_ROUTE214_ACCESS after warp round trip.png"}
+{"t": 1792735276.94, "event": "observe", "label": "MAP_ROUTE214_ACCESS after warp round trip", "problems": []}
+{"t": 1792735276.97, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735279.98, "event": "map", "map": "MAP_ROUTE214", "pos": [16, 4]}
+{"t": 1792735280.44, "event": "map-qa-check", "name": "reached MAP_ROUTE214", "ok": true, "at": ["MAP_ROUTE214", [16, 4]]}
+{"t": 1792735331.73, "event": "capture", "file": "0034-seam-MAP_ROUTE214-down.png"}
+{"t": 1792735333.38, "event": "map-qa-check", "name": "MAP_ROUTE214 down seam (26, 90) -> MAP_VALOR_LAKEFRONT (50, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214", [26, 90]], "got": ["MAP_ROUTE214", [26, 90]]}
+{"t": 1792735338.44, "event": "capture", "file": "0035-seam-MAP_ROUTE214-down.png"}
+{"t": 1792735339.5, "event": "map-qa-check", "name": "MAP_ROUTE214 down seam (28, 90) -> MAP_VALOR_LAKEFRONT (52, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214", [28, 90]], "got": ["MAP_ROUTE214", [28, 90]]}
+{"t": 1792735343.45, "event": "capture", "file": "0036-seam-MAP_ROUTE214-down.png"}
+{"t": 1792735344.58, "event": "map-qa-check", "name": "MAP_ROUTE214 down seam (29, 90) -> MAP_VALOR_LAKEFRONT (53, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214", [29, 90]], "got": ["MAP_ROUTE214", [29, 90]]}
+{"t": 1792735393.24, "event": "capture", "file": "0037-warp-MAP_ROUTE214-0.png"}
+{"t": 1792735395.58, "event": "capture", "file": "0038-MAP_ROUTE214_ACCESS via warp.png"}
+{"t": 1792735395.59, "event": "observe", "label": "MAP_ROUTE214_ACCESS via warp", "problems": []}
+{"t": 1792735395.64, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735395.76, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE214_ACCESS", "ok": true, "at": ["MAP_ROUTE214_ACCESS", [4, 9]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735398.56, "event": "map-qa-check", "name": "MAP_ROUTE214 warp 0 (16, 4) -> MAP_ROUTE214_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214", [[16, 4], [17, 4]]], "got": ["MAP_ROUTE214", [16, 4]]}
+{"t": 1792735402.16, "event": "capture", "file": "0039-MAP_ROUTE214 after warp round trip.png"}
+{"t": 1792735402.16, "event": "observe", "label": "MAP_ROUTE214 after warp round trip", "problems": []}
+{"t": 1792735402.19, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735407.36, "event": "capture", "file": "0040-warp-MAP_ROUTE214-1.png"}
+{"t": 1792735410.17, "event": "capture", "file": "0041-MAP_ROUTE214_ACCESS via warp.png"}
+{"t": 1792735410.17, "event": "observe", "label": "MAP_ROUTE214_ACCESS via warp", "problems": []}
+{"t": 1792735410.24, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735410.47, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE214_ACCESS", "ok": true, "at": ["MAP_ROUTE214_ACCESS", [4, 9]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735413.28, "event": "map-qa-check", "name": "MAP_ROUTE214 warp 1 (17, 4) -> MAP_ROUTE214_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE214", [[16, 4], [17, 4]]], "got": ["MAP_ROUTE214", [16, 4]]}
+{"t": 1792735416.85, "event": "capture", "file": "0042-MAP_ROUTE214 after warp round trip.png"}
+{"t": 1792735416.86, "event": "observe", "label": "MAP_ROUTE214 after warp round trip", "problems": []}
+{"t": 1792735416.86, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE214 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735455.24, "event": "map", "map": "MAP_VALOR_LAKEFRONT", "pos": [50, 0]}
+{"t": 1792735455.33, "event": "map-qa-check", "name": "reached MAP_VALOR_LAKEFRONT", "ok": true, "at": ["MAP_VALOR_LAKEFRONT", [50, 0]]}
+{"t": 1792735489.19, "event": "capture", "file": "0043-seam-MAP_VALOR_LAKEFRONT-down.png"}
+{"t": 1792735489.96, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT down seam (7, 65) -> MAP_ROUTE213 (47, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [7, 65]], "got": ["MAP_VALOR_LAKEFRONT", [7, 65]]}
+{"t": 1792735495.89, "event": "capture", "file": "0044-seam-MAP_VALOR_LAKEFRONT-down.png"}
+{"t": 1792735496.66, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT down seam (22, 65) -> MAP_ROUTE213 (62, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [22, 65]], "got": ["MAP_VALOR_LAKEFRONT", [22, 65]]}
+{"t": 1792735502.85, "event": "capture", "file": "0045-seam-MAP_VALOR_LAKEFRONT-down.png"}
+{"t": 1792735503.59, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT down seam (36, 65) -> MAP_ROUTE213 (76, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [36, 65]], "got": ["MAP_VALOR_LAKEFRONT", [36, 65]]}
+{"t": 1792735530.65, "event": "capture", "file": "0046-seam-MAP_VALOR_LAKEFRONT-up.png"}
+{"t": 1792735531.46, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT up seam (50, 0) -> MAP_ROUTE214 (26, 90) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [50, 0]], "got": ["MAP_VALOR_LAKEFRONT", [50, 0]]}
+{"t": 1792735534.17, "event": "capture", "file": "0047-seam-MAP_VALOR_LAKEFRONT-up.png"}
+{"t": 1792735534.91, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT up seam (52, 0) -> MAP_ROUTE214 (28, 90) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [52, 0]], "got": ["MAP_VALOR_LAKEFRONT", [52, 0]]}
+{"t": 1792735537.2, "event": "capture", "file": "0048-seam-MAP_VALOR_LAKEFRONT-up.png"}
+{"t": 1792735538.04, "event": "map-qa-check", "name": "MAP_VALOR_LAKEFRONT up seam (53, 0) -> MAP_ROUTE214 (29, 90) and back", "ok": true, "leg": "back", "expected": ["MAP_VALOR_LAKEFRONT", [53, 0]], "got": ["MAP_VALOR_LAKEFRONT", [53, 0]]}
+{"t": 1792735573.94, "event": "map", "map": "MAP_ROUTE213", "pos": [47, 0]}
+{"t": 1792735574.05, "event": "map-qa-check", "name": "reached MAP_ROUTE213", "ok": true, "at": ["MAP_ROUTE213", [47, 0]]}
+{"t": 1792735575.85, "event": "capture", "file": "0049-seam-MAP_ROUTE213-up.png"}
+{"t": 1792735576.56, "event": "map-qa-check", "name": "MAP_ROUTE213 up seam (47, 0) -> MAP_VALOR_LAKEFRONT (7, 65) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [47, 0]], "got": ["MAP_ROUTE213", [47, 0]]}
+{"t": 1792735577.16, "event": "enter-region", "map": "MAP_ROUTE213", "tile": [62, 0], "via": ["MAP_HOTEL_GRAND_LAKE", [7, 1]], "destinationElevation": 3}
+{"t": 1792735580.26, "event": "map", "map": "MAP_VALOR_LAKEFRONT", "pos": [7, 65]}
+{"t": 1792735585.1, "event": "map", "map": "MAP_ROUTE213", "pos": [60, 0]}
+{"t": 1792735592.7, "event": "map", "map": "MAP_HOTEL_GRAND_LAKE", "pos": [7, 1]}
+{"t": 1792735602.07, "event": "capture", "file": "0050-seam-MAP_ROUTE213-up.png"}
+{"t": 1792735602.8, "event": "map-qa-check", "name": "MAP_ROUTE213 up seam (62, 0) -> MAP_VALOR_LAKEFRONT (22, 65) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [62, 0]], "got": ["MAP_ROUTE213", [62, 0]]}
+{"t": 1792735608.69, "event": "capture", "file": "0051-seam-MAP_ROUTE213-up.png"}
+{"t": 1792735609.4, "event": "map-qa-check", "name": "MAP_ROUTE213 up seam (76, 0) -> MAP_VALOR_LAKEFRONT (36, 65) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [76, 0]], "got": ["MAP_ROUTE213", [76, 0]]}
+{"t": 1792735610.18, "event": "enter-region", "map": "MAP_ROUTE213", "tile": [4, 9], "via": ["MAP_HOTEL_GRAND_LAKE", [7, 10]], "destinationElevation": 3}
+{"t": 1792735618.5, "event": "map", "map": "MAP_HOTEL_GRAND_LAKE", "pos": [7, 1]}
+{"t": 1792735654.52, "event": "capture", "file": "0052-warp-MAP_ROUTE213-0.png"}
+{"t": 1792735656.45, "event": "capture", "file": "0053-MAP_ROUTE213_ACCESS via warp.png"}
+{"t": 1792735656.45, "event": "observe", "label": "MAP_ROUTE213_ACCESS via warp", "problems": []}
+{"t": 1792735656.49, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735656.59, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE213_ACCESS", "ok": true, "at": ["MAP_ROUTE213_ACCESS", [11, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735659.16, "event": "map-qa-check", "name": "MAP_ROUTE213 warp 0 (4, 9) -> MAP_ROUTE213_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [[4, 9]]], "got": ["MAP_ROUTE213", [4, 9]]}
+{"t": 1792735661.49, "event": "capture", "file": "0054-MAP_ROUTE213 after warp round trip.png"}
+{"t": 1792735661.49, "event": "observe", "label": "MAP_ROUTE213 after warp round trip", "problems": []}
+{"t": 1792735661.51, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735693.31, "event": "capture", "file": "0055-warp-MAP_ROUTE213-1.png"}
+{"t": 1792735694.99, "event": "capture", "file": "0056-MAP_HOTEL_GRAND_LAKE via warp.png"}
+{"t": 1792735694.99, "event": "observe", "label": "MAP_HOTEL_GRAND_LAKE via warp", "problems": []}
+{"t": 1792735695.0, "event": "map-qa-check", "name": "follower visible (MAP_HOTEL_GRAND_LAKE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735695.07, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_HOTEL_GRAND_LAKE", "ok": true, "at": ["MAP_HOTEL_GRAND_LAKE", [7, 10]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735697.68, "event": "map-qa-check", "name": "MAP_ROUTE213 warp 1 (68, 16) -> MAP_HOTEL_GRAND_LAKE and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [[68, 17]]], "got": ["MAP_ROUTE213", [68, 17]]}
+{"t": 1792735699.78, "event": "capture", "file": "0057-MAP_ROUTE213 after warp round trip.png"}
+{"t": 1792735699.78, "event": "observe", "label": "MAP_ROUTE213 after warp round trip", "problems": []}
+{"t": 1792735699.8, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735700.45, "event": "enter-region", "map": "MAP_ROUTE213", "tile": [68, 11], "via": ["MAP_HOTEL_GRAND_LAKE", [7, 1]], "destinationElevation": 3}
+{"t": 1792735704.58, "event": "map", "map": "MAP_HOTEL_GRAND_LAKE", "pos": [7, 10]}
+{"t": 1792735712.25, "event": "capture", "file": "0058-warp-MAP_ROUTE213-2.png"}
+{"t": 1792735713.95, "event": "capture", "file": "0059-MAP_HOTEL_GRAND_LAKE via warp.png"}
+{"t": 1792735713.95, "event": "observe", "label": "MAP_HOTEL_GRAND_LAKE via warp", "problems": []}
+{"t": 1792735713.96, "event": "map-qa-check", "name": "follower visible (MAP_HOTEL_GRAND_LAKE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735714.05, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_HOTEL_GRAND_LAKE", "ok": true, "at": ["MAP_HOTEL_GRAND_LAKE", [7, 1]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735716.58, "event": "map-qa-check", "name": "MAP_ROUTE213 warp 2 (68, 11) -> MAP_HOTEL_GRAND_LAKE and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213", [[68, 11]]], "got": ["MAP_ROUTE213", [68, 11]]}
+{"t": 1792735718.65, "event": "capture", "file": "0060-MAP_ROUTE213 after warp round trip.png"}
+{"t": 1792735718.65, "event": "observe", "label": "MAP_ROUTE213 after warp round trip", "problems": []}
+{"t": 1792735718.66, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735721.49, "event": "map", "map": "MAP_HOTEL_GRAND_LAKE", "pos": [7, 1]}
+{"t": 1792735721.55, "event": "map-qa-check", "name": "reached MAP_HOTEL_GRAND_LAKE", "ok": true, "at": ["MAP_HOTEL_GRAND_LAKE", [7, 1]]}
+{"t": 1792735724.1, "event": "capture", "file": "0061-warp-MAP_HOTEL_GRAND_LAKE-0.png"}
+{"t": 1792735726.71, "event": "capture", "file": "0062-MAP_ROUTE213 via warp.png"}
+{"t": 1792735726.72, "event": "observe", "label": "MAP_ROUTE213 via warp", "problems": []}
+{"t": 1792735726.73, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735727.05, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE213", "ok": true, "at": ["MAP_ROUTE213", [68, 11]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735729.88, "event": "map-qa-check", "name": "MAP_HOTEL_GRAND_LAKE warp 0 (7, 1) -> MAP_ROUTE213 and back", "ok": true, "leg": "back", "expected": ["MAP_HOTEL_GRAND_LAKE", [[7, 1]]], "got": ["MAP_HOTEL_GRAND_LAKE", [7, 1]]}
+{"t": 1792735731.48, "event": "capture", "file": "0063-MAP_HOTEL_GRAND_LAKE after warp round trip.png"}
+{"t": 1792735731.48, "event": "observe", "label": "MAP_HOTEL_GRAND_LAKE after warp round trip", "problems": []}
+{"t": 1792735731.48, "event": "map-qa-check", "name": "follower visible (MAP_HOTEL_GRAND_LAKE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735736.39, "event": "capture", "file": "0064-warp-MAP_HOTEL_GRAND_LAKE-1.png"}
+{"t": 1792735738.6, "event": "capture", "file": "0065-MAP_ROUTE213 via warp.png"}
+{"t": 1792735738.6, "event": "observe", "label": "MAP_ROUTE213 via warp", "problems": []}
+{"t": 1792735738.61, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735738.93, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE213", "ok": true, "at": ["MAP_ROUTE213", [68, 17]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735742.05, "event": "map-qa-check", "name": "MAP_HOTEL_GRAND_LAKE warp 1 (7, 10) -> MAP_ROUTE213 and back", "ok": true, "leg": "back", "expected": ["MAP_HOTEL_GRAND_LAKE", [[7, 10]]], "got": ["MAP_HOTEL_GRAND_LAKE", [7, 10]]}
+{"t": 1792735743.78, "event": "capture", "file": "0066-MAP_HOTEL_GRAND_LAKE after warp round trip.png"}
+{"t": 1792735743.78, "event": "observe", "label": "MAP_HOTEL_GRAND_LAKE after warp round trip", "problems": []}
+{"t": 1792735743.79, "event": "map-qa-check", "name": "follower visible (MAP_HOTEL_GRAND_LAKE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735748.32, "event": "map", "map": "MAP_ROUTE213", "pos": [68, 17]}
+{"t": 1792735778.69, "event": "map", "map": "MAP_ROUTE213_ACCESS", "pos": [11, 5]}
+{"t": 1792735778.81, "event": "map-qa-check", "name": "reached MAP_ROUTE213_ACCESS", "ok": true, "at": ["MAP_ROUTE213_ACCESS", [11, 5]]}
+{"t": 1792735781.45, "event": "capture", "file": "0067-warp-MAP_ROUTE213_ACCESS-0.png"}
+{"t": 1792735783.58, "event": "capture", "file": "0068-MAP_ROUTE213 via warp.png"}
+{"t": 1792735783.58, "event": "observe", "label": "MAP_ROUTE213 via warp", "problems": []}
+{"t": 1792735783.6, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735783.95, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE213", "ok": true, "at": ["MAP_ROUTE213", [4, 9]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735786.75, "event": "map-qa-check", "name": "MAP_ROUTE213_ACCESS warp 0 (11, 5) -> MAP_ROUTE213 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213_ACCESS", [[11, 5]]], "got": ["MAP_ROUTE213_ACCESS", [11, 5]]}
+{"t": 1792735788.48, "event": "capture", "file": "0069-MAP_ROUTE213_ACCESS after warp round trip.png"}
+{"t": 1792735788.48, "event": "observe", "label": "MAP_ROUTE213_ACCESS after warp round trip", "problems": []}
+{"t": 1792735788.51, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735793.91, "event": "capture", "file": "0070-warp-MAP_ROUTE213_ACCESS-1.png"}
+{"t": 1792735796.01, "event": "capture", "file": "0071-MAP_PASTORIA_CITY via warp.png"}
+{"t": 1792735796.01, "event": "observe", "label": "MAP_PASTORIA_CITY via warp", "problems": []}
+{"t": 1792735796.02, "event": "map-qa-check", "name": "follower visible (MAP_PASTORIA_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735796.3, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_PASTORIA_CITY", "ok": true, "at": ["MAP_PASTORIA_CITY", [63, 11]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735799.12, "event": "map-qa-check", "name": "MAP_ROUTE213_ACCESS warp 1 (1, 5) -> MAP_PASTORIA_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE213_ACCESS", [[1, 5]]], "got": ["MAP_ROUTE213_ACCESS", [1, 5]]}
+{"t": 1792735801.02, "event": "capture", "file": "0072-MAP_ROUTE213_ACCESS after warp round trip.png"}
+{"t": 1792735801.02, "event": "observe", "label": "MAP_ROUTE213_ACCESS after warp round trip", "problems": []}
+{"t": 1792735801.03, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735803.52, "event": "map", "map": "MAP_PASTORIA_CITY", "pos": [63, 11]}
+{"t": 1792735803.61, "event": "map-qa-check", "name": "reached MAP_PASTORIA_CITY", "ok": true, "at": ["MAP_PASTORIA_CITY", [63, 11]]}
+{"t": 1792735831.7, "event": "capture", "file": "0073-seam-MAP_PASTORIA_CITY-left.png"}
+{"t": 1792735832.42, "event": "map-qa-check", "name": "MAP_PASTORIA_CITY left seam (0, 43) -> MAP_ROUTE212_SOUTH (129, 11) and back", "ok": true, "leg": "back", "expected": ["MAP_PASTORIA_CITY", [0, 43]], "got": ["MAP_PASTORIA_CITY", [0, 43]]}
+{"t": 1792735835.7, "event": "capture", "file": "0074-seam-MAP_PASTORIA_CITY-left.png"}
+{"t": 1792735836.48, "event": "map-qa-check", "name": "MAP_PASTORIA_CITY left seam (0, 47) -> MAP_ROUTE212_SOUTH (129, 15) and back", "ok": true, "leg": "back", "expected": ["MAP_PASTORIA_CITY", [0, 47]], "got": ["MAP_PASTORIA_CITY", [0, 47]]}
+{"t": 1792735838.88, "event": "capture", "file": "0075-seam-MAP_PASTORIA_CITY-left.png"}
+{"t": 1792735839.64, "event": "map-qa-check", "name": "MAP_PASTORIA_CITY left seam (0, 50) -> MAP_ROUTE212_SOUTH (129, 18) and back", "ok": true, "leg": "back", "expected": ["MAP_PASTORIA_CITY", [0, 50]], "got": ["MAP_PASTORIA_CITY", [0, 50]]}
+{"t": 1792735870.33, "event": "capture", "file": "0076-warp-MAP_PASTORIA_CITY-0.png"}
+{"t": 1792735871.92, "event": "capture", "file": "0077-MAP_ROUTE213_ACCESS via warp.png"}
+{"t": 1792735871.92, "event": "observe", "label": "MAP_ROUTE213_ACCESS via warp", "problems": []}
+{"t": 1792735871.93, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE213_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735872.02, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE213_ACCESS", "ok": true, "at": ["MAP_ROUTE213_ACCESS", [1, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735874.57, "event": "map-qa-check", "name": "MAP_PASTORIA_CITY warp 0 (63, 11) -> MAP_ROUTE213_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_PASTORIA_CITY", [[63, 11]]], "got": ["MAP_PASTORIA_CITY", [63, 11]]}
+{"t": 1792735876.75, "event": "capture", "file": "0078-MAP_PASTORIA_CITY after warp round trip.png"}
+{"t": 1792735876.75, "event": "observe", "label": "MAP_PASTORIA_CITY after warp round trip", "problems": []}
+{"t": 1792735876.77, "event": "map-qa-check", "name": "follower visible (MAP_PASTORIA_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735903.83, "event": "map", "map": "MAP_ROUTE212_SOUTH", "pos": [129, 11]}
+{"t": 1792735903.93, "event": "map-qa-check", "name": "reached MAP_ROUTE212_SOUTH", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [129, 11]]}
+{"t": 1792735905.58, "event": "capture", "file": "0079-seam-MAP_ROUTE212_SOUTH-right.png"}
+{"t": 1792735906.53, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH right seam (129, 11) -> MAP_PASTORIA_CITY (0, 43) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [129, 11]], "got": ["MAP_ROUTE212_SOUTH", [129, 11]]}
+{"t": 1792735909.79, "event": "capture", "file": "0080-seam-MAP_ROUTE212_SOUTH-right.png"}
+{"t": 1792735910.52, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH right seam (129, 15) -> MAP_PASTORIA_CITY (0, 47) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [129, 15]], "got": ["MAP_ROUTE212_SOUTH", [129, 15]]}
+{"t": 1792735912.88, "event": "capture", "file": "0081-seam-MAP_ROUTE212_SOUTH-right.png"}
+{"t": 1792735913.58, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH right seam (129, 18) -> MAP_PASTORIA_CITY (0, 50) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [129, 18]], "got": ["MAP_ROUTE212_SOUTH", [129, 18]]}
+{"t": 1792735914.12, "event": "declared-acro-portal", "map": "MAP_ROUTE212_SOUTH", "goal": [10, 0], "plan": {"approach": [36, 12], "rail": [36, 11], "landing": [36, 10], "direction": "up"}, "dev_only": true}
+{"t": 1792735953.18, "event": "capture", "file": "0082-acro-key-item.png"}
+{"t": 1792735956.35, "event": "acro-sidehop-start", "direction": "up", "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792735957.48, "event": "acro-sidehop-end", "at": ["MAP_ROUTE212_SOUTH", [36, 11]], "avatar": {"flags": 4, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792735957.5, "event": "map-qa-check", "name": "declared Acro rail toward (10, 0)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 11]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735957.53, "event": "acro-sidehop-start", "direction": "up", "at": ["MAP_ROUTE212_SOUTH", [36, 11]], "avatar": {"flags": 4, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792735958.64, "event": "acro-sidehop-end", "at": ["MAP_ROUTE212_SOUTH", [36, 10]], "avatar": {"flags": 4, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792735958.66, "event": "map-qa-check", "name": "declared Acro landing toward (10, 0)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 10]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735961.66, "event": "capture", "file": "0083-acro-key-item.png"}
+{"t": 1792735966.13, "event": "capture", "file": "0084-after declared Acro portal.png"}
+{"t": 1792735966.13, "event": "observe", "label": "after declared Acro portal", "problems": []}
+{"t": 1792735966.14, "event": "map-qa-check", "name": "follower visible (after declared Acro portal)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792735988.02, "event": "capture", "file": "0085-seam-MAP_ROUTE212_SOUTH-up.png"}
+{"t": 1792735988.72, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH up seam (10, 0) -> MAP_ROUTE212_NORTH (10, 99) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [10, 0]], "got": ["MAP_ROUTE212_SOUTH", [10, 0]]}
+{"t": 1792735991.13, "event": "capture", "file": "0086-seam-MAP_ROUTE212_SOUTH-up.png"}
+{"t": 1792735991.97, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH up seam (13, 0) -> MAP_ROUTE212_NORTH (13, 99) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [13, 0]], "got": ["MAP_ROUTE212_SOUTH", [13, 0]]}
+{"t": 1792735994.28, "event": "capture", "file": "0087-seam-MAP_ROUTE212_SOUTH-up.png"}
+{"t": 1792735995.02, "event": "map-qa-check", "name": "MAP_ROUTE212_SOUTH up seam (15, 0) -> MAP_ROUTE212_NORTH (15, 99) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_SOUTH", [15, 0]], "got": ["MAP_ROUTE212_SOUTH", [15, 0]]}
+{"t": 1792735997.64, "event": "map", "map": "MAP_ROUTE212_NORTH", "pos": [10, 99]}
+{"t": 1792735997.7, "event": "map-qa-check", "name": "reached MAP_ROUTE212_NORTH", "ok": true, "at": ["MAP_ROUTE212_NORTH", [10, 99]]}
+{"t": 1792735999.02, "event": "capture", "file": "0088-seam-MAP_ROUTE212_NORTH-down.png"}
+{"t": 1792735999.7, "event": "map-qa-check", "name": "MAP_ROUTE212_NORTH down seam (10, 99) -> MAP_ROUTE212_SOUTH (10, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_NORTH", [10, 99]], "got": ["MAP_ROUTE212_NORTH", [10, 99]]}
+{"t": 1792736002.14, "event": "capture", "file": "0089-seam-MAP_ROUTE212_NORTH-down.png"}
+{"t": 1792736002.85, "event": "map-qa-check", "name": "MAP_ROUTE212_NORTH down seam (13, 99) -> MAP_ROUTE212_SOUTH (13, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_NORTH", [13, 99]], "got": ["MAP_ROUTE212_NORTH", [13, 99]]}
+{"t": 1792736004.95, "event": "capture", "file": "0090-seam-MAP_ROUTE212_NORTH-down.png"}
+{"t": 1792736005.65, "event": "map-qa-check", "name": "MAP_ROUTE212_NORTH down seam (15, 99) -> MAP_ROUTE212_SOUTH (15, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_NORTH", [15, 99]], "got": ["MAP_ROUTE212_NORTH", [15, 99]]}
+{"t": 1792736039.81, "event": "capture", "file": "0091-warp-MAP_ROUTE212_NORTH-0.png"}
+{"t": 1792736041.6, "event": "capture", "file": "0092-MAP_ROUTE212_ACCESS via warp.png"}
+{"t": 1792736041.6, "event": "observe", "label": "MAP_ROUTE212_ACCESS via warp", "problems": []}
+{"t": 1792736041.61, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792736041.68, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE212_ACCESS", "ok": true, "at": ["MAP_ROUTE212_ACCESS", [4, 9]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792736044.19, "event": "map-qa-check", "name": "MAP_ROUTE212_NORTH warp 0 (12, 3) -> MAP_ROUTE212_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_NORTH", [[12, 3], [13, 3]]], "got": ["MAP_ROUTE212_NORTH", [12, 3]]}
+{"t": 1792736046.32, "event": "capture", "file": "0093-MAP_ROUTE212_NORTH after warp round trip.png"}
+{"t": 1792736046.32, "event": "observe", "label": "MAP_ROUTE212_NORTH after warp round trip", "problems": []}
+{"t": 1792736046.33, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_NORTH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 0, "follower": 3}}
+{"t": 1792736049.35, "event": "capture", "file": "0094-warp-MAP_ROUTE212_NORTH-1.png"}
+{"t": 1792736050.87, "event": "capture", "file": "0095-MAP_ROUTE212_ACCESS via warp.png"}
+{"t": 1792736050.87, "event": "observe", "label": "MAP_ROUTE212_ACCESS via warp", "problems": []}
+{"t": 1792736050.87, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792736050.94, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE212_ACCESS", "ok": true, "at": ["MAP_ROUTE212_ACCESS", [4, 9]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792736053.4, "event": "map-qa-check", "name": "MAP_ROUTE212_NORTH warp 1 (13, 3) -> MAP_ROUTE212_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_NORTH", [[12, 3], [13, 3]]], "got": ["MAP_ROUTE212_NORTH", [12, 3]]}
+{"t": 1792736055.3, "event": "capture", "file": "0096-MAP_ROUTE212_NORTH after warp round trip.png"}
+{"t": 1792736055.3, "event": "observe", "label": "MAP_ROUTE212_NORTH after warp round trip", "problems": []}
+{"t": 1792736055.33, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_NORTH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 0, "follower": 3}}
+{"t": 1792736057.35, "event": "map", "map": "MAP_ROUTE212_ACCESS", "pos": [4, 9]}
+{"t": 1792736057.43, "event": "map-qa-check", "name": "reached MAP_ROUTE212_ACCESS", "ok": true, "at": ["MAP_ROUTE212_ACCESS", [4, 9]]}
+{"t": 1792736060.04, "event": "capture", "file": "0097-warp-MAP_ROUTE212_ACCESS-0.png"}
+{"t": 1792736061.75, "event": "capture", "file": "0098-MAP_ROUTE212_NORTH via warp.png"}
+{"t": 1792736061.75, "event": "observe", "label": "MAP_ROUTE212_NORTH via warp", "problems": []}
+{"t": 1792736061.76, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_NORTH via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 0, "follower": 3}}
+{"t": 1792736061.99, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE212_NORTH", "ok": true, "at": ["MAP_ROUTE212_NORTH", [12, 3]], "elevations": {"player": 0, "follower": 3}}
+{"t": 1792736064.59, "event": "map-qa-check", "name": "MAP_ROUTE212_ACCESS warp 0 (4, 9) -> MAP_ROUTE212_NORTH and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE212_ACCESS", [[4, 9]]], "got": ["MAP_ROUTE212_ACCESS", [4, 9]]}
+{"t": 1792736066.17, "event": "capture", "file": "0099-MAP_ROUTE212_ACCESS after warp round trip.png"}
+{"t": 1792736066.17, "event": "observe", "label": "MAP_ROUTE212_ACCESS after warp round trip", "problems": []}
+{"t": 1792736066.21, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE212_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792736067.36, "event": "capture", "file": "0100-start-menu.png"}
+{"t": 1792736068.18, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792736073.41, "event": "capture", "file": "0101-save-confirm-eastern-thirteen-acro-dev.png"}
+{"t": 1792736074.56, "event": "capture", "file": "0102-save-step-eastern-thirteen-acro-dev-01.png"}
+{"t": 1792736075.64, "event": "capture", "file": "0103-save-step-eastern-thirteen-acro-dev-02.png"}
+{"t": 1792736076.64, "event": "capture", "file": "0104-save-step-eastern-thirteen-acro-dev-03.png"}
+{"t": 1792736077.62, "event": "capture", "file": "0105-save-step-eastern-thirteen-acro-dev-04.png"}
+{"t": 1792736078.61, "event": "capture", "file": "0106-save-step-eastern-thirteen-acro-dev-05.png"}
+{"t": 1792736079.6, "event": "capture", "file": "0107-save-step-eastern-thirteen-acro-dev-06.png"}
+{"t": 1792736080.64, "event": "capture", "file": "0108-save-step-eastern-thirteen-acro-dev-07.png"}
+{"t": 1792736081.75, "event": "capture", "file": "0109-save-step-eastern-thirteen-acro-dev-08.png"}
+{"t": 1792736082.61, "event": "capture", "file": "0110-saved-eastern-thirteen-acro-dev.png"}
+{"t": 1792736082.61, "event": "release-save", "label": "eastern-thirteen-acro-dev", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792736082.62, "event": "map-qa-check", "name": "SAVE (eastern-thirteen-acro-dev)", "ok": true, "at": ["MAP_ROUTE212_ACCESS", [4, 9]]}

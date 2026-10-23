@@ -1,0 +1,310 @@
+#!/usr/bin/env python3
+"""Eastern hotel-linked thirteen-map DEV QA, reusing #221 native-rule navigation and source-grounded bridge probes.
+
+The engine/map/flash is never patched. Only marked recipe-verified DEV source
+is accepted; real player/follower elevation is read from matching-build offsets.
+"""
+import argparse
+from collections import deque
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+MAPS=('MAP_VEILSTONE_CITY', 'MAP_ROUTE215_ACCESS', 'MAP_ROUTE215', 'MAP_ROUTE214_ACCESS', 'MAP_ROUTE214', 'MAP_VALOR_LAKEFRONT', 'MAP_ROUTE213', 'MAP_HOTEL_GRAND_LAKE', 'MAP_ROUTE213_ACCESS', 'MAP_PASTORIA_CITY', 'MAP_ROUTE212_SOUTH', 'MAP_ROUTE212_NORTH', 'MAP_ROUTE212_ACCESS')
+
+DIRS={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}
+
+# CheckAcroBikeCollision in both pinned donor and Averon is independent of
+# current elevation. Rail/underpass C0/E15 does not imply foot traversal.
+FOOT_BLOCKED_BEHAVIORS=frozenset(('MB_BUMPY_SLOPE','MB_ISOLATED_VERTICAL_RAIL',
+    'MB_ISOLATED_HORIZONTAL_RAIL','MB_VERTICAL_RAIL','MB_HORIZONTAL_RAIL'))
+
+def foot_walkable(m,x,y):
+    return m.walkable(x,y) and m.behavior(x,y) not in FOOT_BLOCKED_BEHAVIORS
+
+
+def select_scope(maps=None,label=None):
+    if maps is None and label is None:return MAPS,'eastern-thirteen'
+    if not maps or not label or not all(c.isascii() and (c.isalnum() or c=='-') for c in label):
+        raise ValueError('explicit subset maps and safe subset label are both required')
+    if len(set(maps))!=len(maps) or any(mid not in MAPS for mid in maps):
+        raise ValueError('unknown or duplicate subset map')
+    return tuple(maps),'eastern-subset-'+label
+
+
+def arrow_direction(m,tile):
+    if not m.warp_at(*tile):return None
+    behavior=getattr(m,'behavior',lambda x,y:'')(*tile)
+    for word,direction in (('NORTH','up'),('SOUTH','down'),('WEST','left'),('EAST','right')):
+        if word+'_ARROW' in behavior:return direction
+    return None
+
+
+def ladder_entry(m,x,y):
+    """Native TryStartWarpEventScript triggers MB_LADDER on entry, not facing.
+
+    Stand beside the real warp and step onto it; never walk to the ladder as
+    setup, because that already changes maps. Other behaviors stay delegated
+    to the existing map_qa trigger implementation.
+    """
+    if m.behavior(x,y)!='MB_LADDER' or m.warp_at(x,y) is None:return None
+    for direction,(dx,dy) in DIRS.items():
+        before=(x-dx,y-dy)
+        if m.inside(*before) and m.walkable(*before) and m.warp_at(*before) is None:
+            if m.elevation(x,y)==0 or m.elevation(*before) in (0,m.elevation(x,y)):
+                return before,direction
+    raise ValueError('ladder warp has no ordinary compatible approach')
+
+
+def ordinary_step(d,direction):
+    """Observe after motion finishes, rather than its first coordinate update."""
+    state=d.step(direction)
+    return None if state is None else d.settle()
+
+
+def follower_origin(m,position):
+    """A ladder arrival must be left before a reversible follower foot probe."""
+    if not m.walkable(*position):raise ValueError("follower probe origin is source-blocked; invalid DEV entry")
+    entry=ladder_entry(m,*position)
+    if entry is None:return None
+    before,push=entry
+    opposite={'up':'down','down':'up','left':'right','right':'left'}
+    return opposite[push],before
+
+
+def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,start_elevation=0):
+    """Host path planning follows IsElevationMismatchAt/ObjectEventUpdateElevation.
+
+    Elevation0 permits transition;15 preserves the existing layer. Leaving15
+    also preserves it for that step, exactly as the existing engine function.
+    No pixel/collision/height or game memory is changed to obtain a route.
+    """
+    start=tuple(start);goals=set(goals)
+    if not 0<=start_elevation<=15:raise ValueError('invalid observed elevation')
+    if start in goals:return []
+    initial=(*start,start_elevation);previous={initial:None};queue=deque([initial])
+    while queue:
+        x,y,z=queue.popleft();prior=m.elevation(x,y)
+        for direction,(dx,dy) in DIRS.items():
+            # The native TryArrowWarp tests the CURRENT tile. Taking its arrow
+            # direction warps; it is not an ordinary step out of this square.
+            if arrow_direction(m,(x,y))==direction:continue
+            tile=(x+dx,y+dy)
+            if tile in blocked or not m.inside(*tile):continue
+            if m.behavior(*tile) in FOOT_BLOCKED_BEHAVIORS:continue
+            if not m.walkable(*tile) and not (allow_goal_unwalkable and tile in goals):continue
+            if tile not in goals and m.warp_at(*tile):continue
+            elevation=m.elevation(*tile)
+            if z!=0 and elevation not in (0,15,z):continue
+            nz=z if 15 in (prior,elevation) else elevation
+            state=(*tile,nz)
+            if state in previous:continue
+            previous[state]=((x,y,z),direction)
+            if tile in goals:
+                result=[]
+                while previous[state] is not None:
+                    state,step=previous[state];result.append(step)
+                return result[::-1]
+            queue.append(state)
+    return None
+
+
+def acro_crossing_plan(m,start,goal,layer):
+    """Only the real, input-proven Route212South ground-layer rail portal.
+
+    Walking remains rail-blocked. Two ordinary sideways hops connect the exact
+    C0/E3 approaches across unchanged C0/E15; never synthesize a floor edge.
+    """
+    if m.id!='MAP_ROUTE212_SOUTH':return None
+    south,north,rail=(36,12),(36,10),(36,11)
+    if any(not m.inside(*tile) for tile in (south,north,rail)):return None
+    if any(m.collision(*tile)!=0 or m.elevation(*tile)!=3 or not foot_walkable(m,*tile) for tile in (south,north)):
+        raise ValueError('source Acro approaches changed')
+    if (m.collision(*rail),m.elevation(*rail),m.behavior(*rail))!=(0,15,'MB_HORIZONTAL_RAIL'):
+        raise ValueError('source Acro rail portal changed')
+    for approach,landing,direction in ((south,north,'up'),(north,south,'down')):
+        if (elevation_path(m,start,{approach},start_elevation=layer) is not None
+                and elevation_path(m,landing,{tuple(goal)},start_elevation=3) is not None):
+            return dict(approach=approach,rail=rail,landing=landing,direction=direction)
+    return None
+
+
+def follower_neighbors(m,position,layer=None):
+    """Uniform-layer probes must not place the follower on transition0."""
+    x,y=position
+    objects={(o[0],o[1]) for o in m.objects}
+    for direction,(dx,dy) in DIRS.items():
+        tile=(x+dx,y+dy)
+        if not foot_walkable(m,*tile) or m.warp_at(*tile) or tile in objects:continue
+        if layer is not None and m.elevation(*tile)!=layer:continue
+        yield direction,tile
+
+
+def observed_elevations(d):
+    g=d.g;off=g.off;size=off['oe.size'];avatar=g.gdb.read(g.sym['gPlayerAvatar']+off['avatar.objectEventId'],1)[0]
+    if avatar>=16:raise ValueError('invalid live player object index')
+    raw=g.gdb.read(g.sym['gObjectEvents'],16*size)
+    player=raw[avatar*size+off['oe.elevationByte']]&15;follower=None
+    for i in range(16):
+        rec=raw[i*size:(i+1)*size]
+        if rec[0]&1 and rec[off['oe.localId']]==g.c['OBJ_EVENT_ID_FOLLOWER']:
+            follower=rec[off['oe.elevationByte']]&15;break
+    return dict(player=player,follower=follower)
+
+
+def validate_source(engine,recipe):
+    engine=Path(engine).resolve()
+    if recipe['status']!='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE' or not (engine/'.map_qa_throwaway').is_file():
+        raise ValueError('marked DEV recipe required')
+    for path,h in recipe['files'].items():
+        target=(engine/path).resolve()
+        if not target.is_relative_to(engine) or hashlib.sha256(target.read_bytes()).hexdigest()!=h:
+            raise ValueError('runtime recipe source differs: '+path)
+
+
+def run(args):
+    selected,save_label=select_scope(getattr(args,'map',None),getattr(args,'subset_label',None))
+    engine=args.engine.resolve();receipt=json.loads(args.recipe.read_text());validate_source(engine,receipt)
+    acro=None
+    if getattr(args,'acro_route',False):
+        spec=importlib.util.spec_from_file_location('eastern_acro_controls',Path(__file__).with_name('run_rail_probe.py'))
+        acro=importlib.util.module_from_spec(spec);spec.loader.exec_module(acro)
+        acro.validate_recipe(engine,receipt);save_label+='-acro-dev'
+    print('QA coverage',json.dumps(dict(maps=selected,label=save_label,complete_batch=selected==MAPS,movement_mode='declared Acro fixture' if acro else 'ordinary foot',continue_only=bool(args.expect))),flush=True)
+    scripts=Path(__file__).resolve().parent.parents[3]/'scripts/claude_play'
+    sys.path.insert(0,str(scripts))
+    import driver
+    import map_qa as qa
+    w=qa._wrapper(engine)
+    if w.driver is not driver or Path(driver.__file__).resolve()!=(scripts/'driver.py').resolve():
+        raise ValueError('QA loaded a different driver')
+    if w.driver.mapdata is not qa.mapdata:raise ValueError('shared driver planner module differs')
+    for module in (qa,driver):
+        path=Path(module.__file__);print('QA source',str(path),hashlib.sha256(path.read_bytes()).hexdigest(),flush=True)
+    if acro is not None:
+        w.emu.OFFSET_EXPRS.update({'bag.keyItems':'offsetof(struct Bag, keyItems)',
+            'avatar.flags':'offsetof(struct PlayerAvatar, flags)',
+            'avatar.acroState':'offsetof(struct PlayerAvatar, acroBikeState)',
+            'oe.directionByte':'offsetof(struct ObjectEvent, range) - 1'})
+        for c in ('ITEM_ACRO_BIKE','PLAYER_AVATAR_FLAG_ACRO_BIKE','DIR_EAST'):
+            if c not in w.emu.CONSTANTS:w.emu.CONSTANTS.append(c)
+    w.emu.OFFSET_EXPRS['avatar.objectEventId']='offsetof(struct PlayerAvatar, objectEventId)'
+    # On this actual GCC/GBA ABI, the current/previous elevation byte is the
+    # byte immediately before initialCoords; its offset is compiler-derived.
+    w.emu.OFFSET_EXPRS['oe.elevationByte']='offsetof(struct ObjectEvent, initialCoords) - 1'
+    original_bfs=qa.mapdata.bfs;original_runner=qa.Runner;original_trigger=qa.mapdata.trigger_entry;active=[None]
+    def trigger(m,x,y):
+        return ladder_entry(m,x,y) or original_trigger(m,x,y)
+    def bfs(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True):
+        if active[0] is None:return original_bfs(m,start,goals,blocked,allow_goal_unwalkable)
+        z=observed_elevations(active[0])['player']
+        return elevation_path(m,start,goals,blocked,allow_goal_unwalkable,z)
+
+    class HeightRunner(original_runner):
+        def __init__(self,*values):
+            super().__init__(*values);active[0]=self.d
+
+        def path(self,map_id,tile,z=None,start=None):
+            here=self.d.here()
+            return elevation_path(self.d.live_map(map_id),start or here[1],{tuple(tile)},
+                                  start_elevation=observed_elevations(self.d)['player'] if z is None else z)
+
+        def go(self,map_id,tile,_depth=0):
+            from driver import Stuck
+            tile=tuple(tile)
+            if self.d.here()[0]==map_id and self.path(map_id,tile) is None and _depth<2:
+                if not (acro is not None and self.acro_portal(map_id,tile)):
+                    self.enter_region(map_id,tile,_depth)
+            try:
+                self.d.walk_path(map_id,{tile});self.d.settle()
+            except Stuck as exc:
+                self.d.log('unreachable',map=map_id,tile=tile,reason=str(exc));return False
+            return self.d.here()==(map_id,tile)
+
+        def acro_portal(self,map_id,tile):
+            from driver import Stuck
+            mid,start=self.d.here()
+            if mid!=map_id:return False
+            plan=acro_crossing_plan(self.d.live_map(mid),start,tile,observed_elevations(self.d)['player'])
+            if plan is None:return False
+            self.d.log('declared-acro-portal',map=mid,goal=tile,plan=plan,dev_only=True)
+            self.d.walk_path(mid,{plan['approach']});self.d.settle()
+            acro.bike_use(self.d,w.play)
+            if not acro.avatar(self.d)['flags']&self.d.g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE']:raise Stuck('Acro did not mount through Bag USE')
+            self.d.e.tap('RIGHT',hold=.025,after=.4);self.d.settle()
+            if self.d.here()!=(mid,plan['approach']) or acro.avatar(self.d)['facing']!=self.d.g.c['DIR_EAST']:
+                raise Stuck('Acro facing-only setup changed location or facing')
+            for stage,expected in (('rail',plan['rail']),('landing',plan['landing'])):
+                got=acro.sidehop(self.d,plan['direction'])
+                if not self.check('declared Acro '+stage+' toward '+str(tile),got==(mid,expected),at=got,elevations=observed_elevations(self.d)):
+                    raise Stuck('real Acro input did not reach source '+stage)
+            acro.bike_use(self.d,w.play)
+            if acro.avatar(self.d)['flags']&self.d.g.c['PLAYER_AVATAR_FLAG_ACRO_BIKE']:raise Stuck('Acro did not dismount through Bag USE')
+            self.follower('after declared Acro portal')
+            return True
+
+        def enter_region(self,map_id,tile,depth):
+            target=self.w.map(map_id)
+            for src in self.plan:
+                for p in self.plan[src]['points']:
+                    if p['kind']!='warp' or p['dest']!=map_id or p['dest_warp']>=len(target.warps):continue
+                    arrive=qa.warp_arrive(target,*target.warps[p['dest_warp']][:2]);z=target.elevation(*arrive)
+                    if z==15 or elevation_path(target,arrive,{tuple(tile)},start_elevation=z) is None:continue
+                    self.d.log('enter-region',map=map_id,tile=tile,via=(src,p['tile']),destinationElevation=z)
+                    if self.d.here()[0]!=src:self.d.travel_to(src)
+                    if not self.go(src,p['tile'],depth+1):continue
+                    for _ in range(4):
+                        self.press(p['push'],hold=.3,after=1.2)
+                        if self.d.here()[0]!=src or self.d.here()==(map_id,arrive):break
+                    there=self.wait_settled()
+                    if there[0]==map_id and self.path(map_id,tile) is not None:return True
+            return False
+
+        def follower(self,label,expected_layer=None):
+            self.d.settle()
+            mid,(x,y)=self.d.here();m=self.d.live_map(mid)
+            origin=follower_origin(m,(x,y))
+            if origin is not None:
+                direction,before=origin;state=ordinary_step(self.d,direction)
+                if state is None or not self.d.field_ready(state) or self.d.here(state)!=(mid,before):
+                    return self.check('follower visible ('+label+')',False,reason='could not leave arrival ladder onto ordinary floor',at=self.d.here())
+                x,y=before;m=self.d.live_map(mid)
+            for direction,tile in follower_neighbors(m,(x,y),expected_layer):
+                path=self.path(mid,tile)
+                if path!=[direction]:continue
+                moved=ordinary_step(self.d,direction)
+                if moved is None:continue
+                if not self.d.field_ready(moved) or self.d.here(moved)!=(mid,tile):
+                    return self.check('follower visible ('+label+')',False,reason='ordinary foot probe unexpectedly left its map/tile',at=self.d.here(moved))
+                returned=ordinary_step(self.d,qa.OPPOSITE[direction])
+                if returned is None or not self.d.field_ready(returned) or self.d.here(returned)!=(mid,(x,y)):
+                    return self.check('follower visible ('+label+')',False,reason='ordinary foot probe did not return to the exact source tile',at=self.d.here())
+                break
+            observation=w.play.observe(self.d,label);follower=observation.get('follower') or {}
+            return self.check('follower visible ('+label+')',bool(follower) and not follower.get('invisible'),follower=follower,elevations=observed_elevations(self.d))
+
+        def can_leave(self,label):
+            mid,pos=self.d.here();m=self.d.live_map(mid)
+            exits={tuple(p['tile']) for p in qa.map_points(m)}
+            path=elevation_path(m,pos,exits,start_elevation=observed_elevations(self.d)['player'])
+            return self.check('an exit is reachable after '+label,path is not None,at=(mid,pos),elevations=observed_elevations(self.d))
+
+    cmd=['run','--engine',str(engine),'--rom',str(args.rom),'--scratch',str(args.scratch),'--out',str(args.out),'--build',args.profile]
+    for mid in selected:cmd+=['--map',mid]
+    if args.expect:cmd+=['--expect',str(args.expect)]
+    else:cmd+=['--save',save_label]
+    qa.mapdata.bfs=bfs;qa.mapdata.trigger_entry=trigger;qa.Runner=HeightRunner
+    try:return qa.main(cmd)
+    finally:qa.mapdata.bfs=original_bfs;qa.mapdata.trigger_entry=original_trigger;qa.Runner=original_runner
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__)
+    for name in ('engine','rom','scratch','out','recipe'):p.add_argument('--'+name,required=True,type=Path)
+    p.add_argument('--map',action='append',choices=MAPS,help='explicit bounded subset; full thirteen remains the default')
+    p.add_argument('--acro-route',action='store_true',help='declared Acro fixture and real-input portal; never ordinary foot acceptance')
+    p.add_argument('--subset-label',help='required with --map; keeps subset save evidence distinct')
+    p.add_argument('--profile',required=True,choices=('normal','release'));p.add_argument('--expect',type=Path)
+    sys.exit(run(p.parse_args()))

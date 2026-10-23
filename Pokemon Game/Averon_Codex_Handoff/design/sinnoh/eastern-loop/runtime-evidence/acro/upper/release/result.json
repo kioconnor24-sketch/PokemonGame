@@ -1,0 +1,686 @@
+{
+ "maps": [
+  "MAP_ROUTE212_SOUTH"
+ ],
+ "build": "release",
+ "rom_sha256": "4ae2996c67db4512526a7788f331f9d14db5338df1ae998c17c172cfe17a82a4",
+ "static_findings": [],
+ "save_before": "91656da555c494e5614fdfc4cf189a45060ce43e5a0c4e217047244429cfe1ad",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "starts on genuine lower ground3 approach",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     12
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "explicit fixture grants exactly one Acro",
+   "ok": true
+  },
+  {
+   "name": "ordinary foot route reaches upper layer4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     43,
+     11
+    ]
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge mounted through ordinary Bag USE",
+   "ok": true
+  },
+  {
+   "name": "upper left (42, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     42,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (41, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     41,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (40, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     40,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (39, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     39,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (38, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     38,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (37, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     37,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (36, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (35, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     35,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (34, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     34,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (33, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     33,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (32, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     32,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (31, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     31,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (30, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     30,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (29, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     29,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (28, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     28,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (27, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     27,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (28, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     28,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (29, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     29,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (30, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     30,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (31, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     31,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (32, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     32,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (33, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     33,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (34, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     34,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (35, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     35,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (36, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (37, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     37,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (38, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     38,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (39, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     39,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (40, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     40,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (41, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     41,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (42, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     42,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper right (43, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     43,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper ordinary Bag USE dismounts",
+   "ok": true
+  },
+  {
+   "name": "follower visible (upper bridge returned)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper player and follower retain native layer4 after dismount",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (back to lower)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "back to lower foot transition preserves both actors",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     12
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (back to upper)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "back to upper foot transition preserves both actors",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     43,
+     11
+    ]
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (eastern-subset-upper-rail-acro-dev)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     43,
+     11
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "1c05312bdbf5fcaf4e5088f5e17a9ec4706cdc71b21cb014be7a38aed966171f",
+ "verdict": "PASS"
+}

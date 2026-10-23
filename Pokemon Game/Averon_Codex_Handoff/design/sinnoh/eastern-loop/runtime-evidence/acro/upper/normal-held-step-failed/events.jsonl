@@ -1,0 +1,28 @@
+{"t": 1792737580.59, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792737580.63, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792737583.27, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792737583.32, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792737586.48, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792737586.59, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792737587.16, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792737587.23, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792737587.76, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792737587.84, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792737588.92, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792737588.96, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792737592.54, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792737592.6, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792737593.29, "event": "field", "map": "MAP_ROUTE212_SOUTH", "pos": [36, 12], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792737593.86, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]]}
+{"t": 1792737595.84, "event": "capture", "file": "0008-start.png"}
+{"t": 1792737595.84, "event": "observe", "label": "start", "problems": []}
+{"t": 1792737595.85, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792737596.15, "event": "map-qa-check", "name": "starts on genuine lower ground3 approach", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792737596.15, "event": "map-qa-check", "name": "explicit fixture grants exactly one Acro", "ok": true}
+{"t": 1792737604.13, "event": "map-qa-check", "name": "ordinary foot route reaches upper layer4", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [43, 11]], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737611.9, "event": "capture", "file": "0009-acro-key-item.png"}
+{"t": 1792737614.28, "event": "map-qa-check", "name": "upper bridge mounted through ordinary Bag USE", "ok": true}
+{"t": 1792737615.11, "event": "map-qa-check", "name": "upper left (42, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [42, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737615.81, "event": "map-qa-check", "name": "upper left (41, 11)", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [41, 11]], "source_elevation": 4, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737616.69, "event": "map-qa-check", "name": "upper left (40, 11)", "ok": false, "at": ["MAP_ROUTE212_SOUTH", [39, 11]], "source_elevation": 15, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792737616.72, "event": "map-qa-check", "name": "run completed without the driver getting stuck", "ok": false, "error": "ValueError('upper left (40, 11)')", "at": ["MAP_ROUTE212_SOUTH", [39, 11]]}

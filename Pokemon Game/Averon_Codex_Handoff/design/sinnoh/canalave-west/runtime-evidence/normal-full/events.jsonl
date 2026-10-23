@@ -1,0 +1,109 @@
+{"t": 1792788645.17, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792788645.29, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792788648.65, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792788648.77, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792788650.88, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792788651.09, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792788651.7, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792788651.88, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792788652.5, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792788652.68, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792788653.87, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 12}
+{"t": 1792788653.99, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792788655.35, "event": "screen", "cb2": "CB2_MainMenu", "i": 13}
+{"t": 1792788655.41, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792788657.98, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792788658.16, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792788659.6, "event": "field", "map": "MAP_ROUTE218_EAST", "pos": [6, 5], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792788660.38, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE218_EAST", [6, 5]]}
+{"t": 1792788663.85, "event": "capture", "file": "0009-start.png"}
+{"t": 1792788663.85, "event": "observe", "label": "start", "problems": []}
+{"t": 1792788663.9, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788663.9, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788664.07, "event": "map-qa-check", "name": "reached MAP_ROUTE218_EAST", "ok": true, "at": ["MAP_ROUTE218_EAST", [6, 5]]}
+{"t": 1792788669.87, "event": "capture", "file": "0010-warp-MAP_ROUTE218_EAST-0.png"}
+{"t": 1792788673.4, "event": "capture", "file": "0011-MAP_ROUTE218 via warp.png"}
+{"t": 1792788673.4, "event": "observe", "label": "MAP_ROUTE218 via warp", "problems": []}
+{"t": 1792788673.47, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788673.47, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788673.88, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE218", "ok": true, "at": ["MAP_ROUTE218", [59, 24]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788676.9, "event": "map-qa-check", "name": "MAP_ROUTE218_EAST warp 0 (1, 5) -> MAP_ROUTE218 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE218_EAST", [[1, 5]]], "got": ["MAP_ROUTE218_EAST", [1, 5]]}
+{"t": 1792788679.65, "event": "capture", "file": "0012-MAP_ROUTE218_EAST after warp round trip.png"}
+{"t": 1792788679.65, "event": "observe", "label": "MAP_ROUTE218_EAST after warp round trip", "problems": []}
+{"t": 1792788679.68, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_EAST after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788679.69, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_EAST after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788682.35, "event": "map", "map": "MAP_ROUTE218", "pos": [59, 24]}
+{"t": 1792788682.57, "event": "map-qa-check", "name": "reached MAP_ROUTE218", "ok": true, "at": ["MAP_ROUTE218", [59, 24]]}
+{"t": 1792788685.9, "event": "capture", "file": "0013-warp-MAP_ROUTE218-0.png"}
+{"t": 1792788688.96, "event": "capture", "file": "0014-MAP_ROUTE218_EAST via warp.png"}
+{"t": 1792788688.96, "event": "observe", "label": "MAP_ROUTE218_EAST via warp", "problems": []}
+{"t": 1792788688.99, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_EAST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788689.01, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_EAST via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788689.2, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE218_EAST", "ok": true, "at": ["MAP_ROUTE218_EAST", [1, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788692.65, "event": "map-qa-check", "name": "MAP_ROUTE218 warp 0 (59, 24) -> MAP_ROUTE218_EAST and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE218", [[59, 24]]], "got": ["MAP_ROUTE218", [59, 24]]}
+{"t": 1792788695.37, "event": "capture", "file": "0015-MAP_ROUTE218 after warp round trip.png"}
+{"t": 1792788695.37, "event": "observe", "label": "MAP_ROUTE218 after warp round trip", "problems": []}
+{"t": 1792788695.38, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788695.4, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788722.68, "event": "capture", "file": "0016-warp-MAP_ROUTE218-1.png"}
+{"t": 1792788725.91, "event": "capture", "file": "0017-MAP_ROUTE218_WEST via warp.png"}
+{"t": 1792788725.91, "event": "observe", "label": "MAP_ROUTE218_WEST via warp", "problems": []}
+{"t": 1792788725.97, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_WEST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788725.97, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788726.17, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE218_WEST", "ok": true, "at": ["MAP_ROUTE218_WEST", [11, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788729.25, "event": "map-qa-check", "name": "MAP_ROUTE218 warp 1 (4, 20) -> MAP_ROUTE218_WEST and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE218", [[4, 20]]], "got": ["MAP_ROUTE218", [4, 20]]}
+{"t": 1792788732.77, "event": "capture", "file": "0018-MAP_ROUTE218 after warp round trip.png"}
+{"t": 1792788732.77, "event": "observe", "label": "MAP_ROUTE218 after warp round trip", "problems": []}
+{"t": 1792788732.8, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788732.8, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788735.25, "event": "map", "map": "MAP_ROUTE218_WEST", "pos": [11, 5]}
+{"t": 1792788735.47, "event": "map-qa-check", "name": "reached MAP_ROUTE218_WEST", "ok": true, "at": ["MAP_ROUTE218_WEST", [11, 5]]}
+{"t": 1792788739.58, "event": "capture", "file": "0019-warp-MAP_ROUTE218_WEST-0.png"}
+{"t": 1792788744.15, "event": "capture", "file": "0020-MAP_ROUTE218 via warp.png"}
+{"t": 1792788744.15, "event": "observe", "label": "MAP_ROUTE218 via warp", "problems": []}
+{"t": 1792788744.18, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788744.18, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788744.68, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE218", "ok": true, "at": ["MAP_ROUTE218", [4, 20]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788748.45, "event": "map-qa-check", "name": "MAP_ROUTE218_WEST warp 0 (11, 5) -> MAP_ROUTE218 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE218_WEST", [[11, 5]]], "got": ["MAP_ROUTE218_WEST", [11, 5]]}
+{"t": 1792788751.59, "event": "capture", "file": "0021-MAP_ROUTE218_WEST after warp round trip.png"}
+{"t": 1792788751.59, "event": "observe", "label": "MAP_ROUTE218_WEST after warp round trip", "problems": []}
+{"t": 1792788751.64, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_WEST after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788751.64, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788758.87, "event": "capture", "file": "0022-warp-MAP_ROUTE218_WEST-1.png"}
+{"t": 1792788762.77, "event": "capture", "file": "0023-MAP_CANALAVE_CITY via warp.png"}
+{"t": 1792788762.78, "event": "observe", "label": "MAP_CANALAVE_CITY via warp", "problems": []}
+{"t": 1792788762.79, "event": "map-qa-check", "name": "follower visible (MAP_CANALAVE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788762.8, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_CANALAVE_CITY via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788763.3, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_CANALAVE_CITY", "ok": true, "at": ["MAP_CANALAVE_CITY", [33, 50]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788766.7, "event": "map-qa-check", "name": "MAP_ROUTE218_WEST warp 1 (1, 5) -> MAP_CANALAVE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE218_WEST", [[1, 5]]], "got": ["MAP_ROUTE218_WEST", [1, 5]]}
+{"t": 1792788769.68, "event": "capture", "file": "0024-MAP_ROUTE218_WEST after warp round trip.png"}
+{"t": 1792788769.68, "event": "observe", "label": "MAP_ROUTE218_WEST after warp round trip", "problems": []}
+{"t": 1792788769.7, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_WEST after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788769.7, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788772.2, "event": "map", "map": "MAP_CANALAVE_CITY", "pos": [33, 50]}
+{"t": 1792788772.4, "event": "map-qa-check", "name": "reached MAP_CANALAVE_CITY", "ok": true, "at": ["MAP_CANALAVE_CITY", [33, 50]]}
+{"t": 1792788776.2, "event": "capture", "file": "0025-warp-MAP_CANALAVE_CITY-0.png"}
+{"t": 1792788779.7, "event": "capture", "file": "0026-MAP_ROUTE218_WEST via warp.png"}
+{"t": 1792788779.71, "event": "observe", "label": "MAP_ROUTE218_WEST via warp", "problems": []}
+{"t": 1792788779.78, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE218_WEST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788779.78, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788779.96, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE218_WEST", "ok": true, "at": ["MAP_ROUTE218_WEST", [1, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788783.11, "event": "map-qa-check", "name": "MAP_CANALAVE_CITY warp 0 (33, 50) -> MAP_ROUTE218_WEST and back", "ok": true, "leg": "back", "expected": ["MAP_CANALAVE_CITY", [[33, 50]]], "got": ["MAP_CANALAVE_CITY", [33, 50]]}
+{"t": 1792788787.07, "event": "capture", "file": "0027-MAP_CANALAVE_CITY after warp round trip.png"}
+{"t": 1792788787.07, "event": "observe", "label": "MAP_CANALAVE_CITY after warp round trip", "problems": []}
+{"t": 1792788787.1, "event": "map-qa-check", "name": "follower visible (MAP_CANALAVE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792788787.1, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_CANALAVE_CITY after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792788788.38, "event": "capture", "file": "0028-start-menu.png"}
+{"t": 1792788789.21, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792788796.0, "event": "capture", "file": "0029-save-confirm-coronet-six.png"}
+{"t": 1792788797.46, "event": "capture", "file": "0030-save-step-coronet-six-01.png"}
+{"t": 1792788799.05, "event": "capture", "file": "0031-save-step-coronet-six-02.png"}
+{"t": 1792788800.48, "event": "capture", "file": "0032-save-step-coronet-six-03.png"}
+{"t": 1792788801.79, "event": "capture", "file": "0033-save-step-coronet-six-04.png"}
+{"t": 1792788803.96, "event": "capture", "file": "0034-save-step-coronet-six-05.png"}
+{"t": 1792788805.66, "event": "capture", "file": "0035-save-step-coronet-six-06.png"}
+{"t": 1792788806.8, "event": "capture", "file": "0036-save-step-coronet-six-07.png"}
+{"t": 1792788807.97, "event": "capture", "file": "0037-save-step-coronet-six-08.png"}
+{"t": 1792788814.09, "event": "capture", "file": "0038-saved-coronet-six.png"}
+{"t": 1792788814.09, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792788814.2, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_CANALAVE_CITY", [33, 50]]}

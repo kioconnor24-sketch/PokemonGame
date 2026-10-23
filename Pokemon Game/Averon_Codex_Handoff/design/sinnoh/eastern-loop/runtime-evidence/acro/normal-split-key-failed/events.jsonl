@@ -1,0 +1,29 @@
+{"t": 1792734644.66, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792734644.84, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792734648.55, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792734648.67, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792734650.88, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792734651.14, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792734651.78, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792734651.89, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792734652.63, "event": "screen", "cb2": "MainCB2", "i": 11}
+{"t": 1792734652.76, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792734653.98, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 13}
+{"t": 1792734654.09, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792734655.38, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792734655.45, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792734659.48, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792734659.69, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792734660.99, "event": "field", "map": "MAP_ROUTE212_SOUTH", "pos": [36, 12], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792734661.35, "event": "rail-check", "name": "explicit Acro grant quantity exactly one", "ok": true}
+{"t": 1792734661.49, "event": "rail-check", "name": "starts at exact source-grounded rail approach", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]]}
+{"t": 1792734664.39, "event": "rail-check", "name": "ordinary foot input is blocked by the original rail", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]]}
+{"t": 1792734673.18, "event": "capture", "file": "0009-acro-key-item.png"}
+{"t": 1792734676.74, "event": "rail-check", "name": "ordinary Bag USE mounted Acro", "ok": true, "avatar": {"flags": 36, "facing": 2, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734677.98, "event": "rail-check", "name": "turn-only preserves exact approach position", "ok": true, "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734678.06, "event": "rail-check", "name": "faces along horizontal rail for sideways hop", "ok": true, "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734678.18, "event": "acro-sidehop-start", "direction": "up", "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734679.65, "event": "acro-sidehop-end", "at": ["MAP_ROUTE212_SOUTH", [36, 12]], "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734679.79, "event": "rail-check", "name": "real sideways hop enters unchanged rail", "ok": false, "avatar": {"flags": 36, "facing": 4, "acro_state": 0, "elevations": {"player": 3, "follower": 3}}}
+{"t": 1792734679.79, "event": "rail-failure", "error": "ValueError('real sideways hop enters unchanged rail')"}
+{"t": 1792734679.97, "event": "capture", "file": "0010-rail-failure.png"}
