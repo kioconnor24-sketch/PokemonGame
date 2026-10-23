@@ -1,0 +1,15 @@
+# Northern snow corridor — source-only connected geography
+
+Base mainc6ac2f967b02473741791eb24b5cc9b11bda3904; branch codex/snow-corridor-stage-20261023. Manager6354992423 D32/D33. Source donor38228bb574a3557345852b758d5f1a65eb01bb22; every original blob/hash in source-receipt.json. Shared merged converter/stager reused without changes.
+
+Implemented Route21696×40 → Route21736×118 → AcuityLakefront64×66 → SnowpointCity34×68,14,624 cells. Three actual reciprocal connection pairs retain exact source offsets and positive open endpoints. All source IDs/elevations and24 bridge/multilevel cells remain.50 explicit collision closures quarantine unfinished exits; no production registry or saved origin allocated. Original216 cave exit targets existing CoronetNorthRoom2/1 and is safely closed pending joint integration rather than duplicating accepted cave work.
+
+Preserve actual WEATHER_SNOW on all4 headers. The shared neutral default WEATHER_NONE would remove intended visibility; isolated wrapper re-reads already receipted source headers, verifies SHA256 and the exact expected weather value, then restores only that metadata. No weather engine/graphics changes. Genuine snow rendering, bridge layers, collision behaviors, followers and resource allocation remain untested in a ROM.
+
+Actual focused9/9 and complete current-main-plus-new211/211 source tests PASS,0skips. Reconstruct all original Git blobs without donor checkout; exact replay of4 maps/50closures;24 bridge cells; reciprocal visible seam endpoints; source weather hashes and changed-hash/unexpected-token refusal; used primary/secondary attributes; absent content/IDs; negative offset/warp-coordinate; no input mutation. Two independent donor CLI runs21/21 byte-identical. Four collision schematics visually inspected. Commands/results in host.log.
+
+LakeAcuity is deliberately absent: its real pinned header has NO warps and connections=0. No entrance, lake story, travel unlock or water route was invented. Snowpoint settlement source likewise contains no public interior warps; do not manufacture acceptance from its name. These are source layouts, not a complete settlement/gameplay implementation.
+
+No donor pixel/palette/music distribution, scripts/NPC/trainers/encounters, permanent IDs227+, saved-structure or engine edits. No NORMAL/RELEASE/native/mGBA/Save→Continue acceptance for this batch. Source primary General + secondary Snowpoint dependencies are recorded; Averon artwork remains UNVERIFIED. Manager reviews/merges; Claude remains paused.
+
+Next: existing permitted-art metadata packer on its correct reviewed parent, preserving all used behavior/layer words, weather and C/E; inspect snow/bridge graphics and source-grounded walkability. Then temporary current-main DEV overlay, both build profiles, focused native and genuine mGBA snow/bridge/follower/Save→fresh Continue/unchanged-old-flash evidence. Resolve lake entry only with source-grounded physical integration; permanent saved identities remain owner-only.
