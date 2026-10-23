@@ -1,0 +1,30 @@
+QA source /workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py 75abf7411f8d9d95b3892ef8e552a4d681ce1a5831cd22b1550061b8d83d6902
+QA source /workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/driver.py 20a9dc7f4025646896e15e74da4b4033ec8a591f451d6fcf7cc2efd9a02af547
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/run_runtime_qa.py", line 208, in <module>
+    sys.exit(run(p.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/run_runtime_qa.py", line 200, in run
+    try:return qa.main(cmd)
+               ^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 1033, in main
+    return cmd_run(args)
+           ^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 825, in cmd_run
+    findings, plan = static_audit(world, args.map)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 200, in static_audit
+    points = map_points(m)
+             ^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 146, in map_points
+    points.append(dict(kind="warp", index=i, tile=warp_stand(m, x, y), warp=(x, y), dest=dest, dest_warp=warp,
+                                                  ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 85, in warp_stand
+    entry = mapdata.trigger_entry(m, x, y)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/run_runtime_qa.py", line 130, in trigger
+    return ladder_entry(m,x,y) or original_trigger(m,x,y)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/run_runtime_qa.py", line 40, in ladder_entry
+    raise ValueError('ladder warp has no ordinary compatible approach')
+ValueError: ladder warp has no ordinary compatible approach

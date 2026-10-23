@@ -1,0 +1,273 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "c6ac2f967b02473741791eb24b5cc9b11bda3904",
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North"
+  ],
+  "temporary_map_slots": {
+    "Route210_North": 19,
+    "CelesticTown": 20,
+    "Route211_East": 21,
+    "MtCoronet_1F_North_Room1": 22,
+    "MtCoronet_1F_North_Room2": 23,
+    "MtCoronet_B1F": 24
+  },
+  "source_headers": {
+    "Route210_North": {
+      "id": "MAP_ROUTE210_NORTH",
+      "name": "Route210_North",
+      "layout": "LAYOUT_ROUTE210_NORTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -6,
+          "direction": "left"
+        }
+      ],
+      "warp_events": [],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "CelesticTown": {
+      "id": "MAP_CELESTIC_TOWN",
+      "name": "CelesticTown",
+      "layout": "LAYOUT_CELESTIC_TOWN",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ROUTE210_NORTH",
+          "offset": 6,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE211_EAST",
+          "offset": 3,
+          "direction": "left"
+        }
+      ],
+      "warp_events": [],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route211_East": {
+      "id": "MAP_ROUTE211_EAST",
+      "name": "Route211_East",
+      "layout": "LAYOUT_ROUTE211_EAST",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_CELESTIC_TOWN",
+          "offset": -3,
+          "direction": "right"
+        }
+      ],
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 10,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "MtCoronet_1F_North_Room1": {
+      "id": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+      "name": "MtCoronet_1F_North_Room1",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM1",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 32,
+          "y": 33,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE211_EAST",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_B1F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "MtCoronet_1F_North_Room2": {
+      "id": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+      "name": "MtCoronet_1F_North_Room2",
+      "layout": "LAYOUT_MT_CORONET_1F_NORTH_ROOM2",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 12,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_B1F",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "MtCoronet_B1F": {
+      "id": "MAP_MT_CORONET_B1F",
+      "name": "MtCoronet_B1F",
+      "layout": "LAYOUT_MT_CORONET_B1F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 60,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM1",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 8,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "dev_surrogate": "MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance",
+  "files": {
+    "data/event_scripts.s": "bc7ab742ac1433691a54e653a80fb3ccb6022918cf502679088962e66fc6ca5b",
+    "data/layouts/CelesticTown/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/CelesticTown/map.bin": "3ed927811079f2ed440d1bc1212ede4918aa3e708868da574620211ea830e804",
+    "data/layouts/MtCoronet_1F_North_Room1/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
+    "data/layouts/MtCoronet_1F_North_Room1/map.bin": "b64e7e7595cb8f05814e7bbeca9fee584b5e5a2fe70f0a8b4193f34023b7179f",
+    "data/layouts/MtCoronet_1F_North_Room2/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
+    "data/layouts/MtCoronet_1F_North_Room2/map.bin": "046ec5cd44b5aa417168ad916c449ad4dceb7fb65a93e9ca9f6c80a0e7e14021",
+    "data/layouts/MtCoronet_B1F/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
+    "data/layouts/MtCoronet_B1F/map.bin": "0ce39a67265ff3ae2352c22e5f4c1aa247f50f8d668f690fed959256de0f1d5d",
+    "data/layouts/Route210_North/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/Route210_North/map.bin": "bdf6e12395ffc9cbe5d18e62f01e6bb8e43c82fff9bf3e965c24693919a2dc8a",
+    "data/layouts/Route211_East/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/Route211_East/map.bin": "81f250bc306a89db520ed15e461d16ce1a93fe2a6f6190c757931d2fd02c333a",
+    "data/layouts/layouts.json": "7b4b4c121d0cfdc5c7e2eed358df14351214938523bf6b6b16c1d5481c9b1223",
+    "data/maps/CelesticTown/map.json": "70dc7c029621678b453de25c57e010ea480cf2d57a0e633021cacfe5e8387b40",
+    "data/maps/CelesticTown/scripts.inc": "55a1d7153cdfbcf9fd80aad080be2ac65c834b256dfd76dc85c1e530f2d11373",
+    "data/maps/MtCoronet_1F_North_Room1/map.json": "b2e85d8e1eceb29c5d377af953a570033a97d6e373eeebb3954d4030bd4922c1",
+    "data/maps/MtCoronet_1F_North_Room1/scripts.inc": "d9f438f56ca2674ea3e7cd8d988bed930025e1d8f62cac8833033ab1c16f6273",
+    "data/maps/MtCoronet_1F_North_Room2/map.json": "237af51df706d3ed9f10fbba12967d0858b63a79502e79ec15c8f7d9fcc6026d",
+    "data/maps/MtCoronet_1F_North_Room2/scripts.inc": "cef63151a1277c3b30ad8245027593686b63f8435873c07ab56fa9a0a839e18f",
+    "data/maps/MtCoronet_B1F/map.json": "210499341b4fcb9677d0d92dce4d23565b49dd2432507ce1433ec840d7287b94",
+    "data/maps/MtCoronet_B1F/scripts.inc": "6c7552a0b9e98bb131fee137e625700be3e2a1b7c3951974e0794535f0ab3bd6",
+    "data/maps/Route210_North/map.json": "8ac442a789d1725862f60ebd326cf50a5f88e5386e2a7ab6d11f6b40c82b8801",
+    "data/maps/Route210_North/scripts.inc": "b9c9fcfb04e7a061d87bce3a32d1c5f92ac1a5e00f8479eed7890250db8614d7",
+    "data/maps/Route211_East/map.json": "5bb90bf7682378155be0171914d5886d19cdc6599106b25f2211a82334b14045",
+    "data/maps/Route211_East/scripts.inc": "26ede6dd11f42201322562443a8489c126ebfcc3213aed988fb6b53648a5c3ca",
+    "data/maps/map_groups.json": "c5f6e161ce7cb8a5c8fb1102d02a4ab13227b6b0edd03a999ea8b42dee58cd58",
+    "data/tilesets/primary/coronet_dev_caveprimary/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/primary/coronet_dev_caveprimary/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/primary/coronet_dev_outdoorprimary/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/primary/coronet_dev_outdoorprimary/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/coronet_dev_cavesecondary/metatile_attributes.bin": "ae152201ec7631fd69c38c75f1978ad9e953c939e17bf4e5164b3b566d171cf2",
+    "data/tilesets/secondary/coronet_dev_cavesecondary/metatiles.bin": "bb63fa6a8ede72c54936204ac533ae681cce2c183a813a477dd58f6ea5802341",
+    "data/tilesets/secondary/coronet_dev_outdoorsecondary/metatile_attributes.bin": "36135ff653e3c34fd37b018b7846c20a23a048ed8f47572ba68ce02f51cdc949",
+    "data/tilesets/secondary/coronet_dev_outdoorsecondary/metatiles.bin": "083bc0c09a368fac3f7735251842de3bbbe5664ec448e2c527c0202f61762311",
+    "include/tilesets.h": "51ca839d20943fb693f2d60d650d4da9d500aa5632144216374e83c64912d415",
+    "src/data/tilesets/headers.h": "da011f7b921295cd37d152fe744b382e00911d60dc848312d5ae9e1f9833c08b",
+    "src/data/tilesets/metatiles.h": "6fe53a2cefac35dbd0fd57bb50d40bb2dc62e9cee50e1a74b4aa2922bcd43694",
+    "test/averon_coronet_runtime.c": "b149f9817118a29e0a653053000fa7d6964ca01c0d476fc7e53cc6b3b56b1d18",
+    "test/data/averon_map_registry_slots.inc": "d843bf239d8e39b6d0adb989e23b50dcb1da29d57c8cc692eea337d28a9e2a2d"
+  }
+}

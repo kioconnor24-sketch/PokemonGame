@@ -37,3 +37,7 @@ NEXT executable work: explicitly adapt these actual used cave dependencies with 
 ## Cave adaptation and six-map runtime follow-up
 
 The three cave art families and guarded six-map DEV overlay are now implemented on codex/coronet-cave-art-runtime-20261023; see RUNTIME_CHECKPOINT.md for actual executed evidence and outstanding gates. The earlier read-only cave preflight above is superseded by this implementation. Production maps and saved identities remain unchanged.
+
+## Completed northern Coronet follow-up
+
+PR229 now supplies permitted cave art and paired six-map DEV evidence:268 source,29 focused native,4 save goldens; each NORMAL/RELEASE46 traversal+3freshContinue+3genuinelegacy PASS. See RUNTIME_CHECKPOINT.md and runtime-evidence/EVIDENCE_INVENTORY.json for exact identities, limits and preserved failures. Earlier unfinished cave/runtime notes above are superseded; production promotion and origins remain separate.
