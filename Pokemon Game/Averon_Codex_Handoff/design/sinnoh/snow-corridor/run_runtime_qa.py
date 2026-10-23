@@ -45,7 +45,7 @@ def weather_offsets(engine,out):
 def run(args):
     scripts=HERE.parents[3]/'scripts/claude_play';sys.path.insert(0,str(scripts))
     import map_qa
-    offsets=weather_offsets(args.engine,args.out/'weather-probe')
+    offsets=weather_offsets(args.engine,args.scratch/'weather-probe')
     original=map_qa.Runner
     class WeatherRunner(original):
         def run_map(self,map_id):
