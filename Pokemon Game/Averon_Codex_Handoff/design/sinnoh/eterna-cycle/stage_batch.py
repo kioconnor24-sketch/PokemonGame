@@ -99,6 +99,33 @@ def sanitize(headers,layouts,raws):
   new.update(region='REGION_SINNOH',region_map_section='MAPSEC_PENDING_OWNER',music='MUS_RUSTBORO' if name=='EternaCity' else 'MUS_ROUTE110',weather='WEATHER_NONE',show_map_name=True,
              connections=connections,warp_events=warps,object_events=[],coord_events=[],bg_events=[])
   out[name]=(struct.pack('<%dH'%len(result),*result),new);closures[name]=list(changes.values())
+ # A target corner can have been walkable in the original source but closed
+ # above because its other edge has no constructed neighbour. Seal against
+ # FINAL candidate cells, to a fixed point; never retain a dangling seam just
+ # because its destination was open before cluster sanitization.
+ final={name:cells(raw,layouts[name]['width'],layouts[name]['height']) for name,(raw,_) in out.items()}
+ while True:
+  pending={}
+  for name,(_,header) in out.items():
+   w,height=layouts[name]['width'],layouts[name]['height']
+   retained={(e['x'],e['y']) for e in header['warp_events']}
+   for connection in header['connections']:
+    direction=connection['direction'];target=ids[connection['map']]
+    tw,th=layouts[target]['width'],layouts[target]['height']
+    points=([(x,0 if direction=='up' else height-1) for x in range(w)] if direction in ('up','down')
+            else [(0 if direction=='left' else w-1,y) for y in range(height)])
+    for x,y in points:
+     index=y*w+x
+     if (x,y) in retained or final[name][index]&0xC00:continue
+     tx,ty=destination((x,y),direction,connection['offset'],tw,th)
+     if not (0<=tx<tw and 0<=ty<th) or final[target][ty*tw+tx]&0xC00:
+      pending[name,index]=dict(x=x,y=y,before=final[name][index],after=(final[name][index]&~0xC00)|0x400,
+                               reason='destination closed by final cluster sanitization')
+  if not pending:break
+  for (name,index),change in pending.items():
+   final[name][index]=change['after'];closures[name].append(change)
+ for name,values in final.items():
+  out[name]=(struct.pack('<%dH'%len(values),*values),out[name][1])
  return out,closures,translations
 
 

@@ -1,0 +1,28 @@
+test_all_three_maps_and_per_record_cells (test_sinnoh_donor_bank_audit.BankAuditTests.test_all_three_maps_and_per_record_cells) ... ok
+test_cli_verity_is_supported (test_sinnoh_donor_bank_audit.BankAuditTests.test_cli_verity_is_supported) ... ok
+test_dewford_option_compares_requested_destination (test_sinnoh_donor_bank_audit.BankAuditTests.test_dewford_option_compares_requested_destination) ... ok
+test_malformed_bank_refused (test_sinnoh_donor_bank_audit.BankAuditTests.test_malformed_bank_refused) ... ok
+test_missing_source_record_refused (test_sinnoh_donor_bank_audit.BankAuditTests.test_missing_source_record_refused) ... ok
+test_unavailable_target_index_reported (test_sinnoh_donor_bank_audit.BankAuditTests.test_unavailable_target_index_reported) ... ok
+test_unsupported_paths_and_family_rejected (test_sinnoh_donor_bank_audit.BankAuditTests.test_unsupported_paths_and_family_rejected) ... ok
+test_bad_dimensions_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_bad_dimensions_refused) ... ok
+test_convert_only_remaps_lower_ten_bits (test_sinnoh_donor_map_pilot.DonorPilotTests.test_convert_only_remaps_lower_ten_bits) ... ok
+test_cross_bank_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_cross_bank_refused) ... ok
+test_inspect_cli_generates_unverified_template (test_sinnoh_donor_map_pilot.DonorPilotTests.test_inspect_cli_generates_unverified_template) ... ok
+test_inspect_has_geometry_and_event_counts_only (test_sinnoh_donor_map_pilot.DonorPilotTests.test_inspect_has_geometry_and_event_counts_only) ... ok
+test_manifest_defaults_to_unverified (test_sinnoh_donor_map_pilot.DonorPilotTests.test_manifest_defaults_to_unverified) ... ok
+test_missing_mapping_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_missing_mapping_refused) ... ok
+test_no_overwrite (test_sinnoh_donor_map_pilot.DonorPilotTests.test_no_overwrite) ... ok
+test_null_connections_are_zero_like_real_lake_verity (test_sinnoh_donor_map_pilot.DonorPilotTests.test_null_connections_are_zero_like_real_lake_verity) ... ok
+test_oversized_buffer_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_oversized_buffer_refused) ... ok
+test_path_escape_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_path_escape_refused) ... ok
+test_reject_in_engine_output (test_sinnoh_donor_map_pilot.DonorPilotTests.test_reject_in_engine_output) ... ok
+test_unverified_behavior_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_unverified_behavior_refused) ... ok
+test_unverified_graphics_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_unverified_graphics_refused) ... ok
+test_wrong_sha_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_wrong_sha_refused) ... ok
+test_wrong_source_and_layout_refused (test_sinnoh_donor_map_pilot.DonorPilotTests.test_wrong_source_and_layout_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.145s
+
+OK
