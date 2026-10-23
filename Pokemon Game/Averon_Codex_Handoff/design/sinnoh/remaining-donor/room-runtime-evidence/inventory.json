@@ -30,8 +30,8 @@
       "bytes": 1640
     },
     "native.log": {
-      "sha256": "4617a1f9485cf8be2659d23cae2c0dbf8010238824858401aaa662f486f8fc35",
-      "bytes": 120494
+      "sha256": "6700d39f03795de291ee9f3a8f77f38f39bdb0ed7b0f540aeab5e3337d4975f8",
+      "bytes": 120493
     },
     "normal-build.log": {
       "sha256": "a793b417f38c8b975c050fb56617a0a4d46ab7a069c1f360a9c196a7148e125f",
@@ -130,8 +130,8 @@
       "bytes": 1034
     },
     "save-goldens.log": {
-      "sha256": "0a272c23ce1984f42ec86a8a5506c2019f75966f13b24be072b154aea23188d2",
-      "bytes": 837
+      "sha256": "cc9460227bdfeffa385f42f296f9586627ee8b1768ff3898c64ae38f8c50231b",
+      "bytes": 836
     },
     "screens/normal-legacy-start.png": {
       "sha256": "a7ef439200bbc8c09c2d5f84ff9a3bfdea0af84b5665726ec91763303c102cf6",
@@ -192,6 +192,16 @@
     "source-identity.json": {
       "sha256": "58d11a005a6fff2c1d2228c0d5e14d96d025e69b03b0c9854e1a8e171ac6b7d4",
       "bytes": 3373
+    }
+  },
+  "log_normalization": {
+    "native.log": {
+      "original_sha256": "4617a1f9485cf8be2659d23cae2c0dbf8010238824858401aaa662f486f8fc35",
+      "normalization": "Only redundant trailing blank lines removed; original private log preserved"
+    },
+    "save-goldens.log": {
+      "original_sha256": "0a272c23ce1984f42ec86a8a5506c2019f75966f13b24be072b154aea23188d2",
+      "normalization": "Only redundant trailing blank lines removed; original private log preserved"
     }
   }
 }
