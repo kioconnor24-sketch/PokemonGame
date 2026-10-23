@@ -123,7 +123,7 @@ class LadderProbeTest(unittest.TestCase):
         return types.SimpleNamespace(behavior=lambda x,y:behavior,
             warp_at=lambda x,y:0 if warp and (x,y)==(8,4) else None,
             inside=lambda x,y:0<=x<16 and 0<=y<16,
-            walkable=lambda x,y:approach and (x,y)==(8,5),elevation=lambda x,y:3)
+            walkable=lambda x,y:(x,y)==(8,4) or (approach and (x,y)==(8,5)),elevation=lambda x,y:3)
 
     def test_ladder_is_approached_from_neighbor_then_entered_by_one_real_step(self):
         before,direction=self.qa.ladder_entry(self.tile(),8,4)
@@ -146,6 +146,11 @@ class LadderProbeTest(unittest.TestCase):
         self.assertEqual(d.mock_calls,[mock.call.step('left'),mock.call.settle()])
         d.reset_mock();d.step.return_value=None
         self.assertIsNone(self.qa.ordinary_step(d,'left'));d.settle.assert_not_called()
+
+    def test_source_blocked_fixture_origin_is_rejected_before_any_foot_probe(self):
+        m=self.tile();m.walkable=lambda x,y:False
+        with self.assertRaisesRegex(ValueError,'source-blocked; invalid DEV entry'):
+            self.qa.follower_origin(m,(8,4))
 
     def test_other_warps_and_unregistered_ladders_stay_delegated(self):
         self.assertIsNone(self.qa.ladder_entry(self.tile(behavior='MB_NORTH_ARROW_WARP'),8,4))

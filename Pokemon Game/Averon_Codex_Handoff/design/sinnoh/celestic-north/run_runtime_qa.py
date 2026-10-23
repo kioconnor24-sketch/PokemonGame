@@ -48,6 +48,7 @@ def ordinary_step(d,direction):
 
 def follower_origin(m,position):
     """A ladder arrival must be left before a reversible follower foot probe."""
+    if not m.walkable(*position):raise ValueError("follower probe origin is source-blocked; invalid DEV entry")
     entry=ladder_entry(m,*position)
     if entry is None:return None
     before,push=entry
