@@ -1,0 +1,11 @@
+# Four-map snow DEV runtime — in progress
+
+Source base d120ca148fa27112b22ccc2cf562a1c06c0cf920; source/art64810c85 pushed. Exactly25-file marked overlay, temporary Sinnoh19–22, existing217 DEV-only surrogate. Existing0–18 and saved IDs0–226 unchanged. Genuine General primary pointer reused only after both metadata arrays match byte-for-byte; no global art/save/identity edits. Source WEATHER_SNOW and all closed cave/lake exits retained.
+
+Actual host5/5 PASS; initial4/5 exposed a test's mistaken group75 assumption (production Sinnoh is76), corrected assertion, not registry. Actual NORMAL build completed: linked17,424,112B (+30,768 vs matching baseline17,393,344), EWRAM226480/IWRAM28392 unchanged. MODERN1 GCC14.2.1, criesOFF. RELEASE/native/graphical/save tests PENDING. No new runtime acceptance claimed.
+
+Read-only weather ABI probe actually compiles against current engine headers using existing emu GCC/nm probing technique: curr528,gfx530,count548,target549, WEATHER_SNOW4, expected16. New wrapper reuses existing height-aware runner; per-map weather checks will read actual initialized state and take screenshots, never patch memory. Existing runner's test save label `coronet-six` is reused solely as an internal filename; this is a four-map snow scene identified by recipe/ROM hashes.
+
+Private build log /workspace/averon-session-evidence/snow-normal-build.log; installed25-file receipt /workspace/averon-session-evidence/snow-installed-recipe.json. Runtime scratch /workspace/averon-corridor-scratch, branch codex/snow-runtime-scratch-20261023 at exact main. Do not reset/delete it while QA/builds run. Original genuine flash /workspace/scratch/corridor-legacy-save/game.sav remains immutable; use only copied disclosed continue-warp fixtures via existing map_qa. No save or ROM upload. Source branch codex/snow-permitted-art-20261023 in /workspace/averon-oreburgh-geography.
+
+Next: actual NORMAL four-map traversal/weather/menu/follower/Save→fresh Continue and genuine oldflash; paired RELEASE build/tests; focused native and strict unchanged save goldens. Record real failures instead of accepting proxy visuals as final snowy artwork. Manager reviews/merges; draft PR235 stays draft while runtime evidence incomplete.
