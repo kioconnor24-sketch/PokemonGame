@@ -1,0 +1,240 @@
+{
+ "maps": [
+  "MAP_ROUTE208"
+ ],
+ "build": "normal",
+ "rom_sha256": "1fa065a9a5e05f1548c2847753aee35082865b316c8c2d973e22992ce4a232a5",
+ "static_findings": [],
+ "save_before": "86c52406ce983c54e6d3b9d9951a69bc74e9920c62b5ef2759999a7a1339f609",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 0
+   }
+  },
+  {
+   "name": "exact lower probe after DEV entry/follower placement",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "lower down step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     17
+    ]
+   ],
+   "expected": [
+    14,
+    17
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower down step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     18
+    ]
+   ],
+   "expected": [
+    14,
+    18
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower down step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     19
+    ]
+   ],
+   "expected": [
+    14,
+    19
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (lower after down)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     19
+    ]
+   ],
+   "expected": [
+    14,
+    19
+   ]
+  },
+  {
+   "name": "lower up step 1",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     18
+    ]
+   ],
+   "expected": [
+    14,
+    18
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower up step 2",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     17
+    ]
+   ],
+   "expected": [
+    14,
+    17
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower up step 3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     16
+    ]
+   ],
+   "expected": [
+    14,
+    16
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (lower after up)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower player and follower layer",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "lower exact endpoint after follower probe",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE208",
+    [
+     14,
+     16
+    ]
+   ],
+   "expected": [
+    14,
+    16
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "86c52406ce983c54e6d3b9d9951a69bc74e9920c62b5ef2759999a7a1339f609",
+ "verdict": "PASS"
+}
