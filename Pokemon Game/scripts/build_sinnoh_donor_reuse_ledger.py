@@ -146,9 +146,20 @@ def evidence_snapshot(repo, refs, facts):
                 runtime=dict(passed=sum(c.get('ok') is True for c in checks),
                              failed=sum(c.get('ok') is not True for c in checks),
                              rom_sha256=doc.get('rom_sha256','UNKNOWN'),build=doc.get('build','UNKNOWN'))
+            repairs={}
+            if isinstance(doc,dict):
+                for name,changes in doc.get('closure_changes',{}).items():
+                    if name in linked and changes:
+                        repairs.setdefault(name,[]).append('receipted external/final-seam collision closures:'+str(len(changes)))
+                for name,repair in doc.get('border_substitutions',{}).items():
+                    if name in linked:
+                        repairs.setdefault(name,[]).append('HASH_GUARDED_BORDER_REPAIR:'+json.dumps(repair,sort_keys=True,separators=(',',':')))
+                for repair in doc.get('neutral_header_corrections',[]):
+                    if repair.get('map') in linked:
+                        repairs.setdefault(repair['map'],[]).append('PINNED_HEADER_REPAIR:'+json.dumps(repair,sort_keys=True,separators=(',',':')))
             if linked:
                 records.append(dict(path=path,sha256=digest(raw),maps=sorted(linked),
-                                    stage_maps=sorted(stage_maps),runtime=runtime))
+                                    stage_maps=sorted(stage_maps),runtime=runtime,repairs=repairs))
         snapshots.append(dict(label=label,commit=commit,paths=paths,records=records))
     # Verify legacy source receipts against actual immutable donor bytes when they
     # publish a source-map SHA, not a remapped/staged output SHA.
@@ -193,13 +204,14 @@ def rows(data):
     production=set(data['production_maps'])
     for f in data['donor']['maps']:
         name=f['name']; sites=sites_for(name,data['sites']);covered.update(sites)
-        evidence=[];stages=[];art=[];qa=[]
+        evidence=[];stages=[];art=[];qa=[];known=[]
         for snap in data['snapshots']:
             for rec in snap['records']:
                 if name not in rec['maps']:
                     continue
                 link=f"{snap['label']}@{snap['commit']}:{rec['path']}#{rec['sha256']}"
                 evidence.append(link)
+                known.extend(rec.get('repairs',{}).get(name,[]))
                 if rec.get('runtime'):
                     rt=rec['runtime']
                     qa.append(f"COMMITTED_SOURCE_BOUND_CLUSTER:{rt['build']}:{rt['passed']}PASS/{rt['failed']}FAIL:ROM={rt['rom_sha256']}:{link}")
@@ -213,7 +225,7 @@ def rows(data):
         # Hash-linked early conversion receipts also establish source staging.
         if not stages:
             stages=[e for e in evidence if 'receipt' in e]
-        known=[]
+        known=list(dict.fromkeys(known))
         if any(w.get('dest_map')==h['id'] for w in h.get('warp_events',[])):
             known.append('source self-warp; review exact destination indices')
         if name=='Route218': known.append('known donor destination repair; use committed canalave-west receipt')

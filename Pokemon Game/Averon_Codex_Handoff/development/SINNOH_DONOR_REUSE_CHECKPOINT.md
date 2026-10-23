@@ -18,4 +18,6 @@ python3 'Pokemon Game/scripts/build_sinnoh_donor_reuse_ledger.py' --inputs 'Poke
 
 Refresh evidence intentionally by supplying `--donor <pinned-git-repo> --repo <averon-repo> --refs <JSON-label-to-full-commit-map>` plus the same inputs/output arguments. Fetch the exact main/open-PR heads first; never infer newer state from this dated snapshot. The inputs list every inspected full commit. The generated CSV is a source/reuse/gap ledger, not production acceptance or permission for IDs227+.
 
-Verification: ledger11/11, source8/8, complete Sinnoh host450/450 PASS with zero skips. Independent generation matched456/456 source-output files. Source-stage identity is fa7faead15ada8637ffe7ef01d74c37baf8a7d6d; later evidence-only commits do not change those staged payloads. No new ROM/native/gameplay verdict is claimed.
+Verification: ledger12/12, source8/8, complete Sinnoh host450/450 PASS with zero skips. Independent generation matched456/456 source-output files. Source-stage identity is fa7faead15ada8637ffe7ef01d74c37baf8a7d6d; later evidence-only commits do not change those staged payloads. No new ROM/native/gameplay verdict is claimed.
+
+Follow-up: known_repair now exposes source receipt closure counts and the exact16 guarded border substitutions/Route221 duplicate repair directly in CSV rows, not only through linked receipts. Focused ledger12/12 PASS; staged payloads remain byte-identical to fa7faead. Prior complete450/450 and subsequent exact-head CI are distinct results.

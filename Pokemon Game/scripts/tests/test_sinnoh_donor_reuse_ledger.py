@@ -86,6 +86,12 @@ class ReuseLedgerTests(unittest.TestCase):
         self.assertIn('target:SN-L09:basement',keys)
         self.assertIn('target:ROADMAP-W8:underground',keys)
 
+    def test_reproduced_source_repairs_are_visible_in_flat_ledger_rows(self):
+        rows={r['donor_map_name']:r for r in ledger.rows(self.data)}
+        self.assertIn('HASH_GUARDED_BORDER_REPAIR',rows['Route205_House']['known_repair'])
+        self.assertIn('468',rows['Route205_House']['known_repair'])
+        self.assertIn('PINNED_HEADER_REPAIR',rows['Route221']['known_repair'])
+
     def test_stale_receipt_hash_is_rejected(self):
         facts={'registered':['Route202'],'maps':[dict(name='Route202',header={'id':'MAP_ROUTE202'},
             map_sha256='a'*64,layout={'blockdata_filepath':'data/layouts/Route202/map.bin'})]}
