@@ -1,0 +1,1308 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/Route218_East/map.json": "2036f94da725b77a55b8e098debaeb9860a649e3af08f94dddfcd28308f7c96f",
+    "data/layouts/Route218_East/map.bin": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+    "data/layouts/Route218_East/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route218/map.json": "7031b9a7cc7e846a991af439800c1819440c50a42e97fc757a2e7d945ed5fb59",
+    "data/layouts/Route218/map.bin": "38df0bdcb7e086477fb745043617a3b38fe76a82a2a195f708a7a65fe15fdffe",
+    "data/layouts/Route218/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/Route218_West/map.json": "92fe8ea942f4c7147c49ed870998108680af9de8fcdc64b315cfbd512bd460a9",
+    "data/layouts/Route218_West/map.bin": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+    "data/layouts/Route218_West/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/CanalaveCity/map.json": "525ca86e145059d27c711b438b1d3adc808e02812daac6ae18242d6208020f46",
+    "data/layouts/CanalaveCity/map.bin": "9002bc61b108cf2e28d9e4e26890ab21150ec18c841bc40904b5f39101cf026a",
+    "data/layouts/CanalaveCity/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/pasos/metatile_attributes.bin": "3efe3d6118ddb28de6083531ec1304f5b4db5b54731609dc31e68ea8ccb9aaac",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/jubilife/metatile_attributes.bin": "9bd943f643aa81d907fb00e8db9c16f85962fb9c2d82a8a200d7bce53b241512",
+    "data/tilesets/secondary/canalave/metatile_attributes.bin": "cee0852c854d4f6aadb7a0d6f5d8f22e4b0172f3f89b7abdd322c2347027a811"
+  },
+  "identity_roundtrips": {
+    "Route218_East": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE218_EAST",
+      "target_map": "MAP_ROUTE218_EAST",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "output_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route218": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE218",
+      "target_map": "MAP_ROUTE218",
+      "source_sha256": "38df0bdcb7e086477fb745043617a3b38fe76a82a2a195f708a7a65fe15fdffe",
+      "output_sha256": "38df0bdcb7e086477fb745043617a3b38fe76a82a2a195f708a7a65fe15fdffe",
+      "mapped_unique_metatiles": 96,
+      "dimensions": [
+        64,
+        32
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route218_West": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE218_WEST",
+      "target_map": "MAP_ROUTE218_WEST",
+      "source_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "output_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "CanalaveCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_CANALAVE_CITY",
+      "target_map": "MAP_CANALAVE_CITY",
+      "source_sha256": "9002bc61b108cf2e28d9e4e26890ab21150ec18c841bc40904b5f39101cf026a",
+      "output_sha256": "9002bc61b108cf2e28d9e4e26890ab21150ec18c841bc40904b5f39101cf026a",
+      "mapped_unique_metatiles": 200,
+      "dimensions": [
+        38,
+        64
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "Route218_East": {
+      "id": "MAP_ROUTE218_EAST",
+      "name": "Route218_East",
+      "layout": "LAYOUT_ROUTE218_EAST",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_JUBILIFE_CITY",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE218",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "Route218": {
+      "id": "MAP_ROUTE218",
+      "name": "Route218",
+      "layout": "LAYOUT_ROUTE218",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 59,
+          "y": 24,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE211_EAST",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 4,
+          "y": 20,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE218_WEST",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_JUBILIFE_CITY",
+          "offset": 4,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_CANALAVE_CITY",
+          "offset": -30,
+          "direction": "left"
+        }
+      ]
+    },
+    "Route218_West": {
+      "id": "MAP_ROUTE218_WEST",
+      "name": "Route218_West",
+      "layout": "LAYOUT_ROUTE218_WEST",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE218",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_CANALAVE_CITY",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "CanalaveCity": {
+      "id": "MAP_CANALAVE_CITY",
+      "name": "CanalaveCity",
+      "layout": "LAYOUT_CANALAVE_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 33,
+          "y": 50,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE218_WEST",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE218",
+          "offset": 30,
+          "direction": "right"
+        }
+      ]
+    }
+  },
+  "warp_index_translation": {
+    "Route218_East": {
+      "1": 0
+    },
+    "Route218": {
+      "0": 0,
+      "1": 1
+    },
+    "Route218_West": {
+      "0": 0,
+      "1": 1
+    },
+    "CanalaveCity": {
+      "0": 0
+    }
+  },
+  "closure_changes": {
+    "Route218_East": [
+      {
+        "x": 11,
+        "y": 5,
+        "before": 12845,
+        "after": 13869,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route218": [
+      {
+        "x": 14,
+        "y": 0,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 38,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 40,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 42,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 43,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 44,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 45,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 46,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 47,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 48,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 49,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 50,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 51,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 52,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 53,
+        "y": 0,
+        "before": 4498,
+        "after": 5522,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 31,
+        "before": 4958,
+        "after": 5982,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 38,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 40,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 42,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 43,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 44,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 45,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 46,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 47,
+        "y": 31,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 48,
+        "y": 31,
+        "before": 4598,
+        "after": 5622,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 49,
+        "y": 31,
+        "before": 4959,
+        "after": 5983,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route218_West": [
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "CanalaveCity": [
+      {
+        "x": 4,
+        "y": 0,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 0,
+        "before": 4498,
+        "after": 5522,
+        "reason": "unbuilt external edge"
+      }
+    ]
+  },
+  "maps": {
+    "Route218_East": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "b195400ca012d0e101f921b37bde3cafd21989dd",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "staged_sha256": "321e6823613b9b0021b777153b4cf133a7ce78fe5f18987b12c0625b4440533a",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 10,
+      "warp_count": 1,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route218": {
+      "dimensions": [
+        64,
+        32
+      ],
+      "source_blob": "51b70abe19c57b3d60d79ef2064c8dadb9d70f60",
+      "source_sha256": "38df0bdcb7e086477fb745043617a3b38fe76a82a2a195f708a7a65fe15fdffe",
+      "staged_sha256": "1f1061674fc0eb7f560bb90080076e7474c9b2d16da107cdafdf76f50f1c3e8d",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 86,
+      "warp_count": 2,
+      "connections": [
+        {
+          "map": "MAP_CANALAVE_CITY",
+          "offset": -30,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route218_West": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "feab6a93f800e642ee42c0c229b4db7302835a6f",
+      "source_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "staged_sha256": "6157827bdf6a84b75732dceb9b1c08747f08fb9e92d410c2ad8698eebce5dbe4",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 9,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "CanalaveCity": {
+      "dimensions": [
+        38,
+        64
+      ],
+      "source_blob": "bc3131fae6aa9a366de8e910c2293b177460a1a5",
+      "source_sha256": "9002bc61b108cf2e28d9e4e26890ab21150ec18c841bc40904b5f39101cf026a",
+      "staged_sha256": "5c01cc80ba732168cec853e811daec5f1e80e1af47b948a9413a81c26f3940e8",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 28,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_ROUTE218",
+          "offset": 30,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art",
+    "Route218 water is preserved; no Surf grant, unlock or ordinary foot through-route acceptance",
+    "Jubilife exit is closed until a separately verified integration; ferry/transfer/gameplay content excluded",
+    "Donor metatile identities/attributes only; Pasos/Jubilife/Canalave artwork is NOT distributed or verified as Averon art"
+  ],
+  "neutral_header_corrections": [
+    {
+      "map": "Route218",
+      "original_warp_index": 0,
+      "before": {
+        "x": 59,
+        "y": 24,
+        "elevation": 0,
+        "dest_map": "MAP_ROUTE211_EAST",
+        "dest_warp_id": "1"
+      },
+      "after": {
+        "x": 59,
+        "y": 24,
+        "elevation": 0,
+        "dest_map": "MAP_ROUTE218_EAST",
+        "dest_warp_id": "1"
+      },
+      "reciprocal_source_map": "Route218_East",
+      "reciprocal_source_warp_index": 1,
+      "reason": "Original source return targets Route218/0; original outward map name instead targets unrelated Route211East"
+    }
+  ]
+}
