@@ -1,0 +1,198 @@
+{"t": 1792671867.8, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792671867.84, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792671870.61, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792671870.73, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792671872.8, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792671872.86, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792671873.38, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792671873.45, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792671874.01, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792671874.06, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792671875.1, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792671875.12, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792671878.71, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792671878.76, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792671879.4, "event": "field", "map": "MAP_ROUTE203", "pos": [51, 7], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792671879.96, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE203", [51, 7]]}
+{"t": 1792671880.69, "event": "capture", "file": "0008-start.png"}
+{"t": 1792671880.69, "event": "observe", "label": "start", "problems": []}
+{"t": 1792671880.69, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671880.82, "event": "map-qa-check", "name": "reached MAP_ROUTE203", "ok": true, "at": ["MAP_ROUTE203", [50, 8]]}
+{"t": 1792671899.28, "event": "capture", "file": "0009-seam-MAP_ROUTE203-left.png"}
+{"t": 1792671900.07, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 19]], "got": ["MAP_ROUTE203", [0, 19]]}
+{"t": 1792671901.7, "event": "capture", "file": "0010-seam-MAP_ROUTE203-left.png"}
+{"t": 1792671902.43, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 21]], "got": ["MAP_ROUTE203", [0, 21]]}
+{"t": 1792671903.96, "event": "capture", "file": "0011-seam-MAP_ROUTE203-left.png"}
+{"t": 1792671904.78, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 22]], "got": ["MAP_ROUTE203", [0, 22]]}
+{"t": 1792671926.94, "event": "capture", "file": "0012-warp-MAP_ROUTE203-0.png"}
+{"t": 1792671927.8, "event": "capture", "file": "0013-MAP_OREBURGH_GATE_1F via warp.png"}
+{"t": 1792671927.8, "event": "observe", "label": "MAP_OREBURGH_GATE_1F via warp", "problems": []}
+{"t": 1792671927.8, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671927.96, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [3, 18]]}
+{"t": 1792671931.49, "event": "map-qa-check", "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [[53, 7]]], "got": ["MAP_ROUTE203", [53, 7]]}
+{"t": 1792671932.14, "event": "capture", "file": "0014-MAP_ROUTE203 after warp round trip.png"}
+{"t": 1792671932.14, "event": "observe", "label": "MAP_ROUTE203 after warp round trip", "problems": []}
+{"t": 1792671932.14, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE203 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671936.04, "event": "map", "map": "MAP_OREBURGH_GATE_1F", "pos": [3, 19]}
+{"t": 1792671936.13, "event": "map-qa-check", "name": "reached MAP_OREBURGH_GATE_1F", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [3, 19]]}
+{"t": 1792671939.41, "event": "capture", "file": "0015-warp-MAP_OREBURGH_GATE_1F-0.png"}
+{"t": 1792671940.05, "event": "capture", "file": "0016-MAP_ROUTE203 via warp.png"}
+{"t": 1792671940.05, "event": "observe", "label": "MAP_ROUTE203 via warp", "problems": []}
+{"t": 1792671940.05, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE203 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671940.27, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE203", "ok": true, "at": ["MAP_ROUTE203", [54, 8]]}
+{"t": 1792671944.0, "event": "map-qa-check", "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_GATE_1F", [[3, 19]]], "got": ["MAP_OREBURGH_GATE_1F", [3, 19]]}
+{"t": 1792671944.95, "event": "capture", "file": "0017-MAP_OREBURGH_GATE_1F after warp round trip.png"}
+{"t": 1792671944.95, "event": "observe", "label": "MAP_OREBURGH_GATE_1F after warp round trip", "problems": []}
+{"t": 1792671944.95, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671954.44, "event": "capture", "file": "0018-warp-MAP_OREBURGH_GATE_1F-1.png"}
+{"t": 1792671955.04, "event": "capture", "file": "0019-MAP_OREBURGH_CITY via warp.png"}
+{"t": 1792671955.04, "event": "observe", "label": "MAP_OREBURGH_CITY via warp", "problems": []}
+{"t": 1792671955.04, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671955.25, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_CITY", "ok": true, "at": ["MAP_OREBURGH_CITY", [7, 14]]}
+{"t": 1792671959.12, "event": "map-qa-check", "name": "MAP_OREBURGH_GATE_1F warp 1 (25, 20) -> MAP_OREBURGH_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_GATE_1F", [[25, 20]]], "got": ["MAP_OREBURGH_GATE_1F", [25, 20]]}
+{"t": 1792671959.92, "event": "capture", "file": "0020-MAP_OREBURGH_GATE_1F after warp round trip.png"}
+{"t": 1792671959.92, "event": "observe", "label": "MAP_OREBURGH_GATE_1F after warp round trip", "problems": []}
+{"t": 1792671959.92, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792671963.74, "event": "map", "map": "MAP_OREBURGH_CITY", "pos": [6, 13]}
+{"t": 1792671963.85, "event": "map-qa-check", "name": "reached MAP_OREBURGH_CITY", "ok": true, "at": ["MAP_OREBURGH_CITY", [6, 13]]}
+{"t": 1792671983.45, "event": "capture", "file": "0021-seam-MAP_OREBURGH_CITY-up.png"}
+{"t": 1792671984.28, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY up seam (44, 0) -> MAP_ROUTE207 (9, 31) and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [44, 0]], "got": ["MAP_OREBURGH_CITY", [44, 0]]}
+{"t": 1792671986.66, "event": "capture", "file": "0022-seam-MAP_OREBURGH_CITY-up.png"}
+{"t": 1792671987.45, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY up seam (47, 0) -> MAP_ROUTE207 (12, 31) and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [47, 0]], "got": ["MAP_OREBURGH_CITY", [47, 0]]}
+{"t": 1792671990.33, "event": "capture", "file": "0023-seam-MAP_OREBURGH_CITY-up.png"}
+{"t": 1792671991.07, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY up seam (50, 0) -> MAP_ROUTE207 (15, 31) and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [50, 0]], "got": ["MAP_OREBURGH_CITY", [50, 0]]}
+{"t": 1792672014.66, "event": "capture", "file": "0024-warp-MAP_OREBURGH_CITY-0.png"}
+{"t": 1792672015.47, "event": "capture", "file": "0025-MAP_OREBURGH_GATE_1F via warp.png"}
+{"t": 1792672015.47, "event": "observe", "label": "MAP_OREBURGH_GATE_1F via warp", "problems": []}
+{"t": 1792672015.47, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672015.59, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [25, 19]]}
+{"t": 1792672019.1, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY warp 0 (6, 12) -> MAP_OREBURGH_GATE_1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [[6, 13]]], "got": ["MAP_OREBURGH_CITY", [6, 13]]}
+{"t": 1792672019.68, "event": "capture", "file": "0026-MAP_OREBURGH_CITY after warp round trip.png"}
+{"t": 1792672019.68, "event": "observe", "label": "MAP_OREBURGH_CITY after warp round trip", "problems": []}
+{"t": 1792672019.68, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672045.74, "event": "capture", "file": "0027-warp-MAP_OREBURGH_CITY-1.png"}
+{"t": 1792672046.07, "event": "capture", "file": "0028-MAP_OREBURGH_MINE_B1F via warp.png"}
+{"t": 1792672046.07, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F via warp", "problems": []}
+{"t": 1792672046.07, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672046.12, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [11, 2]]}
+{"t": 1792672049.54, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY warp 1 (50, 57) -> MAP_OREBURGH_MINE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [[50, 57], [51, 57]]], "got": ["MAP_OREBURGH_CITY", [50, 57]]}
+{"t": 1792672049.85, "event": "capture", "file": "0029-MAP_OREBURGH_CITY after warp round trip.png"}
+{"t": 1792672049.86, "event": "observe", "label": "MAP_OREBURGH_CITY after warp round trip", "problems": []}
+{"t": 1792672049.86, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672053.76, "event": "capture", "file": "0030-warp-MAP_OREBURGH_CITY-2.png"}
+{"t": 1792672054.09, "event": "capture", "file": "0031-MAP_OREBURGH_MINE_B1F via warp.png"}
+{"t": 1792672054.09, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F via warp", "problems": []}
+{"t": 1792672054.09, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672054.17, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [11, 2]]}
+{"t": 1792672057.31, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY warp 2 (51, 57) -> MAP_OREBURGH_MINE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [[50, 57], [51, 57]]], "got": ["MAP_OREBURGH_CITY", [50, 57]]}
+{"t": 1792672057.6, "event": "capture", "file": "0032-MAP_OREBURGH_CITY after warp round trip.png"}
+{"t": 1792672057.6, "event": "observe", "label": "MAP_OREBURGH_CITY after warp round trip", "problems": []}
+{"t": 1792672057.6, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672061.78, "event": "capture", "file": "0033-warp-MAP_OREBURGH_CITY-3.png"}
+{"t": 1792672062.04, "event": "capture", "file": "0034-MAP_OREBURGH_MINE_B1F via warp.png"}
+{"t": 1792672062.04, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F via warp", "problems": []}
+{"t": 1792672062.04, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672062.09, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [12, 2]]}
+{"t": 1792672065.26, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY warp 3 (52, 57) -> MAP_OREBURGH_MINE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [[52, 57], [53, 57]]], "got": ["MAP_OREBURGH_CITY", [53, 57]]}
+{"t": 1792672065.6, "event": "capture", "file": "0035-MAP_OREBURGH_CITY after warp round trip.png"}
+{"t": 1792672065.6, "event": "observe", "label": "MAP_OREBURGH_CITY after warp round trip", "problems": []}
+{"t": 1792672065.6, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672069.09, "event": "capture", "file": "0036-warp-MAP_OREBURGH_CITY-4.png"}
+{"t": 1792672069.33, "event": "capture", "file": "0037-MAP_OREBURGH_MINE_B1F via warp.png"}
+{"t": 1792672069.34, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F via warp", "problems": []}
+{"t": 1792672069.34, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672069.39, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [12, 2]]}
+{"t": 1792672072.88, "event": "map-qa-check", "name": "MAP_OREBURGH_CITY warp 4 (53, 57) -> MAP_OREBURGH_MINE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_CITY", [[52, 57], [53, 57]]], "got": ["MAP_OREBURGH_CITY", [53, 57]]}
+{"t": 1792672073.42, "event": "capture", "file": "0038-MAP_OREBURGH_CITY after warp round trip.png"}
+{"t": 1792672073.42, "event": "observe", "label": "MAP_OREBURGH_CITY after warp round trip", "problems": []}
+{"t": 1792672073.42, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672091.48, "event": "map", "map": "MAP_ROUTE207", "pos": [9, 31]}
+{"t": 1792672091.55, "event": "map-qa-check", "name": "reached MAP_ROUTE207", "ok": true, "at": ["MAP_ROUTE207", [9, 31]]}
+{"t": 1792672092.44, "event": "capture", "file": "0039-seam-MAP_ROUTE207-down.png"}
+{"t": 1792672093.25, "event": "map-qa-check", "name": "MAP_ROUTE207 down seam (9, 31) -> MAP_OREBURGH_CITY (44, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE207", [9, 31]], "got": ["MAP_ROUTE207", [9, 31]]}
+{"t": 1792672095.11, "event": "capture", "file": "0040-seam-MAP_ROUTE207-down.png"}
+{"t": 1792672095.92, "event": "map-qa-check", "name": "MAP_ROUTE207 down seam (12, 31) -> MAP_OREBURGH_CITY (47, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE207", [12, 31]], "got": ["MAP_ROUTE207", [12, 31]]}
+{"t": 1792672098.15, "event": "capture", "file": "0041-seam-MAP_ROUTE207-down.png"}
+{"t": 1792672098.87, "event": "map-qa-check", "name": "MAP_ROUTE207 down seam (15, 31) -> MAP_OREBURGH_CITY (50, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE207", [15, 31]], "got": ["MAP_ROUTE207", [15, 31]]}
+{"t": 1792672101.59, "event": "map", "map": "MAP_OREBURGH_CITY", "pos": [44, 0]}
+{"t": 1792672122.39, "event": "map", "map": "MAP_OREBURGH_MINE_B1F", "pos": [11, 1]}
+{"t": 1792672122.48, "event": "map-qa-check", "name": "reached MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [11, 1]]}
+{"t": 1792672125.44, "event": "capture", "file": "0042-warp-MAP_OREBURGH_MINE_B1F-0.png"}
+{"t": 1792672125.81, "event": "capture", "file": "0043-MAP_OREBURGH_CITY via warp.png"}
+{"t": 1792672125.81, "event": "observe", "label": "MAP_OREBURGH_CITY via warp", "problems": []}
+{"t": 1792672125.81, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672126.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_CITY", "ok": true, "at": ["MAP_OREBURGH_CITY", [50, 56]]}
+{"t": 1792672129.76, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 0 (11, 1) -> MAP_OREBURGH_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[11, 1]]], "got": ["MAP_OREBURGH_MINE_B1F", [11, 1]]}
+{"t": 1792672130.01, "event": "capture", "file": "0044-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672130.01, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672130.01, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672133.46, "event": "capture", "file": "0045-warp-MAP_OREBURGH_MINE_B1F-1.png"}
+{"t": 1792672133.76, "event": "capture", "file": "0046-MAP_OREBURGH_CITY via warp.png"}
+{"t": 1792672133.76, "event": "observe", "label": "MAP_OREBURGH_CITY via warp", "problems": []}
+{"t": 1792672133.76, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672134.01, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_CITY", "ok": true, "at": ["MAP_OREBURGH_CITY", [53, 56]]}
+{"t": 1792672137.53, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 1 (12, 1) -> MAP_OREBURGH_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[12, 1]]], "got": ["MAP_OREBURGH_MINE_B1F", [12, 1]]}
+{"t": 1792672137.82, "event": "capture", "file": "0047-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672137.83, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672137.83, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672145.3, "event": "capture", "file": "0048-warp-MAP_OREBURGH_MINE_B1F-2.png"}
+{"t": 1792672146.09, "event": "capture", "file": "0049-MAP_OREBURGH_MINE_B2F via warp.png"}
+{"t": 1792672146.1, "event": "observe", "label": "MAP_OREBURGH_MINE_B2F via warp", "problems": []}
+{"t": 1792672146.1, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672146.17, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792672148.81, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 2 (11, 21) -> MAP_OREBURGH_MINE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[10, 21], [11, 21], [12, 21], [13, 21]]], "got": ["MAP_OREBURGH_MINE_B1F", [11, 21]]}
+{"t": 1792672149.09, "event": "capture", "file": "0050-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672149.1, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672149.1, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672152.05, "event": "capture", "file": "0051-warp-MAP_OREBURGH_MINE_B1F-3.png"}
+{"t": 1792672152.88, "event": "capture", "file": "0052-MAP_OREBURGH_MINE_B2F via warp.png"}
+{"t": 1792672152.88, "event": "observe", "label": "MAP_OREBURGH_MINE_B2F via warp", "problems": []}
+{"t": 1792672152.88, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672152.97, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792672155.45, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 3 (12, 21) -> MAP_OREBURGH_MINE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[10, 21], [11, 21], [12, 21], [13, 21]]], "got": ["MAP_OREBURGH_MINE_B1F", [11, 21]]}
+{"t": 1792672155.86, "event": "capture", "file": "0053-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672155.86, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672155.87, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672159.05, "event": "capture", "file": "0054-warp-MAP_OREBURGH_MINE_B1F-4.png"}
+{"t": 1792672159.78, "event": "capture", "file": "0055-MAP_OREBURGH_MINE_B2F via warp.png"}
+{"t": 1792672159.78, "event": "observe", "label": "MAP_OREBURGH_MINE_B2F via warp", "problems": []}
+{"t": 1792672159.78, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672159.89, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792672162.55, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 4 (10, 21) -> MAP_OREBURGH_MINE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[10, 21], [11, 21], [12, 21], [13, 21]]], "got": ["MAP_OREBURGH_MINE_B1F", [11, 21]]}
+{"t": 1792672162.89, "event": "capture", "file": "0056-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672162.89, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672162.89, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672166.07, "event": "capture", "file": "0057-warp-MAP_OREBURGH_MINE_B1F-5.png"}
+{"t": 1792672166.92, "event": "capture", "file": "0058-MAP_OREBURGH_MINE_B2F via warp.png"}
+{"t": 1792672166.92, "event": "observe", "label": "MAP_OREBURGH_MINE_B2F via warp", "problems": []}
+{"t": 1792672166.92, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672166.99, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
+{"t": 1792672169.53, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B1F warp 5 (13, 21) -> MAP_OREBURGH_MINE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B1F", [[10, 21], [11, 21], [12, 21], [13, 21]]], "got": ["MAP_OREBURGH_MINE_B1F", [11, 21]]}
+{"t": 1792672169.8, "event": "capture", "file": "0059-MAP_OREBURGH_MINE_B1F after warp round trip.png"}
+{"t": 1792672169.8, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F after warp round trip", "problems": []}
+{"t": 1792672169.8, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672172.26, "event": "map", "map": "MAP_OREBURGH_MINE_B2F", "pos": [15, 2]}
+{"t": 1792672172.33, "event": "map-qa-check", "name": "reached MAP_OREBURGH_MINE_B2F", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 2]]}
+{"t": 1792672174.71, "event": "capture", "file": "0060-warp-MAP_OREBURGH_MINE_B2F-0.png"}
+{"t": 1792672175.07, "event": "capture", "file": "0061-MAP_OREBURGH_MINE_B1F via warp.png"}
+{"t": 1792672175.07, "event": "observe", "label": "MAP_OREBURGH_MINE_B1F via warp", "problems": []}
+{"t": 1792672175.07, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672175.1, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F", "ok": true, "at": ["MAP_OREBURGH_MINE_B1F", [11, 20]]}
+{"t": 1792672177.72, "event": "map-qa-check", "name": "MAP_OREBURGH_MINE_B2F warp 0 (15, 1) -> MAP_OREBURGH_MINE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_MINE_B2F", [[15, 2]]], "got": ["MAP_OREBURGH_MINE_B2F", [15, 2]]}
+{"t": 1792672178.54, "event": "capture", "file": "0062-MAP_OREBURGH_MINE_B2F after warp round trip.png"}
+{"t": 1792672178.54, "event": "observe", "label": "MAP_OREBURGH_MINE_B2F after warp round trip", "problems": []}
+{"t": 1792672178.54, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_MINE_B2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792672179.59, "event": "capture", "file": "0063-start-menu.png"}
+{"t": 1792672180.38, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792672186.46, "event": "capture", "file": "0064-save-confirm-oreburgh-corridor.png"}
+{"t": 1792672187.59, "event": "capture", "file": "0065-save-step-oreburgh-corridor-01.png"}
+{"t": 1792672188.71, "event": "capture", "file": "0066-save-step-oreburgh-corridor-02.png"}
+{"t": 1792672189.72, "event": "capture", "file": "0067-save-step-oreburgh-corridor-03.png"}
+{"t": 1792672190.71, "event": "capture", "file": "0068-save-step-oreburgh-corridor-04.png"}
+{"t": 1792672191.68, "event": "capture", "file": "0069-save-step-oreburgh-corridor-05.png"}
+{"t": 1792672192.69, "event": "capture", "file": "0070-save-step-oreburgh-corridor-06.png"}
+{"t": 1792672193.74, "event": "capture", "file": "0071-save-step-oreburgh-corridor-07.png"}
+{"t": 1792672194.86, "event": "capture", "file": "0072-save-step-oreburgh-corridor-08.png"}
+{"t": 1792672195.68, "event": "capture", "file": "0073-saved-oreburgh-corridor.png"}
+{"t": 1792672195.69, "event": "release-save", "label": "oreburgh-corridor", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792672195.72, "event": "map-qa-check", "name": "SAVE (oreburgh-corridor)", "ok": true, "at": ["MAP_OREBURGH_MINE_B2F", [15, 3]]}
