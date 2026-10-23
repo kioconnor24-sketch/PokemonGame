@@ -1,4 +1,4 @@
-"""Seven-map current-main DEV plan reuses art and preserves production prefixes."""
+"""Six-map current-main DEV plan reuses art and preserves production prefixes."""
 import copy
 import importlib.util
 import json
@@ -111,6 +111,36 @@ class RuntimeTest(unittest.TestCase):
                               [b'codex/coronet-runtime-scratch-test\n',(a.BASE+'\n').encode(),b' M source.c\n']):
                 with mock.patch.object(a.base,'git',side_effect=responses),self.assertRaises(ValueError):a.install(repo)
             self.assertEqual(list(engine.iterdir()),[engine/'.map_qa_throwaway'])
+
+
+class LadderProbeTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec=importlib.util.spec_from_file_location('coronet_ladder_qa',HERE/'run_runtime_qa.py')
+        cls.qa=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.qa)
+
+    def tile(self,behavior='MB_LADDER',warp=True,approach=True):
+        return types.SimpleNamespace(behavior=lambda x,y:behavior,
+            warp_at=lambda x,y:0 if warp and (x,y)==(8,4) else None,
+            inside=lambda x,y:0<=x<16 and 0<=y<16,
+            walkable=lambda x,y:approach and (x,y)==(8,5),elevation=lambda x,y:3)
+
+    def test_ladder_is_approached_from_neighbor_then_entered_by_one_real_step(self):
+        before,direction=self.qa.ladder_entry(self.tile(),8,4)
+        self.assertEqual((before,direction),((8,5),'up'))
+        dx,dy=self.qa.DIRS[direction];self.assertEqual((before[0]+dx,before[1]+dy),(8,4))
+
+    def test_room2_elevation_zero_ladder_accepts_ordinary_layer3_approach(self):
+        m=self.tile();m.elevation=lambda x,y:0 if (x,y)==(8,4) else 3
+        self.assertEqual(self.qa.ladder_entry(m,8,4),((8,5),'up'))
+
+    def test_other_warps_and_unregistered_ladders_stay_delegated(self):
+        self.assertIsNone(self.qa.ladder_entry(self.tile(behavior='MB_NORTH_ARROW_WARP'),8,4))
+        self.assertIsNone(self.qa.ladder_entry(self.tile(warp=False),8,4))
+
+    def test_blocked_ladder_cannot_silently_become_a_successful_probe(self):
+        with self.assertRaisesRegex(ValueError,'no ordinary compatible approach'):
+            self.qa.ladder_entry(self.tile(approach=False),8,4)
 
 
 if __name__=='__main__':unittest.main()

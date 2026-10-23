@@ -24,6 +24,22 @@ def arrow_direction(m,tile):
     return None
 
 
+def ladder_entry(m,x,y):
+    """Native TryStartWarpEventScript triggers MB_LADDER on entry, not facing.
+
+    Stand beside the real warp and step onto it; never walk to the ladder as
+    setup, because that already changes maps. Other behaviors stay delegated
+    to the existing map_qa trigger implementation.
+    """
+    if m.behavior(x,y)!='MB_LADDER' or m.warp_at(x,y) is None:return None
+    for direction,(dx,dy) in DIRS.items():
+        before=(x-dx,y-dy)
+        if m.inside(*before) and m.walkable(*before) and m.warp_at(*before) is None:
+            if m.elevation(x,y)==0 or m.elevation(*before) in (0,m.elevation(x,y)):
+                return before,direction
+    raise ValueError('ladder warp has no ordinary compatible approach')
+
+
 def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,start_elevation=0):
     """Host path planning follows IsElevationMismatchAt/ObjectEventUpdateElevation.
 
@@ -109,7 +125,9 @@ def run(args):
     # On this actual GCC/GBA ABI, the current/previous elevation byte is the
     # byte immediately before initialCoords; its offset is compiler-derived.
     w.emu.OFFSET_EXPRS['oe.elevationByte']='offsetof(struct ObjectEvent, initialCoords) - 1'
-    original_bfs=qa.mapdata.bfs;original_runner=qa.Runner;active=[None]
+    original_bfs=qa.mapdata.bfs;original_runner=qa.Runner;original_trigger=qa.mapdata.trigger_entry;active=[None]
+    def trigger(m,x,y):
+        return ladder_entry(m,x,y) or original_trigger(m,x,y)
     def bfs(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True):
         if active[0] is None:return original_bfs(m,start,goals,blocked,allow_goal_unwalkable)
         z=observed_elevations(active[0])['player']
@@ -178,9 +196,9 @@ def run(args):
     for mid in MAPS:cmd+=['--map',mid]
     if args.expect:cmd+=['--expect',str(args.expect)]
     else:cmd+=['--save','coronet-six']
-    qa.mapdata.bfs=bfs;qa.Runner=HeightRunner
+    qa.mapdata.bfs=bfs;qa.mapdata.trigger_entry=trigger;qa.Runner=HeightRunner
     try:return qa.main(cmd)
-    finally:qa.mapdata.bfs=original_bfs;qa.Runner=original_runner
+    finally:qa.mapdata.bfs=original_bfs;qa.mapdata.trigger_entry=original_trigger;qa.Runner=original_runner
 
 
 if __name__=='__main__':
