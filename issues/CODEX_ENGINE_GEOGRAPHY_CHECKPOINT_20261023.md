@@ -1,5 +1,14 @@
 # Codex engine/geography checkpoint — 2026-10-23
 
+## ACTIVE continuation supersedes the prior stopped/clean state below
+
+Sourcea3485b64b4bd8a582f27f557b5983248ad7615ef pushed to #231. Optional explicit --acro-fixture reuses existing QA item grant; ONE Acro, no flags or terrain changes. Default66-file contract matches the previous published golden exactly. Source282/282,0skips verified by CI120266931035; focused13/13; native30/30 and backward goldens4/4 PASS. Normal focused real Bag/mount/rail return/dismount/follower/Save13/13 and new-process Continue2/2 PASS. Initial split-key timing FAIL6/7 remains preserved. Full13 NORMAL with --acro-route is RUNNING; serialized RELEASE probe/full/Continue/legacy queued. Do not call these pending results accepted.
+
+Current fixture engine12a70ac134e8366f12f9c981695826ebd19cd1d8: NORMAL17,471,916B SHA09cc9d8a919523f26d5447c517165df5510c4843b1ba739e3fd53f5b111f04c4; RELEASE17,591,044B SHA4ae2996c67db4512526a7788f331f9d14db5338df1ae998c17c172cfe17a82a4; exactly+32B each vs matching no-grant DEV, RAM unchanged. Explicit fixture, not production progression or natural arrival.
+
+Scratch is INSTALLED on c6ac; no-grant stash96c9f8b… and private bundle remain preserved. Active normal shell /workspace/averon-session-evidence/run-eastern-acro-normal.sh PID779700; serialized RELEASE queue /workspace/averon-session-evidence/run-eastern-acro-release-queue.sh waits for it. Recipe /workspace/averon-session-evidence/eastern-acro-installed-recipe.json. Source files/ROMs must stay unchanged while active; do not start another GUI/display77/GDB2345 session. Partial actual receipts plus pending markers in runtime-evidence/acro/README.md. Next: inspect actual full outputs, resolve demonstrated harness failures, finish both profiles and old-flash checks, publish exact receipts, then independent upper-layer/art work. Prior full-foot failure is retained; no production promotion or owner saved-ID decision bypass.
+
+
 Current code/evidence lane: `codex/eastern-dev-runtime-20261023`, PR #231, code head `e1cf374aff8be99a3341aa71e455141238c1f387`; evidence/documentation follow-up does not alter the built engine. Exact current remote head is recorded in the final Issue15 handoff. Detailed source/commands/results: `Pokemon Game/Averon_Codex_Handoff/design/sinnoh/eastern-loop/RUNTIME_CHECKPOINT.md` and its68-file evidence set.
 
 ## Actual results / blockers

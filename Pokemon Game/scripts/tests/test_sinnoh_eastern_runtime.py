@@ -172,6 +172,8 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual(receipt['dev_fixture']['flag_grants'],[])
         self.assertEqual(set(files),set(before));self.assertEqual(len(files),66)
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
+        published=json.loads((HERE/'runtime-recipe.json').read_text())
+        self.assertEqual(self.receipt,published)  # exact previous no-grant contract, not a self-generated oracle
         self.assertNotIn('dev_fixture',self.receipt)
         for bad in (1,'yes',None):
             with self.subTest(value=bad),self.assertRaises(ValueError):a.assemble(ROOT,acro_fixture=bad)
