@@ -61,7 +61,8 @@ def run(args):
             ordinary=old_check(self,'ordinary foot/no Surf at '+name,bool(flags&foot) and not (flags&mask),avatar_flags=flags,foot_mask=foot,surf_mask=mask)
             return bool(result and ordinary)
         return result
-    shared.MAPS=('MAP_ROUTE222',) if getattr(args,'ledge_x',None) is not None else MAPS
+    shared.MAPS=(('MAP_ROUTE222',) if getattr(args,'ledge_x',None) is not None else
+                 ('MAP_POKMON_LEAGUE',) if getattr(args,'dry_league',False) else MAPS)
     qa.Runner.check=check;qa.Runner=CoastRunner
     try:return shared.run(args)
     finally:shared.MAPS=old_maps;qa.Runner.check=old_check;qa.Runner=old_runner
@@ -72,4 +73,5 @@ if __name__=='__main__':
     for name in ('engine','rom','scratch','out','recipe'):p.add_argument('--'+name,required=True,type=Path)
     p.add_argument('--profile',required=True,choices=('normal','release'));p.add_argument('--expect',type=Path)
     p.add_argument('--ledge-x',type=int,choices=(36,37),help='independent actual source-ledge negative, DEV flash copy only')
+    p.add_argument('--dry-league',action='store_true',help='isolated dry courtyard fixture; no Surf/Waterfall or natural arrival claim')
     sys.exit(run(p.parse_args()))
