@@ -61,6 +61,12 @@ def build(donor,engine,out):
         bank,i=divmod(mid,512)
         words=struct.unpack_from('<8H',(p,records)[bank],i*16)
         if any((word&1023) in CHANGED for word in words) and mid!=660:raise ValueError('unexpected substituted cell type')
+    # The four current Museum replacement patterns are transparent placeholders.
+    # Static RGB compositing hid the backdrop leak, but settled real GBA frames
+    # show a magenta tile. Reuse an already verified opaque floor record; keep
+    # every source cell and its complete660 behavior/layer attribute unchanged.
+    records[(660-512)*16:(661-512)*16]=records[(649-512)*16:(650-512)*16]
+    deps=d.closure(raw+border,[p,records],images)
     image=d.render(raw,[p,records],images,palettes,19,17)
     reference=d.render(raw,[p,source_records],source_images,source_palettes,19,17)
     left,right=image.tobytes(),reference.tobytes();stride=len(image.getbands())
@@ -70,7 +76,8 @@ def build(donor,engine,out):
         source_sha256=source_hash,existing_averon_sha256=current_hash,geometry_sha256=b.sha(raw),source_physics_and_attributes_unchanged=True,
         dependencies=deps,substituted_graphic_tile_ids=sorted(CHANGED),substituted_metatile=660,affected_cells=affected,changed_render_pixels=different_pixels,
         all_other_used_patterns_identical=True,all_used_palette_colors_equal=True,secondary_records=count,
-        limits=['Four source graphic patterns intentionally replaced with existing Museum patterns; not full source RGB equivalence','No donor PNG/palette written or imported, no story/objects/encounters','No engine install, saved identity, ROM or mGBA acceptance; Forest Valor remains unadapted'])
+        runtime_opaque_floor_repair=dict(metatile=660,existing_floor_template=649,affected_cells=len(affected),source_attribute_preserved=True),
+        limits=['Metatile660 uses accepted opaque Museum floor649 to replace four transparent placeholder patterns; not source RGB equivalence','No donor PNG/palette written or imported, no story/objects/encounters','Static art only; exact repaired ROM/native/mGBA evidence is separate from pre-repair functional runs'])
     (out/'entrance-graphics-compatibility.json').write_text(json.dumps(receipt,indent=2)+'\n');return receipt
 
 

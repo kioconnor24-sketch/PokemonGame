@@ -1,0 +1,344 @@
+{"t": 1792706437.26, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792706437.34, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792706440.29, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792706440.36, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792706441.66, "event": "screen", "cb2": "MainCB2_Intro", "i": 7}
+{"t": 1792706441.77, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792706442.34, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 8}
+{"t": 1792706442.39, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792706442.98, "event": "screen", "cb2": "MainCB2", "i": 9}
+{"t": 1792706443.06, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792706444.24, "event": "screen", "cb2": "CB2_MainMenu", "i": 11}
+{"t": 1792706444.29, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792706448.07, "event": "screen", "cb2": "CB2_Overworld", "i": 14}
+{"t": 1792706448.2, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792706448.86, "event": "field", "map": "MAP_ETERNA_FOREST", "pos": [59, 8], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792706449.46, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706450.35, "event": "capture", "file": "0008-start.png"}
+{"t": 1792706450.35, "event": "observe", "label": "start", "problems": []}
+{"t": 1792706450.35, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706450.44, "event": "map-qa-check", "name": "reached MAP_ETERNA_FOREST", "ok": true, "at": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706452.95, "event": "capture", "file": "0009-warp-MAP_ETERNA_FOREST-0.png"}
+{"t": 1792706453.7, "event": "capture", "file": "0010-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706453.71, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706453.71, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706453.84, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 16]]}
+{"t": 1792706456.18, "event": "map-qa-check", "name": "MAP_ETERNA_FOREST warp 0 (59, 7) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_ETERNA_FOREST", [[59, 8]]], "got": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706456.91, "event": "capture", "file": "0011-MAP_ETERNA_FOREST after warp round trip.png"}
+{"t": 1792706456.91, "event": "observe", "label": "MAP_ETERNA_FOREST after warp round trip", "problems": []}
+{"t": 1792706456.91, "event": "map-qa-check", "name": "follower visible (MAP_ETERNA_FOREST after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706459.08, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 16]}
+{"t": 1792706459.23, "event": "map-qa-check", "name": "reached MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 16]]}
+{"t": 1792706461.84, "event": "capture", "file": "0012-warp-MAP_OLD_CHATEAU_ENTRANCE-0.png"}
+{"t": 1792706462.68, "event": "capture", "file": "0013-MAP_ETERNA_FOREST via warp.png"}
+{"t": 1792706462.68, "event": "observe", "label": "MAP_ETERNA_FOREST via warp", "problems": []}
+{"t": 1792706462.68, "event": "map-qa-check", "name": "follower visible (MAP_ETERNA_FOREST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706463.3, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ETERNA_FOREST", "ok": true, "at": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706466.2, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 0 (9, 16) -> MAP_ETERNA_FOREST and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[8, 16], [9, 16], [10, 16]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 16]]}
+{"t": 1792706466.89, "event": "capture", "file": "0014-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706466.89, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706466.89, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706469.65, "event": "capture", "file": "0015-warp-MAP_OLD_CHATEAU_ENTRANCE-1.png"}
+{"t": 1792706470.46, "event": "capture", "file": "0016-MAP_ETERNA_FOREST via warp.png"}
+{"t": 1792706470.46, "event": "observe", "label": "MAP_ETERNA_FOREST via warp", "problems": []}
+{"t": 1792706470.46, "event": "map-qa-check", "name": "follower visible (MAP_ETERNA_FOREST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706470.75, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ETERNA_FOREST", "ok": true, "at": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706473.23, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 1 (8, 16) -> MAP_ETERNA_FOREST and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[8, 16], [9, 16], [10, 16]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 16]]}
+{"t": 1792706473.9, "event": "capture", "file": "0017-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706473.9, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706473.9, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706476.46, "event": "capture", "file": "0018-warp-MAP_OLD_CHATEAU_ENTRANCE-2.png"}
+{"t": 1792706477.05, "event": "capture", "file": "0019-MAP_ETERNA_FOREST via warp.png"}
+{"t": 1792706477.05, "event": "observe", "label": "MAP_ETERNA_FOREST via warp", "problems": []}
+{"t": 1792706477.05, "event": "map-qa-check", "name": "follower visible (MAP_ETERNA_FOREST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706477.28, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ETERNA_FOREST", "ok": true, "at": ["MAP_ETERNA_FOREST", [59, 8]]}
+{"t": 1792706479.76, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 2 (10, 16) -> MAP_ETERNA_FOREST and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[8, 16], [9, 16], [10, 16]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 16]]}
+{"t": 1792706480.47, "event": "capture", "file": "0020-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706480.47, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706480.47, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706483.93, "event": "capture", "file": "0021-warp-MAP_OLD_CHATEAU_ENTRANCE-3.png"}
+{"t": 1792706484.69, "event": "capture", "file": "0022-MAP_OLD_CHATEAU_DINING_ROOM via warp.png"}
+{"t": 1792706484.7, "event": "observe", "label": "MAP_OLD_CHATEAU_DINING_ROOM via warp", "problems": []}
+{"t": 1792706484.7, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_DINING_ROOM via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706484.78, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_DINING_ROOM", "ok": true, "at": ["MAP_OLD_CHATEAU_DINING_ROOM", [20, 9]]}
+{"t": 1792706487.16, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 3 (9, 11) -> MAP_OLD_CHATEAU_DINING_ROOM and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[9, 12]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 12]]}
+{"t": 1792706487.84, "event": "capture", "file": "0023-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706487.84, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706487.84, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706495.27, "event": "capture", "file": "0024-warp-MAP_OLD_CHATEAU_ENTRANCE-4.png"}
+{"t": 1792706496.03, "event": "capture", "file": "0025-MAP_OLD_CHATEAU_SIDE_ROOM_1 via warp.png"}
+{"t": 1792706496.03, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_1 via warp", "problems": []}
+{"t": 1792706496.03, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_1 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706496.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_SIDE_ROOM_1", "ok": true, "at": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [4, 9]]}
+{"t": 1792706498.48, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 4 (2, 2) -> MAP_OLD_CHATEAU_SIDE_ROOM_1 and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[2, 3]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [2, 3]]}
+{"t": 1792706499.74, "event": "capture", "file": "0026-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706499.74, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706499.74, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706504.11, "event": "capture", "file": "0027-warp-MAP_OLD_CHATEAU_ENTRANCE-5.png"}
+{"t": 1792706504.88, "event": "capture", "file": "0028-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706504.89, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706504.89, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706505.0, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [18, 13]]}
+{"t": 1792706507.37, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 5 (9, 2) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[9, 3]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706508.04, "event": "capture", "file": "0029-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706508.04, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706508.04, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706512.3, "event": "capture", "file": "0030-warp-MAP_OLD_CHATEAU_ENTRANCE-6.png"}
+{"t": 1792706513.0, "event": "capture", "file": "0031-MAP_OLD_CHATEAU_SIDE_ROOM_2 via warp.png"}
+{"t": 1792706513.0, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_2 via warp", "problems": []}
+{"t": 1792706513.0, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706513.04, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_SIDE_ROOM_2", "ok": true, "at": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [4, 9]]}
+{"t": 1792706515.26, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_ENTRANCE warp 6 (16, 2) -> MAP_OLD_CHATEAU_SIDE_ROOM_2 and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_ENTRANCE", [[16, 3]]], "got": ["MAP_OLD_CHATEAU_ENTRANCE", [16, 3]]}
+{"t": 1792706515.89, "event": "capture", "file": "0032-MAP_OLD_CHATEAU_ENTRANCE after warp round trip.png"}
+{"t": 1792706515.89, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE after warp round trip", "problems": []}
+{"t": 1792706515.89, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706523.4, "event": "map", "map": "MAP_OLD_CHATEAU_DINING_ROOM", "pos": [20, 9]}
+{"t": 1792706523.5, "event": "map-qa-check", "name": "reached MAP_OLD_CHATEAU_DINING_ROOM", "ok": true, "at": ["MAP_OLD_CHATEAU_DINING_ROOM", [20, 9]]}
+{"t": 1792706525.77, "event": "capture", "file": "0033-warp-MAP_OLD_CHATEAU_DINING_ROOM-0.png"}
+{"t": 1792706526.49, "event": "capture", "file": "0034-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706526.5, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706526.5, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706526.63, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 12]]}
+{"t": 1792706528.99, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_DINING_ROOM warp 0 (20, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_DINING_ROOM", [[20, 9], [21, 9]]], "got": ["MAP_OLD_CHATEAU_DINING_ROOM", [20, 9]]}
+{"t": 1792706529.65, "event": "capture", "file": "0035-MAP_OLD_CHATEAU_DINING_ROOM after warp round trip.png"}
+{"t": 1792706529.65, "event": "observe", "label": "MAP_OLD_CHATEAU_DINING_ROOM after warp round trip", "problems": []}
+{"t": 1792706529.65, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_DINING_ROOM after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706532.34, "event": "capture", "file": "0036-warp-MAP_OLD_CHATEAU_DINING_ROOM-1.png"}
+{"t": 1792706532.94, "event": "capture", "file": "0037-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706532.95, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706532.95, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706533.03, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 12]]}
+{"t": 1792706535.24, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_DINING_ROOM warp 1 (21, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_DINING_ROOM", [[20, 9], [21, 9]]], "got": ["MAP_OLD_CHATEAU_DINING_ROOM", [20, 9]]}
+{"t": 1792706535.93, "event": "capture", "file": "0038-MAP_OLD_CHATEAU_DINING_ROOM after warp round trip.png"}
+{"t": 1792706535.94, "event": "observe", "label": "MAP_OLD_CHATEAU_DINING_ROOM after warp round trip", "problems": []}
+{"t": 1792706535.94, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_DINING_ROOM after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706537.66, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 12]}
+{"t": 1792706546.93, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [18, 13]}
+{"t": 1792706546.98, "event": "map-qa-check", "name": "reached MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [18, 13]]}
+{"t": 1792706549.27, "event": "capture", "file": "0039-warp-MAP_OLD_CHATEAU_2F-0.png"}
+{"t": 1792706550.0, "event": "capture", "file": "0040-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706550.0, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706550.0, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706550.09, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706552.38, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 0 (18, 13) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[18, 13], [19, 13]]], "got": ["MAP_OLD_CHATEAU_2F", [18, 13]]}
+{"t": 1792706552.96, "event": "capture", "file": "0041-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706552.96, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706552.96, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706555.54, "event": "capture", "file": "0042-warp-MAP_OLD_CHATEAU_2F-1.png"}
+{"t": 1792706556.19, "event": "capture", "file": "0043-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706556.19, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706556.19, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706556.3, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706558.73, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 1 (19, 13) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[18, 13], [19, 13]]], "got": ["MAP_OLD_CHATEAU_2F", [18, 13]]}
+{"t": 1792706559.38, "event": "capture", "file": "0044-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706559.39, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706559.39, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706567.05, "event": "capture", "file": "0045-warp-MAP_OLD_CHATEAU_2F-2.png"}
+{"t": 1792706567.65, "event": "capture", "file": "0046-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706567.65, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706567.65, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706567.74, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [3, 7]]}
+{"t": 1792706569.97, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 2 (3, 9) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[3, 10]]], "got": ["MAP_OLD_CHATEAU_2F", [3, 10]]}
+{"t": 1792706570.69, "event": "capture", "file": "0047-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706570.69, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706570.69, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706570.81, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [3, 7], "via": ["MAP_OLD_CHATEAU_2F", [3, 10]]}
+{"t": 1792706575.44, "event": "capture", "file": "0048-warp-MAP_OLD_CHATEAU_2F-3.png"}
+{"t": 1792706576.24, "event": "capture", "file": "0049-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706576.25, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706576.25, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706576.37, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [3, 10]]}
+{"t": 1792706578.74, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 3 (3, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[2, 7], [3, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [3, 7]]}
+{"t": 1792706579.58, "event": "capture", "file": "0050-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706579.58, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706579.58, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706582.47, "event": "capture", "file": "0051-warp-MAP_OLD_CHATEAU_2F-4.png"}
+{"t": 1792706583.17, "event": "capture", "file": "0052-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706583.17, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706583.17, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706583.24, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [3, 10]]}
+{"t": 1792706585.48, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 4 (2, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[2, 7], [3, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [3, 7]]}
+{"t": 1792706586.2, "event": "capture", "file": "0053-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706586.2, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706586.2, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706586.36, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [9, 10], "via": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706588.55, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [3, 10]}
+{"t": 1792706595.7, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 3]}
+{"t": 1792706603.28, "event": "capture", "file": "0054-warp-MAP_OLD_CHATEAU_2F-5.png"}
+{"t": 1792706603.82, "event": "capture", "file": "0055-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706603.82, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706603.82, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706603.91, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [9, 7]]}
+{"t": 1792706606.16, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 5 (9, 9) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[9, 10]]], "got": ["MAP_OLD_CHATEAU_2F", [9, 10]]}
+{"t": 1792706606.62, "event": "capture", "file": "0056-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706606.62, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706606.62, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706606.68, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [9, 7], "via": ["MAP_OLD_CHATEAU_2F", [9, 10]]}
+{"t": 1792706611.06, "event": "capture", "file": "0057-warp-MAP_OLD_CHATEAU_2F-6.png"}
+{"t": 1792706611.62, "event": "capture", "file": "0058-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706611.62, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706611.62, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706611.67, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [9, 10]]}
+{"t": 1792706613.89, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 6 (9, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[9, 7], [10, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [9, 7]]}
+{"t": 1792706614.47, "event": "capture", "file": "0059-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706614.47, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706614.47, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706617.06, "event": "capture", "file": "0060-warp-MAP_OLD_CHATEAU_2F-7.png"}
+{"t": 1792706617.6, "event": "capture", "file": "0061-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706617.6, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706617.6, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706617.7, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [9, 10]]}
+{"t": 1792706620.0, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 7 (10, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[9, 7], [10, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [9, 7]]}
+{"t": 1792706620.56, "event": "capture", "file": "0062-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706620.56, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706620.56, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706620.68, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [18, 10], "via": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706622.66, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [9, 10]}
+{"t": 1792706627.86, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 3]}
+{"t": 1792706633.01, "event": "capture", "file": "0063-warp-MAP_OLD_CHATEAU_2F-8.png"}
+{"t": 1792706633.55, "event": "capture", "file": "0064-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706633.55, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706633.55, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706633.6, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [18, 7]]}
+{"t": 1792706635.8, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 8 (18, 9) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[18, 10]]], "got": ["MAP_OLD_CHATEAU_2F", [18, 10]]}
+{"t": 1792706636.32, "event": "capture", "file": "0065-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706636.32, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706636.32, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706636.41, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [18, 7], "via": ["MAP_OLD_CHATEAU_2F", [18, 10]]}
+{"t": 1792706640.7, "event": "capture", "file": "0066-warp-MAP_OLD_CHATEAU_2F-9.png"}
+{"t": 1792706641.21, "event": "capture", "file": "0067-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706641.21, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706641.21, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706641.28, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [18, 10]]}
+{"t": 1792706643.5, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 9 (18, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[18, 7], [19, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [18, 7]]}
+{"t": 1792706644.08, "event": "capture", "file": "0068-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706644.08, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706644.08, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706646.65, "event": "capture", "file": "0069-warp-MAP_OLD_CHATEAU_2F-10.png"}
+{"t": 1792706647.09, "event": "capture", "file": "0070-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706647.09, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706647.09, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706647.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [18, 10]]}
+{"t": 1792706649.47, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 10 (19, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[18, 7], [19, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [18, 7]]}
+{"t": 1792706650.16, "event": "capture", "file": "0071-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706650.16, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706650.16, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706650.33, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [28, 10], "via": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706652.47, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [18, 10]}
+{"t": 1792706655.06, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 3]}
+{"t": 1792706662.87, "event": "capture", "file": "0072-warp-MAP_OLD_CHATEAU_2F-11.png"}
+{"t": 1792706663.44, "event": "capture", "file": "0073-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706663.44, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706663.44, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706663.49, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [28, 7]]}
+{"t": 1792706665.7, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 11 (28, 9) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[28, 10]]], "got": ["MAP_OLD_CHATEAU_2F", [28, 10]]}
+{"t": 1792706666.2, "event": "capture", "file": "0074-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706666.2, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706666.2, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706666.28, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [28, 7], "via": ["MAP_OLD_CHATEAU_2F", [28, 10]]}
+{"t": 1792706670.62, "event": "capture", "file": "0075-warp-MAP_OLD_CHATEAU_2F-12.png"}
+{"t": 1792706671.09, "event": "capture", "file": "0076-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706671.09, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706671.09, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706671.16, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [28, 10]]}
+{"t": 1792706673.74, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 12 (28, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[27, 7], [28, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [28, 7]]}
+{"t": 1792706674.29, "event": "capture", "file": "0077-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706674.29, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706674.29, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706676.86, "event": "capture", "file": "0078-warp-MAP_OLD_CHATEAU_2F-13.png"}
+{"t": 1792706677.4, "event": "capture", "file": "0079-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706677.4, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706677.4, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706677.46, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [28, 10]]}
+{"t": 1792706679.61, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 13 (27, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[27, 7], [28, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [28, 7]]}
+{"t": 1792706680.13, "event": "capture", "file": "0080-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706680.13, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706680.13, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706680.26, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [35, 10], "via": ["MAP_OLD_CHATEAU_ENTRANCE", [9, 3]]}
+{"t": 1792706682.25, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [28, 10]}
+{"t": 1792706687.68, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 3]}
+{"t": 1792706697.17, "event": "capture", "file": "0081-warp-MAP_OLD_CHATEAU_2F-14.png"}
+{"t": 1792706697.74, "event": "capture", "file": "0082-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706697.74, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706697.74, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706697.8, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [35, 7]]}
+{"t": 1792706700.11, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 14 (35, 9) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[35, 10]]], "got": ["MAP_OLD_CHATEAU_2F", [35, 10]]}
+{"t": 1792706700.74, "event": "capture", "file": "0083-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706700.74, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706700.74, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706700.84, "event": "enter-region", "map": "MAP_OLD_CHATEAU_2F", "tile": [35, 7], "via": ["MAP_OLD_CHATEAU_2F", [35, 10]]}
+{"t": 1792706705.25, "event": "capture", "file": "0084-warp-MAP_OLD_CHATEAU_2F-15.png"}
+{"t": 1792706705.77, "event": "capture", "file": "0085-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706705.77, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706705.77, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706705.86, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [35, 10]]}
+{"t": 1792706708.03, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 15 (35, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[34, 7], [35, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [35, 7]]}
+{"t": 1792706708.54, "event": "capture", "file": "0086-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706708.54, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706708.54, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706711.13, "event": "capture", "file": "0087-warp-MAP_OLD_CHATEAU_2F-16.png"}
+{"t": 1792706711.65, "event": "capture", "file": "0088-MAP_OLD_CHATEAU_2F via warp.png"}
+{"t": 1792706711.66, "event": "observe", "label": "MAP_OLD_CHATEAU_2F via warp", "problems": []}
+{"t": 1792706711.66, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706711.74, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_2F", "ok": true, "at": ["MAP_OLD_CHATEAU_2F", [35, 10]]}
+{"t": 1792706713.95, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_2F warp 16 (34, 7) -> MAP_OLD_CHATEAU_2F and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_2F", [[34, 7], [35, 7]]], "got": ["MAP_OLD_CHATEAU_2F", [35, 7]]}
+{"t": 1792706714.4, "event": "capture", "file": "0089-MAP_OLD_CHATEAU_2F after warp round trip.png"}
+{"t": 1792706714.4, "event": "observe", "label": "MAP_OLD_CHATEAU_2F after warp round trip", "problems": []}
+{"t": 1792706714.4, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706715.92, "event": "map", "map": "MAP_OLD_CHATEAU_2F", "pos": [35, 10]}
+{"t": 1792706722.76, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [9, 3]}
+{"t": 1792706726.25, "event": "map", "map": "MAP_OLD_CHATEAU_SIDE_ROOM_1", "pos": [4, 9]}
+{"t": 1792706726.32, "event": "map-qa-check", "name": "reached MAP_OLD_CHATEAU_SIDE_ROOM_1", "ok": true, "at": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [4, 9]]}
+{"t": 1792706728.51, "event": "capture", "file": "0090-warp-MAP_OLD_CHATEAU_SIDE_ROOM_1-0.png"}
+{"t": 1792706729.04, "event": "capture", "file": "0091-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706729.04, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706729.04, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706729.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [2, 3]]}
+{"t": 1792706731.39, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_SIDE_ROOM_1 warp 0 (4, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [[4, 9], [5, 9]]], "got": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [4, 9]]}
+{"t": 1792706731.98, "event": "capture", "file": "0092-MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip.png"}
+{"t": 1792706731.98, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip", "problems": []}
+{"t": 1792706731.98, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706734.59, "event": "capture", "file": "0093-warp-MAP_OLD_CHATEAU_SIDE_ROOM_1-1.png"}
+{"t": 1792706735.13, "event": "capture", "file": "0094-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706735.13, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706735.13, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706735.19, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [2, 3]]}
+{"t": 1792706737.35, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_SIDE_ROOM_1 warp 1 (5, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [[4, 9], [5, 9]]], "got": ["MAP_OLD_CHATEAU_SIDE_ROOM_1", [4, 9]]}
+{"t": 1792706737.87, "event": "capture", "file": "0095-MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip.png"}
+{"t": 1792706737.87, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip", "problems": []}
+{"t": 1792706737.87, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_1 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706739.89, "event": "map", "map": "MAP_OLD_CHATEAU_ENTRANCE", "pos": [2, 3]}
+{"t": 1792706745.3, "event": "map", "map": "MAP_OLD_CHATEAU_SIDE_ROOM_2", "pos": [4, 9]}
+{"t": 1792706745.37, "event": "map-qa-check", "name": "reached MAP_OLD_CHATEAU_SIDE_ROOM_2", "ok": true, "at": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [4, 9]]}
+{"t": 1792706747.59, "event": "capture", "file": "0096-warp-MAP_OLD_CHATEAU_SIDE_ROOM_2-0.png"}
+{"t": 1792706748.13, "event": "capture", "file": "0097-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706748.14, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706748.14, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706748.19, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [16, 3]]}
+{"t": 1792706750.39, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_SIDE_ROOM_2 warp 0 (4, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [[4, 9], [5, 9]]], "got": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [4, 9]]}
+{"t": 1792706750.84, "event": "capture", "file": "0098-MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip.png"}
+{"t": 1792706750.84, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip", "problems": []}
+{"t": 1792706750.84, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706753.32, "event": "capture", "file": "0099-warp-MAP_OLD_CHATEAU_SIDE_ROOM_2-1.png"}
+{"t": 1792706753.83, "event": "capture", "file": "0100-MAP_OLD_CHATEAU_ENTRANCE via warp.png"}
+{"t": 1792706753.83, "event": "observe", "label": "MAP_OLD_CHATEAU_ENTRANCE via warp", "problems": []}
+{"t": 1792706753.83, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_ENTRANCE via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706753.89, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OLD_CHATEAU_ENTRANCE", "ok": true, "at": ["MAP_OLD_CHATEAU_ENTRANCE", [16, 3]]}
+{"t": 1792706756.02, "event": "map-qa-check", "name": "MAP_OLD_CHATEAU_SIDE_ROOM_2 warp 1 (5, 9) -> MAP_OLD_CHATEAU_ENTRANCE and back", "ok": true, "leg": "back", "expected": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [[4, 9], [5, 9]]], "got": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [4, 9]]}
+{"t": 1792706756.57, "event": "capture", "file": "0101-MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip.png"}
+{"t": 1792706756.57, "event": "observe", "label": "MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip", "problems": []}
+{"t": 1792706756.57, "event": "map-qa-check", "name": "follower visible (MAP_OLD_CHATEAU_SIDE_ROOM_2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792706757.56, "event": "capture", "file": "0102-start-menu.png"}
+{"t": 1792706758.33, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792706764.07, "event": "capture", "file": "0103-save-confirm-forest-chateau.png"}
+{"t": 1792706765.21, "event": "capture", "file": "0104-save-step-forest-chateau-01.png"}
+{"t": 1792706766.34, "event": "capture", "file": "0105-save-step-forest-chateau-02.png"}
+{"t": 1792706767.37, "event": "capture", "file": "0106-save-step-forest-chateau-03.png"}
+{"t": 1792706768.37, "event": "capture", "file": "0107-save-step-forest-chateau-04.png"}
+{"t": 1792706769.37, "event": "capture", "file": "0108-save-step-forest-chateau-05.png"}
+{"t": 1792706770.34, "event": "capture", "file": "0109-save-step-forest-chateau-06.png"}
+{"t": 1792706771.37, "event": "capture", "file": "0110-save-step-forest-chateau-07.png"}
+{"t": 1792706772.51, "event": "capture", "file": "0111-save-step-forest-chateau-08.png"}
+{"t": 1792706773.32, "event": "capture", "file": "0112-saved-forest-chateau.png"}
+{"t": 1792706773.32, "event": "release-save", "label": "forest-chateau", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792706773.35, "event": "map-qa-check", "name": "SAVE (forest-chateau)", "ok": true, "at": ["MAP_OLD_CHATEAU_SIDE_ROOM_2", [4, 9]]}

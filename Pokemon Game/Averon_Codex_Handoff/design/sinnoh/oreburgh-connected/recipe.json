@@ -1,0 +1,271 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "f0a8bcaa10b410245d240b6014779ba69eb31c74",
+  "art_source": "0005ba56711ba5c73e4d1b31402b62b1a7863800",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "maps": {
+    "OreburghCity": [
+      70,
+      59
+    ],
+    "Route207": [
+      64,
+      32
+    ],
+    "OreburghMine_B1F": [
+      24,
+      26
+    ],
+    "OreburghMine_B2F": [
+      32,
+      28
+    ]
+  },
+  "source_headers": {
+    "OreburghCity": {
+      "id": "MAP_OREBURGH_CITY",
+      "name": "OreburghCity",
+      "layout": "LAYOUT_OREBURGH_CITY",
+      "music": "MUS_RUSTBORO",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "weather": "WEATHER_SUNNY",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "show_map_name": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "connections": [
+        {
+          "map": "MAP_ROUTE207",
+          "offset": 35,
+          "direction": "up"
+        }
+      ],
+      "object_events": [],
+      "warp_events": [
+        {
+          "x": 6,
+          "y": 12,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_GATE_1F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 50,
+          "y": 57,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B1F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 51,
+          "y": 57,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B1F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 52,
+          "y": 57,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B1F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 53,
+          "y": 57,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B1F",
+          "dest_warp_id": "1"
+        }
+      ],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route207": {
+      "id": "MAP_ROUTE207",
+      "name": "Route207",
+      "layout": "LAYOUT_ROUTE207",
+      "music": "MUS_ROUTE110",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "weather": "WEATHER_SUNNY",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "show_map_name": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "connections": [
+        {
+          "map": "MAP_OREBURGH_CITY",
+          "offset": -35,
+          "direction": "down"
+        }
+      ],
+      "object_events": [],
+      "warp_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "OreburghMine_B1F": {
+      "id": "MAP_OREBURGH_MINE_B1F",
+      "name": "OreburghMine_B1F",
+      "layout": "LAYOUT_OREBURGH_MINE_B1F",
+      "music": "MUS_CAVE_OF_ORIGIN",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "weather": "WEATHER_NONE",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "show_map_name": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "connections": null,
+      "object_events": [],
+      "warp_events": [
+        {
+          "x": 11,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_CITY",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 12,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_CITY",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 11,
+          "y": 21,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B2F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 12,
+          "y": 21,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B2F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 10,
+          "y": 21,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B2F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 13,
+          "y": 21,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B2F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "OreburghMine_B2F": {
+      "id": "MAP_OREBURGH_MINE_B2F",
+      "name": "OreburghMine_B2F",
+      "layout": "LAYOUT_OREBURGH_MINE_B2F",
+      "music": "MUS_CAVE_OF_ORIGIN",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "weather": "WEATHER_NONE",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "show_map_name": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "connections": null,
+      "object_events": [],
+      "warp_events": [
+        {
+          "x": 15,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_OREBURGH_MINE_B1F",
+          "dest_warp_id": "2"
+        }
+      ],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool"
+  ],
+  "group_index": 76,
+  "dev_surrogate": "MAPSEC_ROUTE_201=217; never reuse generated save as production",
+  "protected_registries_unchanged": true,
+  "seam_closure": {
+    "map": "Route207",
+    "x": 13,
+    "y": 31,
+    "before": 12556,
+    "after": 13580,
+    "reason": "source edge faces blocked City48,0"
+  },
+  "files": {
+    "data/event_scripts.s": "714c59081516a25057c74ac0774d3b9bd5208b9c68914c6a4d2a7ada6d3f5a37",
+    "data/layouts/OreburghCity/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/OreburghCity/map.bin": "ebc1b5c41ef7a7d0a26eda8ac0edf02ec6945f0af5f922e3c7bd46a3101896e6",
+    "data/layouts/OreburghGate_1F/map.bin": "53cb879bcab990997155158780eb6e724a7f6a47ff12e41f4a0f594ec70f3f9e",
+    "data/layouts/OreburghMine_B1F/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/layouts/OreburghMine_B1F/map.bin": "b774ff7598b65ac8bb8b85f7f7ba1dc6e399690e495bb11d85d026df12145836",
+    "data/layouts/OreburghMine_B2F/border.bin": "a8fb987bcf19f3554623d70e41906b5eb019ae568cb1b0d5eed634c70b24f12a",
+    "data/layouts/OreburghMine_B2F/map.bin": "111b1152fd399dffaa83ee2747da807c225d1bafe460f57bfca52becdab3d828",
+    "data/layouts/Route207/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/layouts/Route207/map.bin": "754c9b14b6db12991dc5455c8fc319ed03c7819e8b8801d06ce5b1356da1c5fc",
+    "data/layouts/layouts.json": "ceb8197c88a968a6159b7c5664d1f3e50d88be6b93febc2b208596f9279b4440",
+    "data/maps/OreburghCity/map.json": "fe0afb43d648223f68ea01d1b8d2102af4c84e0a20e7176b5b223fccb0b9882d",
+    "data/maps/OreburghCity/scripts.inc": "2d1e95d6df65068807b6434b3d56b65e48cf8eeb76fa340f8c22ac72f68b6733",
+    "data/maps/OreburghGate_1F/map.json": "b7f3a59c73dd4dcbe9488e3e73c205107dbfcd9d0f1f0ec1a4bde15904d6f6df",
+    "data/maps/OreburghMine_B1F/map.json": "6f405e8c8db36a683f8a6fae3c1a2d2f9be4008017d1f9b2f0dd9b7a40c7590e",
+    "data/maps/OreburghMine_B1F/scripts.inc": "5b91e19a9891989b99af21efd24522d7e182735cd5de6e5a773f58662b856daa",
+    "data/maps/OreburghMine_B2F/map.json": "1c5e6ece21c2410ad2f070c5f18d02e3b6b3f3a2287b10f144820dc1a068fda4",
+    "data/maps/OreburghMine_B2F/scripts.inc": "0ea46a04203b311049a385cfb6e7439b6af255cb95da7d98192dccb3663ae087",
+    "data/maps/Route207/map.json": "f41327088b6a38af8e5444144883553fc8774255783f8db2009991c451c85feb",
+    "data/maps/Route207/scripts.inc": "c1901d4efea76d0cf3b503ba8b988d67890f3c26dd0a47964cf053cdb32e813d",
+    "data/maps/map_groups.json": "b13f64f20f571f5bf078894ead3b30f5479a1c5f5ba3130b335d04a54c2e7fbe",
+    "data/tilesets/primary/oreburgh_candidate_cityprimary/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/primary/oreburgh_candidate_cityprimary/metatiles.bin": "a610df7e921699e100e7bbe5831492a552e8ef317d23963cac78fbf2875a5ea0",
+    "data/tilesets/primary/oreburgh_candidate_mineprimary/metatile_attributes.bin": "af06d5c5c3180a92cca5bb09ad6fe8a600f011ee456e6d770af76f7a387b5341",
+    "data/tilesets/primary/oreburgh_candidate_mineprimary/metatiles.bin": "9b8f5d59ccf68579e7bac13c2d77f7baa7457f799200c848dfb882467b31bfd2",
+    "data/tilesets/secondary/oreburgh_candidate_citysecondary/metatile_attributes.bin": "858160b569ae7b127588e911422e95450d2b180b5de1acce6865b8a0d9a8c574",
+    "data/tilesets/secondary/oreburgh_candidate_citysecondary/metatiles.bin": "323a0684dbdbd2be3c60fb5cd318b328d55c6006fe472340a2cd74cdf9b57702",
+    "data/tilesets/secondary/oreburgh_candidate_minesecondary/metatile_attributes.bin": "60b72a04207a73a136c6ab139d928a6d49c87e63eddea8b9e91d9e97dfe55056",
+    "data/tilesets/secondary/oreburgh_candidate_minesecondary/metatiles.bin": "fd61e783aaaa3074bd82aabfd0f26b910aa531b5c70989079756bc1eb5dbdb83",
+    "include/tilesets.h": "223141f6d969e3d03f081df3a6e349fefe00b505c96819c1aca573cfa0a57e17",
+    "src/data/tilesets/headers.h": "28a88f1058128cee0650e3c5e8209a761f65ee0c3ebdb0d4d2a2dfa2ef71e768",
+    "src/data/tilesets/metatiles.h": "44712615f6d14fae6f08d0036f573485da3263c3847daa45bb118bc4cb25a475",
+    "test/averon_oreburgh_candidate.c": "1ee8e83c7139eea935a5434fdf19572a6e0a8a1c17f051db04de3e960b85f6e7",
+    "test/data/averon_map_registry_slots.inc": "d7bd2807125deebbc116e3dfafc937dd4bb4aed3000d5c8aeea56e6888840445"
+  }
+}

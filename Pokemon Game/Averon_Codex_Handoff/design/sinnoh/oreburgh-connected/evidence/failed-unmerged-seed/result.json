@@ -1,0 +1,27 @@
+{
+ "maps": [
+  "MAP_ROUTE203",
+  "MAP_OREBURGH_GATE_1F",
+  "MAP_OREBURGH_CITY",
+  "MAP_ROUTE207",
+  "MAP_OREBURGH_MINE_B1F",
+  "MAP_OREBURGH_MINE_B2F"
+ ],
+ "build": "normal",
+ "rom_sha256": "9e81fb199833f26290bf568028c02a02eda70257a2339b70fd30cee6febf02cb",
+ "static_findings": [],
+ "save_before": "9834324323cbd908910da2bbd1946419ea7290914162562032732024f6261f72",
+ "checks": [
+  {
+   "name": "run completed without the driver getting stuck",
+   "ok": false,
+   "error": "Blocked('GDB connection closed by the emulator (exited or crashed; see mgba.log)')",
+   "at": null
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": false,
+ "error": "Blocked('GDB connection closed by the emulator (exited or crashed; see mgba.log)')",
+ "save_after": "9834324323cbd908910da2bbd1946419ea7290914162562032732024f6261f72",
+ "verdict": "FAIL"
+}

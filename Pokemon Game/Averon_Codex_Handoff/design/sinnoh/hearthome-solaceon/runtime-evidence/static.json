@@ -1,0 +1,467 @@
+{
+  "findings": [],
+  "plan": {
+    "MAP_HEARTHOME_CITY": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            45
+          ],
+          "warp": [
+            4,
+            45
+          ],
+          "dest": "MAP_ROUTE208_ACCESS",
+          "dest_warp": 1,
+          "push": "left"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            53,
+            45
+          ],
+          "warp": [
+            53,
+            45
+          ],
+          "dest": "MAP_ROUTE209_ACCESS",
+          "dest_warp": 0,
+          "push": "right"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE208": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            63,
+            24
+          ],
+          "warp": [
+            63,
+            24
+          ],
+          "dest": "MAP_ROUTE208_ACCESS",
+          "dest_warp": 0,
+          "push": "right"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE208_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            1,
+            5
+          ],
+          "warp": [
+            1,
+            5
+          ],
+          "dest": "MAP_ROUTE208",
+          "dest_warp": 0,
+          "push": "left"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            11,
+            5
+          ],
+          "warp": [
+            11,
+            5
+          ],
+          "dest": "MAP_HEARTHOME_CITY",
+          "dest_warp": 0,
+          "push": "right"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE209": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            62
+          ],
+          "warp": [
+            4,
+            62
+          ],
+          "dest": "MAP_ROUTE209_ACCESS",
+          "dest_warp": 1,
+          "push": "left"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            49,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            50,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            51,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            52,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            53,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            54,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            55,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 34
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_SOLACEON_TOWN": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            15,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            16,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            17,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            18,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            19,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            20,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            21,
+            43
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE209",
+          "offset": -34
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            14,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            15,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            16,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            17,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            18,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            19,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            20,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            21,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE210_SOUTH",
+          "offset": -6
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE210_SOUTH": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            20,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            21,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            22,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            23,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            24,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            25,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            26,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            27,
+            93
+          ],
+          "direction": "down",
+          "dest": "MAP_SOLACEON_TOWN",
+          "offset": 6
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE209_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            1,
+            5
+          ],
+          "warp": [
+            1,
+            5
+          ],
+          "dest": "MAP_HEARTHOME_CITY",
+          "dest_warp": 1,
+          "push": "left"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            11,
+            5
+          ],
+          "warp": [
+            11,
+            5
+          ],
+          "dest": "MAP_ROUTE209",
+          "dest_warp": 0,
+          "push": "right"
+        }
+      ],
+      "pocket": null
+    }
+  }
+}

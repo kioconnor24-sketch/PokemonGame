@@ -1,0 +1,30 @@
+test_actual_render_of_all_three_uses_only_current_general_cave_assets (test_sinnoh_coronet_art.OutdoorArtTest.test_actual_render_of_all_three_uses_only_current_general_cave_assets) ... ok
+test_all_explicit_ladder_water_and_transition_roles_are_present (test_sinnoh_coronet_art.OutdoorArtTest.test_all_explicit_ladder_water_and_transition_roles_are_present) ... ok
+test_all_source_bridge_and_road_heights_are_identical_after_adaptation (test_sinnoh_coronet_art.OutdoorArtTest.test_all_source_bridge_and_road_heights_are_identical_after_adaptation) ... ok
+test_all_source_hashes_and_existing_graphics_provenance_are_actual (test_sinnoh_coronet_art.OutdoorArtTest.test_all_source_hashes_and_existing_graphics_provenance_are_actual) ... ok
+test_every_map_and_border_preserves_all_physics_and_full_attribute_words (test_sinnoh_coronet_art.OutdoorArtTest.test_every_map_and_border_preserves_all_physics_and_full_attribute_words) ... ok
+test_incomplete_attributes_unknown_secondary_and_wrong_dimensions_rejected (test_sinnoh_coronet_art.OutdoorArtTest.test_incomplete_attributes_unknown_secondary_and_wrong_dimensions_rejected) ... ERROR
+test_primary_is_unchanged_and_secondary_fits_actual_hardware_budget (test_sinnoh_coronet_art.OutdoorArtTest.test_primary_is_unchanged_and_secondary_fits_actual_hardware_budget) ... ok
+test_all_existing_map_layout_and_include_prefixes_survive (test_sinnoh_coronet_runtime.RuntimeTest.test_all_existing_map_layout_and_include_prefixes_survive) ... ok
+test_existing_qa_world_reads_every_new_tileset_and_map (test_sinnoh_coronet_runtime.RuntimeTest.test_existing_qa_world_reads_every_new_tileset_and_map) ... ok
+test_foreign_warp_wrong_return_and_connection_offset_fail_closed (test_sinnoh_coronet_runtime.RuntimeTest.test_foreign_warp_wrong_return_and_connection_offset_fail_closed) ... ok
+test_install_requires_marker_current_branch_head_and_clean_engine (test_sinnoh_coronet_runtime.RuntimeTest.test_install_requires_marker_current_branch_head_and_clean_engine) ... ok
+test_installed_geometry_and_all_warp_arrays_reuse_exact_artifacts (test_sinnoh_coronet_runtime.RuntimeTest.test_installed_geometry_and_all_warp_arrays_reuse_exact_artifacts) ... ok
+test_misaligned_bank_and_dirty_baseline_rejected (test_sinnoh_coronet_runtime.RuntimeTest.test_misaligned_bank_and_dirty_baseline_rejected) ... ok
+test_no_save_id_general_northern_or_existing_gate_writes (test_sinnoh_coronet_runtime.RuntimeTest.test_no_save_id_general_northern_or_existing_gate_writes) ... ok
+test_outdoor_and_cave_streaming_families_are_coherent_and_separate (test_sinnoh_coronet_runtime.RuntimeTest.test_outdoor_and_cave_streaming_families_are_coherent_and_separate) ... ok
+test_plan_reproduces_without_writing_any_input (test_sinnoh_coronet_runtime.RuntimeTest.test_plan_reproduces_without_writing_any_input) ... ok
+
+======================================================================
+ERROR: test_incomplete_attributes_unknown_secondary_and_wrong_dimensions_rejected (test_sinnoh_coronet_art.OutdoorArtTest.test_incomplete_attributes_unknown_secondary_and_wrong_dimensions_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/tests/test_sinnoh_coronet_art.py", line 82, in test_incomplete_attributes_unknown_secondary_and_wrong_dimensions_rejected
+    elif kind=='attribute':at.pop('1')
+                           ^^^^^^^^^^^
+KeyError: '1'
+
+----------------------------------------------------------------------
+Ran 16 tests in 21.132s
+
+FAILED (errors=1)

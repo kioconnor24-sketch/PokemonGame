@@ -1,0 +1,55 @@
+tools/scaninc/scaninc -M build/emerald/src/tilesets.d -g build/assets -I include -I tools/agbcc/include src/tilesets.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trade.o src/trade.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trader.o src/trader.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_card.o src/trainer_card.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer.o src/trainer.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_fan_club.o src/trainer_fan_club.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_hill.o src/trainer_hill.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_pokemon_sprites.o src/trainer_pokemon_sprites.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_pools.o src/trainer_pools.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_see.o src/trainer_see.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_slide.o src/trainer_slide.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_tower.o src/trainer_tower.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_tower_sets.o src/trainer_tower_sets.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trainer_util.o src/trainer_util.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/trig.o src/trig.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/tv.o src/tv.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/type_icons.o src/type_icons.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/union_room.o src/union_room.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/union_room_battle.o src/union_room_battle.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/union_room_chat.o src/union_room_chat.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/union_room_player_avatar.o src/union_room_player_avatar.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/use_pokeblock.o src/use_pokeblock.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/util.o src/util.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/vs_seeker.o src/vs_seeker.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/walda_phrase.o src/walda_phrase.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/wallclock.o src/wallclock.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/wild_encounter.o src/wild_encounter.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/wild_encounter_ow.o src/wild_encounter_ow.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/window.o src/window.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/wireless_communication_status_screen.o src/wireless_communication_status_screen.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/wonder_news.o src/wonder_news.c
+tools/preproc/preproc -s data/battle_anim_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/battle_anim_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/battle_anim_scripts.o
+tools/preproc/preproc -s data/battle_scripts_1.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/battle_scripts_1.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/battle_scripts_1.o
+tools/preproc/preproc -s data/battle_scripts_2.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/battle_scripts_2.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/battle_scripts_2.o
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/event_scripts.o
+tools/mapjson/mapjson map emerald data/maps/EternaCity/map.json data/layouts/layouts.json data/maps/EternaCity
+tools/mapjson/mapjson map emerald data/maps/Route206/map.json data/layouts/layouts.json data/maps/Route206
+tools/mapjson/mapjson map emerald data/maps/Route206_North/map.json data/layouts/layouts.json data/maps/Route206_North
+tools/mapjson/mapjson map emerald data/maps/Route206_South/map.json data/layouts/layouts.json data/maps/Route206_South
+tools/mapjson/mapjson map emerald data/maps/Route211_West/map.json data/layouts/layouts.json data/maps/Route211_West
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/battle_script_commands.o src/battle_script_commands.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/battle_tv.o src/battle_tv.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/battle_util.o src/battle_util.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/battle_util2.o src/battle_util2.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald/src/tilesets.o src/tilesets.c
+tools/preproc/preproc -s data/map_events.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/map_events.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/map_events.o
+tools/preproc/preproc -s data/maps.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -I include - | tools/preproc/preproc -ie data/maps.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald/data/maps.o
+Memory region         Used Size  Region Size  %age Used
+           EWRAM:      226480 B       256 KB     86.40%
+           IWRAM:       28392 B        32 KB     86.65%
+             ROM:    17425948 B        32 MB     51.93%
+cd build/emerald && arm-none-eabi-ld -Map ../../pokeemerald.map --print-memory-usage --gc-sections -T ../../ld_script_modern.ld -o ../../pokeemerald.elf <objs> <libs> | cat
+tools/gbafix/gbafix pokeemerald.elf -t"POKEMON EMER" -cBPEE -m01 -r0 --silent
+arm-none-eabi-objcopy -O binary pokeemerald.elf pokeemerald.gba
+tools/gbafix/gbafix pokeemerald.gba -p --silent

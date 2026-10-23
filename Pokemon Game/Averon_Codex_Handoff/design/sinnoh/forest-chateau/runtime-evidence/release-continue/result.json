@@ -1,0 +1,51 @@
+{
+ "maps": [
+  "MAP_ETERNA_FOREST",
+  "MAP_OLD_CHATEAU_ENTRANCE",
+  "MAP_OLD_CHATEAU_DINING_ROOM",
+  "MAP_OLD_CHATEAU_2F",
+  "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+  "MAP_OLD_CHATEAU_SIDE_ROOM_2"
+ ],
+ "build": "release",
+ "rom_sha256": "d2a8723a67ca94d923b8d3f199e263595d7d4417c7393c927abb974a67dc2aca",
+ "static_findings": [],
+ "save_before": "8861712bf1fde4105f351ce90247dd5cd9a61c63a3169dfd24174cc389fb0ae4",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "8861712bf1fde4105f351ce90247dd5cd9a61c63a3169dfd24174cc389fb0ae4",
+ "verdict": "PASS"
+}

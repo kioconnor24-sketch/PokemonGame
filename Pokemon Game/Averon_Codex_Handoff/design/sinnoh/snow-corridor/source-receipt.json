@@ -1,0 +1,706 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/Route216/map.json": "fac0bab2c01235db4954bece2921c93b690b24af8dcdc078c7828fa43cd82a75",
+    "data/layouts/Route216/map.bin": "51c79c5169743b6dbaeb97dc80ade0c34a010fbbec458301cdcbba9d6473c02e",
+    "data/layouts/Route216/border.bin": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+    "data/maps/Route217/map.json": "05b53f595875db93e7ac0887b9309d3d0dc1c9e8c24836cb867611dea791f2a6",
+    "data/layouts/Route217/map.bin": "b7e87e22ff971f5870678901a9e88568c7d47f42fd0c6a6ae65f3f0270018a96",
+    "data/layouts/Route217/border.bin": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+    "data/maps/AcuityLakefront/map.json": "d82866e5445bc6e51e157014c0dbd3901dd365a4db4c0e3761063c30505f71de",
+    "data/layouts/AcuityLakefront/map.bin": "5aca600b35b6f1832a3a363d255fc9356067eebe6d6b2f9077d05345d2e5401a",
+    "data/layouts/AcuityLakefront/border.bin": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+    "data/maps/SnowpointCity/map.json": "6492741b93609b038d0102279b8411df8726386c51f4c0289fa238ba10b35c08",
+    "data/layouts/SnowpointCity/map.bin": "acb5c331e595fce7b2ea68c74f7e21f2e5b1485d856d4497e042f173777f2fe8",
+    "data/layouts/SnowpointCity/border.bin": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/snowpoint/metatile_attributes.bin": "97f14376c4716d58f26e08d31e3a9f0f6ab1bd788ca9fc1b3bfea627a814d68b"
+  },
+  "identity_roundtrips": {
+    "Route216": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE216",
+      "target_map": "MAP_ROUTE216",
+      "source_sha256": "51c79c5169743b6dbaeb97dc80ade0c34a010fbbec458301cdcbba9d6473c02e",
+      "output_sha256": "51c79c5169743b6dbaeb97dc80ade0c34a010fbbec458301cdcbba9d6473c02e",
+      "mapped_unique_metatiles": 54,
+      "dimensions": [
+        96,
+        40
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route217": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE217",
+      "target_map": "MAP_ROUTE217",
+      "source_sha256": "b7e87e22ff971f5870678901a9e88568c7d47f42fd0c6a6ae65f3f0270018a96",
+      "output_sha256": "b7e87e22ff971f5870678901a9e88568c7d47f42fd0c6a6ae65f3f0270018a96",
+      "mapped_unique_metatiles": 30,
+      "dimensions": [
+        36,
+        118
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "AcuityLakefront": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ACUITY_LAKEFRONT",
+      "target_map": "MAP_ACUITY_LAKEFRONT",
+      "source_sha256": "5aca600b35b6f1832a3a363d255fc9356067eebe6d6b2f9077d05345d2e5401a",
+      "output_sha256": "5aca600b35b6f1832a3a363d255fc9356067eebe6d6b2f9077d05345d2e5401a",
+      "mapped_unique_metatiles": 52,
+      "dimensions": [
+        64,
+        66
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "SnowpointCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_SNOWPOINT_CITY",
+      "target_map": "MAP_SNOWPOINT_CITY",
+      "source_sha256": "acb5c331e595fce7b2ea68c74f7e21f2e5b1485d856d4497e042f173777f2fe8",
+      "output_sha256": "acb5c331e595fce7b2ea68c74f7e21f2e5b1485d856d4497e042f173777f2fe8",
+      "mapped_unique_metatiles": 128,
+      "dimensions": [
+        34,
+        68
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "Route216": {
+      "id": "MAP_ROUTE216",
+      "name": "Route216",
+      "layout": "LAYOUT_ROUTE216",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 87,
+          "y": 23,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_NORTH_ROOM2",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE217",
+          "offset": -2,
+          "direction": "up"
+        }
+      ]
+    },
+    "Route217": {
+      "id": "MAP_ROUTE217",
+      "name": "Route217",
+      "layout": "LAYOUT_ROUTE217",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ACUITY_LAKEFRONT",
+          "offset": 2,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_ROUTE216",
+          "offset": 2,
+          "direction": "down"
+        }
+      ]
+    },
+    "AcuityLakefront": {
+      "id": "MAP_ACUITY_LAKEFRONT",
+      "name": "AcuityLakefront",
+      "layout": "LAYOUT_ACUITY_LAKEFRONT",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ROUTE217",
+          "offset": -2,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_SNOWPOINT_CITY",
+          "offset": -2,
+          "direction": "right"
+        }
+      ]
+    },
+    "SnowpointCity": {
+      "id": "MAP_SNOWPOINT_CITY",
+      "name": "SnowpointCity",
+      "layout": "LAYOUT_SNOWPOINT_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ACUITY_LAKEFRONT",
+          "offset": 2,
+          "direction": "left"
+        }
+      ]
+    }
+  },
+  "warp_index_translation": {
+    "Route216": {},
+    "Route217": {},
+    "AcuityLakefront": {},
+    "SnowpointCity": {}
+  },
+  "closure_changes": {
+    "Route216": [
+      {
+        "x": 87,
+        "y": 23,
+        "before": 539,
+        "after": 1563,
+        "reason": "unbuilt source destination"
+      }
+    ],
+    "Route217": [
+      {
+        "x": 22,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 23,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 26,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 27,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 28,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 29,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 31,
+        "y": 0,
+        "before": 12801,
+        "after": 13825,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 18,
+        "y": 117,
+        "before": 12810,
+        "after": 13834,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 19,
+        "y": 117,
+        "before": 12811,
+        "after": 13835,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      }
+    ],
+    "AcuityLakefront": [],
+    "SnowpointCity": [
+      {
+        "x": 3,
+        "y": 67,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 67,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 59,
+        "before": 4489,
+        "after": 5513,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 60,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 61,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 62,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 63,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 64,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 65,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 66,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      }
+    ]
+  },
+  "maps": {
+    "Route216": {
+      "dimensions": [
+        96,
+        40
+      ],
+      "source_blob": "788e5d6785cc907b4ab478329f847e13e40d512d",
+      "source_sha256": "51c79c5169743b6dbaeb97dc80ade0c34a010fbbec458301cdcbba9d6473c02e",
+      "staged_sha256": "46707b380245e4330c5497d14f43fdadfd7b6d7db060c1ce5d61e80eff77e2b0",
+      "border_sha256": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+      "closed_cells": 1,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ROUTE217",
+          "offset": -2,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 24
+    },
+    "Route217": {
+      "dimensions": [
+        36,
+        118
+      ],
+      "source_blob": "9efd12cc02dea4dda9011a73b8555c87c00abe19",
+      "source_sha256": "b7e87e22ff971f5870678901a9e88568c7d47f42fd0c6a6ae65f3f0270018a96",
+      "staged_sha256": "2f6de7691e4b44e5de2aa0c46b45d9b8002adec87f805d7e8cd77e4b1061d825",
+      "border_sha256": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+      "closed_cells": 10,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ACUITY_LAKEFRONT",
+          "offset": 2,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_ROUTE216",
+          "offset": 2,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "AcuityLakefront": {
+      "dimensions": [
+        64,
+        66
+      ],
+      "source_blob": "276a4ad14b467abdf1d951ae17a8399d052463b0",
+      "source_sha256": "5aca600b35b6f1832a3a363d255fc9356067eebe6d6b2f9077d05345d2e5401a",
+      "staged_sha256": "5aca600b35b6f1832a3a363d255fc9356067eebe6d6b2f9077d05345d2e5401a",
+      "border_sha256": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+      "closed_cells": 0,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ROUTE217",
+          "offset": -2,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_SNOWPOINT_CITY",
+          "offset": -2,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "SnowpointCity": {
+      "dimensions": [
+        34,
+        68
+      ],
+      "source_blob": "1cf26ec961e985f067c9004375c44318d6aaad03",
+      "source_sha256": "acb5c331e595fce7b2ea68c74f7e21f2e5b1485d856d4497e042f173777f2fe8",
+      "staged_sha256": "a78042371270634cb9ffce18a81d54bb5227a8f0833afa2eb7f7ba162e5baeef",
+      "border_sha256": "fa1d04209c2670d9c02ea51ce7741a82be841062b47b84ad75af426876d4c5b5",
+      "closed_cells": 39,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ACUITY_LAKEFRONT",
+          "offset": 2,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art",
+    "Source WEATHER_SNOW preserved; visibility, weather allocation and rendering not emulator-verified",
+    "LakeAcuity is excluded: pinned source has no warp or connection; no invented lake entrance",
+    "Original Route216 Coronet portal closed until joint source integration; no new progression or saved IDs"
+  ],
+  "source_weather_restored": {
+    "Route216": {
+      "before": "WEATHER_NONE",
+      "after": "WEATHER_SNOW",
+      "source_header_sha256": "fac0bab2c01235db4954bece2921c93b690b24af8dcdc078c7828fa43cd82a75"
+    },
+    "Route217": {
+      "before": "WEATHER_NONE",
+      "after": "WEATHER_SNOW",
+      "source_header_sha256": "05b53f595875db93e7ac0887b9309d3d0dc1c9e8c24836cb867611dea791f2a6"
+    },
+    "AcuityLakefront": {
+      "before": "WEATHER_NONE",
+      "after": "WEATHER_SNOW",
+      "source_header_sha256": "d82866e5445bc6e51e157014c0dbd3901dd365a4db4c0e3761063c30505f71de"
+    },
+    "SnowpointCity": {
+      "before": "WEATHER_NONE",
+      "after": "WEATHER_SNOW",
+      "source_header_sha256": "6492741b93609b038d0102279b8411df8726386c51f4c0289fa238ba10b35c08"
+    }
+  }
+}
