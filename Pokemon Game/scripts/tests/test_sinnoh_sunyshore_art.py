@@ -99,4 +99,20 @@ class CoastArtTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'new off-engine'):a.build(ENGINE,Path(t))
             with self.assertRaisesRegex(ValueError,'new off-engine'):a.build(ENGINE,ENGINE/'forbidden-coast-output')
 
+    def test_changed_elevated_source_fails_before_output_creation(self):
+        real_source=a.source
+        def changed(name):
+            raw,border,h,attrs=real_source(name)
+            if name=='SunyshoreCity':
+                values=list(struct.unpack('<%dH'%(len(raw)//2),raw))
+                i=next(i for i,v in enumerate(values) if v>>12==15)
+                values[i]&=0x0FFF
+                raw=struct.pack('<%dH'%len(values),*values)
+            return raw,border,h,attrs
+        with tempfile.TemporaryDirectory() as t:
+            out=Path(t)/'new'
+            with mock.patch.object(a,'source',side_effect=changed),self.assertRaisesRegex(ValueError,'elevated walkway'):
+                a.build(ENGINE,out)
+            self.assertFalse(out.exists())
+
 if __name__=='__main__':unittest.main()

@@ -1,0 +1,9 @@
+# Five-map coast DEV integration — tests in progress
+
+Exact production base d96ae4041cb955918801eea5dfb300f517000474, engine overlay tree eb74029471ea632cbd58f8cbabdbf348ed12d11c. 32 exact payload files in runtime-recipe.json; installer writes only marked codex/sunyshore-runtime-scratch- branches at this base with a clean engine. Original19 slots unchanged, five temporary19–23; existing217 surrogate is DEV-only, never production. Native General/Building metadata verified byte-identical; two isolated secondary banks, no global pixels/palettes/save/IDs changed. Exterior borders use adapted metadata, gate retains exact reused border.
+
+Installer/QA host7/7 PASS including every installed map/border full attribute, original prefix, real paired source warps, exact recipe hashes, wrong/dirty/escaping checkout negatives and source-driver/readonly avatar-flag guard. Initial test port used an old directory name and guessed33 instead of actual32 payloads; fixed tests only, no production/source changes. Source/art focused tests and full branch host are being rerun. NORMAL compilation is running, RELEASE/native/mGBA pending: no runtime acceptance yet.
+
+Actual existing static audit identifies two untouched Route222 source ledge landings: ledges(36,16),(37,16), land(36,17),(37,17) are source-blocked. This is a disclosed source limitation, not a passed path or reason to change historical expected results. Route223 and League sea/Waterfall requirements remain ungranted. The dry QA plan contains Route222/gate/Sunyshore only; real water maps remain compiled/native-inspected separately. All68 elevated Sunyshore cells require actual plane/screenshots.
+
+The earlier source/art status and original gate reuse hashes remain in CHECKPOINT.md and ART_CHECKPOINT.md. No ROMs/ELFs/private saves/donor pixels are public.

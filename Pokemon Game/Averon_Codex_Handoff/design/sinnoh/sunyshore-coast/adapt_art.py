@@ -6,6 +6,7 @@ Reads permitted Averon graphics only. No converter, donor art or engine install.
 import argparse
 import importlib.util
 import json
+import struct
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -35,9 +36,11 @@ desired_art = existing.desired_art
 
 
 def build(engine, out):
-    receipt = existing.build(engine, out)
-    if receipt['elevation15_preserved'] != dict(SunyshoreCity=68, Route222=0, Route223=0, PokmonLeague=0):
+    # Check the source contract before the shared builder creates any output.
+    heights = {n: sum(v[0] >> 12 == 15 for v in struct.iter_unpack('<H', source(n)[0])) for n in MAPS}
+    if heights != dict(SunyshoreCity=68, Route222=0, Route223=0, PokmonLeague=0):
         raise ValueError('source elevated walkway contract changed')
+    receipt = existing.build(engine, out)
     receipt['status'] = 'EXISTING_AVERON_SUNYSHORE_ART_NOT_RUNTIME_ACCEPTANCE'
     receipt['art_roles_sha256'] = pack.accepted.base.sha((HERE/'art-map-roles.json').read_bytes())
     receipt['limits'] = [
