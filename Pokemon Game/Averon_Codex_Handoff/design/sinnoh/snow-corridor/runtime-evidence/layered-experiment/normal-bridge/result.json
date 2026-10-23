@@ -1,0 +1,408 @@
+{
+ "maps": [
+  "MAP_ROUTE216"
+ ],
+ "build": "normal",
+ "rom_sha256": "d45b988b22ee7e57a61947e5f67531a5a9d9718c6fe822e4d9be2c29644e1157",
+ "static_findings": [],
+ "save_before": "7a5a8eb4a735b790381ee481da9e64b374602fe8bce96dcc9f5b58b9693f5f45",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "bridge probe starts on original Route216",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "upper bridge foot travel (47, 18)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 18)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 23)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 23)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "live upper bridge cell equals ROM source",
+   "ok": true,
+   "live": "0xf209",
+   "source": "0xf209"
+  },
+  {
+   "name": "upper bridge foot travel (47, 28)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     28
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 28)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 32)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     32
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 32)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 28)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     28
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 28)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "live upper bridge cell equals ROM source",
+   "ok": true,
+   "live": "0xf209",
+   "source": "0xf209"
+  },
+  {
+   "name": "upper bridge foot travel (47, 23)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 23)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge foot travel (47, 18)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "upper player and follower remain4 (47, 18)",
+   "ok": true,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "original stairs reach lower3",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower approach player3",
+   "ok": true
+  },
+  {
+   "name": "ordinary lower underpass (47, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (47, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "live lower bridge cell equals ROM source",
+   "ok": true,
+   "live": "0xf209",
+   "source": "0xf209"
+  },
+  {
+   "name": "ordinary lower underpass (48, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     48,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (48, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary lower underpass (49, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     49,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (49, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary lower underpass (48, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     48,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (48, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary lower underpass (47, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     47,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (47, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "live lower bridge cell equals ROM source",
+   "ok": true,
+   "live": "0xf209",
+   "source": "0xf209"
+  },
+  {
+   "name": "ordinary lower underpass (46, 25)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "lower player and follower remain3 (46, 25)",
+   "ok": true,
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "actual initialized snow sprites MAP_ROUTE216",
+   "ok": true,
+   "weather": {
+    "current": 4,
+    "loaded": 1,
+    "count": 16,
+    "target": 16
+   },
+   "compiled": {
+    "count": 548,
+    "current": 528,
+    "expected": 16,
+    "loaded": 530,
+    "snow": 4,
+    "target": 549
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "455a62b59f6acfe1708582706fc68ffe762a660ee141da9a300db37e1d78da5e",
+ "verdict": "PASS"
+}

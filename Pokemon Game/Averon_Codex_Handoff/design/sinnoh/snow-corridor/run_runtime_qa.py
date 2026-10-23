@@ -49,6 +49,16 @@ def run(args):
     if args.bridge_probe:qa.MAPS=('MAP_ROUTE216',)
     original=map_qa.Runner
     class WeatherRunner(original):
+        def check(self,name,ok,**details):
+            result=super().check(name,ok,**details)
+            if args.bridge_probe and args.expect and name=='follower visible (start)':
+                live=self.d.g.live_blocks(96,40)
+                source=self.w.map('MAP_ROUTE216').blocks
+                differences=None if live is None else [(x,y,hex(live[y*96+x]),hex(source[y*96+x]))
+                    for y in range(18,34) for x in (47,48) if live[y*96+x]!=source[y*96+x]]
+                super().check('all actual bridge grid cells equal ROM after Continue',
+                    live is not None and not differences,differences=differences)
+            return result
         def run_map(self,map_id):
             if args.bridge_probe:
                 self.check('bridge probe starts on original Route216',self.d.here()[0]==map_id,at=self.d.here())
