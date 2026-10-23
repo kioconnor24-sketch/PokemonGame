@@ -27,3 +27,11 @@ Every one of **432 cells** retains source collision/elevation/full behavior-laye
 Final pure geography suite **246/246 PASS**,0skips, including all older237 cases plus9 new source/negative cases. The full combined suite after gateway art is recorded next.
 
 Final complete combined Sinnoh source suite actually PASS **251/251**,0skips: the237 reused earlier cases plus9 eastern source and5 gate-art cases. No historical source fixtures needed regeneration; only this new package received the one demonstrated final-seam closure. Runtime/build acceptance remains explicitly pending for the eastern maps.
+
+## Current-main reconciliation — 2026-10-23
+
+Manager6361394314 Priority A completed by ordinary merge (no history rewrite): main `d120ca148fa27112b22ccc2cf562a1c06c0cf920` into the preserved #226 branch, merge `64578de3faa87071439a0d853976ee791857d1ca`, tree `14870f9165fab1649493e60d78a4f36ae7761a85`. Final diff remains the same81 bounded #226 paths; no production engine/registry/identity/workflow change. Shared fixed-point stager and optional gate helper remain exactly their reviewed #226 versions; merging needed no manual conflict resolution.
+
+Actual complete Sinnoh host suite **423/423 PASS,0skips** (51.675s), including newly merged Canalave/Snowpoint replay/negative tests. Focused donor suite23/23 PASS. Hygiene extension/source-scope and `git diff --check` PASS. Rebuilt independently from pinned donor38228bb574a3557345852b758d5f1a65eb01bb22: eastern61/61, Canalave21/21, Snowpoint21/21 committed files identical, each two fresh generations identical. Exact per-file SHA256s in `reconciliation/reproduction.json`; complete logs alongside. No changed cells/closures/headers/receipts, no silently revised accepted output.
+
+This establishes SOURCE integration compatibility, not new ROM/native/mGBA acceptance. Existing later #230/#231 evidence remains on its own exact sources; reconcile those only after manager normally integrates #226. No expensive ROM rebuild for unchanged engine data. Manager source review/merge remains pending; no merge by Codex.
