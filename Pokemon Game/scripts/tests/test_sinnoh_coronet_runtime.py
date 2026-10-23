@@ -134,6 +134,19 @@ class LadderProbeTest(unittest.TestCase):
         m=self.tile();m.elevation=lambda x,y:0 if (x,y)==(8,4) else 3
         self.assertEqual(self.qa.ladder_entry(m,8,4),((8,5),'up'))
 
+    def test_follower_ladder_arrival_moves_to_ordinary_origin_not_back_onto_warp(self):
+        direction,origin=self.qa.follower_origin(self.tile(),(8,4))
+        self.assertEqual((direction,origin),('down',(8,5)))
+        self.assertIsNone(self.tile().warp_at(*origin))
+        self.assertIsNone(self.qa.follower_origin(self.tile(behavior='MB_CAVE'),(8,4)))
+
+    def test_ordinary_step_waits_for_settled_state_and_does_not_forge_failed_input(self):
+        d=mock.Mock();d.step.return_value='first coordinate frame';d.settle.return_value='settled frame'
+        self.assertEqual(self.qa.ordinary_step(d,'left'),'settled frame')
+        self.assertEqual(d.mock_calls,[mock.call.step('left'),mock.call.settle()])
+        d.reset_mock();d.step.return_value=None
+        self.assertIsNone(self.qa.ordinary_step(d,'left'));d.settle.assert_not_called()
+
     def test_other_warps_and_unregistered_ladders_stay_delegated(self):
         self.assertIsNone(self.qa.ladder_entry(self.tile(behavior='MB_NORTH_ARROW_WARP'),8,4))
         self.assertIsNone(self.qa.ladder_entry(self.tile(warp=False),8,4))

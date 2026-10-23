@@ -40,6 +40,21 @@ def ladder_entry(m,x,y):
     raise ValueError('ladder warp has no ordinary compatible approach')
 
 
+def ordinary_step(d,direction):
+    """Observe after motion finishes, rather than its first coordinate update."""
+    state=d.step(direction)
+    return None if state is None else d.settle()
+
+
+def follower_origin(m,position):
+    """A ladder arrival must be left before a reversible follower foot probe."""
+    entry=ladder_entry(m,*position)
+    if entry is None:return None
+    before,push=entry
+    opposite={'up':'down','down':'up','left':'right','right':'left'}
+    return opposite[push],before
+
+
 def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,start_elevation=0):
     """Host path planning follows IsElevationMismatchAt/ObjectEventUpdateElevation.
 
@@ -171,15 +186,22 @@ def run(args):
             return False
 
         def follower(self,label,expected_layer=None):
+            self.d.settle()
             mid,(x,y)=self.d.here();m=self.d.live_map(mid)
+            origin=follower_origin(m,(x,y))
+            if origin is not None:
+                direction,before=origin;state=ordinary_step(self.d,direction)
+                if state is None or not self.d.field_ready(state) or self.d.here(state)!=(mid,before):
+                    return self.check('follower visible ('+label+')',False,reason='could not leave arrival ladder onto ordinary floor',at=self.d.here())
+                x,y=before;m=self.d.live_map(mid)
             for direction,tile in follower_neighbors(m,(x,y),expected_layer):
                 path=self.path(mid,tile)
                 if path!=[direction]:continue
-                moved=self.d.step(direction)
+                moved=ordinary_step(self.d,direction)
                 if moved is None:continue
                 if not self.d.field_ready(moved) or self.d.here(moved)!=(mid,tile):
                     return self.check('follower visible ('+label+')',False,reason='ordinary foot probe unexpectedly left its map/tile',at=self.d.here(moved))
-                returned=self.d.step(qa.OPPOSITE[direction])
+                returned=ordinary_step(self.d,qa.OPPOSITE[direction])
                 if returned is None or not self.d.field_ready(returned) or self.d.here(returned)!=(mid,(x,y)):
                     return self.check('follower visible ('+label+')',False,reason='ordinary foot probe did not return to the exact source tile',at=self.d.here())
                 break
