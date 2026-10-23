@@ -1,0 +1,73 @@
+{
+ "maps": [
+  "MAP_POKMON_LEAGUE"
+ ],
+ "build": "normal",
+ "rom_sha256": "317deaa9a49aab59059c65ff1334b7b1e0de8ac2ebaeb9baeb35ef03c304935b",
+ "static_findings": [],
+ "save_before": "c7420ff3c818d5ebba8314466c25668dffd95e6cdd46158e51f7deed54de7404",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     11,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_POKMON_LEAGUE",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     11,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     11,
+     59
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "c6af10ee7b9010ca9b5db31ff8e6b14d31795ffc498bd597aca72d833d675608",
+ "verdict": "PASS"
+}

@@ -1,0 +1,23 @@
+{"t": 1792797104.95, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792797104.98, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792797107.69, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792797107.72, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792797109.42, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792797109.47, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792797110.0, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792797110.05, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792797110.58, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792797110.63, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792797111.67, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792797111.71, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792797115.31, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792797115.36, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792797116.01, "event": "field", "map": "MAP_POKMON_LEAGUE", "pos": [11, 59], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792797116.16, "event": "capture", "file": "0008-continued.png"}
+{"t": 1792797116.16, "event": "continue-check", "problems": []}
+{"t": 1792797116.19, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_POKMON_LEAGUE", [11, 59]]}
+{"t": 1792797116.74, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_POKMON_LEAGUE", [11, 59]]}
+{"t": 1792797118.67, "event": "capture", "file": "0009-start.png"}
+{"t": 1792797118.67, "event": "observe", "label": "start", "problems": []}
+{"t": 1792797118.68, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792797118.68, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
