@@ -1,0 +1,103 @@
+{
+  "status": "SOURCE_COUPLING_ONLY_NOT_ROM_OR_NATURAL_TRAVEL_ACCEPTANCE",
+  "coast_revision": "3e00eab223722dda747f2ac3f748682a33c47026",
+  "core_revision": "064433efeb35a7e171149e3a1f950c76ccf24a84",
+  "input_sha256": {
+    "PokmonLeague/map.bin": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+    "PokmonLeague/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "PokmonLeague/map.json": "2d7f46209c61872b1a324b2b4272802d30567f51778d2955c7be42dd7e7ccaaa",
+    "PokmonLeague/attributes.json": "7bd6e76bbc9a583c504161178b1207fba58007b1fc2ec8f3411e1884892c103a",
+    "PokmonLeague/averon.png": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+    "SinnohVictoryRoad_1F/map.bin": "64f326ac107bedc79e78b4811eb9f66c0da6765b62d7691f1003668575b6925b",
+    "SinnohVictoryRoad_1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_1F/map.json": "8819d62b6ffd9f7e2eb3c29ab80763cbe3e9e0e15a001c5e23c68227be795cdf",
+    "SinnohVictoryRoad_1F/attributes.json": "66a6d8230758d41156616d05e5e776f73b64d21754ba82c23ced77e4ab436d70",
+    "SinnohVictoryRoad_1F/averon.png": "93db0ac6fc2122ab7f0892894bed148313770ecfb5ece107c90733a283fbfd2a",
+    "SinnohVictoryRoad_2F/map.bin": "e3d8c52919cae6842bce421df8212cd3ca3e3f57163fc55c0e1932fee23fe991",
+    "SinnohVictoryRoad_2F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_2F/map.json": "a025ff5d6749b399aef9c9314e1573ccc5b8146df4ba6548ea16adfb7a931ef6",
+    "SinnohVictoryRoad_2F/attributes.json": "66a6d8230758d41156616d05e5e776f73b64d21754ba82c23ced77e4ab436d70",
+    "SinnohVictoryRoad_2F/averon.png": "f5305b346538879c218c85a078ae8349ec5f90b1e6fadc3f6b09975fe3634901",
+    "SinnohVictoryRoad_B1F/map.bin": "f5c32c4a3c6ab9755c800c4f827297d9f2ef1d1736efc16a2f8d715417f7aa14",
+    "SinnohVictoryRoad_B1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_B1F/map.json": "223585f402bedcd64853e60b364dd4c7f3b92a3114b72efe7308723509d22a2f",
+    "SinnohVictoryRoad_B1F/attributes.json": "66a6d8230758d41156616d05e5e776f73b64d21754ba82c23ced77e4ab436d70",
+    "SinnohVictoryRoad_B1F/averon.png": "a329fd96e3b91e6f33af86f806be7ce677058b6e9a5ded42c1a5d3157f575337",
+    "league-primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "league-secondary-attributes.bin": "5107c1c245e967b6dcfba023479a5b82598a4b8c5348b0fc2fe98923e037fe8a"
+  },
+  "existing_averon_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "core_changes": [
+    {
+      "core_tile": [
+        15,
+        78
+      ],
+      "before": 3593,
+      "after": 532,
+      "league_tile": [
+        21,
+        58
+      ],
+      "ds_1f_canonical_index": 7,
+      "core_index": 6,
+      "league_index": 0
+    },
+    {
+      "core_tile": [
+        34,
+        5
+      ],
+      "before": 3593,
+      "after": 532,
+      "league_tile": [
+        23,
+        41
+      ],
+      "ds_1f_canonical_index": 8,
+      "core_index": 7,
+      "league_index": 1
+    }
+  ],
+  "league_binary_and_border_unchanged": true,
+  "original_six_core_stairs_unchanged": true,
+  "full_fields_preserved_except_two_original_sealed_core_doors": true,
+  "output_sha256": {
+    "PokmonLeague/map.bin": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+    "PokmonLeague/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "PokmonLeague/map.json": "6cc93333bb126b6345c4450e0be91b0adae3b06f15b64fd9e24a9e51afc11c6a",
+    "PokmonLeague/attributes.json": "c98dcabd686a13429cd011871f4ded91c64d2f9c0021d60693d939f29db1aa80",
+    "PokmonLeague/averon.png": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+    "SinnohVictoryRoad_1F/map.bin": "92951c5f3a36abb3aca5684f468c527cdd6ec712c98325ac47d57a0de4144a8b",
+    "SinnohVictoryRoad_1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_1F/map.json": "a8d594d4582a4c9c31d3816b2417a8c2584c7549ee979e67e44372fd21fe1e9b",
+    "SinnohVictoryRoad_1F/attributes.json": "7a43a1e10ab24ecadfc1c09e3e2db695bdf525fbe6ac211cc0b9cdaea6b0d1fe",
+    "SinnohVictoryRoad_1F/averon.png": "b7ee2d695de4bfffac7adce361a2189811e0ff26a6cb77124a4e87d2d400bdd5",
+    "SinnohVictoryRoad_2F/map.bin": "e3d8c52919cae6842bce421df8212cd3ca3e3f57163fc55c0e1932fee23fe991",
+    "SinnohVictoryRoad_2F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_2F/map.json": "a025ff5d6749b399aef9c9314e1573ccc5b8146df4ba6548ea16adfb7a931ef6",
+    "SinnohVictoryRoad_2F/attributes.json": "66a6d8230758d41156616d05e5e776f73b64d21754ba82c23ced77e4ab436d70",
+    "SinnohVictoryRoad_2F/averon.png": "f5305b346538879c218c85a078ae8349ec5f90b1e6fadc3f6b09975fe3634901",
+    "SinnohVictoryRoad_B1F/map.bin": "f5c32c4a3c6ab9755c800c4f827297d9f2ef1d1736efc16a2f8d715417f7aa14",
+    "SinnohVictoryRoad_B1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "SinnohVictoryRoad_B1F/map.json": "223585f402bedcd64853e60b364dd4c7f3b92a3114b72efe7308723509d22a2f",
+    "SinnohVictoryRoad_B1F/attributes.json": "66a6d8230758d41156616d05e5e776f73b64d21754ba82c23ced77e4ab436d70",
+    "SinnohVictoryRoad_B1F/averon.png": "a329fd96e3b91e6f33af86f806be7ce677058b6e9a5ded42c1a5d3157f575337"
+  },
+  "limits": [
+    "Existing League cave anchors are source facts21,58 and23,41, not guessed coordinates",
+    "Canonical DS pairs League2/3 to1F7/8 become two explicit GBA paired doors; wider DS warp aliases not copied",
+    "Source coast terrain/elevation/behaviors/art unchanged; only two original authored core door cells open",
+    "League Route223 metadata still requires the existing coast batch in a combined DEV/production registry",
+    "No natural Surf/Waterfall arrival, side rooms, story, saved IDs, ROM/native/mGBA or production acceptance"
+  ]
+}
