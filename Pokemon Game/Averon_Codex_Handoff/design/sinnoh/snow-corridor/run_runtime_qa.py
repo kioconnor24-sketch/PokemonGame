@@ -46,10 +46,29 @@ def run(args):
     scripts=HERE.parents[3]/'scripts/claude_play';sys.path.insert(0,str(scripts))
     import map_qa
     offsets=weather_offsets(args.engine,args.scratch/'weather-probe')
+    if args.bridge_probe:qa.MAPS=('MAP_ROUTE216',)
     original=map_qa.Runner
     class WeatherRunner(original):
         def run_map(self,map_id):
-            super().run_map(map_id)
+            if args.bridge_probe:
+                self.check('bridge probe starts on original Route216',self.d.here()[0]==map_id,at=self.d.here())
+                for tile in ((47,18),(47,23),(47,25),(47,28),(47,32),(47,28),(47,25),(47,23),(47,18)):
+                    ok=self.go(map_id,tile)
+                    self.check('upper bridge foot travel '+str(tile),ok,at=self.d.here())
+                    z=qa.observed_elevations(self.d)
+                    self.check('upper player and follower remain4 '+str(tile),z==dict(player=4,follower=4),elevations=z)
+                    if tile==(47,25):self.d.shot('upper-bridge')
+                self.check('original stairs reach lower3',self.go(map_id,(46,25)),at=self.d.here())
+                self.check('lower approach player3',qa.observed_elevations(self.d)['player']==3)
+                for direction,tile in (('right',(47,25)),('right',(48,25)),('right',(49,25)),
+                                       ('left',(48,25)),('left',(47,25)),('left',(46,25))):
+                    state=qa.ordinary_step(self.d,direction)
+                    ok=state is not None and self.d.field_ready(state) and self.d.here(state)==(map_id,tile)
+                    self.check('ordinary lower underpass '+str(tile),ok,at=self.d.here())
+                    z=qa.observed_elevations(self.d)
+                    self.check('lower player and follower remain3 '+str(tile),z==dict(player=3,follower=3),elevations=z)
+                    if tile==(47,25):self.d.shot('lower-underpass')
+            else:super().run_map(map_id)
             self.d.settle();g=self.d.g;address=g.sym['gWeather']
             observed={name:g.gdb.read(address+offsets[name],1)[0] for name in ('current','loaded','count','target')}
             self.check('actual initialized snow sprites '+map_id,
@@ -65,4 +84,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('engine','rom','scratch','out','recipe'):p.add_argument('--'+name,required=True,type=Path)
     p.add_argument('--profile',required=True,choices=('normal','release'));p.add_argument('--expect',type=Path)
+    p.add_argument('--bridge-probe',action='store_true',help='Focused original stairs/upper4/lower3 foot test, same verified ROM')
     sys.exit(run(p.parse_args()))

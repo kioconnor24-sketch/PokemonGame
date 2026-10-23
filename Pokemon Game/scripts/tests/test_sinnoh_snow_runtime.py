@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import subprocess
 import unittest
 from unittest import mock
 
@@ -52,6 +53,6 @@ class SnowRuntimeTest(unittest.TestCase):
     def test_source_checkout_and_unmarked_target_refused_before_any_write(self):
         with self.assertRaisesRegex(ValueError,'explicit disposable snow'):a.install(REPO)
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaises(Exception):a.install(Path(tmp))
+            with self.assertRaises(subprocess.CalledProcessError):a.install(Path(tmp))
 
 if __name__=='__main__':unittest.main()
