@@ -1,0 +1,202 @@
+{
+ "maps": [
+  "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+  "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2"
+ ],
+ "build": "release",
+ "rom_sha256": "dcd6a543117edede8671a6af6f9c886bca52f9ce20de2627112334c628cb3660",
+ "static_findings": [],
+ "save_before": "9d916070af2c4ec069f5b8eac516e504aba125d9b19d7865206936b9b8cde48d",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+    [
+     5,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+    [
+     5,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+    [
+     1,
+     2
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 warp 0 (2, 2) -> MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+    [
+     [
+      2,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+    [
+     2,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1",
+    [
+     2,
+     3
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 warp 0 (1, 1) -> MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+    [
+     [
+      1,
+      2
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2",
+    [
+     1,
+     2
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "dc04f5965a2ba63ab417241be700fef091798ffb6e4e75d9ba6d20557485c93e",
+ "verdict": "PASS"
+}

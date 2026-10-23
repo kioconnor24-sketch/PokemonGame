@@ -52,9 +52,13 @@ class RoomRuntimeTests(unittest.TestCase):
 
     def test_production_checkout_refused_and_exact_dirty_inputs_rejected(self):
         with self.assertRaisesRegex(ValueError,'disposable rooms branch'):runtime.install(ROOT)
-        with tempfile.TemporaryDirectory() as temp:
-            with self.assertRaises(Exception):runtime.inputs(Path(temp))
-            self.assertEqual([],list(Path(temp).iterdir()))
+        baseline=runtime.inputs(ROOT)
+        corrupted=dict(baseline)
+        first=next(iter(corrupted));corrupted[first]+=b'changed'
+        def altered(repo,path,revision):
+            return corrupted[str(path).removeprefix(runtime.ENGINE)]
+        with patch.object(runtime.base,'verified_file',side_effect=altered):
+            with self.assertRaisesRegex(ValueError,'baseline inputs differ'):runtime.inputs(ROOT)
 
     def test_wrong_base_and_escape_refused_before_any_output(self):
         with tempfile.TemporaryDirectory() as temp:

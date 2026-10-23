@@ -1,0 +1,58 @@
+{"t": 1792787002.1, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792787002.39, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792787005.67, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 4}
+{"t": 1792787005.85, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792787008.27, "event": "screen", "cb2": "MainCB2_Intro", "i": 7}
+{"t": 1792787008.67, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792787009.35, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 8}
+{"t": 1792787009.65, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792787010.49, "event": "screen", "cb2": "MainCB2", "i": 9}
+{"t": 1792787010.76, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792787012.28, "event": "screen", "cb2": "CB2_GoToMainMenu", "i": 11}
+{"t": 1792787012.5, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792787013.8, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792787013.99, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792787016.97, "event": "screen", "cb2": "CB2_DoChangeMap", "i": 14}
+{"t": 1792787017.09, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792787018.35, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792787018.45, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792787019.11, "event": "field", "map": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", "pos": [5, 5], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792787019.76, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", [5, 5]]}
+{"t": 1792787022.56, "event": "capture", "file": "0010-start.png"}
+{"t": 1792787022.56, "event": "observe", "label": "start", "problems": []}
+{"t": 1792787022.59, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787022.88, "event": "map-qa-check", "name": "reached MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", [5, 5]]}
+{"t": 1792787028.95, "event": "capture", "file": "0011-warp-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1-0.png"}
+{"t": 1792787031.5, "event": "capture", "file": "0012-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 via warp.png"}
+{"t": 1792787031.5, "event": "observe", "label": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 via warp", "problems": []}
+{"t": 1792787031.55, "event": "map-qa-check", "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787031.68, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", [1, 2]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787034.88, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 warp 0 (2, 2) -> MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 and back", "ok": true, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", [[2, 3]]], "got": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", [2, 3]]}
+{"t": 1792787037.8, "event": "capture", "file": "0013-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 after warp round trip.png"}
+{"t": 1792787037.8, "event": "observe", "label": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 after warp round trip", "problems": []}
+{"t": 1792787037.85, "event": "map-qa-check", "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787041.25, "event": "map", "map": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", "pos": [1, 2]}
+{"t": 1792787041.58, "event": "map-qa-check", "name": "reached MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", [1, 2]]}
+{"t": 1792787045.41, "event": "capture", "file": "0014-warp-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2-0.png"}
+{"t": 1792787048.11, "event": "capture", "file": "0015-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 via warp.png"}
+{"t": 1792787048.11, "event": "observe", "label": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 via warp", "problems": []}
+{"t": 1792787048.17, "event": "map-qa-check", "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787048.2, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1", [2, 3]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787051.28, "event": "map-qa-check", "name": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 warp 0 (1, 1) -> MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F1 and back", "ok": true, "leg": "back", "expected": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", [[1, 2]]], "got": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", [1, 2]]}
+{"t": 1792787053.81, "event": "capture", "file": "0016-MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 after warp round trip.png"}
+{"t": 1792787053.81, "event": "observe", "label": "MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 after warp round trip", "problems": []}
+{"t": 1792787053.86, "event": "map-qa-check", "name": "follower visible (MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792787054.98, "event": "capture", "file": "0017-start-menu.png"}
+{"t": 1792787055.87, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792787062.4, "event": "capture", "file": "0018-save-confirm-coronet-six.png"}
+{"t": 1792787063.88, "event": "capture", "file": "0019-save-step-coronet-six-01.png"}
+{"t": 1792787066.27, "event": "capture", "file": "0020-save-step-coronet-six-02.png"}
+{"t": 1792787067.51, "event": "capture", "file": "0021-save-step-coronet-six-03.png"}
+{"t": 1792787068.77, "event": "capture", "file": "0022-save-step-coronet-six-04.png"}
+{"t": 1792787070.0, "event": "capture", "file": "0023-save-step-coronet-six-05.png"}
+{"t": 1792787071.25, "event": "capture", "file": "0024-save-step-coronet-six-06.png"}
+{"t": 1792787072.5, "event": "capture", "file": "0025-save-step-coronet-six-07.png"}
+{"t": 1792787073.77, "event": "capture", "file": "0026-save-step-coronet-six-08.png"}
+{"t": 1792787076.49, "event": "capture", "file": "0027-saved-coronet-six.png"}
+{"t": 1792787076.49, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792787076.6, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_TWINLEAF_TOWN_RIVALS_HOUSE_F2", [1, 2]]}
