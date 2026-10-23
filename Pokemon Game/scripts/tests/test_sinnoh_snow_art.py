@@ -67,7 +67,7 @@ class SnowArtTest(unittest.TestCase):
         self.assertEqual(self.receipt['weather'],{n:'WEATHER_SNOW' for n in a.MAPS})
 
     def test_bridge_pixels_use_actual_wood_instead_of_paving_or_house_tiles(self):
-        plank=a.pack.words(self.stock[1],16);wood=tuple(plank[i] for i in (1,1,3,3,5,5,7,7));count=0
+        plank=a.pack.words(self.stock[1],16);wood=(plank[5],)*8;count=0
         for name in a.MAPS:
             f=HERE/'staged'/name
             old=struct.unpack('<%dH'%((f/'map.bin').stat().st_size//2),(f/'map.bin').read_bytes())

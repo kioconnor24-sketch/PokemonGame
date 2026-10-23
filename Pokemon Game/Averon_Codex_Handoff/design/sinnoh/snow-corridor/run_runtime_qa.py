@@ -57,7 +57,12 @@ def run(args):
                     self.check('upper bridge foot travel '+str(tile),ok,at=self.d.here())
                     z=qa.observed_elevations(self.d)
                     self.check('upper player and follower remain4 '+str(tile),z==dict(player=4,follower=4),elevations=z)
-                    if tile==(47,25):self.d.shot('upper-bridge')
+                    if tile==(47,25):
+                        live=self.d.live_map(map_id);source=self.w.map(map_id)
+                        point=25*live.width+47
+                        self.check('live upper bridge cell equals ROM source',live.blocks[point]==source.blocks[point],
+                            live=hex(live.blocks[point]),source=hex(source.blocks[point]))
+                        self.d.shot('upper-bridge')
                 self.check('original stairs reach lower3',self.go(map_id,(46,25)),at=self.d.here())
                 self.check('lower approach player3',qa.observed_elevations(self.d)['player']==3)
                 for direction,tile in (('right',(47,25)),('right',(48,25)),('right',(49,25)),
@@ -67,7 +72,11 @@ def run(args):
                     self.check('ordinary lower underpass '+str(tile),ok,at=self.d.here())
                     z=qa.observed_elevations(self.d)
                     self.check('lower player and follower remain3 '+str(tile),z==dict(player=3,follower=3),elevations=z)
-                    if tile==(47,25):self.d.shot('lower-underpass')
+                    if tile==(47,25):
+                        live=self.d.live_map(map_id);source=self.w.map(map_id);point=25*live.width+47
+                        self.check('live lower bridge cell equals ROM source',live.blocks[point]==source.blocks[point],
+                            live=hex(live.blocks[point]),source=hex(source.blocks[point]))
+                        self.d.shot('lower-underpass')
             else:super().run_map(map_id)
             self.d.settle();g=self.d.g;address=g.sym['gWeather']
             observed={name:g.gdb.read(address+offsets[name],1)[0] for name in ('current','loaded','count','target')}

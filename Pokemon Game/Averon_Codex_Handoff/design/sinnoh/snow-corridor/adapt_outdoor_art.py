@@ -49,7 +49,11 @@ def desired_art(name,raw,border,header,attrs,banks,stock):
     if header['weather']!='WEATHER_SNOW':raise ValueError('source snow weather changed')
     desired=templates.desired_art(name,raw,border,header,attrs,banks,stock)
     plank=pack.words(banks[1],528-512)
-    wood=tuple(plank[i] for i in (1,1,3,3,5,5,7,7))
+    # Preserve the stock plank in BOTH hardware layers. Its original lower
+    # quadrants are flat ground colors. Actual upper E15 captures showed a
+    # white gap, so test the real stock plank in both planes before acceptance.
+    # No layer/terrain word is changed; verify upper4 and lower3 in mGBA.
+    wood=(plank[5],)*8
     for i,(cell,) in enumerate(struct.iter_unpack('<H',raw+border)):
         mid=cell&1023
         if mid in BRIDGES[name]:desired[i]=wood

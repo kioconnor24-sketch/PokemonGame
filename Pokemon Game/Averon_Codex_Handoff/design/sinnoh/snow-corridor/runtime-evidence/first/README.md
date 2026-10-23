@@ -1,0 +1,9 @@
+# First exact snow scene — preserved, NOT final bridge visual acceptance
+
+Engine1b346ef567a5395583a4e1c43068d7b6aae03409, base d120ca14. NORMAL/RELEASE full24/24 each, fresh3/3, unchanged genuine oldflash3/3 each. Explicit copied-flash continue-warp DEV entry; temporary217 popup is knowingly Route201. Both4-map scenes initialize actual16/16 snow sprites; screenshots show snow. Native29/29, unchanged save goldens4/4, source423/423 zero skips.
+
+NORMAL focused bridge38/38; RELEASE42/42 adds4 live-cell equality checks. Both fresh3/3. Real player/follower upper4/lower3 reversible foot movement, menu and Save pass, but **upper screenshots expose a white walkway gap** while both live/ROM cells equalF209. These movement PASS receipts do NOT accept visual layering. Separate source-only two-plane existing-plank correction is being built/tested; never overwrite/relabel these initial ROMs/results.
+
+Source scenario variants are explicit in scenario-identities.json. Actual GCC/nm-derived weather constants/offsets appear in events. No new emulator/save formatter, no GDB writes, no grants/flags/IDs. Original genuine flash44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d unchanged. All ROM/ELF/map/save binaries stay private in /workspace/scratch/snow-first-built-20261023. Exact25 overlay stash625a4370764d2563cd70705014df11289e62e64a; restore once, not over a different installed scene.
+
+Initial harness errors preserved: two misspelled SHA256 receipt keys (7PASS+2ERROR); mistaken group75 assertion (4PASS+1FAIL; corrected to actual76); prelaunch socket namespace failure (no gameplay verdict). Network-enabled graphical retry succeeded. Winter proxies still use green conifers and pale existing path; final snow-covered art, natural arrival, Surf, story, permanent origins and Delta remain unaccepted.

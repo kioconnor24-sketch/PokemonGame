@@ -1,0 +1,402 @@
+{
+ "maps": [
+  "MAP_ROUTE216",
+  "MAP_ROUTE217",
+  "MAP_ACUITY_LAKEFRONT",
+  "MAP_SNOWPOINT_CITY"
+ ],
+ "build": "normal",
+ "rom_sha256": "57bd65006ad02c4ee56c9ba653b9eb9d718c31a7bb0cd8e335bedac8175089d0",
+ "static_findings": [],
+ "save_before": "4d0eea32038f6f4257063f0bde97aa4c4c01769f892f77899e1e73719538503d",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE217",
+    [
+     18,
+     60
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE216",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     14,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE216 up seam (14, 0) -> MAP_ROUTE217 (16, 117) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE216",
+    [
+     14,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE216",
+    [
+     14,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE216 up seam (15, 0) -> MAP_ROUTE217 (17, 117) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE216",
+    [
+     15,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE216",
+    [
+     15,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "actual initialized snow sprites MAP_ROUTE216",
+   "ok": true,
+   "weather": {
+    "current": 4,
+    "loaded": 1,
+    "count": 16,
+    "target": 16
+   },
+   "compiled": {
+    "count": 548,
+    "current": 528,
+    "expected": 16,
+    "loaded": 530,
+    "snow": 4,
+    "target": 549
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE217",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE217",
+    [
+     16,
+     117
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE217 up seam (24, 0) -> MAP_ACUITY_LAKEFRONT (22, 65) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE217",
+    [
+     24,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE217",
+    [
+     24,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE217 up seam (25, 0) -> MAP_ACUITY_LAKEFRONT (23, 65) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE217",
+    [
+     25,
+     0
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE217",
+    [
+     25,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE217 down seam (16, 117) -> MAP_ROUTE216 (14, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE217",
+    [
+     16,
+     117
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE217",
+    [
+     16,
+     117
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE217 down seam (17, 117) -> MAP_ROUTE216 (15, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE217",
+    [
+     17,
+     117
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE217",
+    [
+     17,
+     117
+    ]
+   ]
+  },
+  {
+   "name": "actual initialized snow sprites MAP_ROUTE217",
+   "ok": true,
+   "weather": {
+    "current": 4,
+    "loaded": 1,
+    "count": 16,
+    "target": 16
+   },
+   "compiled": {
+    "count": 548,
+    "current": 528,
+    "expected": 16,
+    "loaded": 530,
+    "snow": 4,
+    "target": 549
+   }
+  },
+  {
+   "name": "reached MAP_ACUITY_LAKEFRONT",
+   "ok": true,
+   "at": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     22,
+     65
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ACUITY_LAKEFRONT down seam (22, 65) -> MAP_ROUTE217 (24, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     22,
+     65
+    ]
+   ],
+   "got": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     22,
+     65
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ACUITY_LAKEFRONT down seam (23, 65) -> MAP_ROUTE217 (25, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     23,
+     65
+    ]
+   ],
+   "got": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     23,
+     65
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ACUITY_LAKEFRONT right seam (63, 48) -> MAP_SNOWPOINT_CITY (0, 50) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     63,
+     48
+    ]
+   ],
+   "got": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     63,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ACUITY_LAKEFRONT right seam (63, 49) -> MAP_SNOWPOINT_CITY (0, 51) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     63,
+     49
+    ]
+   ],
+   "got": [
+    "MAP_ACUITY_LAKEFRONT",
+    [
+     63,
+     49
+    ]
+   ]
+  },
+  {
+   "name": "actual initialized snow sprites MAP_ACUITY_LAKEFRONT",
+   "ok": true,
+   "weather": {
+    "current": 4,
+    "loaded": 1,
+    "count": 16,
+    "target": 16
+   },
+   "compiled": {
+    "count": 548,
+    "current": 528,
+    "expected": 16,
+    "loaded": 530,
+    "snow": 4,
+    "target": 549
+   }
+  },
+  {
+   "name": "reached MAP_SNOWPOINT_CITY",
+   "ok": true,
+   "at": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SNOWPOINT_CITY left seam (0, 50) -> MAP_ACUITY_LAKEFRONT (63, 48) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     50
+    ]
+   ],
+   "got": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "MAP_SNOWPOINT_CITY left seam (0, 51) -> MAP_ACUITY_LAKEFRONT (63, 49) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     51
+    ]
+   ],
+   "got": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     51
+    ]
+   ]
+  },
+  {
+   "name": "actual initialized snow sprites MAP_SNOWPOINT_CITY",
+   "ok": true,
+   "weather": {
+    "current": 4,
+    "loaded": 1,
+    "count": 16,
+    "target": 16
+   },
+   "compiled": {
+    "count": 548,
+    "current": 528,
+    "expected": 16,
+    "loaded": 530,
+    "snow": 4,
+    "target": 549
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     51
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "037132dd599c917e8433b794e2d0e71dbb796b8670a6332cf165f0febe53009d",
+ "verdict": "PASS"
+}
