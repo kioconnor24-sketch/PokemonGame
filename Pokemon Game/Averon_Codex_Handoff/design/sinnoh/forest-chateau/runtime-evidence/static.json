@@ -1,0 +1,514 @@
+{
+ "maps": [
+  "MAP_ETERNA_FOREST",
+  "MAP_OLD_CHATEAU_ENTRANCE",
+  "MAP_OLD_CHATEAU_DINING_ROOM",
+  "MAP_OLD_CHATEAU_2F",
+  "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+  "MAP_OLD_CHATEAU_SIDE_ROOM_2"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ETERNA_FOREST": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      59,
+      8
+     ],
+     "warp": [
+      59,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 0,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OLD_CHATEAU_ENTRANCE": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      9,
+      16
+     ],
+     "warp": [
+      9,
+      16
+     ],
+     "dest": "MAP_ETERNA_FOREST",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      8,
+      16
+     ],
+     "warp": [
+      8,
+      16
+     ],
+     "dest": "MAP_ETERNA_FOREST",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      10,
+      16
+     ],
+     "warp": [
+      10,
+      16
+     ],
+     "dest": "MAP_ETERNA_FOREST",
+     "dest_warp": 0,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      9,
+      12
+     ],
+     "warp": [
+      9,
+      11
+     ],
+     "dest": "MAP_OLD_CHATEAU_DINING_ROOM",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      2,
+      3
+     ],
+     "warp": [
+      2,
+      2
+     ],
+     "dest": "MAP_OLD_CHATEAU_SIDE_ROOM_1",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 5,
+     "tile": [
+      9,
+      3
+     ],
+     "warp": [
+      9,
+      2
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 6,
+     "tile": [
+      16,
+      3
+     ],
+     "warp": [
+      16,
+      2
+     ],
+     "dest": "MAP_OLD_CHATEAU_SIDE_ROOM_2",
+     "dest_warp": 0,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OLD_CHATEAU_DINING_ROOM": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      20,
+      9
+     ],
+     "warp": [
+      20,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 3,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      21,
+      9
+     ],
+     "warp": [
+      21,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 3,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OLD_CHATEAU_2F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      18,
+      13
+     ],
+     "warp": [
+      18,
+      13
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 5,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      19,
+      13
+     ],
+     "warp": [
+      19,
+      13
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 5,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      3,
+      10
+     ],
+     "warp": [
+      3,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 3,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      3,
+      7
+     ],
+     "warp": [
+      3,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 2,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      2,
+      7
+     ],
+     "warp": [
+      2,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 2,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 5,
+     "tile": [
+      9,
+      10
+     ],
+     "warp": [
+      9,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 6,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 6,
+     "tile": [
+      9,
+      7
+     ],
+     "warp": [
+      9,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 5,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 7,
+     "tile": [
+      10,
+      7
+     ],
+     "warp": [
+      10,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 5,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 8,
+     "tile": [
+      18,
+      10
+     ],
+     "warp": [
+      18,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 9,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 9,
+     "tile": [
+      18,
+      7
+     ],
+     "warp": [
+      18,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 8,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 10,
+     "tile": [
+      19,
+      7
+     ],
+     "warp": [
+      19,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 8,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 11,
+     "tile": [
+      28,
+      10
+     ],
+     "warp": [
+      28,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 12,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 12,
+     "tile": [
+      28,
+      7
+     ],
+     "warp": [
+      28,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 11,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 13,
+     "tile": [
+      27,
+      7
+     ],
+     "warp": [
+      27,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 11,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 14,
+     "tile": [
+      35,
+      10
+     ],
+     "warp": [
+      35,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 15,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 15,
+     "tile": [
+      35,
+      7
+     ],
+     "warp": [
+      35,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 14,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 16,
+     "tile": [
+      34,
+      7
+     ],
+     "warp": [
+      34,
+      7
+     ],
+     "dest": "MAP_OLD_CHATEAU_2F",
+     "dest_warp": 14,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OLD_CHATEAU_SIDE_ROOM_1": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      9
+     ],
+     "warp": [
+      4,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 4,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      5,
+      9
+     ],
+     "warp": [
+      5,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 4,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_OLD_CHATEAU_SIDE_ROOM_2": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      9
+     ],
+     "warp": [
+      4,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 6,
+     "push": "down"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      5,
+      9
+     ],
+     "warp": [
+      5,
+      9
+     ],
+     "dest": "MAP_OLD_CHATEAU_ENTRANCE",
+     "dest_warp": 6,
+     "push": "down"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}

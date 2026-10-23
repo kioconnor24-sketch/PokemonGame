@@ -431,7 +431,7 @@ class Runner:
         for direction, (dx, dy) in DIRS.items():
             n = (x + dx, y + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
-                if self.d.step(direction):
+                if self.d.step(direction) is not None:
                     self.d.step(OPPOSITE[direction])
                 break
         obs = play.observe(self.d, label)

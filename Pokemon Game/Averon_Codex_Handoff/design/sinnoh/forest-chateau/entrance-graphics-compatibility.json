@@ -1,7 +1,7 @@
 {
   "status": "EXISTING_AVERON_ENTRANCE_WITH_EXPLICIT_LIMITED_ART_SUBSTITUTION_NOT_RUNTIME_ACCEPTANCE",
   "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
-  "engine_source": "40721fd8f4aa7a8206d163c964a197ad850f2227",
+  "engine_source": "637f631b33eb4548f45ae23f49c9199ad16fc861",
   "source_sha256": {
     "data/tilesets/primary/building/tiles.png": "355d5dc8625e332ceb34cbe685092d96540ece0b7a39293e493d27c02b6db300",
     "data/tilesets/secondary/lilycove_museum/tiles.png": "96eddd8275c836ca4a293629d2d3ee75d57946fe62d73d89743272e9e926367c",
@@ -109,11 +109,7 @@
       868,
       871,
       884,
-      887,
-      916,
-      917,
-      932,
-      933
+      887
     ],
     "palettes": [
       0,
@@ -185,9 +181,15 @@
   "all_other_used_patterns_identical": true,
   "all_used_palette_colors_equal": true,
   "secondary_records": 155,
+  "runtime_opaque_floor_repair": {
+    "metatile": 660,
+    "existing_floor_template": 649,
+    "affected_cells": 12,
+    "source_attribute_preserved": true
+  },
   "limits": [
-    "Four source graphic patterns intentionally replaced with existing Museum patterns; not full source RGB equivalence",
+    "Metatile660 uses accepted opaque Museum floor649 to replace four transparent placeholder patterns; not source RGB equivalence",
     "No donor PNG/palette written or imported, no story/objects/encounters",
-    "No engine install, saved identity, ROM or mGBA acceptance; Forest Valor remains unadapted"
+    "Static art only; exact repaired ROM/native/mGBA evidence is separate from pre-repair functional runs"
   ]
 }
