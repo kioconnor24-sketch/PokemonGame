@@ -46,6 +46,7 @@ class RuntimeTest(unittest.TestCase):
             for name in names:
                 for key in ('primary_tileset','secondary_tileset'):
                     self.assertEqual(d[name+'_Layout'][key],d[names[0]+'_Layout'][key])
+        self.assertEqual(d['Route213_Layout']['primary_tileset'],'gTileset_General')
         self.assertNotEqual(d['VeilstoneCity_Layout']['secondary_tileset'],d['Route215_Access_Layout']['secondary_tileset'])
         for name in ('General','Rustboro','Building','Shop'):
             for value in a.asset_bindings(self.before['src/data/tilesets/headers.h'].decode(),name).values():
@@ -53,7 +54,7 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual(len(self.files['data/tilesets/primary/eastern_dev_gateprimary/metatiles.bin']),8*16)
 
     def test_no_save_id_general_northern_or_existing_gate_writes(self):
-        self.assertEqual(len(self.files),68)
+        self.assertEqual(len(self.files),66)
         for p in self.files:
             self.assertFalse('region_map_sections' in p or 'mapsec-pins' in p or 'pokemon.h' in p or 'global.h' in p or '/general/' in p)
             self.assertFalse(any('/'+n+'/' in p for n in self.receipt['existing_map_names_preserved']))
@@ -102,6 +103,16 @@ class RuntimeTest(unittest.TestCase):
             return data[:-1] if path==HERE/'hotel-link/outdoor-family/secondary-metatiles.bin' else data
         with mock.patch.object(Path,'read_bytes',new=read),self.assertRaises(ValueError):a.assemble(ROOT)
         with mock.patch.object(a.base,'verified_file',return_value=b'changed'),self.assertRaises(ValueError):a.inputs(ROOT)
+
+    def test_native_general_reuse_rejects_either_changed_primary_metadata_array(self):
+        original=Path.read_bytes
+        for filename in ('primary-metatiles.bin','primary-attributes.bin'):
+            target=HERE/'hotel-link/outdoor-family'/filename
+            def read(path):
+                data=original(path)
+                return bytes([data[0]^1])+data[1:] if path==target else data
+            with self.subTest(filename=filename),mock.patch.object(Path,'read_bytes',new=read),self.assertRaisesRegex(ValueError,'native General primary metadata'):
+                a.assemble(ROOT)
 
     def test_install_requires_marker_current_branch_head_and_clean_engine(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -3,6 +3,7 @@
 #include "test/test.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "tilesets.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 STATIC_ASSERT(MAPSEC_NONE == 215, eastern_none_preserved);
@@ -37,4 +38,10 @@ TEST("Averon DEV eastern gateways and outdoors stream separate coherent families
     EXPECT(city->mapLayout->secondaryTileset==coast->mapLayout->secondaryTileset);
     EXPECT(gate->mapLayout->secondaryTileset==other->mapLayout->secondaryTileset);
     EXPECT(gate->mapLayout->secondaryTileset!=city->mapLayout->secondaryTileset);
+}
+
+TEST("Averon DEV eastern animated doors retain native General identity")
+{
+    const struct MapHeader *route=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE213),MAP_NUM(MAP_ROUTE213));
+    EXPECT(route->mapLayout->primaryTileset==&gTileset_General);
 }

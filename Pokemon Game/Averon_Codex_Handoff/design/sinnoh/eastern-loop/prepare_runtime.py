@@ -60,6 +60,14 @@ def assemble(repo):
         bank='secondary' if secondary else 'primary';symbol='EasternDev'+family;path=f'data/tilesets/{bank}/eastern_dev_{family.lower()}/'
         records=(HERE/folder/(bank+'-metatiles.bin')).read_bytes();attrs=(HERE/folder/(bank+'-attributes.bin')).read_bytes()
         if not records or len(records)%16 or len(records)>8192 or len(attrs)*8!=len(records):raise ValueError('invalid metadata bank')
+        if family=='OutdoorPrimary':
+            # Native door animation lookup requires the stock tileset identity.
+            # Reuse it only when BOTH metadata arrays are exactly unchanged.
+            for value,filename in ((records,'metatiles.bin'),(attrs,'metatile_attributes.bin')):
+                original=base.verified_file(repo,Path(ENGINE)/'data/tilesets/primary/general'/filename,'HEAD')
+                if value!=original:raise ValueError('native General primary metadata must be identical')
+            symbols[family]='gTileset_General'
+            continue
         files[path+'metatiles.bin']=records;files[path+'metatile_attributes.bin']=attrs
         symbols[family]='gTileset_'+symbol
         bindings=asset_bindings(before['src/data/tilesets/headers.h'].decode(),graphics)
