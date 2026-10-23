@@ -114,6 +114,43 @@ class RuntimeTest(unittest.TestCase):
             with self.subTest(filename=filename),mock.patch.object(Path,'read_bytes',new=read),self.assertRaisesRegex(ValueError,'native General primary metadata'):
                 a.assemble(ROOT)
 
+    def test_actual_route212_rails_are_not_foot_paths_even_at_elevation15(self):
+        path=HERE/'run_runtime_qa.py'
+        spec=importlib.util.spec_from_file_location('eastern_foot_qa',path)
+        qa=importlib.util.module_from_spec(spec);spec.loader.exec_module(qa)
+        path=HERE.parents[3]/'scripts/claude_play/mapdata.py'
+        spec=importlib.util.spec_from_file_location('eastern_foot_maps',path)
+        md=importlib.util.module_from_spec(spec);spec.loader.exec_module(md)
+        engine=ROOT/a.ENGINE;read_text=Path.read_text;read_bytes=Path.read_bytes
+        def lookup(path):
+            try:return self.files.get(str(path.relative_to(engine)))
+            except ValueError:return None
+        def text(path,*args,**kwargs):
+            value=lookup(path);return value.decode() if value is not None else read_text(path,*args,**kwargs)
+        def binary(path):
+            value=lookup(path);return value if value is not None else read_bytes(path)
+        with mock.patch.object(Path,'read_text',new=text),mock.patch.object(Path,'read_bytes',new=binary):
+            m=md.World(engine).map('MAP_ROUTE212_SOUTH')
+            for x in range(36,41):
+                self.assertEqual((m.collision(x,11),m.elevation(x,11),m.behavior(x,11)),(0,15,'MB_HORIZONTAL_RAIL'))
+                self.assertFalse(qa.foot_walkable(m,x,11))
+            # Exact real mGBA failure: collision-only planning promised a path
+            # through these rail tiles; native foot input refused every one.
+            self.assertIsNone(qa.elevation_path(m,(36,12),{(10,0)},start_elevation=3))
+            self.assertIsNone(qa.elevation_path(m,(36,12),{(36,11)},start_elevation=3))
+            self.assertIsNotNone(qa.elevation_path(m,(36,12),{(37,12)},start_elevation=3))
+            self.assertNotIn(('up',(36,11)),list(qa.follower_neighbors(m,(36,12))))
+
+    def test_subset_evidence_cannot_silently_replace_full_corridor_scope(self):
+        spec=importlib.util.spec_from_file_location('eastern_scope_qa',HERE/'run_runtime_qa.py')
+        qa=importlib.util.module_from_spec(spec);spec.loader.exec_module(qa)
+        self.assertEqual(qa.select_scope(),(qa.MAPS,'eastern-thirteen'))
+        self.assertEqual(qa.select_scope(['MAP_ROUTE212_NORTH'],'north'),(('MAP_ROUTE212_NORTH',),'eastern-subset-north'))
+        for maps,label in ((['MAP_ROUTE212_NORTH'],None),(None,'north'),([], 'north'),
+                           (['MAP_ROUTE212_NORTH']*2,'north'),(['MAP_INVALID'],'bad'),
+                           (['MAP_ROUTE212_NORTH'],'../full')):
+            with self.subTest(maps=maps,label=label),self.assertRaises(ValueError):qa.select_scope(maps,label)
+
     def test_install_requires_marker_current_branch_head_and_clean_engine(self):
         with tempfile.TemporaryDirectory() as tmp:
             repo=Path(tmp);engine=repo/a.ENGINE;engine.mkdir(parents=True)

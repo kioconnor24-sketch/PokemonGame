@@ -1,15 +1,15 @@
 {
-  "linked_used_bytes": 17481124,
-  "free_bytes": 16073308,
+  "linked_used_bytes": 17471884,
+  "free_bytes": 16082548,
   "padded_file_bytes": 33554432,
-  "rom_sha256": "58b710c30bb19d04890526611e61554661c31957d642799d837545c5973a732e",
-  "elf_sha256": "fc8006e23bf3bcc26734ed67e289fbdf2001a16937f57f7f48abb8302be3722b",
+  "rom_sha256": "16bfc6da6c11e281617813d9bb1085aacdd74901063ac4523eae17139b9611dd",
+  "elf_sha256": "b73d1d3493ffef1d185e5cb6477407d578bfe82cbfcce660d7302930112221e2",
   "pokemon_config_sha256": "64fdb84d6f3f858dab6f8442e19cf01068c55ffd06984bdecc740d845c2a5588",
   "sections": {
     ".text": 2348952,
     "script_data": 1264312,
     ".rodata.compound_string": 367759,
-    ".rodata": 13497880,
+    ".rodata": 13488640,
     ".data.iwram": 2204,
     ".data.ewram": 16
   },
@@ -32,7 +32,7 @@
     },
     {
       "object": "src/tilesets.o",
-      "bytes": 711440
+      "bytes": 702200
     },
     {
       "object": "src/event_object_movement.o",

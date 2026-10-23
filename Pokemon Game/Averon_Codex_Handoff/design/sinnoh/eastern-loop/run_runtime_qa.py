@@ -15,6 +15,23 @@ MAPS=('MAP_VEILSTONE_CITY', 'MAP_ROUTE215_ACCESS', 'MAP_ROUTE215', 'MAP_ROUTE214
 
 DIRS={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}
 
+# CheckAcroBikeCollision in both pinned donor and Averon is independent of
+# current elevation. Rail/underpass C0/E15 does not imply foot traversal.
+FOOT_BLOCKED_BEHAVIORS=frozenset(('MB_BUMPY_SLOPE','MB_ISOLATED_VERTICAL_RAIL',
+    'MB_ISOLATED_HORIZONTAL_RAIL','MB_VERTICAL_RAIL','MB_HORIZONTAL_RAIL'))
+
+def foot_walkable(m,x,y):
+    return m.walkable(x,y) and m.behavior(x,y) not in FOOT_BLOCKED_BEHAVIORS
+
+
+def select_scope(maps=None,label=None):
+    if maps is None and label is None:return MAPS,'eastern-thirteen'
+    if not maps or not label or not all(c.isascii() and (c.isalnum() or c=='-') for c in label):
+        raise ValueError('explicit subset maps and safe subset label are both required')
+    if len(set(maps))!=len(maps) or any(mid not in MAPS for mid in maps):
+        raise ValueError('unknown or duplicate subset map')
+    return tuple(maps),'eastern-subset-'+label
+
 
 def arrow_direction(m,tile):
     if not m.warp_at(*tile):return None
@@ -75,6 +92,7 @@ def elevation_path(m,start,goals,blocked=frozenset(),allow_goal_unwalkable=True,
             if arrow_direction(m,(x,y))==direction:continue
             tile=(x+dx,y+dy)
             if tile in blocked or not m.inside(*tile):continue
+            if m.behavior(*tile) in FOOT_BLOCKED_BEHAVIORS:continue
             if not m.walkable(*tile) and not (allow_goal_unwalkable and tile in goals):continue
             if tile not in goals and m.warp_at(*tile):continue
             elevation=m.elevation(*tile)
@@ -98,7 +116,7 @@ def follower_neighbors(m,position,layer=None):
     objects={(o[0],o[1]) for o in m.objects}
     for direction,(dx,dy) in DIRS.items():
         tile=(x+dx,y+dy)
-        if not m.walkable(*tile) or m.warp_at(*tile) or tile in objects:continue
+        if not foot_walkable(m,*tile) or m.warp_at(*tile) or tile in objects:continue
         if layer is not None and m.elevation(*tile)!=layer:continue
         yield direction,tile
 
@@ -126,6 +144,8 @@ def validate_source(engine,recipe):
 
 
 def run(args):
+    selected,save_label=select_scope(getattr(args,'map',None),getattr(args,'subset_label',None))
+    print('QA coverage',json.dumps(dict(maps=selected,label=save_label,complete_batch=selected==MAPS)),flush=True)
     engine=args.engine.resolve();validate_source(engine,json.loads(args.recipe.read_text()))
     scripts=Path(__file__).resolve().parent.parents[3]/'scripts/claude_play'
     sys.path.insert(0,str(scripts))
@@ -216,9 +236,9 @@ def run(args):
             return self.check('an exit is reachable after '+label,path is not None,at=(mid,pos),elevations=observed_elevations(self.d))
 
     cmd=['run','--engine',str(engine),'--rom',str(args.rom),'--scratch',str(args.scratch),'--out',str(args.out),'--build',args.profile]
-    for mid in MAPS:cmd+=['--map',mid]
+    for mid in selected:cmd+=['--map',mid]
     if args.expect:cmd+=['--expect',str(args.expect)]
-    else:cmd+=['--save','eastern-thirteen']
+    else:cmd+=['--save',save_label]
     qa.mapdata.bfs=bfs;qa.mapdata.trigger_entry=trigger;qa.Runner=HeightRunner
     try:return qa.main(cmd)
     finally:qa.mapdata.bfs=original_bfs;qa.mapdata.trigger_entry=original_trigger;qa.Runner=original_runner
@@ -227,5 +247,7 @@ def run(args):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('engine','rom','scratch','out','recipe'):p.add_argument('--'+name,required=True,type=Path)
+    p.add_argument('--map',action='append',choices=MAPS,help='explicit bounded subset; full thirteen remains the default')
+    p.add_argument('--subset-label',help='required with --map; keeps subset save evidence distinct')
     p.add_argument('--profile',required=True,choices=('normal','release'));p.add_argument('--expect',type=Path)
     sys.exit(run(p.parse_args()))
