@@ -17,13 +17,33 @@ One existing Acro item, no flags/geometry changes. Default66-file no-grant recip
       "passed": 2,
       "total": 2
     },
-    "full": "PENDING",
-    "full-continue": "PENDING",
-    "legacy": "PENDING"
+    "full": {
+      "verdict": "PASS",
+      "passed": 128,
+      "total": 128
+    },
+    "full-continue": {
+      "verdict": "PASS",
+      "passed": 3,
+      "total": 3
+    },
+    "legacy": {
+      "verdict": "PASS",
+      "passed": 3,
+      "total": 3
+    }
   },
   "release": {
-    "probe": "PENDING",
-    "probe-continue": "PENDING",
+    "probe": {
+      "verdict": "PASS",
+      "passed": 13,
+      "total": 13
+    },
+    "probe-continue": {
+      "verdict": "PASS",
+      "passed": 2,
+      "total": 2
+    },
     "full": "PENDING",
     "full-continue": "PENDING",
     "legacy": "PENDING"

@@ -1,5 +1,7 @@
 # Codex engine/geography checkpoint — 2026-10-23
 
+LATEST active state: source416f09f3bdfaf5ddae6fe7274eb73f16a20972e6 pushed, CI286/286 source0skips/all applicable checksPASS. NORMAL full128/128 +fresh3/3 +legacy3/3 PASS. RELEASE focused13/13 +fresh2/2 PASS; full prelaunch X11 failure preserved, readiness-checked fresh retry RUNNING. Upper source4/4, paired runtime queued. Engine12a70…/ROMs09cc9d… and4ae299… unchanged. Active GUI retry PID794297, followed by upper queue PID794507; old queue/PID779700 are historical, not current. Source scripts under /workspace/averon-session-evidence/run-eastern-acro-release-retry.sh and run-eastern-upper-queue.sh. Do not start competing GUI/edit installed source. No runtime result invented; current records under runtime-evidence/acro.
+
 ## ACTIVE continuation supersedes the prior stopped/clean state below
 
 Sourcea3485b64b4bd8a582f27f557b5983248ad7615ef pushed to #231. Optional explicit --acro-fixture reuses existing QA item grant; ONE Acro, no flags or terrain changes. Default66-file contract matches the previous published golden exactly. Source282/282,0skips verified by CI120266931035; focused13/13; native30/30 and backward goldens4/4 PASS. Normal focused real Bag/mount/rail return/dismount/follower/Save13/13 and new-process Continue2/2 PASS. Initial split-key timing FAIL6/7 remains preserved. Full13 NORMAL with --acro-route is RUNNING; serialized RELEASE probe/full/Continue/legacy queued. Do not call these pending results accepted.

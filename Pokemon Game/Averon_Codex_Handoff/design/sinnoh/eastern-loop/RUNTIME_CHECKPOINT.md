@@ -1,5 +1,13 @@
 # Eastern hotel-linked DEV — bounded evidence, through-route unresolved
 
+## Live verification update — supersedes earlier pending markers
+
+Pushed QA source416f09f3bdfaf5ddae6fe7274eb73f16a20972e6; all applicable checks PASS and CI independently verifies286/286 source outcomes,0skips (includes4 upper-track negatives). Engine/ROM identities remain12a70… /09cc9d… NORMAL /4ae299… RELEASE; no source/ROM change since the explicit32B grant build.
+
+Actual NORMAL complete13-map declared-Acro traversal128/128, fresh Continue3/3, unchanged legacy3/3 PASS. Actual RELEASE focused13/13 and fresh Continue2/2 PASS. First RELEASE full launch failed before boot: X11 unavailable/no window, no result.json or gameplay verdict; original stdout/mgba logs preserved. Explicit outer Xvfb readiness/noreset fixed startup; fresh-directory retry is running. Upper layer scenario uses the same original source, lower3→upper4 ordinary foot stairs,17cell/12E15 rail round trip,4→3→4 follower transitions and high-layer Save; source4/4 passed, actual paired runs are queued, NOT accepted yet.
+
+Active serial GUI: /workspace/averon-session-evidence/run-eastern-acro-release-retry.sh PID794297; then /workspace/averon-session-evidence/run-eastern-upper-queue.sh PID794507. Prior normal and first RELEASE queue ended. Native30/gold4 finished PASS. Do not edit installed source or launch competing GUI. Receipts in runtime-evidence/acro show exact completed/PENDING lanes; original full-foot103/107 and split-key6/7 failures remain. Do not call pending upper/RELEASE full accepted.
+
 ## Active continuation — explicit Acro fixture, not production progression
 
 Current continuation adds optional `prepare_runtime.py --acro-fixture`, using the EXISTING marked map_qa grant helper. It grants exactly one ITEM_ACRO_BIKE on Route212South transition, no flags/other items. Default66 outputs remain byte-identical; the optional variant changes only that disposable script. Actual NORMAL/RELEASE builds pass, each exactly32B above the matching no-grant DEV build; RAM unchanged. Host focused13/13 and complete282/282 (0skips) passed; exact codea3485b64b4bd8a582f27f557b5983248ad7615ef CI independently confirms282/0. Extra golden assertion verifies the entire previous no-grant receipt exactly, not a self-generated oracle.
