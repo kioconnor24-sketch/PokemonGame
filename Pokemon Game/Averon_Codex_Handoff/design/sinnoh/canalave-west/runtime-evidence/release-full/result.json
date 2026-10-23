@@ -1,0 +1,565 @@
+{
+ "maps": [
+  "MAP_ROUTE218_EAST",
+  "MAP_ROUTE218",
+  "MAP_ROUTE218_WEST",
+  "MAP_CANALAVE_CITY"
+ ],
+ "build": "release",
+ "rom_sha256": "42371dcaced522fb6cebcf5f35878d42f6432721f1ada4cd9f492d3affdd522f",
+ "static_findings": [],
+ "save_before": "c348827df89da176d6b13fea941ef5ed53231257e594c86045ddfd4918531aa0",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_EAST",
+    [
+     6,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_ROUTE218_EAST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_EAST",
+    [
+     6,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE218",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218",
+    [
+     59,
+     24
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE218_EAST warp 0 (1, 5) -> MAP_ROUTE218 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE218_EAST",
+    [
+     [
+      1,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE218_EAST",
+    [
+     1,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_EAST after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_EAST after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_ROUTE218",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218",
+    [
+     59,
+     24
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_EAST via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_EAST via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE218_EAST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_EAST",
+    [
+     1,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE218 warp 0 (59, 24) -> MAP_ROUTE218_EAST and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE218",
+    [
+     [
+      59,
+      24
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE218",
+    [
+     59,
+     24
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_WEST via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE218_WEST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_WEST",
+    [
+     11,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE218 warp 1 (4, 20) -> MAP_ROUTE218_WEST and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE218",
+    [
+     [
+      4,
+      20
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE218",
+    [
+     4,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_ROUTE218_WEST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_WEST",
+    [
+     11,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218 via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE218",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218",
+    [
+     4,
+     20
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE218_WEST warp 0 (11, 5) -> MAP_ROUTE218 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE218_WEST",
+    [
+     [
+      11,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE218_WEST",
+    [
+     11,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_WEST after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_CANALAVE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_CANALAVE_CITY via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_CANALAVE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE218_WEST warp 1 (1, 5) -> MAP_CANALAVE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE218_WEST",
+    [
+     [
+      1,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE218_WEST",
+    [
+     1,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_WEST after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_CANALAVE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE218_WEST via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE218_WEST via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE218_WEST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE218_WEST",
+    [
+     1,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_CANALAVE_CITY warp 0 (33, 50) -> MAP_ROUTE218_WEST and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CANALAVE_CITY",
+    [
+     [
+      33,
+      50
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_CANALAVE_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_CANALAVE_CITY after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "f95c2da74c61597e05e4b4c79d1fe010ba41d1047c43952fe4b976b549c98f4a",
+ "verdict": "PASS"
+}
