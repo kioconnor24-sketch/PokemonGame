@@ -2,6 +2,18 @@
 
 The source project for an original **Averon** region followed by a full **Sinnoh** second region. This is actively developed source, **not** a complete playable game or verified Delta iOS release.
 
+## Fast developer startup (live work)
+
+For **Codex or Claude**, avoid reconstructing the project from dated handoffs or hundreds of old comments. This is a navigation guide, not a replacement for the protected operating contract.
+
+1. Read root [AGENTS.md](AGENTS.md) (Claude also [CLAUDE.md](CLAUDE.md)) and the [current operating contract](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md). These control authorization and preservation, not old handoff files.
+2. Open [the live work router (Issue #15)](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), [current open PRs](https://github.com/kioconnor24-sketch/PokemonGame/pulls?q=is%3Apr+is%3Aopen) and [latest main](https://github.com/kioconnor24-sketch/PokemonGame/commits/main/). Check **your active branch/PR head, file claims, final checkpoint and required CI**, not a historic manager summary.
+3. For Sinnoh donor availability, use the **159-map reuse ledger in [PR #237](https://github.com/kioconnor24-sketch/PokemonGame/pull/237)** until accepted onto `main`; [PR #238](https://github.com/kioconnor24-sketch/PokemonGame/pull/238) depends on it. Use the existing [87-site geography scope](Pokemon%20Game/Averon_Codex_Handoff/development/SINNOH_FULL_AREA_COVERAGE.md) to find genuinely missing places, not to count individual maps.
+4. Work on substantive connected map/art/DEV test batches; use existing source converters, art packers and QA. Separate **source-staged**, **DEV emulator-tested** and **production-installed** status. Keep story and new permanent saved origins out of this phase.
+5. If blocked, record the **one exact blocker** on the owning PR/Issue #15 and continue independent work. Issue comments do not launch sessions. Do not read all historical branches, repeat earlier proofs without changed inputs, delete shared refs or upload ROMs/private saves.
+
+**October 23, 2026 snapshot (check live links):** #239 Canalave DEV merged; #237 bulk 91-map stage is awaiting genuine owner handoff for three reserved documentation paths, #238 is stacked on #237, and draft #235 has unresolved Snowpoint bridge visuals. Codex's Sunyshore coast branch is active. Older manager handoffs, branch inventories and the development index can be useful history, but are not current assignment authority.
+
 ## Start here — current operating contract
 
 1. **[Owner-approved current phase, readiness and developer handoff](Pokemon%20Game/Averon_Codex_Handoff/development/CURRENT_PHASE_AND_HANDOFF.md)** — the single process authority. **Milestone 1 is accepted.** Developers may design and construct ordinary Sinnoh physical geography for later owner revision; story, encounters, levels, saved-ID policy, protected paths, and release are separately controlled. Human-audio and Delta acceptance remain unverified.
