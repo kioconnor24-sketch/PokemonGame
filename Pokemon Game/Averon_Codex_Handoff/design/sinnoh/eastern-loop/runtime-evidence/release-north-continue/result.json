@@ -1,0 +1,51 @@
+{
+ "maps": [
+  "MAP_ROUTE212_NORTH",
+  "MAP_ROUTE212_ACCESS"
+ ],
+ "build": "release",
+ "rom_sha256": "ccba92cd4915e20a230d6366dc2610d77c0d3efaf234dd57c8169b4976eff15f",
+ "static_findings": [],
+ "save_before": "d382ac731958bbd8c115b09d7bfb0e29d885ee9acdde6022671c3e280251b092",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_ACCESS",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_ACCESS",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "d382ac731958bbd8c115b09d7bfb0e29d885ee9acdde6022671c3e280251b092",
+ "verdict": "PASS"
+}

@@ -1,0 +1,59 @@
+{
+ "maps": [
+  "MAP_VEILSTONE_CITY",
+  "MAP_ROUTE215_ACCESS",
+  "MAP_ROUTE215",
+  "MAP_ROUTE214_ACCESS",
+  "MAP_ROUTE214",
+  "MAP_VALOR_LAKEFRONT",
+  "MAP_ROUTE213",
+  "MAP_HOTEL_GRAND_LAKE",
+  "MAP_ROUTE213_ACCESS",
+  "MAP_PASTORIA_CITY"
+ ],
+ "build": "release",
+ "rom_sha256": "ccba92cd4915e20a230d6366dc2610d77c0d3efaf234dd57c8169b4976eff15f",
+ "static_findings": [],
+ "save_before": "800c56d15f779734f651e109ddd9b35aa4d298a334855c9655ff0927a2683946",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_PASTORIA_CITY",
+    [
+     63,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_PASTORIA_CITY",
+    [
+     63,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "800c56d15f779734f651e109ddd9b35aa4d298a334855c9655ff0927a2683946",
+ "verdict": "PASS"
+}
