@@ -1,0 +1,1338 @@
+{
+  "findings": [],
+  "plan": {
+    "MAP_ROUTE212_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            9
+          ],
+          "warp": [
+            4,
+            9
+          ],
+          "dest": "MAP_ROUTE212_NORTH",
+          "dest_warp": 0,
+          "push": "down"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE212_NORTH": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            12,
+            3
+          ],
+          "warp": [
+            12,
+            3
+          ],
+          "dest": "MAP_ROUTE212_ACCESS",
+          "dest_warp": 0,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            13,
+            3
+          ],
+          "warp": [
+            13,
+            3
+          ],
+          "dest": "MAP_ROUTE212_ACCESS",
+          "dest_warp": 0,
+          "push": "up"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            10,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            11,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            12,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            13,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            14,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            15,
+            99
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 0
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE212_SOUTH": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            11
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            12
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            13
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            14
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            15
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            16
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            17
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            129,
+            18
+          ],
+          "direction": "right",
+          "dest": "MAP_PASTORIA_CITY",
+          "offset": -32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            10,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            11,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            12,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            13,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            14,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            15,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE212_NORTH",
+          "offset": 0
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE213": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            9
+          ],
+          "warp": [
+            4,
+            9
+          ],
+          "dest": "MAP_ROUTE213_ACCESS",
+          "dest_warp": 0,
+          "push": "left"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            68,
+            17
+          ],
+          "warp": [
+            68,
+            16
+          ],
+          "dest": "MAP_HOTEL_GRAND_LAKE",
+          "dest_warp": 1,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 2,
+          "tile": [
+            68,
+            11
+          ],
+          "warp": [
+            68,
+            11
+          ],
+          "dest": "MAP_HOTEL_GRAND_LAKE",
+          "dest_warp": 0,
+          "push": "down"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            47,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            48,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            49,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            50,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            51,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            52,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            53,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            54,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            55,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            56,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            57,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            58,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            60,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            61,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            62,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            63,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            64,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            65,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            66,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            67,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            68,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            69,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            70,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            71,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            72,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            73,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            74,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            75,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            76,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": 40
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE213_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            11,
+            5
+          ],
+          "warp": [
+            11,
+            5
+          ],
+          "dest": "MAP_ROUTE213",
+          "dest_warp": 0,
+          "push": "right"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            1,
+            5
+          ],
+          "warp": [
+            1,
+            5
+          ],
+          "dest": "MAP_PASTORIA_CITY",
+          "dest_warp": 0,
+          "push": "left"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE214": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            16,
+            4
+          ],
+          "warp": [
+            16,
+            4
+          ],
+          "dest": "MAP_ROUTE214_ACCESS",
+          "dest_warp": 1,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            17,
+            4
+          ],
+          "warp": [
+            17,
+            4
+          ],
+          "dest": "MAP_ROUTE214_ACCESS",
+          "dest_warp": 1,
+          "push": "up"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            26,
+            90
+          ],
+          "direction": "down",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": -24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            27,
+            90
+          ],
+          "direction": "down",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": -24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            28,
+            90
+          ],
+          "direction": "down",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": -24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            29,
+            90
+          ],
+          "direction": "down",
+          "dest": "MAP_VALOR_LAKEFRONT",
+          "offset": -24
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE214_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            4,
+            1
+          ],
+          "warp": [
+            4,
+            1
+          ],
+          "dest": "MAP_VEILSTONE_CITY",
+          "dest_warp": 0,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            4,
+            9
+          ],
+          "warp": [
+            4,
+            9
+          ],
+          "dest": "MAP_ROUTE214",
+          "dest_warp": 0,
+          "push": "down"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE215": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            95,
+            27
+          ],
+          "warp": [
+            95,
+            27
+          ],
+          "dest": "MAP_ROUTE215_ACCESS",
+          "dest_warp": 1,
+          "push": "right"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_ROUTE215_ACCESS": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            11,
+            5
+          ],
+          "warp": [
+            11,
+            5
+          ],
+          "dest": "MAP_VEILSTONE_CITY",
+          "dest_warp": 2,
+          "push": "right"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            1,
+            5
+          ],
+          "warp": [
+            1,
+            5
+          ],
+          "dest": "MAP_ROUTE215",
+          "dest_warp": 0,
+          "push": "left"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_VALOR_LAKEFRONT": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "connection",
+          "tile": [
+            7,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            8,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            9,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            10,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            11,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            12,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            13,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            14,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            15,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            16,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            17,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            18,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            20,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            21,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            22,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            23,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            24,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            25,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            26,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            27,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            28,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            29,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            30,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            31,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            32,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            33,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            34,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            35,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            36,
+            65
+          ],
+          "direction": "down",
+          "dest": "MAP_ROUTE213",
+          "offset": -40
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            50,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE214",
+          "offset": 24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            51,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE214",
+          "offset": 24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            52,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE214",
+          "offset": 24
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            53,
+            0
+          ],
+          "direction": "up",
+          "dest": "MAP_ROUTE214",
+          "offset": 24
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_VEILSTONE_CITY": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            42,
+            62
+          ],
+          "warp": [
+            42,
+            62
+          ],
+          "dest": "MAP_ROUTE214_ACCESS",
+          "dest_warp": 0,
+          "push": "down"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            43,
+            62
+          ],
+          "warp": [
+            43,
+            62
+          ],
+          "dest": "MAP_ROUTE214_ACCESS",
+          "dest_warp": 0,
+          "push": "down"
+        },
+        {
+          "kind": "warp",
+          "index": 2,
+          "tile": [
+            4,
+            26
+          ],
+          "warp": [
+            4,
+            26
+          ],
+          "dest": "MAP_ROUTE215_ACCESS",
+          "dest_warp": 0,
+          "push": "left"
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_PASTORIA_CITY": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            63,
+            11
+          ],
+          "warp": [
+            63,
+            11
+          ],
+          "dest": "MAP_ROUTE213_ACCESS",
+          "dest_warp": 1,
+          "push": "right"
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            43
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            44
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            45
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            46
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            47
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            48
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            49
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        },
+        {
+          "kind": "connection",
+          "tile": [
+            0,
+            50
+          ],
+          "direction": "left",
+          "dest": "MAP_ROUTE212_SOUTH",
+          "offset": 32
+        }
+      ],
+      "pocket": null
+    },
+    "MAP_HOTEL_GRAND_LAKE": {
+      "closed": [],
+      "points": [
+        {
+          "kind": "warp",
+          "index": 0,
+          "tile": [
+            7,
+            1
+          ],
+          "warp": [
+            7,
+            1
+          ],
+          "dest": "MAP_ROUTE213",
+          "dest_warp": 2,
+          "push": "up"
+        },
+        {
+          "kind": "warp",
+          "index": 1,
+          "tile": [
+            7,
+            10
+          ],
+          "warp": [
+            7,
+            10
+          ],
+          "dest": "MAP_ROUTE213",
+          "dest_warp": 1,
+          "push": "down"
+        }
+      ],
+      "pocket": null
+    }
+  }
+}

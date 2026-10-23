@@ -1,0 +1,21 @@
+QA coverage {"maps": ["MAP_VEILSTONE_CITY", "MAP_ROUTE215_ACCESS", "MAP_ROUTE215", "MAP_ROUTE214_ACCESS", "MAP_ROUTE214", "MAP_VALOR_LAKEFRONT", "MAP_ROUTE213", "MAP_HOTEL_GRAND_LAKE", "MAP_ROUTE213_ACCESS", "MAP_PASTORIA_CITY", "MAP_ROUTE212_SOUTH", "MAP_ROUTE212_NORTH", "MAP_ROUTE212_ACCESS"], "label": "eastern-thirteen-acro-dev", "complete_batch": true, "movement_mode": "declared Acro fixture", "continue_only": false}
+QA source /workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py 75abf7411f8d9d95b3892ef8e552a4d681ce1a5831cd22b1550061b8d83d6902
+QA source /workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/driver.py 20a9dc7f4025646896e15e74da4b4033ec8a591f451d6fcf7cc2efd9a02af547
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/eastern-loop/run_runtime_qa.py", line 310, in <module>
+    sys.exit(run(p.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/eastern-loop/run_runtime_qa.py", line 299, in run
+    try:return qa.main(cmd)
+               ^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 1033, in main
+    return cmd_run(args)
+           ^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/claude_play/map_qa.py", line 832, in cmd_run
+    e = emu.Emulator(rom, out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window

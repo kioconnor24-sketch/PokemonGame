@@ -1,0 +1,49 @@
+{
+  "status": "EXACT_ORIGINAL_CONNECTOR_RESTORATION_DEV_ONLY",
+  "source_stage_sha256": "7a0abcceb472da25a49ffe17971e53d1b350733a01d0aa3100d118612c4a8511",
+  "closure_restorations": [
+    {
+      "x": 68,
+      "y": 11,
+      "before": 12860,
+      "after": 13884,
+      "reason": "unbuilt source destination"
+    }
+  ],
+  "existing_route213_warp_prefix": [
+    {
+      "x": 4,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE213_ACCESS",
+      "dest_warp_id": "0"
+    }
+  ],
+  "append_original_warps": [
+    {
+      "x": 68,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_HOTEL_GRAND_LAKE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 68,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_HOTEL_GRAND_LAKE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "all_existing17_event_indices_preserved": true,
+  "new_total_warp_events": 21,
+  "temporary_hotel_slot": 31,
+  "source_staged_files_unmodified": true,
+  "ghost_endpoint_caps": 4,
+  "remaining_runtime_closures_vs_donor": 343,
+  "limits": [
+    "Only one original north collision reopened; south animated door stays original C1",
+    "No permanent section/map IDs or production save migration",
+    "Four isolated ghost endpoints capped; whole-cluster audit still required"
+  ]
+}

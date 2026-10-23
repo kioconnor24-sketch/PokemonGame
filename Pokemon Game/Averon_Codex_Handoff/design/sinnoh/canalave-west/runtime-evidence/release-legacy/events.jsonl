@@ -1,0 +1,24 @@
+{"t": 1792789274.71, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792789274.78, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792789275.34, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792789275.38, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792789277.65, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792789277.71, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792789279.55, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792789279.65, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792789280.28, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792789280.43, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792789281.05, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792789281.14, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792789282.32, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792789282.36, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792789286.04, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792789286.13, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792789286.74, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792789286.92, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792789286.92, "event": "continue-check", "problems": []}
+{"t": 1792789286.93, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792789287.47, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792789288.14, "event": "capture", "file": "0010-start.png"}
+{"t": 1792789288.14, "event": "observe", "label": "start", "problems": []}
+{"t": 1792789288.14, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
