@@ -5,6 +5,9 @@
 #include "tilesets.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
+// The production layout references this native symbol from assembly; it is
+// intentionally not exported by the small public tilesets declaration list.
+extern const struct Tileset gTileset_Cave;
 STATIC_ASSERT(MAPSEC_NONE == 215, victory_none_preserved);
 STATIC_ASSERT(MAPSEC_COUNT == 227, victory_no_new_origins);
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, victory_box_preserved);
