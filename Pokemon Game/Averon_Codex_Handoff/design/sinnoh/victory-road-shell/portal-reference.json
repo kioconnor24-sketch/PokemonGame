@@ -1,0 +1,197 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "scope": "Technical floor/portal facts only; no DS art, trainer, encounter, dialogue or story imported",
+  "files": {
+    "1f": {
+      "path": "res/field/events/events_victory_road_1f.json",
+      "git_blob": "f74247a4da5b69fa240bc061580bd89ece9643e1",
+      "sha256": "b1f04f17e20f13928cd1de4a1d105cb837f2d86283e519384ef151e9c3e8a8f0",
+      "warp_events": [
+        {
+          "x": 4,
+          "z": 37,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_2F",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 7,
+          "z": 47,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_2F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 42,
+          "z": 41,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_B1F",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 44,
+          "z": 48,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_B1F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 41,
+          "z": 24,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_B1F",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 4,
+          "z": 25,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_2F",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 45,
+          "z": 33,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F_ROOM_1",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 15,
+          "z": 78,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 34,
+          "z": 5,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 14,
+          "z": 78,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 16,
+          "z": 78,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 34,
+          "z": 4,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 34,
+          "z": 6,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE",
+          "dest_warp_id": 3
+        }
+      ]
+    },
+    "2f": {
+      "path": "res/field/events/events_victory_road_2f.json",
+      "git_blob": "2663b3dc534c6938fc7339919aa0c83d0bf8c7ed",
+      "sha256": "bd764f5d89e4d9a9a73e05abcc6fcd3c9defbfbd5d6f8264ea1b1ee8cf9956fa",
+      "warp_events": [
+        {
+          "x": 20,
+          "z": 16,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 23,
+          "z": 26,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 20,
+          "z": 4,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 5
+        }
+      ]
+    },
+    "b1f": {
+      "path": "res/field/events/events_victory_road_b1f.json",
+      "git_blob": "d23237e68be922e58f282747d7beb76712f2bff6",
+      "sha256": "7e8e299c13441f431005db356aac04f91faa598348036a9097a13db0d129bf4b",
+      "warp_events": [
+        {
+          "x": 4,
+          "z": 39,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 6,
+          "z": 46,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 3,
+          "z": 22,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 4
+        }
+      ]
+    },
+    "league": {
+      "path": "res/field/events/events_pokemon_league.json",
+      "git_blob": "6aa6f4cf03f2e4acf65f3f18135276e4ef546177",
+      "sha256": "7a65489acbd4f90d93c3a28ba91d9204726a56b1459a63cc3b1df94f7a10b0ad",
+      "warp_events": [
+        {
+          "x": 842,
+          "z": 598,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE_SOUTH_POKECENTER_1F",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 847,
+          "z": 559,
+          "dest_header_id": "MAP_HEADER_POKEMON_LEAGUE_NORTH_POKECENTER_1F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 851,
+          "z": 597,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 7
+        },
+        {
+          "x": 853,
+          "z": 582,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 8
+        },
+        {
+          "x": 850,
+          "z": 597,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 7
+        },
+        {
+          "x": 852,
+          "z": 597,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 7
+        },
+        {
+          "x": 853,
+          "z": 581,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 8
+        },
+        {
+          "x": 853,
+          "z": 583,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 8
+        }
+      ]
+    }
+  }
+}
