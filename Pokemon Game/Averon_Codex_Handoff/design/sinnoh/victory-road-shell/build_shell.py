@@ -21,9 +21,11 @@ sha=lambda data:hashlib.sha256(data).hexdigest()
 encode=lambda data:(json.dumps(data,indent=2)+'\n').encode()
 
 
-def construct(recipe,reference):
+def construct(recipe,reference,names=None,ids=None,header_prefix='MAP_HEADER_VICTORY_ROAD_'):
+    names=NAMES if names is None else names
+    ids=IDS if ids is None else ids
     maps=recipe['maps'];refs=reference['files'];result={}
-    if set(maps)!=set(NAMES.values()):raise ValueError('exact three core floors required')
+    if set(maps)!=set(names.values()) or set(ids)!=set(maps):raise ValueError('exact configured core floors required')
     for name,plan in maps.items():
         w,h=plan['width'],plan['height']
         if min(w,h)<3 or (w+15)*(h+14)>10240:raise ValueError('invalid map buffer')
@@ -45,12 +47,12 @@ def construct(recipe,reference):
                     x+=dx;y+=dy
         source=refs[plan['reference']]['warp_events'];warps=[]
         for old in plan['interior_warp_indices']:
-            v=source[old];target_ref=v['dest_header_id'].removeprefix('MAP_HEADER_VICTORY_ROAD_').lower()
-            if target_ref not in NAMES:raise ValueError('external destination cannot activate')
-            target=NAMES[target_ref];target_indices=maps[target]['interior_warp_indices']
+            v=source[old];target_ref=v['dest_header_id'].removeprefix(header_prefix).lower()
+            if target_ref not in names:raise ValueError('external destination cannot activate')
+            target=names[target_ref];target_indices=maps[target]['interior_warp_indices']
             if v['dest_warp_id'] not in target_indices:raise ValueError('missing counterpart')
             x,y=v['x'],v['z'];floor(x,y);grid[y*w+x]=LADDER|0x3000
-            warps.append(dict(x=x,y=y,elevation=0,dest_map=IDS[target],dest_warp_id=str(target_indices.index(v['dest_warp_id']))))
+            warps.append(dict(x=x,y=y,elevation=0,dest_map=ids[target],dest_warp_id=str(target_indices.index(v['dest_warp_id']))))
         for x,y in plan['sealed_external_ports']:
             if not (0<=x<w and 0<=y<h):raise ValueError('sealed port outside map')
             grid[y*w+x]=WALL|0xC00
@@ -63,7 +65,7 @@ def construct(recipe,reference):
                 if not shape[i]&0xC00:continue
                 tile=521 if not shape[i+w]&0xC00 else 530 if not shape[i+1]&0xC00 else 528 if not shape[i-1]&0xC00 else WALL
                 grid[i]=(shape[i]&0xFC00)|tile
-        header=dict(id=IDS[name],name=name,layout='LAYOUT_'+IDS[name][4:],map_type='MAP_TYPE_UNDERGROUND',requires_flash=False,
+        header=dict(id=ids[name],name=name,layout='LAYOUT_'+ids[name][4:],map_type='MAP_TYPE_UNDERGROUND',requires_flash=False,
             allow_cycling=False,allow_escaping=False,allow_running=True,battle_scene='MAP_BATTLE_SCENE_NORMAL',region='REGION_SINNOH',
             region_map_section='MAPSEC_PENDING_OWNER',music='MUS_PETALBURG_WOODS',weather='WEATHER_NONE',show_map_name=True,
             connections=[],warp_events=warps,object_events=[],coord_events=[],bg_events=[])
