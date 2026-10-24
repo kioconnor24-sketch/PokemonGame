@@ -11,6 +11,21 @@ shared=importlib.util.module_from_spec(spec);spec.loader.exec_module(shared)
 MAPS=('MAP_SINNOH_MT_CORONET_2F', 'MAP_SINNOH_MT_CORONET_3F', 'MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH', 'MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH', 'MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2', 'MAP_SINNOH_MT_CORONET_4F_ROOM_3')
 
 
+def ordinary_step(d,direction):
+    """Release a short ordinary keypress before slow debugger observations.
+
+    Holding a key across GDB snapshots can walk two tiles under load. Retain
+    exact destination assertions in the shared runner; never accept overshoot.
+    A facing-only pulse may need another press before movement starts.
+    """
+    start=d.here()
+    for _ in range(3):
+        d.e.tap(direction.upper(),hold=.08,after=.3)
+        state=d.settle()
+        if not d.field_ready(state) or d.here(state)!=start:return state
+    return None
+
+
 def run(args):
     scripts=HERE.parents[3]/'scripts/claude_play';sys.path.insert(0,str(scripts))
     import driver  # bind the expected source driver before _wrapper resolves modules
@@ -19,7 +34,7 @@ def run(args):
     wrapper.emu.OFFSET_EXPRS['avatar.flags']='offsetof(struct PlayerAvatar, flags)'
     for flag in ('PLAYER_AVATAR_FLAG_SURFING','PLAYER_AVATAR_FLAG_ON_FOOT'):
         if flag not in wrapper.emu.CONSTANTS:wrapper.emu.CONSTANTS.append(flag)
-    old_maps,old_check=shared.MAPS,qa.Runner.check
+    old_maps,old_check,old_step=shared.MAPS,qa.Runner.check,shared.ordinary_step
     def check(self,name,ok,**details):
         result=old_check(self,name,ok,**details)
         if name.startswith('follower visible'):
@@ -31,9 +46,10 @@ def run(args):
             return bool(result and ordinary)
         return result
     shared.MAPS=MAPS
+    shared.ordinary_step=ordinary_step
     qa.Runner.check=check
     try:return shared.run(args)
-    finally:shared.MAPS=old_maps;qa.Runner.check=old_check
+    finally:shared.MAPS=old_maps;qa.Runner.check=old_check;shared.ordinary_step=old_step
 
 
 if __name__=='__main__':

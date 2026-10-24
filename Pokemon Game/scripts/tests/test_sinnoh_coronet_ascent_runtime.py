@@ -88,6 +88,24 @@ assert m.shared.MAPS==old
         result=subprocess.run([sys.executable,'-c',script,str(HERE/'run_runtime_qa.py'),str(ROOT/r.ENGINE)],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
 
+    def test_follower_pulse_releases_key_before_observation_and_bounds_no_motion(self):
+        from types import SimpleNamespace
+        spec=importlib.util.spec_from_file_location('ascent_pulse',HERE/'run_runtime_qa.py')
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        class Driver:
+            def __init__(self,blocked=False):self.pos=(7,25);self.calls=[];self.blocked=blocked;self.e=self
+            def here(self,state=None):return ('ROOM',self.pos)
+            def field_ready(self,state):return True
+            def tap(self,key,hold,after):
+                self.calls.append(('released',key,hold,after))
+                if len(self.calls)>2 and not self.blocked:self.pos=(7,26)
+            def settle(self):self.calls.append(('observe',));return SimpleNamespace()
+            def step(self,*args):raise AssertionError('must not poll GDB with key held')
+        d=Driver();self.assertIsNotNone(module.ordinary_step(d,'down'))
+        self.assertEqual(d.pos,(7,26));self.assertEqual(len(d.calls),4)
+        d=Driver(blocked=True);self.assertIsNone(module.ordinary_step(d,'down'))
+        self.assertEqual(len(d.calls),6);self.assertEqual(d.pos,(7,25))
+
     def test_main_checkout_wrong_base_dirty_or_path_escape_refused(self):
         with self.assertRaisesRegex(ValueError,'marked disposable'):r.install(ROOT)
         with tempfile.TemporaryDirectory() as temp:
