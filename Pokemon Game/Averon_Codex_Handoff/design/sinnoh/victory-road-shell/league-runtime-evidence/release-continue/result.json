@@ -1,0 +1,60 @@
+{
+ "maps": [
+  "MAP_POKMON_LEAGUE",
+  "MAP_SINNOH_VICTORY_ROAD_1F",
+  "MAP_SINNOH_VICTORY_ROAD_2F",
+  "MAP_SINNOH_VICTORY_ROAD_B1F"
+ ],
+ "build": "release",
+ "rom_sha256": "8f95a6ca81297cd2c204da7b504128fb6cad1c0600e0f697c4b57e625737a06d",
+ "static_findings": [],
+ "save_before": "f12b5cde4900a8527b11acea303705b239a046e0548f82a7764f6e6872b40875",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "f12b5cde4900a8527b11acea303705b239a046e0548f82a7764f6e6872b40875",
+ "verdict": "PASS"
+}

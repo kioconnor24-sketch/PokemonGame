@@ -1,0 +1,59 @@
+{
+ "maps": [
+  "MAP_SINNOH_VICTORY_ROAD_1F",
+  "MAP_SINNOH_VICTORY_ROAD_2F",
+  "MAP_SINNOH_VICTORY_ROAD_B1F"
+ ],
+ "build": "release",
+ "rom_sha256": "9d34eca30c220c1d724e914ee2f5efd26890c890a9cb77e1dafdc166cd11af19",
+ "static_findings": [],
+ "save_before": "743d350a15b33906f8774f29265679e4e9c5e93ef89013cf258330affd36193b",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "743d350a15b33906f8774f29265679e4e9c5e93ef89013cf258330affd36193b",
+ "verdict": "PASS"
+}

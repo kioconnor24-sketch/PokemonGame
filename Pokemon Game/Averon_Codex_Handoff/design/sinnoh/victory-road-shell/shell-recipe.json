@@ -1,0 +1,300 @@
+{
+  "status": "ORIGINAL_PROVISIONAL_GBA_PHYSICAL_SHELL_NOT_DS_TERRAIN_COPY",
+  "maps": {
+    "SinnohVictoryRoad_1F": {
+      "reference": "1f",
+      "width": 52,
+      "height": 84,
+      "rooms": [
+        [
+          2,
+          22,
+          10,
+          11
+        ],
+        [
+          2,
+          34,
+          11,
+          17
+        ],
+        [
+          20,
+          36,
+          11,
+          12
+        ],
+        [
+          36,
+          20,
+          12,
+          17
+        ],
+        [
+          36,
+          38,
+          12,
+          15
+        ],
+        [
+          11,
+          68,
+          12,
+          13
+        ],
+        [
+          28,
+          3,
+          12,
+          12
+        ]
+      ],
+      "corridors": [
+        [
+          [
+            7,
+            27
+          ],
+          [
+            7,
+            47
+          ]
+        ],
+        [
+          [
+            7,
+            37
+          ],
+          [
+            25,
+            37
+          ],
+          [
+            25,
+            43
+          ],
+          [
+            42,
+            43
+          ]
+        ],
+        [
+          [
+            42,
+            24
+          ],
+          [
+            42,
+            48
+          ]
+        ],
+        [
+          [
+            7,
+            47
+          ],
+          [
+            16,
+            47
+          ],
+          [
+            16,
+            78
+          ]
+        ],
+        [
+          [
+            42,
+            24
+          ],
+          [
+            34,
+            24
+          ],
+          [
+            34,
+            5
+          ]
+        ]
+      ],
+      "sealed_external_ports": [
+        [
+          15,
+          78
+        ],
+        [
+          34,
+          5
+        ],
+        [
+          45,
+          33
+        ]
+      ],
+      "interior_warp_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "SinnohVictoryRoad_2F": {
+      "reference": "2f",
+      "width": 32,
+      "height": 32,
+      "rooms": [
+        [
+          3,
+          3,
+          8,
+          10
+        ],
+        [
+          16,
+          2,
+          10,
+          10
+        ],
+        [
+          4,
+          15,
+          10,
+          10
+        ],
+        [
+          17,
+          14,
+          12,
+          15
+        ]
+      ],
+      "corridors": [
+        [
+          [
+            20,
+            4
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            7,
+            19
+          ],
+          [
+            20,
+            19
+          ],
+          [
+            20,
+            16
+          ]
+        ],
+        [
+          [
+            20,
+            16
+          ],
+          [
+            23,
+            16
+          ],
+          [
+            23,
+            26
+          ]
+        ]
+      ],
+      "sealed_external_ports": [],
+      "interior_warp_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "SinnohVictoryRoad_B1F": {
+      "reference": "b1f",
+      "width": 40,
+      "height": 52,
+      "rooms": [
+        [
+          2,
+          18,
+          10,
+          11
+        ],
+        [
+          2,
+          34,
+          12,
+          15
+        ],
+        [
+          18,
+          17,
+          16,
+          13
+        ],
+        [
+          18,
+          34,
+          16,
+          14
+        ]
+      ],
+      "corridors": [
+        [
+          [
+            3,
+            22
+          ],
+          [
+            24,
+            22
+          ],
+          [
+            24,
+            40
+          ],
+          [
+            4,
+            40
+          ],
+          [
+            4,
+            39
+          ]
+        ],
+        [
+          [
+            4,
+            39
+          ],
+          [
+            6,
+            39
+          ],
+          [
+            6,
+            46
+          ]
+        ]
+      ],
+      "sealed_external_ports": [],
+      "interior_warp_indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "limits": [
+    "Original rooms/corridors approximate a GBA-compatible cave; portal coordinates/floor graph are source-pinned DS facts, not donor terrain.",
+    "Core stairs only. League lower/upper door anchors and side-room branch remain closed, no fake exterior reciprocal links.",
+    "No boulder/HM puzzles, water unlocks, trainers, encounters, items, events, saved IDs or production registration.",
+    "Further authored League approach and three side rooms must be reviewed and tested separately."
+  ]
+}

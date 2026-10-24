@@ -1,0 +1,176 @@
+{"t": 1792798437.87, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792798437.96, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792798441.59, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792798441.75, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792798443.06, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792798443.2, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792798443.87, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792798443.99, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792798444.57, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792798444.7, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792798445.88, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 12}
+{"t": 1792798445.97, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792798447.25, "event": "screen", "cb2": "CB2_MainMenu", "i": 13}
+{"t": 1792798447.46, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792798451.5, "event": "screen", "cb2": "CB2_ChangeMapMain", "i": 16}
+{"t": 1792798451.66, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792798452.46, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792798452.56, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792798453.31, "event": "field", "map": "MAP_SINNOH_VICTORY_ROAD_1F", "pos": [16, 75], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792798454.1, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [16, 75]]}
+{"t": 1792798457.85, "event": "capture", "file": "0010-start.png"}
+{"t": 1792798457.85, "event": "observe", "label": "start", "problems": []}
+{"t": 1792798457.88, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798457.88, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798457.95, "event": "map-qa-check", "name": "reached MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [16, 75]]}
+{"t": 1792798482.16, "event": "capture", "file": "0011-warp-MAP_SINNOH_VICTORY_ROAD_1F-0.png"}
+{"t": 1792798486.79, "event": "capture", "file": "0012-MAP_SINNOH_VICTORY_ROAD_2F via warp.png"}
+{"t": 1792798486.79, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F via warp", "problems": []}
+{"t": 1792798486.85, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798486.85, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798487.16, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_2F", [20, 17]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798490.3, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 0 (4, 37) -> MAP_SINNOH_VICTORY_ROAD_2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[4, 37]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [4, 37]]}
+{"t": 1792798497.18, "event": "capture", "file": "0013-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798497.18, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798497.25, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798497.25, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798506.56, "event": "capture", "file": "0014-warp-MAP_SINNOH_VICTORY_ROAD_1F-1.png"}
+{"t": 1792798510.72, "event": "capture", "file": "0015-MAP_SINNOH_VICTORY_ROAD_2F via warp.png"}
+{"t": 1792798510.72, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F via warp", "problems": []}
+{"t": 1792798510.75, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798510.75, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798510.92, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_2F", [23, 27]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798513.48, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 1 (7, 47) -> MAP_SINNOH_VICTORY_ROAD_2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[7, 47]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [7, 47]]}
+{"t": 1792798516.61, "event": "capture", "file": "0016-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798516.61, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798516.65, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798516.65, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798540.46, "event": "capture", "file": "0017-warp-MAP_SINNOH_VICTORY_ROAD_1F-2.png"}
+{"t": 1792798545.59, "event": "capture", "file": "0018-MAP_SINNOH_VICTORY_ROAD_B1F via warp.png"}
+{"t": 1792798545.59, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F via warp", "problems": []}
+{"t": 1792798545.65, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798545.65, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798546.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_B1F", [4, 40]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798549.37, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 2 (42, 41) -> MAP_SINNOH_VICTORY_ROAD_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[42, 41]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [42, 41]]}
+{"t": 1792798555.35, "event": "capture", "file": "0019-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798555.35, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798555.38, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798555.38, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798563.68, "event": "capture", "file": "0020-warp-MAP_SINNOH_VICTORY_ROAD_1F-3.png"}
+{"t": 1792798569.16, "event": "capture", "file": "0021-MAP_SINNOH_VICTORY_ROAD_B1F via warp.png"}
+{"t": 1792798569.16, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F via warp", "problems": []}
+{"t": 1792798569.16, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798569.16, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798569.49, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_B1F", [6, 47]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798572.6, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 3 (44, 48) -> MAP_SINNOH_VICTORY_ROAD_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[44, 48]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [44, 48]]}
+{"t": 1792798577.07, "event": "capture", "file": "0022-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798577.07, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798577.08, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798577.1, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798592.26, "event": "capture", "file": "0023-warp-MAP_SINNOH_VICTORY_ROAD_1F-4.png"}
+{"t": 1792798596.46, "event": "capture", "file": "0024-MAP_SINNOH_VICTORY_ROAD_B1F via warp.png"}
+{"t": 1792798596.46, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F via warp", "problems": []}
+{"t": 1792798596.48, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798596.5, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798596.88, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_B1F", [3, 23]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798600.35, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 4 (41, 24) -> MAP_SINNOH_VICTORY_ROAD_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[41, 24]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [41, 24]]}
+{"t": 1792798606.47, "event": "capture", "file": "0025-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798606.47, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798606.5, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798606.5, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798641.16, "event": "capture", "file": "0026-warp-MAP_SINNOH_VICTORY_ROAD_1F-5.png"}
+{"t": 1792798645.35, "event": "capture", "file": "0027-MAP_SINNOH_VICTORY_ROAD_2F via warp.png"}
+{"t": 1792798645.35, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F via warp", "problems": []}
+{"t": 1792798645.4, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798645.4, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798645.75, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_2F", [20, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798649.28, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 5 (4, 25) -> MAP_SINNOH_VICTORY_ROAD_2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_1F", [[4, 25]]], "got": ["MAP_SINNOH_VICTORY_ROAD_1F", [4, 25]]}
+{"t": 1792798655.86, "event": "capture", "file": "0028-MAP_SINNOH_VICTORY_ROAD_1F after warp round trip.png"}
+{"t": 1792798655.86, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F after warp round trip", "problems": []}
+{"t": 1792798655.88, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798655.89, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798666.98, "event": "map", "map": "MAP_SINNOH_VICTORY_ROAD_2F", "pos": [20, 16]}
+{"t": 1792798667.35, "event": "map-qa-check", "name": "reached MAP_SINNOH_VICTORY_ROAD_2F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_2F", [20, 16]]}
+{"t": 1792798673.65, "event": "capture", "file": "0029-warp-MAP_SINNOH_VICTORY_ROAD_2F-0.png"}
+{"t": 1792798679.25, "event": "capture", "file": "0030-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798679.25, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798679.3, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798679.35, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798680.2, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [4, 38]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798683.39, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 0 (20, 16) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_2F", [[20, 16]]], "got": ["MAP_SINNOH_VICTORY_ROAD_2F", [20, 16]]}
+{"t": 1792798687.27, "event": "capture", "file": "0031-MAP_SINNOH_VICTORY_ROAD_2F after warp round trip.png"}
+{"t": 1792798687.27, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F after warp round trip", "problems": []}
+{"t": 1792798687.29, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798687.3, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798695.95, "event": "capture", "file": "0032-warp-MAP_SINNOH_VICTORY_ROAD_2F-1.png"}
+{"t": 1792798702.18, "event": "capture", "file": "0033-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798702.18, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798702.19, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798702.19, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798703.05, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [7, 48]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798706.75, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 1 (23, 26) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_2F", [[23, 26]]], "got": ["MAP_SINNOH_VICTORY_ROAD_2F", [23, 26]]}
+{"t": 1792798712.47, "event": "capture", "file": "0034-MAP_SINNOH_VICTORY_ROAD_2F after warp round trip.png"}
+{"t": 1792798712.47, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F after warp round trip", "problems": []}
+{"t": 1792798712.57, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798712.58, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798741.16, "event": "capture", "file": "0035-warp-MAP_SINNOH_VICTORY_ROAD_2F-2.png"}
+{"t": 1792798744.65, "event": "capture", "file": "0036-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798744.65, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798744.66, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798744.66, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798745.28, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [4, 26]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798748.5, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 2 (20, 4) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_2F", [[20, 4]]], "got": ["MAP_SINNOH_VICTORY_ROAD_2F", [20, 4]]}
+{"t": 1792798752.49, "event": "capture", "file": "0037-MAP_SINNOH_VICTORY_ROAD_2F after warp round trip.png"}
+{"t": 1792798752.49, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_2F after warp round trip", "problems": []}
+{"t": 1792798752.55, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798752.55, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798772.48, "event": "map", "map": "MAP_SINNOH_VICTORY_ROAD_1F", "pos": [4, 37]}
+{"t": 1792798795.27, "event": "map", "map": "MAP_SINNOH_VICTORY_ROAD_B1F", "pos": [4, 39]}
+{"t": 1792798795.5, "event": "map-qa-check", "name": "reached MAP_SINNOH_VICTORY_ROAD_B1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_B1F", [4, 39]]}
+{"t": 1792798799.51, "event": "capture", "file": "0038-warp-MAP_SINNOH_VICTORY_ROAD_B1F-0.png"}
+{"t": 1792798805.86, "event": "capture", "file": "0039-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798805.86, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798805.88, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798805.88, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798806.35, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [42, 42]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798809.58, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 0 (4, 39) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_B1F", [[4, 39]]], "got": ["MAP_SINNOH_VICTORY_ROAD_B1F", [4, 39]]}
+{"t": 1792798814.77, "event": "capture", "file": "0040-MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip.png"}
+{"t": 1792798814.77, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip", "problems": []}
+{"t": 1792798814.78, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798814.78, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798822.91, "event": "capture", "file": "0041-warp-MAP_SINNOH_VICTORY_ROAD_B1F-1.png"}
+{"t": 1792798828.25, "event": "capture", "file": "0042-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798828.25, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798828.28, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798828.28, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798829.86, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [44, 49]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798833.75, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 1 (6, 46) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_B1F", [[6, 46]]], "got": ["MAP_SINNOH_VICTORY_ROAD_B1F", [6, 46]]}
+{"t": 1792798837.48, "event": "capture", "file": "0043-MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip.png"}
+{"t": 1792798837.48, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip", "problems": []}
+{"t": 1792798837.55, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798837.55, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798868.26, "event": "capture", "file": "0044-warp-MAP_SINNOH_VICTORY_ROAD_B1F-2.png"}
+{"t": 1792798874.07, "event": "capture", "file": "0045-MAP_SINNOH_VICTORY_ROAD_1F via warp.png"}
+{"t": 1792798874.07, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_1F via warp", "problems": []}
+{"t": 1792798874.08, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798874.1, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798874.48, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_1F", [41, 25]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798878.7, "event": "map-qa-check", "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 2 (3, 22) -> MAP_SINNOH_VICTORY_ROAD_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_VICTORY_ROAD_B1F", [[3, 22]]], "got": ["MAP_SINNOH_VICTORY_ROAD_B1F", [3, 22]]}
+{"t": 1792798883.56, "event": "capture", "file": "0046-MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip.png"}
+{"t": 1792798883.56, "event": "observe", "label": "MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip", "problems": []}
+{"t": 1792798883.59, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792798883.59, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792798884.75, "event": "capture", "file": "0047-start-menu.png"}
+{"t": 1792798885.66, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792798893.45, "event": "capture", "file": "0048-save-confirm-coronet-six.png"}
+{"t": 1792798895.16, "event": "capture", "file": "0049-save-step-coronet-six-01.png"}
+{"t": 1792798896.67, "event": "capture", "file": "0050-save-step-coronet-six-02.png"}
+{"t": 1792798898.2, "event": "capture", "file": "0051-save-step-coronet-six-03.png"}
+{"t": 1792798899.41, "event": "capture", "file": "0052-save-step-coronet-six-04.png"}
+{"t": 1792798900.58, "event": "capture", "file": "0053-save-step-coronet-six-05.png"}
+{"t": 1792798901.89, "event": "capture", "file": "0054-save-step-coronet-six-06.png"}
+{"t": 1792798903.01, "event": "capture", "file": "0055-save-step-coronet-six-07.png"}
+{"t": 1792798904.25, "event": "capture", "file": "0056-save-step-coronet-six-08.png"}
+{"t": 1792798906.29, "event": "capture", "file": "0057-saved-coronet-six.png"}
+{"t": 1792798906.29, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792798906.35, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_SINNOH_VICTORY_ROAD_B1F", [3, 23]]}

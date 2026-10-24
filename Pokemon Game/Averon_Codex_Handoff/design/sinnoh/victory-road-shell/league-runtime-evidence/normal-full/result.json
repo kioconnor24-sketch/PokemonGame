@@ -1,0 +1,1325 @@
+{
+ "maps": [
+  "MAP_POKMON_LEAGUE",
+  "MAP_SINNOH_VICTORY_ROAD_1F",
+  "MAP_SINNOH_VICTORY_ROAD_2F",
+  "MAP_SINNOH_VICTORY_ROAD_B1F"
+ ],
+ "build": "normal",
+ "rom_sha256": "d1ff5018460b730f9c6a65801f4f822b2827702a231d9fc519cad4e90167ab0a",
+ "static_findings": [],
+ "save_before": "5b52833ad7be80aa9d456ff8576baf4b882a8ba26de7adfa29c33086e2222edf",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     21,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_POKMON_LEAGUE",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     21,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     15,
+     79
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_POKMON_LEAGUE warp 0 (21, 58) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_POKMON_LEAGUE",
+    [
+     [
+      21,
+      59
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_POKMON_LEAGUE",
+    [
+     21,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_POKMON_LEAGUE after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_POKMON_LEAGUE after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     34,
+     6
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_POKMON_LEAGUE warp 1 (23, 41) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_POKMON_LEAGUE",
+    [
+     [
+      23,
+      42
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_POKMON_LEAGUE",
+    [
+     23,
+     42
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_POKMON_LEAGUE after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_POKMON_LEAGUE after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     34,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     20,
+     17
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 0 (4, 37) -> MAP_SINNOH_VICTORY_ROAD_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      4,
+      37
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     4,
+     37
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     23,
+     27
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 1 (7, 47) -> MAP_SINNOH_VICTORY_ROAD_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      7,
+      47
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     7,
+     47
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     4,
+     40
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 2 (42, 41) -> MAP_SINNOH_VICTORY_ROAD_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      42,
+      41
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     42,
+     41
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     6,
+     47
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 3 (44, 48) -> MAP_SINNOH_VICTORY_ROAD_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      44,
+      48
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     44,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 4 (41, 24) -> MAP_SINNOH_VICTORY_ROAD_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      41,
+      24
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     41,
+     24
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     20,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 5 (4, 25) -> MAP_SINNOH_VICTORY_ROAD_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      4,
+      25
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     4,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_POKMON_LEAGUE via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_POKMON_LEAGUE via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_POKMON_LEAGUE",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     21,
+     59
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 6 (15, 78) -> MAP_POKMON_LEAGUE and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      15,
+      79
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     15,
+     79
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_POKMON_LEAGUE via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_POKMON_LEAGUE via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_POKMON_LEAGUE",
+   "ok": true,
+   "at": [
+    "MAP_POKMON_LEAGUE",
+    [
+     23,
+     42
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_1F warp 7 (34, 5) -> MAP_POKMON_LEAGUE and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     [
+      34,
+      6
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     34,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_VICTORY_ROAD_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     20,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     4,
+     38
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 0 (20, 16) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     [
+      20,
+      16
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     20,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     7,
+     48
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 1 (23, 26) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     [
+      23,
+      26
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     23,
+     26
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     4,
+     26
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_2F warp 2 (20, 4) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     [
+      20,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_2F",
+    [
+     20,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_VICTORY_ROAD_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     4,
+     39
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     42,
+     42
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 0 (4, 39) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     [
+      4,
+      39
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     4,
+     39
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     44,
+     49
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 1 (6, 46) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     [
+      6,
+      46
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     6,
+     46
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_VICTORY_ROAD_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_1F",
+    [
+     41,
+     25
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_VICTORY_ROAD_B1F warp 2 (3, 22) -> MAP_SINNOH_VICTORY_ROAD_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     [
+      3,
+      22
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_VICTORY_ROAD_B1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_VICTORY_ROAD_B1F",
+    [
+     3,
+     23
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "f99424f1207788448b38b969711a8be4d6c4b6e065c61af10515672389e835bc",
+ "verdict": "PASS"
+}

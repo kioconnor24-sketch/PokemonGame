@@ -1,0 +1,210 @@
+{
+  "status": "ORIGINAL_SOURCE_AND_PERMITTED_ART_ONLY_NOT_RUNTIME_OR_PRODUCTION",
+  "reference_revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "input_sha256": {
+    "shell-recipe.json": "42b11448b02e31e55bdad70f8557cdaa0a071c413f71aa3183c7062f3926aec4",
+    "portal-reference.json": "13af68a98b0187fd9d5a0cf16eb6a6547e998a1a36c875ae93f86227fe529773"
+  },
+  "existing_averon_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "maps": {
+    "SinnohVictoryRoad_1F": {
+      "dimensions": [
+        52,
+        84
+      ],
+      "cells": 4368,
+      "retained_technical_stairs": 6,
+      "source_warp_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sealed_external_ports": [
+        [
+          15,
+          78
+        ],
+        [
+          34,
+          5
+        ],
+        [
+          45,
+          33
+        ]
+      ],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "64f326ac107bedc79e78b4811eb9f66c0da6765b62d7691f1003668575b6925b"
+    },
+    "SinnohVictoryRoad_2F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "cells": 1024,
+      "retained_technical_stairs": 3,
+      "source_warp_indices": [
+        0,
+        1,
+        2
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "e3d8c52919cae6842bce421df8212cd3ca3e3f57163fc55c0e1932fee23fe991"
+    },
+    "SinnohVictoryRoad_B1F": {
+      "dimensions": [
+        40,
+        52
+      ],
+      "cells": 2080,
+      "retained_technical_stairs": 3,
+      "source_warp_indices": [
+        0,
+        1,
+        2
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "f5c32c4a3c6ab9755c800c4f827297d9f2ef1d1736efc16a2f8d715417f7aa14"
+    }
+  },
+  "limits": [
+    "Original rooms/corridors approximate a GBA-compatible cave; portal coordinates/floor graph are source-pinned DS facts, not donor terrain.",
+    "Core stairs only. League lower/upper door anchors and side-room branch remain closed, no fake exterior reciprocal links.",
+    "No boulder/HM puzzles, water unlocks, trainers, encounters, items, events, saved IDs or production registration.",
+    "Further authored League approach and three side rooms must be reviewed and tested separately."
+  ]
+}

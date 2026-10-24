@@ -1,0 +1,208 @@
+{
+ "maps": [
+  "MAP_SINNOH_VICTORY_ROAD_1F",
+  "MAP_SINNOH_VICTORY_ROAD_2F",
+  "MAP_SINNOH_VICTORY_ROAD_B1F"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_SINNOH_VICTORY_ROAD_1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      37
+     ],
+     "warp": [
+      4,
+      37
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_2F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      7,
+      47
+     ],
+     "warp": [
+      7,
+      47
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_2F",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      42,
+      41
+     ],
+     "warp": [
+      42,
+      41
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_B1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      44,
+      48
+     ],
+     "warp": [
+      44,
+      48
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_B1F",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 4,
+     "tile": [
+      41,
+      24
+     ],
+     "warp": [
+      41,
+      24
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_B1F",
+     "dest_warp": 2,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 5,
+     "tile": [
+      4,
+      25
+     ],
+     "warp": [
+      4,
+      25
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_2F",
+     "dest_warp": 2,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_SINNOH_VICTORY_ROAD_2F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      20,
+      16
+     ],
+     "warp": [
+      20,
+      16
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      23,
+      26
+     ],
+     "warp": [
+      23,
+      26
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      20,
+      4
+     ],
+     "warp": [
+      20,
+      4
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 5,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_SINNOH_VICTORY_ROAD_B1F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      4,
+      39
+     ],
+     "warp": [
+      4,
+      39
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 2,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      6,
+      46
+     ],
+     "warp": [
+      6,
+      46
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 3,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      3,
+      22
+     ],
+     "warp": [
+      3,
+      22
+     ],
+     "dest": "MAP_SINNOH_VICTORY_ROAD_1F",
+     "dest_warp": 4,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}
