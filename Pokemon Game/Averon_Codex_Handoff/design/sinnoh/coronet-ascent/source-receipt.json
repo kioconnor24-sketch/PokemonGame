@@ -1,0 +1,377 @@
+{
+  "status": "ORIGINAL_CORONET_ASCENT_SOURCE_ART_ONLY_NOT_RUNTIME_OR_PRODUCTION",
+  "reference_revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "source_inputs_sha256": {
+    "shell-recipe.json": "ebcf955c94c33d1fcb55e199650cf59441ade7eb885a05c28178d3aa085e76bb",
+    "portal-reference.json": "e81f245d08fa321faa4e97621ee5cc3bce419dc19b09a395a952457977498cb5"
+  },
+  "existing_averon_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "maps": {
+    "SinnohMtCoronet_2F": {
+      "dimensions": [
+        34,
+        64
+      ],
+      "cells": 2176,
+      "warps": 4,
+      "source_warp_indices": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "sealed_external_ports": [
+        [
+          27,
+          48
+        ],
+        [
+          2,
+          59
+        ]
+      ],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "42d1170fec6eed2b9bf4bd1a4e444be8369abb192a9d8364c08f1bc78796269a"
+    },
+    "SinnohMtCoronet_3F": {
+      "dimensions": [
+        28,
+        34
+      ],
+      "cells": 952,
+      "warps": 3,
+      "source_warp_indices": [
+        0,
+        1,
+        2
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "57569a4812cc6a4abc9911ce78736cde55e56f00371741ce649743445a20c2d6"
+    },
+    "SinnohMtCoronet_OutsideSouth": {
+      "dimensions": [
+        46,
+        40
+      ],
+      "cells": 1840,
+      "warps": 3,
+      "source_warp_indices": [
+        0,
+        1,
+        2
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "0a5040c7bd1d8acf058b511213abe8b651082ff0370055595187db24d4c6db9f"
+    },
+    "SinnohMtCoronet_OutsideNorth": {
+      "dimensions": [
+        50,
+        46
+      ],
+      "cells": 2300,
+      "warps": 2,
+      "source_warp_indices": [
+        0,
+        1
+      ],
+      "sealed_external_ports": [
+        [
+          45,
+          28
+        ]
+      ],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "2b83312c29e15a3e193a029c2299e58e3363ca3aed541bde9d13d80c6c858ba8"
+    },
+    "SinnohMtCoronet_4F_Rooms1And2": {
+      "dimensions": [
+        64,
+        30
+      ],
+      "cells": 1920,
+      "warps": 5,
+      "source_warp_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "2194d90d022eacce3426cb7c20207b7d5bfe72ea2fa26d8ec24a7c5f284dadec"
+    },
+    "SinnohMtCoronet_4F_Room3": {
+      "dimensions": [
+        24,
+        14
+      ],
+      "cells": 336,
+      "warps": 1,
+      "source_warp_indices": [
+        0
+      ],
+      "sealed_external_ports": [
+        [
+          18,
+          8
+        ]
+      ],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          722,
+          723,
+          726,
+          727
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "7c08feb1476bcf03d72e73146f922cc84c715dad3f181ea521da9bddf22be0d8"
+    }
+  },
+  "limits": [
+    "Original GBA physical approximation, not DS terrain/puzzles or final art",
+    "Existing2F unchanged; only previously sealed3F3,29 opens to constructed OutsideSouth",
+    "Outside shells use existing rocky Cave assets and ordinary foot corridors; no Rock Climb/snow/story acceptance",
+    "2F lower exits, OutsideNorth1F-tunnel and4FRoom3\u21925F remain closed",
+    "No production slots, origins, saved data, flags, encounters or donor pixels/music"
+  ]
+}
