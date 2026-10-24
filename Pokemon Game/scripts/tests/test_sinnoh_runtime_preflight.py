@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import subprocess
 import unittest
 
 spec = importlib.util.spec_from_file_location('preflight', Path(__file__).parents[1] / 'sinnoh-runtime-preflight.py')
@@ -80,6 +81,34 @@ class RuntimePreflightTests(unittest.TestCase):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'escapes'): p.inside(self.engine, name)
         with self.assertRaisesRegex(ValueError, 'escapes'):
             p.verify(self.engine, self.archive, '../outside', 'identity.json', 'normal')
+
+    def test_whole_engine_audit_rejects_unlisted_changes_and_wrong_head(self):
+        repo = self.root
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.PIPE).decode().strip()
+        groups = self.engine / 'data/maps/map_groups.json'
+        current = groups.read_bytes()
+        groups.write_text(json.dumps({'gMapGroup_Sinnoh': ['Existing']}))
+        git('init'); git('add', 'engine/data/maps/map_groups.json')
+        git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-m', 'fixture')
+        self.recipe['base'] = git('rev-parse', 'HEAD')
+        groups.write_bytes(current)
+        self.recipe['existing_map_names_preserved'] = ['Counterfeit']
+        with self.assertRaisesRegex(ValueError, 'original Sinnoh prefix'): p.verify_engine_changes(repo, self.engine, self.recipe)
+        self.recipe['existing_map_names_preserved'] = ['Existing']
+        self.assertEqual(p.verify_engine_changes(repo, self.engine, self.recipe)['unexpected_engine_paths'], [])
+        rogue = self.engine / 'unlisted.c'; rogue.write_text('not listed')
+        with self.assertRaisesRegex(ValueError, 'unlisted engine'): p.verify_engine_changes(repo, self.engine, self.recipe)
+        git('add', 'engine/unlisted.c')
+        git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-m', 'tracked fixture')
+        self.recipe['base'] = git('rev-parse', 'HEAD')
+        rogue.write_text('tracked change outside recipe')
+        with self.assertRaisesRegex(ValueError, 'unlisted engine'): p.verify_engine_changes(repo, self.engine, self.recipe)
+        git('checkout', '--', 'engine/unlisted.c')
+        # A tracked source path remains visible when modified, even if ignored.
+        git('add', '-f', 'engine/.map_qa_throwaway')
+        git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-m', 'next')
+        with self.assertRaisesRegex(ValueError, 'HEAD differs'): p.verify_engine_changes(repo, self.engine, self.recipe)
 
     def test_unmarked_scratch_and_unknown_profile_rejected(self):
         (self.engine / '.map_qa_throwaway').unlink()

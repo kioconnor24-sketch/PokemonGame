@@ -8,6 +8,7 @@ whole-tree audit. It never installs maps, changes saves, or authorizes IDs.
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -27,7 +28,29 @@ def inside(root, relative):
     return target
 
 
-def verify(engine, archive, recipe_name, identity_name, profile):
+def verify_engine_changes(repo, engine, recipe):
+    """Reject unlisted tracked or untracked source changes without modifying Git."""
+    repo, engine = Path(repo).resolve(), Path(engine).resolve()
+    relative = engine.relative_to(repo).as_posix()
+    def git(*args):
+        return subprocess.check_output(['git', '-C', str(repo), *args])
+    if git('rev-parse', 'HEAD').decode().strip() != recipe['base']:
+        raise ValueError('scratch HEAD differs from recipe base')
+    baseline = json.loads(git('show', 'HEAD:' + relative + '/data/maps/map_groups.json'))
+    if baseline['gMapGroup_Sinnoh'] != recipe['existing_map_names_preserved']:
+        raise ValueError('original Sinnoh prefix differs from base HEAD')
+    tracked = git('diff', '--name-only', '-z', 'HEAD', '--', relative)
+    untracked = git('ls-files', '--others', '--exclude-standard', '-z', '--', relative)
+    paths = {v.decode() for v in (tracked + untracked).split(b'\0') if v}
+    allowed = {relative + '/' + name for name in recipe['files']}
+    allowed.add(relative + '/.map_qa_throwaway')
+    unexpected = sorted(paths - allowed)
+    if unexpected:
+        raise ValueError('unlisted engine changes: ' + repr(unexpected))
+    return dict(base=recipe['base'], changed_paths=len(paths), unexpected_engine_paths=[])
+
+
+def verify(engine, archive, recipe_name, identity_name, profile, repo=None):
     if profile not in ('normal', 'release'):
         raise ValueError('unknown profile')
     engine, archive = Path(engine).resolve(), Path(archive).resolve()
@@ -60,9 +83,10 @@ def verify(engine, archive, recipe_name, identity_name, profile):
             or names != prior + list(slots)
             or list(slots.values()) != list(range(len(prior), len(names)))):
         raise ValueError('temporary registry is not an exact append-only prefix')
-    return dict(status='CONSISTENT_DEV_INPUTS_NOT_RUNTIME_ACCEPTANCE', profile=profile,
+    audit = verify_engine_changes(repo, engine, recipe) if repo is not None else None
+    return dict(whole_engine_audit=audit, status='CONSISTENT_DEV_INPUTS_NOT_RUNTIME_ACCEPTANCE', profile=profile,
                 base=recipe['base'], engine_tree=identity['engine_tree'],
-                source_files=len(recipe['files']), coverage='listed recipe files only; audit unlisted engine changes separately',
+                source_files=len(recipe['files']), coverage='listed file hashes plus whole-engine Git audit' if audit is not None else 'listed recipe files only; audit unlisted engine changes separately',
                 prior_maps=len(prior),
                 temporary_maps=len(slots), rom_sha256=digest(archive / (stem + '.gba')),
                 elf_sha256=digest(archive / (stem + '.elf')))
@@ -74,6 +98,7 @@ if __name__ == '__main__':
     p.add_argument('--archive', required=True, type=Path)
     p.add_argument('--recipe', required=True, help='relative archived recipe filename')
     p.add_argument('--identity', required=True, help='relative archived identity filename')
+    p.add_argument('--repo', required=True, type=Path, help='scratch repository for whole-engine change audit')
     p.add_argument('--profile', required=True, choices=('normal', 'release'))
     a = p.parse_args()
-    print(json.dumps(verify(a.engine, a.archive, a.recipe, a.identity, a.profile), indent=2))
+    print(json.dumps(verify(a.engine, a.archive, a.recipe, a.identity, a.profile, a.repo), indent=2))
