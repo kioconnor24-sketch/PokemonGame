@@ -15,6 +15,7 @@ import subprocess
 PREFIX='Pokemon Game/Averon_Codex_Handoff/design/sinnoh/'
 ENGINE='Pokemon Game/engine/'
 BASE='d96ae4041cb955918801eea5dfb300f517000474'
+SOURCE_ROOT=Path(__file__).resolve().parents[5]
 sha=lambda raw:hashlib.sha256(raw).hexdigest()
 encode=lambda value:(json.dumps(value,indent=2)+'\n').encode()
 
@@ -31,8 +32,8 @@ def replace_once(raw,before,after):
 
 
 def assemble(repo):
-    repo=Path(repo).resolve();coast=load(repo,'combined_coast_source',PREFIX+'sunyshore-coast/prepare_runtime.py')
-    core=load(repo,'combined_core_source',PREFIX+'victory-road-shell/prepare_runtime.py')
+    repo=Path(repo).resolve();coast=load(SOURCE_ROOT,'combined_coast_source',PREFIX+'sunyshore-coast/prepare_runtime.py')
+    core=load(SOURCE_ROOT,'combined_core_source',PREFIX+'victory-road-shell/prepare_runtime.py')
     if coast.BASE!=BASE or core.BASE!=BASE:raise ValueError('scene baseline differs')
     a,ar=coast.assemble(repo);b,br=core.assemble(repo)
     common={'data/maps/map_groups.json','data/layouts/layouts.json','test/data/averon_map_registry_slots.inc','data/event_scripts.s'}
@@ -53,7 +54,7 @@ def assemble(repo):
     original=coast.inputs(repo)['data/event_scripts.s']
     if not b['data/event_scripts.s'].startswith(original):raise ValueError('event script prefix differs')
     out['data/event_scripts.s']=a['data/event_scripts.s']+b['data/event_scripts.s'][len(original):]
-    here=repo/(PREFIX+'victory-road-shell');receipt=json.loads((here/'connected-receipt.json').read_text())
+    here=SOURCE_ROOT/(PREFIX+'victory-road-shell');receipt=json.loads((here/'connected-receipt.json').read_text())
     expected={n+'/'+f for n in ('PokmonLeague',*core.MAPS) for f in ('map.bin','border.bin','map.json','attributes.json','averon.png')}
     if set(receipt['output_sha256'])!=expected:raise ValueError('exact connected packet set required')
     data={p:(here/'connected'/p).read_bytes() for p in expected}
@@ -76,7 +77,7 @@ def assemble(repo):
 
 
 def install(repo):
-    repo=Path(repo).resolve();coast=load(repo,'combined_install_guard',PREFIX+'sunyshore-coast/prepare_runtime.py');base=coast.base;engine=repo/ENGINE
+    repo=Path(repo).resolve();coast=load(SOURCE_ROOT,'combined_install_guard',PREFIX+'sunyshore-coast/prepare_runtime.py');base=coast.base;engine=repo/ENGINE
     if not base.git(repo,'branch','--show-current').decode().strip().startswith('codex/victory-league-runtime-scratch-') or not (engine/'.map_qa_throwaway').is_file():raise ValueError('marked disposable combined branch required')
     if base.git(repo,'rev-parse','HEAD').decode().strip()!=BASE:raise ValueError('exact production baseline required')
     status=base.git(repo,'status','--porcelain','--untracked-files=normal','--',ENGINE).decode().splitlines()

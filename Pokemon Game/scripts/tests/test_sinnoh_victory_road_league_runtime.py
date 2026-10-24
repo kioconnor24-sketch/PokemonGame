@@ -2,6 +2,8 @@
 import importlib.util
 import json
 import os
+import subprocess
+import sys
 from pathlib import Path
 import tempfile
 import unittest
@@ -77,5 +79,45 @@ class CombinedSceneTests(unittest.TestCase):
             # Reuse the actual source guard with a fixture-only repository.
             with patch.object(r,'load',return_value=type('Guard',(),{'base':base})()),patch.object(base,'git',side_effect=wrong),self.assertRaisesRegex(ValueError,'exact production baseline'):r.install(repo)
             self.assertEqual([p.name for p in e.iterdir()],['.map_qa_throwaway'])
+
+    def test_separate_baseline_only_target_does_not_need_unmerged_source_tools(self):
+        # The real target is a clean main checkout, which cannot contain the
+        # unmerged scene tools. Keep source and destination roles independent.
+        pins=json.loads((ROOT/r.PREFIX/'sunyshore-coast/runtime-base-input-hashes.json').read_text())
+        assets=json.loads((HERE/'source-receipt.json').read_text())['existing_averon_sha256']
+        paths=sorted(set(pins)|set(assets))
+        with tempfile.TemporaryDirectory() as t:
+            target=Path(t)
+            subprocess.run(['git','init','-q',str(target)],check=True)
+            for name in paths:
+                p=target/r.ENGINE/name;p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(subprocess.check_output(['git','-C',str(ROOT),'show','HEAD:'+r.ENGINE+name]))
+            subprocess.run(['git','-C',str(target),'add','--',*[r.ENGINE+p for p in paths]],check=True)
+            subprocess.run(['git','-C',str(target),'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-q','-m','Baseline-only test fixture'],check=True)
+            self.assertFalse((target/r.PREFIX).exists())
+            actual,receipt=r.assemble(target)
+            self.assertEqual(actual,self.files)
+            self.assertEqual(receipt['files'],self.receipt['files'])
+
+    def test_qa_scope_includes_both_league_doors_only_when_explicitly_requested(self):
+        script=r'''
+import importlib.util,sys
+from pathlib import Path
+from types import SimpleNamespace
+p=Path(sys.argv[1]);sp=importlib.util.spec_from_file_location('four_map_qa_probe',p)
+m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m);old=m.shared.MAPS
+def fake(args):
+ import driver,map_qa as q
+ w=q._wrapper(args.engine)
+ assert w.driver is driver
+ assert m.shared.MAPS==(('MAP_POKMON_LEAGUE',*m.MAPS) if args.with_league else m.MAPS)
+ return 0
+m.shared.run=fake
+for value in (False,True):
+ assert m.run(SimpleNamespace(engine=Path(sys.argv[2]),with_league=value))==0
+ assert m.shared.MAPS==old
+'''
+        result=subprocess.run([sys.executable,'-c',script,str(HERE/'run_runtime_qa.py'),str(ROOT/r.ENGINE)],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
 
 if __name__=='__main__':unittest.main()
