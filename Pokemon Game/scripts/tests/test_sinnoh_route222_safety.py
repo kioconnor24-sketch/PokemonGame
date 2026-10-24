@@ -80,4 +80,3 @@ class RuntimeTests(unittest.TestCase):
    with patch.object(rt.base,'git',side_effect=baseline),patch.object(rt,'assemble',return_value=({'../escape':b'x'},{})),self.assertRaisesRegex(ValueError,'escapes engine'):rt.install(repo)
    self.assertEqual([p.name for p in engine.iterdir()],['.map_qa_throwaway'])
 if __name__=='__main__':unittest.main()
-
