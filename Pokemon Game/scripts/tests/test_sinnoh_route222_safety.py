@@ -35,6 +35,7 @@ class RepairTests(unittest.TestCase):
   self.assertEqual({p.name for p in self.out.iterdir()},{'map.bin','averon-map.bin','averon.png','repair-receipt.json'})
   self.assertIn('NOT_RUNTIME_ACCEPTANCE',self.receipt['status'])
  def test_repeated_outputs_exact(self):
+  self.assertEqual({p.name:p.read_bytes() for p in self.out.iterdir()},{p.name:p.read_bytes() for p in (HERE/'corrected').iterdir()})
   with tempfile.TemporaryDirectory() as t:
    other=Path(t)/'packet';r.build(ROOT,other)
    self.assertEqual({p.name:p.read_bytes() for p in self.out.iterdir()},{p.name:p.read_bytes() for p in other.iterdir()})

@@ -8,3 +8,14 @@ Not yet compiled or emulator-accepted: next install this candidate on the exact 
 
 
 Public branch replay9/9 PASS. First replay exposed an unnecessary dependency on downstream Victory Road's renderer wrapper; corrected to reuse this parent coast's existing adapt_art/pack renderer directly. Output bytes unchanged; the current branch contains no Victory tools, so this proves parent independence. No engine/source pixels changed by that repair. Final source9/9 log retained privately; actual corrected NORMAL build now running.
+
+
+## LATEST — actual corrected paired scene complete
+
+NORMAL+RELEASE142/142 actual GUI: each two exact previously failing ledge cases10/10 each, coast/gateway/city44, fresh-process Continue4, unchanged legacy flash3. The repaired faces block at36/37,15; existing adjacent35/38 jumps land safely at35/38,17. All original boulders remain solid. Scoped native30/30, strict originalSaveBlock1/2/3/PC4/4, host9/9, static0. Evidence/events/screenshots/logs/resources/source equivalence and inventory in runtime-evidence/. Original two6/7 negatives remain published unchanged in parent241; no relabeling.
+
+Exact engine tree9e3db316117df080d1afb369c9bfe85ea93c3a59, baseline871c46b6fc8b4fdaae9e2bef04543c649987542a. Git-tree proof against original coasteb740294 shows only Route222 map.bin plus added native test differ. NORMAL17,430,244B SHA256b19a190840535914bedda6f27875b28001096fcb5dfd7b5d89199c15e9aa1a73; RELEASE17,549,364B SHA256d4a2622c29485715119067ed8ff030eba5247a965cf9c4e1282100d1be01bf41. Repair addsZERO linked bytes/RAM versus original coast; complete scene+36,900 over matched main baselines. RAM226480/28392 and226482/28336 unchanged; RELEASE16,005,068B free.
+
+Actual first RELEASE legacy-only emulator launch failed before gameplay (x11 not available/no window). Preserved both logs, restarted a fresh graphical Xvfb79 session, same ROM/source/copied original flash then3/3 PASS. No test/engine/timeout changes. Original flash remains44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d. Automatic approval review required publication before evidence links; files committed/pushed before final handoff. Two accidentally staged generated Python caches were removed by normal follow-up commit, no history rewrite.
+
+This is a source/art candidate and genuinely tested disposable scene, not production integration or natural ocean/League/Surf/Waterfall acceptance. Exact source deviation ready for review; stock cliff art remains owner-revisable. Parent237 genuine owner three-path gate and235 bridge remain. Private paired archive /workspace/scratch/route222-safety-built-20261023. Next package: source-grounded Coronet outside/4F shells, with separate six-map runtime proof still required.

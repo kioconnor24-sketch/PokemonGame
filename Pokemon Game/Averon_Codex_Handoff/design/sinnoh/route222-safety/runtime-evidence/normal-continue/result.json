@@ -1,0 +1,59 @@
+{
+ "maps": [
+  "MAP_ROUTE222",
+  "MAP_ROUTE222_ACCESS",
+  "MAP_SUNYSHORE_CITY"
+ ],
+ "build": "normal",
+ "rom_sha256": "b19a190840535914bedda6f27875b28001096fcb5dfd7b5d89199c15e9aa1a73",
+ "static_findings": [],
+ "save_before": "d47668582e9d78c5817584c3e07cd8895bc6a43599d8f354b982c7c8468862c9",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "d47668582e9d78c5817584c3e07cd8895bc6a43599d8f354b982c7c8468862c9",
+ "verdict": "PASS"
+}
