@@ -1,0 +1,67 @@
+{
+  "status": "OFF_ENGINE_GEOMETRY_ONLY_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "maps": {
+    "OreburghCity": {
+      "git_blob": "e475d8891ee8e50160679d05b9095c72b05e1f38",
+      "source_sha256": "7078a4b3f9bbbbe27c6b97f49bf804d64d760ab7421e6e172b04b45567156566",
+      "staged_sha256": "bbad53605044afb179affd2aa7c44c5bde025c3a707e34f446af1db6093f422c",
+      "dimensions": [
+        70,
+        59
+      ],
+      "used_primary": 75,
+      "used_secondary": 183,
+      "closed_collision_cells": 1,
+      "all_elevation_and_metatile_bits_preserved": true,
+      "excluded_event_counts": {
+        "object_events": 15,
+        "coord_events": 1,
+        "bg_events": 8
+      }
+    },
+    "Route207": {
+      "git_blob": "08fb2516a753dbb621316d13703e564be9a94619",
+      "source_sha256": "fe265553a2d3983dd2e007aef1c1b73547bc93028fc35239c3913830d0127fab",
+      "staged_sha256": "b21dff39fc3f721a48f654d934c5eeecd952458032f95010ca9c1e4482a474e6",
+      "dimensions": [
+        64,
+        32
+      ],
+      "used_primary": 52,
+      "used_secondary": 15,
+      "closed_collision_cells": 10,
+      "all_elevation_and_metatile_bits_preserved": true,
+      "excluded_event_counts": {
+        "object_events": 0,
+        "coord_events": 0,
+        "bg_events": 0
+      }
+    }
+  },
+  "consumed_donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/OreburghCity/map.json": "e11f67b24049fb7fa2b05546f130ea3210d4b554a5072c68aac987f83ea05fb1",
+    "data/layouts/OreburghCity/map.bin": "7078a4b3f9bbbbe27c6b97f49bf804d64d760ab7421e6e172b04b45567156566",
+    "data/layouts/OreburghCity/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/Route207/map.json": "17ba03a515f72741e50fe58783b0b7352d331b2087d99e63d3dccecabf218971",
+    "data/layouts/Route207/map.bin": "fe265553a2d3983dd2e007aef1c1b73547bc93028fc35239c3913830d0127fab",
+    "data/layouts/Route207/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/OreburghGate_1F/map.json": "52bbe8edc37c8c2d0b6146342498da135945fe02bf11462e24f778b354fb2e2e"
+  },
+  "gate_dependency": {
+    "source_warp_id": 1,
+    "x": 25,
+    "y": 20,
+    "destination": "MAP_OREBURGH_CITY",
+    "destination_source_warp_id": 0,
+    "status": "CLOSED_IN_PR194_OPEN_ONLY_IN_COHERENT_TEST_TREE"
+  },
+  "mine_dependency": "reuse merged198; retain source City11/14 and all6 B1 warps",
+  "limits": [
+    "No donor pixels/palettes/music or gameplay copied",
+    "Graphics remapping and callback/bridge validation NOT COMPLETED",
+    "Sparse source warp IDs are not an engine event array",
+    "No permanent sections, production install, ROM or mGBA acceptance"
+  ]
+}

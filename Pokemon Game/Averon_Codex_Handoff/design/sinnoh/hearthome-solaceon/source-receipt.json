@@ -1,0 +1,1025 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/HearthomeCity/map.json": "48b151450a84a5a8c8ca6019d2ffb82556ca9d3a1d5a7935e7d3aac7f928d1b6",
+    "data/layouts/HearthomeCity/map.bin": "8fc04fab352cac26e211f6bc4bb909516e912407555029b8496f3fc311c02a9a",
+    "data/layouts/HearthomeCity/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/Route208/map.json": "161137d88611f324cf4cbdd975f8bbb1397846e8809b8c89e4f9dcd3dfe159f1",
+    "data/layouts/Route208/map.bin": "87cfeca44cabfb03652c71f08b695d6d64367918d9722709dd0436d68f0b4b04",
+    "data/layouts/Route208/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/Route208_Access/map.json": "e6096568dbcc391557c3fccbf687fa01d9d60ba84e5d5745c178e8d85dfa2196",
+    "data/layouts/Route208_Access/map.bin": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+    "data/layouts/Route208_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route209/map.json": "e797c090d61381831992553ed1626711423fc4a2a59ee533798e0d8b9edfca21",
+    "data/layouts/Route209/map.bin": "3a8acfc97bfb7ebc4accb7ce7cbfcb4c963e1f027d318d878fbe04a04c351243",
+    "data/layouts/Route209/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/SolaceonTown/map.json": "8d419b34c50905c9d5483706ed3f0c20cdfd7fed0d50bf29124f4d8c4c7a6269",
+    "data/layouts/SolaceonTown/map.bin": "b34d6988eae41ae5bf5e60b68f389140191059918debafe66babd32a9738ac76",
+    "data/layouts/SolaceonTown/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/Route210_South/map.json": "25f466b325361eb3c7f6c1aa929efadd6239de91e867b8f7d4b8962b45900900",
+    "data/layouts/Route210_South/map.bin": "58c6eb1a6b91d43e4b0d2b957666c7f0668621fc3d1fc65af7648adf90798543",
+    "data/layouts/Route210_South/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "data/maps/Route209_Access/map.json": "4f692251bf04513c8c70142ef78c25f72f971a0c0e92918830b0062d35b547df",
+    "data/layouts/Route209_Access/map.bin": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+    "data/layouts/Route209_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/hearthome/metatile_attributes.bin": "bc5a9dd933f728fb6a7171d4be8e0ad8bbfc58f64b706bed161fbf61af850903",
+    "data/tilesets/secondary/mauville/metatile_attributes.bin": "bf58fcb22b97cd66afd514936a9cb20bf6e3f51d8383abafb9f1e48ebc18d8cc",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/pasos/metatile_attributes.bin": "3efe3d6118ddb28de6083531ec1304f5b4db5b54731609dc31e68ea8ccb9aaac",
+    "data/tilesets/secondary/celestic/metatile_attributes.bin": "eaead554f5bdde8202c8efd97372fc1f356a365a70e133f4633eea99859682ad"
+  },
+  "identity_roundtrips": {
+    "HearthomeCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_HEARTHOME_CITY",
+      "target_map": "MAP_HEARTHOME_CITY",
+      "source_sha256": "8fc04fab352cac26e211f6bc4bb909516e912407555029b8496f3fc311c02a9a",
+      "output_sha256": "8fc04fab352cac26e211f6bc4bb909516e912407555029b8496f3fc311c02a9a",
+      "mapped_unique_metatiles": 303,
+      "dimensions": [
+        58,
+        52
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route208": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE208",
+      "target_map": "MAP_ROUTE208",
+      "source_sha256": "87cfeca44cabfb03652c71f08b695d6d64367918d9722709dd0436d68f0b4b04",
+      "output_sha256": "87cfeca44cabfb03652c71f08b695d6d64367918d9722709dd0436d68f0b4b04",
+      "mapped_unique_metatiles": 116,
+      "dimensions": [
+        68,
+        38
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route208_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE208_ACCESS",
+      "target_map": "MAP_ROUTE208_ACCESS",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "output_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route209": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE209",
+      "target_map": "MAP_ROUTE209",
+      "source_sha256": "3a8acfc97bfb7ebc4accb7ce7cbfcb4c963e1f027d318d878fbe04a04c351243",
+      "output_sha256": "3a8acfc97bfb7ebc4accb7ce7cbfcb4c963e1f027d318d878fbe04a04c351243",
+      "mapped_unique_metatiles": 152,
+      "dimensions": [
+        68,
+        72
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "SolaceonTown": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_SOLACEON_TOWN",
+      "target_map": "MAP_SOLACEON_TOWN",
+      "source_sha256": "b34d6988eae41ae5bf5e60b68f389140191059918debafe66babd32a9738ac76",
+      "output_sha256": "b34d6988eae41ae5bf5e60b68f389140191059918debafe66babd32a9738ac76",
+      "mapped_unique_metatiles": 135,
+      "dimensions": [
+        66,
+        44
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route210_South": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE210_SOUTH",
+      "target_map": "MAP_ROUTE210_SOUTH",
+      "source_sha256": "58c6eb1a6b91d43e4b0d2b957666c7f0668621fc3d1fc65af7648adf90798543",
+      "output_sha256": "58c6eb1a6b91d43e4b0d2b957666c7f0668621fc3d1fc65af7648adf90798543",
+      "mapped_unique_metatiles": 95,
+      "dimensions": [
+        42,
+        94
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route209_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE209_ACCESS",
+      "target_map": "MAP_ROUTE209_ACCESS",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "output_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "HearthomeCity": {
+      "id": "MAP_HEARTHOME_CITY",
+      "name": "HearthomeCity",
+      "layout": "LAYOUT_HEARTHOME_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 45,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE208_ACCESS",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 53,
+          "y": 45,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE209_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 8,
+          "y": 46,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE212_ACCESS",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 9,
+          "y": 46,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE212_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE208",
+          "offset": 21,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE209",
+          "offset": -17,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE212_NORTH",
+          "offset": -4,
+          "direction": "down"
+        }
+      ]
+    },
+    "Route208": {
+      "id": "MAP_ROUTE208",
+      "name": "Route208",
+      "layout": "LAYOUT_ROUTE208",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 19,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_SOUTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 63,
+          "y": 24,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE208_ACCESS",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_HEARTHOME_CITY",
+          "offset": -21,
+          "direction": "right"
+        }
+      ]
+    },
+    "Route208_Access": {
+      "id": "MAP_ROUTE208_ACCESS",
+      "name": "Route208_Access",
+      "layout": "LAYOUT_ROUTE208_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE208",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_HEARTHOME_CITY",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "Route209": {
+      "id": "MAP_ROUTE209",
+      "name": "Route209",
+      "layout": "LAYOUT_ROUTE209",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 62,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE209_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_HEARTHOME_CITY",
+          "offset": 17,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_SOLACEON_TOWN",
+          "offset": 34,
+          "direction": "up"
+        }
+      ]
+    },
+    "SolaceonTown": {
+      "id": "MAP_SOLACEON_TOWN",
+      "name": "SolaceonTown",
+      "layout": "LAYOUT_SOLACEON_TOWN",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_ROUTE209",
+          "offset": -34,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_ROUTE210_SOUTH",
+          "offset": -6,
+          "direction": "up"
+        }
+      ]
+    },
+    "Route210_South": {
+      "id": "MAP_ROUTE210_SOUTH",
+      "name": "Route210_South",
+      "layout": "LAYOUT_ROUTE210_SOUTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_SOLACEON_TOWN",
+          "offset": 6,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_ROUTE210_NORTH",
+          "offset": -57,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_ROUTE215",
+          "offset": 26,
+          "direction": "right"
+        }
+      ]
+    },
+    "Route209_Access": {
+      "id": "MAP_ROUTE209_ACCESS",
+      "name": "Route209_Access",
+      "layout": "LAYOUT_ROUTE209_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_HEARTHOME_CITY",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE209",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    }
+  },
+  "warp_index_translation": {
+    "HearthomeCity": {
+      "0": 0,
+      "1": 1
+    },
+    "Route208": {
+      "1": 0
+    },
+    "Route208_Access": {
+      "0": 0,
+      "1": 1
+    },
+    "Route209": {
+      "0": 0
+    },
+    "SolaceonTown": {},
+    "Route210_South": {},
+    "Route209_Access": {
+      "0": 0,
+      "1": 1
+    }
+  },
+  "closure_changes": {
+    "HearthomeCity": [
+      {
+        "x": 8,
+        "y": 46,
+        "before": 12846,
+        "after": 13870,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 9,
+        "y": 46,
+        "before": 12846,
+        "after": 13870,
+        "reason": "unbuilt source destination"
+      }
+    ],
+    "Route208": [
+      {
+        "x": 8,
+        "y": 19,
+        "before": 167,
+        "after": 1191,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 0,
+        "before": 4498,
+        "after": 5522,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 37,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 37,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 37,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 37,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 37,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 37,
+        "before": 4498,
+        "after": 5522,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 67,
+        "y": 26,
+        "before": 12311,
+        "after": 13335,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      }
+    ],
+    "Route208_Access": [
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route209": [
+      {
+        "x": 67,
+        "y": 34,
+        "before": 4489,
+        "after": 5513,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 67,
+        "y": 35,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "SolaceonTown": [],
+    "Route210_South": [
+      {
+        "x": 24,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 0,
+        "before": 12576,
+        "after": 13600,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 0,
+        "before": 12577,
+        "after": 13601,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 0,
+        "before": 12578,
+        "after": 13602,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 0,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 0,
+        "before": 12301,
+        "after": 13325,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 89,
+        "before": 12782,
+        "after": 13806,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 48,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 49,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 50,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 51,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 52,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 53,
+        "before": 12753,
+        "after": 13777,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 54,
+        "before": 12761,
+        "after": 13785,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 55,
+        "before": 12769,
+        "after": 13793,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 56,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route209_Access": [
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ]
+  },
+  "maps": {
+    "HearthomeCity": {
+      "dimensions": [
+        58,
+        52
+      ],
+      "source_blob": "914b087aaf8a239769200a32cfb01c5e80ec6a41",
+      "source_sha256": "8fc04fab352cac26e211f6bc4bb909516e912407555029b8496f3fc311c02a9a",
+      "staged_sha256": "70dae1fd5f5d3bfc5bd3e66195236bfc4251906fbfaa62da817e0646fa290a3b",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 2,
+      "warp_count": 2,
+      "connections": [
+        {
+          "map": "MAP_ROUTE208",
+          "offset": 21,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE209",
+          "offset": -17,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route208": {
+      "dimensions": [
+        68,
+        38
+      ],
+      "source_blob": "c334b00d1a9774f588dc6dd9322d4cd0c4cc438c",
+      "source_sha256": "87cfeca44cabfb03652c71f08b695d6d64367918d9722709dd0436d68f0b4b04",
+      "staged_sha256": "798210bbc9138a28d080d44ac47094f2da1aada24d7429d006984aee02fdd59f",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 10,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_HEARTHOME_CITY",
+          "offset": -21,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 58
+    },
+    "Route208_Access": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "b195400ca012d0e101f921b37bde3cafd21989dd",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "staged_sha256": "c08399de7d2ee78b0991b5b237d40c8455a0fac727151a46ff79374adc096353",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 9,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route209": {
+      "dimensions": [
+        68,
+        72
+      ],
+      "source_blob": "5593c5475ce0e4c9c252627c19d48bb66dc8a70f",
+      "source_sha256": "3a8acfc97bfb7ebc4accb7ce7cbfcb4c963e1f027d318d878fbe04a04c351243",
+      "staged_sha256": "403d59a52d966d3c60a84dfe08e263ef651dbf5919aefbfb238572247445b2d0",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 2,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_HEARTHOME_CITY",
+          "offset": 17,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_SOLACEON_TOWN",
+          "offset": 34,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "SolaceonTown": {
+      "dimensions": [
+        66,
+        44
+      ],
+      "source_blob": "858183919dcf56dac5ec35a49c69e7dfa687ae07",
+      "source_sha256": "b34d6988eae41ae5bf5e60b68f389140191059918debafe66babd32a9738ac76",
+      "staged_sha256": "b34d6988eae41ae5bf5e60b68f389140191059918debafe66babd32a9738ac76",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 0,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ROUTE209",
+          "offset": -34,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_ROUTE210_SOUTH",
+          "offset": -6,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route210_South": {
+      "dimensions": [
+        42,
+        94
+      ],
+      "source_blob": "4175e5b76b52847e79b2223178d2b795f3dbf504",
+      "source_sha256": "58c6eb1a6b91d43e4b0d2b957666c7f0668621fc3d1fc65af7648adf90798543",
+      "staged_sha256": "3c59f055b455356c80d57696e30ca2c4a4fb7aa87289c61f1c2d78e90136e2ef",
+      "border_sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "closed_cells": 24,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_SOLACEON_TOWN",
+          "offset": 6,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route209_Access": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "b195400ca012d0e101f921b37bde3cafd21989dd",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "staged_sha256": "c08399de7d2ee78b0991b5b237d40c8455a0fac727151a46ff79374adc096353",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 9,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ]
+}

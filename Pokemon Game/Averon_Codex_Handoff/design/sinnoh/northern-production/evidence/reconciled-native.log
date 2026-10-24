@@ -1,0 +1,100 @@
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_rg_shop.o sound/songs/midi/se_rg_shop.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_rg_ss_anne_horn.o sound/songs/midi/se_rg_ss_anne_horn.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_rotating_gate.o sound/songs/midi/se_rotating_gate.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_roulette_ball.o sound/songs/midi/se_roulette_ball.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_roulette_ball2.o sound/songs/midi/se_roulette_ball2.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_save.o sound/songs/midi/se_save.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_select.o sound/songs/midi/se_select.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_shiny.o sound/songs/midi/se_shiny.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_ship.o sound/songs/midi/se_ship.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_shop.o sound/songs/midi/se_shop.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_sliding_door.o sound/songs/midi/se_sliding_door.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_success.o sound/songs/midi/se_success.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_sudowoodo_shake.o sound/songs/midi/se_sudowoodo_shake.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_super_effective.o sound/songs/midi/se_super_effective.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_switch.o sound/songs/midi/se_switch.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_taillow_wing_flap.o sound/songs/midi/se_taillow_wing_flap.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_thunder.o sound/songs/midi/se_thunder.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_thunder2.o sound/songs/midi/se_thunder2.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_thunderstorm.o sound/songs/midi/se_thunderstorm.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_thunderstorm_stop.o sound/songs/midi/se_thunderstorm_stop.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_truck_door.o sound/songs/midi/se_truck_door.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_truck_move.o sound/songs/midi/se_truck_move.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_truck_stop.o sound/songs/midi/se_truck_stop.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_truck_unload.o sound/songs/midi/se_truck_unload.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_u.o sound/songs/midi/se_u.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_unlock.o sound/songs/midi/se_unlock.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_use_item.o sound/songs/midi/se_use_item.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_vend.o sound/songs/midi/se_vend.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_wall_hit.o sound/songs/midi/se_wall_hit.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_warp_in.o sound/songs/midi/se_warp_in.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_warp_out.o sound/songs/midi/se_warp_out.s
+arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -I sound -o build/emerald-test/sound/songs/midi/se_win_open.o sound/songs/midi/se_win_open.s
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/test_test_runner.o test/test_test_runner.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner.o test/test_runner.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_args.o test/test_runner_args.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_corridor_location.o test/averon_corridor_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_lake_verity_location.o test/averon_lake_verity_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_location_compatibility.o test/averon_location_compatibility.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_sandgem_location.o test/averon_sandgem_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_route202_location.o test/averon_route202_location.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_map_registry_contract.o test/averon_map_registry_contract.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_region_travel.o test/averon_region_travel.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_region_save.o test/averon_region_save.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/save.o test/save.c
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/cc1 -quiet <flags> -o build/emerald-test/test/averon_northern_location.o test/averon_northern_location.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o ../../pokeemerald-test.elf <objects> <test-objects> <lib>
+tools/gbafix/gbafix pokeemerald-test.elf -t"POKEMON EMER" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test.elf gTestRunnerArgv "Averon\0"
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra /workspace/.onboarding/mgba-rom-test arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[0] Averon corridor approved origins have names and survive boxed summary reads: [32mPASS[0m
+[0] Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically: [32mPASS[0m
+[0] Averon Lake Verity origin survives the real summary formatter unchanged: [32mPASS[0m
+[1] Averon Verity flash reload preserves the new map position origin and regional return destination: [32mPASS[0m
+[1] Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group: [32mPASS[0m
+[1] Averon Lake Verity is section 220 in Sinnoh with its own name and popup: [32mPASS[0m
+[1] Averon location battle controller preserves all legacy bytes but not a new 13-bit identity: [32mPASS[0m
+[0] Averon location flash reload preserves all 256 PC origins party TV specials and region state: [32mPASS[0m
+[0] Averon location 13-bit experiment exposes legacy API truncation and special aliases: [32mPASS[0m
+[0] Averon location legacy names and region identities remain unchanged: [32mPASS[0m
+[0] Averon Sandgem summary keeps NONE unassigned and special met values unnamed: [32mPASS[0m
+[0] Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names: [32mPASS[0m
+[0] Averon Route 202 is section 219 in Sinnoh with its own name and popup: [32mPASS[0m
+[0] Averon map registry resolves every linked numeric ID within its original group: [32mPASS[0m
+[0] Averon region adapters keep both badge banks independent and fail closed: [32mPASS[0m
+[1] Averon location every 8-bit origin survives encryption PC withdrawal and rekeying: [32mPASS[0m
+[1] Averon Sandgem popup theme stays in bounds with fixed NONE and future codes: [32mPASS[0m
+[1] Averon Sandgem real summary formatter names caught hatched and traded origins: [32mPASS[0m
+[1] Averon Route 202 origin survives the real summary formatter unchanged: [32mPASS[0m
+[1] Averon map registry IDs round trip through the actual signed warp fields: [32mPASS[0m
+[1] Averon map registry preserves group slots and disabled-region null entries: [32mPASS[0m
+[1] Averon region adapters reject disabled map groups without changing the return warp: [32mPASS[0m
+[1] Averon region save refuses a newer format: loads nothing and never overwrites it: [32mPASS[0m
+[1] Averon region save reports both slots corrupt instead of mixing them: [32mPASS[0m
+[1] Averon region save rejects a record copied from the other slot: [32mPASS[0m
+[1] Averon region save rejects every anchor bit flip even under a recomputed sector checksum: [32mPASS[0m
+[1] Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save: [32mPASS[0m
+[1] Averon region save round-trips both regions through flash without writing on load: [32mPASS[0m
+[1] Averon region travel runs from an overworld script through the registered special: [32mPASS[0m
+[1] Averon region travel survives a save and load through flash: [32mPASS[0m
+[1] Averon region travel rejects invalid requests and changes nothing: [32mPASS[0m
+[1] Averon region travel stores the departure and arms the target region's warps: [32mPASS[0m
+[1] Averon northern summary names caught hatched and traded origins without changing encrypted data: [32mPASS[0m
+[0] Averon region save power loss at any sector write keeps the last whole slot: [32mPASS[0m
+[0] Averon region save rolls back across save counter wrap: [32mPASS[0m
+[0] Averon region save rejects a slot whose sectors come from two different saves: [32mPASS[0m
+[0] Averon region save rejects CRC-valid semantic corruption and loads the older slot: [32mPASS[0m
+[0] Averon region save rejects every single-bit flip in the record and loads the older slot: [32mPASS[0m
+[0] Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash: [32mPASS[0m
+[0] Averon region save layout: anchor replaces filler_90 and the record fits sector 0: [32mPASS[0m
+[0] Averon region travel power loss while saving keeps region and location together: [32mPASS[0m
+[0] Averon region travel special validates script values before narrowing: [32mPASS[0m
+[0] Averon region travel whiteout uses the healer of the region the player is in: [32mPASS[0m
+[0] Averon northern flash reload preserves party PC legacy special origins and regional position: [32mPASS[0m
+[0] Averon northern map headers share only the three approved origin names: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          45
+- Tests [34mTOTAL[0m:           45
+

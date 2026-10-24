@@ -1,0 +1,54 @@
+{
+ "maps": [
+  "MAP_ROUTE206"
+ ],
+ "build": "normal",
+ "rom_sha256": "8e14c7150d1a3e8aa29c35155b8280ae3bb2cd4ca4649db2a0e6dc9f51090057",
+ "static_findings": [],
+ "save_before": "01f0937b8d6c2e1ac6ef63a9772934f43d8863712d1949000b2cf2b869b3cfaa",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     10,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "explicit upper DEV entry",
+   "ok": false,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     10,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "01f0937b8d6c2e1ac6ef63a9772934f43d8863712d1949000b2cf2b869b3cfaa",
+ "verdict": "FAIL"
+}

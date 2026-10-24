@@ -1,3 +1,5 @@
+> **HISTORICAL HANDOFF (superseded 2026-10-21):** The current manager entrypoint is [October 21 — Codex-only handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261021.md). The dated Route202 correction and Codex-paused assumptions below are no longer current. Preserve this earlier document as historical engineering evidence; refresh live GitHub and follow the current operating contract.
+
 # Pokémon Averon — Next ChatGPT manager session handoff (2026-10-20)
 
 **READ THIS DOCUMENT IN FULL BEFORE WORKING.** This is the **current concise manager entrypoint**, replacing the long [2026-10-19 handoff](CHATGPT_MANAGER_NEXT_SESSION_HANDOFF_20261019.md) as the default startup document. The older handoff retains historical engineering context, not the live work queue. **The operating contract remains authoritative** for policy: [CURRENT_PHASE_AND_HANDOFF.md](CURRENT_PHASE_AND_HANDOFF.md). GitHub observations below were refreshed approximately **2026-10-20 01:32 America/New_York**. Always refresh main, open PR heads, actual checks and Issue #15 claims before acting. No GitHub comment can run or resume a paid agent.

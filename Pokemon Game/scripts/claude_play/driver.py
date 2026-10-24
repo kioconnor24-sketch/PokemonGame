@@ -150,6 +150,14 @@ class Driver:
     def go_map(self, route, on_event=None):
         """Follow a list of (map_id, how, arg) legs: ('edge', dir) or ('warp', (x, y), dir)."""
         for map_id, how, *rest in route:
+            same_map_arrival = None
+            if how == "warp":
+                source = self.w.map(map_id)
+                target = source.warp_at(*rest[0])
+                if target and target[0] == map_id:
+                    if not 0 <= target[1] < len(source.warps):
+                        raise Stuck("invalid same-map warp destination")
+                    same_map_arrival = (map_id, mapdata.warp_arrival(source, *source.warps[target[1]][:2]))
             for attempt in range(6):
                 mid, pos = self.here()
                 if mid != map_id:
@@ -174,8 +182,13 @@ class Driver:
                     # A map split by a cliff can have the leg's warp out of reach: any of its warps to the
                     # same destination will do (e.g. a route's two cave doors). Doors are entered from
                     # their doorstep.
-                    dest = (m.warp_at(*rest[0]) or (None,))[0]
-                    tiles = [tuple(rest[0])] + [(x, y) for x, y, d, _ in m.warps if d == dest and (x, y) != tuple(rest[0])]
+                    wanted = m.warp_at(*rest[0])
+                    dest = (wanted or (None,))[0]
+                    # Another room in the same map is not an interchangeable
+                    # destination. Only paired mats sharing its target index
+                    # are equivalent; external-map fallback is unchanged.
+                    tiles = [tuple(rest[0])] + [(x, y) for x, y, d, di in m.warps
+                             if d == dest and (dest != map_id or di == wanted[1]) and (x, y) != tuple(rest[0])]
                     for tile in tiles:
                         push = self.warp_push(m, tile)
                         before = (tile[0] - mapdata.DIRS[push][0], tile[1] - mapdata.DIRS[push][1])
@@ -189,6 +202,8 @@ class Driver:
                             time.sleep(1.0)
                             self.settle()
                         break
+                if same_map_arrival is not None and self.here() == same_map_arrival:
+                    break
             mid, pos = self.here()
             self.log("map", map=mid, pos=pos)
 

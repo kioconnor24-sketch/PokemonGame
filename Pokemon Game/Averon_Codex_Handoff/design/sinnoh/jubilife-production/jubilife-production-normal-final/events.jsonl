@@ -1,0 +1,178 @@
+{"t": 1792585094.69, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792585094.73, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792585095.24, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792585095.33, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792585097.49, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792585097.53, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792585099.16, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792585099.2, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792585099.74, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792585099.78, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792585100.3, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792585100.33, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792585101.41, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792585101.43, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792585105.04, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792585105.1, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792585105.74, "event": "field", "map": "MAP_JUBILIFE_CITY", "pos": [49, 55], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792585106.29, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_JUBILIFE_CITY", [49, 55]]}
+{"t": 1792585106.86, "event": "capture", "file": "0009-start.png"}
+{"t": 1792585106.86, "event": "observe", "label": "start", "problems": []}
+{"t": 1792585106.86, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585106.96, "event": "map-qa-check", "name": "reached MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [49, 54]]}
+{"t": 1792585123.36, "event": "capture", "file": "0010-seam-MAP_JUBILIFE_CITY-right.png"}
+{"t": 1792585124.08, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY right seam (69, 19) -> MAP_ROUTE203 (0, 19) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [69, 19]], "got": ["MAP_JUBILIFE_CITY", [69, 19]]}
+{"t": 1792585125.89, "event": "capture", "file": "0011-seam-MAP_JUBILIFE_CITY-right.png"}
+{"t": 1792585126.63, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY right seam (69, 21) -> MAP_ROUTE203 (0, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [69, 21]], "got": ["MAP_JUBILIFE_CITY", [69, 21]]}
+{"t": 1792585128.53, "event": "capture", "file": "0012-seam-MAP_JUBILIFE_CITY-right.png"}
+{"t": 1792585129.34, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY right seam (69, 22) -> MAP_ROUTE203 (0, 22) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [69, 22]], "got": ["MAP_JUBILIFE_CITY", [69, 22]]}
+{"t": 1792585149.39, "event": "capture", "file": "0013-seam-MAP_JUBILIFE_CITY-down.png"}
+{"t": 1792585150.09, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY down seam (46, 63) -> MAP_ROUTE202 (8, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [46, 63]], "got": ["MAP_JUBILIFE_CITY", [46, 63]]}
+{"t": 1792585152.35, "event": "capture", "file": "0014-seam-MAP_JUBILIFE_CITY-down.png"}
+{"t": 1792585153.15, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY down seam (50, 63) -> MAP_ROUTE202 (12, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [50, 63]], "got": ["MAP_JUBILIFE_CITY", [50, 63]]}
+{"t": 1792585155.33, "event": "capture", "file": "0015-seam-MAP_JUBILIFE_CITY-down.png"}
+{"t": 1792585156.13, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY down seam (53, 63) -> MAP_ROUTE202 (15, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [53, 63]], "got": ["MAP_JUBILIFE_CITY", [53, 63]]}
+{"t": 1792585169.47, "event": "capture", "file": "0016-warp-MAP_JUBILIFE_CITY-0.png"}
+{"t": 1792585169.78, "event": "capture", "file": "0017-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F via warp.png"}
+{"t": 1792585169.78, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F via warp", "problems": []}
+{"t": 1792585169.78, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585169.87, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", "ok": true, "at": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [6, 7]]}
+{"t": 1792585173.09, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY warp 0 (55, 36) -> MAP_JUBILIFE_CITY_POKEMON_CENTER_1F and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [[55, 37]]], "got": ["MAP_JUBILIFE_CITY", [55, 37]]}
+{"t": 1792585173.48, "event": "capture", "file": "0018-MAP_JUBILIFE_CITY after warp round trip.png"}
+{"t": 1792585173.48, "event": "observe", "label": "MAP_JUBILIFE_CITY after warp round trip", "problems": []}
+{"t": 1792585173.48, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585181.86, "event": "capture", "file": "0019-warp-MAP_JUBILIFE_CITY-1.png"}
+{"t": 1792585182.2, "event": "capture", "file": "0020-MAP_JUBILIFE_CITY_MART via warp.png"}
+{"t": 1792585182.2, "event": "observe", "label": "MAP_JUBILIFE_CITY_MART via warp", "problems": []}
+{"t": 1792585182.2, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_MART via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585182.28, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_MART", "ok": true, "at": ["MAP_JUBILIFE_CITY_MART", [3, 6]]}
+{"t": 1792585185.43, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY warp 1 (54, 26) -> MAP_JUBILIFE_CITY_MART and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [[54, 27]]], "got": ["MAP_JUBILIFE_CITY", [54, 27]]}
+{"t": 1792585185.75, "event": "capture", "file": "0021-MAP_JUBILIFE_CITY after warp round trip.png"}
+{"t": 1792585185.75, "event": "observe", "label": "MAP_JUBILIFE_CITY after warp round trip", "problems": []}
+{"t": 1792585185.75, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585193.52, "event": "capture", "file": "0022-warp-MAP_JUBILIFE_CITY-2.png"}
+{"t": 1792585193.86, "event": "capture", "file": "0023-MAP_JUBILIFE_CITY_POKEMON_SCHOOL via warp.png"}
+{"t": 1792585193.87, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL via warp", "problems": []}
+{"t": 1792585193.87, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585193.89, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_POKEMON_SCHOOL", "ok": true, "at": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [5, 9]]}
+{"t": 1792585196.88, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY warp 2 (43, 36) -> MAP_JUBILIFE_CITY_POKEMON_SCHOOL and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY", [[43, 37]]], "got": ["MAP_JUBILIFE_CITY", [43, 37]]}
+{"t": 1792585197.19, "event": "capture", "file": "0024-MAP_JUBILIFE_CITY after warp round trip.png"}
+{"t": 1792585197.19, "event": "observe", "label": "MAP_JUBILIFE_CITY after warp round trip", "problems": []}
+{"t": 1792585197.19, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585210.63, "event": "map", "map": "MAP_ROUTE203", "pos": [0, 19]}
+{"t": 1792585210.74, "event": "map-qa-check", "name": "reached MAP_ROUTE203", "ok": true, "at": ["MAP_ROUTE203", [0, 19]]}
+{"t": 1792585211.68, "event": "capture", "file": "0025-seam-MAP_ROUTE203-left.png"}
+{"t": 1792585212.44, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 19]], "got": ["MAP_ROUTE203", [0, 19]]}
+{"t": 1792585214.16, "event": "capture", "file": "0026-seam-MAP_ROUTE203-left.png"}
+{"t": 1792585215.0, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 21]], "got": ["MAP_ROUTE203", [0, 21]]}
+{"t": 1792585216.57, "event": "capture", "file": "0027-seam-MAP_ROUTE203-left.png"}
+{"t": 1792585217.33, "event": "map-qa-check", "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [0, 22]], "got": ["MAP_ROUTE203", [0, 22]]}
+{"t": 1792585239.34, "event": "capture", "file": "0028-warp-MAP_ROUTE203-0.png"}
+{"t": 1792585239.75, "event": "capture", "file": "0029-MAP_OREBURGH_GATE_1F via warp.png"}
+{"t": 1792585239.75, "event": "observe", "label": "MAP_OREBURGH_GATE_1F via warp", "problems": []}
+{"t": 1792585239.75, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585239.86, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [3, 18]]}
+{"t": 1792585243.66, "event": "map-qa-check", "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE203", [[53, 7]]], "got": ["MAP_ROUTE203", [53, 7]]}
+{"t": 1792585244.02, "event": "capture", "file": "0030-MAP_ROUTE203 after warp round trip.png"}
+{"t": 1792585244.02, "event": "observe", "label": "MAP_ROUTE203 after warp round trip", "problems": []}
+{"t": 1792585244.02, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE203 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585247.76, "event": "map", "map": "MAP_OREBURGH_GATE_1F", "pos": [3, 19]}
+{"t": 1792585247.88, "event": "map-qa-check", "name": "reached MAP_OREBURGH_GATE_1F", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [3, 19]]}
+{"t": 1792585251.12, "event": "capture", "file": "0031-warp-MAP_OREBURGH_GATE_1F-0.png"}
+{"t": 1792585251.46, "event": "capture", "file": "0032-MAP_ROUTE203 via warp.png"}
+{"t": 1792585251.46, "event": "observe", "label": "MAP_ROUTE203 via warp", "problems": []}
+{"t": 1792585251.46, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE203 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585251.71, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE203", "ok": true, "at": ["MAP_ROUTE203", [53, 8]]}
+{"t": 1792585255.72, "event": "map-qa-check", "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back", "ok": true, "leg": "back", "expected": ["MAP_OREBURGH_GATE_1F", [[3, 19]]], "got": ["MAP_OREBURGH_GATE_1F", [3, 19]]}
+{"t": 1792585256.03, "event": "capture", "file": "0033-MAP_OREBURGH_GATE_1F after warp round trip.png"}
+{"t": 1792585256.03, "event": "observe", "label": "MAP_OREBURGH_GATE_1F after warp round trip", "problems": []}
+{"t": 1792585256.03, "event": "map-qa-check", "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585260.06, "event": "map", "map": "MAP_ROUTE203", "pos": [53, 7]}
+{"t": 1792585279.49, "event": "map", "map": "MAP_JUBILIFE_CITY", "pos": [69, 19]}
+{"t": 1792585292.86, "event": "map", "map": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", "pos": [6, 8]}
+{"t": 1792585292.95, "event": "map-qa-check", "name": "reached MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", "ok": true, "at": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792585295.83, "event": "capture", "file": "0034-warp-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F-0.png"}
+{"t": 1792585296.3, "event": "capture", "file": "0035-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585296.3, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585296.3, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585296.59, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [55, 38]]}
+{"t": 1792585301.25, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F warp 0 (6, 8) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [[6, 8], [7, 8]]], "got": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792585301.5, "event": "capture", "file": "0036-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip.png"}
+{"t": 1792585301.51, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip", "problems": []}
+{"t": 1792585301.51, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585304.89, "event": "capture", "file": "0037-warp-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F-1.png"}
+{"t": 1792585305.18, "event": "capture", "file": "0038-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585305.18, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585305.18, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585305.46, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [55, 38]]}
+{"t": 1792585309.98, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F warp 1 (7, 8) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [[6, 8], [7, 8]]], "got": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [6, 8]]}
+{"t": 1792585310.28, "event": "capture", "file": "0039-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip.png"}
+{"t": 1792585310.28, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip", "problems": []}
+{"t": 1792585310.28, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_CENTER_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585313.45, "event": "map", "map": "MAP_JUBILIFE_CITY", "pos": [55, 37]}
+{"t": 1792585320.05, "event": "map", "map": "MAP_JUBILIFE_CITY_MART", "pos": [3, 7]}
+{"t": 1792585320.3, "event": "map-qa-check", "name": "reached MAP_JUBILIFE_CITY_MART", "ok": true, "at": ["MAP_JUBILIFE_CITY_MART", [3, 7]]}
+{"t": 1792585323.1, "event": "capture", "file": "0040-warp-MAP_JUBILIFE_CITY_MART-0.png"}
+{"t": 1792585323.4, "event": "capture", "file": "0041-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585323.41, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585323.41, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585323.67, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [54, 28]]}
+{"t": 1792585327.0, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_MART warp 0 (3, 7) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_MART", [[3, 7], [4, 7]]], "got": ["MAP_JUBILIFE_CITY_MART", [3, 7]]}
+{"t": 1792585327.41, "event": "capture", "file": "0042-MAP_JUBILIFE_CITY_MART after warp round trip.png"}
+{"t": 1792585327.41, "event": "observe", "label": "MAP_JUBILIFE_CITY_MART after warp round trip", "problems": []}
+{"t": 1792585327.41, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_MART after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585330.95, "event": "capture", "file": "0043-warp-MAP_JUBILIFE_CITY_MART-1.png"}
+{"t": 1792585331.3, "event": "capture", "file": "0044-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585331.3, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585331.3, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585331.6, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [54, 28]]}
+{"t": 1792585335.52, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_MART warp 1 (4, 7) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_MART", [[3, 7], [4, 7]]], "got": ["MAP_JUBILIFE_CITY_MART", [3, 7]]}
+{"t": 1792585336.05, "event": "capture", "file": "0045-MAP_JUBILIFE_CITY_MART after warp round trip.png"}
+{"t": 1792585336.05, "event": "observe", "label": "MAP_JUBILIFE_CITY_MART after warp round trip", "problems": []}
+{"t": 1792585336.05, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_MART after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585339.25, "event": "map", "map": "MAP_JUBILIFE_CITY", "pos": [54, 27]}
+{"t": 1792585347.11, "event": "map", "map": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL", "pos": [5, 10]}
+{"t": 1792585347.18, "event": "map-qa-check", "name": "reached MAP_JUBILIFE_CITY_POKEMON_SCHOOL", "ok": true, "at": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [5, 10]]}
+{"t": 1792585349.72, "event": "capture", "file": "0046-warp-MAP_JUBILIFE_CITY_POKEMON_SCHOOL-0.png"}
+{"t": 1792585350.09, "event": "capture", "file": "0047-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585350.09, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585350.09, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585350.38, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [43, 38]]}
+{"t": 1792585353.35, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL warp 0 (5, 10) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [[5, 10], [6, 10]]], "got": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [5, 10]]}
+{"t": 1792585353.62, "event": "capture", "file": "0048-MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip.png"}
+{"t": 1792585353.62, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip", "problems": []}
+{"t": 1792585353.62, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585356.75, "event": "capture", "file": "0049-warp-MAP_JUBILIFE_CITY_POKEMON_SCHOOL-1.png"}
+{"t": 1792585357.1, "event": "capture", "file": "0050-MAP_JUBILIFE_CITY via warp.png"}
+{"t": 1792585357.1, "event": "observe", "label": "MAP_JUBILIFE_CITY via warp", "problems": []}
+{"t": 1792585357.1, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585357.35, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY", "ok": true, "at": ["MAP_JUBILIFE_CITY", [43, 38]]}
+{"t": 1792585360.27, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL warp 1 (6, 10) -> MAP_JUBILIFE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [[5, 10], [6, 10]]], "got": ["MAP_JUBILIFE_CITY_POKEMON_SCHOOL", [5, 10]]}
+{"t": 1792585360.71, "event": "capture", "file": "0051-MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip.png"}
+{"t": 1792585360.71, "event": "observe", "label": "MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip", "problems": []}
+{"t": 1792585360.71, "event": "map-qa-check", "name": "follower visible (MAP_JUBILIFE_CITY_POKEMON_SCHOOL after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792585363.5, "event": "map", "map": "MAP_JUBILIFE_CITY", "pos": [43, 37]}
+{"t": 1792585369.68, "event": "map", "map": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", "pos": [6, 8]}
+{"t": 1792585372.63, "event": "capture", "file": "0052-blocked-MAP_JUBILIFE_CITY_POKEMON_CENTER_1F-1-6-left.png"}
+{"t": 1792585372.63, "event": "map-qa-check", "name": "MAP_JUBILIFE_CITY_POKEMON_CENTER_1F (1, 6) pushing left is blocked", "ok": true, "before": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [1, 6]], "after": ["MAP_JUBILIFE_CITY_POKEMON_CENTER_1F", [1, 6]]}
+{"t": 1792585377.53, "event": "map", "map": "MAP_JUBILIFE_CITY", "pos": [55, 37]}
+{"t": 1792585389.47, "event": "map", "map": "MAP_ROUTE203", "pos": [0, 19]}
+{"t": 1792585409.99, "event": "map", "map": "MAP_OREBURGH_GATE_1F", "pos": [3, 19]}
+{"t": 1792585419.41, "event": "capture", "file": "0053-blocked-MAP_OREBURGH_GATE_1F-19-4-up.png"}
+{"t": 1792585419.41, "event": "map-qa-check", "name": "MAP_OREBURGH_GATE_1F (19, 4) pushing up is blocked", "ok": true, "before": ["MAP_OREBURGH_GATE_1F", [19, 4]], "after": ["MAP_OREBURGH_GATE_1F", [19, 4]]}
+{"t": 1792585432.29, "event": "capture", "file": "0054-blocked-MAP_OREBURGH_GATE_1F-25-20-down.png"}
+{"t": 1792585432.29, "event": "map-qa-check", "name": "MAP_OREBURGH_GATE_1F (25, 20) pushing down is blocked", "ok": true, "before": ["MAP_OREBURGH_GATE_1F", [25, 20]], "after": ["MAP_OREBURGH_GATE_1F", [25, 20]]}
+{"t": 1792585433.3, "event": "capture", "file": "0055-start-menu.png"}
+{"t": 1792585434.1, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792585440.0, "event": "capture", "file": "0056-save-confirm-jubilife-production.png"}
+{"t": 1792585441.12, "event": "capture", "file": "0057-save-step-jubilife-production-01.png"}
+{"t": 1792585442.26, "event": "capture", "file": "0058-save-step-jubilife-production-02.png"}
+{"t": 1792585443.29, "event": "capture", "file": "0059-save-step-jubilife-production-03.png"}
+{"t": 1792585444.33, "event": "capture", "file": "0060-save-step-jubilife-production-04.png"}
+{"t": 1792585445.32, "event": "capture", "file": "0061-save-step-jubilife-production-05.png"}
+{"t": 1792585446.33, "event": "capture", "file": "0062-save-step-jubilife-production-06.png"}
+{"t": 1792585447.45, "event": "capture", "file": "0063-save-step-jubilife-production-07.png"}
+{"t": 1792585448.61, "event": "capture", "file": "0064-save-step-jubilife-production-08.png"}
+{"t": 1792585449.47, "event": "capture", "file": "0065-saved-jubilife-production.png"}
+{"t": 1792585449.47, "event": "release-save", "label": "jubilife-production", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792585449.48, "event": "map-qa-check", "name": "SAVE (jubilife-production)", "ok": true, "at": ["MAP_OREBURGH_GATE_1F", [25, 20]]}

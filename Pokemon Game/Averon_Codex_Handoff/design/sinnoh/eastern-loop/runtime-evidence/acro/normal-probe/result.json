@@ -1,0 +1,159 @@
+{
+  "status": "DECLARED_ACRO_DEV_FIXTURE_NOT_PRODUCTION_OR_NATURAL_TRAVEL",
+  "profile": "normal",
+  "rom_sha256": "09cc9d8a919523f26d5447c517165df5510c4843b1ba739e3fd53f5b111f04c4",
+  "probe_sha256": "28351780a5c9e2de7e7928ea89877fd358bda9ccfbaaa84732ce5c2ccc91baa3",
+  "checks": [
+    {
+      "name": "explicit Acro grant quantity exactly one",
+      "ok": true
+    },
+    {
+      "name": "starts at exact source-grounded rail approach",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE212_SOUTH",
+        [
+          36,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "ordinary foot input is blocked by the original rail",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE212_SOUTH",
+        [
+          36,
+          12
+        ]
+      ]
+    },
+    {
+      "name": "ordinary Bag USE mounted Acro",
+      "ok": true,
+      "avatar": {
+        "flags": 36,
+        "facing": 2,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "turn-only preserves exact approach position",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE212_SOUTH",
+        [
+          36,
+          12
+        ]
+      ],
+      "avatar": {
+        "flags": 36,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "faces along horizontal rail for sideways hop",
+      "ok": true,
+      "avatar": {
+        "flags": 36,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "real sideways hop enters unchanged rail",
+      "ok": true,
+      "avatar": {
+        "flags": 4,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "real sideways hop exits rail onto northern ground",
+      "ok": true,
+      "avatar": {
+        "flags": 4,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "return hop reenters same rail",
+      "ok": true,
+      "avatar": {
+        "flags": 4,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "return hop restores original approach",
+      "ok": true,
+      "avatar": {
+        "flags": 4,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "ordinary Bag USE dismounts",
+      "ok": true,
+      "avatar": {
+        "flags": 33,
+        "facing": 4,
+        "acro_state": 0,
+        "elevations": {
+          "player": 3,
+          "follower": 3
+        }
+      }
+    },
+    {
+      "name": "follower visible again after ordinary dismount and foot steps",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    },
+    {
+      "name": "actual Save dialog succeeded",
+      "ok": true
+    }
+  ],
+  "verdict": "PASS"
+}

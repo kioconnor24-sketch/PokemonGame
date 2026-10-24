@@ -50,6 +50,14 @@ jobs:
               owner,repo,issue_number:15,per_page:100});
             const handoffs=[];
             const regex=/^HANDOFF_APPROVED PR=#(\d+) PATHS=([^\r\n]+)$/gm;
+            const managerRegex=/^MANAGER_HANDOFF_APPROVED PR=#(\d+) HEAD=([a-f0-9]{40}) PATHS=([^\r\n]+)$/gm;
+            const ownerDirective=comments.find(c=>c.id===6322129730
+              && c.user?.login===owner && c.author_association==='OWNER'
+              && (c.body||'').includes('OWNER DIRECTIVE — PROJECT-WIDE CHATGPT MANAGEMENT AUTHORIZATION'));
+            const revoked=comments.some(c=>c.user?.login===owner && c.author_association==='OWNER'
+              && /^MANAGER_DELEGATION_REVOKED$/m.test(c.body||''));
+            const manager_delegation_active=Boolean(ownerDirective && !revoked);
+            const manager_handoffs=[];
             for(const c of comments){
               if(!['OWNER','MEMBER','COLLABORATOR'].includes(c.author_association))continue;
               let match; regex.lastIndex=0;
@@ -57,10 +65,42 @@ jobs:
                 handoffs.push({pr:Number(match[1]),paths:match[2].split(',').map(x=>x.trim()),
                   association:c.author_association});
               }
+              // A distinct, audit-visible marker avoids claiming to be an
+              // owner-specific HANDOFF_APPROVED. The same shared login cannot
+              // independently attest a human/agent identity.
+              if(!manager_delegation_active || c.user?.login!==owner
+                 || c.author_association!=='OWNER')continue;
+              managerRegex.lastIndex=0;
+              while((match=managerRegex.exec(c.body||''))!==null){
+                manager_handoffs.push({pr:Number(match[1]),head_sha:match[2],
+                  paths:match[3].split(',').map(x=>x.trim()),comment_id:c.id});
+              }
+            }
+            // Read production and PR registry JSON as DATA only. The verifier is
+            // trusted code from main, never code supplied by the PR.
+            const identityPaths=[
+              'Pokemon Game/engine/src/data/region_map/region_map_sections.json',
+              'Pokemon Game/scripts/averon-mapsec-pins.json'
+            ];
+            const identity_files={};
+            if(identityPaths.some(path=>own.some(f=>f.filename===path || f.previous_filename===path))){
+              for(const path of identityPaths){
+                const [mainFile, proposedFile]=await Promise.all([
+                  github.rest.repos.getContent({owner,repo,path,ref:'main'}),
+                  github.rest.repos.getContent({owner,repo,path,ref:pr.head.sha})
+                ]);
+                function parseFile(response){
+                  if(response.data.type!=='file' || response.data.encoding!=='base64' ||
+                     typeof response.data.content!=='string') throw Error('Unexpected registry source '+path);
+                  return JSON.parse(Buffer.from(response.data.content,'base64').toString('utf8'));
+                }
+                identity_files[path]={base:parseFile(mainFile),head:parseFile(proposedFile)};
+              }
             }
             fs.writeFileSync('/tmp/averon-guard.json',JSON.stringify({
-              pull_request:{number,files:own.map(f=>({filename:f.filename,status:f.status}))},
-              other_open_prs,handoffs
+              pull_request:{number,head_sha:pr.head.sha,
+                files:own.map(f=>({filename:f.filename,status:f.status,previous_filename:f.previous_filename}))},
+              other_open_prs,handoffs,manager_delegation_active,manager_handoffs,identity_files
             },null,2));
       - name: Enforce exclusive handoffs, prevent overlap and freeze violations
         run: python3 "Pokemon Game/scripts/coordination/check_protected_files.py" /tmp/averon-guard.json

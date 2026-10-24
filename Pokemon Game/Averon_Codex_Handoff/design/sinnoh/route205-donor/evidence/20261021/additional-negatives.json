@@ -1,0 +1,166 @@
+[
+  {
+    "fixture": "negative-route204-warp-swap.json",
+    "source_static_batch": [
+      "MAP_ROUTE205_NORTH",
+      "MAP_ROUTE205_SOUTH",
+      "MAP_FLOAROMA_TOWN",
+      "MAP_FLOAROMA_MEADOW",
+      "MAP_ROUTE204",
+      "MAP_RAVAGED_PATH"
+    ],
+    "original_emulator_batch": [
+      "MAP_ROUTE204",
+      "MAP_RAVAGED_PATH"
+    ],
+    "baseline": [],
+    "negative_findings": [
+      {
+        "map": "MAP_ROUTE204",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                11,
+                32
+              ],
+              [
+                19,
+                25
+              ]
+            ],
+            [
+              [
+                11,
+                32
+              ],
+              [
+                10,
+                0
+              ]
+            ],
+            [
+              [
+                11,
+                32
+              ],
+              [
+                11,
+                0
+              ]
+            ],
+            [
+              [
+                11,
+                32
+              ],
+              [
+                12,
+                0
+              ]
+            ],
+            [
+              [
+                12,
+                63
+              ],
+              [
+                19,
+                25
+              ]
+            ],
+            [
+              [
+                12,
+                63
+              ],
+              [
+                10,
+                0
+              ]
+            ],
+            [
+              [
+                12,
+                63
+              ],
+              [
+                11,
+                0
+              ]
+            ],
+            [
+              [
+                12,
+                63
+              ],
+              [
+                12,
+                0
+              ]
+            ]
+          ],
+          "count": 20
+        }
+      }
+    ],
+    "scope": "SOURCE-STATIC mutation of complete connected batch, not a negative emulator run",
+    "headers_restored": true
+  },
+  {
+    "fixture": "negative-route205-wrong-offset.json",
+    "source_static_batch": [
+      "MAP_ROUTE205_NORTH",
+      "MAP_ROUTE205_SOUTH",
+      "MAP_FLOAROMA_TOWN",
+      "MAP_FLOAROMA_MEADOW",
+      "MAP_ROUTE204",
+      "MAP_RAVAGED_PATH"
+    ],
+    "original_emulator_batch": [
+      "MAP_ROUTE205_SOUTH"
+    ],
+    "baseline": [],
+    "negative_findings": [
+      {
+        "map": "MAP_ROUTE205_SOUTH",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            87
+          ],
+          "faces": [
+            "MAP_FLOAROMA_TOWN",
+            [
+              33,
+              25
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_ROUTE205_SOUTH",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            88
+          ],
+          "faces": [
+            "MAP_FLOAROMA_TOWN",
+            [
+              33,
+              26
+            ]
+          ]
+        }
+      }
+    ],
+    "scope": "SOURCE-STATIC mutation of complete connected batch, not a negative emulator run",
+    "headers_restored": true
+  }
+]

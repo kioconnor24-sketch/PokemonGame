@@ -1768,6 +1768,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/SandgemTown_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/Route201/scripts.inc"
 	.include "data/maps/TwinleafTown/scripts.inc"
+	.include "data/maps/Route202/scripts.inc"
+	.include "data/maps/VerityLakefront/scripts.inc"
+	.include "data/maps/LakeVerity/scripts.inc"
 
 	.include "data/maps/AlderfieldSupply/scripts.inc"
 
@@ -1796,3 +1799,17 @@ AveronFieldLab_Gift::
 AveronFieldLab_TryGift::
 	end
 #endif
+
+	.include "data/maps/JubilifeCity/scripts.inc"
+	.include "data/maps/Route203/scripts.inc"
+	.include "data/maps/OreburghGate_1F/scripts.inc"
+	.include "data/maps/JubilifeCity_PokemonCenter_1F/scripts.inc"
+	.include "data/maps/JubilifeCity_Mart/scripts.inc"
+	.include "data/maps/JubilifeCity_PokemonSchool/scripts.inc"
+
+	.include "data/maps/Route204/scripts.inc"
+	.include "data/maps/RavagedPath/scripts.inc"
+	.include "data/maps/FloaromaTown/scripts.inc"
+	.include "data/maps/FloaromaMeadow/scripts.inc"
+	.include "data/maps/Route205_South/scripts.inc"
+	.include "data/maps/Route205_North/scripts.inc"

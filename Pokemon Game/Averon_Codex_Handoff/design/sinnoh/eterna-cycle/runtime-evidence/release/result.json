@@ -1,0 +1,864 @@
+{
+ "maps": [
+  "MAP_ETERNA_CITY",
+  "MAP_ROUTE206_NORTH",
+  "MAP_ROUTE206",
+  "MAP_ROUTE206_SOUTH",
+  "MAP_ROUTE211_WEST"
+ ],
+ "build": "release",
+ "rom_sha256": "f00e37527b27c55c5cd20f5377d5b426a869d874deb715e7b7dc9ea337f2ad4c",
+ "static_findings": [],
+ "save_before": "b55e675eb973f720798cca1fcacd0851634a113159c97d4e34f4be778cff94e5",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ETERNA_CITY",
+    [
+     15,
+     47
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ETERNA_CITY",
+   "ok": true,
+   "at": [
+    "MAP_ETERNA_CITY",
+    [
+     15,
+     47
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ETERNA_CITY right seam (59, 18) -> MAP_ROUTE211_WEST (0, 18) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     18
+    ]
+   ],
+   "got": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ETERNA_CITY right seam (59, 19) -> MAP_ROUTE211_WEST (0, 19) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     19
+    ]
+   ],
+   "got": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ETERNA_CITY right seam (59, 20) -> MAP_ROUTE211_WEST (0, 20) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     20
+    ]
+   ],
+   "got": [
+    "MAP_ETERNA_CITY",
+    [
+     59,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_NORTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_NORTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_NORTH",
+    [
+     4,
+     1
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ETERNA_CITY warp 0 (15, 48) -> MAP_ROUTE206_NORTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ETERNA_CITY",
+    [
+     [
+      15,
+      48
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ETERNA_CITY",
+    [
+     15,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ETERNA_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE206_NORTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_NORTH",
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ETERNA_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ETERNA_CITY",
+   "ok": true,
+   "at": [
+    "MAP_ETERNA_CITY",
+    [
+     15,
+     48
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206_NORTH warp 0 (4, 1) -> MAP_ETERNA_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206_NORTH",
+    [
+     [
+      4,
+      1
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206_NORTH",
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_NORTH after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 0,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     14,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 0,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206_NORTH warp 1 (4, 9) -> MAP_ROUTE206 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206_NORTH",
+    [
+     [
+      4,
+      9
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206_NORTH",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_NORTH after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE206",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     14,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_NORTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_NORTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_NORTH",
+    [
+     4,
+     9
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206 warp 0 (14, 5) -> MAP_ROUTE206_NORTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206",
+    [
+     [
+      14,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206",
+    [
+     14,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 0,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     1
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206 warp 1 (12, 96) -> MAP_ROUTE206_SOUTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206",
+    [
+     [
+      12,
+      96
+     ],
+     [
+      13,
+      96
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206",
+    [
+     12,
+     96
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 0,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     1
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206 warp 2 (13, 96) -> MAP_ROUTE206_SOUTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206",
+    [
+     [
+      12,
+      96
+     ],
+     [
+      13,
+      96
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206",
+    [
+     12,
+     96
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 0,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     9
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206 warp 3 (12, 102) -> MAP_ROUTE206_SOUTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206",
+    [
+     [
+      12,
+      102
+     ],
+     [
+      13,
+      102
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206",
+    [
+     12,
+     102
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     9
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206 warp 4 (13, 102) -> MAP_ROUTE206_SOUTH and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206",
+    [
+     [
+      12,
+      102
+     ],
+     [
+      13,
+      102
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206",
+    [
+     12,
+     102
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE206_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 0,
+    "follower": 4
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     12,
+     96
+    ]
+   ],
+   "elevations": {
+    "player": 0,
+    "follower": 4
+   }
+  },
+  {
+   "name": "MAP_ROUTE206_SOUTH warp 0 (4, 1) -> MAP_ROUTE206 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     [
+      4,
+      1
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE206",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE206",
+    [
+     12,
+     102
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE206_SOUTH warp 1 (4, 9) -> MAP_ROUTE206 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     [
+      4,
+      9
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE206_SOUTH",
+    [
+     4,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE206_SOUTH after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE211_WEST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_WEST left seam (0, 18) -> MAP_ETERNA_CITY (59, 18) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     18
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_WEST left seam (0, 19) -> MAP_ETERNA_CITY (59, 19) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     19
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     19
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_WEST left seam (0, 20) -> MAP_ETERNA_CITY (59, 20) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     20
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (eterna-cycle)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_WEST",
+    [
+     0,
+     20
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "eb67351e4a95d3aef2666bfd3ccb774c31421b3c90297b644eca7b5fb7422dd9",
+ "verdict": "PASS"
+}

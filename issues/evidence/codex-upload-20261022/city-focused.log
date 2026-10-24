@@ -1,0 +1,18 @@
+test_capacity_exhaustion_rejected (test_sinnoh_oreburgh_city_art.PackingTest.test_capacity_exhaustion_rejected) ... ok
+test_deduplicates_complete_art_and_attribute_pair (test_sinnoh_oreburgh_city_art.PackingTest.test_deduplicates_complete_art_and_attribute_pair) ... ok
+test_every_collision_and_elevation_combination_preserved (test_sinnoh_oreburgh_city_art.PackingTest.test_every_collision_and_elevation_combination_preserved) ... ok
+test_input_banks_remain_unmodified_and_existing_prefix_preserved (test_sinnoh_oreburgh_city_art.PackingTest.test_input_banks_remain_unmodified_and_existing_prefix_preserved) ... ok
+test_invalid_art_words_and_truncated_source_attributes_rejected (test_sinnoh_oreburgh_city_art.PackingTest.test_invalid_art_words_and_truncated_source_attributes_rejected) ... ok
+test_malformed_dimensions_rejected (test_sinnoh_oreburgh_city_art.PackingTest.test_malformed_dimensions_rejected) ... ok
+test_reuses_matching_primary_record_without_secondary_allocation (test_sinnoh_oreburgh_city_art.PackingTest.test_reuses_matching_primary_record_without_secondary_allocation) ... ok
+test_same_art_with_different_full_layer_word_is_distinct (test_sinnoh_oreburgh_city_art.PackingTest.test_same_art_with_different_full_layer_word_is_distinct) ... ok
+test_published_cells_preserve_geometry_and_used_source_attributes (test_sinnoh_oreburgh_city_art.PublishedFamilyTest.test_published_cells_preserve_geometry_and_used_source_attributes) ... ok
+test_all_source_mine_events_and_canonical_b2_return_required (test_sinnoh_oreburgh_city_art.WarpPlanTest.test_all_source_mine_events_and_canonical_b2_return_required) ... ok
+test_invalid_gate_or_city_destination_rejected (test_sinnoh_oreburgh_city_art.WarpPlanTest.test_invalid_gate_or_city_destination_rejected) ... ok
+test_missing_reordered_or_shifted_city_mine_anchor_rejected (test_sinnoh_oreburgh_city_art.WarpPlanTest.test_missing_reordered_or_shifted_city_mine_anchor_rejected) ... ok
+test_sparse_city_returns_compact_as_one_coupled_plan (test_sinnoh_oreburgh_city_art.WarpPlanTest.test_sparse_city_returns_compact_as_one_coupled_plan) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.020s
+
+OK

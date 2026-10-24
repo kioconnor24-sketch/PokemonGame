@@ -1,0 +1,725 @@
+{
+ "maps": [
+  "MAP_CELESTIC_TOWN",
+  "MAP_ROUTE210_NORTH",
+  "MAP_ROUTE211_EAST",
+  "MAP_MT_CORONET_1F_NORTH_ROOM1",
+  "MAP_MT_CORONET_B1F",
+  "MAP_MT_CORONET_1F_NORTH_ROOM2"
+ ],
+ "build": "normal",
+ "rom_sha256": "3ef9056857f7e99fcf2f26fcb967bb40d0e6a88fa1c1ff6faea4560437e0f17a",
+ "static_findings": [],
+ "save_before": "59db478b96947e9e8868d405a811a37b2b87df5d824eb1971f14bbd69601893a",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_CELESTIC_TOWN",
+    [
+     8,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": false,
+   "reason": "ordinary foot probe did not return to the exact source tile",
+   "at": [
+    "MAP_CELESTIC_TOWN",
+    [
+     9,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_CELESTIC_TOWN",
+   "ok": true,
+   "at": [
+    "MAP_CELESTIC_TOWN",
+    [
+     9,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN right seam (37, 18) -> MAP_ROUTE210_NORTH (0, 12) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     18
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN right seam (37, 20) -> MAP_ROUTE210_NORTH (0, 14) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     20
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN right seam (37, 22) -> MAP_ROUTE210_NORTH (0, 16) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     22
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     37,
+     22
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN left seam (0, 16) -> MAP_ROUTE211_EAST (31, 13) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     16
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN left seam (0, 18) -> MAP_ROUTE211_EAST (31, 15) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     18
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     18
+    ]
+   ]
+  },
+  {
+   "name": "MAP_CELESTIC_TOWN left seam (0, 20) -> MAP_ROUTE211_EAST (31, 17) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     20
+    ]
+   ],
+   "got": [
+    "MAP_CELESTIC_TOWN",
+    [
+     0,
+     20
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_ROUTE210_NORTH",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE210_NORTH left seam (0, 12) -> MAP_CELESTIC_TOWN (37, 18) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     12
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE210_NORTH left seam (0, 14) -> MAP_CELESTIC_TOWN (37, 20) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     14
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE210_NORTH left seam (0, 16) -> MAP_CELESTIC_TOWN (37, 22) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     16
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE210_NORTH",
+    [
+     0,
+     16
+    ]
+   ]
+  },
+  {
+   "name": "reached MAP_ROUTE211_EAST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_EAST right seam (31, 13) -> MAP_CELESTIC_TOWN (0, 16) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     13
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_EAST right seam (31, 15) -> MAP_CELESTIC_TOWN (0, 18) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     15
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE211_EAST right seam (31, 17) -> MAP_CELESTIC_TOWN (0, 20) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     17
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_EAST",
+    [
+     31,
+     17
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM1",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     32,
+     33
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE211_EAST warp 0 (4, 10) -> MAP_MT_CORONET_1F_NORTH_ROOM1 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE211_EAST",
+    [
+     [
+      4,
+      11
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE211_EAST",
+    [
+     4,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE211_EAST after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "reached MAP_MT_CORONET_1F_NORTH_ROOM1",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     32,
+     33
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE211_EAST via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE211_EAST",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE211_EAST",
+    [
+     4,
+     11
+    ]
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_NORTH_ROOM1 warp 0 (32, 33) -> MAP_ROUTE211_EAST and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     [
+      32,
+      33
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     32,
+     33
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_MT_CORONET_B1F",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_B1F",
+    [
+     8,
+     61
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_NORTH_ROOM1 warp 1 (8, 4) -> MAP_MT_CORONET_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     [
+      8,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     8,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_MT_CORONET_B1F",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_B1F",
+    [
+     8,
+     60
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM1",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM1",
+    [
+     8,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_B1F warp 0 (8, 60) -> MAP_MT_CORONET_1F_NORTH_ROOM1 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_B1F",
+    [
+     [
+      8,
+      60
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_B1F",
+    [
+     8,
+     60
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM2 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM2",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     13
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_B1F warp 1 (8, 2) -> MAP_MT_CORONET_1F_NORTH_ROOM2 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_B1F",
+    [
+     [
+      8,
+      2
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_B1F",
+    [
+     8,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "reached MAP_MT_CORONET_1F_NORTH_ROOM2",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_MT_CORONET_B1F",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_B1F",
+    [
+     8,
+     3
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_NORTH_ROOM2 warp 0 (8, 12) -> MAP_MT_CORONET_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     [
+      8,
+      12
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM2 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_NORTH_ROOM2",
+    [
+     8,
+     13
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "b09fd2f30c72e24710a14f3d2333cdcff31967df4a8907204be7695501eb5219",
+ "verdict": "FAIL"
+}

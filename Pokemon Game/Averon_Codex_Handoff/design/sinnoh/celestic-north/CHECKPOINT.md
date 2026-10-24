@@ -1,0 +1,43 @@
+# Celestic / northern ridge / northern Coronet source package
+
+**SOURCE ONLY**, not permitted-art, production registration, ROM or gameplay acceptance. Pinned donor LiderMorti00/Sinnoh-pokeemerald-expansion `38228bb574a3557345852b758d5f1a65eb01bb22`. Uses the existing merged donor converter and Eterna/Forest connected stager; no new converter or geographic reconstruction.
+
+Six actually retrieved maps: Route210_North99×29, CelesticTown38×35, Route211_East32×32, MtCoronet_1F_North_Room1 36×51, Room2 19×16, and MtCoronet_B1F32×65: **9,445 original cells**. All source map/border blob/hash identities and complete used behavior/layer words are in source-receipt.json/attributes.json. Collision/elevation schematics are generated from source cell flags, not donor artwork. No donor images/palettes/music, original scripts/NPCs/encounters or permanent saved origins are copied.
+
+The entire chain is connected: Route210North↔Celestic exact±6, Celestic↔Route211East exact±3, East↔CoronetRoom1↔B1F↔Room2. Source west211, Route216 and south210 boundaries remain closed because those external maps are outside this package. No existing Eterna West or central South source file is overwritten. Eight explicitly listed collision closures only; every original metatile ID and elevation remains. All48 North210 elevation15 cells survive. Largest padded footprint4902≤10240, a source-buffer bound rather than runtime RAM/ROM measurement.
+
+Cave compaction is coupled: Room1 old source1/2→candidate0/1 after closing unbuilt west exit0; East's Room1 destination1→0; B1F's Room1 return2→1. Room2 retains basement event0 and closes unbuilt216 event1. All6 internal warp events remain at original coordinates/elevations with valid paired destination indices. No neutral interior/Ruins source was invented: pinned CelesticTown actually has no warp events. This covers three northern mountain maps, **not the complete canonical Mt.Coronet**.
+
+Actual focused8/8 and full matching source237/237 PASS,0skips. Tests reconstruct original source from recorded closures and validate every original Git blob/SHA256 plus staged bytes/headers, all9445 cell identities/heights, full attributes, all48 elevation15 positions, exact offsets and cave return translations, closed foreign destinations, hardware footprint, no gameplay/origins, bad offsets/removed/out-of-range returns/duplicate anchors/bad dimensions, input immutability and deterministic pure staging. Two full conversions reproduce31/31 output files byte-identically. Donor metadata may require ordinary authorized fetching from its sparse Git object store; unit fixtures need no donor/history fetch.
+
+Reproduce `stage_celestic.py --donor /workspace/sinnoh-donor-pinned --out NEW_OFF_ENGINE_DIR`, then `python3 -m unittest discover -s 'Pokemon Game/scripts/tests' -p test_sinnoh_celestic_north.py -v` and all test_sinnoh_*.py. Exact source revision/blob mappings are embedded in the small wrapper; the existing builder performs identity conversion/closure/compaction.
+
+Next: adapt permitted current Averon outdoor/cave art and verify all actual source dependencies before claiming RGB/animation/field compatibility. Reconcile external south210/west211/216 seams/portals only when both approved source packages are available, without renumbering accepted identities. Install/test in a marked disposable current-main environment after art is coherent. Permanent production origin policy remains owner-reserved. No source-only package is called playable, and existing connected Eterna runtime work continues independently.
+
+## Permitted outdoor artwork implemented (2026-10-22)
+
+Child branch codex/celestic-permitted-outdoor-art-20261022 reuses these exact already converted sources. Route210North,CelesticTown and211East now have actual rendered existing-Averon art; three mountain cave sources remain unfinished. No reconversion, map/header/warp/offset/collision/elevation edits, new saved origins or production files.
+
+One shared General/Rustboro family: unchanged512-record primary,39 deduplicated secondary art+full-attribute records,473/512 secondary slots free. All5237 map/border cells preserve C/E and entire source16-bit attribute words, including all48 Route210 bridge15 cells. Source rail214 uses actual existing General horizontal-rail art;82 bridge-body cells reuse existing wood. All pixels/palettes/metadata come from verified current Averon assets, with exact hashes in outdoor-art-receipt.json. No donor PNG,palette,music,script,trainer,encounter or story.
+
+Six explicit source architectural envelopes use existing neutral house/Center art. The source's incompatible old5-column Center roof/pillar envelope now contains one exact4×4 stock Center anchored at(25,24); source-blocked padding uses visible existing rocks, while source physical bytes remain untouched. A larger northern building uses a neutral stock house facade. Foreign monument art becomes neutral stock rock clusters, without naming lore or inventing services. These are disclosed visual adaptations for owner revision, not graphical gameplay acceptance.
+
+Actual focused8/8 and full branch source245/245 PASS,0skips (237 existing cases plus8 new, not additive unique coverage). Independently rerendered RGBs/dependency closure match all three exported previews. Complete source+asset hashes, every C/E/full-attribute cell, bridge/layer positions, all82 wood records and the exact stock Center are checked. Negative fixtures reject missing attributes, unknown secondary records, bad dimensions/warp anchors and out-of-bounds facades; input headers/metadata are not mutated. Two complete CLI builds reproduce14/14 files byte-identically on engine-source22919e59. All three previews inspected; earlier private preview's incompatible duplicate Center roof was corrected before delivery.
+
+Raw exported bank metadata9918B and map/border10474B are actual staged bytes, NOT measured linked ROM growth. No native/ROM/RAM/mGBA/Save/Delta/bike/Surf/animation acceptance claimed for this new package. Original General behavior, rails, water and bridge attributes remain; real riding/layer/animation and route traversal need the future coherent DEV runtime.
+
+Reproduce adapt_outdoor_art.py --engine ENGINE --out NEW_OFF_ENGINE_DIRECTORY, then focused test_sinnoh_celestic_art.py and the existing full test_sinnoh_*.py suite. Pending permanent origin policy and protected production integration remain separate. NEXT: adapt the existing three northern Coronet cave sources using verified permitted cave assets, preserve all6 compacted warp events, then assemble/test the six-map DEV chain. Do not recreate these three outdoor outputs or repeat completed #227 runtime.
+
+### Exact next cave-bank preflight (read-only, not implemented)
+
+Pinned donor cave metatile blob49ffce9add138149775280b96067e727a662a993 (440 records) versus actual c6ac Averon Cave blobcc8b117e20f6477dfdeb92612730fb3136372523 (414). Across the three staged caves,54 used secondary IDs:36 raw structural matches;922 differs;17 used records932–942 and944–949 lie beyond the existing bank. Raw record matches do NOT establish pixel/visual equivalence. No donor pixels were read/imported for this audit.
+
+NEXT executable work: explicitly adapt these actual used cave dependencies with verified current Averon Cave/General art, preserving full original attrs/C/E and all6 coupled warp events; source933 has ladder behavior,934–942 pond-water variants. Verify their graphic roles/lighting/animation and the remaining neutral structures rather than guessing from numeric equality or transplanting an unrelated bank. Keep unchanged outdoor family as a separate streaming family. Only then prepare coherent six-map current-main DEV builds/native/real cave traversal/ladder/follower/Save→freshContinue/legacy checks. Permanent origins and any production promotion remain separate gates; no extra geographic conversion is needed.
+
+## Cave adaptation and six-map runtime follow-up
+
+The three cave art families and guarded six-map DEV overlay are now implemented on codex/coronet-cave-art-runtime-20261023; see RUNTIME_CHECKPOINT.md for actual executed evidence and outstanding gates. The earlier read-only cave preflight above is superseded by this implementation. Production maps and saved identities remain unchanged.
+
+## Completed northern Coronet follow-up
+
+PR229 now supplies permitted cave art and paired six-map DEV evidence:268 source,29 focused native,4 save goldens; each NORMAL/RELEASE46 traversal+3freshContinue+3genuinelegacy PASS. See RUNTIME_CHECKPOINT.md and runtime-evidence/EVIDENCE_INVENTORY.json for exact identities, limits and preserved failures. Earlier unfinished cave/runtime notes above are superseded; production promotion and origins remain separate.

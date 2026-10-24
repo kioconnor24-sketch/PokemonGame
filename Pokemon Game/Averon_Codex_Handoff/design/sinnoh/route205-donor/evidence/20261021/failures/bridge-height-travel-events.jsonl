@@ -1,0 +1,197 @@
+{"t": 1792600828.11, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792600828.16, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792600828.71, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792600828.75, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792600830.91, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792600830.96, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792600832.65, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792600832.74, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792600833.24, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792600833.29, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792600833.8, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792600833.83, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792600834.91, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792600834.94, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792600838.53, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792600838.56, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792600839.2, "event": "field", "map": "MAP_ROUTE205_SOUTH", "pos": [26, 81], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792600841.74, "event": "map-qa-check", "name": "south-bridge-south-ground", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 84]]}
+{"t": 1792600841.78, "event": "capture", "file": "0009-south-bridge-south-ground.png"}
+{"t": 1792600842.22, "event": "capture", "file": "0010-south-bridge-south-ground.png"}
+{"t": 1792600842.22, "event": "observe", "label": "south-bridge-south-ground", "problems": []}
+{"t": 1792600842.22, "event": "map-qa-check", "name": "follower visible (south-bridge-south-ground)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600842.97, "event": "map-qa-check", "name": "south-bridge-up-(25, 83)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 83]]}
+{"t": 1792600843.01, "event": "capture", "file": "0011-south-bridge-up-(25, 83).png"}
+{"t": 1792600843.36, "event": "capture", "file": "0012-south-bridge-up-(25, 83).png"}
+{"t": 1792600843.36, "event": "observe", "label": "south-bridge-up-(25, 83)", "problems": []}
+{"t": 1792600843.36, "event": "map-qa-check", "name": "follower visible (south-bridge-up-(25, 83))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600844.17, "event": "map-qa-check", "name": "south-bridge-up-(25, 82)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 82]]}
+{"t": 1792600844.22, "event": "capture", "file": "0013-south-bridge-up-(25, 82).png"}
+{"t": 1792600844.46, "event": "capture", "file": "0014-south-bridge-up-(25, 82).png"}
+{"t": 1792600844.46, "event": "observe", "label": "south-bridge-up-(25, 82)", "problems": []}
+{"t": 1792600844.46, "event": "map-qa-check", "name": "follower visible (south-bridge-up-(25, 82))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600845.31, "event": "map-qa-check", "name": "south-bridge-up-(25, 81)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 81]]}
+{"t": 1792600845.35, "event": "capture", "file": "0015-south-bridge-up-(25, 81).png"}
+{"t": 1792600845.65, "event": "capture", "file": "0016-south-bridge-up-(25, 81).png"}
+{"t": 1792600845.65, "event": "observe", "label": "south-bridge-up-(25, 81)", "problems": []}
+{"t": 1792600845.65, "event": "map-qa-check", "name": "follower visible (south-bridge-up-(25, 81))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600846.51, "event": "map-qa-check", "name": "south-bridge-up-(25, 80)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 80]]}
+{"t": 1792600846.55, "event": "capture", "file": "0017-south-bridge-up-(25, 80).png"}
+{"t": 1792600846.95, "event": "capture", "file": "0018-south-bridge-up-(25, 80).png"}
+{"t": 1792600846.95, "event": "observe", "label": "south-bridge-up-(25, 80)", "problems": []}
+{"t": 1792600846.95, "event": "map-qa-check", "name": "follower visible (south-bridge-up-(25, 80))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600847.9, "event": "map-qa-check", "name": "south-bridge-up-(25, 79)", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 79]]}
+{"t": 1792600847.94, "event": "capture", "file": "0019-south-bridge-up-(25, 79).png"}
+{"t": 1792600848.24, "event": "capture", "file": "0020-south-bridge-up-(25, 79).png"}
+{"t": 1792600848.24, "event": "observe", "label": "south-bridge-up-(25, 79)", "problems": []}
+{"t": 1792600848.24, "event": "map-qa-check", "name": "follower visible (south-bridge-up-(25, 79))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600850.9, "event": "capture", "file": "0021-blocked-MAP_ROUTE205_SOUTH-26-81-right.png"}
+{"t": 1792600850.9, "event": "map-qa-check", "name": "MAP_ROUTE205_SOUTH (26, 81) pushing right is blocked", "ok": true, "before": ["MAP_ROUTE205_SOUTH", [26, 81]], "after": ["MAP_ROUTE205_SOUTH", [26, 81]]}
+{"t": 1792600853.0, "event": "map-qa-check", "name": "south-bridge-return", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [25, 84]]}
+{"t": 1792600853.05, "event": "capture", "file": "0022-south-bridge-return.png"}
+{"t": 1792600853.46, "event": "capture", "file": "0023-south-bridge-return.png"}
+{"t": 1792600853.46, "event": "observe", "label": "south-bridge-return", "problems": []}
+{"t": 1792600853.46, "event": "map-qa-check", "name": "follower visible (south-bridge-return)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600863.59, "event": "map-qa-check", "name": "stair-lower-ground", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [20, 61]]}
+{"t": 1792600863.63, "event": "capture", "file": "0024-stair-lower-ground.png"}
+{"t": 1792600864.07, "event": "capture", "file": "0025-stair-lower-ground.png"}
+{"t": 1792600864.07, "event": "observe", "label": "stair-lower-ground", "problems": []}
+{"t": 1792600864.07, "event": "map-qa-check", "name": "follower visible (stair-lower-ground)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600865.69, "event": "map-qa-check", "name": "stair-transition", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [19, 61]]}
+{"t": 1792600865.74, "event": "capture", "file": "0026-stair-transition.png"}
+{"t": 1792600866.22, "event": "capture", "file": "0027-stair-transition.png"}
+{"t": 1792600866.22, "event": "observe", "label": "stair-transition", "problems": []}
+{"t": 1792600866.22, "event": "map-qa-check", "name": "follower visible (stair-transition)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600867.78, "event": "map-qa-check", "name": "stair-upper-ground", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [18, 61]]}
+{"t": 1792600867.84, "event": "capture", "file": "0028-stair-upper-ground.png"}
+{"t": 1792600868.32, "event": "capture", "file": "0029-stair-upper-ground.png"}
+{"t": 1792600868.32, "event": "observe", "label": "stair-upper-ground", "problems": []}
+{"t": 1792600868.32, "event": "map-qa-check", "name": "follower visible (stair-upper-ground)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600873.07, "event": "map-qa-check", "name": "upper-bridge-south-ground", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 48]]}
+{"t": 1792600873.11, "event": "capture", "file": "0030-upper-bridge-south-ground.png"}
+{"t": 1792600873.57, "event": "capture", "file": "0031-upper-bridge-south-ground.png"}
+{"t": 1792600873.57, "event": "observe", "label": "upper-bridge-south-ground", "problems": []}
+{"t": 1792600873.57, "event": "map-qa-check", "name": "follower visible (upper-bridge-south-ground)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600876.63, "event": "map-qa-check", "name": "upper-bridge-north-ground", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 39]]}
+{"t": 1792600876.68, "event": "capture", "file": "0032-upper-bridge-north-ground.png"}
+{"t": 1792600877.02, "event": "capture", "file": "0033-upper-bridge-north-ground.png"}
+{"t": 1792600877.02, "event": "observe", "label": "upper-bridge-north-ground", "problems": []}
+{"t": 1792600877.02, "event": "map-qa-check", "name": "follower visible (upper-bridge-north-ground)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600878.5, "event": "map-qa-check", "name": "upper-bridge-over-40", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 40]]}
+{"t": 1792600878.54, "event": "capture", "file": "0034-upper-bridge-over-40.png"}
+{"t": 1792600879.04, "event": "capture", "file": "0035-upper-bridge-over-40.png"}
+{"t": 1792600879.04, "event": "observe", "label": "upper-bridge-over-40", "problems": []}
+{"t": 1792600879.04, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-40)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600880.75, "event": "map-qa-check", "name": "upper-bridge-over-41", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 41]]}
+{"t": 1792600880.79, "event": "capture", "file": "0036-upper-bridge-over-41.png"}
+{"t": 1792600881.18, "event": "capture", "file": "0037-upper-bridge-over-41.png"}
+{"t": 1792600881.18, "event": "observe", "label": "upper-bridge-over-41", "problems": []}
+{"t": 1792600881.18, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-41)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600882.81, "event": "map-qa-check", "name": "upper-bridge-over-42", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 42]]}
+{"t": 1792600882.86, "event": "capture", "file": "0038-upper-bridge-over-42.png"}
+{"t": 1792600883.37, "event": "capture", "file": "0039-upper-bridge-over-42.png"}
+{"t": 1792600883.37, "event": "observe", "label": "upper-bridge-over-42", "problems": []}
+{"t": 1792600883.37, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-42)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600885.03, "event": "map-qa-check", "name": "upper-bridge-over-43", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 43]]}
+{"t": 1792600885.07, "event": "capture", "file": "0040-upper-bridge-over-43.png"}
+{"t": 1792600885.57, "event": "capture", "file": "0041-upper-bridge-over-43.png"}
+{"t": 1792600885.57, "event": "observe", "label": "upper-bridge-over-43", "problems": []}
+{"t": 1792600885.57, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-43)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600887.12, "event": "map-qa-check", "name": "upper-bridge-over-44", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 44]]}
+{"t": 1792600887.16, "event": "capture", "file": "0042-upper-bridge-over-44.png"}
+{"t": 1792600887.65, "event": "capture", "file": "0043-upper-bridge-over-44.png"}
+{"t": 1792600887.65, "event": "observe", "label": "upper-bridge-over-44", "problems": []}
+{"t": 1792600887.65, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-44)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600889.32, "event": "map-qa-check", "name": "upper-bridge-over-45", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 45]]}
+{"t": 1792600889.35, "event": "capture", "file": "0044-upper-bridge-over-45.png"}
+{"t": 1792600889.8, "event": "capture", "file": "0045-upper-bridge-over-45.png"}
+{"t": 1792600889.8, "event": "observe", "label": "upper-bridge-over-45", "problems": []}
+{"t": 1792600889.8, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-45)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600891.3, "event": "map-qa-check", "name": "upper-bridge-over-46", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 46]]}
+{"t": 1792600891.36, "event": "capture", "file": "0046-upper-bridge-over-46.png"}
+{"t": 1792600891.8, "event": "capture", "file": "0047-upper-bridge-over-46.png"}
+{"t": 1792600891.8, "event": "observe", "label": "upper-bridge-over-46", "problems": []}
+{"t": 1792600891.8, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-46)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600893.31, "event": "map-qa-check", "name": "upper-bridge-over-47", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 47]]}
+{"t": 1792600893.34, "event": "capture", "file": "0048-upper-bridge-over-47.png"}
+{"t": 1792600893.84, "event": "capture", "file": "0049-upper-bridge-over-47.png"}
+{"t": 1792600893.84, "event": "observe", "label": "upper-bridge-over-47", "problems": []}
+{"t": 1792600893.84, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-47)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600895.36, "event": "map-qa-check", "name": "upper-bridge-over-48", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 48]]}
+{"t": 1792600895.41, "event": "capture", "file": "0050-upper-bridge-over-48.png"}
+{"t": 1792600895.85, "event": "capture", "file": "0051-upper-bridge-over-48.png"}
+{"t": 1792600895.85, "event": "observe", "label": "upper-bridge-over-48", "problems": []}
+{"t": 1792600895.85, "event": "map-qa-check", "name": "follower visible (upper-bridge-over-48)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600901.28, "event": "map-qa-check", "name": "stair-upper-return", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [18, 61]]}
+{"t": 1792600901.32, "event": "capture", "file": "0052-stair-upper-return.png"}
+{"t": 1792600901.76, "event": "capture", "file": "0053-stair-upper-return.png"}
+{"t": 1792600901.76, "event": "observe", "label": "stair-upper-return", "problems": []}
+{"t": 1792600901.76, "event": "map-qa-check", "name": "follower visible (stair-upper-return)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600903.23, "event": "map-qa-check", "name": "stair-transition-return", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [19, 61]]}
+{"t": 1792600903.27, "event": "capture", "file": "0054-stair-transition-return.png"}
+{"t": 1792600903.72, "event": "capture", "file": "0055-stair-transition-return.png"}
+{"t": 1792600903.72, "event": "observe", "label": "stair-transition-return", "problems": []}
+{"t": 1792600903.72, "event": "map-qa-check", "name": "follower visible (stair-transition-return)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600905.18, "event": "map-qa-check", "name": "stair-lower-return", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [20, 61]]}
+{"t": 1792600905.22, "event": "capture", "file": "0056-stair-lower-return.png"}
+{"t": 1792600905.68, "event": "capture", "file": "0057-stair-lower-return.png"}
+{"t": 1792600905.68, "event": "observe", "label": "stair-lower-return", "problems": []}
+{"t": 1792600905.68, "event": "map-qa-check", "name": "follower visible (stair-lower-return)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600907.28, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [20, 60]], "actual": ["MAP_ROUTE205_SOUTH", [20, 60]]}
+{"t": 1792600907.93, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [20, 59]], "actual": ["MAP_ROUTE205_SOUTH", [20, 59]]}
+{"t": 1792600908.55, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [20, 58]], "actual": ["MAP_ROUTE205_SOUTH", [20, 58]]}
+{"t": 1792600909.23, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [20, 57]], "actual": ["MAP_ROUTE205_SOUTH", [20, 57]]}
+{"t": 1792600909.85, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [20, 56]], "actual": ["MAP_ROUTE205_SOUTH", [20, 56]]}
+{"t": 1792600910.64, "event": "lower-route-step", "direction": "right", "expected": ["MAP_ROUTE205_SOUTH", [21, 56]], "actual": ["MAP_ROUTE205_SOUTH", [21, 56]]}
+{"t": 1792600911.36, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [21, 55]], "actual": ["MAP_ROUTE205_SOUTH", [21, 55]]}
+{"t": 1792600912.1, "event": "lower-route-step", "direction": "right", "expected": ["MAP_ROUTE205_SOUTH", [22, 55]], "actual": ["MAP_ROUTE205_SOUTH", [22, 55]]}
+{"t": 1792600912.77, "event": "lower-route-step", "direction": "right", "expected": ["MAP_ROUTE205_SOUTH", [23, 55]], "actual": ["MAP_ROUTE205_SOUTH", [23, 55]]}
+{"t": 1792600913.51, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [23, 54]], "actual": ["MAP_ROUTE205_SOUTH", [23, 54]]}
+{"t": 1792600914.11, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [23, 53]], "actual": ["MAP_ROUTE205_SOUTH", [23, 53]]}
+{"t": 1792600914.87, "event": "lower-route-step", "direction": "right", "expected": ["MAP_ROUTE205_SOUTH", [24, 53]], "actual": ["MAP_ROUTE205_SOUTH", [24, 53]]}
+{"t": 1792600915.5, "event": "lower-route-step", "direction": "right", "expected": ["MAP_ROUTE205_SOUTH", [25, 53]], "actual": ["MAP_ROUTE205_SOUTH", [25, 53]]}
+{"t": 1792600916.24, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 52]], "actual": ["MAP_ROUTE205_SOUTH", [25, 52]]}
+{"t": 1792600916.87, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 51]], "actual": ["MAP_ROUTE205_SOUTH", [25, 51]]}
+{"t": 1792600917.52, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 50]], "actual": ["MAP_ROUTE205_SOUTH", [25, 50]]}
+{"t": 1792600918.14, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 49]], "actual": ["MAP_ROUTE205_SOUTH", [25, 49]]}
+{"t": 1792600918.79, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 48]], "actual": ["MAP_ROUTE205_SOUTH", [25, 48]]}
+{"t": 1792600919.56, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 47]], "actual": ["MAP_ROUTE205_SOUTH", [25, 47]]}
+{"t": 1792600920.14, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 46]], "actual": ["MAP_ROUTE205_SOUTH", [25, 46]]}
+{"t": 1792600920.74, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 45]], "actual": ["MAP_ROUTE205_SOUTH", [25, 45]]}
+{"t": 1792600921.37, "event": "lower-route-step", "direction": "up", "expected": ["MAP_ROUTE205_SOUTH", [25, 44]], "actual": ["MAP_ROUTE205_SOUTH", [25, 44]]}
+{"t": 1792600922.13, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [24, 44]], "actual": ["MAP_ROUTE205_SOUTH", [24, 44]]}
+{"t": 1792600922.75, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [23, 44]], "actual": ["MAP_ROUTE205_SOUTH", [23, 44]]}
+{"t": 1792600923.38, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [22, 44]], "actual": ["MAP_ROUTE205_SOUTH", [22, 44]]}
+{"t": 1792600924.0, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [21, 44]], "actual": ["MAP_ROUTE205_SOUTH", [21, 44]]}
+{"t": 1792600924.63, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [20, 44]], "actual": ["MAP_ROUTE205_SOUTH", [20, 44]]}
+{"t": 1792600925.31, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [19, 44]], "actual": ["MAP_ROUTE205_SOUTH", [19, 44]]}
+{"t": 1792600925.94, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [18, 44]], "actual": ["MAP_ROUTE205_SOUTH", [18, 44]]}
+{"t": 1792600926.57, "event": "lower-route-step", "direction": "left", "expected": ["MAP_ROUTE205_SOUTH", [17, 44]], "actual": ["MAP_ROUTE205_SOUTH", [17, 44]]}
+{"t": 1792600927.42, "event": "map-qa-check", "name": "upper-bridge-east-grass", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [17, 44]]}
+{"t": 1792600927.46, "event": "capture", "file": "0058-upper-bridge-east-grass.png"}
+{"t": 1792600927.93, "event": "capture", "file": "0059-upper-bridge-east-grass.png"}
+{"t": 1792600927.93, "event": "observe", "label": "upper-bridge-east-grass", "problems": []}
+{"t": 1792600927.93, "event": "map-qa-check", "name": "follower visible (upper-bridge-east-grass)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600929.47, "event": "map-qa-check", "name": "upper-bridge-under-16", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [16, 44]]}
+{"t": 1792600929.51, "event": "capture", "file": "0060-upper-bridge-under-16.png"}
+{"t": 1792600929.99, "event": "capture", "file": "0061-upper-bridge-under-16.png"}
+{"t": 1792600929.99, "event": "observe", "label": "upper-bridge-under-16", "problems": []}
+{"t": 1792600929.99, "event": "map-qa-check", "name": "follower visible (upper-bridge-under-16)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600931.57, "event": "map-qa-check", "name": "upper-bridge-under-15", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [15, 44]]}
+{"t": 1792600931.61, "event": "capture", "file": "0062-upper-bridge-under-15.png"}
+{"t": 1792600932.09, "event": "capture", "file": "0063-upper-bridge-under-15.png"}
+{"t": 1792600932.09, "event": "observe", "label": "upper-bridge-under-15", "problems": []}
+{"t": 1792600932.09, "event": "map-qa-check", "name": "follower visible (upper-bridge-under-15)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600933.7, "event": "map-qa-check", "name": "upper-bridge-under-14", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [14, 44]]}
+{"t": 1792600933.73, "event": "capture", "file": "0064-upper-bridge-under-14.png"}
+{"t": 1792600934.11, "event": "capture", "file": "0065-upper-bridge-under-14.png"}
+{"t": 1792600934.11, "event": "observe", "label": "upper-bridge-under-14", "problems": []}
+{"t": 1792600934.11, "event": "map-qa-check", "name": "follower visible (upper-bridge-under-14)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600935.63, "event": "map-qa-check", "name": "upper-bridge-under-13", "ok": true, "at": ["MAP_ROUTE205_SOUTH", [13, 44]]}
+{"t": 1792600935.68, "event": "capture", "file": "0066-upper-bridge-under-13.png"}
+{"t": 1792600936.12, "event": "capture", "file": "0067-upper-bridge-under-13.png"}
+{"t": 1792600936.12, "event": "observe", "label": "upper-bridge-under-13", "problems": []}
+{"t": 1792600936.12, "event": "map-qa-check", "name": "follower visible (upper-bridge-under-13)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
+{"t": 1792600940.44, "event": "blocked", "map": "MAP_ROUTE205_SOUTH", "tile": [14, 41]}
+{"t": 1792600944.58, "event": "blocked", "map": "MAP_ROUTE205_SOUTH", "tile": [15, 41]}
+{"t": 1792600948.55, "event": "blocked", "map": "MAP_ROUTE205_SOUTH", "tile": [16, 41]}

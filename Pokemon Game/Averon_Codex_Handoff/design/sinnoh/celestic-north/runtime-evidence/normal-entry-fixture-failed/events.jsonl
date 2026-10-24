@@ -1,0 +1,121 @@
+{"t": 1792717465.8, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792717465.88, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792717468.66, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792717468.73, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792717470.55, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792717470.67, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792717471.26, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792717471.31, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792717471.85, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792717471.91, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792717473.03, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792717473.08, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792717476.77, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792717476.85, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792717477.5, "event": "field", "map": "MAP_CELESTIC_TOWN", "pos": [8, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792717478.04, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_CELESTIC_TOWN", [8, 16]]}
+{"t": 1792717481.79, "event": "map-qa-check", "name": "follower visible (start)", "ok": false, "reason": "ordinary foot probe did not return to the exact source tile", "at": ["MAP_CELESTIC_TOWN", [9, 16]]}
+{"t": 1792717481.86, "event": "map-qa-check", "name": "reached MAP_CELESTIC_TOWN", "ok": true, "at": ["MAP_CELESTIC_TOWN", [9, 16]]}
+{"t": 1792717497.76, "event": "capture", "file": "0008-seam-MAP_CELESTIC_TOWN-right.png"}
+{"t": 1792717498.63, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN right seam (37, 18) -> MAP_ROUTE210_NORTH (0, 12) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [37, 18]], "got": ["MAP_CELESTIC_TOWN", [37, 18]]}
+{"t": 1792717501.03, "event": "capture", "file": "0009-seam-MAP_CELESTIC_TOWN-right.png"}
+{"t": 1792717501.86, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN right seam (37, 20) -> MAP_ROUTE210_NORTH (0, 14) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [37, 20]], "got": ["MAP_CELESTIC_TOWN", [37, 20]]}
+{"t": 1792717504.0, "event": "capture", "file": "0010-seam-MAP_CELESTIC_TOWN-right.png"}
+{"t": 1792717504.73, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN right seam (37, 22) -> MAP_ROUTE210_NORTH (0, 16) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [37, 22]], "got": ["MAP_CELESTIC_TOWN", [37, 22]]}
+{"t": 1792717520.43, "event": "capture", "file": "0011-seam-MAP_CELESTIC_TOWN-left.png"}
+{"t": 1792717521.17, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN left seam (0, 16) -> MAP_ROUTE211_EAST (31, 13) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [0, 16]], "got": ["MAP_CELESTIC_TOWN", [0, 16]]}
+{"t": 1792717523.15, "event": "capture", "file": "0012-seam-MAP_CELESTIC_TOWN-left.png"}
+{"t": 1792717523.83, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN left seam (0, 18) -> MAP_ROUTE211_EAST (31, 15) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [0, 18]], "got": ["MAP_CELESTIC_TOWN", [0, 18]]}
+{"t": 1792717525.78, "event": "capture", "file": "0013-seam-MAP_CELESTIC_TOWN-left.png"}
+{"t": 1792717526.45, "event": "map-qa-check", "name": "MAP_CELESTIC_TOWN left seam (0, 20) -> MAP_ROUTE211_EAST (31, 17) and back", "ok": true, "leg": "back", "expected": ["MAP_CELESTIC_TOWN", [0, 20]], "got": ["MAP_CELESTIC_TOWN", [0, 20]]}
+{"t": 1792717542.26, "event": "map", "map": "MAP_ROUTE210_NORTH", "pos": [0, 12]}
+{"t": 1792717542.32, "event": "map-qa-check", "name": "reached MAP_ROUTE210_NORTH", "ok": true, "at": ["MAP_ROUTE210_NORTH", [0, 12]]}
+{"t": 1792717543.66, "event": "capture", "file": "0014-seam-MAP_ROUTE210_NORTH-left.png"}
+{"t": 1792717544.37, "event": "map-qa-check", "name": "MAP_ROUTE210_NORTH left seam (0, 12) -> MAP_CELESTIC_TOWN (37, 18) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE210_NORTH", [0, 12]], "got": ["MAP_ROUTE210_NORTH", [0, 12]]}
+{"t": 1792717546.68, "event": "capture", "file": "0015-seam-MAP_ROUTE210_NORTH-left.png"}
+{"t": 1792717547.49, "event": "map-qa-check", "name": "MAP_ROUTE210_NORTH left seam (0, 14) -> MAP_CELESTIC_TOWN (37, 20) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE210_NORTH", [0, 14]], "got": ["MAP_ROUTE210_NORTH", [0, 14]]}
+{"t": 1792717549.64, "event": "capture", "file": "0016-seam-MAP_ROUTE210_NORTH-left.png"}
+{"t": 1792717550.35, "event": "map-qa-check", "name": "MAP_ROUTE210_NORTH left seam (0, 16) -> MAP_CELESTIC_TOWN (37, 22) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE210_NORTH", [0, 16]], "got": ["MAP_ROUTE210_NORTH", [0, 16]]}
+{"t": 1792717552.49, "event": "map", "map": "MAP_CELESTIC_TOWN", "pos": [37, 18]}
+{"t": 1792717566.96, "event": "map", "map": "MAP_ROUTE211_EAST", "pos": [31, 13]}
+{"t": 1792717567.08, "event": "map-qa-check", "name": "reached MAP_ROUTE211_EAST", "ok": true, "at": ["MAP_ROUTE211_EAST", [31, 13]]}
+{"t": 1792717568.33, "event": "capture", "file": "0017-seam-MAP_ROUTE211_EAST-right.png"}
+{"t": 1792717569.14, "event": "map-qa-check", "name": "MAP_ROUTE211_EAST right seam (31, 13) -> MAP_CELESTIC_TOWN (0, 16) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE211_EAST", [31, 13]], "got": ["MAP_ROUTE211_EAST", [31, 13]]}
+{"t": 1792717570.95, "event": "capture", "file": "0018-seam-MAP_ROUTE211_EAST-right.png"}
+{"t": 1792717571.65, "event": "map-qa-check", "name": "MAP_ROUTE211_EAST right seam (31, 15) -> MAP_CELESTIC_TOWN (0, 18) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE211_EAST", [31, 15]], "got": ["MAP_ROUTE211_EAST", [31, 15]]}
+{"t": 1792717573.55, "event": "capture", "file": "0019-seam-MAP_ROUTE211_EAST-right.png"}
+{"t": 1792717574.27, "event": "map-qa-check", "name": "MAP_ROUTE211_EAST right seam (31, 17) -> MAP_CELESTIC_TOWN (0, 20) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE211_EAST", [31, 17]], "got": ["MAP_ROUTE211_EAST", [31, 17]]}
+{"t": 1792717587.04, "event": "capture", "file": "0020-warp-MAP_ROUTE211_EAST-0.png"}
+{"t": 1792717588.87, "event": "capture", "file": "0021-MAP_MT_CORONET_1F_NORTH_ROOM1 via warp.png"}
+{"t": 1792717588.87, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM1 via warp", "problems": []}
+{"t": 1792717588.87, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717589.01, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM1", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [32, 33]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717592.39, "event": "map-qa-check", "name": "MAP_ROUTE211_EAST warp 0 (4, 10) -> MAP_MT_CORONET_1F_NORTH_ROOM1 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE211_EAST", [[4, 11]]], "got": ["MAP_ROUTE211_EAST", [4, 11]]}
+{"t": 1792717594.83, "event": "capture", "file": "0022-MAP_ROUTE211_EAST after warp round trip.png"}
+{"t": 1792717594.84, "event": "observe", "label": "MAP_ROUTE211_EAST after warp round trip", "problems": []}
+{"t": 1792717594.9, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE211_EAST after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792717598.22, "event": "map", "map": "MAP_MT_CORONET_1F_NORTH_ROOM1", "pos": [32, 33]}
+{"t": 1792717598.26, "event": "map-qa-check", "name": "reached MAP_MT_CORONET_1F_NORTH_ROOM1", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [32, 33]]}
+{"t": 1792717601.74, "event": "capture", "file": "0023-warp-MAP_MT_CORONET_1F_NORTH_ROOM1-0.png"}
+{"t": 1792717603.45, "event": "capture", "file": "0024-MAP_ROUTE211_EAST via warp.png"}
+{"t": 1792717603.45, "event": "observe", "label": "MAP_ROUTE211_EAST via warp", "problems": []}
+{"t": 1792717603.48, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE211_EAST via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792717603.59, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE211_EAST", "ok": true, "at": ["MAP_ROUTE211_EAST", [4, 11]], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792717607.0, "event": "map-qa-check", "name": "MAP_MT_CORONET_1F_NORTH_ROOM1 warp 0 (32, 33) -> MAP_ROUTE211_EAST and back", "ok": true, "leg": "back", "expected": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [[32, 33]]], "got": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [32, 33]]}
+{"t": 1792717608.71, "event": "capture", "file": "0025-MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip.png"}
+{"t": 1792717608.71, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip", "problems": []}
+{"t": 1792717608.72, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717625.73, "event": "capture", "file": "0026-warp-MAP_MT_CORONET_1F_NORTH_ROOM1-1.png"}
+{"t": 1792717628.03, "event": "capture", "file": "0027-MAP_MT_CORONET_B1F via warp.png"}
+{"t": 1792717628.03, "event": "observe", "label": "MAP_MT_CORONET_B1F via warp", "problems": []}
+{"t": 1792717628.03, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717628.22, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_MT_CORONET_B1F", "ok": true, "at": ["MAP_MT_CORONET_B1F", [8, 61]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717630.9, "event": "map-qa-check", "name": "MAP_MT_CORONET_1F_NORTH_ROOM1 warp 1 (8, 4) -> MAP_MT_CORONET_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [[8, 4]]], "got": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [8, 4]]}
+{"t": 1792717633.43, "event": "capture", "file": "0028-MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip.png"}
+{"t": 1792717633.43, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip", "problems": []}
+{"t": 1792717633.45, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717635.77, "event": "map", "map": "MAP_MT_CORONET_B1F", "pos": [8, 60]}
+{"t": 1792717635.84, "event": "map-qa-check", "name": "reached MAP_MT_CORONET_B1F", "ok": true, "at": ["MAP_MT_CORONET_B1F", [8, 60]]}
+{"t": 1792717638.83, "event": "capture", "file": "0029-warp-MAP_MT_CORONET_B1F-0.png"}
+{"t": 1792717641.49, "event": "capture", "file": "0030-MAP_MT_CORONET_1F_NORTH_ROOM1 via warp.png"}
+{"t": 1792717641.49, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM1 via warp", "problems": []}
+{"t": 1792717641.5, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM1 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717641.71, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM1", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM1", [8, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717644.26, "event": "map-qa-check", "name": "MAP_MT_CORONET_B1F warp 0 (8, 60) -> MAP_MT_CORONET_1F_NORTH_ROOM1 and back", "ok": true, "leg": "back", "expected": ["MAP_MT_CORONET_B1F", [[8, 60]]], "got": ["MAP_MT_CORONET_B1F", [8, 60]]}
+{"t": 1792717646.74, "event": "capture", "file": "0031-MAP_MT_CORONET_B1F after warp round trip.png"}
+{"t": 1792717646.74, "event": "observe", "label": "MAP_MT_CORONET_B1F after warp round trip", "problems": []}
+{"t": 1792717646.74, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717667.69, "event": "capture", "file": "0032-warp-MAP_MT_CORONET_B1F-1.png"}
+{"t": 1792717670.07, "event": "capture", "file": "0033-MAP_MT_CORONET_1F_NORTH_ROOM2 via warp.png"}
+{"t": 1792717670.07, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM2 via warp", "problems": []}
+{"t": 1792717670.08, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717670.15, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_NORTH_ROOM2", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 13]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717672.63, "event": "map-qa-check", "name": "MAP_MT_CORONET_B1F warp 1 (8, 2) -> MAP_MT_CORONET_1F_NORTH_ROOM2 and back", "ok": true, "leg": "back", "expected": ["MAP_MT_CORONET_B1F", [[8, 2]]], "got": ["MAP_MT_CORONET_B1F", [8, 2]]}
+{"t": 1792717675.13, "event": "capture", "file": "0034-MAP_MT_CORONET_B1F after warp round trip.png"}
+{"t": 1792717675.14, "event": "observe", "label": "MAP_MT_CORONET_B1F after warp round trip", "problems": []}
+{"t": 1792717675.15, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717676.76, "event": "map", "map": "MAP_MT_CORONET_1F_NORTH_ROOM2", "pos": [8, 12]}
+{"t": 1792717676.86, "event": "map-qa-check", "name": "reached MAP_MT_CORONET_1F_NORTH_ROOM2", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 12]]}
+{"t": 1792717679.7, "event": "capture", "file": "0035-warp-MAP_MT_CORONET_1F_NORTH_ROOM2-0.png"}
+{"t": 1792717682.32, "event": "capture", "file": "0036-MAP_MT_CORONET_B1F via warp.png"}
+{"t": 1792717682.32, "event": "observe", "label": "MAP_MT_CORONET_B1F via warp", "problems": []}
+{"t": 1792717682.34, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717682.48, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_MT_CORONET_B1F", "ok": true, "at": ["MAP_MT_CORONET_B1F", [8, 3]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717685.03, "event": "map-qa-check", "name": "MAP_MT_CORONET_1F_NORTH_ROOM2 warp 0 (8, 12) -> MAP_MT_CORONET_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [[8, 12]]], "got": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 12]]}
+{"t": 1792717687.4, "event": "capture", "file": "0037-MAP_MT_CORONET_1F_NORTH_ROOM2 after warp round trip.png"}
+{"t": 1792717687.4, "event": "observe", "label": "MAP_MT_CORONET_1F_NORTH_ROOM2 after warp round trip", "problems": []}
+{"t": 1792717687.4, "event": "map-qa-check", "name": "follower visible (MAP_MT_CORONET_1F_NORTH_ROOM2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792717688.41, "event": "capture", "file": "0038-start-menu.png"}
+{"t": 1792717689.21, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792717695.3, "event": "capture", "file": "0039-save-confirm-coronet-six.png"}
+{"t": 1792717696.45, "event": "capture", "file": "0040-save-step-coronet-six-01.png"}
+{"t": 1792717697.53, "event": "capture", "file": "0041-save-step-coronet-six-02.png"}
+{"t": 1792717698.58, "event": "capture", "file": "0042-save-step-coronet-six-03.png"}
+{"t": 1792717699.71, "event": "capture", "file": "0043-save-step-coronet-six-04.png"}
+{"t": 1792717700.71, "event": "capture", "file": "0044-save-step-coronet-six-05.png"}
+{"t": 1792717701.75, "event": "capture", "file": "0045-save-step-coronet-six-06.png"}
+{"t": 1792717702.71, "event": "capture", "file": "0046-save-step-coronet-six-07.png"}
+{"t": 1792717703.9, "event": "capture", "file": "0047-save-step-coronet-six-08.png"}
+{"t": 1792717704.75, "event": "capture", "file": "0048-saved-coronet-six.png"}
+{"t": 1792717704.75, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792717704.77, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_MT_CORONET_1F_NORTH_ROOM2", [8, 13]]}

@@ -1,0 +1,3473 @@
+{
+  "status": "OFF_ENGINE_GEOGRAPHY_ONLY_AVERON_GRAPHICS_PENDING",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/Route212_Access/map.json": "ee8c4c81614a17c6e5c62978e86244f08364f25c01489916f651a27ceef38e85",
+    "data/layouts/Route212_Access/map.bin": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+    "data/layouts/Route212_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route212_North/map.json": "2053fc68bde9e70c0375511de65b56d76a8abeec8fdba35f797b8e10bf07fd14",
+    "data/layouts/Route212_North/map.bin": "f8a78cdcf49f2ff7a7b1e2c1534c86acaf8ae77ec10b7f3384f701ff2463c562",
+    "data/layouts/Route212_North/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "data/maps/Route212_South/map.json": "da24624d85313bf4e3fd3cc9ad7017a9579afaf70bd2798ed946502cb08cb953",
+    "data/layouts/Route212_South/map.bin": "301f33cd5de4e13eb03abf3253a207039c9ed452a77c066be561b0adeb4d706c",
+    "data/layouts/Route212_South/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "data/maps/Route213/map.json": "51257cd4d05115eeb9ff465ff8cafcf940f9de9f51387ae915f9f04012ee2d5d",
+    "data/layouts/Route213/map.bin": "cdad001d84c1f18a6d11dc57fa14ab9ef677d98d42fe645aaa8adb6ccb4101fa",
+    "data/layouts/Route213/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "data/maps/Route213_Access/map.json": "bae0b52a43a2c5791810d953c2c76f18c923d1ddc4adc26618b255d26c1c54a5",
+    "data/layouts/Route213_Access/map.bin": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+    "data/layouts/Route213_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route214/map.json": "141fd35700ed18f508ecd50cc7155da2c2f77212e86737f2e1fa7205f632e2ed",
+    "data/layouts/Route214/map.bin": "3c25a90375acec337ddcb79ec985b36c70937eef9fe99f99b81e4e19e1eacfb2",
+    "data/layouts/Route214/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/Route214_Access/map.json": "a0356b2fa113efb6ccc190dc17dcaddd1a7ab3a23c10425e65e48884f1347605",
+    "data/layouts/Route214_Access/map.bin": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+    "data/layouts/Route214_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/Route215/map.json": "eb4c796a915ac16a72e2f6358846d7993be64c67a7e6de41b36b4ce93adfdaeb",
+    "data/layouts/Route215/map.bin": "61c0141623fedb372b76dc652f5d49ce5a2e9ee66f46bfac73bb874c5eaa3de4",
+    "data/layouts/Route215/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "data/maps/Route215_Access/map.json": "a6ea1c7be68b31997528b0a0eaa086603a593d96abdaac0a44794776c308ff46",
+    "data/layouts/Route215_Access/map.bin": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+    "data/layouts/Route215_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/maps/ValorLakefront/map.json": "8b50c7651e926e3f0f5297acbd4c033edf5c806d87839fbbc7108fbcb1628469",
+    "data/layouts/ValorLakefront/map.bin": "06d1f85436328b56dcd453a931875aedbd68e555506e96702d7a173c105c008b",
+    "data/layouts/ValorLakefront/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "data/maps/VeilstoneCity/map.json": "560857ef00cb50c544c7f4840c4add1646e6aa7409a638b9adeb1d92e94e180f",
+    "data/layouts/VeilstoneCity/map.bin": "4a5a708414111e28828dbc60f75e3c3a801ffb2b58a033fb98efa87a8e931848",
+    "data/layouts/VeilstoneCity/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "data/maps/PastoriaCity/map.json": "8f89a7944a1c1e35d8fa9887569102e16763c183d13f403d57b1101907efb687",
+    "data/layouts/PastoriaCity/map.bin": "44852e21a594056cc602d667f882e09ad2c4b36b73f63d0fd4fcd307372ace42",
+    "data/layouts/PastoriaCity/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/pasos/metatile_attributes.bin": "3efe3d6118ddb28de6083531ec1304f5b4db5b54731609dc31e68ea8ccb9aaac",
+    "data/tilesets/primary/general/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+    "data/tilesets/secondary/lilycove/metatile_attributes.bin": "1c79db002f83127b6cb7a0583f7a109186bf2e8813af02981b5d85e528818683",
+    "data/tilesets/secondary/valor/metatile_attributes.bin": "7caf539d04510ede13b84b0b6648d887faf6fd075b73a26f38b7dbb890ec2089",
+    "data/tilesets/secondary/celestic/metatile_attributes.bin": "eaead554f5bdde8202c8efd97372fc1f356a365a70e133f4633eea99859682ad",
+    "data/tilesets/secondary/veilstone/metatile_attributes.bin": "89d5c0d690f6865e381dbac42fb6acc6e0c4b956ba8ed24a7375857b52850190"
+  },
+  "identity_roundtrips": {
+    "Route212_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE212_ACCESS",
+      "target_map": "MAP_ROUTE212_ACCESS",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "output_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "mapped_unique_metatiles": 41,
+      "dimensions": [
+        9,
+        11
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route212_North": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE212_NORTH",
+      "target_map": "MAP_ROUTE212_NORTH",
+      "source_sha256": "f8a78cdcf49f2ff7a7b1e2c1534c86acaf8ae77ec10b7f3384f701ff2463c562",
+      "output_sha256": "f8a78cdcf49f2ff7a7b1e2c1534c86acaf8ae77ec10b7f3384f701ff2463c562",
+      "mapped_unique_metatiles": 139,
+      "dimensions": [
+        34,
+        100
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route212_South": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE212_SOUTH",
+      "target_map": "MAP_ROUTE212_SOUTH",
+      "source_sha256": "301f33cd5de4e13eb03abf3253a207039c9ed452a77c066be561b0adeb4d706c",
+      "output_sha256": "301f33cd5de4e13eb03abf3253a207039c9ed452a77c066be561b0adeb4d706c",
+      "mapped_unique_metatiles": 176,
+      "dimensions": [
+        130,
+        34
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route213": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE213",
+      "target_map": "MAP_ROUTE213",
+      "source_sha256": "cdad001d84c1f18a6d11dc57fa14ab9ef677d98d42fe645aaa8adb6ccb4101fa",
+      "output_sha256": "cdad001d84c1f18a6d11dc57fa14ab9ef677d98d42fe645aaa8adb6ccb4101fa",
+      "mapped_unique_metatiles": 211,
+      "dimensions": [
+        100,
+        60
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route213_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE213_ACCESS",
+      "target_map": "MAP_ROUTE213_ACCESS",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "output_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route214": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE214",
+      "target_map": "MAP_ROUTE214",
+      "source_sha256": "3c25a90375acec337ddcb79ec985b36c70937eef9fe99f99b81e4e19e1eacfb2",
+      "output_sha256": "3c25a90375acec337ddcb79ec985b36c70937eef9fe99f99b81e4e19e1eacfb2",
+      "mapped_unique_metatiles": 98,
+      "dimensions": [
+        44,
+        91
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route214_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE214_ACCESS",
+      "target_map": "MAP_ROUTE214_ACCESS",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "output_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "mapped_unique_metatiles": 41,
+      "dimensions": [
+        9,
+        11
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route215": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE215",
+      "target_map": "MAP_ROUTE215",
+      "source_sha256": "61c0141623fedb372b76dc652f5d49ce5a2e9ee66f46bfac73bb874c5eaa3de4",
+      "output_sha256": "61c0141623fedb372b76dc652f5d49ce5a2e9ee66f46bfac73bb874c5eaa3de4",
+      "mapped_unique_metatiles": 122,
+      "dimensions": [
+        100,
+        42
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "Route215_Access": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_ROUTE215_ACCESS",
+      "target_map": "MAP_ROUTE215_ACCESS",
+      "source_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "output_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "mapped_unique_metatiles": 47,
+      "dimensions": [
+        13,
+        9
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "ValorLakefront": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_VALOR_LAKEFRONT",
+      "target_map": "MAP_VALOR_LAKEFRONT",
+      "source_sha256": "06d1f85436328b56dcd453a931875aedbd68e555506e96702d7a173c105c008b",
+      "output_sha256": "06d1f85436328b56dcd453a931875aedbd68e555506e96702d7a173c105c008b",
+      "mapped_unique_metatiles": 131,
+      "dimensions": [
+        56,
+        66
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "VeilstoneCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_VEILSTONE_CITY",
+      "target_map": "MAP_VEILSTONE_CITY",
+      "source_sha256": "4a5a708414111e28828dbc60f75e3c3a801ffb2b58a033fb98efa87a8e931848",
+      "output_sha256": "4a5a708414111e28828dbc60f75e3c3a801ffb2b58a033fb98efa87a8e931848",
+      "mapped_unique_metatiles": 271,
+      "dimensions": [
+        66,
+        68
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    },
+    "PastoriaCity": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_PASTORIA_CITY",
+      "target_map": "MAP_PASTORIA_CITY",
+      "source_sha256": "44852e21a594056cc602d667f882e09ad2c4b36b73f63d0fd4fcd307372ace42",
+      "output_sha256": "44852e21a594056cc602d667f882e09ad2c4b36b73f63d0fd4fcd307372ace42",
+      "mapped_unique_metatiles": 182,
+      "dimensions": [
+        68,
+        60
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "Route212_Access": {
+      "id": "MAP_ROUTE212_ACCESS",
+      "name": "Route212_Access",
+      "layout": "LAYOUT_ROUTE212_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE212_NORTH",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_HEARTHOME_CITY",
+          "dest_warp_id": "2"
+        }
+      ],
+      "connections": null
+    },
+    "Route212_North": {
+      "id": "MAP_ROUTE212_NORTH",
+      "name": "Route212_North",
+      "layout": "LAYOUT_ROUTE212_NORTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 12,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE212_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 13,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE212_ACCESS",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE212_SOUTH",
+          "offset": 0,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_HEARTHOME_CITY",
+          "offset": 4,
+          "direction": "up"
+        }
+      ]
+    },
+    "Route212_South": {
+      "id": "MAP_ROUTE212_SOUTH",
+      "name": "Route212_South",
+      "layout": "LAYOUT_ROUTE212_SOUTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [],
+      "connections": [
+        {
+          "map": "MAP_PASTORIA_CITY",
+          "offset": -32,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE212_NORTH",
+          "offset": 0,
+          "direction": "up"
+        }
+      ]
+    },
+    "Route213": {
+      "id": "MAP_ROUTE213",
+      "name": "Route213",
+      "layout": "LAYOUT_ROUTE213",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE213_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 68,
+          "y": 16,
+          "elevation": 0,
+          "dest_map": "MAP_HOTEL_GRAND_LAKE",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 68,
+          "y": 11,
+          "elevation": 0,
+          "dest_map": "MAP_HOTEL_GRAND_LAKE",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_PASTORIA_CITY",
+          "offset": -2,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_VALOR_LAKEFRONT",
+          "offset": 40,
+          "direction": "up"
+        }
+      ]
+    },
+    "Route213_Access": {
+      "id": "MAP_ROUTE213_ACCESS",
+      "name": "Route213_Access",
+      "layout": "LAYOUT_ROUTE213_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE213",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_PASTORIA_CITY",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "Route214": {
+      "id": "MAP_ROUTE214",
+      "name": "Route214",
+      "layout": "LAYOUT_ROUTE214",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 16,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE214_ACCESS",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 17,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE214_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_VEILSTONE_CITY",
+          "offset": -26,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_VALOR_LAKEFRONT",
+          "offset": -24,
+          "direction": "down"
+        }
+      ]
+    },
+    "Route214_Access": {
+      "id": "MAP_ROUTE214_ACCESS",
+      "name": "Route214_Access",
+      "layout": "LAYOUT_ROUTE214_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_VEILSTONE_CITY",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE214",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": null
+    },
+    "Route215": {
+      "id": "MAP_ROUTE215",
+      "name": "Route215",
+      "layout": "LAYOUT_ROUTE215",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 95,
+          "y": 27,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE215_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE210_SOUTH",
+          "offset": -26,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_VEILSTONE_CITY",
+          "offset": 1,
+          "direction": "right"
+        }
+      ]
+    },
+    "Route215_Access": {
+      "id": "MAP_ROUTE215_ACCESS",
+      "name": "Route215_Access",
+      "layout": "LAYOUT_ROUTE215_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_VEILSTONE_CITY",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE215",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": 0
+    },
+    "ValorLakefront": {
+      "id": "MAP_VALOR_LAKEFRONT",
+      "name": "ValorLakefront",
+      "layout": "LAYOUT_VALOR_LAKEFRONT",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 41,
+          "y": 27,
+          "elevation": 0,
+          "dest_map": "MAP_LAKE_VALOR",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 41,
+          "y": 28,
+          "elevation": 0,
+          "dest_map": "MAP_LAKE_VALOR",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE213",
+          "offset": -40,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_ROUTE214",
+          "offset": 24,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_ROUTE222",
+          "offset": 36,
+          "direction": "right"
+        }
+      ]
+    },
+    "VeilstoneCity": {
+      "id": "MAP_VEILSTONE_CITY",
+      "name": "VeilstoneCity",
+      "layout": "LAYOUT_VEILSTONE_CITY",
+      "map_type": "MAP_TYPE_TOWN",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 42,
+          "y": 62,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE214_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 43,
+          "y": 62,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE214_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 4,
+          "y": 26,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE215_ACCESS",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 25,
+          "y": 30,
+          "elevation": 0,
+          "dest_map": "MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE215",
+          "offset": -1,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE214",
+          "offset": 26,
+          "direction": "down"
+        }
+      ]
+    },
+    "PastoriaCity": {
+      "id": "MAP_PASTORIA_CITY",
+      "name": "PastoriaCity",
+      "layout": "LAYOUT_PASTORIA_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 63,
+          "y": 11,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE213_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": [
+        {
+          "map": "MAP_ROUTE213",
+          "offset": 2,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE212_SOUTH",
+          "offset": 32,
+          "direction": "left"
+        }
+      ]
+    }
+  },
+  "warp_index_translation": {
+    "Route212_Access": {
+      "0": 0
+    },
+    "Route212_North": {
+      "0": 0,
+      "1": 1
+    },
+    "Route212_South": {},
+    "Route213": {
+      "0": 0
+    },
+    "Route213_Access": {
+      "0": 0,
+      "1": 1
+    },
+    "Route214": {
+      "0": 0,
+      "1": 1
+    },
+    "Route214_Access": {
+      "0": 0,
+      "1": 1
+    },
+    "Route215": {
+      "0": 0
+    },
+    "Route215_Access": {
+      "0": 0,
+      "1": 1
+    },
+    "ValorLakefront": {},
+    "VeilstoneCity": {
+      "0": 0,
+      "1": 1,
+      "2": 2
+    },
+    "PastoriaCity": {
+      "0": 0
+    }
+  },
+  "closure_changes": {
+    "Route212_Access": [
+      {
+        "x": 4,
+        "y": 1,
+        "before": 12828,
+        "after": 13852,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "before": 12818,
+        "after": 13842,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route212_North": [],
+    "Route212_South": [
+      {
+        "x": 62,
+        "y": 0,
+        "before": 4496,
+        "after": 5520,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 63,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 64,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 65,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 66,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 67,
+        "y": 0,
+        "before": 4498,
+        "after": 5522,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 129,
+        "y": 19,
+        "before": 12289,
+        "after": 13313,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      }
+    ],
+    "Route213": [
+      {
+        "x": 68,
+        "y": 11,
+        "before": 12860,
+        "after": 13884,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 90,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 91,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 92,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 93,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 94,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 95,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 96,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 97,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 98,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 99,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 0,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 38,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 40,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 42,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 43,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 44,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 45,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 46,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 47,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 48,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 49,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 50,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 51,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 52,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 53,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 54,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 56,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 57,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 58,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 59,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 60,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 61,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 62,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 63,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 64,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 66,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 67,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 68,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 69,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 70,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 71,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 72,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 73,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 74,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 75,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 76,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 77,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 78,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 79,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 80,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 81,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 82,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 83,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 84,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 85,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 86,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 87,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 88,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 89,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 90,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 91,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 92,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 93,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 94,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 95,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 96,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 97,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 98,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 58,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 99,
+        "y": 1,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 2,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 3,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 4,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 5,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 6,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 7,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 8,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 9,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 10,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 11,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 12,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 13,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 14,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 15,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 16,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 17,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 20,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 21,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 22,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 23,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 24,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 25,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 26,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 27,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 28,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 29,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 30,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 31,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 32,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 33,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 34,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 35,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 36,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 37,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 38,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 39,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 40,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 41,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 42,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 43,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 44,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 45,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 46,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 47,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 48,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 49,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 50,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 51,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 52,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 53,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 54,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 55,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 56,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 57,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 99,
+        "y": 58,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 57,
+        "before": 4464,
+        "after": 5488,
+        "reason": "destination closed by final cluster sanitization"
+      }
+    ],
+    "Route213_Access": [
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route214": [],
+    "Route214_Access": [
+      {
+        "x": 0,
+        "y": 2,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 4,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 5,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 7,
+        "before": 12824,
+        "after": 13848,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "before": 12808,
+        "after": 13832,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "before": 12818,
+        "after": 13842,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12826,
+        "after": 13850,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route215": [
+      {
+        "x": 0,
+        "y": 20,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 21,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 22,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 23,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 24,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 25,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 26,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 27,
+        "before": 12753,
+        "after": 13777,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 28,
+        "before": 12761,
+        "after": 13785,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 29,
+        "before": 12769,
+        "after": 13793,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 30,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "Route215_Access": [
+      {
+        "x": 2,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "before": 12802,
+        "after": 13826,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "ValorLakefront": [
+      {
+        "x": 41,
+        "y": 27,
+        "before": 661,
+        "after": 1685,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 41,
+        "y": 28,
+        "before": 673,
+        "after": 1697,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 37,
+        "y": 65,
+        "before": 12289,
+        "after": 13313,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 55,
+        "y": 39,
+        "before": 12289,
+        "after": 13313,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 43,
+        "before": 12751,
+        "after": 13775,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 46,
+        "before": 12751,
+        "after": 13775,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 57,
+        "before": 16385,
+        "after": 17409,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 58,
+        "before": 16665,
+        "after": 17689,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 59,
+        "before": 16673,
+        "after": 17697,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 60,
+        "before": 16681,
+        "after": 17705,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 61,
+        "before": 16385,
+        "after": 17409,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 63,
+        "before": 12580,
+        "after": 13604,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "VeilstoneCity": [
+      {
+        "x": 25,
+        "y": 30,
+        "before": 16988,
+        "after": 18012,
+        "reason": "unbuilt source destination"
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 1,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 2,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 3,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 4,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 5,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 7,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 9,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 10,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 18,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 19,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 20,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 21,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 22,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 23,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 24,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 25,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 26,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 27,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 28,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 29,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 30,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 31,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 32,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 33,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 34,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 35,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 36,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 37,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 38,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 39,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 40,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 41,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 42,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 43,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 44,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 45,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 46,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 47,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 48,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 49,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 50,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 51,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 52,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 53,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 54,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 56,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 57,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 58,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 59,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 60,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 61,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 62,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 63,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 64,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 0,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 0,
+        "y": 1,
+        "before": 4464,
+        "after": 5488,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 0,
+        "y": 2,
+        "before": 4598,
+        "after": 5622,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 0,
+        "y": 3,
+        "before": 12796,
+        "after": 13820,
+        "reason": "nonoverlap or blocked source seam endpoint"
+      },
+      {
+        "x": 65,
+        "y": 1,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 2,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 3,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 4,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 5,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 6,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 7,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 8,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 9,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 10,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 11,
+        "before": 4599,
+        "after": 5623,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 12,
+        "before": 12797,
+        "after": 13821,
+        "reason": "unbuilt external edge"
+      }
+    ],
+    "PastoriaCity": [
+      {
+        "x": 46,
+        "y": 59,
+        "before": 4496,
+        "after": 5520,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 47,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 48,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 49,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 50,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 51,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 52,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 53,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 54,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 55,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 56,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 57,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 58,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 59,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 60,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 61,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 62,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 63,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 64,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 65,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 66,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      },
+      {
+        "x": 67,
+        "y": 59,
+        "before": 4464,
+        "after": 5488,
+        "reason": "unbuilt external edge"
+      }
+    ]
+  },
+  "maps": {
+    "Route212_Access": {
+      "dimensions": [
+        9,
+        11
+      ],
+      "source_blob": "38af8d53086c00edfee9778c2b17a9d5a12c1872",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "staged_sha256": "6f3b2c7af53cf886a82f8968537375c919aa6b50c3065ad2c12809ceb5af0044",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 11,
+      "warp_count": 1,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route212_North": {
+      "dimensions": [
+        34,
+        100
+      ],
+      "source_blob": "95da4bb2ec84b4d54a42e346871c229727d6f5b8",
+      "source_sha256": "f8a78cdcf49f2ff7a7b1e2c1534c86acaf8ae77ec10b7f3384f701ff2463c562",
+      "staged_sha256": "f8a78cdcf49f2ff7a7b1e2c1534c86acaf8ae77ec10b7f3384f701ff2463c562",
+      "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "closed_cells": 0,
+      "warp_count": 2,
+      "connections": [
+        {
+          "map": "MAP_ROUTE212_SOUTH",
+          "offset": 0,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route212_South": {
+      "dimensions": [
+        130,
+        34
+      ],
+      "source_blob": "32c3fabe6f2af6fc5a7577081934de489486a39c",
+      "source_sha256": "301f33cd5de4e13eb03abf3253a207039c9ed452a77c066be561b0adeb4d706c",
+      "staged_sha256": "ec4b6626cc6a6cd6a8618b7def5cf571c78dcc0a8bb12a76565a0288a8cff340",
+      "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "closed_cells": 7,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_PASTORIA_CITY",
+          "offset": -32,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE212_NORTH",
+          "offset": 0,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 34
+    },
+    "Route213": {
+      "dimensions": [
+        100,
+        60
+      ],
+      "source_blob": "a8e56eafb005d94cbe3248a56a6e18763e460b97",
+      "source_sha256": "cdad001d84c1f18a6d11dc57fa14ab9ef677d98d42fe645aaa8adb6ccb4101fa",
+      "staged_sha256": "04d2aba216ba8938fbdfffb76a086b87d5ec7d94e5a644e57e14dd118c7ea047",
+      "border_sha256": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+      "closed_cells": 167,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_PASTORIA_CITY",
+          "offset": -2,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_VALOR_LAKEFRONT",
+          "offset": 40,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route213_Access": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "b195400ca012d0e101f921b37bde3cafd21989dd",
+      "source_sha256": "71889ed868391a01a38594d9eca31f8cf47a1b9deea894bbe0e2cf9c8d66d1ae",
+      "staged_sha256": "c08399de7d2ee78b0991b5b237d40c8455a0fac727151a46ff79374adc096353",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 9,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route214": {
+      "dimensions": [
+        44,
+        91
+      ],
+      "source_blob": "cb6faa3d4729bef5a43775dee3acb03e1ca148c2",
+      "source_sha256": "3c25a90375acec337ddcb79ec985b36c70937eef9fe99f99b81e4e19e1eacfb2",
+      "staged_sha256": "3c25a90375acec337ddcb79ec985b36c70937eef9fe99f99b81e4e19e1eacfb2",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 0,
+      "warp_count": 2,
+      "connections": [
+        {
+          "map": "MAP_VEILSTONE_CITY",
+          "offset": -26,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_VALOR_LAKEFRONT",
+          "offset": -24,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "Route214_Access": {
+      "dimensions": [
+        9,
+        11
+      ],
+      "source_blob": "38af8d53086c00edfee9778c2b17a9d5a12c1872",
+      "source_sha256": "9c7845fda71b2281bf719527e2d6d106b8de64ec5ca2e631fdb31efb2b2058d8",
+      "staged_sha256": "948782bb1af05f437faf408b275f746795b1b8531de203a6d2e9a2a1e9876278",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 10,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "Route215": {
+      "dimensions": [
+        100,
+        42
+      ],
+      "source_blob": "9986f98b26c78b38ec4628c9c4230783756730bb",
+      "source_sha256": "61c0141623fedb372b76dc652f5d49ce5a2e9ee66f46bfac73bb874c5eaa3de4",
+      "staged_sha256": "d4a21dc861fd26a2677f1953da09fcfd7e18a3e31302d979c23d979e615d77e3",
+      "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "closed_cells": 11,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_VEILSTONE_CITY",
+          "offset": 1,
+          "direction": "right"
+        }
+      ],
+      "elevation15_cells": 63
+    },
+    "Route215_Access": {
+      "dimensions": [
+        13,
+        9
+      ],
+      "source_blob": "feab6a93f800e642ee42c0c229b4db7302835a6f",
+      "source_sha256": "71426d1911abe0001eb1fad400e38da813dbf67eabd8f9902e22c28f55de8741",
+      "staged_sha256": "6157827bdf6a84b75732dceb9b1c08747f08fb9e92d410c2ad8698eebce5dbe4",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 9,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    },
+    "ValorLakefront": {
+      "dimensions": [
+        56,
+        66
+      ],
+      "source_blob": "972daf04538e3ef85fba0c8784e943179491c890",
+      "source_sha256": "06d1f85436328b56dcd453a931875aedbd68e555506e96702d7a173c105c008b",
+      "staged_sha256": "f21811200d53f0324dc44077d062cb7f7bba8517360c59f50d07465bd22f0058",
+      "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "closed_cells": 12,
+      "warp_count": 0,
+      "connections": [
+        {
+          "map": "MAP_ROUTE213",
+          "offset": -40,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_ROUTE214",
+          "offset": 24,
+          "direction": "up"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "VeilstoneCity": {
+      "dimensions": [
+        66,
+        68
+      ],
+      "source_blob": "cf156106b37670e558c401dcf577a599f3a6059f",
+      "source_sha256": "4a5a708414111e28828dbc60f75e3c3a801ffb2b58a033fb98efa87a8e931848",
+      "staged_sha256": "284c8503677b486ac1c5cd8016cbc3cc5ef162ed4ff00f525560d907b0ba7462",
+      "border_sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "closed_cells": 82,
+      "warp_count": 3,
+      "connections": [
+        {
+          "map": "MAP_ROUTE215",
+          "offset": -1,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE214",
+          "offset": 26,
+          "direction": "down"
+        }
+      ],
+      "elevation15_cells": 0
+    },
+    "PastoriaCity": {
+      "dimensions": [
+        68,
+        60
+      ],
+      "source_blob": "2daf5ede287de06223c1ff2063e4dfd885eda450",
+      "source_sha256": "44852e21a594056cc602d667f882e09ad2c4b36b73f63d0fd4fcd307372ace42",
+      "staged_sha256": "2cb1f0264426585369a67f07ec4ed00fbe6804bf36f6ae20f632f2f2038e7840",
+      "border_sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "closed_cells": 22,
+      "warp_count": 1,
+      "connections": [
+        {
+          "map": "MAP_ROUTE213",
+          "offset": 2,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_ROUTE212_SOUTH",
+          "offset": 32,
+          "direction": "left"
+        }
+      ],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "MAP_OLD_CHATEAU_DINING_ROOM",
+  "name": "OldChateau_DiningRoom",
+  "layout": "LAYOUT_OLD_CHATEAU_DINING_ROOM",
+  "map_type": "MAP_TYPE_NONE",
+  "requires_flash": false,
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "music": "MUS_ROUTE110",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 20,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 21,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_OLD_CHATEAU_ENTRANCE",
+      "dest_warp_id": "3"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

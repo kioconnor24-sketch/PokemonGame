@@ -1,0 +1,68 @@
+{
+  "scope": "read-only verification of two earlier executed regenerations and published outputs; not a new ROM/build test",
+  "published_source_sha": "0005ba56711ba5c73e4d1b31402b62b1a7863800",
+  "files_compared": 10,
+  "all_equal": true,
+  "files": [
+    {
+      "path": "OreburghCity/averon.png",
+      "bytes": 100238,
+      "sha256": "c1ee7a1485d12676e1ff4d9897aaa1c1356c07a59a7cb041789c7b79794ea95d",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "OreburghCity/map.bin",
+      "bytes": 8260,
+      "sha256": "ebc1b5c41ef7a7d0a26eda8ac0edf02ec6945f0af5f922e3c7bd46a3101896e6",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "Route207/averon.png",
+      "bytes": 63573,
+      "sha256": "556613c2f387ae83cfbc4edba8f7d7af2523ddb80c3337ba1c76f811add5c74c",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "Route207/map.bin",
+      "bytes": 4096,
+      "sha256": "b21dff39fc3f721a48f654d934c5eeecd952458032f95010ca9c1e4482a474e6",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "banks/primary/metatile_attributes.bin",
+      "bytes": 1024,
+      "sha256": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "banks/primary/metatiles.bin",
+      "bytes": 8192,
+      "sha256": "a610df7e921699e100e7bbe5831492a552e8ef317d23963cac78fbf2875a5ea0",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "banks/secondary/metatile_attributes.bin",
+      "bytes": 878,
+      "sha256": "858160b569ae7b127588e911422e95450d2b180b5de1acce6865b8a0d9a8c574",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "banks/secondary/metatiles.bin",
+      "bytes": 7024,
+      "sha256": "323a0684dbdbd2be3c60fb5cd318b328d55c6006fe472340a2cd74cdf9b57702",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 19529,
+      "sha256": "a4f86d2a87a2240832ffa4f11c54d40af1141c0e4f869726fad89e6cd3cded3a",
+      "two_regenerations_and_published_commit_equal": true
+    },
+    {
+      "path": "warp-plan.json",
+      "bytes": 2645,
+      "sha256": "e6e352e45173442036aa8ac540a37f533621416c0137dda9910aa0cf61581918",
+      "two_regenerations_and_published_commit_equal": true
+    }
+  ]
+}

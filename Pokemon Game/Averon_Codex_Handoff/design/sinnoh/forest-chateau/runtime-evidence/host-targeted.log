@@ -1,0 +1,20 @@
+test_actual_building_alias_and_all_existing_animation_bindings_are_preserved (test_sinnoh_forest_runtime.ForestRuntimeTest.test_actual_building_alias_and_all_existing_animation_bindings_are_preserved) ... ok
+test_all_existing_map_layout_and_include_prefixes_survive (test_sinnoh_forest_runtime.ForestRuntimeTest.test_all_existing_map_layout_and_include_prefixes_survive) ... ok
+test_all_interiors_share_building_with_distinct_museum_and_generic_metadata (test_sinnoh_forest_runtime.ForestRuntimeTest.test_all_interiors_share_building_with_distinct_museum_and_generic_metadata) ... ok
+test_all_six_tilesets_and_maps_parse_in_real_qa_world (test_sinnoh_forest_runtime.ForestRuntimeTest.test_all_six_tilesets_and_maps_parse_in_real_qa_world) ... ok
+test_follower_does_not_send_a_return_for_a_failed_step (test_sinnoh_forest_runtime.ForestRuntimeTest.test_follower_does_not_send_a_return_for_a_failed_step) ... ok
+test_follower_returns_after_a_real_falsey_state_snapshot (test_sinnoh_forest_runtime.ForestRuntimeTest.test_follower_returns_after_a_real_falsey_state_snapshot) ... ok
+test_foreign_or_invalid_self_warp_rejected_before_writing (test_sinnoh_forest_runtime.ForestRuntimeTest.test_foreign_or_invalid_self_warp_rejected_before_writing) ... ok
+test_installed_source_warps_and_all_geometry_reuse_exact_accepted_art (test_sinnoh_forest_runtime.ForestRuntimeTest.test_installed_source_warps_and_all_geometry_reuse_exact_accepted_art) ... ok
+test_misaligned_bank_dirty_baseline_and_unmarked_install_rejected (test_sinnoh_forest_runtime.ForestRuntimeTest.test_misaligned_bank_dirty_baseline_and_unmarked_install_rejected) ... ok
+test_no_save_id_global_art_northern_or_existing_production_map_writes (test_sinnoh_forest_runtime.ForestRuntimeTest.test_no_save_id_global_art_northern_or_existing_production_map_writes) ... ok
+test_plan_reproduces_without_writing_any_input (test_sinnoh_forest_runtime.ForestRuntimeTest.test_plan_reproduces_without_writing_any_input) ... ok
+test_runtime_floor_repair_is_opaque_and_preserves_source_attributes (test_sinnoh_forest_runtime.ForestRuntimeTest.test_runtime_floor_repair_is_opaque_and_preserves_source_attributes) ... /workspace/averon-oreburgh-corridor/Pokemon Game/scripts/tests/test_sinnoh_forest_runtime.py:121: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  self.assertNotIn(0,set(pixels.getdata()))
+ok
+test_runtime_launcher_refuses_unmarked_changed_or_escaping_source (test_sinnoh_forest_runtime.ForestRuntimeTest.test_runtime_launcher_refuses_unmarked_changed_or_escaping_source) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.743s
+
+OK

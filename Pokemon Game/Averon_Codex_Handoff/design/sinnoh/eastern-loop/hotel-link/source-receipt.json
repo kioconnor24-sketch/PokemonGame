@@ -1,0 +1,99 @@
+{
+  "status": "NEUTRAL_ORIGINAL_HOTEL_CONNECTOR_NOT_PRODUCTION",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "donor_sha256": {
+    "data/layouts/layouts.json": "e45d0bd9164021e7ec5b3c40de9fc66b26c989c10e199ed8e1325adc23101ad6",
+    "data/maps/HotelGrandLake/map.json": "ca4146632267cead611875744cde40c6ab4f5bcb005447e8abf42235e74ed711",
+    "data/layouts/HotelGrandLake/map.bin": "b1890c35c0c1ded0be99870d11b8b42f54d65c93b724f4cacd8a7aa16f84d2ec",
+    "data/layouts/HotelGrandLake/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "data/tilesets/secondary/pasos/metatile_attributes.bin": "3efe3d6118ddb28de6083531ec1304f5b4db5b54731609dc31e68ea8ccb9aaac"
+  },
+  "identity_roundtrips": {
+    "HotelGrandLake": {
+      "status": "STAGED_NOT_INTEGRATED_OR_PLAYTESTED",
+      "donor": "https://github.com/LiderMorti00/Sinnoh-pokeemerald-expansion",
+      "revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+      "source_map": "MAP_HOTEL_GRAND_LAKE",
+      "target_map": "MAP_HOTEL_GRAND_LAKE",
+      "source_sha256": "b1890c35c0c1ded0be99870d11b8b42f54d65c93b724f4cacd8a7aa16f84d2ec",
+      "output_sha256": "b1890c35c0c1ded0be99870d11b8b42f54d65c93b724f4cacd8a7aa16f84d2ec",
+      "mapped_unique_metatiles": 55,
+      "dimensions": [
+        15,
+        12
+      ],
+      "preserved_collision_elevation": true,
+      "excluded": [
+        "events",
+        "scripts",
+        "connections",
+        "warps",
+        "flags",
+        "map IDs",
+        "saved sections",
+        "assets"
+      ]
+    }
+  },
+  "source_geometry_headers": {
+    "HotelGrandLake": {
+      "id": "MAP_HOTEL_GRAND_LAKE",
+      "name": "HotelGrandLake",
+      "layout": "LAYOUT_HOTEL_GRAND_LAKE",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "warp_events": [
+        {
+          "x": 7,
+          "y": 1,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE213",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 7,
+          "y": 10,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE213",
+          "dest_warp_id": "1"
+        }
+      ],
+      "connections": null
+    }
+  },
+  "warp_index_translation": {
+    "HotelGrandLake": {
+      "0": 0,
+      "1": 1
+    }
+  },
+  "closure_changes": {
+    "HotelGrandLake": []
+  },
+  "maps": {
+    "HotelGrandLake": {
+      "dimensions": [
+        15,
+        12
+      ],
+      "source_blob": "4ffd2c9d215171d44aa4396ccd93d76b7026ff85",
+      "source_sha256": "b1890c35c0c1ded0be99870d11b8b42f54d65c93b724f4cacd8a7aa16f84d2ec",
+      "staged_sha256": "b1890c35c0c1ded0be99870d11b8b42f54d65c93b724f4cacd8a7aa16f84d2ec",
+      "border_sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "closed_cells": 0,
+      "warp_count": 2,
+      "connections": [],
+      "elevation15_cells": 0
+    }
+  },
+  "limits": [
+    "No donor pixels/palettes/scripts/objects/trainers/encounters copied",
+    "No production registry, saved ID, ROM or mGBA acceptance",
+    "Yellow collision preview means elevation15, not actual art"
+  ]
+}

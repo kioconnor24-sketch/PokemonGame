@@ -1,0 +1,50 @@
+{
+  "maps": [
+    "MAP_ROUTE205_NORTH",
+    "MAP_ROUTE205_SOUTH",
+    "MAP_FLOAROMA_TOWN",
+    "MAP_FLOAROMA_MEADOW",
+    "MAP_ROUTE204",
+    "MAP_RAVAGED_PATH"
+  ],
+  "build": "release",
+  "rom_sha256": "64c4ab1d5052804612092080ce08066a72e502571d76c64f03f78adb1e088130",
+  "static_findings": [],
+  "navigation": "hash-pinned52-step height route; existing checks unchanged, ordinary controller only",
+  "dev_entry": "continue-warp DEV fixture unless --expect; no production origin-name acceptance",
+  "alive": true,
+  "checks": [
+    {
+      "name": "fresh CONTINUE restores the saved state",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ]
+    },
+    {
+      "name": "starts inside the batch",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE205_SOUTH",
+        [
+          26,
+          81
+        ]
+      ]
+    },
+    {
+      "name": "follower visible (start)",
+      "ok": true,
+      "follower": {
+        "species": 393,
+        "graphicsId": 16777,
+        "invisible": false
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

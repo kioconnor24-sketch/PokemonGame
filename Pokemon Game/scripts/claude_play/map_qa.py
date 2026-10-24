@@ -451,7 +451,7 @@ class Runner:
         for direction, (dx, dy) in DIRS.items():
             n = (x + dx, y + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
-                if self.d.step(direction):
+                if self.d.step(direction) is not None:
                     self.d.step(OPPOSITE[direction])
                 break
         obs = play.observe(self.d, label)
@@ -469,7 +469,8 @@ class Runner:
         """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run.
 
         When the tile is in another part of the map than the player (a route split by a cliff and joined
-        by a cave), enter that part through a batch warp whose arrival can reach it, then walk.
+        by a cave, or a plateau reached only across a seam), travel there through neighbouring maps with
+        elevation-aware routing; failing that, enter that part through a batch warp whose arrival can reach it.
         """
         from driver import Stuck
         tile = tuple(tile)
@@ -479,12 +480,37 @@ class Runner:
                 self.d.go_map(self.d.map_route(map_id, map_id, here[1], target=tile))
             except Stuck as exc:
                 self.d.log("no-route-to-tile", map=map_id, tile=tile, reason=str(exc))
+                self.enter_region(map_id, tile, _depth)
         try:
             self.d.walk_path(map_id, {tile})
         except Stuck as exc:
             self.d.log("unreachable", map=map_id, tile=tile, reason=str(exc))
             return False
         return self.d.here() == (map_id, tile)
+
+    def enter_region(self, map_id, tile, depth):
+        target = self.w.map(map_id)
+        for src in self.plan:
+            for p in self.plan[src]["points"]:
+                if p["kind"] != "warp" or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
+                    continue
+                arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
+                if tile not in reach(target, [arrive]):
+                    continue
+                self.d.log("enter-region", map=map_id, tile=tile, via=(src, tuple(p["tile"])))
+                if self.d.here()[0] != src:
+                    self.d.travel_to(src)
+                if not self.go(src, p["tile"], depth + 1):
+                    continue
+                for _ in range(4):
+                    self.press(p["push"], hold=0.3, after=1.2)
+                    here = self.d.here()
+                    if here[0] != src or (src == map_id and here == (map_id, arrive)):
+                        break
+                here = self.wait_settled()
+                if here[0] == map_id and (src != map_id or here[1] == arrive):
+                    return True
+        return False
 
     def blocked(self, map_id, x, y, direction):
         """Targeted probe (e.g. a shore facing water without Surf): stand there, push, must not move."""
@@ -541,7 +567,8 @@ class Runner:
             return self.check(name, False, reason="could not reach the warp", at=self.d.here())
         for _ in range(4):
             self.press(p["push"], hold=0.3, after=1.2)
-            if self.d.here()[0] != map_id:
+            here = self.d.here()
+            if here[0] != map_id or (p["dest"] == map_id and here == (p["dest"], arrive)):
                 break
         there = self.wait_settled()
         self.d.shot(f"warp-{map_id}-{p['index']}")
@@ -550,14 +577,18 @@ class Runner:
         self.follower(f"{p['dest']} via warp")
         self.can_leave(f"warping into {p['dest']}")
         self.go(p["dest"], dstand)
+        # A same-map warp changes coordinates, not its map ID. Stop on the
+        # exact accepted source-derived return group before another input moves
+        # the player away; shared exit mats remain valid as before.
+        m = self.w.map(map_id)
+        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         for _ in range(4):
             self.press(dpush, hold=0.3, after=1.2)
-            if self.d.here()[0] != p["dest"]:
+            here = self.d.here()
+            if here[0] != p["dest"] or (p["dest"] == map_id and here[0] == map_id and here[1] in group):
                 break
         back = self.wait_settled()
         # Several warps may share one destination (a Center's two exit mats); any of them is a correct return.
-        m = self.w.map(map_id)
-        group = {warp_arrive(m, x, y) for x, y, dst, dw in m.warps if (dst, dw) == (p["dest"], p["dest_warp"])}
         ok = self.check(name, back[0] == map_id and back[1] in group, leg="back", expected=(map_id, sorted(group)), got=back)
         if ok:
             self.follower(f"{map_id} after warp round trip")

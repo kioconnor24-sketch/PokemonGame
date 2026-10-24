@@ -1,0 +1,416 @@
+{
+  "observed_utc": "2026-10-22T04:50:26.014924+00:00",
+  "main_sha": "f4548cca06d56c45595cbcb3386ed32f09d5a362",
+  "pull_requests": [
+    {
+      "headRefName": "codex/oreburgh-route207-art-20261021",
+      "headRefOid": "920cf050e4a79f4899ff86539540cb0efcadfe3e",
+      "mergeCommit": null,
+      "number": 205,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:31:28Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693952988/job/119546676221",
+          "name": "file-guard",
+          "startedAt": "2026-10-21T23:31:25Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:32:08Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693952987/job/119546675885",
+          "name": "inspect-only",
+          "startedAt": "2026-10-21T23:31:25Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon Sinnoh donor pilot (read-only)"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:31:33Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693953134/job/119546679026",
+          "name": "route",
+          "startedAt": "2026-10-21T23:31:26Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:31:38Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693953126/job/119546678929",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-21T23:31:25Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:31:33Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693952974/job/119546676128",
+          "name": "python-source-checks",
+          "startedAt": "2026-10-21T23:31:25Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon source checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T23:31:23Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39693952988/job/119546678058",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-21T23:31:23Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        }
+      ],
+      "url": "https://github.com/kioconnor24-sketch/PokemonGame/pull/205"
+    },
+    {
+      "headRefName": "codex/northern-integration-20261021",
+      "headRefOid": "756437be817b45ecba85dd0a2a16a55eda4eebc0",
+      "mergeCommit": null,
+      "number": 206,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:52Z",
+          "conclusion": "FAILURE",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699707798/job/119565691668",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T00:26:38Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:23Z",
+          "conclusion": "FAILURE",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699860537/job/119566199807",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T00:28:12Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:29Z",
+          "conclusion": "FAILURE",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699865246/job/119566215973",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T00:28:15Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:30:37Z",
+          "conclusion": "FAILURE",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39700081045/job/119566924128",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T00:30:23Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:16Z",
+          "conclusion": "CANCELLED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699860091/job/119566197308",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T00:28:12Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:46Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710705/job/119565701014",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T00:26:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:27Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699864633/job/119566239563",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T00:28:21Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:30:29Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39700080574/job/119566920860",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T00:30:23Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:27:20Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710685/job/119565700601",
+          "name": "inspect-only",
+          "startedAt": "2026-10-22T00:26:41Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon Sinnoh donor pilot (read-only)"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:47Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699707872/job/119565692593",
+          "name": "route",
+          "startedAt": "2026-10-22T00:26:39Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:20Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699860597/job/119566200403",
+          "name": "route",
+          "startedAt": "2026-10-22T00:28:12Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:30:32Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39700081196/job/119566924673",
+          "name": "route",
+          "startedAt": "2026-10-22T00:30:24Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:49Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710760/job/119565701615",
+          "name": "source-contract",
+          "startedAt": "2026-10-22T00:26:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon map registry contract"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:44:37Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710728/job/119565701563",
+          "name": "native-build",
+          "startedAt": "2026-10-22T00:26:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon native build gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:27:27Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710704/job/119565700942",
+          "name": "production-config",
+          "startedAt": "2026-10-22T00:26:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon release configuration parity"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:50Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710671/job/119565702083",
+          "name": "python-source-checks",
+          "startedAt": "2026-10-22T00:26:40Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon source checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:26:38Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699710705/job/119565702421",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T00:26:38Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:09Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699860091/job/119566199089",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T00:28:10Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:28:17Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39699864633/job/119566240707",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T00:28:17Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:30:20Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39700080574/job/119566922631",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T00:30:21Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        }
+      ],
+      "url": "https://github.com/kioconnor24-sketch/PokemonGame/pull/206"
+    },
+    {
+      "headRefName": "codex/sinnoh-origin-options-20261021",
+      "headRefOid": "0f1d3f9b6671d6db28b0c457ea01fb4f76f286c0",
+      "mergeCommit": null,
+      "number": 207,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:18:00Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39698846675/job/119562805486",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T00:17:56Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:18:39Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39698846574/job/119562804657",
+          "name": "inspect-only",
+          "startedAt": "2026-10-22T00:17:55Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon Sinnoh donor pilot (read-only)"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:18:02Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39698846580/job/119562806733",
+          "name": "route",
+          "startedAt": "2026-10-22T00:17:56Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:18:09Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39698846463/job/119562806004",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T00:17:56Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T00:17:53Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39698846675/job/119562806933",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T00:17:54Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        }
+      ],
+      "url": "https://github.com/kioconnor24-sketch/PokemonGame/pull/207"
+    },
+    {
+      "headRefName": "codex/oreburgh-city-family-20261021",
+      "headRefOid": "0005ba56711ba5c73e4d1b31402b62b1a7863800",
+      "mergeCommit": null,
+      "number": 208,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:45:22Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128794/job/119644050041",
+          "name": "file-guard",
+          "startedAt": "2026-10-22T04:45:17Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:46:02Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128709/job/119644049590",
+          "name": "inspect-only",
+          "startedAt": "2026-10-22T04:45:17Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon Sinnoh donor pilot (read-only)"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:45:28Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128827/job/119644051361",
+          "name": "route",
+          "startedAt": "2026-10-22T04:45:18Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon agent dispatch board"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:45:33Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128745/job/119644050879",
+          "name": "exclusive-files",
+          "startedAt": "2026-10-22T04:45:18Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon exclusive-source gate"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:45:25Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128787/job/119644049878",
+          "name": "python-source-checks",
+          "startedAt": "2026-10-22T04:45:17Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon source checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-22T04:45:15Z",
+          "conclusion": "SKIPPED",
+          "detailsUrl": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/39724128794/job/119644051465",
+          "name": "weekly-readonly-audit",
+          "startedAt": "2026-10-22T04:45:16Z",
+          "status": "COMPLETED",
+          "workflowName": "Averon PR hygiene"
+        }
+      ],
+      "url": "https://github.com/kioconnor24-sketch/PokemonGame/pull/208"
+    }
+  ]
+}

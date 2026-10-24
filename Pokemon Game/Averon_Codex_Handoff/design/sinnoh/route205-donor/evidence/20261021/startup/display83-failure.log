@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/averon-route204-resume/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_bridge_qa.py", line 115, in <module>
+    sys.exit(run(parser.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-route204-resume/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/route205-donor/run_bridge_qa.py", line 42, in run
+    e = emu.Emulator(rom, args.out, display=args.display, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-north-scratch-v2/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-north-scratch-v2/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window

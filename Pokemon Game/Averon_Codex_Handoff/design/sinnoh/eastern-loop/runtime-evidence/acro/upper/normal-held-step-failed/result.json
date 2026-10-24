@@ -1,0 +1,138 @@
+{
+ "maps": [
+  "MAP_ROUTE212_SOUTH"
+ ],
+ "build": "normal",
+ "rom_sha256": "09cc9d8a919523f26d5447c517165df5510c4843b1ba739e3fd53f5b111f04c4",
+ "static_findings": [],
+ "save_before": "91656da555c494e5614fdfc4cf189a45060ce43e5a0c4e217047244429cfe1ad",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "starts on genuine lower ground3 approach",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     36,
+     12
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "explicit fixture grants exactly one Acro",
+   "ok": true
+  },
+  {
+   "name": "ordinary foot route reaches upper layer4",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     43,
+     11
+    ]
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper bridge mounted through ordinary Bag USE",
+   "ok": true
+  },
+  {
+   "name": "upper left (42, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     42,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (41, 11)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     41,
+     11
+    ]
+   ],
+   "source_elevation": 4,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "upper left (40, 11)",
+   "ok": false,
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     39,
+     11
+    ]
+   ],
+   "source_elevation": 15,
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "run completed without the driver getting stuck",
+   "ok": false,
+   "error": "ValueError('upper left (40, 11)')",
+   "at": [
+    "MAP_ROUTE212_SOUTH",
+    [
+     39,
+     11
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": false,
+ "error": "ValueError('upper left (40, 11)')",
+ "save_after": "91656da555c494e5614fdfc4cf189a45060ce43e5a0c4e217047244429cfe1ad",
+ "verdict": "FAIL"
+}

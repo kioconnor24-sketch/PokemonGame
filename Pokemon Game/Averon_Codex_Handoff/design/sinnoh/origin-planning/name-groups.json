@@ -1,0 +1,536 @@
+{
+  "scope": "READ_ONLY_UNAPPROVED_FUTURE_NAMING_PROPOSALS_NO_ALLOCATIONS",
+  "live_main": "f4548cca06d56c45595cbcb3386ed32f09d5a362",
+  "anticipated_approved_codebook_source": "79f2070e71b1358947ea87c0178914ec2c25e86a",
+  "register_sha256": "174213decc8984602896130ee617db0d9a0ffccfb81646cff56875bd31482df4",
+  "approved_pair_normalization": {
+    "SN-L04": "Lake Verity",
+    "SN-L11": "Route 204",
+    "SN-L12": "Floaroma Town"
+  },
+  "normalization_scope": "Counter inputs only for the THREE already approved pairs; production CSV/aliases/guard untouched. Existing calculator correctly rejects silently expanding frozen names; do not disable that guard.",
+  "rows": [
+    {
+      "tracker_key": "SN-T01",
+      "area": "Twinleaf Town",
+      "approved_baseline_name": "Twinleaf Town",
+      "proposed_low_name": "Twinleaf Town"
+    },
+    {
+      "tracker_key": "SN-T02",
+      "area": "Sandgem Town",
+      "approved_baseline_name": "Sandgem Town",
+      "proposed_low_name": "Sandgem Town"
+    },
+    {
+      "tracker_key": "SN-T03",
+      "area": "Jubilife City",
+      "approved_baseline_name": "Jubilife City",
+      "proposed_low_name": "Jubilife City"
+    },
+    {
+      "tracker_key": "SN-T04",
+      "area": "Oreburgh City",
+      "approved_baseline_name": "Oreburgh City",
+      "proposed_low_name": "Oreburgh City"
+    },
+    {
+      "tracker_key": "SN-T05",
+      "area": "Floaroma Town",
+      "approved_baseline_name": "Floaroma Town",
+      "proposed_low_name": "Floaroma Town"
+    },
+    {
+      "tracker_key": "SN-T06",
+      "area": "Eterna City",
+      "approved_baseline_name": "Eterna City",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-T07",
+      "area": "Hearthome City",
+      "approved_baseline_name": "Hearthome City",
+      "proposed_low_name": "Hearthome City"
+    },
+    {
+      "tracker_key": "SN-T08",
+      "area": "Solaceon Town",
+      "approved_baseline_name": "Solaceon Town",
+      "proposed_low_name": "Solaceon Town"
+    },
+    {
+      "tracker_key": "SN-T09",
+      "area": "Veilstone City",
+      "approved_baseline_name": "Veilstone City",
+      "proposed_low_name": "Veilstone City"
+    },
+    {
+      "tracker_key": "SN-T10",
+      "area": "Pastoria City",
+      "approved_baseline_name": "Pastoria City",
+      "proposed_low_name": "Pastoria City"
+    },
+    {
+      "tracker_key": "SN-T11",
+      "area": "Celestic Town",
+      "approved_baseline_name": "Celestic Town",
+      "proposed_low_name": "Celestic Town"
+    },
+    {
+      "tracker_key": "SN-T12",
+      "area": "Canalave City",
+      "approved_baseline_name": "Canalave City",
+      "proposed_low_name": "Canalave City"
+    },
+    {
+      "tracker_key": "SN-T13",
+      "area": "Snowpoint City",
+      "approved_baseline_name": "Snowpoint City",
+      "proposed_low_name": "Snowpoint City"
+    },
+    {
+      "tracker_key": "SN-T14",
+      "area": "Sunyshore City",
+      "approved_baseline_name": "Sunyshore City",
+      "proposed_low_name": "Sunyshore City"
+    },
+    {
+      "tracker_key": "SN-T15",
+      "area": "Pokémon League",
+      "approved_baseline_name": "Pokémon League",
+      "proposed_low_name": "Pokémon League"
+    },
+    {
+      "tracker_key": "SN-T16",
+      "area": "Fight Area",
+      "approved_baseline_name": "Fight Area",
+      "proposed_low_name": "Fight Area"
+    },
+    {
+      "tracker_key": "SN-T17",
+      "area": "Survival Area",
+      "approved_baseline_name": "Survival Area",
+      "proposed_low_name": "Survival Area"
+    },
+    {
+      "tracker_key": "SN-T18",
+      "area": "Resort Area",
+      "approved_baseline_name": "Resort Area",
+      "proposed_low_name": "Resort Area"
+    },
+    {
+      "tracker_key": "SN-R201",
+      "area": "Route 201",
+      "approved_baseline_name": "Route 201",
+      "proposed_low_name": "Route 201"
+    },
+    {
+      "tracker_key": "SN-R202",
+      "area": "Route 202",
+      "approved_baseline_name": "Route 202",
+      "proposed_low_name": "Route 202"
+    },
+    {
+      "tracker_key": "SN-R203",
+      "area": "Route 203",
+      "approved_baseline_name": "Route 203",
+      "proposed_low_name": "Route 203"
+    },
+    {
+      "tracker_key": "SN-R204",
+      "area": "Route 204",
+      "approved_baseline_name": "Route 204",
+      "proposed_low_name": "Route 204"
+    },
+    {
+      "tracker_key": "SN-R205",
+      "area": "Route 205",
+      "approved_baseline_name": "Route 205",
+      "proposed_low_name": "Route 205"
+    },
+    {
+      "tracker_key": "SN-R206",
+      "area": "Route 206",
+      "approved_baseline_name": "Route 206",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-R207",
+      "area": "Route 207",
+      "approved_baseline_name": "Route 207",
+      "proposed_low_name": "Oreburgh City"
+    },
+    {
+      "tracker_key": "SN-R208",
+      "area": "Route 208",
+      "approved_baseline_name": "Route 208",
+      "proposed_low_name": "Hearthome City"
+    },
+    {
+      "tracker_key": "SN-R209",
+      "area": "Route 209",
+      "approved_baseline_name": "Route 209",
+      "proposed_low_name": "Solaceon Town"
+    },
+    {
+      "tracker_key": "SN-R210",
+      "area": "Route 210",
+      "approved_baseline_name": "Route 210",
+      "proposed_low_name": "Solaceon Town"
+    },
+    {
+      "tracker_key": "SN-R211",
+      "area": "Route 211",
+      "approved_baseline_name": "Route 211",
+      "proposed_low_name": "Celestic Town"
+    },
+    {
+      "tracker_key": "SN-R212",
+      "area": "Route 212",
+      "approved_baseline_name": "Route 212",
+      "proposed_low_name": "Hearthome City"
+    },
+    {
+      "tracker_key": "SN-R213",
+      "area": "Route 213",
+      "approved_baseline_name": "Route 213",
+      "proposed_low_name": "Pastoria City"
+    },
+    {
+      "tracker_key": "SN-R214",
+      "area": "Route 214",
+      "approved_baseline_name": "Route 214",
+      "proposed_low_name": "Veilstone City"
+    },
+    {
+      "tracker_key": "SN-R215",
+      "area": "Route 215",
+      "approved_baseline_name": "Route 215",
+      "proposed_low_name": "Veilstone City"
+    },
+    {
+      "tracker_key": "SN-R216",
+      "area": "Route 216",
+      "approved_baseline_name": "Route 216",
+      "proposed_low_name": "Snowpoint City"
+    },
+    {
+      "tracker_key": "SN-R217",
+      "area": "Route 217",
+      "approved_baseline_name": "Route 217",
+      "proposed_low_name": "Snowpoint City"
+    },
+    {
+      "tracker_key": "SN-R218",
+      "area": "Route 218",
+      "approved_baseline_name": "Route 218",
+      "proposed_low_name": "Canalave City"
+    },
+    {
+      "tracker_key": "SN-R219",
+      "area": "Route 219",
+      "approved_baseline_name": "Route 219",
+      "proposed_low_name": "Pal Park"
+    },
+    {
+      "tracker_key": "SN-R220",
+      "area": "Route 220",
+      "approved_baseline_name": "Route 220",
+      "proposed_low_name": "Pal Park"
+    },
+    {
+      "tracker_key": "SN-R221",
+      "area": "Route 221",
+      "approved_baseline_name": "Route 221",
+      "proposed_low_name": "Pal Park"
+    },
+    {
+      "tracker_key": "SN-R222",
+      "area": "Route 222",
+      "approved_baseline_name": "Route 222",
+      "proposed_low_name": "Sunyshore City"
+    },
+    {
+      "tracker_key": "SN-R223",
+      "area": "Route 223",
+      "approved_baseline_name": "Route 223",
+      "proposed_low_name": "Pokémon League"
+    },
+    {
+      "tracker_key": "SN-R224",
+      "area": "Route 224",
+      "approved_baseline_name": "Route 224",
+      "proposed_low_name": "Pokémon League"
+    },
+    {
+      "tracker_key": "SN-R225",
+      "area": "Route 225",
+      "approved_baseline_name": "Route 225",
+      "proposed_low_name": "Fight Area"
+    },
+    {
+      "tracker_key": "SN-R226",
+      "area": "Route 226",
+      "approved_baseline_name": "Route 226",
+      "proposed_low_name": "Survival Area"
+    },
+    {
+      "tracker_key": "SN-R227",
+      "area": "Route 227",
+      "approved_baseline_name": "Route 227",
+      "proposed_low_name": "Stark Mountain"
+    },
+    {
+      "tracker_key": "SN-R228",
+      "area": "Route 228",
+      "approved_baseline_name": "Route 228",
+      "proposed_low_name": "Resort Area"
+    },
+    {
+      "tracker_key": "SN-R229",
+      "area": "Route 229",
+      "approved_baseline_name": "Route 229",
+      "proposed_low_name": "Resort Area"
+    },
+    {
+      "tracker_key": "SN-R230",
+      "area": "Route 230",
+      "approved_baseline_name": "Route 230",
+      "proposed_low_name": "Resort Area"
+    },
+    {
+      "tracker_key": "SN-L01",
+      "area": "Lake Verity",
+      "approved_baseline_name": "Lake Verity",
+      "proposed_low_name": "Lake Verity"
+    },
+    {
+      "tracker_key": "SN-L02",
+      "area": "Lake Valor",
+      "approved_baseline_name": "Lake Valor",
+      "proposed_low_name": "Lake Valor"
+    },
+    {
+      "tracker_key": "SN-L03",
+      "area": "Lake Acuity",
+      "approved_baseline_name": "Lake Acuity",
+      "proposed_low_name": "Lake Acuity"
+    },
+    {
+      "tracker_key": "SN-L04",
+      "area": "Verity Lakefront",
+      "approved_baseline_name": "Lake Verity",
+      "proposed_low_name": "Lake Verity"
+    },
+    {
+      "tracker_key": "SN-L05",
+      "area": "Valor Lakefront",
+      "approved_baseline_name": "Valor Lakefront",
+      "proposed_low_name": "Lake Valor"
+    },
+    {
+      "tracker_key": "SN-L06",
+      "area": "Acuity Lakefront",
+      "approved_baseline_name": "Acuity Lakefront",
+      "proposed_low_name": "Lake Acuity"
+    },
+    {
+      "tracker_key": "SN-L07",
+      "area": "Mt. Coronet",
+      "approved_baseline_name": "Mt. Coronet",
+      "proposed_low_name": "Mt. Coronet"
+    },
+    {
+      "tracker_key": "SN-L08",
+      "area": "Spear Pillar",
+      "approved_baseline_name": "Spear Pillar",
+      "proposed_low_name": "Mt. Coronet"
+    },
+    {
+      "tracker_key": "SN-L09",
+      "area": "Oreburgh Gate",
+      "approved_baseline_name": "Oreburgh Gate",
+      "proposed_low_name": "Oreburgh Gate"
+    },
+    {
+      "tracker_key": "SN-L10",
+      "area": "Oreburgh Mine",
+      "approved_baseline_name": "Oreburgh Mine",
+      "proposed_low_name": "Oreburgh City"
+    },
+    {
+      "tracker_key": "SN-L11",
+      "area": "Ravaged Path",
+      "approved_baseline_name": "Route 204",
+      "proposed_low_name": "Route 204"
+    },
+    {
+      "tracker_key": "SN-L12",
+      "area": "Floaroma Meadow",
+      "approved_baseline_name": "Floaroma Town",
+      "proposed_low_name": "Floaroma Town"
+    },
+    {
+      "tracker_key": "SN-L13",
+      "area": "Valley Windworks",
+      "approved_baseline_name": "Valley Windworks",
+      "proposed_low_name": "Valley Windworks"
+    },
+    {
+      "tracker_key": "SN-L14",
+      "area": "Eterna Forest",
+      "approved_baseline_name": "Eterna Forest",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-L15",
+      "area": "Old Chateau",
+      "approved_baseline_name": "Old Chateau",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-L16",
+      "area": "Fuego Ironworks",
+      "approved_baseline_name": "Fuego Ironworks",
+      "proposed_low_name": "Valley Windworks"
+    },
+    {
+      "tracker_key": "SN-L17",
+      "area": "Wayward Cave",
+      "approved_baseline_name": "Wayward Cave",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-L18",
+      "area": "Cycling Road",
+      "approved_baseline_name": "Cycling Road",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-L19",
+      "area": "Amity Square",
+      "approved_baseline_name": "Amity Square",
+      "proposed_low_name": "Hearthome City"
+    },
+    {
+      "tracker_key": "SN-L20",
+      "area": "Lost Tower",
+      "approved_baseline_name": "Lost Tower",
+      "proposed_low_name": "Solaceon Town"
+    },
+    {
+      "tracker_key": "SN-L21",
+      "area": "Solaceon Ruins",
+      "approved_baseline_name": "Solaceon Ruins",
+      "proposed_low_name": "Solaceon Town"
+    },
+    {
+      "tracker_key": "SN-L22",
+      "area": "Great Marsh",
+      "approved_baseline_name": "Great Marsh",
+      "proposed_low_name": "Pastoria City"
+    },
+    {
+      "tracker_key": "SN-L23",
+      "area": "Trophy Garden",
+      "approved_baseline_name": "Trophy Garden",
+      "proposed_low_name": "Hearthome City"
+    },
+    {
+      "tracker_key": "SN-L24",
+      "area": "Sendoff Spring",
+      "approved_baseline_name": "Sendoff Spring",
+      "proposed_low_name": "Sendoff Spring"
+    },
+    {
+      "tracker_key": "SN-L25",
+      "area": "Spring Path",
+      "approved_baseline_name": "Spring Path",
+      "proposed_low_name": "Sendoff Spring"
+    },
+    {
+      "tracker_key": "SN-L26",
+      "area": "Turnback Cave",
+      "approved_baseline_name": "Turnback Cave",
+      "proposed_low_name": "Sendoff Spring"
+    },
+    {
+      "tracker_key": "SN-L27",
+      "area": "Iron Island",
+      "approved_baseline_name": "Iron Island",
+      "proposed_low_name": "Iron Island"
+    },
+    {
+      "tracker_key": "SN-L28",
+      "area": "Snowpoint Temple",
+      "approved_baseline_name": "Snowpoint Temple",
+      "proposed_low_name": "Snowpoint City"
+    },
+    {
+      "tracker_key": "SN-L29",
+      "area": "Victory Road",
+      "approved_baseline_name": "Victory Road",
+      "proposed_low_name": "Pokémon League"
+    },
+    {
+      "tracker_key": "SN-L30",
+      "area": "Stark Mountain",
+      "approved_baseline_name": "Stark Mountain",
+      "proposed_low_name": "Stark Mountain"
+    },
+    {
+      "tracker_key": "SN-L31",
+      "area": "Fullmoon Island",
+      "approved_baseline_name": "Fullmoon Island",
+      "proposed_low_name": "Iron Island"
+    },
+    {
+      "tracker_key": "SN-L32",
+      "area": "Newmoon Island",
+      "approved_baseline_name": "Newmoon Island",
+      "proposed_low_name": "Iron Island"
+    },
+    {
+      "tracker_key": "SN-L33",
+      "area": "Pal Park",
+      "approved_baseline_name": "Pal Park",
+      "proposed_low_name": "Pal Park"
+    },
+    {
+      "tracker_key": "SN-O01",
+      "area": "Flower Paradise",
+      "approved_baseline_name": "Flower Paradise",
+      "proposed_low_name": "Pokémon League"
+    },
+    {
+      "tracker_key": "SN-O02",
+      "area": "Hall of Origin",
+      "approved_baseline_name": "Hall of Origin",
+      "proposed_low_name": "Mt. Coronet"
+    },
+    {
+      "tracker_key": "SN-O03",
+      "area": "Eterna Galactic Building",
+      "approved_baseline_name": "Eterna Galactic Building",
+      "proposed_low_name": "Eterna City"
+    },
+    {
+      "tracker_key": "SN-O04",
+      "area": "Veilstone Galactic Headquarters",
+      "approved_baseline_name": "Veilstone Galactic Headquarters",
+      "proposed_low_name": "Veilstone City"
+    },
+    {
+      "tracker_key": "SN-O05",
+      "area": "Battle Park / Battle Frontier",
+      "approved_baseline_name": "Battle Park / Battle Frontier",
+      "proposed_low_name": "Fight Area"
+    },
+    {
+      "tracker_key": "SN-O06",
+      "area": "Distortion World",
+      "approved_baseline_name": "Distortion World",
+      "proposed_low_name": "Sendoff Spring"
+    }
+  ]
+}

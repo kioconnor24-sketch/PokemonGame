@@ -1,0 +1,568 @@
+{
+ "maps": [
+  "MAP_VERITY_LAKEFRONT",
+  "MAP_LAKE_VERITY",
+  "MAP_ROUTE201"
+ ],
+ "build": "normal",
+ "rom_sha256": "cf5f9cae1cb35a56d0ca7eaf45279d23e912825c69071c994b1e1aa0821584e0",
+ "static_findings": [],
+ "save_before": "2294f49050018605fe0c8c4d78de102bbd04f6b4d321a3b8c49035e36798fc17",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     14,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_VERITY_LAKEFRONT",
+   "ok": true,
+   "at": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     14,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT closed left edge at (0, 10) blocks",
+   "ok": true,
+   "before": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     0,
+     10
+    ]
+   ],
+   "after": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     0,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT right seam (19, 7) -> MAP_ROUTE201 (0, 8) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     7
+    ]
+   ],
+   "got": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     7
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT right seam (19, 10) -> MAP_ROUTE201 (0, 11) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     10
+    ]
+   ],
+   "got": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     10
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT right seam (19, 13) -> MAP_ROUTE201 (0, 14) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     13
+    ]
+   ],
+   "got": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     19,
+     13
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_LAKE_VERITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_LAKE_VERITY",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     38,
+     42
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT warp 0 (2, 4) -> MAP_LAKE_VERITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     [
+      2,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     2,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_VERITY_LAKEFRONT after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_LAKE_VERITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_LAKE_VERITY",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     39,
+     42
+    ]
+   ]
+  },
+  {
+   "name": "MAP_VERITY_LAKEFRONT warp 1 (3, 4) -> MAP_LAKE_VERITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     [
+      3,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     3,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_VERITY_LAKEFRONT after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_LAKE_VERITY",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     38,
+     43
+    ]
+   ]
+  },
+  {
+   "name": "MAP_LAKE_VERITY closed right edge at (47, 30) blocks",
+   "ok": true,
+   "before": [
+    "MAP_LAKE_VERITY",
+    [
+     47,
+     30
+    ]
+   ],
+   "after": [
+    "MAP_LAKE_VERITY",
+    [
+     47,
+     30
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_VERITY_LAKEFRONT via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_VERITY_LAKEFRONT",
+   "ok": true,
+   "at": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     2,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "MAP_LAKE_VERITY warp 0 (38, 43) -> MAP_VERITY_LAKEFRONT and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_LAKE_VERITY",
+    [
+     [
+      38,
+      43
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_LAKE_VERITY",
+    [
+     38,
+     43
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_LAKE_VERITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "follower visible (MAP_VERITY_LAKEFRONT via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_VERITY_LAKEFRONT",
+   "ok": true,
+   "at": [
+    "MAP_VERITY_LAKEFRONT",
+    [
+     3,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "MAP_LAKE_VERITY warp 1 (39, 43) -> MAP_VERITY_LAKEFRONT and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_LAKE_VERITY",
+    [
+     [
+      39,
+      43
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_LAKE_VERITY",
+    [
+     39,
+     43
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_LAKE_VERITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   }
+  },
+  {
+   "name": "reached MAP_ROUTE201",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE201",
+    [
+     0,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 6) -> MAP_SANDGEM_TOWN (0, 10) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     6
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 8) -> MAP_SANDGEM_TOWN (0, 12) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 right seam (63, 9) -> MAP_SANDGEM_TOWN (0, 13) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     63,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (15, 21) -> MAP_TWINLEAF_TOWN (15, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     15,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     15,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (16, 21) -> MAP_TWINLEAF_TOWN (16, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     16,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 down seam (17, 21) -> MAP_TWINLEAF_TOWN (17, 0) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 left seam (0, 8) -> MAP_VERITY_LAKEFRONT (19, 7) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     0,
+     8
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     0,
+     8
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 left seam (0, 11) -> MAP_VERITY_LAKEFRONT (19, 10) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     0,
+     11
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     0,
+     11
+    ]
+   ]
+  },
+  {
+   "name": "MAP_ROUTE201 left seam (0, 14) -> MAP_VERITY_LAKEFRONT (19, 13) and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE201",
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "name": "MAP_LAKE_VERITY (40, 31) pushing up is blocked",
+   "ok": true,
+   "before": [
+    "MAP_LAKE_VERITY",
+    [
+     40,
+     31
+    ]
+   ],
+   "after": [
+    "MAP_LAKE_VERITY",
+    [
+     40,
+     31
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (verity-production)",
+   "ok": true,
+   "at": [
+    "MAP_LAKE_VERITY",
+    [
+     40,
+     31
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "cd7e21689e9a810d6bab95d3d981a10ee6fff9d52035ab9edc7248b4aa0ea9d3",
+ "verdict": "PASS"
+}
