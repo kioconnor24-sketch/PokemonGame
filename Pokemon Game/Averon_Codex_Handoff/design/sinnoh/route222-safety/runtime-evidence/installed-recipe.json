@@ -1,0 +1,283 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "871c46b6fc8b4fdaae9e2bef04543c649987542a",
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North"
+  ],
+  "temporary_map_slots": {
+    "SunyshoreCity": 19,
+    "Route222": 20,
+    "Route223": 21,
+    "PokmonLeague": 22,
+    "Route222_Access": 23
+  },
+  "source_headers": {
+    "SunyshoreCity": {
+      "id": "MAP_SUNYSHORE_CITY",
+      "name": "SunyshoreCity",
+      "layout": "LAYOUT_SUNYSHORE_CITY",
+      "map_type": "MAP_TYPE_CITY",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ROUTE222",
+          "offset": 25,
+          "direction": "left"
+        },
+        {
+          "map": "MAP_ROUTE223",
+          "offset": -2,
+          "direction": "up"
+        }
+      ],
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 48,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE222_ACCESS",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route222": {
+      "id": "MAP_ROUTE222",
+      "name": "Route222",
+      "layout": "LAYOUT_ROUTE222",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_SUNYSHORE_CITY",
+          "offset": -25,
+          "direction": "right"
+        }
+      ],
+      "warp_events": [
+        {
+          "x": 89,
+          "y": 23,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE222_ACCESS",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route223": {
+      "id": "MAP_ROUTE223",
+      "name": "Route223",
+      "layout": "LAYOUT_ROUTE223",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_SUNYSHORE_CITY",
+          "offset": 2,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_POKMON_LEAGUE",
+          "offset": -1,
+          "direction": "up"
+        }
+      ],
+      "warp_events": [],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "PokmonLeague": {
+      "id": "MAP_POKMON_LEAGUE",
+      "name": "PokmonLeague",
+      "layout": "LAYOUT_POKMON_LEAGUE",
+      "map_type": "MAP_TYPE_NONE",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [
+        {
+          "map": "MAP_ROUTE223",
+          "offset": 1,
+          "direction": "down"
+        }
+      ],
+      "warp_events": [],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "Route222_Access": {
+      "id": "MAP_ROUTE222_ACCESS",
+      "name": "Route222_Access",
+      "layout": "LAYOUT_ROUTE222_ACCESS",
+      "map_type": "MAP_TYPE_INDOOR",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": false,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_ROUTE110",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 1,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE222",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_SUNYSHORE_CITY",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "dev_surrogate": "MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance",
+  "files": {
+    "data/event_scripts.s": "b7310581333b3fe68b387c690eab1db6c9aa2fede9b005a189fc9faef81e47ea",
+    "data/layouts/PokmonLeague/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "data/layouts/PokmonLeague/map.bin": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+    "data/layouts/Route222/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "data/layouts/Route222/map.bin": "d72e2575f7503746f8ba2e404696b217ee9f66e60d1995dc6a26e22fc22d7d36",
+    "data/layouts/Route222_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "data/layouts/Route222_Access/map.bin": "3006b2c5accf749a75222bfa68024352a88f559c8202613786fcf5cbbb1526ee",
+    "data/layouts/Route223/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "data/layouts/Route223/map.bin": "44882e2c4c9602fe93b4d2cd6d355e8627aa0e053c2820e4a67dc2e3f3aafa10",
+    "data/layouts/SunyshoreCity/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "data/layouts/SunyshoreCity/map.bin": "266d4baf1caf11cc03c7c1ba9eb3689dc1e3f3e53f797cfe191c549a3547b429",
+    "data/layouts/layouts.json": "b91898e43c1dc7605a4ca128e8aec8f859e79b92fef482bfc07f430d70ad8e45",
+    "data/maps/PokmonLeague/map.json": "8a47f1dc0cb93ffcbc067bfd96549103d1a9c05ab9b04f99317fa1e0d91cfee3",
+    "data/maps/PokmonLeague/scripts.inc": "d96ea702936aef07ca08ebd11eb331dc4b53a57cfbc38576f4b15156706d2320",
+    "data/maps/Route222/map.json": "c1dbdb364e150541e383e24905d7f383bc16c469914dc8cce6b1b65362eb1e8a",
+    "data/maps/Route222/scripts.inc": "85463ca850e420a17f53289c10361dacbec0cd78154d247e7fab1201f1b98eda",
+    "data/maps/Route222_Access/map.json": "35c38950532edb2830a6b29b01479eb262c3651da74f09ae2ef7701c1246cd11",
+    "data/maps/Route222_Access/scripts.inc": "b8eae7262926da634c326f1bcd075d84230940728bade8164079e590453222c8",
+    "data/maps/Route223/map.json": "5b70f746563c037565f4124554d4cae0408556e6804414975f125707902eb398",
+    "data/maps/Route223/scripts.inc": "8e9e0aaf6c3744642bad78b288f8c85554c04e6d0f91ba2f8a002d48efb26726",
+    "data/maps/SunyshoreCity/map.json": "0d4bce712bc122f65e77a1b6238f8e6cd2a2dd13dfaccfb7bbf1eee75b5d86da",
+    "data/maps/SunyshoreCity/scripts.inc": "addbfb766c673b081dd2fe53f42bfe1756ce190994e43c9aadc4fe75700f9afc",
+    "data/maps/map_groups.json": "fd63487e45748c55cb0622855183aeb7b8b29124f4396fad3f23841541c95d78",
+    "data/tilesets/secondary/sunyshore_dev_gatesecondary/metatile_attributes.bin": "1f7d76516e0bc25138f1fc6d11afcf930660a6d0ef2fe14ca3a484e16ae3bae9",
+    "data/tilesets/secondary/sunyshore_dev_gatesecondary/metatiles.bin": "00b9d98ed7ce0f64a3ffd3f9ef83e803ffc6c5f29965e8351fa664e271ff6593",
+    "data/tilesets/secondary/sunyshore_dev_outdoorsecondary/metatile_attributes.bin": "5107c1c245e967b6dcfba023479a5b82598a4b8c5348b0fc2fe98923e037fe8a",
+    "data/tilesets/secondary/sunyshore_dev_outdoorsecondary/metatiles.bin": "4c512158566d2d929427645981cf55bc0ab05c95b11c61868561abf6793cc1bb",
+    "include/tilesets.h": "10645809d89942e1e8cc36f3af20fef743d9c4f2163c282ac35972a5bd267776",
+    "src/data/tilesets/headers.h": "fcf87eb6fa078cefca86b4589aecb0da3b5e980fdb9068ff4547f28c5886f3b6",
+    "src/data/tilesets/metatiles.h": "01601ccf1d495659769af9c7f9813d5b135542c05f6a62c27c661b46fd45f94a",
+    "test/averon_route222_safety_runtime.c": "59615d31410a3feb0e40518609b5f0759c19ce2e2b8e7c952e644b5604818783",
+    "test/averon_sunyshore_runtime.c": "84e1f201be1d16362d1dbd9fded3313710946d18f1fb17a9eeabab3c0da6feba",
+    "test/data/averon_map_registry_slots.inc": "2c8fdfceb2a32ab7398ab561c54fd42e877bbb3726f277551492469d5c92e493"
+  },
+  "correction": {
+    "status": "DOCUMENTED_TWO_CELL_GEOGRAPHY_SAFETY_DEVIATION_NOT_RUNTIME_ACCEPTANCE",
+    "original_sha256": {
+      "map.bin": "e9545d4a1ad3a71c6dbacccba7a1eff13f758f1e0c16edaf6864c7c8870a8ee3",
+      "averon-map.bin": "752711b563612d52def985c5d66018f496cbf6323f8e9344cff8714ed28a8b75"
+    },
+    "cells": [
+      {
+        "x": 36,
+        "y": 16,
+        "before": 1159,
+        "after": 1169,
+        "old_behavior": "MB_JUMP_SOUTH",
+        "new_behavior": "MB_NORMAL",
+        "collision_before": 1,
+        "collision_after": 1,
+        "elevation_before": 0,
+        "elevation_after": 0
+      },
+      {
+        "x": 37,
+        "y": 16,
+        "before": 1159,
+        "after": 1169,
+        "old_behavior": "MB_JUMP_SOUTH",
+        "new_behavior": "MB_NORMAL",
+        "collision_before": 1,
+        "collision_after": 1,
+        "elevation_before": 0,
+        "elevation_after": 0
+      }
+    ],
+    "reason": "Previously reproduced ledge jumps land inside unchanged solid boulders36/37,17. Replace only those two jump faces with existing impassable sand-base cliff; retain adjacent legal jumps and all four boulder cells. Owner visual review remains.",
+    "output_sha256": {
+      "map.bin": "e7a85f8dc9185348575c68182556666e56d6f56143f12f9a7a9010d841fc12ed",
+      "averon-map.bin": "d72e2575f7503746f8ba2e404696b217ee9f66e60d1995dc6a26e22fc22d7d36"
+    },
+    "limits": [
+      "Original source packets remain byte-identical",
+      "No bank or global graphics edit, saved ID, warp, story, encounter or production install",
+      "Source-tested only; original negative fixtures must be rerun against a newly compiled corrected scene"
+    ]
+  }
+}

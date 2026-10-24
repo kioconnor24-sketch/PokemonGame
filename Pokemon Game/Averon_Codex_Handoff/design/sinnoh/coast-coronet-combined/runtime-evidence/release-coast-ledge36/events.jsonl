@@ -1,0 +1,44 @@
+{"t": 1792871871.42, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792871871.48, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792871871.99, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792871872.02, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792871874.16, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792871874.19, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792871875.88, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792871875.92, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792871876.48, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792871876.51, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792871877.02, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792871877.06, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792871878.11, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792871878.16, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792871881.74, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792871881.78, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792871882.46, "event": "field", "map": "MAP_ROUTE222", "pos": [36, 15], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792871883.04, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE222", [36, 15]]}
+{"t": 1792871884.97, "event": "capture", "file": "0009-start.png"}
+{"t": 1792871884.97, "event": "observe", "label": "start", "problems": []}
+{"t": 1792871884.98, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792871884.98, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792871885.54, "event": "map-qa-check", "name": "reached source ledge approach", "ok": true, "at": ["MAP_ROUTE222", [36, 15]]}
+{"t": 1792871885.59, "event": "capture", "file": "0010-source-ledge-before.png"}
+{"t": 1792871887.55, "event": "capture", "file": "0011-source-ledge-after.png"}
+{"t": 1792871887.55, "event": "map-qa-check", "name": "corrected cliff blocks the exact former hazardous jump", "ok": true, "at": ["MAP_ROUTE222", [36, 15]]}
+{"t": 1792871887.55, "event": "map-qa-check", "name": "source ledge does not land inside solid terrain", "ok": true, "at": ["MAP_ROUTE222", [36, 15]], "landing_collision": 1}
+{"t": 1792871888.5, "event": "map-qa-check", "name": "reached unchanged adjacent legal jump", "ok": true, "at": ["MAP_ROUTE222", [35, 15]]}
+{"t": 1792871890.42, "event": "capture", "file": "0012-adjacent-legal-jump-after.png"}
+{"t": 1792871890.42, "event": "map-qa-check", "name": "unchanged neighboring jump lands on safe beach", "ok": true, "at": ["MAP_ROUTE222", [35, 17]]}
+{"t": 1792871891.42, "event": "capture", "file": "0013-start-menu.png"}
+{"t": 1792871892.21, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792871898.09, "event": "capture", "file": "0014-save-confirm-coronet-six.png"}
+{"t": 1792871899.26, "event": "capture", "file": "0015-save-step-coronet-six-01.png"}
+{"t": 1792871900.36, "event": "capture", "file": "0016-save-step-coronet-six-02.png"}
+{"t": 1792871901.43, "event": "capture", "file": "0017-save-step-coronet-six-03.png"}
+{"t": 1792871902.46, "event": "capture", "file": "0018-save-step-coronet-six-04.png"}
+{"t": 1792871903.49, "event": "capture", "file": "0019-save-step-coronet-six-05.png"}
+{"t": 1792871904.49, "event": "capture", "file": "0020-save-step-coronet-six-06.png"}
+{"t": 1792871905.52, "event": "capture", "file": "0021-save-step-coronet-six-07.png"}
+{"t": 1792871906.61, "event": "capture", "file": "0022-save-step-coronet-six-08.png"}
+{"t": 1792871907.42, "event": "capture", "file": "0023-saved-coronet-six.png"}
+{"t": 1792871907.42, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792871907.43, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_ROUTE222", [35, 17]]}

@@ -1,0 +1,118 @@
+{
+ "maps": [
+  "MAP_ROUTE222"
+ ],
+ "build": "normal",
+ "rom_sha256": "38ace9eada6af9e602b34b2b05662c8533c88497134da37bb7cebab40f085fdb",
+ "static_findings": [],
+ "save_before": "2f4f6812e1547405eddfed64e103a0afb7e7f8d634c1680186a76996d622fdb2",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached source ledge approach",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "corrected cliff blocks the exact former hazardous jump",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "source ledge does not land inside solid terrain",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ],
+   "landing_collision": 1
+  },
+  {
+   "name": "reached unchanged adjacent legal jump",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     38,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "unchanged neighboring jump lands on safe beach",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     38,
+     17
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     38,
+     17
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "25b5b797835fd035d8cf1d3510dcd37fc68709df8363505b0f1aa131859bb37f",
+ "verdict": "PASS"
+}
