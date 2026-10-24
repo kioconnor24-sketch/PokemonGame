@@ -1,0 +1,10 @@
+# Route222 two-cell ledge safety correction
+
+Original #241 NORMAL gameplay proved two real failures: jumping south at36/37,16 lands inside solid boulders36/37,17. This documented geography deviation changes exactly two source/adapted cells0x487→0x491, native nonjumping sand-base cliff145 replacing south-jump face135. All collision/elevation bits remain identical. All four boulder cells and every other map cell, border, portal, header, bank/graphics, IDs and saved state remain unchanged. Original source and prior failing evidence remain intact; corrected/ is an explicit separate candidate. Adjacent35/38 jumps remain available to reach the same beach. Owner visual review still applies.
+
+Private source and scene-host9/9 PASS before this copy. Corrected map/art packet4 outputs repeat byte-identically, source pins and native behavior/bank checks fail closed. Guarded33-file current-main DEV assembler reuses #241's complete five-map coast; only Route222 map bytes change and one native regression is added. Original19 production map slots and temp19–23/217 surrogate preserved, never permanent location approval.
+
+Not yet compiled or emulator-accepted: next install this candidate on the exact marked current-main disposable branch, run real NORMAL/RELEASE, both previously failing ledge probes with strict start-position blocking and adjacent safe jumps, coast gateway/follower/menu/Save→fresh Continue, unchanged original flash and scoped native/save goldens. Existing #241 failures are NOT relabeled; only newly built corrected ROM tests can establish repair. Production remains untouched; no saved IDs, story or global art change.
+
+
+Public branch replay9/9 PASS. First replay exposed an unnecessary dependency on downstream Victory Road's renderer wrapper; corrected to reuse this parent coast's existing adapt_art/pack renderer directly. Output bytes unchanged; the current branch contains no Victory tools, so this proves parent independence. No engine/source pixels changed by that repair. Final source9/9 log retained privately; actual corrected NORMAL build now running.
