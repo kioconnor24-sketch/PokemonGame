@@ -1,0 +1,112 @@
+{"t": 1792869254.1, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792869254.13, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792869254.66, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792869254.7, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792869256.82, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792869256.85, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792869258.55, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792869258.61, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792869259.11, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792869259.15, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792869259.69, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792869259.73, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792869260.79, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792869260.82, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792869264.43, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792869264.47, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792869265.15, "event": "field", "map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "pos": [14, 19], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792869265.68, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [14, 19]]}
+{"t": 1792869269.24, "event": "capture", "file": "0009-start.png"}
+{"t": 1792869269.24, "event": "observe", "label": "start", "problems": []}
+{"t": 1792869269.25, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869269.25, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869269.29, "event": "map-qa-check", "name": "reached MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [14, 19]]}
+{"t": 1792869285.04, "event": "capture", "file": "0010-warp-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH-0.png"}
+{"t": 1792869290.28, "event": "capture", "file": "0011-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp.png"}
+{"t": 1792869290.28, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp", "problems": []}
+{"t": 1792869290.32, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869290.32, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869290.51, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [40, 11]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869293.45, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH warp 0 (42, 40) -> MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [[42, 40]]], "got": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [42, 40]]}
+{"t": 1792869298.47, "event": "capture", "file": "0012-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip.png"}
+{"t": 1792869298.47, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip", "problems": []}
+{"t": 1792869298.47, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869298.47, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869314.84, "event": "capture", "file": "0013-warp-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH-1.png"}
+{"t": 1792869318.95, "event": "capture", "file": "0014-MAP_SINNOH_MT_CORONET_4F_ROOM_3 via warp.png"}
+{"t": 1792869318.95, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOM_3 via warp", "problems": []}
+{"t": 1792869318.96, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOM_3 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869318.97, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOM_3 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869319.07, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_4F_ROOM_3", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOM_3", [2, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869321.92, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH warp 1 (13, 19) -> MAP_SINNOH_MT_CORONET_4F_ROOM_3 and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [[13, 19]]], "got": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [13, 19]]}
+{"t": 1792869326.8, "event": "capture", "file": "0015-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip.png"}
+{"t": 1792869326.8, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip", "problems": []}
+{"t": 1792869326.8, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869326.8, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869329.07, "event": "map", "map": "MAP_SINNOH_MT_CORONET_4F_ROOM_3", "pos": [2, 3]}
+{"t": 1792869329.16, "event": "map-qa-check", "name": "reached MAP_SINNOH_MT_CORONET_4F_ROOM_3", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOM_3", [2, 3]]}
+{"t": 1792869332.27, "event": "capture", "file": "0016-warp-MAP_SINNOH_MT_CORONET_4F_ROOM_3-0.png"}
+{"t": 1792869337.27, "event": "capture", "file": "0017-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp.png"}
+{"t": 1792869337.27, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp", "problems": []}
+{"t": 1792869337.27, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869337.27, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869337.45, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [13, 20]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869340.01, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_4F_ROOM_3 warp 0 (2, 3) -> MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_4F_ROOM_3", [[2, 3]]], "got": ["MAP_SINNOH_MT_CORONET_4F_ROOM_3", [2, 3]]}
+{"t": 1792869344.29, "event": "capture", "file": "0018-MAP_SINNOH_MT_CORONET_4F_ROOM_3 after warp round trip.png"}
+{"t": 1792869344.29, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOM_3 after warp round trip", "problems": []}
+{"t": 1792869344.32, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOM_3 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869344.32, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOM_3 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869346.71, "event": "map", "map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "pos": [13, 19]}
+{"t": 1792869362.67, "event": "map", "map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "pos": [40, 10]}
+{"t": 1792869362.77, "event": "map-qa-check", "name": "reached MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [40, 10]]}
+{"t": 1792869363.04, "event": "enter-region", "map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "tile": [17, 7], "via": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [59, 7]], "destinationElevation": 3}
+{"t": 1792869375.12, "event": "capture", "file": "0019-warp-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2-2.png"}
+{"t": 1792869379.43, "event": "capture", "file": "0020-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp.png"}
+{"t": 1792869379.43, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp", "problems": []}
+{"t": 1792869379.44, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869379.46, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869379.67, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [59, 7]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869382.31, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 warp 2 (17, 6) -> MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [[17, 6]]], "got": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [17, 6]]}
+{"t": 1792869386.68, "event": "capture", "file": "0021-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip.png"}
+{"t": 1792869386.68, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip", "problems": []}
+{"t": 1792869386.69, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869386.69, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869386.91, "event": "enter-region", "map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "tile": [59, 7], "via": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [42, 41]], "destinationElevation": 3}
+{"t": 1792869389.03, "event": "map", "map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "pos": [59, 6]}
+{"t": 1792869398.03, "event": "map", "map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "pos": [42, 40]}
+{"t": 1792869410.03, "event": "capture", "file": "0022-warp-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2-3.png"}
+{"t": 1792869414.52, "event": "capture", "file": "0023-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp.png"}
+{"t": 1792869414.52, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp", "problems": []}
+{"t": 1792869414.56, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869414.56, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869414.75, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [17, 7]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869417.29, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 warp 3 (59, 6) -> MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [[59, 6]]], "got": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [59, 6]]}
+{"t": 1792869422.19, "event": "capture", "file": "0024-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip.png"}
+{"t": 1792869422.19, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip", "problems": []}
+{"t": 1792869422.21, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869422.21, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869431.2, "event": "capture", "file": "0025-warp-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2-4.png"}
+{"t": 1792869435.51, "event": "capture", "file": "0026-MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp.png"}
+{"t": 1792869435.51, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp", "problems": []}
+{"t": 1792869435.52, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869435.52, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869435.78, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH", [42, 41]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869438.42, "event": "map-qa-check", "name": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 warp 4 (40, 10) -> MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [[40, 10]]], "got": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [40, 10]]}
+{"t": 1792869443.28, "event": "capture", "file": "0027-MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip.png"}
+{"t": 1792869443.28, "event": "observe", "label": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip", "problems": []}
+{"t": 1792869443.28, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792869443.28, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792869444.28, "event": "capture", "file": "0028-start-menu.png"}
+{"t": 1792869445.08, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792869450.89, "event": "capture", "file": "0029-save-confirm-coronet-six.png"}
+{"t": 1792869452.06, "event": "capture", "file": "0030-save-step-coronet-six-01.png"}
+{"t": 1792869453.13, "event": "capture", "file": "0031-save-step-coronet-six-02.png"}
+{"t": 1792869454.16, "event": "capture", "file": "0032-save-step-coronet-six-03.png"}
+{"t": 1792869455.25, "event": "capture", "file": "0033-save-step-coronet-six-04.png"}
+{"t": 1792869456.25, "event": "capture", "file": "0034-save-step-coronet-six-05.png"}
+{"t": 1792869457.21, "event": "capture", "file": "0035-save-step-coronet-six-06.png"}
+{"t": 1792869458.26, "event": "capture", "file": "0036-save-step-coronet-six-07.png"}
+{"t": 1792869459.35, "event": "capture", "file": "0037-save-step-coronet-six-08.png"}
+{"t": 1792869460.23, "event": "capture", "file": "0038-saved-coronet-six.png"}
+{"t": 1792869460.23, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792869460.28, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2", [40, 11]]}
