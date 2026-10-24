@@ -1,0 +1,55 @@
+{
+ "maps": [
+  "MAP_ROUTE216"
+ ],
+ "build": "normal",
+ "rom_sha256": "d45b988b22ee7e57a61947e5f67531a5a9d9718c6fe822e4d9be2c29644e1157",
+ "static_findings": [],
+ "save_before": "455a62b59f6acfe1708582706fc68ffe762a660ee141da9a300db37e1d78da5e",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE216",
+    [
+     46,
+     25
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "all actual bridge grid cells equal ROM after Continue",
+   "ok": true,
+   "differences": []
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "455a62b59f6acfe1708582706fc68ffe762a660ee141da9a300db37e1d78da5e",
+ "verdict": "PASS"
+}

@@ -1,0 +1,32 @@
+test_actual_four_previews_resolve_every_graphic_tile_and_palette (test_sinnoh_snow_art.SnowArtTest.test_actual_four_previews_resolve_every_graphic_tile_and_palette) ... ok
+test_all_weather_and24_elevation15_cells_and_neutral_source_are_preserved (test_sinnoh_snow_art.SnowArtTest.test_all_weather_and24_elevation15_cells_and_neutral_source_are_preserved) ... ERROR
+test_bridge_pixels_use_actual_wood_instead_of_paving_or_house_tiles (test_sinnoh_snow_art.SnowArtTest.test_bridge_pixels_use_actual_wood_instead_of_paving_or_house_tiles) ... ok
+test_builder_refuses_existing_output_and_engine_destination (test_sinnoh_snow_art.SnowArtTest.test_builder_refuses_existing_output_and_engine_destination) ... ok
+test_changed_weather_is_rejected_without_suppressing_snow (test_sinnoh_snow_art.SnowArtTest.test_changed_weather_is_rejected_without_suppressing_snow) ... ok
+test_every14640_map_border_cell_keeps_collision_elevation_full_behavior (test_sinnoh_snow_art.SnowArtTest.test_every14640_map_border_cell_keeps_collision_elevation_full_behavior) ... ok
+test_facade_outside_source_fails_and_valid_inputs_not_mutated (test_sinnoh_snow_art.SnowArtTest.test_facade_outside_source_fails_and_valid_inputs_not_mutated) ... ok
+test_general_unchanged_isolated_bank_capacity_and_assets_are_exact (test_sinnoh_snow_art.SnowArtTest.test_general_unchanged_isolated_bank_capacity_and_assets_are_exact) ... ERROR
+test_source_fields_cannot_expand_art_without_reviewed_mapping (test_sinnoh_snow_art.SnowArtTest.test_source_fields_cannot_expand_art_without_reviewed_mapping) ... ok
+
+======================================================================
+ERROR: test_all_weather_and24_elevation15_cells_and_neutral_source_are_preserved (test_sinnoh_snow_art.SnowArtTest.test_all_weather_and24_elevation15_cells_and_neutral_source_are_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/tests/test_sinnoh_snow_art.py", line 62, in test_all_weather_and24_elevation15_cells_and_neutral_source_are_preserved
+    for p,sha in self.receipt['source_sha256'][name].items():self.assertEqual(a.pack.accepted.base.sha((f/p).read_bytes()),sha)
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'source_sha256'
+
+======================================================================
+ERROR: test_general_unchanged_isolated_bank_capacity_and_assets_are_exact (test_sinnoh_snow_art.SnowArtTest.test_general_unchanged_isolated_bank_capacity_and_assets_are_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/tests/test_sinnoh_snow_art.py", line 42, in test_general_unchanged_isolated_bank_capacity_and_assets_are_exact
+    for p,h in self.receipt['existing_averon_sha256'].items():self.assertEqual(base.sha(base.verified_file(root,ENGINE.relative_to(root)/p,self.receipt['engine_source'])),h)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'existing_averon_sha256'
+
+----------------------------------------------------------------------
+Ran 9 tests in 9.791s
+
+FAILED (errors=2)

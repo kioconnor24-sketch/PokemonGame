@@ -1,0 +1,5 @@
+# Two-plane existing-plank experiment: visual gap UNRESOLVED
+
+Current engine f2cc95ab2918a46d27acf120a53b28a9b75b5ee7. Actual NORMAL build17,424,112B (same linked size), ROM d45b988b22ee7e57a61947e5f67531a5a9d9718c6fe822e4d9be2c29644e1157. Host23/23; actual bridge42/42, fresh Continue3/3, additional whole-bridge live-grid vs ROM after Continue4/4. Two-plane wood does NOT eliminate the visual gap in inspected upper captures; no bridge graphical acceptance or fixed engine bug claimed. All32 sampled bridge grid cells unchanged after Save/Continue; no stale-map-cell defect reproduced. Native29 and gold4 belong to FIRST engine, not this experiment. RELEASE experiment not rebuilt: avoid duplicating known inconclusive art while root cause remains unresolved.
+
+No geometry/full-attribute/global-art/IDs/save-format edits. Frozen scenario includes final no-fallback grid diagnostic; earlier bridge runs predate that final check. Main advanced to d855ff86 by source-only #226/#234 merges; this scene remains exact-base d120ca14. No production/snow-covered-art acceptance. See RUNTIME_CHECKPOINT for recoverable source and next executable work.
