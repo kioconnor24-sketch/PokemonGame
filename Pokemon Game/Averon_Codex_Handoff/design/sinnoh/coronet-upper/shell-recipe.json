@@ -1,0 +1,198 @@
+{
+  "maps": {
+    "SinnohMtCoronet_2F": {
+      "reference": "2f",
+      "width": 34,
+      "height": 64,
+      "rooms": [
+        [
+          3,
+          2,
+          11,
+          13
+        ],
+        [
+          16,
+          2,
+          12,
+          8
+        ],
+        [
+          3,
+          21,
+          12,
+          10
+        ],
+        [
+          12,
+          32,
+          12,
+          12
+        ],
+        [
+          22,
+          40,
+          9,
+          12
+        ],
+        [
+          1,
+          54,
+          8,
+          8
+        ]
+      ],
+      "corridors": [
+        [
+          [
+            9,
+            6
+          ],
+          [
+            22,
+            6
+          ]
+        ],
+        [
+          [
+            7,
+            23
+          ],
+          [
+            16,
+            23
+          ],
+          [
+            16,
+            39
+          ],
+          [
+            27,
+            39
+          ],
+          [
+            27,
+            48
+          ]
+        ],
+        [
+          [
+            16,
+            39
+          ],
+          [
+            16,
+            57
+          ],
+          [
+            3,
+            57
+          ],
+          [
+            3,
+            59
+          ]
+        ]
+      ],
+      "sealed_external_ports": [
+        [
+          27,
+          48
+        ],
+        [
+          2,
+          59
+        ]
+      ],
+      "interior_warp_indices": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "SinnohMtCoronet_3F": {
+      "reference": "3f",
+      "width": 28,
+      "height": 34,
+      "rooms": [
+        [
+          10,
+          22,
+          13,
+          9
+        ],
+        [
+          2,
+          22,
+          6,
+          10
+        ],
+        [
+          3,
+          4,
+          8,
+          10
+        ],
+        [
+          18,
+          8,
+          7,
+          9
+        ]
+      ],
+      "corridors": [
+        [
+          [
+            7,
+            12
+          ],
+          [
+            7,
+            24
+          ],
+          [
+            16,
+            24
+          ]
+        ],
+        [
+          [
+            5,
+            26
+          ],
+          [
+            15,
+            26
+          ]
+        ],
+        [
+          [
+            9,
+            10
+          ],
+          [
+            21,
+            10
+          ]
+        ]
+      ],
+      "sealed_external_ports": [
+        [
+          3,
+          29
+        ]
+      ],
+      "interior_warp_indices": [
+        0,
+        1
+      ]
+    }
+  },
+  "limits": [
+    "Original GBA approximation from source-pinned portal topology, not copied DS terrain",
+    "Two2F components intentionally joined only by the original same-floor stair pair",
+    "1F/Route207/outside-south anchors closed; no Rock Climb/story or saved origins",
+    "General/Cave stock art only; no ROM/native/emulator or production acceptance"
+  ]
+}

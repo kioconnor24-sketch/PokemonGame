@@ -1,0 +1,541 @@
+{
+ "maps": [
+  "MAP_SINNOH_MT_CORONET_2F",
+  "MAP_SINNOH_MT_CORONET_3F"
+ ],
+ "build": "release",
+ "rom_sha256": "c3ca4e05b3a348b2dd9fc38d87f0273c1b0ce400b48aa4539700b158062f6758",
+ "static_findings": [],
+ "save_before": "b1075484931fefae905a2e5e57cc5ac3e22e9326bfccca1633c9358f9e203dd1",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     8,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     8,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     13
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_2F warp 0 (7, 23) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     [
+      7,
+      23
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     24
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_2F warp 1 (7, 12) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     [
+      7,
+      12
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_3F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_3F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     14,
+     27
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_2F warp 2 (11, 4) -> MAP_SINNOH_MT_CORONET_3F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     [
+      11,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     11,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_3F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_3F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     18,
+     27
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_2F warp 3 (21, 4) -> MAP_SINNOH_MT_CORONET_3F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     [
+      21,
+      4
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     21,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_MT_CORONET_3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     14,
+     26
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     11,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_3F warp 0 (14, 26) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     [
+      14,
+      26
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     14,
+     26
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_3F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_3F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     21,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_3F warp 1 (18, 26) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     [
+      18,
+      26
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     18,
+     26
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_3F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_3F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_3F",
+    [
+     18,
+     27
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "93fff37d926b40752066494016a48d168d7396282f11939b2c51c2e4d1c1c46e",
+ "verdict": "PASS"
+}

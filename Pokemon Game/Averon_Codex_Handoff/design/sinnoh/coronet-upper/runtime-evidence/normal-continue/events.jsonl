@@ -1,0 +1,25 @@
+{"t": 1792814267.95, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792814268.06, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792814271.78, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792814271.88, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792814273.9, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792814274.06, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792814274.68, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792814274.79, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792814275.38, "event": "screen", "cb2": "MainCB2", "i": 11}
+{"t": 1792814275.57, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792814276.8, "event": "screen", "cb2": "CB2_GoToMainMenu", "i": 13}
+{"t": 1792814276.88, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792814278.09, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792814278.18, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792814281.99, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792814282.06, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792814283.4, "event": "field", "map": "MAP_SINNOH_MT_CORONET_3F", "pos": [18, 27], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792814283.81, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792814283.81, "event": "continue-check", "problems": []}
+{"t": 1792814283.9, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_3F", [18, 27]]}
+{"t": 1792814284.57, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SINNOH_MT_CORONET_3F", [18, 27]]}
+{"t": 1792814287.55, "event": "capture", "file": "0010-start.png"}
+{"t": 1792814287.55, "event": "observe", "label": "start", "problems": []}
+{"t": 1792814287.58, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792814287.58, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}

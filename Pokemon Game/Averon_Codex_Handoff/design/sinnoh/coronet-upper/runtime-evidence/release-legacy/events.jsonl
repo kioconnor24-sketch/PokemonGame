@@ -1,0 +1,24 @@
+{"t": 1792814634.81, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792814634.9, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792814638.77, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792814638.96, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792814640.98, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792814641.15, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792814642.4, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 11}
+{"t": 1792814642.55, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792814643.18, "event": "screen", "cb2": "MainCB2", "i": 12}
+{"t": 1792814643.29, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792814644.51, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 14}
+{"t": 1792814644.6, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792814645.81, "event": "screen", "cb2": "CB2_MainMenu", "i": 15}
+{"t": 1792814645.9, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792814648.47, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792814648.59, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792814649.75, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792814649.98, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792814649.98, "event": "continue-check", "problems": []}
+{"t": 1792814650.05, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792814650.75, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792814652.16, "event": "capture", "file": "0010-start.png"}
+{"t": 1792814652.16, "event": "observe", "label": "start", "problems": []}
+{"t": 1792814652.16, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}
