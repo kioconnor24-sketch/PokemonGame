@@ -75,15 +75,23 @@ import importlib.util,sys
 from pathlib import Path
 from types import SimpleNamespace
 p=Path(sys.argv[1]);sp=importlib.util.spec_from_file_location('upper_qa_probe',p)
-m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m);old=m.shared.MAPS
+m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m);old=m.shared.MAPS;old_step=m.shared.ordinary_step
 def fake(args):
  import driver,map_qa as q
  assert q._wrapper(args.engine).driver is driver
+ assert m.shared.ordinary_step is m.ordinary_step
  assert m.shared.MAPS==('MAP_SINNOH_MT_CORONET_2F', 'MAP_SINNOH_MT_CORONET_3F', 'MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH', 'MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH', 'MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2', 'MAP_SINNOH_MT_CORONET_4F_ROOM_3')
  return 0
 m.shared.run=fake
 assert m.run(SimpleNamespace(engine=Path(sys.argv[2])))==0
 assert m.shared.MAPS==old
+assert m.shared.ordinary_step is old_step
+def broken(args):raise RuntimeError("probe")
+m.shared.run=broken
+try:m.run(SimpleNamespace(engine=Path(sys.argv[2])))
+except RuntimeError:pass
+else:raise AssertionError("exception swallowed")
+assert m.shared.MAPS==old and m.shared.ordinary_step is old_step
 """
         result=subprocess.run([sys.executable,'-c',script,str(HERE/'run_runtime_qa.py'),str(ROOT/r.ENGINE)],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
