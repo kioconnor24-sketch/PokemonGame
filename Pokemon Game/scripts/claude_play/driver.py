@@ -214,12 +214,14 @@ class Driver:
         before = (tile[0] - mapdata.DIRS[push][0], tile[1] - mapdata.DIRS[push][1])
         return (tile if m.walkable(*tile) and "DOOR" not in m.behavior(*tile) else before), push
 
-    def map_route(self, src, dst, pos=None):
+    def map_route(self, src, dst, pos=None, target=None):
         """Breadth-first route over map connections and warps.
 
         With pos (the player's tile on src), the search is over (map, position): a leg is only used if its
         exit is reachable on foot from there, so a map split by a cliff (a route whose halves only meet
-        through a cave) is handled. Without pos it is the plain map-level search.
+        through a cave) is handled. Without pos it is the plain map-level search. With target, the route
+        must end in the part of dst from which that tile is reachable (dst may be src: a plateau reachable
+        only through a neighbouring map).
         """
         from collections import deque
         if pos is None:
@@ -231,7 +233,7 @@ class Driver:
         while q:
             cur = q.popleft()
             mid, pos = cur
-            if mid == dst:
+            if mid == dst and (target is None or mapdata.bfs(self.w.map(mid), pos, {tuple(target)}) is not None):
                 goal = cur
                 break
             m = self.w.map(mid)
@@ -248,7 +250,8 @@ class Driver:
                 by_arrival = {}
                 for t in exits:
                     a = mapdata.across(m, om, d, off, t)
-                    if om.inside(*a) and om.walkable(*a):
+                    if om.inside(*a) and om.walkable(*a) and mapdata.elevations_compatible(
+                            mapdata.elevation_at(m, *t), mapdata.elevation_at(om, *a)):
                         by_arrival.setdefault(a, []).append(t)
                 for a, ts in by_arrival.items():
                     nexts.append(((mid, "edge", d, tuple(ts)), (other, a)))

@@ -129,18 +129,46 @@ class MapInfo:
         return None
 
 
-def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
-    """Shortest list of direction names from start to any goal tile."""
+def elevation_at(m, x, y):
+    """Map elevation of a tile (0 when the map model has none, e.g. test fakes: no restriction)."""
+    return m.elevation(x, y) if hasattr(m, "elevation") else 0
+
+
+def step_elevation(m, cur, frm, to):
+    """The player's elevation after stepping frm -> to, or None when the engine refuses the step.
+
+    Mirrors pokeemerald: IsElevationMismatchAt blocks entering a tile whose elevation is neither 0 nor 15 nor
+    the player's own (unless the player is at 0); ObjectEventUpdateElevation then takes the new tile's
+    elevation, except to or from a 15 (bridge) tile, which keeps the previous one.
+    """
+    te = elevation_at(m, *to)
+    if cur != 0 and te not in (0, 15) and te != cur:
+        return None
+    return cur if te == 15 or elevation_at(m, *frm) == 15 else te
+
+
+def elevations_compatible(a, b):
+    """Whether a player standing at elevation a may step onto a tile of elevation b (e.g. across a seam)."""
+    return a == 0 or b in (0, 15) or a == b
+
+
+def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevation=None):
+    """Shortest list of direction names from start to any goal tile, honouring the engine's elevation rules.
+
+    elevation is the player's current elevation (default: the start tile's)."""
     goals = set(goals)
     if start in goals:
         return []
-    prev = {start: None}
-    q = deque([start])
+    e0 = elevation_at(m, *start) if elevation is None else elevation
+    first = (start, e0)
+    prev = {first: None}
+    q = deque([first])
     while q:
-        cur = q.popleft()
+        state = q.popleft()
+        cur, e = state
         for name, (dx, dy) in DIRS.items():
             nxt = (cur[0] + dx, cur[1] + dy)
-            if nxt in prev or nxt in blocked:
+            if nxt in blocked:
                 continue
             ok = m.walkable(*nxt) or (allow_goal_unwalkable and nxt in goals and m.inside(*nxt))
             if not ok:
@@ -148,15 +176,18 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
             # A warp tile that is not the goal would take us elsewhere.
             if nxt not in goals and m.warp_at(*nxt):
                 continue
-            prev[nxt] = (cur, name)
+            ne = step_elevation(m, e, cur, nxt) if m.walkable(*nxt) else e
+            if ne is None or (nxt, ne) in prev:
+                continue
+            prev[(nxt, ne)] = (state, name)
             if nxt in goals:
                 path = []
-                node = nxt
+                node = (nxt, ne)
                 while prev[node]:
                     node, step = prev[node]
                     path.append(step)
                 return path[::-1]
-            q.append(nxt)
+            q.append((nxt, ne))
     return None
 
 

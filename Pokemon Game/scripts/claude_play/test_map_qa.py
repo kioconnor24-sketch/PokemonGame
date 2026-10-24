@@ -38,6 +38,16 @@ class FakeMap:
         return None
 
 
+class FakeElevMap(FakeMap):
+    """FakeMap plus per-tile elevations (digits; '.' rows default to 3)."""
+    def __init__(self, map_id, rows, elev, **kw):
+        super().__init__(map_id, rows, **kw)
+        self.elev = elev
+
+    def elevation(self, x, y):
+        return int(self.elev[y][x])
+
+
 class FakeWorld:
     def __init__(self, *maps):
         self.maps = {m.id: m for m in maps}
@@ -128,6 +138,48 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual([leg[:2] for leg in legs], [("ROUTE", "warp"), ("CAVE", "warp"), ("ROUTE", "edge")])
         self.assertEqual(legs[0][2], (2, 3))                    # the south door, not the unreachable north one
         self.assertEqual(d.map_route("ROUTE", "TOWN", (2, 1))[0][:2], ("ROUTE", "edge"))   # north half: straight up
+
+    def test_elevation_blocks_a_plateau_except_through_a_transition_tile(self):
+        # Row 0: grass (3) | plateau (4). Row 1: the same, but x 2 is an elevation-0 stair joining them.
+        m = FakeElevMap("M", ["....",
+                              "...."], ["3344",
+                                        "3304"])
+        self.assertEqual(map_qa.reach(m, [(0, 0)]), {(0, 0), (1, 0), (0, 1), (1, 1), (2, 1), (3, 1), (2, 0), (3, 0)})
+        flat = FakeElevMap("M", ["....",
+                                 "...."], ["3344",
+                                           "3344"])
+        self.assertEqual(map_qa.reach(flat, [(0, 0)]), {(0, 0), (1, 0), (0, 1), (1, 1)})
+        self.assertEqual(map_qa.reach(flat, [(3, 0)], reverse=True), {(2, 0), (3, 0), (2, 1), (3, 1)})
+        self.assertIsNone(map_qa.mapdata.bfs(flat, (0, 0), {(3, 0)}))
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (0, 0), {(3, 0)})), 5)
+
+    def test_a_seam_between_different_elevations_is_a_mismatch(self):
+        a = FakeElevMap("A", ["....."], ["33344"], connections=[("down", "B", 0)])
+        b = FakeElevMap("B", ["....."], ["33333"], connections=[("up", "A", 0)])
+        findings, _ = map_qa.static_audit(FakeWorld(a, b), ["A", "B"])
+        bad = [f["detail"]["tile"] for f in findings if f["code"] == "seam-mismatch"]
+        self.assertEqual(sorted(bad), [(3, 0), (3, 0), (4, 0), (4, 0)])   # both sides of x 3-4
+
+    def test_driver_reaches_a_plateau_only_through_the_neighbouring_map(self):
+        import driver as drv
+        # South: grass (3) at x 0-1, a raised strip (4) at x 3 reachable from nowhere inside South.
+        south = FakeElevMap("SOUTH", ["..#.",
+                                      "..#."], ["3304",
+                                                "3304"], connections=[("up", "NORTH", 0)])
+        # North: grass (3), an elevation-0 stair at x 2, the same raised strip (4) at x 3 down to the seam.
+        north = FakeElevMap("NORTH", ["....",
+                                      "...."], ["3304",
+                                                "3304"], connections=[("down", "SOUTH", 0)])
+        world = FakeWorld(south, north)
+        world.map_ids = {"SOUTH": 0, "NORTH": 1}
+        for m in (south, north):
+            m.world = world
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = world
+        self.assertNotIn((3, 1), map_qa.reach(south, [(0, 1)]))
+        legs = d.map_route("SOUTH", "SOUTH", (0, 1), target=(3, 1))
+        self.assertEqual([leg[:2] for leg in legs], [("SOUTH", "edge"), ("NORTH", "edge")])
+        self.assertEqual(legs[1][3], ((3, 1),))       # down from North's raised column, landing on the strip
 
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",

@@ -118,25 +118,42 @@ def edge_tiles(m, direction):
 across = mapdata.across
 
 
+def state_moves(m, x, y, e):
+    """(tile, elevation) states reachable in one press from (x, y) at elevation e: a walk or a ledge jump,
+    with the engine's elevation rules (mapdata.step_elevation)."""
+    for t in moves(m, x, y):
+        if m.inside(*t) and m.walkable(*t):
+            ne = mapdata.step_elevation(m, e, (x, y), t)
+            if ne is not None:
+                yield t, ne
+
+
 def reach(m, starts, reverse=False):
+    """Tiles reachable from starts (or, reverse, tiles that can reach a start), honouring elevations."""
     starts = [s for s in starts if m.inside(*s) and m.walkable(*s)]
     if reverse:
+        levels = {mapdata.elevation_at(m, x, y) for y in range(m.height) for x in range(m.width)} | {0}
+        # The player's elevation is the tile's own, except on a 15 (bridge) tile, which keeps the previous one.
+        valid = lambda x, y: levels if mapdata.elevation_at(m, x, y) == 15 else {mapdata.elevation_at(m, x, y)}
         back = {}
         for y in range(m.height):
             for x in range(m.width):
                 if m.walkable(x, y):
-                    for t in moves(m, x, y):
-                        back.setdefault(t, []).append((x, y))
-        step = lambda t: back.get(t, [])
+                    for e in valid(x, y):
+                        for t in state_moves(m, x, y, e):
+                            back.setdefault(t, []).append(((x, y), e))
+        step = lambda s: back.get(s, [])
+        first = [(s, e) for s in starts for e in valid(*s)]
     else:
-        step = lambda t: [n for n in moves(m, *t) if m.inside(*n) and m.walkable(*n)]
-    seen, queue = set(starts), deque(starts)
+        step = lambda s: list(state_moves(m, *s[0], s[1]))
+        first = [(s, mapdata.elevation_at(m, *s)) for s in starts]
+    seen, queue = set(first), deque(first)
     while queue:
         for n in step(queue.popleft()):
             if n not in seen:
                 seen.add(n)
                 queue.append(n)
-    return seen
+    return {s for s, _ in seen}
 
 
 def map_points(m):
@@ -181,7 +198,9 @@ def batch_reach(world, map_ids, map_id, tile):
             elif p["dest"] in map_ids:
                 other = world.map(p["dest"])
                 o = across(m, other, p["direction"], p["offset"], p["tile"])
-                nxt = (p["dest"], tuple(o)) if other.inside(*o) and other.walkable(*o) else None
+                ok = other.inside(*o) and other.walkable(*o) and mapdata.elevations_compatible(
+                    mapdata.elevation_at(m, *p["tile"]), mapdata.elevation_at(other, *o))
+                nxt = (p["dest"], tuple(o)) if ok else None
             else:
                 nxt = None
             if nxt and nxt not in seen:
@@ -217,7 +236,8 @@ def static_audit(world, map_ids):
             other = world.map(other_id)
             for t in edge_tiles(m, direction):
                 o = across(m, other, direction, offset, t)
-                if not (other.inside(*o) and other.walkable(*o)):
+                if not (other.inside(*o) and other.walkable(*o)
+                        and mapdata.elevations_compatible(mapdata.elevation_at(m, *t), mapdata.elevation_at(other, *o))):
                     find(map_id, "seam-mismatch", dict(direction=direction, tile=t, faces=(other_id, o)))
         # Every entry must reach every exit inside the map (cross-map routes are run-time checks).
         cut = []
@@ -453,37 +473,18 @@ class Runner:
         """
         from driver import Stuck
         tile = tuple(tile)
-        if self.d.here()[0] == map_id and tile not in reach(self.d.live_map(map_id), [self.d.here()[1]]) and _depth < 2:
-            self.enter_region(map_id, tile, _depth)
+        here = self.d.here()
+        if here[0] == map_id and tile not in reach(self.d.live_map(map_id), [here[1]]) and _depth < 2:
+            try:
+                self.d.go_map(self.d.map_route(map_id, map_id, here[1], target=tile))
+            except Stuck as exc:
+                self.d.log("no-route-to-tile", map=map_id, tile=tile, reason=str(exc))
         try:
             self.d.walk_path(map_id, {tile})
         except Stuck as exc:
             self.d.log("unreachable", map=map_id, tile=tile, reason=str(exc))
             return False
         return self.d.here() == (map_id, tile)
-
-    def enter_region(self, map_id, tile, depth):
-        target = self.w.map(map_id)
-        for src in self.plan:
-            for p in self.plan[src]["points"]:
-                if p["kind"] != "warp" or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
-                    continue
-                arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
-                if tile not in reach(target, [arrive]):
-                    continue
-                self.d.log("enter-region", map=map_id, tile=tile, via=(src, tuple(p["tile"])))
-                if self.d.here()[0] != src:
-                    self.d.travel_to(src)
-                if not self.go(src, p["tile"], depth + 1):
-                    continue
-                for _ in range(4):
-                    self.press(p["push"], hold=0.3, after=1.2)
-                    if self.d.here()[0] != src:
-                        break
-                self.wait_settled()
-                if self.d.here()[0] == map_id:
-                    return True
-        return False
 
     def blocked(self, map_id, x, y, direction):
         """Targeted probe (e.g. a shore facing water without Surf): stand there, push, must not move."""
