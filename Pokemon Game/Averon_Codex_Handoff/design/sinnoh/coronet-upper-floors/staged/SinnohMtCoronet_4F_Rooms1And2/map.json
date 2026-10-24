@@ -1,0 +1,57 @@
+{
+  "id": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+  "name": "SinnohMtCoronet_4F_Rooms1And2",
+  "layout": "LAYOUT_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "requires_flash": false,
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "music": "MUS_PETALBURG_WOODS",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 35,
+      "y": 24,
+      "elevation": 0,
+      "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 17,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 59,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 40,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+      "dest_warp_id": "0"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
