@@ -1,0 +1,111 @@
+{
+ "maps": [
+  "MAP_SINNOH_MT_CORONET_2F",
+  "MAP_SINNOH_MT_CORONET_3F"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_SINNOH_MT_CORONET_2F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      7,
+      23
+     ],
+     "warp": [
+      7,
+      23
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_2F",
+     "dest_warp": 1,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      7,
+      12
+     ],
+     "warp": [
+      7,
+      12
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_2F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 2,
+     "tile": [
+      11,
+      4
+     ],
+     "warp": [
+      11,
+      4
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_3F",
+     "dest_warp": 0,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 3,
+     "tile": [
+      21,
+      4
+     ],
+     "warp": [
+      21,
+      4
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_3F",
+     "dest_warp": 1,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_SINNOH_MT_CORONET_3F": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      14,
+      26
+     ],
+     "warp": [
+      14,
+      26
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_2F",
+     "dest_warp": 2,
+     "push": "up"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      18,
+      26
+     ],
+     "warp": [
+      18,
+      26
+     ],
+     "dest": "MAP_SINNOH_MT_CORONET_2F",
+     "dest_warp": 3,
+     "push": "up"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}
