@@ -1,0 +1,13 @@
+test_both_profiles_return_actual_distinct_identities (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_both_profiles_return_actual_distinct_identities) ... ok
+test_changed_engine_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_changed_engine_rejected) ... ok
+test_changed_rom_elf_recipe_identity_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_changed_rom_elf_recipe_identity_rejected) ... ok
+test_engine_and_archive_path_escape_or_symlink_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_engine_and_archive_path_escape_or_symlink_rejected) ... ok
+test_reordered_duplicate_or_noncontiguous_registry_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_reordered_duplicate_or_noncontiguous_registry_rejected) ... ok
+test_resealed_mismatched_identity_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_resealed_mismatched_identity_rejected) ... ok
+test_unmarked_scratch_and_unknown_profile_rejected (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_unmarked_scratch_and_unknown_profile_rejected) ... ok
+test_whole_engine_audit_rejects_unlisted_changes_and_wrong_head (test_sinnoh_runtime_preflight.RuntimePreflightTests.test_whole_engine_audit_rejects_unlisted_changes_and_wrong_head) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.148s
+
+OK

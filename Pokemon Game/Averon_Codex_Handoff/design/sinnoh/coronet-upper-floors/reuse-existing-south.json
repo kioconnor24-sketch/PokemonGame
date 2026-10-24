@@ -1,0 +1,36 @@
+{
+  "status": "REUSE_EXISTING_DONOR_GEOMETRY_NOT_A_NEW_SOUTH_MAP",
+  "source_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "existing_map": "MtCoronet_1F_South",
+  "dimensions": [
+    42,
+    32
+  ],
+  "staged_files_sha256": {
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/attributes.json": "7c6d6817300f418260464beb869f4ad05e0a25ca18ae9292b736630da88f6fc8",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/map.json": "4975cd7fc64d28df5d63591a9e87a48879b7f865bb772577055c8a42601bccff",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/collision.png": "627f548f2eaee71164ae4a13ce566554e1e23c8a2cba35e3c2a5774d2f6f2df9",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/border.bin": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/map.bin": "bbedf27924b73dac44bbf523738962b9f87f76426ab22a4bc46b70d6162d7cd3"
+  },
+  "existing_source_ladder": {
+    "x": 29,
+    "y": 2,
+    "map_word": "0x33a5",
+    "attribute_word": "0x1061"
+  },
+  "platinum_south_port": [
+    25,
+    3
+  ],
+  "platinum_2f_port": [
+    27,
+    48
+  ],
+  "limits": [
+    "Existing donor exits5,7 and36,20 remain quarantined",
+    "29,2 is an existing donor MB_LADDER,not raw-record visual equivalence",
+    "Future connection must reuse/adapt the existing42x32 geometry and verify graphics/approach;2F lower port remains closed in current nine-map recipe",
+    "Withdrawn32x24 parallel prototype remains only in earlier Git history,not active outputs"
+  ]
+}

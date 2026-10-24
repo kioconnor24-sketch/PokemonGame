@@ -1,0 +1,281 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "2f": {
+      "path": "res/field/events/events_mt_coronet_2f.json",
+      "sha256": "b9e9d79c56ae6e8f5d1c8a8d0ac19e4a95c7a55a8d7a83614de3a5694e76daf4",
+      "git_blob": "d17f110210adbd869a1eca6a648e7415cc11c1c7",
+      "warp_events": [
+        {
+          "x": 27,
+          "z": 48,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_1F_SOUTH",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 2,
+          "z": 59,
+          "dest_header_id": "MAP_HEADER_ROUTE_207",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 7,
+          "z": 23,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_2F",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 7,
+          "z": 12,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_2F",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 11,
+          "z": 4,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_3F",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 21,
+          "z": 4,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_3F",
+          "dest_warp_id": 1
+        }
+      ]
+    },
+    "3f": {
+      "path": "res/field/events/events_mt_coronet_3f.json",
+      "sha256": "950d45b6ee09a5d51b646594bb5e9051d0abf852dfbbf121b10c25b168c31bbd",
+      "git_blob": "e7927df1df1066cbd1cacdd9e69d4681d2186cac",
+      "warp_events": [
+        {
+          "x": 14,
+          "z": 26,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_2F",
+          "dest_warp_id": 4
+        },
+        {
+          "x": 18,
+          "z": 26,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_2F",
+          "dest_warp_id": 5
+        },
+        {
+          "x": 3,
+          "z": 29,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "outside_south": {
+      "path": "res/field/events/events_mt_coronet_outside_south.json",
+      "blob": "a1a74060987f5f488a9aec15de42e545a401ea35",
+      "sha256": "306a94def2757441a06ab77c08c557d379873d7c3d77ae72418e3c12c0f7a302",
+      "warp_events": [
+        {
+          "x": 12,
+          "z": 35,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_3F",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 11,
+          "z": 17,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 39,
+          "z": 18,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": 1
+        }
+      ]
+    },
+    "outside_north": {
+      "path": "res/field/events/events_mt_coronet_outside_north.json",
+      "blob": "2f2269534358b0424eb3e1aeab39b1d24c2d3c44",
+      "sha256": "2e6e6c1e5af0ee0758ae3f1a7bd0645d73353d1c58b2ee0a52c235e076b75948",
+      "warp_events": [
+        {
+          "x": 42,
+          "z": 40,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": 4
+        },
+        {
+          "x": 13,
+          "z": 19,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOM_3",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 45,
+          "z": 28,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_1F_TUNNEL_ROOM",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "4f_rooms_1_and_2": {
+      "path": "res/field/events/events_mt_coronet_4f_rooms_1_and_2.json",
+      "blob": "79d924def4f55a0725f5ee8b9d9ec338cc9f4220",
+      "sha256": "9a00add4a1fb3d87dd29c227d137de1bc6d824fe8cd448dbe4032bd1e7d7a6c3",
+      "warp_events": [
+        {
+          "x": 7,
+          "z": 25,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 35,
+          "z": 24,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 17,
+          "z": 6,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 59,
+          "z": 6,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 40,
+          "z": 10,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "4f_room_3": {
+      "path": "res/field/events/events_mt_coronet_4f_room_3.json",
+      "blob": "f04f412cdc306c34d5b26441d5983b2532a61ae9",
+      "sha256": "c6079038c83a2f67e2f0127e3d7e8598240aabf31df29a2459bc0047c0f11dc5",
+      "warp_events": [
+        {
+          "x": 2,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 18,
+          "z": 8,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_5F",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "5f": {
+      "path": "res/field/events/events_mt_coronet_5f.json",
+      "blob": "21def300cbe0c1cb2ec82dd15201845acca45058",
+      "sha256": "cdcd38c0224fdb35bcb70e5e0b586e841d2784cf6ef3a99fe9de2875821e326d",
+      "warp_events": [
+        {
+          "x": 21,
+          "z": 7,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_4F_ROOM_3",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 13,
+          "z": 24,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_6F",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "6f": {
+      "path": "res/field/events/events_mt_coronet_6f.json",
+      "blob": "a3a07ece6ba0f62b0c5bb59ca48fdbc599767cd2",
+      "sha256": "e9e6617a6b4f03b2a02b01f3d5a7c66afd4e4b29d21f298bcdcfdda2f2e79f60",
+      "warp_events": [
+        {
+          "x": 10,
+          "z": 24,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_5F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 7,
+          "z": 5,
+          "dest_header_id": "MAP_HEADER_SPEAR_PILLAR",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 7,
+          "z": 5,
+          "dest_header_id": "MAP_HEADER_SPEAR_PILLAR_DISTORTED",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 7,
+          "z": 5,
+          "dest_header_id": "MAP_HEADER_SPEAR_PILLAR_DIALGA",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 7,
+          "z": 5,
+          "dest_header_id": "MAP_HEADER_SPEAR_PILLAR_PALKIA",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "1f_south": {
+      "path": "res/field/events/events_mt_coronet_1f_south.json",
+      "sha256": "45346b87f09db56617eb3c9aadf7f2ee6e3816fbafb8491e3cb9e647c189b77f",
+      "git_blob": "fd7df3a0158cc02a58df1038f2a087f7f36d6b7d",
+      "warp_events": [
+        {
+          "x": 4,
+          "z": 8,
+          "dest_header_id": "MAP_HEADER_ROUTE_207",
+          "dest_warp_id": 0
+        },
+        {
+          "x": 27,
+          "z": 20,
+          "dest_header_id": "MAP_HEADER_ROUTE_208",
+          "dest_warp_id": 3
+        },
+        {
+          "x": 25,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_2F",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "1f_tunnel_room": {
+      "path": "res/field/events/events_mt_coronet_1f_tunnel_room.json",
+      "sha256": "cf7d5162fb131b1ff759020a9c6aaf72299232d6fce802e3753e9463e9d24a0c",
+      "git_blob": "4a4e4a34f398414dcdabfed81250a0948821783a",
+      "warp_events": [
+        {
+          "x": 2,
+          "z": 58,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 16,
+          "z": 13,
+          "dest_header_id": "MAP_HEADER_MT_CORONET_1F_NORTH_ROOM_1",
+          "dest_warp_id": 0
+        }
+      ]
+    }
+  },
+  "scope": "Technical portal facts only, no DS art/scripts/story/encounters"
+}
