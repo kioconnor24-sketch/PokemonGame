@@ -1,0 +1,4 @@
+test/averon_victory_runtime.c:26:53: error: 'gTileset_Cave' undeclared (first use in this function); did you mean 'gTileset_Shop'?
+   26 |         EXPECT(h->mapLayout->secondaryTileset==&gTileset_Cave);
+test/averon_victory_runtime.c:26:53: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Makefile:519: build/emerald-test/test/averon_victory_runtime.o] Error 1
