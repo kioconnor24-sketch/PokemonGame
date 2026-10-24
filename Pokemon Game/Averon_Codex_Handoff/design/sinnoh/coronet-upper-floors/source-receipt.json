@@ -2,7 +2,7 @@
   "status": "ORIGINAL_CORONET_ASCENT_SOURCE_ART_ONLY_NOT_RUNTIME_OR_PRODUCTION",
   "reference_revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
   "source_inputs_sha256": {
-    "shell-recipe.json": "0ee6d59b647eace87e11a51525984b3042564c6c9e76d68b42fc78c977168aee",
+    "shell-recipe.json": "68a932465108a1d904edd6c813e11406b4023d6759230ddbfd3c01fe68404a61",
     "portal-reference.json": "1956e26fce0eeab9b81f31f4006ea000f5ff6a86d17ab3a35b1beeeb4a839c73"
   },
   "existing_averon_sha256": {
@@ -22,18 +22,21 @@
         64
       ],
       "cells": 2176,
-      "warps": 5,
+      "warps": 4,
       "source_warp_indices": [
         2,
         3,
         4,
-        5,
-        0
+        5
       ],
       "sealed_external_ports": [
         [
           2,
           59
+        ],
+        [
+          27,
+          48
         ]
       ],
       "dependencies": {
@@ -77,7 +80,7 @@
           6
         ]
       },
-      "map_sha256": "f5cc91d6958643f0c2d7c12e0a69adc9b2e2a398c0a2519665e868192190a83a"
+      "map_sha256": "42d1170fec6eed2b9bf4bd1a4e444be8369abb192a9d8364c08f1bc78796269a"
     },
     "SinnohMtCoronet_3F": {
       "dimensions": [
@@ -464,69 +467,6 @@
       },
       "map_sha256": "486051ec2126d5452e751939d91f6c70dcf369431198963e0da91bb42e77e312"
     },
-    "SinnohMtCoronet_1F_South": {
-      "dimensions": [
-        32,
-        24
-      ],
-      "cells": 768,
-      "warps": 1,
-      "source_warp_indices": [
-        2
-      ],
-      "sealed_external_ports": [
-        [
-          4,
-          8
-        ],
-        [
-          27,
-          20
-        ]
-      ],
-      "dependencies": {
-        "metatiles": [
-          513,
-          517,
-          521,
-          528,
-          529,
-          530
-        ],
-        "graphic_tiles": [
-          0,
-          515,
-          516,
-          521,
-          522,
-          531,
-          532,
-          537,
-          538,
-          680,
-          681,
-          690,
-          691,
-          706,
-          707,
-          710,
-          711,
-          714,
-          715,
-          722,
-          723,
-          726,
-          727,
-          730,
-          731
-        ],
-        "palettes": [
-          0,
-          6
-        ]
-      },
-      "map_sha256": "e3cbaea184f56f95ace8fb68eacdc3a03f6070f33b3a3b3730b4947c6a86bc1d"
-    },
     "SinnohMtCoronet_1F_Tunnel_Room": {
       "dimensions": [
         20,
@@ -588,10 +528,10 @@
     }
   },
   "limits": [
-    "Four new original GBA physical shells, not DS terrain/Strength puzzles or final artwork",
-    "Existing six maps changed only at three real source anchors:2F27,48;OutsideNorth45,28;4FRoom318,8; prior warp indices unchanged",
-    "1F-South Route207/208,2F Route207,tunnel north-room and6F summit aliases stay closed; no invented world links",
-    "Source terrain approximated with ordinary foot corridors, not RockClimb/Strength/progression acceptance",
-    "No production registration, permanent saved IDs, plot, encounters, triggers, donor pixels/music or save edits"
+    "Three genuinely missing original GBA physical shells:5F,6F,1F Tunnel Room; not DS terrain/puzzles/final art",
+    "Existing staged donor MtCoronet_1F_South42x32 is retained unchanged, not reconstructed; its actual ladder29,2 is a future source-grounded seam candidate",
+    "2F lower/South and Route207 anchors remain closed until existing donor South geometry/art is reused and integrated",
+    "Only4FRoom318,8 andOutsideNorth45,28 open to new floors; original warp indices unchanged",
+    "Summit aliases and Tunnel north-room remain sealed; no RockClimb/Strength/story/production IDs/assets/save edits"
   ]
 }

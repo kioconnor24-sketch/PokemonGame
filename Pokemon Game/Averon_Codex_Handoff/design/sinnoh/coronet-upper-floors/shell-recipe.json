@@ -98,14 +98,17 @@
         [
           2,
           59
+        ],
+        [
+          27,
+          48
         ]
       ],
       "interior_warp_indices": [
         2,
         3,
         4,
-        5,
-        0
+        5
       ]
     },
     "SinnohMtCoronet_3F": {
@@ -527,33 +530,6 @@
         ]
       ]
     },
-    "SinnohMtCoronet_1F_South": {
-      "reference": "1f_south",
-      "width": 32,
-      "height": 24,
-      "rooms": [
-        [
-          2,
-          2,
-          27,
-          20
-        ]
-      ],
-      "corridors": [],
-      "interior_warp_indices": [
-        2
-      ],
-      "sealed_external_ports": [
-        [
-          4,
-          8
-        ],
-        [
-          27,
-          20
-        ]
-      ]
-    },
     "SinnohMtCoronet_1F_Tunnel_Room": {
       "reference": "1f_tunnel_room",
       "width": 20,
@@ -600,10 +576,10 @@
     }
   },
   "limits": [
-    "Four new original GBA physical shells, not DS terrain/Strength puzzles or final artwork",
-    "Existing six maps changed only at three real source anchors:2F27,48;OutsideNorth45,28;4FRoom318,8; prior warp indices unchanged",
-    "1F-South Route207/208,2F Route207,tunnel north-room and6F summit aliases stay closed; no invented world links",
-    "Source terrain approximated with ordinary foot corridors, not RockClimb/Strength/progression acceptance",
-    "No production registration, permanent saved IDs, plot, encounters, triggers, donor pixels/music or save edits"
+    "Three genuinely missing original GBA physical shells:5F,6F,1F Tunnel Room; not DS terrain/puzzles/final art",
+    "Existing staged donor MtCoronet_1F_South42x32 is retained unchanged, not reconstructed; its actual ladder29,2 is a future source-grounded seam candidate",
+    "2F lower/South and Route207 anchors remain closed until existing donor South geometry/art is reused and integrated",
+    "Only4FRoom318,8 andOutsideNorth45,28 open to new floors; original warp indices unchanged",
+    "Summit aliases and Tunnel north-room remain sealed; no RockClimb/Strength/story/production IDs/assets/save edits"
   ]
 }

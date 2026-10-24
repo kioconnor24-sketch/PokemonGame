@@ -1,3 +1,19 @@
+# Coronet upper floors and tunnel — reuse-safe source package
+
+Active scope:three genuinely missing original GBA shells5F26×28,6F14×28,1F Tunnel20×62 =2,360 new cells. Coupled NINE maps11,884 cells/24 reciprocal events; guarded41-file DEV recipe appends temporary19–27, original19 prefix unchanged.217 surrogate only, no permanent IDs. Native five tests prepared,NOT executed; future scoped32 expected. No nine-map builds/GUI/save acceptance yet.
+
+**Correction to earlier prototype:**the existing#237 ledger already stages donor MtCoronet_1F_South42×32. The parallel32×24 South prototype was an unnecessary reconstruction and is withdrawn from active outputs in an ordinary follow-up commit; its old content remains in Git history. Existing donor South geometry/header/attributes/border/schematic remain byte-identical. Source-backed reuse manifest records their hashes and actual donor MB_LADDER at29,2 (map0x33a5,full attribute0x1061). Platinum's corresponding25,3 is NOT blindly placed into this different geography.2F27,48 stays sealed pending actual permitted-art adaptation and verified reuse of that existing42×32 map. No donor raw-record match is claimed as visual equivalence.
+
+Active source-grounded new seams:4FRoom3source1↔5F0;5F1↔6F0;OutsideNorthsource2↔1FTunnel0. Prior six maps' warp indices retained; only4FRoom318,8 andOutsideNorth45,28 walk cells open, adjacent already-solid wall faces update without collision/elevation changes. Both old same-floor pairs preserved. Closed:2F South27,48/Route2072,59;Tunnel north-room16,13;6F coincident summit7,5. No7F or legendary/conditional story. No RockClimb/Strength/final mountain artwork acceptance;existing rocky outside placeholders remain.
+
+Pinned technical references pret/pokeplatinum6dc1499e3127176d4cb34f41c01ee62e1d98808a;source South reuse LiderMorti00 revision38228bb574a3557345852b758d5f1a65eb01bb22/existing#237 receipt. No new donor pixels,palettes,music,encounters,trainers,flags or saved schema. Existing General/Cave assets and painter reused. Every current packet regenerated exactly (46 outputs),ordinary floor/stair graph connected,source portals/closed edges/old indices verified;guards reject dirty/wrong-base/path escape/native asset/packet tampering. QA delegates current parent short-pulse runner and restores scope on exception.
+
+Current host15/15 =eight source/reuse cases plus seven installer/QA/negative cases;see host15.log. Earlier host7/14 files are HISTORICAL ten-map-prototype results,not acceptance of the active nine-map package. Current tests specifically assert existing donor South hashes,existing29,2 ladder and2F lower closure. Five native cases remain prepared only. The old source title/counts below are retained history and superseded.
+
+NEXT:finish active#249 combined606 runtime proof first,preserve its overlay/archive,refresh main/claims,install this existing nine-map recipe on clean marked codex/coronet-upper-floors-runtime-scratch-* baseline,then NORMAL/RELEASE/native32/unchanged goldens4/24 actual events/followers/menu/Save→fresh Continue/old flash. Never load a DEV save from a different temporary registry. Separately reuse the existing donor South and its genuine29,2 stair with a verified graphics family before opening2F lower seam. Preserve#237's owner-reserved paths/227+ gates,no draft merge or automatic restart.
+
+## Superseded prototype checkpoint — historical only
+
 # Coronet upper floors and lower connectors — source/art only
 
 Four new original GBA physical shells:5F26×28,6F14×28,1F South32×24,1F Tunnel Room20×62 =3,128 new cells. Coupled ten-map scene12,652 cells/26 reciprocal warp events. Existing six-map #246 scene is the parent dependency, not production registration. This package reuses its painter and permitted stock General/Cave assets, with no DS pixels/music or competing converter.

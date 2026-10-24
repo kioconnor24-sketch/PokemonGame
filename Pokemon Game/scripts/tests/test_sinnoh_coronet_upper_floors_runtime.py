@@ -1,4 +1,4 @@
-"""Original Coronet six-map DEV install cannot affect production or external geography."""
+"""Guarded Coronet nine-map DEV install cannot affect production or external geography."""
 import importlib.util
 import json
 from pathlib import Path
@@ -18,12 +18,12 @@ class CoronetUpperFloorsRuntimeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):cls.files,cls.receipt=r.assemble(ROOT)
 
-    def test_original19_prefix_and_only_six_temporary_maps_no_origins_or_graphics(self):
+    def test_original19_prefix_and_only_nine_temporary_maps_no_origins_or_graphics(self):
         groups=json.loads(self.files['data/maps/map_groups.json']);old=json.loads((ROOT/r.ENGINE/'data/maps/map_groups.json').read_text())
         self.assertEqual(groups['gMapGroup_Sinnoh'][:19],old['gMapGroup_Sinnoh'])
-        self.assertEqual(groups['gMapGroup_Sinnoh'][19:],list(r.MAPS));self.assertEqual(len(groups['gMapGroup_Sinnoh']),29)
-        self.assertEqual(list(self.receipt['temporary_map_slots'].values()),list(range(19,29)))
-        self.assertEqual(len(self.files),45)
+        self.assertEqual(groups['gMapGroup_Sinnoh'][19:],list(r.MAPS));self.assertEqual(len(groups['gMapGroup_Sinnoh']),28)
+        self.assertEqual(list(self.receipt['temporary_map_slots'].values()),list(range(19,28)))
+        self.assertEqual(len(self.files),41)
         self.assertFalse(any('tileset' in p or 'pokemon' in p or 'region_map_sections' in p or p.endswith(('.png','.pal','.sav','.gba')) for p in self.files))
 
     def test_every_packet_and_full_stair_order_exact_only_section_surrogate_changes(self):
@@ -71,11 +71,11 @@ class CoronetUpperFloorsRuntimeTests(unittest.TestCase):
                     raw=bytearray(p.read_bytes());raw[0]^=1;p.write_bytes(raw)
                 with patch.object(r,'HERE',d),self.assertRaisesRegex(ValueError,'tested original packet'):r.assemble(ROOT)
 
-    def test_ten_map_qa_reuses_parent_and_restores_scope_on_success_or_failure(self):
+    def test_nine_map_qa_reuses_parent_and_restores_scope_on_success_or_failure(self):
         from types import SimpleNamespace
         spec=importlib.util.spec_from_file_location('upper_ten_qa',HERE/'run_runtime_qa.py')
         m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);old=m.a.MAPS
-        self.assertEqual(len(m.MAPS),10)
+        self.assertEqual(len(m.MAPS),9)
         def fake(args):
             self.assertEqual(m.a.MAPS,m.MAPS)
             return 0

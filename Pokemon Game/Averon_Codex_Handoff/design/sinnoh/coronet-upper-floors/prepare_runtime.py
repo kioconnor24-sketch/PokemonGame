@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guarded current-main ten-map Coronet upper floors DEV installation; external anchors stay closed."""
+"""Guarded current-main nine-map Coronet upper floors DEV installation; external anchors stay closed."""
 import argparse
 import copy
 import importlib.util
@@ -11,7 +11,7 @@ HERE=Path(__file__).resolve().parent
 sp=importlib.util.spec_from_file_location('victory_existing_guard',HERE.parent/'sunyshore-coast/prepare_runtime.py')
 coast=importlib.util.module_from_spec(sp);sp.loader.exec_module(coast)
 base=coast.base;BASE='9c195964938b5a9c5db37bd114ca6dbcfc1965a3';ENGINE=coast.ENGINE;sha=coast.sha;encode=coast.encode
-MAPS={'SinnohMtCoronet_2F': (34, 64), 'SinnohMtCoronet_3F': (28, 34), 'SinnohMtCoronet_OutsideSouth': (46, 40), 'SinnohMtCoronet_OutsideNorth': (50, 46), 'SinnohMtCoronet_4F_Rooms1And2': (64, 30), 'SinnohMtCoronet_4F_Room3': (24, 14), 'SinnohMtCoronet_5F': (26, 28), 'SinnohMtCoronet_6F': (14, 28), 'SinnohMtCoronet_1F_South': (32, 24), 'SinnohMtCoronet_1F_Tunnel_Room': (20, 62)}
+MAPS={'SinnohMtCoronet_2F': (34, 64), 'SinnohMtCoronet_3F': (28, 34), 'SinnohMtCoronet_OutsideSouth': (46, 40), 'SinnohMtCoronet_OutsideNorth': (50, 46), 'SinnohMtCoronet_4F_Rooms1And2': (64, 30), 'SinnohMtCoronet_4F_Room3': (24, 14), 'SinnohMtCoronet_5F': (26, 28), 'SinnohMtCoronet_6F': (14, 28), 'SinnohMtCoronet_1F_Tunnel_Room': (20, 62)}
 source_spec=importlib.util.spec_from_file_location('victory_original_source',HERE.parent/'victory-road-shell/build_shell.py')
 source=importlib.util.module_from_spec(source_spec);source_spec.loader.exec_module(source)
 
@@ -35,7 +35,7 @@ def assemble(repo):
     if len(prior)!=19 or len(set(prior))!=19 or set(prior)&set(MAPS):raise ValueError('exact original19 prefix required')
     slots=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 19, 1)'
     if slots.count(marker)!=1:raise ValueError('registry count differs')
-    slots=slots.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 29, 1)')
+    slots=slots.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 28, 1)')
     layout_ids={v['id'] for v in layouts['layouts']};files={};headers={};includes=[]
     for slot,(name,(w,h)) in enumerate(MAPS.items(),19):
         f=HERE/'staged'/name;header=json.loads((f/'map.json').read_text());headers[name]=copy.deepcopy(header)
@@ -61,7 +61,7 @@ def assemble(repo):
     files['test/data/averon_map_registry_slots.inc']=slots.encode();files['data/event_scripts.s']=before['data/event_scripts.s']+('\n'+'\n'.join(includes)+'\n').encode()
     files['test/averon_coronet_upper_floors_runtime.c']=(HERE/'native-runtime.c').read_bytes()
     return files,dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',base=BASE,existing_map_names_preserved=prior,
-        temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers=headers,dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ten-map Coronet upper floors ROM; unbuilt four exterior anchors closed, never production',files={p:sha(v) for p,v in sorted(files.items())})
+        temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers=headers,dev_surrogate='MAPSEC_ROUTE_201217 only in disposable nine-map Coronet upper floors ROM; unbuilt four exterior anchors closed, never production',files={p:sha(v) for p,v in sorted(files.items())})
 
 
 def install(repo):
