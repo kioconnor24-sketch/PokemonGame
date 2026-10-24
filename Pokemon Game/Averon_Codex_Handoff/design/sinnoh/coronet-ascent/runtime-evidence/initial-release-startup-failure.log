@@ -1,0 +1,35 @@
+QA source /workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/map_qa.py 5385c41a05ec6ea59e185e8fd6f52f7d82be854e446d5ecd562b902fa6edb8b4
+QA source /workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/driver.py 7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-ascent/run_runtime_qa.py", line 43, in <module>
+    sys.exit(run(p.parse_args()))
+             ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-ascent/run_runtime_qa.py", line 35, in run
+    try:return shared.run(args)
+               ^^^^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/run_runtime_qa.py", line 223, in run
+    try:return qa.main(cmd)
+               ^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/map_qa.py", line 1039, in main
+    return cmd_run(args)
+           ^^^^^^^^^^^^^
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/map_qa.py", line 838, in cmd_run
+    e = emu.Emulator(rom, out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 339, in _attach
+    self.gdb.halt()
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 230, in halt
+    stop = self._cmd("?")
+           ^^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 215, in _cmd
+    return self._packet() if reply else None
+           ^^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 197, in _packet
+    while self._recv1() != b"$":
+          ^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 189, in _recv1
+    ch = self.sock.recv(1)
+         ^^^^^^^^^^^^^^^^^
+TimeoutError: timed out

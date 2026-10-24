@@ -47,7 +47,9 @@ def construct(recipe,reference,names=None,ids=None,header_prefix='MAP_HEADER_VIC
                     x+=dx;y+=dy
         source=refs[plan['reference']]['warp_events'];warps=[]
         for old in plan['interior_warp_indices']:
-            v=source[old];target_ref=v['dest_header_id'].removeprefix(header_prefix).lower()
+            v=source[old];destination=v['dest_header_id']
+            if not isinstance(destination,str) or not destination.startswith(header_prefix):raise ValueError('invalid destination header prefix')
+            target_ref=destination.removeprefix(header_prefix).lower()
             if target_ref not in names:raise ValueError('external destination cannot activate')
             target=names[target_ref];target_indices=maps[target]['interior_warp_indices']
             if v['dest_warp_id'] not in target_indices:raise ValueError('missing counterpart')

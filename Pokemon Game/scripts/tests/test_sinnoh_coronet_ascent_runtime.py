@@ -105,6 +105,7 @@ assert m.shared.MAPS==old and m.shared.ordinary_step is old_step
             def here(self,state=None):return ('ROOM',self.pos)
             def field_ready(self,state):return True
             def tap(self,key,hold,after):
+                assert hold<=.025, 'one-frame pulse must release well before repeat movement'
                 self.calls.append(('released',key,hold,after))
                 if len(self.calls)>2 and not self.blocked:self.pos=(7,26)
             def settle(self):self.calls.append(('observe',));return SimpleNamespace()
