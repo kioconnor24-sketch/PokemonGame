@@ -20,7 +20,7 @@ def ordinary_step(d,direction):
     """
     start=d.here()
     for _ in range(3):
-        d.e.tap(direction.upper(),hold=.08,after=.3)
+        d.e.tap(direction.upper(),hold=.025,after=.3)
         state=d.settle()
         if not d.field_ready(state) or d.here(state)!=start:return state
     return None
