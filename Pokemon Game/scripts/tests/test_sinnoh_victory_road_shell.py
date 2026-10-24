@@ -115,4 +115,11 @@ class VictoryShellTests(unittest.TestCase):
         bad=compile_tracks(['MUS_GRANITE_CAVE'])
         self.assertNotEqual(bad.returncode,0)
 
+    def test_bare_matching_destination_suffix_requires_full_source_namespace(self):
+        bad=copy.deepcopy(self.reference)
+        plan=next(iter(self.recipe['maps'].values()))
+        warp=bad['files'][plan['reference']]['warp_events'][plan['interior_warp_indices'][0]]
+        warp['dest_header_id']=warp['dest_header_id'].removeprefix('MAP_HEADER_VICTORY_ROAD_')
+        with self.assertRaisesRegex(ValueError,'destination header prefix'):s.construct(self.recipe,bad)
+
 if __name__=='__main__':unittest.main()

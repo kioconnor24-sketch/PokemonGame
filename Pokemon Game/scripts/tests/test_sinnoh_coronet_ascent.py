@@ -67,4 +67,7 @@ class AscentTests(unittest.TestCase):
   with self.assertRaises((KeyError,ValueError)):s.construct(self.recipe,bad,a.NAMES,a.IDS,'MAP_HEADER_MT_CORONET_')
   bad=copy.deepcopy(self.recipe);bad['maps'][a.NAMES['outside_south']]['corridors'].append([[1,1],[3,3]])
   with self.assertRaisesRegex(ValueError,'orthogonal'):s.construct(bad,self.ref,a.NAMES,a.IDS,'MAP_HEADER_MT_CORONET_')
+ def test_bare_matching_destination_suffix_cannot_impersonate_source_header(self):
+  bad=copy.deepcopy(self.ref);bad['files']['2f']['warp_events'][2]['dest_header_id']='2F'
+  with self.assertRaisesRegex(ValueError,'destination header prefix'):s.construct(self.recipe,bad,a.NAMES,a.IDS,'MAP_HEADER_MT_CORONET_')
 if __name__=='__main__':unittest.main()
