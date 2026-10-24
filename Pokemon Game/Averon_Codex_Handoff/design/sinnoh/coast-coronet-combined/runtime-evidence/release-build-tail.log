@@ -1,0 +1,14 @@
+Memory region         Used Size  Region Size  %age Used
+           EWRAM:      226482 B       256 KB     86.40%
+           IWRAM:       28336 B        32 KB     86.47%
+             ROM:    17584536 B        32 MB     52.41%
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): in function `_write_r':
+/build/reproducible-path/newlib-4.5.0.20241231/build/arm-none-eabi/thumb/nofp/newlib/../../../../../newlib/libc/reent/writer.c:49:(.text+0x10): warning: _write is not implemented and will always fail
+/workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/bin/ld: /workspace/.onboarding/sysroot/usr/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): note: the message above does not take linker garbage collection into account
+Memory region         Used Size  Region Size  %age Used
+           EWRAM:      226482 B       256 KB     86.40%
+           IWRAM:       28336 B        32 KB     86.47%
+             ROM:    17584536 B        32 MB     52.41%
+tools/gbafix/gbafix pokeemerald-release.elf -t"POKEMON EMER" -cBPEE -m01 -r0 --silent
+arm-none-eabi-objcopy -O binary pokeemerald-release.elf pokeemerald-release.gba
+tools/gbafix/gbafix pokeemerald-release.gba -p --silent

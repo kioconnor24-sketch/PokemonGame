@@ -1,3 +1,9 @@
+# Combined DEV scene: builds/native and first runtime tranche
+
+Actual paired builds/engine treefe424d6b, native36/36, unchanged strict goldens4/4, static0 and new-scene NORMAL coast71/71 are now published in [runtime-evidence/README.md](runtime-evidence/README.md). Exact source/ROM hashes, linked usage, retained ledge proof and pending serial Victory/Coronet/RELEASE cases are recorded there. This is PARTIAL combined gameplay evidence; keep source/ROMs frozen until the remaining jobs finish. No production or final visual acceptance.
+
+## Original source-only preparation — historical
+
 # Combined corrected coast–Victory–Coronet DEV recipe
 
 Explicit normal merge of #245 (`0fa671e3717b57b6f1409a3cee866950eca6a5d9`) retains the exact tested Route222 repair and its original separate evidence. The one documentation conflict was resolved by preserving both prior Victory results and the later Route222 correction; original failed coast receipts remain untouched. No historical evidence was overwritten or accepted retroactively.
