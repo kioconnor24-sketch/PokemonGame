@@ -1,0 +1,42 @@
+{"t": 1792871913.99, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792871914.03, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792871916.65, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792871916.69, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792871918.36, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792871918.41, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792871918.92, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792871918.96, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792871919.47, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792871919.51, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792871920.59, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792871920.63, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792871924.27, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792871924.31, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792871924.97, "event": "field", "map": "MAP_ROUTE222", "pos": [37, 15], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792871925.52, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE222", [37, 15]]}
+{"t": 1792871927.58, "event": "capture", "file": "0008-start.png"}
+{"t": 1792871927.58, "event": "observe", "label": "start", "problems": []}
+{"t": 1792871927.58, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792871927.58, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792871928.16, "event": "map-qa-check", "name": "reached source ledge approach", "ok": true, "at": ["MAP_ROUTE222", [37, 15]]}
+{"t": 1792871928.21, "event": "capture", "file": "0009-source-ledge-before.png"}
+{"t": 1792871930.12, "event": "capture", "file": "0010-source-ledge-after.png"}
+{"t": 1792871930.12, "event": "map-qa-check", "name": "corrected cliff blocks the exact former hazardous jump", "ok": true, "at": ["MAP_ROUTE222", [37, 15]]}
+{"t": 1792871930.12, "event": "map-qa-check", "name": "source ledge does not land inside solid terrain", "ok": true, "at": ["MAP_ROUTE222", [37, 15]], "landing_collision": 1}
+{"t": 1792871931.1, "event": "map-qa-check", "name": "reached unchanged adjacent legal jump", "ok": true, "at": ["MAP_ROUTE222", [38, 15]]}
+{"t": 1792871933.01, "event": "capture", "file": "0011-adjacent-legal-jump-after.png"}
+{"t": 1792871933.01, "event": "map-qa-check", "name": "unchanged neighboring jump lands on safe beach", "ok": true, "at": ["MAP_ROUTE222", [38, 17]]}
+{"t": 1792871934.0, "event": "capture", "file": "0012-start-menu.png"}
+{"t": 1792871934.83, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792871940.74, "event": "capture", "file": "0013-save-confirm-coronet-six.png"}
+{"t": 1792871941.92, "event": "capture", "file": "0014-save-step-coronet-six-01.png"}
+{"t": 1792871943.01, "event": "capture", "file": "0015-save-step-coronet-six-02.png"}
+{"t": 1792871944.1, "event": "capture", "file": "0016-save-step-coronet-six-03.png"}
+{"t": 1792871945.14, "event": "capture", "file": "0017-save-step-coronet-six-04.png"}
+{"t": 1792871946.12, "event": "capture", "file": "0018-save-step-coronet-six-05.png"}
+{"t": 1792871947.15, "event": "capture", "file": "0019-save-step-coronet-six-06.png"}
+{"t": 1792871948.21, "event": "capture", "file": "0020-save-step-coronet-six-07.png"}
+{"t": 1792871949.32, "event": "capture", "file": "0021-save-step-coronet-six-08.png"}
+{"t": 1792871950.23, "event": "capture", "file": "0022-saved-coronet-six.png"}
+{"t": 1792871950.23, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792871950.27, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_ROUTE222", [38, 17]]}

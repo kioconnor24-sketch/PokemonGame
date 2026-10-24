@@ -1,6 +1,8 @@
-# Combined DEV scene: builds/native and first runtime tranche
+# Combined DEV scene: completed paired606 proof
 
-Actual paired builds/engine treefe424d6b, native36/36, unchanged strict goldens4/4, static0 and new-scene complete NORMAL303/303 (coast71+Victory109+Coronet123) are now published in [runtime-evidence/README.md](runtime-evidence/README.md). Exact source/ROM hashes, linked usage, retained ledge proof and pending serial RELEASE cases are recorded there. This is PARTIAL combined gameplay evidence; keep source/ROMs frozen until the remaining jobs finish. No production or final visual acceptance.
+Actual NORMAL303/303 + RELEASE303/303 =606/606 across18 ordinary-input GUI cases,native36/36,original strict goldens4/4,host8/8,static0. Exact frozen enginefe424d6b2373e567127234f46ac6774f2802a9db on main9c195964;all71 recipe files unchanged and no other engine changes. Both profile hashes/measurements,67 curated evidence files,all38 events/self-stairs/League doors/ledge negatives/followers/menus/save/fresh Continue/old flash are recorded in [runtime-evidence/README.md](runtime-evidence/README.md). NORMAL17,465,416B/RELEASE17,584,536B,+72,072 each,RAM unchanged. No natural Surf/Waterfall,final mountain-art,production IDs or approval-gate acceptance.
+
+NEXT:preserve this verified source/paired archive,refresh main/claims,then existing#248 NINE-map recipe at3348fd2b:three new5F/6F/Tunnel shells,24 events,15/15 host;existing donor South preserved,lower seam closed. Its native32/GUI/build proof is NOT executed yet. Do not restart the superseded duplicate-South ten-map prototype. Owner#237 reserved paths/227+ and#235 white bridge gap remain separate gates.
 
 ## Original source-only preparation — historical
 
