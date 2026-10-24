@@ -1,0 +1,43 @@
+{
+  "status": "DOCUMENTED_TWO_CELL_GEOGRAPHY_SAFETY_DEVIATION_NOT_RUNTIME_ACCEPTANCE",
+  "original_sha256": {
+    "map.bin": "e9545d4a1ad3a71c6dbacccba7a1eff13f758f1e0c16edaf6864c7c8870a8ee3",
+    "averon-map.bin": "752711b563612d52def985c5d66018f496cbf6323f8e9344cff8714ed28a8b75"
+  },
+  "cells": [
+    {
+      "x": 36,
+      "y": 16,
+      "before": 1159,
+      "after": 1169,
+      "old_behavior": "MB_JUMP_SOUTH",
+      "new_behavior": "MB_NORMAL",
+      "collision_before": 1,
+      "collision_after": 1,
+      "elevation_before": 0,
+      "elevation_after": 0
+    },
+    {
+      "x": 37,
+      "y": 16,
+      "before": 1159,
+      "after": 1169,
+      "old_behavior": "MB_JUMP_SOUTH",
+      "new_behavior": "MB_NORMAL",
+      "collision_before": 1,
+      "collision_after": 1,
+      "elevation_before": 0,
+      "elevation_after": 0
+    }
+  ],
+  "reason": "Previously reproduced ledge jumps land inside unchanged solid boulders36/37,17. Replace only those two jump faces with existing impassable sand-base cliff; retain adjacent legal jumps and all four boulder cells. Owner visual review remains.",
+  "output_sha256": {
+    "map.bin": "e7a85f8dc9185348575c68182556666e56d6f56143f12f9a7a9010d841fc12ed",
+    "averon-map.bin": "d72e2575f7503746f8ba2e404696b217ee9f66e60d1995dc6a26e22fc22d7d36"
+  },
+  "limits": [
+    "Original source packets remain byte-identical",
+    "No bank or global graphics edit, saved ID, warp, story, encounter or production install",
+    "Source-tested only; original negative fixtures must be rerun against a newly compiled corrected scene"
+  ]
+}
