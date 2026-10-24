@@ -1,3 +1,9 @@
+# LATEST — owner-requested save/upload checkpoint
+
+Actual nine-map NORMAL and RELEASE builds now complete;exact identities/sizes/hashes and commands in [build-evidence](build-evidence/README.md). Native32/goldens4/GUI/save checks are NOT executed for this new scene. Active source41-file enginebe89b883 at main9c195964,private branch codex/coronet-upper-floors-runtime-scratch-20261024. Both paired artifacts retained privately;no running make/mGBA at handoff.
+
+Existing South art is now actually adapted without reconstructing geography:5/5 tests,all1,348 cells/full attributes preserved,old three cave outputs and bank prefix unchanged,one added18-byte metadata record. See [reused-south-art](reused-south-art/README.md). It is NOT installed in this nine-map scene;lower seam remains closed. No new donor art or saved IDs. Total separate host cases15+5=20,not native execution. Resume exact instructions in issues/CODEX_RESUME_CHECKPOINT_20261024.md.
+
 # Coronet upper floors and tunnel — reuse-safe source package
 
 Active scope:three genuinely missing original GBA shells5F26×28,6F14×28,1F Tunnel20×62 =2,360 new cells. Coupled NINE maps11,884 cells/24 reciprocal events; guarded41-file DEV recipe appends temporary19–27, original19 prefix unchanged.217 surrogate only, no permanent IDs. Native five tests prepared,NOT executed; future scoped32 expected. No nine-map builds/GUI/save acceptance yet.

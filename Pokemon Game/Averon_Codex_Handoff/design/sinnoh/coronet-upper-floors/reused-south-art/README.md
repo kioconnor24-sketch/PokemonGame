@@ -1,0 +1,7 @@
+# Existing South: art-only reuse, no new geography or integration
+
+Uses the existing42x32 donor MtCoronet_1F_South through the existing northern cave art packer. Every1,348 map+border cell preserves C/E and full16-bit source behavior/layer attributes. All three existing northern cave map/border outputs and bank prefix remain identical. Eight additional source ocean-water roles explicitly use existing General161 art while retaining full0x1015 semantics. Secondary family grows37→38 records,one extra16-byte metatile+2-byte attribute,474 slots remain;no new pixels/palettes or shared General edits. Actual5/5 host cases cover all cells,old outputs/bank prefix,real29,2 ladder/quarantined header and unknown role/changed geometry refusal. Preview inspected;not a claim of faithful final artwork or animation/gameplay acceptance.
+
+Initial wrapper omitted the existing packer's independent source-hash view;fixed via temporary symlink view of the SAME staged files,not copying/reconstructing maps. A negative fixture then exposed coupling of code lookup to its test input directory;trusted packer path is now fixed separately. Original failures remain private logs;final5/5 passed. No original source file mutated.
+
+No warp/header emitted or lower seam opened. Current nine-map engine DOES NOT include this South family/map. No ROM/native/GUI/save acceptance for South. Future:reuse this existing geometry and verified29,2 stair with actual graphics/approach/reciprocal2F27,48 tests;do not resurrect the withdrawn32x24 duplicate. Source fields/IDs/saves/owner gates unchanged.
