@@ -1,6 +1,6 @@
 # Combined DEV scene: builds/native and first runtime tranche
 
-Actual paired builds/engine treefe424d6b, native36/36, unchanged strict goldens4/4, static0 and new-scene NORMAL coast71/71 are now published in [runtime-evidence/README.md](runtime-evidence/README.md). Exact source/ROM hashes, linked usage, retained ledge proof and pending serial Victory/Coronet/RELEASE cases are recorded there. This is PARTIAL combined gameplay evidence; keep source/ROMs frozen until the remaining jobs finish. No production or final visual acceptance.
+Actual paired builds/engine treefe424d6b, native36/36, unchanged strict goldens4/4, static0 and new-scene complete NORMAL303/303 (coast71+Victory109+Coronet123) are now published in [runtime-evidence/README.md](runtime-evidence/README.md). Exact source/ROM hashes, linked usage, retained ledge proof and pending serial RELEASE cases are recorded there. This is PARTIAL combined gameplay evidence; keep source/ROMs frozen until the remaining jobs finish. No production or final visual acceptance.
 
 ## Original source-only preparation — historical
 
