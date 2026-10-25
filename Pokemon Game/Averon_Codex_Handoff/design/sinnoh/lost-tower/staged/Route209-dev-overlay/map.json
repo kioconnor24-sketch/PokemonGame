@@ -39,6 +39,27 @@
       "elevation": 0,
       "dest_map": "MAP_LOST_TOWER_1F",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 45,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_SOLACEON_RUINS_A",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 54,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_SOLACEON_RUINS_B",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 38,
+      "elevation": 0,
+      "dest_map": "MAP_SOLACEON_RUINS_C",
+      "dest_warp_id": "0"
     }
   ],
   "object_events": [],
@@ -51,6 +72,33 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "Route209_EventScript_ToLostTower"
+    },
+    {
+      "type": "trigger",
+      "x": 45,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Route209_EventScript_ToSolaceonRuins_A"
+    },
+    {
+      "type": "trigger",
+      "x": 54,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Route209_EventScript_ToSolaceonRuins_B"
+    },
+    {
+      "type": "trigger",
+      "x": 47,
+      "y": 38,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Route209_EventScript_ToSolaceonRuins_C"
     }
   ],
   "bg_events": []

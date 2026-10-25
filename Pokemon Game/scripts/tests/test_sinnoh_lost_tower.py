@@ -36,18 +36,29 @@ class LostTowerTest(unittest.TestCase):
         for mid, h in by_id.items():
             for w in h["warp_events"]:
                 if w["dest_map"] == "MAP_ROUTE209":
-                    self.assertEqual(int(w["dest_warp_id"]), len(self.r209["warp_events"]) - 1)
+                    portal = self.r209["warp_events"][int(w["dest_warp_id"])]
+                    self.assertEqual(portal["dest_map"], mid)
                     continue
                 target = by_id[w["dest_map"]]["warp_events"][int(w["dest_warp_id"])]
                 self.assertIn(target["dest_map"], (mid,), (mid, w))
 
-    def test_route209_overlay_adds_one_portal(self):
+    def test_route209_overlay_adds_four_portals(self):
         source = json.loads((b.ROUTE209 / "map.json").read_text())
-        self.assertEqual(self.r209["warp_events"][:-1], source["warp_events"])
-        self.assertEqual(len(self.r209["coord_events"]) - len(source.get("coord_events") or []), 1)
-        w, c = self.r209["warp_events"][-1], self.r209["coord_events"][-1]
-        self.assertEqual((w["x"], w["y"]), (c["x"], c["y"]))                 # step-on portal: warp + trigger
-        self.assertIn("warp MAP_LOST_TOWER_1F, 0", self.script)
+        n = len(source["warp_events"])
+        self.assertEqual(self.r209["warp_events"][:n], source["warp_events"])
+        added, triggers = self.r209["warp_events"][n:], self.r209["coord_events"][len(source.get("coord_events") or []):]
+        self.assertEqual(len(added), 4)
+        self.assertEqual([(w["x"], w["y"]) for w in added], [(c["x"], c["y"]) for c in triggers])   # warp + trigger
+        for i, w in enumerate(added, n):
+            back = [x for x in self.maps.values() if x["id"] == w["dest_map"]][0]["warp_events"][0]
+            self.assertEqual((back["dest_map"], int(back["dest_warp_id"])), ("MAP_ROUTE209", i))
+            self.assertIn(f"warp {w['dest_map']}, 0", self.script)
+
+    def test_ruins_keep_their_stock_inner_pair(self):
+        for name, stock, _ in b.RUINS:
+            got = self.maps[name]["warp_events"]
+            self.assertEqual([(w["x"], w["y"]) for w in got], [(8, 29), (8, 20), (8, 11)])
+            self.assertEqual([w["dest_map"] for w in got[1:]], [self.maps[name]["id"]] * 2)
 
 
 if __name__ == "__main__":
