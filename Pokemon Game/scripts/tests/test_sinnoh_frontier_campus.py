@@ -42,6 +42,20 @@ class FrontierTests(unittest.TestCase):
                     self.assertEqual(a&0xfc00,b&0xfc00)
                     self.assertEqual(m.packer.attribute((pa,sa)[(b&1023)//512],b%512),0x1000)
             self.assertIn('NOT_RUNTIME_ACCEPTANCE',receipt['status'])
+    def test_unfinished_civic_candidate_replays_and_preserves_all_source_physics(self):
+        spec=importlib.util.spec_from_file_location('civic_test',HERE/'adapt_civic.py')
+        civic=importlib.util.module_from_spec(spec);spec.loader.exec_module(civic)
+        with tempfile.TemporaryDirectory() as t:
+            out=Path(t)/'new';receipt=civic.build(ROOT/'Pokemon Game/engine',out)
+            self.assertEqual(receipt,json.loads((HERE/'civic-candidate/receipt.json').read_text()))
+            for path,h in receipt['output_sha256'].items():self.assertEqual(m.base.sha((out/path).read_bytes()),h)
+            old=(HERE/'staged/Campus/map.bin').read_bytes();new=(out/'map.bin').read_bytes()
+            self.assertEqual(len(old),len(new))
+            for (a,),(b,) in zip(struct.iter_unpack('<H',old),struct.iter_unpack('<H',new)):self.assertEqual(a&0xfc00,b&0xfc00)
+            self.assertEqual(receipt['source_cells'],9220)
+            self.assertEqual(receipt['secondary_records'],20)
+        with self.assertRaisesRegex(ValueError,'off-engine'):civic.build(ROOT/'Pokemon Game/engine',ROOT/'Pokemon Game/engine/bad')
+
     def test_dirty_geometry_and_engine_output_refused_before_write(self):
         original=Path.read_bytes
         def dirty(p):
