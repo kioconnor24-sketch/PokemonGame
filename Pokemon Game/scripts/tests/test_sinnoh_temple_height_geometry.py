@@ -6,6 +6,7 @@ import json
 import copy
 import unittest
 from fractions import Fraction
+from unittest.mock import patch
 
 HERE=Path(__file__).resolve().parents[3]/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-height'
 s=importlib.util.spec_from_file_location('temple_bdhc_test',HERE/'parse_bdhc.py')
@@ -126,5 +127,34 @@ class ProvisionalGeometryTests(unittest.TestCase):
             cells[y*32+x]=tile|0x3000
         seen=self.m.stop_graph(struct.pack('<1024H',*cells),(2,2))
         self.assertIn((4,2),seen);self.assertNotIn((3,2),seen);self.assertNotIn((3,3),seen)
+
+
+class HeightRuntimePreparationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec=importlib.util.spec_from_file_location('temple_height_prepare_test',HERE/'prepare_runtime.py')
+        cls.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.m)
+        cls.root=HERE.parents[4];cls.files,cls.receipt=cls.m.assemble(cls.root)
+
+    def test_separate29_file_scene_keeps19_slots_native_assets_and_temporary_codes(self):
+        self.assertEqual(len(self.files),29)
+        groups=json.loads(self.files['data/maps/map_groups.json'])['gMapGroup_Sinnoh']
+        self.assertEqual(groups[:19],self.receipt['existing_map_names_preserved'])
+        self.assertEqual(groups[19:],list(self.m.core.MAPS))
+        layouts=json.loads(self.files['data/layouts/layouts.json'])['layouts']
+        for name in self.m.core.MAPS:
+            self.assertEqual(len(self.files[f'data/layouts/{name}/map.bin']),2048)
+            layout=next(v for v in layouts if v['name']==name+'_Layout')
+            self.assertEqual((layout['width'],layout['height']),(32,32))
+            self.assertEqual(layout['primary_tileset'],'gTileset_General');self.assertEqual(layout['secondary_tileset'],'gTileset_Cave')
+            h=json.loads(self.files[f'data/maps/{name}/map.json']);self.assertEqual(h['region_map_section'],'MAPSEC_ROUTE_201')
+        self.assertNotIn('test/averon_temple_core_runtime.c',self.files)
+        self.assertFalse(any('region_map_sections' in p or 'tileset' in p or p.endswith(('.png','.sav','.gba')) for p in self.files))
+
+    def test_tampered_source_and_production_install_refused(self):
+        original=self.m.sha;target=(HERE/'geometry-audit.json').read_bytes()
+        with patch.object(self.m,'sha',side_effect=lambda data:'bad' if data==target else original(data)):
+            with self.assertRaisesRegex(ValueError,'height source input'):self.m.assemble(self.root)
+        with self.assertRaisesRegex(ValueError,'marked height'):self.m.install(self.root)
 
 if __name__=='__main__':unittest.main()
