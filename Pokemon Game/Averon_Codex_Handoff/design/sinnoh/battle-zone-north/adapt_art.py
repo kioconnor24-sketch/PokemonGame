@@ -46,6 +46,11 @@ def verify_source(repo):
             raise ValueError('pinned source geometry differs')
         header=json.loads(files['map.json'])
         if header['region_map_section']!='MAPSEC_PENDING_OWNER' or any(header[k] for k in ('object_events','coord_events','bg_events','warp_events')):raise ValueError('neutral source packet required')
+        # The inherited converter and seam auditor consume these worktree files.
+        # A committed pin alone does not authenticate their actual input bytes.
+        for filename, verified in files.items():
+            if (SOURCE/'staged'/name/filename).read_bytes()!=verified:
+                raise ValueError('worktree source differs from committed pin: '+name+'/'+filename)
         pins[name]={p:base.sha(v) for p,v in files.items()}
     return pins
 

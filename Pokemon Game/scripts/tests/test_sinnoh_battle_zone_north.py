@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import shutil
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -93,6 +94,35 @@ class NorthernArtTests(unittest.TestCase):
             out=Path(t)/'never-created'
             with self.assertRaisesRegex(ValueError,'unreviewed secondary'):m.build(ENGINE,out)
             self.assertFalse(out.exists())
+
+    def test_dirty_worktree_inputs_refused_before_output_without_changing_git_pins(self):
+        original=m.base.verified_file
+        source=m.SOURCE
+        # Real uncommitted disk mutations, with Git verification still returning
+        # the original committed bytes. All four input classes must fail closed.
+        with tempfile.TemporaryDirectory(dir=ROOT) as t:
+            staged=Path(t)
+            for name in m.MAPS:
+                dest=staged/'staged'/name;dest.mkdir(parents=True)
+                for filename in ('map.bin','border.bin','map.json','attributes.json'):
+                    shutil.copyfile(source/'staged'/name/filename,dest/filename)
+            def committed(repo,path,rev):
+                relative=Path(path).relative_to(staged.relative_to(ROOT))
+                return original(repo,source.relative_to(ROOT)/relative,rev)
+            with patch.object(m,'SOURCE',staged),patch.object(m.base,'verified_file',side_effect=committed):
+                for filename in ('map.bin','border.bin','map.json','attributes.json'):
+                    with self.subTest(filename=filename):
+                        target=staged/'staged/Route225'/filename;clean=target.read_bytes()
+                        if filename=='map.json':
+                            header=json.loads(clean);header['warp_events']=[{'x':1,'y':1}]
+                            dirty=json.dumps(header).encode()
+                        else:dirty=bytes([clean[0]^1])+clean[1:]
+                        target.write_bytes(dirty)
+                        out=staged/('never-created-'+filename)
+                        with self.assertRaisesRegex(ValueError,'worktree source differs.*Route225/'+filename):
+                            m.build(ENGINE,out)
+                        self.assertFalse(out.exists())
+                        target.write_bytes(clean)
 
     def test_no_content_ids_donor_art_or_gameplay_claim_and_correct_facade_bounds(self):
         for n in m.MAPS:
