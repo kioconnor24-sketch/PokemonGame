@@ -1,0 +1,44 @@
+{
+  "files": {
+    "map.bin": {
+      "source_commit": "63c3a8887cb37e32b69f796a58f7dde606f64557",
+      "source_path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snow-corridor/staged/AcuityLakefront/averon-map.bin",
+      "sha256": "d2ba838a10ae86eef03724ba7e86681a95801c090819ed803270a4371941e06a",
+      "git_blob": "e3dd41ab4258f52cac3351c448e15ced4438136f"
+    },
+    "border.bin": {
+      "source_commit": "63c3a8887cb37e32b69f796a58f7dde606f64557",
+      "source_path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snow-corridor/staged/AcuityLakefront/averon-border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "git_blob": "d198bece6c2319a6c58559f63b55ac233c96e438"
+    },
+    "map.json": {
+      "source_commit": "63c3a8887cb37e32b69f796a58f7dde606f64557",
+      "source_path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snow-corridor/staged/AcuityLakefront/map.json",
+      "sha256": "8fa0f7955af063fa394784a769bcec681a4f09b13a54eb3e6946ef882ba50460",
+      "git_blob": "4dc45a8d342b07a79d9cfc15e05bff4d63e301ec"
+    }
+  },
+  "reference": {
+    "repository": "https://github.com/pret/pokeplatinum",
+    "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+    "path": "res/field/events/events_acuity_lakefront.json",
+    "sha256": "2b89ca4f40d9a3d5d1bdef52928952ccc591dc164cf57f0cb4db9e14e92f0e99",
+    "git_blob": "b0f9a2076adef0b0a745515b477be8c519a3f9ef",
+    "normal_lake_warps": [
+      {
+        "x": 308,
+        "z": 229,
+        "dest_header_id": "MAP_HEADER_LAKE_ACUITY",
+        "dest_warp_id": 3
+      },
+      {
+        "x": 309,
+        "z": 229,
+        "dest_header_id": "MAP_HEADER_LAKE_ACUITY",
+        "dest_warp_id": 4
+      }
+    ]
+  },
+  "adaptation": "Native existing two-column cliff mouth20/21,39 matches source20/21,37 with+2row; lake shore6/7,48 is explicit native destination adaptation"
+}
