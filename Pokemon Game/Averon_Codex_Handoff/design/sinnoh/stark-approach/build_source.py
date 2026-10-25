@@ -71,15 +71,15 @@ def construct(geometry,route,room,room_header):
         seen.add((x,y))
         # All unmatched outer edges closed; only the authored two-lane seam.
         if x in (0,31) or y in (0,31):
-            if not(y==31 and x in (4,5)):continue
+            if not(y==31 and x in (28,29)):continue
         z=zmap[Fraction(p['height'])] if p['flat'] else 0
         cells[y*32+x]=(z<<12)|(13 if p['permission']==2 else 529 if p['flat'] else 516)
-    for x in (4,5):
+    for x in (28,29):
         if cells[31*32+x]&0xfc00!=0x3000:raise ValueError('south source seam height differs')
     if (14,7) not in seen:raise ValueError('missing outside door')
     cells[7*32+14]=(cells[7*32+14]&0xf000)|517
     route=bytearray(route);changes=[]
-    for x in (18,19):
+    for x in (28,29):
         old=struct.unpack_from('<H',route,2*x)[0]
         if not old&0xc00:raise ValueError('unexpected open Route227 source boundary')
         struct.pack_into('<H',route,2*x,0x3001);changes.append(dict(cell=[x,0],before=old,after=0x3001))
@@ -95,7 +95,7 @@ def construct(geometry,route,room,room_header):
                  map_type='MAP_TYPE_ROUTE',requires_flash=False,allow_cycling=False,allow_escaping=False,allow_running=True,
                  battle_scene='MAP_BATTLE_SCENE_NORMAL',region='REGION_SINNOH',region_map_section='MAPSEC_PENDING_OWNER',
                  music='MUS_ROUTE110',weather='WEATHER_NONE',show_map_name=True,
-                 connections=[dict(map='MAP_ROUTE227',direction='down',offset=-14)],
+                 connections=[dict(map='MAP_ROUTE227',direction='down',offset=0)],
                  warp_events=[dict(x=14,y=7,elevation=cells[7*32+14]>>12,dest_map=header['id'],dest_warp_id='1')],
                  object_events=[],coord_events=[],bg_events=[])
     return struct.pack('<1024H',*cells),bytes(route),bytes(room),outside,header,dict(route_changes=changes,room1_changed_cell=[20,29],
@@ -132,7 +132,7 @@ def build(engine,out):
     room=(BASE/'staged/Room1/map.bin').read_bytes();header=json.loads((BASE/'staged/Room1/map.json').read_text())
     raw,route,room,outside,header,audit=construct(geometry,route,room,header)
     route_header=json.loads((m.HERE.parent/'remaining-donor/staged/Route227/map.json').read_text())
-    route_header['connections'].append(dict(map=outside['id'],direction='up',offset=14))
+    route_header['connections'].append(dict(map=outside['id'],direction='up',offset=0))
     prefixes=['data/tilesets/primary/general/','data/tilesets/secondary/cave/'];assets={}
     def read(path):
         v=base.verified_file(ROOT,engine.relative_to(ROOT)/path,'HEAD');assets[path]=base.sha(v);return v
@@ -146,13 +146,13 @@ def build(engine,out):
     def attributes(data,banks):return {str(v&1023):packer.attribute(banks[(v&1023)//512],v%512) for (v,) in struct.iter_unpack('<H',data)}
     outside_attrs=attributes(converted,(pa,sa));room_attrs=attributes(room,(pa,sa))
     paths=[]
-    for x in (4,5):
+    for x in (28,29):
         path=static_path(converted[:2048],32,32,[x,31],[14,7],outside_attrs)
         if not path:raise ValueError('outside seam cannot reach cave door')
         paths.append(path)
     # Ordinary local Route227 and Room1 approaches must remain accessible.
     route_attrs=attributes(route,[(ROUTE/'outdoor-family/primary-attributes.bin').read_bytes(),(ROUTE/'outdoor-family/secondary-attributes.bin').read_bytes()])
-    if not static_path(route,48,60,[18,1],[18,0],route_attrs):raise ValueError('Route227 approach inaccessible')
+    if not static_path(route,48,60,[28,1],[28,0],route_attrs):raise ValueError('Route227 approach inaccessible')
     room_path=static_path(room,64,32,[20,29],[17,2],room_attrs)
     if not room_path:raise ValueError('Room1 entry cannot reach internal stair')
     images=[dual.indexed(read(p+'tiles.png')) for p in prefixes]
@@ -176,7 +176,7 @@ def build(engine,out):
                  outside_paths=paths,room1_entry_path=room_path,
                  limits=['Source outside permission/heights with ordinal/wildcard native physical adaptation',
                          'Two Route227 boundary cells and one Room1 cell explicitly authored; original packets immutable',
-                         'Seam offset-14/+14 is authored width adaptation, not donor original',
+                         'Seam offset0/0 is authored width adaptation, not donor original',
                          'Grass renders without encounters; ashfall/props/models not copied',
                          'No permanent IDs/registry/save changes or ROM/native/mGBA/Save acceptance'])
     receipt['output_sha256']={str(p.relative_to(out)):base.sha(p.read_bytes()) for p in out.rglob('*') if p.is_file()}
