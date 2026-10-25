@@ -296,7 +296,18 @@ def cave_b2f(eng):
     cv.block(7, 6, 12, 10)
     cv.block(16, 9, 22, 13)
     cv.ladder(24, 15, eng, down=False)
-    return cv, dict(ladder=(24, 15))
+    cv.ladder(5, 16, eng, down=True)
+    return cv, dict(ladder=(24, 15), down=(5, 16))
+
+
+def cave_b3f(eng):
+    cv = Cave(eng, 36, 26)
+    cv.room(3, 3, 32, 21)
+    cv.block(7, 6, 13, 11)
+    cv.block(20, 6, 27, 10)
+    cv.block(12, 14, 22, 18)
+    cv.ladder(30, 19, eng, down=False)
+    return cv, dict(ladder=(30, 19))
 
 
 # ---------------------------------------------------------------------------------------------- Canalave overlay
@@ -361,6 +372,7 @@ def build(engine_root):
     c1, p1 = cave_1f(eng)
     c2, p2 = cave_b1f(eng)
     c3, p3 = cave_b2f(eng)
+    c4, p4 = cave_b3f(eng)
     canal_bin, canal_header, canal_receipt = canalave_overlay()
     (cx, cy), (hx, hy), (ax, ay), (tx, ty) = ipts["cave"], ipts["house"], ipts["pier_arrive"], ipts["pier_trigger"]
     maps = {
@@ -380,8 +392,12 @@ def build(engine_root):
                                                            (*p2["down"], "MAP_IRON_ISLAND_B2F", 0)]),
                            (c2.cells, c2.w, c2.h, "gTileset_General", "gTileset_Cave")),
         "IronIsland_B2F": (header("MAP_IRON_ISLAND_B2F", "IronIsland_B2F", "LAYOUT_IRON_ISLAND_B2F", "MUS_CAVE_OF_ORIGIN",
-                                  "MAP_TYPE_UNDERGROUND", [(*p3["ladder"], "MAP_IRON_ISLAND_B1F", 1)]),
+                                  "MAP_TYPE_UNDERGROUND", [(*p3["ladder"], "MAP_IRON_ISLAND_B1F", 1),
+                                                           (*p3["down"], "MAP_IRON_ISLAND_B3F", 0)]),
                            (c3.cells, c3.w, c3.h, "gTileset_General", "gTileset_Cave")),
+        "IronIsland_B3F": (header("MAP_IRON_ISLAND_B3F", "IronIsland_B3F", "LAYOUT_IRON_ISLAND_B3F", "MUS_CAVE_OF_ORIGIN",
+                                  "MAP_TYPE_UNDERGROUND", [(*p4["ladder"], "MAP_IRON_ISLAND_B2F", 1)]),
+                           (c4.cells, c4.w, c4.h, "gTileset_General", "gTileset_Cave")),
         "CanalaveCity_House1": (header("MAP_CANALAVE_CITY_HOUSE1", "CanalaveCity_House1", "LAYOUT_HOUSE1", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 3), (4, 8, "MAP_CANALAVE_CITY", 3)]), None),
         "CanalaveCity_House2": (header("MAP_CANALAVE_CITY_HOUSE2", "CanalaveCity_House2", "LAYOUT_HOUSE1", "MUS_ROUTE110",
