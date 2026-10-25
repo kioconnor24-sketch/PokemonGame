@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reuse the existing packer for four pinned northern maps, no donor art import."""
+"""Reuse the existing packer for nine pinned northern maps, no donor art import."""
 import argparse
 import importlib.util
 import json
@@ -12,7 +12,7 @@ s=importlib.util.spec_from_file_location('battle_existing_packer',HERE.parent/'c
 existing=importlib.util.module_from_spec(s);s.loader.exec_module(existing)
 pack=existing.pack;base=pack.accepted.base
 SOURCE=HERE.parent/'remaining-donor';ROOT=HERE.parents[4]
-MAPS={'Route225':(32,94),'SurvivalArea':(32,32),'Route226':(100,32),'Route227':(48,60)}
+MAPS={'Route225':(32,94),'SurvivalArea':(32,32),'Route226':(100,32),'Route227':(48,60),'FightArea':(70,37),'Route228':(32,94),'Route229':(64,30),'ResortArea':(36,30),'Route230':(96,34)}
 plan=json.loads((HERE/'art-plan.json').read_text())
 if set(plan['maps'])!=set(MAPS):raise ValueError('exact northern cluster required')
 for n,d in MAPS.items():
@@ -26,6 +26,15 @@ existing.templates.FACADES=existing.FACADES;existing.templates.PRIMARY={};existi
 # This private template instance uses full source-envelope resampling instead
 # of its4x4 Center special case, which would leave an old roof strip here.
 existing.templates.CENTER=(-1,-1,0,0)
+
+
+original_desired_art=existing.desired_art
+def desired_art(name,*args):
+    old=existing.templates.PRIMARY
+    existing.templates.PRIMARY={int(k):v for k,v in plan['maps'][name].get('primary_remap',{}).items()}
+    try:return original_desired_art(name,*args)
+    finally:existing.templates.PRIMARY=old
+existing.desired_art=desired_art
 
 
 def verify_source(repo):
@@ -63,8 +72,11 @@ def seam_audit(files):
                 z,zz=first>>12,second>>12
                 if z not in (0,15) and zz not in (0,15,z):continue
                 usable.append(dict(source=list(a),target=list(b),elevations=[z,zz]))
-            if not usable:raise ValueError('source connection has no compatible seam lane')
-            result.append(dict(source=name,target=target,direction=direction,offset=off,compatible_lanes=usable))
+            identity=dict(source=name,target=target,direction=direction,offset=off)
+            closed=identity in plan.get('closed_source_connections',[])
+            if not usable and not closed:raise ValueError('source connection has no compatible seam lane: '+name+' '+direction+' -> '+target)
+            if usable and closed:raise ValueError('closed source gate unexpectedly opened')
+            result.append(dict(**identity,state='CLOSED_SOURCE_METADATA_ONLY' if closed else 'COMPATIBLE_GEOMETRY_ONLY',compatible_lanes=usable))
     return result
 
 
@@ -79,8 +91,12 @@ def build(engine,out):
     for name in MAPS:shutil.move(str(out/name),staged/name)
     after=seam_audit({n:(staged/n/'averon-map.bin').read_bytes() for n in MAPS})
     if after!=before:raise ValueError('source seam lanes changed during art conversion')
+    for path,expected in plan['preserved_first_four_outputs'].items():
+        if base.sha((out/path).read_bytes())!=expected:raise ValueError('accepted first-four art packet changed')
+    for path,pin in plan['preserved_secondary_prefix'].items():
+        if base.sha((out/path).read_bytes()[:pin['bytes']])!=pin['sha256']:raise ValueError('first-four metadata prefix changed')
     (out/'outdoor-art-receipt.json').unlink()  # own freshly generated intermediate
-    receipt.update(status='FOUR_MAP_NATIVE_ART_SOURCE_ONLY_NOT_RUNTIME_ACCEPTANCE',source_pins=pins,art_plan_sha256=base.sha((HERE/'art-plan.json').read_bytes()),
+    receipt.update(status='NINE_MAP_NATIVE_ART_SOURCE_ONLY_NOT_RUNTIME_ACCEPTANCE',source_pins=pins,art_plan_sha256=base.sha((HERE/'art-plan.json').read_bytes()),
         source_revision='38228bb574a3557345852b758d5f1a65eb01bb22',source_seams=after,
         output_sha256={str(p.relative_to(out)):base.sha(p.read_bytes()) for p in out.rglob('*') if p.is_file()},
         limits=['Only existing native General/Rustboro pixels/palettes are emitted; no donor artwork',
