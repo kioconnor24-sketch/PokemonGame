@@ -8,6 +8,7 @@ s=importlib.util.spec_from_file_location('frontier_reuse',HERE.parent/'stark-mou
 m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 base=m.base;dual=m.dual;packer=m.a.a
 DIMS={'Gate':(32,32),'Campus':(96,96)}
+SOURCE_BEHAVIORS=(0,0x15,0x65,0x6c,0x6d,0x6e)
 
 def extract(inputs):
     pins=json.loads((HERE/'source-pins.json').read_text());raws={}
@@ -29,7 +30,7 @@ def extract(inputs):
                     x,y=i%32,i//32;heights={v for _,v in m.b.tile_candidates(data,x,y)}
                     reason=None
                     if len(heights)!=1:reason='missing_or_ambiguous_center'
-                    elif word&255 not in (0,0x15,0x65,0x6c,0x6d,0x6e):reason='unsupported_behavior'
+                    elif word&255 not in SOURCE_BEHAVIORS:reason='unsupported_behavior'
                     else:
                         height=next(iter(heights));flat=True
                         for dx,dz in ((-8,-8),(-8,8),(8,-8),(8,8)):
@@ -51,7 +52,7 @@ def construct(geometry):
         zmap={v:i+3 for i,v in enumerate(heights)};cells=[0xc00|513]*(w*h);seen=set();sealed=0
         for p in g['surfaces']:
             x,y=p['tile']
-            if not 0<=x<w or not 0<=y<h or (x,y) in seen or p['permission'] not in (0,0x15,0x65,0x6c,0x6d,0x6e):raise ValueError('invalid/duplicate surface')
+            if not 0<=x<w or not 0<=y<h or (x,y) in seen or p['permission'] not in SOURCE_BEHAVIORS:raise ValueError('invalid/duplicate surface')
             seen.add((x,y))
             # External/capability doors remain sealed until supported shells and links.
             if x in (0,w-1) or y in (0,h-1) or p['permission']!=0:sealed+=1;continue
