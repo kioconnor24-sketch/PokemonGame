@@ -113,7 +113,7 @@ ISLAND_W, ISLAND_H = 40, 32
 LAND = {y: (5, 33) for y in range(4, 29)}   # a rectangle: every edge and corner pattern is attested
 GRASS = {y: (7, 31) for y in range(7, 26)}
 HILL = (11, 7, 17, 6)          # x, y, width, height on grass; cave mouth at the bottom row's centre
-HILL_SMALL = [(24, 15, 7, 4)]  # Verity's islet size, no mouth
+HILL_SMALL = [(24, 15, 7, 4)]  # Verity's islet size; its mouth is the cave's second entrance (into B1F)
 HOUSE_AT = (8, 19)             # Dewford house (5 x 4), door at +2, +3
 PIER = (34, 20, 5)             # x (first plank), row, planks; pilings on the row below
 BOULDERS = [(6, 9), (32, 13), (6, 24), (32, 26), (13, 27)]
@@ -158,7 +158,7 @@ def island(eng):
             cells[(ty + dy) * ISLAND_W + tx + dx] = verity[mid]
     stamp_hill(eng, cells, ISLAND_W, *HILL, door=True)
     for h in HILL_SMALL:
-        stamp_hill(eng, cells, ISLAND_W, *h, door=False)
+        stamp_hill(eng, cells, ISLAND_W, *h, door=True)
     hx, hy = HOUSE_AT
     for j in range(4):
         for i in range(5):
@@ -176,7 +176,8 @@ def island(eng):
     house_door = (hx + 2, hy + 3)
     # Step-on portal (as Floaroma Meadow's): the warp and its coord trigger share the pier's end plank. Arriving by
     # warp never fires a coord trigger; walking onto it from the plank before does.
-    return cells, dict(cave=door, house=house_door, pier_arrive=(px + n - 1, py), pier_trigger=(px + n - 1, py),
+    sx, sy, sw, sh = HILL_SMALL[0]
+    return cells, dict(cave=door, cave2=(sx + sw // 2, sy + sh - 1), house=house_door, pier_arrive=(px + n - 1, py), pier_trigger=(px + n - 1, py),
                        shore_metatiles=dict(sorted(used.items())))
 
 
@@ -287,7 +288,8 @@ def cave_b1f(eng):
     cv.block(17, 12, 24, 16)
     cv.ladder(5, 4, eng, down=False)
     cv.ladder(26, 18, eng, down=True)
-    return cv, dict(ladder=(5, 4), down=(26, 18))
+    cv.exit_south(10, 20, eng)
+    return cv, dict(ladder=(5, 4), down=(26, 18), exit=(10, 20))
 
 
 def cave_b2f(eng):
@@ -385,7 +387,7 @@ def build(engine_root):
     maps = {
         "IronIsland": (header("MAP_IRON_ISLAND", "IronIsland", "LAYOUT_IRON_ISLAND", "MUS_DEWFORD", "MAP_TYPE_ROUTE",
                               [(cx, cy, "MAP_IRON_ISLAND_1F", 0), (hx, hy, "MAP_IRON_ISLAND_HOUSE", 0),
-                               (ax, ay, "MAP_CANALAVE_CITY_HARBOR", 2)],
+                               (ax, ay, "MAP_CANALAVE_CITY_HARBOR", 2), (*ipts["cave2"], "MAP_IRON_ISLAND_B1F", 2)],
                               [(tx, ty, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 2))]),
                        (isl, ISLAND_W, ISLAND_H, "gTileset_General", "gTileset_Dewford")),
         "IronIsland_House": (header("MAP_IRON_ISLAND_HOUSE", "IronIsland_House", "LAYOUT_HOUSE1", "MUS_DEWFORD",
@@ -396,7 +398,8 @@ def build(engine_root):
                           (c1.cells, c1.w, c1.h, "gTileset_General", "gTileset_Cave")),
         "IronIsland_B1F": (header("MAP_IRON_ISLAND_B1F", "IronIsland_B1F", "LAYOUT_IRON_ISLAND_B1F", "MUS_CAVE_OF_ORIGIN",
                                   "MAP_TYPE_UNDERGROUND", [(*p2["ladder"], "MAP_IRON_ISLAND_1F", 1),
-                                                           (*p2["down"], "MAP_IRON_ISLAND_B2F", 0)]),
+                                                           (*p2["down"], "MAP_IRON_ISLAND_B2F", 0),
+                                                           (*p2["exit"], "MAP_IRON_ISLAND", 3)]),
                            (c2.cells, c2.w, c2.h, "gTileset_General", "gTileset_Cave")),
         "IronIsland_B2F": (header("MAP_IRON_ISLAND_B2F", "IronIsland_B2F", "LAYOUT_IRON_ISLAND_B2F", "MUS_CAVE_OF_ORIGIN",
                                   "MAP_TYPE_UNDERGROUND", [(*p3["ladder"], "MAP_IRON_ISLAND_B1F", 1),
