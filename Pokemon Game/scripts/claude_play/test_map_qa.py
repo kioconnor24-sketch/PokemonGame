@@ -12,7 +12,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import map_qa  # noqa: E402
 
 BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP", "L": "MB_LADDER",
-            "H": "MB_MT_PYRE_HOLE"}
+            "H": "MB_MT_PYRE_HOLE", "N": "MB_NON_ANIMATED_DOOR", "n": "MB_NON_ANIMATED_DOOR"}
 
 
 class FakeMap:
@@ -30,7 +30,7 @@ class FakeMap:
         return BEHAVIOR.get(self.rows[y][x], "MB_NORMAL")
 
     def walkable(self, x, y):
-        return self.inside(x, y) and self.rows[y][x] in ".MLH"
+        return self.inside(x, y) and self.rows[y][x] in ".MLHn"
 
     def warp_at(self, x, y):
         for wx, wy, dest, warp in self.warps:
@@ -322,6 +322,18 @@ class StaticLayer(unittest.TestCase):
         pit.warps = [(2, 1, "UP", 0), (2, 3, "UP", 1)]
         pit.height = 4
         self.assertIn("exit-unreachable", codes(map_qa.static_audit(FakeWorld(upper, pit), ["LOW"])[0]))
+
+    def test_a_solid_non_animated_door_is_shut(self):
+        # A non-animated door warps only when stepped onto (IsWarpMetatileBehavior); drawn solid it never opens,
+        # unlike an animated door, which is pushed into. 'N' is solid, 'n' walkable.
+        rows = ["#N#n#D#",
+                "#.....#"]
+        m = FakeMap("TOWN", rows, warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 0), (5, 0, "ROOM", 0)])
+        md = map_qa.mapdata
+        self.assertEqual([md.takeable(m, x, 0) for x in (1, 3, 5)], [False, True, True])
+        room = FakeMap("ROOM", ["#M#"], warps=[(1, 0, "TOWN", 1)])
+        closed = [f for f in map_qa.static_audit(FakeWorld(m, room), ["TOWN"])[0] if f["code"] == "warp-closed"]
+        self.assertEqual([f["detail"]["warp"] for f in closed], [(1, 0)])
 
     def test_closed_edges_skip_warp_mats_and_split_runs(self):
         rows = ["#######",

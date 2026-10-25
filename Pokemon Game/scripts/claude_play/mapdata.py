@@ -247,12 +247,16 @@ STEP_ON = ("MB_LADDER", "MB_MT_PYRE_HOLE")
 def takeable(m, x, y):
     """Whether the warp at (x, y) can be taken at all. The engine warps only through a door, arrow, stair, ladder,
     escalator or hole behaviour (TryArrowWarp, TryDoorWarp, IsWarpMetatileBehavior) or a coord trigger; a warp on
-    any other tile is only an arrival point (e.g. the floor where a Mt. Pyre hole drops the player)."""
+    any other tile is only an arrival point (e.g. the floor where a Mt. Pyre hole drops the player). Step-on behaviours
+    (ladder, hole, non-animated door, escalator) also need the tile to be enterable; an animated door is pushed into."""
     if m.warp_at(x, y) is None:
         return False
     b = m.behavior(x, y)
-    return (x, y) in getattr(m, "triggers", ()) or b in STEP_ON or any(
-        k in b for k in ("DOOR", "WARP", "ESCALATOR"))
+    if (x, y) in getattr(m, "triggers", ()):
+        return True
+    if b in STEP_ON or b == "MB_NON_ANIMATED_DOOR" or "ESCALATOR" in b:
+        return m.walkable(x, y)          # IsWarpMetatileBehavior warps only when stepped onto: a solid one is shut
+    return "DOOR" in b or "WARP" in b
 
 
 def trigger_entry(m, x, y):

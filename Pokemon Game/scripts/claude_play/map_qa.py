@@ -239,6 +239,8 @@ def static_audit(world, map_ids):
         for p in points:
             if not (m.inside(*p["tile"]) and m.walkable(*p["tile"])):
                 find(map_id, "exit-not-walkable", p)
+            if p["kind"] == "warp" and not p["exit"] and any(k in m.behavior(*p["warp"]) for k in ("DOOR", "LADDER")):
+                find(map_id, "warp-closed", dict(warp=p["warp"], behavior=m.behavior(*p["warp"]), dest=p["dest"]))
         # Ledges must land on walkable ground (PlayerJumpLedge never checks).
         for y in range(m.height):
             for x in range(m.width):
