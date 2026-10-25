@@ -2,8 +2,6 @@
 
 **Planning backlog, 2026-10-19.** Companion to the [master roadmap](SINNOH_MASTER_PRODUCTION_ROADMAP.md), [complete coverage](SINNOH_FULL_AREA_COVERAGE.md), [area register](SINNOH_AREA_REGISTER.csv), and [live Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). **Read live main/PR heads/claims first**; this backlog is not a permanent agent task lock or proof of a finished feature. Owner product direction is [6261800483](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6261800483). Short-term queue at issue #15 takes precedence for unfinished work already claimed by an agent.
 
-**Construction QA speed policy (2026-10-24):** Use [Sinnoh Fast Batch QA](SINNOH_FAST_BATCH_QA.md) for new geographic work: quick source/static checks while building, a lean focused batch emulator pass at batch completion, and unchanged full required two-profile/map/save/visual acceptance before permanent integration. Both developers now build **and test their own disjoint physical-map batches**; neither is permanently assigned only to QA. Existing active/frozen jobs finish against their original test identity. This is an optimization of *development cadence*, not permission to skip final MAP-QA/ENGINE-QA or owner/protected gates. Consult live Issue #15 before choosing the next geographical area.
-
 ## How to use this backlog without a manager bottleneck
 
 1. Both agents refresh current main, Issue #15 claims, active PR head and changed paths. Resume *existing* live work before claiming a new work package. Mark a work item covered by accepted work rather than doing it again.
