@@ -78,6 +78,13 @@ def construct(geometry,route,room,room_header):
         if cells[31*32+x]&0xfc00!=0x3000:raise ValueError('south source seam height differs')
     if (14,7) not in seen:raise ValueError('missing outside door')
     cells[7*32+14]=(cells[7*32+14]&0xf000)|517
+    shape=list(cells)
+    for y in range(1,31):
+        for x in range(1,31):
+            i=y*32+x
+            if shape[i]&0xc00:
+                tile=521 if not shape[i+32]&0xc00 else 530 if not shape[i+1]&0xc00 else 528 if not shape[i-1]&0xc00 else 513
+                cells[i]=0xc00|tile
     route=bytearray(route);changes=[]
     for x in (28,29):
         old=struct.unpack_from('<H',route,2*x)[0]
@@ -89,8 +96,8 @@ def construct(geometry,route,room,room_header):
     room=bytearray(room);ladder=struct.unpack_from('<H',room,2*(2*64+17))[0]&1023
     old=struct.unpack_from('<H',room,2*(29*64+20))[0]
     if not old&0xc00:raise ValueError('Room1 exterior already open')
-    struct.pack_into('<H',room,2*(29*64+20),0x3000|ladder)
-    header['warp_events'].append(dict(x=20,y=29,elevation=3,dest_map='MAP_SINNOH_STARK_OUTSIDE',dest_warp_id='0'))
+    struct.pack_into('<H',room,2*(29*64+20),0xa000|ladder)
+    header['warp_events'].append(dict(x=20,y=29,elevation=10,dest_map='MAP_SINNOH_STARK_OUTSIDE',dest_warp_id='0'))
     outside=dict(id='MAP_SINNOH_STARK_OUTSIDE',name='SinnohStarkOutside',layout='LAYOUT_SINNOH_STARK_OUTSIDE',
                  map_type='MAP_TYPE_ROUTE',requires_flash=False,allow_cycling=False,allow_escaping=False,allow_running=True,
                  battle_scene='MAP_BATTLE_SCENE_NORMAL',region='REGION_SINNOH',region_map_section='MAPSEC_PENDING_OWNER',
@@ -125,6 +132,21 @@ def static_path(raw,w,h,start,end,attributes):
             prev[q]=p;todo.append(q)
     return []
 
+def validate_seam(outside,route,oh,rh):
+    if oh['connections']!=[dict(map='MAP_ROUTE227',direction='down',offset=0)]:
+        raise ValueError('outside reciprocal seam differs')
+    if rh['connections'][-1]!=dict(map='MAP_SINNOH_STARK_OUTSIDE',direction='up',offset=0):
+        raise ValueError('route reciprocal seam differs')
+    a=struct.unpack('<1024H',outside);b=struct.unpack('<2880H',route);lanes=[]
+    for x in range(32):
+        first,second=a[31*32+x],b[x]
+        if first&0xc00 or second&0xc00:continue
+        if first>>12!=3 or second>>12!=3:raise ValueError('seam elevation differs')
+        lanes.append(x)
+    if lanes!=[28,29]:raise ValueError('seam lanes differ')
+    return lanes
+
+
 def build(engine,out):
     engine,out=Path(engine).resolve(),Path(out).resolve()
     if out.exists() or out.is_relative_to(engine) or 'engine' in out.parts:raise ValueError('new off-engine output required')
@@ -153,6 +175,7 @@ def build(engine,out):
     # Ordinary local Route227 and Room1 approaches must remain accessible.
     route_attrs=attributes(route,[(ROUTE/'outdoor-family/primary-attributes.bin').read_bytes(),(ROUTE/'outdoor-family/secondary-attributes.bin').read_bytes()])
     if not static_path(route,48,60,[28,1],[28,0],route_attrs):raise ValueError('Route227 approach inaccessible')
+    seam_lanes=validate_seam(converted[:2048],route,outside,route_header)
     room_path=static_path(room,64,32,[20,29],[17,2],room_attrs)
     if not room_path:raise ValueError('Room1 entry cannot reach internal stair')
     images=[dual.indexed(read(p+'tiles.png')) for p in prefixes]
@@ -161,6 +184,11 @@ def build(engine,out):
         deps=dual.closure(data,[stock[0],sec],images)
         palettes={i:base.palette(read(prefixes[i>=6]+'palettes/%02d.pal'%i)) for i in deps['palettes']}
         previews[n]=dual.render(data,[stock[0],sec],images,palettes,w,h)
+    rp=['data/tilesets/primary/general/','data/tilesets/secondary/rustboro/']
+    rb=[(ROUTE/'outdoor-family'/n).read_bytes() for n in ('primary-metatiles.bin','secondary-metatiles.bin')]
+    ri=[dual.indexed(read(p+'tiles.png')) for p in rp];deps=dual.closure(route,rb,ri)
+    palettes={i:base.palette(read(rp[i>=6]+'palettes/%02d.pal'%i)) for i in deps['palettes']}
+    previews['Route227']=dual.render(route,rb,ri,palettes,48,60)
     out.mkdir(parents=True);family=out/'cave-family';family.mkdir()
     for n,v in [('primary-metatiles',stock[0]),('primary-attributes',pa),('secondary-metatiles',sec),('secondary-attributes',sa)]:(family/(n+'.bin')).write_bytes(v)
     packets={'Outside':(converted[:2048],converted[2048:],outside,outside_attrs),
@@ -173,7 +201,7 @@ def build(engine,out):
     receipt=dict(status='AUTHORED_SOURCE_HEIGHT_APPROACH_NOT_RUNTIME_ACCEPTANCE',**audit,
                  geometry_sha256=base.sha((HERE/'geometry.json').read_bytes()),plan_sha256=base.sha((HERE/'plan.json').read_bytes()),
                  baseline_sha256=plan['baseline_sha256'],native_asset_sha256=assets,secondary_records=len(sec)//16,
-                 outside_paths=paths,room1_entry_path=room_path,
+                 outside_paths=paths,room1_entry_path=room_path,seam_lanes=seam_lanes,
                  limits=['Source outside permission/heights with ordinal/wildcard native physical adaptation',
                          'Two Route227 boundary cells and one Room1 cell explicitly authored; original packets immutable',
                          'Seam offset0/0 is authored width adaptation, not donor original',
