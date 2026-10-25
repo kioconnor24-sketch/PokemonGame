@@ -25,6 +25,8 @@ def build(engine,out):
     upper=HERE.parent/'coronet-upper-floors';source=upper/'staged/SinnohMtCoronet_6F'
     six=bytearray(read(source/'map.bin'));border=read(source/'border.bin');six_h=json.loads(read(source/'map.json'))
     if len(six_h['warp_events'])!=1:raise ValueError('existing6F source prefix differs')
+    normal=json.loads(read(upper/'portal-reference.json'))['files']['6f']['warp_events'][1]
+    if normal!=dict(x=7,z=5,dest_header_id='MAP_HEADER_SPEAR_PILLAR',dest_warp_id=0):raise ValueError('normal6F source route differs')
     geometry=json.loads(read(HERE/'geometry.json'))
     if not any(p['tile']==[31,53] and p['permission']==0x6f and p['height']=='16' and p['flat'] for p in geometry['Summit']['surfaces']):raise ValueError('unsupported source summit exit')
     source_pins=json.loads(read(HERE/'source-pins.json'))
@@ -49,7 +51,7 @@ def build(engine,out):
         p=out/'staged'/name;p.mkdir(parents=True,exist_ok=True)
         attrs={str(v&1023):existing.packer.attribute((fam[1],fam[3])[(v&1023)//512],v%512) for (v,) in struct.iter_unpack('<H',raw+border)}
         foot={mid:(v&~255 if v&255==8 else v) for mid,v in attrs.items()}
-        start,end=([31,52],[31,53]) if name=='Summit' else ([7,5],[10,24])
+        start,end=([31,53],[31,13]) if name=='Summit' else ([7,5],[10,24])
         path=gate.a.static_path(raw,*dims,start,end,foot)
         if not path:raise ValueError('source summit/6F ordinary approach disconnected')
         paths[name]=path
@@ -67,7 +69,7 @@ def build(engine,out):
     import shutil
     shutil.rmtree(out/'native-family')
     (out/'staged/Summit/preview.png').stat()
-    receipt=dict(status='NORMAL_SUMMIT_SOURCE_GEOMETRY_NOT_STORY_OR_RUNTIME_ACCEPTANCE',source_geometry=core['maps'],source_sha256=pins,
+    receipt=dict(status='NORMAL_SUMMIT_SOURCE_GEOMETRY_NOT_STORY_OR_RUNTIME_ACCEPTANCE',baseline_projection=core['maps'],current_open_cells={n:sum(not v&0xc00 for (v,) in struct.iter_unpack('<H',d[0])) for n,d in packets.items()},source_sha256=pins,
         summit_changes=changes,sixf_change=dict(cell=[7,5],before=old,after=0x3000|517),local_paths=paths,
         native_assets=core['native_assets'],limits=['Actual normal matrix022 footprint, no DS models/props/art/story emitted',
         '484 supported source cells, ordinary native ordinal projection not DS movement parity',
