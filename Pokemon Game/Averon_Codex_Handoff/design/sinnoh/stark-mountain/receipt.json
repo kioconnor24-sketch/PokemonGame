@@ -1,0 +1,76 @@
+{
+  "status": "SOURCE_HEIGHT_PROJECTION_NATIVE_ART_NOT_RUNTIME_ACCEPTANCE",
+  "rooms": {
+    "Room1": {
+      "source_marked_surfaces": 294,
+      "slope_or_footprint_edge_stair_proxies": 113,
+      "open_cells": 293
+    },
+    "Room2": {
+      "source_marked_surfaces": 1549,
+      "slope_or_footprint_edge_stair_proxies": 379,
+      "open_cells": 1549
+    },
+    "Room3": {
+      "source_marked_surfaces": 71,
+      "slope_or_footprint_edge_stair_proxies": 0,
+      "open_cells": 71
+    }
+  },
+  "height_to_elevation": {
+    "16": 3,
+    "65591/4096": 4,
+    "32": 5,
+    "48": 6,
+    "64": 7,
+    "80": 8,
+    "96": 9,
+    "112": 10,
+    "128": 11,
+    "144": 12,
+    "176": 13,
+    "192": 14
+  },
+  "geometry_sha256": "d2496c9e5c570592393c6d3cd45ea991615cc5c8fdc24a18f8c15f78d255f068",
+  "source_pins_sha256": "e80fc497ce9d6b8e949056a32df1df608266b2d2512a6ea5d34f36bc5e91836f",
+  "native_asset_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "secondary_records": 7,
+  "limits": [
+    "Source cave-marked floor/door centers and four corners supported by strict BDHC",
+    "Unmarked zero-behavior filler conservatively closed, not complete DS collision parity",
+    "Native ordinal heights and wildcard slope stairs are explicit physical adaptation",
+    "Exterior door sealed: Stark approach not constructed",
+    "No DS models/textures/props/story/encounters emitted",
+    "No production IDs/registry/save changes or ROM/native/mGBA/Save acceptance"
+  ],
+  "output_sha256": {
+    "cave-family/secondary-attributes.bin": "99b17612e53b787fa6949cac8d1c0ef4dbf53c43c3ab1aa3a03d890b4110dc76",
+    "cave-family/secondary-metatiles.bin": "1a282c6180d3489cb3dc938a8f0df3fa12f9192b78c2c06f0e44547b71826fe0",
+    "cave-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "cave-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/Room3/preview.png": "0cecd341733565579828e66b3609837740d32dc8bf991fe6d038e4c8fc5007d8",
+    "staged/Room3/attributes.json": "b1970c37d76bd6003fc2add60afed71c384f2eeea9a89854247019d5b5c9fde5",
+    "staged/Room3/map.json": "37d889ed33a1ef4c18be41cd5c8da7032a9b8b9299de38f5173e047a5bb0c460",
+    "staged/Room3/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room3/map.bin": "fb8efc5cd7ab255652e157a035b7dbe52b4f342ad445ea77a8f9ad81b8640212",
+    "staged/Room2/preview.png": "c29bb5eb5ef868e205f0af26a19b2684049efff2e5f80180f6f48c075edfb950",
+    "staged/Room2/attributes.json": "37f41ad951509e110a0d069e6ba85d84ee36730933fce71ff56b2cd4ad0e3fd0",
+    "staged/Room2/map.json": "4176eb2980c6137a197fe0d2f057f76d78c89cdefd9417ba70d85e95823bc024",
+    "staged/Room2/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room2/map.bin": "221deeb71032eaeddb251eff354f1e0cef18b25258388157babb9537044f0c24",
+    "staged/Room1/preview.png": "4e21f5cc8080e9f53a3e0c74c10287da630d698e6fedfc784c8bb3bdd1f06a9f",
+    "staged/Room1/attributes.json": "3c5efb9aa400bb3ed507b8b302402af66374632053f6361775662730b3173282",
+    "staged/Room1/map.json": "b3644ab37c270f74551f2f3b9f11530ba097f3fe0e865f22c70e614b33148954",
+    "staged/Room1/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room1/map.bin": "60806c8f84bb9734f5fe4bfc30a4cc83fc970a1c592024ee2d5be9e4feb64002"
+  }
+}
