@@ -19,7 +19,7 @@ b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
 NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
-SHARED = {"IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_House1": "LAYOUT_HOUSE1", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
+SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_House1": "LAYOUT_HOUSE1", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
 
@@ -154,14 +154,14 @@ class IronIslandTest(unittest.TestCase):
     def test_canalave_overlay_changes_one_cell_and_appends_two_doors(self):
         data, hdr, receipt = self.canal
         src = (b.CANALAVE / "staged/CanalaveCity/averon-map.bin").read_bytes()
-        self.assertEqual(receipt["changed_cells"], [(29, 13)])
+        self.assertEqual(receipt["changed_cells"], sorted([(29, 13)] + b.MORE_HOUSE_DOORS, key=lambda p: (p[1], p[0])))
         a, c = struct.unpack("<%dH" % (len(src) // 2), src), struct.unpack("<%dH" % (len(data) // 2), data)
         self.assertEqual(a[13 * 38 + 29] & 0xFC00, c[13 * 38 + 29] & 0xFC00)   # collision/elevation kept
         source = json.loads((b.CANALAVE / "staged/CanalaveCity/map.json").read_text())
         self.assertEqual(hdr["warp_events"][:1], source["warp_events"])
         self.assertEqual({k: v for k, v in hdr.items() if k != "warp_events"},
                          {k: v for k, v in source.items() if k != "warp_events"})
-        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)])
+        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)] + b.MORE_HOUSE_DOORS)
 
 
 if __name__ == "__main__":

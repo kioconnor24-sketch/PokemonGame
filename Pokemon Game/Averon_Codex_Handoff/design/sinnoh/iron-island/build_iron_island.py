@@ -313,6 +313,7 @@ def cave_b3f(eng):
 # ---------------------------------------------------------------------------------------------- Canalave overlay
 PIER_HOUSE_ROW = 13
 PIER_HOUSE_X = 27
+MORE_HOUSE_DOORS = [(25, 31), (9, 39), (10, 45), (25, 45)]    # closed shells with a doorless door picture (525)
 
 
 def canalave_overlay():
@@ -329,6 +330,10 @@ def canalave_overlay():
     assert cells[17 * w + 7] & 1023 == 537
     door = PIER_HOUSE_ROW * w + PIER_HOUSE_X + 2
     cells[door] = (cells[door] & 0xFC00) | 537
+    for x, y in MORE_HOUSE_DOORS:                                   # same door-picture swap, same kept bits
+        i = y * w + x
+        assert cells[i] & 1023 == 525 and not cells[i + w] & 0xC00, (x, y)
+        cells[i] = (cells[i] & 0xFC00) | 537
     assert cells[22 * w + 28] & 1023 == 545                         # Pokemon Center door (closed: no warp)
     assert header["warp_events"] == [{"x": 33, "y": 50, "elevation": 0, "dest_map": "MAP_ROUTE218_WEST",
                                       "dest_warp_id": "1"}]
@@ -337,7 +342,9 @@ def canalave_overlay():
         {"x": PIER_HOUSE_X + 2, "y": PIER_HOUSE_ROW, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HARBOR",
          "dest_warp_id": "0"},
         {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE1", "dest_warp_id": "0"},
-        {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}]
+        {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}] + [
+        {"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_CANALAVE_CITY_HOUSE{n}", "dest_warp_id": "0"}
+        for n, (x, y) in enumerate(MORE_HOUSE_DOORS, 3)]
     assert cells[17 * w + 7] & 1023 == 537 and cells[31 * w + 9] & 1023 == 537   # existing animated doors
     data = struct.pack("<%dH" % len(cells), *cells)
     changed = [(i % w, i // w) for i, (a, b) in enumerate(zip(struct.unpack("<%dH" % (len(raw) // 2), raw), cells)) if a != b]
@@ -402,6 +409,10 @@ def build(engine_root):
                                        "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 3), (4, 8, "MAP_CANALAVE_CITY", 3)]), None),
         "CanalaveCity_House2": (header("MAP_CANALAVE_CITY_HOUSE2", "CanalaveCity_House2", "LAYOUT_HOUSE1", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 4), (4, 8, "MAP_CANALAVE_CITY", 4)]), None),
+        **{f"CanalaveCity_House{n}": (header(f"MAP_CANALAVE_CITY_HOUSE{n}", f"CanalaveCity_House{n}", "LAYOUT_HOUSE1",
+                                             "MUS_ROUTE110", "MAP_TYPE_INDOOR",
+                                             [(3, 8, "MAP_CANALAVE_CITY", n + 2), (4, 8, "MAP_CANALAVE_CITY", n + 2)]), None)
+           for n in range(3, 7)},
         "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_HARBOR", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
                                                            (8, 10, "MAP_IRON_ISLAND", 2)],
