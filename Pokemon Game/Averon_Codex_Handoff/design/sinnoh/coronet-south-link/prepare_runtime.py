@@ -11,6 +11,8 @@ import subprocess
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[4]
 BASE = 'fb83410f6bbded89a9d99537d952698e80af4cf5'
+# Independently verified engine tree at BASE; shallow PRs need no base object.
+BASE_ENGINE_TREE = 'c2e26cce0a00af43251e0672fef708c796b7a918'
 ENGINE = 'Pokemon Game/engine/'
 SOUTH = 'MtCoronet_1F_South'
 UPPER = 'SinnohMtCoronet_2F'
@@ -33,12 +35,16 @@ def words(data):
     return list(struct.unpack('<%dH' % (len(data)//2), data))
 
 
+def verify_baseline_engine(repo):
+    if base.git(repo, 'rev-parse', 'HEAD:'+ENGINE.rstrip('/')).decode().strip() != BASE_ENGINE_TREE:
+        raise ValueError('exact current baseline required')
+
+
 def assemble(repo):
     repo = Path(repo).resolve()
     files, receipt = upper.assemble(repo)
     # The new main differs only in opt-in QA; never silently use other engine data.
-    if base.git(repo, 'rev-parse', 'HEAD:'+ENGINE.rstrip('/')).strip() != base.git(repo, 'rev-parse', BASE+':'+ENGINE.rstrip('/')).strip():
-        raise ValueError('exact current baseline required')
+    verify_baseline_engine(repo)
     original_raw, original_border, original_header, source_attrs = reuse.south_source()
     art = HERE.parent/'coronet-upper-floors/reused-south-art'
     inventory = json.loads((art/'inventory.json').read_text())
