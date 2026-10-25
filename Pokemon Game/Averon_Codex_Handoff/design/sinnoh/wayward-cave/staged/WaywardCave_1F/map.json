@@ -1,0 +1,36 @@
+{
+  "id": "MAP_WAYWARD_CAVE_1F",
+  "name": "WaywardCave_1F",
+  "layout": "LAYOUT_WAYWARD_CAVE_1F",
+  "music": "MUS_CAVE_OF_ORIGIN",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 20,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE206",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 38,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_WAYWARD_CAVE_B1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
