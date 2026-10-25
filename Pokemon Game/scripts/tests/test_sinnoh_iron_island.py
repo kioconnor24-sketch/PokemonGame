@@ -18,8 +18,8 @@ spec = importlib.util.spec_from_file_location("iron_island_builder", HERE / "bui
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
-NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F")
-SHARED = {"IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
+NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F")
+SHARED = {"IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_House1": "LAYOUT_HOUSE1", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
 
@@ -69,7 +69,7 @@ class IronIslandTest(unittest.TestCase):
     def test_every_cell_word_is_an_existing_averon_cell(self):
         """ID, collision and elevation of every new cell occur together in the layouts the builder reads."""
         for name, corpus in (("IronIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("IronIsland_1F", b.CAVE_CORPUS),
-                             ("IronIsland_B1F", b.CAVE_CORPUS)):
+                             ("IronIsland_B1F", b.CAVE_CORPUS), ("IronIsland_B2F", b.CAVE_CORPUS)):
             known = set()
             for n in corpus:
                 known |= set(self.eng.cells(n)[2])
@@ -141,7 +141,7 @@ class IronIslandTest(unittest.TestCase):
 
     def test_caves_are_connected_and_closed(self):
         beh = behaviours("general", "cave")
-        for name in ("IronIsland_1F", "IronIsland_B1F"):
+        for name in ("IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F"):
             cells, w = self.cells(name)
             warps = [(e["x"], e["y"]) for e in self.maps[name][0]["warp_events"]]
             got = reach(cells, w, beh, warps[0])
@@ -161,7 +161,7 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual(hdr["warp_events"][:1], source["warp_events"])
         self.assertEqual({k: v for k, v in hdr.items() if k != "warp_events"},
                          {k: v for k, v in source.items() if k != "warp_events"})
-        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13)])
+        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)])
 
 
 if __name__ == "__main__":

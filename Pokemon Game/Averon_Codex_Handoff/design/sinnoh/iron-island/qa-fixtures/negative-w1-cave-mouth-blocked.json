@@ -1,0 +1,9 @@
+{
+ "batch": ["MAP_IRON_ISLAND", "MAP_IRON_ISLAND_1F"],
+ "entry": ["MAP_IRON_ISLAND", 37, 20],
+ "description": "TEST-ONLY: the island's open cave mouth (19, 12) gets its collision bit back (as Lake Verity's closed one), so the cave can no longer be entered from outside.",
+ "expect": "FAIL",
+ "static_codes": ["exit-unreachable"],
+ "must_fail": ["warp 0"],
+ "edits": [{"op": "blocks", "layout": "LAYOUT_IRON_ISLAND", "set": [[19, 12, 167, 1, 0]]}]
+}

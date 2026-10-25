@@ -284,7 +284,17 @@ def cave_b1f(eng):
     cv.block(7, 7, 12, 11)
     cv.block(17, 12, 24, 16)
     cv.ladder(5, 4, eng, down=False)
-    return cv, dict(ladder=(5, 4))
+    cv.ladder(26, 18, eng, down=True)
+    return cv, dict(ladder=(5, 4), down=(26, 18))
+
+
+def cave_b2f(eng):
+    cv = Cave(eng, 30, 22)
+    cv.room(3, 3, 26, 17)
+    cv.block(7, 6, 12, 10)
+    cv.block(16, 9, 22, 13)
+    cv.ladder(24, 15, eng, down=False)
+    return cv, dict(ladder=(24, 15))
 
 
 # ---------------------------------------------------------------------------------------------- Canalave overlay
@@ -312,7 +322,10 @@ def canalave_overlay():
     header["warp_events"] += [
         {"x": 28, "y": 22, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_POKEMON_CENTER_1F", "dest_warp_id": "0"},
         {"x": PIER_HOUSE_X + 2, "y": PIER_HOUSE_ROW, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HARBOR",
-         "dest_warp_id": "0"}]
+         "dest_warp_id": "0"},
+        {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE1", "dest_warp_id": "0"},
+        {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}]
+    assert cells[17 * w + 7] & 1023 == 537 and cells[31 * w + 9] & 1023 == 537   # existing animated doors
     data = struct.pack("<%dH" % len(cells), *cells)
     changed = [(i % w, i // w) for i, (a, b) in enumerate(zip(struct.unpack("<%dH" % (len(raw) // 2), raw), cells)) if a != b]
     return data, header, dict(source_sha256=sha(raw), output_sha256=sha(data), changed_cells=changed)
@@ -345,6 +358,7 @@ def build(engine_root):
     isl, ipts = island(eng)
     c1, p1 = cave_1f(eng)
     c2, p2 = cave_b1f(eng)
+    c3, p3 = cave_b2f(eng)
     canal_bin, canal_header, canal_receipt = canalave_overlay()
     (cx, cy), (hx, hy), (ax, ay), (tx, ty) = ipts["cave"], ipts["house"], ipts["pier_arrive"], ipts["pier_trigger"]
     maps = {
@@ -360,8 +374,16 @@ def build(engine_root):
                                                           (*p1["ladder"], "MAP_IRON_ISLAND_B1F", 0)]),
                           (c1.cells, c1.w, c1.h, "gTileset_General", "gTileset_Cave")),
         "IronIsland_B1F": (header("MAP_IRON_ISLAND_B1F", "IronIsland_B1F", "LAYOUT_IRON_ISLAND_B1F", "MUS_CAVE_OF_ORIGIN",
-                                  "MAP_TYPE_UNDERGROUND", [(*p2["ladder"], "MAP_IRON_ISLAND_1F", 1)]),
+                                  "MAP_TYPE_UNDERGROUND", [(*p2["ladder"], "MAP_IRON_ISLAND_1F", 1),
+                                                           (*p2["down"], "MAP_IRON_ISLAND_B2F", 0)]),
                            (c2.cells, c2.w, c2.h, "gTileset_General", "gTileset_Cave")),
+        "IronIsland_B2F": (header("MAP_IRON_ISLAND_B2F", "IronIsland_B2F", "LAYOUT_IRON_ISLAND_B2F", "MUS_CAVE_OF_ORIGIN",
+                                  "MAP_TYPE_UNDERGROUND", [(*p3["ladder"], "MAP_IRON_ISLAND_B1F", 1)]),
+                           (c3.cells, c3.w, c3.h, "gTileset_General", "gTileset_Cave")),
+        "CanalaveCity_House1": (header("MAP_CANALAVE_CITY_HOUSE1", "CanalaveCity_House1", "LAYOUT_HOUSE1", "MUS_ROUTE110",
+                                       "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 3), (4, 8, "MAP_CANALAVE_CITY", 3)]), None),
+        "CanalaveCity_House2": (header("MAP_CANALAVE_CITY_HOUSE2", "CanalaveCity_House2", "LAYOUT_HOUSE1", "MUS_ROUTE110",
+                                       "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 4), (4, 8, "MAP_CANALAVE_CITY", 4)]), None),
         "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_HARBOR", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
                                                            (8, 11, "MAP_IRON_ISLAND", 2)],

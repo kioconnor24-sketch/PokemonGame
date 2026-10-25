@@ -21,8 +21,8 @@ import subprocess
 HERE = pathlib.Path(__file__).resolve().parent
 ENGINE = "Pokemon Game/engine/"
 STAND_IN = "MAPSEC_ROUTE_201"
-ORDER = ["IronIsland", "IronIsland_House", "IronIsland_1F", "IronIsland_B1F", "CanalaveCity_Harbor",
-         "CanalaveCity_PokemonCenter_1F"]
+ORDER = ["IronIsland", "IronIsland_House", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "CanalaveCity_Harbor",
+         "CanalaveCity_PokemonCenter_1F", "CanalaveCity_House1", "CanalaveCity_House2"]
 
 
 def load(name, path):
