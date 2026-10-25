@@ -1,0 +1,114 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "1f": {
+      "path": "res/field/events/events_snowpoint_temple_1f.json",
+      "git_blob": "ef7ebf6616e62405aa1a9c66200d106a7caef6bc",
+      "warp_events": [
+        {
+          "x": 8,
+          "z": 13,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_CITY",
+          "dest_warp_id": 2
+        },
+        {
+          "x": 14,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B1F",
+          "dest_warp_id": 0
+        }
+      ],
+      "sha256": "69481c03251704614ae65af2e88a9819265426ac8091679003af2e376e965be9"
+    },
+    "b1f": {
+      "path": "res/field/events/events_snowpoint_temple_b1f.json",
+      "git_blob": "cd9c4785f815076442dcde84e1364420246c2ccc",
+      "warp_events": [
+        {
+          "x": 4,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_1F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 14,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B2F",
+          "dest_warp_id": 0
+        }
+      ],
+      "sha256": "19cfc93c7068e8165fbc53598abdafabc36c80abe4ea12fb119f23bab39ccce0"
+    },
+    "b2f": {
+      "path": "res/field/events/events_snowpoint_temple_b2f.json",
+      "git_blob": "febcae2542d54be9fb570ce5dee8569ef03104e4",
+      "warp_events": [
+        {
+          "x": 6,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B1F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 14,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B3F",
+          "dest_warp_id": 0
+        }
+      ],
+      "sha256": "52ad4188f78f9dedf953c5e9fa2182af4d756a14a693f16919c2e73518dc9090"
+    },
+    "b3f": {
+      "path": "res/field/events/events_snowpoint_temple_b3f.json",
+      "git_blob": "594cbdd564bd0624b8a25f2fc74252e43e9be3ef",
+      "warp_events": [
+        {
+          "x": 6,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B2F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 14,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B4F",
+          "dest_warp_id": 0
+        }
+      ],
+      "sha256": "dae471eefa9306e2d75898c021a31569c2b223e3e1d9970f2c330d17159ce277"
+    },
+    "b4f": {
+      "path": "res/field/events/events_snowpoint_temple_b4f.json",
+      "git_blob": "a9fc5e79cebda3234a868599816c1e2df2af6470",
+      "warp_events": [
+        {
+          "x": 6,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B3F",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 14,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B5F",
+          "dest_warp_id": 0
+        }
+      ],
+      "sha256": "30c888f9c79004328a3933798dff30c353af8d20f46b773b9808c807d8702bee"
+    },
+    "b5f": {
+      "path": "res/field/events/events_snowpoint_temple_b5f.json",
+      "git_blob": "58778af79b8cc0157f8e47c6850935c04d49a597",
+      "warp_events": [
+        {
+          "x": 8,
+          "z": 3,
+          "dest_header_id": "MAP_HEADER_SNOWPOINT_TEMPLE_B4F",
+          "dest_warp_id": 1
+        }
+      ],
+      "sha256": "10a5c2e7922e3b561e7ce97826deb200fbda935747046f81d79236aa93936030"
+    }
+  }
+}

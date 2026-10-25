@@ -1,0 +1,359 @@
+{
+  "status": "ORIGINAL_SOURCE_AND_PERMITTED_ART_ONLY_NOT_RUNTIME_OR_PRODUCTION",
+  "reference_revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "input_sha256": {
+    "shell-recipe.json": "bbd3cfa4ac18c15fcbf3bddd3151900a028dbd19a662af897e17b8c10234eadd",
+    "portal-reference.json": "ae1c1524bc00efd20283384d4070c9139bf53e4460e94a2160c5a13d9d0efba1"
+  },
+  "existing_averon_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "maps": {
+    "SinnohSnowpointTemple_1F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 1,
+      "source_warp_indices": [
+        1
+      ],
+      "sealed_external_ports": [
+        [
+          8,
+          13
+        ]
+      ],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "5641b15a956e11f99a62e08a2d2346c3e5628a774e57f16539b46cbfa235a202"
+    },
+    "SinnohSnowpointTemple_B1F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 2,
+      "source_warp_indices": [
+        0,
+        1
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "5b326d4518d4ea2a1609ab68d67baeb8148675ad8efcaec87d4ec554ec58476b"
+    },
+    "SinnohSnowpointTemple_B2F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 2,
+      "source_warp_indices": [
+        0,
+        1
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f"
+    },
+    "SinnohSnowpointTemple_B3F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 2,
+      "source_warp_indices": [
+        0,
+        1
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f"
+    },
+    "SinnohSnowpointTemple_B4F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 2,
+      "source_warp_indices": [
+        0,
+        1
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f"
+    },
+    "SinnohSnowpointTemple_B5F": {
+      "dimensions": [
+        20,
+        20
+      ],
+      "cells": 400,
+      "retained_technical_stairs": 1,
+      "source_warp_indices": [
+        0
+      ],
+      "sealed_external_ports": [],
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731
+        ],
+        "palettes": [
+          0,
+          6
+        ]
+      },
+      "map_sha256": "39e5d8c6a2d1586688e023bc5de9f863af5441a534ee5ab91de1a59ce9a39f81"
+    }
+  },
+  "limits": [
+    "Source-pinned stair coordinates/topology only; original neutral GBA chambers, not canonical DS ice geometry",
+    "No ice puzzle solution, movement mechanic, Regigigas, encounter, story, items or production identity chosen",
+    "Exterior SnowpointCity door8,13 sealed pending bounded city integration; no invented link",
+    "Existing native General/Cave art, not donor pixels or final Temple art"
+  ]
+}
