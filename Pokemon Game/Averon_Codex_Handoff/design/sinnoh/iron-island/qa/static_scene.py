@@ -40,7 +40,9 @@ def main():
     inc = files["data/event_scripts.s"].decode()
     layout_ids = {l["id"] for l in layouts["layouts"]}
     st = batch / "staged"
-    for d in sorted(st.iterdir()):
+    skipped = set()      # ids of overlays outside this scene: new maps leading into them are skipped too
+    dirs = sorted(st.iterdir(), key=lambda d: (not d.name.endswith("-dev-overlay"), d.name))
+    for d in dirs:
         hdr_path = d / "map.json"
         if not hdr_path.exists():
             continue
@@ -58,6 +60,7 @@ def main():
                     files.setdefault(f"data/layouts/{name}/map.bin", (eng / rel).read_bytes())
             if key not in files:
                 print("skip overlay (not in this family scene):", name)
+                skipped.add(hdr["id"])
                 continue
             files[key] = (json.dumps(hdr, indent=2) + "\n").encode()
             if (d / "map.bin").exists():  # DEV-derived blockdata of the family's own layout (same dimensions)
@@ -69,6 +72,9 @@ def main():
                 files[f"data/maps/{name}/scripts.inc"] += b"\n" + script.read_bytes()
             continue
         name = d.name
+        if {w["dest_map"] for w in hdr["warp_events"]} & skipped:
+            print("skip map (leads into a skipped overlay):", name)
+            continue
         files[f"data/maps/{name}/map.json"] = (json.dumps(hdr, indent=2) + "\n").encode()
         files[f"data/maps/{name}/scripts.inc"] = (d / "scripts.inc").read_bytes()
         if (d / "map.bin").exists() and hdr["layout"] not in layout_ids:
