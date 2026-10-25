@@ -1,0 +1,7 @@
+# Actual nine-map paired builds — runtime still pending
+
+Current main9c195964,private branch codex/coronet-upper-floors-runtime-scratch-20261024,engine treebe89b883d8461faefe120f583f1a9305509e1f10,41 installed files.Original19 prefix plus9 temporary slots19–27,24 reciprocal events,217 surrogate;existing South omitted/lower2F exit closed. Code3348fd2b recipe,source/installer15/15 host. Five native tests PREPARED,not executed;NO nine-map mGBA/fresh Continue/old-flash acceptance.
+
+Actual make -j4 all MODERN=1 and make -j4 all MODERN=1 RELEASE=1 finished. GCC14.2.1 20241119,criesOFF owner default. NORMAL17,418,212 linked bytes,SHA2568e9ff61c43e8eaf8c8118f53b3a70e5157d53936b8682f9cb8e0b89898c2427a;RELEASE17,537,332,SHA2561677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6. Each+24,868 versus matching main;RAM unchanged226480/28392 and226482/28336. RELEASE16,017,100 linked bytes free. Matching ELF/ROM segments/extent checks included,not caller-label proof.
+
+Canonical paired ROM/ELF/maps/recipe/identity/budgets preserved privately at /workspace/scratch/coronet-nine-built-20261024. RELEASE files MOVED there after verification to avoid redundant disk use;use archive pokeemerald-release.gba with matching ELF for QA. Normal is archived and also still at engine root. Source/ROMs must stay matched. Native32 expected+original strict4 and actual nine-map158/profile+Continue4+legacy3 (counts must be observed,not assumed) NEXT. No ROM/ELF/private save uploaded.

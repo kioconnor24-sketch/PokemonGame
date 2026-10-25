@@ -1,0 +1,25 @@
+# CODEX_RESUME_CHECKPOINT — Coronet runtime lane
+
+Branch `codex/coronet-upper-connectors-20261024`, PR #248. Final evidence commit is this branch head (exact remote SHA in latest Issue #15 handoff). Latest allocation: Issue #15 comment6390351229. Claude is active on western geography; avoid Route218/Canalave/Iron Island, its map-local assets and claimed shared elevation-QA files. #235 is not assigned to Codex. No competing agents or automatic restarts.
+
+## Completed
+
+- Nine-map Coronet: NORMAL158 full+4 fresh Continue+3 untouched legacy =165/165; RELEASE158+4+3 =165/165. Total330/330 actual GUI checks PASS, all24 reciprocal events/both same-floor pairs,5F/6F/Tunnel, ordinary followers/foot/elevation, menus, genuine Save and fresh-process Continue. Native32/32; unchanged original SaveBlock1/2/3/PC goldens4/4. Source/installer15, separate South-art5, reusable preflight8 host tests PASS.
+- Frozen engine tree `be89b883d8461faefe120f583f1a9305509e1f10`, main `9c195964938b5a9c5db37bd114ca6dbcfc1965a3`,41 recipe files, original19 Sinnoh prefix+temporary19–27,217 DEV surrogate. No production IDs/structures/registry changes.
+- Actual NORMAL17,418,212 linked bytes SHA256 `8e9ff61c43e8eaf8c8118f53b3a70e5157d53936b8682f9cb8e0b89898c2427a`; RELEASE17,537,332 SHA256 `1677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6`. +24,868 each vs matching main (+5,076 beyond six-map scene); RAM unchanged. GCC14.2.1/MODERN1, criesOFF default. No audio listening/Delta/final art/production acceptance.
+- New read-only `Pokemon Game/scripts/sinnoh-runtime-preflight.py` verifies archived ROM/ELF pairs, recipe/identity, actual Git baseline/original prefix, listed source hashes and unlisted tracked/untracked changes; rejects escaping paths. Eight positive/negative fixtures. Use --repo/--engine/--archive/--recipe/--identity/--profile.
+- Preserve completed #249 `0d7d0791eedc33973b81ad0b17d4bb1683a6cf4d`606/606 GUI/native36/goldens4. #246 `ca283e870e99d2b969b458dcb2290e5748333cde`252 paired GUI+44 focused NORMAL/native31/goldens4. Do not rerun them as unfinished work.
+
+## Actual failures and limitations
+
+Three GUI startups failed before gameplay (initial NORMAL, RELEASE Continue, Continue retry): Xvfb/local X11 access errors. Logs retained under runtime-evidence/initial-gui-startup-failure; completed cases use unchanged ROM/source/assertions. Final explicitly access-enabled local Xvfb was verified with xdpyinfo; one emulator/debugger2345 at a time. No engine defect inferred. All active batch processes stopped after completion.
+
+Coronet static0; original Saltmere legacy audit still reports existing up7,0→CoastalMeadow7,31 seam warning, outside this task. Provisional cave-style outside art is not final mountain/snow/RockClimb art. Lower2F27,48→South, Route207/north-room/summit anchors remain closed. Existing donor South42x32 and separate native-art adaptation are NOT installed in the nine-map ROM; withdrawn32x24 duplicate stays withdrawn. No donor pixels imported.
+
+## Next executable task
+
+On a new Codex adjacent-connectivity branch, reuse existing South42x32, `reuse_south_art.py`, its SHA-pinned geometry and actual MB_LADDER29,2 (not Platinum25,3). Construct a bounded reciprocal DEV link to2F27,48, preserving every old warp index and all existing source identifiers. Use isolated metadata banks referencing permitted native graphics; never replace globally shared General assets. Keep other unbuilt exterior anchors sealed. Test source/C/E/full behavior, registry and negative topology first; then build both profiles and run fresh native/GUI/Continue/legacy proof. The330 receipts cannot accept changed topology or a different temporary registry. Do not allocate227+ or reopen story/transport decisions.
+
+Preserve current dirty41-file scratch overlay before replacing it; installer deliberately refuses dirty/wrong-branch/wrong-base source. Current scratch `/workspace/averon-corridor-scratch`, branch `codex/coronet-upper-floors-runtime-scratch-20261024`. Canonical paired archive `/workspace/scratch/coronet-nine-built-20261024` includes matching ROM/ELF/map/recipes/identities and final native ELFs. Prior combined archive `/workspace/scratch/combined-coast-coronet-built-20261024`, stash562923ce176dd906b00285d4a046dad6f2c7096e; prior six-map archive `ascent-six-built-20261024`, stash96a1492bc97d764f69157fbda860f27140bdf881. All unique source/saves/history retained. Only hash-verified ended duplicates and regenerable objects reclaimed; cleanup manifests stay private.
+
+Original flash `/workspace/scratch/corridor-legacy-save/game.sav` remains SHA256 `44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d`; expected snapshot private. Never carry older DEV saves into different temporary registries. No ROM/ELF/private flash/expected snapshot uploaded. #237 three owner-reserved inventory paths and saved origins227+ remain blocked; no handoff impersonation or gate bypass. #248 draft/parent gates remain; read live final-head CI before any review/promotion. Integration of Claude packets requires its immutable pushed batch and explicit file-claim release.
