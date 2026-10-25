@@ -1,0 +1,2611 @@
+{
+  "status": "AUTHORED_BOUNDARY_SOURCE_ART_ONLY_NOT_RUNTIME_ACCEPTANCE",
+  "base_pr": 266,
+  "base_head": "008bdba851a65db0f8bbd361e9b3742b9355c1b1",
+  "baseline_sha256": {
+    "outdoor-family/secondary-metatiles.bin": "64973ec8dc0e439dff2bb8df2bdeca785dd3637d321917d08a3596888b56777c",
+    "outdoor-family/secondary-attributes.bin": "95d74f3ba2634b890a1f08e6a40fc25a3ab435b9286f07e6a4bcc55e340e43c4",
+    "outdoor-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "outdoor-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/ResortArea/averon.png": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
+    "staged/ResortArea/averon-border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/ResortArea/averon-map.bin": "e4e3a395a6e1b2d9da948b3c9c438180b3f21c68623fde0b32bec3a4a2225e95",
+    "staged/Route229/averon.png": "c7873f2c07930cecc17744b01ebbb930ca9c844dccd6a4c0167e25fef36b9199",
+    "staged/Route229/averon-border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/Route229/averon-map.bin": "78a6430892b4d90b150452bee145831d0c6d349f599147558983a446f7ff7325",
+    "staged/Route226/averon.png": "83318f722802686fd77cfeda09f5281a27fa28926e59f7302b43f2e3e9fc9263",
+    "staged/Route226/averon-border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "staged/Route226/averon-map.bin": "b27bcdad4e0db30cf424d134aca293e952382e26a252a973fed306085cbf66e8",
+    "staged/Route227/averon.png": "80a258bf399d3bbd7a3988af68e0a0a31966c303f60efbe892ed247359b64f38",
+    "staged/Route227/averon-border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "staged/Route227/averon-map.bin": "a09fa5326f57f2d9deaf60d16c47416d949fdf7a95d68df8af7577f9da51b28f",
+    "staged/SurvivalArea/averon.png": "0b3e2e4d65e5dbd5a4f8022a98979e7fab9fbc02c2803b730ce6dfbea56c0c60",
+    "staged/SurvivalArea/averon-border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/SurvivalArea/averon-map.bin": "760335d43485c1c88b2dd63e5573e62025995305fe6f7486402fd4a0042f76f7",
+    "staged/Route230/averon.png": "f328009cc9e71bf16a60aeae640ea98db861e718190247b11c8c10a48b61dd40",
+    "staged/Route230/averon-border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "staged/Route230/averon-map.bin": "728d9692a0877def2faaa9cd2d99d44f43a457a0c613eddd6d8f29c55d6d0ca1",
+    "staged/FightArea/averon.png": "b9b5cecc25bb835da6dad692def10249c4f72947dd9bdd092dbd972e55bf77d3",
+    "staged/FightArea/averon-border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/FightArea/averon-map.bin": "79ed92e585ce73a664319712e1850b30efed188c83a09851f8a25822d30646d4",
+    "staged/Route228/averon.png": "f3dd73a23b42bcece66bfb19fd33a30b41ead3fc77ce9df94b8b1620d4fef450",
+    "staged/Route228/averon-border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/Route228/averon-map.bin": "d093ceb6f8f5b23f28e15c73c633f33123d5ceeeb2670bcb7106349e4abaa049",
+    "staged/Route225/averon.png": "44d70b91f3b5ab1d515836f101de262655bc75f04782496d760bf8cc7e6cf05a",
+    "staged/Route225/averon-border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/Route225/averon-map.bin": "e3fad3d17bb397123210dbab6b6ebbb2752b6856a4f9ec8a8ab16c23585dbec4",
+    "source-receipt.json": "94ac7f6dd1460c29c4460b9ec9015eba8e57e861b0a4a80850006b25fcf7568b",
+    "art-plan.json": "e86e5778da6bd7ed04b2af172e8ac3b09c227600428cb31a26aad1ace3c08440",
+    "../remaining-donor/staged/Route225/map.bin": "10c7392f2977eaa1ac4f5142eb7bd2bddc573348e68496a5300d26a6f2c27e89",
+    "../remaining-donor/staged/Route225/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "../remaining-donor/staged/Route225/map.json": "894fd767b32e593120efdd27c9c9cee677ade47b8fc07e0f0f611a2c38068005",
+    "../remaining-donor/staged/Route225/attributes.json": "3f4cc91070dca0e2fbcc042a603d3a0fdcedb93fc7463124ae35dbb59b491ebc",
+    "../remaining-donor/staged/SurvivalArea/map.bin": "bc167a84bae4a2465dd0350220ac01713a20ff5e449d47c13f0e32b54941a0a2",
+    "../remaining-donor/staged/SurvivalArea/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "../remaining-donor/staged/SurvivalArea/map.json": "befd8a32a1e337e72d8f3734dbdd9a24402e68add4b7886f9d422010786e3bf0",
+    "../remaining-donor/staged/SurvivalArea/attributes.json": "7fc1579f8ab3fbfcb3401b3c666d5b41362bcf0f41c7fb463d4df5fbdb2e194c",
+    "../remaining-donor/staged/Route226/map.bin": "510995502c0646677cae63b235e7e52daef60b5672fc7005472160729d7d6da8",
+    "../remaining-donor/staged/Route226/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "../remaining-donor/staged/Route226/map.json": "e531b9946aee5aae49b72d4ca6365b19d6a749942d4660b8a89001062fa02b95",
+    "../remaining-donor/staged/Route226/attributes.json": "94b8e9faeff531785163e7c58a6f14b02f65d3d42f9c3a6b2548dd07d35bd3d4",
+    "../remaining-donor/staged/Route227/map.bin": "cfe5014857c2b92c048f696c1433fc512d1c63d636bb82c5ba95fb21fbe7f136",
+    "../remaining-donor/staged/Route227/border.bin": "78fa2efa01ed000953acaf19b84d4a338450da3bb5f8431751c7dbff56a2d63a",
+    "../remaining-donor/staged/Route227/map.json": "9bb767674961c4ef086b84fa0758ab260dffea7974f55a1aa47e82c55551a7f1",
+    "../remaining-donor/staged/Route227/attributes.json": "5022b61ceb616191a36b186db30e30eb2bbd7020e55b24fc73a69a125925aaa1",
+    "../remaining-donor/staged/FightArea/map.bin": "869cd88cd851de06b449df07186805638e5d4b297619e31745c67b52a36cc6cc",
+    "../remaining-donor/staged/FightArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "../remaining-donor/staged/FightArea/map.json": "f01dcbaa270899f821567076e38d0cda99fedd1a17da4b583d5f6be7dbcf97e9",
+    "../remaining-donor/staged/FightArea/attributes.json": "2072a4e9f2e0d78f09dc270886591606008170ae5aad0b0431d7c076b74463c4",
+    "../remaining-donor/staged/Route228/map.bin": "51ebdc63698fca5324efe93cd85d150b3c7bab42cccea58acbce36c166cdb12e",
+    "../remaining-donor/staged/Route228/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "../remaining-donor/staged/Route228/map.json": "091d71530ba9169ff7b22d2bcde12784a7e2cd62e44a7260e2fb4daf78e50f59",
+    "../remaining-donor/staged/Route228/attributes.json": "82e196113de7796ab6cfff353b3583fa5a4983078fcd59b9bf87947decea2f77",
+    "../remaining-donor/staged/Route229/map.bin": "8cf6d453b7de5bd119fc0617471327766c88d80dba538e22b6c1bf18fa61cedc",
+    "../remaining-donor/staged/Route229/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "../remaining-donor/staged/Route229/map.json": "93842fb49cba54e0642b1d8470cce62b0de1ddd4a21a827c2aa3a930a2851e7a",
+    "../remaining-donor/staged/Route229/attributes.json": "bcc115e9d7e444fd04e5e857a54640235f7006df8a553070de33738073d3c8a8",
+    "../remaining-donor/staged/ResortArea/map.bin": "030fc7e9d99ec96e04473a4e7a3445afbed257da4e43978719243a4f183d84a6",
+    "../remaining-donor/staged/ResortArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "../remaining-donor/staged/ResortArea/map.json": "8d8fea89299104fc38a73c1749ded869475944246ff96d01efcff59b0372046b",
+    "../remaining-donor/staged/ResortArea/attributes.json": "6f8f79f5963c94320ee006921a57f53b0875227990c80427cb22ea274e36c057",
+    "../remaining-donor/staged/Route230/map.bin": "c66626482493df1437d8289c78a38cf059ce11782aa8cc13f6b0fd5ba730a5e5",
+    "../remaining-donor/staged/Route230/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "../remaining-donor/staged/Route230/map.json": "e5dd671744b713445f452b0e622fe82b9f8392cd932a557f383d720954955e27",
+    "../remaining-donor/staged/Route230/attributes.json": "85717e6484369a21d08a6af5e6dd2d6e5e800694d5db564f09d5b51148d65ea0"
+  },
+  "plan_sha256": "b24bf3b19b43cc3591a87da8568b1779ca8f641fac76791bf55cee8ac3fafc33",
+  "changed_cells": [
+    {
+      "map": "Route225",
+      "cell": [
+        22,
+        90
+      ],
+      "before": 12831,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        23,
+        90
+      ],
+      "before": 12831,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        22,
+        91
+      ],
+      "before": 1086,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        23,
+        91
+      ],
+      "before": 1086,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        22,
+        92
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        23,
+        92
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        22,
+        93
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route225",
+      "cell": [
+        23,
+        93
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        22,
+        0
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        23,
+        0
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        22,
+        1
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        23,
+        1
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        22,
+        2
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "FightArea",
+      "cell": [
+        23,
+        2
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        96,
+        14
+      ],
+      "before": 1093,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        97,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        98,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        99,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        96,
+        15
+      ],
+      "before": 1101,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        97,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        98,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route226",
+      "cell": [
+        99,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        0,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        1,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        2,
+        14
+      ],
+      "before": 1094,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        3,
+        14
+      ],
+      "before": 1095,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        0,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        1,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        2,
+        15
+      ],
+      "before": 1102,
+      "after": 12289
+    },
+    {
+      "map": "Route228",
+      "cell": [
+        3,
+        15
+      ],
+      "before": 1103,
+      "after": 12289
+    }
+  ],
+  "ordinary_foot_approaches": [
+    {
+      "map": "Route225",
+      "anchor": [
+        22,
+        89
+      ],
+      "boundary": [
+        22,
+        93
+      ],
+      "path": [
+        [
+          22,
+          89
+        ],
+        [
+          22,
+          90
+        ],
+        [
+          22,
+          91
+        ],
+        [
+          22,
+          92
+        ],
+        [
+          22,
+          93
+        ]
+      ]
+    },
+    {
+      "map": "Route225",
+      "anchor": [
+        23,
+        89
+      ],
+      "boundary": [
+        23,
+        93
+      ],
+      "path": [
+        [
+          23,
+          89
+        ],
+        [
+          23,
+          90
+        ],
+        [
+          23,
+          91
+        ],
+        [
+          23,
+          92
+        ],
+        [
+          23,
+          93
+        ]
+      ]
+    },
+    {
+      "map": "FightArea",
+      "anchor": [
+        22,
+        3
+      ],
+      "boundary": [
+        22,
+        0
+      ],
+      "path": [
+        [
+          22,
+          3
+        ],
+        [
+          22,
+          2
+        ],
+        [
+          22,
+          1
+        ],
+        [
+          22,
+          0
+        ]
+      ]
+    },
+    {
+      "map": "FightArea",
+      "anchor": [
+        23,
+        3
+      ],
+      "boundary": [
+        23,
+        0
+      ],
+      "path": [
+        [
+          23,
+          3
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          23,
+          1
+        ],
+        [
+          23,
+          0
+        ]
+      ]
+    },
+    {
+      "map": "Route226",
+      "anchor": [
+        95,
+        14
+      ],
+      "boundary": [
+        99,
+        14
+      ],
+      "path": [
+        [
+          95,
+          14
+        ],
+        [
+          96,
+          14
+        ],
+        [
+          97,
+          14
+        ],
+        [
+          98,
+          14
+        ],
+        [
+          99,
+          14
+        ]
+      ]
+    },
+    {
+      "map": "Route226",
+      "anchor": [
+        95,
+        15
+      ],
+      "boundary": [
+        99,
+        15
+      ],
+      "path": [
+        [
+          95,
+          15
+        ],
+        [
+          96,
+          15
+        ],
+        [
+          97,
+          15
+        ],
+        [
+          98,
+          15
+        ],
+        [
+          99,
+          15
+        ]
+      ]
+    },
+    {
+      "map": "Route228",
+      "anchor": [
+        4,
+        14
+      ],
+      "boundary": [
+        0,
+        14
+      ],
+      "path": [
+        [
+          4,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          0,
+          14
+        ]
+      ]
+    },
+    {
+      "map": "Route228",
+      "anchor": [
+        4,
+        15
+      ],
+      "boundary": [
+        0,
+        15
+      ],
+      "path": [
+        [
+          4,
+          15
+        ],
+        [
+          3,
+          15
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          1,
+          15
+        ],
+        [
+          0,
+          15
+        ]
+      ]
+    }
+  ],
+  "seams": [
+    {
+      "source": "Route225",
+      "target": "FightArea",
+      "direction": "down",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            22,
+            93
+          ],
+          "target": [
+            22,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            23,
+            93
+          ],
+          "target": [
+            23,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route225",
+      "target": "SurvivalArea",
+      "direction": "right",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            31,
+            14
+          ],
+          "target": [
+            0,
+            14
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            15
+          ],
+          "target": [
+            0,
+            15
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            16
+          ],
+          "target": [
+            0,
+            16
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "SurvivalArea",
+      "target": "Route225",
+      "direction": "left",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            0,
+            14
+          ],
+          "target": [
+            31,
+            14
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            15
+          ],
+          "target": [
+            31,
+            15
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            16
+          ],
+          "target": [
+            31,
+            16
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "SurvivalArea",
+      "target": "Route226",
+      "direction": "right",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            31,
+            4
+          ],
+          "target": [
+            0,
+            4
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            5
+          ],
+          "target": [
+            0,
+            5
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            17
+          ],
+          "target": [
+            0,
+            17
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            18
+          ],
+          "target": [
+            0,
+            18
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            31,
+            19
+          ],
+          "target": [
+            0,
+            19
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route226",
+      "target": "SurvivalArea",
+      "direction": "left",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            0,
+            4
+          ],
+          "target": [
+            31,
+            4
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            5
+          ],
+          "target": [
+            31,
+            5
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            17
+          ],
+          "target": [
+            31,
+            17
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            18
+          ],
+          "target": [
+            31,
+            18
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            19
+          ],
+          "target": [
+            31,
+            19
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route226",
+      "target": "Route227",
+      "direction": "up",
+      "offset": 56,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            76,
+            0
+          ],
+          "target": [
+            20,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            77,
+            0
+          ],
+          "target": [
+            21,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            78,
+            0
+          ],
+          "target": [
+            22,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            79,
+            0
+          ],
+          "target": [
+            23,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            80,
+            0
+          ],
+          "target": [
+            24,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            81,
+            0
+          ],
+          "target": [
+            25,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            82,
+            0
+          ],
+          "target": [
+            26,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            83,
+            0
+          ],
+          "target": [
+            27,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            84,
+            0
+          ],
+          "target": [
+            28,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            85,
+            0
+          ],
+          "target": [
+            29,
+            59
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route226",
+      "target": "Route228",
+      "direction": "right",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            99,
+            14
+          ],
+          "target": [
+            0,
+            14
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            99,
+            15
+          ],
+          "target": [
+            0,
+            15
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route227",
+      "target": "Route226",
+      "direction": "down",
+      "offset": -56,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            20,
+            59
+          ],
+          "target": [
+            76,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            21,
+            59
+          ],
+          "target": [
+            77,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            22,
+            59
+          ],
+          "target": [
+            78,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            23,
+            59
+          ],
+          "target": [
+            79,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            24,
+            59
+          ],
+          "target": [
+            80,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            25,
+            59
+          ],
+          "target": [
+            81,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            26,
+            59
+          ],
+          "target": [
+            82,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            27,
+            59
+          ],
+          "target": [
+            83,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            28,
+            59
+          ],
+          "target": [
+            84,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            29,
+            59
+          ],
+          "target": [
+            85,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "FightArea",
+      "target": "Route225",
+      "direction": "up",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            22,
+            0
+          ],
+          "target": [
+            22,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            23,
+            0
+          ],
+          "target": [
+            23,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "FightArea",
+      "target": "Route230",
+      "direction": "right",
+      "offset": -2,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            69,
+            15
+          ],
+          "target": [
+            0,
+            17
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            69,
+            16
+          ],
+          "target": [
+            0,
+            18
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            69,
+            17
+          ],
+          "target": [
+            0,
+            19
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            69,
+            18
+          ],
+          "target": [
+            0,
+            20
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route228",
+      "target": "Route226",
+      "direction": "left",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            0,
+            14
+          ],
+          "target": [
+            99,
+            14
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            15
+          ],
+          "target": [
+            99,
+            15
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route228",
+      "target": "Route229",
+      "direction": "down",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            14,
+            93
+          ],
+          "target": [
+            14,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            15,
+            93
+          ],
+          "target": [
+            15,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            16,
+            93
+          ],
+          "target": [
+            16,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            17,
+            93
+          ],
+          "target": [
+            17,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            18,
+            93
+          ],
+          "target": [
+            18,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            19,
+            93
+          ],
+          "target": [
+            19,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route229",
+      "target": "Route228",
+      "direction": "up",
+      "offset": 0,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            14,
+            0
+          ],
+          "target": [
+            14,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            15,
+            0
+          ],
+          "target": [
+            15,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            16,
+            0
+          ],
+          "target": [
+            16,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            17,
+            0
+          ],
+          "target": [
+            17,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            18,
+            0
+          ],
+          "target": [
+            18,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            19,
+            0
+          ],
+          "target": [
+            19,
+            93
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route229",
+      "target": "Route230",
+      "direction": "left",
+      "offset": -2,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            0,
+            3
+          ],
+          "target": [
+            95,
+            5
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            4
+          ],
+          "target": [
+            95,
+            6
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            5
+          ],
+          "target": [
+            95,
+            7
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            6
+          ],
+          "target": [
+            95,
+            8
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            11
+          ],
+          "target": [
+            95,
+            13
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            12
+          ],
+          "target": [
+            95,
+            14
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            13
+          ],
+          "target": [
+            95,
+            15
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            14
+          ],
+          "target": [
+            95,
+            16
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            15
+          ],
+          "target": [
+            95,
+            17
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            16
+          ],
+          "target": [
+            95,
+            18
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            17
+          ],
+          "target": [
+            95,
+            19
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            18
+          ],
+          "target": [
+            95,
+            20
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            19
+          ],
+          "target": [
+            95,
+            21
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            20
+          ],
+          "target": [
+            95,
+            22
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            21
+          ],
+          "target": [
+            95,
+            23
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            22
+          ],
+          "target": [
+            95,
+            24
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            23
+          ],
+          "target": [
+            95,
+            25
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            26
+          ],
+          "target": [
+            95,
+            28
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            27
+          ],
+          "target": [
+            95,
+            29
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            0,
+            28
+          ],
+          "target": [
+            95,
+            30
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route229",
+      "target": "ResortArea",
+      "direction": "down",
+      "offset": 30,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            34,
+            29
+          ],
+          "target": [
+            4,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            35,
+            29
+          ],
+          "target": [
+            5,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            36,
+            29
+          ],
+          "target": [
+            6,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            37,
+            29
+          ],
+          "target": [
+            7,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            42,
+            29
+          ],
+          "target": [
+            12,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            43,
+            29
+          ],
+          "target": [
+            13,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            44,
+            29
+          ],
+          "target": [
+            14,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            45,
+            29
+          ],
+          "target": [
+            15,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            46,
+            29
+          ],
+          "target": [
+            16,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            47,
+            29
+          ],
+          "target": [
+            17,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            48,
+            29
+          ],
+          "target": [
+            18,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            49,
+            29
+          ],
+          "target": [
+            19,
+            0
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "ResortArea",
+      "target": "Route229",
+      "direction": "up",
+      "offset": -30,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            4,
+            0
+          ],
+          "target": [
+            34,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            5,
+            0
+          ],
+          "target": [
+            35,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            6,
+            0
+          ],
+          "target": [
+            36,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            7,
+            0
+          ],
+          "target": [
+            37,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            12,
+            0
+          ],
+          "target": [
+            42,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            13,
+            0
+          ],
+          "target": [
+            43,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            14,
+            0
+          ],
+          "target": [
+            44,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            15,
+            0
+          ],
+          "target": [
+            45,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            16,
+            0
+          ],
+          "target": [
+            46,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            17,
+            0
+          ],
+          "target": [
+            47,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            18,
+            0
+          ],
+          "target": [
+            48,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            19,
+            0
+          ],
+          "target": [
+            49,
+            29
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route230",
+      "target": "FightArea",
+      "direction": "left",
+      "offset": 2,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            0,
+            17
+          ],
+          "target": [
+            69,
+            15
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            18
+          ],
+          "target": [
+            69,
+            16
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            19
+          ],
+          "target": [
+            69,
+            17
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        },
+        {
+          "source": [
+            0,
+            20
+          ],
+          "target": [
+            69,
+            18
+          ],
+          "elevations": [
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source": "Route230",
+      "target": "Route229",
+      "direction": "right",
+      "offset": 2,
+      "state": "COMPATIBLE_GEOMETRY_ONLY",
+      "compatible_lanes": [
+        {
+          "source": [
+            95,
+            5
+          ],
+          "target": [
+            0,
+            3
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            6
+          ],
+          "target": [
+            0,
+            4
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            7
+          ],
+          "target": [
+            0,
+            5
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            8
+          ],
+          "target": [
+            0,
+            6
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            13
+          ],
+          "target": [
+            0,
+            11
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            14
+          ],
+          "target": [
+            0,
+            12
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            15
+          ],
+          "target": [
+            0,
+            13
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            16
+          ],
+          "target": [
+            0,
+            14
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            17
+          ],
+          "target": [
+            0,
+            15
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            18
+          ],
+          "target": [
+            0,
+            16
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            19
+          ],
+          "target": [
+            0,
+            17
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            20
+          ],
+          "target": [
+            0,
+            18
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            21
+          ],
+          "target": [
+            0,
+            19
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            22
+          ],
+          "target": [
+            0,
+            20
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            23
+          ],
+          "target": [
+            0,
+            21
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            24
+          ],
+          "target": [
+            0,
+            22
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            25
+          ],
+          "target": [
+            0,
+            23
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            28
+          ],
+          "target": [
+            0,
+            26
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            29
+          ],
+          "target": [
+            0,
+            27
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        },
+        {
+          "source": [
+            95,
+            30
+          ],
+          "target": [
+            0,
+            28
+          ],
+          "elevations": [
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "boundary_components": [
+    [
+      "FightArea",
+      "ResortArea",
+      "Route225",
+      "Route226",
+      "Route227",
+      "Route228",
+      "Route229",
+      "Route230",
+      "SurvivalArea"
+    ]
+  ],
+  "unchanged_maps": [
+    "SurvivalArea",
+    "Route227",
+    "Route229",
+    "ResortArea",
+    "Route230"
+  ],
+  "limits": [
+    "One boundary graph is not whole-route walking/Surf/bridge acceptance",
+    "30 cells explicitly authored; original donor pins and artifacts remain unchanged",
+    "No warps, content, permanent IDs, registry or save changes",
+    "No ROM/native-suite/mGBA/Save/Delta acceptance"
+  ],
+  "output_sha256": {
+    "staged/Route228/preview.png": "47012c13715836a593bfa0e874cb50045560aa03cac15eb168e17f1b5cf75492",
+    "staged/Route228/attributes.json": "beb18418ed5b9ce835380f9c4d7b82f2d1a0cc882fbc2328b63bf66653682087",
+    "staged/Route228/map.json": "091d71530ba9169ff7b22d2bcde12784a7e2cd62e44a7260e2fb4daf78e50f59",
+    "staged/Route228/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/Route228/map.bin": "0fb8cfa7cb68dc315dbc1794eb4a9a62d46b4963a507bf7023dd168f210dd670",
+    "staged/Route226/preview.png": "be9093dba620431fcfbd1ab4b140f108451de29c54bc981906c3cc549d400423",
+    "staged/Route226/attributes.json": "2279fadf6dbffd6af0bdc9ae566c10b0f09e7378d8a90c7c311b2a896ca07f55",
+    "staged/Route226/map.json": "e531b9946aee5aae49b72d4ca6365b19d6a749942d4660b8a89001062fa02b95",
+    "staged/Route226/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+    "staged/Route226/map.bin": "43d58b24bfd9c49925a598d8381e6ff29753ea3f3e500ea4d34a26179e6d95e3",
+    "staged/FightArea/preview.png": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
+    "staged/FightArea/attributes.json": "d22d93a998ac5c45b9686d98ace7947c7ade22046bdf06a7f83bad54f99bb8f6",
+    "staged/FightArea/map.json": "f01dcbaa270899f821567076e38d0cda99fedd1a17da4b583d5f6be7dbcf97e9",
+    "staged/FightArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/FightArea/map.bin": "a7ed42a0a99ce1dde452d02962015ab3b2c050de472021d3368d8f58dd633b70",
+    "staged/Route225/preview.png": "91e3344c8367dfb28fc6afd4b506778544e846e330ffee6263290d45eee0f8ef",
+    "staged/Route225/attributes.json": "825c8975abbd9af559ee123bfee2c5e4b2233fccb16126324364fd54c6198d95",
+    "staged/Route225/map.json": "894fd767b32e593120efdd27c9c9cee677ade47b8fc07e0f0f611a2c38068005",
+    "staged/Route225/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/Route225/map.bin": "62e8451da52080fabc3b220f8ac95651887b3cc979049db26902908ba6fbe120"
+  }
+}
