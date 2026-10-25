@@ -1,3 +1,13 @@
+## LATEST — nine-map paired proof completed
+
+PR #248 source/tool code450294f9; final evidence commit is the current branch head. NORMAL165/165 and RELEASE165/165 =330/330 actual GUI checks PASS (each158 full,4 fresh Continue,3 original flash). Native32/32 and unchanged original save goldens4/4 PASS. Host source/installer15, separate South-art5 and reusable preflight8 PASS. Exact enginebe89b883d8461faefe120f583f1a9305509e1f10 / base9c195964938b5a9c5db37bd114ca6dbcfc1965a3; paired NORMAL/RELEASE builds and all hashes in build-evidence and runtime-evidence/README.md. Three retained GUI startup failures occurred before gameplay; no result/expectation/engine was weakened. Coronet static0; old Saltmere seam warning retained. Original flash unchanged.
+
+Current manager assignment6390351229 supersedes older allocations: Claude owns western Route218/Canalave/Iron Island and shared elevation-QA changes. Do not edit those or #235. #249606 checks are already complete. Next is adjacent Coronet connectivity using EXISTING donor South42x32/art-only adapter and verified29,2 ladder; lower2F27,48 remains CLOSED in these accepted ROMs. New topology requires its own frozen source/build/native/GUI/save proof, not these receipts. New read-only scripts/sinnoh-runtime-preflight.py requires --repo and checks actual baseline/prefix, full listed hashes/unlisted Git changes, archive pair identity and path containment (8 tests).
+
+No new permanent IDs, saved encoding, story or production installation accepted. #248 stays draft on #246; #237 owner-reserved paths/227+ remain genuine gates. See issues/CODEX_RESUME_CHECKPOINT_20261024.md for exact next actions and private archives. Older notes below are historical and superseded where they describe pending nine-map tests.
+
+---
+
 # LATEST — owner-requested save/upload checkpoint
 
 Actual nine-map NORMAL and RELEASE builds now complete;exact identities/sizes/hashes and commands in [build-evidence](build-evidence/README.md). Native32/goldens4/GUI/save checks are NOT executed for this new scene. Active source41-file enginebe89b883 at main9c195964,private branch codex/coronet-upper-floors-runtime-scratch-20261024. Both paired artifacts retained privately;no running make/mGBA at handoff.

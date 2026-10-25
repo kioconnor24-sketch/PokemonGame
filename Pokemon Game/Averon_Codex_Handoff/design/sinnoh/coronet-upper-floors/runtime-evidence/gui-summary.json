@@ -35,5 +35,42 @@
       }
     ],
     "rom_sha256": "8e9ff61c43e8eaf8c8118f53b3a70e5157d53936b8682f9cb8e0b89898c2427a"
+  },
+  "release-full": {
+    "verdict": "PASS",
+    "checks": 158,
+    "static_findings": [],
+    "rom_sha256": "1677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6"
+  },
+  "release-continue": {
+    "verdict": "PASS",
+    "checks": 4,
+    "static_findings": [],
+    "rom_sha256": "1677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6"
+  },
+  "release-legacy": {
+    "verdict": "PASS",
+    "checks": 3,
+    "static_findings": [
+      {
+        "map": "MAP_SALTMERE",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "up",
+          "tile": [
+            7,
+            0
+          ],
+          "faces": [
+            "MAP_COASTALMEADOW",
+            [
+              7,
+              31
+            ]
+          ]
+        }
+      }
+    ],
+    "rom_sha256": "1677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6"
   }
 }

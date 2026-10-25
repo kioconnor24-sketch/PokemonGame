@@ -1,0 +1,65 @@
+{
+ "maps": [
+  "MAP_SINNOH_MT_CORONET_2F",
+  "MAP_SINNOH_MT_CORONET_3F",
+  "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+  "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+  "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+  "MAP_SINNOH_MT_CORONET_4F_ROOM_3",
+  "MAP_SINNOH_MT_CORONET_5F",
+  "MAP_SINNOH_MT_CORONET_6F",
+  "MAP_SINNOH_MT_CORONET_1F_TUNNEL_ROOM"
+ ],
+ "build": "release",
+ "rom_sha256": "1677e74a3583baddef03292e6247b14da387b9fc4dd46a3f4a6832cd408dd6e6",
+ "static_findings": [],
+ "save_before": "64280cd28d244323f2f589b76c6d74ba2ef3b0bce958a74f7a1d180d53e3fe8a",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_1F_TUNNEL_ROOM",
+    [
+     2,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_1F_TUNNEL_ROOM",
+    [
+     2,
+     59
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "64280cd28d244323f2f589b76c6d74ba2ef3b0bce958a74f7a1d180d53e3fe8a",
+ "verdict": "PASS"
+}
