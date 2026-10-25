@@ -1,0 +1,62 @@
+{
+ "maps": [
+  "MAP_MT_CORONET_1F_SOUTH",
+  "MAP_SINNOH_MT_CORONET_2F"
+ ],
+ "build": "normal",
+ "rom_sha256": "43bcf5834682c059a874ec5417482d91b7837d38a0ec2e27dbce5371b9da86a7",
+ "static_findings": [],
+ "save_before": "f1d9e52736844fab5cf0229d2b3ae8066c3e4557e413ab18703adea7aa01e9ab",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     31,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     31,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "f1d9e52736844fab5cf0229d2b3ae8066c3e4557e413ab18703adea7aa01e9ab",
+ "verdict": "PASS",
+ "qa_mode": "batch",
+ "construction_only": true,
+ "affected_only": true,
+ "production_acceptance_claimed": false
+}

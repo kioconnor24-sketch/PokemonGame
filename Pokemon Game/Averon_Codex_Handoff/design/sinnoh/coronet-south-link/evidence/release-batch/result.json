@@ -1,0 +1,349 @@
+{
+ "maps": [
+  "MAP_MT_CORONET_1F_SOUTH",
+  "MAP_SINNOH_MT_CORONET_2F"
+ ],
+ "build": "release",
+ "rom_sha256": "ecb39aaf04a701b3665c3c2874ce40990a4ba73ec8e86f19039c6699ef41f39b",
+ "static_findings": [],
+ "save_before": "fa6e7a845057d648f25e70cb68c24db69da7d147991b9396d4b656590bd5f8ee",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     29,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_MT_CORONET_1F_SOUTH",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     29,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     27,
+     49
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH warp 0 (29, 2) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     [
+      29,
+      2
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     29,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     27,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_MT_CORONET_2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     13
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_MT_CORONET_2F warp 0 (7, 23) -> MAP_SINNOH_MT_CORONET_2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     [
+      7,
+      23
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_MT_CORONET_2F",
+    [
+     7,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_MT_CORONET_2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (26, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     26,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     26,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (27, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     27,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     27,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (28, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     28,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     28,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (29, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     29,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     29,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (30, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     30,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     30,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "MAP_MT_CORONET_1F_SOUTH (31, 9) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     31,
+     9
+    ]
+   ],
+   "after": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     31,
+     9
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_MT_CORONET_1F_SOUTH",
+    [
+     31,
+     9
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "44fe1ff0c7573fe19c7dd64496ca1f09dd20fd64a12c252ac691625cc52a466e",
+ "verdict": "PASS",
+ "qa_mode": "batch",
+ "construction_only": true,
+ "affected_only": true,
+ "production_acceptance_claimed": false
+}

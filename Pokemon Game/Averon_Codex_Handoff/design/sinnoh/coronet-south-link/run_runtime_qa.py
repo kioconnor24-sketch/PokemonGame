@@ -6,6 +6,7 @@ runner. Batch deduplicates only the manager helper's proven reciprocal pairs.
 """
 import argparse
 import importlib.util
+import json
 from pathlib import Path
 import sys
 HERE=Path(__file__).resolve().parent
@@ -30,7 +31,14 @@ def run(args):
             for x in range(26,32):argv+=['--blocked',f'MAP_MT_CORONET_1F_SOUTH,{x},9,down']
         return original_main(argv)
     qa.main=main
-    try:return a.run(args)
+    try:
+        code=a.run(args)
+        out=getattr(args,'out',None)
+        if out is not None and (Path(out)/'result.json').is_file():
+            p=Path(out)/'result.json';d=json.loads(p.read_text())
+            d.update(qa_mode=args.mode,construction_only=args.mode=='batch',affected_only=getattr(args,'affected_only',False),production_acceptance_claimed=False)
+            p.write_text(json.dumps(d,indent=1)+'\n')
+        return code
     finally:
         a.MAPS=old_maps;qa.Runner.warp=original_warp;qa.Runner.follower=original_follower;qa.main=original_main
 

@@ -1,0 +1,38 @@
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra /workspace/.onboarding/mgba-rom-test arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[1] Averon map registry resolves every linked numeric ID within its original group: [32mPASS[0m
+[1] Averon location battle controller preserves all legacy bytes but not a new 13-bit identity: [32mPASS[0m
+[2] Averon map registry preserves group slots and disabled-region null entries: [32mPASS[0m
+[1] Averon region adapters keep both badge banks independent and fail closed: [32mPASS[0m
+[2] Averon location 13-bit experiment exposes legacy API truncation and special aliases: [32mPASS[0m
+[2] Averon region adapters reject disabled map groups without changing the return warp: [32mPASS[0m
+[3] Averon corridor approved origins have names and survive boxed summary reads: [32mPASS[0m
+[0] Averon map registry IDs round trip through the actual signed warp fields: [32mPASS[0m
+[3] Averon location every 8-bit origin survives encryption PC withdrawal and rekeying: [32mPASS[0m
+[1] Averon region save rolls back across save counter wrap: [32mPASS[0m
+[2] Averon region save reports both slots corrupt instead of mixing them: [32mPASS[0m
+[0] Averon location flash reload preserves all 256 PC origins party TV specials and region state: [32mPASS[0m
+[0] Averon location legacy names and region identities remain unchanged: [32mPASS[0m
+[0] Averon region save refuses a newer format: loads nothing and never overwrites it: [32mPASS[0m
+[0] Averon region save rejects a record copied from the other slot: [32mPASS[0m
+[1] Averon region save rejects CRC-valid semantic corruption and loads the older slot: [32mPASS[0m
+[1] Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash: [32mPASS[0m
+[1] Averon northern summary names caught hatched and traded origins without changing encrypted data: [32mPASS[0m
+[1] Averon DEV Coronet fourth-floor same-map stairs preserve both separated room destinations: [32mPASS[0m
+[0] Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save: [32mPASS[0m
+[0] Averon northern flash reload preserves party PC legacy special origins and regional position: [32mPASS[0m
+[0] Averon DEV Coronet new upper and lower anchors retain original compiled stair indices: [32mPASS[0m
+[0] Averon DEV Coronet ten-map upper maps preserve native cave assets and temporary-only identities: [32mPASS[0m
+[2] Averon region save rejects every anchor bit flip even under a recomputed sector checksum: [32mPASS[0m
+[2] Averon region save round-trips both regions through flash without writing on load: [32mPASS[0m
+[2] Averon northern map headers share only the three approved origin names: [32mPASS[0m
+[2] Averon DEV Coronet essential same-floor stair preserves distinct reciprocal coordinates: [32mPASS[0m
+[3] Averon region save power loss at any sector write keeps the last whole slot: [32mPASS[0m
+[3] Averon region save rejects a slot whose sectors come from two different saves: [32mPASS[0m
+[3] Averon region save rejects every single-bit flip in the record and loads the older slot: [32mPASS[0m
+[3] Averon region save layout: anchor replaces filler_90 and the record fits sector 0: [32mPASS[0m
+[3] Averon DEV Coronet reused South preserves isolated native banks and actual donor ladder: [32mPASS[0m
+[3] Averon DEV Coronet ten-map upper all twenty-six stairs have reciprocal core-only destinations: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          33
+- Tests [34mTOTAL[0m:           33
+
