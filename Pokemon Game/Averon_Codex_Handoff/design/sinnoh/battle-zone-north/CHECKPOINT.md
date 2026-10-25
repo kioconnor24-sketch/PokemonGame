@@ -1,0 +1,23 @@
+# Battle Zone — nine-map source/native-art construction
+
+Branch codex/battle-zone-north-art-20261025, PR266, initial source4-map commite32885f8. Claims Issue15/6394390366 and6394516817. Current packet reuses #237 donor38228bb574a3557345852b758d5f1a65eb01bb22 geometry: Route22532x94, SurvivalArea32x32, Route226100x32, Route22748x60, FightArea70x37, Route22832x94, Route22964x30, ResortArea36x30, Route23096x34. Source headers/IDs/closed portals/connection offsets untouched; all inputs verified against HEAD/staged pins before outputs. No production engine/reserved inventories edited.
+
+Nine real map/border/PNG native-art packets share94 secondary records (418 free), General512 primary unchanged. All22010 map/border C/E/full behavior/layer cells verified;52 Route225+21 Route227+38 Route228 elevation15 cells retained. Existing pack_art/Canalave/Celestic code reused, no competing converter. First four map/border/PNG bytes and original67-record metadata prefix remain byte-identical when adding five maps (hard hash checks). Native General/Rustboro assets only; actual donor art inspected privately for roles and never redistributed.
+
+## Geometry truth, not fabricated connectivity
+
+18 declared internal directions:14 have120 C/E-compatible lanes; four remain closed metadata only. Original north cluster retains36 lanes:225↔Survival3 each, Survival↔2265 each,226↔22710 each (+56/-56). Additional usable pairs Fight↔2304 each,228↔2296 each,229↔23020 each,229↔Resort12 each. Source225↔Fight and226↔228 have ZERO lanes, despite connection metadata. Original source warp lists are empty too. Nine maps therefore form TWO physical source clusters, not a completed traversable Battle Zone. No speculative doorway/warp/offset/collision change made to conceal this limitation.
+
+The exact four closed directions are explicit in art-plan, backed by immutable source pins, and stay closed. Unexpected reopening is a failure; every other zero-lane seam still fails. All original C/E/full-word checks remain enforced. This is not a source/CI safeguard waiver or runtime PASS. Surf/bridge/Acro movement still requires real connected integration QA.
+
+## Actual work and tests
+
+8/8 focused host PASS: all22010 cells and111 elevated cells; all18 declared directions/120 compatible lanes; preserved36-lane old cluster; exact two-component topology; unknown blocked/nonreciprocal seams rejected; known closed gate cannot silently open; source corruption/unknown art/unsafe output rejected; fresh full9-map art replay/asset hashes; unchanged primary/first67 metadata prefix/first4 images; neutral data/no foreign-art or game claim. A real preview defect exposed donor primary418 versus blank native418; per-Resort explicit remap to native pale path265 fixes the dark holes without changing physics. Source Center envelopes corrected; all nine final native previews inspected. Native proxies/neutral warehouses/mansion/rails/gate facades are not final source-art equivalence or graphical acceptance.
+
+Reproduce: PYTHONDONTWRITEBYTECODE=1 python3 adapt_art.py --engine ABS_ENGINE --out NEW_OFF_ENGINE_DIR; python3 -m unittest discover -s 'Pokemon Game/scripts/tests' -p test_sinnoh_battle_zone_north.py -v. Immutable engine-tree provenance avoids docs-head/shallow-base dependencies. No ROM/native-suite/mGBA/Save/Delta/production acceptance. Current disk~28MiB prevents a safe full ROM build; retain unique source/history/saves/archives. Broader QA stays at connected-batch integration per manager6394170586.
+
+NEXT: source-ground the two missing gate links (original donor declares connections but supplies neither usable border nor warp), or next unclaimed source-backed northern physical map. Do not treat gates as open, allocate origins227+, add services/story/encounters, or reconstruct source that already exists. No claimed StarkMountain source exists in this packet. Preserve Claude western/shared-QA, #235 bridge/#237 reserved paths. Future DEV integration must preserve original19-slot prefix and earn separate paired game evidence; previous Temple/Core results do not accept this geometry.
+
+## Resume: provenance repair, 2026-10-25
+
+Review5642352138 fixed: all four actual worktree inputs per map are compared byte-for-byte with verified committed HEAD before seam auditing/conversion/output. Real uncommitted fixture mutations of map.bin, border.bin, map.json (including injected warp), and attributes.json all refuse before output. Actual focused9/9 PASS (16.149s), including unchanged nine-map artifact replay. Original source receipts and artifacts remain unchanged. No new ROM/runtime proof; storage27MiB/12506 free inodes. Next: disjoint physical connector package per manager6395649520; Claude paused and original donor pins preserved.
