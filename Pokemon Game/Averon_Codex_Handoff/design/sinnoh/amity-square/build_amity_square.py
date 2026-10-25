@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Amity Square (W11): new physical geography north of Hearthome City, in Averon's own banks (OFF-ENGINE staging).
+
+No donor, main or open-PR map exists for Amity Square. Built with W1/W6's attested composition, General + Dewford:
+a 52 x 40 park with a tree ring, a central sand plaza, three rectangular ponds whose every pond/grass pattern occurs
+in Lake Verity (strict), walkways, and two gatehouses (Dewford's house) at the south-west and south-east.
+Hearthome (Codex's hearthome-solaceon staging) has two pairs of north arrow mats with no warp at (8-9, 6) and
+(50-51, 6); a DEV-only overlay of its map.json appends four warps: the west pair to the west gatehouse door, the east
+pair to the east one. Its map data and files are not modified.
+No story, walking-Pokemon mechanic, objects, encounters or sections (MAPSEC_PENDING_OWNER).
+
+  build_amity_square.py --engine ENGINE --out DIR
+"""
+import argparse
+import importlib.util
+import json
+import pathlib
+import struct
+
+HERE = pathlib.Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location("pal", HERE.parent / "pal-park/build_pal_park.py")
+pal = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(pal)
+w1 = pal.w1
+HEARTHOME = HERE.parent / "hearthome-solaceon/staged/HearthomeCity"
+MATS = {"west": [(8, 6), (9, 6)], "east": [(50, 6), (51, 6)]}
+W, H = 52, 40
+PONDS = [(8, 6, 15, 11), (36, 6, 43, 11), (22, 26, 29, 30)]
+PLAZA = (18, 12, 33, 22)
+PATHS = [((25, 4), (26, 33)), ((6, 17), (45, 18)), ((8, 30), (43, 31))]
+GATES = {"west": (6, 31), "east": (41, 31)}          # Dewford house top-left; door (+2, +3)
+
+
+def build(engine):
+    eng = w1.Engine(engine)
+    verity = eng.words(("LakeVerity",))
+    grass, sand = eng.word("LakeVerity", 19, 20, 1), eng.word("DewfordTown", 8, 9, 292)
+    cells = [grass] * (W * H)
+    x0, y0, x1, y1 = PLAZA
+    for y in range(y0, y1 + 1):
+        for x in range(x0, x1 + 1):
+            cells[y * W + x] = sand
+    for (a, b), (c, d) in PATHS:
+        for y in range(b, d + 1):
+            for x in range(a, c + 1):
+                cells[y * W + x] = sand
+    ptab = pal.pond_table(eng)
+    for px0, py0, px1, py1 in PONDS:
+        inside = lambda x, y: px0 <= x <= px1 and py0 <= y <= py1
+        for y in range(py0, py1 + 1):
+            for x in range(px0, px1 + 1):
+                key = tuple(not inside(x + dx, y + dy) for dx, dy in w1.NB8)
+                if key not in ptab:
+                    raise SystemExit(f"unattested pond pattern at {(x, y)}: {key}")
+                cells[y * W + x] = verity[ptab[key].most_common(1)[0][0]]
+
+    def tree(tx, ty):
+        for (dx, dy), mid in zip(((0, 0), (1, 0), (0, 1), (1, 1)), (470, 471, 478, 479)):
+            cells[(ty + dy) * W + tx + dx] = verity[mid]
+    for tx in range(0, W, 2):
+        tree(tx, 0), tree(tx, H - 2), tree(tx, H - 4)
+    for ty in range(2, H - 4, 2):
+        tree(0, ty), tree(2, ty), tree(W - 2, ty), tree(W - 4, ty)
+    for tx, ty in [(18, 6), (30, 6), (8, 22), (40, 22), (14, 26), (34, 26)]:
+        tree(tx, ty)
+    dew = eng.cells("DewfordTown")[2]
+    doors = {}
+    for side, (gx, gy) in GATES.items():
+        for j in range(4):
+            for i in range(5):
+                cells[(gy + j) * W + gx + i] = dew[j * 20 + 1 + i]
+        doors[side] = (gx + 2, gy + 3)
+        assert cells[(gy + 3) * W + gx + 2] & 1023 == 549
+    hh = json.loads((HEARTHOME / "map.json").read_text())
+    n = len(hh["warp_events"])
+    for side, mats in MATS.items():
+        for x, y in mats:
+            assert all((w["x"], w["y"]) != (x, y) for w in hh["warp_events"])
+            hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_AMITY_SQUARE",
+                                      "dest_warp_id": "0" if side == "west" else "1"})
+    amity = w1.header("MAP_AMITY_SQUARE", "AmitySquare", "LAYOUT_AMITY_SQUARE", "MUS_ROUTE110", "MAP_TYPE_ROUTE",
+                      [(*doors["west"], "MAP_HEARTHOME_CITY", n), (*doors["east"], "MAP_HEARTHOME_CITY", n + 2)])
+    return eng, cells, amity, hh, doors
+
+
+def write(engine, out):
+    eng, cells, amity, hh, doors = build(engine)
+    st = pathlib.Path(out) / "staged"
+    (st / "AmitySquare").mkdir(parents=True, exist_ok=True)
+    data = struct.pack("<%dH" % len(cells), *cells)
+    (st / "AmitySquare/map.bin").write_bytes(data)
+    (st / "AmitySquare/border.bin").write_bytes(struct.pack("<4H", *[eng.word("LakeVerity", 0, 0, 478)] * 4))
+    (st / "AmitySquare/map.json").write_text(json.dumps(amity, indent=2) + "\n")
+    (st / "AmitySquare/scripts.inc").write_text(w1.scripts("AmitySquare"))
+    (st / "HearthomeCity-dev-overlay").mkdir(parents=True, exist_ok=True)
+    (st / "HearthomeCity-dev-overlay/map.json").write_text(json.dumps(hh, indent=2) + "\n")
+    bank = w1.render.Bank(eng.root / "data/tilesets/primary/general", eng.root / "data/tilesets/secondary/dewford")
+    w1.render.render_cells(bank, cells, W, st / "AmitySquare/preview.png")
+    receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "map_sha256": w1.sha(data), "doors": doors,
+               "inputs_sha256": dict(sorted(eng.read.items()))}
+    (pathlib.Path(out) / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    return receipt
+
+
+if __name__ == "__main__":
+    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--engine", type=pathlib.Path, required=True)
+    p.add_argument("--out", type=pathlib.Path, required=True)
+    a = p.parse_args()
+    print(json.dumps(write(a.engine, a.out), indent=2))
