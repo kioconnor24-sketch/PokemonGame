@@ -1,0 +1,165 @@
+QA source /workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/map_qa.py 5385c41a05ec6ea59e185e8fd6f52f7d82be854e446d5ecd562b902fa6edb8b4
+QA source /workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/driver.py 7a314c0d45e49d298175b85fde4d0521d1953920a4d651480fb30024657510a6
+screen {"cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+capture {"file": "0001-boot-01.png"}
+screen {"cb2": "CB2_ExpansionIntro", "i": 5}
+capture {"file": "0002-boot-02.png"}
+screen {"cb2": "MainCB2_Intro", "i": 7}
+capture {"file": "0003-boot-03.png"}
+screen {"cb2": "CB2_InitTitleScreen", "i": 8}
+capture {"file": "0004-boot-04.png"}
+screen {"cb2": "MainCB2", "i": 9}
+capture {"file": "0005-boot-05.png"}
+screen {"cb2": "CB2_MainMenu", "i": 10}
+capture {"file": "0006-boot-06.png"}
+screen {"cb2": "CB2_Overworld", "i": 13}
+capture {"file": "0007-boot-07.png"}
+field {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "pos": [14, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+map-qa-check {"name": "starts inside the batch", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 4]]}
+capture {"file": "0008-start.png"}
+observe {"label": "start", "problems": []}
+map-qa-check {"name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 4]]}
+capture {"file": "0009-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_1F-0.png"}
+capture {"file": "0010-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [4, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F warp 0 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 3]]}
+capture {"file": "0011-MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "pos": [4, 3]}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [4, 3]]}
+capture {"file": "0012-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F-0.png"}
+capture {"file": "0013-MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F warp 0 (4, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [[4, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [4, 3]]}
+capture {"file": "0014-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+capture {"file": "0015-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F-1.png"}
+capture {"file": "0016-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [14, 3]]}
+capture {"file": "0017-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "pos": [6, 3]}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [6, 3]]}
+capture {"file": "0018-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F-0.png"}
+capture {"file": "0019-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [14, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [[6, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [6, 3]]}
+capture {"file": "0020-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+capture {"file": "0021-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F-1.png"}
+capture {"file": "0022-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B3F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [14, 3]]}
+capture {"file": "0023-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "pos": [6, 3]}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [6, 3]]}
+capture {"file": "0024-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F-0.png"}
+capture {"file": "0025-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [14, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [[6, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [6, 3]]}
+capture {"file": "0026-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+capture {"file": "0027-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F-1.png"}
+capture {"file": "0028-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B4F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [14, 3]]}
+capture {"file": "0029-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "pos": [6, 3]}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [6, 3]]}
+capture {"file": "0030-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F-0.png"}
+capture {"file": "0031-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [14, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B3F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [[6, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [6, 3]]}
+capture {"file": "0032-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+capture {"file": "0033-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F-1.png"}
+capture {"file": "0034-MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [8, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B5F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [14, 3]]}
+capture {"file": "0035-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "pos": [8, 3]}
+map-qa-check {"name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [8, 3]]}
+capture {"file": "0036-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B5F-0.png"}
+capture {"file": "0037-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map-qa-check {"name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [14, 4]], "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F warp 0 (8, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B4F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [[8, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [8, 3]]}
+capture {"file": "0038-MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip.png"}
+observe {"label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip", "problems": []}
+map-qa-check {"name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+map-qa-check {"name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "pos": [14, 3]}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "pos": [14, 3]}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "pos": [14, 3]}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "pos": [14, 3]}
+map {"map": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "pos": [14, 3]}
+capture {"file": "0039-blocked-MAP_SINNOH_SNOWPOINT_TEMPLE_1F-8-12-down.png"}
+map-qa-check {"name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F (8, 12) pushing down is blocked", "ok": true, "before": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]], "after": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]]}
+capture {"file": "0040-start-menu.png"}
+map-qa-check {"name": "Start menu opens and returns to the field", "ok": true}
+capture {"file": "0041-save-confirm-temple-core.png"}
+capture {"file": "0042-save-step-temple-core-01.png"}
+capture {"file": "0043-save-step-temple-core-02.png"}
+capture {"file": "0044-save-step-temple-core-03.png"}
+capture {"file": "0045-save-step-temple-core-04.png"}
+capture {"file": "0046-save-step-temple-core-05.png"}
+capture {"file": "0047-save-step-temple-core-06.png"}
+capture {"file": "0048-save-step-temple-core-07.png"}
+capture {"file": "0049-save-step-temple-core-08.png"}
+capture {"file": "0050-saved-temple-core.png"}
+release-save {"label": "temple-core", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+map-qa-check {"name": "SAVE (temple-core)", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]]}
+PASS 72/72 checks

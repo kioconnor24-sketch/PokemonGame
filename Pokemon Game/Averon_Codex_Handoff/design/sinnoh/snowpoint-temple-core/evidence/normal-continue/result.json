@@ -1,0 +1,66 @@
+{
+ "maps": [
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F"
+ ],
+ "build": "normal",
+ "rom_sha256": "9c4728b7d6cf57262ee71a80c0ab6a733f3fde3cf2fb16315b65e9f818e7cda8",
+ "static_findings": [],
+ "save_before": "e9328c4b4f0a941cfa4dfbbc8221938b109a9dda45cef698986a75a0df36aa3c",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     8,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     8,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "e9328c4b4f0a941cfa4dfbbc8221938b109a9dda45cef698986a75a0df36aa3c",
+ "verdict": "PASS",
+ "qa_mode": "batch",
+ "construction_only": true,
+ "production_acceptance_claimed": false,
+ "physical_scope": "partial neutral Temple stairs, not ice puzzle acceptance"
+}

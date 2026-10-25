@@ -1,0 +1,106 @@
+{"t": 1792892897.4, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792892897.43, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792892900.12, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792892900.15, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792892901.9, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792892901.96, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792892902.51, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792892902.56, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792892903.1, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792892903.15, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792892904.33, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792892904.35, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792892907.96, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792892908.0, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792892908.68, "event": "field", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "pos": [14, 4], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792892909.21, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 4]]}
+{"t": 1792892912.02, "event": "capture", "file": "0008-start.png"}
+{"t": 1792892912.02, "event": "observe", "label": "start", "problems": []}
+{"t": 1792892912.03, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892912.03, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892912.08, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 4]]}
+{"t": 1792892914.63, "event": "capture", "file": "0009-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_1F-0.png"}
+{"t": 1792892918.97, "event": "capture", "file": "0010-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp.png"}
+{"t": 1792892918.97, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp", "problems": []}
+{"t": 1792892918.99, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892918.99, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892919.08, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [4, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892921.54, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F warp 0 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B1F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [14, 3]]}
+{"t": 1792892925.58, "event": "capture", "file": "0011-MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip.png"}
+{"t": 1792892925.58, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip", "problems": []}
+{"t": 1792892925.6, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892925.6, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892927.2, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "pos": [4, 3]}
+{"t": 1792892927.34, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [4, 3]]}
+{"t": 1792892933.06, "event": "capture", "file": "0012-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F-1.png"}
+{"t": 1792892937.89, "event": "capture", "file": "0013-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp.png"}
+{"t": 1792892937.89, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp", "problems": []}
+{"t": 1792892937.93, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892937.93, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892938.12, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892940.8, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B2F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", [14, 3]]}
+{"t": 1792892945.17, "event": "capture", "file": "0014-MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip.png"}
+{"t": 1792892945.17, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip", "problems": []}
+{"t": 1792892945.19, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892945.19, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892947.0, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "pos": [6, 3]}
+{"t": 1792892947.09, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [6, 3]]}
+{"t": 1792892952.4, "event": "capture", "file": "0015-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F-1.png"}
+{"t": 1792892956.63, "event": "capture", "file": "0016-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp.png"}
+{"t": 1792892956.63, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp", "problems": []}
+{"t": 1792892956.66, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892956.66, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892956.78, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892959.41, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B3F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", [14, 3]]}
+{"t": 1792892963.57, "event": "capture", "file": "0017-MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip.png"}
+{"t": 1792892963.57, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip", "problems": []}
+{"t": 1792892963.59, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892963.61, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892965.33, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "pos": [6, 3]}
+{"t": 1792892965.5, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [6, 3]]}
+{"t": 1792892970.68, "event": "capture", "file": "0018-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F-1.png"}
+{"t": 1792892975.28, "event": "capture", "file": "0019-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp.png"}
+{"t": 1792892975.28, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp", "problems": []}
+{"t": 1792892975.28, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892975.3, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892975.37, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [6, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892978.08, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B4F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", [14, 3]]}
+{"t": 1792892982.45, "event": "capture", "file": "0020-MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip.png"}
+{"t": 1792892982.45, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip", "problems": []}
+{"t": 1792892982.47, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892982.47, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892984.0, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "pos": [6, 3]}
+{"t": 1792892984.11, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [6, 3]]}
+{"t": 1792892989.25, "event": "capture", "file": "0021-warp-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F-1.png"}
+{"t": 1792892993.63, "event": "capture", "file": "0022-MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp.png"}
+{"t": 1792892993.63, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp", "problems": []}
+{"t": 1792892993.63, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892993.63, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792892993.77, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [8, 4]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792892996.53, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B5F and back", "ok": true, "leg": "back", "expected": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [[14, 3]]], "got": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", [14, 3]]}
+{"t": 1792893001.09, "event": "capture", "file": "0023-MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip.png"}
+{"t": 1792893001.09, "event": "observe", "label": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip", "problems": []}
+{"t": 1792893001.1, "event": "map-qa-check", "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792893001.11, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792893002.79, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "pos": [8, 3]}
+{"t": 1792893002.94, "event": "map-qa-check", "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_B5F", [8, 3]]}
+{"t": 1792893005.9, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F", "pos": [14, 3]}
+{"t": 1792893010.2, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F", "pos": [14, 3]}
+{"t": 1792893014.35, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F", "pos": [14, 3]}
+{"t": 1792893018.61, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F", "pos": [14, 3]}
+{"t": 1792893023.75, "event": "map", "map": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F", "pos": [14, 3]}
+{"t": 1792893029.55, "event": "capture", "file": "0024-blocked-MAP_SINNOH_SNOWPOINT_TEMPLE_1F-8-12-down.png"}
+{"t": 1792893029.55, "event": "map-qa-check", "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F (8, 12) pushing down is blocked", "ok": true, "before": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]], "after": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]]}
+{"t": 1792893030.76, "event": "capture", "file": "0025-start-menu.png"}
+{"t": 1792893031.58, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792893037.42, "event": "capture", "file": "0026-save-confirm-temple-core.png"}
+{"t": 1792893038.55, "event": "capture", "file": "0027-save-step-temple-core-01.png"}
+{"t": 1792893039.62, "event": "capture", "file": "0028-save-step-temple-core-02.png"}
+{"t": 1792893040.67, "event": "capture", "file": "0029-save-step-temple-core-03.png"}
+{"t": 1792893041.78, "event": "capture", "file": "0030-save-step-temple-core-04.png"}
+{"t": 1792893042.77, "event": "capture", "file": "0031-save-step-temple-core-05.png"}
+{"t": 1792893043.84, "event": "capture", "file": "0032-save-step-temple-core-06.png"}
+{"t": 1792893045.03, "event": "capture", "file": "0033-save-step-temple-core-07.png"}
+{"t": 1792893045.97, "event": "capture", "file": "0034-saved-temple-core.png"}
+{"t": 1792893045.97, "event": "release-save", "label": "temple-core", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792893046.01, "event": "map-qa-check", "name": "SAVE (temple-core)", "ok": true, "at": ["MAP_SINNOH_SNOWPOINT_TEMPLE_1F", [8, 12]]}

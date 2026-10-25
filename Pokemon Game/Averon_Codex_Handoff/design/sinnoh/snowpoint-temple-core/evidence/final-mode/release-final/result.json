@@ -1,0 +1,915 @@
+{
+ "maps": [
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+  "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F"
+ ],
+ "build": "release",
+ "rom_sha256": "76453fa5f3b56c4fd02bb0f494c28bfb0db745ad25a263228d4c6776a5a3f0be",
+ "static_findings": [],
+ "save_before": "3ceb2eaf39a9756fb3b0bd32c8fd1544629fb5aca8b44e44291a834eee3a01cb",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     14,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     14,
+     4
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     4,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F warp 0 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     [
+      14,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     14,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     4,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     14,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F warp 0 (4, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     [
+      4,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     4,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     6,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     [
+      14,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     14,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B1F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+    [
+     14,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B1F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     [
+      6,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     6,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B3F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     [
+      14,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     14,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B2F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+    [
+     14,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B2F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     [
+      6,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     6,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B4F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     [
+      14,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     14,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B3F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+    [
+     14,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F warp 0 (6, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B3F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     [
+      6,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     6,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+    [
+     8,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F warp 1 (14, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B5F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     [
+      14,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     14,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+    [
+     8,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B4F via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+    [
+     14,
+     4
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F warp 0 (8, 3) -> MAP_SINNOH_SNOWPOINT_TEMPLE_B4F and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+    [
+     [
+      8,
+      3
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+    [
+     8,
+     3
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SINNOH_SNOWPOINT_TEMPLE_B5F after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F (8, 12) pushing down is blocked",
+   "ok": true,
+   "before": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     8,
+     12
+    ]
+   ],
+   "after": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     8,
+     12
+    ]
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (temple-core)",
+   "ok": true,
+   "at": [
+    "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+    [
+     8,
+     12
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "f9ffb1160a741e858da0c039ceb78b01ef96865dfc6c7a110bf5cc65fa027c27",
+ "verdict": "PASS",
+ "qa_mode": "final",
+ "construction_only": false,
+ "production_acceptance_claimed": false,
+ "physical_scope": "partial neutral Temple stairs, not ice puzzle acceptance"
+}

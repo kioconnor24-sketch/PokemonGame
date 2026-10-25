@@ -1,0 +1,269 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "fb83410f6bbded89a9d99537d952698e80af4cf5",
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North"
+  ],
+  "temporary_map_slots": {
+    "SinnohSnowpointTemple_1F": 19,
+    "SinnohSnowpointTemple_B1F": 20,
+    "SinnohSnowpointTemple_B2F": 21,
+    "SinnohSnowpointTemple_B3F": 22,
+    "SinnohSnowpointTemple_B4F": 23,
+    "SinnohSnowpointTemple_B5F": 24
+  },
+  "source_headers": {
+    "SinnohSnowpointTemple_1F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+      "name": "SinnohSnowpointTemple_1F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_1F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 14,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohSnowpointTemple_B1F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+      "name": "SinnohSnowpointTemple_B1F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_B1F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 4,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_1F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 14,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohSnowpointTemple_B2F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+      "name": "SinnohSnowpointTemple_B2F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_B2F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 6,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B1F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 14,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohSnowpointTemple_B3F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+      "name": "SinnohSnowpointTemple_B3F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_B3F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 6,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B2F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 14,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohSnowpointTemple_B4F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+      "name": "SinnohSnowpointTemple_B4F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_B4F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 6,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B3F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 14,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohSnowpointTemple_B5F": {
+      "id": "MAP_SINNOH_SNOWPOINT_TEMPLE_B5F",
+      "name": "SinnohSnowpointTemple_B5F",
+      "layout": "LAYOUT_SINNOH_SNOWPOINT_TEMPLE_B5F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 8,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_SNOWPOINT_TEMPLE_B4F",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "dev_surrogate": "217 DEV only; no production Temple origin approval",
+  "files": {
+    "data/event_scripts.s": "75c98cd9cb5c0e81669d71c25784c4933a20a9e525531f80b05a2cf98e245bbc",
+    "data/layouts/SinnohSnowpointTemple_1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_1F/map.bin": "8193b65718ba0529a03f82d5048520418427ae1cb5f67956dc480086b28289bc",
+    "data/layouts/SinnohSnowpointTemple_B1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_B1F/map.bin": "5b326d4518d4ea2a1609ab68d67baeb8148675ad8efcaec87d4ec554ec58476b",
+    "data/layouts/SinnohSnowpointTemple_B2F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_B2F/map.bin": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f",
+    "data/layouts/SinnohSnowpointTemple_B3F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_B3F/map.bin": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f",
+    "data/layouts/SinnohSnowpointTemple_B4F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_B4F/map.bin": "af6fd5e14ef59c15bdfca27c7751f12b425d60db327852ebd651d9fba4c2a78f",
+    "data/layouts/SinnohSnowpointTemple_B5F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohSnowpointTemple_B5F/map.bin": "39e5d8c6a2d1586688e023bc5de9f863af5441a534ee5ab91de1a59ce9a39f81",
+    "data/layouts/layouts.json": "3df8bf2b410844c6313aef7dc499bcda3696ad2208e96583af70d770bbc66932",
+    "data/maps/SinnohSnowpointTemple_1F/map.json": "4442d13e73b186fc91d5a4989055d3e609906560c25e26daca4f5d13cfa406ef",
+    "data/maps/SinnohSnowpointTemple_1F/scripts.inc": "691c6e4f60d630325e67d80483429d7e1d165397507d087fd238064e38158cf4",
+    "data/maps/SinnohSnowpointTemple_B1F/map.json": "f28c91d8d29fbd481beb0113002be614c666793630ab8473672c71cd6ed397f4",
+    "data/maps/SinnohSnowpointTemple_B1F/scripts.inc": "005caf57204e66049bd6bcd266cd78e4780a6fc7bea54168e10357276d2ca103",
+    "data/maps/SinnohSnowpointTemple_B2F/map.json": "1ecc985863dacac584c2885b50199870ccd1bd5ae2536ab2fd8c1cd02e90d6f5",
+    "data/maps/SinnohSnowpointTemple_B2F/scripts.inc": "85d84eca06ac7993a955fe5f85b8bf8323bb5fef0b902c5187d431d2cb41b071",
+    "data/maps/SinnohSnowpointTemple_B3F/map.json": "06eca0da9332e4e2f515d22ea38359da030a07aa1ae7b6d01346223a3292bfc8",
+    "data/maps/SinnohSnowpointTemple_B3F/scripts.inc": "27e1d3f3652a34b397494f5bfc65f3ab0a8572093091aa0cb9a1fd0696808140",
+    "data/maps/SinnohSnowpointTemple_B4F/map.json": "16c558526e2e5ef9744a0416b6be7c8d60eedea88787f06fc4b763a2a757a233",
+    "data/maps/SinnohSnowpointTemple_B4F/scripts.inc": "29694f4cf2160d51f471e27ddbb55b0ba15867fba545e314bdf4ee2364fccf36",
+    "data/maps/SinnohSnowpointTemple_B5F/map.json": "76bb7825073752dd7d3329ef3d3d95c36f3b8166e5db4bc1d7efcbc30f6617a1",
+    "data/maps/SinnohSnowpointTemple_B5F/scripts.inc": "2db790ebf467bcef1290a705db0d7b7b7a2c73d5695655bfcaae8403a1de56f2",
+    "data/maps/map_groups.json": "e319b287ead032f7e4988967ec34faf6f02b855991cc685b7bf44cf573b76fe2",
+    "test/averon_temple_core_runtime.c": "464fb8fd227d70c027e04bde5414334bff71c9a7a4a890aba3d5e1647283a5a9",
+    "test/data/averon_map_registry_slots.inc": "4eb516781bc5bac0057a83560fa12f0ccb59aead733eb9c0c505885e37a0c8ef"
+  }
+}
