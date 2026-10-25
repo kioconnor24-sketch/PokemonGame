@@ -5,7 +5,7 @@
 
 REPO is a disposable checkout of main (marked .map_qa_throwaway, engine tree reset first). FAMILY is a Codex design
 folder whose prepare_runtime.assemble() supplies the base scene. BATCH_DIR/staged holds *-dev-overlay/map.json
-(headers replacing the family's) and new maps (map.json [+ map.bin/border.bin + layout dims from map.bin size]).
+(headers replacing the family's; an optional same-size map.bin replaces its blockdata) and new maps (map.json [+ map.bin/border.bin + layout dims from map.bin size]).
 """
 import importlib.util
 import json
@@ -49,6 +49,10 @@ def main():
                 print("skip overlay (not in this family scene):", name)
                 continue
             files[key] = (json.dumps(hdr, indent=2) + "\n").encode()
+            if (d / "map.bin").exists():  # DEV-derived blockdata of the family's own layout (same dimensions)
+                key = f"data/layouts/{name}/map.bin"
+                assert key in files and len(files[key]) == (d / "map.bin").stat().st_size, key
+                files[key] = (d / "map.bin").read_bytes()
             script = d / "portal-script.inc"
             if script.exists():
                 files[f"data/maps/{name}/scripts.inc"] += b"\n" + script.read_bytes()
