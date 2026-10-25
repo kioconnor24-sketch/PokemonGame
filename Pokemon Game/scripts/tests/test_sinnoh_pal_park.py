@@ -18,7 +18,7 @@ ti.loader.exec_module(t)
 
 class PalParkTest(unittest.TestCase):
     def setUp(self):
-        self.eng, self.cells, self.hdr, self.r221, self.door = b.build(ENGINE)
+        self.eng, self.cells, self.hdr, self.r221, self.door, self.gate = b.build(ENGINE)
 
     def test_staged_matches_fresh_build(self):
         self.assertEqual((HERE / "staged/PalPark/map.bin").read_bytes(), struct.pack("<%dH" % len(self.cells), *self.cells))
@@ -46,9 +46,14 @@ class PalParkTest(unittest.TestCase):
         got = t.reach(self.cells, b.W, beh, (x, y + 1))
         self.assertIn((20, b.SAND_TOP + 1), got)                                   # walk to the beach
         self.assertFalse({p for p in got if p[0] in (0, b.W - 1) or p[1] in (0, b.H - 1)})
-        self.assertEqual(self.hdr["warp_events"][0]["dest_map"], "MAP_ROUTE221")
-        self.assertEqual(self.r221["warp_events"], [{"x": 82, "y": 15, "elevation": 0, "dest_map": "MAP_PAL_PARK",
+        # Route 221 door -> gate mats 0/1; gate mats 2/3 -> park door; park door -> gate mat 2.
+        self.assertEqual(self.r221["warp_events"], [{"x": 82, "y": 15, "elevation": 0, "dest_map": "MAP_PAL_PARK_GATE",
                                                      "dest_warp_id": "0"}])
+        g = self.gate["warp_events"]
+        self.assertEqual([(w["dest_map"], w["dest_warp_id"]) for w in g],
+                         [("MAP_ROUTE221", "0")] * 2 + [("MAP_PAL_PARK", "0")] * 2)
+        self.assertEqual((self.hdr["warp_events"][0]["dest_map"], self.hdr["warp_events"][0]["dest_warp_id"]),
+                         ("MAP_PAL_PARK_GATE", "2"))
 
 
 if __name__ == "__main__":

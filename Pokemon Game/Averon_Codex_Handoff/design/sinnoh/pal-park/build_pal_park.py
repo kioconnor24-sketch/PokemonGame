@@ -109,15 +109,23 @@ def build(engine):
     door = (gx + 2, gy + 3)
     assert cells[door[1] * W + door[0]] & 1023 == 549
     hdr = w1.header("MAP_PAL_PARK", "PalPark", "LAYOUT_PAL_PARK", "MUS_ROUTE101", "MAP_TYPE_ROUTE",
-                    [(*door, "MAP_ROUTE221", 0)])
+                    [(*door, "MAP_PAL_PARK_GATE", 2)])
+    # Gate: the stock Seaside Cycling Road entrance (two mat pairs at opposite ends), unchanged.
+    assert "LAYOUT_ROUTE110_SEASIDE_CYCLING_ROAD_ENTRANCE" in eng.layout_ids
+    gate = w1.header("MAP_PAL_PARK_GATE", "PalPark_Gate", "LAYOUT_ROUTE110_SEASIDE_CYCLING_ROAD_ENTRANCE", "MUS_ROUTE101",
+                     "MAP_TYPE_INDOOR", [(1, 5, "MAP_ROUTE221", 0), (2, 5, "MAP_ROUTE221", 0),
+                                         (12, 5, "MAP_PAL_PARK", 0), (13, 5, "MAP_PAL_PARK", 0)])
     r221 = json.loads(ROUTE221.read_text())
     assert r221["warp_events"] == []
-    r221["warp_events"] = [{"x": 82, "y": 15, "elevation": 0, "dest_map": "MAP_PAL_PARK", "dest_warp_id": "0"}]
-    return eng, cells, hdr, r221, door
+    r221["warp_events"] = [{"x": 82, "y": 15, "elevation": 0, "dest_map": "MAP_PAL_PARK_GATE", "dest_warp_id": "0"}]
+    return eng, cells, hdr, r221, door, gate
 
 
 def write(engine, out):
-    eng, cells, hdr, r221, door = build(engine)
+    eng, cells, hdr, r221, door, gate = build(engine)
+    (pathlib.Path(out) / "staged/PalPark_Gate").mkdir(parents=True, exist_ok=True)
+    (pathlib.Path(out) / "staged/PalPark_Gate/map.json").write_text(json.dumps(gate, indent=2) + "\n")
+    (pathlib.Path(out) / "staged/PalPark_Gate/scripts.inc").write_text(w1.scripts("PalPark_Gate"))
     d = pathlib.Path(out) / "staged"
     (d / "PalPark").mkdir(parents=True, exist_ok=True)
     (d / "Route221-dev-overlay").mkdir(parents=True, exist_ok=True)
