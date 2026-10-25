@@ -8,6 +8,7 @@ import tempfile
 import sys
 import unittest
 from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT=Path(__file__).resolve().parents[3]
 HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-south-link'
@@ -39,13 +40,14 @@ class SouthLinkTests(unittest.TestCase):
                 self.assertEqual((other['dest_map'],int(other['dest_warp_id'])),(h['id'],i));total+=1
         self.assertEqual(total,26)
 
-    def test_reused_south_full_physics_except_two_explicit_closures(self):
+    def test_reused_south_full_physics_except_eight_explicit_quarantines(self):
         source,_,_,attrs=m.reuse.south_source();before=m.words(source)
         after=m.words(self.files[f'data/layouts/{m.SOUTH}/map.bin'])
         pa=m.words(self.files['data/tilesets/primary/coronet_south_dev/metatile_attributes.bin'])
         sa=m.words(self.files['data/tilesets/secondary/coronet_south_dev/metatile_attributes.bin'])
         for i,(a,b) in enumerate(zip(before,after)):
-            if i in (7*42+5,20*42+36):self.assertTrue(b&0xc00);continue
+            if i in (7*42+5,20*42+36,*[10*42+x for x in range(26,32)]):
+                self.assertTrue(b&0xc00);self.assertEqual(a&0xf000,b&0xf000);self.assertEqual((pa+sa)[b&1023]&511,8);continue
             self.assertEqual(a&0xfc00,b&0xfc00)
             self.assertEqual((pa+sa)[b&1023],attrs[str(a&1023)])
         self.assertEqual(before[2*42+29],0x33a5)
@@ -101,6 +103,8 @@ class SouthLinkTests(unittest.TestCase):
             info=mapdata.World(e).map('MAP_MT_CORONET_1F_SOUTH')
             self.assertEqual((info.width,info.height),(42,32))
             self.assertEqual(info.behavior(29,2),'MB_LADDER')
+            for x in range(26,32):
+                self.assertEqual(info.behavior(x,10),'MB_CAVE');self.assertTrue(info.collision(x,10))
 
     def test_corrupt_art_rejected(self):
         original=m.sha
@@ -121,6 +125,25 @@ class SouthLinkTests(unittest.TestCase):
         with patch.object(m.base,'git',side_effect=changed):
             with self.assertRaisesRegex(ValueError,'baseline'):m.assemble(ROOT)
         with self.assertRaisesRegex(ValueError,'marked South'):m.install(ROOT)
+
+    def test_bespoke_fast_scope_barriers_and_final_mode_restore(self):
+        sys.path.insert(0,str(ROOT/'Pokemon Game/scripts/claude_play'))
+        import map_qa as qa
+        spec=importlib.util.spec_from_file_location('south_qa_test',HERE/'run_runtime_qa.py')
+        runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner)
+        old=runner.a.MAPS;original_main=qa.main;original_warp=qa.Runner.warp
+        commands=[]
+        def fake(args):
+            self.assertEqual(runner.a.MAPS,('MAP_MT_CORONET_1F_SOUTH','MAP_SINNOH_MT_CORONET_2F'))
+            return qa.main(['run'])
+        with patch.object(qa,'main',side_effect=lambda args:commands.append(args) or 0),patch.object(runner.a,'run',side_effect=fake):
+            self.assertEqual(runner.run(SimpleNamespace(mode='batch',affected_only=True,expect=None)),0)
+        self.assertEqual(commands[0].count('--blocked'),6)
+        self.assertEqual(runner.a.MAPS,old);self.assertIs(qa.main,original_main);self.assertIs(qa.Runner.warp,original_warp)
+        with self.assertRaisesRegex(ValueError,'never final'):runner.run(SimpleNamespace(mode='final',affected_only=True,expect=None))
+        with patch.object(runner.a,'run',side_effect=RuntimeError('probe')):
+            with self.assertRaisesRegex(RuntimeError,'probe'):runner.run(SimpleNamespace(mode='batch',affected_only=True,expect=None))
+        self.assertEqual(runner.a.MAPS,old);self.assertIs(qa.main,original_main);self.assertIs(qa.Runner.warp,original_warp)
 
     def test_deterministic_recipe_hashes(self):
         other,receipt=m.assemble(ROOT);self.assertEqual(other,self.files);self.assertEqual(receipt,self.receipt)

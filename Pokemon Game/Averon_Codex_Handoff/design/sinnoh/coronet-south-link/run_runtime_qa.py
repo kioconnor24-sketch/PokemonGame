@@ -17,16 +17,22 @@ MAPS=(*a.MAPS,'MAP_MT_CORONET_1F_SOUTH')
 def run(args):
     sys.path.insert(0,str(ROOT/'Pokemon Game/scripts/claude_play'))
     import map_qa as qa
-    old_maps=a.MAPS;original_warp=qa.Runner.warp;original_follower=qa.Runner.follower
+    old_maps=a.MAPS;original_warp=qa.Runner.warp;original_follower=qa.Runner.follower;original_main=qa.main
     if args.mode=='batch':
         s=importlib.util.spec_from_file_location('south_fast_qa',ROOT/'Pokemon Game/scripts/sinnoh_fast_batch_qa.py')
         fast=importlib.util.module_from_spec(s);s.loader.exec_module(fast);fast.install_batch_mode(qa)
     if getattr(args,'affected_only',False) and args.mode!='batch':
         raise ValueError('affected-only is construction QA, never final acceptance')
     a.MAPS=('MAP_MT_CORONET_1F_SOUTH','MAP_SINNOH_MT_CORONET_2F') if getattr(args,'affected_only',False) else MAPS
+    def main(argv):
+        argv=list(argv)
+        if not args.expect:
+            for x in range(26,32):argv+=['--blocked',f'MAP_MT_CORONET_1F_SOUTH,{x},9,down']
+        return original_main(argv)
+    qa.main=main
     try:return a.run(args)
     finally:
-        a.MAPS=old_maps;qa.Runner.warp=original_warp;qa.Runner.follower=original_follower
+        a.MAPS=old_maps;qa.Runner.warp=original_warp;qa.Runner.follower=original_follower;qa.main=original_main
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)

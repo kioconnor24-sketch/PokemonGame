@@ -442,7 +442,7 @@
   "files": {
     "data/event_scripts.s": "0d96bfa7413ea244154a63a0ea111c99b6a0c30ee45c5949ce5cc0545fedf4c6",
     "data/layouts/MtCoronet_1F_South/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
-    "data/layouts/MtCoronet_1F_South/map.bin": "3983f1e8aefb3200f814ed8cd2ef1032b96894827a25be8e73b9aadcef913b1f",
+    "data/layouts/MtCoronet_1F_South/map.bin": "e5b2693abcfd10dd972504797c29bc8f7c2422c736c11cb46e0e303f0cc7053b",
     "data/layouts/SinnohMtCoronet_1F_Tunnel_Room/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
     "data/layouts/SinnohMtCoronet_1F_Tunnel_Room/map.bin": "86da5875853ba97538af1f16fe5c924eba734753b4e6a597777e8b60eaf5392b",
     "data/layouts/SinnohMtCoronet_2F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
@@ -490,7 +490,7 @@
     "include/tilesets.h": "096f3155dd9b92543e2cac89931d424183cd24a981064cadf0009034f235cae9",
     "src/data/tilesets/headers.h": "f5feaba0f400f4603b86910bda17528b4ac2cae3435ddf7e2d979dcdf54fba00",
     "src/data/tilesets/metatiles.h": "1ee69ed53b12e37afa38c7eb32cf7b844840298da3a37c2a4e1163af9c7da404",
-    "test/averon_coronet_south_runtime.c": "a16a77934c4d64c3989558c01dff4cfb642fb8d374831a5ebf49e8b3fdee7bf3",
+    "test/averon_coronet_south_runtime.c": "f62a3a37a086f77f8ba7e71d06cae8a8507a92ab07fb5cf84baa84bdbd0d453e",
     "test/data/averon_map_registry_slots.inc": "60a8f3dcafce3112a777ea3f82cd529fc745c63528282e3c860aeb36c4ce75eb"
   },
   "lower_link": {
@@ -513,6 +513,33 @@
         20
       ]
     ],
+    "quarantined_ledge_tiles": [
+      [
+        26,
+        10
+      ],
+      [
+        27,
+        10
+      ],
+      [
+        28,
+        10
+      ],
+      [
+        29,
+        10
+      ],
+      [
+        30,
+        10
+      ],
+      [
+        31,
+        10
+      ]
+    ],
+    "wall_alias": 524,
     "upper_changed_cells": [
       [
         27,

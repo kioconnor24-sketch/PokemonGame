@@ -58,12 +58,28 @@ def assemble(repo):
             raise ValueError('South physics or full attributes differ')
     if attrs[raw[2*42+29] & 1023] != 0x1061 or raw[2*42+29] & 0xc00:
         raise ValueError('actual South ladder29,2 required')
-    # Neutralized donor exits have no reciprocal world yet: seal only those cells.
-    closures = [(5, 7), (36, 20)]
-    for x, y in closures:
-        raw[y*42+x] = 0x0c00 | 513  # native cave wall in isolated bank (verified below)
-    if attrs[513] & 0xff != 0:
-        raise ValueError('unexpected stock wall behavior')
+    # Genuine on-foot trap reproduced in mGBA: downhill ledges enter the
+    # unfinished exterior-return region. Visible DEV walls quarantine that
+    # access; collision bits alone do not suppress a ledge behavior.
+    bank_path=Path(ENGINE)/'data/tilesets/secondary/cave'
+    stock_records=base.verified_file(repo,bank_path/'metatiles.bin','HEAD')
+    stock_attrs=base.verified_file(repo,bank_path/'metatile_attributes.bin','HEAD')
+    wall_record=stock_records[16:32];wall_attribute=stock_attrs[2:4]
+    secondary_records=(art/'cave-family/secondary-metatiles.bin').read_bytes()
+    secondary_attrs=(art/'cave-family/secondary-attributes.bin').read_bytes()
+    matches=[i for i in range(len(secondary)) if secondary_records[16*i:16*i+16]==wall_record and secondary_attrs[2*i:2*i+2]==wall_attribute]
+    wall=512+matches[0] if matches else 512+len(secondary)
+    if not matches:
+        secondary_records+=wall_record;secondary_attrs+=wall_attribute
+    if struct.unpack('<H',wall_attribute)[0]&511 != 8:
+        raise ValueError('stock wall unexpectedly has movement behavior')
+    closures=[(5,7),(36,20)]
+    ledges=[(x,10) for x in range(26,32)]
+    for x,y in ledges:
+        if source_attrs[str(original[y*42+x]&1023)]!=0x3b:
+            raise ValueError('reviewed downhill ledge source differs')
+    for x,y in closures+ledges:
+        raw[y*42+x]=(raw[y*42+x]&0xf000)|0xc00|wall
     header = copy.deepcopy(original_header)
     header['region_map_section'] = 'MAPSEC_ROUTE_201'
     header['music'] = 'MUS_CAVE_OF_ORIGIN'
@@ -98,6 +114,7 @@ def assemble(repo):
         directory=f'data/tilesets/{bank}/coronet_south_dev/'
         records=(art/f'cave-family/{bank}-metatiles.bin').read_bytes()
         attr=(art/f'cave-family/{bank}-attributes.bin').read_bytes()
+        if bank=='secondary':records=secondary_records;attr=secondary_attrs
         if not records or len(records)%16 or len(records)>8192 or len(attr)*8!=len(records):
             raise ValueError('invalid isolated metadata bank')
         files[directory+'metatiles.bin']=records;files[directory+'metatile_attributes.bin']=attr
@@ -121,7 +138,7 @@ def assemble(repo):
     files['data/event_scripts.s']+=f'\n\t.include "data/maps/{SOUTH}/scripts.inc"\n'.encode()
     del files['test/averon_coronet_upper_floors_runtime.c']
     files['test/averon_coronet_south_runtime.c']=(HERE/'native-runtime.c').read_bytes()
-    receipt.update(base=BASE,temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers={**receipt['source_headers'],UPPER:upper_header,SOUTH:header},lower_link=dict(south=[29,2],upper=[27,48],upper_appended_index=len(old_upper_warps),closed_donor_exits=closures,upper_changed_cells=changed),files={p:sha(v) for p,v in sorted(files.items())})
+    receipt.update(base=BASE,temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers={**receipt['source_headers'],UPPER:upper_header,SOUTH:header},lower_link=dict(south=[29,2],upper=[27,48],upper_appended_index=len(old_upper_warps),closed_donor_exits=closures,quarantined_ledge_tiles=ledges,wall_alias=wall,upper_changed_cells=changed),files={p:sha(v) for p,v in sorted(files.items())})
     return files,receipt
 
 

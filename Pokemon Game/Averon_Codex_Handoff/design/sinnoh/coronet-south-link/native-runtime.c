@@ -103,5 +103,11 @@ TEST("Averon DEV Coronet reused South preserves isolated native banks and actual
     EXPECT(h->mapLayout->map[7*42+5]&0xc00);
     EXPECT(h->mapLayout->map[20*42+36]&0xc00);
     EXPECT_EQ(h->mapLayout->map[2*42+29]&0xfc00,0x3000);
+    for (u32 x=26;x<=31;x++)
+    {
+        u16 word=h->mapLayout->map[10*42+x];
+        EXPECT(word&0xc00);
+        EXPECT_EQ(((const u16 *)h->mapLayout->secondaryTileset->metatileAttributes)[(word&1023)-512]&511,8);
+    }
     EXPECT_EQ(h->regionMapSectionId,MAPSEC_ROUTE_201);
 }
