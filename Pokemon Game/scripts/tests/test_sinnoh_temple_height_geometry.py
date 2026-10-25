@@ -98,6 +98,15 @@ class ProvisionalGeometryTests(unittest.TestCase):
             walkable+=len(info['walkable_center_samples'])
         self.assertEqual(unsupported,4204);self.assertEqual(walkable,887)
 
+    def test_actual_corners_have_flat_support_and_ramp_edge_ambiguity_is_disclosed(self):
+        self.assertEqual(sum(v['sampled_walkable_corners'] for v in self.audit['floors'].values()),3548)
+        self.assertEqual(sum(len(v['nonflat_edge_candidates']) for v in self.audit['floors'].values()),50)
+        for v in self.audit['floors'].values():
+            self.assertFalse(v['corners_without_flat16'])
+            self.assertTrue(all('16' in p['height_candidates'] for p in v['nonflat_edge_candidates']))
+        bad=copy.deepcopy(self.audit);bad['floors']['1f']['corners_without_flat16']=[[14,3,-8,-8]]
+        with self.assertRaisesRegex(ValueError,'footprint'):self.m.construct(bad,self.reference)
+
     def test_stairs_reciprocal_and_reachable_with_host_ice_stops_city_closed(self):
         byid={v[2]['id']:v for v in self.maps.values()};events=0
         for raw,_,h in self.maps.values():

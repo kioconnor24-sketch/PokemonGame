@@ -20,13 +20,15 @@ sha=core.a.sha;encode=core.a.encode
 
 
 def construct(audit,reference):
-    if audit['revision']!=reference['revision'] or audit['total_ice_tiles']!=338:
+    if audit['revision']!=reference['revision'] or audit['total_ice_tiles']!=338 or audit['total_terrain_words']!=6144 or sum(len(v['ice']) for v in audit['floors'].values())!=338:
         raise ValueError('pinned source revision or ice count differs')
     recipe=json.loads((SOURCE/'shell-recipe.json').read_text())
     headers={n:packet[2] for n,packet in core.construct(recipe,reference).items()}
     result={}
     for floor,name in core.NAMES.items():
         info=audit['floors'][floor];cells=[WALL|0xc00]*1024;seen=set();ice=set()
+        if info['corners_without_flat16']:
+            raise ValueError('unsupported source tile footprint')
         for point in info['walkable_center_samples']:
             x,y=point['tile']
             if not 0<x<31 or not 0<y<31 or (x,y) in seen:
@@ -38,6 +40,8 @@ def construct(audit,reference):
                 raise ValueError('unsupported source behavior')
             seen.add((x,y));cells[y*32+x]=(ICE if behavior==32 else FLOOR)|0x3000
             if behavior==32:ice.add((x,y))
+        if info['sampled_walkable_corners']!=4*len(info['walkable_center_samples']):
+            raise ValueError('incomplete source tile footprint')
         if ice!={tuple(v['tile']) for v in info['ice']} or any(v['collision_bit'] or not v['height_candidates'] for v in info['ice']):
             raise ValueError('ice surface or permission differs')
         header=headers[name]
