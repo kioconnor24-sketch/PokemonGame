@@ -4,7 +4,7 @@
   static_scene.py REPO FAMILY BATCH_DIR [--map MAP_ID ...]
 
 REPO is a disposable checkout of main (marked .map_qa_throwaway, engine tree reset first). FAMILY is a Codex design
-folder whose prepare_runtime.assemble() supplies the base scene. BATCH_DIR/staged holds *-dev-overlay/map.json
+folder whose prepare_runtime.assemble() supplies the base scene, or '-' for the production scene itself. BATCH_DIR/staged holds *-dev-overlay/map.json
 (headers replacing the family's; an optional same-size map.bin replaces its blockdata) and new maps (map.json [+ map.bin/border.bin + layout dims from map.bin size]).
 """
 import importlib.util
@@ -26,10 +26,14 @@ def main():
     subprocess.run(["git", "-C", str(repo), "clean", "-qfd", "--", ENGINE + "data", ENGINE + "test", ENGINE + "src",
                     ENGINE + "include"], check=True)
     design = repo / "Pokemon Game/Averon_Codex_Handoff/design/sinnoh"
-    spec = importlib.util.spec_from_file_location("fam", design / family / "prepare_runtime.py")
-    fam = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(fam)
-    files, _ = fam.assemble(repo)
+    if family == "-":  # the production scene itself: overlays replace files of the engine tree
+        files = {k: (eng / k).read_bytes() for k in
+                 ("data/maps/map_groups.json", "data/layouts/layouts.json", "data/event_scripts.s")}
+    else:
+        spec = importlib.util.spec_from_file_location("fam", design / family / "prepare_runtime.py")
+        fam = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fam)
+        files, _ = fam.assemble(repo)
     groups = json.loads(files["data/maps/map_groups.json"])
     layouts = json.loads(files["data/layouts/layouts.json"])
     names = groups["gMapGroup_Sinnoh"]
@@ -45,6 +49,13 @@ def main():
         if d.name.endswith("-dev-overlay"):
             name = d.name[: -len("-dev-overlay")]
             key = f"data/maps/{name}/map.json"
+            if family == "-" and (eng / key).exists():
+                files.setdefault(key, (eng / key).read_bytes())
+                files.setdefault(f"data/maps/{name}/scripts.inc", (eng / f"data/maps/{name}/scripts.inc").read_bytes())
+                if (d / "map.bin").exists():
+                    layout = json.loads(files[key])["layout"]
+                    rel = next(l["blockdata_filepath"] for l in layouts["layouts"] if l.get("id") == layout)
+                    files.setdefault(f"data/layouts/{name}/map.bin", (eng / rel).read_bytes())
             if key not in files:
                 print("skip overlay (not in this family scene):", name)
                 continue
