@@ -241,45 +241,56 @@ class Driver:
         from collections import deque
         if pos is None:
             return self._map_route_maps(src, dst)
-        start = (src, tuple(pos))
-        prev, seen = {start: None}, {}
-        q = deque([start])
+        # States carry the player's actual elevation: a bridge (15) tile keeps the one the player arrived with,
+        # so a seam crossed from a bridge depends on it (mapdata.step_across), not on the tile's 15.
+        try:
+            elevation = self.g.player_elevation()
+        except AttributeError:
+            elevation = None
+        firsts = [(src, tuple(pos), e) for e in
+                  ([elevation] if elevation is not None else mapdata.start_elevations(self.w.map(src), tuple(pos)))]
+        prev, seen = dict.fromkeys(firsts), {}
+        q = deque(firsts)
         goal = None
         while q:
             cur = q.popleft()
-            mid, pos = cur
-            if mid == dst and (target is None or mapdata.bfs(self.w.map(mid), pos, {tuple(target)}) is not None):
+            mid, pos, e = cur
+            m = self.w.map(mid)
+            states = mapdata.reach_states(m, pos, e)
+            if mid == dst and (target is None or tuple(target) in states):
                 goal = cur
                 break
-            m = self.w.map(mid)
-            # Skip a position already covered by an explored one in the same part of this map.
-            if any(mapdata.bfs(m, p, {pos}) is not None for p in seen.get(mid, [])):
+            # Skip a state already covered by an explored one in the same part of this map.
+            if (pos, e) in seen.get(mid, set()):
                 continue
-            seen.setdefault(mid, []).append(pos)
+            seen.setdefault(mid, set()).update((t, x) for t, es in states.items() for x in es)
             nexts = []
             for d, other, off in m.connections:
                 if other not in self.w.map_ids:
                     continue
                 om = self.w.map(other)
-                exits = [t for t in mapdata.edge_exits(m, d) if mapdata.bfs(m, pos, {t}) is not None]
                 by_arrival = {}
-                for t in exits:
+                for t in mapdata.edge_exits(m, d):
                     a = mapdata.across(m, om, d, off, t)
-                    if om.inside(*a) and om.walkable(*a) and mapdata.elevations_compatible(
-                            mapdata.elevation_at(m, *t), mapdata.elevation_at(om, *a)):
-                        by_arrival.setdefault(a, []).append(t)
-                for a, ts in by_arrival.items():
-                    nexts.append(((mid, "edge", d, tuple(ts)), (other, a)))
+                    if not (om.inside(*a) and om.walkable(*a)):
+                        continue
+                    for et in states.get(t, ()):
+                        ne = mapdata.step_across(et, mapdata.elevation_at(m, *t), mapdata.elevation_at(om, *a))
+                        if ne is not None:
+                            by_arrival.setdefault((a, ne), []).append(t)
+                for (a, ne), ts in by_arrival.items():
+                    nexts.append(((mid, "edge", d, tuple(ts)), (other, a, ne)))
             for x, y, dest, dw in m.warps:
                 if dest not in self.w.map_ids or not mapdata.takeable(m, x, y):
                     continue
                 stand, push = self.warp_goal(m, (x, y))
-                if mapdata.bfs(m, pos, {stand}) is None:
+                if stand not in states:
                     continue
                 dm = self.w.map(dest)
                 if dw >= len(dm.warps):
                     continue
-                nexts.append(((mid, "warp", (x, y), push), (dest, mapdata.warp_arrival(dm, *dm.warps[dw][:2]))))
+                at = mapdata.warp_arrival(dm, *dm.warps[dw][:2])
+                nexts.append(((mid, "warp", (x, y), push), (dest, at, mapdata.elevation_at(dm, *at))))
             for leg, nxt in nexts:
                 if nxt not in prev:
                     prev[nxt] = (cur, leg)

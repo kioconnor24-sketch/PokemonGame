@@ -216,8 +216,7 @@ def batch_reach(world, map_ids, map_id, tile):
             elif p["dest"] in map_ids:
                 other = world.map(p["dest"])
                 o = across(m, other, p["direction"], p["offset"], p["tile"])
-                ok = other.inside(*o) and other.walkable(*o) and mapdata.elevations_compatible(
-                    mapdata.elevation_at(m, *p["tile"]), mapdata.elevation_at(other, *o))
+                ok = other.inside(*o) and other.walkable(*o) and mapdata.crossable(m, p["tile"], other, o)
                 nxt = (p["dest"], tuple(o)) if ok else None
             else:
                 nxt = None
@@ -256,7 +255,7 @@ def static_audit(world, map_ids):
             for t in edge_tiles(m, direction, (other_id, offset)):
                 o = across(m, other, direction, offset, t)
                 if not (other.inside(*o) and other.walkable(*o)
-                        and mapdata.elevations_compatible(mapdata.elevation_at(m, *t), mapdata.elevation_at(other, *o))):
+                        and mapdata.crossable(m, t, other, o)):
                     find(map_id, "seam-mismatch", dict(direction=direction, tile=t, faces=(other_id, o)))
         # Every entry must reach every exit inside the map (cross-map routes are run-time checks).
         cut = []

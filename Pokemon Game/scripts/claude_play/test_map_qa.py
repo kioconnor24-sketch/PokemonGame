@@ -172,6 +172,35 @@ class StaticLayer(unittest.TestCase):
                                           "4445"])
         self.assertEqual(map_qa.mapdata.start_elevations(far, (1, 0)), [3, 4, 15])  # 5 never touches the bridge
 
+    def test_a_seam_from_a_bridge_uses_the_actual_elevation(self):
+        # A: ground 3, then a bridge (15) on its east edge; B: ground 3. Walking 3 -> 15 keeps 3, so the
+        # seam onto B's 3 is open. With ground 4 instead (actual elevation 4 on the bridge) it is refused.
+        import driver as drv
+
+        def world(ground):
+            a = FakeElevMap("A", ["..."], [ground * 2 + "f"], connections=[("right", "B", 0)])
+            b = FakeElevMap("B", ["..."], ["333"], connections=[("left", "A", 0)])
+            w = FakeWorld(a, b)
+            w.map_ids = {"A": 0, "B": 1}
+            a.world = b.world = w
+            d = drv.Driver.__new__(drv.Driver)
+            d.w = w
+            return w, d
+
+        w, d = world("3")
+        md = map_qa.mapdata
+        self.assertTrue(md.crossable(w.map("A"), (2, 0), w.map("B"), (0, 0)))
+        self.assertEqual(md.step_across(3, 15, 3), 3)
+        self.assertIsNone(md.step_across(4, 15, 3))
+        self.assertEqual([leg[:2] for leg in d.map_route("A", "B", (0, 0))], [("A", "edge")])
+        self.assertEqual([leg[:2] for leg in d.map_route("A", "B", (2, 0))], [("A", "edge")])   # starting on it
+        self.assertNotIn("seam-mismatch", codes(map_qa.static_audit(w, ["A", "B"])[0]))
+        w, d = world("4")
+        self.assertFalse(md.crossable(w.map("A"), (2, 0), w.map("B"), (0, 0)))
+        with self.assertRaises(drv.Stuck):
+            d.map_route("A", "B", (0, 0))
+        self.assertIn("seam-mismatch", codes(map_qa.static_audit(w, ["A", "B"])[0]))
+
     def test_a_seam_between_different_elevations_is_a_mismatch(self):
         a = FakeElevMap("A", ["....."], ["33344"], connections=[("down", "B", 0)])
         b = FakeElevMap("B", ["....."], ["33333"], connections=[("up", "A", 0)])

@@ -134,22 +134,50 @@ def elevation_at(m, x, y):
     return m.elevation(x, y) if hasattr(m, "elevation") else 0
 
 
-def step_elevation(m, cur, frm, to):
-    """The player's elevation after stepping frm -> to, or None when the engine refuses the step.
+def step_across(cur, frm_e, to_e):
+    """The player's elevation after a step from a tile of elevation frm_e onto one of to_e (on the same map or
+    across a seam), or None when the engine refuses it.
 
     Mirrors pokeemerald: IsElevationMismatchAt blocks entering a tile whose elevation is neither 0 nor 15 nor
     the player's own (unless the player is at 0); ObjectEventUpdateElevation then takes the new tile's
     elevation, except to or from a 15 (bridge) tile, which keeps the previous one.
     """
-    te = elevation_at(m, *to)
-    if cur != 0 and te not in (0, 15) and te != cur:
+    if cur != 0 and to_e not in (0, 15) and to_e != cur:
         return None
-    return cur if te == 15 or elevation_at(m, *frm) == 15 else te
+    return cur if to_e == 15 or frm_e == 15 else to_e
 
 
-def elevations_compatible(a, b):
-    """Whether a player standing at elevation a may step onto a tile of elevation b (e.g. across a seam)."""
-    return a == 0 or b in (0, 15) or a == b
+def step_elevation(m, cur, frm, to):
+    """step_across for a step frm -> to on m."""
+    return step_across(cur, elevation_at(m, *frm), elevation_at(m, *to))
+
+
+def crossable(m, tile, other, to):
+    """Whether some player who can stand on tile (any start_elevations) may step across the seam onto other's to."""
+    return any(step_across(e, elevation_at(m, *tile), elevation_at(other, *to)) is not None
+               for e in start_elevations(m, tile))
+
+
+def reach_states(m, start, elevation=None):
+    """{tile: elevations} reachable on foot from start (as bfs: a takeable warp tile is reached, not crossed)."""
+    first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
+    seen, q = set(first), deque(first)
+    while q:
+        cur, e = q.popleft()
+        if cur != start and takeable(m, *cur):
+            continue
+        for dx, dy in DIRS.values():
+            nxt = (cur[0] + dx, cur[1] + dy)
+            if not m.walkable(*nxt):
+                continue
+            ne = step_elevation(m, e, cur, nxt)
+            if ne is not None and (nxt, ne) not in seen:
+                seen.add((nxt, ne))
+                q.append((nxt, ne))
+    out = {}
+    for t, e in seen:
+        out.setdefault(t, set()).add(e)
+    return out
 
 
 def start_elevations(m, start):
