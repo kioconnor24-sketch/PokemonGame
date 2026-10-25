@@ -54,4 +54,4 @@ Production files are untouched in all of these; each is a DEV overlay or proposa
 ## Still to run
 
 - #252: awaiting manager re-review (bridge-start, bridge seam, holes, solid step-on doors, stair-door probes fixed).
-- W12 runtime gate; RELEASE builds for the family-scene batches at integration.
+- RELEASE builds for the family-scene batches at integration.
