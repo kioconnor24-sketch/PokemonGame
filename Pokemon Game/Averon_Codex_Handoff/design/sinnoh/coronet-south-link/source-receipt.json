@@ -1,0 +1,523 @@
+{
+  "status": "DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE",
+  "base": "fb83410f6bbded89a9d99537d952698e80af4cf5",
+  "existing_map_names_preserved": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North"
+  ],
+  "temporary_map_slots": {
+    "SinnohMtCoronet_2F": 19,
+    "SinnohMtCoronet_3F": 20,
+    "SinnohMtCoronet_OutsideSouth": 21,
+    "SinnohMtCoronet_OutsideNorth": 22,
+    "SinnohMtCoronet_4F_Rooms1And2": 23,
+    "SinnohMtCoronet_4F_Room3": 24,
+    "SinnohMtCoronet_5F": 25,
+    "SinnohMtCoronet_6F": 26,
+    "SinnohMtCoronet_1F_Tunnel_Room": 27,
+    "MtCoronet_1F_South": 28
+  },
+  "source_headers": {
+    "SinnohMtCoronet_2F": {
+      "id": "MAP_SINNOH_MT_CORONET_2F",
+      "name": "SinnohMtCoronet_2F",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_2F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 7,
+          "y": 23,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_2F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 7,
+          "y": 12,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_2F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 11,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_3F",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 21,
+          "y": 4,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_3F",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 27,
+          "y": 48,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_SOUTH",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_3F": {
+      "id": "MAP_SINNOH_MT_CORONET_3F",
+      "name": "SinnohMtCoronet_3F",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_3F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 14,
+          "y": 26,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_2F",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 18,
+          "y": 26,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_2F",
+          "dest_warp_id": "3"
+        },
+        {
+          "x": 3,
+          "y": 29,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_OutsideSouth": {
+      "id": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+      "name": "SinnohMtCoronet_OutsideSouth",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 12,
+          "y": 35,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_3F",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 11,
+          "y": 17,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 39,
+          "y": 18,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_OutsideNorth": {
+      "id": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+      "name": "SinnohMtCoronet_OutsideNorth",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+      "map_type": "MAP_TYPE_ROUTE",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 42,
+          "y": 40,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": "4"
+        },
+        {
+          "x": 13,
+          "y": 19,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOM_3",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 45,
+          "y": 28,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_1F_TUNNEL_ROOM",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_4F_Rooms1And2": {
+      "id": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+      "name": "SinnohMtCoronet_4F_Rooms1And2",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 7,
+          "y": 25,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 35,
+          "y": 24,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_SOUTH",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 17,
+          "y": 6,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": "3"
+        },
+        {
+          "x": 59,
+          "y": 6,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOMS_1_AND_2",
+          "dest_warp_id": "2"
+        },
+        {
+          "x": 40,
+          "y": 10,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_4F_Room3": {
+      "id": "MAP_SINNOH_MT_CORONET_4F_ROOM_3",
+      "name": "SinnohMtCoronet_4F_Room3",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_4F_ROOM_3",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 2,
+          "y": 3,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 18,
+          "y": 8,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_5F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_5F": {
+      "id": "MAP_SINNOH_MT_CORONET_5F",
+      "name": "SinnohMtCoronet_5F",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_5F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 21,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_4F_ROOM_3",
+          "dest_warp_id": "1"
+        },
+        {
+          "x": 13,
+          "y": 24,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_6F",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_6F": {
+      "id": "MAP_SINNOH_MT_CORONET_6F",
+      "name": "SinnohMtCoronet_6F",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_6F",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 10,
+          "y": 24,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_5F",
+          "dest_warp_id": "1"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "SinnohMtCoronet_1F_Tunnel_Room": {
+      "id": "MAP_SINNOH_MT_CORONET_1F_TUNNEL_ROOM",
+      "name": "SinnohMtCoronet_1F_Tunnel_Room",
+      "layout": "LAYOUT_SINNOH_MT_CORONET_1F_TUNNEL_ROOM",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_PENDING_OWNER",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 2,
+          "y": 58,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_OUTSIDE_NORTH",
+          "dest_warp_id": "2"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "MtCoronet_1F_South": {
+      "id": "MAP_MT_CORONET_1F_SOUTH",
+      "name": "MtCoronet_1F_South",
+      "layout": "LAYOUT_MT_CORONET_1F_SOUTH",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": false,
+      "allow_escaping": false,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_ROUTE_201",
+      "music": "MUS_CAVE_OF_ORIGIN",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 29,
+          "y": 2,
+          "elevation": 0,
+          "dest_map": "MAP_SINNOH_MT_CORONET_2F",
+          "dest_warp_id": "4"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    }
+  },
+  "dev_surrogate": "MAPSEC_ROUTE_201217 only in disposable nine-map Coronet upper floors ROM; unbuilt four exterior anchors closed, never production",
+  "files": {
+    "data/event_scripts.s": "0d96bfa7413ea244154a63a0ea111c99b6a0c30ee45c5949ce5cc0545fedf4c6",
+    "data/layouts/MtCoronet_1F_South/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
+    "data/layouts/MtCoronet_1F_South/map.bin": "3983f1e8aefb3200f814ed8cd2ef1032b96894827a25be8e73b9aadcef913b1f",
+    "data/layouts/SinnohMtCoronet_1F_Tunnel_Room/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_1F_Tunnel_Room/map.bin": "86da5875853ba97538af1f16fe5c924eba734753b4e6a597777e8b60eaf5392b",
+    "data/layouts/SinnohMtCoronet_2F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_2F/map.bin": "f5cc91d6958643f0c2d7c12e0a69adc9b2e2a398c0a2519665e868192190a83a",
+    "data/layouts/SinnohMtCoronet_3F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_3F/map.bin": "57569a4812cc6a4abc9911ce78736cde55e56f00371741ce649743445a20c2d6",
+    "data/layouts/SinnohMtCoronet_4F_Room3/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_4F_Room3/map.bin": "cb4d55a112ffa1b551a5683a4d79bc51d60b34242f6c26159572db953fe121d3",
+    "data/layouts/SinnohMtCoronet_4F_Rooms1And2/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_4F_Rooms1And2/map.bin": "2194d90d022eacce3426cb7c20207b7d5bfe72ea2fa26d8ec24a7c5f284dadec",
+    "data/layouts/SinnohMtCoronet_5F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_5F/map.bin": "89a7186a697fbfff84d269317b0eced444420f678c42650296637ab33e3fe234",
+    "data/layouts/SinnohMtCoronet_6F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_6F/map.bin": "486051ec2126d5452e751939d91f6c70dcf369431198963e0da91bb42e77e312",
+    "data/layouts/SinnohMtCoronet_OutsideNorth/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_OutsideNorth/map.bin": "0f5b94a550875392e468a82426a3b234dcca3ba468c1cc30ce299a461641c60c",
+    "data/layouts/SinnohMtCoronet_OutsideSouth/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "data/layouts/SinnohMtCoronet_OutsideSouth/map.bin": "0a5040c7bd1d8acf058b511213abe8b651082ff0370055595187db24d4c6db9f",
+    "data/layouts/layouts.json": "14a813f06ba1a81debeb4ad819e62b3d4137e2bba85f871299d335427cd1d99e",
+    "data/maps/MtCoronet_1F_South/map.json": "d89219e350312465a7ae3fb5a760743e79b1d88c906c9d019bc93e17608cc1f6",
+    "data/maps/MtCoronet_1F_South/scripts.inc": "2fd99588edf6b19d4b1b7811aa057aeadcda62a72ce684cc4096f2593576aec8",
+    "data/maps/SinnohMtCoronet_1F_Tunnel_Room/map.json": "f9fba1c26d0d92df4c5f9ca3353310ee7f63d9c0fcaad352990ef6a770a27323",
+    "data/maps/SinnohMtCoronet_1F_Tunnel_Room/scripts.inc": "db5d7a8e5c18c2da870e070e0d8e5579ee38153f9a3a05a6f3e4af051b92ebec",
+    "data/maps/SinnohMtCoronet_2F/map.json": "e48c8e2067bff717b7e3fddafc6c4919d3af587a1acd50f88fd8fd0a706c05b8",
+    "data/maps/SinnohMtCoronet_2F/scripts.inc": "d1e36f7bbe16fc322a689b7ad69ebe44dd5b3767f1afbd4ca779006f6b87b010",
+    "data/maps/SinnohMtCoronet_3F/map.json": "70b5c448603d0e135cb426c48b5ae9f80e20b7de022200dcde26c3a171e3dc2c",
+    "data/maps/SinnohMtCoronet_3F/scripts.inc": "dceef64fe4a7d96e77bf3ebb7d1a17fa63978e9fddc22129eb5e66912ce52f99",
+    "data/maps/SinnohMtCoronet_4F_Room3/map.json": "02f182f137d47e1f9f182ddef593dc409d52286416a0f763bb98ef73a834e5b6",
+    "data/maps/SinnohMtCoronet_4F_Room3/scripts.inc": "0f460c38bc19a0924dc729d4b57e6c45ea3ee17b829fb89a22b4f476e2ae2da8",
+    "data/maps/SinnohMtCoronet_4F_Rooms1And2/map.json": "0681dfea4cb6981d2e31c65ddb40a80a9d26cd429f6c7a263c1536a70967eda7",
+    "data/maps/SinnohMtCoronet_4F_Rooms1And2/scripts.inc": "9bc2aa8b9255101bff63793d502c791832294f0eb7cfe0e6d02472e164d0a79f",
+    "data/maps/SinnohMtCoronet_5F/map.json": "f2978a67c80ba0744c0bfdba8741a8989975e91914413e541acc8e58e0501d97",
+    "data/maps/SinnohMtCoronet_5F/scripts.inc": "7d44e1f5150b487bb1ba7a37b200336e359994777b35db668475e2920eed64bc",
+    "data/maps/SinnohMtCoronet_6F/map.json": "1a733c56e0fe6b928f0f2d95fb077c594b5c949ba684c62a065f3fb5ea8ab31c",
+    "data/maps/SinnohMtCoronet_6F/scripts.inc": "51ee14eae5b9d4d513922b7c2f879c98d0944046525479e3985cf49052f07338",
+    "data/maps/SinnohMtCoronet_OutsideNorth/map.json": "21070c5717026d1327a3fa0ccc1c5be1c5b857c0a426f8cc0cb333979faea5f5",
+    "data/maps/SinnohMtCoronet_OutsideNorth/scripts.inc": "14c52c371e02298c7e3b507db12552dce3fb94fea7b89b83c5f1faaba37f8f44",
+    "data/maps/SinnohMtCoronet_OutsideSouth/map.json": "b6d9d7c9a1499318ef01072ec683501fb5de5571dc2209af66bf93bd0b2fdb80",
+    "data/maps/SinnohMtCoronet_OutsideSouth/scripts.inc": "49bd697ea435ea0461779de1689475077b90094424a2950ea10e1f211f9033d8",
+    "data/maps/map_groups.json": "59d8698fb342af8506413232fb6331b35cb1aecde710983b4cd5ee0dc3bcb110",
+    "data/tilesets/primary/coronet_south_dev/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/primary/coronet_south_dev/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/coronet_south_dev/metatile_attributes.bin": "3f02c17bb3a3b82c65894b9230c1395322243cfbfa02ad31d1a7762bf662eb69",
+    "data/tilesets/secondary/coronet_south_dev/metatiles.bin": "1bd8f05be571c3c7339e32b1bfd440af09bcb36100b95e863cc3b0520357fdb4",
+    "include/tilesets.h": "096f3155dd9b92543e2cac89931d424183cd24a981064cadf0009034f235cae9",
+    "src/data/tilesets/headers.h": "a0b8afc47e02ba52bc64858c6dc9604a28200a081c8024788327193114389887",
+    "src/data/tilesets/metatiles.h": "1ee69ed53b12e37afa38c7eb32cf7b844840298da3a37c2a4e1163af9c7da404",
+    "test/averon_coronet_south_runtime.c": "a16a77934c4d64c3989558c01dff4cfb642fb8d374831a5ebf49e8b3fdee7bf3",
+    "test/data/averon_map_registry_slots.inc": "60a8f3dcafce3112a777ea3f82cd529fc745c63528282e3c860aeb36c4ce75eb"
+  },
+  "lower_link": {
+    "south": [
+      29,
+      2
+    ],
+    "upper": [
+      27,
+      48
+    ],
+    "upper_appended_index": 4,
+    "closed_donor_exits": [
+      [
+        5,
+        7
+      ],
+      [
+        36,
+        20
+      ]
+    ],
+    "upper_changed_cells": [
+      [
+        27,
+        48
+      ]
+    ]
+  }
+}
