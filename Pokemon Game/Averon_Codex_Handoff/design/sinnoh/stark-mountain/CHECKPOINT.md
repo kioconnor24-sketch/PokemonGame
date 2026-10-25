@@ -1,0 +1,23 @@
+# Stark Mountain — three source-height interior candidates
+
+SOURCE / NATIVE ART / HOST only. Branch codex/stark-mountain-source-20261025, child of #2725ae4abf6, which depends on #266008bdba8. Main remainsfb83410f6bbded89a9d99537d952698e80af4cf5. Manager6395649520 / claim6401159521. No Claude files or production engine edited.
+
+## Actual construction
+
+Pinned pret/pokeplatinum6dc1499e3127176d4cb34f41c01ee62e1d98808a matrices057/058/059 identify room1 lands454–455 (64x32), room2 lands456–464 (96x96), room3 land465 (32x32). The 159-map GBA donor tree has no Stark packet. Real source containers and technical warp events retrieved privately; byte sizes/SHA256/Git blob IDs in source-pins.json. Existing strict Temple BDHC parser and native packer reused. Private extraction actually rerun and compared with committed geometry, not assumed. No DS models, textures, props, music, story, event arrays, encounters or roster emitted.
+
+1914 cave-marked floor/door centers have unique height and four supported footprint samples:294/1549/71. Unmarked zero-behavior filler and permission-blocked cells sealed. Room1 exterior20,29 sealed until outside approach exists, leaving1913 open cells. Source reciprocal internal stairs retained at Room117,2 ↔ Room242,86; Room247,2 ↔ Room37,17. Neutral header IDs are unregistered symbols, MAPSEC_PENDING_OWNER throughout. No permanent IDs, registry, save structures or services.
+
+This is an explicit native physical PROJECTION, not exact DS movement parity. Twelve distinct flat heights map monotonically to native elevations3–14.492 source slope/footprint-edge cells use existing brown cave-stair art and elevation0 wildcard as an authored adaptation; no bridge15 is emitted. Subpixel room3 height65591/4096 is kept in technical metadata. Flat-footprint routing/DS fixed rounding/dynamic boulders/rock-climb are not accepted. Native General+Cave only, primary unchanged; isolated secondary records and exact assets/output hashes in receipt. First preview used white General stairs; inspected native Cave gallery and switched to existing brown Cave516; no foreign artwork imported. Three final previews inspected, no blank tiles; repeated edge stair art remains provisional.
+
+Static ordinal/wildcard graphs retain real isolated source pockets: Room1[292,1], Room2[1487,28,20,7,7], Room3[59,6,6]. Both room2 stairs are in its1487-cell component; four internal warp definitions reciprocal. These graph checks do not establish actual player/follower traversal or accept every pocket. Do not claim a finished playable Stark Mountain or natural Route227 entry.
+
+## Executed evidence
+
+Actual focused5/5 HOST PASS6.750s: all-source marked-cell counts, every output open/blocked cell, sealed exterior/boundaries, exact height range/492 proxies/component sizes, reciprocal source warp indices and room2 door path; invalid boundary/blocked/duplicate/capacity/warp negatives; dirty technical geometry/unsafe output refusal before output; full native-art deterministic replay preserving every C/E word and normal-vs-ladder semantics. Source geometry and pin worktree files must equal committed Git bytes before building. Private full re-extraction passed with exact raw file/Git blob/section bounds/center/corner verification. Initial extraction rejected blocked source0x804b/0x8065; corrected handling preserves all permission-blocked cells without interpreting their inactive behaviors. No guard relaxed for passable unknown behaviors.
+
+Commands: PYTHONDONTWRITEBYTECODE=1 python3 build_source.py --engine ENGINE --out NEW_OFF_ENGINE_DIR [--private-inputs PRIVATE_DIR]; unittest discover -s 'Pokemon Game/scripts/tests' -p test_sinnoh_stark_mountain.py -v. Public rebuild uses committed technical metadata; no private DS container needed in Actions. Host log committed. Native game suite, NORMAL/RELEASE ROM, mGBA/Save/Delta NOT RUN for this batch.
+
+## Blockers and next action
+
+Disk24MiB/free12333 inodes at final read prevents safe full ROM build. No unique caches/archives/saves deleted. #266/#272 applicable checks pass; this new head needs its own live CI verification. All geography stays draft and unintegrated. Next: source-ground Stark outside/Route227 approach (Platinum matrix000 is world matrix, not room057), then construct guarded temporary connected northern scene once storage is legitimately sufficient. Actual NORMAL+RELEASE/native/old-save/mGBA ordinary movement/follower/stairs/Save→fresh Continue remains required. Resolve isolated pockets or keep them sealed/disclosed. Preserve original donor pins and Claude paused branches; #237 reserved inventory, #235 snow bridge and origins227+ remain untouched.

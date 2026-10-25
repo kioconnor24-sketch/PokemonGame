@@ -61,6 +61,23 @@ def extract(inputs):
                         'Unmarked zero-behavior filler conservatively closed, not complete DS collision parity',
                         'Native ordinal heights and wildcard slope stairs are explicit physical adaptation'])
 
+def height_components(cells,w,h):
+    """Static ordinal/wildcard graph only, excluding runtime actor semantics."""
+    seen=set();sizes=[]
+    for start,v in enumerate(cells):
+        if v&0xc00 or start in seen:continue
+        todo=[start];seen.add(start);size=0
+        while todo:
+            i=todo.pop();size+=1;x,y=i%w,i//w
+            for xx,yy in ((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+                if not(0<=xx<w and 0<=yy<h):continue
+                j=yy*w+xx;first,second=cells[i],cells[j]
+                if j not in seen and not second&0xc00 and (not(first>>12) or not(second>>12) or first>>12==second>>12):
+                    seen.add(j);todo.append(j)
+        sizes.append(size)
+    return sorted(sizes,reverse=True)
+
+
 def construct(geometry):
     flat=sorted({Fraction(p['height']) for r in geometry['rooms'].values() for p in r['surfaces'] if p['flat']})
     if len(flat)>12:raise ValueError('native elevation capacity exceeded')
@@ -106,7 +123,7 @@ def construct(geometry):
                     music='MUS_CAVE_OF_ORIGIN',weather='WEATHER_NONE',show_map_name=True,
                     connections=[],warp_events=warps,object_events=[],coord_events=[],bg_events=[])
         result[room]=(struct.pack('<%dH'%(w*h),*cells),header)
-        audit[room]=dict(source_marked_surfaces=len(seen),slope_or_footprint_edge_stair_proxies=ramps,open_cells=sum(not v&0xc00 for v in cells))
+        audit[room]=dict(source_marked_surfaces=len(seen),slope_or_footprint_edge_stair_proxies=ramps,open_cells=sum(not v&0xc00 for v in cells),static_height_components=height_components(cells,w,h))
     return result,dict(rooms=audit,height_to_elevation={str(v):z for v,z in elevations.items()})
 
 def build(engine,out):
