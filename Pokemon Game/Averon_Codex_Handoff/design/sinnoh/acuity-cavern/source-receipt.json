@@ -1,0 +1,80 @@
+{
+  "status": "SOURCE_GEOMETRY_NATIVE_ART_ONLY_NO_RUNTIME_ACCEPTANCE",
+  "source_pins_sha256": "183995a8d5ba18611f20c486c88c5fe6e661ca24ef6d269287c59711c8dbf5ab",
+  "geometry_sha256": "5c0b9e69ccd88364bc8e79d2623a3a82a2811b680cb0b90cb2adb44b9f162677",
+  "native_asset_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/primary/general/palettes/01.pal": "9b9d01878137cef9ea6006c3025a3ada5cdf37d9c251b25bc95f71963bd9a447",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "dimensions": [
+    32,
+    32
+  ],
+  "open_cells": 386,
+  "reflective_no_surf_no_splash_cells": 182,
+  "secondary_records": 6,
+  "dependencies": {
+    "metatiles": [
+      512,
+      513,
+      514,
+      515,
+      516,
+      517
+    ],
+    "graphic_tiles": [
+      0,
+      286,
+      515,
+      516,
+      531,
+      532,
+      680,
+      681,
+      690,
+      691,
+      706,
+      707,
+      710,
+      711,
+      714,
+      715,
+      722,
+      723,
+      726,
+      727,
+      730,
+      731
+    ],
+    "palettes": [
+      0,
+      1,
+      6
+    ]
+  },
+  "output_sha256": {
+    "staged/attributes.json": "297352d014f358ae647aa773000f9da33efee333cdbed17e607481f3ac287307",
+    "staged/map.json": "d4f574638f5bbc3c7f2d5eac15ad130e8e6efc0ac569a1eff22639d8feb0c837",
+    "staged/averon.png": "0c0cac651dd428198e7f16f268a7ec509a115bfee8d74a8b200af4bcf0c66e5c",
+    "staged/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/map.bin": "3f9a968ef70a94fa3f215cd3043d6ca47afd818cd7d6913b3f2b9602cee2a0c2",
+    "cave-family/secondary-metatiles.bin": "1ac4b95feb1622f76eb99d6005b301f82a8dfb6fa526e354bd5712f1d675aae9",
+    "cave-family/secondary-attributes.bin": "668cef873e7f3dbb253200049fec37eec3e5355a93b65afa2e67c633a1e5a178",
+    "cave-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "cave-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910"
+  },
+  "limits": [
+    "Exact semantic mapping is explicit, not preservation of DS numeric behavior IDs",
+    "No DS model/texture/props/story/legendary/encounter data emitted",
+    "Source door14,29 sealed: GBA lake has no reciprocal warp1",
+    "Tile centers/corners are source-supported flat16; native elevation3/proxy art still need runtime proof",
+    "No production IDs, registry, engine or gameplay acceptance"
+  ]
+}
