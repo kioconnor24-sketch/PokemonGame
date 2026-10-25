@@ -3,6 +3,7 @@ import copy
 import importlib.util
 import json
 import pathlib
+import struct
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -16,7 +17,7 @@ spec.loader.exec_module(b)
 class JubilifeShellsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.eng, cls.maps, cls.jub = b.build(ENGINE)
+        cls.eng, cls.maps, cls.jub, cls.blocks = b.build(ENGINE)
         cls.source = json.loads((ENGINE / "data/maps/JubilifeCity/map.json").read_text())
 
     def test_staged_files_match_a_fresh_build(self):
@@ -24,6 +25,16 @@ class JubilifeShellsTest(unittest.TestCase):
             self.assertEqual(json.loads((HERE / "staged" / name / "map.json").read_text()), hdr)
             self.assertEqual((HERE / "staged" / name / "scripts.inc").read_text(), b.w1.scripts(name))
         self.assertEqual(json.loads((HERE / "staged/JubilifeCity-dev-overlay/map.json").read_text()), self.jub)
+        self.assertEqual((HERE / "staged/JubilifeCity-dev-overlay/map.bin").read_bytes(),
+                         struct.pack("<%dH" % len(self.blocks), *self.blocks))
+
+    def test_hall_doors_become_enterable_and_nothing_else_changes(self):
+        width, _, cells = self.eng.cells("JubilifeCity")
+        changed = [(i % width, i // width) for i, (a, c) in enumerate(zip(cells, self.blocks)) if a != c]
+        self.assertEqual(changed, sorted(b.SOLID_DOORS, key=lambda t: (t[1], t[0])))
+        for x, y in b.SOLID_DOORS:
+            old, new = cells[y * width + x], self.blocks[y * width + x]
+            self.assertEqual((old & 1023, new & 1023, bool(old & 0xC00), bool(new & 0xC00)), (693, 693, True, False))
 
     def test_overlay_only_appends_one_warp_per_door(self):
         n = len(self.source["warp_events"])

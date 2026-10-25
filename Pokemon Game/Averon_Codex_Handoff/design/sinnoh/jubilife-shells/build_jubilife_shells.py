@@ -11,6 +11,11 @@ the map names changed (as W8's Lost Tower); its street mats return to the Jubili
 - Pokétch Company: the tower's door (55, 16), Rustboro Devon Corp 1F/2F/3F layouts (both street mats lead out).
 - Two condos: (16, 49) and (42, 49), LAYOUT_HOUSE1.
 
+The two halls draw their doors as non-animated doors (metatile 693) with collision 1. The engine takes such a door
+only when the player steps onto it, so they can never open. A derived copy of Jubilife's map.bin (overlay map.bin)
+puts on those four cells the walkable 693 word of stock Rustboro's Devon Corp double door (11-12, 15): same
+metatile, collision 0. Nothing else changes.
+
 Names follow the DS buildings for orientation only: no NPCs, services (GTS, TV, Pokétch), objects, story or
 sections (MAPSEC_PENDING_OWNER).
 
@@ -32,6 +37,7 @@ MUSIC = "MUS_RUSTBORO"
 BUILDINGS = [("JubilifeCity_GlobalTerminal", "SlateportCity_OceanicMuseum", ["1F", "2F"], [(19, 13), (20, 13)]),
              ("JubilifeCity_TV", "MossdeepCity_SpaceCenter", ["1F", "2F"], [(40, 13), (41, 13)]),
              ("JubilifeCity_PoketchCompany", "RustboroCity_DevonCorp", ["1F", "2F", "3F"], [(55, 16), (55, 16)])]
+SOLID_DOORS = [(19, 13), (20, 13), (40, 13), (41, 13)]
 CONDOS = [("JubilifeCity_Condo1", (16, 49)), ("JubilifeCity_Condo2", (42, 49))]
 
 
@@ -89,7 +95,14 @@ def build(engine_root):
                                [(3, 8, "MAP_JUBILIFE_CITY", i), (4, 8, "MAP_JUBILIFE_CITY", i)])
     for hdr in maps.values():
         assert hdr["layout"] in eng.layout_ids, hdr["layout"]
-    return eng, maps, jub
+    width, _, cells = eng.cells("JubilifeCity")
+    open_door = eng.word("RustboroCity", 11, 15, 693)
+    assert not open_door & 0xC00
+    blocks = list(cells)
+    for x, y in SOLID_DOORS:
+        assert cells[y * width + x] & 1023 == 693 and cells[y * width + x] & 0xC00, (x, y)
+        blocks[y * width + x] = open_door
+    return eng, maps, jub, blocks
 
 
 def check(maps, jub):
@@ -106,7 +119,7 @@ def check(maps, jub):
 
 
 def write(engine_root, out):
-    eng, maps, jub = build(engine_root)
+    eng, maps, jub, blocks = build(engine_root)
     check(maps, jub)
     st = pathlib.Path(out) / "staged"
     for name, hdr in maps.items():
@@ -115,6 +128,7 @@ def write(engine_root, out):
         (st / name / "scripts.inc").write_text(w1.scripts(name))
     (st / "JubilifeCity-dev-overlay").mkdir(parents=True, exist_ok=True)
     (st / "JubilifeCity-dev-overlay/map.json").write_text(json.dumps(jub, indent=2) + "\n")
+    (st / "JubilifeCity-dev-overlay/map.bin").write_bytes(struct.pack("<%dH" % len(blocks), *blocks))
     receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "maps": sorted(maps),
                "inputs_sha256": dict(sorted(eng.read.items()))}
     (pathlib.Path(out) / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
