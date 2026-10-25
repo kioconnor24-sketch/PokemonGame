@@ -1,0 +1,256 @@
+{
+  "maps": {
+    "Route225": {
+      "dimensions": [
+        32,
+        94
+      ],
+      "secondary_remap": {
+        "555": 207,
+        "556": 13,
+        "559": 268,
+        "563": 13,
+        "564": 13,
+        "580": 240,
+        "582": 242,
+        "588": 145,
+        "590": 146,
+        "606": 528,
+        "607": 529,
+        "609": 281,
+        "610": 282,
+        "615": 835,
+        "616": 80,
+        "617": 81,
+        "618": 82,
+        "623": 843,
+        "624": 88,
+        "625": 89,
+        "626": 90,
+        "632": 88,
+        "633": 89,
+        "634": 90,
+        "635": 91,
+        "640": 96,
+        "642": 98,
+        "643": 99
+      },
+      "facades": [
+        [
+          [
+            8,
+            43,
+            4,
+            4
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ]
+      ],
+      "wood_walkway_ids": []
+    },
+    "SurvivalArea": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "secondary_remap": {
+        "555": 207,
+        "616": 80,
+        "617": 81,
+        "618": 82,
+        "624": 88,
+        "625": 89,
+        "626": 90,
+        "633": 89,
+        "634": 90,
+        "635": 91,
+        "642": 98,
+        "643": 99,
+        "678": 5,
+        "679": 5,
+        "686": 5,
+        "687": 5,
+        "696": 80,
+        "697": 81,
+        "698": 81,
+        "699": 81,
+        "700": 82,
+        "742": 91,
+        "750": 99
+      },
+      "facades": [
+        [
+          [
+            15,
+            3,
+            4,
+            4
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ],
+        [
+          [
+            9,
+            14,
+            4,
+            4
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ],
+        [
+          [
+            14,
+            24,
+            4,
+            5
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ],
+        [
+          [
+            15,
+            14,
+            5,
+            5
+          ],
+          [
+            15,
+            35,
+            4,
+            4
+          ]
+        ]
+      ],
+      "wood_walkway_ids": []
+    },
+    "Route226": {
+      "dimensions": [
+        100,
+        32
+      ],
+      "secondary_remap": {
+        "555": 207,
+        "590": 146,
+        "624": 88,
+        "625": 89,
+        "626": 90,
+        "627": 80,
+        "628": 81,
+        "629": 82,
+        "633": 89,
+        "634": 90,
+        "635": 91,
+        "642": 98,
+        "643": 99,
+        "742": 91,
+        "750": 99
+      },
+      "facades": [
+        [
+          [
+            66,
+            18,
+            4,
+            4
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ]
+      ],
+      "wood_walkway_ids": []
+    },
+    "Route227": {
+      "dimensions": [
+        48,
+        60
+      ],
+      "secondary_remap": {
+        "517": 268,
+        "519": 268,
+        "584": 13,
+        "616": 129,
+        "617": 148,
+        "618": 130,
+        "624": 136,
+        "625": 113,
+        "626": 138,
+        "627": 147,
+        "632": 136,
+        "633": 113,
+        "634": 138,
+        "636": 268,
+        "720": 134,
+        "721": 135,
+        "733": 124,
+        "734": 268,
+        "735": 125,
+        "742": 144,
+        "743": 146,
+        "745": 112,
+        "746": 143,
+        "754": 114,
+        "764": 143,
+        "765": 143,
+        "773": 113,
+        "782": 144,
+        "783": 146,
+        "791": 114,
+        "933": 80,
+        "934": 81,
+        "935": 82,
+        "938": 247,
+        "939": 236,
+        "940": 236
+      },
+      "facades": [
+        [
+          [
+            11,
+            40,
+            4,
+            4
+          ],
+          [
+            31,
+            15,
+            5,
+            5
+          ]
+        ]
+      ],
+      "wood_walkway_ids": []
+    }
+  },
+  "roles": [
+    "Retain existing native General terrain, explicit neutral stock facades in original building envelopes",
+    "Valor plain/grass/rock/border roles use matching existing native terrain; no foreign pixels",
+    "Route227 uses native brown cliff/soil proxies and existing vertical Acro rail art; no new bike behavior",
+    "Existing source bridge full words and elevation15 are immutable; no foot-only acceptance assumed",
+    "Survival native Center proxy fills full original5x5 source envelope; no leftover donor roof strip or rock padding",
+    "Lower Survival house consumes original collision-closed canopy row24 in its neutral facade to avoid floating tree crowns; C/E unchanged"
+  ]
+}
