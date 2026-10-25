@@ -5,6 +5,9 @@ import json
 from pathlib import Path
 import struct
 import unittest
+import sys
+from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT=Path(__file__).resolve().parents[3]
 HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-core'
@@ -73,5 +76,53 @@ class TempleCoreTests(unittest.TestCase):
         for path,h in receipt['existing_averon_sha256'].items():
             self.assertEqual(m.a.sha(m.a.base.verified_file(ROOT,Path('Pokemon Game/engine')/path,'HEAD')),h)
         self.assertFalse(any(p.suffix in ('.sav','.gba') for p in HERE.rglob('*')))
+
+class TempleRuntimePreparationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec=importlib.util.spec_from_file_location('temple_prepare_test',HERE/'prepare_runtime.py')
+        cls.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.m)
+        cls.files,cls.receipt=cls.m.assemble(ROOT)
+
+    def test_guarded29_file_scene_preserves_original_prefix_and_six_source_packets(self):
+        self.assertEqual(len(self.files),29)
+        groups=json.loads(self.files['data/maps/map_groups.json'])['gMapGroup_Sinnoh']
+        self.assertEqual(groups[:19],self.receipt['existing_map_names_preserved'])
+        self.assertEqual(groups[19:],list(self.m.MAPS))
+        self.assertEqual(list(self.receipt['temporary_map_slots'].values()),list(range(19,25)))
+        for n in self.m.MAPS:
+            self.assertEqual(self.files[f'data/layouts/{n}/map.bin'],(HERE/'staged'/n/'map.bin').read_bytes())
+            h=json.loads(self.files[f'data/maps/{n}/map.json']);old=json.loads((HERE/'staged'/n/'map.json').read_text())
+            old['region_map_section']='MAPSEC_ROUTE_201';self.assertEqual(h,old)
+        self.assertFalse(any('tileset' in p or p.endswith(('.png','.pal','.sav','.gba')) or 'region_map_sections' in p for p in self.files))
+
+    def test_source_art_or_baseline_mismatch_and_production_install_refused(self):
+        original=self.m.sha
+        target=(HERE/'shell-recipe.json').read_bytes()
+        with patch.object(self.m,'sha',side_effect=lambda data:'bad' if data==target else original(data)):
+            with self.assertRaisesRegex(ValueError,'Temple source'):self.m.assemble(ROOT)
+        git=self.m.base.git
+        with patch.object(self.m.base,'git',side_effect=lambda repo,*args:b'bad' if args==('rev-parse','HEAD:Pokemon Game/engine') else git(repo,*args)):
+            with self.assertRaisesRegex(ValueError,'baseline engine'):self.m.assemble(ROOT)
+        with self.assertRaisesRegex(ValueError,'marked Temple'):self.m.install(ROOT)
+
+    def test_construction_and_final_runner_restore_original_shared_qa(self):
+        sys.path.insert(0,str(ROOT/'Pokemon Game/scripts/claude_play'))
+        import map_qa as qa
+        spec=importlib.util.spec_from_file_location('temple_run_test',HERE/'run_runtime_qa.py')
+        runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner)
+        old=runner.a.MAPS;warp=qa.Runner.warp;main=qa.main
+        for mode in ('batch','final'):
+            commands=[]
+            def probe(args):
+                self.assertEqual(runner.a.MAPS,runner.MAPS)
+                return qa.main(['run','--save','coronet-six'])
+            with patch.object(qa,'main',side_effect=lambda args:commands.append(args) or 0),patch.object(runner.a,'run',side_effect=probe):
+                self.assertEqual(runner.run(SimpleNamespace(mode=mode)),0)
+            self.assertEqual(commands,[['run','--save','temple-core']]);self.assertEqual(runner.a.MAPS,old)
+            self.assertIs(qa.Runner.warp,warp);self.assertIs(qa.main,main)
+        with patch.object(runner.a,'run',side_effect=RuntimeError('fixture')):
+            with self.assertRaises(RuntimeError):runner.run(SimpleNamespace(mode='batch'))
+        self.assertIs(qa.Runner.warp,warp);self.assertIs(qa.main,main);self.assertEqual(runner.a.MAPS,old)
 
 if __name__=='__main__':unittest.main()
