@@ -107,7 +107,7 @@ def assemble(repo):
         bindings=assets.asset_bindings(base.verified_file(repo,Path(ENGINE)/'src/data/tilesets/headers.h','HEAD').decode(),graphics)
         append('include/tilesets.h',f'\nextern const struct Tileset gTileset_{symbol};\n')
         append('src/data/tilesets/metatiles.h',f'\nconst u16 gMetatiles_{symbol}[] = INCBIN_U16("{directory}metatiles.bin");\nconst u16 gMetatileAttributes_{symbol}[] = INCBIN_U16("{directory}metatile_attributes.bin");\n')
-        append('src/data/tilesets/headers.h',f'\nconst struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary_bank else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes=gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n')
+        append('src/data/tilesets/headers.h',f'\nconst struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary_bank else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n')
     groups=json.loads(files['data/maps/map_groups.json']); group=groups['group_order'].index('gMapGroup_Sinnoh')
     if len(groups['gMapGroup_Sinnoh'])!=28 or SOUTH in groups['gMapGroup_Sinnoh']:
         raise ValueError('unexpected inherited registry')

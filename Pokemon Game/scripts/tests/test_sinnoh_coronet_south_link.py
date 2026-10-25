@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import tempfile
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -80,6 +82,25 @@ class SouthLinkTests(unittest.TestCase):
             for x,y in json.loads((m.upper.HERE/'shell-recipe.json').read_text())['maps'][name]['sealed_external_ports']:
                 if name==m.UPPER and (x,y)==(27,48):continue
                 self.assertTrue(m.words(self.files[f'data/layouts/{name}/map.bin'])[y*w+x]&0xc00)
+
+    def test_real_mapdata_parser_resolves_isolated_native_banks(self):
+        sys.path.insert(0,str(ROOT/'Pokemon Game/scripts/claude_play'))
+        import mapdata
+        with tempfile.TemporaryDirectory() as t:
+            e=Path(t)
+            selected=['src/data/tilesets/headers.h','src/data/tilesets/metatiles.h',
+                      'data/layouts/layouts.json',f'data/maps/{m.SOUTH}/map.json',
+                      f'data/layouts/{m.SOUTH}/map.bin',f'data/layouts/{m.SOUTH}/border.bin',
+                      'data/tilesets/primary/coronet_south_dev/metatile_attributes.bin',
+                      'data/tilesets/secondary/coronet_south_dev/metatile_attributes.bin']
+            for path in selected:
+                target=e/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(self.files[path])
+            (e/'data/maps/map_groups.json').write_text(json.dumps(dict(group_order=['gMapGroup_Sinnoh'],gMapGroup_Sinnoh=[m.SOUTH])))
+            path=Path('include/constants/metatile_behaviors.h');(e/path).parent.mkdir(parents=True)
+            (e/path).write_bytes(m.base.verified_file(ROOT,Path(m.ENGINE)/path,'HEAD'))
+            info=mapdata.World(e).map('MAP_MT_CORONET_1F_SOUTH')
+            self.assertEqual((info.width,info.height),(42,32))
+            self.assertEqual(info.behavior(29,2),'MB_LADDER')
 
     def test_corrupt_art_rejected(self):
         original=m.sha
