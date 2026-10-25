@@ -18,7 +18,7 @@ ti.loader.exec_module(t)
 
 class GreatMarshTest(unittest.TestCase):
     def setUp(self):
-        self.eng, self.cells, self.marsh, self.gate, self.past, self.door = b.build(ENGINE)
+        self.eng, self.cells, self.marsh, self.gate, self.past, self.door, self.shells = b.build(ENGINE)
 
     def test_staged_matches_fresh_build(self):
         self.assertEqual((HERE / "staged/GreatMarsh/map.bin").read_bytes(), struct.pack("<%dH" % len(self.cells), *self.cells))
@@ -43,6 +43,11 @@ class GreatMarshTest(unittest.TestCase):
         n = len(source["warp_events"])
         self.assertEqual(self.past["warp_events"][:n], source["warp_events"])
         self.assertEqual(self.past["warp_events"][n]["dest_map"], "MAP_GREAT_MARSH_GATE")
+        for k, (x, y) in enumerate(b.PASTORIA_DOORS, 1):                       # each shell pairs with its door
+            i = n + k
+            self.assertEqual((self.past["warp_events"][i]["x"], self.past["warp_events"][i]["y"]), (x, y))
+            back = self.shells[f"PastoriaCity_House{k}"]["warp_events"]
+            self.assertEqual({(w["dest_map"], int(w["dest_warp_id"])) for w in back}, {("MAP_PASTORIA_CITY", i)})
         g = [(w["dest_map"], int(w["dest_warp_id"])) for w in self.gate["warp_events"]]
         self.assertEqual(g, [("MAP_PASTORIA_CITY", n)] * 2 + [("MAP_GREAT_MARSH", 0)] * 2)
         self.assertEqual(self.marsh["warp_events"][0]["dest_map"], "MAP_GREAT_MARSH_GATE")

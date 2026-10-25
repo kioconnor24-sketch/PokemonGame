@@ -30,6 +30,8 @@ W, H = 48, 40
 PONDS = [(6, 5, 12, 10), (18, 4, 27, 8), (33, 6, 41, 12), (5, 17, 11, 24), (20, 15, 29, 21), (34, 20, 42, 26)]
 TALL = [(14, 11, 18, 14), (30, 14, 33, 18), (13, 26, 19, 30), (26, 25, 31, 29)]
 PATHS = [((23, 22), (23, 33)), ((8, 13), (42, 13)), ((15, 9), (15, 27)), ((31, 9), (31, 31)), ((8, 28), (42, 28))]
+# Pastoria's other warp-less animated doors open into neutral LAYOUT_HOUSE1 shells (no NPCs/services).
+PASTORIA_DOORS = [(26, 14), (50, 18), (26, 22), (15, 26), (27, 34), (37, 34), (15, 43), (27, 43)]
 GATE = (21, 32)                                     # Dewford house top-left; door (+2, +3) = (23, 35)
 
 
@@ -87,6 +89,15 @@ def build(engine):
     index = len(past["warp_events"])
     past["warp_events"].append({"x": DOOR[0], "y": DOOR[1], "elevation": 0, "dest_map": "MAP_GREAT_MARSH_GATE",
                                 "dest_warp_id": "0"})
+    shells = {}
+    for k, (x, y) in enumerate(PASTORIA_DOORS, 1):
+        assert pc[y * 68 + x] & 0xC00 and all((w["x"], w["y"]) != (x, y) for w in past["warp_events"]), (x, y)
+        i = len(past["warp_events"])
+        name = f"PastoriaCity_House{k}"
+        past["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_PASTORIA_CITY_HOUSE{k}",
+                                    "dest_warp_id": "0"})
+        shells[name] = w1.header(f"MAP_PASTORIA_CITY_HOUSE{k}", name, "LAYOUT_HOUSE1", "MUS_ROUTE110", "MAP_TYPE_INDOOR",
+                                 [(3, 8, "MAP_PASTORIA_CITY", i), (4, 8, "MAP_PASTORIA_CITY", i)])
     marsh = w1.header("MAP_GREAT_MARSH", "GreatMarsh", "LAYOUT_GREAT_MARSH", "MUS_ROUTE110", "MAP_TYPE_ROUTE",
                       [(*door, "MAP_GREAT_MARSH_GATE", 2)])
     assert "LAYOUT_ROUTE110_SEASIDE_CYCLING_ROAD_ENTRANCE" in eng.layout_ids
@@ -94,13 +105,13 @@ def build(engine):
                      "MUS_ROUTE110", "MAP_TYPE_INDOOR",
                      [(1, 5, "MAP_PASTORIA_CITY", index), (2, 5, "MAP_PASTORIA_CITY", index),
                       (12, 5, "MAP_GREAT_MARSH", 0), (13, 5, "MAP_GREAT_MARSH", 0)])
-    return eng, cells, marsh, gate, past, door
+    return eng, cells, marsh, gate, past, door, shells
 
 
 def write(engine, out):
-    eng, cells, marsh, gate, past, door = build(engine)
+    eng, cells, marsh, gate, past, door, shells = build(engine)
     st = pathlib.Path(out) / "staged"
-    for name, hdr in (("GreatMarsh", marsh), ("GreatMarsh_Gate", gate)):
+    for name, hdr in [("GreatMarsh", marsh), ("GreatMarsh_Gate", gate)] + list(shells.items()):
         (st / name).mkdir(parents=True, exist_ok=True)
         (st / name / "map.json").write_text(json.dumps(hdr, indent=2) + "\n")
         (st / name / "scripts.inc").write_text(w1.scripts(name))
