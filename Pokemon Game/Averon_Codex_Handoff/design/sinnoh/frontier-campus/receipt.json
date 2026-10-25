@@ -1,0 +1,89 @@
+{
+  "status": "CONSERVATIVE_SOURCE_HEIGHT_PROJECTION_NOT_RUNTIME_ACCEPTANCE",
+  "maps": {
+    "Gate": {
+      "supported": 172,
+      "sealed_doors_boundaries": 6,
+      "static_components": [
+        107,
+        22,
+        22,
+        8,
+        7
+      ]
+    },
+    "Campus": {
+      "supported": 1263,
+      "sealed_doors_boundaries": 10,
+      "static_components": [
+        1134,
+        25,
+        10,
+        10,
+        6,
+        6,
+        6,
+        4,
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "native_assets": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "geometry_sha256": "f98e6f44f92b6260f655c97f2f945788377aedfd69d6babcaa4bc586f6ce3861",
+  "secondary_records": 6,
+  "limits": [
+    "Native cave proxies, not final campus architecture",
+    "Missing/overlapping source surfaces sealed, not guessed",
+    "All doors sealed; no Fight Area arrival or facility gameplay",
+    "No DS art/props/story/IDs/registry/save changes or runtime proof"
+  ],
+  "output_sha256": {
+    "native-family/secondary-attributes.bin": "d4d5461fba878799cdf6e1016ae0837d069c12d38d7b6c99cc505e2a291dd63c",
+    "native-family/secondary-metatiles.bin": "c0be3670fff94eccf81101c844199a9745ede644126767a111a600b151b96932",
+    "native-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "native-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/Campus/preview.png": "4ca64791cb73f09fc4d9a506bc2a1a41e1739aa92a4100e8294951e91d97c449",
+    "staged/Campus/map.json": "52230470b5f3a8b3e0a4524a73829b590b444364987d9526c59cd0a3efbe212b",
+    "staged/Campus/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Campus/map.bin": "a753618930eaa9a8760ceba3f3fd3b4b7e24f4a581b94ec7344576339af0b833",
+    "staged/Gate/preview.png": "2049d84037ba24db02207fbd56c4d1246a94d6b173c9e7bfdff60d61de2a891e",
+    "staged/Gate/map.json": "e352a6f80e594bdf72ce40a9131845997f8f24d088126f20e8bab570c77fa5a9",
+    "staged/Gate/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Gate/map.bin": "29b2b46701a148217cd5474755ba484e27f5dc99364f6476dbb2f3ccbfd5e859"
+  }
+}

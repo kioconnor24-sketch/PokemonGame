@@ -51,10 +51,10 @@ def construct(geometry):
         zmap={v:i+3 for i,v in enumerate(heights)};cells=[0xc00|513]*(w*h);seen=set();sealed=0
         for p in g['surfaces']:
             x,y=p['tile']
-            if not 0<=x<w or not 0<=y<h or (x,y) in seen:raise ValueError('invalid/duplicate surface')
+            if not 0<=x<w or not 0<=y<h or (x,y) in seen or p['permission'] not in (0,0x15,0x65,0x6c,0x6d,0x6e):raise ValueError('invalid/duplicate surface')
             seen.add((x,y))
             # External/capability doors remain sealed until supported shells and links.
-            if x in (0,w-1) or y in (0,h-1) or p['permission']&255 not in (0,0x15):sealed+=1;continue
+            if x in (0,w-1) or y in (0,h-1) or p['permission']!=0:sealed+=1;continue
             z=zmap[Fraction(p['height'])] if p['flat'] else 0
             cells[y*w+x]=z<<12|(529 if p['flat'] else 516)
         shape=list(cells)
