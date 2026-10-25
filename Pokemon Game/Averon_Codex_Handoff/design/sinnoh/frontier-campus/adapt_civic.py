@@ -19,7 +19,7 @@ def build(engine,out):
     stock=struct.unpack('<2400H',read('data/layouts/RustboroCity/map.bin'))
     words=list(struct.iter_unpack('<H',raw+border));desired=[]
     for i,(v,) in enumerate(words):
-        tile=1 if v&0xc00 else 103 if v>>12==0 else 148
+        tile=1 if v&0xc00 else 103 if v>>12==0 else 265
         art=m.packer.words(banks[0],tile)
         if i<len(raw)//2:
             x,y=i%96,i//96
