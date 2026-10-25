@@ -82,6 +82,9 @@ def write(engine, out):
         (d / "border.bin").write_bytes(struct.pack("<4H", *[cv.k[529]] * 4))
         (d / "map.json").write_text(json.dumps(hdr, indent=2) + "\n")
         (d / "scripts.inc").write_text(w1.scripts(name))
+        (d / "layout.json").write_text(json.dumps({"id": hdr["layout"], "width": cv.w, "height": cv.h,
+                                                   "primary_tileset": "gTileset_General",
+                                                   "secondary_tileset": "gTileset_Cave"}, indent=2) + "\n")
         w1.render.render_cells(bank, cv.cells, cv.w, d / "preview.png")
         receipt["maps"][name] = {"width": cv.w, "height": cv.h, "map_sha256": w1.sha(data)}
     (st / "Route206-dev-overlay").mkdir(parents=True, exist_ok=True)
