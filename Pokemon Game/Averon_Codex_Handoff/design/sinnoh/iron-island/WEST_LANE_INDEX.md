@@ -8,7 +8,7 @@ Labels: **SOURCE** = staged files plus source tests; **DEV** = temporary-slot RO
 | #254 | `claude/southwest-coast-w2` | **W2**: Routes 219–221 + Sandgem seam proposal | Gate NORMAL and RELEASE 36/36, each + 3/3 |
 | #255 | `claude/fuego-ironworks-w3` | **W3**: Fuego Ironworks (new) | DEV 28/28 in both builds + Continue |
 | #256 | `claude/verity-cavern-w4` | **W4**: Verity Cavern (new) | DEV 14/15 in both builds; the 1 failure is the Surf-only islet |
-| #257 | `claude/valley-windworks-w5` | **W5**: Valley Windworks | DEV NORMAL 42/42 + Continue; RELEASE queued |
+| #257 | `claude/valley-windworks-w5` | **W5**: Valley Windworks | DEV NORMAL and RELEASE 42/42, each + Continue 3/3 |
 | #260 | `claude/pal-park-w6` | **W6**: Pal Park + gate (new) | Gate NORMAL and RELEASE 35/35, each + 3/3 (Route 221 → gate → park) |
 | #265 | `claude/wayward-cave-w7` | **W7**: Wayward Cave 1F/B1F (new) | SOURCE 4/4; static clean (the cave joins Route 206's existing south section) |
 | #267 | `claude/lost-tower-w8` | **W8**: Lost Tower 6F + Solaceon Ruins ×3 (Route 209) | SOURCE 5/5; static: Lost Tower clean. **Solaceon Ruins unreachable** because of Route 209's own pocket elevations (reported to Codex). |
@@ -52,5 +52,5 @@ Production files are untouched in all of these; each is a DEV overlay or proposa
 
 ## Still to run
 
-- W5 RELEASE (`qa/gate.sh`).
+- W10 runtime gate on the eastern-loop scene (running).
 - Runtime gates for W7, W8, W10, W11 and W12 on Codex family scenes. They need those families' builds.
