@@ -1,0 +1,369 @@
+{
+  "status": "PROVISIONAL_SOURCE_GEOMETRY_AND_NATIVE_ART_NOT_RUNTIME_ACCEPTED",
+  "source_revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "input_sha256": {
+    "geometry-audit.json": "d00e0dc1447a4264d80532f85bc1a3a7b277882977e7ee486655e255e73b2394",
+    "portal-reference.json": "ae1c1524bc00efd20283384d4070c9139bf53e4460e94a2160c5a13d9d0efba1"
+  },
+  "native_asset_sha256": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8",
+    "data/tilesets/secondary/cave/palettes/11.pal": "5a979ffc203b2fcf6bbe263c8492aaf67a7a9d9c04a4132c64946b647b07d1a9"
+  },
+  "maps": {
+    "SinnohSnowpointTemple_1F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "096bedbdca6324fc77fe4ab6cbf1af2548d768ec45e31ed38213d6b44247fd9f",
+      "ice_tiles": 7,
+      "host_stoppable_cells": 90,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    },
+    "SinnohSnowpointTemple_B1F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "b21c42169cd56da10307dadbdd777da19b1514518dfc0f64d707b79ebc361d7d",
+      "ice_tiles": 14,
+      "host_stoppable_cells": 91,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    },
+    "SinnohSnowpointTemple_B2F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "ad000f625286900a321fdd916446fb697d053b5fd862f04797558b47fb2717ea",
+      "ice_tiles": 2,
+      "host_stoppable_cells": 109,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    },
+    "SinnohSnowpointTemple_B3F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "9269bc2ddddf9d84798e3fb7804c8dc0d1f1b37dd45c899669e91e401f409299",
+      "ice_tiles": 106,
+      "host_stoppable_cells": 58,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    },
+    "SinnohSnowpointTemple_B4F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "d3b0a89143c4e50c2018412cc607fa32bdb91d0d4c0cad6e56b59b29906c4920",
+      "ice_tiles": 1,
+      "host_stoppable_cells": 176,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    },
+    "SinnohSnowpointTemple_B5F": {
+      "dimensions": [
+        32,
+        32
+      ],
+      "map_sha256": "84e710e2dd28d78eadc1c7b25598113dd164df6c9eb2dfbbb6116b0a33690584",
+      "ice_tiles": 208,
+      "host_stoppable_cells": 86,
+      "all_stairs_host_reachable": true,
+      "dependencies": {
+        "metatiles": [
+          513,
+          517,
+          521,
+          528,
+          529,
+          530,
+          909
+        ],
+        "graphic_tiles": [
+          0,
+          515,
+          516,
+          521,
+          522,
+          531,
+          532,
+          537,
+          538,
+          680,
+          681,
+          690,
+          691,
+          706,
+          707,
+          710,
+          711,
+          714,
+          715,
+          722,
+          723,
+          726,
+          727,
+          730,
+          731,
+          813,
+          814,
+          829,
+          830
+        ],
+        "palettes": [
+          0,
+          6,
+          11
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Tile-center surfaces and permissions are verified, not DS movement/edge/model parity",
+    "All source permission-clear supported centers are flat16; native elevation3 is a provisional single-layer adaptation",
+    "Ice stopping and stair access are host-only; genuine paired ROM/native/mGBA/Save acceptance is still required",
+    "City door sealed; no story, legendary, encounters, permanent IDs or production registry"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "source_code": {
+    "include/overlay005/bdhc.h": {
+      "sha256": "d33cae8e0710530422c4a2ef7dd0e32bd7fad69efc2d177c19a8108b57bc5bee",
+      "git_blob": "0b79b316f1447413791a4fc30564db42d93a119e"
+    },
+    "src/overlay005/bdhc.c": {
+      "sha256": "1813355d527425559218febdcef37ec360f6ce79ee45a8b7f936bb4974f47b63",
+      "git_blob": "0618f518fc5c1493dd4e2962be9b5fefbbfb34c4"
+    },
+    "src/terrain_collision_manager.c": {
+      "sha256": "b8671b8128b178d2b4231c01b151a7a7691e3a8f3a748391c1445cab4eed0ad3",
+      "git_blob": "362b1227ef986d221a1ec26e90ab1d531e3f70a9"
+    },
+    "src/map_object.c": {
+      "sha256": "36b5a9085565e67af4c3dafb89579e1561ff50f369fc47dfd1e973d1104bfe8f",
+      "git_blob": "2c543ac49d6abd4e5490e58e7c72e25f84509250"
+    }
+  },
+  "contracts": [
+    "BDHC magic+sixLEu16 counts; point2s32 normal3s32 constant1s32 plate4u16 strip(s32,u16,u16) accessu16",
+    "Inclusive plate rectangles; first greater scanline clamped at last; ordered access candidates",
+    "MapObject tile center=(tile*16+8)*4096; terrain query subtracts16-tile matrix origin",
+    "Plane samples use exact rational arithmetic; no nearest-object-height choice or DS FX rounding claim",
+    "Tile center support + collisionbit15 + behaviorlow8 is provisional geometry, not model-edge/DS movement acceptance"
+  ]
+}
