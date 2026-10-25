@@ -341,7 +341,7 @@ def canalave_overlay():
         {"x": 28, "y": 22, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_POKEMON_CENTER_1F", "dest_warp_id": "0"},
         {"x": PIER_HOUSE_X + 2, "y": PIER_HOUSE_ROW, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HARBOR",
          "dest_warp_id": "0"},
-        {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE1", "dest_warp_id": "0"},
+        {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_LIBRARY_1F", "dest_warp_id": "0"},
         {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}] + [
         {"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_CANALAVE_CITY_HOUSE{n}", "dest_warp_id": "0"}
         for n, (x, y) in enumerate(MORE_HOUSE_DOORS, 3)]
@@ -405,8 +405,14 @@ def build(engine_root):
         "IronIsland_B3F": (header("MAP_IRON_ISLAND_B3F", "IronIsland_B3F", "LAYOUT_IRON_ISLAND_B3F", "MUS_CAVE_OF_ORIGIN",
                                   "MAP_TYPE_UNDERGROUND", [(*p4["ladder"], "MAP_IRON_ISLAND_B2F", 1)]),
                            (c4.cells, c4.w, c4.h, "gTileset_General", "gTileset_Cave")),
-        "CanalaveCity_House1": (header("MAP_CANALAVE_CITY_HOUSE1", "CanalaveCity_House1", "LAYOUT_HOUSE1", "MUS_ROUTE110",
-                                       "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 3), (4, 8, "MAP_CANALAVE_CITY", 3)]), None),
+        # The large north-west building: two floors in Lilycove Museum's stock layouts (neutral; no exhibits/NPCs).
+        "CanalaveCity_Library_1F": (header("MAP_CANALAVE_CITY_LIBRARY_1F", "CanalaveCity_Library_1F",
+                                           "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "MUS_ROUTE110", "MAP_TYPE_INDOOR",
+                                           [(9, 13, "MAP_CANALAVE_CITY", 3), (10, 13, "MAP_CANALAVE_CITY", 3),
+                                            (16, 1, "MAP_CANALAVE_CITY_LIBRARY_2F", 0)]), None),
+        "CanalaveCity_Library_2F": (header("MAP_CANALAVE_CITY_LIBRARY_2F", "CanalaveCity_Library_2F",
+                                           "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "MUS_ROUTE110", "MAP_TYPE_INDOOR",
+                                           [(13, 1, "MAP_CANALAVE_CITY_LIBRARY_1F", 2)]), None),
         "CanalaveCity_House2": (header("MAP_CANALAVE_CITY_HOUSE2", "CanalaveCity_House2", "LAYOUT_HOUSE1", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 4), (4, 8, "MAP_CANALAVE_CITY", 4)]), None),
         **{f"CanalaveCity_House{n}": (header(f"MAP_CANALAVE_CITY_HOUSE{n}", f"CanalaveCity_House{n}", "LAYOUT_HOUSE1",

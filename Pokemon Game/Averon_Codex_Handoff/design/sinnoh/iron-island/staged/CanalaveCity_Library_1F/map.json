@@ -1,7 +1,7 @@
 {
-  "id": "MAP_CANALAVE_CITY_HOUSE1",
-  "name": "CanalaveCity_House1",
-  "layout": "LAYOUT_HOUSE1",
+  "id": "MAP_CANALAVE_CITY_LIBRARY_1F",
+  "name": "CanalaveCity_Library_1F",
+  "layout": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F",
   "music": "MUS_ROUTE110",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -17,18 +17,25 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 3,
-      "y": 8,
+      "x": 9,
+      "y": 13,
       "elevation": 0,
       "dest_map": "MAP_CANALAVE_CITY",
       "dest_warp_id": "3"
     },
     {
-      "x": 4,
-      "y": 8,
+      "x": 10,
+      "y": 13,
       "elevation": 0,
       "dest_map": "MAP_CANALAVE_CITY",
       "dest_warp_id": "3"
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_CANALAVE_CITY_LIBRARY_2F",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

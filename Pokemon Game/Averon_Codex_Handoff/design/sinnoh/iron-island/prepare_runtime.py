@@ -22,7 +22,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ENGINE = "Pokemon Game/engine/"
 STAND_IN = "MAPSEC_ROUTE_201"
 ORDER = ["IronIsland", "IronIsland_House", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F", "CanalaveCity_Harbor",
-         "CanalaveCity_PokemonCenter_1F", "CanalaveCity_House1", "CanalaveCity_House2",
+         "CanalaveCity_PokemonCenter_1F", "CanalaveCity_Library_1F", "CanalaveCity_Library_2F", "CanalaveCity_House2",
          "CanalaveCity_House3", "CanalaveCity_House4", "CanalaveCity_House5", "CanalaveCity_House6"]
 
 

@@ -19,7 +19,7 @@ b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
 NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
-SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_House1": "LAYOUT_HOUSE1", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
+SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
 
