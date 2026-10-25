@@ -486,12 +486,18 @@ class Runner:
     def go(self, map_id, tile, _depth=0):
         """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run.
 
-        When the tile is in another part of the map than the player (a route split by a cliff and joined
+        When the player is on another map (after a one-way drop), travel back first. When the tile is in another
+        part of the map than the player (a route split by a cliff and joined
         by a cave, or a plateau reached only across a seam), travel there through neighbouring maps with
         elevation-aware routing; failing that, enter that part through a batch warp whose arrival can reach it.
         """
         from driver import Stuck
         tile = tuple(tile)
+        if self.d.here()[0] != map_id:      # e.g. left on the floor below by a one-way hole drop
+            try:
+                self.d.travel_to(map_id)
+            except Stuck as exc:
+                self.d.log("no-route-to-map", map=map_id, reason=str(exc))
         here = self.d.here()
         if here[0] == map_id and tile not in reach(self.d.live_map(map_id), [here[1]]) and _depth < 2:
             try:
