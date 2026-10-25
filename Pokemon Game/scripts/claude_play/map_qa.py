@@ -274,7 +274,11 @@ def static_audit(world, map_ids):
         pocket = sorted(fwd - back)
         if pocket:
             find(map_id, "one-way-pocket", dict(tiles=pocket[:12], count=len(pocket)))
-        # Runtime plan: closed edges (one tile per contiguous run), seams, warps, pockets.
+        # Runtime plan: closed edges (one tile per contiguous run), seams, warps, pockets. A probe tile must be
+        # walkable to from where the player stands at an entry, never across a warp (behind a stair door is dead).
+        walk = set()
+        for p in points:
+            walk |= set(mapdata.reach_states(m, tuple(p["tile"])))
         closed = []
         for direction in DIRS:
             run = []
@@ -282,7 +286,7 @@ def static_audit(world, map_ids):
             for t in plain + [None]:
                 if run and (t is None or abs(t[0] - run[-1][0]) + abs(t[1] - run[-1][1]) != 1):
                     middle = run[len(run) // 2]
-                    if middle in fwd:
+                    if middle in fwd and middle in walk:
                         closed.append(dict(tile=middle, direction=direction, span=[run[0], run[-1]]))
                     run = []
                 if t is not None:

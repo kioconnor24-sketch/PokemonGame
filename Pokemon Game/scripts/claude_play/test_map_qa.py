@@ -356,6 +356,19 @@ class StaticLayer(unittest.TestCase):
         legs = d.map_route("ROOM", "ROOM", (1, 2), target=(2, 0))
         self.assertEqual([leg[:2] for leg in legs], [("ROOM", "warp"), ("UP", "warp")])
 
+    def test_no_closed_edge_probe_behind_a_stair_door(self):
+        # Devon Corp 1F: the stairs (2, 1) are a walkable non-animated door, entered from below and arrived at
+        # below; the strip above it is never stood on, so no probe may target it.
+        rows = ["#...#",
+                "##n##",
+                "#...#",
+                "##M##"]
+        m = FakeMap("ROOM", rows, warps=[(2, 1, "UP", 0), (2, 3, "UP", 1)])
+        up = FakeMap("UP", ["#M.M#"], warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 1)])
+        _, plan = map_qa.static_audit(FakeWorld(m, up), ["ROOM"])
+        self.assertFalse([c for c in plan["ROOM"]["closed"] if c["tile"][1] == 0])
+        self.assertIn((2, 0), map_qa.reach(m, [(2, 2)]))          # the warp-crossing reach would have probed it
+
     def test_closed_edges_skip_warp_mats_and_split_runs(self):
         rows = ["#######",
                 "#.....#",
