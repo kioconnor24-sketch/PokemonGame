@@ -4,6 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import subprocess
+import tempfile
 import unittest
 import sys
 from unittest.mock import patch
@@ -105,6 +107,32 @@ class TempleRuntimePreparationTests(unittest.TestCase):
         with patch.object(self.m.base,'git',side_effect=lambda repo,*args:b'bad' if args==('rev-parse','HEAD:Pokemon Game/engine') else git(repo,*args)):
             with self.assertRaisesRegex(ValueError,'baseline engine'):self.m.assemble(ROOT)
         with self.assertRaisesRegex(ValueError,'marked Temple'):self.m.install(ROOT)
+
+    def test_baseline_guard_in_real_depth1_checkout_and_changed_engine_refused(self):
+        # A tiny independent Git repository models CI with no historical BASE.
+        with tempfile.TemporaryDirectory() as t:
+            source=Path(t)/'source';source.mkdir()
+            def git(repo,*args):
+                return subprocess.check_output(['git','-C',str(repo),*args],stderr=subprocess.DEVNULL).decode().strip()
+            git(source,'init','-q')
+            engine=source/'Pokemon Game/engine';engine.mkdir(parents=True)
+            (engine/'pin.txt').write_text('original engine\n')
+            git(source,'add','.')
+            git(source,'-c','user.name=fixture','-c','user.email=fixture@example.invalid','commit','-qm','original')
+            tree=git(source,'rev-parse','HEAD:Pokemon Game/engine')
+            (source/'docs.txt').write_text('docs only\n');git(source,'add','.')
+            git(source,'-c','user.name=fixture','-c','user.email=fixture@example.invalid','commit','-qm','docs')
+            shallow=Path(t)/'shallow'
+            subprocess.run(['git','clone','-q','--depth=1',source.as_uri(),str(shallow)],check=True,stderr=subprocess.DEVNULL)
+            self.assertEqual(git(shallow,'rev-parse','--is-shallow-repository'),'true')
+            self.assertNotEqual(subprocess.run(['git','-C',str(shallow),'cat-file','-e',self.m.BASE],stderr=subprocess.DEVNULL).returncode,0)
+            with patch.object(self.m,'BASE_ENGINE_TREE',tree):
+                self.m.verify_baseline_engine(shallow)
+                (shallow/'Pokemon Game/engine/pin.txt').write_text('changed engine\n')
+                git(shallow,'add','.')
+                git(shallow,'-c','user.name=fixture','-c','user.email=fixture@example.invalid','commit','-qm','engine changed')
+                with self.assertRaisesRegex(ValueError,'baseline engine'):
+                    self.m.verify_baseline_engine(shallow)
 
     def test_construction_and_final_runner_restore_original_shared_qa(self):
         sys.path.insert(0,str(ROOT/'Pokemon Game/scripts/claude_play'))

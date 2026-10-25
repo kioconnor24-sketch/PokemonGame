@@ -7,6 +7,9 @@ from pathlib import Path
 import subprocess
 HERE=Path(__file__).resolve().parent
 BASE='fb83410f6bbded89a9d99537d952698e80af4cf5'
+# Verified with git rev-parse <BASE>:Pokemon\ Game/engine in the full source repo.
+# Compare HEAD directly so read-only PR checks need no historical commit object.
+BASE_ENGINE_TREE='c2e26cce0a00af43251e0672fef708c796b7a918'
 ENGINE='Pokemon Game/engine/'
 def load(name,path):
     s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -15,10 +18,13 @@ coast=load('temple_existing_base',HERE.parent/'sunyshore-coast/prepare_runtime.p
 base=coast.base;sha=coast.sha;encode=coast.encode
 MAPS=tuple(core.NAMES.values())
 
+def verify_baseline_engine(repo):
+    if base.git(repo,'rev-parse','HEAD:Pokemon Game/engine').decode().strip()!=BASE_ENGINE_TREE:
+        raise ValueError('exact baseline engine required')
+
 def assemble(repo):
     repo=Path(repo).resolve()
-    if base.git(repo,'rev-parse','HEAD:Pokemon Game/engine').strip()!=base.git(repo,'rev-parse',BASE+':Pokemon Game/engine').strip():
-        raise ValueError('exact baseline engine required')
+    verify_baseline_engine(repo)
     before=coast.inputs(repo);receipt=json.loads((HERE/'source-receipt.json').read_text())
     for p,h in receipt['input_sha256'].items():
         if sha((HERE/p).read_bytes())!=h:raise ValueError('tested Temple source differs')
