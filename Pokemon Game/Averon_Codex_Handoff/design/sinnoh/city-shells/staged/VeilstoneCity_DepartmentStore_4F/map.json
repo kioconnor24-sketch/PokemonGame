@@ -1,7 +1,7 @@
 {
-  "id": "MAP_VEILSTONE_CITY_HOUSE11",
-  "name": "VeilstoneCity_House11",
-  "layout": "LAYOUT_HOUSE1",
+  "id": "MAP_VEILSTONE_CITY_DEPARTMENT_STORE_4F",
+  "name": "VeilstoneCity_DepartmentStore_4F",
+  "layout": "LAYOUT_LILYCOVE_CITY_DEPARTMENT_STORE_4F",
   "music": "MUS_ROUTE110",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -17,18 +17,18 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 3,
-      "y": 8,
+      "x": 16,
+      "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_VEILSTONE_CITY",
-      "dest_warp_id": "13"
+      "dest_map": "MAP_VEILSTONE_CITY_DEPARTMENT_STORE_3F",
+      "dest_warp_id": "1"
     },
     {
-      "x": 4,
-      "y": 8,
+      "x": 13,
+      "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_VEILSTONE_CITY",
-      "dest_warp_id": "13"
+      "dest_map": "MAP_VEILSTONE_CITY_DEPARTMENT_STORE_5F",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
