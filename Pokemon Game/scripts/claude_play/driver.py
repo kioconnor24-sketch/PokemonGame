@@ -271,7 +271,7 @@ class Driver:
                 for a, ts in by_arrival.items():
                     nexts.append(((mid, "edge", d, tuple(ts)), (other, a)))
             for x, y, dest, dw in m.warps:
-                if dest not in self.w.map_ids:
+                if dest not in self.w.map_ids or not mapdata.takeable(m, x, y):
                     continue
                 stand, push = self.warp_goal(m, (x, y))
                 if mapdata.bfs(m, pos, {stand}) is None:

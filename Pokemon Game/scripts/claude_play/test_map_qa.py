@@ -11,7 +11,8 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import map_qa  # noqa: E402
 
-BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP", "L": "MB_LADDER"}
+BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP", "L": "MB_LADDER",
+            "H": "MB_MT_PYRE_HOLE"}
 
 
 class FakeMap:
@@ -29,7 +30,7 @@ class FakeMap:
         return BEHAVIOR.get(self.rows[y][x], "MB_NORMAL")
 
     def walkable(self, x, y):
-        return self.inside(x, y) and self.rows[y][x] in ".ML"
+        return self.inside(x, y) and self.rows[y][x] in ".MLH"
 
     def warp_at(self, x, y):
         for wx, wy, dest, warp in self.warps:
@@ -265,6 +266,33 @@ class StaticLayer(unittest.TestCase):
                 "########"]
         m = FakeMap("TOWN", rows, warps=[(3, 2, "ROOM", 0)], connections=[("up", "TOWN", 0)])
         self.assertIn("exit-unreachable", codes(map_qa.static_audit(FakeWorld(m), ["TOWN"])[0]))
+
+    def test_a_hole_drop_lands_on_an_arrival_only_warp(self):
+        # Upper floor: a hole (step-on, one way down). Lower floor: the landing is a plain floor warp the engine
+        # never takes (Mt. Pyre), and a stair mat back up.
+        upper = FakeMap("UP", ["#####",
+                               "#.H.#",
+                               "#.M.#"], warps=[(2, 1, "LOW", 0), (2, 2, "LOW", 1)])
+        low = FakeMap("LOW", ["#####",
+                              "#...#",
+                              "#.M.#"], warps=[(2, 1, "UP", 0), (2, 2, "UP", 1)])
+        md = map_qa.mapdata
+        self.assertTrue(md.takeable(upper, 2, 1))
+        self.assertIn(md.trigger_entry(upper, 2, 1)[0], {(1, 1), (3, 1)})   # stepped onto from beside, never the mat
+        self.assertFalse(md.takeable(low, 2, 1))                              # arrival only
+        self.assertTrue(md.takeable(low, 2, 2))
+        self.assertEqual(len(md.bfs(low, (1, 1), {(3, 1)})), 2)               # walking over the landing is safe
+        findings, plan = map_qa.static_audit(FakeWorld(upper, low), ["UP", "LOW"])
+        self.assertEqual(findings, [])
+        self.assertEqual([p["exit"] for p in plan["LOW"]["points"]], [False, True])
+        # Wall the landing off from the stairs: whoever drops in is stuck, which the audit must report.
+        pit = FakeMap("LOW", ["#####",
+                              "#.#.#",
+                              "#.M.#"], warps=[(2, 1, "UP", 0), (2, 2, "UP", 1)])
+        pit.rows = ["#####", "##.##", "#####", "#.M.#"]
+        pit.warps = [(2, 1, "UP", 0), (2, 3, "UP", 1)]
+        pit.height = 4
+        self.assertIn("exit-unreachable", codes(map_qa.static_audit(FakeWorld(upper, pit), ["LOW"])[0]))
 
     def test_closed_edges_skip_warp_mats_and_split_runs(self):
         rows = ["#######",

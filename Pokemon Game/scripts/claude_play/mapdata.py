@@ -196,7 +196,7 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevat
             if not ok:
                 continue
             # A warp tile that is not the goal would take us elsewhere.
-            if nxt not in goals and m.warp_at(*nxt):
+            if nxt not in goals and takeable(m, *nxt):
                 continue
             ne = step_elevation(m, e, cur, nxt) if m.walkable(*nxt) else e
             if ne is None or (nxt, ne) in prev:
@@ -213,6 +213,20 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevat
     return None
 
 
+STEP_ON = ("MB_LADDER", "MB_MT_PYRE_HOLE")
+
+
+def takeable(m, x, y):
+    """Whether the warp at (x, y) can be taken at all. The engine warps only through a door, arrow, stair, ladder,
+    escalator or hole behaviour (TryArrowWarp, TryDoorWarp, IsWarpMetatileBehavior) or a coord trigger; a warp on
+    any other tile is only an arrival point (e.g. the floor where a Mt. Pyre hole drops the player)."""
+    if m.warp_at(x, y) is None:
+        return False
+    b = m.behavior(x, y)
+    return (x, y) in getattr(m, "triggers", ()) or b in STEP_ON or any(
+        k in b for k in ("DOOR", "WARP", "ESCALATOR"))
+
+
 def trigger_entry(m, x, y):
     """A warp tile that also carries a coord trigger is a step-on warp (no arrow/door metatile).
 
@@ -221,13 +235,13 @@ def trigger_entry(m, x, y):
     triggers = getattr(m, "triggers", ())
     if m.warp_at(x, y) is None:
         return None
-    # A ladder warps when stepped onto (field_control_avatar IsWarpMetatileBehavior): the player arrives standing on
-    # it and must step off and back on to use it, exactly as a coord-trigger warp.
-    if (x, y) not in triggers and not (m.behavior(x, y) == "MB_LADDER" and m.walkable(x, y)):
+    # A ladder or a Mt. Pyre hole warps when stepped onto (field_control_avatar IsWarpMetatileBehavior): the player
+    # arrives standing on it and must step off and back on to use it, exactly as a coord-trigger warp.
+    if (x, y) not in triggers and not (m.behavior(x, y) in STEP_ON and m.walkable(x, y)):
         return None
     for d, (dx, dy) in DIRS.items():
         approach = (x - dx, y - dy)
-        if m.walkable(*approach) and approach not in triggers:
+        if m.walkable(*approach) and approach not in triggers and not takeable(m, *approach):
             return approach, d
     return None
 
