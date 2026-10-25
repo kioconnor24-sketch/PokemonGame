@@ -1,0 +1,51 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "res/field/matrices/map_matrix_000.json": {
+      "bytes": 36934,
+      "sha256": "31a366a91be3f2df2d8aaca789b34f69f28a2c21323c70a9c2e81b1ca40c03e3",
+      "git_blob": "164ff7630a52547f15e20c07b5f98142f8f78f49",
+      "private_input_name": "stark-world-matrix-000-PRIVATE.json"
+    },
+    "res/field/maps/data/map_data_172.bin": {
+      "bytes": 59972,
+      "sha256": "784397b23e62267e9422f3577a6238ddc9a7d2504a2df34f88823e58d50df599",
+      "git_blob": "bbd5c951502347002080ace3a4dc249957a3d877",
+      "private_input_name": "stark-outside-land-172-PRIVATE.bin"
+    },
+    "res/field/events/events_stark_mountain_outside.json": {
+      "bytes": 4516,
+      "sha256": "43aa7fb0f0be3c42220f8724a50143d729fbe6395ca83fd187a47294ca2bb6fb",
+      "git_blob": "9c25d2f29fa8eae07a71efa793ce71f4c4b662dd",
+      "private_input_name": "stark-outside-events-PRIVATE.json"
+    }
+  },
+  "verified_world_cell": {
+    "x": 23,
+    "y": 7,
+    "land": 172,
+    "altitude": 0
+  },
+  "south_world_cell": {
+    "x": 23,
+    "y": 8,
+    "land": 170,
+    "header": "MAP_HEADER_ROUTE_227"
+  },
+  "outside_door_local": [
+    14,
+    7
+  ],
+  "source_destination": {
+    "map": "MAP_HEADER_STARK_MOUNTAIN_ROOM_1",
+    "warp": 0
+  },
+  "limits": [
+    "Source metadata inspected; exterior not yet constructed",
+    "Land172 section sizes2048/144/56140/1624 include prop section; cave-only loader must not be blindly reused",
+    "249 permission-clear source centers:150 normal/98 grass/1 north door; full corner/terrain conversion not yet executed",
+    "GBA Route227 north edge wholly blocked, no north connection/warp; source-ground explicit physical approach adaptation still required",
+    "Do not infer direct boundary offsets between GBA48-wide Route227 and DS32-wide Stark outside"
+  ]
+}
