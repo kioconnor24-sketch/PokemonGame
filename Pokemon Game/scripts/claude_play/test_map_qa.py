@@ -11,7 +11,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import map_qa  # noqa: E402
 
-BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP"}
+BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP", "L": "MB_LADDER"}
 
 
 class FakeMap:
@@ -29,7 +29,7 @@ class FakeMap:
         return BEHAVIOR.get(self.rows[y][x], "MB_NORMAL")
 
     def walkable(self, x, y):
-        return self.inside(x, y) and self.rows[y][x] in ".M"
+        return self.inside(x, y) and self.rows[y][x] in ".ML"
 
     def warp_at(self, x, y):
         for wx, wy, dest, warp in self.warps:
@@ -209,6 +209,18 @@ class StaticLayer(unittest.TestCase):
         found = map_qa.static_audit(FakeWorld(a, b), ["A"])[0]
         self.assertEqual(codes(found), ["seam-mismatch"])
         self.assertEqual(found[0]["detail"]["faces"], ("B", (1, 2)))
+
+    def test_ladder_is_a_step_on_warp(self):
+        """Arriving on a ladder and pushing away walks off it; the plan must step back onto it instead."""
+        cave = FakeMap("CAVE", ["#####", "#.L.#", "#...#", "#####"], warps=[(2, 1, "DOWN", 0)])
+        self.assertEqual(cave.behavior(2, 1), "MB_LADDER")
+        entry = map_qa.mapdata.trigger_entry(cave, 2, 1)
+        self.assertIsNotNone(entry)
+        (ax, ay), d = entry
+        dx, dy = map_qa.DIRS[d]
+        self.assertEqual((ax + dx, ay + dy), (2, 1))
+        self.assertTrue(cave.walkable(ax, ay))
+        self.assertEqual(map_qa.warp_stand(cave, 2, 1), (ax, ay))
 
     def test_two_connections_on_one_side_each_own_their_span(self):
         """Route 205 North opens down to two maps; a tile belongs only to the connection whose span holds it."""

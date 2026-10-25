@@ -197,7 +197,11 @@ def trigger_entry(m, x, y):
     Returns (approach tile, direction to step onto the warp) or None. The player arrives on the warp tile.
     """
     triggers = getattr(m, "triggers", ())
-    if (x, y) not in triggers or m.warp_at(x, y) is None:
+    if m.warp_at(x, y) is None:
+        return None
+    # A ladder warps when stepped onto (field_control_avatar IsWarpMetatileBehavior): the player arrives standing on
+    # it and must step off and back on to use it, exactly as a coord-trigger warp.
+    if (x, y) not in triggers and not (m.behavior(x, y) == "MB_LADDER" and m.walkable(x, y)):
         return None
     for d, (dx, dy) in DIRS.items():
         approach = (x - dx, y - dy)
