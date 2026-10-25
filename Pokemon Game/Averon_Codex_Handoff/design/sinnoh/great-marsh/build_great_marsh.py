@@ -117,6 +117,9 @@ def write(engine, out):
         (st / name / "scripts.inc").write_text(w1.scripts(name))
     data = struct.pack("<%dH" % len(cells), *cells)
     (st / "GreatMarsh/map.bin").write_bytes(data)
+    (st / "GreatMarsh/layout.json").write_text(json.dumps({"id": "LAYOUT_GREAT_MARSH", "width": W, "height": H,
+                                                           "primary_tileset": "gTileset_General",
+                                                           "secondary_tileset": "gTileset_Dewford"}, indent=2) + "\n")
     (st / "GreatMarsh/border.bin").write_bytes(struct.pack("<4H", *[eng.word("LakeVerity", 0, 0, 478)] * 4))
     (st / "PastoriaCity-dev-overlay").mkdir(parents=True, exist_ok=True)
     (st / "PastoriaCity-dev-overlay/map.json").write_text(json.dumps(past, indent=2) + "\n")
