@@ -45,7 +45,9 @@ def main():
         if d.name.endswith("-dev-overlay"):
             name = d.name[: -len("-dev-overlay")]
             key = f"data/maps/{name}/map.json"
-            assert key in files, key
+            if key not in files:
+                print("skip overlay (not in this family scene):", name)
+                continue
             files[key] = (json.dumps(hdr, indent=2) + "\n").encode()
             script = d / "portal-script.inc"
             if script.exists():
