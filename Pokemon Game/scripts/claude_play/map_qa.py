@@ -107,12 +107,30 @@ def moves(m, x, y):
             yield nx + dx, ny + dy
 
 
-def edge_tiles(m, direction):
+def edge_tiles(m, direction, connection=None):
+    """Walkable tiles on one edge; with connection=(other_id, offset), only those that connection spans.
+
+    A map may have several connections on one side (Route 205 North opens down to two maps): the engine
+    (GetIncomingConnection) uses the one whose span contains the tile, so each seam owns only its own tiles.
+    """
     if direction in ("up", "down"):
         y = 0 if direction == "up" else m.height - 1
-        return [(x, y) for x in range(m.width) if m.walkable(x, y)]
-    x = 0 if direction == "left" else m.width - 1
-    return [(x, y) for y in range(m.height) if m.walkable(x, y)]
+        tiles = [(x, y) for x in range(m.width) if m.walkable(x, y)]
+    else:
+        x = 0 if direction == "left" else m.width - 1
+        tiles = [(x, y) for y in range(m.height) if m.walkable(x, y)]
+    world = getattr(m, "world", None)
+    if connection is None or world is None:
+        return tiles
+    other = world.map(connection[0])
+    return [t for t in tiles if other.inside(*across(m, other, direction, connection[1], t))]
+
+
+def uncovered_edge_tiles(m, direction):
+    """Walkable edge tiles no connection on that side spans: a closed edge for the player."""
+    spans = [(o, off) for d, o, off in m.connections if d == direction]
+    covered = {t for c in spans for t in edge_tiles(m, direction, c)}
+    return [t for t in edge_tiles(m, direction) if t not in covered]
 
 
 across = mapdata.across
@@ -163,7 +181,7 @@ def map_points(m):
         points.append(dict(kind="warp", index=i, tile=warp_stand(m, x, y), warp=(x, y), dest=dest, dest_warp=warp,
                            push=warp_push(m, x, y)))
     for direction, other_id, offset in m.connections:
-        for t in edge_tiles(m, direction):
+        for t in edge_tiles(m, direction, (other_id, offset)):
             points.append(dict(kind="connection", tile=t, direction=direction, dest=other_id, offset=offset))
     return points
 
@@ -234,7 +252,7 @@ def static_audit(world, map_ids):
         # Seams: each walkable tile must face a walkable tile across the connection.
         for direction, other_id, offset in m.connections:
             other = world.map(other_id)
-            for t in edge_tiles(m, direction):
+            for t in edge_tiles(m, direction, (other_id, offset)):
                 o = across(m, other, direction, offset, t)
                 if not (other.inside(*o) and other.walkable(*o)
                         and mapdata.elevations_compatible(mapdata.elevation_at(m, *t), mapdata.elevation_at(other, *o))):
@@ -255,13 +273,10 @@ def static_audit(world, map_ids):
         if pocket:
             find(map_id, "one-way-pocket", dict(tiles=pocket[:12], count=len(pocket)))
         # Runtime plan: closed edges (one tile per contiguous run), seams, warps, pockets.
-        connected = {d for d, _, _ in m.connections}
         closed = []
         for direction in DIRS:
-            if direction in connected:
-                continue
             run = []
-            plain = [t for t in edge_tiles(m, direction) if not m.warp_at(*t)]   # pressing out on a mat warps
+            plain = [t for t in uncovered_edge_tiles(m, direction) if not m.warp_at(*t)]   # pressing out on a mat warps
             for t in plain + [None]:
                 if run and (t is None or abs(t[0] - run[-1][0]) + abs(t[1] - run[-1][1]) != 1):
                     middle = run[len(run) // 2]

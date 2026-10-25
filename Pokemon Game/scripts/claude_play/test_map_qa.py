@@ -210,6 +210,23 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(codes(found), ["seam-mismatch"])
         self.assertEqual(found[0]["detail"]["faces"], ("B", (1, 2)))
 
+    def test_two_connections_on_one_side_each_own_their_span(self):
+        """Route 205 North opens down to two maps; a tile belongs only to the connection whose span holds it."""
+        north = FakeMap("N", ["##########", "#........#", "#..#.##..#"],
+                        connections=[("down", "L", 0), ("down", "R", 6)])
+        left = FakeMap("L", ["#..#", "#..#", "####"], connections=[("up", "N", 0)])
+        right = FakeMap("R", ["#..#", "#..#", "####"], connections=[("up", "N", -6)])
+        world = FakeWorld(north, left, right)
+        for m in (north, left, right):
+            m.world = world
+        found, _ = map_qa.static_audit(world, ["N", "L", "R"])
+        self.assertNotIn("seam-mismatch", codes(found))
+        self.assertEqual(map_qa.edge_tiles(north, "down", ("R", 6)), [(7, 2), (8, 2)])
+        self.assertEqual(map_qa.uncovered_edge_tiles(north, "down"), [(4, 2)])   # spanned by neither: closed
+        north.connections = [("down", "L", 0), ("down", "R", 5)]                 # R shifted: its seam breaks
+        right.connections = [("up", "N", -5)]
+        self.assertIn("seam-mismatch", codes(map_qa.static_audit(world, ["N"])[0]))
+
     def test_walled_off_seam_is_unreachable(self):
         rows = ["###..###",
                 "########",
