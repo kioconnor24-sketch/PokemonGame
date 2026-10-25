@@ -1,0 +1,43 @@
+{
+  "id": "MAP_LAKE_ACUITY",
+  "name": "LakeAcuity",
+  "layout": "LAYOUT_LAKE_ACUITY",
+  "map_type": "MAP_TYPE_TOWN",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "music": "MUS_ROUTE110",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 23,
+      "y": 29,
+      "elevation": 3,
+      "dest_map": "MAP_SINNOH_ACUITY_CAVERN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 48,
+      "elevation": 3,
+      "dest_map": "MAP_ACUITY_LAKEFRONT",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 7,
+      "y": 48,
+      "elevation": 3,
+      "dest_map": "MAP_ACUITY_LAKEFRONT",
+      "dest_warp_id": "1"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

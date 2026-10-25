@@ -1,0 +1,141 @@
+{
+  "status": "SOURCE_GROUNDED_CLIFF_SHORE_JOIN_NOT_RUNTIME_ACCEPTANCE",
+  "source_sha256": {
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-lakefront-join/source-pins.json": "11f5c316a8fff95c7915bdead83871578cb5ee865c6c911add59e72213d18be8",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-lakefront-join/lakefront-source/map.bin": "d2ba838a10ae86eef03724ba7e86681a95801c090819ed803270a4371941e06a",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-lakefront-join/lakefront-source/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-lakefront-join/lakefront-source/map.json": "8fa0f7955af063fa394784a769bcec681a4f09b13a54eb3e6946ef882ba50460",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/staged/LakeAcuity/map.bin": "7bdf0a54560c6b2b0e7d559eba2c93319b5661af92805b893f0e777af513e7b0",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/staged/LakeAcuity/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/staged/LakeAcuity/map.json": "190f60d4259809b19b76e4d54aa34ab39aa98da494ee847d6cfd819af85dc078",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-entry/city-source/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-entry/city-source/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-entry/city-source/secondary-metatiles.bin": "214e244f85733257f41feac124433c94b6add07a040208a7ebb10baa934b82c7",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-entry/city-source/secondary-attributes.bin": "cce80dd2a795941f911130bc2f60f2f8cdc65189407883eccb901108566044c9",
+    "Pokemon Game/engine/data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "Pokemon Game/engine/data/tilesets/secondary/rustboro/tiles.png": "87b3ce4e15674b3ef02b1793df0bc8633b7c49bf4443cb50708293615b048d24",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/01.pal": "9b9d01878137cef9ea6006c3025a3ada5cdf37d9c251b25bc95f71963bd9a447",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/02.pal": "8a469b137e6fc97823ab46b903c0ab80c466212cd430340586ccde22afbee949",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/03.pal": "821f0a62f0ce995c96e9eaa0b4a32a1cd61e4db1f3216bfbe1fd588cf33b7583",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/families/LakeAcuity/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/families/LakeAcuity/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/families/LakeAcuity/secondary-metatiles.bin": "1f8c7e87b6bc00af4f26a924fda678ad5da452265e37d97bbe82ebe17621bd49",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-island-link/families/LakeAcuity/secondary-attributes.bin": "f6fcb982d87bb16b29850dcfb1640c552ff4ec064169a359d84b4ebc0df29a8c"
+  },
+  "changes": {
+    "AcuityLakefront": [
+      {
+        "cell": [
+          20,
+          39
+        ],
+        "before": 12801,
+        "after": 12857
+      },
+      {
+        "cell": [
+          21,
+          39
+        ],
+        "before": 12801,
+        "after": 12857
+      }
+    ],
+    "LakeAcuity": [
+      {
+        "cell": [
+          6,
+          48
+        ],
+        "before": 12802,
+        "after": 12809
+      },
+      {
+        "cell": [
+          7,
+          48
+        ],
+        "before": 12802,
+        "after": 12809
+      }
+    ]
+  },
+  "preserved_water_cells": {
+    "AcuityLakefront": 44,
+    "LakeAcuity": 1070
+  },
+  "local_ground_paths": {
+    "AcuityLakefront": [
+      [
+        [
+          20,
+          40
+        ],
+        [
+          20,
+          39
+        ]
+      ],
+      [
+        [
+          21,
+          40
+        ],
+        [
+          21,
+          39
+        ]
+      ]
+    ],
+    "LakeAcuity": [
+      [
+        [
+          6,
+          47
+        ],
+        [
+          6,
+          48
+        ]
+      ],
+      [
+        [
+          7,
+          47
+        ],
+        [
+          7,
+          48
+        ]
+      ]
+    ]
+  },
+  "limits": [
+    "Existing cliff mouth20/21,39 matches pinned DS entry after native+2row adaptation",
+    "Lake shore6/7,48 explicitly adapted to existing land, no DS indices blindly copied",
+    "Original island/cavern event0 and regional connections preserved; every water/layer word unchanged",
+    "No new trail/tree cuts/footbridge/Surf grant/story/low-water variant/IDs/registry/save changes",
+    "Static local ground checks are not natural arrival or Surf/runtime/Save acceptance"
+  ],
+  "output_sha256": {
+    "families/LakeAcuity/secondary-attributes.bin": "77110666196722b0a59000e288cfddc94e9c0f62ff087a73d78928aede59fd15",
+    "families/LakeAcuity/secondary-metatiles.bin": "46c9581fa77d5028b12262c656af6946ce8182d097c5bab5c0f01e4c06feb24b",
+    "families/LakeAcuity/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "families/LakeAcuity/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "families/AcuityLakefront/secondary-attributes.bin": "bb82870d5f5b8d2827b290f743664ab9f006be6c4ea2822be9d3b851c236c0cc",
+    "families/AcuityLakefront/secondary-metatiles.bin": "76cb75944ae4c3ca7b6b4a35bab41c342058462976f60ae0bfb90266a8094bce",
+    "families/AcuityLakefront/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "families/AcuityLakefront/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/LakeAcuity/preview.png": "37c9995766cc9fb9488fe3de6cd9ff205674a165c361752542ba8ee7fcc60a45",
+    "staged/LakeAcuity/attributes.json": "30e812193e3dfc745107851272b822d00a989041cb6c00badbcd68ed7ea7a65c",
+    "staged/LakeAcuity/map.json": "4c01f3f05d50a6934a9fb452f1a364276eae1c731bcac2d4d606a98cade8c7ce",
+    "staged/LakeAcuity/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/LakeAcuity/map.bin": "ce4939124862d555dba0e6982589e66a5293bf5e19d552efa8626f2f4ccccfed",
+    "staged/AcuityLakefront/preview.png": "b571394bfce27e00bbaab6961629e5db1f56bb3c41616a8555e6c225e6614a30",
+    "staged/AcuityLakefront/attributes.json": "5365b2624555d0c977827f6e940d2af3ec496d82bbd14aff6e3ca16948635d99",
+    "staged/AcuityLakefront/map.json": "08685bb35d633ea9589e42ff14a7d514e39761834d1874ae49485cbb3fbc4a09",
+    "staged/AcuityLakefront/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/AcuityLakefront/map.bin": "552242fe259512f301de4466188246dea6ddf180be935477f20b0e43f360affe"
+  }
+}
