@@ -21,6 +21,8 @@ SINNOH = HERE.parent
 spec = importlib.util.spec_from_file_location("w1", SINNOH / "iron-island/build_iron_island.py")
 w1 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w1)
+# Doors left closed: their doorstep is a sealed pocket (static audit on the eastern-loop scene: reaches no exit).
+EXCLUDE = {("Route213", (74, 4)): "doorstep (74, 5) is on a rock-walled plateau with no way in"}
 TARGETS = [  # family folder, staged map, map constant prefix, music
     ("eastern-loop", "VeilstoneCity", "MAP_VEILSTONE_CITY", "MUS_ROUTE110"),
     ("eastern-loop", "Route213", "MAP_ROUTE213", "MUS_ROUTE110"),
@@ -52,7 +54,7 @@ def closed_doors(engine, family, name):
     warps = {(w["x"], w["y"]) for w in hdr["warp_events"]}
     return hdr, [(i % width, i // width) for i, v in enumerate(cells)
                  if (v & 1023) < len(attrs) and names[attrs[v & 1023] & 0xFF] == "MB_ANIMATED_DOOR"
-                 and (i % width, i // width) not in warps]
+                 and (i % width, i // width) not in warps and (name, (i % width, i // width)) not in EXCLUDE]
 
 
 def build(engine):
