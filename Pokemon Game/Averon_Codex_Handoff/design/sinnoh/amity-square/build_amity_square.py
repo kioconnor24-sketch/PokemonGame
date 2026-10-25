@@ -104,6 +104,9 @@ def write(engine, out):
     (st / "AmitySquare").mkdir(parents=True, exist_ok=True)
     data = struct.pack("<%dH" % len(cells), *cells)
     (st / "AmitySquare/map.bin").write_bytes(data)
+    (st / "AmitySquare/layout.json").write_text(json.dumps({"id": "LAYOUT_AMITY_SQUARE", "width": W, "height": H,
+                                                            "primary_tileset": "gTileset_General",
+                                                            "secondary_tileset": "gTileset_Dewford"}, indent=2) + "\n")
     (st / "AmitySquare/border.bin").write_bytes(struct.pack("<4H", *[eng.word("LakeVerity", 0, 0, 478)] * 4))
     (st / "AmitySquare/map.json").write_text(json.dumps(amity, indent=2) + "\n")
     (st / "AmitySquare/scripts.inc").write_text(w1.scripts("AmitySquare"))
