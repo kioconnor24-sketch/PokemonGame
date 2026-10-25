@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import pathlib
+import struct
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -14,12 +15,30 @@ spec.loader.exec_module(b)
 
 class LostTowerTest(unittest.TestCase):
     def setUp(self):
-        self.maps, self.r209, self.script = b.build(ENGINE)
+        self.maps, self.r209, self.script, self.r209_bin = b.build(ENGINE)
 
     def test_staged_matches_fresh_build(self):
         for name, hdr in self.maps.items():
             self.assertEqual(json.loads((HERE / "staged" / name / "map.json").read_text()), hdr)
         self.assertEqual(json.loads((HERE / "staged/Route209-dev-overlay/map.json").read_text()), self.r209)
+        self.assertEqual((HERE / "staged/Route209-dev-overlay/map.bin").read_bytes(), self.r209_bin)
+
+    def test_route209_pocket_steps_become_transitions_only(self):
+        unpack = lambda raw: struct.unpack("<%dH" % (len(raw) // 2), raw)
+        src, got = unpack((b.ROUTE209 / "averon-map.bin").read_bytes()), unpack(self.r209_bin)
+        changed = [(i % 68, i // 68) for i, (s, g) in enumerate(zip(src, got)) if s != g]
+        self.assertEqual(sorted(changed), sorted(b.STEPS))
+        for x, y in b.STEPS:
+            s, g = src[y * 68 + x], got[y * 68 + x]
+            self.assertEqual((s & 0x0FFF, s >> 12, g), (g, 2, s & 0x0FFF))   # same tile and collision, 2 -> 0
+
+        def may_enter(cur, tile):  # IsElevationMismatchAt, then ObjectEventUpdateElevation
+            return None if cur and tile not in (0, 15) and tile != cur else tile
+
+        for x, y in b.STEPS:      # ground 3 -> step -> floor 2 -> step -> ground 3
+            ground, step, floor = (got[(y + d) * 68 + x] >> 12 for d in (1, 0, -1))
+            self.assertIsNone(may_enter(ground, src[y * 68 + x] >> 12))       # the source refuses it
+            self.assertEqual(may_enter(may_enter(may_enter(may_enter(ground, step), floor), step), ground), 3)
 
     def test_graph_is_mt_pyre_renamed(self):
         for f in b.FLOORS:

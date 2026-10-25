@@ -8,7 +8,11 @@ return to Route 209.
 
 Route 209 (Codex's hearthome-solaceon staging) draws the tower with a walkable base passage (61, 15)-(62, 17) and no
 door; a DEV-only overlay of its map.json appends one step-on portal at (61, 15) (warp + coord trigger on the same
-tile, as W1's harbor). Its map data and files are not modified.
+tile, as W1's harbor). Codex's files are not modified.
+
+Route 209's three walled pockets (the ruins) have floor and entry steps at elevation 2 against ground at 3, so the
+engine refuses the step in. A DEV-only derived copy of its map.bin (overlay map.bin) sets just those eight step cells
+to elevation 0, the transition convention (3 -> 0 -> 2 and back); metatiles and collision are unchanged.
 No story, objects, items, encounters or sections (MAPSEC_PENDING_OWNER).
 
   build_lost_tower.py --engine ENGINE --out DIR
@@ -31,6 +35,7 @@ EXTERIOR = {"MAP_ROUTE122", "MAP_MT_PYRE_EXTERIOR"}
 # centre of the pocket, leading to a stock Averon ruin chamber (unchanged layout, its own internal warp pair kept).
 RUINS = [("SolaceonRuins_A", "DesertRuins", (45, 16)), ("SolaceonRuins_B", "IslandCave", (54, 28)),
          ("SolaceonRuins_C", "AncientTomb", (47, 38))]
+STEPS = [(44, 18), (45, 18), (46, 18), (53, 30), (54, 30), (55, 30), (47, 40), (48, 40)]
 
 
 def build(engine):
@@ -79,11 +84,17 @@ def build(engine):
             own = w["dest_map"] == "MAP_" + "".join("_" + ch if ch.isupper() else ch for ch in stock).lstrip("_").upper()
             warps.append((w["x"], w["y"], mid if own else "MAP_ROUTE209", int(w["dest_warp_id"]) if own else i))
         maps[name] = w1.header(mid, name, src["layout"], "MUS_ROUTE110", "MAP_TYPE_UNDERGROUND", warps)
-    return maps, r209, script
+    blocks = list(cells)
+    for x, y in STEPS:
+        v = cells[y * 68 + x]
+        assert v & 1023 in (175, 35, 207) and not v & 0xC00 and v >> 12 == 2, ((x, y), hex(v))
+        assert cells[(y + 1) * 68 + x] >> 12 == 3 and cells[(y - 1) * 68 + x] >> 12 == 2, (x, y)  # ground / floor
+        blocks[y * 68 + x] = v & 0x0FFF
+    return maps, r209, script, struct.pack("<%dH" % len(blocks), *blocks)
 
 
 def write(engine, out):
-    maps, r209, script = build(engine)
+    maps, r209, script, r209_bin = build(engine)
     st = pathlib.Path(out) / "staged"
     for name, hdr in maps.items():
         (st / name).mkdir(parents=True, exist_ok=True)
@@ -92,6 +103,7 @@ def write(engine, out):
     (st / "Route209-dev-overlay").mkdir(parents=True, exist_ok=True)
     (st / "Route209-dev-overlay/map.json").write_text(json.dumps(r209, indent=2) + "\n")
     (st / "Route209-dev-overlay/portal-script.inc").write_text(script)
+    (st / "Route209-dev-overlay/map.bin").write_bytes(r209_bin)
     return {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "floors": list(maps), "portal": PORTAL}
 
 
