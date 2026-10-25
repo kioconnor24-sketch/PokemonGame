@@ -501,7 +501,8 @@ class Runner:
             except Stuck as exc:
                 self.d.log("no-route-to-map", map=map_id, reason=str(exc))
         here = self.d.here()
-        if here[0] == map_id and tile not in reach(self.d.live_map(map_id), [here[1]]) and _depth < 2:
+        # On foot means without stepping onto a takeable warp (a strip behind stairs is reached by coming down them).
+        if here[0] == map_id and tile not in mapdata.reach_states(self.d.live_map(map_id), here[1]) and _depth < 2:
             try:
                 self.d.go_map(self.d.map_route(map_id, map_id, here[1], target=tile))
             except Stuck as exc:

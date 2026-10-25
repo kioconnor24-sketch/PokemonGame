@@ -335,6 +335,27 @@ class StaticLayer(unittest.TestCase):
         closed = [f for f in map_qa.static_audit(FakeWorld(m, room), ["TOWN"])[0] if f["code"] == "warp-closed"]
         self.assertEqual([f["detail"]["warp"] for f in closed], [(1, 0)])
 
+    def test_a_strip_behind_stairs_is_routed_through_the_floor_above(self):
+        # ROOM row 0 is walled off except through the stair mat (2, 1), which warps up; coming back down lands on
+        # the mat, from which row 0 is walkable. On foot from row 2 it is not reachable, so the driver must route
+        # through UP (Devon Corp 1F (14, 0) in the W14 gate).
+        import driver as drv
+        room = FakeMap("ROOM", ["#...#",
+                                "##M##",
+                                "#...#",
+                                "##M##"], warps=[(2, 1, "UP", 0), (2, 3, "UP", 1)])
+        up = FakeMap("UP", ["#M.M#"], warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 1)])
+        w = FakeWorld(room, up)
+        w.map_ids = {"ROOM": 0, "UP": 1}
+        room.world = up.world = w
+        md = map_qa.mapdata
+        self.assertNotIn((2, 0), md.reach_states(room, (1, 2)))
+        self.assertIn((2, 0), md.reach_states(room, (2, 1)))
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = w
+        legs = d.map_route("ROOM", "ROOM", (1, 2), target=(2, 0))
+        self.assertEqual([leg[:2] for leg in legs], [("ROOM", "warp"), ("UP", "warp")])
+
     def test_closed_edges_skip_warp_mats_and_split_runs(self):
         rows = ["#######",
                 "#.....#",
