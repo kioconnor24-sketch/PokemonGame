@@ -1,0 +1,52 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "land_data": {
+      "source_path": "res/field/maps/data/map_data_561.bin",
+      "bytes": 49174,
+      "sha256": "18b96a083d8565d888a0fb0ef437d161f50c0f95aefb1cd1aa7396570c1214f1",
+      "git_blob": "92ca5327785e2af35f4dc9f7817ac3b84985b6d4",
+      "private_input_name": "acuity-map-data-561-PRIVATE.bin"
+    },
+    "matrix": {
+      "source_path": "res/field/matrices/map_matrix_109.json",
+      "bytes": 110,
+      "sha256": "764f4eea71af5087e8b5d097ba9ba22ad43e904f75af0e979e2e34ce6d15ea2c",
+      "git_blob": "d3a67990585c9c94d930a401627a6c1d02c7468b",
+      "private_input_name": "acuity-matrix-109.json"
+    },
+    "events": {
+      "source_path": "res/field/events/events_acuity_cavern.json",
+      "bytes": 732,
+      "sha256": "5a444879c5783f72c82ad7032543e55edc10869590af38b81bb80c8401ba36fb",
+      "git_blob": "51125698049c8ea9d077d8446ab412b032a6f083",
+      "private_input_name": "acuity-cavern-events-PRIVATE.json"
+    }
+  },
+  "model_or_texture_emitted": false,
+  "behavior_mapping": {
+    "source": {
+      "value": 29,
+      "name": "TILE_BEHAVIOR_PUDDLE_NO_SPLASHING",
+      "constants_git_blob": "1b40ea5b219b4d639bf3fb1fb0834d9908b210e2"
+    },
+    "target": {
+      "value": 43,
+      "name": "MB_REFLECTION_UNDER_BRIDGE"
+    },
+    "preserved_semantics": [
+      "walkable",
+      "reflective",
+      "not surfable",
+      "no splash",
+      "no encounter"
+    ],
+    "pending_runtime": [
+      "reflection rendering",
+      "follower reflection",
+      "actual foot traversal",
+      "saved reload"
+    ]
+  }
+}
