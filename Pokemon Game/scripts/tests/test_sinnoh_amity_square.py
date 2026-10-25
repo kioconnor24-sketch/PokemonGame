@@ -18,7 +18,7 @@ ti.loader.exec_module(t)
 
 class AmitySquareTest(unittest.TestCase):
     def setUp(self):
-        self.eng, self.cells, self.amity, self.hh, self.doors = b.build(ENGINE)
+        self.eng, self.cells, self.amity, self.hh, self.doors, self.shells = b.build(ENGINE)
 
     def test_staged_matches_fresh_build(self):
         self.assertEqual((HERE / "staged/AmitySquare/map.bin").read_bytes(), struct.pack("<%dH" % len(self.cells), *self.cells))
@@ -40,8 +40,13 @@ class AmitySquareTest(unittest.TestCase):
         source = json.loads((b.HEARTHOME / "map.json").read_text())
         n = len(source["warp_events"])
         self.assertEqual(self.hh["warp_events"][:n], source["warp_events"])
-        added = self.hh["warp_events"][n:]
+        added = self.hh["warp_events"][n:n + 4]
         self.assertEqual([(w["x"], w["y"]) for w in added], b.MATS["west"] + b.MATS["east"])
+        for k, (x, y) in enumerate(b.HEARTHOME_DOORS, 1):
+            i = n + 3 + k
+            self.assertEqual((self.hh["warp_events"][i]["x"], self.hh["warp_events"][i]["y"]), (x, y))
+            back = self.shells[f"HearthomeCity_House{k}"]["warp_events"]
+            self.assertEqual({(w["dest_map"], int(w["dest_warp_id"])) for w in back}, {("MAP_HEARTHOME_CITY", i)})
         self.assertEqual([w["dest_warp_id"] for w in added], ["0", "0", "1", "1"])
         aw = self.amity["warp_events"]
         self.assertEqual([(w["dest_map"], int(w["dest_warp_id"])) for w in aw],

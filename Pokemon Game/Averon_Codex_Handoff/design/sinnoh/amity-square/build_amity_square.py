@@ -24,6 +24,8 @@ spec.loader.exec_module(pal)
 w1 = pal.w1
 HEARTHOME = HERE.parent / "hearthome-solaceon/staged/HearthomeCity"
 MATS = {"west": [(8, 6), (9, 6)], "east": [(50, 6), (51, 6)]}
+# Hearthome's warp-less animated doors open into neutral LAYOUT_HOUSE1 shells (no NPCs/services/contests/gym).
+HEARTHOME_DOORS = [(29, 12), (14, 19), (36, 19), (49, 19), (27, 30), (37, 30), (44, 30)]
 W, H = 52, 40
 PONDS = [(8, 6, 15, 11), (36, 6, 43, 11), (22, 26, 29, 30)]
 PLAZA = (18, 12, 33, 22)
@@ -78,14 +80,27 @@ def build(engine):
             assert all((w["x"], w["y"]) != (x, y) for w in hh["warp_events"])
             hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_AMITY_SQUARE",
                                       "dest_warp_id": "0" if side == "west" else "1"})
+    shells = {}
+    for k, (x, y) in enumerate(HEARTHOME_DOORS, 1):
+        assert all((w["x"], w["y"]) != (x, y) for w in hh["warp_events"]), (x, y)
+        i = len(hh["warp_events"])
+        name = f"HearthomeCity_House{k}"
+        hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_HEARTHOME_CITY_HOUSE{k}",
+                                  "dest_warp_id": "0"})
+        shells[name] = w1.header(f"MAP_HEARTHOME_CITY_HOUSE{k}", name, "LAYOUT_HOUSE1", "MUS_ROUTE110",
+                                 "MAP_TYPE_INDOOR", [(3, 8, "MAP_HEARTHOME_CITY", i), (4, 8, "MAP_HEARTHOME_CITY", i)])
     amity = w1.header("MAP_AMITY_SQUARE", "AmitySquare", "LAYOUT_AMITY_SQUARE", "MUS_ROUTE110", "MAP_TYPE_ROUTE",
                       [(*doors["west"], "MAP_HEARTHOME_CITY", n), (*doors["east"], "MAP_HEARTHOME_CITY", n + 2)])
-    return eng, cells, amity, hh, doors
+    return eng, cells, amity, hh, doors, shells
 
 
 def write(engine, out):
-    eng, cells, amity, hh, doors = build(engine)
+    eng, cells, amity, hh, doors, shells = build(engine)
     st = pathlib.Path(out) / "staged"
+    for name, hdr in shells.items():
+        (st / name).mkdir(parents=True, exist_ok=True)
+        (st / name / "map.json").write_text(json.dumps(hdr, indent=2) + "\n")
+        (st / name / "scripts.inc").write_text(w1.scripts(name))
     (st / "AmitySquare").mkdir(parents=True, exist_ok=True)
     data = struct.pack("<%dH" % len(cells), *cells)
     (st / "AmitySquare/map.bin").write_bytes(data)
