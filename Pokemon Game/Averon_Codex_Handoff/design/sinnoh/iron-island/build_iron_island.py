@@ -174,7 +174,9 @@ def island(eng):
         cells[y * ISLAND_W + x] = boulder
     door = (HILL[0] + HILL[2] // 2, HILL[1] + HILL[3] - 1)
     house_door = (hx + 2, hy + 3)
-    return cells, dict(cave=door, house=house_door, pier_arrive=(px + n - 2, py), pier_trigger=(px + n - 1, py),
+    # Step-on portal (as Floaroma Meadow's): the warp and its coord trigger share the pier's end plank. Arriving by
+    # warp never fires a coord trigger; walking onto it from the plank before does.
+    return cells, dict(cave=door, house=house_door, pier_arrive=(px + n - 1, py), pier_trigger=(px + n - 1, py),
                        shore_metatiles=dict(sorted(used.items())))
 
 
@@ -386,16 +388,14 @@ def build(engine_root):
                                        "MAP_TYPE_INDOOR", [(3, 8, "MAP_CANALAVE_CITY", 4), (4, 8, "MAP_CANALAVE_CITY", 4)]), None),
         "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_HARBOR", "MUS_ROUTE110",
                                        "MAP_TYPE_INDOOR", [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
-                                                           (8, 11, "MAP_IRON_ISLAND", 2)],
-                                       [(7, 10, "ToIronIsland0", ("MAP_IRON_ISLAND", 2)),
-                                        (8, 10, "ToIronIsland1", ("MAP_IRON_ISLAND", 2))]), None),
+                                                           (8, 10, "MAP_IRON_ISLAND", 2)],
+                                       [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2))]), None),
         "CanalaveCity_PokemonCenter_1F": (header("MAP_CANALAVE_CITY_POKEMON_CENTER_1F", "CanalaveCity_PokemonCenter_1F",
                                                  "LAYOUT_POKEMON_CENTER_1F", "MUS_POKE_CENTER", "MAP_TYPE_INDOOR",
                                                  [(6, 8, "MAP_CANALAVE_CITY", 1), (7, 8, "MAP_CANALAVE_CITY", 1)]), None),
     }
     coords = {"IronIsland": [(tx, ty, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 2))],
-              "CanalaveCity_Harbor": [(7, 10, "ToIronIsland0", ("MAP_IRON_ISLAND", 2)),
-                                      (8, 10, "ToIronIsland1", ("MAP_IRON_ISLAND", 2))]}
+              "CanalaveCity_Harbor": [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2))]}
     # Shared layouts must exist unchanged; their warp tiles are the stock ones.
     for name, (hdr, layout) in maps.items():
         if layout is None:

@@ -114,10 +114,10 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual((dest, warp), ("MAP_CANALAVE_CITY_HARBOR", 2))
         self.assertEqual(har["warp_events"][2]["dest_map"], "MAP_IRON_ISLAND")
         arrive = isl["warp_events"][int(har["warp_events"][2]["dest_warp_id"])]
-        self.assertEqual(abs(arrive["x"] - tx) + abs(arrive["y"] - ty), 1)   # trigger is the next plank
+        self.assertEqual((arrive["x"], arrive["y"]), (tx, ty))      # step-on portal: trigger on the arrival warp
         for x, y, _, (dest, warp) in self.coords["CanalaveCity_Harbor"]:
             self.assertEqual((dest, warp), ("MAP_IRON_ISLAND", 2))
-            self.assertLessEqual(abs(har["warp_events"][2]["x"] - x) + abs(har["warp_events"][2]["y"] - y), 2)
+            self.assertEqual((har["warp_events"][2]["x"], har["warp_events"][2]["y"]), (x, y))
         for name in ("IronIsland", "CanalaveCity_Harbor"):
             text = b.scripts(name, self.coords[name])
             self.assertEqual(text.count("\twarp "), len(self.coords[name]))
