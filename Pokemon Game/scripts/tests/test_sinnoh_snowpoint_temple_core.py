@@ -119,7 +119,7 @@ class TempleRuntimePreparationTests(unittest.TestCase):
                 return qa.main(['run','--save','coronet-six'])
             with patch.object(qa,'main',side_effect=lambda args:commands.append(args) or 0),patch.object(runner.a,'run',side_effect=probe):
                 self.assertEqual(runner.run(SimpleNamespace(mode=mode)),0)
-            self.assertEqual(commands,[['run','--save','temple-core']]);self.assertEqual(runner.a.MAPS,old)
+            self.assertEqual(commands,[['run','--save','temple-core','--blocked','MAP_SINNOH_SNOWPOINT_TEMPLE_1F,8,12,down']]);self.assertEqual(runner.a.MAPS,old)
             self.assertIs(qa.Runner.warp,warp);self.assertIs(qa.main,main)
         with patch.object(runner.a,'run',side_effect=RuntimeError('fixture')):
             with self.assertRaises(RuntimeError):runner.run(SimpleNamespace(mode='batch'))

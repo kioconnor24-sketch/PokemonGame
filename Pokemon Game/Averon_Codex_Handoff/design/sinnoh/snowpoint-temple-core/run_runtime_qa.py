@@ -2,6 +2,7 @@
 """Partial Temple stair QA; opt-in construction dedup, unchanged full final traversal."""
 import argparse
 import importlib.util
+import json
 from pathlib import Path
 import sys
 HERE=Path(__file__).resolve().parent
@@ -18,9 +19,17 @@ def run(args):
     def main(argv):
         argv=list(argv)
         if '--save' in argv:argv[argv.index('--save')+1]='temple-core'
+        if not getattr(args,'expect',None):argv+=['--blocked','MAP_SINNOH_SNOWPOINT_TEMPLE_1F,8,12,down']
         return old_main(argv)
     qa.main=main;a.MAPS=MAPS
-    try:return a.run(args)
+    try:
+        code=a.run(args)
+        out=getattr(args,'out',None)
+        if out is not None and (Path(out)/'result.json').is_file():
+            p=Path(out)/'result.json';d=json.loads(p.read_text())
+            d.update(qa_mode=args.mode,construction_only=args.mode=='batch',production_acceptance_claimed=False,physical_scope='partial neutral Temple stairs, not ice puzzle acceptance')
+            p.write_text(json.dumps(d,indent=1)+'\n')
+        return code
     finally:a.MAPS=old_maps;qa.Runner.warp=old_warp;qa.Runner.follower=old_follower;qa.main=old_main
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
