@@ -1,0 +1,19 @@
+test_dirty_source_and_engine_output_rejected_before_write (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_dirty_source_and_engine_output_rejected_before_write) ... ok
+test_exact_four_semantic_cells_all_other_words_and_borders_unchanged (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_exact_four_semantic_cells_all_other_words_and_borders_unchanged) ... ok
+test_native_prefixes_and_full_render_replay (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_native_prefixes_and_full_render_replay) ... ok
+test_real_water_cannot_be_used_as_ground_and_all_water_words_preserved (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_real_water_cannot_be_used_as_ground_and_all_water_words_preserved) ... FAIL
+test_reciprocal_indices_trigger_heights_and_original_island_event_preserved (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_reciprocal_indices_trigger_heights_and_original_island_event_preserved) ... ok
+
+======================================================================
+FAIL: test_real_water_cannot_be_used_as_ground_and_all_water_words_preserved (test_sinnoh_acuity_lakefront_join.LakefrontJoinTests.test_real_water_cannot_be_used_as_ground_and_all_water_words_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-geography/Pokemon Game/scripts/tests/test_sinnoh_acuity_lakefront_join.py", line 26, in test_real_water_cannot_be_used_as_ground_and_all_water_words_preserved
+    v=struct.unpack_from('<H',raw,2*(48*48+8))[0];self.assertEqual(attrs[str(v&1023)]&255,0x10)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 33 != 16
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.577s
+
+FAILED (failures=1)
