@@ -81,6 +81,25 @@ class ApproachTests(unittest.TestCase):
         room=bytearray(self.room);struct.pack_into('<H',room,2*(29*64+20),0x3001)
         with self.assertRaisesRegex(ValueError,'already open'):m.construct(self.geometry,self.route,room,self.header)
 
+    def test_combined13_map_scene_resolves_all_connections_warps_and_attributes(self):
+        spec=importlib.util.spec_from_file_location('combined_stark_scene',HERE/'audit_scene.py')
+        scene=importlib.util.module_from_spec(spec);spec.loader.exec_module(scene)
+        result=scene.audit(scene.load_scene())
+        self.assertEqual((result['maps'],result['directed_connections'],result['directed_warps'],result['header_components']),(13,20,6,1))
+
+    def test_combined_scene_wrong_warp_height_index_and_missing_destination_refused(self):
+        spec=importlib.util.spec_from_file_location('negative_stark_scene',HERE/'audit_scene.py')
+        scene=importlib.util.module_from_spec(spec);spec.loader.exec_module(scene)
+        original=scene.load_scene()
+        for value,error in [(99,'unresolved warp'),(0,'nonreciprocal warp')]:
+            bad=copy.deepcopy(original)
+            bad['MAP_SINNOH_STARK_OUTSIDE']['header']['warp_events'][0]['dest_warp_id']=str(value)
+            with self.assertRaisesRegex(ValueError,error):scene.audit(bad)
+        bad=copy.deepcopy(original);bad['MAP_SINNOH_STARK_ROOM1']['header']['warp_events'][1]['elevation']=3
+        with self.assertRaisesRegex(ValueError,'height'):scene.audit(bad)
+        bad=copy.deepcopy(original);bad['MAP_ROUTE227']['header']['connections'][-1]['map']='MAP_MISSING'
+        with self.assertRaisesRegex(ValueError,'unresolved|nonreciprocal'):scene.audit(bad)
+
     def test_dirty_geometry_and_unsafe_output_refused_before_write(self):
         original=Path.read_bytes
         def dirty(path):
