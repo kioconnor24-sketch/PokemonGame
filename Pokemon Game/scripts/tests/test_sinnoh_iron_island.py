@@ -18,7 +18,7 @@ spec = importlib.util.spec_from_file_location("iron_island_builder", HERE / "bui
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
-NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
+NEW = ("IronIsland", "FullmoonIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
 SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
@@ -68,7 +68,7 @@ class IronIslandTest(unittest.TestCase):
 
     def test_every_cell_word_is_an_existing_averon_cell(self):
         """ID, collision and elevation of every new cell occur together in the layouts the builder reads."""
-        for name, corpus in (("IronIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("IronIsland_1F", b.CAVE_CORPUS),
+        for name, corpus in (("IronIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("FullmoonIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("IronIsland_1F", b.CAVE_CORPUS),
                              ("IronIsland_B1F", b.CAVE_CORPUS), ("IronIsland_B2F", b.CAVE_CORPUS), ("IronIsland_B3F", b.CAVE_CORPUS)):
             known = set()
             for n in corpus:
@@ -115,10 +115,15 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual(har["warp_events"][2]["dest_map"], "MAP_IRON_ISLAND")
         arrive = isl["warp_events"][int(har["warp_events"][2]["dest_warp_id"])]
         self.assertEqual((arrive["x"], arrive["y"]), (tx, ty))      # step-on portal: trigger on the arrival warp
+        by_id = {h["id"]: h for h, _ in self.maps.values()}
         for x, y, _, (dest, warp) in self.coords["CanalaveCity_Harbor"]:
-            self.assertEqual((dest, warp), ("MAP_IRON_ISLAND", 2))
-            self.assertEqual((har["warp_events"][2]["x"], har["warp_events"][2]["y"]), (x, y))
-        for name in ("IronIsland", "CanalaveCity_Harbor"):
+            own = [i for i, w in enumerate(har["warp_events"]) if (w["x"], w["y"]) == (x, y)]
+            self.assertEqual(len(own), 1)                                # each gangway tile: one portal warp
+            self.assertEqual((har["warp_events"][own[0]]["dest_map"], int(har["warp_events"][own[0]]["dest_warp_id"])),
+                             (dest, warp))
+            back = by_id[dest]["warp_events"][warp]
+            self.assertEqual((back["dest_map"], int(back["dest_warp_id"])), ("MAP_CANALAVE_CITY_HARBOR", own[0]))
+        for name in ("IronIsland", "FullmoonIsland", "CanalaveCity_Harbor"):
             text = b.scripts(name, self.coords[name])
             self.assertEqual(text.count("\twarp "), len(self.coords[name]))
             self.assertEqual(text.count("\twaitstate\n"), len(self.coords[name]))

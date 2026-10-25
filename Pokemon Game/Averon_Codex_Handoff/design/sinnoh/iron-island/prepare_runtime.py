@@ -23,7 +23,7 @@ ENGINE = "Pokemon Game/engine/"
 STAND_IN = "MAPSEC_ROUTE_201"
 ORDER = ["IronIsland", "IronIsland_House", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F", "CanalaveCity_Harbor",
          "CanalaveCity_PokemonCenter_1F", "CanalaveCity_Library_1F", "CanalaveCity_Library_2F", "CanalaveCity_House2",
-         "CanalaveCity_House3", "CanalaveCity_House4", "CanalaveCity_House5", "CanalaveCity_House6"]
+         "CanalaveCity_House3", "CanalaveCity_House4", "CanalaveCity_House5", "CanalaveCity_House6", "FullmoonIsland"]
 
 
 def load(name, path):
@@ -72,7 +72,7 @@ def assemble(repo):
             if (w + 15) * (h + 14) > 10240:
                 raise ValueError("map footprint exceeds the map buffer")
             files[f"data/layouts/{name}/map.bin"] = struct.pack("<%dH" % len(cells), *cells)
-            border = cells[0] if name == "IronIsland" else builder.Cave(eng, 1, 1).k[529]
+            border = cells[0] if name in ("IronIsland", "FullmoonIsland") else builder.Cave(eng, 1, 1).k[529]
             files[f"data/layouts/{name}/border.bin"] = struct.pack("<4H", *[border] * 4)
             layouts["layouts"].append(dict(id=hdr["layout"], name=name + "_Layout", width=w, height=h,
                                            primary_tileset=prim, secondary_tileset=sec, layout_version="emerald",
