@@ -1,0 +1,54 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "Summit": {
+      "private_input_name": "spear-matrix-022-PRIVATE.json",
+      "source_path": "res/field/matrices/map_matrix_022.json",
+      "sha256": "3a8da7a23e9ca00c4a490e408c5d1d8310dbe4ad7946211649ddf27c75f88fd4",
+      "git_blob": "8418adbb29ee501bdb3fda7a8c74f06b0f23eebd",
+      "bytes": 153
+    },
+    "MAP_375": {
+      "private_input_name": "spear-land-375-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_375.bin",
+      "sha256": "76e8026f39a529d55dead742e3309b5efac19a211d91339c9ffda2f64c6bd8a5",
+      "git_blob": "a105637c6322adf4c7b6ffc21d6c06552bab49ef",
+      "bytes": 46622
+    },
+    "MAP_376": {
+      "private_input_name": "spear-land-376-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_376.bin",
+      "sha256": "1b69dec8fc6c9a1294f00b6c5626bcb39116a848b4534a3567bb22b192bcb2e2",
+      "git_blob": "ad3565d921206e15d5b1786f003aadd1485849de",
+      "bytes": 26690
+    },
+    "MAP_377": {
+      "private_input_name": "spear-land-377-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_377.bin",
+      "sha256": "959211ad91c6f83a5b8d2b7eda0c9cf0fb29a8a4aaf565dabb67773aeaf0a87f",
+      "git_blob": "00e6f2901cab8e3ed78ae69c0be68f6990e0049b",
+      "bytes": 28782
+    },
+    "MAP_378": {
+      "private_input_name": "spear-land-378-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_378.bin",
+      "sha256": "7bc6d09f32aebcc10bfebfd717dd14bb55a59e25d8138ece9c7f32f1773469cc",
+      "git_blob": "d8f7e3fa70f8899a7cdcf58c56d863f38b00aedf",
+      "bytes": 26194
+    }
+  },
+  "technical_exit": {
+    "path": "res/field/events/events_spear_pillar.json",
+    "sha256": "e4ebdde991a1d1dc4bb5552f83f0ae42204510cb6d2b3f647bbba2d2273309f1",
+    "git_blob": "4cf16be1763b593a7b6963f03875ffeee562c0c1",
+    "warps": [
+      {
+        "x": 31,
+        "z": 53,
+        "dest_header_id": "MAP_HEADER_MT_CORONET_6F",
+        "dest_warp_id": 1
+      }
+    ]
+  }
+}
