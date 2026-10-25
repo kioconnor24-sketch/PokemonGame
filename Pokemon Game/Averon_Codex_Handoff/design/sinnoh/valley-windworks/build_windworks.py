@@ -37,6 +37,9 @@ TURBINE = range(848, 911)
 GROUND_WALK = {"ValleyWindworks": 1, "ValleyWindoworks_Indoor": 528}
 OVERRIDE = {"ValleyWindworks": {1020: 368}, "ValleyWindoworks_Indoor": {760: 528, 761: 528}}
 ROCK = 137
+# The donor's tree at (0-1, 86-87) faces Route 205 South's walkable grass (31, 86-87) across the seam: open it to
+# grass (elevation 3, as the grass beside it) so the seam is walkable both ways (static seam-mismatch otherwise).
+SEAM_OPEN = {(0, 86): 470, (1, 86): 471, (0, 87): 486, (1, 87): 487}
 CONNECTIONS = [("MAP_ROUTE205_SOUTH", 0, "left"), ("MAP_ROUTE205_NORTH", -9, "up")]
 OPPOSITE = {"left": "right", "up": "down"}
 
@@ -71,8 +74,14 @@ def convert(donor, engine, name):
             turbines += 1
         else:
             assert D[mid] == A[mid], (name, mid)
-    for a, b in zip(blocks, cells):
-        assert (a ^ b) & 0xFC00 == 0
+    owned = set()
+    if name == "ValleyWindworks":
+        for (x, y), mid in SEAM_OPEN.items():
+            assert cells[y * w + x] & 1023 == mid and cells[y * w + x] & 0xC00, (x, y)
+            cells[y * w + x] = (3 << 12) | 1
+            owned.add(y * w + x)
+    for i, (a, b) in enumerate(zip(blocks, cells)):
+        assert i in owned or (a ^ b) & 0xFC00 == 0
     data = struct.pack("<%dH" % len(cells), *cells)
     border = pilot._inside(pathlib.Path(donor), layout["border_filepath"]).read_bytes()
     return data, border, {"map": name, "source_git_blob": hashlib.sha1(b"blob %d\0" % len(raw) + raw).hexdigest(),
