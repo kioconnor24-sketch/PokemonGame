@@ -39,13 +39,13 @@ class FakeMap:
 
 
 class FakeElevMap(FakeMap):
-    """FakeMap plus per-tile elevations (digits; '.' rows default to 3)."""
+    """FakeMap plus per-tile elevations (one hex digit per tile, so 'f' is a 15 bridge)."""
     def __init__(self, map_id, rows, elev, **kw):
         super().__init__(map_id, rows, **kw)
         self.elev = elev
 
     def elevation(self, x, y):
-        return int(self.elev[y][x])
+        return int(self.elev[y][x], 16)
 
 
 class FakeWorld:
@@ -152,6 +152,24 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(map_qa.reach(flat, [(3, 0)], reverse=True), {(2, 0), (3, 0), (2, 1), (3, 1)})
         self.assertIsNone(map_qa.mapdata.bfs(flat, (0, 0), {(3, 0)}))
         self.assertEqual(len(map_qa.mapdata.bfs(m, (0, 0), {(3, 0)})), 5)
+
+    def test_a_route_starting_on_a_bridge_keeps_the_arrival_elevation(self):
+        # Ground (3) | bridge (15) | ground (3) over a lower floor (4) the bridge spans; start on the bridge.
+        m = FakeElevMap("M", ["...",
+                              "..."], ["3f3",
+                                       "444"])
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)})), 1)
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)}, elevation=3)), 1)
+        self.assertIsNone(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)}, elevation=15))  # warped onto it: stuck at 15
+        self.assertIsNone(map_qa.mapdata.bfs(m, (1, 0), {(0, 1)}, elevation=3))   # mismatch protection kept
+        self.assertEqual(map_qa.reach(m, [(1, 0)]), {(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)})
+        self.assertEqual(map_qa.reach(m, [(0, 0)]), {(0, 0), (1, 0), (2, 0)})
+        self.assertEqual(map_qa.mapdata.start_elevations(m, (1, 0)), [3, 4, 15])
+        self.assertEqual(map_qa.mapdata.start_elevations(m, (0, 0)), [3])
+        far = FakeElevMap("M", ["....",
+                                "...."], ["3f35",
+                                          "4445"])
+        self.assertEqual(map_qa.mapdata.start_elevations(far, (1, 0)), [3, 4, 15])  # 5 never touches the bridge
 
     def test_a_seam_between_different_elevations_is_a_mismatch(self):
         a = FakeElevMap("A", ["....."], ["33344"], connections=[("down", "B", 0)])

@@ -164,7 +164,7 @@ def reach(m, starts, reverse=False):
         first = [(s, e) for s in starts for e in valid(*s)]
     else:
         step = lambda s: list(state_moves(m, *s[0], s[1]))
-        first = [(s, mapdata.elevation_at(m, *s)) for s in starts]
+        first = [(s, e) for s in starts for e in mapdata.start_elevations(m, s)]
     seen, queue = set(first), deque(first)
     while queue:
         for n in step(queue.popleft()):

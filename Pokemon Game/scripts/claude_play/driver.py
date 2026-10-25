@@ -119,7 +119,7 @@ class Driver:
                 return mid, pos
             m = self.live_map(map_id)
             dyn = set(blocked) | {(x, y) for x, y, *_ in m.objects}
-            path = mapdata.bfs(m, pos, goals, frozenset(dyn - set(goals)))
+            path = mapdata.bfs(m, pos, goals, frozenset(dyn - set(goals)), elevation=self.g.player_elevation())
             if path is None:
                 raise Stuck(f"no path on {map_id} from {pos} to {sorted(goals)[:5]}")
             for d in path:

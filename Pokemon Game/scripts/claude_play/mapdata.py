@@ -152,17 +152,39 @@ def elevations_compatible(a, b):
     return a == 0 or b in (0, 15) or a == b
 
 
+def start_elevations(m, start):
+    """Elevations the player may have on start when the actual one is unknown.
+
+    Normally the tile's own. A 15 (bridge) tile keeps the elevation the player arrived with: that of any walkable
+    tile next to the bridge (the connected 15 tiles around start), or 15 itself when warped straight onto it."""
+    e = elevation_at(m, *start)
+    if e != 15:
+        return [e]
+    seen, todo, levels = {start}, [start], {15}
+    while todo:
+        x, y = todo.pop()
+        for dx, dy in DIRS.values():
+            t = (x + dx, y + dy)
+            if t in seen or not (m.inside(*t) and m.walkable(*t)):
+                continue
+            if elevation_at(m, *t) == 15:
+                seen.add(t)
+                todo.append(t)
+            else:
+                levels.add(elevation_at(m, *t))
+    return sorted(levels)
+
+
 def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevation=None):
     """Shortest list of direction names from start to any goal tile, honouring the engine's elevation rules.
 
-    elevation is the player's current elevation (default: the start tile's)."""
+    elevation is the player's actual elevation; when None, every possible one on start (start_elevations)."""
     goals = set(goals)
     if start in goals:
         return []
-    e0 = elevation_at(m, *start) if elevation is None else elevation
-    first = (start, e0)
-    prev = {first: None}
-    q = deque([first])
+    first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
+    prev = dict.fromkeys(first)
+    q = deque(first)
     while q:
         state = q.popleft()
         cur, e = state
