@@ -11,12 +11,12 @@ Labels: **SOURCE** = staged files plus source tests; **DEV** = temporary-slot RO
 | #257 | `claude/valley-windworks-w5` | **W5**: Valley Windworks | DEV NORMAL and RELEASE 42/42, each + Continue 3/3 |
 | #260 | `claude/pal-park-w6` | **W6**: Pal Park + gate (new) | Gate NORMAL and RELEASE 35/35, each + 3/3 (Route 221 → gate → park) |
 | #265 | `claude/wayward-cave-w7` | **W7**: Wayward Cave 1F/B1F (new) | SOURCE 4/4; static clean; **DEV gate NORMAL 14/14 + Continue 3/3** (eterna-cycle scene) |
-| #267 | `claude/lost-tower-w8` | **W8**: Lost Tower 6F + Solaceon Ruins ×3 (Route 209) | SOURCE 6/6; static 0 findings after a derived Route 209 overlay sets the 8 pocket step cells to elevation 0 (`5823b4d3`). **DEV gate FAIL 136/170**: the Ruins and Route 209 pass, but the **Lost Tower stairs (1F→2F onward) don't trigger** (open defect). Continue 3/3. |
+| #267 | `claude/lost-tower-w8` | **W8**: Lost Tower 6F + Solaceon Ruins ×3 (Route 209) | SOURCE 6/6; static 0 findings after a derived Route 209 overlay sets the 8 pocket step cells to elevation 0 (`5823b4d3`). **DEV gate 184/184 + Continue 3/3** (the earlier 136/170 was a tooling defect: Mt. Pyre holes are one-way; fixed in #252). |
 | #268 | `claude/great-marsh-w10` | **W10**: Great Marsh + gate + Pastoria House1–8 | SOURCE 4/4; static **0 findings**; **DEV gate NORMAL 174/174 + Continue 3/3** (eastern-loop scene) |
 | #269 | `claude/amity-square-w11` | **W11**: Amity Square + Hearthome House1–7 | SOURCE 4/4; static **0 findings**; **DEV gate NORMAL 149/149 + Continue 3/3** (hearthome-solaceon scene) |
-| #275 | `claude/sendoff-spring-w13` | **W13**: Spring Path → Sendoff Spring → Turnback Cave 1F/B1F/B2F + Maniac Tunnel; Route 214 derived overlay | SOURCE 7/7; static **0 findings** (eastern-loop scene); runtime gate stopped early at wrap-up (fixture start outside the batch) |
-| #276 | `claude/jubilife-shells-w14` | **W14**: Jubilife Global Terminal, TV, Pokétch Company and 2 condos behind production Jubilife's 7 closed doors (DEV overlay) | SOURCE 5/5; static **0 findings** (production scene); ROM built, runtime not run yet |
-| #270 | `claude/city-shells-w12` | **W12**: neutral shells (Veilstone, Route 213, Valor Lakefront, Solaceon, Routes 208/210S/212S) + **Veilstone civic interiors** (Pokémon Center, warehouse, department store 1F–5F + rooftop via a one-cell derived door; `3873daf5`) | SOURCE 5/5; static 0 findings (Veilstone + 9 civic floors). Route 213 (74,4) left closed (sealed plateau). Runtime gate queued. |
+| #275 | `claude/sendoff-spring-w13` | **W13**: Spring Path → Sendoff Spring → Turnback Cave 1F/B1F/B2F + Maniac Tunnel; Route 214 derived overlay | SOURCE 7/7; static **0 findings** (eastern-loop scene); **DEV gate 40/40 + Continue 3/3** |
+| #276 | `claude/jubilife-shells-w14` | **W14**: Jubilife Global Terminal, TV, Pokétch Company and 2 condos behind production Jubilife's 7 closed doors (DEV overlay) | SOURCE 6/6; static 0 findings; **DEV gate 155/155 + Continue 3/3** after opening the halls' solid non-animated doors (`6343ec68`) |
+| #270 | `claude/city-shells-w12` | **W12**: neutral shells (Veilstone, Route 213, Valor Lakefront, Solaceon, Routes 208/210S/212S) + **Veilstone civic interiors** (Pokémon Center, warehouse, department store 1F–5F + rooftop via a one-cell derived door; `3873daf5`) | SOURCE 5/5; static 0 findings (Veilstone + 9 civic floors). Route 213 (74,4) left closed (sealed plateau). **Veilstone DEV gate 140/140 + Continue 3/3**. |
 | #252 | `claude/map-qa-elevation` | Tooling: elevation, span-aware seams, ladders, follower step-on fix, bridge start elevation (review 5641599180), **one-way holes / arrival-only warps** (`ba533bed`), **seams from a bridge use the actual elevation** (review 5644727982, `4e71ae64`), `go()` returns to the map (`68c27967`) | Host 67 OK; live W5 scene 42/42 + 3/3 at `37d52157` |
 
 ## Merge order
@@ -53,6 +53,5 @@ Production files are untouched in all of these; each is a DEV overlay or proposa
 
 ## Still to run
 
-- **Fix W8's Lost Tower stairs** (failing warps listed on #267).
-- Re-run the W13 gate with the save inside Spring Path; run the W14 gate (production scene ROM `db14652c` built in `wt-prodthrow`).
+- #252: awaiting manager re-review (bridge-start, bridge seam, holes, solid step-on doors, stair-door probes fixed).
 - W12 runtime gate; RELEASE builds for the family-scene batches at integration.
