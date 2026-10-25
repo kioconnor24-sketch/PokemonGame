@@ -1,0 +1,55 @@
+{
+  "status": "OFF_ENGINE_STAGING_NOT_PRODUCTION",
+  "maps": {
+    "IronIsland": {
+      "layout": "LAYOUT_IRON_ISLAND",
+      "width": 40,
+      "height": 32,
+      "map_sha256": "0b58863396a37c974045e9fc17543e41901e98b964e6b6e8f5623b11ce9879da",
+      "border_sha256": "09e6b43c8549e711f19a59dea03683b6c42176bdc528bf60fc0b9a0629720fbb"
+    },
+    "IronIsland_House": {
+      "layout": "LAYOUT_HOUSE1"
+    },
+    "IronIsland_1F": {
+      "layout": "LAYOUT_IRON_ISLAND_1F",
+      "width": 26,
+      "height": 19,
+      "map_sha256": "9d740c3a62c2315347850871ed823029f04c9a17e55cb8107203bb82ee2259a0",
+      "border_sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+    },
+    "IronIsland_B1F": {
+      "layout": "LAYOUT_IRON_ISLAND_B1F",
+      "width": 32,
+      "height": 25,
+      "map_sha256": "c6b665f220d9749a4cc901524db91a74c53fe139d89884cd52db47e5d7c3a936",
+      "border_sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+    },
+    "CanalaveCity_Harbor": {
+      "layout": "LAYOUT_HARBOR"
+    },
+    "CanalaveCity_PokemonCenter_1F": {
+      "layout": "LAYOUT_POKEMON_CENTER_1F"
+    }
+  },
+  "inputs_sha256": {
+    "data/layouts/DewfordTown/map.bin": "f99942a2f630ca1fc16d7d84f7f831485934962c4477e8b1fa88cfbe30c61f74",
+    "data/layouts/GraniteCave_1F/map.bin": "6e8e5420747a9e2c18c9ecc04e43e028cac70e6030a8015a52edcac739459bbf",
+    "data/layouts/GraniteCave_B1F/map.bin": "b9598bdd24ac4358679e255dc07052b2687c2babef091ff6174115c19409c7c5",
+    "data/layouts/LakeVerity/map.bin": "f7fd0e8a1acd247c123b67df78d06cccfaf47bce9cc524af9d0db7a43ad1864a",
+    "data/layouts/OreburghGate_1F/map.bin": "03fb0288b064076c4eaaa530ca49070bca2d416e81d31a718fcb94973cd499e2",
+    "data/layouts/Route105/map.bin": "3426db0bbeca5baeb3971d5d60345400d01fff229a60c28ebe3745fd81558b14",
+    "data/layouts/Route106/map.bin": "1b7db80391ceca412e992ad704ccfd8018d3d97a810d4a144033e1193ba67849",
+    "data/layouts/Route107/map.bin": "af88a3d526aa59d8f263514364c2ae76f333d3e0dc9222c3b1786f10f025e097"
+  },
+  "canalave_overlay": {
+    "source_sha256": "1a6d0438b0ca4fae2166bbedd09cb27d29a04175c8bf9e0f36aaf5459ae87eb5",
+    "output_sha256": "6dbe1341a78eb1f615a2f7b2f9999b4585fc80c4d97351bd5e3e2de98d24f68b",
+    "changed_cells": [
+      [
+        29,
+        13
+      ]
+    ]
+  }
+}
