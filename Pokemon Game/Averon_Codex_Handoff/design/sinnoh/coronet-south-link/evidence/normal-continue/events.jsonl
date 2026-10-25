@@ -1,0 +1,23 @@
+{"t": 1792890915.15, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792890915.19, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792890917.91, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792890918.01, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792890919.76, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792890919.82, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792890920.36, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792890920.4, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792890920.92, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792890920.95, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792890922.01, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792890922.04, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792890925.6, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792890925.66, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792890926.3, "event": "field", "map": "MAP_MT_CORONET_1F_SOUTH", "pos": [31, 9], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792890926.46, "event": "capture", "file": "0008-continued.png"}
+{"t": 1792890926.46, "event": "continue-check", "problems": []}
+{"t": 1792890926.46, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_MT_CORONET_1F_SOUTH", [31, 9]]}
+{"t": 1792890926.99, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_MT_CORONET_1F_SOUTH", [31, 9]]}
+{"t": 1792890930.78, "event": "capture", "file": "0009-start.png"}
+{"t": 1792890930.78, "event": "observe", "label": "start", "problems": []}
+{"t": 1792890930.78, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792890930.79, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
