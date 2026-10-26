@@ -24,3 +24,6 @@ Re-ran all7 crossing tests against the actual Git-blob-verified Python modules f
 
 ## West22 integration follow-up
 This preserved source packet is now reused by the eastern assembler itself on the PR306 child compatibility branch. Every original staged donor/native-art file stays unchanged. Updated compose receipts hash the actual patched output; standalone assemble recognizes the already-composed receipt instead of applying twice. Original nineteen-slot evidence above remains historical. New22-slot runtime-recipe-west22.json is separate. No production geometry or gameplay acceptance added.
+
+## Current-main production candidate reconciliation
+Merge accepted main e595de41 into306 cdbbd490 on a new Codex-owned integration branch. Retain22-slot source guards and existing fa12ccb0 exact baseline; both that baseline and the current candidate have identical engine tree320fc1f48b1d1da85a83bcf943dbb30103379e0f. Keep the22-slot test/recipe, while preserving main's separate historical19-slot recipe. No Claude production/source byte changed; only Codex-owned conflicts resolved. New exact-final-head paired gameplay remains required before306 promotion.
