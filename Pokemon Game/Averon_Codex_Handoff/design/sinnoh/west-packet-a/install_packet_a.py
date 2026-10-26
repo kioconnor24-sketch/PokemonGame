@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """West integrated packet A (C36): install W14's Jubilife interiors and W16's Oreburgh Gate B1F into the engine.
 
-PRODUCTION integration of already-staged Claude geography, appended after the existing 19 Sinnoh slots:
-- W14 (jubilife-shells): Global Terminal 1F/2F, TV 1F/2F, Pokétch Company 1F/2F/3F, Condo 1/2 behind the seven
-  warp-less doors of production Jubilife; Jubilife gains the seven warps and its two halls' four non-animated door
-  cells the walkable 693 word (collision 1 -> 0, nothing else).
+PRODUCTION integration of already-staged Claude geography, appended after the existing 19 Sinnoh slots. Narrowed
+to three maps by the manager's routing decision (option (a), PR #306 comment 6408538418):
+- W14 (jubilife-shells): only Global Terminal 1F/2F, behind the west hall's double door (19-20, 13). Jubilife gains
+  those two warps and the two west-hall non-animated door cells the walkable 693 word (collision 1 -> 0, nothing
+  else). The TV, Pokétch Company and condo doors stay closed and unassigned (source-grounded interiors: #238).
 - W16 (oreburgh-gate-b1f): Oreburgh Gate B1F under the dead-end north alcove of production Gate 1F (one ladder cell,
   one appended warp).
 
-Identities: map slots 19-28 appended to gMapGroup_Sinnoh (0-18 untouched); layouts reuse stock interiors except one
-new layout (LAYOUT_OREBURGH_GATE_B1F, appended); sections are the existing MAPSEC_JUBILIFE_CITY and
+Identities: map slots 19-21 appended to gMapGroup_Sinnoh in the order of SLOTS (0-18 untouched); layouts reuse stock
+interiors except one new layout (LAYOUT_OREBURGH_GATE_B1F, appended); sections are the existing MAPSEC_JUBILIFE_CITY and
 MAPSEC_OREBURGH_GATE. No new section/healer/flag/var/save identity, services, NPCs, encounters or story.
 Headers follow production conventions: interiors copy JubilifeCity_Mart's header fields with Jubilife's music,
 B1F copies Gate 1F's.
@@ -42,6 +43,9 @@ def load(name, path):
 w14 = load("w14", SINNOH / "jubilife-shells/build_jubilife_shells.py")
 w16 = load("w16", SINNOH / "oreburgh-gate-b1f/build_oreburgh_gate_b1f.py")
 PRIOR_SLOTS = 19
+# Appended slots, in order: 19, 20, 21.
+SLOTS = ["JubilifeCity_GlobalTerminal_1F", "JubilifeCity_GlobalTerminal_2F", "OreburghGate_B1F"]
+OPENED_DOORS = [(19, 13), (20, 13)]                                 # the west hall's double door
 REGISTRY = "test/data/averon_map_registry_slots.inc"
 HEADER_FIELDS = ("music", "region", "region_map_section", "weather", "map_type", "allow_cycling", "allow_escaping",
                  "allow_running", "show_map_name", "requires_flash", "battle_scene")
@@ -62,13 +66,26 @@ def plan(engine):
     """Every engine file this packet writes, as {relative path: bytes}, computed from the base snapshot."""
     engine = pathlib.Path(engine)
     base = lambda rel: (BASE / rel).read_bytes()
-    _, maps, jub, jub_blocks = w14.build(engine)
+    _, maps, jub, w14_blocks = w14.build(engine)
     _, gate, gate_blocks, b1f, cv = w16.build(engine)
+    maps = {n: maps[n] for n in SLOTS[:2]}
+    base_jub = json.loads(base("data/maps/JubilifeCity/map.json"))
+    kept = len(base_jub["warp_events"]) + len(OPENED_DOORS)
+    assert jub["warp_events"][:len(base_jub["warp_events"])] == base_jub["warp_events"]
+    assert [(w["x"], w["y"]) for w in jub["warp_events"][len(base_jub["warp_events"]):kept]] == OPENED_DOORS
+    assert all(w["dest_map"] == "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F"
+               for w in jub["warp_events"][len(base_jub["warp_events"]):kept])
+    jub["warp_events"] = jub["warp_events"][:kept]              # drop the TV, Pokétch and condo warps
+    width, _, jub_blocks = w14.w1.Engine(engine, base=BASE).cells("JubilifeCity")
+    jub_blocks = list(jub_blocks)                               # base Jubilife with only the west hall opened
+    for x, y in OPENED_DOORS:
+        jub_blocks[y * width + x] = w14_blocks[y * width + x]
     mart = json.loads((engine / "data/maps/JubilifeCity_Mart/map.json").read_text())
     gate_src = json.loads(base("data/maps/OreburghGate_1F/map.json"))
     city_music = json.loads(base("data/maps/JubilifeCity/map.json"))["music"]
     files = {}
     names = list(maps) + ["OreburghGate_B1F"]
+    assert names == SLOTS, names
     for name, staged in maps.items():
         hdr = production_header(staged, mart, city_music)
         files[f"data/maps/{name}/map.json"] = hdr

@@ -1,8 +1,9 @@
-"""C36 west packet A: the engine holds exactly W14 + W16 on top of the pinned base, appended after slot 18."""
+"""C36 west packet A (narrowed, option (a)): Global Terminal 1F/2F + Oreburgh Gate B1F at slots 19-21 on the pinned base."""
 import importlib.util
 import json
 import pathlib
 import re
+import struct
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -28,7 +29,7 @@ class WestPacketATest(unittest.TestCase):
     def test_slots_0_to_18_unchanged_and_ten_appended(self):
         sinnoh = json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
         self.assertEqual(sinnoh, PRIOR + self.names)
-        self.assertEqual(len(self.names), 10)
+        self.assertEqual(self.names, ["JubilifeCity_GlobalTerminal_1F", "JubilifeCity_GlobalTerminal_2F", "OreburghGate_B1F"])
         registry = (ENGINE / p.REGISTRY).read_text()
         self.assertIn(f"REGISTRY_GROUP(76, gMapGroup_Sinnoh, {len(sinnoh)}, 1)", registry)
         slots = re.findall(r"REGISTRY_SLOT\(76, (\d+), (\w+), (\w+), 1\)", registry)
@@ -62,10 +63,24 @@ class WestPacketATest(unittest.TestCase):
         base_jub = json.loads((p.BASE / "data/maps/JubilifeCity/map.json").read_text())
         jub = json.loads((ENGINE / "data/maps/JubilifeCity/map.json").read_text())
         self.assertEqual(jub["warp_events"][:len(base_jub["warp_events"])], base_jub["warp_events"])
-        self.assertEqual(len(jub["warp_events"]) - len(base_jub["warp_events"]), 7)
+        added = jub["warp_events"][len(base_jub["warp_events"]):]
+        self.assertEqual([(w["x"], w["y"], w["dest_map"]) for w in added],
+                         [(19, 13, "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F"), (20, 13, "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F")])
         base_gate = json.loads((p.BASE / "data/maps/OreburghGate_1F/map.json").read_text())
         gate = json.loads((ENGINE / "data/maps/OreburghGate_1F/map.json").read_text())
         self.assertEqual(gate["warp_events"][:-1], base_gate["warp_events"])
+
+    def test_only_the_west_hall_door_cells_change(self):
+        def cells(path):
+            raw = path.read_bytes()
+            return struct.unpack("<%dH" % (len(raw) // 2), raw)
+        before = cells(p.BASE / "data/layouts/JubilifeCity/map.bin")
+        after = cells(ENGINE / "data/layouts/JubilifeCity/map.bin")
+        changed = [(i % 70, i // 70) for i, (a, b) in enumerate(zip(before, after)) if a != b]
+        self.assertEqual(changed, [(19, 13), (20, 13)])
+        for x, y in changed:
+            self.assertEqual(after[y * 70 + x] & 0x3FF, before[y * 70 + x] & 0x3FF)
+            self.assertEqual(after[y * 70 + x] & 0xC00, 0)
 
     def test_a_tampered_engine_file_is_reported(self):
         target = ENGINE / "data/maps/OreburghGate_B1F/scripts.inc"
