@@ -20,8 +20,9 @@ Lakefront never uses:
 Collision/elevation are the donor's cell for cell, except the island cave door (23, 25): no warp (story-reserved,
 Azelf), so it is made solid like Lake Verity's.
 
-ValorLakefront-dev-overlay: Codex's header plus the donor's two entrance warps, and a derived map.bin reopening the
-two cells Codex closed for them (41, 27-28; source collision 0). No objects, encounters, story, music or sections
+ValorLakefront-dev-overlay: Codex's header plus the donor's two entrance warps, and a derived copy of the blockdata
+Codex's scene installs (eastern-loop/hotel-link/valor-map.bin) reopening the two cells Codex closed for them (41, 27-28;
+source collision 0). No objects, encounters, story, music or sections
 (MAPSEC_PENDING_OWNER; the Lakefront's music).
 
   build_lake_valor.py --donor-root DONOR --out DIR
@@ -113,7 +114,7 @@ def build(donor, engine):
     cells[y * W + x] |= 1 << 10
     border = [(c & 0xFC00) | tile(c & 1023) for c in unpack(border_raw)]
     lakefront = json.loads((EASTERN / "staged/ValorLakefront/map.json").read_text())
-    front_cells = unpack((EASTERN / "staged/ValorLakefront/averon-map.bin").read_bytes())
+    front_cells = unpack((EASTERN / "hotel-link/valor-map.bin").read_bytes())     # what Codex's scene installs
     closed = {(c["x"], c["y"]): c["before"] for c in json.loads((EASTERN / "source-receipt.json").read_text())
               ["closure_changes"]["ValorLakefront"]}
     n = len(lakefront["warp_events"])
@@ -132,7 +133,8 @@ def build(donor, engine):
     hashes = {"donor LakeValor map.bin": BLOBS["LakeValor"], "donor LakeValor border.bin": BORDER_BLOB,
               "donor ValorLakefront map.bin": BLOBS["ValorLakefront"],
               **{f"eastern-loop/{p}": hashlib.sha256((EASTERN / p).read_bytes()).hexdigest() for p in (
-                  "staged/ValorLakefront/map.json", "staged/ValorLakefront/averon-map.bin", "source-receipt.json",
+                  "staged/ValorLakefront/map.json", "staged/ValorLakefront/averon-map.bin", "hotel-link/valor-map.bin",
+                  "source-receipt.json",
                   "outdoor-family/primary-attributes.bin")}}
     return lake, cells, border, layout_info, lakefront, front_cells, hashes
 

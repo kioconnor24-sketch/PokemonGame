@@ -41,7 +41,7 @@ class LakeValorTest(unittest.TestCase):
         self.assertEqual(self.front["warp_events"][:len(src["warp_events"])], src["warp_events"])
         self.assertEqual({k: v for k, v in self.front.items() if k != "warp_events"},
                          {k: v for k, v in src.items() if k != "warp_events"})
-        before = cells(EASTERN / "staged/ValorLakefront/averon-map.bin")
+        before = cells(EASTERN / "hotel-link/valor-map.bin")
         after = cells(HERE / "ValorLakefront-dev-overlay/map.bin")
         changed = [(i % 56, i // 56, a ^ b) for i, (a, b) in enumerate(zip(before, after)) if a != b]
         self.assertEqual([(x, y) for x, y, _ in changed], [(41, 27), (41, 28)])
