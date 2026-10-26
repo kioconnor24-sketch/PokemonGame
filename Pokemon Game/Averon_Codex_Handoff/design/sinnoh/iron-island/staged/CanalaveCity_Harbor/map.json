@@ -1,7 +1,7 @@
 {
   "id": "MAP_CANALAVE_CITY_HARBOR",
   "name": "CanalaveCity_Harbor",
-  "layout": "LAYOUT_HARBOR",
+  "layout": "LAYOUT_CANALAVE_CITY_HARBOR",
   "music": "MUS_ROUTE110",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -32,22 +32,27 @@
     },
     {
       "x": 8,
-      "y": 11,
+      "y": 10,
       "elevation": 0,
       "dest_map": "MAP_IRON_ISLAND",
       "dest_warp_id": "2"
-    }
-  ],
-  "coord_events": [
+    },
     {
-      "type": "trigger",
       "x": 7,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "CanalaveCity_Harbor_EventScript_ToIronIsland0"
+      "dest_map": "MAP_FULLMOON_ISLAND",
+      "dest_warp_id": "0"
     },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_NEWMOON_ISLAND",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
     {
       "type": "trigger",
       "x": 8,
@@ -55,7 +60,25 @@
       "elevation": 0,
       "var": "VAR_TEMP_1",
       "var_value": "0",
-      "script": "CanalaveCity_Harbor_EventScript_ToIronIsland1"
+      "script": "CanalaveCity_Harbor_EventScript_ToIronIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CanalaveCity_Harbor_EventScript_ToFullmoonIsland"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "CanalaveCity_Harbor_EventScript_ToNewmoonIsland"
     }
   ],
   "bg_events": []
