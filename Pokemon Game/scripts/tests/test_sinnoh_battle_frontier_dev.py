@@ -64,6 +64,14 @@ class BattleFrontierDEV(unittest.TestCase):
    for p,h in r['files'].items():self.assertEqual(m.base.sha((out/'overlay'/p).read_bytes()),h)
    with self.assertRaisesRegex(ValueError,'off-engine'):m.export(ROOT,out)
   with self.assertRaisesRegex(ValueError,'off-engine'):m.export(ROOT,ROOT/m.ENGINE/'bad')
+ def test_export_does_not_require_unfetched_side_branch_baseline_object(self):
+  original=m.base.git
+  def shallow(repo,*args):
+   if any(m.BASE in str(arg) for arg in args):raise AssertionError('BASE side-branch object unavailable in shallow CI checkout')
+   return original(repo,*args)
+  with patch.object(m.base,'git',shallow):
+   files,r=m.assemble(ROOT)
+  self.assertEqual(files,self.files);self.assertEqual(r['base_engine_tree'],m.ENGINE_TREE)
  def test_dirty_source_and_non_disposable_install_refused_without_writes(self):
   original=Path.read_bytes;target=HERE.parent/'stark-mountain/staged/Room2/map.bin'
   def dirty(p):

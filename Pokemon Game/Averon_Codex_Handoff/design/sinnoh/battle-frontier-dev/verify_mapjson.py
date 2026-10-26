@@ -11,6 +11,7 @@ def verify(repo,bundle,tool,out):
     if out.exists() or out.is_relative_to(engine) or out.is_relative_to(bundle) or 'engine' in out.parts:raise ValueError('new independent verification directory required')
     if not tool.is_file():raise ValueError('real mapjson executable required')
     recipe=json.loads((bundle/'receipt.json').read_text());overlay=bundle/'overlay'
+    if recipe['base_engine_tree']!=scene.ENGINE_TREE or scene.base.git(repo,'rev-parse','HEAD:'+scene.ENGINE).decode().strip()!=scene.ENGINE_TREE:raise ValueError('verification engine tree differs')
     for p,h in recipe['files'].items():
         if scene.base.sha((overlay/p).read_bytes())!=h:raise ValueError('overlay hash differs')
     source_hashes={}

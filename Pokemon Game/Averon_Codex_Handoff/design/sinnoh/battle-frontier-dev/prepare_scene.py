@@ -6,6 +6,7 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 ENGINE='Pokemon Game/engine'
 BASE='ef48b0df4ebe7134b45221887ee39378416918bb'
+ENGINE_TREE='c2e26cce0a00af43251e0672fef708c796b7a918'
 s=importlib.util.spec_from_file_location('battle_dev_guarded_reuse',HERE.parent/'sunyshore-coast/prepare_runtime.py')
 reuse=importlib.util.module_from_spec(s);s.loader.exec_module(reuse)
 base=reuse.base
@@ -19,7 +20,7 @@ FAMILIES={
  'StarkCave':('stark-mountain/cave-family','Cave')}
 def assemble(repo):
     repo=Path(repo).resolve();engine=repo/ENGINE
-    if base.git(repo,'rev-parse','HEAD:'+ENGINE)!=base.git(repo,'rev-parse',BASE+':'+ENGINE):raise ValueError('exact engine tree required')
+    if base.git(repo,'rev-parse','HEAD:'+ENGINE).decode().strip()!=ENGINE_TREE:raise ValueError('exact engine tree required')
     before=reuse.inputs(repo);source_pins={};native_inputs={}
     def read(path):
         raw=base.verified_file(ROOT,path.relative_to(ROOT),'HEAD');source_pins[str(path.relative_to(ROOT))]=base.sha(raw);return raw
@@ -153,7 +154,7 @@ def assemble(repo):
         scene[key]=dict(group=group,num=i,id=h['id'],name=name,dimensions=list(p['dims']),source_section='MAPSEC_PENDING_OWNER',dev_only_section='MAPSEC_ROUTE_201')
     for path,lines in [('include/tilesets.h',decl),('src/data/tilesets/headers.h',heads),('src/data/tilesets/metatiles.h',meta),('data/event_scripts.s',includes)]:out[path]=before[path]+(chr(10)+chr(10).join(lines)+chr(10)).encode()
     out['data/maps/map_groups.json']=encode(groups);out['data/layouts/layouts.json']=encode(layouts);out['test/data/averon_map_registry_slots.inc']=slots.encode()
-    receipt=dict(status='DEV_OVERLAY_ONLY_NOT_ROM_OR_PRODUCTION_ACCEPTANCE',base=BASE,source_sha=base.git(ROOT,'rev-parse','HEAD').decode().strip(),existing_map_names_preserved=prior,
+    receipt=dict(status='DEV_OVERLAY_ONLY_NOT_ROM_OR_PRODUCTION_ACCEPTANCE',base=BASE,base_engine_tree=ENGINE_TREE,source_sha=base.git(ROOT,'rev-parse','HEAD').decode().strip(),existing_map_names_preserved=prior,
         dev_surrogate='Existing217 only in disposable scene; no permanent origin or save compatibility acceptance',scene=scene,source_sha256=source_pins,
         base_input_sha256={p:base.sha(v) for p,v in before.items()},native_input_sha256=native_inputs,family_aliases=aliases,stark_room2_dev_split=translation,verified_native_attribute_cells=verified_cells,
         secondary_metadata_bytes_before=sum(len(v['secondary-metatiles.bin'])+len(v['secondary-attributes.bin']) for v in families.values()),
