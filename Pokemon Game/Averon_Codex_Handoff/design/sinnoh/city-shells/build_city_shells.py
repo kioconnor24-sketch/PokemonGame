@@ -10,7 +10,9 @@ warp leaving the building other than the street mats (elevators, a Center's 2F) 
 Veilstone's Pokemon Center (stock Center 1F), the north-east block's middle door (Stern's Shipyard 1F/2F as a
 warehouse) and the north-west block, whose door is drawn as a closed picture (529): a derived copy of Veilstone's
 map.bin puts the bank's animated door (533, copied from the north-east door, same 525/528 surroundings) there, and it
-opens onto Lilycove's department store 1F-5F and rooftop by the stairs. Celestic and Mt. Coronet are excluded (active Codex work); Canalave, Pastoria and Hearthome are
+opens onto Lilycove's department store 1F-5F and rooftop by the stairs. Solaceon's west house is drawn the same way
+(picture 593); it gets the family's door from Route 210 South's house (identical 528/528/519 surroundings) and a
+plain shell. Celestic and Mt. Coronet are excluded (active Codex work); Canalave, Pastoria and Hearthome are
 handled by W1, W10 and W11.
 
   build_city_shells.py --engine ENGINE --out DIR
@@ -29,7 +31,11 @@ w1 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w1)
 # Doors left closed: their doorstep is a sealed pocket (static audit on the eastern-loop scene: reaches no exit).
 EXCLUDE = {("Route213", (74, 4)): "doorstep (74, 5) is on a rock-walled plateau with no way in"}
-OPEN = {"VeilstoneCity": {(18, 10): (41, 14)}}   # closed door picture -> copy of this animated door cell
+# Closed door pictures (solid, non-door) -> the family's animated door cell with the same left/right/above pieces.
+# Solaceon's (11, 11) picture (593) has no such door on its own map; Route 210 South's house door matches exactly.
+# Not opened: Veilstone's (43, 67) picture is on the map's bottom row, so it has no doorstep to arrive on.
+OPEN = {"VeilstoneCity": {(18, 10): ("VeilstoneCity", (41, 14))},
+        "SolaceonTown": {(11, 11): ("Route210_South", (30, 47))}}
 CIVIC = {("VeilstoneCity", (41, 36)): [("VeilstoneCity_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")],
          ("VeilstoneCity", (41, 14)): [("VeilstoneCity_Warehouse_1F", "SlateportCity_SternsShipyard_1F"),
                                        ("VeilstoneCity_Warehouse_2F", "SlateportCity_SternsShipyard_2F")],
@@ -62,18 +68,31 @@ def map_bin(family, name):
     return width, list(struct.unpack("<%dH" % (len(raw) // 2), raw))
 
 
-def opened(family, name):
+def opened(engine, family, name):
     """Derived blockdata with OPEN's door pictures replaced by animated door cells, or None."""
     if name not in OPEN:
         return None
     width, cells = map_bin(family, name)
+    attrs, names = attributes(family), behaviours(engine)
     out = list(cells)
-    for (x, y), (sx, sy) in OPEN[name].items():
-        assert cells[y * width + x] & 1023 == 529 and cells[sy * width + sx] & 1023 == 533
+    for (x, y), (donor, (sx, sy)) in OPEN[name].items():
+        dwidth, dcells = map_bin(family, donor)
+        door, picture = dcells[sy * dwidth + sx], cells[y * width + x]
+        assert names[attrs[door & 1023] & 0xFF] == "MB_ANIMATED_DOOR", (donor, sx, sy)
+        assert picture & 0xC00 and "DOOR" not in names[attrs[picture & 1023] & 0xFF], (name, x, y)
+        assert not cells[(y + 1) * width + x] & 0xC00, (name, x, y)       # a walkable doorstep below
         for dx, dy in ((-1, 0), (1, 0), (0, -1)):          # same surroundings as the copied door
-            assert cells[(y + dy) * width + x + dx] & 1023 == cells[(sy + dy) * width + sx + dx] & 1023
-        out[y * width + x] = cells[sy * width + sx]
+            assert cells[(y + dy) * width + x + dx] & 1023 == dcells[(sy + dy) * dwidth + sx + dx] & 1023, (name, x, y)
+        out[y * width + x] = door
     return out
+
+
+def attributes(family):
+    fam = SINNOH / family / "outdoor-family"
+    pa = (fam / "primary-attributes.bin").read_bytes()
+    sa = (fam / "secondary-attributes.bin").read_bytes()
+    pa += b"\0" * (1024 - len(pa))
+    return struct.unpack("<%dH" % ((len(pa) + len(sa)) // 2), pa + sa)
 
 
 def civic(engine, floors, prefix, door_warps):
@@ -103,11 +122,7 @@ def civic(engine, floors, prefix, door_warps):
 
 
 def closed_doors(engine, family, name):
-    fam = SINNOH / family / "outdoor-family"
-    pa = (fam / "primary-attributes.bin").read_bytes()
-    sa = (fam / "secondary-attributes.bin").read_bytes()
-    pa += b"\0" * (1024 - len(pa))
-    attrs = struct.unpack("<%dH" % ((len(pa) + len(sa)) // 2), pa + sa)
+    attrs = attributes(family)
     names = behaviours(engine)
     d = SINNOH / family / "staged" / name
     hdr = json.loads((d / "map.json").read_text())
@@ -144,7 +159,7 @@ def build(engine):
             shells[shell] = w1.header(mid, shell, "LAYOUT_HOUSE1", music, "MAP_TYPE_INDOOR",
                                       [(3, 8, prefix, i), (4, 8, prefix, i)])
         overlays[name] = hdr
-    return overlays, shells, {n: opened(f, n) for f, n, _, _ in TARGETS if n in OPEN}
+    return overlays, shells, {n: opened(engine, f, n) for f, n, _, _ in TARGETS if n in OPEN}
 
 
 def write(engine, out):

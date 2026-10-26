@@ -66,6 +66,24 @@ class CityShellsTest(unittest.TestCase):
         self.assertEqual([(i % width, i // width) for i, (a, c) in enumerate(zip(src, got)) if a != c], [(18, 10)])
         self.assertEqual(got[10 * width + 18], src[14 * width + 41])
 
+    def test_solaceon_opens_its_door_picture_with_the_family_door(self):
+        width, src = b.map_bin("hearthome-solaceon", "SolaceonTown")
+        got = self.bins["SolaceonTown"]
+        self.assertEqual([(i % width, i // width) for i, (a, c) in enumerate(zip(src, got)) if a != c], [(11, 11)])
+        dwidth, donor = b.map_bin("hearthome-solaceon", "Route210_South")
+        self.assertEqual(got[11 * width + 11], donor[47 * dwidth + 30])
+        self.assertIn("MAP_SOLACEON_TOWN_HOUSE3", {w["dest_map"] for w in self.overlays["SolaceonTown"]["warp_events"]})
+
+    def test_a_donor_door_with_other_surroundings_is_refused(self):
+        saved = dict(b.OPEN)
+        try:
+            b.OPEN["SolaceonTown"] = {(11, 11): ("HearthomeCity", (14, 19))}     # a door between other pieces
+            with self.assertRaises(AssertionError):
+                b.opened(ENGINE, "hearthome-solaceon", "SolaceonTown")
+        finally:
+            b.OPEN.clear()
+            b.OPEN.update(saved)
+
     def test_no_door_left_closed(self):
         for family, name, _, _ in b.TARGETS:
             hdr, doors = b.closed_doors(ENGINE, family, name)
