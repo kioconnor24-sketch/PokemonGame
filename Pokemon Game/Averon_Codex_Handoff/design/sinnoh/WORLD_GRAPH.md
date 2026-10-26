@@ -32,12 +32,20 @@ The open PRs that join groups:
 | W24 #315 | Hearthome ↔ Route 212; Route 210 South ↔ Route 210 North and Route 215; Route 211 West ↔ Mt. Coronet North Room 1 (west to central) |
 | W25 #317 | Cycling Road ↔ Route 207 |
 
-## Groups still apart, and what each needs
+## Groups still apart, and the decisions on them
 
-| Group | Maps | Missing link | Owner of the decision |
+The owner delegated these decisions (#15 comment 6425492105):
+
+| Group | Maps | Missing link | Decision |
 | --- | ---: | --- | --- |
-| Canalave / Iron Island / Route 218 | 23 | The donor's Route 218 East gate warps into Jubilife, but production Jubilife has no west entrance (its west edge is solid), and the donor Jubilife geometry is not in the pinned export used here. | owner/manager (a new entrance on a production map) |
+| Canalave / Iron Island / Route 218 | 23 | Production Jubilife's sealed west-arrow (4,20) ↔ Route 218 East's closed east mat (11,5) | **Open it**, as the original does: W27 #320 (DEV overlays; static 0 findings). This takes the world to 3 groups. Production integration needs an exact-path handoff for JubilifeCity. |
+| Fuego Ironworks | 2 | The Surf river off Route 205 South | **Surf-only, as the original.** No land path; unreachable on foot by design until Surf access exists. |
 | Snowpoint corridor | 4 | Route 216 ↔ Mt. Coronet North Room 2 | Codex (northern lane, active) |
-| Fuego Ironworks | 2 | The Surf river off Route 205 South | owner (field-move access) |
 
 Also not linked, though it doesn't change the grouping: Eterna Forest's east exit to Route 205 North's gatehouse. The donor building art has no Averon equivalent yet.
+
+**Donor interiors for production doors that are not staged anywhere:**
+- these sit at the donor's own door coordinates in production: Floaroma Mart, Flower Shop, House 1 and House 2; the Floaroma Meadow house; the Route 205 house;
+- these don't, because production Sandgem and Twinleaf were redrawn: Sandgem House 1 and Mart; Twinleaf's two houses.
+
+They need the neutral indoor packer (`hearthome-solaceon/adapt_gate_art.py`) plus a DEV scene that declares the resulting tileset pair.
