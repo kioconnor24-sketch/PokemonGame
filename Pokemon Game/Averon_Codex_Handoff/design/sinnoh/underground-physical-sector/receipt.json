@@ -1,0 +1,250 @@
+{
+  "status": "BOUNDED_UNDERGROUND_CORRIDORS_NOT_FULL_UNDERGROUND_OR_RUNTIME_ACCEPTANCE",
+  "maps": {
+    "NW": {
+      "supported": 1290,
+      "sealed_doors_boundaries": 20,
+      "static_components": [
+        640,
+        235,
+        230,
+        85,
+        80
+      ]
+    },
+    "NE": {
+      "supported": 1390,
+      "sealed_doors_boundaries": 30,
+      "static_components": [
+        730,
+        235,
+        230,
+        85,
+        80
+      ]
+    },
+    "SW": {
+      "supported": 1670,
+      "sealed_doors_boundaries": 30,
+      "static_components": [
+        1370,
+        270
+      ]
+    },
+    "SE": {
+      "supported": 1500,
+      "sealed_doors_boundaries": 20,
+      "static_components": [
+        1170,
+        230,
+        80
+      ]
+    }
+  },
+  "native_assets": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "geometry_sha256": "c346b90051c162ff1c1eb8767442dc9e70bf577c12325a1e58f5ef9d7f990235",
+  "secondary_records": 5,
+  "limits": [
+    "Authentic128x128 corridor sector split into four64x64 maps, not full480x480 world",
+    "Source floor0x0C is ordinary mountain-floor walking, normalized to native normal floor without encounters",
+    "No dynamic MAP649 secret-base slots, multiplayer/mining/traps/spheres/base mechanics or surface transport",
+    "Outer sector cuts sealed; all internal source centers/corners/heights preserved",
+    "Existing native Cave artwork only; no DS models/pixels/music/story/IDs/registry/schema",
+    "No NORMAL/RELEASE/native-game-suite/mGBA/Save/Delta acceptance"
+  ],
+  "output_sha256": {
+    "native-family/secondary-attributes.bin": "63175ab80f9869d1754c89b6f9b40a7d700654fdb640137d4f0c3437b04d3a23",
+    "native-family/secondary-metatiles.bin": "b1c667fb110aa33c3a6512195453767dbac5f1b0a6da5282b7ec7f3243dd36a3",
+    "native-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "native-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/SE/preview.png": "9b7bc5e4ed5b4afae71dee1f50e8b9d58e0430fe0775dfb2044fb60c0ea18d90",
+    "staged/SE/map.json": "27e3b8ad40026218578ce7ee10bfda49149e3f3503cca8385f1072626f55107b",
+    "staged/SE/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/SE/map.bin": "bca5f79e0195d93ab5daca86914cefd3a74f9d465f5bbdb7256e6dabbcc854e7",
+    "staged/SW/preview.png": "faae572c9c342383792db9b91712d9a58324072a41b062aec04c1aae3836dea2",
+    "staged/SW/map.json": "d666269554256e262e266b3983e226ca0397fff47846b55ad896ed49b990ede7",
+    "staged/SW/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/SW/map.bin": "352f32a78964482c665e39cb4c147b352e20f94bbc642d0875eb2b4a0e90efd1",
+    "staged/NE/preview.png": "4b04bda3cd44f6c2b36b2ea11aa0b0042e017904a952ca2372e842500e1b31d4",
+    "staged/NE/map.json": "3134d817168c7d9e863317d47103047c05fbb5cb401bb58d0bd0a97948fd8553",
+    "staged/NE/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/NE/map.bin": "b2bab0d508c8ec4edd9cc6b35d1db1ae6ae3c6698a6c9154aefde0bd71f910a6",
+    "staged/NW/preview.png": "93c6d3a023e85711553e06636a240b82b06327772ef1dbc3a4940ae558db9550",
+    "staged/NW/map.json": "b88740090debbd951b0aa0ea87739e5db00f161cb7577b7a43a6b1f0212505e8",
+    "staged/NW/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/NW/map.bin": "981c166e791fddc4ca91b24d9b9ae56922f1248bc9ca5d47924b4f18e2c2e456"
+  },
+  "static_global_components": [
+    {
+      "cells": 3180,
+      "sectors": [
+        "NE",
+        "NW",
+        "SE",
+        "SW"
+      ]
+    },
+    {
+      "cells": 1040,
+      "sectors": [
+        "NE",
+        "SE"
+      ]
+    },
+    {
+      "cells": 910,
+      "sectors": [
+        "NW",
+        "SW"
+      ]
+    },
+    {
+      "cells": 460,
+      "sectors": [
+        "NE",
+        "NW"
+      ]
+    },
+    {
+      "cells": 160,
+      "sectors": [
+        "NE",
+        "NW"
+      ]
+    }
+  ],
+  "world_chunk_origin": [
+    6,
+    3
+  ],
+  "global_tile_origin": [
+    192,
+    96
+  ],
+  "source_pins_sha256": "92dd3861bc3e68a5242e58d41ab26fc9ed390795f26073a601172e732126d916",
+  "padded_map_cells": 6162,
+  "buffer_cells": 10240,
+  "seams": [
+    {
+      "source": "NW",
+      "target": "NE",
+      "direction": "right",
+      "offset": 0,
+      "lanes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        21,
+        22,
+        23,
+        24,
+        25,
+        38,
+        39,
+        40,
+        41,
+        42,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "source": "SW",
+      "target": "SE",
+      "direction": "right",
+      "offset": 0,
+      "lanes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        21,
+        22,
+        23,
+        24,
+        25,
+        38,
+        39,
+        40,
+        41,
+        42,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "source": "NW",
+      "target": "SW",
+      "direction": "down",
+      "offset": 0,
+      "lanes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        21,
+        22,
+        23,
+        24,
+        25,
+        38,
+        39,
+        40,
+        41,
+        42,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "source": "NE",
+      "target": "SE",
+      "direction": "down",
+      "offset": 0,
+      "lanes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        21,
+        22,
+        23,
+        24,
+        25,
+        38,
+        39,
+        40,
+        41,
+        42,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    }
+  ]
+}

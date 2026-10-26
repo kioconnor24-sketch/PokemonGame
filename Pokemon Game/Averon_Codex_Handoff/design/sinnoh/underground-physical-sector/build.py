@@ -55,7 +55,21 @@ def build(engine,out):
             if not(v&0xc00 or w&0xc00) and v>>12==w>>12:lanes.append(i)
         if len(lanes)!=20:raise ValueError('authentic corridor seam differs')
         seams.append(dict(source=a,target=b,direction=d,offset=0,lanes=lanes))
-    receipt.update(status='BOUNDED_UNDERGROUND_CORRIDORS_NOT_FULL_UNDERGROUND_OR_RUNTIME_ACCEPTANCE',world_chunk_origin=[6,3],global_tile_origin=[192,96],
+    from collections import deque
+    points={}
+    for n,ox,oy in [('NW',0,0),('NE',64,0),('SW',0,64),('SE',64,64)]:
+        for i,v in enumerate(maps[n]):
+            if not v&0xc00:points[(ox+i%64,oy+i//64)]=n
+    pending=set(points);components=[]
+    while pending:
+        start=pending.pop();q=deque([start]);seen={start}
+        while q:
+            x,y=q.popleft()
+            for pt in ((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+                if pt in pending:pending.remove(pt);seen.add(pt);q.append(pt)
+        components.append(dict(cells=len(seen),sectors=sorted({points[p] for p in seen})))
+    components.sort(key=lambda v:v['cells'],reverse=True)
+    receipt.update(static_global_components=components,status='BOUNDED_UNDERGROUND_CORRIDORS_NOT_FULL_UNDERGROUND_OR_RUNTIME_ACCEPTANCE',world_chunk_origin=[6,3],global_tile_origin=[192,96],
         source_pins_sha256=existing.base.sha(pins),padded_map_cells=padded,buffer_cells=limits['cells'],seams=seams,
         limits=['Authentic128x128 corridor sector split into four64x64 maps, not full480x480 world',
                 'Source floor0x0C is ordinary mountain-floor walking, normalized to native normal floor without encounters',
