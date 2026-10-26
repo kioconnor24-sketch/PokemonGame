@@ -1,5 +1,5 @@
 {
-  "status": "SIXTEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE",
+  "status": "NINETEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE",
   "input_sha256": {
     "Pokemon Game/engine/data/layouts/layouts.json": "089517d03842c8d11711630ba06e2490cec1e70feaf0ae0aed30492bc2f362e3",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/map.bin": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
@@ -35,6 +35,10 @@
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon-border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon.png": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/map.json": "8d8fea89299104fc38a73c1749ded869475944246ff96d01efcff59b0372046b",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/map.bin": "0fb8cfa7cb68dc315dbc1794eb4a9a62d46b4963a507bf7023dd168f210dd670",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/map.json": "091d71530ba9169ff7b22d2bcde12784a7e2cd62e44a7260e2fb4daf78e50f59",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/preview.png": "47012c13715836a593bfa0e874cb50045560aa03cac15eb168e17f1b5cf75492",
     "Pokemon Game/engine/data/maps/OldaleTown_House1/map.json": "0919ef7cae945c4a0154ca6fa6216f6dc397f2984f9bc9404de3e927a1af88e3",
     "Pokemon Game/engine/data/layouts/House1/map.bin": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
     "Pokemon Game/engine/data/layouts/House1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
@@ -78,6 +82,15 @@
         9,
         10
       ]
+    },
+    "Route228": {
+      "width": 32,
+      "height": 94,
+      "door": [
+        21,
+        36
+      ],
+      "center": false
     }
   },
   "native_house_adaptations": {
@@ -122,6 +135,18 @@
       18,
       21,
       "OldaleTown_House1"
+    ],
+    "Route228House1": [
+      "Route228",
+      21,
+      36,
+      "OldaleTown_House1"
+    ],
+    "Route228House2": [
+      "Route228",
+      7,
+      64,
+      "DewfordTown_House1"
     ]
   },
   "preserved_exterior_warp_prefix": {
@@ -135,7 +160,8 @@
       }
     ],
     "SurvivalArea": [],
-    "ResortArea": []
+    "ResortArea": [],
+    "Route228": []
   },
   "closed_online_door_cells": [
     {
@@ -194,7 +220,7 @@
     }
   ],
   "limits": [
-    "Six center floors/seven one-floor native house adaptations, not donor interiors or gameplay services",
+    "Six center floors/nine one-floor native house adaptations, not donor interiors or gameplay services",
     "Exterior map/border/art, existing Frontier gateway and regional connections unchanged",
     "No nurse/healer/respawn/link registrations, saved IDs/registry/schema/story or encounters",
     "Generic PC/door/escalator behavior needs actual runtime acceptance",
@@ -202,6 +228,18 @@
     "No NORMAL/RELEASE/native-game-suite/mGBA/Save acceptance borrowed"
   ],
   "output_sha256": {
+    "staged/Route228House2/preview.png": "75ef0732328f72a7c1d15909afe5893ff34dcf78c12db8f15b83c52fa1500634",
+    "staged/Route228House2/attributes.json": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+    "staged/Route228House2/layout.json": "94a21289ec3ed84e63c8120ed3cdeb90970ce52212f67286a1f2da3a852e231e",
+    "staged/Route228House2/map.json": "1acf46acae0044990162f0c8529066285e071e8b19818b7387d60c204e04398b",
+    "staged/Route228House2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Route228House2/map.bin": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+    "staged/Route228House1/preview.png": "7d3b4a10a0d603b9288cc827a96528f194a907b27864b00259373e4a480b9032",
+    "staged/Route228House1/attributes.json": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+    "staged/Route228House1/layout.json": "774f63ca1c5dd371ab19e9da7b4990ac626fa67433d44537b3a32f464bd7f442",
+    "staged/Route228House1/map.json": "0246622b8b71215fbb54452b97db2df8b316ebc1789a0edb079ddd46cf97c82b",
+    "staged/Route228House1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/Route228House1/map.bin": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
     "staged/ResortAreaHouse2/preview.png": "7d3b4a10a0d603b9288cc827a96528f194a907b27864b00259373e4a480b9032",
     "staged/ResortAreaHouse2/attributes.json": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
     "staged/ResortAreaHouse2/layout.json": "0abe515e82cabb50694232563e6bdc852a3a091778d483037f7c5b360ce191da",
@@ -280,6 +318,11 @@
     "staged/FightAreaCenter1/map.json": "f7c5f2eb88e8cd17c7bdd61bec56f0130ca4f77bbdd6f78c091791281d794e24",
     "staged/FightAreaCenter1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
     "staged/FightAreaCenter1/map.bin": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+    "staged/Route228/attributes.json": "beb18418ed5b9ce835380f9c4d7b82f2d1a0cc882fbc2328b63bf66653682087",
+    "staged/Route228/preview.png": "47012c13715836a593bfa0e874cb50045560aa03cac15eb168e17f1b5cf75492",
+    "staged/Route228/map.json": "00ff31aef722c8507f9174764bbc5c8d577acddce2e711545504102df254ea1e",
+    "staged/Route228/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+    "staged/Route228/map.bin": "0fb8cfa7cb68dc315dbc1794eb4a9a62d46b4963a507bf7023dd168f210dd670",
     "staged/ResortArea/attributes.json": "a52ea52bef8b90c269b525e312ce12b324af087f55a7e9f25d2c4c82281eea19",
     "staged/ResortArea/map.json": "358ce60a1c2aa220f2ec0bb1851b7cd92c510011824764c61a1d42c2d0f0943e",
     "staged/ResortArea/preview.png": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",

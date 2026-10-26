@@ -6,7 +6,7 @@ HERE=Path(__file__).resolve().parent
 spec=importlib.util.spec_from_file_location('battle_native_rooms',HERE.parent/'frontier-facilities/build.py')
 reuse=importlib.util.module_from_spec(spec);spec.loader.exec_module(reuse)
 m=reuse.m
-AREAS={'FightArea':dict(width=70,height=37,door=[39,14]),'SurvivalArea':dict(width=32,height=32,door=[17,18]),'ResortArea':dict(width=36,height=30,door=[9,10])}
+AREAS={'FightArea':dict(width=70,height=37,door=[39,14]),'SurvivalArea':dict(width=32,height=32,door=[17,18]),'ResortArea':dict(width=36,height=30,door=[9,10]),'Route228':dict(width=32,height=94,door=[21,36],center=False)}
 HOUSES={
 'FightAreaHouse1':('FightArea',37,24,'OldaleTown_House1'),
 'FightAreaHouse2':('FightArea',46,24,'OldaleTown_House2'),
@@ -14,7 +14,9 @@ HOUSES={
 'SurvivalAreaHouse2':('SurvivalArea',10,17,'OldaleTown_House2'),
 'SurvivalAreaHouse3':('SurvivalArea',15,28,'PetalburgCity_WallysHouse'),
 'ResortAreaHouse1':('ResortArea',4,17,'DewfordTown_House1'),
-'ResortAreaHouse2':('ResortArea',18,21,'OldaleTown_House1')}
+'ResortAreaHouse2':('ResortArea',18,21,'OldaleTown_House1'),
+'Route228House1':('Route228',21,36,'OldaleTown_House1'),
+'Route228House2':('Route228',7,64,'DewfordTown_House1')}
 def build(engine,out):
     engine,out=Path(engine).resolve(),Path(out).resolve()
     if out.exists() or out.is_relative_to(engine) or 'engine' in out.parts:raise ValueError('new off-engine output required')
@@ -31,6 +33,12 @@ def build(engine,out):
             folder=HERE.parent/'frontier-gate-link/staged/FightArea'
             data={n:read(folder/n) for n in ('map.bin','border.bin','map.json','attributes.json','preview.png')}
             words=json.loads(data['attributes.json'])
+        elif area=='Route228':
+            folder=HERE.parent/'battle-zone-links/staged/Route228'
+            data={n:read(folder/n) for n in ('map.bin','border.bin','map.json','preview.png')}
+            family=[read(base/'outdoor-family'/(n+'-attributes.bin')) for n in ('primary','secondary')]
+            words={str(v&1023):m.packer.attribute(family[(v&1023)//512],v%512) for (v,) in struct.iter_unpack('<H',data['map.bin']+data['border.bin'])}
+            data['attributes.json']=(json.dumps(words,indent=2)+chr(10)).encode()
         else:
             folder=base/'staged'/area
             data={n:read(folder/old) for n,old in [('map.bin','averon-map.bin'),('border.bin','averon-border.bin'),('preview.png','averon.png')]}
@@ -46,9 +54,9 @@ def build(engine,out):
         below=struct.unpack_from('<H',data['map.bin'],2*((y+1)*w+x))[0]
         if words[str(v&1023)]&255!=0x69 or below&0xc00:raise ValueError('center anchor or doorstep differs')
         index=len(prefix);root_id='MAP_SINNOH_'+area.upper()+'_CENTER_1F'
-        header['warp_events'].append(dict(x=x,y=y,elevation=0,dest_map=root_id,dest_warp_id='0'))
+        if cfg.get('center',True):header['warp_events'].append(dict(x=x,y=y,elevation=0,dest_map=root_id,dest_warp_id='0'))
         data['map.json']=(json.dumps(header,indent=2)+chr(10)).encode();packets[area]=data;exterior_prefix[area]=prefix
-        for floor in (1,2):
+        for floor in ((1,2) if cfg.get('center',True) else ()):
             name=area+'Center'+str(floor)
             original=json.loads(eng('data/maps/PetalburgCity_PokemonCenter_%dF/map.json'%floor))
             layout=layouts[original['layout']];width,height=layout['width'],layout['height']
@@ -110,9 +118,9 @@ def build(engine,out):
         p=out/'staged'/name;p.mkdir(parents=True)
         for n,v in [('map.bin',raw),('border.bin',border),('map.json',(json.dumps(h,indent=2)+chr(10)).encode()),('layout.json',(json.dumps(l,indent=2)+chr(10)).encode()),('attributes.json',(json.dumps(words,indent=2)+chr(10)).encode())]:(p/n).write_bytes(v)
         preview.save(p/'preview.png')
-    receipt=dict(status='SIXTEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE',input_sha256=pins,areas=AREAS,native_house_adaptations={n:list(v) for n,v in HOUSES.items()},
+    receipt=dict(status='NINETEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE',input_sha256=pins,areas=AREAS,native_house_adaptations={n:list(v) for n,v in HOUSES.items()},
        preserved_exterior_warp_prefix=exterior_prefix,closed_online_door_cells=closures,
-       limits=['Six center floors/seven one-floor native house adaptations, not donor interiors or gameplay services',
+       limits=['Six center floors/nine one-floor native house adaptations, not donor interiors or gameplay services',
                'Exterior map/border/art, existing Frontier gateway and regional connections unchanged',
                'No nurse/healer/respawn/link registrations, saved IDs/registry/schema/story or encounters',
                'Generic PC/door/escalator behavior needs actual runtime acceptance',
