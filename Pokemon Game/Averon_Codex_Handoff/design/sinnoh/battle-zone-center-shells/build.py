@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Nine-map neutral Battle Zone center packet; existing exterior bytes retained."""
+"""Connected neutral Battle Zone center packet; existing exterior bytes retained."""
 import argparse,importlib.util,json,struct
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
@@ -7,6 +7,14 @@ spec=importlib.util.spec_from_file_location('battle_native_rooms',HERE.parent/'f
 reuse=importlib.util.module_from_spec(spec);spec.loader.exec_module(reuse)
 m=reuse.m
 AREAS={'FightArea':dict(width=70,height=37,door=[39,14]),'SurvivalArea':dict(width=32,height=32,door=[17,18]),'ResortArea':dict(width=36,height=30,door=[9,10])}
+HOUSES={
+'FightAreaHouse1':('FightArea',37,24,'OldaleTown_House1'),
+'FightAreaHouse2':('FightArea',46,24,'OldaleTown_House2'),
+'SurvivalAreaHouse1':('SurvivalArea',16,6,'DewfordTown_House1'),
+'SurvivalAreaHouse2':('SurvivalArea',10,17,'OldaleTown_House2'),
+'SurvivalAreaHouse3':('SurvivalArea',15,28,'PetalburgCity_WallysHouse'),
+'ResortAreaHouse1':('ResortArea',4,17,'DewfordTown_House1'),
+'ResortAreaHouse2':('ResortArea',18,21,'OldaleTown_House1')}
 def build(engine,out):
     engine,out=Path(engine).resolve(),Path(out).resolve()
     if out.exists() or out.is_relative_to(engine) or 'engine' in out.parts:raise ValueError('new off-engine output required')
@@ -70,6 +78,30 @@ def build(engine,out):
             words={str(v&1023):m.packer.attribute(attrs[(v&1023)//512],v%512) for (v,) in struct.iter_unpack('<H',raw+border)}
             l=dict(layout);l.update(id=rh['layout'],name=rh['name']+'_Layout',blockdata_filepath='staged/'+name+'/map.bin',border_filepath='staged/'+name+'/border.bin')
             room_data[name]=(raw,border,rh,l,words,preview)
+    # Add only existing facade-backed doors with clear in-bounds standing cells.
+    for name,(area,x,y,template) in HOUSES.items():
+        data=packets[area];header=json.loads(data['map.json']);w=AREAS[area]['width']
+        words=json.loads(data['attributes.json']);v=struct.unpack_from('<H',data['map.bin'],2*(y*w+x))[0]
+        below=struct.unpack_from('<H',data['map.bin'],2*((y+1)*w+x))[0]
+        if words[str(v&1023)]&255!=0x69 or below&0xc00:raise ValueError('house anchor or doorstep differs')
+        index=len(header['warp_events']);ident='MAP_SINNOH_'+name.upper()
+        header['warp_events'].append(dict(x=x,y=y,elevation=0,dest_map=ident,dest_warp_id='0'))
+        data['map.json']=(json.dumps(header,indent=2)+chr(10)).encode()
+        original=json.loads(eng('data/maps/'+template+'/map.json'));layout=layouts[original['layout']]
+        raw=eng(layout['blockdata_filepath']);border=eng(layout['border_filepath']);width,height=layout['width'],layout['height']
+        rh=dict(original);rh.update(id=ident,name='Sinnoh'+name,layout='LAYOUT_SINNOH_'+name.upper(),region='REGION_SINNOH',
+            region_map_section='MAPSEC_PENDING_OWNER',connections=[],object_events=[],coord_events=[],bg_events=[],music='MUS_ROUTE110')
+        if len(original['warp_events'])!=2:raise ValueError('one-floor neutral template required')
+        rh['warp_events']=[dict(e,dest_map=header['id'],dest_warp_id=str(index)) for e in original['warp_events']]
+        paths=['data/tilesets/primary/'+reuse.folder(layout['primary_tileset'])+'/',
+               'data/tilesets/secondary/'+reuse.folder(layout['secondary_tileset'])+'/']
+        banks=[eng(p+'metatiles.bin') for p in paths];attrs=[eng(p+'metatile_attributes.bin') for p in paths]
+        images=[m.dual.indexed(eng(p+'tiles.png')) for p in paths];deps=m.dual.closure(raw,banks,images)
+        palettes={i:m.base.palette(eng(paths[i>=6]+'palettes/%02d.pal'%i)) for i in deps['palettes']}
+        preview=m.dual.render(raw,banks,images,palettes,width,height)
+        words={str(v&1023):m.packer.attribute(attrs[(v&1023)//512],v%512) for (v,) in struct.iter_unpack('<H',raw+border)}
+        l=dict(layout);l.update(id=rh['layout'],name=rh['name']+'_Layout',blockdata_filepath='staged/'+name+'/map.bin',border_filepath='staged/'+name+'/border.bin')
+        room_data[name]=(raw,border,rh,l,words,preview)
     out.mkdir(parents=True)
     for name,data in packets.items():
         p=out/'staged'/name;p.mkdir(parents=True)
@@ -78,9 +110,9 @@ def build(engine,out):
         p=out/'staged'/name;p.mkdir(parents=True)
         for n,v in [('map.bin',raw),('border.bin',border),('map.json',(json.dumps(h,indent=2)+chr(10)).encode()),('layout.json',(json.dumps(l,indent=2)+chr(10)).encode()),('attributes.json',(json.dumps(words,indent=2)+chr(10)).encode())]:(p/n).write_bytes(v)
         preview.save(p/'preview.png')
-    receipt=dict(status='NINE_MAP_NEUTRAL_CENTER_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE',input_sha256=pins,areas=AREAS,
+    receipt=dict(status='SIXTEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE',input_sha256=pins,areas=AREAS,native_house_adaptations={n:list(v) for n,v in HOUSES.items()},
        preserved_exterior_warp_prefix=exterior_prefix,closed_online_door_cells=closures,
-       limits=['Six native GBA template room adaptations, not copied donor interiors or gameplay services',
+       limits=['Six center floors/seven one-floor native house adaptations, not donor interiors or gameplay services',
                'Exterior map/border/art, existing Frontier gateway and regional connections unchanged',
                'No nurse/healer/respawn/link registrations, saved IDs/registry/schema/story or encounters',
                'Generic PC/door/escalator behavior needs actual runtime acceptance',

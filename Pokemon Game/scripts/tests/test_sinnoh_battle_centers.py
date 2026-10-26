@@ -17,9 +17,9 @@ class BattleCenters(unittest.TestCase):
     parent=HERE.parent/'battle-zone-north/staged'/name
     for a,b in [('map.bin','averon-map.bin'),('border.bin','averon-border.bin'),('preview.png','averon.png')]:self.assertEqual((parent/b).read_bytes(),(q/a).read_bytes())
     original=json.loads((HERE.parent/'remaining-donor/staged'/name/'map.json').read_text())
-   h=json.loads((q/'map.json').read_text());self.assertEqual(h['warp_events'][:-1],original['warp_events'])
+   h=json.loads((q/'map.json').read_text());self.assertEqual(h['warp_events'][:len(original['warp_events'])],original['warp_events'])
    self.assertEqual(h['connections'],original['connections'])
-   e=h['warp_events'][-1];self.assertEqual([e['x'],e['y']],cfg['door']);self.assertEqual(e['dest_warp_id'],'0')
+   e=h['warp_events'][len(original['warp_events'])];self.assertEqual([e['x'],e['y']],cfg['door']);self.assertEqual(e['dest_warp_id'],'0')
    v=struct.unpack_from('<H',(q/'map.bin').read_bytes(),2*(e['y']*cfg['width']+e['x']))[0]
    self.assertEqual(json.loads((q/'attributes.json').read_text())[str(v&1023)]&255,0x69)
  def test_six_rooms_reciprocal_stairs_return_aliases_and_only_online_closures(self):
@@ -45,6 +45,21 @@ class BattleCenters(unittest.TestCase):
      self.assertEqual(h['warp_events'][2]['dest_warp_id'],'0')
     self.assertEqual((p/'map.bin').read_bytes(),bytes(raw))
     self.assertEqual((p/'border.bin').read_bytes(),(ENGINE/l['border_filepath']).read_bytes())
+ def test_seven_house_shells_preserve_templates_and_both_return_aliases(self):
+  layouts={v['id']:v for v in json.loads((ENGINE/'data/layouts/layouts.json').read_text())['layouts']}
+  for name,(area,x,y,template) in m.HOUSES.items():
+   p=HERE/'staged'/name;h=json.loads((p/'map.json').read_text())
+   original=json.loads((ENGINE/('data/maps/'+template+'/map.json')).read_text());l=layouts[original['layout']]
+   self.assertEqual((p/'map.bin').read_bytes(),(ENGINE/l['blockdata_filepath']).read_bytes())
+   self.assertEqual((p/'border.bin').read_bytes(),(ENGINE/l['border_filepath']).read_bytes())
+   self.assertEqual(len(h['warp_events']),2)
+   self.assertEqual(h['region_map_section'],'MAPSEC_PENDING_OWNER')
+   for k in ('object_events','coord_events','bg_events'):self.assertFalse(h[k])
+   parent=json.loads((HERE/'staged'/area/'map.json').read_text())
+   for e in h['warp_events']:
+    self.assertEqual(e['dest_map'],parent['id'])
+    back=parent['warp_events'][int(e['dest_warp_id'])]
+    self.assertEqual(back['dest_map'],h['id']);self.assertEqual((back['x'],back['y']),(x,y))
  def test_replay_dirty_source_and_unsafe_output_negatives(self):
   with tempfile.TemporaryDirectory() as t:
    out=Path(t)/'new';r=m.build(ENGINE,out);self.assertEqual(r,json.loads((HERE/'receipt.json').read_text()))

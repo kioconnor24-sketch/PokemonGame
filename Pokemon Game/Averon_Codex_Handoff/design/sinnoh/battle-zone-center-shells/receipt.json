@@ -1,5 +1,5 @@
 {
-  "status": "NINE_MAP_NEUTRAL_CENTER_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE",
+  "status": "SIXTEEN_MAP_NEUTRAL_TOWN_PACKET_NOT_SERVICES_OR_RUNTIME_ACCEPTANCE",
   "input_sha256": {
     "Pokemon Game/engine/data/layouts/layouts.json": "089517d03842c8d11711630ba06e2490cec1e70feaf0ae0aed30492bc2f362e3",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/map.bin": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
@@ -34,7 +34,25 @@
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon-map.bin": "e4e3a395a6e1b2d9da948b3c9c438180b3f21c68623fde0b32bec3a4a2225e95",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon-border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon.png": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
-    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/map.json": "8d8fea89299104fc38a73c1749ded869475944246ff96d01efcff59b0372046b"
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/map.json": "8d8fea89299104fc38a73c1749ded869475944246ff96d01efcff59b0372046b",
+    "Pokemon Game/engine/data/maps/OldaleTown_House1/map.json": "0919ef7cae945c4a0154ca6fa6216f6dc397f2984f9bc9404de3e927a1af88e3",
+    "Pokemon Game/engine/data/layouts/House1/map.bin": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
+    "Pokemon Game/engine/data/layouts/House1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/metatiles.bin": "c3401446239749a25f6abc1daab0c19cd43eb6333a7ec5335bb7e1580d002b1d",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/metatile_attributes.bin": "eb3e942c013770224ffc7d99c469cdaf9cd31243f71ce3fb05a70b278dc5a509",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/tiles.png": "7783d199aaaaa51db286c745ddc6907a576f2930767a2f52862128c39cf15be8",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/palettes/06.pal": "ffb4889ea278944f5e981beac110aceb239548a57b3d2e2b258a9e86a5f98912",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/palettes/08.pal": "88bf97cf6eca47f21bbf0859fccc60172fc09fd715eb3d9266b8a9d4af715e72",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/palettes/09.pal": "05fd8b97e2c49b33977cf02b4404d5e28bbcfa600d4da3385efb1f09a86d9733",
+    "Pokemon Game/engine/data/tilesets/secondary/generic_building/palettes/10.pal": "0b90183051d332918bed10cc3f6d2359a909f811ddd836a885d382dcddd580b1",
+    "Pokemon Game/engine/data/maps/OldaleTown_House2/map.json": "2670333d75f4f5b2efdd6bc92c67611e7c0195a2d3c08a22c2d3ee5e79c265dc",
+    "Pokemon Game/engine/data/layouts/House2/map.bin": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+    "Pokemon Game/engine/data/layouts/House2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "Pokemon Game/engine/data/maps/DewfordTown_House1/map.json": "e19b33b488113da1072053631d20e7088d65784f13a2803a1940e391ddad3f76",
+    "Pokemon Game/engine/data/layouts/House3/map.bin": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+    "Pokemon Game/engine/data/layouts/House3/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/engine/data/tilesets/primary/building/palettes/05.pal": "b81a37f041aeb04428ce37ad1f7a7a476cdc822f534a4cda12f360c4ca5d0a58",
+    "Pokemon Game/engine/data/maps/PetalburgCity_WallysHouse/map.json": "eb699c9aaf1c5aebaa0284b7d054cca25423fe3c80ebf16e000347c9e56ab8d9"
   },
   "areas": {
     "FightArea": {
@@ -61,6 +79,50 @@
         10
       ]
     }
+  },
+  "native_house_adaptations": {
+    "FightAreaHouse1": [
+      "FightArea",
+      37,
+      24,
+      "OldaleTown_House1"
+    ],
+    "FightAreaHouse2": [
+      "FightArea",
+      46,
+      24,
+      "OldaleTown_House2"
+    ],
+    "SurvivalAreaHouse1": [
+      "SurvivalArea",
+      16,
+      6,
+      "DewfordTown_House1"
+    ],
+    "SurvivalAreaHouse2": [
+      "SurvivalArea",
+      10,
+      17,
+      "OldaleTown_House2"
+    ],
+    "SurvivalAreaHouse3": [
+      "SurvivalArea",
+      15,
+      28,
+      "PetalburgCity_WallysHouse"
+    ],
+    "ResortAreaHouse1": [
+      "ResortArea",
+      4,
+      17,
+      "DewfordTown_House1"
+    ],
+    "ResortAreaHouse2": [
+      "ResortArea",
+      18,
+      21,
+      "OldaleTown_House1"
+    ]
   },
   "preserved_exterior_warp_prefix": {
     "FightArea": [
@@ -132,7 +194,7 @@
     }
   ],
   "limits": [
-    "Six native GBA template room adaptations, not copied donor interiors or gameplay services",
+    "Six center floors/seven one-floor native house adaptations, not donor interiors or gameplay services",
     "Exterior map/border/art, existing Frontier gateway and regional connections unchanged",
     "No nurse/healer/respawn/link registrations, saved IDs/registry/schema/story or encounters",
     "Generic PC/door/escalator behavior needs actual runtime acceptance",
@@ -140,6 +202,48 @@
     "No NORMAL/RELEASE/native-game-suite/mGBA/Save acceptance borrowed"
   ],
   "output_sha256": {
+    "staged/ResortAreaHouse2/preview.png": "7d3b4a10a0d603b9288cc827a96528f194a907b27864b00259373e4a480b9032",
+    "staged/ResortAreaHouse2/attributes.json": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+    "staged/ResortAreaHouse2/layout.json": "0abe515e82cabb50694232563e6bdc852a3a091778d483037f7c5b360ce191da",
+    "staged/ResortAreaHouse2/map.json": "b6e037850906c8b2f055f64c26cf84cbeb1841bf81031a6c45d78f434656113c",
+    "staged/ResortAreaHouse2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/ResortAreaHouse2/map.bin": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
+    "staged/ResortAreaHouse1/preview.png": "75ef0732328f72a7c1d15909afe5893ff34dcf78c12db8f15b83c52fa1500634",
+    "staged/ResortAreaHouse1/attributes.json": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+    "staged/ResortAreaHouse1/layout.json": "432c1a256986d41521ef389de0ae61c69161d63a88da4908a2558d12721e9c1d",
+    "staged/ResortAreaHouse1/map.json": "b8af90f99861fbd9134284892e82b54a5c708fe21c0f93ef5be06cefa59e9259",
+    "staged/ResortAreaHouse1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/ResortAreaHouse1/map.bin": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+    "staged/SurvivalAreaHouse3/preview.png": "a8c542605dfdbb3595c3165076b07791f5cc5f428a3cdf602b85830d77293248",
+    "staged/SurvivalAreaHouse3/attributes.json": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+    "staged/SurvivalAreaHouse3/layout.json": "a70900d97f8311f610645257f8489204cacc8ca95ef12521662cd72487731f06",
+    "staged/SurvivalAreaHouse3/map.json": "006dc2f3abe634cd7f84965e5da3584a9376d79a0e0b7daba1ca6ee59f061769",
+    "staged/SurvivalAreaHouse3/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/SurvivalAreaHouse3/map.bin": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+    "staged/SurvivalAreaHouse2/preview.png": "a8c542605dfdbb3595c3165076b07791f5cc5f428a3cdf602b85830d77293248",
+    "staged/SurvivalAreaHouse2/attributes.json": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+    "staged/SurvivalAreaHouse2/layout.json": "61429e00b87c38671543292b3eac8fde2fa0da4547150c3c96806804c0962100",
+    "staged/SurvivalAreaHouse2/map.json": "89fe4a000c53fa4bed94650d5d033c8dd5e2e35b4215fa3fef63f739d9a19833",
+    "staged/SurvivalAreaHouse2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/SurvivalAreaHouse2/map.bin": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+    "staged/SurvivalAreaHouse1/preview.png": "75ef0732328f72a7c1d15909afe5893ff34dcf78c12db8f15b83c52fa1500634",
+    "staged/SurvivalAreaHouse1/attributes.json": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+    "staged/SurvivalAreaHouse1/layout.json": "694b12ac46d92bc5213d44c6811f356930083a8cc534891026e432b74b75177e",
+    "staged/SurvivalAreaHouse1/map.json": "10710c147eca753558fa532d27e44dfca8551d7f7e56873b3dc2e9b22852405e",
+    "staged/SurvivalAreaHouse1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/SurvivalAreaHouse1/map.bin": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+    "staged/FightAreaHouse2/preview.png": "a8c542605dfdbb3595c3165076b07791f5cc5f428a3cdf602b85830d77293248",
+    "staged/FightAreaHouse2/attributes.json": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+    "staged/FightAreaHouse2/layout.json": "14f8755e938333132119d5e789fc2e7662f640a175992385256d3900a08854d4",
+    "staged/FightAreaHouse2/map.json": "febce64b94c6eb75911b41b20bdc514ddae944d8e860eef3c2e9f2b04b8c1003",
+    "staged/FightAreaHouse2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/FightAreaHouse2/map.bin": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+    "staged/FightAreaHouse1/preview.png": "7d3b4a10a0d603b9288cc827a96528f194a907b27864b00259373e4a480b9032",
+    "staged/FightAreaHouse1/attributes.json": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+    "staged/FightAreaHouse1/layout.json": "48bde9bc425a66b0117ddf77e4c2bac7723d3f2b62f0c256af472e0882c4fc81",
+    "staged/FightAreaHouse1/map.json": "a5fef8ecf7a302634159c9470822b48f8c2c021fca49167a1948f5ff8c572017",
+    "staged/FightAreaHouse1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/FightAreaHouse1/map.bin": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
     "staged/ResortAreaCenter2/preview.png": "75bf52a8628f045ad1681bbe49e33feeb04cd642f5037d1cf8a8fb546b97e645",
     "staged/ResortAreaCenter2/attributes.json": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
     "staged/ResortAreaCenter2/layout.json": "05be2beb95f4a18d1548b1307228de62b8edd89c4811a8c89cec808efa207595",
@@ -177,18 +281,18 @@
     "staged/FightAreaCenter1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
     "staged/FightAreaCenter1/map.bin": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
     "staged/ResortArea/attributes.json": "a52ea52bef8b90c269b525e312ce12b324af087f55a7e9f25d2c4c82281eea19",
-    "staged/ResortArea/map.json": "c56b70b4cf5dceeff966c72d3d3d04609661ec911f3cde6887c053af994149e4",
+    "staged/ResortArea/map.json": "358ce60a1c2aa220f2ec0bb1851b7cd92c510011824764c61a1d42c2d0f0943e",
     "staged/ResortArea/preview.png": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
     "staged/ResortArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
     "staged/ResortArea/map.bin": "e4e3a395a6e1b2d9da948b3c9c438180b3f21c68623fde0b32bec3a4a2225e95",
     "staged/SurvivalArea/attributes.json": "d8c0868945bb5b7446ace5c908da8c8e1c2edf2891060faa875bc7fb0439d0ed",
-    "staged/SurvivalArea/map.json": "f68e465b48a5213ddd324f39ab0b3cb92a20951d2d91f1e561b87adf11d617e6",
+    "staged/SurvivalArea/map.json": "9481172761bd73664da898c1edd60948ebecb7a4b6f5f2c0a9ef4010285ca6a0",
     "staged/SurvivalArea/preview.png": "0b3e2e4d65e5dbd5a4f8022a98979e7fab9fbc02c2803b730ce6dfbea56c0c60",
     "staged/SurvivalArea/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
     "staged/SurvivalArea/map.bin": "760335d43485c1c88b2dd63e5573e62025995305fe6f7486402fd4a0042f76f7",
     "staged/FightArea/preview.png": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
     "staged/FightArea/attributes.json": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
-    "staged/FightArea/map.json": "d9bfd331fbf500bd3e883786c23f1c74ab64b61b460ee4c11b8adfc34e8f67fa",
+    "staged/FightArea/map.json": "5fdd0b19678c49628c3ee0a12698b1a0e63bdf5a3bd247c22ecabf9f098f2dd8",
     "staged/FightArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
     "staged/FightArea/map.bin": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650"
   }
