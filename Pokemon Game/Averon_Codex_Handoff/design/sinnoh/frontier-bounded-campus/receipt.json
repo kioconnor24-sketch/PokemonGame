@@ -1,0 +1,576 @@
+{
+  "status": "BOUNDED_FRONTIER_SOURCE_PACKET_NOT_RUNTIME_ACCEPTANCE",
+  "input_sha256": {
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Campus/map.json": "4016ea29261097e0fb92088225f6393d8396040358086482b90c5c4aca35ab37",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Campus/map.bin": "b6fc4303a005b00d643d484ef9b790d4c4e96e19044815c03c0ef5878c12f877",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Campus/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Campus/attributes.json": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Campus/preview.png": "35aeeb7666d09ab8d7a079769a8d6dd97873a6287a5fce56c73037b4fad8d039",
+    "Pokemon Game/engine/include/fieldmap.h": "43620e45d4085e278d679b2ad07bcec3e729be87613646fd42ed1fbd2ff185fb",
+    "Pokemon Game/engine/include/global.fieldmap.h": "5c4d47192e2950101df27b211501f9e3337b7754804d322033724c508f645b2d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Gate/map.bin": "9e138fcfb110864f66e857b2576439d607007603764bccabb7bb40593beb8a9b",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Gate/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Gate/attributes.json": "daf4c01fe26eb6ee9fca81114ca47c78c6909cc956ef2f8730ffea8625df57ce",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Gate/preview.png": "dc9db30def9b5349463ebf568872c0488f866f6c2d8a463c561361fc302a2d20",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/Gate/map.json": "81313d95df1a5da9c97e033ff2fda17d050773293cf00616aaf1b9b0bb27efc3",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/map.bin": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/attributes.json": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/preview.png": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/map.json": "5fdd0b19678c49628c3ee0a12698b1a0e63bdf5a3bd247c22ecabf9f098f2dd8",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/map.bin": "4c5ad76bd2fb5a4d65914978338551c240f2e966c6f8f5a91346db1118bf6cbc",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/attributes.json": "2b0bbcbd71ea7df1724de56f75a85f827eaa02bc58576a84d1fc6b94321b081a",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/preview.png": "9442700f2669ffcc36341fd402b6c506b6cde1f79c6bfeb79a0106e74a52c663",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/map.json": "f8b9fd6904af43e1ada155f33aa2399c6beb3ac8553319815296a12f9d1b8a4d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/layout.json": "78506ee2caf192bef2f6945d689c69748d4fbaab6be8d69b88f5d73af2ad0936",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/map.bin": "2b6356ff72f7a014080fb98be0a9d59f7c8ecb16264af571d41436d82efec11e",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/attributes.json": "6d95614239be2cc33e278acad24821ecf4c030de9ee5264d2da420a8dd22918d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/preview.png": "873fcd031e5ef9bf89227d9aa63d755df1f1a89d46fba297affdce10c5d447fa",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/map.json": "383534262ffeb19439d9ab4449c3de842dc20a3ff82396d2fbbaaa8536485bdb",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/layout.json": "db90a675f36fcb5e686a0552100429bb21b7c592d2812c991ca1a1b03c46f90d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/map.bin": "9805c919da40c085f1347a6b5f22ea3f928d3801204c7fe2aa0a63c4e46b2129",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/attributes.json": "f79ee0063477fb58ac8ef808649d536c12d93345e2b59429898c3f4ccae019ce",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/preview.png": "0dc41838e6de83a6914c039ed91a357bee59778ae33b3127bbb6b7edcabbfbfd",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/map.json": "d3d87602bc4d6ac92ab71de869cfd843f54742408ab68156649e6c9252514f82",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/layout.json": "bb7ce7f1e15df2c95ecfe12f6d7f7bc65ad54e1a4d750fa6cb3459988b9541fd",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/map.bin": "c469fe853404f430fc5a7a268122962ef16c0af90cb557e71036639199d8f88d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/attributes.json": "6d378e6d7453704a91473d267a0e52d8cc05d93dc88e8f192feb98131aed4b19",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/preview.png": "d6375863dfcb450ab95534fc2c9cd726e43673162610497b2973f1a03cd68272",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/map.json": "c7fbc5f34f932852be4cedbc839008ae573e42e32676ed6e2ea0829b631c8738",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/layout.json": "9f248d53ddb018ee11cb750feef9212dd51807bd5299e3842a8dd77ea5c1f63f",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/map.bin": "2657da4b3d4ecd7f1e62ebec37053c3e95cc3f3e3d9e5739c3887edae1c282cb",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/attributes.json": "527719f45d7ebe2b4d72cd3d90bbb4ad2daaa96c047db2f3aef0ffa2dd4647e5",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/preview.png": "430a2b4ca3d9178c44b350b6c9f82dfbc100bfd9f60015ff7af8f7c2efd609cc",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/map.json": "7870af234757948bb5deef5f3b30125d2e5c52a4eceae8a6d0aca0b8de5eb338",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/layout.json": "1538c783cc12a02306cb72ce9c7133831e406e1ca1f8a3ac54447b407d61fa53",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/map.bin": "fcd427b02daa332fc585ffefb3e0f148abc01e70325344734645d988a424bc81",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/attributes.json": "b43d323ba911f48c719d85f31981ef31d4bd6c9a9e49bc315404b0c80e31e967",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/preview.png": "a622fe251b272b45f8a3c8c00d368f8cbbb84e0fef397bf6f0656401fb1a9706",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/map.json": "f5fbcbe43dd385157c530929f762fa621e99c84b092d97382d69dcf7ed7380d7",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/layout.json": "3e0bf1934d2cf0ea3b4f87d8693798ce2d07f3b6e0a3c35a497b2a652eeeac82",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/map.bin": "d4b8d2fe40c87032e90fd4dbe77ab8f9c7eb8ee6339b7af0f55e346120175f04",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/attributes.json": "c48bb65835239a1c6dff0c6b0c4ab99474fa8abd6b8941d852aaf01c69777f14",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/preview.png": "78c944de35072134c4457665882c81b1a39fb8e194dfd6ce4c3914c393b580e3",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/map.json": "19c76cddb47ca4d39aa0810fdb556cfff60829bbf2fd1ab3e28e533ed2565a49",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/layout.json": "206634076cdbb0c8ff542ebfce179c9a2e5474785f12f4171d8eed8791575a87",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/map.bin": "ce6c9d1748d45a552bccab2a71b300c2cf2e53bbccbba0b9ff0cca13294bd01c",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/attributes.json": "1e9983fc828fb070fa15f4f32fd8fe8116ee2330bbee7d0fa2d36ef9d305c732",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/preview.png": "b2a6e65a1821b4a528f64c3ff4967daafa95f101202d7b9e986b6bda465a01a3",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/map.json": "9fe9ee8044a5a081230887ca06ed6cb7e45a970e7541a6f25a37a42126191f0a",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/layout.json": "1b716d817b6b4e3b86d42b63074747ef96e9b72cdd3b9ee22d55b518323c7910",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/map.bin": "6356bb1f2530472ccba1b2708f28669227a67b15aa83294869d8b1b14a822576",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/attributes.json": "7902f233ef0db67b6b1058832055791b620051219af6802dbc7d1320db7523fe",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/preview.png": "805553bebc39f8bce46275f1ccd385f9657a5702df54933604189496f83ba8d6",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/map.json": "6ce6fef16fe53b6f3e4075bf92e493fb67bb5056a5479fe57db94cc03a54e4fd",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/layout.json": "62d5e88bd419fcf761192d807d04c2c3f6208b89e43fd2205fb4ac5606246ebd",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/map.bin": "238ba00ec625402d3da640e9bf78c0f2424f6655f070c136533e681f40abb733",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/attributes.json": "8af9ee07d0601dd1b916c20f1c46c3ed737eb03d4b9cffcf4f0f0b983792c31c",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/preview.png": "d1abdaf41294f919e4c0d187f2db1fbb352633b077b45ed4a003ad262a0cb546",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/map.json": "ed2b2164c66bb4965ddf6d7c79345e2c37bffa3d104d92f6a9beebd0f72e2565",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/layout.json": "1f7ed075eadc3cb09c24fbc6d498b034e7ad02d756a52693c6488f88d68438b5"
+  },
+  "original_padded_cells": 12210,
+  "buffer_cells": 10240,
+  "padded_cells": {
+    "CampusWest": 5170,
+    "CampusCenter": 5170,
+    "CampusEast": 5170,
+    "Gate": 2162,
+    "FightArea": 4335,
+    "Tower1": 782,
+    "Tower2": 782,
+    "Tower3": 782,
+    "Hall1": 805,
+    "Hall2": 805,
+    "Factory1": 1044,
+    "Factory2": 928,
+    "Castle": 1040,
+    "Arcade1": 1008,
+    "Arcade2": 999
+  },
+  "dimensions": {
+    "CampusWest": [
+      32,
+      96
+    ],
+    "CampusCenter": [
+      32,
+      96
+    ],
+    "CampusEast": [
+      32,
+      96
+    ],
+    "Gate": [
+      32,
+      32
+    ],
+    "FightArea": [
+      70,
+      37
+    ],
+    "Tower1": [
+      19,
+      9
+    ],
+    "Tower2": [
+      19,
+      9
+    ],
+    "Tower3": [
+      19,
+      9
+    ],
+    "Hall1": [
+      20,
+      9
+    ],
+    "Hall2": [
+      20,
+      9
+    ],
+    "Factory1": [
+      21,
+      15
+    ],
+    "Factory2": [
+      17,
+      15
+    ],
+    "Castle": [
+      25,
+      12
+    ],
+    "Arcade1": [
+      21,
+      14
+    ],
+    "Arcade2": [
+      22,
+      13
+    ]
+  },
+  "original_campus_portal_mapping": {
+    "1": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+      "index": 0,
+      "global_tile": [
+        19,
+        34
+      ],
+      "local_tile": [
+        19,
+        34
+      ]
+    },
+    "2": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+      "index": 0,
+      "global_tile": [
+        33,
+        62
+      ],
+      "local_tile": [
+        1,
+        62
+      ]
+    },
+    "4": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+      "index": 1,
+      "global_tile": [
+        48,
+        18
+      ],
+      "local_tile": [
+        16,
+        18
+      ]
+    },
+    "5": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+      "index": 2,
+      "global_tile": [
+        48,
+        52
+      ],
+      "local_tile": [
+        16,
+        52
+      ]
+    },
+    "0": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+      "index": 0,
+      "global_tile": [
+        77,
+        34
+      ],
+      "local_tile": [
+        13,
+        34
+      ]
+    },
+    "3": {
+      "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+      "index": 1,
+      "global_tile": [
+        64,
+        62
+      ],
+      "local_tile": [
+        0,
+        62
+      ]
+    }
+  },
+  "remapped_return_events": [
+    {
+      "map": "Gate",
+      "event": 0,
+      "before": {
+        "x": 7,
+        "y": 2,
+        "elevation": 3,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "5"
+      },
+      "after": {
+        "x": 7,
+        "y": 2,
+        "elevation": 3,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "dest_warp_id": "2"
+      }
+    },
+    {
+      "map": "Tower1",
+      "event": 0,
+      "before": {
+        "x": 5,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "4"
+      },
+      "after": {
+        "x": 5,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "dest_warp_id": "1"
+      }
+    },
+    {
+      "map": "Tower1",
+      "event": 1,
+      "before": {
+        "x": 6,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "4"
+      },
+      "after": {
+        "x": 6,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "dest_warp_id": "1"
+      }
+    },
+    {
+      "map": "Hall1",
+      "event": 0,
+      "before": {
+        "x": 9,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "1"
+      },
+      "after": {
+        "x": 9,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Hall1",
+      "event": 1,
+      "before": {
+        "x": 10,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "1"
+      },
+      "after": {
+        "x": 10,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Factory1",
+      "event": 0,
+      "before": {
+        "x": 2,
+        "y": 14,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "0"
+      },
+      "after": {
+        "x": 2,
+        "y": 14,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Factory1",
+      "event": 1,
+      "before": {
+        "x": 3,
+        "y": 14,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "0"
+      },
+      "after": {
+        "x": 3,
+        "y": 14,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Castle",
+      "event": 0,
+      "before": {
+        "x": 12,
+        "y": 11,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "2"
+      },
+      "after": {
+        "x": 12,
+        "y": 11,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Castle",
+      "event": 1,
+      "before": {
+        "x": 13,
+        "y": 11,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "2"
+      },
+      "after": {
+        "x": 13,
+        "y": 11,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "dest_warp_id": "0"
+      }
+    },
+    {
+      "map": "Arcade1",
+      "event": 0,
+      "before": {
+        "x": 9,
+        "y": 13,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "3"
+      },
+      "after": {
+        "x": 9,
+        "y": 13,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "dest_warp_id": "1"
+      }
+    },
+    {
+      "map": "Arcade1",
+      "event": 1,
+      "before": {
+        "x": 10,
+        "y": 13,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUS",
+        "dest_warp_id": "3"
+      },
+      "after": {
+        "x": 10,
+        "y": 13,
+        "elevation": 0,
+        "dest_map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "dest_warp_id": "1"
+      }
+    }
+  ],
+  "strip_seams": [
+    {
+      "west": "CampusWest",
+      "east": "CampusCenter",
+      "offset": 0,
+      "ordinary_ground_rows": [
+        25,
+        28,
+        29,
+        34,
+        35,
+        45,
+        46,
+        51,
+        52,
+        53,
+        54
+      ]
+    },
+    {
+      "west": "CampusCenter",
+      "east": "CampusEast",
+      "offset": 0,
+      "ordinary_ground_rows": [
+        24,
+        25,
+        28,
+        29,
+        34,
+        35,
+        45,
+        51,
+        52,
+        55,
+        56,
+        57
+      ]
+    }
+  ],
+  "family_dependencies": {
+    "campus": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Campus",
+    "gate": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Gate",
+    "fight": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/FightArea",
+    "facilities": "original frontier-facilities/layout.json native dependencies"
+  },
+  "limits": [
+    "Three exact32x96 source strips replace oversized96x96 proposal; global terrain/C/E/art unchanged",
+    "This is an alternative bounded campus proposal, not duplicate registration of old96x96 header",
+    "Existing facility/gate IDs retained, six campus portals and returns mechanically remapped",
+    "Current Fight Area center/house external events require #295; regional source dependencies retained",
+    "No engine buffer expansion, permanent savedIDs/registry/schema/story or ROM/native/mGBA/Save acceptance"
+  ],
+  "output_sha256": {
+    "staged/Arcade2/map.json": "ed2b2164c66bb4965ddf6d7c79345e2c37bffa3d104d92f6a9beebd0f72e2565",
+    "staged/Arcade2/layout.json": "1f7ed075eadc3cb09c24fbc6d498b034e7ad02d756a52693c6488f88d68438b5",
+    "staged/Arcade2/preview.png": "d1abdaf41294f919e4c0d187f2db1fbb352633b077b45ed4a003ad262a0cb546",
+    "staged/Arcade2/attributes.json": "8af9ee07d0601dd1b916c20f1c46c3ed737eb03d4b9cffcf4f0f0b983792c31c",
+    "staged/Arcade2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Arcade2/map.bin": "238ba00ec625402d3da640e9bf78c0f2424f6655f070c136533e681f40abb733",
+    "staged/Arcade1/map.json": "692609f968011632ccabc6d7268ccef6e79cfd367bc8156fe3ea88405fcc79c5",
+    "staged/Arcade1/layout.json": "62d5e88bd419fcf761192d807d04c2c3f6208b89e43fd2205fb4ac5606246ebd",
+    "staged/Arcade1/preview.png": "805553bebc39f8bce46275f1ccd385f9657a5702df54933604189496f83ba8d6",
+    "staged/Arcade1/attributes.json": "7902f233ef0db67b6b1058832055791b620051219af6802dbc7d1320db7523fe",
+    "staged/Arcade1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Arcade1/map.bin": "6356bb1f2530472ccba1b2708f28669227a67b15aa83294869d8b1b14a822576",
+    "staged/Castle/map.json": "0fda79acb4d0eace2ba7aed893a90f3632a298d91080028f68f246af89c00ad2",
+    "staged/Castle/layout.json": "1b716d817b6b4e3b86d42b63074747ef96e9b72cdd3b9ee22d55b518323c7910",
+    "staged/Castle/preview.png": "b2a6e65a1821b4a528f64c3ff4967daafa95f101202d7b9e986b6bda465a01a3",
+    "staged/Castle/attributes.json": "1e9983fc828fb070fa15f4f32fd8fe8116ee2330bbee7d0fa2d36ef9d305c732",
+    "staged/Castle/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/Castle/map.bin": "ce6c9d1748d45a552bccab2a71b300c2cf2e53bbccbba0b9ff0cca13294bd01c",
+    "staged/Factory2/map.json": "19c76cddb47ca4d39aa0810fdb556cfff60829bbf2fd1ab3e28e533ed2565a49",
+    "staged/Factory2/layout.json": "206634076cdbb0c8ff542ebfce179c9a2e5474785f12f4171d8eed8791575a87",
+    "staged/Factory2/preview.png": "78c944de35072134c4457665882c81b1a39fb8e194dfd6ce4c3914c393b580e3",
+    "staged/Factory2/attributes.json": "c48bb65835239a1c6dff0c6b0c4ab99474fa8abd6b8941d852aaf01c69777f14",
+    "staged/Factory2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Factory2/map.bin": "d4b8d2fe40c87032e90fd4dbe77ab8f9c7eb8ee6339b7af0f55e346120175f04",
+    "staged/Factory1/map.json": "f1f17ca65fdfdf0ace35ff0af29bf06b0ee0a57c7370b831e05d31b84d7f8f9f",
+    "staged/Factory1/layout.json": "3e0bf1934d2cf0ea3b4f87d8693798ce2d07f3b6e0a3c35a497b2a652eeeac82",
+    "staged/Factory1/preview.png": "a622fe251b272b45f8a3c8c00d368f8cbbb84e0fef397bf6f0656401fb1a9706",
+    "staged/Factory1/attributes.json": "b43d323ba911f48c719d85f31981ef31d4bd6c9a9e49bc315404b0c80e31e967",
+    "staged/Factory1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Factory1/map.bin": "fcd427b02daa332fc585ffefb3e0f148abc01e70325344734645d988a424bc81",
+    "staged/Hall2/map.json": "7870af234757948bb5deef5f3b30125d2e5c52a4eceae8a6d0aca0b8de5eb338",
+    "staged/Hall2/layout.json": "1538c783cc12a02306cb72ce9c7133831e406e1ca1f8a3ac54447b407d61fa53",
+    "staged/Hall2/preview.png": "430a2b4ca3d9178c44b350b6c9f82dfbc100bfd9f60015ff7af8f7c2efd609cc",
+    "staged/Hall2/attributes.json": "527719f45d7ebe2b4d72cd3d90bbb4ad2daaa96c047db2f3aef0ffa2dd4647e5",
+    "staged/Hall2/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/Hall2/map.bin": "2657da4b3d4ecd7f1e62ebec37053c3e95cc3f3e3d9e5739c3887edae1c282cb",
+    "staged/Hall1/map.json": "ccd49dd0a400c523380b829e21664fa6eceb8c04a411ca47d9af7ee89b4e1a15",
+    "staged/Hall1/layout.json": "9f248d53ddb018ee11cb750feef9212dd51807bd5299e3842a8dd77ea5c1f63f",
+    "staged/Hall1/preview.png": "d6375863dfcb450ab95534fc2c9cd726e43673162610497b2973f1a03cd68272",
+    "staged/Hall1/attributes.json": "6d378e6d7453704a91473d267a0e52d8cc05d93dc88e8f192feb98131aed4b19",
+    "staged/Hall1/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+    "staged/Hall1/map.bin": "c469fe853404f430fc5a7a268122962ef16c0af90cb557e71036639199d8f88d",
+    "staged/Tower3/map.json": "d3d87602bc4d6ac92ab71de869cfd843f54742408ab68156649e6c9252514f82",
+    "staged/Tower3/layout.json": "bb7ce7f1e15df2c95ecfe12f6d7f7bc65ad54e1a4d750fa6cb3459988b9541fd",
+    "staged/Tower3/preview.png": "0dc41838e6de83a6914c039ed91a357bee59778ae33b3127bbb6b7edcabbfbfd",
+    "staged/Tower3/attributes.json": "f79ee0063477fb58ac8ef808649d536c12d93345e2b59429898c3f4ccae019ce",
+    "staged/Tower3/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Tower3/map.bin": "9805c919da40c085f1347a6b5f22ea3f928d3801204c7fe2aa0a63c4e46b2129",
+    "staged/Tower2/map.json": "383534262ffeb19439d9ab4449c3de842dc20a3ff82396d2fbbaaa8536485bdb",
+    "staged/Tower2/layout.json": "db90a675f36fcb5e686a0552100429bb21b7c592d2812c991ca1a1b03c46f90d",
+    "staged/Tower2/preview.png": "873fcd031e5ef9bf89227d9aa63d755df1f1a89d46fba297affdce10c5d447fa",
+    "staged/Tower2/attributes.json": "6d95614239be2cc33e278acad24821ecf4c030de9ee5264d2da420a8dd22918d",
+    "staged/Tower2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Tower2/map.bin": "2b6356ff72f7a014080fb98be0a9d59f7c8ecb16264af571d41436d82efec11e",
+    "staged/Tower1/map.json": "815c57d30cc49fa9daff4eabcda2eea7d01aa7a8384d683f855ac74db5da4eac",
+    "staged/Tower1/layout.json": "78506ee2caf192bef2f6945d689c69748d4fbaab6be8d69b88f5d73af2ad0936",
+    "staged/Tower1/preview.png": "9442700f2669ffcc36341fd402b6c506b6cde1f79c6bfeb79a0106e74a52c663",
+    "staged/Tower1/attributes.json": "2b0bbcbd71ea7df1724de56f75a85f827eaa02bc58576a84d1fc6b94321b081a",
+    "staged/Tower1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/Tower1/map.bin": "4c5ad76bd2fb5a4d65914978338551c240f2e966c6f8f5a91346db1118bf6cbc",
+    "staged/FightArea/map.json": "5fdd0b19678c49628c3ee0a12698b1a0e63bdf5a3bd247c22ecabf9f098f2dd8",
+    "staged/FightArea/preview.png": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
+    "staged/FightArea/attributes.json": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
+    "staged/FightArea/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+    "staged/FightArea/map.bin": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
+    "staged/Gate/map.json": "a8dce4576d79dc650397765cdd8b28ccd0351b3bed526700a0bb0cefe9c5032b",
+    "staged/Gate/preview.png": "dc9db30def9b5349463ebf568872c0488f866f6c2d8a463c561361fc302a2d20",
+    "staged/Gate/attributes.json": "daf4c01fe26eb6ee9fca81114ca47c78c6909cc956ef2f8730ffea8625df57ce",
+    "staged/Gate/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Gate/map.bin": "9e138fcfb110864f66e857b2576439d607007603764bccabb7bb40593beb8a9b",
+    "staged/CampusEast/map.json": "f1314d1a47f24c41dc1ce1717f8a71aee7174a718349be46f06cc680bcc45187",
+    "staged/CampusEast/preview.png": "5bbd9a3e1ea1f6c8070fd93d79eb7881a1e9d3cda1a668d7655183e055157933",
+    "staged/CampusEast/attributes.json": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+    "staged/CampusEast/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/CampusEast/map.bin": "1692253b2c9d0d5d5a67387a8eee8de20a5f1b98878793e63f8cf7773854239c",
+    "staged/CampusCenter/map.json": "4861535267f6f130d366104134eeb1ca7eb9101ea5feb7638354d2fe98c95743",
+    "staged/CampusCenter/preview.png": "19e43b4765a172c0e17cde7b4b8260e2da7e99cc85983eb787e30e2d7d65108d",
+    "staged/CampusCenter/attributes.json": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+    "staged/CampusCenter/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/CampusCenter/map.bin": "cf90f4abf52049f5f24b2cd9fbe25731ae0d6ad724ce8f4da3107d383decef9e",
+    "staged/CampusWest/map.json": "19a22ffd166485bd96ba4677ae101cfb4b868406ab62023026086bca3dd7e3ca",
+    "staged/CampusWest/preview.png": "e56d407de465a0613f22e5891214c0345304d57bab13a67e6712cfe4d72d9cfe",
+    "staged/CampusWest/attributes.json": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+    "staged/CampusWest/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/CampusWest/map.bin": "f3400983c5fee9a6378244cc0e2f8d426594b7e137448141b96f1930ca7d1467"
+  }
+}
