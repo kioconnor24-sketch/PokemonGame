@@ -12,7 +12,7 @@ warehouse) and the north-west block, whose door is drawn as a closed picture (52
 map.bin puts the bank's animated door (533, copied from the north-east door, same 525/528 surroundings) there, and it
 opens onto Lilycove's department store 1F-5F and rooftop by the stairs. Solaceon's west house is drawn the same way
 (picture 593); it gets the family's door from Route 210 South's house (identical 528/528/519 surroundings) and a
-plain shell. Celestic and Mt. Coronet are excluded (active Codex work); Canalave, Pastoria and Hearthome are
+plain shell. Solaceon's Pokemon Center and Mart get the stock Center 1F and Mart. Celestic and Mt. Coronet are excluded (active Codex work); Canalave, Pastoria and Hearthome are
 handled by W1, W10 and W11.
 
   build_city_shells.py --engine ENGINE --out DIR
@@ -41,7 +41,9 @@ CIVIC = {("VeilstoneCity", (41, 36)): [("VeilstoneCity_PokemonCenter_1F", "Oldal
                                        ("VeilstoneCity_Warehouse_2F", "SlateportCity_SternsShipyard_2F")],
          ("VeilstoneCity", (18, 10)): [(f"VeilstoneCity_DepartmentStore_{f}", f"LilycoveCity_DepartmentStore_{f}")
                                        for f in ("1F", "2F", "3F", "4F", "5F")]
-                                      + [("VeilstoneCity_DepartmentStore_Rooftop", "LilycoveCity_DepartmentStoreRooftop")]}
+                                      + [("VeilstoneCity_DepartmentStore_Rooftop", "LilycoveCity_DepartmentStoreRooftop")],
+         ("SolaceonTown", (24, 24)): [("SolaceonTown_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")],
+         ("SolaceonTown", (29, 33)): [("SolaceonTown_Mart", "OldaleTown_Mart")]}
 TARGETS = [  # family folder, staged map, map constant prefix, music
     ("eastern-loop", "VeilstoneCity", "MAP_VEILSTONE_CITY", "MUS_ROUTE110"),
     ("eastern-loop", "Route213", "MAP_ROUTE213", "MUS_ROUTE110"),
