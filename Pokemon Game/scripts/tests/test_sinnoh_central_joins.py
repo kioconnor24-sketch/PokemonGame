@@ -62,6 +62,13 @@ class CentralJoinsTest(unittest.TestCase):
         back = a["warp_events"][int(gate[0]["dest_warp_id"])]
         self.assertEqual((back["x"], back["y"], back["dest_map"]), (4, 1, "MAP_HEARTHOME_CITY"))
 
+    def test_coronet_west_entrance_follows_the_donor(self):
+        w, r = self.maps["Route211_West"].header, self.maps["MtCoronet_1F_North_Room1"].header
+        self.assertEqual([(x["x"], x["y"], x["dest_map"]) for x in w["warp_events"]],
+                         [(29, 8, "MAP_MT_CORONET_1F_NORTH_ROOM1")])
+        back = r["warp_events"][int(w["warp_events"][0]["dest_warp_id"])]
+        self.assertEqual((back["x"], back["y"], back["dest_map"]), (3, 33, "MAP_ROUTE211_WEST"))
+
 
 if __name__ == "__main__":
     unittest.main()

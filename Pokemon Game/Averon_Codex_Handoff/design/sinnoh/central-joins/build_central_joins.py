@@ -6,12 +6,15 @@ destination" / "unbuilt external edge", recorded with the original cell in each 
 These three links join families that are all staged now (donor LiderMorti00/Sinnoh-pokeemerald-expansion @ 38228bb5):
 - HearthomeCity (8-9, 46) <-> Route212_Access (4, 1): the south gate's warps (hearthome-solaceon / eastern-loop);
 - Route210_South up <-> Route210_North down, offset -57 (hearthome-solaceon / celestic-north);
-- Route210_South right <-> Route215 left, offset 26 (hearthome-solaceon / eastern-loop).
+- Route210_South right <-> Route215 left, offset 26 (hearthome-solaceon / eastern-loop);
+- Route211_West (29, 8) <-> MtCoronet_1F_North_Room1 (3, 33): Mt. Coronet's west entrance (eterna-cycle /
+  celestic-north), the "west211" link Codex's Coronet checkpoint leaves as a separate gate. This one joins the west
+  and central networks; it only appends a warp on each side, a reversible proposal for Codex's Coronet.
 A DEV overlay of each touched map appends the donor warps (indices through Codex's warp_index_translation) and
 connections, and a derived map.bin reopens only cells Codex closed whose source collision was 0 and, for an edge,
 that face a reopened cell at the same elevation on the other side; every other closure stays.
 
-Codex's files are not modified. No NPCs, services, items, encounters or story. Mt. Coronet links are excluded.
+Codex's files are not modified. No NPCs, services, items, encounters or story. Coronet's other links (Room 2 <-> Route 216) are excluded.
 
   build_central_joins.py --out DIR
 """
@@ -24,8 +27,10 @@ import struct
 HERE = pathlib.Path(__file__).resolve().parent
 SINNOH = HERE.parent
 FAMILY = {"HearthomeCity": "hearthome-solaceon", "Route210_South": "hearthome-solaceon",
-          "Route212_Access": "eastern-loop", "Route215": "eastern-loop", "Route210_North": "celestic-north"}
-WARPS = [("HearthomeCity", [(8, 46), (9, 46)], "Route212_Access", [(4, 1)])]
+          "Route212_Access": "eastern-loop", "Route215": "eastern-loop", "Route210_North": "celestic-north",
+          "Route211_West": "eterna-cycle", "MtCoronet_1F_North_Room1": "celestic-north"}
+WARPS = [("HearthomeCity", [(8, 46), (9, 46)], "Route212_Access", [(4, 1)]),
+         ("Route211_West", [(29, 8)], "MtCoronet_1F_North_Room1", [(3, 33)])]
 CONNECTIONS = [("Route210_South", "up", "Route210_North", -57), ("Route210_South", "right", "Route215", 26)]
 OPPOSITE = {"up": "down", "down": "up", "left": "right", "right": "left"}
 
