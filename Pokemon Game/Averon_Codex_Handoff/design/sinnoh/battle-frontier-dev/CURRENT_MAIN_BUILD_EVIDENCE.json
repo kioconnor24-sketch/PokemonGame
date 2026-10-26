@@ -40,7 +40,22 @@
     "ewram_bytes": 226482,
     "iwram_bytes": 28336
   },
-  "native": "RUNNING: compilation complete; last headless worker active; no PASS claimed",
+  "native": {
+    "verdict": "INCOMPLETE_INTERRUPTED_NOT_SUITE_PASS",
+    "command": "make -j8 -O CRIES=off check TESTS=Averon",
+    "completed_pass_result_rows": 313,
+    "completed_fail_result_rows": 0,
+    "reason": "Final worker still active after20min; compiled suite retained, batch interrupted",
+    "replay": {
+      "verdict": "TIMEOUT180s_NOT_PASS",
+      "case": "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+      "parameters": 1890,
+      "reached_parameter": 262,
+      "observation": "Active progress; not a demonstrated hang or backend defect"
+    },
+    "strict_expected_failure_baseline": "UNCHANGED",
+    "source_sha": "b99e5e1ad1385b6131545a1cd6e5d34c4047b91b"
+  },
   "graphical": {
     "scope": "BOUNDED FightArea/gate pair plus reciprocal Route225/230 seam probes, not all44",
     "normal": {
