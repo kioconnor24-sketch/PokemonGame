@@ -5,11 +5,13 @@ OFF-ENGINE staging. Codex's city (eterna-cycle/staged/EternaCity and the city-fa
 A DEV-only overlay of the city's map.json appends one warp per closed door; the new maps reuse stock Averon interiors
 unchanged, each stair graph copied with its floors renamed (W12's civic()):
 - Pokemon Center (16, 17): stock Center 1F. Mart (19, 33): stock Mart.
-- The central hall's double door (19-20, 25): a LAYOUT_HOUSE1 shell, one street mat per door. Both cells are
+- The Cycle Shop's double door (19-20, 25): a LAYOUT_HOUSE1 shell, one street mat per door. Both cells are
   non-animated doors drawn with collision 1, which the engine only takes when the player steps onto them, so they
   could never open: a derived copy of the city's map.bin (overlay map.bin) clears those two cells' collision.
-- The six other doors: neutral LAYOUT_HOUSE1 shells.
-Closed on purpose: the Gym (22, 44); a gym's interior is design content, not a neutral shell.
+- The five other doors: neutral LAYOUT_HOUSE1 shells named after the donor's buildings (Codex's recorded source
+  header): Herb Shop (27, 8), Underground Man's house (21, 17), Flat 1 (25, 33), House 1 (9, 44), House 2 (39, 22).
+Closed on purpose: the Gym (22, 44), whose interior is design content, and the Galactic Building (16, 6), a story
+building (Codex's #238 stages its floors).
 
 West seam (C13): the donor joins Eterna's west edge to Route 205 North's east edge (left/right, offset 0). Production
 Route 205 North is open there (rows 14-21 but 16) and faces nothing; Codex closed Eterna's side (0, 14-21; source
@@ -36,12 +38,16 @@ spec.loader.exec_module(w12)
 w1 = w12.w1
 FAMILY = SINNOH / "eterna-cycle"
 CITY, PREFIX, WIDTH, HEIGHT = "EternaCity", "MAP_ETERNA_CITY", 60, 55
-CLOSED = {(22, 44): "Gym: a gym's interior is design content (layout, puzzle, leader), not a neutral shell"}
+CLOSED = {(22, 44): "Gym: a gym's interior is design content (layout, puzzle, leader), not a neutral shell",
+          (16, 6): "Galactic Building: a story building; Codex's #238 stages its floors"}
 UNBLOCK = [(19, 25), (20, 25)]                          # non-animated double door drawn with collision 1
 # doors (one per street mat, in mat order) -> floors (new name, stock map)
 CIVIC = [([(16, 17)], [("EternaCity_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")]),
          ([(19, 33)], [("EternaCity_Mart", "OldaleTown_Mart")])]
-HALL = ("EternaCity_Hall", [(19, 25), (20, 25)])
+HALL = ("EternaCity_CycleShop", [(19, 25), (20, 25)])
+# the donor's building behind each remaining door (eterna-cycle source-receipt, EternaCity warp destinations)
+SHELLS = {(27, 8): "EternaCity_HerbShop", (21, 17): "EternaCity_UndergroundManHouse", (25, 33): "EternaCity_Flat1",
+          (9, 44): "EternaCity_House1", (39, 22): "EternaCity_House2"}
 SEAM_OFFSET = 0                                         # donor: EternaCity left -> Route205_North, offset 0
 
 
@@ -95,7 +101,11 @@ def build(engine):
     doors = closed_doors(engine, hdr, cells, attrs)
     planned = [d for ds, _ in CIVIC for d in ds] + HALL[1] + list(CLOSED)
     houses = [d for d in doors if d not in planned]
-    assert set(planned) <= set(doors) and len(houses) == 6, (doors, houses)
+    assert set(planned) <= set(doors) and sorted(houses) == sorted(SHELLS), (doors, houses)
+    source = {(w["x"], w["y"]): w["dest_map"] for w in json.loads((FAMILY / "source-receipt.json").read_text())
+              ["source_geometry_headers"][CITY]["warp_events"]}
+    for door, name in list(SHELLS.items()) + [(d, HALL[0]) for d in HALL[1]]:
+        assert source[door].startswith(w12.const(name).replace("FLAT1", "FLAT1_F1")), (door, source[door])
     assert all(names[attrs[cells[y * WIDTH + x] & 1023] & 0xFF] == "MB_ANIMATED_DOOR" for x, y in houses), houses
     for x, y in doors:                                          # every door has a walkable doorstep below it
         assert not cells[(y + 1) * WIDTH + x] & 0xC00, (x, y)
@@ -118,8 +128,8 @@ def build(engine):
         w["dest_map"], w["dest_warp_id"] = w12.const(hall), str(mat)
     maps[hall] = w1.header(w12.const(hall), hall, "LAYOUT_HOUSE1", music, "MAP_TYPE_INDOOR",
                            [(3, 8, PREFIX, index[hall_doors[0]]), (4, 8, PREFIX, index[hall_doors[1]])])
-    for k, door in enumerate(houses, 1):
-        name = f"{CITY}_House{k}"
+    for door in houses:
+        name = SHELLS[door]
         hdr["warp_events"][index[door]]["dest_map"] = w12.const(name)
         maps[name] = w1.header(w12.const(name), name, "LAYOUT_HOUSE1", music, "MAP_TYPE_INDOOR",
                                [(3, 8, PREFIX, index[door]), (4, 8, PREFIX, index[door])])

@@ -34,8 +34,9 @@ class EternaCivicTest(unittest.TestCase):
         n = len(source["warp_events"])
         self.assertEqual(self.hdr["warp_events"][:n], source["warp_events"])
         added = {(w["x"], w["y"]) for w in self.hdr["warp_events"][n:]}
-        self.assertEqual(len(added), 10)
+        self.assertEqual(len(added), 9)
         self.assertNotIn((22, 44), added)
+        self.assertNotIn((16, 6), added)
         self.assertEqual({k: v for k, v in self.hdr.items() if k not in ("warp_events", "connections")},
                          {k: v for k, v in source.items() if k not in ("warp_events", "connections")})
         self.assertEqual(self.hdr["connections"], source["connections"]
@@ -45,7 +46,7 @@ class EternaCivicTest(unittest.TestCase):
         self.assertTrue(w22.check(self.hdr, self.maps))
 
     def test_new_maps_are_neutral(self):
-        self.assertEqual(len(self.maps), 9)
+        self.assertEqual(len(self.maps), 8)
         for h in self.maps.values():
             self.assertEqual((h["object_events"], h["coord_events"], h["bg_events"]), ([], [], []))
             self.assertEqual(h["region_map_section"], "MAPSEC_PENDING_OWNER")
