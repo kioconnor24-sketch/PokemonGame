@@ -6,7 +6,10 @@ a 52 x 40 park with a tree ring, a central sand plaza, three rectangular ponds w
 in Lake Verity (strict), walkways, and two gatehouses (Dewford's house) at the south-west and south-east.
 Hearthome (Codex's hearthome-solaceon staging) has two pairs of north arrow mats with no warp at (8-9, 6) and
 (50-51, 6); a DEV-only overlay of its map.json appends four warps: the west pair to the west gatehouse door, the east
-pair to the east one. Its map data and files are not modified.
+pair to the east one. Its seven warp-less animated doors open into neutral LAYOUT_HOUSE1 shells. Two more houses,
+(20, 19) and (21, 30), draw their door as the closed picture 593 (solid); a DEV-only derived copy of Hearthome's
+map.bin puts the family's animated door there, copied from Route 210 South's house door (30, 47), whose left/right/
+above pieces are identical (528/528/519), and they get shells too. Codex's files are not modified.
 No story, walking-Pokemon mechanic, objects, encounters or sections (MAPSEC_PENDING_OWNER).
 
   build_amity_square.py --engine ENGINE --out DIR
@@ -15,6 +18,7 @@ import argparse
 import importlib.util
 import json
 import pathlib
+import re
 import struct
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -26,11 +30,45 @@ HEARTHOME = HERE.parent / "hearthome-solaceon/staged/HearthomeCity"
 MATS = {"west": [(8, 6), (9, 6)], "east": [(50, 6), (51, 6)]}
 # Hearthome's warp-less animated doors open into neutral LAYOUT_HOUSE1 shells (no NPCs/services/contests/gym).
 HEARTHOME_DOORS = [(29, 12), (14, 19), (36, 19), (49, 19), (27, 30), (37, 30), (44, 30)]
+# Closed door pictures opened with the family's door of the same surroundings (house shells 8 and 9).
+PICTURE_DOORS = [(20, 19), (21, 30)]
+DOOR_DONOR = ("Route210_South", (30, 47))
 W, H = 52, 40
 PONDS = [(8, 6, 15, 11), (36, 6, 43, 11), (22, 26, 29, 30)]
 PLAZA = (18, 12, 33, 22)
 PATHS = [((25, 4), (26, 33)), ((6, 17), (45, 18)), ((8, 30), (43, 31))]
 GATES = {"west": (6, 31), "east": (41, 31)}          # Dewford house top-left; door (+2, +3)
+
+
+def family_bin(name):
+    d = HERE.parent / "hearthome-solaceon/staged" / name
+    raw = (d / "averon-map.bin").read_bytes()
+    width = struct.unpack(">I", (d / "averon.png").read_bytes()[16:20])[0] // 16
+    return width, list(struct.unpack("<%dH" % (len(raw) // 2), raw))
+
+
+def opened_hearthome(engine):
+    """Hearthome's blockdata with PICTURE_DOORS given the family's animated door word."""
+    fam = HERE.parent / "hearthome-solaceon/outdoor-family"
+    pa = (fam / "primary-attributes.bin").read_bytes()
+    pa += b"\0" * (1024 - len(pa))
+    sa = (fam / "secondary-attributes.bin").read_bytes()
+    attrs = struct.unpack("<%dH" % ((len(pa) + len(sa)) // 2), pa + sa)
+    names = re.findall(r"^\s*(MB_\w+)", (pathlib.Path(engine) / "include/constants/metatile_behaviors.h").read_text(), re.M)
+    width, cells = family_bin("HearthomeCity")
+    dwidth, dcells = family_bin(DOOR_DONOR[0])
+    sx, sy = DOOR_DONOR[1]
+    door = dcells[sy * dwidth + sx]
+    assert names[attrs[door & 1023] & 0xFF] == "MB_ANIMATED_DOOR"
+    out = list(cells)
+    for x, y in PICTURE_DOORS:
+        picture = cells[y * width + x]
+        assert picture & 0xC00 and "DOOR" not in names[attrs[picture & 1023] & 0xFF], (x, y)
+        assert not cells[(y + 1) * width + x] & 0xC00, (x, y)                   # a walkable doorstep below
+        for dx, dy in ((-1, 0), (1, 0), (0, -1)):
+            assert cells[(y + dy) * width + x + dx] & 1023 == dcells[(sy + dy) * dwidth + sx + dx] & 1023, (x, y)
+        out[y * width + x] = door
+    return out
 
 
 def build(engine):
@@ -81,7 +119,7 @@ def build(engine):
             hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_AMITY_SQUARE",
                                       "dest_warp_id": "0" if side == "west" else "1"})
     shells = {}
-    for k, (x, y) in enumerate(HEARTHOME_DOORS, 1):
+    for k, (x, y) in enumerate(HEARTHOME_DOORS + PICTURE_DOORS, 1):
         assert all((w["x"], w["y"]) != (x, y) for w in hh["warp_events"]), (x, y)
         i = len(hh["warp_events"])
         name = f"HearthomeCity_House{k}"
@@ -91,11 +129,11 @@ def build(engine):
                                  "MAP_TYPE_INDOOR", [(3, 8, "MAP_HEARTHOME_CITY", i), (4, 8, "MAP_HEARTHOME_CITY", i)])
     amity = w1.header("MAP_AMITY_SQUARE", "AmitySquare", "LAYOUT_AMITY_SQUARE", "MUS_ROUTE110", "MAP_TYPE_ROUTE",
                       [(*doors["west"], "MAP_HEARTHOME_CITY", n), (*doors["east"], "MAP_HEARTHOME_CITY", n + 2)])
-    return eng, cells, amity, hh, doors, shells
+    return eng, cells, amity, hh, doors, shells, opened_hearthome(engine)
 
 
 def write(engine, out):
-    eng, cells, amity, hh, doors, shells = build(engine)
+    eng, cells, amity, hh, doors, shells, hh_bin = build(engine)
     st = pathlib.Path(out) / "staged"
     for name, hdr in shells.items():
         (st / name).mkdir(parents=True, exist_ok=True)
@@ -112,6 +150,7 @@ def write(engine, out):
     (st / "AmitySquare/scripts.inc").write_text(w1.scripts("AmitySquare"))
     (st / "HearthomeCity-dev-overlay").mkdir(parents=True, exist_ok=True)
     (st / "HearthomeCity-dev-overlay/map.json").write_text(json.dumps(hh, indent=2) + "\n")
+    (st / "HearthomeCity-dev-overlay/map.bin").write_bytes(struct.pack("<%dH" % len(hh_bin), *hh_bin))
     bank = w1.render.Bank(eng.root / "data/tilesets/primary/general", eng.root / "data/tilesets/secondary/dewford")
     w1.render.render_cells(bank, cells, W, st / "AmitySquare/preview.png")
     receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "map_sha256": w1.sha(data), "doors": doors,

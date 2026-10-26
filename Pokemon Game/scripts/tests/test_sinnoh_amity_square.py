@@ -18,12 +18,14 @@ ti.loader.exec_module(t)
 
 class AmitySquareTest(unittest.TestCase):
     def setUp(self):
-        self.eng, self.cells, self.amity, self.hh, self.doors, self.shells = b.build(ENGINE)
+        self.eng, self.cells, self.amity, self.hh, self.doors, self.shells, self.hh_bin = b.build(ENGINE)
 
     def test_staged_matches_fresh_build(self):
         self.assertEqual((HERE / "staged/AmitySquare/map.bin").read_bytes(), struct.pack("<%dH" % len(self.cells), *self.cells))
         self.assertEqual(json.loads((HERE / "staged/AmitySquare/map.json").read_text()), self.amity)
         self.assertEqual(json.loads((HERE / "staged/HearthomeCity-dev-overlay/map.json").read_text()), self.hh)
+        self.assertEqual((HERE / "staged/HearthomeCity-dev-overlay/map.bin").read_bytes(),
+                         struct.pack("<%dH" % len(self.hh_bin), *self.hh_bin))
 
     def test_words_attested(self):
         known = set(self.eng.cells("LakeVerity")[2]) | set(self.eng.cells("DewfordTown")[2])
@@ -42,7 +44,7 @@ class AmitySquareTest(unittest.TestCase):
         self.assertEqual(self.hh["warp_events"][:n], source["warp_events"])
         added = self.hh["warp_events"][n:n + 4]
         self.assertEqual([(w["x"], w["y"]) for w in added], b.MATS["west"] + b.MATS["east"])
-        for k, (x, y) in enumerate(b.HEARTHOME_DOORS, 1):
+        for k, (x, y) in enumerate(b.HEARTHOME_DOORS + b.PICTURE_DOORS, 1):
             i = n + 3 + k
             self.assertEqual((self.hh["warp_events"][i]["x"], self.hh["warp_events"][i]["y"]), (x, y))
             back = self.shells[f"HearthomeCity_House{k}"]["warp_events"]
@@ -51,6 +53,24 @@ class AmitySquareTest(unittest.TestCase):
         aw = self.amity["warp_events"]
         self.assertEqual([(w["dest_map"], int(w["dest_warp_id"])) for w in aw],
                          [("MAP_HEARTHOME_CITY", n), ("MAP_HEARTHOME_CITY", n + 2)])
+
+    def test_two_door_pictures_get_the_family_door_and_nothing_else_changes(self):
+        width, src = b.family_bin("HearthomeCity")
+        changed = [(i % width, i // width) for i, (a, c) in enumerate(zip(src, self.hh_bin)) if a != c]
+        self.assertEqual(sorted(changed, key=lambda p: (p[1], p[0])), b.PICTURE_DOORS)
+        dwidth, donor = b.family_bin(b.DOOR_DONOR[0])
+        sx, sy = b.DOOR_DONOR[1]
+        for x, y in b.PICTURE_DOORS:
+            self.assertEqual(self.hh_bin[y * width + x], donor[sy * dwidth + sx])
+
+    def test_a_donor_with_other_surroundings_is_refused(self):
+        saved = b.DOOR_DONOR
+        try:
+            b.DOOR_DONOR = ("HearthomeCity", (14, 19))
+            with self.assertRaises(AssertionError):
+                b.opened_hearthome(ENGINE)
+        finally:
+            b.DOOR_DONOR = saved
 
 
 if __name__ == "__main__":
