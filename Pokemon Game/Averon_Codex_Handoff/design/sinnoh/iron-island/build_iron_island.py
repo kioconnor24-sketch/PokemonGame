@@ -414,6 +414,7 @@ def cave_b3f(eng):
 PIER_HOUSE_ROW = 13
 PIER_HOUSE_X = 27
 MORE_HOUSE_DOORS = [(25, 31), (9, 39), (10, 45), (25, 45)]    # closed shells with a doorless door picture (525)
+WARPLESS_DOORS = [(24, 39)]    # an animated door (561) the staging draws without a warp: shell House7
 
 
 def canalave_overlay():
@@ -444,7 +445,9 @@ def canalave_overlay():
         {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_LIBRARY_1F", "dest_warp_id": "0"},
         {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}] + [
         {"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_CANALAVE_CITY_HOUSE{n}", "dest_warp_id": "0"}
-        for n, (x, y) in enumerate(MORE_HOUSE_DOORS, 3)]
+        for n, (x, y) in enumerate(MORE_HOUSE_DOORS + WARPLESS_DOORS, 3)]
+    for x, y in WARPLESS_DOORS:
+        assert cells[y * w + x] & 1023 == 561 and not cells[(y + 1) * w + x] & 0xC00, (x, y)
     assert cells[17 * w + 7] & 1023 == 537 and cells[31 * w + 9] & 1023 == 537   # existing animated doors
     data = struct.pack("<%dH" % len(cells), *cells)
     changed = [(i % w, i // w) for i, (a, b) in enumerate(zip(struct.unpack("<%dH" % (len(raw) // 2), raw), cells)) if a != b]
@@ -522,7 +525,7 @@ def build(engine_root):
         **{f"CanalaveCity_House{n}": (header(f"MAP_CANALAVE_CITY_HOUSE{n}", f"CanalaveCity_House{n}", "LAYOUT_HOUSE1",
                                              "MUS_ROUTE110", "MAP_TYPE_INDOOR",
                                              [(3, 8, "MAP_CANALAVE_CITY", n + 2), (4, 8, "MAP_CANALAVE_CITY", n + 2)]), None)
-           for n in range(3, 7)},
+           for n in range(3, 3 + len(MORE_HOUSE_DOORS + WARPLESS_DOORS))},
         "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_CANALAVE_CITY_HARBOR",
                                        "MUS_ROUTE110", "MAP_TYPE_INDOOR",
                                        [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
