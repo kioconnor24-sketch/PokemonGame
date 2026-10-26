@@ -39,7 +39,7 @@ def construct(geometry):
             if p['permission']==0x15:
                 # Keep exterior sides and unbuilt southern join safely closed.
                 edge=(x in (0,w-1)) or (y==0 and 'up' not in existing.OPEN_BOUNDARIES[name]) or (y==height-1 and 'down' not in existing.OPEN_BOUNDARIES[name])
-                cells[y*w+x]=0x1000|44|(0xc00 if edge else 0)
+                cells[y*w+x]=0x1000|368|(0xc00 if edge else 0)
             elif p['permission']==0:
                 v=cells[y*w+x]
                 if not v&0xc00:
@@ -75,10 +75,10 @@ def build(engine,out):
     prefixes=['data/tilesets/primary/general/','data/tilesets/secondary/rustboro/']
     primary=read(engine/prefixes[0]/'metatiles.bin');pa=read(engine/prefixes[0]/'metatile_attributes.bin');source_attrs=[bytearray(pa),bytearray(1024)]
     for mid in (1,4,265):struct.pack_into('<H',source_attrs[0],2*mid,0x1000)
-    if existing.packer.attribute(pa,44)!=0x1015:raise ValueError('native ocean semantics differ')
+    if existing.packer.attribute(pa,368)!=0x1015:raise ValueError('native ocean semantics differ')
     sec=sa=b'';packets={}
     for name,(raw,h) in result.items():
-        border=struct.pack('<4H',*[0x1c00|44]*4);desired=[existing.packer.words(primary,v&1023) for (v,) in struct.iter_unpack('<H',raw+border)]
+        border=struct.pack('<4H',*[0x1c00|368]*4);desired=[existing.packer.words(primary,v&1023) for (v,) in struct.iter_unpack('<H',raw+border)]
         data,sec,sa=existing.packer.pack_art(raw+border,desired,source_attrs,primary,pa,sec,sa)
         packets[name]=(data[:len(raw)],data[len(raw):],h)
     images=[existing.dual.indexed(read(engine/p/'tiles.png')) for p in prefixes];previews={};attrs={}
