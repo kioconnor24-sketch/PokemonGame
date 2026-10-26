@@ -21,13 +21,11 @@ def build(engine,out):
        limits=['Authentic technical footprint/native cave and step proxies, not DS sky/platform architecture or camera',
                'Source exit and summit transition closed; no flute, legendary, conditional routing or story unlock',
                'No DS pixels/models/music, production IDs/registry/save edits, ROM/native/mGBA/Save acceptance'])
-    (Path(out)/'receipt.json').write_text(json.dumps(result,indent=2)+'
-')
+    (Path(out)/'receipt.json').write_text(json.dumps(result,indent=2)+'\n')
     return result
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--engine',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--private-inputs',type=Path);a=p.parse_args()
     if a.private_inputs:
-        g=existing.extract(a.private_inputs);(HERE/'geometry.json').write_text(json.dumps(g,indent=2)+'
-')
+        g=existing.extract(a.private_inputs);(HERE/'geometry.json').write_text(json.dumps(g,indent=2)+'\n')
         print({n:dict(supported=len(v['surfaces']),rejected=v['rejected_permission_clear']) for n,v in g.items()})
     else:print(json.dumps(build(a.engine,a.out),indent=2))
