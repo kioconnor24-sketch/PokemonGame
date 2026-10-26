@@ -1,0 +1,29 @@
+{
+  "id": "MAP_ROUTE212_NORTH_MANSION_2F",
+  "name": "Route212_North_Mansion_2F",
+  "layout": "LAYOUT_LILYCOVE_CITY_COVE_LILY_MOTEL_2F",
+  "music": "MUS_ROUTE110",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE212_NORTH_MANSION_1F",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
