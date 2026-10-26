@@ -1,0 +1,2 @@
+GreatMarsh_West_MapScripts::
+	.byte 0

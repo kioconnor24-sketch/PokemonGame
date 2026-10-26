@@ -1,0 +1,69 @@
+{
+  "status": "OFF_ENGINE_STAGING_NOT_PRODUCTION",
+  "maps": {
+    "GreatMarsh": {
+      "map_sha256": "62c705aec9fad3b71ba65f2be912e5e56579499a1d808300cf5cdd48ba3e3704",
+      "connections": [
+        {
+          "map": "MAP_GREAT_MARSH_NORTH",
+          "offset": 0,
+          "direction": "up"
+        },
+        {
+          "map": "MAP_GREAT_MARSH_WEST",
+          "offset": 0,
+          "direction": "left"
+        }
+      ]
+    },
+    "GreatMarsh_North": {
+      "map_sha256": "ee66151f7882b6b740f2b57bd07e00229ab7215dc8e8c1568b94427a1d7339a4",
+      "connections": [
+        {
+          "map": "MAP_GREAT_MARSH",
+          "offset": 0,
+          "direction": "down"
+        },
+        {
+          "map": "MAP_GREAT_MARSH_NORTH_WEST",
+          "offset": 0,
+          "direction": "left"
+        }
+      ]
+    },
+    "GreatMarsh_NorthWest": {
+      "map_sha256": "9676b29b0acaa6151a42157a1aad3b610514b2b8b2aec360b7b60d985a9eca55",
+      "connections": [
+        {
+          "map": "MAP_GREAT_MARSH_NORTH",
+          "offset": 0,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_GREAT_MARSH_WEST",
+          "offset": 0,
+          "direction": "down"
+        }
+      ]
+    },
+    "GreatMarsh_West": {
+      "map_sha256": "4bc33dadec6ffe93a52c179966ba8157685afa6aa82e3474d160148839894f62",
+      "connections": [
+        {
+          "map": "MAP_GREAT_MARSH",
+          "offset": 0,
+          "direction": "right"
+        },
+        {
+          "map": "MAP_GREAT_MARSH_NORTH_WEST",
+          "offset": 0,
+          "direction": "up"
+        }
+      ]
+    }
+  },
+  "inputs_sha256": {
+    "data/layouts/DewfordTown/map.bin": "f99942a2f630ca1fc16d7d84f7f831485934962c4477e8b1fa88cfbe30c61f74",
+    "data/layouts/LakeVerity/map.bin": "f7fd0e8a1acd247c123b67df78d06cccfaf47bce9cc524af9d0db7a43ad1864a"
+  }
+}
