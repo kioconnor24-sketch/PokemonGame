@@ -1,0 +1,8 @@
+{
+ "batch": ["MAP_IRON_ISLAND_1F", "MAP_IRON_ISLAND_B1F"],
+ "entry": ["MAP_IRON_ISLAND_1F", 12, 13],
+ "description": "TEST-ONLY: Iron Island B1F's ladder (warp 0) is pointed at 1F's cave-mouth exit (warp 0) instead of 1F's ladder (warp 1), so the ladder pair is no longer reciprocal. Climbing back up must land at the wrong place.",
+ "expect": "FAIL",
+ "must_fail": ["warp 1"],
+ "edits": [{"op": "warp", "map": "IronIsland_B1F", "index": 0, "set": {"dest_warp_id": "0"}}]
+}
