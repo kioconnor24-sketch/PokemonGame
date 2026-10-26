@@ -10,6 +10,7 @@ folder whose prepare_runtime.assemble() supplies the base scene, or '-' for the 
 import importlib.util
 import json
 import pathlib
+import re
 import struct
 import subprocess
 import sys
@@ -108,6 +109,26 @@ def main():
             layout_ids.add(hdr["layout"])
         names.append(name)
         inc += f'\t.include "data/maps/{name}/scripts.inc"\n'
+    tilesets = st / "tilesets.json"     # a batch's own tileset pair, declared as Codex's family assemblers do
+    if tilesets.exists():
+        for path in ("include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h"):
+            files.setdefault(path, (eng / path).read_bytes())
+        for t in json.loads(tilesets.read_text()):
+            bank = "secondary" if t["secondary"] else "primary"
+            folder = f"data/tilesets/{bank}/{t['symbol'].lower()}/"
+            files[folder + "metatiles.bin"] = (batch / t["metatiles"]).read_bytes()
+            files[folder + "metatile_attributes.bin"] = (batch / t["attributes"]).read_bytes()
+            text = files["src/data/tilesets/headers.h"].decode()
+            block = re.search(r"const struct Tileset gTileset_" + t["graphics"] + r" =\s*\{(.*?)\};", text, re.S)[1]
+            bind = {f: re.search(r"\." + f + r"\s*=\s*(\w+)\s*,", block)[1] for f in ("tiles", "palettes", "callback")}
+            sym = t["symbol"]
+            files["include/tilesets.h"] += f"\nextern const struct Tileset gTileset_{sym};\n".encode()
+            files["src/data/tilesets/metatiles.h"] += (f'\nconst u16 gMetatiles_{sym}[] = INCBIN_U16("{folder}metatiles.bin");\n'
+                                                       f'const u16 gMetatileAttributes_{sym}[] = INCBIN_U16("{folder}metatile_attributes.bin");\n').encode()
+            files["src/data/tilesets/headers.h"] += (f"\nconst struct Tileset gTileset_{sym} = {{ .isCompressed=TRUE, "
+                                                     f".isSecondary={'TRUE' if t['secondary'] else 'FALSE'}, .tiles={bind['tiles']}, "
+                                                     f".palettes={bind['palettes']}, .metatiles=gMetatiles_{sym}, "
+                                                     f".metatileAttributes = gMetatileAttributes_{sym}, .callback={bind['callback']} }};\n").encode()
     files["data/maps/map_groups.json"] = (json.dumps(groups, indent=2) + "\n").encode()
     files["data/layouts/layouts.json"] = (json.dumps(layouts, indent=2) + "\n").encode()
     files["data/event_scripts.s"] = inc.encode()
