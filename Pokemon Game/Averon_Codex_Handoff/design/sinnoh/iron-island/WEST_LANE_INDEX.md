@@ -12,15 +12,17 @@ Labels: **SOURCE** = staged files plus source tests; **DEV** = temporary-slot RO
 | #260 | `claude/pal-park-w6` | **W6**: Pal Park + gate (new) | Gate NORMAL and RELEASE 35/35, each + 3/3 (Route 221 → gate → park) |
 | #265 | `claude/wayward-cave-w7` | **W7**: Wayward Cave 1F/B1F (new) | SOURCE 4/4; static clean; **DEV gate NORMAL 14/14 + Continue 3/3** (eterna-cycle scene) |
 | #267 | `claude/lost-tower-w8` | **W8**: Lost Tower 6F + Solaceon Ruins ×3 (Route 209) | SOURCE 6/6; static 0 findings after a derived Route 209 overlay sets the 8 pocket step cells to elevation 0 (`5823b4d3`). **DEV gate 184/184 + Continue 3/3** (the earlier 136/170 was a tooling defect: Mt. Pyre holes are one-way; fixed in #252). |
-| #268 | `claude/great-marsh-w10` | **W10**: Great Marsh + gate + Pastoria House1–8 | SOURCE 4/4; static **0 findings**; **DEV gate NORMAL 174/174 + Continue 3/3** (eastern-loop scene) |
-| #269 | `claude/amity-square-w11` | **W11**: Amity Square + Hearthome House1–7, + **House8–9** behind two solid door pictures (derived Hearthome map.bin, `d068e929`) | SOURCE 6/6; static **0 findings**; **DEV gate NORMAL 149/149 + Continue 3/3** (hearthome-solaceon scene, before House8–9) |
+| #268 | `claude/great-marsh-w10` | **W10**: Great Marsh + gate + Pastoria houses + Center (stock Center 1F, `7b5fb8d3`) | SOURCE 4/4; static **0 findings**; **DEV gate NORMAL 174/174 + Continue 3/3** (eastern-loop scene) |
+| #269 | `claude/amity-square-w11` | **W11**: Amity Square + Hearthome House1–7, + **House8–9** behind two solid door pictures (derived Hearthome map.bin, `d068e929`) + **civic interiors**: contest lobby/hall, Center, Mart (`684f5f82`) | SOURCE 6/6; static **0 findings**; **DEV gate NORMAL 149/149 + Continue 3/3** (hearthome-solaceon scene, before House8–9) |
 | #275 | `claude/sendoff-spring-w13` | **W13**: Spring Path → Sendoff Spring → Turnback Cave 1F/B1F/B2F + Maniac Tunnel; Route 214 derived overlay | SOURCE 7/7; static **0 findings** (eastern-loop scene); **DEV gate 40/40 + Continue 3/3** |
 | #276 | `claude/jubilife-shells-w14` | **W14**: Jubilife Global Terminal, TV, Pokétch Company and 2 condos behind production Jubilife's 7 closed doors (DEV overlay) | SOURCE 6/6; static 0 findings; **DEV gate 155/155 + Continue 3/3** after opening the halls' solid non-animated doors (`6343ec68`) |
-| #270 | `claude/city-shells-w12` | **W12**: neutral shells (Veilstone, Route 213, Valor Lakefront, Solaceon, Routes 208/210S/212S) + **Veilstone civic interiors** (Pokémon Center, warehouse, department store 1F–5F + rooftop via a one-cell derived door; `3873daf5`) + Solaceon House3 behind a solid door picture (`efcdd649`) | SOURCE 7/7; static 0 findings. Route 213 (74,4) left closed (sealed plateau); Veilstone (43,67) picture left closed (bottom row, no doorstep). **Veilstone DEV gate 140/140 + Continue 3/3**. |
+| #270 | `claude/city-shells-w12` | **W12**: neutral shells (Veilstone, Route 213, Valor Lakefront, Solaceon, Routes 208/210S/212S) + **Veilstone civic interiors** (Pokémon Center, warehouse, department store 1F–5F + rooftop via a one-cell derived door; `3873daf5`) + Solaceon door-picture house (`efcdd649`) + Solaceon Center and Mart stock interiors (`54c07571`) | SOURCE 7/7; static 0 findings. Route 213 (74,4) left closed (sealed plateau); Veilstone (43,67) picture left closed (bottom row, no doorstep). **Veilstone DEV gate 140/140 + Continue 3/3**. |
 | #285 | `claude/solaceon-depths-w15` | **W15**: Solaceon Ruins depths: A/B/C chambers on derived layouts (one ladder each) + B1F hub, B2F West/East, B3F Sanctum (loop) | SOURCE 6/6; static **0 findings** (hearthome-solaceon + W8 + W15) |
 | #287 | `claude/oreburgh-gate-w16` | **W16**: Oreburgh Gate B1F under production 1F (one-cell derived 1F ladder) | SOURCE 6/6; static **0 findings** (production scene) |
 | #291 | `claude/route212-mansion-w17` | **W17**: Route 212 North mansion facade opened (one-cell derived door) onto stock Cove Lily Motel 1F/2F | SOURCE 5/5; static **0 findings** (eastern-loop scene) |
-| #252 | `claude/map-qa-elevation` | Tooling: elevation, span-aware seams, ladders, follower step-on fix, bridge start elevation (review 5641599180), **one-way holes / arrival-only warps** (`ba533bed`), **seams from a bridge use the actual elevation** (review 5644727982, `4e71ae64`), `go()` returns to the map (`68c27967`), **connection-specific edge exits** (review 5645231711, `64d0e222`) | Host 71 run, 1 skipped; live W5 scene 42/42 + 3/3 at `37d52157` |
+| #294 | `claude/maniac-ruins-link-w19` | **W19**: Maniac Tunnel (W13) dug through to Ruins B2F East (W15) via a new 56×16 passage; branch merges W13 + W15 | SOURCE 5/5; static **0 findings** (hearthome-solaceon). No single scene holds Route 214 and Route 209, so no live crossing. |
+| #297 | `claude/solaceon-ruins-entrance-w20` | **W20**: Solaceon's two warp-less cliff cave mouths → new Ruins entrance chamber → B1F hub; branch merges W19 + W12 | SOURCE 6/6; static **0 findings** |
+| #252 | `claude/map-qa-elevation` | Tooling: elevation, span-aware seams, ladders, follower step-on fix, bridge start elevation (review 5641599180), **one-way holes / arrival-only warps** (`ba533bed`), **seams from a bridge use the actual elevation** (review 5644727982, `4e71ae64`), `go()` returns to the map (`68c27967`), **connection-specific edge exits** (review 5645231711, `64d0e222`), **Acro Bike rails/bumpy slopes not walkable on foot** (`8fc79e81`) | Host 72 run, 1 skipped; live W5 scene 42/42 + 3/3 at `37d52157` |
 
 ## Merge order
 
@@ -28,7 +30,8 @@ Labels: **SOURCE** = staged files plus source tests; **DEV** = temporary-slot RO
 2. **#258 (W1)** goes before W3, W4, W5, W7, W8, W12, W13 and W14, which are stacked on it.
 3. **#254 (W2)**, then **#260 (W6)**. W6 is stacked on both W1 and W2.
 4. **#268 (W10)** and **#269 (W11)** come after #260.
-5. **#285 (W15)** comes after #267; **#287 (W16)** after #258; **#291 (W17)** after #270.
+5. **#285 (W15)** comes after #267; **#287 (W16)** after #258; **#291 (W17)** after #270; **#293 (W18)** after #268.
+6. **#294 (W19)** after #285 and #275; **#297 (W20)** after #294 and #270.
 
 ## Owner decisions
 
@@ -72,6 +75,10 @@ All are DEV-only overlays (header append and/or a same-size derived map.bin); th
 | Route205_North/South (Codex route205-donor) | W5 | connections | — |
 
 Needed at integration for every new map: a layout ID (new blockdata) or stock layout reuse, a map ID in the Sinnoh group (owner-gated, no 227+ origin values) and a section decision. Overlays that share a map with a Codex DEV change (Oreburgh Gate east exit, Route 209 restorations) are appends, so they merge by concatenating warp lists in the documented order.
+
+## Known external blocker
+
+- Codex's eastern-loop Route 212 South: rail rows (MB_HORIZONTAL_RAIL, row 11 x 27–59 and row 22) are a collision on foot, so Route 212 North (W17's mansion) is unreachable from Pastoria. Reported on #15 (6406549902); W17's live gate is deferred.
 
 ## Issues
 
