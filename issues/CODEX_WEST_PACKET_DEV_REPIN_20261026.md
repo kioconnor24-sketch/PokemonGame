@@ -1,0 +1,9 @@
+# West packet A DEV compatibility — work checkpoint
+
+Base PR306 exact3616176ae1ec81af019d56fd602cf82528977b92. Per owner-directed Claude handoff6423919451 and exact instructions6423868136, six Codex-owned assemblers now pin the actual six changed engine inputs and preserve22 production slots. Temporary slots begin22; group totals derive22+len(MAPS). Original19 identities plus approved append19–21 stay unchanged. Production bytes, source maps, save schema and Claude W21 untouched.
+
+Executed: eight original focused suites87 cases,86PASS/1 stale eastern recipe failure; retained original nineteen-slot runtime-recipe.json, created separate runtime-recipe-west22.json. Re-ran entire affected eastern suite13/13PASS11.717s; all87 distinct cases covered successfully after correction. New table regression2/2PASS6.999s across allsix assemblers, including swapped legacy identity rejected by unchanged SHA256 guards. No latest ROM/runtime evidence inferred from host cases.
+
+Original source-only Main/QA history preserved. Current-main rail rule300 merged7e919fd2 reveals the separate Route212 source crossing need; incorporate independently tested310 composition before declaring the joined current-main scene ready. Candidate installerBASE remains exact3616176a; it is not silently advanced to a future mainSHA. Hash guards/branch-marker/dirty checks remain strict.
+
+Parallel verification: separate immutable-source archive engine treec2e26cce0a00af43251e0672fef708c796b7a918 + PR289 ruleblob46cc553a07e4bb10ca686a6cc67c0567bbf145a4. NORMAL completed successfully; RELEASE running. Explicit CRIES=off yields pokeemerald-cries-off*.gba; padded files32MiB, linked usage recorded separately. Initial zero-inode failure preserved; removed only inactive untracked regenerable .o/.d and generated build/assets caches, never source assets/ROMs/ELFs/maps/saves/archives. No failing build relabeled skipped/pass.
