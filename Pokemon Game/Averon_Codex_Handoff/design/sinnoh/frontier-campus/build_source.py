@@ -9,6 +9,7 @@ m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 base=m.base;dual=m.dual;packer=m.a.a
 DIMS={'Gate':(32,32),'Campus':(96,96)}
 SOURCE_BEHAVIORS=(0,0x15,0x65,0x6c,0x6d,0x6e)
+OPEN_BOUNDARIES={}
 
 def extract(inputs):
     pins=json.loads((HERE/'source-pins.json').read_text());raws={}
@@ -55,7 +56,9 @@ def construct(geometry):
             if not 0<=x<w or not 0<=y<h or (x,y) in seen or p['permission'] not in SOURCE_BEHAVIORS:raise ValueError('invalid/duplicate surface')
             seen.add((x,y))
             # External/capability doors remain sealed until supported shells and links.
-            if x in (0,w-1) or y in (0,h-1) or p['permission']!=0:sealed+=1;continue
+            opened=OPEN_BOUNDARIES.get(name,set())
+            closed_edge=(x==0 and 'left' not in opened) or (x==w-1 and 'right' not in opened) or (y==0 and 'up' not in opened) or (y==h-1 and 'down' not in opened)
+            if closed_edge or p['permission']!=0:sealed+=1;continue
             z=zmap[Fraction(p['height'])] if p['flat'] else 0
             cells[y*w+x]=z<<12|(529 if p['flat'] else 516)
         shape=list(cells)
