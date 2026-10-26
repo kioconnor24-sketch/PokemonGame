@@ -563,7 +563,7 @@
     "data/layouts/Route212_North/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
     "data/layouts/Route212_North/map.bin": "fff96cd5b848aaf2673d0935e57acda44151b0d4d69042cd620e72913e1659ff",
     "data/layouts/Route212_South/border.bin": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
-    "data/layouts/Route212_South/map.bin": "33ca15c567c5a28eec9cae20589db3bf94fe07e6b5ef372913eeee23af7a7d97",
+    "data/layouts/Route212_South/map.bin": "6bc8df49ac8947767fc2ac9cd7698fdc4b6019a4eb1a70d30e52c34ea0b78b8f",
     "data/layouts/Route213/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
     "data/layouts/Route213/map.bin": "6ade2c63209201c216c02b5b63dab80261e3002717a159844959de0b4953038c",
     "data/layouts/Route213_Access/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
@@ -619,5 +619,24 @@
     "src/data/tilesets/metatiles.h": "9ec89d05560ac4c8e296a757a7cac83da899863afba69f0065208e4fa643e750",
     "test/averon_eastern_runtime.c": "f0f2b4dacfe517717c53f3ceacb8d5e775d26edd94d59ecf48dc9b7a68d1756a",
     "test/data/averon_map_registry_slots.inc": "fae671f2ddaa57858bd05139590a43b0a1e9dd78f069595c5ff90968515d6a0a"
+  },
+  "foot_crossing": {
+    "status": "SOURCE_DEV_ONLY_NOT_RUNTIME_ACCEPTANCE",
+    "contract_pr": 291,
+    "contract_head": "0089e5ff88ab3d511975fe37f23ca176127e01a3",
+    "path": "data/layouts/Route212_South/map.bin",
+    "cell": [
+      38,
+      11
+    ],
+    "before_word": 62028,
+    "after_word": 61441,
+    "before_sha256": "33ca15c567c5a28eec9cae20589db3bf94fe07e6b5ef372913eeee23af7a7d97",
+    "after_sha256": "6bc8df49ac8947767fc2ac9cd7698fdc4b6019a4eb1a70d30e52c34ea0b78b8f",
+    "changed_cells": 1,
+    "collision": 0,
+    "elevation": 15,
+    "graphics": "Existing General metatile1; no bank or asset modification",
+    "remaining_rails": "Every other original rail is byte-identical"
   }
 }

@@ -21,6 +21,8 @@ MAPS={'Route212_Access': (9, 11), 'Route212_North': (34, 100), 'Route212_South':
 spec=importlib.util.spec_from_file_location('eastern_runtime_pack',HERE/'adapt_outdoor_art.py')
 art=importlib.util.module_from_spec(spec);spec.loader.exec_module(art)
 base=art.pack.accepted.base
+cross_spec=importlib.util.spec_from_file_location('eastern_foot_crossing',HERE.parent/'route212-foot-crossing/prepare_crossing.py')
+crossing=importlib.util.module_from_spec(cross_spec);cross_spec.loader.exec_module(crossing)
 sha=lambda data:hashlib.sha256(data).hexdigest()
 encode=lambda data:(json.dumps(data,indent=2)+'\n').encode()
 
@@ -129,7 +131,7 @@ def assemble(repo,acro_fixture=False):
         temporary_map_slots={n:22+i for i,n in enumerate(MAPS)},source_headers=source_headers,
         dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance',files={p:sha(d) for p,d in sorted(files.items())})
     if acro_fixture:receipt['dev_fixture']=dict(item_grants=['ITEM_ACRO_BIKE'],flag_grants=[],map='Route212_South',method='existing map_qa.apply_fixture grant; disposable source only')
-    return files,receipt
+    return crossing.compose(files,receipt)
 
 
 def install(repo,acro_fixture=False):

@@ -1,5 +1,6 @@
 """Real thirteen-map world with PR300's rail semantics, no GUI acceptance."""
 import importlib.util
+import copy
 from pathlib import Path
 import struct
 import unittest
@@ -24,7 +25,11 @@ RAILS = ('MB_BUMPY_SLOPE', 'MB_ISOLATED_VERTICAL_RAIL', 'MB_ISOLATED_HORIZONTAL_
 class CrossingTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.before, cls.receipt = crossing.eastern().assemble(ROOT)
+        files, receipt = crossing.eastern().assemble(ROOT)
+        cls.before, cls.receipt = dict(files), copy.deepcopy(receipt)
+        cls.before[crossing.PATH] = (HERE / 'eastern-loop/staged/Route212_South/averon-map.bin').read_bytes()
+        cls.receipt.pop('foot_crossing', None)
+        cls.receipt['files'][crossing.PATH] = crossing.sha(cls.before[crossing.PATH])
         cls.after, cls.evidence = crossing.compose(cls.before, cls.receipt)
 
     def world_audit(self, files):

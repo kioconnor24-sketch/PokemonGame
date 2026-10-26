@@ -57,6 +57,8 @@ def compose(files, receipt):
     result = dict(files)
     result[PATH] = replacement
     evidence = copy.deepcopy(receipt)
+    if 'files' in evidence:
+        evidence['files'][PATH] = sha(replacement)
     evidence['foot_crossing'] = dict(status='SOURCE_DEV_ONLY_NOT_RUNTIME_ACCEPTANCE',
         contract_pr=291, contract_head='0089e5ff88ab3d511975fe37f23ca176127e01a3',
         path=PATH, cell=list(CELL), before_word=OLD, after_word=NEW,
@@ -68,7 +70,12 @@ def compose(files, receipt):
 
 
 def assemble(repo, acro_fixture=False):
-    return compose(*eastern().assemble(repo, acro_fixture=acro_fixture))
+    files, receipt = eastern().assemble(repo, acro_fixture=acro_fixture)
+    if 'foot_crossing' in receipt:
+        if sha(files[PATH]) != receipt['foot_crossing']['after_sha256']:
+            raise ValueError('composed crossing receipt mismatch')
+        return files, receipt
+    return compose(files, receipt)
 
 
 def main():
