@@ -23,7 +23,7 @@ def construct(geometry):
         for p in geometry[n]['surfaces']:
             x,y=p['tile']
             if p['permission']==0x15:
-                cells[y*w+x]=0x1000|44
+                cells[y*w+x]=0x1000|368
         h.update(id='MAP_SINNOH_VICTORY_SIDE_'+n.upper(),name='SinnohVictorySide'+n,layout='LAYOUT_SINNOH_VICTORY_SIDE_'+n.upper(),map_type='MAP_TYPE_UNDERGROUND',music='MUS_GRANITE_CAVE')
         for i,e in enumerate(pins['technical_portals'][n]['warps']):
             if n=='Room3' and i==1:continue # Route224 outside this bounded group
