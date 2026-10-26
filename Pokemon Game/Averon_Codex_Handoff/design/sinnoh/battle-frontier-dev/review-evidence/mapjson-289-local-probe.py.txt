@@ -1,0 +1,54 @@
+import hashlib,json,os,shutil,struct,subprocess,tempfile,time
+from pathlib import Path
+root=Path('/workspace/averon-oreburgh-geography');engine=root/'Pokemon Game/engine'
+tool=Path('/workspace/averon-corridor-scratch/Pokemon Game/engine/tools/mapjson/mapjson')
+before=(engine/'map_data_rules.mk').read_text()
+after=Path('/workspace/averon-session-evidence/mapjson-289-candidate.mk').read_text()
+def rule(text):
+ lines=text.splitlines();i=next(i for i,x in enumerate(lines) if x.startswith('$(MAPS_OUTDIR)/connections.inc '))
+ return chr(10).join(lines[i:i+3])+chr(10)
+assert rule(after)==rule(before).replace('.h: ','.h &: ')
+def sha(raw):return hashlib.sha256(raw).hexdigest()
+def run_case(text,profile,variant):
+ with tempfile.TemporaryDirectory(prefix='mr289-') as tmp:
+  p=Path(tmp);maps=p/'data/maps';const=p/'include/constants';out=p/'generated/maps';data=p/'src/data';required=p/'tools/mapjson'
+  for d in (maps,const,out,data,required):d.mkdir(parents=True)
+  alias=p/'original';alias.symlink_to(engine/'data/maps',target_is_directory=True)
+  names=[]
+  for folder in sorted((engine/'data/maps').iterdir()):
+   if folder.is_dir():
+    (maps/folder.name).symlink_to(alias/folder.name,target_is_directory=True)
+    if (folder/'map.json').is_file():names.append('data/maps/'+folder.name+'/map.json')
+  (maps/'map_groups.json').write_bytes((engine/'data/maps/map_groups.json').read_bytes())
+  (data/'heal_locations.json').write_bytes((engine/'src/data/heal_locations.json').read_bytes())
+  (required/'required_map_defines.json').write_bytes((engine/'tools/mapjson/required_map_defines.json').read_bytes())
+  (p/'.map_version').write_text('emerald')
+  cmd=[str(tool),'groups','emerald','data/maps/map_groups.json',*names,'generated/maps','include/constants']
+  subprocess.run(cmd,cwd=p,check=True,capture_output=True)
+  targets=['generated/maps/'+n+'.inc' for n in ('connections','groups','events','headers')]+['include/constants/map_groups.h','src/data/map_group_count.h']
+  canonical={n:sha((p/n).read_bytes()) for n in targets}
+  healer_before=sha((data/'heal_locations.json').read_bytes())
+  for n in targets:(p/n).unlink()
+  counter=p/'invocations.txt';wrapper=p/'mapjson-wrapper'
+  wrapper.write_text('#!/usr/bin/env python3'+chr(10)+'import os,time'+chr(10)+'with open(os.environ["MR289_COUNTER"],"a") as f:f.write(str(os.getpid())+"\\n")'+chr(10)+'time.sleep(0.05)'+chr(10)+'os.execv(os.environ["MR289_TOOL"],[os.environ["MR289_TOOL"]]+__import__("sys").argv[1:])'+chr(10))
+  wrapper.chmod(0o700)
+  variables='MAPS_OUTDIR := generated/maps\nINCLUDECONSTS_OUTDIR := include/constants\nDATA_SRC_SUBDIR := src/data\nMAPS_DIR := data/maps\nMAP_VERSION := emerald\nMAPJSON := ./mapjson-wrapper\nMAP_JSONS := '+' '.join(names)+'\n.PHONY: all\nall: '+' '.join(targets)+'\n'
+  (p/'Makefile').write_text(variables+rule(text))
+  env=dict(os.environ,MR289_COUNTER=str(counter),MR289_TOOL=str(tool))
+  result=subprocess.run(['make','-j8','all','RELEASE='+('1' if profile=='RELEASE' else '0'),'CRIES=off'],cwd=p,env=env,capture_output=True,text=True)
+  count=len(counter.read_text().splitlines()) if counter.exists() else 0
+  evidence=dict(variant=variant,profile_argument=profile,make_exit=result.returncode,tool_invocations=count,all_six_outputs_match_control=all((p/n).is_file() and sha((p/n).read_bytes())==h for n,h in canonical.items()),healer_hash_matches_canonical_control=sha((data/'heal_locations.json').read_bytes())==healer_before)
+  if variant=='grouped' and result.returncode==0:
+   (p/targets[0]).unlink();oldcount=count
+   second=subprocess.run(['make','-j8','all','RELEASE='+('1' if profile=='RELEASE' else '0'),'CRIES=off'],cwd=p,env=env,capture_output=True,text=True)
+   evidence.update(missing_peer_exit=second.returncode,missing_peer_extra_invocations=len(counter.read_text().splitlines())-oldcount,missing_peer_all_outputs_restored=all((p/n).is_file() and sha((p/n).read_bytes())==h for n,h in canonical.items()))
+  if result.returncode:evidence['diagnostic']=result.stderr[-1000:]
+  return evidence
+rows=[]
+for profile in ('NORMAL','RELEASE'):
+ for variant,text in [('independent',before),('grouped',after)]:
+  r=run_case(text,profile,variant);rows.append(r);print(r,flush=True)
+result=dict(reviewed_head='dbb46f313f8330ad7de241d1ac51a2861e36b122',candidate_blob='46cc553a07e4bb10ca686a6cc67c0567bbf145a4',
+ make_version=subprocess.check_output(['make','--version'],text=True).splitlines()[0],mapjson_sha256=sha(tool.read_bytes()),
+ scope='ACTUAL_GROUP_RULE_HOST_PROBE_NOT_FULL_NORMAL_RELEASE_ROM_BUILDS',results=rows)
+Path('/workspace/averon-session-evidence/mapjson-289-independent-review.json').write_text(json.dumps(result,indent=2)+chr(10))

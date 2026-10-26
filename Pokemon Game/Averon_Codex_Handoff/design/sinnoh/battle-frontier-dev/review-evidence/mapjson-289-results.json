@@ -1,0 +1,47 @@
+{
+  "reviewed_head": "dbb46f313f8330ad7de241d1ac51a2861e36b122",
+  "candidate_blob": "46cc553a07e4bb10ca686a6cc67c0567bbf145a4",
+  "make_version": "GNU Make 4.4.1",
+  "mapjson_sha256": "96f8a1e1d211d6ac07b0105389551883db24da3b75a864f08544baf362cc052d",
+  "scope": "ACTUAL_GROUP_RULE_HOST_PROBE_NOT_FULL_NORMAL_RELEASE_ROM_BUILDS",
+  "results": [
+    {
+      "variant": "independent",
+      "profile_argument": "NORMAL",
+      "make_exit": 0,
+      "tool_invocations": 6,
+      "all_six_outputs_match_control": true,
+      "healer_hash_matches_canonical_control": true
+    },
+    {
+      "variant": "grouped",
+      "profile_argument": "NORMAL",
+      "make_exit": 0,
+      "tool_invocations": 1,
+      "all_six_outputs_match_control": true,
+      "healer_hash_matches_canonical_control": true,
+      "missing_peer_exit": 0,
+      "missing_peer_extra_invocations": 1,
+      "missing_peer_all_outputs_restored": true
+    },
+    {
+      "variant": "independent",
+      "profile_argument": "RELEASE",
+      "make_exit": 0,
+      "tool_invocations": 6,
+      "all_six_outputs_match_control": true,
+      "healer_hash_matches_canonical_control": true
+    },
+    {
+      "variant": "grouped",
+      "profile_argument": "RELEASE",
+      "make_exit": 0,
+      "tool_invocations": 1,
+      "all_six_outputs_match_control": true,
+      "healer_hash_matches_canonical_control": true,
+      "missing_peer_exit": 0,
+      "missing_peer_extra_invocations": 1,
+      "missing_peer_all_outputs_restored": true
+    }
+  ]
+}

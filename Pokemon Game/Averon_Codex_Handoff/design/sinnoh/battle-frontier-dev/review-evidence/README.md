@@ -1,0 +1,6 @@
+# Independent build-rule review evidence
+Actual reviewed PR289 head dbb46f313f8330ad7de241d1ac51a2861e36b122; candidate Git blob46cc553a07e4bb10ca686a6cc67c0567bbf145a4.
+The archived probe is the exact executed local harness, with its local source/tool/candidate paths retained for honest reproduction. It is documentation, not an installed engine tool or CI hook. Obtain candidate map_data_rules.mk from that reviewed Git object and adjust paths to rerun.
+Uses actual mapjson and the exact original/proposed three-line six-output make rule in isolated metadata views; original engine/manager branch unchanged. Wrapper logs invocations and executes the real tool. GNU Make4.4.1, make -j8, CRIES=off, RELEASE=0/1 arguments.
+Original independent rule:6 invocations each. Proposed grouped rule:1 each; a deleted peer triggers1 extra, restoring all six control hashes. All six generated outputs/healer hash match the serial canonical control. These particular old-rule samples did not corrupt JSON; duplicate scheduling was reproduced.
+This is NOT a full NORMAL/RELEASE ROM build or gameplay acceptance. Canonical healer control accounts for the generator's existing disabled-NPC normalization. No original source/ROM/private save/model assets included.
