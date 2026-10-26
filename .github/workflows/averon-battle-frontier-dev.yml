@@ -47,15 +47,15 @@ jobs:
           set -euo pipefail
           evidence="$RUNNER_TEMP/battle-frontier-evidence"
           cd "$RUNNER_TEMP/battle-frontier-runtime/Pokemon Game/engine"
-          case "$SCENE_PROFILE" in NORMAL) scene_release=0;; RELEASE) scene_release=1;; *) exit 2;; esac
+          case "$SCENE_PROFILE" in NORMAL) scene_release=0; scene_rom=pokeemerald.gba;; RELEASE) scene_release=1; scene_rom=pokeemerald-release.gba;; *) exit 2;; esac
           make -j4 -O RELEASE="$scene_release" all > "$evidence/build.log" 2>&1 || {
             tail -100 "$evidence/build.log"; exit 1;
           }
-          test -s pokeemerald.gba
-          sha256sum pokeemerald.gba > "$evidence/rom-sha256.txt"
-          stat -c '%s' pokeemerald.gba > "$evidence/rom-bytes.txt"
+          test -s "$scene_rom"
+          sha256sum "$scene_rom" > "$evidence/rom-sha256.txt"
+          stat -c '%s' "$scene_rom" > "$evidence/rom-bytes.txt"
           python3 "$GITHUB_WORKSPACE/source/Pokemon Game/scripts/check-averon-resource-budget.py" \
-            --log "$evidence/build.log" --rom pokeemerald.gba --json "$evidence/resource-budget.json"
+            --log "$evidence/build.log" --rom "$scene_rom" --json "$evidence/resource-budget.json"
       - name: Run the actual focused native regression in NORMAL
         if: matrix.profile == 'NORMAL'
         run: |
