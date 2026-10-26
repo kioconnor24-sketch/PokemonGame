@@ -118,7 +118,7 @@ class MapInfo:
         if not self.inside(x, y) or self.collision(x, y):
             return False
         b = self.behavior(x, y)
-        if "WATER" in b or b.startswith("MB_JUMP") or b == "MB_COUNTER":
+        if "WATER" in b or b.startswith("MB_JUMP") or b == "MB_COUNTER" or b in ACRO_BIKE_ONLY:
             return False
         return True
 
@@ -276,6 +276,12 @@ def trigger_entry(m, x, y):
         if m.walkable(*approach) and approach not in triggers and not takeable(m, *approach):
             return approach, d
     return None
+
+
+# Acro Bike trick tiles: CheckForPlayerAvatarCollision runs CheckAcroBikeCollision for the player on foot too, so
+# stepping onto any of these is a collision unless riding the Acro Bike (field_player_avatar.c).
+ACRO_BIKE_ONLY = ("MB_BUMPY_SLOPE", "MB_ISOLATED_VERTICAL_RAIL", "MB_ISOLATED_HORIZONTAL_RAIL", "MB_VERTICAL_RAIL",
+                  "MB_HORIZONTAL_RAIL")
 
 
 def across(m, other, direction, offset, tile):
