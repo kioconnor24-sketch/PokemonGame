@@ -1,7 +1,7 @@
 {
-  "id": "MAP_ETERNA_FOREST_SOUTH_GATE",
-  "name": "EternaForest_SouthGate",
-  "layout": "LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE",
+  "id": "MAP_ROUTE205_SOUTH_HOUSE",
+  "name": "Route205_South_House",
+  "layout": "LAYOUT_HOUSE1",
   "music": "MUS_ROUTE101",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -17,25 +17,18 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 4,
-      "y": 7,
+      "x": 3,
+      "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE205_SOUTH",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 5,
-      "y": 7,
-      "elevation": 0,
-      "dest_map": "MAP_ROUTE205_SOUTH",
-      "dest_warp_id": "0"
+      "dest_warp_id": "2"
     },
     {
       "x": 4,
-      "y": 1,
+      "y": 8,
       "elevation": 0,
-      "dest_map": "MAP_ETERNA_FOREST",
-      "dest_warp_id": "1"
+      "dest_map": "MAP_ROUTE205_SOUTH",
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

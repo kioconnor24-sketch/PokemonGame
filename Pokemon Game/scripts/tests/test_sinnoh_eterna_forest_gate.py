@@ -1,4 +1,4 @@
-"""W23 Eterna Forest south gate: staging equals a fresh build; warps reciprocal; only the two mouth cells open."""
+"""W23 Eterna Forest south tunnel: staging equals a fresh build; donor warps reciprocal; only the tunnel/mouth reopen."""
 import importlib.util
 import json
 import pathlib
@@ -14,10 +14,14 @@ w23 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w23)
 
 
-class EternaForestGateTest(unittest.TestCase):
+def cells(raw):
+    return struct.unpack("<%dH" % (len(raw) // 2), raw)
+
+
+class EternaForestTunnelTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.route, cls.forest, cls.gate, cls.blocks, cls.hashes = w23.build(ENGINE)
+        cls.route, cls.forest, cls.house, cls.route_blocks, cls.forest_blocks, _ = w23.build(ENGINE)
 
     def test_committed_staging_equals_a_fresh_build(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -29,42 +33,51 @@ class EternaForestGateTest(unittest.TestCase):
             for rel in fresh:
                 self.assertEqual((pathlib.Path(tmp) / rel).read_bytes(), (HERE / rel).read_bytes(), rel)
 
-    def test_sources_only_gain_appended_warps(self):
-        route = json.loads((ENGINE / "data/maps/Route205_South/map.json").read_text())
-        forest = json.loads((w23.FOREST / "staged/EternaForest/map.json").read_text())
-        for new, old, added in ((self.route, route, 1), (self.forest, forest, 2)):
-            self.assertEqual(new["warp_events"][:len(old["warp_events"])], old["warp_events"])
-            self.assertEqual(len(new["warp_events"]) - len(old["warp_events"]), added)
-            self.assertEqual({k: v for k, v in new.items() if k != "warp_events"},
-                             {k: v for k, v in old.items() if k != "warp_events"})
+    def test_donor_warps_in_donor_order(self):
+        self.assertEqual([(w["x"], w["y"], w["dest_map"]) for w in self.route["warp_events"]],
+                         [(14, 12, "MAP_ETERNA_FOREST"), (15, 12, "MAP_ETERNA_FOREST"),
+                          (21, 22, "MAP_ROUTE205_SOUTH_HOUSE")])
+        source = json.loads((w23.FOREST / "staged/EternaForest/map.json").read_text())
+        self.assertEqual(self.forest["warp_events"][:len(source["warp_events"])], source["warp_events"])
+        self.assertEqual([(w["x"], w["y"], w["dest_warp_id"]) for w in self.forest["warp_events"][-2:]],
+                         [(16, 80, "0"), (17, 80, "1")])
 
     def test_every_warp_is_reciprocal(self):
-        self.assertTrue(w23.check(self.route, self.forest, self.gate))
+        self.assertTrue(w23.check(self.route, self.forest, self.house))
 
-    def test_gate_is_neutral_stock_layout(self):
-        self.assertEqual(self.gate["layout"], "LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE")
-        self.assertEqual((self.gate["object_events"], self.gate["coord_events"], self.gate["bg_events"]), ([], [], []))
-        self.assertEqual(self.gate["region_map_section"], "MAPSEC_PENDING_OWNER")
+    def test_house_is_a_neutral_shell(self):
+        self.assertEqual(self.house["layout"], "LAYOUT_HOUSE1")
+        self.assertEqual((self.house["object_events"], self.house["coord_events"], self.house["bg_events"]),
+                         ([], [], []))
 
-    def test_only_the_two_mouth_cells_open(self):
+    def test_route_changes_only_the_tunnel_and_keeps_elevations(self):
+        before = cells((ENGINE / "data/layouts/Route205_South/map.bin").read_bytes())
+        changed = {(i % 32, i // 32) for i, (a, b) in enumerate(zip(before, self.route_blocks)) if a != b}
+        self.assertTrue(changed <= set(w23.TUNNEL_ART))
+        for i, (a, b) in enumerate(zip(before, self.route_blocks)):
+            self.assertEqual(a >> 12, b >> 12, i)
+        walkable = {(i % 32, i // 32) for i, b in enumerate(self.route_blocks) if not (b >> 10) & 3
+                    and (i % 32, i // 32) in w23.TUNNEL_ART}
+        self.assertEqual(walkable, set(w23.FLOOR))
+
+    def test_forest_changes_only_the_two_mouth_cells(self):
         raw = (w23.FOREST / "staged/EternaForest/averon-map.bin").read_bytes()
-        cells = struct.unpack("<%dH" % (len(raw) // 2), raw)
-        changed = [(i % 82, i // 82, a ^ b) for i, (a, b) in enumerate(zip(cells, self.blocks)) if a != b]
+        changed = [(i % 82, i // 82, a ^ b) for i, (a, b) in enumerate(zip(cells(raw), self.forest_blocks)) if a != b]
         self.assertEqual([(x, y) for x, y, _ in changed], [(16, 80), (17, 80)])
         self.assertTrue(all(delta & ~0xC00 == 0 for _, _, delta in changed))
 
-    def test_an_already_warped_route_door_is_refused(self):
-        route = ENGINE / "data/maps/Route205_South/map.json"
-        original = route.read_bytes()
+    def test_an_unexpected_route_tunnel_is_refused(self):
+        orig = w23.route_inputs
         try:
-            hdr = json.loads(original)
-            hdr["warp_events"].append({"x": 21, "y": 22, "elevation": 0, "dest_map": "MAP_FLOAROMA_TOWN",
-                                       "dest_warp_id": "0"})
-            route.write_text(json.dumps(hdr, indent=2) + "\n")
+            def tampered(engine):
+                hdr, route_cells, hashes = orig(engine)
+                route_cells[12 * 32 + 14] &= ~0xC00              # already open: not the production seal
+                return hdr, route_cells, hashes
+            w23.route_inputs = tampered
             with self.assertRaises(AssertionError):
                 w23.build(ENGINE)
         finally:
-            route.write_bytes(original)
+            w23.route_inputs = orig
 
 
 if __name__ == "__main__":

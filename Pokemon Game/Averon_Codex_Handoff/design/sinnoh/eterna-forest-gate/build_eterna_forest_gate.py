@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""Eterna Forest south gate (W23, C15): production Route 205 South -> gatehouse -> Codex's staged Eterna Forest.
+"""Eterna Forest south tunnel (W23, C15): production Route 205 South <-> Codex's staged Eterna Forest, as the donor has it.
 
-OFF-ENGINE staging. Production Route 205 South draws an animated door (21, 22) with no warp near its north end, where
-the forest's entrance building stands; Codex's staged Eterna Forest ends its south path in two south-arrow warp cells
-(16-17, 80) that are closed with collision 1 because they had no destination. This joins them:
-- Route205_South-dev-overlay: one appended warp, door (21, 22) -> the gate's street mat.
-- EternaForest_SouthGate (new): stock LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE unchanged. Its two south mats return to
-  Route 205 South; its back door (4, 1), a walkable non-animated door, opens north into the forest.
-- EternaForest-dev-overlay: two appended warps on (16-17, 80) -> the gate's back door, and a derived copy of the
-  forest's map.bin clearing exactly those two cells' collision (same metatile, elevation and behaviour).
+OFF-ENGINE staging. In the donor (LiderMorti00/Sinnoh-pokeemerald-expansion @ 38228bb5), Route 205 South's tunnel
+(x 13-16, rows 9-13) warps (14, 12)/(15, 12) straight into Eterna Forest's south mouth (16, 80)/(17, 80), and its
+house door (21, 22) leads to MAP_ROUTE205_HOUSE. Production Route 205 South sealed the tunnel with tree halves
+(route205-donor/build_route205.py: same elevation bits, collision forced solid) and dropped all three warps; Codex's
+staged forest closed its mouth (collision 1, forest-chateau source-receipt closure_changes). This reopens both:
+- Route205_South-dev-overlay: the three donor warps, appended in donor order (tunnel 0/1 -> forest, door -> house);
+  a derived copy of its map.bin redraws the tunnel with floaroma-donor's Meadow tunnel recipe (same 2-wide shape and
+  tree-half phase): tree halves, two canopy ends, grass floor. Only the donor's four floor cells are walkable again:
+  (14-15, 12) at elevation 0 holding the warps, (14-15, 13) at elevation 3 below them. Elevations are unchanged.
+- EternaForest-dev-overlay: the mouth's two warps back (16 -> tunnel 0, 17 -> tunnel 1) and a derived map.bin
+  clearing exactly those two cells' collision (the source had none).
+- Route205_South_House (new): a neutral LAYOUT_HOUSE1 shell behind the house door.
+Not reopened: the forest's east exit (70, 26-27) to Route 205 North's gatehouse (43-46, 9-12), whose donor building
+art has no Averon equivalent yet.
 
 Production map data and Codex's files are not modified. No NPCs, services, items, encounters, story or sections
 (MAPSEC_PENDING_OWNER).
@@ -30,14 +36,39 @@ w1 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w1)
 FOREST = SINNOH / "forest-chateau"
 FOREST_WIDTH, FOREST_HEIGHT = 82, 84
-ROUTE_DOOR = (21, 22)
+ROUTE_WIDTH, ROUTE_HEIGHT = 32, 96
 MOUTH = [(16, 80), (17, 80)]
-GATE, GATE_ID, GATE_LAYOUT = "EternaForest_SouthGate", "MAP_ETERNA_FOREST_SOUTH_GATE", "LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE"
-GATE_MATS, GATE_BACK = [(4, 7), (5, 7)], (4, 1)
+TUNNEL_WARPS = [(14, 12), (15, 12)]
+HOUSE_DOOR = (21, 22)
+HOUSE, HOUSE_ID = "Route205_South_House", "MAP_ROUTE205_SOUTH_HOUSE"
+# floaroma-donor's Meadow tunnel recipe (its x 3-6, rows 0-3) on this tunnel's x 13-16, rows 10-13 (same phase);
+# row 9 keeps the plain tree halves the seal put there.
+TUNNEL_ART = {(13, 10): 471, (14, 10): 470, (15, 10): 471, (16, 10): 470,
+              (13, 11): 479, (14, 11): 486, (15, 11): 487, (16, 11): 478,
+              (13, 12): 471, (14, 12): 1, (15, 12): 1, (16, 12): 470,
+              (13, 13): 487, (14, 13): 1, (15, 13): 1, (16, 13): 486}
+FLOOR = {(14, 12): 0, (15, 12): 0, (14, 13): 3, (15, 13): 3}       # donor's walkable cells -> elevation
+
+
+def tree_half(x, y):
+    """route205-donor's seal: Averon General tree halves, left halves at even x."""
+    left = x % 2 == 0
+    return (470 if left else 471) if y % 2 == 0 else (478 if left else 479)
 
 
 def behaviours(engine):
     return re.findall(r"^\s*(MB_\w+)", (engine / "include/constants/metatile_behaviors.h").read_text(), re.M)
+
+
+def route_inputs(engine):
+    layouts = json.loads((engine / "data/layouts/layouts.json").read_text())["layouts"]
+    layout = next(l for l in layouts if l.get("id") == "LAYOUT_ROUTE205_SOUTH")
+    assert (layout["width"], layout["height"]) == (ROUTE_WIDTH, ROUTE_HEIGHT)
+    raw = {"data/maps/Route205_South/map.json": (engine / "data/maps/Route205_South/map.json").read_bytes(),
+           layout["blockdata_filepath"]: (engine / layout["blockdata_filepath"]).read_bytes()}
+    cells = list(struct.unpack("<%dH" % (ROUTE_WIDTH * ROUTE_HEIGHT), raw[layout["blockdata_filepath"]]))
+    hashes = {f"engine/{p}": hashlib.sha256(b).hexdigest() for p, b in raw.items()}
+    return json.loads(raw["data/maps/Route205_South/map.json"]), cells, hashes
 
 
 def forest_inputs():
@@ -57,37 +88,44 @@ def forest_inputs():
 def build(engine):
     engine = pathlib.Path(engine)
     names = behaviours(engine)
-    route = json.loads((engine / "data/maps/Route205_South/map.json").read_text())
-    stock = json.loads((engine / "data/maps/Route114_FossilManiacsHouse/map.json").read_text())
-    assert stock["layout"] == GATE_LAYOUT
-    assert [(w["x"], w["y"]) for w in stock["warp_events"]] == GATE_MATS + [GATE_BACK], stock["warp_events"]
-    assert all((w["x"], w["y"]) != ROUTE_DOOR for w in route["warp_events"])
-    forest, cells, attrs, hashes = forest_inputs()
+    route, route_cells, hashes = route_inputs(engine)
+    forest, forest_cells, attrs, forest_hashes = forest_inputs()
+    hashes.update(forest_hashes)
+    assert route["warp_events"] == [], route["warp_events"]
     assert all((w["x"], w["y"]) not in MOUTH for w in forest["warp_events"])
-    for x, y in MOUTH:                     # closed south arrows below a walkable path
-        v = cells[y * FOREST_WIDTH + x]
+    for y in range(9, 14):                              # the tunnel is still exactly the production seal
+        for x in range(13, 17):
+            v = route_cells[y * ROUTE_WIDTH + x]
+            assert v & 1023 == tree_half(x, y) and (v >> 10) & 3 == 1, (x, y, hex(v))
+            if (x, y) in FLOOR:
+                assert v >> 12 == FLOOR[(x, y)], (x, y, hex(v))
+    for x, y in MOUTH:                                  # Codex's closed south arrows below a walkable path
+        v = forest_cells[y * FOREST_WIDTH + x]
         assert names[attrs[v & 1023] & 0xFF] == "MB_SOUTH_ARROW_WARP" and v & 0xC00, (x, y)
-        assert not cells[(y - 1) * FOREST_WIDTH + x] & 0xC00, (x, y)
-    door = len(route["warp_events"])
-    route["warp_events"].append({"x": ROUTE_DOOR[0], "y": ROUTE_DOOR[1], "elevation": 0, "dest_map": GATE_ID,
-                                 "dest_warp_id": "0"})
+        assert not forest_cells[(y - 1) * FOREST_WIDTH + x] & 0xC00, (x, y)
     mouth = len(forest["warp_events"])
+    route["warp_events"] = [{"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ETERNA_FOREST",
+                             "dest_warp_id": str(mouth + i)} for i, (x, y) in enumerate(TUNNEL_WARPS)]
+    route["warp_events"].append({"x": HOUSE_DOOR[0], "y": HOUSE_DOOR[1], "elevation": 0, "dest_map": HOUSE_ID,
+                                 "dest_warp_id": "0"})
+    for i, (x, y) in enumerate(MOUTH):
+        forest["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ROUTE205_SOUTH",
+                                      "dest_warp_id": str(i)})
+    house = w1.header(HOUSE_ID, HOUSE, "LAYOUT_HOUSE1", route["music"], "MAP_TYPE_INDOOR",
+                      [(3, 8, "MAP_ROUTE205_SOUTH", 2), (4, 8, "MAP_ROUTE205_SOUTH", 2)])
+    route_blocks = list(route_cells)
+    for (x, y), mid in TUNNEL_ART.items():
+        v = route_cells[y * ROUTE_WIDTH + x]
+        route_blocks[y * ROUTE_WIDTH + x] = (v & 0xF000) | (0 if (x, y) in FLOOR else 1 << 10) | mid
+    forest_blocks = list(forest_cells)
     for x, y in MOUTH:
-        forest["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": GATE_ID, "dest_warp_id": "2"})
-    gate = w1.header(GATE_ID, GATE, GATE_LAYOUT, route["music"], "MAP_TYPE_INDOOR",
-                     [(x, y, "MAP_ROUTE205_SOUTH", door) for x, y in GATE_MATS]
-                     + [(GATE_BACK[0], GATE_BACK[1], "MAP_ETERNA_FOREST", mouth)])
-    blocks = list(cells)
-    for x, y in MOUTH:
-        blocks[y * FOREST_WIDTH + x] &= ~0xC00
-    hashes["engine/data/maps/Route205_South/map.json"] = hashlib.sha256(
-        (engine / "data/maps/Route205_South/map.json").read_bytes()).hexdigest()
-    return route, forest, gate, blocks, hashes
+        forest_blocks[y * FOREST_WIDTH + x] &= ~0xC00
+    return route, forest, house, route_blocks, forest_blocks, hashes
 
 
-def check(route, forest, gate):
+def check(route, forest, house):
     """Every warp lands on a warp that leads back to the map it came from."""
-    headers = {h["id"]: h for h in (route, forest, gate)}
+    headers = {h["id"]: h for h in (route, forest, house)}
     for mid, h in headers.items():
         for w in h["warp_events"]:
             if w["dest_map"] in headers:
@@ -97,15 +135,17 @@ def check(route, forest, gate):
 
 
 def write(engine, out):
-    route, forest, gate, blocks, hashes = build(engine)
-    check(route, forest, gate)
+    route, forest, house, route_blocks, forest_blocks, hashes = build(engine)
+    check(route, forest, house)
     st = pathlib.Path(out) / "staged"
-    for name, hdr in (("Route205_South-dev-overlay", route), ("EternaForest-dev-overlay", forest), (GATE, gate)):
+    for name, hdr, blocks in (("Route205_South-dev-overlay", route, route_blocks),
+                              ("EternaForest-dev-overlay", forest, forest_blocks), (HOUSE, house, None)):
         (st / name).mkdir(parents=True, exist_ok=True)
         (st / name / "map.json").write_text(json.dumps(hdr, indent=2) + "\n")
-    (st / "EternaForest-dev-overlay/map.bin").write_bytes(struct.pack("<%dH" % len(blocks), *blocks))
-    (st / GATE / "scripts.inc").write_text(w1.scripts(GATE))
-    receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "maps": [GATE],
+        if blocks:
+            (st / name / "map.bin").write_bytes(struct.pack("<%dH" % len(blocks), *blocks))
+    (st / HOUSE / "scripts.inc").write_text(w1.scripts(HOUSE))
+    receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "maps": [HOUSE],
                "overlays": ["EternaForest", "Route205_South"], "inputs_sha256": hashes}
     (pathlib.Path(out) / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     return receipt
