@@ -24,6 +24,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("w1", HERE.parent / "iron-island/build_iron_island.py")
 w1 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w1)
+# Production inputs integrated by west packet A (C36) are read from its pinned pre-integration snapshot.
+BASE = HERE.parent / "west-packet-a/base"
 MUSIC = "MUS_CAVE_OF_ORIGIN"
 LADDER_1F = (18, 5)
 ALCOVE = [(x, y) for y in (4, 5, 6) for x in range(7, 21)]
@@ -45,7 +47,7 @@ def b1f(eng):
 
 
 def build(engine_root):
-    eng = w1.Engine(engine_root)
+    eng = w1.Engine(engine_root, base=BASE)
     gate = json.loads(eng.file("data/maps/OreburghGate_1F/map.json"))
     assert gate["layout"] == "LAYOUT_OREBURGH_GATE_1F"
     width, height, cells = eng.cells("OreburghGate_1F")

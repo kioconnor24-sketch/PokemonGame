@@ -32,6 +32,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location("w1", HERE.parent / "iron-island/build_iron_island.py")
 w1 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(w1)
+# Production inputs integrated by west packet A (C36) are read from its pinned pre-integration snapshot.
+BASE = HERE.parent / "west-packet-a/base"
 MUSIC = "MUS_RUSTBORO"
 # name, stock map prefix, floors, Jubilife door cells (one per street mat, in mat order)
 BUILDINGS = [("JubilifeCity_GlobalTerminal", "SlateportCity_OceanicMuseum", ["1F", "2F"], [(19, 13), (20, 13)]),
@@ -61,7 +63,7 @@ def closed_doors(eng, hdr):
 
 
 def build(engine_root):
-    eng = w1.Engine(engine_root)
+    eng = w1.Engine(engine_root, base=BASE)
     jub = json.loads(eng.file("data/maps/JubilifeCity/map.json"))
     assert eng.layouts["JubilifeCity"]["secondary_tileset"] == "gTileset_AveronCorridorRustboro"
     doors = closed_doors(eng, jub)

@@ -53,8 +53,12 @@ def sha(data):
 
 
 class Engine:
-    def __init__(self, root):
+    """Read-only view of an engine tree. With base, files present under base (same relative paths) are read from
+    there instead: a pinned pre-integration snapshot for builders whose inputs were later integrated."""
+
+    def __init__(self, root, base=None):
         self.root = pathlib.Path(root)
+        self.base = pathlib.Path(base) if base else None
         layouts = json.loads((self.root / "data/layouts/layouts.json").read_text())["layouts"]
         self.layouts = {l["name"].removesuffix("_Layout"): l for l in layouts}
         self.layout_ids = {l["id"]: l for l in layouts}
@@ -67,7 +71,8 @@ class Engine:
         return l["width"], l["height"], list(struct.unpack("<%dH" % (len(raw) // 2), raw))
 
     def file(self, rel):
-        data = (self.root / rel).read_bytes()
+        pinned = self.base / rel if self.base else None
+        data = (pinned if pinned and pinned.is_file() else self.root / rel).read_bytes()
         self.read[rel] = sha(data)
         return data
 

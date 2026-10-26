@@ -18,7 +18,7 @@ class JubilifeShellsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.eng, cls.maps, cls.jub, cls.blocks = b.build(ENGINE)
-        cls.source = json.loads((ENGINE / "data/maps/JubilifeCity/map.json").read_text())
+        cls.source = json.loads(cls.eng.file("data/maps/JubilifeCity/map.json"))      # pinned pre-integration base
 
     def test_staged_files_match_a_fresh_build(self):
         for name, hdr in self.maps.items():

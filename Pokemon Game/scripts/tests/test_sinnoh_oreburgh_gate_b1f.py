@@ -31,7 +31,7 @@ class OreburghGateB1FTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.eng, cls.gate, cls.blocks, cls.hdr, cls.cv = b.build(ENGINE)
-        cls.source = json.loads((ENGINE / "data/maps/OreburghGate_1F/map.json").read_text())
+        cls.source = json.loads(cls.eng.file("data/maps/OreburghGate_1F/map.json"))      # pinned pre-integration base
 
     def test_staged_files_match_a_fresh_build(self):
         st = HERE / "staged"
