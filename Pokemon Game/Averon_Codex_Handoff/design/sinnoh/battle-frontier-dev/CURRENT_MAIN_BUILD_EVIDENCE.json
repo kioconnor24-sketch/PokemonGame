@@ -40,7 +40,7 @@
     "ewram_bytes": 226482,
     "iwram_bytes": 28336
   },
-  "native": "NOT RUN on this scene",
+  "native": "RUNNING: compilation complete; last headless worker active; no PASS claimed",
   "graphical": {
     "scope": "BOUNDED FightArea/gate pair plus reciprocal Route225/230 seam probes, not all44",
     "normal": {
@@ -359,7 +359,322 @@
       "save_after": "664e5127829ad945562f4ff0c4b8cea5d367198cc3514b09bc2f757ee86661dc",
       "verdict": "PASS"
     },
-    "release": "RUNNING; not PASS"
+    "release": {
+      "maps": [
+        "MAP_FIGHT_AREA",
+        "MAP_SINNOH_FRONTIER_GATE"
+      ],
+      "build": "release",
+      "rom_sha256": "8d85e9b3779322977318f6d7ef76c3497565a47046d221415137da68914863d6",
+      "static_findings": [],
+      "save_before": "2159f28fbdae680bc51b257d38160cbc81056874239d2e3395c4d2c70c2ad982",
+      "checks": [
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_FIGHT_AREA",
+            [
+              23,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_FIGHT_AREA",
+          "ok": true,
+          "at": [
+            "MAP_FIGHT_AREA",
+            [
+              23,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA up seam (22, 0) -> MAP_ROUTE225 (22, 93) and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              22,
+              0
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              22,
+              0
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA up seam (23, 0) -> MAP_ROUTE225 (23, 93) and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              23,
+              0
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA right seam (69, 15) -> MAP_ROUTE230 (0, 17) and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              15
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              15
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA right seam (69, 17) -> MAP_ROUTE230 (0, 19) and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              17
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              17
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA right seam (69, 18) -> MAP_ROUTE230 (0, 20) and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              18
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              69,
+              18
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+          "ok": true,
+          "at": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_FIGHT_AREA",
+            [
+              [
+                50,
+                9
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_FIGHT_AREA",
+            [
+              50,
+              9
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_SINNOH_FRONTIER_GATE",
+          "ok": true,
+          "at": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_FIGHT_AREA via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_FIGHT_AREA",
+          "ok": true,
+          "at": [
+            "MAP_FIGHT_AREA",
+            [
+              50,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "MAP_SINNOH_FRONTIER_GATE warp 1 (7, 20) -> MAP_FIGHT_AREA and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              [
+                7,
+                20
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "Start menu opens and returns to the field",
+          "ok": true
+        },
+        {
+          "name": "SAVE (frontier44-fight-gate)",
+          "ok": true,
+          "at": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "flash_problems": [],
+      "save_after": "355aa9d62ebee2e9156ed9abcabde1a6a35a2727d17a58e3ef14e9b7a2c5be43",
+      "verdict": "PASS"
+    },
+    "release_fresh_continue": {
+      "maps": [
+        "MAP_FIGHT_AREA",
+        "MAP_SINNOH_FRONTIER_GATE"
+      ],
+      "build": "release",
+      "rom_sha256": "8d85e9b3779322977318f6d7ef76c3497565a47046d221415137da68914863d6",
+      "static_findings": [],
+      "save_before": "355aa9d62ebee2e9156ed9abcabde1a6a35a2727d17a58e3ef14e9b7a2c5be43",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "355aa9d62ebee2e9156ed9abcabde1a6a35a2727d17a58e3ef14e9b7a2c5be43",
+      "verdict": "PASS"
+    }
   },
   "movement_static": {
     "verdict": "FAIL32_FINDINGS_NOT_SUPPRESSED",
@@ -1363,5 +1678,213 @@
       "MAP_SINNOH_FRONTIER_GATE"
     ],
     "findings": 0
+  },
+  "positive_menu_proof": {
+    "normal": {
+      "profile": "normal",
+      "source_sha": "b99e5e1ad1385b6131545a1cd6e5d34c4047b91b",
+      "rom_sha256": "482351a605c5509e77807cc49819541b99d3836ccef1626418af43feb1f913d2",
+      "fixture": "None; copied actual game-written prior SAVE",
+      "checks": [
+        {
+          "name": "actual native start-menu task and valid action list",
+          "ok": true,
+          "tasks": [
+            "Task_WeatherMain",
+            "Task_RunPerStepCallback",
+            "Task_MuddySlope",
+            "Task_RunTimeBasedEvents",
+            "Task_ShowStartMenu"
+          ],
+          "actions": 7,
+          "cursor": 0
+        },
+        {
+          "name": "B closes menu and preserves field position",
+          "ok": true,
+          "position": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "name": "source game-written flash unchanged",
+          "ok": true
+        }
+      ],
+      "verdict": "PASS"
+    },
+    "release": {
+      "profile": "release",
+      "source_sha": "b99e5e1ad1385b6131545a1cd6e5d34c4047b91b",
+      "rom_sha256": "8d85e9b3779322977318f6d7ef76c3497565a47046d221415137da68914863d6",
+      "fixture": "None; copied actual game-written prior SAVE",
+      "checks": [
+        {
+          "name": "actual native start-menu task and valid action list",
+          "ok": true,
+          "tasks": [
+            "Task_WeatherMain",
+            "Task_RunPerStepCallback",
+            "Task_MuddySlope",
+            "Task_RunTimeBasedEvents",
+            "Task_ShowStartMenu"
+          ],
+          "actions": 7,
+          "cursor": 0
+        },
+        {
+          "name": "B closes menu and preserves field position",
+          "ok": true,
+          "position": [
+            "MAP_SINNOH_FRONTIER_GATE",
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "name": "source game-written flash unchanged",
+          "ok": true
+        }
+      ],
+      "verdict": "PASS"
+    }
+  },
+  "legacy_load": {
+    "normal": {
+      "maps": [
+        "MAP_SALTMERE"
+      ],
+      "build": "normal",
+      "rom_sha256": "482351a605c5509e77807cc49819541b99d3836ccef1626418af43feb1f913d2",
+      "static_findings": [
+        {
+          "map": "MAP_SALTMERE",
+          "code": "seam-mismatch",
+          "detail": {
+            "direction": "up",
+            "tile": [
+              7,
+              0
+            ],
+            "faces": [
+              "MAP_COASTALMEADOW",
+              [
+                7,
+                31
+              ]
+            ]
+          }
+        }
+      ],
+      "save_before": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_SALTMERE",
+            [
+              19,
+              16
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_SALTMERE",
+            [
+              19,
+              16
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+      "verdict": "PASS"
+    },
+    "release": {
+      "maps": [
+        "MAP_SALTMERE"
+      ],
+      "build": "release",
+      "rom_sha256": "8d85e9b3779322977318f6d7ef76c3497565a47046d221415137da68914863d6",
+      "static_findings": [
+        {
+          "map": "MAP_SALTMERE",
+          "code": "seam-mismatch",
+          "detail": {
+            "direction": "up",
+            "tile": [
+              7,
+              0
+            ],
+            "faces": [
+              "MAP_COASTALMEADOW",
+              [
+                7,
+                31
+              ]
+            ]
+          }
+        }
+      ],
+      "save_before": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_SALTMERE",
+            [
+              19,
+              16
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_SALTMERE",
+            [
+              19,
+              16
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+      "verdict": "PASS"
+    }
   }
 }
