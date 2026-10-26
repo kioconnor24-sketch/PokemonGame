@@ -170,3 +170,24 @@ Sinnoh has no approved Town Map or Fly grid yet. Since #138 the game refuses the
 The check needs the PokéNav flag, the Fly licence and a Town Map. The TEST-ONLY fixture op `grant` adds an on-transition script that sets those flags and gives the items once. It refuses a map that already has an on-transition script, and, like every fixture, it only runs in a throwaway tree. The `section` op relabels a map's section. The negative fixture uses it to give Sandgem a Hoenn section, so the maps open and `--region-ui refused` must fail.
 
 The party-menu and menu-cursor offsets come from private structs that the offset probe can't see. `party_menu_layout()` reads them from source, and stops with an error if those structs' leading fields ever change.
+
+### DEV scenes for staged overlays (`static_scene.py`, `compose_scene.py`)
+
+Staged batches (`design/sinnoh/<batch>/staged/`) are tested on a Codex family's DEV scene, never on production. `static_scene.py REPO FAMILY BATCH_DIR --map MAP ...` works only in a throwaway checkout, one carrying the `.map_qa_throwaway` marker:
+1. It resets the engine tree.
+2. It installs FAMILY's scene: the family's `prepare_runtime.assemble()`, or `-` for production alone, or a `family/module.py` path.
+3. It applies the batch:
+   - each `<Map>-dev-overlay/map.json` replaces that map's header, whether the map is the family's or a production one;
+   - an optional same-size `map.bin` replaces its blockdata;
+   - every other staged map is appended.
+4. It runs `map_qa.py static` on the listed maps.
+
+The installed tree can then be built and run with `map_qa.py run`, entering through a `fixture-save`.
+
+`FAMILY` may be `a+b+c`: `compose_scene.py` merges several family scenes into one, for links between families. It works like this:
+- each family keeps its own map, layout and art files;
+- the families' appends to `event_scripts.s` and the tileset headers are concatenated;
+- `map_groups.json` and `layouts.json` are merged in order;
+- the registry slot list is renumbered.
+
+It fails closed if two families write one file differently, if a family rewrites rather than appends an index file, or if a tileset is declared twice. Tests: `scripts/tests/test_compose_scene.py`.
