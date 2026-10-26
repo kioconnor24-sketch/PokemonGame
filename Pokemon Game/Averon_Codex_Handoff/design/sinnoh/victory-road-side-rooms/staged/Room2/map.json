@@ -1,0 +1,36 @@
+{
+  "id": "MAP_SINNOH_VICTORY_SIDE_ROOM2",
+  "name": "SinnohVictorySideRoom2",
+  "layout": "LAYOUT_SINNOH_VICTORY_SIDE_ROOM2",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "music": "MUS_GRANITE_CAVE",
+  "weather": "WEATHER_NONE",
+  "requires_flash": false,
+  "allow_cycling": false,
+  "allow_running": true,
+  "allow_escaping": false,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 58,
+      "elevation": 12,
+      "dest_map": "MAP_SINNOH_VICTORY_SIDE_ROOM1",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 56,
+      "y": 13,
+      "elevation": 6,
+      "dest_map": "MAP_SINNOH_VICTORY_SIDE_ROOM3",
+      "dest_warp_id": "0"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
