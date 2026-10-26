@@ -14,13 +14,15 @@ import subprocess
 import tempfile
 
 HERE=Path(__file__).resolve().parent
-BASE='c6ac2f967b02473741791eb24b5cc9b11bda3904'
+BASE='187193c28a636a32abdabd62aad26f14393a9cdc'
 ENGINE='Pokemon Game/engine/'
 MAPS={'Route212_Access': (9, 11), 'Route212_North': (34, 100), 'Route212_South': (130, 34), 'Route213': (100, 60), 'Route213_Access': (13, 9), 'Route214': (44, 91), 'Route214_Access': (9, 11), 'Route215': (100, 42), 'Route215_Access': (13, 9), 'ValorLakefront': (56, 66), 'VeilstoneCity': (66, 68), 'PastoriaCity': (68, 60), 'HotelGrandLake': (15, 12)}
 
 spec=importlib.util.spec_from_file_location('eastern_runtime_pack',HERE/'adapt_outdoor_art.py')
 art=importlib.util.module_from_spec(spec);spec.loader.exec_module(art)
 base=art.pack.accepted.base
+cross_spec=importlib.util.spec_from_file_location('eastern_foot_crossing',HERE.parent/'route212-foot-crossing/prepare_crossing.py')
+crossing=importlib.util.module_from_spec(cross_spec);cross_spec.loader.exec_module(crossing)
 sha=lambda data:hashlib.sha256(data).hexdigest()
 encode=lambda data:(json.dumps(data,indent=2)+'\n').encode()
 
@@ -68,7 +70,7 @@ def assemble(repo,acro_fixture=False):
     if len(names)!=19 or len(set(names))!=19 or set(MAPS)&set(names):raise ValueError('exact current19-slot prefix required')
     pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 19, 1)'
     if pins.count(marker)!=1:raise ValueError('registry count mismatch')
-    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 32, 1)')
+    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {19+len(MAPS)}, 1)')
     files={};symbols={};declarations='\n';headers='\n';metatiles='\n';includes=[]
     for family,secondary,graphics,folder in (
             ('OutdoorPrimary',False,'General','hotel-link/outdoor-family'),
@@ -129,7 +131,7 @@ def assemble(repo,acro_fixture=False):
         temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers=source_headers,
         dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance',files={p:sha(d) for p,d in sorted(files.items())})
     if acro_fixture:receipt['dev_fixture']=dict(item_grants=['ITEM_ACRO_BIKE'],flag_grants=[],map='Route212_South',method='existing map_qa.apply_fixture grant; disposable source only')
-    return files,receipt
+    return crossing.compose(files,receipt)
 
 
 def install(repo,acro_fixture=False):
