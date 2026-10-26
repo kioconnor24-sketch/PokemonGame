@@ -72,6 +72,42 @@ class BattleFrontierDEV(unittest.TestCase):
   with patch.object(m.base,'git',shallow):
    files,r=m.assemble(ROOT)
   self.assertEqual(files,self.files);self.assertEqual(r['base_engine_tree'],m.ENGINE_TREE)
+ def marked_metadata_fixture(self,path):
+  engine=path/m.ENGINE
+  for rel in set(self.recipe['base_input_sha256'])|set(self.recipe['native_input_sha256']):
+   target=engine/rel;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/m.ENGINE/rel).read_bytes())
+  (engine/'.map_qa_throwaway').write_text('isolated unit fixture; Git state is stubbed')
+  original=m.base.git
+  def fixture_git(repo,*args):
+   if Path(repo).resolve()==path.resolve():
+    if args==('branch','--show-current'):return b'codex/battle-frontier-runtime-scratch-unit'+bytes([10])
+    if args==('rev-parse','HEAD'):return (m.BASE+chr(10)).encode()
+    if args and args[0]=='status':return b'?? "Pokemon Game/engine/.map_qa_throwaway"'+bytes([10])
+    return original(ROOT,*args) # real immutable blobs, simulated target Git state
+   return original(repo,*args)
+  return engine,fixture_git
+ def test_installer_filesystem_replay_with_pinned_blobs_and_stubbed_git_state(self):
+  with tempfile.TemporaryDirectory() as t:
+   target=Path(t);engine,git=self.marked_metadata_fixture(target)
+   with patch.object(m.base,'git',git):r=m.install(target)
+   self.assertEqual(r,self.recipe)
+   for p,h in r['files'].items():self.assertEqual(m.base.sha((engine/p).read_bytes()),h)
+   for p,h in r['native_input_sha256'].items():
+    if p not in r['files']:self.assertEqual(m.base.sha((engine/p).read_bytes()),h)
+ def test_installer_refuses_ignored_existing_asset_and_path_escape_before_writing(self):
+  with tempfile.TemporaryDirectory() as t:
+   target=Path(t);engine,git=self.marked_metadata_fixture(target)
+   path=next(p for p in self.files if p.startswith('data/tilesets/secondary/') and p.endswith('/metatiles.bin'))
+   asset=engine/path;asset.parent.mkdir(parents=True);asset.write_bytes(b'preexisting user asset')
+   before=(engine/'data/maps/map_groups.json').read_bytes()
+   with patch.object(m.base,'git',git):
+    with self.assertRaisesRegex(ValueError,'existing untracked'):m.install(target)
+   self.assertEqual(asset.read_bytes(),b'preexisting user asset')
+   self.assertEqual((engine/'data/maps/map_groups.json').read_bytes(),before)
+   outside=target/'Pokemon Game/outside.txt';outside.write_text('preserve')
+   with patch.object(m.base,'git',git),patch.object(m,'assemble',return_value=({'../outside.txt':b'bad'},self.recipe)):
+    with self.assertRaisesRegex(ValueError,'escapes engine'):m.install(target)
+   self.assertEqual(outside.read_text(),'preserve')
  def test_dirty_source_and_non_disposable_install_refused_without_writes(self):
   original=Path.read_bytes;target=HERE.parent/'stark-mountain/staged/Room2/map.bin'
   def dirty(p):
