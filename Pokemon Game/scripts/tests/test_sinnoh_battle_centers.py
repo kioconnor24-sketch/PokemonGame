@@ -6,12 +6,16 @@ ROOT=Path(__file__).resolve().parents[3];HERE=ROOT/'Pokemon Game/Averon_Codex_Ha
 s=importlib.util.spec_from_file_location('battle_center_tests',HERE/'build.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 ENGINE=ROOT/'Pokemon Game/engine'
 class BattleCenters(unittest.TestCase):
- def test_all_three_exteriors_immutable_geometry_and_existing_gateway_prefix(self):
+ def test_all_four_exteriors_immutable_geometry_and_existing_gateway_prefix(self):
   for name,cfg in m.AREAS.items():
    q=HERE/'staged'/name
    if name=='FightArea':
     parent=HERE.parent/'frontier-gate-link/staged/FightArea'
     for n in ('map.bin','border.bin','preview.png','attributes.json'):self.assertEqual((parent/n).read_bytes(),(q/n).read_bytes())
+    original=json.loads((parent/'map.json').read_text())
+   elif name=='Route228':
+    parent=HERE.parent/'battle-zone-links/staged/Route228'
+    for n in ('map.bin','border.bin','preview.png'):self.assertEqual((parent/n).read_bytes(),(q/n).read_bytes())
     original=json.loads((parent/'map.json').read_text())
    else:
     parent=HERE.parent/'battle-zone-north/staged'/name
@@ -24,7 +28,8 @@ class BattleCenters(unittest.TestCase):
    self.assertEqual(json.loads((q/'attributes.json').read_text())[str(v&1023)]&255,0x69)
  def test_six_rooms_reciprocal_stairs_return_aliases_and_only_online_closures(self):
   layouts={v['id']:v for v in json.loads((ENGINE/'data/layouts/layouts.json').read_text())['layouts']}
-  for area in m.AREAS:
+  for area,cfg in m.AREAS.items():
+   if not cfg.get('center',True):continue
    exterior=json.loads((HERE/'staged'/area/'map.json').read_text())
    for floor in (1,2):
     p=HERE/'staged'/(area+'Center'+str(floor));h=json.loads((p/'map.json').read_text())
@@ -45,7 +50,7 @@ class BattleCenters(unittest.TestCase):
      self.assertEqual(h['warp_events'][2]['dest_warp_id'],'0')
     self.assertEqual((p/'map.bin').read_bytes(),bytes(raw))
     self.assertEqual((p/'border.bin').read_bytes(),(ENGINE/l['border_filepath']).read_bytes())
- def test_seven_house_shells_preserve_templates_and_both_return_aliases(self):
+ def test_nine_house_shells_preserve_templates_and_both_return_aliases(self):
   layouts={v['id']:v for v in json.loads((ENGINE/'data/layouts/layouts.json').read_text())['layouts']}
   for name,(area,x,y,template) in m.HOUSES.items():
    p=HERE/'staged'/name;h=json.loads((p/'map.json').read_text())
