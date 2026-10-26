@@ -45,6 +45,14 @@ class EternaForestTunnelTest(unittest.TestCase):
     def test_every_warp_is_reciprocal(self):
         self.assertTrue(w23.check(self.route, self.forest, self.house))
 
+    def test_each_tunnel_warp_has_a_trigger_that_takes_it(self):
+        # The tunnel floor is plain grass: without a coord trigger the engine never takes the warp (mGBA W23 gate).
+        triggers = {(c["x"], c["y"]): c["script"] for c in self.route["coord_events"]}
+        script = w23.portal_script(self.route)
+        for w in self.route["warp_events"][:2]:
+            label = triggers[(w["x"], w["y"])]
+            self.assertIn(f"{label}::\n\twarp {w['dest_map']}, {w['dest_warp_id']}\n", script)
+
     def test_house_is_a_neutral_shell(self):
         self.assertEqual(self.house["layout"], "LAYOUT_HOUSE1")
         self.assertEqual((self.house["object_events"], self.house["coord_events"], self.house["bg_events"]),

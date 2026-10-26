@@ -10,6 +10,8 @@ staged forest closed its mouth (collision 1, forest-chateau source-receipt closu
   a derived copy of its map.bin redraws the tunnel with floaroma-donor's Meadow tunnel recipe (same 2-wide shape and
   tree-half phase): tree halves, two canopy ends, grass floor. Only the donor's four floor cells are walkable again:
   (14-15, 12) at elevation 0 holding the warps, (14-15, 13) at elevation 3 below them. Elevations are unchanged.
+  The floor has no arrow behaviour, so (as in the Meadow tunnel) a coord trigger on each warp cell takes it; the
+  overlay's portal-script.inc holds their two warp scripts.
 - EternaForest-dev-overlay: the mouth's two warps back (16 -> tunnel 0, 17 -> tunnel 1) and a derived map.bin
   clearing exactly those two cells' collision (the source had none).
 - Route205_South_House (new): a neutral LAYOUT_HOUSE1 shell behind the house door.
@@ -108,6 +110,11 @@ def build(engine):
                              "dest_warp_id": str(mouth + i)} for i, (x, y) in enumerate(TUNNEL_WARPS)]
     route["warp_events"].append({"x": HOUSE_DOOR[0], "y": HOUSE_DOOR[1], "elevation": 0, "dest_map": HOUSE_ID,
                                  "dest_warp_id": "0"})
+    # The tunnel floor is plain grass (no arrow behaviour), so, as in floaroma-donor's Meadow tunnel, a coord trigger
+    # on each warp cell takes it (portal-script.inc below).
+    route["coord_events"] = route.get("coord_events", []) + [
+        {"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_1", "var_value": "0",
+         "script": f"Route205_South_EventScript_ToForest{i}"} for i, (x, y) in enumerate(TUNNEL_WARPS)]
     for i, (x, y) in enumerate(MOUTH):
         forest["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ROUTE205_SOUTH",
                                       "dest_warp_id": str(i)})
@@ -134,6 +141,12 @@ def check(route, forest, house):
     return True
 
 
+def portal_script(route):
+    """The tunnel triggers' scripts, appended to production Route 205 South's scripts.inc in the DEV scene."""
+    return "".join(f"\n{c['script']}::\n\twarp MAP_ETERNA_FOREST, {route['warp_events'][i]['dest_warp_id']}\n"
+                   "\twaitstate\n\tend\n" for i, c in enumerate(route["coord_events"][-len(TUNNEL_WARPS):]))
+
+
 def write(engine, out):
     route, forest, house, route_blocks, forest_blocks, hashes = build(engine)
     check(route, forest, house)
@@ -145,6 +158,7 @@ def write(engine, out):
         if blocks:
             (st / name / "map.bin").write_bytes(struct.pack("<%dH" % len(blocks), *blocks))
     (st / HOUSE / "scripts.inc").write_text(w1.scripts(HOUSE))
+    (st / "Route205_South-dev-overlay" / "portal-script.inc").write_text(portal_script(route))
     receipt = {"status": "OFF_ENGINE_STAGING_NOT_PRODUCTION", "maps": [HOUSE],
                "overlays": ["EternaForest", "Route205_South"], "inputs_sha256": hashes}
     (pathlib.Path(out) / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
