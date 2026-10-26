@@ -33,10 +33,10 @@ jobs:
           scene_root="$RUNNER_TEMP/battle-frontier-runtime"
           evidence="$RUNNER_TEMP/battle-frontier-evidence"
           mkdir -p "$evidence"
-          git -C source fetch --no-tags --depth=1 origin ef48b0df4ebe7134b45221887ee39378416918bb
+          git -C source fetch --no-tags --depth=1 origin f57a79eaf8060bd1da4c412e703345f560dad30a
           git -C source worktree add --no-checkout \
             -b "codex/battle-frontier-runtime-scratch-ci-$GITHUB_RUN_ID-$SCENE_PROFILE" \
-            "$scene_root" ef48b0df4ebe7134b45221887ee39378416918bb
+            "$scene_root" f57a79eaf8060bd1da4c412e703345f560dad30a
           git -C "$scene_root" sparse-checkout set --cone "Pokemon Game/engine"
           touch "$scene_root/Pokemon Game/engine/.map_qa_throwaway"
           python3 "source/Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/prepare_scene.py" \

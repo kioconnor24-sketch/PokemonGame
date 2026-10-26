@@ -5,7 +5,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 ENGINE='Pokemon Game/engine'
-BASE='ef48b0df4ebe7134b45221887ee39378416918bb'
+BASE='f57a79eaf8060bd1da4c412e703345f560dad30a'
 ENGINE_TREE='c2e26cce0a00af43251e0672fef708c796b7a918'
 s=importlib.util.spec_from_file_location('battle_dev_guarded_reuse',HERE.parent/'sunyshore-coast/prepare_runtime.py')
 reuse=importlib.util.module_from_spec(s);s.loader.exec_module(reuse)
