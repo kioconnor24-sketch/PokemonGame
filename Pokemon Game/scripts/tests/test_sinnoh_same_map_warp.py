@@ -74,7 +74,8 @@ class SameMapTest(unittest.TestCase):
 
     def probe(self,index,**kwargs):
         x,y,dest,di=self.m.warps[index]
-        p=dict(index=index,warp=[x,y],tile=qa.warp_stand(self.m,x,y),push=qa.warp_push(self.m,x,y),dest=dest,dest_warp=di)
+        p=dict(index=index,warp=[x,y],tile=qa.warp_stand(self.m,x,y),push=qa.warp_push(self.m,x,y),
+               dest=dest,dest_warp=di,kind='warp',exit=mapdata.takeable(self.m,x,y))
         runner=FixtureRunner(self.maps,self.mid,p,**kwargs)
         runner.expected_return=qa.warp_arrive(self.m,x,y)
         return runner,p
