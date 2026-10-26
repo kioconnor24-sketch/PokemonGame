@@ -52,6 +52,16 @@ class Game:
                             graphicsId=gid, invisible=bool(rec[1] & 0x20))
         return None
 
+    def player_elevation(self):
+        """The player object's currentElevation (the low nibble after mapGroup), read-only; None if not found."""
+        size = self.off["oe.size"]
+        raw = self.gdb.read(self.sym["gObjectEvents"], 16 * size)
+        for i in range(16):
+            rec = raw[i * size:(i + 1) * size]
+            if rec[0] & 1 and rec[self.off["oe.localId"]] == self.c["OBJ_EVENT_ID_PLAYER"]:
+                return rec[self.off["oe.mapGroup"] + 1] & 0xF
+        return None
+
     def box_species(self, raw):
         """Species of a party Pokemon, decoded read-only like GetSubstruct():
         the secure words are XORed with otId ^ personality, and substruct 0
