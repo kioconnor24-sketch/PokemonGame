@@ -175,7 +175,9 @@ def reach(m, starts, reverse=False):
 
 
 def map_points(m):
-    """Entries and exits of one map: every warp's standing tile and every connection seam tile."""
+    """Entries and exits of one map: every warp's standing tile and every connection seam tile.
+
+    A point without "exit" (hand-built plans and fixtures from before arrival-only warps) counts as an exit."""
     points = []
     for i, (x, y, dest, warp) in enumerate(m.warps):
         points.append(dict(kind="warp", index=i, tile=warp_stand(m, x, y), warp=(x, y), dest=dest, dest_warp=warp,
@@ -209,7 +211,7 @@ def batch_reach(world, map_ids, map_id, tile):
         region = reach(m, [start])
         seen |= {(mid, t) for t in region}
         for p in map_points(m):
-            if tuple(p["tile"]) not in region or not p["exit"]:
+            if tuple(p["tile"]) not in region or not p.get("exit", True):
                 continue
             if p["kind"] == "warp":
                 nxt = batch_arrival(world, map_ids, p)
@@ -235,11 +237,11 @@ def static_audit(world, map_ids):
         m = world.map(map_id)
         points = map_points(m)
         tiles = [p["tile"] for p in points]
-        exits = [p for p in points if p["exit"]]        # arrival-only warps are entries, never exits
+        exits = [p for p in points if p.get("exit", True)]        # arrival-only warps are entries, never exits
         for p in points:
             if not (m.inside(*p["tile"]) and m.walkable(*p["tile"])):
                 find(map_id, "exit-not-walkable", p)
-            if p["kind"] == "warp" and not p["exit"] and any(k in m.behavior(*p["warp"]) for k in ("DOOR", "LADDER")):
+            if p["kind"] == "warp" and not p.get("exit", True) and any(k in m.behavior(*p["warp"]) for k in ("DOOR", "LADDER")):
                 find(map_id, "warp-closed", dict(warp=p["warp"], behavior=m.behavior(*p["warp"]), dest=p["dest"]))
         # Ledges must land on walkable ground (PlayerJumpLedge never checks).
         for y in range(m.height):
@@ -485,7 +487,7 @@ class Runner:
     def can_leave(self, label):
         mid, pos = self.d.here()
         m = self.d.live_map(mid)
-        exits = {p["tile"] for p in map_points(m) if p["exit"]}
+        exits = {p["tile"] for p in map_points(m) if p.get("exit", True)}
         ok = bool(reach(m, [pos]) & exits)
         return self.check(f"an exit is reachable after {label}", ok, at=(mid, pos))
 
@@ -523,7 +525,7 @@ class Runner:
         target = self.w.map(map_id)
         for src in self.plan:
             for p in self.plan[src]["points"]:
-                if p["kind"] != "warp" or not p["exit"] or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
+                if p["kind"] != "warp" or not p.get("exit", True) or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
                     continue
                 arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
                 if tile not in reach(target, [arrive]):
@@ -648,7 +650,7 @@ class Runner:
             return self.check(f"pocket probe landed at {tuple(entry['into'])} on {map_id}", False, got=landed)
         self.d.shot(f"pocket-{map_id}-in")
         # Escape attempt with real input: route to any warp/seam point, then push every direction.
-        exits = {tuple(p["tile"]) for p in map_points(self.d.live_map(map_id)) if p["exit"]}
+        exits = {tuple(p["tile"]) for p in map_points(self.d.live_map(map_id)) if p.get("exit", True)}
         try:
             self.d.walk_path(map_id, exits)
         except Stuck as exc:
@@ -863,7 +865,7 @@ class Runner:
             for p in {id(q): q for q in (run[0], run[len(run) // 2], run[-1])}.values():
                 self.seam(map_id, p)
         for p in plan["points"]:
-            if p["kind"] == "warp" and p["exit"] and p["dest"] in self.plan:
+            if p["kind"] == "warp" and p.get("exit", True) and p["dest"] in self.plan:
                 self.warp(map_id, p)
 
     def passable_seams(self, map_id, direction):
