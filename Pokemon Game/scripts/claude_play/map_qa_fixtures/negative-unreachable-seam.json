@@ -8,7 +8,7 @@
   15,
   10
  ],
- "description": "TEST-ONLY: the loop connection, plus trees across the north path (row 3), so the north seam cannot be reached from the town: static exit-unreachable, and the run cannot walk to the seam.",
+ "description": "TEST-ONLY: the loop connection, plus trees across the north path (row 3) and the south opening (row 26), so neither seam can be reached from the town: static exit-unreachable, and the run cannot walk to the seam. (The south row was added once Sandgem's south edge opened: through the loop it made the north seam reachable.)",
  "expect": "FAIL",
  "must_fail": [
   "up seam"
@@ -77,6 +77,48 @@
     [
      24,
      3,
+     476,
+     1,
+     0
+    ],
+    [
+     19,
+     26,
+     477,
+     1,
+     0
+    ],
+    [
+     20,
+     26,
+     476,
+     1,
+     0
+    ],
+    [
+     21,
+     26,
+     477,
+     1,
+     0
+    ],
+    [
+     22,
+     26,
+     476,
+     1,
+     0
+    ],
+    [
+     23,
+     26,
+     477,
+     1,
+     0
+    ],
+    [
+     24,
+     26,
      476,
      1,
      0

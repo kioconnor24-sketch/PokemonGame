@@ -11,7 +11,8 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import map_qa  # noqa: E402
 
-BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP"}
+BEHAVIOR = {"v": "MB_JUMP_SOUTH", "D": "MB_ANIMATED_DOOR", "M": "MB_SOUTH_ARROW_WARP", "L": "MB_LADDER",
+            "H": "MB_MT_PYRE_HOLE", "N": "MB_NON_ANIMATED_DOOR", "n": "MB_NON_ANIMATED_DOOR"}
 
 
 class FakeMap:
@@ -29,13 +30,23 @@ class FakeMap:
         return BEHAVIOR.get(self.rows[y][x], "MB_NORMAL")
 
     def walkable(self, x, y):
-        return self.inside(x, y) and self.rows[y][x] in ".M"
+        return self.inside(x, y) and self.rows[y][x] in ".MLHn"
 
     def warp_at(self, x, y):
         for wx, wy, dest, warp in self.warps:
             if (wx, wy) == (x, y):
                 return dest, warp
         return None
+
+
+class FakeElevMap(FakeMap):
+    """FakeMap plus per-tile elevations (one hex digit per tile, so 'f' is a 15 bridge)."""
+    def __init__(self, map_id, rows, elev, **kw):
+        super().__init__(map_id, rows, **kw)
+        self.elev = elev
+
+    def elevation(self, x, y):
+        return int(self.elev[y][x], 16)
 
 
 class FakeWorld:
@@ -129,6 +140,95 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(legs[0][2], (2, 3))                    # the south door, not the unreachable north one
         self.assertEqual(d.map_route("ROUTE", "TOWN", (2, 1))[0][:2], ("ROUTE", "edge"))   # north half: straight up
 
+    def test_elevation_blocks_a_plateau_except_through_a_transition_tile(self):
+        # Row 0: grass (3) | plateau (4). Row 1: the same, but x 2 is an elevation-0 stair joining them.
+        m = FakeElevMap("M", ["....",
+                              "...."], ["3344",
+                                        "3304"])
+        self.assertEqual(map_qa.reach(m, [(0, 0)]), {(0, 0), (1, 0), (0, 1), (1, 1), (2, 1), (3, 1), (2, 0), (3, 0)})
+        flat = FakeElevMap("M", ["....",
+                                 "...."], ["3344",
+                                           "3344"])
+        self.assertEqual(map_qa.reach(flat, [(0, 0)]), {(0, 0), (1, 0), (0, 1), (1, 1)})
+        self.assertEqual(map_qa.reach(flat, [(3, 0)], reverse=True), {(2, 0), (3, 0), (2, 1), (3, 1)})
+        self.assertIsNone(map_qa.mapdata.bfs(flat, (0, 0), {(3, 0)}))
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (0, 0), {(3, 0)})), 5)
+
+    def test_a_route_starting_on_a_bridge_keeps_the_arrival_elevation(self):
+        # Ground (3) | bridge (15) | ground (3) over a lower floor (4) the bridge spans; start on the bridge.
+        m = FakeElevMap("M", ["...",
+                              "..."], ["3f3",
+                                       "444"])
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)})), 1)
+        self.assertEqual(len(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)}, elevation=3)), 1)
+        self.assertIsNone(map_qa.mapdata.bfs(m, (1, 0), {(2, 0)}, elevation=15))  # warped onto it: stuck at 15
+        self.assertIsNone(map_qa.mapdata.bfs(m, (1, 0), {(0, 1)}, elevation=3))   # mismatch protection kept
+        self.assertEqual(map_qa.reach(m, [(1, 0)]), {(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), (2, 1)})
+        self.assertEqual(map_qa.reach(m, [(0, 0)]), {(0, 0), (1, 0), (2, 0)})
+        self.assertEqual(map_qa.mapdata.start_elevations(m, (1, 0)), [3, 4, 15])
+        self.assertEqual(map_qa.mapdata.start_elevations(m, (0, 0)), [3])
+        far = FakeElevMap("M", ["....",
+                                "...."], ["3f35",
+                                          "4445"])
+        self.assertEqual(map_qa.mapdata.start_elevations(far, (1, 0)), [3, 4, 15])  # 5 never touches the bridge
+
+    def test_a_seam_from_a_bridge_uses_the_actual_elevation(self):
+        # A: ground 3, then a bridge (15) on its east edge; B: ground 3. Walking 3 -> 15 keeps 3, so the
+        # seam onto B's 3 is open. With ground 4 instead (actual elevation 4 on the bridge) it is refused.
+        import driver as drv
+
+        def world(ground):
+            a = FakeElevMap("A", ["..."], [ground * 2 + "f"], connections=[("right", "B", 0)])
+            b = FakeElevMap("B", ["..."], ["333"], connections=[("left", "A", 0)])
+            w = FakeWorld(a, b)
+            w.map_ids = {"A": 0, "B": 1}
+            a.world = b.world = w
+            d = drv.Driver.__new__(drv.Driver)
+            d.w = w
+            return w, d
+
+        w, d = world("3")
+        md = map_qa.mapdata
+        self.assertTrue(md.crossable(w.map("A"), (2, 0), w.map("B"), (0, 0)))
+        self.assertEqual(md.step_across(3, 15, 3), 3)
+        self.assertIsNone(md.step_across(4, 15, 3))
+        self.assertEqual([leg[:2] for leg in d.map_route("A", "B", (0, 0))], [("A", "edge")])
+        self.assertEqual([leg[:2] for leg in d.map_route("A", "B", (2, 0))], [("A", "edge")])   # starting on it
+        self.assertNotIn("seam-mismatch", codes(map_qa.static_audit(w, ["A", "B"])[0]))
+        w, d = world("4")
+        self.assertFalse(md.crossable(w.map("A"), (2, 0), w.map("B"), (0, 0)))
+        with self.assertRaises(drv.Stuck):
+            d.map_route("A", "B", (0, 0))
+        self.assertIn("seam-mismatch", codes(map_qa.static_audit(w, ["A", "B"])[0]))
+
+    def test_a_seam_between_different_elevations_is_a_mismatch(self):
+        a = FakeElevMap("A", ["....."], ["33344"], connections=[("down", "B", 0)])
+        b = FakeElevMap("B", ["....."], ["33333"], connections=[("up", "A", 0)])
+        findings, _ = map_qa.static_audit(FakeWorld(a, b), ["A", "B"])
+        bad = [f["detail"]["tile"] for f in findings if f["code"] == "seam-mismatch"]
+        self.assertEqual(sorted(bad), [(3, 0), (3, 0), (4, 0), (4, 0)])   # both sides of x 3-4
+
+    def test_driver_reaches_a_plateau_only_through_the_neighbouring_map(self):
+        import driver as drv
+        # South: grass (3) at x 0-1, a raised strip (4) at x 3 reachable from nowhere inside South.
+        south = FakeElevMap("SOUTH", ["..#.",
+                                      "..#."], ["3304",
+                                                "3304"], connections=[("up", "NORTH", 0)])
+        # North: grass (3), an elevation-0 stair at x 2, the same raised strip (4) at x 3 down to the seam.
+        north = FakeElevMap("NORTH", ["....",
+                                      "...."], ["3304",
+                                                "3304"], connections=[("down", "SOUTH", 0)])
+        world = FakeWorld(south, north)
+        world.map_ids = {"SOUTH": 0, "NORTH": 1}
+        for m in (south, north):
+            m.world = world
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = world
+        self.assertNotIn((3, 1), map_qa.reach(south, [(0, 1)]))
+        legs = d.map_route("SOUTH", "SOUTH", (0, 1), target=(3, 1))
+        self.assertEqual([leg[:2] for leg in legs], [("SOUTH", "edge"), ("NORTH", "edge")])
+        self.assertEqual(legs[1][3], ((3, 1),))       # down from North's raised column, landing on the strip
+
     def test_ledge_pocket_is_found(self):
         rows = ["#..####",
                 "#.....#",
@@ -158,6 +258,65 @@ class StaticLayer(unittest.TestCase):
         self.assertEqual(codes(found), ["seam-mismatch"])
         self.assertEqual(found[0]["detail"]["faces"], ("B", (1, 2)))
 
+    def test_ladder_is_a_step_on_warp(self):
+        """Arriving on a ladder and pushing away walks off it; the plan must step back onto it instead."""
+        cave = FakeMap("CAVE", ["#####", "#.L.#", "#...#", "#####"], warps=[(2, 1, "DOWN", 0)])
+        self.assertEqual(cave.behavior(2, 1), "MB_LADDER")
+        entry = map_qa.mapdata.trigger_entry(cave, 2, 1)
+        self.assertIsNotNone(entry)
+        (ax, ay), d = entry
+        dx, dy = map_qa.DIRS[d]
+        self.assertEqual((ax + dx, ay + dy), (2, 1))
+        self.assertTrue(cave.walkable(ax, ay))
+        self.assertEqual(map_qa.warp_stand(cave, 2, 1), (ax, ay))
+
+    def test_two_connections_on_one_side_each_own_their_span(self):
+        """Route 205 North opens down to two maps; a tile belongs only to the connection whose span holds it."""
+        north = FakeMap("N", ["##########", "#........#", "#..#.##..#"],
+                        connections=[("down", "L", 0), ("down", "R", 6)])
+        left = FakeMap("L", ["#..#", "#..#", "####"], connections=[("up", "N", 0)])
+        right = FakeMap("R", ["#..#", "#..#", "####"], connections=[("up", "N", -6)])
+        world = FakeWorld(north, left, right)
+        for m in (north, left, right):
+            m.world = world
+        found, _ = map_qa.static_audit(world, ["N", "L", "R"])
+        self.assertNotIn("seam-mismatch", codes(found))
+        self.assertEqual(map_qa.edge_tiles(north, "down", ("R", 6)), [(7, 2), (8, 2)])
+        self.assertEqual(map_qa.uncovered_edge_tiles(north, "down"), [(4, 2)])   # spanned by neither: closed
+        north.connections = [("down", "L", 0), ("down", "R", 5)]                 # R shifted: its seam breaks
+        right.connections = [("up", "N", -5)]
+        self.assertIn("seam-mismatch", codes(map_qa.static_audit(world, ["N"])[0]))
+
+    def test_driver_routes_each_same_side_connection_through_its_own_span(self):
+        """Two disjoint downward connections: the route to the second uses its own edge tiles and offset, and the
+        tile spanned by neither (4, 2) is never routed (review 5645231711)."""
+        import driver as drv
+        north = FakeMap("N", ["##########", "#........#", "#..#.##..#"],
+                        connections=[("down", "L", 0), ("down", "R", 6)])
+        left = FakeMap("L", ["#..#", "#..#", "####"], connections=[("up", "N", 0)])
+        right = FakeMap("R", ["#..#", "#..#", "####"], connections=[("up", "N", -6)])
+        w = FakeWorld(north, left, right)
+        w.map_ids = {"N": 0, "L": 1, "R": 2}
+        for m in (north, left, right):
+            m.world = w
+        md = map_qa.mapdata
+        self.assertEqual(md.edge_exits(north, "down", ("L", 0)), [(1, 2), (2, 2)])
+        self.assertEqual(md.edge_exits(north, "down", ("R", 6)), [(7, 2), (8, 2)])
+        self.assertEqual(md.edge_exits(north, "down"), [(1, 2), (2, 2), (7, 2), (8, 2)])
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = w
+        for dst, tiles in (("L", ((1, 2), (2, 2))), ("R", ((7, 2), (8, 2)))):
+            self.assertEqual(d._map_route_maps("N", dst), [("N", "edge", "down", tiles)])
+            (leg,) = d.map_route("N", dst, (1, 1))                     # one leg per arrival tile
+            self.assertEqual(leg[:3], ("N", "edge", "down"))
+            self.assertTrue(leg[3] and set(leg[3]) <= set(tiles), leg)
+        (leg,) = d.map_route("R", "N", (1, 1))
+        self.assertTrue(set(leg[3]) <= {(1, 0), (2, 0)}, leg)            # back up: R's own offset, -6
+        self.assertEqual(md.across(right, north, "up", -6, (1, 0)), (7, 2))
+        right.rows = ["####", "#..#", "####"]                          # R's top row walled: the seam is closed
+        with self.assertRaises(drv.Stuck):
+            d.map_route("N", "R", (1, 1))
+
     def test_walled_off_seam_is_unreachable(self):
         rows = ["###..###",
                 "########",
@@ -166,6 +325,79 @@ class StaticLayer(unittest.TestCase):
                 "########"]
         m = FakeMap("TOWN", rows, warps=[(3, 2, "ROOM", 0)], connections=[("up", "TOWN", 0)])
         self.assertIn("exit-unreachable", codes(map_qa.static_audit(FakeWorld(m), ["TOWN"])[0]))
+
+    def test_a_hole_drop_lands_on_an_arrival_only_warp(self):
+        # Upper floor: a hole (step-on, one way down). Lower floor: the landing is a plain floor warp the engine
+        # never takes (Mt. Pyre), and a stair mat back up.
+        upper = FakeMap("UP", ["#####",
+                               "#.H.#",
+                               "#.M.#"], warps=[(2, 1, "LOW", 0), (2, 2, "LOW", 1)])
+        low = FakeMap("LOW", ["#####",
+                              "#...#",
+                              "#.M.#"], warps=[(2, 1, "UP", 0), (2, 2, "UP", 1)])
+        md = map_qa.mapdata
+        self.assertTrue(md.takeable(upper, 2, 1))
+        self.assertIn(md.trigger_entry(upper, 2, 1)[0], {(1, 1), (3, 1)})   # stepped onto from beside, never the mat
+        self.assertFalse(md.takeable(low, 2, 1))                              # arrival only
+        self.assertTrue(md.takeable(low, 2, 2))
+        self.assertEqual(len(md.bfs(low, (1, 1), {(3, 1)})), 2)               # walking over the landing is safe
+        findings, plan = map_qa.static_audit(FakeWorld(upper, low), ["UP", "LOW"])
+        self.assertEqual(findings, [])
+        self.assertEqual([p["exit"] for p in plan["LOW"]["points"]], [False, True])
+        # Wall the landing off from the stairs: whoever drops in is stuck, which the audit must report.
+        pit = FakeMap("LOW", ["#####",
+                              "#.#.#",
+                              "#.M.#"], warps=[(2, 1, "UP", 0), (2, 2, "UP", 1)])
+        pit.rows = ["#####", "##.##", "#####", "#.M.#"]
+        pit.warps = [(2, 1, "UP", 0), (2, 3, "UP", 1)]
+        pit.height = 4
+        self.assertIn("exit-unreachable", codes(map_qa.static_audit(FakeWorld(upper, pit), ["LOW"])[0]))
+
+    def test_a_solid_non_animated_door_is_shut(self):
+        # A non-animated door warps only when stepped onto (IsWarpMetatileBehavior); drawn solid it never opens,
+        # unlike an animated door, which is pushed into. 'N' is solid, 'n' walkable.
+        rows = ["#N#n#D#",
+                "#.....#"]
+        m = FakeMap("TOWN", rows, warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 0), (5, 0, "ROOM", 0)])
+        md = map_qa.mapdata
+        self.assertEqual([md.takeable(m, x, 0) for x in (1, 3, 5)], [False, True, True])
+        room = FakeMap("ROOM", ["#M#"], warps=[(1, 0, "TOWN", 1)])
+        closed = [f for f in map_qa.static_audit(FakeWorld(m, room), ["TOWN"])[0] if f["code"] == "warp-closed"]
+        self.assertEqual([f["detail"]["warp"] for f in closed], [(1, 0)])
+
+    def test_a_strip_behind_stairs_is_routed_through_the_floor_above(self):
+        # ROOM row 0 is walled off except through the stair mat (2, 1), which warps up; coming back down lands on
+        # the mat, from which row 0 is walkable. On foot from row 2 it is not reachable, so the driver must route
+        # through UP (Devon Corp 1F (14, 0) in the W14 gate).
+        import driver as drv
+        room = FakeMap("ROOM", ["#...#",
+                                "##M##",
+                                "#...#",
+                                "##M##"], warps=[(2, 1, "UP", 0), (2, 3, "UP", 1)])
+        up = FakeMap("UP", ["#M.M#"], warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 1)])
+        w = FakeWorld(room, up)
+        w.map_ids = {"ROOM": 0, "UP": 1}
+        room.world = up.world = w
+        md = map_qa.mapdata
+        self.assertNotIn((2, 0), md.reach_states(room, (1, 2)))
+        self.assertIn((2, 0), md.reach_states(room, (2, 1)))
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = w
+        legs = d.map_route("ROOM", "ROOM", (1, 2), target=(2, 0))
+        self.assertEqual([leg[:2] for leg in legs], [("ROOM", "warp"), ("UP", "warp")])
+
+    def test_no_closed_edge_probe_behind_a_stair_door(self):
+        # Devon Corp 1F: the stairs (2, 1) are a walkable non-animated door, entered from below and arrived at
+        # below; the strip above it is never stood on, so no probe may target it.
+        rows = ["#...#",
+                "##n##",
+                "#...#",
+                "##M##"]
+        m = FakeMap("ROOM", rows, warps=[(2, 1, "UP", 0), (2, 3, "UP", 1)])
+        up = FakeMap("UP", ["#M.M#"], warps=[(1, 0, "ROOM", 0), (3, 0, "ROOM", 1)])
+        _, plan = map_qa.static_audit(FakeWorld(m, up), ["ROOM"])
+        self.assertFalse([c for c in plan["ROOM"]["closed"] if c["tile"][1] == 0])
+        self.assertIn((2, 0), map_qa.reach(m, [(2, 2)]))          # the warp-crossing reach would have probed it
 
     def test_closed_edges_skip_warp_mats_and_split_runs(self):
         rows = ["#######",
