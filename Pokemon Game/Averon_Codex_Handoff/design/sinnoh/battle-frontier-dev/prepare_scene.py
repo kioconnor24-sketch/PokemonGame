@@ -134,7 +134,7 @@ def assemble(repo):
         out[path+'metatiles.bin']=fam['secondary-metatiles.bin'];out[path+'metatile_attributes.bin']=fam['secondary-attributes.bin']
         decl.append('extern const struct Tileset gTileset_'+symbol+';')
         meta.append('const u16 gMetatiles_'+symbol+'[] = INCBIN_U16("'+path+'metatiles.bin");'+chr(10)+'const u16 gMetatileAttributes_'+symbol+'[] = INCBIN_U16("'+path+'metatile_attributes.bin");')
-        heads.append('const struct Tileset gTileset_'+symbol+' = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles='+bindings['tiles']+', .palettes='+bindings['palettes']+', .metatiles=gMetatiles_'+symbol+', .metatileAttributes=gMetatileAttributes_'+symbol+', .callback='+bindings['callback']+' };')
+        heads.append('const struct Tileset gTileset_'+symbol+' = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles='+bindings['tiles']+', .palettes='+bindings['palettes']+', .metatiles=gMetatiles_'+symbol+', .metatileAttributes = gMetatileAttributes_'+symbol+', .callback='+bindings['callback']+' };')
     groups=json.loads(before['data/maps/map_groups.json']);layouts=json.loads(before['data/layouts/layouts.json'])
     prior=list(groups['gMapGroup_Sinnoh']);group=groups['group_order'].index('gMapGroup_Sinnoh')
     if len(prior)!=19:raise ValueError('exact19-map prefix required')

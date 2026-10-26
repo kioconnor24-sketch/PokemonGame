@@ -108,6 +108,23 @@ class BattleFrontierDEV(unittest.TestCase):
    with patch.object(m.base,'git',git),patch.object(m,'assemble',return_value=({'../outside.txt':b'bad'},self.recipe)):
     with self.assertRaisesRegex(ValueError,'escapes engine'):m.install(target)
    self.assertEqual(outside.read_text(),'preserve')
+ def test_existing_qa_world_can_read_all44_generated_tilesets_and_maps(self):
+  spec=importlib.util.spec_from_file_location('battle_actual_mapdata',ROOT/'Pokemon Game/scripts/claude_play/mapdata.py')
+  md=importlib.util.module_from_spec(spec);spec.loader.exec_module(md)
+  engine=ROOT/m.ENGINE;original_text=Path.read_text;original_bytes=Path.read_bytes
+  def lookup(path):
+   try:return self.files.get(str(path.relative_to(engine)))
+   except ValueError:return None
+  def text(path,*args,**kwargs):
+   value=lookup(path);return value.decode() if value is not None else original_text(path,*args,**kwargs)
+  def binary(path):
+   value=lookup(path);return value if value is not None else original_bytes(path)
+  with patch.object(Path,'read_text',text),patch.object(Path,'read_bytes',binary):
+   world=md.World(engine)
+   for entry in self.recipe['scene'].values():
+    info=world.map(entry['id'])
+    self.assertEqual((info.width,info.height),tuple(entry['dimensions']))
+    self.assertTrue(info._primary and info._secondary)
  def test_dirty_source_and_non_disposable_install_refused_without_writes(self):
   original=Path.read_bytes;target=HERE.parent/'stark-mountain/staged/Room2/map.bin'
   def dirty(p):
