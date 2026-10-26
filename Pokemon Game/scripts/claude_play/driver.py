@@ -270,7 +270,7 @@ class Driver:
                     continue
                 om = self.w.map(other)
                 by_arrival = {}
-                for t in mapdata.edge_exits(m, d):
+                for t in mapdata.edge_exits(m, d, (other, off)):
                     a = mapdata.across(m, om, d, off, t)
                     if not (om.inside(*a) and om.walkable(*a)):
                         continue
@@ -312,7 +312,8 @@ class Driver:
             if cur == dst:
                 break
             m = self.w.map(cur)
-            legs = [((cur, "edge", d), other) for d, other, _ in m.connections if mapdata.edge_exits(m, d)]
+            legs = [((cur, "edge", d, tuple(ts)), other) for d, other, off in m.connections
+                    for ts in [mapdata.edge_exits(m, d, (other, off))] if ts]
             legs += [((cur, "warp", (x, y), self.warp_push(m, (x, y))), dest) for x, y, dest, _ in m.warps
                      if dest in self.w.map_ids]
             for leg, nxt in legs:

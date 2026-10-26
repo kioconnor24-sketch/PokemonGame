@@ -287,6 +287,36 @@ class StaticLayer(unittest.TestCase):
         right.connections = [("up", "N", -5)]
         self.assertIn("seam-mismatch", codes(map_qa.static_audit(world, ["N"])[0]))
 
+    def test_driver_routes_each_same_side_connection_through_its_own_span(self):
+        """Two disjoint downward connections: the route to the second uses its own edge tiles and offset, and the
+        tile spanned by neither (4, 2) is never routed (review 5645231711)."""
+        import driver as drv
+        north = FakeMap("N", ["##########", "#........#", "#..#.##..#"],
+                        connections=[("down", "L", 0), ("down", "R", 6)])
+        left = FakeMap("L", ["#..#", "#..#", "####"], connections=[("up", "N", 0)])
+        right = FakeMap("R", ["#..#", "#..#", "####"], connections=[("up", "N", -6)])
+        w = FakeWorld(north, left, right)
+        w.map_ids = {"N": 0, "L": 1, "R": 2}
+        for m in (north, left, right):
+            m.world = w
+        md = map_qa.mapdata
+        self.assertEqual(md.edge_exits(north, "down", ("L", 0)), [(1, 2), (2, 2)])
+        self.assertEqual(md.edge_exits(north, "down", ("R", 6)), [(7, 2), (8, 2)])
+        self.assertEqual(md.edge_exits(north, "down"), [(1, 2), (2, 2), (7, 2), (8, 2)])
+        d = drv.Driver.__new__(drv.Driver)
+        d.w = w
+        for dst, tiles in (("L", ((1, 2), (2, 2))), ("R", ((7, 2), (8, 2)))):
+            self.assertEqual(d._map_route_maps("N", dst), [("N", "edge", "down", tiles)])
+            (leg,) = d.map_route("N", dst, (1, 1))                     # one leg per arrival tile
+            self.assertEqual(leg[:3], ("N", "edge", "down"))
+            self.assertTrue(leg[3] and set(leg[3]) <= set(tiles), leg)
+        (leg,) = d.map_route("R", "N", (1, 1))
+        self.assertTrue(set(leg[3]) <= {(1, 0), (2, 0)}, leg)            # back up: R's own offset, -6
+        self.assertEqual(md.across(right, north, "up", -6, (1, 0)), (7, 2))
+        right.rows = ["####", "#..#", "####"]                          # R's top row walled: the seam is closed
+        with self.assertRaises(drv.Stuck):
+            d.map_route("N", "R", (1, 1))
+
     def test_walled_off_seam_is_unreachable(self):
         rows = ["###..###",
                 "########",

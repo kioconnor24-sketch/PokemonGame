@@ -300,26 +300,24 @@ def warp_arrival(m, x, y):
     return (x, y)
 
 
-def edge_exits(m, direction):
-    """Tiles on m's edge from which stepping `direction` enters the connected map."""
-    conn = next((c for c in m.connections if c[0] == direction), None)
-    if conn is None:
-        return []
-    other = m.world.map(conn[1])
-    offset = conn[2]
+def edge_exits(m, direction, connection=None):
+    """Tiles on m's edge from which stepping `direction` enters a connected map.
+
+    With connection=(other_id, offset), only the tiles that connection spans. A side may hold several connections
+    (Route 205 North opens down to two maps): the engine (GetIncomingConnection) takes the one whose span holds
+    the tile, so each owns only its own tiles. Without it, the union over every connection on that side.
+    """
+    conns = [c[1:] for c in m.connections if c[0] == direction] if connection is None else [connection]
     tiles = []
-    if direction in ("up", "down"):
-        y = 0 if direction == "up" else m.height - 1
-        oy = other.height - 1 if direction == "up" else 0
-        for x in range(m.width):
-            ox = x - offset
-            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
-                tiles.append((x, y))
-    else:
-        x = 0 if direction == "left" else m.width - 1
-        ox = other.width - 1 if direction == "left" else 0
-        for y in range(m.height):
-            oy = y - offset
-            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
-                tiles.append((x, y))
+    for other_id, offset in conns:
+        other = m.world.map(other_id)
+        if direction in ("up", "down"):
+            y = 0 if direction == "up" else m.height - 1
+            oy = other.height - 1 if direction == "up" else 0
+            edge = [((x, y), (x - offset, oy)) for x in range(m.width)]
+        else:
+            x = 0 if direction == "left" else m.width - 1
+            ox = other.width - 1 if direction == "left" else 0
+            edge = [((x, y), (ox, y - offset)) for y in range(m.height)]
+        tiles += [t for t, o in edge if t not in tiles and m.walkable(*t) and other.inside(*o) and other.walkable(*o)]
     return tiles
