@@ -1,0 +1,120 @@
+{
+  "status": "NATIVE_NEUTRAL_CENTER_GEOGRAPHY_NOT_HEALING_OR_RUNTIME_ACCEPTANCE",
+  "input_sha256": {
+    "Pokemon Game/engine/data/layouts/layouts.json": "089517d03842c8d11711630ba06e2490cec1e70feaf0ae0aed30492bc2f362e3",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/map.bin": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/map.json": "6cc93333bb126b6345c4450e0be91b0adae3b06f15b64fd9e24a9e51afc11c6a",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/attributes.json": "c98dcabd686a13429cd011871f4ded91c64d2f9c0021d60693d939f29db1aa80",
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/averon.png": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+    "Pokemon Game/engine/data/maps/PetalburgCity_PokemonCenter_1F/map.json": "05053ef962a942e10e4ef9d1c16b7dedf764bdf481838be8c5a41ff9f718ba24",
+    "Pokemon Game/engine/data/layouts/PokemonCenter_1F/map.bin": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+    "Pokemon Game/engine/data/layouts/PokemonCenter_1F/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "Pokemon Game/engine/data/tilesets/primary/building/metatiles.bin": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/metatiles.bin": "22e260e7dff89e25402c76392e37efdd8593abda9dcbda2a879caf522ebb2e05",
+    "Pokemon Game/engine/data/tilesets/primary/building/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/metatile_attributes.bin": "7c6373eced25fba8b046b61779d60b16755250aedb8945ff84c1a9c3f50b9110",
+    "Pokemon Game/engine/data/tilesets/primary/building/tiles.png": "355d5dc8625e332ceb34cbe685092d96540ece0b7a39293e493d27c02b6db300",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/tiles.png": "c7d0da06a04b3ecb28494b48f933034388dea850de910d3303e6770d2a6a12fd",
+    "Pokemon Game/engine/data/tilesets/primary/building/palettes/00.pal": "6008920965897f0fe9e901ab795aacb4c6a6869ea300db6cfb6411da42f750ee",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/palettes/06.pal": "b41d246ba76add796e583ce5a961212c0f24219ffb00ddee6bbb4426057c1c96",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/palettes/07.pal": "dd2da15de7299827706b895a2518e0752651ceefa30ddd14028a8a5ea525dd56",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/palettes/08.pal": "71560cea7b2102a71f4f2196d85648cdd2b2e15037cf4fdb3e7bbefb0e4ddbbc",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/palettes/09.pal": "572f4c2694d479122adecbf39b6085af25fe330193f32a9963f120f879610dd8",
+    "Pokemon Game/engine/data/tilesets/secondary/pokemon_center/palettes/11.pal": "590f6158fec170545f20e03c95e7a9482516f7993f414b89b1eac53c749a94e0",
+    "Pokemon Game/engine/data/maps/PetalburgCity_PokemonCenter_2F/map.json": "b78582cdb64a491113c67e688ca4ac361c008cddcc77e39c2cf23554958008c4",
+    "Pokemon Game/engine/data/layouts/PokemonCenter_2F/map.bin": "a0c9ecf69e7faa2d66fd719bc2d1167bd520d78ef7660b858f950d68a0b108f5",
+    "Pokemon Game/engine/data/layouts/PokemonCenter_2F/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d"
+  },
+  "portals": {
+    "South": [
+      11,
+      58
+    ],
+    "North": [
+      16,
+      13
+    ]
+  },
+  "closures": [
+    {
+      "map": "South2",
+      "tile": [
+        5,
+        1
+      ],
+      "before": 13924,
+      "after": 15972,
+      "reason": "online/link room absent"
+    },
+    {
+      "map": "South2",
+      "tile": [
+        9,
+        1
+      ],
+      "before": 13924,
+      "after": 15972,
+      "reason": "online/link room absent"
+    },
+    {
+      "map": "North2",
+      "tile": [
+        5,
+        1
+      ],
+      "before": 13924,
+      "after": 15972,
+      "reason": "online/link room absent"
+    },
+    {
+      "map": "North2",
+      "tile": [
+        9,
+        1
+      ],
+      "before": 13924,
+      "after": 15972,
+      "reason": "online/link room absent"
+    }
+  ],
+  "exterior_binary_border_art_unchanged": true,
+  "limits": [
+    "Explicit native GBA room adaptation, not DS room geometry or functional service implementation",
+    "No nurse/healer/respawn registration, encounters/story, save IDs/schema or production installation",
+    "Generic PC/metatile behavior and door animation need runtime acceptance; not claimed",
+    "Original exterior two cave events preserved; Route223 Surf and side-room/League dependencies remain",
+    "No NORMAL/RELEASE/native-game-suite/mGBA/Save evidence borrowed from earlier packets"
+  ],
+  "output_sha256": {
+    "staged/League/averon.png": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+    "staged/League/attributes.json": "c98dcabd686a13429cd011871f4ded91c64d2f9c0021d60693d939f29db1aa80",
+    "staged/League/map.json": "a83f950bb61bf99b9c727d5414f8568a9cab7b59b2be7418f265da342eeb1813",
+    "staged/League/border.bin": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+    "staged/League/map.bin": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+    "staged/North2/preview.png": "75bf52a8628f045ad1681bbe49e33feeb04cd642f5037d1cf8a8fb546b97e645",
+    "staged/North2/attributes.json": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
+    "staged/North2/layout.json": "8fabf34ec5ba39db7f92b45568139fe47ef976640bcc58f52db1bde984e25df7",
+    "staged/North2/map.json": "238c6ab3b6e5644cc1740d5b4552731477ad91acaf0d982444b032526575d0ba",
+    "staged/North2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/North2/map.bin": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+    "staged/North1/preview.png": "60d75aaa423688c974e226bc90086cb6cb3f2e42b8cc665b08ad6b5e54d6d078",
+    "staged/North1/attributes.json": "59eabb8cd05649ac51aa8b6183a0f53bec407b7ebcc7ebcb80e220a694808988",
+    "staged/North1/layout.json": "f41c0c820c26be676a2c21df662f3b24821439a6e5fd7f189eabaae0d309b785",
+    "staged/North1/map.json": "67fe5805cd90d7e70e77f6332d2ba33de728407be43a4be81eaaaad05f560a8f",
+    "staged/North1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/North1/map.bin": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+    "staged/South2/preview.png": "75bf52a8628f045ad1681bbe49e33feeb04cd642f5037d1cf8a8fb546b97e645",
+    "staged/South2/attributes.json": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
+    "staged/South2/layout.json": "63140c2e30a82d504a8048a3f47c6f594a1c052bf535841f835caae33e08fe8a",
+    "staged/South2/map.json": "7ae82cb3b8c2b0def10c85eb88b0174fda5f90cf172c0ab9cc243c448f6158ff",
+    "staged/South2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/South2/map.bin": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+    "staged/South1/preview.png": "60d75aaa423688c974e226bc90086cb6cb3f2e42b8cc665b08ad6b5e54d6d078",
+    "staged/South1/attributes.json": "59eabb8cd05649ac51aa8b6183a0f53bec407b7ebcc7ebcb80e220a694808988",
+    "staged/South1/layout.json": "7cae005de68fa4d57da93fa1514678f74eea00584eee36b03f1ccc3ba411498c",
+    "staged/South1/map.json": "cca277271dadb03859647e3d7d5b443fb5e243ba783c416bcbeb29c862047e61",
+    "staged/South1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "staged/South1/map.bin": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005"
+  }
+}
