@@ -173,7 +173,7 @@ The party-menu and menu-cursor offsets come from private structs that the offset
 
 ### DEV scenes for staged overlays (`static_scene.py`, `compose_scene.py`)
 
-Staged batches (`design/sinnoh/<batch>/staged/`) are tested on a Codex family's DEV scene, never on production. `static_scene.py REPO FAMILY BATCH_DIR --map MAP ...` works only in a throwaway checkout, one carrying the `.map_qa_throwaway` marker:
+Staged batches (`design/sinnoh/<batch>/staged/`) are tested on a Codex family's DEV scene, never on production. `static_scene.py REPO FAMILY BATCH_DIR MAP_ID ...` works only in a throwaway checkout, one carrying the `.map_qa_throwaway` marker:
 1. It resets the engine tree.
 2. It installs FAMILY's scene: the family's `prepare_runtime.assemble()`, or `-` for production alone, or a `family/module.py` path.
 3. It applies the batch:

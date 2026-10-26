@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Static map_qa audit of a Claude overlay batch on top of a Codex family scene (no build, DEV only).
 
-  static_scene.py REPO FAMILY BATCH_DIR [--map MAP_ID ...]
+  static_scene.py REPO FAMILY BATCH_DIR [MAP_ID ...]
 
 REPO is a disposable checkout of main (marked .map_qa_throwaway, engine tree reset first). FAMILY is a Codex design
 folder whose prepare_runtime.assemble() supplies the base scene, or '-' for the production scene itself. BATCH_DIR/staged holds *-dev-overlay/map.json
