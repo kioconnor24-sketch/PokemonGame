@@ -1,0 +1,134 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "Room1": {
+      "private_input_name": "victory-matrix-47-PRIVATE.json",
+      "source_path": "res/field/matrices/map_matrix_047.json",
+      "sha256": "a0b52f90f88bfb2b0c8e90da4a51de3a2ae235caaea0bbe69b3a5d6123201c18",
+      "git_blob": "06aeedeeea239f8b5620bc5a4565f8eb0d38b89f",
+      "bytes": 110
+    },
+    "Room2": {
+      "private_input_name": "victory-matrix-46-PRIVATE.json",
+      "source_path": "res/field/matrices/map_matrix_046.json",
+      "sha256": "d58346dd1d443d16ed91b443044ec77a98caf3b49f85ffa20b02d234d58b8eed",
+      "git_blob": "c65fbb5768a33cb2f817f0c2d14dbe1add2fbe3e",
+      "bytes": 153
+    },
+    "Room3": {
+      "private_input_name": "victory-matrix-48-PRIVATE.json",
+      "source_path": "res/field/matrices/map_matrix_048.json",
+      "sha256": "8c3585c569b2367ca48bd921edbee435ce8d666ca8166455747b3f3cd65b7b8e",
+      "git_blob": "34e507e403239c9c7fdab252e99b3dd9b3898fca",
+      "bytes": 110
+    },
+    "MAP_421": {
+      "private_input_name": "victory-land-421-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_421.bin",
+      "sha256": "a0cb5a8bfde53fd2cc4a5b12e7d244f2e1958ce2a43219e6a5049660ab6342f9",
+      "git_blob": "5cd8a2a8e991d56a0f5888e769f2fcc80c76b679",
+      "bytes": 28168
+    },
+    "MAP_422": {
+      "private_input_name": "victory-land-422-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_422.bin",
+      "sha256": "7e4dc1b2897234e4e7738c09391df31d3532b3bf1324e1d5da41d967be16b8d2",
+      "git_blob": "2c61b2b5ccf1cd3f78862c65b07db09a92210eb0",
+      "bytes": 37048
+    },
+    "MAP_423": {
+      "private_input_name": "victory-land-423-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_423.bin",
+      "sha256": "eeac8b74cdab7dc7cc021a16312bde4bb44973cdcf7d9d85178283197ebb5dd3",
+      "git_blob": "d62522ce964515a4ea3ad6918a7fced77b952eae",
+      "bytes": 29134
+    },
+    "MAP_424": {
+      "private_input_name": "victory-land-424-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_424.bin",
+      "sha256": "ed4ad8b6193928d350aaca8d7ce95681dc957b38e9baf980be13848234f6f475",
+      "git_blob": "914f22fb944b8b3b8fa832a103f13799939593d6",
+      "bytes": 29034
+    },
+    "MAP_425": {
+      "private_input_name": "victory-land-425-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_425.bin",
+      "sha256": "5310867f7b4ced553fcefadb96ce50d467f8b4f634ccf4c736b465dbd5c6f60d",
+      "git_blob": "eabce88b068f40f688f3eb1cce66915a80c1cc34",
+      "bytes": 34070
+    },
+    "MAP_426": {
+      "private_input_name": "victory-land-426-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_426.bin",
+      "sha256": "0c035ab05ab6aa360fd6de5cf42b53b2b408cfe0c4a9f3e56c1bda6dd398a137",
+      "git_blob": "deb115247d62ae579bba9100f9a34543b322d684",
+      "bytes": 34570
+    }
+  },
+  "technical_portals": {
+    "Room1": {
+      "private_input_name": "victory-room-1-events-PRIVATE.json",
+      "source_path": "res/field/events/events_victory_road_1f_room_1.json",
+      "sha256": "7bca7fd355ab5c38658ed72df234fa551d7b78bd5b3aab98df4ac70219cc9d57",
+      "git_blob": "df66b7e07ea394aecd26f068668879cd69139bdd",
+      "bytes": 412,
+      "warps": [
+        {
+          "x": 5,
+          "z": 20,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F",
+          "dest_warp_id": 6
+        },
+        {
+          "x": 21,
+          "z": 10,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F_ROOM_2",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "Room2": {
+      "private_input_name": "victory-room-2-events-PRIVATE.json",
+      "source_path": "res/field/events/events_victory_road_1f_room_2.json",
+      "sha256": "8b654b870f696f004b9b0d8e7b4da38d58b74035f99c649c0801cf5d8408b532",
+      "git_blob": "130c4df59523a334fe1d8dec2b8bf0293f585d06",
+      "bytes": 17071,
+      "warps": [
+        {
+          "x": 3,
+          "z": 58,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F_ROOM_1",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 56,
+          "z": 13,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F_ROOM_3",
+          "dest_warp_id": 0
+        }
+      ]
+    },
+    "Room3": {
+      "private_input_name": "victory-room-3-events-PRIVATE.json",
+      "source_path": "res/field/events/events_victory_road_1f_room_3.json",
+      "sha256": "9b3de4b3cdb3396856eee2369ad33d3d2f96fbdc2a9ff6a3ec8832d10b376898",
+      "git_blob": "0b30835c283b4fe1beda52b6f263a4f07a83dc18",
+      "bytes": 407,
+      "warps": [
+        {
+          "x": 12,
+          "z": 16,
+          "dest_header_id": "MAP_HEADER_VICTORY_ROAD_1F_ROOM_2",
+          "dest_warp_id": 1
+        },
+        {
+          "x": 29,
+          "z": 16,
+          "dest_header_id": "MAP_HEADER_ROUTE_224",
+          "dest_warp_id": 0
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "status": "SOURCE_VICTORY_SIDE_ROOMS_NOT_SURF_OR_RUNTIME_ACCEPTANCE",
+  "maps": {
+    "Room1": {
+      "supported": 368,
+      "sealed_doors_boundaries": 100,
+      "static_components": [
+        132,
+        80,
+        56
+      ]
+    },
+    "Room2": {
+      "supported": 1820,
+      "sealed_doors_boundaries": 893,
+      "static_components": [
+        695,
+        178,
+        26,
+        25,
+        3
+      ]
+    },
+    "Room3": {
+      "supported": 294,
+      "sealed_doors_boundaries": 90,
+      "static_components": [
+        87,
+        60,
+        57
+      ]
+    }
+  },
+  "native_assets": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8",
+    "data/tilesets/primary/general/palettes/03.pal": "821f0a62f0ce995c96e9eaa0b4a32a1cd61e4db1f3216bfbe1fd588cf33b7583",
+    "data/tilesets/primary/general/palettes/04.pal": "f99602126046eed3f20545a34ddd46fa6e5fcb96f032b410fa8d5251c7450e22"
+  },
+  "geometry_sha256": "89ba7a63b034b0168663dd1d386e2e642769e6144eff6edda9f36a14bbe8614f",
+  "secondary_records": 7,
+  "limits": [
+    "Three actual source rooms with native cave/step proxies, not full DS 3D puzzle parity",
+    "Room2 actual sea0x15 remains native ocean0x1015 and requires Surf; no capability grant",
+    "Room3 Route224 exit sealed; existing core eight event prefix retained",
+    "Separate side-room and stock core art families required; no production registry or saved IDs",
+    "No DS art, NPC, boulder, Defog, encounter/story or ROM/native/mGBA/Save acceptance"
+  ],
+  "output_sha256": {
+    "native-family/secondary-attributes.bin": "20119bd21e773ef4be916b7bca078513f3a2105e91206b53de756c92b8ca88d5",
+    "native-family/secondary-metatiles.bin": "4d9a88bbc6de6be3b46a21b991195e450973dd23b50d37cea1abef0911e8f9f1",
+    "native-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "native-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/Core1F/map.json": "e4f366fd9c6ad5a50838251e9785ccda8c037f1fc8379ed8aa8313d53083c1eb",
+    "staged/Core1F/border.bin": "ad6624797d5fc45d82a120acdc891670586fb85d6c6f7855a74cb1298a7118c5",
+    "staged/Core1F/map.bin": "093d3c91628fa0fa31042ce53bc2e3a5c0e50e737db6649bb560a69673f45684",
+    "staged/Room3/attributes.json": "e159b12c1d19a8dfb0109776785f9fb1538d34367eda171c1129f875a425774f",
+    "staged/Room3/preview.png": "0bae851b59621bc9632b018b2df52f09191b4015fe30abc042b9656e89452658",
+    "staged/Room3/map.json": "eeb9f7b37efc27e13d5ccaebe7a3a7d60483fc3c927d4495ae46f433e9d12a4c",
+    "staged/Room3/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room3/map.bin": "1689161343cf4cbbcd604d6a3daa1c9afc542d4864cb9ea1cdacd0336b427827",
+    "staged/Room2/attributes.json": "8370bc4386d9887f18e8e5b878da04d13350216031e19c42dd56615d17f7704f",
+    "staged/Room2/preview.png": "4f71d49b3fba87a1d681324c0b4c2e290a439dc155c7099980b647c8de076639",
+    "staged/Room2/map.json": "dde450531bf1c7aad3ed21ee60da882201ecc95d1882e593a80bb5d6d6dd908e",
+    "staged/Room2/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room2/map.bin": "7fe1e946a946021862d5d1a9ba9e617311947e58e0c72a2aff3191e3e41d4ef5",
+    "staged/Room1/attributes.json": "5ee84d1a211f096f87d5d68cb60fa5fe0135a56357be8cff929a8524cdc55d63",
+    "staged/Room1/preview.png": "d94c0d288cf0889400312392a246a0f638dcb31377073d98a659a0eaab906de1",
+    "staged/Room1/map.json": "3f4b10715fcba85afdc4902aaa4d231525539f8eac11ccd6f56991da288572c6",
+    "staged/Room1/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Room1/map.bin": "ec5c1ed95649ecbd4a509fba53fcdf6e6cb99f14d3566a42fac884f7558b33d6"
+  },
+  "core_single_cell_change": {
+    "tile": [
+      45,
+      33
+    ],
+    "before": 3593,
+    "after": 12805
+  }
+}
