@@ -18,6 +18,63 @@ import sys
 ENGINE = "Pokemon Game/engine/"
 
 
+IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_]*\Z")
+
+
+def inside(root, rel):
+    """root/rel resolved (symlinks followed); refuses anything that leaves root."""
+    root = pathlib.Path(root).resolve()
+    path = (root / rel).resolve()
+    if path != root and root not in path.parents:
+        raise SystemExit(f"refused: {rel} leaves {root}")
+    return path
+
+
+def declare_tilesets(files, eng, batch, decls):
+    """Each declared tileset as its own symbol: metatile banks under data/tilesets/<bank>/<symbol>/ plus extern,
+    INCBIN and a Tileset bound to an existing tileset's tiles/palettes/callback. Every input is validated before
+    anything is added to files: identifiers, a real boolean bank, sources inside the batch, no existing symbol."""
+    for path in ("include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h"):
+        files.setdefault(path, (eng / path).read_bytes())
+    seen = set()
+    for t in decls:
+        sym, graphics = t.get("symbol"), t.get("graphics")
+        for value in (sym, graphics):
+            if not (isinstance(value, str) and IDENT.match(value)):
+                raise SystemExit(f"tilesets.json: {value!r} is not a C identifier")
+        if not isinstance(t.get("secondary"), bool):
+            raise SystemExit(f"tilesets.json: {sym}: secondary must be true or false")
+        if sym in seen or re.search(r"\bgTileset_" + re.escape(sym) + r"\b", files["include/tilesets.h"].decode()):
+            raise SystemExit(f"tilesets.json: gTileset_{sym} already exists")
+        seen.add(sym)
+        bank = "secondary" if t["secondary"] else "primary"
+        folder = f"data/tilesets/{bank}/{sym.lower()}/"
+        if (eng / folder).exists() or any(k.startswith(folder) for k in files):
+            raise SystemExit(f"tilesets.json: {folder} already exists")
+        text = files["src/data/tilesets/headers.h"].decode()
+        found = re.search(r"const struct Tileset gTileset_" + re.escape(graphics) + r" =\s*\{(.*?)\};", text, re.S)
+        if not found:
+            raise SystemExit(f"tilesets.json: no gTileset_{graphics} to bind {sym} to")
+        bind = {f: re.search(r"\." + f + r"\s*=\s*(\w+)\s*,", found[1])[1] for f in ("tiles", "palettes", "callback")}
+        files[folder + "metatiles.bin"] = inside(batch, t["metatiles"]).read_bytes()
+        files[folder + "metatile_attributes.bin"] = inside(batch, t["attributes"]).read_bytes()
+        files["include/tilesets.h"] += f"\nextern const struct Tileset gTileset_{sym};\n".encode()
+        files["src/data/tilesets/metatiles.h"] += (f'\nconst u16 gMetatiles_{sym}[] = INCBIN_U16("{folder}metatiles.bin");\n'
+                                                   f'const u16 gMetatileAttributes_{sym}[] = INCBIN_U16("{folder}metatile_attributes.bin");\n').encode()
+        files["src/data/tilesets/headers.h"] += (f"\nconst struct Tileset gTileset_{sym} = {{ .isCompressed=TRUE, "
+                                                 f".isSecondary={'TRUE' if t['secondary'] else 'FALSE'}, .tiles={bind['tiles']}, "
+                                                 f".palettes={bind['palettes']}, .metatiles=gMetatiles_{sym}, "
+                                                 f".metatileAttributes = gMetatileAttributes_{sym}, .callback={bind['callback']} }};\n").encode()
+
+
+def write_files(eng, files):
+    """Writes the scene into the engine tree; every target is checked to stay inside it before the first write."""
+    targets = {rel: inside(eng, rel) for rel in files}
+    for rel, path in targets.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(files[rel])
+
+
 def main():
     repo, family, batch = pathlib.Path(sys.argv[1]).resolve(), sys.argv[2], pathlib.Path(sys.argv[3]).resolve()
     maps = sys.argv[4:]
@@ -111,30 +168,11 @@ def main():
         inc += f'\t.include "data/maps/{name}/scripts.inc"\n'
     tilesets = st / "tilesets.json"     # a batch's own tileset pair, declared as Codex's family assemblers do
     if tilesets.exists():
-        for path in ("include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h"):
-            files.setdefault(path, (eng / path).read_bytes())
-        for t in json.loads(tilesets.read_text()):
-            bank = "secondary" if t["secondary"] else "primary"
-            folder = f"data/tilesets/{bank}/{t['symbol'].lower()}/"
-            files[folder + "metatiles.bin"] = (batch / t["metatiles"]).read_bytes()
-            files[folder + "metatile_attributes.bin"] = (batch / t["attributes"]).read_bytes()
-            text = files["src/data/tilesets/headers.h"].decode()
-            block = re.search(r"const struct Tileset gTileset_" + t["graphics"] + r" =\s*\{(.*?)\};", text, re.S)[1]
-            bind = {f: re.search(r"\." + f + r"\s*=\s*(\w+)\s*,", block)[1] for f in ("tiles", "palettes", "callback")}
-            sym = t["symbol"]
-            files["include/tilesets.h"] += f"\nextern const struct Tileset gTileset_{sym};\n".encode()
-            files["src/data/tilesets/metatiles.h"] += (f'\nconst u16 gMetatiles_{sym}[] = INCBIN_U16("{folder}metatiles.bin");\n'
-                                                       f'const u16 gMetatileAttributes_{sym}[] = INCBIN_U16("{folder}metatile_attributes.bin");\n').encode()
-            files["src/data/tilesets/headers.h"] += (f"\nconst struct Tileset gTileset_{sym} = {{ .isCompressed=TRUE, "
-                                                     f".isSecondary={'TRUE' if t['secondary'] else 'FALSE'}, .tiles={bind['tiles']}, "
-                                                     f".palettes={bind['palettes']}, .metatiles=gMetatiles_{sym}, "
-                                                     f".metatileAttributes = gMetatileAttributes_{sym}, .callback={bind['callback']} }};\n").encode()
+        declare_tilesets(files, eng, batch, json.loads(tilesets.read_text()))
     files["data/maps/map_groups.json"] = (json.dumps(groups, indent=2) + "\n").encode()
     files["data/layouts/layouts.json"] = (json.dumps(layouts, indent=2) + "\n").encode()
     files["data/event_scripts.s"] = inc.encode()
-    for p, data in files.items():
-        (eng / p).parent.mkdir(parents=True, exist_ok=True)
-        (eng / p).write_bytes(data)
+    write_files(eng, files)
     cmd = [sys.executable, "-B", "map_qa.py", "static", "--engine", "../../engine"] + sum((["--map", m] for m in maps), [])
     r = subprocess.run(cmd, cwd=repo / "Pokemon Game/scripts/claude_play", capture_output=True, text=True)
     print(r.stdout[-3000:], r.stderr[-1500:])
