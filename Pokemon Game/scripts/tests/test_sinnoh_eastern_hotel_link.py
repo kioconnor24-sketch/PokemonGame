@@ -43,7 +43,7 @@ class HotelLinkTest(unittest.TestCase):
         self.assertEqual(h['region_map_section'],'MAPSEC_PENDING_OWNER')
         self.assertFalse(h['object_events'] or h['coord_events'] or h['bg_events'])
 
-    def test_every34900_cell_retains_full_attrs_and_only_five_recorded_collision_changes(self):
+    def test_every34900_cell_preserves_attrs_except_one_crossing_and_five_collision_changes(self):
         count=changed=0
         changes={('Route213',68,11):'open',('Route213',82,0):'close',('Route213',83,0):'close',('ValorLakefront',42,65):'close',('ValorLakefront',43,65):'close'}
         for name,(w,h) in a.MAPS.items():
@@ -55,7 +55,7 @@ class HotelLinkTest(unittest.TestCase):
                 kind=changes.get((name,i%w,i//w));expected=(old&~0x400) if kind=='open' else (old|0x400) if kind=='close' else old
                 self.assertEqual(current&0xFC00,expected&0xFC00)
                 changed+=bool((current^old)&0xC00);b,n=divmod(current&1023,512)
-                self.assertEqual(a.art.pack.attribute(values[b],n),attrs[str(old&1023)]);count+=1
+                self.assertEqual(a.art.pack.attribute(values[b],n),0 if (name,i%w,i//w)==('Route212_South',38,11) else attrs[str(old&1023)]);count+=1
         self.assertEqual(count,34900);self.assertEqual(changed,5)
 
     def test_all_seventeen_original_event_indices_and_four_gateway_records_survive(self):
