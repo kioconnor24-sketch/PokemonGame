@@ -1,0 +1,56 @@
+{
+  "repository": "https://github.com/pret/pokeplatinum",
+  "revision": "6dc1499e3127176d4cb34f41c01ee62e1d98808a",
+  "files": {
+    "Hall": {
+      "private_input_name": "hall-matrix-241-PRIVATE.json",
+      "source_path": "res/field/matrices/map_matrix_241.json",
+      "sha256": "cfbd4b42dc796ee7a09bae89f9163d12f9120374a3cbb5cb1c37766d8dd94851",
+      "git_blob": "1d1bed45feae6b3b91122b7f70589404f713234e",
+      "bytes": 153
+    },
+    "MAP_576": {
+      "private_input_name": "hall-land-576-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_576.bin",
+      "sha256": "085d476126303772b8a3c64fb4be9de652789d19cefce85f1e02c8db6902e2c7",
+      "git_blob": "fd223d23022c40a558a79a66e1033651a8480b95",
+      "bytes": 46656
+    },
+    "MAP_577": {
+      "private_input_name": "hall-land-577-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_577.bin",
+      "sha256": "82dc6ca12c287bd62ff46ee8ec67d4b262f4ba9094c75a26c53ff0c669cccdaa",
+      "git_blob": "4dfd09e833050dd52153a3f2bcefda18b44d90d7",
+      "bytes": 26732
+    },
+    "MAP_578": {
+      "private_input_name": "hall-land-578-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_578.bin",
+      "sha256": "0b75b24b10b4ec0d2c995f206219b1250caf3d8faaaca0679f6b97e034c17d06",
+      "git_blob": "aff51a05aa71239d424040bac20710cada0cc1db",
+      "bytes": 33086
+    },
+    "MAP_579": {
+      "private_input_name": "hall-land-579-PRIVATE.bin",
+      "source_path": "res/field/maps/data/map_data_579.bin",
+      "sha256": "58939dbd5f79612fae36241b32dffd5b5068bd5f1b8a752e7656c9f0ef5cb710",
+      "git_blob": "104d5f4e12fd8ccb30476db7e2a20e7bca92dbf8",
+      "bytes": 26290
+    }
+  },
+  "technical_closed_exit": {
+    "private_input_name": "hall-events-PRIVATE.json",
+    "source_path": "res/field/events/events_hall_of_origin.json",
+    "sha256": "675fbd41a6d24a156e8232349a054b9dd776bf4f45ea85f01d3560c948c98ada",
+    "git_blob": "07cedcff6edd336451a6ac8ea05202b134626930",
+    "bytes": 967,
+    "warps": [
+      {
+        "x": 31,
+        "z": 53,
+        "dest_header_id": "MAP_HEADER_MT_CORONET_6F",
+        "dest_warp_id": 1
+      }
+    ]
+  }
+}

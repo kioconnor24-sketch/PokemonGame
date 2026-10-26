@@ -1,0 +1,39 @@
+{
+  "status": "BOUNDED_HALL_FOOTPRINT_ONLY_NOT_STORY_OR_RUNTIME_ACCEPTANCE",
+  "maps": {
+    "Hall": {
+      "supported": 106,
+      "sealed_doors_boundaries": 1,
+      "static_components": [
+        105
+      ]
+    }
+  },
+  "native_assets": {
+    "data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "data/tilesets/secondary/cave/metatiles.bin": "fca8629264b6ff2324224864ed98d929cc5a93213a5a512a3798d144470e022b",
+    "data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "data/tilesets/secondary/cave/metatile_attributes.bin": "35737e4634461b7461e4dfab12a150d9cad7ff78591a51e23f74a61219d86ad2",
+    "data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "data/tilesets/secondary/cave/tiles.png": "bcffd7ad24c8acb328cee23598dca4dadeb527299c76565e6a9d939e25e40c76",
+    "data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "data/tilesets/secondary/cave/palettes/06.pal": "aa7b4ee23247cf3b450244bf3f6bd93261636f9fbbcd5f1aca5e4c2c7b4514d8"
+  },
+  "geometry_sha256": "61c66369c17db9da7fa23dcc57b8515b9d040ba37c9aee9492241da4aa7f5131",
+  "secondary_records": 6,
+  "limits": [
+    "Authentic technical footprint/native cave and step proxies, not DS sky/platform architecture or camera",
+    "Source exit and summit transition closed; no flute, legendary, conditional routing or story unlock",
+    "No DS pixels/models/music, production IDs/registry/save edits, ROM/native/mGBA/Save acceptance"
+  ],
+  "output_sha256": {
+    "native-family/secondary-attributes.bin": "d4d5461fba878799cdf6e1016ae0837d069c12d38d7b6c99cc505e2a291dd63c",
+    "native-family/secondary-metatiles.bin": "4b0de858fc3975a81633d99af64b36eb9215ad23d16d6eeb38a8e155047adfac",
+    "native-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "native-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/Hall/preview.png": "4efc7377b64ab698987de4d8e01313cbcd0efa0863591d19699f8af55ad5182c",
+    "staged/Hall/map.json": "de0648f5bd19c1dc329caaf3a8c1c270576fcdb3741190be135b462f0f3066c5",
+    "staged/Hall/border.bin": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+    "staged/Hall/map.bin": "7de2ca89b56bffd8a0aca97a025682dd550aa27bc8c0861c837054a22e30937c"
+  }
+}
