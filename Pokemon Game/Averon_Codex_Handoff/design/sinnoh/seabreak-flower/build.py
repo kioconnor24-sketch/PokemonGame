@@ -24,6 +24,13 @@ def extract(inputs):
 def construct(geometry):
     # Use only real ground for the shared ordinal-land projection. Water
     # is restored separately as actual native ocean, never ordinary floor.
+    for name,g in geometry.items():
+        seen=set();w,h=existing.DIMS[name]
+        for p in g['surfaces']:
+            xy=tuple(p['tile'])
+            if len(xy)!=2 or xy in seen or not (0<=xy[0]<w and 0<=xy[1]<h) or p['permission'] not in (0,0x15):
+                raise ValueError('invalid or duplicate supported source surface')
+            seen.add(xy)
     ground={n:dict(g,surfaces=[p for p in g['surfaces'] if p['permission']==0]) for n,g in geometry.items()}
     result=existing.construct(ground);audit={}
     for name,(raw,h,facts) in result.items():

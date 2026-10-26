@@ -1,0 +1,89 @@
+{
+  "status": "SOURCE_FLOWER_SEABREAK_SEGMENTS_NOT_STORY_OR_RUNTIME_ACCEPTANCE",
+  "source_sha256": {
+    "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/seabreak-flower/geometry.json": "7ee5a7d68acf4cc7139b79406ab52da38dbbf6b9694e0c66ceb7c942f0fc0ab8",
+    "Pokemon Game/engine/include/fieldmap.h": "43620e45d4085e278d679b2ad07bcec3e729be87613646fd42ed1fbd2ff185fb",
+    "Pokemon Game/engine/include/global.fieldmap.h": "5c4d47192e2950101df27b211501f9e3337b7754804d322033724c508f645b2d",
+    "Pokemon Game/engine/data/tilesets/primary/general/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "Pokemon Game/engine/data/tilesets/primary/general/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "Pokemon Game/engine/data/tilesets/primary/general/tiles.png": "365ba5482e7564763e614a0009900d1c317790dcd9f7a06c4ab74c363a3ba2f5",
+    "Pokemon Game/engine/data/tilesets/secondary/rustboro/tiles.png": "87b3ce4e15674b3ef02b1793df0bc8633b7c49bf4443cb50708293615b048d24",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/00.pal": "424a32d1079a61b6b9b4f1e879dd68108708905e8312d18edd134af3918407fd",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/01.pal": "9b9d01878137cef9ea6006c3025a3ada5cdf37d9c251b25bc95f71963bd9a447",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/02.pal": "8a469b137e6fc97823ab46b903c0ab80c466212cd430340586ccde22afbee949",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/03.pal": "821f0a62f0ce995c96e9eaa0b4a32a1cd61e4db1f3216bfbe1fd588cf33b7583",
+    "Pokemon Game/engine/data/tilesets/primary/general/palettes/04.pal": "f99602126046eed3f20545a34ddd46fa6e5fcb96f032b410fa8d5251c7450e22"
+  },
+  "source_geometry": {
+    "FlowerParadise": {
+      "source_supported": 754,
+      "source_ground": 420,
+      "source_sea": 334
+    },
+    "SeabreakNorth": {
+      "source_supported": 3840,
+      "source_ground": 384,
+      "source_sea": 3456
+    },
+    "SeabreakSouth": {
+      "source_supported": 3840,
+      "source_ground": 384,
+      "source_sea": 3456
+    }
+  },
+  "buffer_capacity": 10240,
+  "padded_cells": {
+    "FlowerParadise": 2162,
+    "SeabreakNorth": 6674,
+    "SeabreakSouth": 6674
+  },
+  "unsplit_padded_cells": 12690,
+  "seams": [
+    {
+      "north": "FlowerParadise",
+      "south": "SeabreakNorth",
+      "ground_lanes": [
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "north": "SeabreakNorth",
+      "south": "SeabreakSouth",
+      "ground_lanes": [
+        14,
+        15,
+        16
+      ]
+    }
+  ],
+  "limits": [
+    "Split authentic256-row road into128-row segments for existing fixed buffer, no engine change",
+    "Sea0x15 mapped explicitly to native0x1015 ocean/Surf semantics; not ordinary ground",
+    "Source south Route224 entrance closed until coherent authorized physical/story integration",
+    "Existing native flower/pale-road art only, no DS textures/props/story/encounters or Shaymin",
+    "No permanent IDs/registry/save changes or ROM/native/mGBA/Save acceptance"
+  ],
+  "output_sha256": {
+    "native-family/secondary-attributes.bin": "aaf9f04b5a1d907a74868ffebedda55d2a0a129ecef2823ed9cddf8d120e22c1",
+    "native-family/secondary-metatiles.bin": "6651c3db7c656fe5271a0cc64dd7c26daa609e9e72c17c5dab77c9408ac18805",
+    "native-family/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+    "native-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+    "staged/SeabreakSouth/preview.png": "70f9de0ff55063326e6ceb02aef522feb062bec3fe94a0e6d1bc72a0d1e69e53",
+    "staged/SeabreakSouth/attributes.json": "899e2f045765f298d995c9fcfeefe98406338141f9dd9b179c72cea62073a8b0",
+    "staged/SeabreakSouth/map.json": "658e3d91993bdadfb108d567ebcf8da1af122ff0099071125c24d9c2d0bf93ce",
+    "staged/SeabreakSouth/border.bin": "7cb5a4b8b7fe93ebdad93eda1905fe2cb6c2aff9b9a10af1b2b236cfe348c14a",
+    "staged/SeabreakSouth/map.bin": "ef70632211d2e626afe69af31d465e076d005a6fb0ea2807e519da030bb5d994",
+    "staged/SeabreakNorth/preview.png": "fcf2c721262ea4d14ff4cbfcfafdfd9b49d0ada58d544488dfd8be53d224de73",
+    "staged/SeabreakNorth/attributes.json": "899e2f045765f298d995c9fcfeefe98406338141f9dd9b179c72cea62073a8b0",
+    "staged/SeabreakNorth/map.json": "7f7e8b87c66bc70c85b47b81a6a4734f85cb85cf4c4a18c1d952567474982478",
+    "staged/SeabreakNorth/border.bin": "7cb5a4b8b7fe93ebdad93eda1905fe2cb6c2aff9b9a10af1b2b236cfe348c14a",
+    "staged/SeabreakNorth/map.bin": "d647ea11b1da8921c8283a6447546d4beb3fb05c45d9ea06c70532349a5af1ae",
+    "staged/FlowerParadise/preview.png": "5c59bcfe5f89291d59362bf089364860ad5e0444c276557aee941ff09936b3c4",
+    "staged/FlowerParadise/attributes.json": "e92b8291f1bb1045c7a8e6fe524fce3732a1064a997b47f5474cd95a3011ede5",
+    "staged/FlowerParadise/map.json": "c40a1cc691779061ccab55aeffb7e891ea20db8ce0a2aed3f634e678a497f7d2",
+    "staged/FlowerParadise/border.bin": "7cb5a4b8b7fe93ebdad93eda1905fe2cb6c2aff9b9a10af1b2b236cfe348c14a",
+    "staged/FlowerParadise/map.bin": "eb29d852d6c9d86afe726ec919843b2a735e5a82b463583c25c01776ef57d2c6"
+  }
+}
