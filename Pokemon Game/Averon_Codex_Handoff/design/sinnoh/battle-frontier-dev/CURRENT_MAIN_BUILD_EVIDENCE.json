@@ -1,0 +1,45 @@
+{
+  "scope": "TEMPORARY44_MAP_DEV_BUILD_NOT_PRODUCTION_OR_RUNTIME_ACCEPTANCE",
+  "source_sha": "b99e5e1ad1385b6131545a1cd6e5d34c4047b91b",
+  "base": "71923a9361bbc56199f0356aea0cf4166657b1a5",
+  "base_engine_tree": "96904d644c44cbc7d2068e212ef07c11f06db9d5",
+  "genuine_install": {
+    "real_git": true,
+    "branch": "codex/battle-frontier-runtime-scratch-20261026",
+    "overlay_files": 191,
+    "maps": 44,
+    "native_attribute_cells": 49597
+  },
+  "normal": {
+    "source_sha": "b99e5e1ad1385b6131545a1cd6e5d34c4047b91b",
+    "files": {
+      "pokeemerald-cries-off.gba": "482351a605c5509e77807cc49819541b99d3836ccef1626418af43feb1f913d2",
+      "pokeemerald-cries-off.elf": "c22d72ca70d65833e0e3eeaf7bb3d4a23e7c37c0d1c9a36c6650e304fdd07941",
+      "pokeemerald-cries-off.map": "66895ad7e32135e5e69345c4cc32971eceb7f2a60846a04e47709494bc04537b"
+    },
+    "byte_identical_to_first": {
+      "pokeemerald-cries-off.gba": true,
+      "pokeemerald-cries-off.elf": true,
+      "pokeemerald-cries-off.map": true
+    },
+    "linked_rom_bytes": 17500100,
+    "baseline_growth_bytes": 106756
+  },
+  "normal_ram": {
+    "ewram_bytes": 226480,
+    "iwram_bytes": 28392,
+    "unchanged_vs_matching_baseline": true
+  },
+  "padded_rom_bytes": 33554432,
+  "release": "RUNNING; not PASS",
+  "native": "NOT RUN on this scene",
+  "graphical": "NOT RUN on this scene",
+  "movement_static": "RUNNING after reader correction; not PASS",
+  "reader_regression": {
+    "before": "Actual World KeyError at generated secondary tileset",
+    "fix": "Producer assignment spacing only; no shared QA change",
+    "host_tests": "10/10 PASS64.105s"
+  },
+  "original_legacy_flash_sha256": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+  "rom_elf_map_and_saves": "PRIVATE; no binary artifacts uploaded"
+}
