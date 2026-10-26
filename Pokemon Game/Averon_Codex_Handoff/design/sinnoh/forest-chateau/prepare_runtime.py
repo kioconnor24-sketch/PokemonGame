@@ -13,7 +13,7 @@ import re
 import subprocess
 
 HERE=Path(__file__).resolve().parent
-BASE='3616176ae1ec81af019d56fd602cf82528977b92'
+BASE='fa12ccb08ace46bedfc527509b44c93429eba4de'
 ENGINE='Pokemon Game/engine/'
 MAPS={'EternaForest':(82,84),'OldChateau_Entrance':(19,17),'OldChateau_DiningRoom':(40,10),
       'OldChateau_2F':(38,14),'OldChateau_SideRoom_1':(10,10),'OldChateau_SideRoom_2':(10,10)}

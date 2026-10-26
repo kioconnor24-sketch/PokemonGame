@@ -13,7 +13,7 @@ import re
 import subprocess
 
 HERE=Path(__file__).resolve().parent
-BASE='3616176ae1ec81af019d56fd602cf82528977b92'
+BASE='fa12ccb08ace46bedfc527509b44c93429eba4de'
 ENGINE='Pokemon Game/engine/'
 MAPS={'Route210_North':(99,29),'CelesticTown':(38,35),'Route211_East':(32,32),
       'MtCoronet_1F_North_Room1':(36,51),'MtCoronet_1F_North_Room2':(19,16),'MtCoronet_B1F':(32,65)}
