@@ -54,6 +54,11 @@ TILESETS = [{"symbol": "ClaudeProdInteriorPrimary", "secondary": False, "graphic
              "metatiles": "interior-art/secondary-metatiles.bin", "attributes": "interior-art/secondary-attributes.bin"}]
 
 
+def const(name, prefix="MAP_"):
+    """MAP_ constant of a map name (FloaromaTown_FlowerShop -> MAP_FLOAROMA_TOWN_FLOWER_SHOP)."""
+    return prefix + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).upper()
+
+
 def git_blob(raw):
     return hashlib.sha1(b"blob %d\0" % len(raw) + raw).hexdigest()
 
@@ -85,7 +90,7 @@ def stage_sources(donor, out):
         (d / "map.bin").write_bytes(raw)
         (d / "border.bin").write_bytes(BORDER)          # the packer's wall top: donor border tiles are not in its banks
         (d / "attributes.json").write_text(json.dumps({"used_source_attribute_words": words}, indent=2) + "\n")
-        neutral = w1.header("MAP_" + room.upper(), room, layout["id"], "MUS_PETALBURG", "MAP_TYPE_INDOOR",
+        neutral = w1.header(const(room), room, layout["id"], "MUS_PETALBURG", "MAP_TYPE_INDOOR",
                             [(w["x"], w["y"], "MAP_PLACEHOLDER", 0) for w in mats])
         (d / "map.json").write_text(json.dumps(neutral, indent=2) + "\n")
         dims[room] = (layout["width"], layout["height"])
@@ -113,13 +118,13 @@ def build(donor, engine, out):
         hdr = towns[town]
         assert all((w["x"], w["y"]) != door for w in hdr["warp_events"]), (town, door)
         index = len(hdr["warp_events"])
-        hdr["warp_events"].append({"x": door[0], "y": door[1], "elevation": 0, "dest_map": "MAP_" + room.upper(),
+        hdr["warp_events"].append({"x": door[0], "y": door[1], "elevation": 0, "dest_map": const(room),
                                    "dest_warp_id": "0"})
         w, h = dims[room]
         cells = struct.unpack("<%dH" % (w * h), adapted[room])
         d = out / "staged" / room
         d.mkdir(parents=True, exist_ok=True)
-        hdr_room = w1.header("MAP_" + room.upper(), room, "LAYOUT_CLAUDE_" + room.upper(), music[town],
+        hdr_room = w1.header(const(room), room, const(room, "LAYOUT_CLAUDE_"), music[town],
                              "MAP_TYPE_INDOOR", [(x, y, towns[town]["id"], index) for x, y in anchors[room]])
         (d / "map.json").write_text(json.dumps(hdr_room, indent=2) + "\n")
         (d / "scripts.inc").write_text(w1.scripts(room))
