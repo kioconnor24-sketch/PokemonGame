@@ -11,6 +11,12 @@ unchanged, each stair graph copied with its floors renamed (W12's civic()):
 - The six other doors: neutral LAYOUT_HOUSE1 shells.
 Closed on purpose: the Gym (22, 44); a gym's interior is design content, not a neutral shell.
 
+West seam (C13): the donor joins Eterna's west edge to Route 205 North's east edge (left/right, offset 0). Production
+Route 205 North is open there (rows 14-21 but 16) and faces nothing; Codex closed Eterna's side (0, 14-21; source
+collision 0, eterna-cycle source-receipt closure_changes). The overlays add the connection on both sides
+(Route205_North-dev-overlay: the production header plus one connection) and the derived city map.bin reopens the
+closed cells whose Route 205 North neighbour is walkable; (0, 16) faces a solid cell there and stays closed.
+
 No NPCs, services, items, encounters, story or sections (MAPSEC_PENDING_OWNER). Codex's files are not modified.
 
   build_eterna_civic.py --engine ENGINE --out DIR
@@ -36,6 +42,7 @@ UNBLOCK = [(19, 25), (20, 25)]                          # non-animated double do
 CIVIC = [([(16, 17)], [("EternaCity_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")]),
          ([(19, 33)], [("EternaCity_Mart", "OldaleTown_Mart")])]
 HALL = ("EternaCity_Hall", [(19, 25), (20, 25)])
+SEAM_OFFSET = 0                                         # donor: EternaCity left -> Route205_North, offset 0
 
 
 def inputs():
@@ -60,6 +67,24 @@ def closed_doors(engine, hdr, cells, attrs):
     return [(i % WIDTH, i // WIDTH) for i, v in enumerate(cells)
             if names[attrs[v & 1023] & 0xFF] in ("MB_ANIMATED_DOOR", "MB_NON_ANIMATED_DOOR")
             and (i % WIDTH, i // WIDTH) not in warps]
+
+
+def west_seam(engine, cells):
+    """Eterna west-edge cells Codex closed whose Route 205 North neighbour (at the donor offset) is walkable."""
+    closures = json.loads((FAMILY / "source-receipt.json").read_text())["closure_changes"][CITY]
+    west = [(c["x"], c["y"]) for c in closures if c["x"] == 0 and not (c["before"] >> 10) & 3]
+    layouts = json.loads((engine / "data/layouts/layouts.json").read_text())["layouts"]
+    layout = next(l for l in layouts if l.get("id") == "LAYOUT_ROUTE205_NORTH")
+    rw, rh = layout["width"], layout["height"]
+    route = struct.unpack("<%dH" % (rw * rh), (engine / layout["blockdata_filepath"]).read_bytes())
+    opened = []
+    for x, y in west:
+        assert cells[y * WIDTH + x] & 0xC00, (x, y)     # still closed in Codex's staging
+        ry = y + SEAM_OFFSET
+        if 0 <= ry < rh and not route[ry * rw + rw - 1] & 0xC00:
+            assert route[ry * rw + rw - 1] >> 12 == cells[y * WIDTH + x] >> 12, (x, y)     # same elevation
+            opened.append((x, y))
+    return opened
 
 
 def build(engine):
@@ -99,6 +124,12 @@ def build(engine):
         maps[name] = w1.header(w12.const(name), name, "LAYOUT_HOUSE1", music, "MAP_TYPE_INDOOR",
                                [(3, 8, PREFIX, index[door]), (4, 8, PREFIX, index[door])])
     blocks = list(cells)
+    for x, y in west_seam(engine, cells):
+        blocks[y * WIDTH + x] &= ~0xC00
+    hdr["connections"] = hdr["connections"] + [{"map": "MAP_ROUTE205_NORTH", "offset": SEAM_OFFSET, "direction": "left"}]
+    route = json.loads((engine / "data/maps/Route205_North/map.json").read_text())
+    assert not any(c["map"] == PREFIX for c in route["connections"])
+    route["connections"] = route["connections"] + [{"map": PREFIX, "offset": -SEAM_OFFSET, "direction": "right"}]
     for x, y in UNBLOCK:
         v = cells[y * WIDTH + x]
         assert names[attrs[v & 1023] & 0xFF] == "MB_NON_ANIMATED_DOOR" and v & 0xC00, (x, y)
@@ -106,7 +137,7 @@ def build(engine):
     layouts = {l.get("id") for l in json.loads((engine / "data/layouts/layouts.json").read_text())["layouts"]}
     for h in maps.values():
         assert h["layout"] in layouts, h["layout"]
-    return hdr, maps, blocks, hashes
+    return hdr, maps, blocks, hashes, route
 
 
 def check(hdr, maps):
@@ -122,9 +153,11 @@ def check(hdr, maps):
 
 
 def write(engine, out):
-    hdr, maps, blocks, hashes = build(engine)
+    hdr, maps, blocks, hashes, route = build(engine)
     check(hdr, maps)
     st = pathlib.Path(out) / "staged"
+    (st / "Route205_North-dev-overlay").mkdir(parents=True, exist_ok=True)
+    (st / "Route205_North-dev-overlay/map.json").write_text(json.dumps(route, indent=2) + "\n")
     (st / f"{CITY}-dev-overlay").mkdir(parents=True, exist_ok=True)
     (st / f"{CITY}-dev-overlay/map.json").write_text(json.dumps(hdr, indent=2) + "\n")
     (st / f"{CITY}-dev-overlay/map.bin").write_bytes(struct.pack("<%dH" % len(blocks), *blocks))

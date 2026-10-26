@@ -17,7 +17,7 @@ spec.loader.exec_module(w22)
 class EternaCivicTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.hdr, cls.maps, cls.blocks, cls.hashes = w22.build(ENGINE)
+        cls.hdr, cls.maps, cls.blocks, cls.hashes, cls.route = w22.build(ENGINE)
 
     def test_committed_staging_equals_a_fresh_build(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -36,8 +36,10 @@ class EternaCivicTest(unittest.TestCase):
         added = {(w["x"], w["y"]) for w in self.hdr["warp_events"][n:]}
         self.assertEqual(len(added), 10)
         self.assertNotIn((22, 44), added)
-        self.assertEqual({k: v for k, v in self.hdr.items() if k != "warp_events"},
-                         {k: v for k, v in source.items() if k != "warp_events"})
+        self.assertEqual({k: v for k, v in self.hdr.items() if k not in ("warp_events", "connections")},
+                         {k: v for k, v in source.items() if k not in ("warp_events", "connections")})
+        self.assertEqual(self.hdr["connections"], source["connections"]
+                         + [{"map": "MAP_ROUTE205_NORTH", "offset": 0, "direction": "left"}])
 
     def test_every_warp_is_reciprocal(self):
         self.assertTrue(w22.check(self.hdr, self.maps))
@@ -50,12 +52,20 @@ class EternaCivicTest(unittest.TestCase):
             self.assertFalse(any(w["dest_map"].startswith("MAP_LILYCOVE") or w["dest_map"].startswith("MAP_OLDALE")
                                  for w in h["warp_events"]), h["id"])
 
-    def test_only_the_hall_door_collisions_change(self):
+    def test_only_the_hall_doors_and_west_seam_collisions_change(self):
         raw = (w22.FAMILY / "staged/EternaCity/averon-map.bin").read_bytes()
         cells = struct.unpack("<%dH" % (len(raw) // 2), raw)
         changed = [(i % 60, i // 60, a ^ b) for i, (a, b) in enumerate(zip(cells, self.blocks)) if a != b]
-        self.assertEqual([(x, y) for x, y, _ in changed], [(19, 25), (20, 25)])
+        west = [(0, y) for y in (14, 15, 17, 18, 19, 20, 21)]
+        self.assertEqual(sorted((x, y) for x, y, _ in changed), sorted(west + [(19, 25), (20, 25)]))
         self.assertTrue(all(delta & ~0xC00 == 0 for _, _, delta in changed))
+
+    def test_route205_north_gains_only_the_reciprocal_connection(self):
+        source = json.loads((ENGINE / "data/maps/Route205_North/map.json").read_text())
+        self.assertEqual({k: v for k, v in self.route.items() if k != "connections"},
+                         {k: v for k, v in source.items() if k != "connections"})
+        self.assertEqual(self.route["connections"], source["connections"]
+                         + [{"map": "MAP_ETERNA_CITY", "offset": 0, "direction": "right"}])
 
     def test_a_door_cell_with_a_wall_doorstep_is_refused(self):
         cells = list(self.blocks)
