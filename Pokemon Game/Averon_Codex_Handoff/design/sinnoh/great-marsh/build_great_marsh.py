@@ -30,8 +30,10 @@ W, H = 48, 40
 PONDS = [(6, 5, 12, 10), (18, 4, 27, 8), (33, 6, 41, 12), (5, 17, 11, 24), (20, 15, 29, 21), (34, 20, 42, 26)]
 TALL = [(14, 11, 18, 14), (30, 14, 33, 18), (13, 26, 19, 30), (26, 25, 31, 29)]
 PATHS = [((23, 22), (23, 33)), ((8, 13), (42, 13)), ((15, 9), (15, 27)), ((31, 9), (31, 31)), ((8, 28), (42, 28))]
-# Pastoria's other warp-less animated doors open into neutral LAYOUT_HOUSE1 shells (no NPCs/services).
+# Pastoria's other warp-less animated doors open into neutral LAYOUT_HOUSE1 shells (no NPCs/services), except CENTER.
 PASTORIA_DOORS = [(26, 14), (50, 18), (26, 22), (15, 26), (27, 34), (37, 34), (15, 43), (27, 43)]
+# The Pokemon Center's door opens onto the stock Center 1F instead (its 2F stairs dropped; no services or NPCs).
+CENTER = ((26, 14), "PastoriaCity_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")
 GATE = (21, 32)                                     # Dewford house top-left; door (+2, +3) = (23, 35)
 
 
@@ -93,6 +95,14 @@ def build(engine):
     for k, (x, y) in enumerate(PASTORIA_DOORS, 1):
         assert pc[y * 68 + x] & 0xC00 and all((w["x"], w["y"]) != (x, y) for w in past["warp_events"]), (x, y)
         i = len(past["warp_events"])
+        if (x, y) == CENTER[0]:
+            src = json.loads(eng.file(f"data/maps/{CENTER[2]}/map.json"))
+            mats = [(w["x"], w["y"]) for w in src["warp_events"] if w["dest_map"] == "MAP_OLDALE_TOWN"]
+            past["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": "MAP_PASTORIA_CITY_POKEMON_CENTER_1F",
+                                        "dest_warp_id": "0"})
+            shells[CENTER[1]] = w1.header("MAP_PASTORIA_CITY_POKEMON_CENTER_1F", CENTER[1], src["layout"], "MUS_ROUTE110",
+                                          "MAP_TYPE_INDOOR", [(mx, my, "MAP_PASTORIA_CITY", i) for mx, my in mats])
+            continue
         name = f"PastoriaCity_House{k}"
         past["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_PASTORIA_CITY_HOUSE{k}",
                                     "dest_warp_id": "0"})

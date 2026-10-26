@@ -46,11 +46,19 @@ class GreatMarshTest(unittest.TestCase):
         for k, (x, y) in enumerate(b.PASTORIA_DOORS, 1):                       # each shell pairs with its door
             i = n + k
             self.assertEqual((self.past["warp_events"][i]["x"], self.past["warp_events"][i]["y"]), (x, y))
-            back = self.shells[f"PastoriaCity_House{k}"]["warp_events"]
+            name = b.CENTER[1] if (x, y) == b.CENTER[0] else f"PastoriaCity_House{k}"
+            back = self.shells[name]["warp_events"]
             self.assertEqual({(w["dest_map"], int(w["dest_warp_id"])) for w in back}, {("MAP_PASTORIA_CITY", i)})
         g = [(w["dest_map"], int(w["dest_warp_id"])) for w in self.gate["warp_events"]]
         self.assertEqual(g, [("MAP_PASTORIA_CITY", n)] * 2 + [("MAP_GREAT_MARSH", 0)] * 2)
         self.assertEqual(self.marsh["warp_events"][0]["dest_map"], "MAP_GREAT_MARSH_GATE")
+
+    def test_center_uses_the_stock_center_without_its_2f(self):
+        src = json.loads((ENGINE / f"data/maps/{b.CENTER[2]}/map.json").read_text())
+        hdr = self.shells[b.CENTER[1]]
+        self.assertEqual(hdr["layout"], src["layout"])
+        self.assertEqual([(w["x"], w["y"]) for w in hdr["warp_events"]],
+                         [(w["x"], w["y"]) for w in src["warp_events"] if w["dest_map"] == "MAP_OLDALE_TOWN"])
 
 
 if __name__ == "__main__":
