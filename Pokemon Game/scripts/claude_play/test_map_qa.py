@@ -317,6 +317,20 @@ class StaticLayer(unittest.TestCase):
         with self.assertRaises(drv.Stuck):
             d.map_route("N", "R", (1, 1))
 
+    def test_acro_bike_rails_block_a_player_on_foot(self):
+        """Route 212 South: a rail row (MB_HORIZONTAL_RAIL, elevation 15, collision 0) between two grounds is a
+        collision on foot (CheckAcroBikeCollision runs for every player step), so MapInfo.walkable refuses it."""
+        md = map_qa.mapdata
+
+        class Cells:
+            behaviors = {(1, 1): "MB_HORIZONTAL_RAIL", (2, 1): "MB_BUMPY_SLOPE", (3, 1): "MB_VERTICAL_RAIL"}
+            inside = staticmethod(lambda x, y: 0 <= x < 5 and 0 <= y < 3)
+            collision = staticmethod(lambda x, y: 0)
+            behavior = classmethod(lambda cls, x, y: cls.behaviors.get((x, y), "MB_NORMAL"))
+        for x in (1, 2, 3):
+            self.assertFalse(md.MapInfo.walkable(Cells, x, 1))
+        self.assertTrue(md.MapInfo.walkable(Cells, 1, 0))
+
     def test_walled_off_seam_is_unreachable(self):
         rows = ["###..###",
                 "########",
