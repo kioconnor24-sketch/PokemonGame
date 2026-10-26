@@ -6,7 +6,9 @@ a 52 x 40 park with a tree ring, a central sand plaza, three rectangular ponds w
 in Lake Verity (strict), walkways, and two gatehouses (Dewford's house) at the south-west and south-east.
 Hearthome (Codex's hearthome-solaceon staging) has two pairs of north arrow mats with no warp at (8-9, 6) and
 (50-51, 6); a DEV-only overlay of its map.json appends four warps: the west pair to the west gatehouse door, the east
-pair to the east one. Its seven warp-less animated doors open into neutral LAYOUT_HOUSE1 shells. Two more houses,
+pair to the east one. Its seven warp-less animated doors open into neutral LAYOUT_HOUSE1 shells, except the civic
+three (CIVIC): the hall gets Lilycove's contest lobby and hall, the Pokemon Center and Mart their stock interiors (no
+services or NPCs). Two more houses,
 (20, 19) and (21, 30), draw their door as the closed picture 593 (solid); a DEV-only derived copy of Hearthome's
 map.bin puts the family's animated door there, copied from Route 210 South's house door (30, 47), whose left/right/
 above pieces are identical (528/528/519), and they get shells too. Codex's files are not modified.
@@ -33,6 +35,12 @@ HEARTHOME_DOORS = [(29, 12), (14, 19), (36, 19), (49, 19), (27, 30), (37, 30), (
 # Closed door pictures opened with the family's door of the same surroundings (house shells 8 and 9).
 PICTURE_DOORS = [(20, 19), (21, 30)]
 DOOR_DONOR = ("Route210_South", (30, 47))
+# Civic buildings get stock multi-room interiors instead of a house shell (as W12 did for Veilstone): stair graphs
+# copied with the floors renamed, street mats -> the Hearthome door, other exits (a Center's 2F) dropped.
+CIVIC = {(29, 12): [("HearthomeCity_ContestLobby", "LilycoveCity_ContestLobby"),
+                    ("HearthomeCity_ContestHall", "LilycoveCity_ContestHall")],
+         (14, 19): [("HearthomeCity_PokemonCenter_1F", "OldaleTown_PokemonCenter_1F")],
+         (27, 30): [("HearthomeCity_Mart", "OldaleTown_Mart")]}
 W, H = 52, 40
 PONDS = [(8, 6, 15, 11), (36, 6, 43, 11), (22, 26, 29, 30)]
 PLAZA = (18, 12, 33, 22)
@@ -68,6 +76,32 @@ def opened_hearthome(engine):
         for dx, dy in ((-1, 0), (1, 0), (0, -1)):
             assert cells[(y + dy) * width + x + dx] & 1023 == dcells[(sy + dy) * dwidth + sx + dx] & 1023, (x, y)
         out[y * width + x] = door
+    return out
+
+
+def const(name):
+    return "MAP_" + re.sub(r"(?<=[a-z])(?=[A-Z])", "_", name).upper()
+
+
+def civic(engine, floors, door_warp):
+    """Stock floors renamed; warps to the stock city -> door_warp on Hearthome; warps outside the floors dropped."""
+    srcs = {n: json.loads((pathlib.Path(engine) / f"data/maps/{s}/map.json").read_text()) for n, s in floors}
+    stock_ids = {src["id"]: n for n, src in srcs.items()}
+    city = const(floors[0][1].split("_")[0])
+    keep = {n: [i for i, w in enumerate(src["warp_events"]) if w["dest_map"] in stock_ids or w["dest_map"] == city]
+            for n, src in srcs.items()}
+    out = {}
+    for n, src in srcs.items():
+        warps = []
+        for i in keep[n]:
+            w = src["warp_events"][i]
+            if w["dest_map"] == city:
+                assert n == floors[0][0], (n, w)
+                warps.append((w["x"], w["y"], "MAP_HEARTHOME_CITY", door_warp))
+            else:
+                dest = stock_ids[w["dest_map"]]
+                warps.append((w["x"], w["y"], const(dest), keep[dest].index(int(w["dest_warp_id"]))))
+        out[n] = w1.header(const(n), n, src["layout"], "MUS_ROUTE110", "MAP_TYPE_INDOOR", warps)
     return out
 
 
@@ -122,6 +156,12 @@ def build(engine):
     for k, (x, y) in enumerate(HEARTHOME_DOORS + PICTURE_DOORS, 1):
         assert all((w["x"], w["y"]) != (x, y) for w in hh["warp_events"]), (x, y)
         i = len(hh["warp_events"])
+        if (x, y) in CIVIC:
+            floors = CIVIC[(x, y)]
+            hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": const(floors[0][0]),
+                                      "dest_warp_id": "0"})
+            shells.update(civic(engine, floors, i))
+            continue
         name = f"HearthomeCity_House{k}"
         hh["warp_events"].append({"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_HEARTHOME_CITY_HOUSE{k}",
                                   "dest_warp_id": "0"})

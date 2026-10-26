@@ -1,7 +1,7 @@
 {
-  "id": "MAP_HEARTHOME_CITY_HOUSE1",
-  "name": "HearthomeCity_House1",
-  "layout": "LAYOUT_HOUSE1",
+  "id": "MAP_HEARTHOME_CITY_MART",
+  "name": "HearthomeCity_Mart",
+  "layout": "LAYOUT_MART",
   "music": "MUS_ROUTE110",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -18,17 +18,17 @@
   "warp_events": [
     {
       "x": 3,
-      "y": 8,
+      "y": 7,
       "elevation": 0,
       "dest_map": "MAP_HEARTHOME_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": "10"
     },
     {
       "x": 4,
-      "y": 8,
+      "y": 7,
       "elevation": 0,
       "dest_map": "MAP_HEARTHOME_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": "10"
     }
   ],
   "coord_events": [],

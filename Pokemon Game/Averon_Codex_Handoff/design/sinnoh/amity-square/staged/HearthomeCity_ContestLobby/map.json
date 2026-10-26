@@ -1,7 +1,7 @@
 {
-  "id": "MAP_HEARTHOME_CITY_HOUSE5",
-  "name": "HearthomeCity_House5",
-  "layout": "LAYOUT_HOUSE1",
+  "id": "MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+  "name": "HearthomeCity_ContestLobby",
+  "layout": "LAYOUT_LILYCOVE_CITY_CONTEST_LOBBY",
   "music": "MUS_ROUTE110",
   "region": "REGION_SINNOH",
   "region_map_section": "MAPSEC_PENDING_OWNER",
@@ -17,18 +17,32 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 3,
-      "y": 8,
+      "x": 14,
+      "y": 11,
       "elevation": 0,
       "dest_map": "MAP_HEARTHOME_CITY",
-      "dest_warp_id": "10"
+      "dest_warp_id": "6"
     },
     {
-      "x": 4,
-      "y": 8,
+      "x": 15,
+      "y": 11,
       "elevation": 0,
       "dest_map": "MAP_HEARTHOME_CITY",
-      "dest_warp_id": "10"
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_HEARTHOME_CITY_CONTEST_HALL",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_HEARTHOME_CITY_CONTEST_HALL",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

@@ -47,7 +47,9 @@ class AmitySquareTest(unittest.TestCase):
         for k, (x, y) in enumerate(b.HEARTHOME_DOORS + b.PICTURE_DOORS, 1):
             i = n + 3 + k
             self.assertEqual((self.hh["warp_events"][i]["x"], self.hh["warp_events"][i]["y"]), (x, y))
-            back = self.shells[f"HearthomeCity_House{k}"]["warp_events"]
+            first = b.CIVIC[(x, y)][0][0] if (x, y) in b.CIVIC else f"HearthomeCity_House{k}"
+            back = [w for w in self.shells[first]["warp_events"] if w["dest_map"] == "MAP_HEARTHOME_CITY"]
+            self.assertTrue(back)
             self.assertEqual({(w["dest_map"], int(w["dest_warp_id"])) for w in back}, {("MAP_HEARTHOME_CITY", i)})
         self.assertEqual([w["dest_warp_id"] for w in added], ["0", "0", "1", "1"])
         aw = self.amity["warp_events"]
@@ -71,6 +73,20 @@ class AmitySquareTest(unittest.TestCase):
                 b.opened_hearthome(ENGINE)
         finally:
             b.DOOR_DONOR = saved
+
+    def test_civic_interiors_copy_the_stock_graphs_and_are_reciprocal(self):
+        by_id = {h["id"]: h for h in self.shells.values()}
+        by_id["MAP_HEARTHOME_CITY"] = self.hh
+        for floors in b.CIVIC.values():
+            for name, stock in floors:
+                src = json.loads((ENGINE / f"data/maps/{stock}/map.json").read_text())
+                self.assertEqual(self.shells[name]["layout"], src["layout"])
+                kept = {(w["x"], w["y"]) for w in self.shells[name]["warp_events"]}
+                self.assertTrue(kept <= {(w["x"], w["y"]) for w in src["warp_events"]})
+        for mid, h in by_id.items():
+            for w in h["warp_events"]:
+                if w["dest_map"] in by_id:
+                    self.assertEqual(by_id[w["dest_map"]]["warp_events"][int(w["dest_warp_id"])]["dest_map"], mid)
 
 
 if __name__ == "__main__":
