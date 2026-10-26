@@ -19,7 +19,7 @@ b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
 NEW = ("IronIsland", "FullmoonIsland", "NewmoonIsland", "CanalaveCity_Harbor", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
-SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1",
+SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 8)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
 
@@ -189,7 +189,7 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual(hdr["warp_events"][:1], source["warp_events"])
         self.assertEqual({k: v for k, v in hdr.items() if k != "warp_events"},
                          {k: v for k, v in source.items() if k != "warp_events"})
-        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)] + b.MORE_HOUSE_DOORS)
+        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)] + b.MORE_HOUSE_DOORS + b.WARPLESS_DOORS)
 
 
 if __name__ == "__main__":
