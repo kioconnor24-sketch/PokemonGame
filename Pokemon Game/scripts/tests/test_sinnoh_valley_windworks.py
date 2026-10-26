@@ -47,5 +47,38 @@ class WindworksTest(unittest.TestCase):
                             for w in h["ValleyWindoworks_Indoor"]["warp_events"]))
 
 
+class ScratchInstallerGuardTest(unittest.TestCase):
+    """prepare_runtime.install refuses a dirty engine tree before writing anything (review 5646468435)."""
+
+    def test_dirty_engine_tree_is_refused_and_clean_marked_tree_passes_the_guard(self):
+        import importlib.util
+        import subprocess
+        import tempfile
+        spec = importlib.util.spec_from_file_location("w5_runtime", HERE / "prepare_runtime.py")
+        rt = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(rt)
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = pathlib.Path(tmp)
+            git = lambda *a: subprocess.run(["git", "-C", tmp, *a], check=True, capture_output=True)
+            git("init", "-q", "-b", "claude/windworks-scratch-test")
+            git("config", "user.email", "t@example.invalid")
+            git("config", "user.name", "t")
+            eng = repo / "Pokemon Game/engine"
+            (eng / "data/maps").mkdir(parents=True)
+            tracked = eng / "data/maps/map_groups.json"
+            tracked.write_text("{}\n")
+            git("add", "-A")
+            git("commit", "-qm", "base")
+            (eng / ".map_qa_throwaway").write_text("")
+            tracked.write_text('{"unique": "scratch work"}\n')
+            with self.assertRaisesRegex(ValueError, "dirty engine tree"):
+                rt.install(repo)
+            self.assertEqual(tracked.read_text(), '{"unique": "scratch work"}\n')    # nothing overwritten
+            git("checkout", "-q", "--", "Pokemon Game/engine/data/maps/map_groups.json")
+            with self.assertRaises(Exception) as clean:                                  # past the guard: fails later
+                rt.install(repo)
+            self.assertNotIn("dirty", str(clean.exception))
+
+
 if __name__ == "__main__":
     unittest.main()

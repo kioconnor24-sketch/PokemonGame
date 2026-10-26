@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DEV-only install of W5 (Valley Windworks + inside, slots 19-20) with the Route 205 South/North connection overlays.
 
-Marked disposable claude/windworks-scratch-* branch only; stand-in section MAPSEC_ROUTE_201; stock banks.
+Marked disposable claude/windworks-scratch-* branch with a clean engine tree only; stand-in section MAPSEC_ROUTE_201; stock banks.
 """
 import argparse
 import json
@@ -20,6 +20,10 @@ def install(repo):
     git = lambda *a: subprocess.run(["git", "-C", str(repo), *a], check=True, capture_output=True).stdout.decode()
     if not git("branch", "--show-current").startswith("claude/windworks-scratch-") or not (eng / ".map_qa_throwaway").is_file():
         raise ValueError("a marked disposable claude/windworks-scratch-* branch is required")
+    # As W1-W3: never overwrite unique scratch work (anything but the throwaway marker changed in the engine tree).
+    status = git("status", "--porcelain", "--untracked-files=normal", "--", ENGINE).splitlines()
+    if status not in ([], ['?? "Pokemon Game/engine/.map_qa_throwaway"']):
+        raise ValueError("refusing a dirty engine tree")
     st = HERE / "staged"
     groups = json.loads((eng / "data/maps/map_groups.json").read_text())
     layouts = json.loads((eng / "data/layouts/layouts.json").read_text())
