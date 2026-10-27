@@ -1,0 +1,32 @@
+{
+  "id": "MAP_GREAT_MARSH_WEST",
+  "name": "GreatMarsh_West",
+  "layout": "LAYOUT_GREAT_MARSH_WEST",
+  "music": "MUS_ROUTE110",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_GREAT_MARSH",
+      "offset": 0,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_GREAT_MARSH_NORTH_WEST",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
