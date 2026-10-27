@@ -80,4 +80,81 @@ class CyclingQAOrderTest(unittest.TestCase):
             with self.assertRaises(ValueError): m.validate(engine, receipt)
 
 
+    def post_c_fixture(self, root):
+        engine = root / "engine"
+        engine.mkdir()
+        (engine / ".map_qa_throwaway").touch()
+        groups = [f"Existing{i}" for i in range(41)]
+        groups[30] = "OreburghCity"
+        groups += ["EternaCity", "Route206_North", "Route206", "Route206_South", "Route211_West",
+                   "Route207", "OreburghMine_B1F", "OreburghMine_B2F"]
+        values = {"data/maps/map_groups.json": json.dumps({"gMapGroup_Sinnoh": groups}).encode(),
+                  "data/maps/OreburghCity/map.json": json.dumps({"region_map_section": "MAPSEC_OREBURGH_CITY",
+                                                                  "warp_events": [{}] * 15}).encode(),
+                  "data/layouts/OreburghCity/map.bin": b"source"}
+        values.update({f"input{i}": b"source" for i in range(58)})
+        for path, raw in values.items():
+            target = engine / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
+        return engine, dict(files={p: hashlib.sha256(b).hexdigest() for p, b in values.items()})
+
+    def change_json(self, engine, receipt, path, change):
+        target = engine / path
+        value = json.loads(target.read_text())
+        change(value)
+        target.write_text(json.dumps(value))
+        receipt["files"][path] = hashlib.sha256(target.read_bytes()).hexdigest()
+
+    def test_post_c_61_file_contract_passes(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            m.validate(engine, receipt)
+
+    def test_post_c_moved_duplicate_or_reordered_identity_fails(self):
+        def moved(g):
+            g[30], g[31] = g[31], g[30]
+        def duplicate(g):
+            g[31] = "OreburghCity"
+        def reordered(g):
+            g[41], g[42] = g[42], g[41]
+        for change in (moved, duplicate, reordered):
+            with self.subTest(change=change.__name__), tempfile.TemporaryDirectory() as t:
+                engine, receipt = self.post_c_fixture(Path(t))
+                self.change_json(engine, receipt, "data/maps/map_groups.json", lambda x: change(x["gMapGroup_Sinnoh"]))
+                with self.assertRaisesRegex(ValueError, "identity contract"):
+                    m.validate(engine, receipt)
+
+    def test_post_c_alias_or_lost_production_warp_fails(self):
+        for field, value in [("region_map_section", "MAPSEC_ROUTE_201"), ("warp_events", [{}] * 14)]:
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as t:
+                engine, receipt = self.post_c_fixture(Path(t))
+                self.change_json(engine, receipt, "data/maps/OreburghCity/map.json", lambda x: x.update({field: value}))
+                with self.assertRaisesRegex(ValueError, "identity contract"):
+                    m.validate(engine, receipt)
+
+    def test_post_c_cannot_replace_production_scripts_to_fill_receipt(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            receipt["files"].pop("input0")
+            path = "data/maps/OreburghCity/scripts.inc"
+            (engine / path).write_bytes(b"source")
+            receipt["files"][path] = hashlib.sha256(b"source").hexdigest()
+            with self.assertRaisesRegex(ValueError, "preservation contract"):
+                m.validate(engine, receipt)
+
+    def test_actual_pinned_composition_is_accepted(self):
+        spec = importlib.util.spec_from_file_location("qa_receipt_composer", HERE / "prepare_current_runtime.py")
+        composer = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(composer)
+        files, receipt = composer.compose(HERE.parents[4])
+        with tempfile.TemporaryDirectory() as t:
+            engine = Path(t)
+            (engine / ".map_qa_throwaway").touch()
+            for path, raw in files.items():
+                target = engine / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(raw)
+            m.validate(engine, receipt)
+
 if __name__ == "__main__": unittest.main()
