@@ -1,0 +1,3415 @@
+{
+  "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+  "production_base": "284503e76145052f420ec1d2debe8e1611093f09",
+  "base_engine_tree": "320fc1f48b1d1da85a83bcf943dbb30103379e0f",
+  "generated_git_tree": "ba9a7a0f8501f6012ecfb43638bbb235808cf370",
+  "generated_engine_tree": "2f416e892847e82e66c8e1fed63eeb164d4b20c2",
+  "note": "Generated Git-index tree, not a production commit. Verified all191 actual installed output hashes.22 original maps +44 temporary maps. No new permanent IDs.",
+  "profiles": {
+    "NORMAL": {
+      "command": "make -j8 -O CRIES=off all",
+      "exit": 0,
+      "linked_rom_bytes": 17503376,
+      "ewram_bytes": 226480,
+      "iwram_bytes": 28392,
+      "artifacts": {
+        "gba": {
+          "bytes": 33554432,
+          "sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95"
+        },
+        "elf": {
+          "bytes": 26939116,
+          "sha256": "f11e16d2cf7d103ee6b58f9a2b80a1320ac30d963ad01e10d4164405d27d08fa"
+        },
+        "map": {
+          "bytes": 4622761,
+          "sha256": "bfc218c669bac928549bbb0206397135c6525a9ef1385a624ae89fa21f92efa7"
+        }
+      },
+      "growth_over_same_profile22_baseline": 106756
+    },
+    "RELEASE": {
+      "command": "make -j8 -O CRIES=off RELEASE=1 all",
+      "exit": 0,
+      "linked_rom_bytes": 17622512,
+      "ewram_bytes": 226482,
+      "iwram_bytes": 28336,
+      "artifacts": {
+        "gba": {
+          "bytes": 33554432,
+          "sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321"
+        },
+        "elf": {
+          "bytes": 27019216,
+          "sha256": "b3633e3b94b6874ae370790ee16a2edc2c0b3b41e593822eff4fc20c671e2bd5"
+        },
+        "map": {
+          "bytes": 5811322,
+          "sha256": "d04086905b4ad6ace5899892082ae34ff2b705de20888cac8fb74c7bf8169988"
+        }
+      },
+      "growth_over_same_profile22_baseline": 106772
+    }
+  },
+  "scope": "SOURCE/DEV only:22 production-prefix maps preserved +44 temporary maps, not production acceptance",
+  "host_tests": {
+    "producer": {
+      "passed": 13,
+      "total": 13,
+      "seconds": 17.876
+    },
+    "four_renderer_receipt_replays": [
+      {
+        "folder": "battle-zone-center-shells",
+        "unchanged_output_files": 110,
+        "changed_metadata_keys": [
+          "input_sha256"
+        ]
+      },
+      {
+        "folder": "battle-zone-north",
+        "unchanged_output_files": 31,
+        "changed_metadata_keys": [
+          "engine_tree"
+        ]
+      },
+      {
+        "folder": "frontier-facilities",
+        "unchanged_output_files": 68,
+        "changed_metadata_keys": [
+          "source_sha256"
+        ]
+      },
+      {
+        "folder": "league-neutral-centers",
+        "unchanged_output_files": 29,
+        "changed_metadata_keys": [
+          "input_sha256"
+        ]
+      }
+    ],
+    "whole_stack_ci": "Prior exact499 CI801 tests:4fail,8error,1skip. Four metadata failures now locally repaired with238 output hashes unchanged;8 old runtime pin errors remain and are not removed."
+  },
+  "static": {
+    "scope": "Unfiltered actual44 temporary maps on accepted22-slot baseline; no findings suppressed",
+    "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+    "base": "284503e76145052f420ec1d2debe8e1611093f09",
+    "maps": [
+      "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+      "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+      "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+      "MAP_SINNOH_FRONTIER_GATE",
+      "MAP_FIGHT_AREA",
+      "MAP_SINNOH_FRONTIER_TOWER1",
+      "MAP_SINNOH_FRONTIER_TOWER2",
+      "MAP_SINNOH_FRONTIER_TOWER3",
+      "MAP_SINNOH_FRONTIER_HALL1",
+      "MAP_SINNOH_FRONTIER_HALL2",
+      "MAP_SINNOH_FRONTIER_FACTORY1",
+      "MAP_SINNOH_FRONTIER_FACTORY2",
+      "MAP_SINNOH_FRONTIER_CASTLE",
+      "MAP_SINNOH_FRONTIER_ARCADE1",
+      "MAP_SINNOH_FRONTIER_ARCADE2",
+      "MAP_SURVIVAL_AREA",
+      "MAP_RESORT_AREA",
+      "MAP_ROUTE228",
+      "MAP_SINNOH_FIGHTAREA_CENTER_1F",
+      "MAP_SINNOH_FIGHTAREA_CENTER_2F",
+      "MAP_SINNOH_SURVIVALAREA_CENTER_1F",
+      "MAP_SINNOH_SURVIVALAREA_CENTER_2F",
+      "MAP_SINNOH_RESORTAREA_CENTER_1F",
+      "MAP_SINNOH_RESORTAREA_CENTER_2F",
+      "MAP_SINNOH_FIGHTAREAHOUSE1",
+      "MAP_SINNOH_FIGHTAREAHOUSE2",
+      "MAP_SINNOH_SURVIVALAREAHOUSE1",
+      "MAP_SINNOH_SURVIVALAREAHOUSE2",
+      "MAP_SINNOH_SURVIVALAREAHOUSE3",
+      "MAP_SINNOH_RESORTAREAHOUSE1",
+      "MAP_SINNOH_RESORTAREAHOUSE2",
+      "MAP_SINNOH_ROUTE228HOUSE1",
+      "MAP_SINNOH_ROUTE228HOUSE2",
+      "MAP_ROUTE225",
+      "MAP_ROUTE226",
+      "MAP_ROUTE229",
+      "MAP_ROUTE230",
+      "MAP_ROUTE227",
+      "MAP_SINNOH_STARK_OUTSIDE",
+      "MAP_SINNOH_STARK_ROOM1",
+      "MAP_SINNOH_STARK_ROOM3",
+      "MAP_SINNOH_STARK_ROOM2_WEST",
+      "MAP_SINNOH_STARK_ROOM2_CENTER",
+      "MAP_SINNOH_STARK_ROOM2_EAST"
+    ],
+    "verdict": "FAIL",
+    "findings": [
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            26
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            27
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            38
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              38
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            39
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              39
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            40
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              40
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            41
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              41
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            42
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              42
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            43
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              43
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            44
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              44
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            47
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              47
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            48
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              48
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            49
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              49
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            50
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              50
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            58
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              58
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            66
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              66
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            67
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              67
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            68
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              68
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                58
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                66
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                67
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                68
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                58
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                66
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                67
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                68
+              ]
+            ]
+          ],
+          "count": 206
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            24
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+            [
+              31,
+              24
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            22
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              22
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            23
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              23
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            26
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            27
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            63
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              63
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            20
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            53
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              53
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            54
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              54
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                12,
+                34
+              ],
+              [
+                0,
+                20
+              ]
+            ],
+            [
+              [
+                0,
+                62
+              ],
+              [
+                0,
+                20
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                12,
+                34
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                62
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                24
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                25
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                28
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                29
+              ]
+            ]
+          ],
+          "count": 34
+        }
+      },
+      {
+        "map": "MAP_ROUTE228",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                21,
+                37
+              ],
+              [
+                7,
+                65
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                14,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                15,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                16,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                17,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                18,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                19,
+                93
+              ]
+            ],
+            [
+              [
+                7,
+                65
+              ],
+              [
+                21,
+                37
+              ]
+            ]
+          ],
+          "count": 54
+        }
+      },
+      {
+        "map": "MAP_ROUTE226",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                0,
+                4
+              ],
+              [
+                76,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                77,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                78,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                79,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                80,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                81,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                82,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                83,
+                0
+              ]
+            ]
+          ],
+          "count": 120
+        }
+      },
+      {
+        "map": "MAP_ROUTE227",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                20,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                20,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                21,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                21,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                22,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                22,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                23,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                23,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ]
+          ],
+          "count": 40
+        }
+      },
+      {
+        "map": "MAP_ROUTE227",
+        "code": "one-way-pocket",
+        "detail": {
+          "tiles": [
+            [
+              16,
+              22
+            ],
+            [
+              16,
+              23
+            ],
+            [
+              16,
+              24
+            ],
+            [
+              17,
+              22
+            ],
+            [
+              17,
+              23
+            ],
+            [
+              17,
+              24
+            ],
+            [
+              18,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              18,
+              22
+            ],
+            [
+              18,
+              23
+            ],
+            [
+              18,
+              24
+            ],
+            [
+              19,
+              16
+            ]
+          ],
+          "count": 92
+        }
+      }
+    ],
+    "code_counts": {
+      "seam-mismatch": 26,
+      "exit-unreachable": 5,
+      "one-way-pocket": 1
+    }
+  },
+  "runtime": {
+    "normal": {
+      "core_controller": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "4c05bed5c7ca0ed131e72cece140cb3653df0161d51bcee4e6c76549083a79c7",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "static_findings": [],
+        "save_before": "658cf1b3b0bffae978ba7d910f1483d7c2f3e1e91b98216263bbd0473db72b67",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "658cf1b3b0bffae978ba7d910f1483d7c2f3e1e91b98216263bbd0473db72b67",
+        "verdict": "PASS"
+      },
+      "portable_cli": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "03f92fa32a0d13adc5518549740ade5a7178a065e2b4e6667faa73fb3c1c3e23",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "portable_fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "static_findings": [],
+        "save_before": "d95e00a85b668fbff44e29b43900a20db970fb66a848884387a28405273d362e",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "d95e00a85b668fbff44e29b43900a20db970fb66a848884387a28405273d362e",
+        "verdict": "PASS"
+      }
+    },
+    "release": {
+      "core_controller": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "4c05bed5c7ca0ed131e72cece140cb3653df0161d51bcee4e6c76549083a79c7",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "static_findings": [],
+        "save_before": "481767e2c73a35453e600a258c8c7689da18f33ea5cb9356ae8ecf5d2c361488",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "481767e2c73a35453e600a258c8c7689da18f33ea5cb9356ae8ecf5d2c361488",
+        "verdict": "PASS"
+      },
+      "portable_cli": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "03f92fa32a0d13adc5518549740ade5a7178a065e2b4e6667faa73fb3c1c3e23",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "portable_fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "static_findings": [],
+        "save_before": "0e5a94d95f88dcec70b133590456f07f942ea3cb20b550d44348acdc3efec7c3",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "0e5a94d95f88dcec70b133590456f07f942ea3cb20b550d44348acdc3efec7c3",
+        "verdict": "PASS"
+      }
+    }
+  },
+  "retained_failure": {
+    "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+    "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+    "base": "284503e76145052f420ec1d2debe8e1611093f09",
+    "profile": "normal",
+    "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+    "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+    "checks": [
+      {
+        "name": "new66-slot fixture starts FightArea",
+        "ok": true,
+        "at": [
+          "MAP_FIGHT_AREA",
+          [
+            23,
+            5
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (start)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            19
+          ]
+        ]
+      },
+      {
+        "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+        "ok": true,
+        "leg": "back",
+        "expected": [
+          "MAP_FIGHT_AREA",
+          [
+            [
+              50,
+              9
+            ]
+          ]
+        ],
+        "got": [
+          "MAP_FIGHT_AREA",
+          [
+            50,
+            9
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            20
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            16,
+            51
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+        "ok": true,
+        "leg": "back",
+        "expected": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            [
+              7,
+              2
+            ]
+          ]
+        ],
+        "got": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            2
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            16,
+            52
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual left campus crossing",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+          [
+            31,
+            25
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual left campus reciprocal return",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            25
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (center after left)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual right campus crossing",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+          [
+            0,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual right campus reciprocal return",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (center after right)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            24
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            22
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            22
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            23
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            23
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            26
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            26
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            27
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            63
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            63
+          ]
+        ]
+      },
+      {
+        "name": "all6 reachable blocked center faces exercised",
+        "ok": true,
+        "count": 6
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            2
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual native menu task and valid cursor",
+        "ok": false,
+        "tasks": [
+          "Task_WeatherMain",
+          "Task_RunPerStepCallback",
+          "Task_MuddySlope",
+          "Task_RunTimeBasedEvents"
+        ],
+        "actions": 0,
+        "cursor": 0
+      },
+      {
+        "name": "bounded run completed",
+        "ok": false,
+        "error": "AssertionError('native menu')"
+      }
+    ],
+    "error": "AssertionError('native menu')",
+    "verdict": "FAIL"
+  },
+  "failure_explanation": "Initial private probe omitted settling before START and observed no menu:31/33. Same immutable ROM passed34/34 after field settle; no engine source change. Two no-window startup attempts retained; successful fresh Continue follows exact saved flash.",
+  "native": {
+    "status": "RUNNING_NOT_PASS",
+    "command_compile": "make -j8 -O CRIES=off TESTS=Averon pokeemerald-cries-off-test.elf",
+    "command_run": "make -j2 -O CRIES=off TESTS=Averon check",
+    "runner_pid": 260523,
+    "active_worker_pid": 260525,
+    "note": "Do not substitute CI inherited22-map322/322 or historic19+44 partial313PASS. Expected baseline/definitions unchanged."
+  },
+  "integration_blockers": [
+    "Original305 stacked base underground@855e9779 lists inherited17 protected engine paths; no handoff recycled or manager marker requested to paper over it.",
+    "Manager6430989943 requires dependency-accurate clean-main extraction, not blind retargeting1,908 source files. Initial actual execution/import trace found229 source paths,7 already identical on main.",
+    "8 older DEV preparation baseline/slot/native-fixture repins remain separate work; do not remove tests or weaken guards.",
+    "Full44 static remainsFAIL32. Six reachable center faces are physically verified blocked, not all26 classified; Route226/227/228 and pocket unresolved.",
+    "307 operative/inactive workflows obsolete and not authorized for current revised baseline; no dispatch."
+  ],
+  "original_legacy_flash_sha256": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d"
+}
