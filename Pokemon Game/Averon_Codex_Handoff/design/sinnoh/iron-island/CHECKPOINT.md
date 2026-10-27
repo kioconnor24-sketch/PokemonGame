@@ -43,6 +43,25 @@ Use `prepare_runtime.py --repo <disposable checkout> --install` only on a marked
 | Static `map_qa`, 13 maps | 0 findings |
 | First 10-map NORMAL run (ROM `0174858f…`) | 52/54. Both failures were the original split portal: the trigger sat beside the arrival warp, so the return never fired. Fixed in `c02eb666`. |
 | W1b 13-map NORMAL (ROM `7df42ba8…`) | 145/147, Save → fresh Continue 3/3. Both portals and every door pass. The two failures were the B1F and B2F **up-ladder** round trips: the tool stood on the ladder and pushed away. A ladder warps on step-on, so the tooling now approaches it from a neighbour (#252 `eca0a39e`). The geometry is unchanged. |
-| W1b RELEASE | W1B_RELEASE |
+| W1b RELEASE (ROM `69f1a8bd…`), old tooling | 145/149, Continue 3/3. The 4 failures were ladder **return** legs: the tool stepped back onto the ladder. Fixed in #252 `8027173f`. |
+| **Integration gate NORMAL, 19 maps** (head `21b0a614`, ROM `c04b34bd…`, tooling `8027173f`) | **252/252**, Save → fresh Continue **3/3**. Every ladder, portal and door passes both ways. |
+| Integration gate RELEASE (ROM `4e08a087…`) | in progress at handoff: 204 checks, 0 failures so far. Results go on PR #258. |
 
 **Build note:** `map_data_rules.mk:32` can run `mapjson groups` twice under `make -j` and empty `src/data/heal_locations.json`. Every build here restores the file first and requires it unchanged afterwards. The one failed RELEASE build was caught by this exit-code gate.
+
+## Later additions (SOURCE + static; runtime only where stated)
+
+| Commit | Addition |
+| --- | --- |
+| `06259d7b` | Iron Island B3F |
+| `d1b4cbf5`-era | Canalave House3–6 (door picture 525 → real door 537) |
+| `250dfb13` | Canalave Library 1F/2F, on stock Lilycove Museum layouts |
+| `21b0a614` | Iron Island second cave entrance (small hill ↔ B1F). The 19-map gate above covers it. |
+| `c862edce` | Fullmoon Island: new forested island via the harbor's second gangway (7,10). SOURCE only. |
+
+## Reproduce QA
+
+The scripts in `qa/` are the ones used in this lane:
+- `gbuild.sh` builds guarded against the `heal_locations.json` race, #263.
+- `gate.sh` runs the integration gate.
+- `static_scene.py` statically audits an overlay batch on a Codex family scene.

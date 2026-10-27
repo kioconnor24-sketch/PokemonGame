@@ -1,0 +1,3743 @@
+{
+  "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+  "production_base": "284503e76145052f420ec1d2debe8e1611093f09",
+  "base_engine_tree": "320fc1f48b1d1da85a83bcf943dbb30103379e0f",
+  "generated_git_tree": "ba9a7a0f8501f6012ecfb43638bbb235808cf370",
+  "generated_engine_tree": "2f416e892847e82e66c8e1fed63eeb164d4b20c2",
+  "note": "Generated Git-index tree, not a production commit. Verified all191 actual installed output hashes.22 original maps +44 temporary maps. No new permanent IDs.",
+  "profiles": {
+    "NORMAL": {
+      "command": "make -j8 -O CRIES=off all",
+      "exit": 0,
+      "linked_rom_bytes": 17503376,
+      "ewram_bytes": 226480,
+      "iwram_bytes": 28392,
+      "artifacts": {
+        "gba": {
+          "bytes": 33554432,
+          "sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95"
+        },
+        "elf": {
+          "bytes": 26939116,
+          "sha256": "f11e16d2cf7d103ee6b58f9a2b80a1320ac30d963ad01e10d4164405d27d08fa"
+        },
+        "map": {
+          "bytes": 4622761,
+          "sha256": "bfc218c669bac928549bbb0206397135c6525a9ef1385a624ae89fa21f92efa7"
+        }
+      },
+      "growth_over_same_profile22_baseline": 106756
+    },
+    "RELEASE": {
+      "command": "make -j8 -O CRIES=off RELEASE=1 all",
+      "exit": 0,
+      "linked_rom_bytes": 17622512,
+      "ewram_bytes": 226482,
+      "iwram_bytes": 28336,
+      "artifacts": {
+        "gba": {
+          "bytes": 33554432,
+          "sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321"
+        },
+        "elf": {
+          "bytes": 27019216,
+          "sha256": "b3633e3b94b6874ae370790ee16a2edc2c0b3b41e593822eff4fc20c671e2bd5"
+        },
+        "map": {
+          "bytes": 5811322,
+          "sha256": "d04086905b4ad6ace5899892082ae34ff2b705de20888cac8fb74c7bf8169988"
+        }
+      },
+      "growth_over_same_profile22_baseline": 106772
+    }
+  },
+  "scope": "SOURCE/DEV only:22 production-prefix maps preserved +44 temporary maps, not production acceptance",
+  "host_tests": {
+    "producer": {
+      "passed": 13,
+      "total": 13,
+      "seconds": 17.876
+    },
+    "four_renderer_receipt_replays": [
+      {
+        "folder": "battle-zone-center-shells",
+        "unchanged_output_files": 110,
+        "changed_metadata_keys": [
+          "input_sha256"
+        ]
+      },
+      {
+        "folder": "battle-zone-north",
+        "unchanged_output_files": 31,
+        "changed_metadata_keys": [
+          "engine_tree"
+        ]
+      },
+      {
+        "folder": "frontier-facilities",
+        "unchanged_output_files": 68,
+        "changed_metadata_keys": [
+          "source_sha256"
+        ]
+      },
+      {
+        "folder": "league-neutral-centers",
+        "unchanged_output_files": 29,
+        "changed_metadata_keys": [
+          "input_sha256"
+        ]
+      }
+    ],
+    "whole_stack_ci": "Prior exact499 CI801 tests:4fail,8error,1skip. Four metadata failures now locally repaired with238 output hashes unchanged;8 old runtime pin errors remain and are not removed."
+  },
+  "static": {
+    "scope": "Unfiltered actual44 temporary maps on accepted22-slot baseline; no findings suppressed",
+    "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+    "base": "284503e76145052f420ec1d2debe8e1611093f09",
+    "maps": [
+      "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+      "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+      "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+      "MAP_SINNOH_FRONTIER_GATE",
+      "MAP_FIGHT_AREA",
+      "MAP_SINNOH_FRONTIER_TOWER1",
+      "MAP_SINNOH_FRONTIER_TOWER2",
+      "MAP_SINNOH_FRONTIER_TOWER3",
+      "MAP_SINNOH_FRONTIER_HALL1",
+      "MAP_SINNOH_FRONTIER_HALL2",
+      "MAP_SINNOH_FRONTIER_FACTORY1",
+      "MAP_SINNOH_FRONTIER_FACTORY2",
+      "MAP_SINNOH_FRONTIER_CASTLE",
+      "MAP_SINNOH_FRONTIER_ARCADE1",
+      "MAP_SINNOH_FRONTIER_ARCADE2",
+      "MAP_SURVIVAL_AREA",
+      "MAP_RESORT_AREA",
+      "MAP_ROUTE228",
+      "MAP_SINNOH_FIGHTAREA_CENTER_1F",
+      "MAP_SINNOH_FIGHTAREA_CENTER_2F",
+      "MAP_SINNOH_SURVIVALAREA_CENTER_1F",
+      "MAP_SINNOH_SURVIVALAREA_CENTER_2F",
+      "MAP_SINNOH_RESORTAREA_CENTER_1F",
+      "MAP_SINNOH_RESORTAREA_CENTER_2F",
+      "MAP_SINNOH_FIGHTAREAHOUSE1",
+      "MAP_SINNOH_FIGHTAREAHOUSE2",
+      "MAP_SINNOH_SURVIVALAREAHOUSE1",
+      "MAP_SINNOH_SURVIVALAREAHOUSE2",
+      "MAP_SINNOH_SURVIVALAREAHOUSE3",
+      "MAP_SINNOH_RESORTAREAHOUSE1",
+      "MAP_SINNOH_RESORTAREAHOUSE2",
+      "MAP_SINNOH_ROUTE228HOUSE1",
+      "MAP_SINNOH_ROUTE228HOUSE2",
+      "MAP_ROUTE225",
+      "MAP_ROUTE226",
+      "MAP_ROUTE229",
+      "MAP_ROUTE230",
+      "MAP_ROUTE227",
+      "MAP_SINNOH_STARK_OUTSIDE",
+      "MAP_SINNOH_STARK_ROOM1",
+      "MAP_SINNOH_STARK_ROOM3",
+      "MAP_SINNOH_STARK_ROOM2_WEST",
+      "MAP_SINNOH_STARK_ROOM2_CENTER",
+      "MAP_SINNOH_STARK_ROOM2_EAST"
+    ],
+    "verdict": "FAIL",
+    "findings": [
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            26
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            27
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            38
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              38
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            39
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              39
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            40
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              40
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            41
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              41
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            42
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              42
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            43
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              43
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            44
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              44
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            47
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              47
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            48
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              48
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            49
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              49
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            50
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              50
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            58
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              58
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            66
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              66
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            67
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              67
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            68
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              0,
+              68
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                58
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                66
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                67
+              ]
+            ],
+            [
+              [
+                20,
+                34
+              ],
+              [
+                31,
+                68
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                58
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                66
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                67
+              ]
+            ],
+            [
+              [
+                31,
+                25
+              ],
+              [
+                31,
+                68
+              ]
+            ]
+          ],
+          "count": 206
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            24
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+            [
+              31,
+              24
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            22
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              22
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            23
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              23
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            26
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              26
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            27
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              27
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "right",
+          "tile": [
+            31,
+            63
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+            [
+              0,
+              63
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            20
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              20
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            53
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              53
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "seam-mismatch",
+        "detail": {
+          "direction": "left",
+          "tile": [
+            0,
+            54
+          ],
+          "faces": [
+            "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            [
+              31,
+              54
+            ]
+          ]
+        }
+      },
+      {
+        "map": "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                12,
+                34
+              ],
+              [
+                0,
+                20
+              ]
+            ],
+            [
+              [
+                0,
+                62
+              ],
+              [
+                0,
+                20
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                12,
+                34
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                62
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                24
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                25
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                28
+              ]
+            ],
+            [
+              [
+                0,
+                20
+              ],
+              [
+                0,
+                29
+              ]
+            ]
+          ],
+          "count": 34
+        }
+      },
+      {
+        "map": "MAP_ROUTE228",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                21,
+                37
+              ],
+              [
+                7,
+                65
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                14,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                15,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                16,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                17,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                18,
+                93
+              ]
+            ],
+            [
+              [
+                21,
+                37
+              ],
+              [
+                19,
+                93
+              ]
+            ],
+            [
+              [
+                7,
+                65
+              ],
+              [
+                21,
+                37
+              ]
+            ]
+          ],
+          "count": 54
+        }
+      },
+      {
+        "map": "MAP_ROUTE226",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                0,
+                4
+              ],
+              [
+                76,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                77,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                78,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                79,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                80,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                81,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                82,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                4
+              ],
+              [
+                83,
+                0
+              ]
+            ]
+          ],
+          "count": 120
+        }
+      },
+      {
+        "map": "MAP_ROUTE227",
+        "code": "exit-unreachable",
+        "detail": {
+          "pairs": [
+            [
+              [
+                20,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                20,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                21,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                21,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                22,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                22,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ],
+            [
+              [
+                23,
+                59
+              ],
+              [
+                28,
+                0
+              ]
+            ],
+            [
+              [
+                23,
+                59
+              ],
+              [
+                29,
+                0
+              ]
+            ]
+          ],
+          "count": 40
+        }
+      },
+      {
+        "map": "MAP_ROUTE227",
+        "code": "one-way-pocket",
+        "detail": {
+          "tiles": [
+            [
+              16,
+              22
+            ],
+            [
+              16,
+              23
+            ],
+            [
+              16,
+              24
+            ],
+            [
+              17,
+              22
+            ],
+            [
+              17,
+              23
+            ],
+            [
+              17,
+              24
+            ],
+            [
+              18,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              18,
+              22
+            ],
+            [
+              18,
+              23
+            ],
+            [
+              18,
+              24
+            ],
+            [
+              19,
+              16
+            ]
+          ],
+          "count": 92
+        }
+      }
+    ],
+    "code_counts": {
+      "seam-mismatch": 26,
+      "exit-unreachable": 5,
+      "one-way-pocket": 1
+    }
+  },
+  "runtime": {
+    "normal": {
+      "core_controller": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "4c05bed5c7ca0ed131e72cece140cb3653df0161d51bcee4e6c76549083a79c7",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "static_findings": [],
+        "save_before": "658cf1b3b0bffae978ba7d910f1483d7c2f3e1e91b98216263bbd0473db72b67",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "658cf1b3b0bffae978ba7d910f1483d7c2f3e1e91b98216263bbd0473db72b67",
+        "verdict": "PASS"
+      },
+      "portable_cli": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "03f92fa32a0d13adc5518549740ade5a7178a065e2b4e6667faa73fb3c1c3e23",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "portable_fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "normal",
+        "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+        "static_findings": [],
+        "save_before": "d95e00a85b668fbff44e29b43900a20db970fb66a848884387a28405273d362e",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "d95e00a85b668fbff44e29b43900a20db970fb66a848884387a28405273d362e",
+        "verdict": "PASS"
+      }
+    },
+    "release": {
+      "core_controller": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "4c05bed5c7ca0ed131e72cece140cb3653df0161d51bcee4e6c76549083a79c7",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "static_findings": [],
+        "save_before": "481767e2c73a35453e600a258c8c7689da18f33ea5cb9356ae8ecf5d2c361488",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "481767e2c73a35453e600a258c8c7689da18f33ea5cb9356ae8ecf5d2c361488",
+        "verdict": "PASS"
+      },
+      "portable_cli": {
+        "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+        "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+        "base": "284503e76145052f420ec1d2debe8e1611093f09",
+        "profile": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+        "host_probe_sha256": "03f92fa32a0d13adc5518549740ade5a7178a065e2b4e6667faa73fb3c1c3e23",
+        "checks": [
+          {
+            "name": "new66-slot fixture starts FightArea",
+            "ok": true,
+            "at": [
+              "MAP_FIGHT_AREA",
+              [
+                23,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_FIGHT_AREA",
+              [
+                [
+                  50,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_FIGHT_AREA",
+              [
+                50,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                51
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                [
+                  7,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                16,
+                52
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+              [
+                31,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual left campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                25
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after left)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus crossing",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual right campus reciprocal return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (center after right)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                0,
+                24
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                26
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                27
+              ]
+            ]
+          },
+          {
+            "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ],
+            "after": [
+              "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+              [
+                31,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "all6 reachable blocked center faces exercised",
+            "ok": true,
+            "count": 6
+          },
+          {
+            "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "actual native menu task and valid cursor",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B returns to same field",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "game-written SAVE after campus return",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          }
+        ],
+        "verdict": "PASS",
+        "flash_problems": []
+      },
+      "portable_fresh_continue": {
+        "maps": [
+          "MAP_SINNOH_FRONTIER_GATE"
+        ],
+        "build": "release",
+        "rom_sha256": "eb4fed33f2765b60036fad8dbbf72c60b2b5fcb7d964636f9d2ab435a7b38321",
+        "static_findings": [],
+        "save_before": "0e5a94d95f88dcec70b133590456f07f942ea3cb20b550d44348acdc3efec7c3",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SINNOH_FRONTIER_GATE",
+              [
+                7,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "0e5a94d95f88dcec70b133590456f07f942ea3cb20b550d44348acdc3efec7c3",
+        "verdict": "PASS"
+      }
+    }
+  },
+  "retained_failure": {
+    "scope": "Bounded real controller FightArea/Gate/Campus; not full44-map acceptance",
+    "source_sha": "499e79d727e6cd039e1f9f4af3086c9fda2fbcf2",
+    "base": "284503e76145052f420ec1d2debe8e1611093f09",
+    "profile": "normal",
+    "rom_sha256": "b8d5555f7727e722e332fbaae6f265b51b121c9a3a7f10d785312ca9ed4ada95",
+    "dev_entry": "existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused",
+    "checks": [
+      {
+        "name": "new66-slot fixture starts FightArea",
+        "ok": true,
+        "at": [
+          "MAP_FIGHT_AREA",
+          [
+            23,
+            5
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (start)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_GATE via warp)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            19
+          ]
+        ]
+      },
+      {
+        "name": "MAP_FIGHT_AREA warp 0 (50, 9) -> MAP_SINNOH_FRONTIER_GATE and back",
+        "ok": true,
+        "leg": "back",
+        "expected": [
+          "MAP_FIGHT_AREA",
+          [
+            [
+              50,
+              9
+            ]
+          ]
+        ],
+        "got": [
+          "MAP_FIGHT_AREA",
+          [
+            50,
+            9
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (MAP_FIGHT_AREA after warp round trip)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            20
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_CAMPUSCENTER via warp)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "an exit is reachable after warping into MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            16,
+            51
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_GATE warp 0 (7, 2) -> MAP_SINNOH_FRONTIER_CAMPUSCENTER and back",
+        "ok": true,
+        "leg": "back",
+        "expected": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            [
+              7,
+              2
+            ]
+          ]
+        ],
+        "got": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            2
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (MAP_SINNOH_FRONTIER_GATE after warp round trip)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            16,
+            52
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_CAMPUSCENTER)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual left campus crossing",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSWEST",
+          [
+            31,
+            25
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSWEST)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual left campus reciprocal return",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            25
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (center after left)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual right campus crossing",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSEAST",
+          [
+            0,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (inside MAP_SINNOH_FRONTIER_CAMPUSEAST)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual right campus reciprocal return",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (center after right)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (0, 24) pushing left is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            24
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            0,
+            24
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 22) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            22
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            22
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 23) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            23
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            23
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 26) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            26
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            26
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 27) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            27
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "name": "MAP_SINNOH_FRONTIER_CAMPUSCENTER (31, 63) pushing right is blocked",
+        "ok": true,
+        "before": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            63
+          ]
+        ],
+        "after": [
+          "MAP_SINNOH_FRONTIER_CAMPUSCENTER",
+          [
+            31,
+            63
+          ]
+        ]
+      },
+      {
+        "name": "all6 reachable blocked center faces exercised",
+        "ok": true,
+        "count": 6
+      },
+      {
+        "name": "ordinary route reaches MAP_SINNOH_FRONTIER_GATE",
+        "ok": true,
+        "at": [
+          "MAP_SINNOH_FRONTIER_GATE",
+          [
+            7,
+            2
+          ]
+        ]
+      },
+      {
+        "name": "follower visible (arrival MAP_SINNOH_FRONTIER_GATE)",
+        "ok": true,
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        }
+      },
+      {
+        "name": "actual native menu task and valid cursor",
+        "ok": false,
+        "tasks": [
+          "Task_WeatherMain",
+          "Task_RunPerStepCallback",
+          "Task_MuddySlope",
+          "Task_RunTimeBasedEvents"
+        ],
+        "actions": 0,
+        "cursor": 0
+      },
+      {
+        "name": "bounded run completed",
+        "ok": false,
+        "error": "AssertionError('native menu')"
+      }
+    ],
+    "error": "AssertionError('native menu')",
+    "verdict": "FAIL"
+  },
+  "failure_explanation": "Initial private probe omitted settling before START and observed no menu:31/33. Same immutable ROM passed34/34 after field settle; no engine source change. Two no-window startup attempts retained; successful fresh Continue follows exact saved flash.",
+  "native": {
+    "status": "PASS",
+    "command_compile": "make -j8 -O CRIES=off TESTS=Averon pokeemerald-cries-off-test.elf",
+    "command_run": "make -j2 -O CRIES=off TESTS=Averon check",
+    "note": "Completed actual66-map run; no substitution of inherited22-map CI or old partial313 results. Baseline/test definitions unchanged.",
+    "passed": 322,
+    "total": 322,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Complete Averon-prefix native regression on actual generated66-map engine, NORMAL TEST build; not the unrelated full M1 all-prefix suite",
+    "log_sha256": "40013e73cf618722d737fdb25f42b772fadcd0ea2e0bdfa479a6aee6eb30175d",
+    "test_identities": [
+      "Averon Mega Evolution still works",
+      "Averon Groudon and Kyogre holding their orbs do not undergo Primal Reversion",
+      "Averon Rare Candy respects the cap and becomes usable after the badge",
+      "Averon connection contract Sinnoh RAM header selects only overlapping signed offset edges",
+      "Averon corridor approved origins have names and survive boxed summary reads",
+      "Averon orb holders switched in mid-battle do not undergo Primal Reversion",
+      "Averon cry safety menu and field effects still start",
+      "Averon cry safety absent species completes without a previous player",
+      "Averon cry safety normal and by-mode cleanup preserve music and effects",
+      "Averon cry safety all modes and Mega stop without a seeded player",
+      "Averon cry safety cold stop and completion before any cry",
+      "Averon Linking Cord evolves Karrablast and Shelmet without a trade partner",
+      "Averon starters reach their first evolution only after the first badge opens the cap",
+      "Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits",
+      "Averon extended location experiment preserves candidate bits across all 24 permutations PC and OT rekey",
+      "Averon harvest fair reward requires delivery and cannot be duplicated",
+      "Averon field lab Dive connections preserve coordinates party and licenses in both directions",
+      "Averon licensed field actions refuse empty fainted and egg-only parties",
+      "Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing",
+      "Averon Pokemon follower visibility recovers on land after water traversal modes",
+      "Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction",
+      "Averon native obstacle preparation selects the facing object without learned HMs",
+      "Averon Field Kit is unavailable on fainted partners and eggs",
+      "Averon Fly map B returns to the same party and Field Kit can reopen",
+      "Averon Field Kit B returns to actions then party selection and exits cleanly",
+      "Averon Fly bounds preserves route and last-table-row map-warp fallback",
+      "Averon Fly bounds retains explicit island and Frontier destinations",
+      "Averon location Fly preserves all 154 explicit legacy destinations including Petalburg",
+      "Averon follower is hidden while surfing or underwater",
+      "Averon follower graphics carry the lead's shiny and female variants",
+      "Averon follower: a large one walks outdoors but not indoors; a small one does both",
+      "Averon follower changes when the party order or health changes",
+      "Averon grouped origin experiment loses distinct runtime detail across real PC flash and summary",
+      "Averon full TM pocket preserves the badge and allows a reward retry",
+      "Averon Gym reward link flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon home clinic and rival healing restores HP status and PP",
+      "Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically",
+      "Averon Lake Verity origin survives the real summary formatter unchanged",
+      "Averon legend a player loss leaves the encounter available",
+      "Averon legend a knockout records a defeat, not a capture",
+      "Averon legend a wild legendary's Whirlwind leaves it available",
+      "Averon legend check and retry macros report and restore availability",
+      "Averon legend battle macro clears the old outcome, fights, then records",
+      "Averon legend defeat is retryable only by the caller's policy or an explicit retry",
+      "Averon legend outcomes without a capture or knockout record nothing",
+      "Averon legend party: a captured legendary, its record and the party survive flash together",
+      "Averon location battle controller preserves all legacy bytes but not a new 13-bit identity",
+      "Averon location every 8-bit origin survives encryption PC withdrawal and rekeying",
+      "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+      "Averon map registry resolves every linked numeric ID within its original group",
+      "Averon northern flash reload preserves party PC legacy special origins and regional position",
+      "Averon northern map headers share only the three approved origin names",
+      "Averon tree observation needs the artist and cannot reset recorded progress",
+      "Averon optional event full pocket keeps the real script reward retryable",
+      "Averon foreign OT delivery preserves encrypted data when the party has space",
+      "Averon every breedable species hatches from a real base species",
+      "Averon clinic union-room check without InitUnionRoom copies nothing",
+      "Averon connection contract actual reciprocal boundary preserves party and region state",
+      "Averon cry safety ducking calls lower music only when cries are enabled",
+      "Averon cry safety title town route battle victory heal music starts",
+      "Averon cry safety real playmoncry waitmoncry bytecode resumes",
+      "Averon cry safety silent unpaired duck never lowers music",
+      "Averon cry safety script wait and replay restore music",
+      "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+      "Averon PC direct removal compacts an exhausted first middle or last slot in order",
+      "Averon PC items reject a partly fitting deposit atomically and allow retry after space is freed",
+      "Averon with every level cap lifted a Pokemon grows to level 100 and no further",
+      "Averon every conditional evolution satisfiable from the Pokemon's own data triggers",
+      "Averon every growth rate reaches level 100 and stops there",
+      "Averon every unconditional level and item evolution actually triggers",
+      "Averon every species fits in a follower graphics ID",
+      "Averon every enabled species learns only real, non-gimmick moves at valid levels",
+      "Averon every enabled species has a national dex number inside the save's dex flags",
+      "Averon every evolution of an enabled species leads to an enabled species",
+      "Averon region map access PokeNav refuses before changing or freeing the main menu",
+      "Averon region map access preserves legacy Fly map type restrictions",
+      "Averon region map access refuses Fly from Sinnoh without an approved grid",
+      "Averon region progression: the badge rule decides the badge-unlocked field move",
+      "Averon region progression: the badge rule decides which badges count",
+      "Averon region progression: Rare Candy stops at the active region's cap",
+      "Averon region progression: a Sinnoh profile's obedience level is the one the battle uses",
+      "Averon region progression: the active region and Sinnoh badges survive a flash save",
+      "Averon region progression: out-of-range profiles are refused and the previous one stays",
+      "Averon region progression: with no regional profile both regions keep today's level caps",
+      "Averon region adapters reject disabled map groups without changing the return warp",
+      "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+      "Averon starter evolution can be postponed with Everstone and resumes after removal",
+      "Averon every conditional evolution Averon can meet produces exactly its own form",
+      "Averon extended location experiment cannot infer a version from checksum-valid legacy unused bits",
+      "Averon harvest fair reward survives a full pocket and can be reclaimed",
+      "Averon developer Fly destination lands both player genders safely in Saltmere",
+      "Averon region save refuses a newer format: loads nothing and never overwrites it",
+      "Averon independent field licenses persist through actual flash save and load",
+      "Averon field licenses gate all seven native script actions without learned HMs",
+      "Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower",
+      "Averon native Dive preparation uses real surface and underwater tiles and refuses land",
+      "Averon region save reports both slots corrupt instead of mixing them",
+      "Averon licensed Field Kit refuses unusable terrain without trapping the party menu",
+      "Averon traversal respects configured follower policy and Fly map-type rules",
+      "Averon Field Kit fits alongside four learned actions and survives Back",
+      "Averon region save rejects a record copied from the other slot",
+      "Averon locked Field Kit actions return safely without changing map or licenses",
+      "Averon Fly bounds rejects invalid sections without replacing prepared warp or progress",
+      "Averon Fly bounds preserves League flag and position selection",
+      "Averon Fly bounds preserves both home genders and mapped legacy healing",
+      "Averon location Fly zero-filled gaps cannot replace a prepared warp with Petalburg",
+      "Averon follower after a flash save and load is the saved lead",
+      "Averon follower is respawned with the right species after each warp",
+      "Averon follower is removed for an empty party or while hidden by script",
+      "Averon follower is the first party Pokemon that is not fainted or an egg",
+      "Averon grouped origin experiment preserves all legacy bytes without modifying encryption",
+      "Averon Gym TM requires a badge and is granted only once",
+      "Averon Gym reward normal flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+      "Averon Verity flash reload preserves the new map position origin and regional return destination",
+      "Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group",
+      "Averon Lake Verity is section 220 in Sinnoh with its own name and popup",
+      "Averon legend a capture is recorded as caught",
+      "Averon legend a wild Pokemon escaping by Emergency Exit leaves it available",
+      "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+      "Averon region save round-trips both regions through flash without writing on load",
+      "Averon legend caught and defeated states survive a flash save and load",
+      "Averon legend a stale capture from an earlier battle is never recorded",
+      "Averon legend the upstream script pattern marks a teleported legendary caught",
+      "Averon legend capture is final and replaces an earlier defeat",
+      "Averon legend only a capture counts as caught and only a knockout as defeated",
+      "Averon location flash reload preserves all 256 PC origins party TV specials and region state",
+      "Averon location 13-bit experiment exposes legacy API truncation and special aliases",
+      "Averon location legacy names and region identities remain unchanged",
+      "Averon map registry IDs round trip through the actual signed warp fields",
+      "Averon map registry preserves group slots and disabled-region null entries",
+      "Averon northern summary names caught hatched and traded origins without changing encrypted data",
+      "Averon developer gift rejects missing prerequisite and full party without PC delivery",
+      "Averon optional event stages survive native flash and transient field reset",
+      "Averon optional event rewards require both prerequisites and cannot repeat",
+      "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+      "Averon PC items remain plaintext and unchanged when the Bag encryption key rotates",
+      "Averon PC items preserve adjacent entries through partial removal and exhausted-slot compaction",
+      "Averon PC items split a large deposit across bounded stacks without changing the Bag",
+      "Averon a Mega Evolved Pokemon is back in its base form in the party after battle",
+      "Averon every form reached in battle has an end-of-battle revert",
+      "Averon every enabled species survives the PC boxes and a flash save and load",
+      "Averon lists the evolution targets that only another region or an upstream map can reach",
+      "Averon every Mega Evolution by held stone uses a real Mega Stone",
+      "Averon every enabled species has usable follower graphics and paired palettes",
+      "Averon every enabled species has valid types, abilities and nonzero base stats",
+      "Averon a complete national dex is counted, stays inside its flags and survives a flash save",
+      "Averon every allowed form change of an enabled species leads to an enabled species",
+      "Averon region map access PokeNav still schedules the legacy map feature",
+      "Averon region map access wall map returns without replacing VBlank or allocating",
+      "Averon region map access retains every legacy section and rejects explicit Sinnoh",
+      "Averon region progression: the badge rule decides whiteout money in Sinnoh",
+      "Averon region progression: cap and obedience follow the player through travel, flash and whiteout",
+      "Averon region progression: a Sinnoh profile's cap limits EXP in a real battle",
+      "Averon region progression: a Sinnoh profile reads only the Sinnoh badge bank",
+      "Averon region adapters keep both badge banks independent and fail closed",
+      "Averon region save paths: power loss during a link save never mixes two saves",
+      "Averon region save paths: overwriting a different file seals and reloads the region state",
+      "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+      "Averon region save refusal: no save type or special sector write reaches flash",
+      "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+      "Averon region travel runs from an overworld script through the registered special",
+      "Averon region travel survives a save and load through flash",
+      "Averon region travel rejects invalid requests and changes nothing",
+      "Averon region travel stores the departure and arms the target region's warps",
+      "Averon respawn contract unregistered arrival stays local without selecting a nurse",
+      "Averon respawn contract valid script anchors preserve the regional record",
+      "Averon Route 201 origin survives the real summary formatter unchanged",
+      "Averon Route 202 origin survives the real summary formatter unchanged",
+      "Averon resource real party and Field Kit menus restore heap across repeated regional visits",
+      "Averon resource sprite slot exhaustion preserves live sprites and permits exact slot reuse",
+      "Averon resource heap fragmented capacity refuses oversized requests and coalesces after free",
+      "Averon Sandgem summary keeps NONE unassigned and special met values unnamed",
+      "Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names",
+      "Averon Sandgem setrespawn whites out in front of the Sandgem nurse",
+      "Averon recovers the previous progression when the newest flash slot is incomplete",
+      "Averon opening and Gym progression survive two native flash save and load cycles",
+      "Averon save bounds ID65535 unsigned primed recovery",
+      "Averon save bounds ID14 unsigned primed recovery",
+      "Averon save bounds ID65535 signed primed recovery",
+      "Averon save bounds ID14 signed primed recovery",
+      "Averon save bounds healthy slots retain old format and alternate normally",
+      "Averon a low-level save load alone leaves the RAM-only flag as it was",
+      "Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin",
+      "Averon scripted battle macro wraps one trainer battle between Begin and Finish",
+      "Averon scripted battles cannot be forfeited but ordinary trainer battles can",
+      "Averon story loss recovers in place with the party healed and money kept",
+      "Averon scripted battle finish clears no-whiteout on a win or a loss",
+      "Averon scripted battle tests run with a real no-whiteout flag",
+      "Averon an ordinary loss after a scripted battle whites out and pays money again",
+      "Averon chain battle damage and status carry back into the party",
+      "Averon scripted loss skips the whiteout and keeps the player's money",
+      "Averon reaccepting errands preserves active and completed progress",
+      "Averon Sinnoh resume refuses unallocated sections NONE and special met aliases",
+      "Averon Sinnoh resume reloads real endpoints and refuses all three map interfaces",
+      "Averon a TM move is taught only to a species whose teachable learnset has it",
+      "Averon every TM and HM item is in the TM pocket and teaches its own real move",
+      "Averon trade save refusal: wireless callback enters failure without writing",
+      "Averon trade save refusal: full-save task enters failure without writing",
+      "Averon transport refuses a physically wrong departing healer before caching its return",
+      "Averon transport refuses a wrong region cached healer without changing the transaction",
+      "Averon transport saved return selects the recorded point instead of the configured first arrival",
+      "Averon transport rejects invalid activation descriptors and leaves all travel state unchanged",
+      "Averon transport points validate physical region identity and indexed arrivals",
+      "Averon travel boundaries flash Continue preserves Sandgem origins PC and both badge banks",
+      "Averon travel boundaries refusal preserves an already armed destination",
+      "Averon Twinleaf Town is section 218 in Sinnoh with its own name and popup",
+      "Averon native whiteout heals and restores the home follower through flash with regional badges",
+      "Averon wild encounters: Repel blocks Pokemon below the lead's level on every Averon table",
+      "Averon a large EXP reward stops exactly at the cap without banking excess",
+      "Averon EXP options: the Gen 6+ unevolved bonus applies only after the evolution level",
+      "Averon EXP options: Gen 5 trainer bonus is 1.5x and reaches the EXP Share holder",
+      "Averon EXP Share: a holder at level 100 or above the cap gains nothing",
+      "Averon EXP Share: a trainer's Pokemon gives the same EXP as a wild one",
+      "Averon EXP Share: a participant that fainted gets no EXP",
+      "Averon EXP Share: only participants and holders gain, split half and half",
+      "Averon held items: Bestow to an uncaptured trainer Pokemon restores the player's non-Berry",
+      "Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries",
+      "Averon held items: capture returns both original items after Trick",
+      "Averon held items: Recycle remembers the donor of a consumed Berry",
+      "Averon held items: allied Trick preserves a Berry and restores a non-Berry in either slot order",
+      "Averon held items: Bestow after eating an original Berry does not duplicate its gift",
+      "Averon held items: an item taken from a wild Pokemon with Magician is kept",
+      "Averon held items: Bestow to a partner does not duplicate the item",
+      "Averon held items: Trick returns each side's own item after the battle",
+      "Averon held items: a Berry eaten in battle stays eaten",
+      "Averon Mega: Rayquaza Mega Evolves through Dragon Ascent without a stone",
+      "Averon Mega: a Mega Evolved Pokemon stays Mega after switching out and back",
+      "Averon Mega: only one Pokemon per trainer can Mega Evolve in a battle",
+      "Averon Mega endings: no second Mega Evolution after the first Mega Pokemon faints",
+      "Averon Mega endings: a Mega Evolved Pokemon that faints is in base form after a win",
+      "Averon Mega endings: the Pokemon reverts when the player Teleports away",
+      "Averon uses Set mode even when an old save requests Shift",
+      "Averon rejects all excluded gimmicks for both battlers",
+      "Averon Dark physical and Ghost special moves use separate attack stats",
+      "Averon coast trainer reuses the unused slot without expanding save flags",
+      "Averon Gym TM01 reward resolves to Work Up",
+      "Averon whiteout money: losing to a wild Pokemon also drops badge-based money",
+      "Averon whiteout money: a loss drops badge rate times the highest party level",
+      "Averon region save power loss at any sector write keeps the last whole slot",
+      "Averon region save rolls back across save counter wrap",
+      "Averon region save rejects a slot whose sectors come from two different saves",
+      "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+      "Averon region save rejects every single-bit flip in the record and loads the older slot",
+      "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+      "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+      "Averon region save paths: a link save rewrites the newest slot in place and reloads it",
+      "Averon region save paths: a Hall of Fame save seals and reloads the region state",
+      "Averon region save refusal: the save failed screen never wipes the refused save",
+      "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+      "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+      "Averon region travel power loss while saving keeps region and location together",
+      "Averon region travel special validates script values before narrowing",
+      "Averon region travel whiteout uses the healer of the region the player is in",
+      "Averon whiteout selects the local home or Alderfield clinic healer",
+      "Averon respawn contract healing alone preserves the previous respawn anchor",
+      "Averon respawn contract rejects invalid script healer IDs before narrowing",
+      "Averon Route 201 is section 217 in Sinnoh with its own name and popup",
+      "Averon Route 202 is section 219 in Sinnoh with its own name and popup",
+      "Averon resource reserved sprite palette banks survive exhaustion and free tag reuse",
+      "Averon resource linked field tilesets decompress within paired buffers and release heap",
+      "Averon Sandgem popup theme stays in bounds with fixed NONE and future codes",
+      "Averon Sandgem real summary formatter names caught hatched and traded origins",
+      "Averon Sandgem healer survives leaving Sinnoh, a flash save and the return trip",
+      "Averon Sandgem heal anchor is the tile below the Center door",
+      "Averon unclaimed rewards survive saving with a full pocket and remain retryable",
+      "Averon save bounds handle erased and invalid-ID slots without a backup",
+      "Averon save bounds ID65535 unsigned unprimed recovery",
+      "Averon save bounds ID14 unsigned unprimed recovery",
+      "Averon save bounds ID65535 signed unprimed recovery",
+      "Averon save bounds ID14 signed unprimed recovery",
+      "Averon RAM-only special flag is not restored from a save but the badge is",
+      "Averon no-whiteout flag lives in RAM outside every saved block",
+      "Averon scripted battle never reports a stale defeat from an earlier battle",
+      "Averon stale no-whiteout state is cleared before ordinary battles",
+      "Averon ambush loss respawns at the last heal location and keeps the badge",
+      "Averon scripted battle finish does not heal between chain battles",
+      "Averon scripted battle outcomes count losses, draws and forfeits as defeats",
+      "Averon scripted battle ended by the player's Explosion still counts as a safe defeat",
+      "Averon chain battle damage and status carry back for every Pokemon the player switched in",
+      "Averon scripted battle natives around a real battle report the result and clear the flag",
+      "Averon starter awards respect party capacity and cannot be duplicated",
+      "Averon first accepted errand survives all six household orders",
+      "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+      "Averon Sinnoh resume validates each linked layout boundary and indexed warp limit",
+      "Averon every TM and HM move can be learned by at least one enabled species",
+      "Averon trade save refusal: a supported full-save task still initializes",
+      "Averon trade save refusal: wired callback enters failure without writing",
+      "Averon transport saved return validation remains usable after an actual flash reload",
+      "Averon transport refuses an indexed departure even with matching inconsistent player coordinates",
+      "Averon transport accepts an indexed first arrival without substituting coordinates",
+      "Averon transport refuses missing or physically wrong region saved returns before mutation",
+      "Averon transport first arrival and saved return use the existing regional transaction",
+      "Averon transport rejects invalid section metadata before Hoenn display fallback",
+      "Averon travel boundaries indexed arrivals resolve the real map warp for Teleport and respawn",
+      "Averon Twinleaf origin survives the real summary formatter unchanged",
+      "Averon native whiteout heals and restores the clinic follower through flash with regional badges",
+      "Averon wild encounters: an existing map without a table reports no encounter header",
+      "Averon wild encounters: each existing Averon table generates only its own species and levels",
+      "Averon six-member party respects held EXP Share and the first cap",
+      "Averon EXP Share: both Pokemon on the field in a double battle share the EXP",
+      "Averon EXP Share: EXP is scaled by the level difference",
+      "Averon EXP Share: Pokemon switched in against the opponent share its EXP",
+      "Averon EXP Share lifecycle: EXP and held items survive two flash save and load cycles",
+      "Averon EXP Share lifecycle: a switched-in holder participates in both Gen 5 pools",
+      "Averon held items: a newly found item cannot replace or duplicate the borrowed original",
+      "Averon held items: capture cannot duplicate a player's same-ID donated item",
+      "Averon held items: Harvest remembers the donor of a consumed Berry",
+      "Averon held items: wild Magician loot is kept when a teammate started with the same item",
+      "Averon held items: returning a donated Berry never overwrites a different held Berry",
+      "Averon held items: Symbiosis after eating an original Berry does not duplicate its gift",
+      "Averon held items: a Berry given to a partner with Bestow goes back to the giver",
+      "Averon held items: an item the player steals from a trainer is not kept",
+      "Averon held items: a non-Berry item lost to a trainer is back after the battle",
+      "Averon Mega: a Mega Stone for another species does nothing",
+      "Averon Mega endings: the Pokemon reverts when the player loses the battle",
+      "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+      "Averon regional EXP Share keeps a capped holder's pool separate in a six-member party",
+      "Averon permits a legal held-stone Mega Evolution",
+      "Averon Elio generates the approved team with Work Up and a healing berry",
+      "Averon Gym preview generates two normal Pokemon for a double battle",
+      "Averon whiteout money: a loss never takes more money than the player has"
+    ]
+  },
+  "integration_blockers": [
+    "Original305 stacked base underground@855e9779 lists inherited17 protected engine paths; no handoff recycled or manager marker requested to paper over it.",
+    "Manager6430989943 requires dependency-accurate clean-main extraction, not blind retargeting1,908 source files. Initial actual execution/import trace found229 source paths,7 already identical on main.",
+    "8 older DEV preparation baseline/slot/native-fixture repins remain separate work; do not remove tests or weaken guards.",
+    "Full44 static remainsFAIL32. Six reachable center faces are physically verified blocked, not all26 classified; Route226/227/228 and pocket unresolved.",
+    "307 operative/inactive workflows obsolete and not authorized for current revised baseline; no dispatch."
+  ],
+  "original_legacy_flash_sha256": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d"
+}

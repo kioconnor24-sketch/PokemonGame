@@ -60,8 +60,22 @@
     "CanalaveCity_House6": {
       "layout": "LAYOUT_HOUSE1"
     },
+    "CanalaveCity_House7": {
+      "layout": "LAYOUT_HOUSE1"
+    },
     "CanalaveCity_Harbor": {
-      "layout": "LAYOUT_HARBOR"
+      "layout": "LAYOUT_CANALAVE_CITY_HARBOR",
+      "width": 24,
+      "height": 15,
+      "map_sha256": "f429549956c174616ad3e4b45edb4af5ba6e4a69277dd93fb12c56bbb687cf99",
+      "border_sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d"
+    },
+    "NewmoonIsland": {
+      "layout": "LAYOUT_NEWMOON_ISLAND",
+      "width": 34,
+      "height": 34,
+      "map_sha256": "655f3519e8b8760fe575f4bbcf8b11def32299d5a7765a14d07a1aaf01eea884",
+      "border_sha256": "09e6b43c8549e711f19a59dea03683b6c42176bdc528bf60fc0b9a0629720fbb"
     },
     "FullmoonIsland": {
       "layout": "LAYOUT_FULLMOON_ISLAND",
@@ -78,6 +92,8 @@
     "data/layouts/DewfordTown/map.bin": "f99942a2f630ca1fc16d7d84f7f831485934962c4477e8b1fa88cfbe30c61f74",
     "data/layouts/GraniteCave_1F/map.bin": "6e8e5420747a9e2c18c9ecc04e43e028cac70e6030a8015a52edcac739459bbf",
     "data/layouts/GraniteCave_B1F/map.bin": "b9598bdd24ac4358679e255dc07052b2687c2babef091ff6174115c19409c7c5",
+    "data/layouts/Harbor/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "data/layouts/Harbor/map.bin": "ec418c60c4f5cac3eb4ee9e2a29e1f48709e552411f67086a5352945001afcbc",
     "data/layouts/LakeVerity/map.bin": "f7fd0e8a1acd247c123b67df78d06cccfaf47bce9cc524af9d0db7a43ad1864a",
     "data/layouts/OreburghGate_1F/map.bin": "03fb0288b064076c4eaaa530ca49070bca2d416e81d31a718fcb94973cd499e2",
     "data/layouts/Route105/map.bin": "3426db0bbeca5baeb3971d5d60345400d01fff229a60c28ebe3745fd81558b14",

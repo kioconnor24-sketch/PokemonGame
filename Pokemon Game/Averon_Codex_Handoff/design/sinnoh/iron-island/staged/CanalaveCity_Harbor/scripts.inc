@@ -10,3 +10,8 @@ CanalaveCity_Harbor_EventScript_ToFullmoonIsland::
 	warp MAP_FULLMOON_ISLAND, 0
 	waitstate
 	end
+
+CanalaveCity_Harbor_EventScript_ToNewmoonIsland::
+	warp MAP_NEWMOON_ISLAND, 0
+	waitstate
+	end
