@@ -5,7 +5,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 ENGINE='Pokemon Game/engine'
-BASE='15557120ce3a2a7963fda0bfa0b81fe3db36e120'   # west packet B's gated head (30 production slots)
+BASE='9a7d02d55a6fc65686088e30da56d4e2ae6f5657'   # west packet B's gated head (30 production slots)
 ENGINE_TREE='63d0c037e0da9a93b5e1a968c078d9622b56c691'
 PRIOR_SLOTS=30
 s=importlib.util.spec_from_file_location('battle_dev_guarded_reuse',HERE.parent/'sunyshore-coast/prepare_runtime.py')

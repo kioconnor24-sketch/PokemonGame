@@ -14,7 +14,7 @@ import re
 import subprocess
 
 HERE=Path(__file__).resolve().parent
-BASE='15557120ce3a2a7963fda0bfa0b81fe3db36e120'
+BASE='9a7d02d55a6fc65686088e30da56d4e2ae6f5657'
 ENGINE='Pokemon Game/engine/'
 MAPS={'EternaCity':(60,55),'Route206_North':(9,11),'Route206':(28,120),
       'Route206_South':(9,11),'Route211_West':(36,28)}
