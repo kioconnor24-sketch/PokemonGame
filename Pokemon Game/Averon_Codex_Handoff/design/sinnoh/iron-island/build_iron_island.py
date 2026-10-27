@@ -12,8 +12,13 @@ Averon layout, and every composition rule is checked against those layouts:
   Dewford's house; the pier is Dewford's pier.
 - Iron Island 1F / B1F (General + Cave): rectangular chambers and rock blocks drawn with the wall kit of Averon's
   Oreburgh Gate 1F, the cave-mouth exit and ladders of Granite Cave.
-- Iron Island house, Canalave Harbor and Canalave Pokemon Center 1F reuse the existing shared layouts
-  LAYOUT_HOUSE1, LAYOUT_HARBOR and LAYOUT_POKEMON_CENTER_1F unchanged (no new layout, no services or NPCs).
+- Iron Island house and Canalave Pokemon Center 1F reuse the existing shared layouts LAYOUT_HOUSE1 and
+  LAYOUT_POKEMON_CENTER_1F unchanged (no services or NPCs).
+- Canalave Harbor is the stock harbor (LAYOUT_HARBOR) with its two-tile gangway widened to three: the left cap
+  and a gangway plank are copied one cell west (two changed cells), so each of Iron, Fullmoon and Newmoon Island
+  has its own step-on gangway tile.
+- Newmoon Island (34 x 34): the Fullmoon recipe (attested rectangular beach, Verity forest, Dewford pier) but a
+  dense, unbroken forest pierced by one L-shaped trail from the east pier to a glade in the north-west.
 - Canalave City overlay: derived from the merged canalave-west staging (read-only). Two of its closed buildings get
   doors: the Pokemon Center door gets a warp, and the closed pier house at (27-30, 13) gets the door metatile (537)
   of the same bank's north-west house in place of its doorless door picture (525). Nothing else changes.
@@ -48,8 +53,12 @@ def sha(data):
 
 
 class Engine:
-    def __init__(self, root):
+    """Read-only view of an engine tree. With base, files present under base (same relative paths) are read from
+    there instead: a pinned pre-integration snapshot for builders whose inputs were later integrated."""
+
+    def __init__(self, root, base=None):
         self.root = pathlib.Path(root)
+        self.base = pathlib.Path(base) if base else None
         layouts = json.loads((self.root / "data/layouts/layouts.json").read_text())["layouts"]
         self.layouts = {l["name"].removesuffix("_Layout"): l for l in layouts}
         self.layout_ids = {l["id"]: l for l in layouts}
@@ -62,7 +71,8 @@ class Engine:
         return l["width"], l["height"], list(struct.unpack("<%dH" % (len(raw) // 2), raw))
 
     def file(self, rel):
-        data = (self.root / rel).read_bytes()
+        pinned = self.base / rel if self.base else None
+        data = (pinned if pinned and pinned.is_file() else self.root / rel).read_bytes()
         self.read[rel] = sha(data)
         return data
 
@@ -201,6 +211,99 @@ def stamp_hill(eng, cells, width, x0, y0, w, h, door):
         cells[(y0 + h - 1) * width + x0 + w // 2] = eng.word("Route106", 48, 16, 167)   # open cave mouth
 
 
+def fullmoon(eng):
+    """Fullmoon Island (36 x 30): attested rectangular beach, grass, a dense Verity forest with a central glade and a
+    walkway from an east pier (Dewford's) whose end plank is the step-on portal back to the harbor."""
+    W, H = 36, 30
+    ocean, verity = eng.words(OCEAN_CORPUS), eng.words(("LakeVerity",))
+    water, sand, grass = eng.word("Route106", 26, 8, 368), eng.word("DewfordTown", 8, 9, 292), \
+        eng.word("LakeVerity", 19, 20, 1)
+    land = {y: (4, 29) for y in range(4, 26)}
+    grid = [["S" if y in land and land[y][0] <= x <= land[y][1] else "W" for x in range(W)] for y in range(H)]
+    table, cells = shore_table(eng), [water] * (W * H)
+    for y in range(H):
+        for x in range(W):
+            nb = tuple(0 <= x + dx < W and 0 <= y + dy < H and grid[y + dy][x + dx] == "S" for dx, dy in NB8)
+            if grid[y][x] == "W" and not any(nb):
+                continue
+            key = (grid[y][x],) + nb
+            if key not in table:
+                raise SystemExit(f"Fullmoon: unattested shore pattern at {(x, y)}: {key}")
+            cells[y * W + x] = ocean[table[key].most_common(1)[0][0]]
+    for y in range(6, 24):
+        for x in range(6, 28):
+            cells[y * W + x] = grass
+    glade = (12, 11, 21, 18)                                   # inclusive clearing, kept as grass
+    walk = {(x, 15) for x in range(22, 30)}                    # glade -> pier walkway
+    for ty in range(6, 24, 2):
+        for tx in range(6, 28, 2):
+            tiles = {(tx, ty), (tx + 1, ty), (tx, ty + 1), (tx + 1, ty + 1)}
+            if any(glade[0] <= x <= glade[2] and glade[1] <= y <= glade[3] for x, y in tiles) or tiles & walk \
+                    or (tx + ty) % 7 == 0:
+                continue
+            for (dx, dy), mid in zip(((0, 0), (1, 0), (0, 1), (1, 1)), (470, 471, 478, 479)):
+                cells[(ty + dy) * W + tx + dx] = verity[mid]
+    for x, y in walk:
+        cells[y * W + x] = sand
+    px, py, n = 30, 15, 4
+    for i in range(n):
+        cells[py * W + px + i] = eng.word("DewfordTown", 11 if i == 0 else 12, 9, 552 if i == 0 else 553)
+        cells[(py + 1) * W + px + i] = eng.word("DewfordTown", 11 if i == 0 else 12, 10, 560 if i == 0 else 561)
+    return cells, W, H, (px + n - 1, py)
+
+
+def newmoon(eng):
+    """Newmoon Island (34 x 34): a beach ring round a dense, gapless Verity forest; an L-shaped trail from the east
+    pier (Dewford's; its end plank is the step-on portal back to the harbor) turns north to a glade."""
+    W, H = 34, 34
+    ocean, verity = eng.words(OCEAN_CORPUS), eng.words(("LakeVerity",))
+    water, sand, grass = eng.word("Route106", 26, 8, 368), eng.word("DewfordTown", 8, 9, 292), \
+        eng.word("LakeVerity", 19, 20, 1)
+    land = {y: (4, 27) for y in range(4, 30)}
+    grid = [["S" if y in land and land[y][0] <= x <= land[y][1] else "W" for x in range(W)] for y in range(H)]
+    table, cells = shore_table(eng), [water] * (W * H)
+    for y in range(H):
+        for x in range(W):
+            nb = tuple(0 <= x + dx < W and 0 <= y + dy < H and grid[y + dy][x + dx] == "S" for dx, dy in NB8)
+            if grid[y][x] == "W" and not any(nb):
+                continue
+            key = (grid[y][x],) + nb
+            if key not in table:
+                raise SystemExit(f"Newmoon: unattested shore pattern at {(x, y)}: {key}")
+            cells[y * W + x] = ocean[table[key].most_common(1)[0][0]]
+    for y in range(6, 28):
+        for x in range(6, 26):
+            cells[y * W + x] = grass
+    glade = (8, 8, 15, 13)                                       # inclusive clearing, kept as grass
+    walk = {(x, 22) for x in range(18, 28)} | {(18, y) for y in range(10, 23)} | {(x, 10) for x in range(16, 18)}
+    for ty in range(6, 28, 2):
+        for tx in range(6, 26, 2):
+            tiles = {(tx, ty), (tx + 1, ty), (tx, ty + 1), (tx + 1, ty + 1)}
+            if any(glade[0] <= x <= glade[2] and glade[1] <= y <= glade[3] for x, y in tiles) or tiles & walk:
+                continue
+            for (dx, dy), mid in zip(((0, 0), (1, 0), (0, 1), (1, 1)), (470, 471, 478, 479)):
+                cells[(ty + dy) * W + tx + dx] = verity[mid]
+    for x, y in walk:
+        cells[y * W + x] = sand
+    px, py, n = 28, 22, 4
+    for i in range(n):
+        cells[py * W + px + i] = eng.word("DewfordTown", 11 if i == 0 else 12, 9, 552 if i == 0 else 553)
+        cells[(py + 1) * W + px + i] = eng.word("DewfordTown", 11 if i == 0 else 12, 10, 560 if i == 0 else 561)
+    return cells, W, H, (px + n - 1, py)
+
+
+HARBOR_GANGWAY = [(6, 10), (7, 10), (8, 10)]   # Newmoon, Fullmoon, Iron Island
+
+
+def harbor(eng):
+    """Stock LAYOUT_HARBOR with the gangway widened west by one plank: (5,10) <- cap (6,10), (6,10) <- plank (7,10)."""
+    w, h, c = eng.cells("Harbor")
+    cells = list(c)
+    assert [c[10 * w + x] & 1023 for x in range(4, 10)] == [854, 854, 855, 859, 859, 853]
+    cells[10 * w + 5], cells[10 * w + 6] = c[10 * w + 6], c[10 * w + 7]
+    return cells, w, h, list(struct.unpack("<4H", eng.file("data/layouts/Harbor/border.bin")))
+
+
 # ---------------------------------------------------------------------------------------------- cave kit
 class Cave:
     """Oreburgh Gate 1F's wall kit: walls by the side they face, diagonal corner pieces (see the module doc)."""
@@ -316,6 +419,7 @@ def cave_b3f(eng):
 PIER_HOUSE_ROW = 13
 PIER_HOUSE_X = 27
 MORE_HOUSE_DOORS = [(25, 31), (9, 39), (10, 45), (25, 45)]    # closed shells with a doorless door picture (525)
+WARPLESS_DOORS = [(24, 39)]    # an animated door (561) the staging draws without a warp: shell House7
 
 
 def canalave_overlay():
@@ -346,7 +450,9 @@ def canalave_overlay():
         {"x": 7, "y": 17, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_LIBRARY_1F", "dest_warp_id": "0"},
         {"x": 9, "y": 31, "elevation": 0, "dest_map": "MAP_CANALAVE_CITY_HOUSE2", "dest_warp_id": "0"}] + [
         {"x": x, "y": y, "elevation": 0, "dest_map": f"MAP_CANALAVE_CITY_HOUSE{n}", "dest_warp_id": "0"}
-        for n, (x, y) in enumerate(MORE_HOUSE_DOORS, 3)]
+        for n, (x, y) in enumerate(MORE_HOUSE_DOORS + WARPLESS_DOORS, 3)]
+    for x, y in WARPLESS_DOORS:
+        assert cells[y * w + x] & 1023 == 561 and not cells[(y + 1) * w + x] & 0xC00, (x, y)
     assert cells[17 * w + 7] & 1023 == 537 and cells[31 * w + 9] & 1023 == 537   # existing animated doors
     data = struct.pack("<%dH" % len(cells), *cells)
     changed = [(i % w, i // w) for i, (a, b) in enumerate(zip(struct.unpack("<%dH" % (len(raw) // 2), raw), cells)) if a != b]
@@ -382,6 +488,9 @@ def build(engine_root):
     c2, p2 = cave_b1f(eng)
     c3, p3 = cave_b2f(eng)
     c4, p4 = cave_b3f(eng)
+    fm_cells, fm_w, fm_h, fm_portal = fullmoon(eng)
+    nm_cells, nm_w, nm_h, nm_portal = newmoon(eng)
+    hb_cells, hb_w, hb_h, hb_border = harbor(eng)
     canal_bin, canal_header, canal_receipt = canalave_overlay()
     (cx, cy), (hx, hy), (ax, ay), (tx, ty) = ipts["cave"], ipts["house"], ipts["pier_arrive"], ipts["pier_trigger"]
     maps = {
@@ -421,17 +530,34 @@ def build(engine_root):
         **{f"CanalaveCity_House{n}": (header(f"MAP_CANALAVE_CITY_HOUSE{n}", f"CanalaveCity_House{n}", "LAYOUT_HOUSE1",
                                              "MUS_ROUTE110", "MAP_TYPE_INDOOR",
                                              [(3, 8, "MAP_CANALAVE_CITY", n + 2), (4, 8, "MAP_CANALAVE_CITY", n + 2)]), None)
-           for n in range(3, 7)},
-        "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_HARBOR", "MUS_ROUTE110",
-                                       "MAP_TYPE_INDOOR", [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
-                                                           (8, 10, "MAP_IRON_ISLAND", 2)],
-                                       [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2))]), None),
+           for n in range(3, 3 + len(MORE_HOUSE_DOORS + WARPLESS_DOORS))},
+        "CanalaveCity_Harbor": (header("MAP_CANALAVE_CITY_HARBOR", "CanalaveCity_Harbor", "LAYOUT_CANALAVE_CITY_HARBOR",
+                                       "MUS_ROUTE110", "MAP_TYPE_INDOOR",
+                                       [(11, 14, "MAP_CANALAVE_CITY", 2), (12, 14, "MAP_CANALAVE_CITY", 2),
+                                        (8, 10, "MAP_IRON_ISLAND", 2), (7, 10, "MAP_FULLMOON_ISLAND", 0),
+                                        (6, 10, "MAP_NEWMOON_ISLAND", 0)],
+                                       [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2)),
+                                        (7, 10, "ToFullmoonIsland", ("MAP_FULLMOON_ISLAND", 0)),
+                                        (6, 10, "ToNewmoonIsland", ("MAP_NEWMOON_ISLAND", 0))]),
+                                (hb_cells, hb_w, hb_h, "gTileset_General", "gTileset_Facility", hb_border)),
+        "NewmoonIsland": (header("MAP_NEWMOON_ISLAND", "NewmoonIsland", "LAYOUT_NEWMOON_ISLAND", "MUS_DEWFORD",
+                                 "MAP_TYPE_ROUTE", [(*nm_portal, "MAP_CANALAVE_CITY_HARBOR", 4)],
+                                 [(*nm_portal, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 4))]),
+                          (nm_cells, nm_w, nm_h, "gTileset_General", "gTileset_Dewford")),
+        "FullmoonIsland": (header("MAP_FULLMOON_ISLAND", "FullmoonIsland", "LAYOUT_FULLMOON_ISLAND", "MUS_DEWFORD",
+                                  "MAP_TYPE_ROUTE", [(*fm_portal, "MAP_CANALAVE_CITY_HARBOR", 3)],
+                                  [(*fm_portal, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 3))]),
+                           (fm_cells, fm_w, fm_h, "gTileset_General", "gTileset_Dewford")),
         "CanalaveCity_PokemonCenter_1F": (header("MAP_CANALAVE_CITY_POKEMON_CENTER_1F", "CanalaveCity_PokemonCenter_1F",
                                                  "LAYOUT_POKEMON_CENTER_1F", "MUS_POKE_CENTER", "MAP_TYPE_INDOOR",
                                                  [(6, 8, "MAP_CANALAVE_CITY", 1), (7, 8, "MAP_CANALAVE_CITY", 1)]), None),
     }
     coords = {"IronIsland": [(tx, ty, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 2))],
-              "CanalaveCity_Harbor": [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2))]}
+              "CanalaveCity_Harbor": [(8, 10, "ToIronIsland", ("MAP_IRON_ISLAND", 2)),
+                                      (7, 10, "ToFullmoonIsland", ("MAP_FULLMOON_ISLAND", 0)),
+                                      (6, 10, "ToNewmoonIsland", ("MAP_NEWMOON_ISLAND", 0))],
+              "FullmoonIsland": [(*fm_portal, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 3))],
+              "NewmoonIsland": [(*nm_portal, "ToHarbor", ("MAP_CANALAVE_CITY_HARBOR", 4))]}
     # Shared layouts must exist unchanged; their warp tiles are the stock ones.
     for name, (hdr, layout) in maps.items():
         if layout is None:
@@ -458,6 +584,13 @@ def check(eng, maps, canal):
     return True
 
 
+def border_words(eng, name, layout):
+    """Four border cells: the layout's own (derived stock maps), open water round islands, else cave rock."""
+    if len(layout) > 5:
+        return layout[5]
+    return [layout[0][0] if name in ("IronIsland", "FullmoonIsland", "NewmoonIsland") else Cave(eng, 1, 1).k[529]] * 4
+
+
 def write(engine_root, out):
     out = pathlib.Path(out)
     if "engine" in out.resolve().parts:
@@ -472,11 +605,10 @@ def write(engine_root, out):
         (d / "scripts.inc").write_text(scripts(name, coords.get(name, ())))
         entry = {"layout": hdr["layout"]}
         if layout:
-            cells, w, h, prim, sec = layout
+            cells, w, h, prim, sec, *_ = layout
             data = struct.pack("<%dH" % len(cells), *cells)
             (d / "map.bin").write_bytes(data)
-            water = cells[0] if name == "IronIsland" else Cave(eng, 1, 1).k[529]
-            border = struct.pack("<4H", *[water] * 4)
+            border = struct.pack("<4H", *border_words(eng, name, layout))
             (d / "border.bin").write_bytes(border)
             (d / "layout.json").write_text(json.dumps({"id": hdr["layout"], "name": name + "_Layout", "width": w,
                                                        "height": h, "primary_tileset": prim, "secondary_tileset": sec},

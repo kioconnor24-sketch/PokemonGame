@@ -18,8 +18,8 @@ spec = importlib.util.spec_from_file_location("iron_island_builder", HERE / "bui
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
 
-NEW = ("IronIsland", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
-SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 7)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1", "CanalaveCity_Harbor": "LAYOUT_HARBOR",
+NEW = ("IronIsland", "FullmoonIsland", "NewmoonIsland", "CanalaveCity_Harbor", "IronIsland_1F", "IronIsland_B1F", "IronIsland_B2F", "IronIsland_B3F")
+SHARED = {**{f"CanalaveCity_House{n}": "LAYOUT_HOUSE1" for n in range(3, 8)}, "IronIsland_House": "LAYOUT_HOUSE1", "CanalaveCity_Library_1F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "CanalaveCity_Library_2F": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F", "CanalaveCity_House2": "LAYOUT_HOUSE1",
           "CanalaveCity_PokemonCenter_1F": "LAYOUT_POKEMON_CENTER_1F"}
 
 
@@ -68,7 +68,8 @@ class IronIslandTest(unittest.TestCase):
 
     def test_every_cell_word_is_an_existing_averon_cell(self):
         """ID, collision and elevation of every new cell occur together in the layouts the builder reads."""
-        for name, corpus in (("IronIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("IronIsland_1F", b.CAVE_CORPUS),
+        for name, corpus in (("IronIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("FullmoonIsland", b.OCEAN_CORPUS + ("LakeVerity",)),
+                             ("NewmoonIsland", b.OCEAN_CORPUS + ("LakeVerity",)), ("CanalaveCity_Harbor", ("Harbor",)), ("IronIsland_1F", b.CAVE_CORPUS),
                              ("IronIsland_B1F", b.CAVE_CORPUS), ("IronIsland_B2F", b.CAVE_CORPUS), ("IronIsland_B3F", b.CAVE_CORPUS)):
             known = set()
             for n in corpus:
@@ -115,10 +116,15 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual(har["warp_events"][2]["dest_map"], "MAP_IRON_ISLAND")
         arrive = isl["warp_events"][int(har["warp_events"][2]["dest_warp_id"])]
         self.assertEqual((arrive["x"], arrive["y"]), (tx, ty))      # step-on portal: trigger on the arrival warp
+        by_id = {h["id"]: h for h, _ in self.maps.values()}
         for x, y, _, (dest, warp) in self.coords["CanalaveCity_Harbor"]:
-            self.assertEqual((dest, warp), ("MAP_IRON_ISLAND", 2))
-            self.assertEqual((har["warp_events"][2]["x"], har["warp_events"][2]["y"]), (x, y))
-        for name in ("IronIsland", "CanalaveCity_Harbor"):
+            own = [i for i, w in enumerate(har["warp_events"]) if (w["x"], w["y"]) == (x, y)]
+            self.assertEqual(len(own), 1)                                # each gangway tile: one portal warp
+            self.assertEqual((har["warp_events"][own[0]]["dest_map"], int(har["warp_events"][own[0]]["dest_warp_id"])),
+                             (dest, warp))
+            back = by_id[dest]["warp_events"][warp]
+            self.assertEqual((back["dest_map"], int(back["dest_warp_id"])), ("MAP_CANALAVE_CITY_HARBOR", own[0]))
+        for name in ("IronIsland", "FullmoonIsland", "NewmoonIsland", "CanalaveCity_Harbor"):
             text = b.scripts(name, self.coords[name])
             self.assertEqual(text.count("\twarp "), len(self.coords[name]))
             self.assertEqual(text.count("\twaitstate\n"), len(self.coords[name]))
@@ -138,6 +144,28 @@ class IronIslandTest(unittest.TestCase):
         self.assertIn((self.coords["IronIsland"][0][0], self.coords["IronIsland"][0][1]), got)
         border = {(x, y) for x in range(w) for y in range(len(cells) // w) if x in (0, w - 1) or y in (0, len(cells) // w - 1)}
         self.assertFalse(got & border)                            # the map edge is never reachable on foot
+
+    def test_harbor_gangway_is_widened_by_two_copied_cells(self):
+        w, h, stock = self.eng.cells("Harbor")
+        cells, hw = self.cells("CanalaveCity_Harbor")
+        self.assertEqual((hw, len(cells) // hw), (w, h))
+        self.assertEqual([i for i, (a, c) in enumerate(zip(stock, cells)) if a != c], [10 * w + 5, 10 * w + 6])
+        self.assertEqual((cells[10 * w + 5], cells[10 * w + 6]), (stock[10 * w + 6], stock[10 * w + 7]))
+        har = self.maps["CanalaveCity_Harbor"][0]["warp_events"]
+        self.assertEqual([(e["x"], e["y"]) for e in har[2:]], [(8, 10), (7, 10), (6, 10)])
+        for x, y in b.HARBOR_GANGWAY:
+            self.assertEqual(cells[y * w + x], stock[10 * w + 7])            # walkable plank
+            self.assertFalse(cells[(y + 1) * w + x] & 0xC00)                  # floor in front of it
+
+    def test_newmoon_trail_reaches_the_glade_and_never_the_edge(self):
+        cells, w = self.cells("NewmoonIsland")
+        beh = behaviours("general", "dewford")
+        (px, py, *_), = self.coords["NewmoonIsland"]
+        got = reach(cells, w, beh, (px, py))
+        self.assertIn((12, 10), got)                                     # the glade
+        h = len(cells) // w
+        self.assertFalse({(x, y) for x, y in got if x in (0, w - 1) or y in (0, h - 1)})
+        self.assertNotEqual(self.cells("NewmoonIsland")[0], self.cells("FullmoonIsland")[0])
 
     def test_caves_are_connected_and_closed(self):
         beh = behaviours("general", "cave")
@@ -161,7 +189,7 @@ class IronIslandTest(unittest.TestCase):
         self.assertEqual(hdr["warp_events"][:1], source["warp_events"])
         self.assertEqual({k: v for k, v in hdr.items() if k != "warp_events"},
                          {k: v for k, v in source.items() if k != "warp_events"})
-        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)] + b.MORE_HOUSE_DOORS)
+        self.assertEqual([(e["x"], e["y"]) for e in hdr["warp_events"][1:]], [(28, 22), (29, 13), (7, 17), (9, 31)] + b.MORE_HOUSE_DOORS + b.WARPLESS_DOORS)
 
 
 if __name__ == "__main__":

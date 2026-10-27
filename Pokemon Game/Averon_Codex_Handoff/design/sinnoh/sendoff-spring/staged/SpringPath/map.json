@@ -1,0 +1,32 @@
+{
+  "id": "MAP_SPRING_PATH",
+  "name": "SpringPath",
+  "layout": "LAYOUT_SPRING_PATH",
+  "music": "MUS_ROUTE110",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE214",
+      "offset": -10,
+      "direction": "left"
+    },
+    {
+      "map": "MAP_SENDOFF_SPRING",
+      "offset": 0,
+      "direction": "right"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

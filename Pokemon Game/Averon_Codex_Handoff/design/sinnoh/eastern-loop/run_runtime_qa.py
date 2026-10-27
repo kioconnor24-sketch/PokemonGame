@@ -124,6 +124,7 @@ def acro_crossing_plan(m,start,goal,layer):
         raise ValueError('source Acro approaches changed')
     if (m.collision(*rail),m.elevation(*rail),m.behavior(*rail))!=(0,15,'MB_HORIZONTAL_RAIL'):
         raise ValueError('source Acro rail portal changed')
+    if elevation_path(m,start,{tuple(goal)},start_elevation=layer) is not None:return None
     for approach,landing,direction in ((south,north,'up'),(north,south,'down')):
         if (elevation_path(m,start,{approach},start_elevation=layer) is not None
                 and elevation_path(m,landing,{tuple(goal)},start_elevation=3) is not None):

@@ -118,7 +118,7 @@ class MapInfo:
         if not self.inside(x, y) or self.collision(x, y):
             return False
         b = self.behavior(x, y)
-        if "WATER" in b or b.startswith("MB_JUMP") or b == "MB_COUNTER":
+        if "WATER" in b or b.startswith("MB_JUMP") or b == "MB_COUNTER" or b in ACRO_BIKE_ONLY:
             return False
         return True
 
@@ -129,35 +129,134 @@ class MapInfo:
         return None
 
 
-def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True):
-    """Shortest list of direction names from start to any goal tile."""
+def elevation_at(m, x, y):
+    """Map elevation of a tile (0 when the map model has none, e.g. test fakes: no restriction)."""
+    return m.elevation(x, y) if hasattr(m, "elevation") else 0
+
+
+def step_across(cur, frm_e, to_e):
+    """The player's elevation after a step from a tile of elevation frm_e onto one of to_e (on the same map or
+    across a seam), or None when the engine refuses it.
+
+    Mirrors pokeemerald: IsElevationMismatchAt blocks entering a tile whose elevation is neither 0 nor 15 nor
+    the player's own (unless the player is at 0); ObjectEventUpdateElevation then takes the new tile's
+    elevation, except to or from a 15 (bridge) tile, which keeps the previous one.
+    """
+    if cur != 0 and to_e not in (0, 15) and to_e != cur:
+        return None
+    return cur if to_e == 15 or frm_e == 15 else to_e
+
+
+def step_elevation(m, cur, frm, to):
+    """step_across for a step frm -> to on m."""
+    return step_across(cur, elevation_at(m, *frm), elevation_at(m, *to))
+
+
+def crossable(m, tile, other, to):
+    """Whether some player who can stand on tile (any start_elevations) may step across the seam onto other's to."""
+    return any(step_across(e, elevation_at(m, *tile), elevation_at(other, *to)) is not None
+               for e in start_elevations(m, tile))
+
+
+def reach_states(m, start, elevation=None):
+    """{tile: elevations} reachable on foot from start (as bfs: a takeable warp tile is reached, not crossed)."""
+    first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
+    seen, q = set(first), deque(first)
+    while q:
+        cur, e = q.popleft()
+        if cur != start and takeable(m, *cur):
+            continue
+        for dx, dy in DIRS.values():
+            nxt = (cur[0] + dx, cur[1] + dy)
+            if not m.walkable(*nxt):
+                continue
+            ne = step_elevation(m, e, cur, nxt)
+            if ne is not None and (nxt, ne) not in seen:
+                seen.add((nxt, ne))
+                q.append((nxt, ne))
+    out = {}
+    for t, e in seen:
+        out.setdefault(t, set()).add(e)
+    return out
+
+
+def start_elevations(m, start):
+    """Elevations the player may have on start when the actual one is unknown.
+
+    Normally the tile's own. A 15 (bridge) tile keeps the elevation the player arrived with: that of any walkable
+    tile next to the bridge (the connected 15 tiles around start), or 15 itself when warped straight onto it."""
+    e = elevation_at(m, *start)
+    if e != 15:
+        return [e]
+    seen, todo, levels = {start}, [start], {15}
+    while todo:
+        x, y = todo.pop()
+        for dx, dy in DIRS.values():
+            t = (x + dx, y + dy)
+            if t in seen or not (m.inside(*t) and m.walkable(*t)):
+                continue
+            if elevation_at(m, *t) == 15:
+                seen.add(t)
+                todo.append(t)
+            else:
+                levels.add(elevation_at(m, *t))
+    return sorted(levels)
+
+
+def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevation=None):
+    """Shortest list of direction names from start to any goal tile, honouring the engine's elevation rules.
+
+    elevation is the player's actual elevation; when None, every possible one on start (start_elevations)."""
     goals = set(goals)
     if start in goals:
         return []
-    prev = {start: None}
-    q = deque([start])
+    first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
+    prev = dict.fromkeys(first)
+    q = deque(first)
     while q:
-        cur = q.popleft()
+        state = q.popleft()
+        cur, e = state
         for name, (dx, dy) in DIRS.items():
             nxt = (cur[0] + dx, cur[1] + dy)
-            if nxt in prev or nxt in blocked:
+            if nxt in blocked:
                 continue
             ok = m.walkable(*nxt) or (allow_goal_unwalkable and nxt in goals and m.inside(*nxt))
             if not ok:
                 continue
             # A warp tile that is not the goal would take us elsewhere.
-            if nxt not in goals and m.warp_at(*nxt):
+            if nxt not in goals and takeable(m, *nxt):
                 continue
-            prev[nxt] = (cur, name)
+            ne = step_elevation(m, e, cur, nxt) if m.walkable(*nxt) else e
+            if ne is None or (nxt, ne) in prev:
+                continue
+            prev[(nxt, ne)] = (state, name)
             if nxt in goals:
                 path = []
-                node = nxt
+                node = (nxt, ne)
                 while prev[node]:
                     node, step = prev[node]
                     path.append(step)
                 return path[::-1]
-            q.append(nxt)
+            q.append((nxt, ne))
     return None
+
+
+STEP_ON = ("MB_LADDER", "MB_MT_PYRE_HOLE")
+
+
+def takeable(m, x, y):
+    """Whether the warp at (x, y) can be taken at all. The engine warps only through a door, arrow, stair, ladder,
+    escalator or hole behaviour (TryArrowWarp, TryDoorWarp, IsWarpMetatileBehavior) or a coord trigger; a warp on
+    any other tile is only an arrival point (e.g. the floor where a Mt. Pyre hole drops the player). Step-on behaviours
+    (ladder, hole, non-animated door, escalator) also need the tile to be enterable; an animated door is pushed into."""
+    if m.warp_at(x, y) is None:
+        return False
+    b = m.behavior(x, y)
+    if (x, y) in getattr(m, "triggers", ()):
+        return True
+    if b in STEP_ON or b == "MB_NON_ANIMATED_DOOR" or "ESCALATOR" in b:
+        return m.walkable(x, y)          # IsWarpMetatileBehavior warps only when stepped onto: a solid one is shut
+    return "DOOR" in b or "WARP" in b
 
 
 def trigger_entry(m, x, y):
@@ -166,13 +265,23 @@ def trigger_entry(m, x, y):
     Returns (approach tile, direction to step onto the warp) or None. The player arrives on the warp tile.
     """
     triggers = getattr(m, "triggers", ())
-    if (x, y) not in triggers or m.warp_at(x, y) is None:
+    if m.warp_at(x, y) is None:
+        return None
+    # A ladder or a Mt. Pyre hole warps when stepped onto (field_control_avatar IsWarpMetatileBehavior): the player
+    # arrives standing on it and must step off and back on to use it, exactly as a coord-trigger warp.
+    if (x, y) not in triggers and not (m.behavior(x, y) in STEP_ON and m.walkable(x, y)):
         return None
     for d, (dx, dy) in DIRS.items():
         approach = (x - dx, y - dy)
-        if m.walkable(*approach) and approach not in triggers:
+        if m.walkable(*approach) and approach not in triggers and not takeable(m, *approach):
             return approach, d
     return None
+
+
+# Acro Bike trick tiles: CheckForPlayerAvatarCollision runs CheckAcroBikeCollision for the player on foot too, so
+# stepping onto any of these is a collision unless riding the Acro Bike (field_player_avatar.c).
+ACRO_BIKE_ONLY = ("MB_BUMPY_SLOPE", "MB_ISOLATED_VERTICAL_RAIL", "MB_ISOLATED_HORIZONTAL_RAIL", "MB_VERTICAL_RAIL",
+                  "MB_HORIZONTAL_RAIL")
 
 
 def across(m, other, direction, offset, tile):
@@ -197,26 +306,24 @@ def warp_arrival(m, x, y):
     return (x, y)
 
 
-def edge_exits(m, direction):
-    """Tiles on m's edge from which stepping `direction` enters the connected map."""
-    conn = next((c for c in m.connections if c[0] == direction), None)
-    if conn is None:
-        return []
-    other = m.world.map(conn[1])
-    offset = conn[2]
+def edge_exits(m, direction, connection=None):
+    """Tiles on m's edge from which stepping `direction` enters a connected map.
+
+    With connection=(other_id, offset), only the tiles that connection spans. A side may hold several connections
+    (Route 205 North opens down to two maps): the engine (GetIncomingConnection) takes the one whose span holds
+    the tile, so each owns only its own tiles. Without it, the union over every connection on that side.
+    """
+    conns = [c[1:] for c in m.connections if c[0] == direction] if connection is None else [connection]
     tiles = []
-    if direction in ("up", "down"):
-        y = 0 if direction == "up" else m.height - 1
-        oy = other.height - 1 if direction == "up" else 0
-        for x in range(m.width):
-            ox = x - offset
-            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
-                tiles.append((x, y))
-    else:
-        x = 0 if direction == "left" else m.width - 1
-        ox = other.width - 1 if direction == "left" else 0
-        for y in range(m.height):
-            oy = y - offset
-            if m.walkable(x, y) and other.inside(ox, oy) and other.walkable(ox, oy):
-                tiles.append((x, y))
+    for other_id, offset in conns:
+        other = m.world.map(other_id)
+        if direction in ("up", "down"):
+            y = 0 if direction == "up" else m.height - 1
+            oy = other.height - 1 if direction == "up" else 0
+            edge = [((x, y), (x - offset, oy)) for x in range(m.width)]
+        else:
+            x = 0 if direction == "left" else m.width - 1
+            ox = other.width - 1 if direction == "left" else 0
+            edge = [((x, y), (ox, y - offset)) for y in range(m.height)]
+        tiles += [t for t, o in edge if t not in tiles and m.walkable(*t) and other.inside(*o) and other.walkable(*o)]
     return tiles
