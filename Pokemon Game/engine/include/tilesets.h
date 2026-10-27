@@ -63,4 +63,7 @@ extern const struct Tileset gTileset_TrainerTower;
 
 extern const struct Tileset gTileset_AveronCorridorRustboro;
 
+extern const struct Tileset gTileset_AveronFloaromaInteriorPrimary;
+extern const struct Tileset gTileset_AveronFloaromaInteriorSecondary;
+
 #endif //GUARD_tilesets_H

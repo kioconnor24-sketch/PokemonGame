@@ -1,0 +1,36 @@
+{
+  "id": "MAP_FLOAROMA_TOWN_MART",
+  "name": "FloaromaTown_Mart",
+  "layout": "LAYOUT_FLOAROMA_TOWN_MART",
+  "music": "MUS_LILYCOVE",
+  "region": "REGION_SINNOH",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region_map_section": "MAPSEC_FLOAROMA_TOWN",
+  "connections": [],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_FLOAROMA_TOWN",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_FLOAROMA_TOWN",
+      "dest_warp_id": "4"
+    }
+  ]
+}

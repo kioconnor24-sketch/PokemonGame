@@ -1550,3 +1550,21 @@ const struct Tileset gTileset_AveronCorridorRustboro =
  .metatileAttributes = gMetatileAttributes_AveronCorridorRustboro,
  .callback=InitTilesetAnim_Rustboro,
 };
+
+const struct Tileset gTileset_AveronFloaromaInteriorPrimary =
+{
+ .isCompressed=TRUE, .isSecondary=FALSE,
+ .tiles=gTilesetTiles_InsideBuilding, .palettes=gTilesetPalettes_InsideBuilding,
+ .metatiles=gMetatiles_AveronFloaromaInteriorPrimary,
+ .metatileAttributes = gMetatileAttributes_AveronFloaromaInteriorPrimary,
+ .callback=InitTilesetAnim_Building,
+};
+
+const struct Tileset gTileset_AveronFloaromaInteriorSecondary =
+{
+ .isCompressed=TRUE, .isSecondary=TRUE,
+ .tiles=gTilesetTiles_Shop, .palettes=gTilesetPalettes_Shop,
+ .metatiles=gMetatiles_AveronFloaromaInteriorSecondary,
+ .metatileAttributes = gMetatileAttributes_AveronFloaromaInteriorSecondary,
+ .callback=NULL,
+};

@@ -61,7 +61,8 @@ class CatalogueTests(unittest.TestCase):
     def test_real_engine_catalogue_is_emerald_only(self):
         cat = art.tileset_catalogue()
         self.assertEqual(sorted(k for k, v in cat.items() if not v['secondary']),
-                         ['gTileset_Building', 'gTileset_General', 'gTileset_SecretBase'])
+                         ['gTileset_AveronFloaromaInteriorPrimary', 'gTileset_Building', 'gTileset_General',
+                          'gTileset_SecretBase'])   # west packet B's packed interior bank (W28)
         self.assertFalse([k for k in cat if k.endswith('Frlg')])
         self.assertIn('gTileset_Dewford', cat)
         self.assertTrue(cat['gTileset_General']['tiles'].endswith('primary/general/tiles.png'))
