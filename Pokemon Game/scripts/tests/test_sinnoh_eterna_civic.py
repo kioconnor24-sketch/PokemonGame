@@ -93,6 +93,10 @@ class EternaCivicTest(unittest.TestCase):
                 dest = engine / rel
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ENGINE / rel, dest)
+            # Reuse immutable stock shell headers without copying the engine.
+            for stock in (ENGINE / "data/maps").iterdir():
+                if stock.is_dir() and stock.name != "Route205_North":
+                    (engine / "data/maps" / stock.name).symlink_to(stock, target_is_directory=True)
             path = engine / "data/maps/Route205_North/map.json"
             source = json.loads(path.read_text())
             windworks = {"map": "MAP_VALLEY_WINDWORKS", "offset": 9, "direction": "down"}
