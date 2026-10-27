@@ -475,6 +475,8 @@ class Runner:
         # so step off only (one step already places the follower).
         on_step_warp = mapdata.trigger_entry(m, x, y) is not None
         for direction, (dx, dy) in DIRS.items():
+            if mapdata.arrow_warp_direction(m, (x, y)) == direction:
+                continue
             n = (x + dx, y + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
                 if self.d.step(direction) is not None and not on_step_warp:
@@ -749,6 +751,8 @@ class Runner:
         m = self.d.live_map(mid)
         on_step_warp = mapdata.trigger_entry(m, *pos) is not None   # never step back onto a step-on warp
         for direction, (dx, dy) in DIRS.items():
+            if mapdata.arrow_warp_direction(m, pos) == direction:
+                continue
             n = (pos[0] + dx, pos[1] + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
                 if self.d.step(direction) is not None:
