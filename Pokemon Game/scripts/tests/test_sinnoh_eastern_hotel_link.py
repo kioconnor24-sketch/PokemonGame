@@ -70,7 +70,7 @@ class HotelLinkTest(unittest.TestCase):
         for family in ('gate-art','outdoor-family'):
             for f in ('primary-metatiles.bin','primary-attributes.bin','secondary-metatiles.bin','secondary-attributes.bin'):
                 self.assertTrue((LINK/family/f).read_bytes().startswith((HERE/family/f).read_bytes()))
-        self.assertEqual(self.receipt['temporary_map_slots']['HotelGrandLake'],31)
+        self.assertEqual(self.receipt['temporary_map_slots']['HotelGrandLake'],34)
 
     def test_native_animated_south_door_stays_solid_and_north_arrow_alone_reopens(self):
         raw=self.files['data/layouts/Route213/map.bin']

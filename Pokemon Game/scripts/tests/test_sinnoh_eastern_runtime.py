@@ -20,9 +20,9 @@ class RuntimeTest(unittest.TestCase):
 
     def test_all_existing_map_layout_and_include_prefixes_survive(self):
         before=json.loads(self.before['data/maps/map_groups.json']);after=json.loads(self.files['data/maps/map_groups.json'])
-        self.assertEqual(len(before['gMapGroup_Sinnoh']),19)
+        self.assertEqual(len(before['gMapGroup_Sinnoh']),22)
         for k,v in before.items():self.assertEqual(after[k][:len(v)] if k=='gMapGroup_Sinnoh' else after[k],v)
-        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(19,32))))
+        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(22,35))))
         before=json.loads(self.before['data/layouts/layouts.json'])['layouts'];after=json.loads(self.files['data/layouts/layouts.json'])['layouts']
         self.assertEqual(before,after[:len(before)])
         for p in ('data/event_scripts.s','include/tilesets.h','src/data/tilesets/headers.h','src/data/tilesets/metatiles.h'):
@@ -172,8 +172,8 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual(receipt['dev_fixture']['flag_grants'],[])
         self.assertEqual(set(files),set(before));self.assertEqual(len(files),66)
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
-        published=json.loads((HERE/'runtime-recipe-foot-crossing.json').read_text())
-        self.assertEqual(self.receipt,published)  # separate source-pinned19-slot no-grant contract; original recipe retained
+        published=json.loads((HERE/'runtime-recipe-west22.json').read_text())
+        self.assertEqual(self.receipt,published)  # separate source-pinned22-slot no-grant contract; original recipe retained
         self.assertNotIn('dev_fixture',self.receipt)
         for bad in (1,'yes',None):
             with self.subTest(value=bad),self.assertRaises(ValueError):a.assemble(ROOT,acro_fixture=bad)
