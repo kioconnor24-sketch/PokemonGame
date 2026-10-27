@@ -19,8 +19,8 @@ A link is a warp or connection to a known map. This is a **graph of declared lin
 
 | Scope | Maps | Links | Groups | Largest group |
 | --- | ---: | ---: | ---: | --- |
-| main `187193c2` | 144 | 144 | 9 | 46 (central/eastern staging); production's group has 30 |
-| main + Claude's open PRs (W10, W11, W15–W25, #306) | 208 | 221 | **4** | **179, including all 19 production maps** |
+| main `f870930b` | 144 | 144 | 9 | 46 (central/eastern staging); production's group has 30 |
+| main + Claude's open PRs (W4, W10, W11, W14–W28, #306) | 215 | 229 | **3** | **209, including all 19 production maps** |
 
 The open PRs that join groups:
 
@@ -31,6 +31,9 @@ The open PRs that join groups:
 | W23 #313 | production Route 205 South ↔ Eterna Forest and Old Chateau (donor tunnel) |
 | W24 #315 | Hearthome ↔ Route 212; Route 210 South ↔ Route 210 North and Route 215; Route 211 West ↔ Mt. Coronet North Room 1 (west to central) |
 | W25 #317 | Cycling Road ↔ Route 207 |
+| W26 #319 | Valor Lakefront ↔ Lake Valor (inside the eastern group) |
+| W27 #320 | production Jubilife ↔ Route 218 East: joins the Canalave / Iron Island / Route 218 group |
+| W28 #321 | production Floaroma Town and Floaroma Meadow ↔ five donor interiors |
 
 ## Groups still apart, and the decisions on them
 
@@ -38,14 +41,21 @@ The owner delegated these decisions (#15 comment 6425492105):
 
 | Group | Maps | Missing link | Decision |
 | --- | ---: | --- | --- |
-| Canalave / Iron Island / Route 218 | 23 | Production Jubilife's sealed west-arrow (4,20) ↔ Route 218 East's closed east mat (11,5) | **Open it**, as the original does: W27 #320 (DEV overlays; static 0 findings). This takes the world to 3 groups. Production integration needs an exact-path handoff for JubilifeCity. |
 | Fuego Ironworks | 2 | The Surf river off Route 205 South | **Surf-only, as the original.** No land path; unreachable on foot by design until Surf access exists. |
 | Snowpoint corridor | 4 | Route 216 ↔ Mt. Coronet North Room 2 | Codex (northern lane, active) |
 
 Also not linked, though it doesn't change the grouping: Eterna Forest's east exit to Route 205 North's gatehouse. The donor building art has no Averon equivalent yet.
 
-**Donor interiors for production doors that are not staged anywhere:**
-- these sit at the donor's own door coordinates in production: Floaroma Mart, Flower Shop, House 1 and House 2; the Floaroma Meadow house; the Route 205 house;
-- these don't, because production Sandgem and Twinleaf were redrawn: Sandgem House 1 and Mart; Twinleaf's two houses.
+The Canalave / Iron Island / Route 218 group (23 maps) is joined by W27 #320. The owner-delegated decision is to open the original geometry (6425492105). Production integration needs an exact-path handoff for JubilifeCity.
 
-They need the neutral indoor packer (`hearthome-solaceon/adapt_gate_art.py`) plus a DEV scene that declares the resulting tileset pair.
+**Donor interiors for production doors:**
+- staged: Floaroma Mart, Flower Shop, House 1 and House 2, and the Floaroma Meadow house (W28 #321, neutral indoor packer, own DEV tileset pair); the Route 205 South house (W23 #313, stock `LAYOUT_HOUSE1`);
+- not staged here, because production Sandgem and Twinleaf were redrawn (the donor doors don't line up): Sandgem House 1 and Mart; Twinleaf's two houses. Codex #238 holds source rooms for these towns.
+
+## One-way on foot (not graph defects)
+
+A link in the graph can still be walkable in one direction only. The mGBA gates found two Muddy Slopes in donor geometry (Codex-owned; recorded, not changed). They have collision 0, but on foot the player slides back down them:
+- **Route 210 South** (26, 80–81) and (21, 71–72): Solaceon → Route 210 North needs a bike. Southbound on foot works.
+- **Route 207** (18, 14–15): Oreburgh → Route 206 (Cycling Road) needs a bike. Southbound on foot works.
+
+Fuego Ironworks is Surf-only by decision (above). Gate runs that cross these slopes use a runner that keeps the same checks and tests down seams last (#315).
