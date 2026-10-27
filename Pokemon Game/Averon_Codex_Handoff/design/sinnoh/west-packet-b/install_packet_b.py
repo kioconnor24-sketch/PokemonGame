@@ -265,7 +265,7 @@ def check(engine):
     engine = pathlib.Path(engine)
     files, layouts = plan(engine)
     bad = [rel for rel, value in files.items() if not (engine / rel).exists() or (engine / rel).read_bytes() != encode(value)]
-    if read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"][PRIOR_SLOTS:] != SLOTS:
+    if read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"][PRIOR_SLOTS:PRIOR_SLOTS + len(SLOTS)] != SLOTS:   # later packets append after
         bad.append("data/maps/map_groups.json")
     have = {l.get("id"): l for l in read_json(engine / "data/layouts/layouts.json")["layouts"]}
     if any(have.get(l["id"]) != l for l in layouts):
