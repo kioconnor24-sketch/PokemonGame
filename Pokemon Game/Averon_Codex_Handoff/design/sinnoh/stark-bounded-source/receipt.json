@@ -1,9 +1,9 @@
 {
   "status": "BOUNDED_STARK_SOURCE_ALTERNATIVE_NOT_RUNTIME_OR_PRODUCTION_ACCEPTANCE",
-  "source_sha": "12daa72725ed02e368c40de6212dfd2b578a3c82",
-  "native_engine_tree": "c2e26cce0a00af43251e0672fef708c796b7a918",
+  "source_sha": "491a1e508469dfea04afce524331f825a30b16cd",
+  "native_engine_tree": "63d0c037e0da9a93b5e1a968c078d9622b56c691",
   "projection_recipe_files": {
-    "data/event_scripts.s": "8eec19688d1394834ddd6dc21d962da6afb06b3568b5752b32a519dd15be4027",
+    "data/event_scripts.s": "bdfd801de1d47de3ec58aa229124ea1f7e3bbd12644950097d63a478f5860524",
     "data/layouts/DevBattleFrontier_Arcade1/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
     "data/layouts/DevBattleFrontier_Arcade1/map.bin": "6356bb1f2530472ccba1b2708f28669227a67b15aa83294869d8b1b14a822576",
     "data/layouts/DevBattleFrontier_Arcade2/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
@@ -92,7 +92,7 @@
     "data/layouts/DevBattleFrontier_Tower2/map.bin": "2b6356ff72f7a014080fb98be0a9d59f7c8ecb16264af571d41436d82efec11e",
     "data/layouts/DevBattleFrontier_Tower3/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
     "data/layouts/DevBattleFrontier_Tower3/map.bin": "9805c919da40c085f1347a6b5f22ea3f928d3801204c7fe2aa0a63c4e46b2129",
-    "data/layouts/layouts.json": "000dbd77fa6d493a83ab67720f87fb1d10c1982df934fd657c42a85ff43f0dab",
+    "data/layouts/layouts.json": "86c33309a81aaa8ece5f5e0f9051f6defcbe4ebb35278e922b3ea9cf23661d66",
     "data/maps/DevBattleFrontier_Arcade1/map.json": "fd9b2c0331d43a7e2e649075b82067cd13a1217e685b101646a8f1d9f28adef3",
     "data/maps/DevBattleFrontier_Arcade1/scripts.inc": "46f861fbe971c664744df13091714c25fd3635c97c1cd716b51d532dd53bcb77",
     "data/maps/DevBattleFrontier_Arcade2/map.json": "270630020eaf452e697be1ebb08bd5c72a5c00deb9d0fd4e27daa3d1afde38ad",
@@ -181,7 +181,7 @@
     "data/maps/DevBattleFrontier_Tower2/scripts.inc": "e721cf2714252d2b951ab208d1f0b17de4830b7b936316bb3621208b28be438e",
     "data/maps/DevBattleFrontier_Tower3/map.json": "12243817d0f442aec0c6423cb231492055264d5cc9d5596b8888cb5816ccbf82",
     "data/maps/DevBattleFrontier_Tower3/scripts.inc": "71cfba6bcf0a7d3281114f979074b340899e1f738b03ed43658ca7930406cb6b",
-    "data/maps/map_groups.json": "6ed7a7f1e3e3e0b3113972969c8274bd7d11871166a1aeac858645aba1813747",
+    "data/maps/map_groups.json": "46f890cd814414b9279ea4a2e5439c55c8b039abf5456db3d8bc04e85d64b95c",
     "data/tilesets/secondary/battle_frontier_dev_campus/metatile_attributes.bin": "77f43970d056687e33a1e1b935d60a7674dde7f0a2e2cf198c9c35404345780e",
     "data/tilesets/secondary/battle_frontier_dev_campus/metatiles.bin": "0d374e11ddd85abed3888da6b2dc508e4d32b4f7d90f7e17b33013ae365676aa",
     "data/tilesets/secondary/battle_frontier_dev_fight/metatile_attributes.bin": "286add40c71986a2b558c53417341284f267bcb4dca8ef89bcdd7c01bbd6d8a3",
@@ -190,10 +190,10 @@
     "data/tilesets/secondary/battle_frontier_dev_gate/metatiles.bin": "498411a2a6663cfbe20e6088ccae8dff214d0365ea57dfa95912338f561aa69f",
     "data/tilesets/secondary/battle_frontier_dev_starkapproach/metatile_attributes.bin": "0e9e9eef99dd43ed6954e25f14e1d24708591c7642aa1052fb24a211fd6f6ad6",
     "data/tilesets/secondary/battle_frontier_dev_starkapproach/metatiles.bin": "0ef076a4d8918b3eb859bb5ce2d14ab1edb1039d103485156c6edf8b2fcd8bbc",
-    "include/tilesets.h": "eaaf978a75a33a355d538976440bb7355a5fbbe7204df632e87b686be3f93a4d",
-    "src/data/tilesets/headers.h": "32dcdda73144f9340c768fca7ecbf552f9a8db491d022a7520b4559c33abc930",
-    "src/data/tilesets/metatiles.h": "46ba8a0f7c9b3388ee3cdf2041929d7c30a766b94fd249e83ea5df7564c2f628",
-    "test/data/averon_map_registry_slots.inc": "deb9445748416c96fe3b42bd23ac5278fbb69bb387ee456606cf508c6b8a97ba"
+    "include/tilesets.h": "d1e44274a97279d7da1137afbd0440ad03a23ecf1ce866b4fcf1b9bc5cb3dd23",
+    "src/data/tilesets/headers.h": "ea2e01040a59547efd378fd2f9dd75b1c8756475160c61fb610dbd58b78f379e",
+    "src/data/tilesets/metatiles.h": "a17da6f48e48d0ac8f3409c5a2737635ac29abce4cb15b308087788ef55871c4",
+    "test/data/averon_map_registry_slots.inc": "82efdac1fe19001b51602b28636535365b7cfe471be8a90e0eaa4d1f3ae89f33"
   },
   "source_sha256": {
     "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/cave-family/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
@@ -373,5 +373,13 @@
     "families/Cave/secondary-metatiles.bin": "0ef076a4d8918b3eb859bb5ce2d14ab1edb1039d103485156c6edf8b2fcd8bbc",
     "families/Cave/primary-attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
     "families/Cave/primary-metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910"
+  },
+  "recovery": {
+    "original_pr": 308,
+    "original_head": "42b324183e228cf21d04efb579c03fcfc0fd25cd",
+    "accepted_base": "eec3efd4b9e053583fff97855ab1aaf13a4df7cb",
+    "exact_recovered_blob_count": 59,
+    "unchanged_output_count": 50,
+    "source_replay_tests": "4/4 PASS"
   }
 }
