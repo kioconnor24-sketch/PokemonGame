@@ -154,7 +154,7 @@ def check(engine):
     names, files, cv = plan(engine)
     bad = [rel for rel, value in files.items() if (engine / rel).read_bytes() != encode(value)]
     groups = json.loads((engine / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-    if groups[PRIOR_SLOTS:] != names:
+    if groups[PRIOR_SLOTS:PRIOR_SLOTS + len(names)] != names:      # later packets append after slot 21
         bad.append("data/maps/map_groups.json")
     layouts = json.loads((engine / "data/layouts/layouts.json").read_text())["layouts"]
     if not any(l.get("id") == "LAYOUT_OREBURGH_GATE_B1F" and l["width"] == cv.w and l["height"] == cv.h for l in layouts):

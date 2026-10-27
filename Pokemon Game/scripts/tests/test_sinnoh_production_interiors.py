@@ -7,6 +7,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 HERE = ROOT / "Averon_Codex_Handoff/design/sinnoh/production-interiors"
 ENGINE = ROOT / "engine"
+PRE = ROOT / "Averon_Codex_Handoff/design/sinnoh/west-packet-b/base"   # production before packet B integrated these
 DOORS = {"FloaromaTown_FlowerShop": ("FloaromaTown", (22, 13)), "FloaromaTown_House1": ("FloaromaTown", (13, 16)),
          "FloaromaTown_Mart": ("FloaromaTown", (26, 19)), "FloaromaTown_House2": ("FloaromaTown", (26, 28)),
          "FloaromaMeadow_House": ("FloaromaMeadow", (35, 41))}
@@ -18,7 +19,8 @@ class ProductionInteriorsTest(unittest.TestCase):
     def test_overlays_only_append_door_warps(self):
         for town in ("FloaromaTown", "FloaromaMeadow"):
             new = json.loads((HERE / f"staged/{town}-dev-overlay/map.json").read_text())
-            old = json.loads((ENGINE / f"data/maps/{town}/map.json").read_text())
+            rel = f"data/maps/{town}/map.json"
+            old = json.loads(((PRE if (PRE / rel).exists() else ENGINE) / rel).read_text())
             self.assertEqual(new["warp_events"][:len(old["warp_events"])], old["warp_events"])
             self.assertEqual({k: v for k, v in new.items() if k != "warp_events"},
                              {k: v for k, v in old.items() if k != "warp_events"})

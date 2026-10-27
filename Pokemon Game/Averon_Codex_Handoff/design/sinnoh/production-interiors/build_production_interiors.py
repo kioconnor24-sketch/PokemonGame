@@ -59,6 +59,12 @@ def const(name, prefix="MAP_"):
     return prefix + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).upper()
 
 
+def pre_integration(engine, rel):
+    """A production file as it was before west packet B integrated these rooms (its pinned base/ copy)."""
+    base = SINNOH / "west-packet-b/base" / rel
+    return base.read_bytes() if base.exists() else (pathlib.Path(engine) / rel).read_bytes()
+
+
 def git_blob(raw):
     return hashlib.sha1(b"blob %d\0" % len(raw) + raw).hexdigest()
 
@@ -112,7 +118,7 @@ def build(donor, engine, out):
             if p.suffix == ".bin" and p.stem not in ROOMS:
                 shutil.copy(p, out / "interior-art" / p.name)
         adapted = {room: (art / f"{room}.bin").read_bytes() for room in ROOMS}
-    towns = {t: json.loads((engine / f"data/maps/{t}/map.json").read_text()) for t, _ in ROOMS.values()}
+    towns = {t: json.loads(pre_integration(engine, f"data/maps/{t}/map.json")) for t, _ in ROOMS.values()}
     music = {t: h["music"] for t, h in towns.items()}
     for room, (town, door) in ROOMS.items():
         hdr = towns[town]
