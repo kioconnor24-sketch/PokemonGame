@@ -1,0 +1,29 @@
+{
+  "id": "MAP_TURNBACK_CAVE_B2F",
+  "name": "TurnbackCave_B2F",
+  "layout": "LAYOUT_TURNBACK_CAVE_B2F",
+  "music": "MUS_CAVE_OF_ORIGIN",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "requires_flash": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 19,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_TURNBACK_CAVE_B1F",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
