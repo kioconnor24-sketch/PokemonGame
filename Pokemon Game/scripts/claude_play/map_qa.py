@@ -98,6 +98,8 @@ def warp_arrive(m, x, y):
 def moves(m, x, y):
     """Tiles reachable in one press from (x, y): a walk or a ledge jump (no landing check, as in the engine)."""
     for d, (dx, dy) in DIRS.items():
+        if mapdata.arrow_warp_direction(m, (x, y)) == d:
+            continue
         nx, ny = x + dx, y + dy
         if not m.inside(nx, ny):
             continue
