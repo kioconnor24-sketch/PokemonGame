@@ -1,0 +1,133 @@
+{
+  "id": "MAP_OREBURGH_CITY",
+  "name": "OreburghCity",
+  "layout": "LAYOUT_OREBURGH_CITY",
+  "music": "MUS_RUSTBORO",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE207",
+      "offset": 35,
+      "direction": "up"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_GATE_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 50,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 51,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 52,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 53,
+      "y": 57,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_MINE_B1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 62,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_MUSEUM_1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 25,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_HOUSE2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_MART",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 54,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_MUSEUM_1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 40,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_CONDO",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 20,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_HOUSE3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 51,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 59,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_HOUSE4",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 56,
+      "y": 37,
+      "elevation": 0,
+      "dest_map": "MAP_OREBURGH_CITY_HOUSE5",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
