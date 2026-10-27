@@ -1822,3 +1822,5 @@ AveronFieldLab_TryGift::
 	.include "data/maps/FloaromaTown_House2/scripts.inc"
 	.include "data/maps/FloaromaMeadow_House/scripts.inc"
 	.include "data/maps/Route205_South_House/scripts.inc"
+	.include "data/maps/ValleyWindworks/scripts.inc"
+	.include "data/maps/ValleyWindworks_Inside/scripts.inc"

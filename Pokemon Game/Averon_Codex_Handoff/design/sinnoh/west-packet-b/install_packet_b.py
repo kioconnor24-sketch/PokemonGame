@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""West integrated packet B: install W28's Floaroma interiors and W23's Route 205 South house into the engine.
+"""West integrated packet B: install W28's Floaroma interiors, W23's Route 205 South house and W5's Valley Windworks.
 
 PRODUCTION integration of already-staged and gated Claude geography, appended after the existing 22 Sinnoh slots:
 - W28 (production-interiors, #321): the donor rooms behind production doors at the donor's own coordinates,
@@ -10,12 +10,18 @@ PRODUCTION integration of already-staged and gated Claude geography, appended af
 - W23 (eterna-forest-gate, #313): only the house behind Route 205 South's door (21, 22), a stock LAYOUT_HOUSE1
   shell. The tunnel into Eterna Forest waits for the forest itself to reach production, so production Route 205
   South gains the door warp alone (index 0; the staged house's return warp is renumbered to match).
+- W5 (valley-windworks, #257): Valley Windworks and its inside, in stock General/Mauville and Building/BikeShop
+  banks (gated NORMAL/RELEASE 42/42 + 3/3, both seams both ways). Production Route 205 South gains the right
+  connection (offset 0) and Route 205 North the down one (offset 9), the donor's. No section exists for the
+  Windworks and no new one is allocated: it uses MAPSEC_ROUTE_205, whose route it sits on. The wind turbines stay
+  the builder's neutral rock stand-ins (turbine art is an owner decision).
 
-Every door cell is the production one, unchanged: only warps are added (no map.bin of an existing map changes).
-Identities: map slots 22-27 appended to gMapGroup_Sinnoh in the order of SLOTS (0-21 untouched); five new layouts
-(LAYOUT_<ROOM>) appended; sections are the existing MAPSEC_FLOAROMA_TOWN and MAPSEC_ROUTE_205. No new
+Every door cell is the production one, unchanged: only warps and the two connections are added (no map.bin of an
+existing map changes). Identities: map slots 22-29 appended to gMapGroup_Sinnoh in the order of SLOTS (0-21 untouched); seven new layouts
+(LAYOUT_<ROOM>, LAYOUT_VALLEY_WINDWORKS[_INSIDE]) appended; sections are the existing MAPSEC_FLOAROMA_TOWN and MAPSEC_ROUTE_205. No new
 section/healer/flag/var/save identity, services, NPCs, encounters or story. Interior headers copy
-JubilifeCity_Mart's header fields with the parent map's music, as packet A's do.
+JubilifeCity_Mart's header fields with the parent map's music, as packet A's do; Valley Windworks copies
+production Route 205 North's (an outdoor route) with its connections.
 
 The builders' committed staging is the input (no donor tree is needed); the three production headers this packet
 changes are pinned in base/, so the staging stays reproducible after integration.
@@ -34,16 +40,20 @@ SINNOH = HERE.parent
 BASE = HERE / "base"
 W28 = SINNOH / "production-interiors"
 W23 = SINNOH / "eterna-forest-gate"
+W5 = SINNOH / "valley-windworks"
 PRIOR_SLOTS = 22
 LAST_PRIOR = "OreburghGate_B1F"
-# Appended slots, in order: 22-26 (W28, its ROOMS order), 27 (W23's house).
+# Appended slots, in order: 22-26 (W28, its ROOMS order), 27 (W23's house), 28-29 (W5).
 ROOMS = ["FloaromaTown_FlowerShop", "FloaromaTown_House1", "FloaromaTown_Mart", "FloaromaTown_House2",
          "FloaromaMeadow_House"]
 HOUSE = "Route205_South_House"
-SLOTS = ROOMS + [HOUSE]
+WINDWORKS = {"ValleyWindworks": (32, 99, "gTileset_General", "gTileset_Mauville"),         # W5's prepare_runtime
+             "ValleyWindworks_Inside": (22, 16, "gTileset_Building", "gTileset_BikeShop")}
+SLOTS = ROOMS + [HOUSE] + list(WINDWORKS)
 PARENT = {"FloaromaTown_FlowerShop": "FloaromaTown", "FloaromaTown_House1": "FloaromaTown",
           "FloaromaTown_Mart": "FloaromaTown", "FloaromaTown_House2": "FloaromaTown",
-          "FloaromaMeadow_House": "FloaromaMeadow", HOUSE: "Route205_South"}
+          "FloaromaMeadow_House": "FloaromaMeadow", HOUSE: "Route205_South",
+          "ValleyWindworks": "Route205_North", "ValleyWindworks_Inside": "ValleyWindworks"}
 HOUSE_DOOR = (21, 22)
 TILESETS = {False: "AveronFloaromaInteriorPrimary", True: "AveronFloaromaInteriorSecondary"}
 DEV_TILESETS = {"gTileset_ClaudeProdInteriorPrimary": "gTileset_" + TILESETS[False],
@@ -68,21 +78,27 @@ def read_json(path):
 
 
 def production_header(staged, template, parent, layout):
-    """The staged header's identity and warps on a production interior template, with the parent's music/section."""
+    """The staged header's identity, warps and connections on a production template, with the parent's music/section."""
     hdr = {"id": staged["id"], "name": staged["name"], "layout": layout, "music": parent["music"]}
     for k in HEADER_FIELDS:
         hdr[k] = template[k]
     hdr["region_map_section"] = parent["region_map_section"]
-    hdr.update(connections=[], object_events=[], coord_events=[], bg_events=[], warp_events=staged["warp_events"])
+    hdr.update(connections=staged.get("connections") or [], object_events=[], coord_events=[], bg_events=[],
+               warp_events=staged["warp_events"])
     return hdr
+
+
+def appended_only(base, overlay, field):
+    """The overlay must be base plus entries appended to one list field; returns the appended entries."""
+    n = len(base[field])
+    assert {k: v for k, v in overlay.items() if k != field} == {k: v for k, v in base.items() if k != field}, base["id"]
+    assert overlay[field][:n] == base[field], base["id"]
+    return overlay[field][n:]
 
 
 def with_door_warps(base, overlay):
     """The overlay must be base plus appended warps only; returns it."""
-    n = len(base["warp_events"])
-    assert {k: v for k, v in overlay.items() if k != "warp_events"} == {k: v for k, v in base.items()
-                                                                        if k != "warp_events"}, base["id"]
-    assert overlay["warp_events"][:n] == base["warp_events"], base["id"]
+    appended_only(base, overlay, "warp_events")
     return overlay
 
 
@@ -90,7 +106,8 @@ def plan(engine):
     """Every engine file this packet writes or adds, as {relative path: bytes or JSON}, plus the new layouts."""
     engine = pathlib.Path(engine)
     template = read_json(engine / "data/maps/JubilifeCity_Mart/map.json")
-    base = {m: read_json(BASE / f"data/maps/{m}/map.json") for m in ("FloaromaTown", "FloaromaMeadow", "Route205_South")}
+    base = {m: read_json(BASE / f"data/maps/{m}/map.json")
+            for m in ("FloaromaTown", "FloaromaMeadow", "Route205_South", "Route205_North")}
     files, layouts = {}, []
     for town in ("FloaromaTown", "FloaromaMeadow"):
         files[f"data/maps/{town}/map.json"] = with_door_warps(base[town],
@@ -101,8 +118,15 @@ def plan(engine):
     door = [w for w in w23_route["warp_events"] if (w["x"], w["y"]) == HOUSE_DOOR]
     assert len(door) == 1 and door[0]["dest_map"] == const(HOUSE), door
     route["warp_events"] = door
+    north = dict(base["Route205_North"])
+    for name, hdr in (("Route205_South", route), ("Route205_North", north)):      # W5's donor connections
+        added = appended_only(base[name], read_json(W5 / f"staged/{name}-dev-overlay/map.json"), "connections")
+        assert [c["map"] for c in added] == ["MAP_VALLEY_WINDWORKS"], added
+        hdr["connections"] = base[name]["connections"] + added
     files["data/maps/Route205_South/map.json"] = route
-    parents = {m: files[f"data/maps/{m}/map.json"] for m in ("FloaromaTown", "FloaromaMeadow", "Route205_South")}
+    files["data/maps/Route205_North/map.json"] = north
+    parents = {m: files[f"data/maps/{m}/map.json"]
+               for m in ("FloaromaTown", "FloaromaMeadow", "Route205_South", "Route205_North")}
     for room in ROOMS:
         d = W28 / "staged" / room
         staged, dims = read_json(d / "map.json"), read_json(d / "layout.json")
@@ -127,6 +151,24 @@ def plan(engine):
         w["dest_warp_id"] = "0"                             # production Route 205 South has only the door warp
     files[f"data/maps/{HOUSE}/map.json"] = production_header(house, template, route, house["layout"])
     files[f"data/maps/{HOUSE}/scripts.inc"] = (W23 / f"staged/{HOUSE}/scripts.inc").read_bytes()
+    for name, (w, h, primary, secondary) in WINDWORKS.items():
+        staged = read_json(W5 / f"staged/{name}/map.json")
+        parent = parents[PARENT[name]]
+        outdoor = staged["map_type"] != "MAP_TYPE_INDOOR"
+        hdr = production_header(staged, north if outdoor else template, parent, staged["layout"])
+        if outdoor:
+            assert {(c["map"], c["offset"], c["direction"]) for c in hdr["connections"]} == {
+                ("MAP_ROUTE205_SOUTH", 0, "left"), ("MAP_ROUTE205_NORTH", -9, "up")}, hdr["connections"]
+        files[f"data/maps/{name}/map.json"] = hdr
+        parents[name] = hdr
+        files[f"data/maps/{name}/scripts.inc"] = (W5 / f"staged/{name}/scripts.inc").read_bytes()
+        for f in ("map.bin", "border.bin"):
+            files[f"data/layouts/{name}/{f}"] = (W5 / f"staged/{name}/{f}").read_bytes()
+        assert len(files[f"data/layouts/{name}/map.bin"]) == w * h * 2, name
+        layouts.append({"id": staged["layout"], "name": f"{name}_Layout", "width": w, "height": h,
+                        "primary_tileset": primary, "secondary_tileset": secondary,
+                        "border_filepath": f"data/layouts/{name}/border.bin",
+                        "blockdata_filepath": f"data/layouts/{name}/map.bin"})
     for t in read_json(W28 / "staged/tilesets.json"):
         dest = f"data/tilesets/{'secondary' if t['secondary'] else 'primary'}/{folder(TILESETS[t['secondary']])}/"
         files[dest + "metatiles.bin"] = (W28 / t["metatiles"]).read_bytes()
