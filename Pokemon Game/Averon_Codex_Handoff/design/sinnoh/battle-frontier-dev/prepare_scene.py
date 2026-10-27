@@ -5,8 +5,9 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 ENGINE='Pokemon Game/engine'
-BASE='71923a9361bbc56199f0356aea0cf4166657b1a5'
-ENGINE_TREE='96904d644c44cbc7d2068e212ef07c11f06db9d5'
+BASE='284503e76145052f420ec1d2debe8e1611093f09'
+ENGINE_TREE='320fc1f48b1d1da85a83bcf943dbb30103379e0f'
+PRIOR_SLOTS=22
 s=importlib.util.spec_from_file_location('battle_dev_guarded_reuse',HERE.parent/'sunyshore-coast/prepare_runtime.py')
 reuse=importlib.util.module_from_spec(s);s.loader.exec_module(reuse)
 base=reuse.base
@@ -18,10 +19,16 @@ FAMILIES={
  'Gate':('frontier-gate-link/families/Gate','Cave'),
  'StarkApproach':('stark-approach/cave-family','Cave'),
  'StarkCave':('stark-mountain/cave-family','Cave')}
+def inputs(repo):
+    # Keep this packet's accepted production pin independent of the older coast scene.
+    pins=json.loads((HERE/'runtime-base-input-hashes-main22.json').read_text())
+    data={p:base.verified_file(Path(repo),Path(ENGINE)/p,'HEAD') for p in pins}
+    if any(base.sha(data[p])!=h for p,h in pins.items()):raise ValueError('current baseline inputs differ')
+    return data
 def assemble(repo):
     repo=Path(repo).resolve();engine=repo/ENGINE
     if base.git(repo,'rev-parse','HEAD:'+ENGINE).decode().strip()!=ENGINE_TREE:raise ValueError('exact engine tree required')
-    before=reuse.inputs(repo);source_pins={};native_inputs={}
+    before=inputs(repo);source_pins={};native_inputs={}
     def read(path):
         raw=base.verified_file(ROOT,path.relative_to(ROOT),'HEAD');source_pins[str(path.relative_to(ROOT))]=base.sha(raw);return raw
     def eng(path):
@@ -137,12 +144,12 @@ def assemble(repo):
         heads.append('const struct Tileset gTileset_'+symbol+' = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles='+bindings['tiles']+', .palettes='+bindings['palettes']+', .metatiles=gMetatiles_'+symbol+', .metatileAttributes = gMetatileAttributes_'+symbol+', .callback='+bindings['callback']+' };')
     groups=json.loads(before['data/maps/map_groups.json']);layouts=json.loads(before['data/layouts/layouts.json'])
     prior=list(groups['gMapGroup_Sinnoh']);group=groups['group_order'].index('gMapGroup_Sinnoh')
-    if len(prior)!=19:raise ValueError('exact19-map prefix required')
-    slots=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 19, 1)'
+    if len(prior)!=PRIOR_SLOTS:raise ValueError(f'exact{PRIOR_SLOTS}-map prefix required')
+    slots=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {PRIOR_SLOTS}, 1)'
     if slots.count(marker)!=1:raise ValueError('registry group pin differs')
-    slots=slots.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {19+len(packets)}, 1)')
+    slots=slots.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {PRIOR_SLOTS+len(packets)}, 1)')
     includes=[];scene={}
-    for i,(key,p) in enumerate(packets.items(),19):
+    for i,(key,p) in enumerate(packets.items(),PRIOR_SLOTS):
         name='DevBattleFrontier_'+key;h=copy.deepcopy(p['header']);h.update(name=name,layout='LAYOUT_DEV_BATTLE_FRONTIER_'+key.upper(),region_map_section='MAPSEC_ROUTE_201')
         if name in prior or (engine/'data/maps'/name).exists():raise ValueError('refusing existing scene map')
         l=dict(p['layout']);l.update(id=h['layout'],name=name+'_Layout',blockdata_filepath='data/layouts/'+name+'/map.bin',border_filepath='data/layouts/'+name+'/border.bin',layout_version='emerald')

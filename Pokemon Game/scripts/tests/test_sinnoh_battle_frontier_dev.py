@@ -8,13 +8,13 @@ s=importlib.util.spec_from_file_location('battle_dev_tests',HERE/'prepare_scene.
 class BattleFrontierDEV(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
-  cls.files,cls.recipe=m.assemble(ROOT);cls.before=m.reuse.inputs(ROOT)
+  cls.files,cls.recipe=m.assemble(ROOT);cls.before=m.inputs(ROOT)
  def test_original_groups_layouts_disabled_entries_and_registry_slots_preserved(self):
   before=json.loads(self.before['data/maps/map_groups.json']);after=json.loads(self.files['data/maps/map_groups.json'])
   self.assertEqual(before['group_order'],after['group_order'])
   for k,v in before.items():
    if k!='gMapGroup_Sinnoh':self.assertEqual(v,after[k])
-  self.assertEqual(after['gMapGroup_Sinnoh'][:19],before['gMapGroup_Sinnoh']);self.assertEqual(len(after['gMapGroup_Sinnoh']),63)
+  self.assertEqual(after['gMapGroup_Sinnoh'][:22],before['gMapGroup_Sinnoh']);self.assertEqual(len(after['gMapGroup_Sinnoh']),66)
   old=json.loads(self.before['data/layouts/layouts.json'])['layouts'];new=json.loads(self.files['data/layouts/layouts.json'])['layouts']
   self.assertEqual(new[:len(old)],old);self.assertEqual(len(new),len(old)+44)
   oldslots=[x for x in self.before['test/data/averon_map_registry_slots.inc'].decode().splitlines() if x.startswith('REGISTRY_SLOT(')]
@@ -22,6 +22,34 @@ class BattleFrontierDEV(unittest.TestCase):
   self.assertEqual(slots[:len(oldslots)],oldslots);self.assertEqual(len(slots),len(oldslots)+44)
   for path in ('include/tilesets.h','src/data/tilesets/headers.h','src/data/tilesets/metatiles.h','data/event_scripts.s'):
    self.assertTrue(self.files[path].startswith(self.before[path]))
+ def test_merged_west_production_maps_precede_every_temporary_slot(self):
+  names=self.recipe['existing_map_names_preserved']
+  self.assertEqual(len(names),22)
+  self.assertEqual(names[-3:],['JubilifeCity_GlobalTerminal_1F','JubilifeCity_GlobalTerminal_2F','OreburghGate_B1F'])
+  self.assertEqual(sorted(p['num'] for p in self.recipe['scene'].values()),list(range(22,66)))
+  # Only the four newly exported files per temporary map may replace map/layout data.
+  self.assertFalse(any(p.startswith(('data/maps/'+name+'/', 'data/layouts/'+name+'/'))
+                       for name in names for p in self.files))
+ def test_shortened_or_expanded_production_prefix_is_refused(self):
+  original=m.inputs
+  for delta in (-1,1):
+   before=original(ROOT)
+   groups=json.loads(before['data/maps/map_groups.json'])
+   if delta<0:groups['gMapGroup_Sinnoh'].pop()
+   else:groups['gMapGroup_Sinnoh'].append('UnapprovedFutureMap')
+   before['data/maps/map_groups.json']=m.encode(groups)
+   with self.subTest(delta=delta),patch.object(m,'inputs',return_value=before):
+    with self.assertRaisesRegex(ValueError,'exact22-map prefix required'):m.assemble(ROOT)
+ def test_changed_baseline_hash_is_rejected(self):
+  target=HERE/'runtime-base-input-hashes-main22.json';original=Path.read_text
+  def changed(path,*args,**kwargs):
+   raw=original(path,*args,**kwargs)
+   if path==target:
+    pins=json.loads(raw);pins[next(iter(pins))]='0'*64
+    return json.dumps(pins)
+   return raw
+  with patch.object(Path,'read_text',changed):
+   with self.assertRaisesRegex(ValueError,'current baseline inputs differ'):m.inputs(ROOT)
  def test_actual_room2_strip_recomposition_source_ids_unmodified_and_all_maps_fit(self):
   scene=self.recipe['scene'];self.assertEqual(len(scene),44)
   pieces=[self.files['data/layouts/'+scene['StarkRoom2'+p]['name']+'/map.bin'] for p in ('West','Center','East')]
