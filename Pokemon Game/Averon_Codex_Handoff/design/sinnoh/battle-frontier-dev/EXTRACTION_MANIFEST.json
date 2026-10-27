@@ -1,0 +1,2575 @@
+{
+  "source_branch": "codex/frontier-main22-tested-source-20261027",
+  "source_commit": "91b2db4343c0192334acae54ee63f80d688f4926",
+  "base_main": "1cd3f57836bc2e4be87ce340ddb0a39562b49b4a",
+  "base_engine_tree": "320fc1f48b1d1da85a83bcf943dbb30103379e0f",
+  "method": "Actual execution/import file tracing through exporter plus34 selected positive/negative/replay host tests. Only those needed inputs and explicit bounded QA/evidence copied. Accepted-main files must be byte-identical and are retained.",
+  "copied_files": [
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/acuity-cavern/build_source.py",
+      "sha256": "aa5fe961198b2514ed4849fe5324080b4c3d6dce2e38dd4eeef1f019e72d777f",
+      "source_blob": "57eef85a49f306247202c9d806177147243c1dd7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/CHECKPOINT.md",
+      "sha256": "cb2ea6ab6f062951ed127dfbade0084ecb485402cff0a58102ab5f2f08336d55",
+      "source_blob": "27dded3c220a862b235e40cf14db8466521a8916",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/MAIN22_BUILD_EVIDENCE.json",
+      "sha256": "8252e58ca8d888295d10bc2f5d8ed05c99c86932c2530bba6f0567ea480ada0f",
+      "source_blob": "00da1862aec916239f09637aadff0736e4703717",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/MAIN22_CAMPUS_EAST_FOLLOWER.png",
+      "sha256": "ad0c8c1e21b1afd30b8363507328564d62aecb4b2bcef0fcca68f85cea69960f",
+      "source_blob": "4d757f0a01705c43d255366a3ff42b9cbe3cf807",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/prepare_scene.py",
+      "sha256": "b645576ccc58c7226a7a1377df5be88f93424f378d5655f7d3bf05460dfae0ee",
+      "source_blob": "e66e2f6f62354747b3b3b8417d49ef62dc06760a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/run_campus_qa.py",
+      "sha256": "03f92fa32a0d13adc5518549740ade5a7178a065e2b4e6667faa73fb3c1c3e23",
+      "source_blob": "e457432796c33b5090dbcf7f92769bd885a15738",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/runtime-base-input-hashes-main22.json",
+      "sha256": "23d8c660a0a4120adbd44d112f8c3d631c986a85eca8dc7a1f99ea9cfeb62ec8",
+      "source_blob": "251787ea9380006df8962b67b35e9926767542cb",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev/runtime-recipe-main22.json",
+      "sha256": "3203d5e23887364ac9372346b1c99cb9076bef6ea511af637b156d24ff27bb63",
+      "source_blob": "e40a81d22168e638235f2e46b38b4727a43cc765",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/build.py",
+      "sha256": "fa2ebbb3d73d66251c7c9320e201f06600432f3fc3274c288cb0d5fab13709d4",
+      "source_blob": "76544d212ea7e3166a5e77563429ff2c62d7998c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/receipt.json",
+      "sha256": "62d8ab07285415c3ad370721c4467498f32d763f6d217d87519afe5f841cb34f",
+      "source_blob": "c6a3e6d28b89a9bc636ef388b6b28d87a2453613",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/attributes.json",
+      "sha256": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
+      "source_blob": "859e40c62d6d2b3a0b94a1ed46a6d8343de85e14",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/map.bin",
+      "sha256": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
+      "source_blob": "b819b8000f9f3fa24b0b75d997e54644b543c964",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/map.json",
+      "sha256": "5fdd0b19678c49628c3ee0a12698b1a0e63bdf5a3bd247c22ecabf9f098f2dd8",
+      "source_blob": "29fc3622e4720aae80b7956b2e98b6da4f177037",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightArea/preview.png",
+      "sha256": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
+      "source_blob": "adfe4296739973f682108f99bb1da466d20e033a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter1/attributes.json",
+      "sha256": "59eabb8cd05649ac51aa8b6183a0f53bec407b7ebcc7ebcb80e220a694808988",
+      "source_blob": "dc805a7fd0a7f38379307387e4773c39ce62220c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter1/layout.json",
+      "sha256": "9b2defd575256e95f8032506ab3b2c233f9750f8989b874395f822dd76d90c04",
+      "source_blob": "a0b237af9dad1f662ee150738419b5b561f05ce3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter1/map.bin",
+      "sha256": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+      "source_blob": "5201dde15f5fcea03a81352588afc22ff96eb97e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter1/map.json",
+      "sha256": "f7c5f2eb88e8cd17c7bdd61bec56f0130ca4f77bbdd6f78c091791281d794e24",
+      "source_blob": "beae5c8ba81c84b98e580e7a29847e89d11b6007",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter2/attributes.json",
+      "sha256": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
+      "source_blob": "84d8898fbb36fa60a29cf2e82a1880f7741c37ef",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter2/layout.json",
+      "sha256": "64a1a2d114fe1c29294487e0b41ae11ae431b1e2806c5f38db1ea107a37e6f81",
+      "source_blob": "feb254499f8e091eacd9daeed86eb655b4fc6998",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter2/map.bin",
+      "sha256": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+      "source_blob": "6ef18b362a77098e0fef8c5f63c8942d067f96ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaCenter2/map.json",
+      "sha256": "b373fa877ede56a33a095ba3c113d43d49151fc437183eb0496ef3ceb0ac0688",
+      "source_blob": "d78ba976f0f842741765a0e76f0e66aa2aa4419d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse1/attributes.json",
+      "sha256": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+      "source_blob": "87b55c6b09da035a457f1641c14ff564df4379be",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse1/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse1/layout.json",
+      "sha256": "48bde9bc425a66b0117ddf77e4c2bac7723d3f2b62f0c256af472e0882c4fc81",
+      "source_blob": "804075a5e31c1187abf5b7466db1982978467d7a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse1/map.bin",
+      "sha256": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
+      "source_blob": "ea185484d6c64c15c0f6a5d479d5bc3541207bcd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse1/map.json",
+      "sha256": "a5fef8ecf7a302634159c9470822b48f8c2c021fca49167a1948f5ff8c572017",
+      "source_blob": "35909b94cf47963f0de63dcec82daeb7fec60193",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse2/attributes.json",
+      "sha256": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+      "source_blob": "0d894bc7c9aa7cc7f38eaa6c5629c874508852d0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse2/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse2/layout.json",
+      "sha256": "14f8755e938333132119d5e789fc2e7662f640a175992385256d3900a08854d4",
+      "source_blob": "6fbae2df789cdd30fa73c9b892e0c7566fe38343",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse2/map.bin",
+      "sha256": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+      "source_blob": "0e9f079644001531511005e3e4d2431049de8772",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/FightAreaHouse2/map.json",
+      "sha256": "febce64b94c6eb75911b41b20bdc514ddae944d8e860eef3c2e9f2b04b8c1003",
+      "source_blob": "c4db683bc4b4bac69662dd0ab19bb5910fd656a7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortArea/attributes.json",
+      "sha256": "a52ea52bef8b90c269b525e312ce12b324af087f55a7e9f25d2c4c82281eea19",
+      "source_blob": "ba8493e4e1af8d65baca156a5152b752379bd069",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortArea/map.bin",
+      "sha256": "e4e3a395a6e1b2d9da948b3c9c438180b3f21c68623fde0b32bec3a4a2225e95",
+      "source_blob": "c7142458fcce8e7849f0f917b9886ed289abcd25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortArea/map.json",
+      "sha256": "358ce60a1c2aa220f2ec0bb1851b7cd92c510011824764c61a1d42c2d0f0943e",
+      "source_blob": "029051edb5829125581c80f1b18bcfabc4938f3b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortArea/preview.png",
+      "sha256": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
+      "source_blob": "cdac904db42dd2c7af2b85ff5036c65b0d18842f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter1/attributes.json",
+      "sha256": "59eabb8cd05649ac51aa8b6183a0f53bec407b7ebcc7ebcb80e220a694808988",
+      "source_blob": "dc805a7fd0a7f38379307387e4773c39ce62220c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter1/layout.json",
+      "sha256": "c376603a6c7a3184334ecc985fcc8acd44f24379a77e1f7005856a65e5671a91",
+      "source_blob": "cd8f8754ee39dff80ffb248a3f04123e7b2ef2ec",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter1/map.bin",
+      "sha256": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+      "source_blob": "5201dde15f5fcea03a81352588afc22ff96eb97e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter1/map.json",
+      "sha256": "d56b68f096d77ab85fd16f7a2cf5220346d3779078a023b84f3ef5e78a122310",
+      "source_blob": "371146a89c2efafee036e7141cfd125166777bb0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter2/attributes.json",
+      "sha256": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
+      "source_blob": "84d8898fbb36fa60a29cf2e82a1880f7741c37ef",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter2/layout.json",
+      "sha256": "05be2beb95f4a18d1548b1307228de62b8edd89c4811a8c89cec808efa207595",
+      "source_blob": "ab7f484aaea356edf18fc8b5691f4277129ebe1f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter2/map.bin",
+      "sha256": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+      "source_blob": "6ef18b362a77098e0fef8c5f63c8942d067f96ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaCenter2/map.json",
+      "sha256": "fe22cf5639c599012b1f4df37eb8bb0ce594c6ea85bfeb45eacd2a0bf2d464a7",
+      "source_blob": "13eb12f6c232acff8de55ea632d753a6016505a4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse1/attributes.json",
+      "sha256": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+      "source_blob": "9d6559662bf54751d546f390b4812fa9ac633f7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse1/layout.json",
+      "sha256": "432c1a256986d41521ef389de0ae61c69161d63a88da4908a2558d12721e9c1d",
+      "source_blob": "b8b7d1f37a6659df7e8ab8a84f5662d8c685067a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse1/map.bin",
+      "sha256": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+      "source_blob": "1f732ba3fb464cb9ccad3778d1b6d4d5c1793f25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse1/map.json",
+      "sha256": "b8af90f99861fbd9134284892e82b54a5c708fe21c0f93ef5be06cefa59e9259",
+      "source_blob": "0d2d710ea44ef6cd739227cda60130db98d1cf87",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse2/attributes.json",
+      "sha256": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+      "source_blob": "87b55c6b09da035a457f1641c14ff564df4379be",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse2/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse2/layout.json",
+      "sha256": "0abe515e82cabb50694232563e6bdc852a3a091778d483037f7c5b360ce191da",
+      "source_blob": "b010051d7568227aa5280fcef0825033936cf566",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse2/map.bin",
+      "sha256": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
+      "source_blob": "ea185484d6c64c15c0f6a5d479d5bc3541207bcd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/ResortAreaHouse2/map.json",
+      "sha256": "b6e037850906c8b2f055f64c26cf84cbeb1841bf81031a6c45d78f434656113c",
+      "source_blob": "7f2e0557be890b691c8596e05d1d93d9b5fc88e2",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228/attributes.json",
+      "sha256": "beb18418ed5b9ce835380f9c4d7b82f2d1a0cc882fbc2328b63bf66653682087",
+      "source_blob": "ed824bc152bd55fcfa3f2fb0c253f05deb2601dc",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228/map.bin",
+      "sha256": "0fb8cfa7cb68dc315dbc1794eb4a9a62d46b4963a507bf7023dd168f210dd670",
+      "source_blob": "f4d4b809fda527c060692296a06f47dda8118612",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228/map.json",
+      "sha256": "00ff31aef722c8507f9174764bbc5c8d577acddce2e711545504102df254ea1e",
+      "source_blob": "b99e6afb9030427951db663f9678f8dd5d808e8e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228/preview.png",
+      "sha256": "47012c13715836a593bfa0e874cb50045560aa03cac15eb168e17f1b5cf75492",
+      "source_blob": "2f739112c1130d77bf94d94be482e78b453b58b5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House1/attributes.json",
+      "sha256": "d7af49509a4553811a0bca6d31e75adea15ae8288a64e583879f575317c6938a",
+      "source_blob": "87b55c6b09da035a457f1641c14ff564df4379be",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House1/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House1/layout.json",
+      "sha256": "774f63ca1c5dd371ab19e9da7b4990ac626fa67433d44537b3a32f464bd7f442",
+      "source_blob": "223280856a6f2216b0b1d36f6af380931da8ed67",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House1/map.bin",
+      "sha256": "9d5aca59ce1da85b17a8cbf691dd0197c483e5773d8516248977989afbb37b63",
+      "source_blob": "ea185484d6c64c15c0f6a5d479d5bc3541207bcd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House1/map.json",
+      "sha256": "0246622b8b71215fbb54452b97db2df8b316ebc1789a0edb079ddd46cf97c82b",
+      "source_blob": "12e45f8a1021491f34d25190634147a989b7e15a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House2/attributes.json",
+      "sha256": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+      "source_blob": "9d6559662bf54751d546f390b4812fa9ac633f7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House2/layout.json",
+      "sha256": "94a21289ec3ed84e63c8120ed3cdeb90970ce52212f67286a1f2da3a852e231e",
+      "source_blob": "3b7250c1374cfc5e738b191d15cb583720e53d5a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House2/map.bin",
+      "sha256": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+      "source_blob": "1f732ba3fb464cb9ccad3778d1b6d4d5c1793f25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/Route228House2/map.json",
+      "sha256": "1acf46acae0044990162f0c8529066285e071e8b19818b7387d60c204e04398b",
+      "source_blob": "bf21ab25c19a56172d6de56b5d6655dd3446093c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalArea/attributes.json",
+      "sha256": "d8c0868945bb5b7446ace5c908da8c8e1c2edf2891060faa875bc7fb0439d0ed",
+      "source_blob": "aa1e9039fd958b1d92e5854779dbbe16f1bb6f4c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalArea/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalArea/map.bin",
+      "sha256": "760335d43485c1c88b2dd63e5573e62025995305fe6f7486402fd4a0042f76f7",
+      "source_blob": "89f8849b70760f2b2db2eed1d0b9385f93f65a16",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalArea/map.json",
+      "sha256": "9481172761bd73664da898c1edd60948ebecb7a4b6f5f2c0a9ef4010285ca6a0",
+      "source_blob": "6cfd9ca2547a3b19cb091365f4b5cb35f118d5ac",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalArea/preview.png",
+      "sha256": "0b3e2e4d65e5dbd5a4f8022a98979e7fab9fbc02c2803b730ce6dfbea56c0c60",
+      "source_blob": "a0718d5a0f2489146439808059680b0224c14bc4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter1/attributes.json",
+      "sha256": "59eabb8cd05649ac51aa8b6183a0f53bec407b7ebcc7ebcb80e220a694808988",
+      "source_blob": "dc805a7fd0a7f38379307387e4773c39ce62220c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter1/layout.json",
+      "sha256": "e999c8c07ac36f1b8e417f5a4484469306821892920ec6f8d4a167e52921aa4c",
+      "source_blob": "e6053821bfb80216427446467a1d6b21bd4f75fd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter1/map.bin",
+      "sha256": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+      "source_blob": "5201dde15f5fcea03a81352588afc22ff96eb97e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter1/map.json",
+      "sha256": "c598a1b75d41afebc69b4f63c6bcd8cbffebd629d83de874778c57f33e933cd2",
+      "source_blob": "619bb27e3fd03067924e6c761d51d9277871e674",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter2/attributes.json",
+      "sha256": "0962352092836e92a8687fdf752218dd9c1e8500409a2280cfd25a18f0db4875",
+      "source_blob": "84d8898fbb36fa60a29cf2e82a1880f7741c37ef",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter2/layout.json",
+      "sha256": "1071da9bcb41ff3759f5bb0281cc614f0cc97329d47cf4d7da6e4a308d87a953",
+      "source_blob": "eade47af8fda0e5799e107dc22c209071d81fa4e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter2/map.bin",
+      "sha256": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+      "source_blob": "6ef18b362a77098e0fef8c5f63c8942d067f96ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaCenter2/map.json",
+      "sha256": "1e4c8d7961c6773aceb625c6038821e90dab5593f58817d46cb50e9e7f586268",
+      "source_blob": "5c992f794d50242518ea0fb4ef80d3be4f0698c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse1/attributes.json",
+      "sha256": "a055a15e99980a77a6a23429c46498e121a05d06239401b3c3f7ce692c591b3b",
+      "source_blob": "9d6559662bf54751d546f390b4812fa9ac633f7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse1/layout.json",
+      "sha256": "694b12ac46d92bc5213d44c6811f356930083a8cc534891026e432b74b75177e",
+      "source_blob": "c5d68ed10101d07a4833d3046c806f014ab4f370",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse1/map.bin",
+      "sha256": "ea0e7ddf63090f3fb8c0e1caaa0574a2c82d919df9032dc23a52fe4b5d0a0991",
+      "source_blob": "1f732ba3fb464cb9ccad3778d1b6d4d5c1793f25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse1/map.json",
+      "sha256": "10710c147eca753558fa532d27e44dfca8551d7f7e56873b3dc2e9b22852405e",
+      "source_blob": "0a4f697d11f77a73ed62cb8fbe8a2f4a295f64af",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse2/attributes.json",
+      "sha256": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+      "source_blob": "0d894bc7c9aa7cc7f38eaa6c5629c874508852d0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse2/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse2/layout.json",
+      "sha256": "61429e00b87c38671543292b3eac8fde2fa0da4547150c3c96806804c0962100",
+      "source_blob": "f870611551d149526b82c3a50cb68b5f1a61ddd0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse2/map.bin",
+      "sha256": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+      "source_blob": "0e9f079644001531511005e3e4d2431049de8772",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse2/map.json",
+      "sha256": "89fe4a000c53fa4bed94650d5d033c8dd5e2e35b4215fa3fef63f739d9a19833",
+      "source_blob": "b8dc7cdd00f98d414a5065472847607839e98c3c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse3/attributes.json",
+      "sha256": "0c4952f41b30f711faf692cfbee5c3447e7de40637717ec98923dead9f1a5645",
+      "source_blob": "0d894bc7c9aa7cc7f38eaa6c5629c874508852d0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse3/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse3/layout.json",
+      "sha256": "a70900d97f8311f610645257f8489204cacc8ca95ef12521662cd72487731f06",
+      "source_blob": "1e95ed796e47fb0dd5c93db7d5d5e70af5673355",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse3/map.bin",
+      "sha256": "abbbb3ae0dde23f48f41faac137e9533b6095a9f3c69ce2817f459d4dad0fe50",
+      "source_blob": "0e9f079644001531511005e3e4d2431049de8772",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells/staged/SurvivalAreaHouse3/map.json",
+      "sha256": "006dc2f3abe634cd7f84965e5da3584a9376d79a0e0b7daba1ca6ee59f061769",
+      "source_blob": "4aeefacd49b3cb290ff1d484fd16088c349f7752",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route225/attributes.json",
+      "sha256": "825c8975abbd9af559ee123bfee2c5e4b2233fccb16126324364fd54c6198d95",
+      "source_blob": "3733e7d474995e6af17e8e981dc11147ab6a331e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route225/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route225/map.bin",
+      "sha256": "62e8451da52080fabc3b220f8ac95651887b3cc979049db26902908ba6fbe120",
+      "source_blob": "c37efc111ec23ce70b82f62d51fc6430c530dc55",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route225/map.json",
+      "sha256": "894fd767b32e593120efdd27c9c9cee677ade47b8fc07e0f0f611a2c38068005",
+      "source_blob": "3d3283ce4409bada177afe23f41b76fb7b1172ff",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route226/attributes.json",
+      "sha256": "2279fadf6dbffd6af0bdc9ae566c10b0f09e7378d8a90c7c311b2a896ca07f55",
+      "source_blob": "b36982bf3332ef1196d0871c64c2557ba13433e5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route226/border.bin",
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "source_blob": "4531975c765efca1944de210b6b914c25285ffb9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route226/map.bin",
+      "sha256": "43d58b24bfd9c49925a598d8381e6ff29753ea3f3e500ea4d34a26179e6d95e3",
+      "source_blob": "c737a272c7652fb9237ff80d30357a0dec8f13af",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route226/map.json",
+      "sha256": "e531b9946aee5aae49b72d4ca6365b19d6a749942d4660b8a89001062fa02b95",
+      "source_blob": "1391c39e57c6d5a0609fb62fc2ee864c66f7b931",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/map.bin",
+      "sha256": "0fb8cfa7cb68dc315dbc1794eb4a9a62d46b4963a507bf7023dd168f210dd670",
+      "source_blob": "f4d4b809fda527c060692296a06f47dda8118612",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/map.json",
+      "sha256": "091d71530ba9169ff7b22d2bcde12784a7e2cd62e44a7260e2fb4daf78e50f59",
+      "source_blob": "3399c9120dfc18b09d9a28f3919712e23b2220ca",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-links/staged/Route228/preview.png",
+      "sha256": "47012c13715836a593bfa0e874cb50045560aa03cac15eb168e17f1b5cf75492",
+      "source_blob": "2f739112c1130d77bf94d94be482e78b453b58b5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/adapt_art.py",
+      "sha256": "b55dccdf6f63946b866732411cb6f5f25cf92e23011ddbedf52564711eefc2fe",
+      "source_blob": "a75eb491af36807f10c05d8209e90ff30597cff4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/art-plan.json",
+      "sha256": "e86e5778da6bd7ed04b2af172e8ac3b09c227600428cb31a26aad1ace3c08440",
+      "source_blob": "5a96ae42880df642e46fe10378fef565461827f4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/outdoor-family/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/outdoor-family/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/outdoor-family/secondary-attributes.bin",
+      "sha256": "95d74f3ba2634b890a1f08e6a40fc25a3ab435b9286f07e6a4bcc55e340e43c4",
+      "source_blob": "fa659eed7e7567cc0cbd7b1494756e9e5e443a17",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/outdoor-family/secondary-metatiles.bin",
+      "sha256": "64973ec8dc0e439dff2bb8df2bdeca785dd3637d321917d08a3596888b56777c",
+      "source_blob": "194000b9bc676c75ac289698023a14dee6b35396",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/source-receipt.json",
+      "sha256": "b489340c1501e9e8ba052b6baf54d461d32b7ef1521129c6095351fc2c48fa65",
+      "source_blob": "7c516e36e9ced18690addb070b0d5db5476d504e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/FightArea/averon-border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/FightArea/averon-map.bin",
+      "sha256": "79ed92e585ce73a664319712e1850b30efed188c83a09851f8a25822d30646d4",
+      "source_blob": "16fc45de732a5ca6f20b4d1d5293041aa6cc7b12",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/FightArea/averon.png",
+      "sha256": "b9b5cecc25bb835da6dad692def10249c4f72947dd9bdd092dbd972e55bf77d3",
+      "source_blob": "0f23af9d118bf21883cca34fb4a8ee690b367ac4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon-border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon-map.bin",
+      "sha256": "e4e3a395a6e1b2d9da948b3c9c438180b3f21c68623fde0b32bec3a4a2225e95",
+      "source_blob": "c7142458fcce8e7849f0f917b9886ed289abcd25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/ResortArea/averon.png",
+      "sha256": "ba0bda4b89da922721f04f1667e24de87a370d9d3b26134013fb102a99f92e49",
+      "source_blob": "cdac904db42dd2c7af2b85ff5036c65b0d18842f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route225/averon-border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route225/averon-map.bin",
+      "sha256": "e3fad3d17bb397123210dbab6b6ebbb2752b6856a4f9ec8a8ab16c23585dbec4",
+      "source_blob": "64c548f18270f1a2ce811a077c5e08395b48981d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route225/averon.png",
+      "sha256": "44d70b91f3b5ab1d515836f101de262655bc75f04782496d760bf8cc7e6cf05a",
+      "source_blob": "8f85595de294933b53fcefb1371d5940fbb5cc72",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route226/averon-border.bin",
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "source_blob": "4531975c765efca1944de210b6b914c25285ffb9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route226/averon-map.bin",
+      "sha256": "b27bcdad4e0db30cf424d134aca293e952382e26a252a973fed306085cbf66e8",
+      "source_blob": "448a32f50ac85900abfe7d507f3a397032c9b15f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route226/averon.png",
+      "sha256": "83318f722802686fd77cfeda09f5281a27fa28926e59f7302b43f2e3e9fc9263",
+      "source_blob": "56df0dc26c55ec37ecbdc5313b77be381ced7b1f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route227/averon-border.bin",
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "source_blob": "4531975c765efca1944de210b6b914c25285ffb9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route227/averon-map.bin",
+      "sha256": "a09fa5326f57f2d9deaf60d16c47416d949fdf7a95d68df8af7577f9da51b28f",
+      "source_blob": "e284173d9adaebbb9568c1e8c2ddc1fbbf7fe533",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route227/averon.png",
+      "sha256": "80a258bf399d3bbd7a3988af68e0a0a31966c303f60efbe892ed247359b64f38",
+      "source_blob": "a52041885ddde8408aab519d8942cb6e16dee463",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route228/averon-border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route228/averon-map.bin",
+      "sha256": "d093ceb6f8f5b23f28e15c73c633f33123d5ceeeb2670bcb7106349e4abaa049",
+      "source_blob": "426dd415e04a21dd3fa47bacb718b6e6d320106b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route228/averon.png",
+      "sha256": "f3dd73a23b42bcece66bfb19fd33a30b41ead3fc77ce9df94b8b1620d4fef450",
+      "source_blob": "b6c5ad033855e535dd994c3b40b68f77e6b6f2c1",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route229/averon-border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route229/averon-map.bin",
+      "sha256": "78a6430892b4d90b150452bee145831d0c6d349f599147558983a446f7ff7325",
+      "source_blob": "f753aa0a8f05700ab3bcd7dce0c3b1720c45efeb",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route229/averon.png",
+      "sha256": "c7873f2c07930cecc17744b01ebbb930ca9c844dccd6a4c0167e25fef36b9199",
+      "source_blob": "e2898228c6613d754354e6e689cb4ee627e303cf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route230/averon-border.bin",
+      "sha256": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+      "source_blob": "c3fe51511d0ddb88492f2082c4ae0dbb5222982a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route230/averon-map.bin",
+      "sha256": "728d9692a0877def2faaa9cd2d99d44f43a457a0c613eddd6d8f29c55d6d0ca1",
+      "source_blob": "c3b074ef6e4f44970425e9cf965e0f5dbadd3523",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/Route230/averon.png",
+      "sha256": "f328009cc9e71bf16a60aeae640ea98db861e718190247b11c8c10a48b61dd40",
+      "source_blob": "4f00ba9adb9532314e457a73a0ae1e49f392986b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/SurvivalArea/averon-border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/SurvivalArea/averon-map.bin",
+      "sha256": "760335d43485c1c88b2dd63e5573e62025995305fe6f7486402fd4a0042f76f7",
+      "source_blob": "89f8849b70760f2b2db2eed1d0b9385f93f65a16",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north/staged/SurvivalArea/averon.png",
+      "sha256": "0b3e2e4d65e5dbd5a4f8022a98979e7fab9fbc02c2803b730ce6dfbea56c0c60",
+      "source_blob": "a0718d5a0f2489146439808059680b0224c14bc4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade1/attributes.json",
+      "sha256": "7902f233ef0db67b6b1058832055791b620051219af6802dbc7d1320db7523fe",
+      "source_blob": "becdbe25c406ea9f2543b2698315f05aaf49f478",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade1/layout.json",
+      "sha256": "62d5e88bd419fcf761192d807d04c2c3f6208b89e43fd2205fb4ac5606246ebd",
+      "source_blob": "c8e6dbcbc67a6e13e3d32ebd25f7625fe5b4eacd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade1/map.bin",
+      "sha256": "6356bb1f2530472ccba1b2708f28669227a67b15aa83294869d8b1b14a822576",
+      "source_blob": "6e92a8b58370372e5c88ed75788eca31921d6de3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade1/map.json",
+      "sha256": "692609f968011632ccabc6d7268ccef6e79cfd367bc8156fe3ea88405fcc79c5",
+      "source_blob": "45d9f405fae8ca129f3b183c291c7c210fbcce09",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade2/attributes.json",
+      "sha256": "8af9ee07d0601dd1b916c20f1c46c3ed737eb03d4b9cffcf4f0f0b983792c31c",
+      "source_blob": "4fef102f139c7e19bc0ade16ed15c2ee796eeb09",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade2/layout.json",
+      "sha256": "1f7ed075eadc3cb09c24fbc6d498b034e7ad02d756a52693c6488f88d68438b5",
+      "source_blob": "15890a5d8b437681f498513cdd844d90c12ea9a4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade2/map.bin",
+      "sha256": "238ba00ec625402d3da640e9bf78c0f2424f6655f070c136533e681f40abb733",
+      "source_blob": "76a918838e013d4ab6c59e4ee96911bc6fd4bb7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Arcade2/map.json",
+      "sha256": "ed2b2164c66bb4965ddf6d7c79345e2c37bffa3d104d92f6a9beebd0f72e2565",
+      "source_blob": "bcdc8eee798a8e40361bd678ec860f55edc9a000",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusCenter/attributes.json",
+      "sha256": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+      "source_blob": "6942abc5d911b5e8c948536b6d2479f603512039",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusCenter/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusCenter/map.bin",
+      "sha256": "cf90f4abf52049f5f24b2cd9fbe25731ae0d6ad724ce8f4da3107d383decef9e",
+      "source_blob": "ee979c69d143fb0dfb46140e6b4c669d34de185d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusCenter/map.json",
+      "sha256": "4861535267f6f130d366104134eeb1ca7eb9101ea5feb7638354d2fe98c95743",
+      "source_blob": "d51e6ad3cf26aaafa01aa47dc141ed3e0569565c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusEast/attributes.json",
+      "sha256": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+      "source_blob": "6942abc5d911b5e8c948536b6d2479f603512039",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusEast/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusEast/map.bin",
+      "sha256": "1692253b2c9d0d5d5a67387a8eee8de20a5f1b98878793e63f8cf7773854239c",
+      "source_blob": "41266860bce95ef8a18fa8fbddf226b6544ff7b0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusEast/map.json",
+      "sha256": "f1314d1a47f24c41dc1ce1717f8a71aee7174a718349be46f06cc680bcc45187",
+      "source_blob": "fced3164bcbab4af67706c43f50c1077584a6b86",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusWest/attributes.json",
+      "sha256": "f60c3f333d53cc9ed149e800c81292b6aabaf589de9950e7cbcfc5952e64f00c",
+      "source_blob": "6942abc5d911b5e8c948536b6d2479f603512039",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusWest/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusWest/map.bin",
+      "sha256": "f3400983c5fee9a6378244cc0e2f8d426594b7e137448141b96f1930ca7d1467",
+      "source_blob": "36ba19ccf896e0df46d66801e519228942d8c02b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/CampusWest/map.json",
+      "sha256": "19a22ffd166485bd96ba4677ae101cfb4b868406ab62023026086bca3dd7e3ca",
+      "source_blob": "b2338e9fb738ec245a41f221c5a05d693bf05f25",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Castle/attributes.json",
+      "sha256": "1e9983fc828fb070fa15f4f32fd8fe8116ee2330bbee7d0fa2d36ef9d305c732",
+      "source_blob": "659018b90c345ca9d03ef3598cae66c9c02313bc",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Castle/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Castle/layout.json",
+      "sha256": "1b716d817b6b4e3b86d42b63074747ef96e9b72cdd3b9ee22d55b518323c7910",
+      "source_blob": "be444f768d04ab689bb1992fb8a9ad8bc2afbe59",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Castle/map.bin",
+      "sha256": "ce6c9d1748d45a552bccab2a71b300c2cf2e53bbccbba0b9ff0cca13294bd01c",
+      "source_blob": "4ea16eb5312f765f1d9fd2ab684b611fc610d959",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Castle/map.json",
+      "sha256": "0fda79acb4d0eace2ba7aed893a90f3632a298d91080028f68f246af89c00ad2",
+      "source_blob": "e555f94b7510027ac306187a027fd7400ef42575",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory1/attributes.json",
+      "sha256": "b43d323ba911f48c719d85f31981ef31d4bd6c9a9e49bc315404b0c80e31e967",
+      "source_blob": "e2639a162eba47c2bfc70794c693f8d7be8584f5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory1/layout.json",
+      "sha256": "3e0bf1934d2cf0ea3b4f87d8693798ce2d07f3b6e0a3c35a497b2a652eeeac82",
+      "source_blob": "26c6a547551fd28c8d0d97ab9b4aa591d9c8ba84",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory1/map.bin",
+      "sha256": "fcd427b02daa332fc585ffefb3e0f148abc01e70325344734645d988a424bc81",
+      "source_blob": "036f5ce263245db2882d40c8867ccca5fe541330",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory1/map.json",
+      "sha256": "f1f17ca65fdfdf0ace35ff0af29bf06b0ee0a57c7370b831e05d31b84d7f8f9f",
+      "source_blob": "087c2309ecb2d71165aee03b1593c74f0e2d3e7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory2/attributes.json",
+      "sha256": "c48bb65835239a1c6dff0c6b0c4ab99474fa8abd6b8941d852aaf01c69777f14",
+      "source_blob": "4aa79d8bda6e4fadd868724b3542f5e953584940",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory2/layout.json",
+      "sha256": "206634076cdbb0c8ff542ebfce179c9a2e5474785f12f4171d8eed8791575a87",
+      "source_blob": "d0b7800a59b5de392011efa239ed8a85d414a2d7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory2/map.bin",
+      "sha256": "d4b8d2fe40c87032e90fd4dbe77ab8f9c7eb8ee6339b7af0f55e346120175f04",
+      "source_blob": "d10ed2ac2fa893dd49bd5fc28af559f932ad4bc7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Factory2/map.json",
+      "sha256": "19c76cddb47ca4d39aa0810fdb556cfff60829bbf2fd1ab3e28e533ed2565a49",
+      "source_blob": "1d73aab5ba0a470189d8951b16bb02cf88b139e8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/FightArea/attributes.json",
+      "sha256": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
+      "source_blob": "859e40c62d6d2b3a0b94a1ed46a6d8343de85e14",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/FightArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/FightArea/map.bin",
+      "sha256": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
+      "source_blob": "b819b8000f9f3fa24b0b75d997e54644b543c964",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/FightArea/map.json",
+      "sha256": "5fdd0b19678c49628c3ee0a12698b1a0e63bdf5a3bd247c22ecabf9f098f2dd8",
+      "source_blob": "29fc3622e4720aae80b7956b2e98b6da4f177037",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Gate/attributes.json",
+      "sha256": "daf4c01fe26eb6ee9fca81114ca47c78c6909cc956ef2f8730ffea8625df57ce",
+      "source_blob": "23cf2670b9947642cf204d7d5b257e3793e106bb",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Gate/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Gate/map.bin",
+      "sha256": "9e138fcfb110864f66e857b2576439d607007603764bccabb7bb40593beb8a9b",
+      "source_blob": "ff7d07fa1e0c00e99fe8b6619fc62322adeeacd5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Gate/map.json",
+      "sha256": "a8dce4576d79dc650397765cdd8b28ccd0351b3bed526700a0bb0cefe9c5032b",
+      "source_blob": "e5ee0247912a063f937ab9dd0c0217b17c6c4fb0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall1/attributes.json",
+      "sha256": "6d378e6d7453704a91473d267a0e52d8cc05d93dc88e8f192feb98131aed4b19",
+      "source_blob": "d20160e9f97efe82763c036d5cdb3a998ef9a95b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall1/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall1/layout.json",
+      "sha256": "9f248d53ddb018ee11cb750feef9212dd51807bd5299e3842a8dd77ea5c1f63f",
+      "source_blob": "600d6acad6e3b526992296373bf7b7dfbabb9da9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall1/map.bin",
+      "sha256": "c469fe853404f430fc5a7a268122962ef16c0af90cb557e71036639199d8f88d",
+      "source_blob": "f18b01e4981d8b8bfc3b4deec6c0e9633c679a41",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall1/map.json",
+      "sha256": "ccd49dd0a400c523380b829e21664fa6eceb8c04a411ca47d9af7ee89b4e1a15",
+      "source_blob": "abc91adbb0badec311c6686108b960eee75bba91",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall2/attributes.json",
+      "sha256": "527719f45d7ebe2b4d72cd3d90bbb4ad2daaa96c047db2f3aef0ffa2dd4647e5",
+      "source_blob": "e9a9ce87458d79ab27747257055dec2f6ab48062",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall2/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall2/layout.json",
+      "sha256": "1538c783cc12a02306cb72ce9c7133831e406e1ca1f8a3ac54447b407d61fa53",
+      "source_blob": "12470f84a4b6053ecc1cf456cac1c60f7488afac",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall2/map.bin",
+      "sha256": "2657da4b3d4ecd7f1e62ebec37053c3e95cc3f3e3d9e5739c3887edae1c282cb",
+      "source_blob": "1fa2cdc1882c33b5a10fd37feacc9a468f0dadf9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Hall2/map.json",
+      "sha256": "7870af234757948bb5deef5f3b30125d2e5c52a4eceae8a6d0aca0b8de5eb338",
+      "source_blob": "1999d43c3889a71c8bd989608ca5001fe4c00c20",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower1/attributes.json",
+      "sha256": "2b0bbcbd71ea7df1724de56f75a85f827eaa02bc58576a84d1fc6b94321b081a",
+      "source_blob": "640a8c73e68094d60b5deb133a98c70a6b156069",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower1/layout.json",
+      "sha256": "78506ee2caf192bef2f6945d689c69748d4fbaab6be8d69b88f5d73af2ad0936",
+      "source_blob": "ef2339c4f90ad2d6f09af007ad6cf86b7dcac6b0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower1/map.bin",
+      "sha256": "4c5ad76bd2fb5a4d65914978338551c240f2e966c6f8f5a91346db1118bf6cbc",
+      "source_blob": "09f86a742de69f7e5eb5cfb4b6c1547d652aad16",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower1/map.json",
+      "sha256": "815c57d30cc49fa9daff4eabcda2eea7d01aa7a8384d683f855ac74db5da4eac",
+      "source_blob": "0e2c5b39acde2397a70d12712e232325b0532286",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower2/attributes.json",
+      "sha256": "6d95614239be2cc33e278acad24821ecf4c030de9ee5264d2da420a8dd22918d",
+      "source_blob": "1a2538c7c6e83e27eac7c665ece850f598060062",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower2/layout.json",
+      "sha256": "db90a675f36fcb5e686a0552100429bb21b7c592d2812c991ca1a1b03c46f90d",
+      "source_blob": "0237933d2f46272af922158e1dd9df5574a8d02c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower2/map.bin",
+      "sha256": "2b6356ff72f7a014080fb98be0a9d59f7c8ecb16264af571d41436d82efec11e",
+      "source_blob": "03985c57229f5ae6e39e206d3c4cbb4fbf185671",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower2/map.json",
+      "sha256": "383534262ffeb19439d9ab4449c3de842dc20a3ff82396d2fbbaaa8536485bdb",
+      "source_blob": "a29dae3d036273e1dbed37c39551480c4ad52ffc",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower3/attributes.json",
+      "sha256": "f79ee0063477fb58ac8ef808649d536c12d93345e2b59429898c3f4ccae019ce",
+      "source_blob": "19079137ad0ab1191ebcd69cd66197a8d2a7d652",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower3/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower3/layout.json",
+      "sha256": "bb7ce7f1e15df2c95ecfe12f6d7f7bc65ad54e1a4d750fa6cb3459988b9541fd",
+      "source_blob": "6f53b5a84d54b8823a6ca42e4ffd999695be8a7e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower3/map.bin",
+      "sha256": "9805c919da40c085f1347a6b5f22ea3f928d3801204c7fe2aa0a63c4e46b2129",
+      "source_blob": "5a55ee4ab83e77d9948a34d23331c202ea9e79d6",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-bounded-campus/staged/Tower3/map.json",
+      "sha256": "d3d87602bc4d6ac92ab71de869cfd843f54742408ab68156649e6c9252514f82",
+      "source_blob": "3240899a2f95ec82fb05d47a564b46e044a31a60",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/build_source.py",
+      "sha256": "942c4a623666e19994fbca33ffdf5887da41d62919d80ead4011e967aa6cf9be",
+      "source_blob": "8ec15bf6c7900eada917b16f59cf31db2ad0180a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/map.bin",
+      "sha256": "491163e9f12a431d4edd7a8f1b4e3884ffbb5f0e7dde622b812d28af76f2763e",
+      "source_blob": "b72b8bbf1a299213237b5ac58a063574e4048d93",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/secondary-attributes.bin",
+      "sha256": "d34e41fee8a100544c29a286b5ede03431c14789ddced517cced0bbf5617aa63",
+      "source_blob": "15839710e8ea60831a4c21eb8e68eea8ee69437b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/civic-candidate/secondary-metatiles.bin",
+      "sha256": "af40ba62f00ce4acfafb1121bfa8110590067232f7d325693366fdda6386c187",
+      "source_blob": "b32eca6a42330b9bfd05425a7757d41ce00d9798",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/geometry.json",
+      "sha256": "f98e6f44f92b6260f655c97f2f945788377aedfd69d6babcaa4bc586f6ce3861",
+      "source_blob": "4a3895f7ce8563eecd8d64a014e18116ad8b3eb7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-campus/staged/Campus/map.json",
+      "sha256": "52230470b5f3a8b3e0a4524a73829b590b444364987d9526c59cd0a3efbe212b",
+      "source_blob": "ee3b3cceae03fae5558088a3ef25735031404744",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/build.py",
+      "sha256": "f3d25c7a74336f16c52eef336d60a55b6fce7a0d226c5b2dd8f19e5e1810bcc6",
+      "source_blob": "982778c90c6efee3bf1e0e2281cfd6810bac816b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/campus-family/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/campus-family/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/campus-family/secondary-attributes.bin",
+      "sha256": "77f43970d056687e33a1e1b935d60a7674dde7f0a2e2cf198c9c35404345780e",
+      "source_blob": "25850a5ec5ba10a150e4c5788df666991e6e66a4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/campus-family/secondary-metatiles.bin",
+      "sha256": "0d374e11ddd85abed3888da6b2dc508e4d32b4f7d90f7e17b33013ae365676aa",
+      "source_blob": "81adba64f9f8d5e414125018fde5171bf0c365db",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/receipt.json",
+      "sha256": "fe1a6c007c976a1de61fca7e0e04d4ba251718dcf8899bdf6689052cd90a3143",
+      "source_blob": "c64e0f780bfe5a721703f47b6d71be1351471ec0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/attributes.json",
+      "sha256": "7902f233ef0db67b6b1058832055791b620051219af6802dbc7d1320db7523fe",
+      "source_blob": "becdbe25c406ea9f2543b2698315f05aaf49f478",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/layout.json",
+      "sha256": "62d5e88bd419fcf761192d807d04c2c3f6208b89e43fd2205fb4ac5606246ebd",
+      "source_blob": "c8e6dbcbc67a6e13e3d32ebd25f7625fe5b4eacd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/map.bin",
+      "sha256": "6356bb1f2530472ccba1b2708f28669227a67b15aa83294869d8b1b14a822576",
+      "source_blob": "6e92a8b58370372e5c88ed75788eca31921d6de3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/map.json",
+      "sha256": "6ce6fef16fe53b6f3e4075bf92e493fb67bb5056a5479fe57db94cc03a54e4fd",
+      "source_blob": "1bb5f5426a63c631fe1ecf40b95c72d5d4d1603e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade1/preview.png",
+      "sha256": "805553bebc39f8bce46275f1ccd385f9657a5702df54933604189496f83ba8d6",
+      "source_blob": "9c00de1a07b0cceedc6ca803fba56fb324c8b843",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/attributes.json",
+      "sha256": "8af9ee07d0601dd1b916c20f1c46c3ed737eb03d4b9cffcf4f0f0b983792c31c",
+      "source_blob": "4fef102f139c7e19bc0ade16ed15c2ee796eeb09",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/layout.json",
+      "sha256": "1f7ed075eadc3cb09c24fbc6d498b034e7ad02d756a52693c6488f88d68438b5",
+      "source_blob": "15890a5d8b437681f498513cdd844d90c12ea9a4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/map.bin",
+      "sha256": "238ba00ec625402d3da640e9bf78c0f2424f6655f070c136533e681f40abb733",
+      "source_blob": "76a918838e013d4ab6c59e4ee96911bc6fd4bb7c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/map.json",
+      "sha256": "ed2b2164c66bb4965ddf6d7c79345e2c37bffa3d104d92f6a9beebd0f72e2565",
+      "source_blob": "bcdc8eee798a8e40361bd678ec860f55edc9a000",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Arcade2/preview.png",
+      "sha256": "d1abdaf41294f919e4c0d187f2db1fbb352633b077b45ed4a003ad262a0cb546",
+      "source_blob": "9557f89055e601cdd13ed420245fd0e861bbc79d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Campus/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Campus/map.bin",
+      "sha256": "e9c8251a935206c5237e846cb6f2e0397ad04908a7fd353226ccd360c40c0198",
+      "source_blob": "c4ac72de4c6b2d31d6ab80dbdd941983073bdb12",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Campus/map.json",
+      "sha256": "c89a159433f3b078a211474fef18576fc7040f353f299ad1243d3a9dee87bf54",
+      "source_blob": "1a13dab97120c966f9db92fb277f0f9f3ed9f12d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Campus/preview.png",
+      "sha256": "3c08c0c6eb817ac6e4e43d058addbc09a2d5d06093093d05a9f6b19a9f4414e8",
+      "source_blob": "f78d2034f63317b88e6441304a41f9b027f96e82",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/attributes.json",
+      "sha256": "1e9983fc828fb070fa15f4f32fd8fe8116ee2330bbee7d0fa2d36ef9d305c732",
+      "source_blob": "659018b90c345ca9d03ef3598cae66c9c02313bc",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/layout.json",
+      "sha256": "1b716d817b6b4e3b86d42b63074747ef96e9b72cdd3b9ee22d55b518323c7910",
+      "source_blob": "be444f768d04ab689bb1992fb8a9ad8bc2afbe59",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/map.bin",
+      "sha256": "ce6c9d1748d45a552bccab2a71b300c2cf2e53bbccbba0b9ff0cca13294bd01c",
+      "source_blob": "4ea16eb5312f765f1d9fd2ab684b611fc610d959",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/map.json",
+      "sha256": "9fe9ee8044a5a081230887ca06ed6cb7e45a970e7541a6f25a37a42126191f0a",
+      "source_blob": "d0b3c6b8ff85368947b63f77915d333edc045166",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Castle/preview.png",
+      "sha256": "b2a6e65a1821b4a528f64c3ff4967daafa95f101202d7b9e986b6bda465a01a3",
+      "source_blob": "0cde8dcf02622c92cf06ee60dd83739868cbdcc5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/attributes.json",
+      "sha256": "b43d323ba911f48c719d85f31981ef31d4bd6c9a9e49bc315404b0c80e31e967",
+      "source_blob": "e2639a162eba47c2bfc70794c693f8d7be8584f5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/layout.json",
+      "sha256": "3e0bf1934d2cf0ea3b4f87d8693798ce2d07f3b6e0a3c35a497b2a652eeeac82",
+      "source_blob": "26c6a547551fd28c8d0d97ab9b4aa591d9c8ba84",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/map.bin",
+      "sha256": "fcd427b02daa332fc585ffefb3e0f148abc01e70325344734645d988a424bc81",
+      "source_blob": "036f5ce263245db2882d40c8867ccca5fe541330",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/map.json",
+      "sha256": "f5fbcbe43dd385157c530929f762fa621e99c84b092d97382d69dcf7ed7380d7",
+      "source_blob": "bf046b24b484361109d37f617fad767ae62788d1",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory1/preview.png",
+      "sha256": "a622fe251b272b45f8a3c8c00d368f8cbbb84e0fef397bf6f0656401fb1a9706",
+      "source_blob": "c6a1ea75e5cb2ff5d2c41dd3879948a0a3febf5a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/attributes.json",
+      "sha256": "c48bb65835239a1c6dff0c6b0c4ab99474fa8abd6b8941d852aaf01c69777f14",
+      "source_blob": "4aa79d8bda6e4fadd868724b3542f5e953584940",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/layout.json",
+      "sha256": "206634076cdbb0c8ff542ebfce179c9a2e5474785f12f4171d8eed8791575a87",
+      "source_blob": "d0b7800a59b5de392011efa239ed8a85d414a2d7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/map.bin",
+      "sha256": "d4b8d2fe40c87032e90fd4dbe77ab8f9c7eb8ee6339b7af0f55e346120175f04",
+      "source_blob": "d10ed2ac2fa893dd49bd5fc28af559f932ad4bc7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/map.json",
+      "sha256": "19c76cddb47ca4d39aa0810fdb556cfff60829bbf2fd1ab3e28e533ed2565a49",
+      "source_blob": "1d73aab5ba0a470189d8951b16bb02cf88b139e8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Factory2/preview.png",
+      "sha256": "78c944de35072134c4457665882c81b1a39fb8e194dfd6ce4c3914c393b580e3",
+      "source_blob": "784c4d4175e6b720820d424df426a57a9f261fb1",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/attributes.json",
+      "sha256": "6d378e6d7453704a91473d267a0e52d8cc05d93dc88e8f192feb98131aed4b19",
+      "source_blob": "d20160e9f97efe82763c036d5cdb3a998ef9a95b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/layout.json",
+      "sha256": "9f248d53ddb018ee11cb750feef9212dd51807bd5299e3842a8dd77ea5c1f63f",
+      "source_blob": "600d6acad6e3b526992296373bf7b7dfbabb9da9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/map.bin",
+      "sha256": "c469fe853404f430fc5a7a268122962ef16c0af90cb557e71036639199d8f88d",
+      "source_blob": "f18b01e4981d8b8bfc3b4deec6c0e9633c679a41",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/map.json",
+      "sha256": "c7fbc5f34f932852be4cedbc839008ae573e42e32676ed6e2ea0829b631c8738",
+      "source_blob": "08017af497dbc66ca3b764c915557f940b6a7557",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall1/preview.png",
+      "sha256": "d6375863dfcb450ab95534fc2c9cd726e43673162610497b2973f1a03cd68272",
+      "source_blob": "f5d5320064626a0875a21bcc5c81f38041ebe72e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/attributes.json",
+      "sha256": "527719f45d7ebe2b4d72cd3d90bbb4ad2daaa96c047db2f3aef0ffa2dd4647e5",
+      "source_blob": "e9a9ce87458d79ab27747257055dec2f6ab48062",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/border.bin",
+      "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+      "source_blob": "f496f458ecf2897514c7ef858e657bf062c57506",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/layout.json",
+      "sha256": "1538c783cc12a02306cb72ce9c7133831e406e1ca1f8a3ac54447b407d61fa53",
+      "source_blob": "12470f84a4b6053ecc1cf456cac1c60f7488afac",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/map.bin",
+      "sha256": "2657da4b3d4ecd7f1e62ebec37053c3e95cc3f3e3d9e5739c3887edae1c282cb",
+      "source_blob": "1fa2cdc1882c33b5a10fd37feacc9a468f0dadf9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/map.json",
+      "sha256": "7870af234757948bb5deef5f3b30125d2e5c52a4eceae8a6d0aca0b8de5eb338",
+      "source_blob": "1999d43c3889a71c8bd989608ca5001fe4c00c20",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Hall2/preview.png",
+      "sha256": "430a2b4ca3d9178c44b350b6c9f82dfbc100bfd9f60015ff7af8f7c2efd609cc",
+      "source_blob": "352b004f019efebf544999032e37ce973bccb9ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/attributes.json",
+      "sha256": "2b0bbcbd71ea7df1724de56f75a85f827eaa02bc58576a84d1fc6b94321b081a",
+      "source_blob": "640a8c73e68094d60b5deb133a98c70a6b156069",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/layout.json",
+      "sha256": "78506ee2caf192bef2f6945d689c69748d4fbaab6be8d69b88f5d73af2ad0936",
+      "source_blob": "ef2339c4f90ad2d6f09af007ad6cf86b7dcac6b0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/map.bin",
+      "sha256": "4c5ad76bd2fb5a4d65914978338551c240f2e966c6f8f5a91346db1118bf6cbc",
+      "source_blob": "09f86a742de69f7e5eb5cfb4b6c1547d652aad16",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/map.json",
+      "sha256": "f8b9fd6904af43e1ada155f33aa2399c6beb3ac8553319815296a12f9d1b8a4d",
+      "source_blob": "f7fd4fe1822b344b14df0b90ece4d41fec977905",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower1/preview.png",
+      "sha256": "9442700f2669ffcc36341fd402b6c506b6cde1f79c6bfeb79a0106e74a52c663",
+      "source_blob": "134bd58480a76edf08da84e41dde430dafde5ae7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/attributes.json",
+      "sha256": "6d95614239be2cc33e278acad24821ecf4c030de9ee5264d2da420a8dd22918d",
+      "source_blob": "1a2538c7c6e83e27eac7c665ece850f598060062",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/layout.json",
+      "sha256": "db90a675f36fcb5e686a0552100429bb21b7c592d2812c991ca1a1b03c46f90d",
+      "source_blob": "0237933d2f46272af922158e1dd9df5574a8d02c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/map.bin",
+      "sha256": "2b6356ff72f7a014080fb98be0a9d59f7c8ecb16264af571d41436d82efec11e",
+      "source_blob": "03985c57229f5ae6e39e206d3c4cbb4fbf185671",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/map.json",
+      "sha256": "383534262ffeb19439d9ab4449c3de842dc20a3ff82396d2fbbaaa8536485bdb",
+      "source_blob": "a29dae3d036273e1dbed37c39551480c4ad52ffc",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower2/preview.png",
+      "sha256": "873fcd031e5ef9bf89227d9aa63d755df1f1a89d46fba297affdce10c5d447fa",
+      "source_blob": "1e9decf0fa7bae2e25acadb1af78d81cd28db697",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/attributes.json",
+      "sha256": "f79ee0063477fb58ac8ef808649d536c12d93345e2b59429898c3f4ccae019ce",
+      "source_blob": "19079137ad0ab1191ebcd69cd66197a8d2a7d652",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/layout.json",
+      "sha256": "bb7ce7f1e15df2c95ecfe12f6d7f7bc65ad54e1a4d750fa6cb3459988b9541fd",
+      "source_blob": "6f53b5a84d54b8823a6ca42e4ffd999695be8a7e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/map.bin",
+      "sha256": "9805c919da40c085f1347a6b5f22ea3f928d3801204c7fe2aa0a63c4e46b2129",
+      "source_blob": "5a55ee4ab83e77d9948a34d23331c202ea9e79d6",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/map.json",
+      "sha256": "d3d87602bc4d6ac92ab71de869cfd843f54742408ab68156649e6c9252514f82",
+      "source_blob": "3240899a2f95ec82fb05d47a564b46e044a31a60",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-facilities/staged/Tower3/preview.png",
+      "sha256": "0dc41838e6de83a6914c039ed91a357bee59778ae33b3127bbb6b7edcabbfbfd",
+      "source_blob": "57c59a90834a0e8470a2609786d3bf36126c09fb",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Campus/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Campus/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Campus/secondary-attributes.bin",
+      "sha256": "77f43970d056687e33a1e1b935d60a7674dde7f0a2e2cf198c9c35404345780e",
+      "source_blob": "25850a5ec5ba10a150e4c5788df666991e6e66a4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Campus/secondary-metatiles.bin",
+      "sha256": "0d374e11ddd85abed3888da6b2dc508e4d32b4f7d90f7e17b33013ae365676aa",
+      "source_blob": "81adba64f9f8d5e414125018fde5171bf0c365db",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/FightArea/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/FightArea/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/FightArea/secondary-attributes.bin",
+      "sha256": "286add40c71986a2b558c53417341284f267bcb4dca8ef89bcdd7c01bbd6d8a3",
+      "source_blob": "5efe0d65d0bb0d355a4baffa921ad7b24bfb195f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/FightArea/secondary-metatiles.bin",
+      "sha256": "ec3a1044c9cf4041051d9e405160048db17adcf7def2f78f230e1e8bc7c965a3",
+      "source_blob": "9aa704c320db447b0a749fe7a58f801198a57c24",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Gate/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Gate/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Gate/secondary-attributes.bin",
+      "sha256": "138cc264ba261c22020622be7d78b20313e84b8449081904c6bcbaadb1dee8f3",
+      "source_blob": "c960a9316b0ad11f99a4afafbf560cfe06d53733",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/families/Gate/secondary-metatiles.bin",
+      "sha256": "498411a2a6663cfbe20e6088ccae8dff214d0365ea57dfa95912338f561aa69f",
+      "source_blob": "4eb9abcb53fae42d4c12e5c249fd4059f7defb68",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/attributes.json",
+      "sha256": "2e2351c89c9dad0c2bbef0b91d4725519bf27cd7fcfee31e014faa193b5049b0",
+      "source_blob": "859e40c62d6d2b3a0b94a1ed46a6d8343de85e14",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/map.bin",
+      "sha256": "34b4bf169c70c1418c08d7e8f3c8ecdfd4361d1387edf669bd440e71450f2650",
+      "source_blob": "b819b8000f9f3fa24b0b75d997e54644b543c964",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/map.json",
+      "sha256": "268bd156e6bb34f7e7fea73ac5c374ebb825d1f2a784d9654e70f23733a56b16",
+      "source_blob": "ac94ef6578875514f2fe8ba1aee0b5d50237ea45",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/frontier-gate-link/staged/FightArea/preview.png",
+      "sha256": "1389566ed6f6299e87fa8aac385dc88eddf8e2cec6a41ca8f0d6f505d55309b6",
+      "source_blob": "adfe4296739973f682108f99bb1da466d20e033a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/build.py",
+      "sha256": "d5aa8bfdb882b2e981e80856569960522ed4a85620a9a87a4bd1e75239e67701",
+      "source_blob": "3c98697125f9cf3e73d656279a7c694b7532d193",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/receipt.json",
+      "sha256": "af3fc0063f249a43a6cff49d91ed2c99354304e4d5f42fe5afa4ca838393a529",
+      "source_blob": "8c39197d45d77f958deb71801cc7f6894e6712d5",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/League/attributes.json",
+      "sha256": "c98dcabd686a13429cd011871f4ded91c64d2f9c0021d60693d939f29db1aa80",
+      "source_blob": "1452bbf1783b42f62f8dbdfe36ed23f4b840750b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/League/averon.png",
+      "sha256": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+      "source_blob": "6686a858cb9915ada9fa42b38917b351a470d9e4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/League/border.bin",
+      "sha256": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+      "source_blob": "c3fe51511d0ddb88492f2082c4ae0dbb5222982a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/League/map.bin",
+      "sha256": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+      "source_blob": "21f46512e21723067c0a83da20752a78ef6a180b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/League/map.json",
+      "sha256": "a83f950bb61bf99b9c727d5414f8568a9cab7b59b2be7418f265da342eeb1813",
+      "source_blob": "240192464e22a6eccd33d12620db98804bd42689",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North1/map.bin",
+      "sha256": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+      "source_blob": "5201dde15f5fcea03a81352588afc22ff96eb97e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North1/map.json",
+      "sha256": "67fe5805cd90d7e70e77f6332d2ba33de728407be43a4be81eaaaad05f560a8f",
+      "source_blob": "ce1950ea936e2d15e4a4f9e31a8bda65a867ad3f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North2/map.bin",
+      "sha256": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+      "source_blob": "6ef18b362a77098e0fef8c5f63c8942d067f96ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/North2/map.json",
+      "sha256": "238c6ab3b6e5644cc1740d5b4552731477ad91acaf0d982444b032526575d0ba",
+      "source_blob": "4ee2c2f48c9bd8b316402bce0b644df02fcbaec2",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South1/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South1/map.bin",
+      "sha256": "e17f23a18cd85fe575d260eac560469e860217dec9d3c5b3cae3232cab0be005",
+      "source_blob": "5201dde15f5fcea03a81352588afc22ff96eb97e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South1/map.json",
+      "sha256": "cca277271dadb03859647e3d7d5b443fb5e243ba783c416bcbeb29c862047e61",
+      "source_blob": "533fb81844bcb2acd0c45c2217bd4a2a52543b3d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South2/border.bin",
+      "sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+      "source_blob": "19d90667980ced4e6b00a744509ce6de9504511a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South2/map.bin",
+      "sha256": "7fc4f333457bd00fda9d42073d98314c275e10a14b6921bb252856b4e37ed828",
+      "source_blob": "6ef18b362a77098e0fef8c5f63c8942d067f96ea",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers/staged/South2/map.json",
+      "sha256": "7ae82cb3b8c2b0def10c85eb88b0174fda5f90cf172c0ab9cc243c448f6158ff",
+      "source_blob": "bdc2f881f284324790f3a2283ddac34336608961",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/source-receipt.json",
+      "sha256": "c5d710b57203e454c5d90dab4003ca4135ba8615a00993c178ac81d8c7e8fe99",
+      "source_blob": "ef82a0123d23db9b91b35b6d436e20b803010aa9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/FightArea/attributes.json",
+      "sha256": "2072a4e9f2e0d78f09dc270886591606008170ae5aad0b0431d7c076b74463c4",
+      "source_blob": "0d3be045c719cb9d4a373a3686c6999385915607",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/FightArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/FightArea/map.bin",
+      "sha256": "869cd88cd851de06b449df07186805638e5d4b297619e31745c67b52a36cc6cc",
+      "source_blob": "de87e7733f7712a00791848cd8fc0e4421b79c63",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/FightArea/map.json",
+      "sha256": "f01dcbaa270899f821567076e38d0cda99fedd1a17da4b583d5f6be7dbcf97e9",
+      "source_blob": "27feb2091ffe9da52790d8b7696a2feb54c773ed",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/attributes.json",
+      "sha256": "6f8f79f5963c94320ee006921a57f53b0875227990c80427cb22ea274e36c057",
+      "source_blob": "ebf226cb6ecda59d261ca1aa17245868e9c9f6de",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/map.bin",
+      "sha256": "030fc7e9d99ec96e04473a4e7a3445afbed257da4e43978719243a4f183d84a6",
+      "source_blob": "604abe13b49c7c5a462bf8cbe5a9967219e78f48",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/ResortArea/map.json",
+      "sha256": "8d8fea89299104fc38a73c1749ded869475944246ff96d01efcff59b0372046b",
+      "source_blob": "76bfb0c5893d60095dc2348b26676c41a7173d91",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route225/attributes.json",
+      "sha256": "3f4cc91070dca0e2fbcc042a603d3a0fdcedb93fc7463124ae35dbb59b491ebc",
+      "source_blob": "fc231709fa5acc9fc1976c20ee943bbaae14a75c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route225/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route225/map.bin",
+      "sha256": "10c7392f2977eaa1ac4f5142eb7bd2bddc573348e68496a5300d26a6f2c27e89",
+      "source_blob": "b7c6fb1d140d8ef0b2040db7efe8a933c9ddc845",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route225/map.json",
+      "sha256": "894fd767b32e593120efdd27c9c9cee677ade47b8fc07e0f0f611a2c38068005",
+      "source_blob": "3d3283ce4409bada177afe23f41b76fb7b1172ff",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route226/attributes.json",
+      "sha256": "94b8e9faeff531785163e7c58a6f14b02f65d3d42f9c3a6b2548dd07d35bd3d4",
+      "source_blob": "1f5af1891c37ef941a9f6708164aac89a72a9340",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route226/border.bin",
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "source_blob": "4531975c765efca1944de210b6b914c25285ffb9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route226/map.bin",
+      "sha256": "510995502c0646677cae63b235e7e52daef60b5672fc7005472160729d7d6da8",
+      "source_blob": "79fbc9fe142780d3385da1117455ee52306de464",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route226/map.json",
+      "sha256": "e531b9946aee5aae49b72d4ca6365b19d6a749942d4660b8a89001062fa02b95",
+      "source_blob": "1391c39e57c6d5a0609fb62fc2ee864c66f7b931",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route227/attributes.json",
+      "sha256": "5022b61ceb616191a36b186db30e30eb2bbd7020e55b24fc73a69a125925aaa1",
+      "source_blob": "ff5ae6e468692050b7b9cc5775a2f6018ae1aecd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route227/border.bin",
+      "sha256": "78fa2efa01ed000953acaf19b84d4a338450da3bb5f8431751c7dbff56a2d63a",
+      "source_blob": "9ae2c21264e79dee1b0321cfa4cf56e9e5ee24e3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route227/map.bin",
+      "sha256": "cfe5014857c2b92c048f696c1433fc512d1c63d636bb82c5ba95fb21fbe7f136",
+      "source_blob": "3d0b979157454294ad8b99afdcf728d434caa37d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route227/map.json",
+      "sha256": "9bb767674961c4ef086b84fa0758ab260dffea7974f55a1aa47e82c55551a7f1",
+      "source_blob": "7b6d33a172bfed10e679feb46e25b4d716ec8faa",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route228/attributes.json",
+      "sha256": "82e196113de7796ab6cfff353b3583fa5a4983078fcd59b9bf87947decea2f77",
+      "source_blob": "5ccd5fc8515d5d32579deed227dd54dedced8ac9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route228/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route228/map.bin",
+      "sha256": "51ebdc63698fca5324efe93cd85d150b3c7bab42cccea58acbce36c166cdb12e",
+      "source_blob": "365044f6e5a313023be3fc7a5fdb29db16d9b779",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route228/map.json",
+      "sha256": "091d71530ba9169ff7b22d2bcde12784a7e2cd62e44a7260e2fb4daf78e50f59",
+      "source_blob": "3399c9120dfc18b09d9a28f3919712e23b2220ca",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route229/attributes.json",
+      "sha256": "bcc115e9d7e444fd04e5e857a54640235f7006df8a553070de33738073d3c8a8",
+      "source_blob": "969cec5d166521e9f9a8607187575d6938362471",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route229/border.bin",
+      "sha256": "bc9105d47576667f6e4d90d95ad19142a1412a53090f98f3d656d8261cb9480e",
+      "source_blob": "d198bece6c2319a6c58559f63b55ac233c96e438",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route229/map.bin",
+      "sha256": "8cf6d453b7de5bd119fc0617471327766c88d80dba538e22b6c1bf18fa61cedc",
+      "source_blob": "4081518ad5126c96b86b540a753465bd59ebcfcd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route229/map.json",
+      "sha256": "93842fb49cba54e0642b1d8470cce62b0de1ddd4a21a827c2aa3a930a2851e7a",
+      "source_blob": "638929413ad79d47d25030ca4ce7fe9d6d1f9a4f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route230/attributes.json",
+      "sha256": "85717e6484369a21d08a6af5e6dd2d6e5e800694d5db564f09d5b51148d65ea0",
+      "source_blob": "05990ad68c060dd22db36ae8b7e2eb5e815cea24",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route230/border.bin",
+      "sha256": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+      "source_blob": "c3fe51511d0ddb88492f2082c4ae0dbb5222982a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route230/map.bin",
+      "sha256": "c66626482493df1437d8289c78a38cf059ce11782aa8cc13f6b0fd5ba730a5e5",
+      "source_blob": "6378f3a868463e325df131fe296586bc605a3d50",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/Route230/map.json",
+      "sha256": "e5dd671744b713445f452b0e622fe82b9f8392cd932a557f383d720954955e27",
+      "source_blob": "dafc570ff05eaafd04dcbe8bc5b509176c8c8e59",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/SurvivalArea/attributes.json",
+      "sha256": "7fc1579f8ab3fbfcb3401b3c666d5b41362bcf0f41c7fb463d4df5fbdb2e194c",
+      "source_blob": "3c14feb65e189b9a646cc1715912b55225a34af0",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/SurvivalArea/border.bin",
+      "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+      "source_blob": "7db65361e89b914575a567fec117960553c258cd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/SurvivalArea/map.bin",
+      "sha256": "bc167a84bae4a2465dd0350220ac01713a20ff5e449d47c13f0e32b54941a0a2",
+      "source_blob": "473fb6f47a8944eab4ae5e87b89d787ba17418fd",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/SurvivalArea/map.json",
+      "sha256": "befd8a32a1e337e72d8f3734dbdd9a24402e68add4b7886f9d422010786e3bf0",
+      "source_blob": "c32f6eac1868300ad48d3010fc51d32ddc3b09a3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/snowpoint-temple-height/parse_bdhc.py",
+      "sha256": "d617d92674741a2ccc724526da50efb5f70165871a70f0381de3dec3db754a53",
+      "source_blob": "3a83211046ea15a1b88dadb2c93ab0b8f33c118a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/cave-family/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/cave-family/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/cave-family/secondary-attributes.bin",
+      "sha256": "0e9e9eef99dd43ed6954e25f14e1d24708591c7642aa1052fb24a211fd6f6ad6",
+      "source_blob": "9132fc609659cdc2409ecd0756c24fa145347641",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/cave-family/secondary-metatiles.bin",
+      "sha256": "0ef076a4d8918b3eb859bb5ce2d14ab1edb1039d103485156c6edf8b2fcd8bbc",
+      "source_blob": "753015545bd552d92f0fc1fae3d0443a94e5e75f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Outside/attributes.json",
+      "sha256": "69b9b16dce9ff7a0071460cd72a7353d7ed7ae93a4512504e5a4076e215fcb79",
+      "source_blob": "dd572ad18b9e7a060b287e16d537c7efc4829952",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Outside/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Outside/map.bin",
+      "sha256": "f4b441828cdbc66d3d8a7f3099b56805ad04f0a589fc9c0791c6131beb3490e2",
+      "source_blob": "21373f5759fc6ef5b8810d3c76d11c33975889b1",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Outside/map.json",
+      "sha256": "4678691efa7e4540bfb5c0662c9bf55510c065aab42f34e0e6766df42bbe603d",
+      "source_blob": "526863805d97c07bf07ba70269d0aef309a0979b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Room1/attributes.json",
+      "sha256": "3c5efb9aa400bb3ed507b8b302402af66374632053f6361775662730b3173282",
+      "source_blob": "2fb0a2d20b9c170938ac4597b3c37bfc3a02a628",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Room1/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Room1/map.bin",
+      "sha256": "a00a23019231956d4e9c8fa0093efcfe2e713a716c8c6bfee8299fa7572650e3",
+      "source_blob": "d0b85f03f17b185c08ea6fe946fa9c3695f46e74",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Room1/map.json",
+      "sha256": "a5f9295bd2a74e633cff7b7a894a1a7fbcfdd3ba79d390d94d00ca36c5ba77f0",
+      "source_blob": "d7ba03bb42de941db537735cf588472516473652",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Route227/attributes.json",
+      "sha256": "02a1a3bb6a639200a523910ffdec02f35973709b40fdedab58f0d2b7889fbfa0",
+      "source_blob": "545e84fbe02856f5117501d1e9a7332879b4f4b8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Route227/border.bin",
+      "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+      "source_blob": "4531975c765efca1944de210b6b914c25285ffb9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Route227/map.bin",
+      "sha256": "704bcc46e180eb2e3c389901fb98ecbb24a5ca3484e4845efe1bfde2149efaf0",
+      "source_blob": "08b33f042389355a57f9c84692566e38426ee02e",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-approach/staged/Route227/map.json",
+      "sha256": "dac4abdf3bd8b76faa9e5e5beb64426d0f516663d81dd5928e96616e12b01af0",
+      "source_blob": "13daabf8410da4a1871bed16871874946aa87dc6",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/build_source.py",
+      "sha256": "3e7f8f39f984a47077d9b6a7541a6e429f610e560f8463a58f725651a73fb7ba",
+      "source_blob": "f3e3363b90a261ed4e191f1cd7e4b58cf8d4ca22",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/cave-family/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+      "source_blob": "d9cd29016d792fb568494dbf2f820100081a14f8",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/cave-family/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+      "source_blob": "af899bcc5efa4bdd3ab1f418b371a866441207c9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/cave-family/secondary-attributes.bin",
+      "sha256": "99b17612e53b787fa6949cac8d1c0ef4dbf53c43c3ab1aa3a03d890b4110dc76",
+      "source_blob": "f284daf3af684c1376edc677140af4ddc420f481",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/cave-family/secondary-metatiles.bin",
+      "sha256": "1a282c6180d3489cb3dc938a8f0df3fa12f9192b78c2c06f0e44547b71826fe0",
+      "source_blob": "a26b51c9cbe69bff56e047fbd22a23b47e27e2f9",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room2/attributes.json",
+      "sha256": "37f41ad951509e110a0d069e6ba85d84ee36730933fce71ff56b2cd4ad0e3fd0",
+      "source_blob": "d31d460644f13a0ceed9c7123ffdab7b2a12cd1f",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room2/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room2/map.bin",
+      "sha256": "221deeb71032eaeddb251eff354f1e0cef18b25258388157babb9537044f0c24",
+      "source_blob": "d9b2d68ee81c7c8382ca9879c303aab9064572fa",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room2/map.json",
+      "sha256": "4176eb2980c6137a197fe0d2f057f76d78c89cdefd9417ba70d85e95823bc024",
+      "source_blob": "b6bc091aa32d4c4d3ec6fdb592434ab54cd21f30",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room3/attributes.json",
+      "sha256": "b1970c37d76bd6003fc2add60afed71c384f2eeea9a89854247019d5b5c9fde5",
+      "source_blob": "66802242e94b68c75ecf0a66110e788f116c3de6",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room3/border.bin",
+      "sha256": "91acc7d5cdd8a7a371dd1a9afde031ca9dd2f00345df3baed9a741f68d4aa4de",
+      "source_blob": "def532515da46e929cb0076de0a28ca115c89edf",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room3/map.bin",
+      "sha256": "fb8efc5cd7ab255652e157a035b7dbe52b4f342ad445ea77a8f9ad81b8640212",
+      "source_blob": "777e6215f7e64bab6f0e9710036ea24190c5deef",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-mountain/staged/Room3/map.json",
+      "sha256": "37d889ed33a1ef4c18be41cd5c8da7032a9b8b9299de38f5173e047a5bb0c460",
+      "source_blob": "4ce3d99575a0bf5ef789a6ab3c5eafc5dac02dbe",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/sunyshore-coast/adapt_art.py",
+      "sha256": "31c689c80d2b24aff0124d2780c810ef5c34eb906f0c61d58245f222414f8fdf",
+      "source_blob": "a09aa5c6eaabb4c264644a6de6be1bded98ee26d",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/sunyshore-coast/art-map-roles.json",
+      "sha256": "b07645c4d3b5abe75a4d2894fadb4109ce3c0cd876c2d7fd78772168c505ba6c",
+      "source_blob": "d3b2be1877204d3bd2817eda94f52be305f1929c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/sunyshore-coast/prepare_runtime.py",
+      "sha256": "e17a5bc2e8ffd416ddf000dca8f6dc3bcc2894ae3f8f26a2028f878befe5ec8d",
+      "source_blob": "f7b2996867361f63c80e1df5d75ee62ce64b7d63",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/attributes.json",
+      "sha256": "c98dcabd686a13429cd011871f4ded91c64d2f9c0021d60693d939f29db1aa80",
+      "source_blob": "1452bbf1783b42f62f8dbdfe36ed23f4b840750b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/averon.png",
+      "sha256": "b5888c70fcfe9afca19bef5703ad0a17591231b2f533d390e25f7c538c9e6135",
+      "source_blob": "6686a858cb9915ada9fa42b38917b351a470d9e4",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/border.bin",
+      "sha256": "0c2871e576a63043efd779a5664d84741cc6512c07b03ae39e8deb07b064d3a4",
+      "source_blob": "c3fe51511d0ddb88492f2082c4ae0dbb5222982a",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/map.bin",
+      "sha256": "9b9bc85ceaa664ff78e436a340fc98f5cc7b458884d20b0e94267221b21d4582",
+      "source_blob": "21f46512e21723067c0a83da20752a78ef6a180b",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/victory-road-shell/connected/PokmonLeague/map.json",
+      "sha256": "6cc93333bb126b6345c4450e0be91b0adae3b06f15b64fd9e24a9e51afc11c6a",
+      "source_blob": "6dbc32aea931e0b16c9ee51015b3d6cbcd578c24",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_battle_centers.py",
+      "sha256": "8502b907c2dc8629a44fd7328774cc48defe3067d43cb5ff39c644c25ecf2262",
+      "source_blob": "6ddf5d89fe0af725c6fc343b6c69801978e444eb",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_battle_frontier_dev.py",
+      "sha256": "cb885d2d57ad92dc3f6f2fdd8df1398c3dcce4fe4b34d6380df02f1f2173ea37",
+      "source_blob": "8e2433f4cd09c0f2761e2ffd7d1c93ee3f2d36e7",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_battle_zone_north.py",
+      "sha256": "1ac69b8884816d2b45c34f63a7cce0ceb2a295ef5713332a44a4e4eeddfd8a9a",
+      "source_blob": "d1f0f09d170ebb3ab34ce507606c6ea72c4b329c",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_frontier_facilities.py",
+      "sha256": "432f5fc3e5b331d46225c02a65770e5f6a54be5eec46384ea7d349fa6a7726b5",
+      "source_blob": "5e0ca52b0fd55583002ab725cccf0e1b99f10be3",
+      "mode": "100644"
+    },
+    {
+      "path": "Pokemon Game/scripts/tests/test_sinnoh_league_centers.py",
+      "sha256": "6b061a6908752a57b3ec41e83fa0e1eda5b5346f4e5b280f8b1ef9c837f0fe7b",
+      "source_blob": "04e9ea341c7eb44f3fecf32cbfb67f3bbae3eab0",
+      "mode": "100644"
+    }
+  ],
+  "accepted_main_files_retained": [
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/canalave-west/adapt_outdoor_art.py",
+      "sha256": "027da4c42352735ae5cafdef786c5591ce19a5159d4389699b5bd92f07a804f9"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/celestic-north/adapt_outdoor_art.py",
+      "sha256": "f7635615864e557ee9a708603378ff9f01ffe18f46c6f98337689616f51344b7"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/build_city_family.py",
+      "sha256": "8c3785cd4ff16a23c5965078b1e54beaf53d41ff067a4fe5b7e4ad3c7f955d23"
+    },
+    {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/oreburgh-donor/build_oreburgh.py",
+      "sha256": "b18c649e5cea8912ea7ebb4b07cb4010637f643c83704f15f443bfacc0e943b7"
+    },
+    {
+      "path": "Pokemon Game/scripts/claude_play/mapdata.py",
+      "sha256": "0661e6e257507f77bfccce1d670c1aad8103a526bb53004ea93b1020bbb9a7e2"
+    },
+    {
+      "path": "Pokemon Game/scripts/sinnoh-donor-map-pilot.py",
+      "sha256": "8965f299a0ff7f7acada202cb4d0840d6b87fbad56f1d60725c1fa7eb71dabee"
+    },
+    {
+      "path": "Pokemon Game/scripts/sinnoh-dual-bank-family.py",
+      "sha256": "5c8d12893d2ed24e07476a92ef6f0298d7eb3c86937a05c7f0434a22d14d018f"
+    },
+    {
+      "path": "Pokemon Game/scripts/sinnoh-isolated-tileset.py",
+      "sha256": "b029c6cf1dff5831578f01ad1a7ea63bf5549eaaccc1b5bbf71a06985496a549"
+    }
+  ],
+  "source_tests": {
+    "run": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "not_claimed": "Original stacked801-suite8 legacy runtime preparation errors remain on preserved branches; no tests removed from those branches. Source-only extraction is not production integration or full44-map gameplay acceptance.",
+  "verification": {
+    "verified_source_head": "f123821792f753e66b93a92e9cd8754bded8e7c8",
+    "whole_host_command": "python3 -m unittest discover -s \"Pokemon Game/scripts/tests\"",
+    "whole_host": {
+      "run": 885,
+      "passed": 884,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "seconds": 473.589,
+      "skip_identity": "test_sinnoh_southwest_coast.SouthwestCoastTest.test_rebuild_from_the_pinned_donor",
+      "skip_reason": "SINNOH_DONOR_ROOT not configured; existing optional donor-checkout test"
+    },
+    "producer": {
+      "run": 13,
+      "passed": 13,
+      "seconds": 20.287
+    },
+    "output_replay": {
+      "source": "dad0724f5cc745fe4b387723f8e7f9c3a9e08e58",
+      "base": "284503e76145052f420ec1d2debe8e1611093f09",
+      "outputs": 191,
+      "all_output_hashes_equal": true,
+      "all_source_native_base_hashes_equal": true,
+      "validated_generated_engine_tree": "2f416e892847e82e66c8e1fed63eeb164d4b20c2"
+    },
+    "host_log_sha256": "e0119a54d538e8021771852860da139d071651939f4e2386a4232ca54d09bc32",
+    "ci_on_verified_source": "All applicable checks PASS; weekly-readonly-audit conditional SKIP; independently reviewed source package still required before merge. Final documentation head gets fresh checks."
+  }
+}
