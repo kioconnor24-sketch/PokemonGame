@@ -5,9 +5,9 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[4]
 ENGINE='Pokemon Game/engine'
-BASE='284503e76145052f420ec1d2debe8e1611093f09'
-ENGINE_TREE='320fc1f48b1d1da85a83bcf943dbb30103379e0f'
-PRIOR_SLOTS=22
+BASE='15557120ce3a2a7963fda0bfa0b81fe3db36e120'   # west packet B's gated head (30 production slots)
+ENGINE_TREE='671411ab551b1eb297fd9c7a2aceab0af5f60dd5'
+PRIOR_SLOTS=30
 s=importlib.util.spec_from_file_location('battle_dev_guarded_reuse',HERE.parent/'sunyshore-coast/prepare_runtime.py')
 reuse=importlib.util.module_from_spec(s);s.loader.exec_module(reuse)
 base=reuse.base
@@ -21,7 +21,7 @@ FAMILIES={
  'StarkCave':('stark-mountain/cave-family','Cave')}
 def inputs(repo):
     # Keep this packet's accepted production pin independent of the older coast scene.
-    pins=json.loads((HERE/'runtime-base-input-hashes-main22.json').read_text())
+    pins=json.loads((HERE/'runtime-base-input-hashes-main30.json').read_text())   # main22 pins retained as evidence
     data={p:base.verified_file(Path(repo),Path(ENGINE)/p,'HEAD') for p in pins}
     if any(base.sha(data[p])!=h for p,h in pins.items()):raise ValueError('current baseline inputs differ')
     return data

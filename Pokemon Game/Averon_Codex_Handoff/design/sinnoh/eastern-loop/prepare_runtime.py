@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 
 HERE=Path(__file__).resolve().parent
-BASE='fa12ccb08ace46bedfc527509b44c93429eba4de'
+BASE='15557120ce3a2a7963fda0bfa0b81fe3db36e120'
 ENGINE='Pokemon Game/engine/'
 MAPS={'Route212_Access': (9, 11), 'Route212_North': (34, 100), 'Route212_South': (130, 34), 'Route213': (100, 60), 'Route213_Access': (13, 9), 'Route214': (44, 91), 'Route214_Access': (9, 11), 'Route215': (100, 42), 'Route215_Access': (13, 9), 'ValorLakefront': (56, 66), 'VeilstoneCity': (66, 68), 'PastoriaCity': (68, 60), 'HotelGrandLake': (15, 12)}
 
@@ -67,10 +67,10 @@ def assemble(repo,acro_fixture=False):
     repo=Path(repo).resolve();before=inputs(repo)
     groups=json.loads(before['data/maps/map_groups.json']);layouts=json.loads(before['data/layouts/layouts.json'])
     names=groups['gMapGroup_Sinnoh'];prior=list(names);group=groups['group_order'].index('gMapGroup_Sinnoh')
-    if len(names)!=22 or len(set(names))!=22 or set(MAPS)&set(names):raise ValueError('exact current22-slot prefix required')
-    pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 22, 1)'
+    if len(names)!=30 or len(set(names))!=30 or set(MAPS)&set(names):raise ValueError('exact current30-slot prefix required')
+    pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 30, 1)'
     if pins.count(marker)!=1:raise ValueError('registry count mismatch')
-    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {22+len(MAPS)}, 1)')
+    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {30+len(MAPS)}, 1)')
     files={};symbols={};declarations='\n';headers='\n';metatiles='\n';includes=[]
     for family,secondary,graphics,folder in (
             ('OutdoorPrimary',False,'General','hotel-link/outdoor-family'),
@@ -95,7 +95,7 @@ def assemble(repo,acro_fixture=False):
         metatiles+=f'const u16 gMetatiles_{symbol}[] = INCBIN_U16("{path}metatiles.bin");\nconst u16 gMetatileAttributes_{symbol}[] = INCBIN_U16("{path}metatile_attributes.bin");\n'
         headers+=f'const struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n'
     source_headers={};layout_ids={d['id'] for d in layouts['layouts']}
-    for slot,(name,(w,h)) in enumerate(MAPS.items(),22):
+    for slot,(name,(w,h)) in enumerate(MAPS.items(),30):
         folder=(HERE/'hotel-link/staged'/name) if name=='HotelGrandLake' else (HERE/'staged'/name)
         header=json.loads((HERE/'hotel-link/route213-map.json' if name=='Route213' else folder/'map.json').read_text());source_headers[name]=copy.deepcopy(header)
         if header['region_map_section']!='MAPSEC_PENDING_OWNER' or header['layout'] in layout_ids:
@@ -128,7 +128,7 @@ def assemble(repo,acro_fixture=False):
         path='data/maps/Route212_South/scripts.inc'
         files[path]=acro_script(files[path])
     receipt=dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',base=BASE,existing_map_names_preserved=prior,
-        temporary_map_slots={n:22+i for i,n in enumerate(MAPS)},source_headers=source_headers,
+        temporary_map_slots={n:30+i for i,n in enumerate(MAPS)},source_headers=source_headers,
         dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance',files={p:sha(d) for p,d in sorted(files.items())})
     if acro_fixture:receipt['dev_fixture']=dict(item_grants=['ITEM_ACRO_BIKE'],flag_grants=[],map='Route212_South',method='existing map_qa.apply_fixture grant; disposable source only')
     return crossing.compose(files,receipt)
