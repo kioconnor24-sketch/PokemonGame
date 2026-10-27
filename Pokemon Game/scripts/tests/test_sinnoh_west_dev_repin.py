@@ -1,4 +1,4 @@
-"""All six DEV scenes preserve the exact narrowed west-packet production prefix."""
+"""All six DEV scenes preserve the exact production prefix: west packets A (19-21) and B (22-29)."""
 import importlib.util
 import json
 from pathlib import Path
@@ -9,6 +9,8 @@ ROOT = Path(__file__).resolve().parents[3]
 SINNOH = ROOT / 'Pokemon Game/Averon_Codex_Handoff/design/sinnoh'
 FAMILIES = ('canalave-west', 'celestic-north', 'eastern-loop', 'eterna-cycle', 'forest-chateau', 'hearthome-solaceon')
 ADDED = ['JubilifeCity_GlobalTerminal_1F', 'JubilifeCity_GlobalTerminal_2F', 'OreburghGate_B1F']
+ADDED_B = ['FloaromaTown_FlowerShop', 'FloaromaTown_House1', 'FloaromaTown_Mart', 'FloaromaTown_House2',
+           'FloaromaMeadow_House', 'Route205_South_House', 'ValleyWindworks', 'ValleyWindworks_Inside']
 
 
 def load(name):
@@ -19,21 +21,21 @@ def load(name):
 
 
 class WestRepinTest(unittest.TestCase):
-    def test_every_scene_keeps_all_production_slots_and_appends_after_21(self):
+    def test_every_scene_keeps_all_production_slots_and_appends_after_29(self):
         prior = json.loads((ROOT / 'Pokemon Game/engine/data/maps/map_groups.json').read_text())
-        self.assertEqual(len(prior['gMapGroup_Sinnoh']), 22)
-        self.assertEqual(prior['gMapGroup_Sinnoh'][19:], ADDED)
+        self.assertEqual(len(prior['gMapGroup_Sinnoh']), 30)
+        self.assertEqual(prior['gMapGroup_Sinnoh'][19:], ADDED + ADDED_B)
         for family in FAMILIES:
             with self.subTest(family=family):
                 module = load(family)
                 files, receipt = module.assemble(ROOT)
                 actual = json.loads(files['data/maps/map_groups.json'])
                 for key, value in prior.items():
-                    self.assertEqual(actual[key][:22] if key == 'gMapGroup_Sinnoh' else actual[key], value)
-                self.assertEqual(list(receipt['temporary_map_slots'].values()), list(range(22, 22 + len(module.MAPS))))
-                self.assertFalse(set(ADDED) & set(module.MAPS))
+                    self.assertEqual(actual[key][:30] if key == 'gMapGroup_Sinnoh' else actual[key], value)
+                self.assertEqual(list(receipt['temporary_map_slots'].values()), list(range(30, 30 + len(module.MAPS))))
+                self.assertFalse(set(ADDED + ADDED_B) & set(module.MAPS))
                 pins = files['test/data/averon_map_registry_slots.inc'].decode()
-                for slot, name in enumerate(ADDED, 19):
+                for slot, name in enumerate(ADDED + ADDED_B, 19):
                     self.assertIn(f', {slot}, ', next(line for line in pins.splitlines() if line.endswith(', ' + name + ', 1)')))
 
     def test_changed_legacy_group_identity_still_fails_hash_guard(self):

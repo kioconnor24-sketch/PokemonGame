@@ -28,7 +28,7 @@ class WestPacketATest(unittest.TestCase):
 
     def test_slots_0_to_18_unchanged_and_ten_appended(self):
         sinnoh = json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-        self.assertEqual(sinnoh, PRIOR + self.names)
+        self.assertEqual(sinnoh[:len(PRIOR) + len(self.names)], PRIOR + self.names)   # later packets append after
         self.assertEqual(self.names, ["JubilifeCity_GlobalTerminal_1F", "JubilifeCity_GlobalTerminal_2F", "OreburghGate_B1F"])
         registry = (ENGINE / p.REGISTRY).read_text()
         self.assertIn(f"REGISTRY_GROUP(76, gMapGroup_Sinnoh, {len(sinnoh)}, 1)", registry)

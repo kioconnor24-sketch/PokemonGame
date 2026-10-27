@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import pathlib
+import shutil
 import struct
 import tempfile
 import unittest
@@ -79,6 +80,34 @@ class EternaCivicTest(unittest.TestCase):
                 w22.build(ENGINE)
         finally:
             w22.inputs = orig
+
+    def test_existing_windworks_connection_survives_dev_overlay_build(self):
+        """A production append must survive staging alongside the Eterna seam."""
+        with tempfile.TemporaryDirectory() as tmp:
+            engine = pathlib.Path(tmp)
+            layouts = json.loads((ENGINE / "data/layouts/layouts.json").read_text())["layouts"]
+            blockdata = next(l["blockdata_filepath"] for l in layouts
+                             if l.get("id") == "LAYOUT_ROUTE205_NORTH")
+            for rel in ("data/maps/Route205_North/map.json", "data/layouts/layouts.json",
+                        "include/constants/metatile_behaviors.h", blockdata):
+                dest = engine / rel
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ENGINE / rel, dest)
+            # Reuse immutable stock shell headers without copying the engine.
+            for stock in (ENGINE / "data/maps").iterdir():
+                if stock.is_dir() and stock.name != "Route205_North":
+                    (engine / "data/maps" / stock.name).symlink_to(stock, target_is_directory=True)
+            path = engine / "data/maps/Route205_North/map.json"
+            source = json.loads(path.read_text())
+            windworks = {"map": "MAP_VALLEY_WINDWORKS", "offset": 9, "direction": "down"}
+            source["connections"] = [c for c in source["connections"]
+                                     if c["map"] != windworks["map"]] + [windworks]
+            path.write_text(json.dumps(source))
+            _, _, _, _, route = w22.build(engine)
+            self.assertEqual(route["connections"][:-1], source["connections"])
+            self.assertEqual(route["connections"][-1],
+                             {"map": "MAP_ETERNA_CITY", "offset": 0, "direction": "right"})
+            self.assertEqual(json.loads(path.read_text()), source)
 
 
 if __name__ == "__main__":
