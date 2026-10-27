@@ -18,7 +18,7 @@ STATIC_ASSERT(MAPSEC_LAKE_VERITY == 220, lake_verity_owner_approved_value);
 STATIC_ASSERT(MAPSEC_JUBILIFE_CITY == 221, jubilife_owner_approved_value);
 STATIC_ASSERT(MAPSEC_ROUTE_203 == 222, route203_owner_approved_value);
 STATIC_ASSERT(MAPSEC_OREBURGH_GATE == 223, oreburgh_gate_owner_approved_value);
-STATIC_ASSERT(MAPSEC_COUNT == 227, no_other_allocations);
+STATIC_ASSERT(MAPSEC_COUNT == 228, no_other_allocations); // 224-226 northern, 227 Oreburgh City: their own tests
 
 static bool32 Contains(const u8 *text, const u8 *needle)
 {

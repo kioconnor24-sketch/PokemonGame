@@ -19,7 +19,7 @@ STATIC_ASSERT(MAPSEC_ROUTE_204 == 224, route204_owner_value);
 STATIC_ASSERT(MAPSEC_FLOAROMA_TOWN == 225, floaroma_owner_value);
 STATIC_ASSERT(MAPSEC_ROUTE_205 == 226, route205_owner_value);
 STATIC_ASSERT(MAPSEC_NONE == 215, northern_none_preserved);
-STATIC_ASSERT(MAPSEC_COUNT == 227, northern_no_unapproved_allocations);
+STATIC_ASSERT(MAPSEC_COUNT == 228, northern_no_unapproved_allocations); // + 227 Oreburgh City (averon_oreburgh_location.c)
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, northern_box_format_preserved);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, northern_party_format_preserved);
 
