@@ -158,6 +158,18 @@ def crossable(m, tile, other, to):
                for e in start_elevations(m, tile))
 
 
+def arrow_warp_direction(m, tile):
+    """TryArrowWarp tests the current tile: this input warps rather than walks."""
+    if not m.warp_at(*tile):
+        return None
+    behavior = m.behavior(*tile)
+    for word, direction in (("NORTH", "up"), ("SOUTH", "down"),
+                            ("WEST", "left"), ("EAST", "right")):
+        if word + "_ARROW" in behavior:
+            return direction
+    return None
+
+
 def reach_states(m, start, elevation=None):
     """{tile: elevations} reachable on foot from start (as bfs: a takeable warp tile is reached, not crossed)."""
     first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
@@ -166,7 +178,9 @@ def reach_states(m, start, elevation=None):
         cur, e = q.popleft()
         if cur != start and takeable(m, *cur):
             continue
-        for dx, dy in DIRS.values():
+        for direction, (dx, dy) in DIRS.items():
+            if arrow_warp_direction(m, cur) == direction:
+                continue
             nxt = (cur[0] + dx, cur[1] + dy)
             if not m.walkable(*nxt):
                 continue
@@ -217,6 +231,8 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevat
         state = q.popleft()
         cur, e = state
         for name, (dx, dy) in DIRS.items():
+            if arrow_warp_direction(m, cur) == name:
+                continue
             nxt = (cur[0] + dx, cur[1] + dy)
             if nxt in blocked:
                 continue
