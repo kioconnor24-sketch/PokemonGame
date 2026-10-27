@@ -2542,5 +2542,34 @@
     "errors": 0,
     "skipped": 0
   },
-  "not_claimed": "Original stacked801-suite8 legacy runtime preparation errors remain on preserved branches; no tests removed from those branches. Source-only extraction is not production integration or full44-map gameplay acceptance."
+  "not_claimed": "Original stacked801-suite8 legacy runtime preparation errors remain on preserved branches; no tests removed from those branches. Source-only extraction is not production integration or full44-map gameplay acceptance.",
+  "verification": {
+    "verified_source_head": "f123821792f753e66b93a92e9cd8754bded8e7c8",
+    "whole_host_command": "python3 -m unittest discover -s \"Pokemon Game/scripts/tests\"",
+    "whole_host": {
+      "run": 885,
+      "passed": 884,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "seconds": 473.589,
+      "skip_identity": "test_sinnoh_southwest_coast.SouthwestCoastTest.test_rebuild_from_the_pinned_donor",
+      "skip_reason": "SINNOH_DONOR_ROOT not configured; existing optional donor-checkout test"
+    },
+    "producer": {
+      "run": 13,
+      "passed": 13,
+      "seconds": 20.287
+    },
+    "output_replay": {
+      "source": "dad0724f5cc745fe4b387723f8e7f9c3a9e08e58",
+      "base": "284503e76145052f420ec1d2debe8e1611093f09",
+      "outputs": 191,
+      "all_output_hashes_equal": true,
+      "all_source_native_base_hashes_equal": true,
+      "validated_generated_engine_tree": "2f416e892847e82e66c8e1fed63eeb164d4b20c2"
+    },
+    "host_log_sha256": "e0119a54d538e8021771852860da139d071651939f4e2386a4232ca54d09bc32",
+    "ci_on_verified_source": "All applicable checks PASS; weekly-readonly-audit conditional SKIP; independently reviewed source package still required before merge. Final documentation head gets fresh checks."
+  }
 }
