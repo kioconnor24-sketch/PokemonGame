@@ -2334,11 +2334,16 @@
     }
   },
   "native_ci": {
-    "status_at_capture": "PENDING",
+    "status_at_capture": "PASS",
     "run": 40423377720,
     "job": 121923006076,
     "source_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
-    "prior_322_pass": "Historical cdbbd490 evidence only; not substituted for this pending head."
+    "prior_322_pass": "Historical cdbbd490 evidence only; not substituted for this pending head.",
+    "passed": 322,
+    "total": 322,
+    "failed": 0,
+    "job_url": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/40423377720/job/121923006076",
+    "verified_summary": "Tests PASSED322; Tests TOTAL322 from completed actual job log"
   },
   "limitations": [
     "Initial Sinnoh arrival uses existing Continue-warp fixture on private copies, not natural progression acceptance.",
@@ -2352,5 +2357,13 @@
   "qa_source_blobs": {
     "Pokemon Game/scripts/claude_play/map_qa.py": "a8f652a519944db0471cdc19d26953b41c0aa2f6",
     "Pokemon Game/scripts/coordination/codex_cry_gameplay.py": "841e8c116fca63b2cfb4a7d9978d4cc3ad272f87"
-  }
+  },
+  "production_integration": {
+    "pr": 306,
+    "merge_sha": "284503e76145052f420ec1d2debe8e1611093f09",
+    "executed_by": "Claude resumed session, acknowledged by live Issue15 comments6430352466 and6430514421",
+    "tested_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
+    "post_merge_main_ci": "Running at update; not substituted for completed PR-head checks"
+  },
+  "independent_build_identity_note": "These GCC14.2.1 isolated-archive ROMs are separately tested artifacts; they are not claimed byte-identical to Claude exact-head ROMs37081295.../4f20f376.... Both report the same verified Git engine tree. Archive source has no Git metadata; no cross-environment byte-reproducibility conclusion inferred."
 }
