@@ -170,6 +170,24 @@ def arrow_warp_direction(m, tile):
     return None
 
 
+def can_walk_direction(m, tile, direction):
+    """Ordinary on-foot input, excluding warps and the native uphill mud slide.
+
+    Collision/elevation are checked separately. ForcedMovement_MuddySlope
+    slides a walking player south; northward passage requires bike speed.
+    """
+    if arrow_warp_direction(m, tile) == direction:
+        return False
+    if direction == "up":
+        behavior = getattr(m, "behavior", lambda x, y: "MB_NORMAL")
+        if behavior(*tile) == "MB_MUDDY_SLOPE":
+            return False
+        target = tile[0], tile[1] - 1
+        if getattr(m, "inside", m.walkable)(*target) and behavior(*target) == "MB_MUDDY_SLOPE":
+            return False
+    return True
+
+
 def reach_states(m, start, elevation=None):
     """{tile: elevations} reachable on foot from start (as bfs: a takeable warp tile is reached, not crossed)."""
     first = [(start, e) for e in (start_elevations(m, start) if elevation is None else [elevation])]
@@ -179,7 +197,7 @@ def reach_states(m, start, elevation=None):
         if cur != start and takeable(m, *cur):
             continue
         for direction, (dx, dy) in DIRS.items():
-            if arrow_warp_direction(m, cur) == direction:
+            if not can_walk_direction(m, cur, direction):
                 continue
             nxt = (cur[0] + dx, cur[1] + dy)
             if not m.walkable(*nxt):
@@ -231,7 +249,7 @@ def bfs(m, start, goals, blocked=frozenset(), allow_goal_unwalkable=True, elevat
         state = q.popleft()
         cur, e = state
         for name, (dx, dy) in DIRS.items():
-            if arrow_warp_direction(m, cur) == name:
+            if not can_walk_direction(m, cur, name):
                 continue
             nxt = (cur[0] + dx, cur[1] + dy)
             if nxt in blocked:
