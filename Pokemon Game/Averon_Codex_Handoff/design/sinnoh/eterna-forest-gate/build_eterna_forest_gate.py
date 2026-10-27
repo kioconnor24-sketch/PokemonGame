@@ -62,11 +62,17 @@ def behaviours(engine):
     return re.findall(r"^\s*(MB_\w+)", (engine / "include/constants/metatile_behaviors.h").read_text(), re.M)
 
 
+def pre_integration(engine, rel):
+    """A production file as it was before west packet B integrated this batch's house (its pinned base/ copy)."""
+    base = SINNOH / "west-packet-b/base" / rel
+    return base.read_bytes() if base.exists() else (engine / rel).read_bytes()
+
+
 def route_inputs(engine):
     layouts = json.loads((engine / "data/layouts/layouts.json").read_text())["layouts"]
     layout = next(l for l in layouts if l.get("id") == "LAYOUT_ROUTE205_SOUTH")
     assert (layout["width"], layout["height"]) == (ROUTE_WIDTH, ROUTE_HEIGHT)
-    raw = {"data/maps/Route205_South/map.json": (engine / "data/maps/Route205_South/map.json").read_bytes(),
+    raw = {"data/maps/Route205_South/map.json": pre_integration(engine, "data/maps/Route205_South/map.json"),
            layout["blockdata_filepath"]: (engine / layout["blockdata_filepath"]).read_bytes()}
     cells = list(struct.unpack("<%dH" % (ROUTE_WIDTH * ROUTE_HEIGHT), raw[layout["blockdata_filepath"]]))
     hashes = {f"engine/{p}": hashlib.sha256(b).hexdigest() for p, b in raw.items()}
