@@ -16,7 +16,8 @@ spec.loader.exec_module(p)
 # The engine files the packet reads (pre-install), copied into a scratch engine so the install never touches ENGINE.
 INPUTS = ["data/maps/map_groups.json", "data/layouts/layouts.json", "data/event_scripts.s", p.REGISTRY,
           "include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h",
-          "data/maps/JubilifeCity_Mart/map.json", "src/data/region_map/region_map_sections.json"]
+          "data/maps/JubilifeCity_Mart/map.json", "src/data/region_map/region_map_sections.json",
+          "data/tilesets/primary/building/metatiles.bin", "data/tilesets/primary/building/metatile_attributes.bin"]
 
 
 def installed(engine):
@@ -86,7 +87,8 @@ class WestPacketBTest(unittest.TestCase):
         for room in p.ROOMS:
             l = layouts[p.const(room, "LAYOUT_")]
             self.assertEqual((l["primary_tileset"], l["secondary_tileset"]),
-                             ("gTileset_AveronFloaromaInteriorPrimary", "gTileset_AveronFloaromaInteriorSecondary"))
+                             ("gTileset_Building", "gTileset_AveronFloaromaInteriorSecondary"))
+            self.assertEqual((self.eng / l["border_filepath"]).read_bytes(), b"\x01\x00" * 4)   # black void
             self.assertEqual((self.eng / l["blockdata_filepath"]).stat().st_size, l["width"] * l["height"] * 2)
         self.assertEqual(self.header(p.HOUSE)["layout"], "LAYOUT_HOUSE1")
         for name, (w, h, primary, secondary) in p.WINDWORKS.items():     # stock banks, no new tileset
@@ -98,16 +100,20 @@ class WestPacketBTest(unittest.TestCase):
 
     def test_tileset_pair_binds_stock_building_and_shop_graphics(self):
         headers = (self.eng / "src/data/tilesets/headers.h").read_text()
-        for sym, tiles, secondary in (("AveronFloaromaInteriorPrimary", "gTilesetTiles_InsideBuilding", "FALSE"),
-                                      ("AveronFloaromaInteriorSecondary", "gTilesetTiles_Shop", "TRUE")):
+        self.assertNotIn("AveronFloaromaInteriorPrimary", headers)        # stock gTileset_Building serves as primary
+        for sym, tiles, secondary in (("AveronFloaromaInteriorSecondary", "gTilesetTiles_Shop", "TRUE"),):
             block = re.search(r"const struct Tileset gTileset_" + sym + r" =\s*\{(.*?)\};", headers, re.S)[1]
             self.assertIn(f".tiles={tiles},", block)
             self.assertIn(f".isSecondary={secondary}", block)
             self.assertIn(f".metatiles=gMetatiles_{sym},", block)
         for t in json.loads((p.W28 / "staged/tilesets.json").read_text()):
-            bank = "secondary" if t["secondary"] else "primary"
-            dest = self.eng / f"data/tilesets/{bank}/{p.folder(p.TILESETS[t['secondary']])}"
-            self.assertEqual((dest / "metatiles.bin").read_bytes(), (p.W28 / t["metatiles"]).read_bytes())
+            if t["secondary"]:
+                dest = self.eng / f"data/tilesets/secondary/{p.folder(p.TILESETS[True])}"
+                self.assertEqual((dest / "metatiles.bin").read_bytes(), (p.W28 / t["metatiles"]).read_bytes())
+            else:
+                stock = (ENGINE / "data/tilesets/primary/building/metatiles.bin").read_bytes()
+                packed = (p.W28 / t["metatiles"]).read_bytes()
+                self.assertEqual(stock[:len(packed)], packed)
 
     def test_every_new_warp_is_reciprocal(self):
         names = p.SLOTS + ["FloaromaTown", "FloaromaMeadow", "Route205_South", "Route205_North"]

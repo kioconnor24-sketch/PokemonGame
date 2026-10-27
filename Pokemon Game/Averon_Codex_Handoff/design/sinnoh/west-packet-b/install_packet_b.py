@@ -4,9 +4,11 @@
 PRODUCTION integration of already-staged and gated Claude geography, appended after the existing 22 Sinnoh slots:
 - W28 (production-interiors, #321): the donor rooms behind production doors at the donor's own coordinates,
   Floaroma Flower Shop (22, 13), House 1 (13, 16), Mart (26, 19), House 2 (26, 28) and the Floaroma Meadow house
-  (35, 41), in neutral indoor art from the merged packer. Their tileset pair becomes production's
-  gTileset_AveronFloaromaInteriorPrimary/Secondary (metatile banks only; tiles, palettes and callback are the stock
-  Building/Shop ones, as gTileset_AveronCorridorRustboro does for Rustboro).
+  (35, 41), in neutral indoor art from the merged packer. The packer's primary bank is byte-for-byte the first
+  metatiles of stock gTileset_Building (asserted), so the rooms use gTileset_Building itself as primary; only the
+  secondary bank becomes a new production tileset, gTileset_AveronFloaromaInteriorSecondary (metatile bank only;
+  tiles, palettes and callback are stock Shop's, as gTileset_AveronCorridorRustboro does for Rustboro). Borders are
+  stock interiors' black void (Building metatile 1).
 - W23 (eterna-forest-gate, #313): only the house behind Route 205 South's door (21, 22), a stock LAYOUT_HOUSE1
   shell. The tunnel into Eterna Forest waits for the forest itself to reach production, so production Route 205
   South gains the door warp alone (index 0; the staged house's return warp is renumbered to match).
@@ -55,8 +57,8 @@ PARENT = {"FloaromaTown_FlowerShop": "FloaromaTown", "FloaromaTown_House1": "Flo
           "FloaromaMeadow_House": "FloaromaMeadow", HOUSE: "Route205_South",
           "ValleyWindworks": "Route205_North", "ValleyWindworks_Inside": "ValleyWindworks"}
 HOUSE_DOOR = (21, 22)
-TILESETS = {False: "AveronFloaromaInteriorPrimary", True: "AveronFloaromaInteriorSecondary"}
-DEV_TILESETS = {"gTileset_ClaudeProdInteriorPrimary": "gTileset_" + TILESETS[False],
+TILESETS = {True: "AveronFloaromaInteriorSecondary"}                 # the only new production tileset
+DEV_TILESETS = {"gTileset_ClaudeProdInteriorPrimary": "gTileset_Building",   # identical prefix, asserted in plan()
                 "gTileset_ClaudeProdInteriorSecondary": "gTileset_" + TILESETS[True]}
 REGISTRY = "test/data/averon_map_registry_slots.inc"
 HEADER_FIELDS = ("region", "weather", "map_type", "allow_cycling", "allow_escaping", "allow_running",
@@ -69,7 +71,7 @@ def const(name, prefix="MAP_"):
 
 
 def folder(symbol):
-    """AveronFloaromaInteriorPrimary -> averon_floaroma_interior_primary."""
+    """AveronFloaromaInteriorSecondary -> averon_floaroma_interior_secondary."""
     return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", symbol).lower()
 
 
@@ -170,7 +172,13 @@ def plan(engine):
                         "border_filepath": f"data/layouts/{name}/border.bin",
                         "blockdata_filepath": f"data/layouts/{name}/map.bin"})
     for t in read_json(W28 / "staged/tilesets.json"):
-        dest = f"data/tilesets/{'secondary' if t['secondary'] else 'primary'}/{folder(TILESETS[t['secondary']])}/"
+        if not t["secondary"]:                              # the packed primary is stock Building's own prefix
+            packed, attrs = (W28 / t["metatiles"]).read_bytes(), (W28 / t["attributes"]).read_bytes()
+            stock = engine / "data/tilesets/primary/building"
+            assert t["graphics"] == "Building" and packed == (stock / "metatiles.bin").read_bytes()[:len(packed)] \
+                and attrs == (stock / "metatile_attributes.bin").read_bytes()[:len(attrs)], "packed primary differs"
+            continue
+        dest = f"data/tilesets/secondary/{folder(TILESETS[t['secondary']])}/"
         files[dest + "metatiles.bin"] = (W28 / t["metatiles"]).read_bytes()
         files[dest + "metatile_attributes.bin"] = (W28 / t["attributes"]).read_bytes()
     for name in SLOTS:
@@ -186,11 +194,11 @@ def tileset_sources(engine):
     tilesets = (engine / "include/tilesets.h").read_text()
     end = "\n#endif //GUARD_tilesets_H"
     assert tilesets.rstrip().endswith(end.strip()) and "AveronFloaromaInterior" not in tilesets
-    decls = "".join(f"extern const struct Tileset gTileset_{TILESETS[s]};\n" for s in (False, True))
+    decls = "".join(f"extern const struct Tileset gTileset_{sym};\n" for sym in TILESETS.values())
     out["include/tilesets.h"] = tilesets.replace(end, "\n" + decls.rstrip("\n") + "\n" + end, 1)
     headers = (engine / "src/data/tilesets/headers.h").read_text()
     metatiles = (engine / "src/data/tilesets/metatiles.h").read_text()
-    for secondary, graphics in ((False, "Building"), (True, "Shop")):
+    for secondary, graphics in ((True, "Shop"),):
         block = re.search(r"const struct Tileset gTileset_" + graphics + r" =\s*\{(.*?)\};", headers, re.S)[1]
         bind = {f: re.search(r"\." + f + r"\s*=\s*(\w+)\s*,", block)[1] for f in ("tiles", "palettes", "callback")}
         sym, bank = TILESETS[secondary], "secondary" if secondary else "primary"

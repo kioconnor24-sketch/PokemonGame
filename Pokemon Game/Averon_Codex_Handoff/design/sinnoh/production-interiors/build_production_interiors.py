@@ -7,7 +7,7 @@ that production Floaroma Town and Floaroma Meadow draw at the donor's own coordi
   FloaromaTown_House2 (26, 28), FloaromaMeadow_House (35, 41).
 (The Center (18, 28) is left to Codex's #238, which stages the donor Center.)
 
-1. source/staged/<Room>/: the donor floor plan unchanged (map.bin; border: the packer's solid wall top), its used attribute words
+1. source/staged/<Room>/: the donor floor plan unchanged (map.bin; border: stock interiors' black void), its used attribute words
    (attributes.json) and a neutral header whose only warps are the donor's street mats.
 2. interior-art/: Codex's merged neutral indoor packer (hearthome-solaceon/adapt_gate_art.py build()) draws every
    room from the existing Building/Shop art: floor, wall, counter, exit mat; collision/elevation/behaviour preserved.
@@ -47,7 +47,7 @@ ROOMS = {"FloaromaTown_FlowerShop": ("FloaromaTown", (22, 13)), "FloaromaTown_Ho
          "FloaromaTown_Mart": ("FloaromaTown", (26, 19)), "FloaromaTown_House2": ("FloaromaTown", (26, 28)),
          "FloaromaMeadow_House": ("FloaromaMeadow", (35, 41))}
 BLOBS = {}                                              # filled from the donor tree and recorded in the receipt
-BORDER = struct.pack("<4H", *[(1 << 10) | packer.WALL_TOP] * 4)
+BORDER = struct.pack("<4H", *[1] * 4)          # stock interiors' black void: Building metatile 1, kept as-is in the packed primary
 TILESETS = [{"symbol": "ClaudeProdInteriorPrimary", "secondary": False, "graphics": "Building",
              "metatiles": "interior-art/primary-metatiles.bin", "attributes": "interior-art/primary-attributes.bin"},
             {"symbol": "ClaudeProdInteriorSecondary", "secondary": True, "graphics": "Shop",
@@ -94,7 +94,7 @@ def stage_sources(donor, out):
         d = out / "staged" / room
         d.mkdir(parents=True)
         (d / "map.bin").write_bytes(raw)
-        (d / "border.bin").write_bytes(BORDER)          # the packer's wall top: donor border tiles are not in its banks
+        (d / "border.bin").write_bytes(BORDER)          # donor border tiles are not in the packer's banks
         (d / "attributes.json").write_text(json.dumps({"used_source_attribute_words": words}, indent=2) + "\n")
         neutral = w1.header(const(room), room, layout["id"], "MUS_PETALBURG", "MAP_TYPE_INDOOR",
                             [(w["x"], w["y"], "MAP_PLACEHOLDER", 0) for w in mats])
