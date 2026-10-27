@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import struct
+import types
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -12,6 +13,7 @@ spec.loader.exec_module(md)
 qa_spec = importlib.util.spec_from_file_location("arrow_map_qa", ROOT / "scripts/claude_play/map_qa.py")
 qa = importlib.util.module_from_spec(qa_spec)
 qa_spec.loader.exec_module(qa)
+import driver
 
 
 class ArrowMap:
@@ -36,6 +38,34 @@ class ArrowMap:
 
 
 class ArrowWarpPathfindingTest(unittest.TestCase):
+    def test_real_driver_routes_between_route206_halves_through_gatehouse(self):
+        folder = ROOT / "Averon_Codex_Handoff/design/sinnoh/eterna-cycle/staged"
+        maps = {}
+        for name, width, height in (("Route206", 28, 120), ("Route206_South", 9, 11)):
+            source = folder / name
+            header = json.loads((source / "map.json").read_text())
+            attrs = json.loads((source / "attributes.json").read_text())["used_source_attribute_words"]
+            m = md.MapInfo.__new__(md.MapInfo)
+            m.width, m.height = width, height
+            m.blocks = struct.unpack("<%dH" % (width * height), (source / "map.bin").read_bytes())
+            m._primary, m._secondary = [0] * 512, [0] * 512
+            for tile, value in attrs.items():
+                bank, index = divmod(int(tile), 512)
+                (m._secondary if bank else m._primary)[index] = value
+            m.world = types.SimpleNamespace(behavior_names=md._behavior_names(ROOT / "engine"))
+            m._derive_behaviors()
+            m.triggers = set()
+            m.connections = []
+            m.warps = [(w["x"], w["y"], w["dest_map"], int(w["dest_warp_id"]))
+                       for w in header["warp_events"]]
+            maps[header["id"]] = m
+        d = driver.Driver.__new__(driver.Driver)
+        d.w = types.SimpleNamespace(map=maps.__getitem__, map_ids=set(maps))
+        d.g = types.SimpleNamespace(player_elevation=lambda: 3)
+        route = d.map_route("MAP_ROUTE206", "MAP_ROUTE206", (12, 103), target=(12, 96))
+        self.assertEqual(route, [("MAP_ROUTE206", "warp", (12, 102), "up"),
+                                 ("MAP_ROUTE206_SOUTH", "warp", (4, 1), "up")])
+
     def test_all_four_current_arrow_directions_cannot_be_ordinary_steps(self):
         for word, direction in (("NORTH", "up"), ("SOUTH", "down"),
                                 ("WEST", "left"), ("EAST", "right")):
