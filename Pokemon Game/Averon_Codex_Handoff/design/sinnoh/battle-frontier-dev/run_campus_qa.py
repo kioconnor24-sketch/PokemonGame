@@ -22,7 +22,7 @@ out.mkdir(parents=True)
 rom_source=engine/('pokeemerald-cries-off'+('-release' if profile=='release' else '')+'.gba')
 rom=scratch/'game.gba';shutil.copyfile(rom_source,rom);flash=rom.with_suffix('.sav')
 recipe=json.loads(args.receipt.read_text())
-if len(recipe['existing_map_names_preserved'])!=22 or len(recipe['scene'])!=44:raise SystemExit('exact22+44 scene receipt required')
+if len(recipe['existing_map_names_preserved'])!=30 or len(recipe['scene'])!=44:raise SystemExit('exact30+44 scene receipt required')
 for n,h in recipe['files'].items():assert hashlib.sha256((engine/n).read_bytes()).hexdigest()==h,n
 result={'scope':'Bounded real controller FightArea/Gate/Campus; not full44-map acceptance','source_sha':recipe['source_sha'],'base':recipe['base'],'profile':profile,'rom_sha256':w.play.sha256(rom),'dev_entry':'existing Continue-warp fixture on fresh private original-legacy copy; no old19-slot DEV flash reused','host_probe_sha256':hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest(),'checks':[]}
 fight='MAP_FIGHT_AREA';gate='MAP_SINNOH_FRONTIER_GATE';center='MAP_SINNOH_FRONTIER_CAMPUSCENTER'
@@ -44,7 +44,7 @@ try:
  d.moves=w.game.MoveTable(rom,info);g.map_names=world.by_num
  r=q.Runner(d,world,{},out)
  w.play.boot(d,False);r.wait_settled()
- require(r.check('new66-slot fixture starts FightArea',d.here()==(fight,(23,5)),at=d.here()),'initial arrival')
+ require(r.check('new74-slot fixture starts FightArea',d.here()==(fight,(23,5)),at=d.here()),'initial arrival')
  r.follower('start')
  warp(fight,0)
  travel(gate);warp(gate,0)
@@ -76,7 +76,7 @@ try:
  require(r.check('actual native menu task and valid cursor',bool(set(tasks)&{'StartMenuTask','Task_ShowStartMenu'}) and 0<count<=9 and cursor<count,tasks=tasks,actions=count,cursor=cursor),'native menu')
  e.tap('B',after=.8);r.wait_settled()
  require(r.check('B returns to same field',d.here()==before and d.field_ready(d.state()),at=d.here()),'menu return')
- w.release_save(d,'frontier66-'+profile,sizes,flash)
+ w.release_save(d,'frontier74-'+profile,sizes,flash)
  require(r.check('game-written SAVE after campus return',True,at=d.here()),'save')
 except BaseException as exc:
  result['error']=repr(exc)

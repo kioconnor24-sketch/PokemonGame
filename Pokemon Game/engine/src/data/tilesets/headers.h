@@ -1550,3 +1550,12 @@ const struct Tileset gTileset_AveronCorridorRustboro =
  .metatileAttributes = gMetatileAttributes_AveronCorridorRustboro,
  .callback=InitTilesetAnim_Rustboro,
 };
+
+const struct Tileset gTileset_AveronFloaromaInteriorSecondary =
+{
+ .isCompressed=TRUE, .isSecondary=TRUE,
+ .tiles=gTilesetTiles_Shop, .palettes=gTilesetPalettes_Shop,
+ .metatiles=gMetatiles_AveronFloaromaInteriorSecondary,
+ .metatileAttributes = gMetatileAttributes_AveronFloaromaInteriorSecondary,
+ .callback=NULL,
+};
