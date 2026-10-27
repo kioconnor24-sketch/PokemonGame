@@ -1,0 +1,2369 @@
+{
+  "tested_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
+  "built_from": "e119fab5a867538df689d70f9e16edfba6ff9670",
+  "engine_tree": "320fc1f48b1d1da85a83bcf943dbb30103379e0f",
+  "post_build_tracked_files_verified": 30450,
+  "profiles": {
+    "NORMAL": {
+      "tested_pr": 306,
+      "current_candidate_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
+      "built_from": "e119fab5a867538df689d70f9e16edfba6ff9670",
+      "identical_engine_tree": "320fc1f48b1d1da85a83bcf943dbb30103379e0f",
+      "profile": "NORMAL",
+      "cries": "off",
+      "build_exit": 0,
+      "command": "make -j8 -O CRIES=off all",
+      "memory_bytes": {
+        "EWRAM": 226480,
+        "IWRAM": 28392,
+        "ROM": 17396620
+      },
+      "linked_growth_bytes": 3276,
+      "artifacts": {
+        "pokeemerald-cries-off.gba": {
+          "bytes": 33554432,
+          "sha256": "6ed6830fdda5b189060b92a0256a413872e0172ea448d674da1e2a8d2d865ee1"
+        },
+        "pokeemerald-cries-off.elf": {
+          "bytes": 26783064,
+          "sha256": "413e588f4875aa5953b55d4522cc801a81479331d26b6b6b47d43686f0b4d491"
+        },
+        "pokeemerald-cries-off.map": {
+          "bytes": 4603313,
+          "sha256": "7b2f0e555914a4e29745971dc7f3426d0042c7c43d3ba448605fdbf32d3717a3"
+        }
+      },
+      "original_legacy_flash_sha256": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+      "runtime": "PENDING; first display-startup attempts blocked, never represented as gameplay PASS"
+    },
+    "RELEASE": {
+      "build_exit": 0,
+      "command": "make -j8 -O CRIES=off RELEASE=1 all",
+      "memory_bytes": {
+        "EWRAM": 226482,
+        "IWRAM": 28336,
+        "ROM": 17515740
+      },
+      "linked_growth_bytes": 3276,
+      "artifacts": {
+        "pokeemerald-cries-off-release.gba": {
+          "bytes": 33554432,
+          "sha256": "a540a7b8c3ebbde22567911a114598a9794d6b34c904deedaeb31eafbbe99a16"
+        },
+        "pokeemerald-cries-off-release.elf": {
+          "bytes": 26928700,
+          "sha256": "c33734b02db36fd8c8b9d1aae3e1e30342b32798c35d8b30608846af78ecc7b3"
+        },
+        "pokeemerald-cries-off-release.map": {
+          "bytes": 5792440,
+          "sha256": "f86854df048c05a79b01f503ac055ee58550bba16bdc241603a30f8aeb8feccc"
+        }
+      }
+    }
+  },
+  "host": {
+    "tests_passed": 22,
+    "failed": 0,
+    "static_maps": 6,
+    "static_findings": 0
+  },
+  "host_runtime_setting": "SDL mGBA -C videoRenderer=0; synchronization unchanged; no engine/shared QA edits",
+  "earlier_attempts": "Two no-window startup failures retained; no gameplay PASS inferred",
+  "runtime": {
+    "normal": {
+      "traversal": {
+        "maps": [
+          "MAP_JUBILIFE_CITY",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+          "MAP_ROUTE203",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F"
+        ],
+        "build": "normal",
+        "rom_sha256": "6ed6830fdda5b189060b92a0256a413872e0172ea448d674da1e2a8d2d865ee1",
+        "static_findings": [],
+        "save_before": "e6082715fb62a758ab8a936b33d4d34a9e22429dcedf47ae82a8e30e1ed9e608",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 19) -> MAP_ROUTE203 (0, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 21) -> MAP_ROUTE203 (0, 21) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                21
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 22) -> MAP_ROUTE203 (0, 22) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                22
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (46, 63) -> MAP_ROUTE202 (8, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                46,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                46,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (50, 63) -> MAP_ROUTE202 (12, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (53, 63) -> MAP_ROUTE202 (15, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                53,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                53,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (48, 0) -> MAP_ROUTE204 (12, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                48,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                48,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (50, 0) -> MAP_ROUTE204 (14, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (51, 0) -> MAP_ROUTE204 (15, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                51,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                51,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY warp 3 (19, 13) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                [
+                  19,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                19,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY warp 4 (20, 13) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                [
+                  20,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed down edge at (2, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                2,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                2,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed down edge at (17, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                17,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                17,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed right edge at (19, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                19,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                19,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                19,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 0 (9, 8) -> MAP_JUBILIFE_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  9,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 1 (10, 8) -> MAP_JUBILIFE_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  10,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 2 (6, 1) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  6,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed down edge at (10, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                10,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed right edge at (19, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                19,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                19,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F warp 0 (6, 1) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                [
+                  6,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE203",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                21
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                22
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                [
+                  53,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                53,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE203 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE203 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE203",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE203",
+              [
+                53,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  3,
+                  19
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 1 (18, 5) -> MAP_OREBURGH_GATE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  18,
+                  5
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_B1F warp 0 (5, 4) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                [
+                  5,
+                  4
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (west-final-normal)",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "e00518cc30cf056813cc482f82d3c55c8a19ab5c9a2eecdd5d1641b6657a1963",
+        "verdict": "PASS"
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_JUBILIFE_CITY",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+          "MAP_ROUTE203",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F"
+        ],
+        "build": "normal",
+        "rom_sha256": "6ed6830fdda5b189060b92a0256a413872e0172ea448d674da1e2a8d2d865ee1",
+        "static_findings": [],
+        "save_before": "e00518cc30cf056813cc482f82d3c55c8a19ab5c9a2eecdd5d1641b6657a1963",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "e00518cc30cf056813cc482f82d3c55c8a19ab5c9a2eecdd5d1641b6657a1963",
+        "verdict": "PASS"
+      },
+      "menu": {
+        "profile": "normal",
+        "source_sha": "0e3d74d6faabfb79f828176dff08637493b9439b",
+        "rom_sha256": "6ed6830fdda5b189060b92a0256a413872e0172ea448d674da1e2a8d2d865ee1",
+        "fixture": "None; copied actual game-written prior SAVE",
+        "checks": [
+          {
+            "name": "actual native start-menu task and valid action list",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B closes menu and preserves field position",
+            "ok": true,
+            "position": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "source game-written flash unchanged",
+            "ok": true
+          }
+        ],
+        "verdict": "PASS"
+      },
+      "legacy_continue": {
+        "maps": [
+          "MAP_SALTMERE"
+        ],
+        "build": "normal",
+        "rom_sha256": "6ed6830fdda5b189060b92a0256a413872e0172ea448d674da1e2a8d2d865ee1",
+        "static_findings": [
+          {
+            "map": "MAP_SALTMERE",
+            "code": "seam-mismatch",
+            "detail": {
+              "direction": "up",
+              "tile": [
+                7,
+                0
+              ],
+              "faces": [
+                "MAP_COASTALMEADOW",
+                [
+                  7,
+                  31
+                ]
+              ]
+            }
+          }
+        ],
+        "save_before": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SALTMERE",
+              [
+                19,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SALTMERE",
+              [
+                19,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+        "verdict": "PASS"
+      }
+    },
+    "release": {
+      "traversal": {
+        "maps": [
+          "MAP_JUBILIFE_CITY",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+          "MAP_ROUTE203",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F"
+        ],
+        "build": "release",
+        "rom_sha256": "a540a7b8c3ebbde22567911a114598a9794d6b34c904deedaeb31eafbbe99a16",
+        "static_findings": [],
+        "save_before": "e6082715fb62a758ab8a936b33d4d34a9e22429dcedf47ae82a8e30e1ed9e608",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 19) -> MAP_ROUTE203 (0, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 21) -> MAP_ROUTE203 (0, 21) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                21
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY right seam (69, 22) -> MAP_ROUTE203 (0, 22) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                22
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                69,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (46, 63) -> MAP_ROUTE202 (8, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                46,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                46,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (50, 63) -> MAP_ROUTE202 (12, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY down seam (53, 63) -> MAP_ROUTE202 (15, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                53,
+                63
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                53,
+                63
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (48, 0) -> MAP_ROUTE204 (12, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                48,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                48,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (50, 0) -> MAP_ROUTE204 (14, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                50,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY up seam (51, 0) -> MAP_ROUTE204 (15, 63) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                51,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                51,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY warp 3 (19, 13) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                [
+                  19,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                19,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY warp 4 (20, 13) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY",
+              [
+                [
+                  20,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed down edge at (2, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                2,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                2,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed down edge at (17, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                17,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                17,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F closed right edge at (19, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                19,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                19,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                19,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 0 (9, 8) -> MAP_JUBILIFE_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  9,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                9,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY",
+              [
+                20,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 1 (10, 8) -> MAP_JUBILIFE_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  10,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F warp 2 (6, 1) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                [
+                  6,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed down edge at (10, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                10,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F closed right edge at (19, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                19,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                19,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+            "ok": true,
+            "at": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F warp 0 (6, 1) -> MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                [
+                  6,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+              [
+                6,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE203",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 19) -> MAP_JUBILIFE_CITY (69, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 21) -> MAP_JUBILIFE_CITY (69, 21) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                21
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 left seam (0, 22) -> MAP_JUBILIFE_CITY (69, 22) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                0,
+                22
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                0,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE203 warp 0 (53, 6) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE203",
+              [
+                [
+                  53,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE203",
+              [
+                53,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE203 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE203 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE203",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE203",
+              [
+                53,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 0 (3, 19) -> MAP_ROUTE203 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  3,
+                  19
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                3,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 1 (18, 5) -> MAP_OREBURGH_GATE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  18,
+                  5
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_B1F warp 0 (5, 4) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                [
+                  5,
+                  4
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (west-final-release)",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "45114a0d44b1d085498743d413bc4c2d8af725114ae8ae22ede6901319c24469",
+        "verdict": "PASS"
+      },
+      "fresh_continue": {
+        "maps": [
+          "MAP_JUBILIFE_CITY",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F",
+          "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_2F",
+          "MAP_ROUTE203",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F"
+        ],
+        "build": "release",
+        "rom_sha256": "a540a7b8c3ebbde22567911a114598a9794d6b34c904deedaeb31eafbbe99a16",
+        "static_findings": [],
+        "save_before": "45114a0d44b1d085498743d413bc4c2d8af725114ae8ae22ede6901319c24469",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "45114a0d44b1d085498743d413bc4c2d8af725114ae8ae22ede6901319c24469",
+        "verdict": "PASS"
+      },
+      "menu": {
+        "profile": "release",
+        "source_sha": "0e3d74d6faabfb79f828176dff08637493b9439b",
+        "rom_sha256": "a540a7b8c3ebbde22567911a114598a9794d6b34c904deedaeb31eafbbe99a16",
+        "fixture": "None; copied actual game-written prior SAVE",
+        "checks": [
+          {
+            "name": "actual native start-menu task and valid action list",
+            "ok": true,
+            "tasks": [
+              "Task_WeatherMain",
+              "Task_RunPerStepCallback",
+              "Task_MuddySlope",
+              "Task_RunTimeBasedEvents",
+              "Task_ShowStartMenu"
+            ],
+            "actions": 7,
+            "cursor": 0
+          },
+          {
+            "name": "B closes menu and preserves field position",
+            "ok": true,
+            "position": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "source game-written flash unchanged",
+            "ok": true
+          }
+        ],
+        "verdict": "PASS"
+      },
+      "legacy_continue": {
+        "maps": [
+          "MAP_SALTMERE"
+        ],
+        "build": "release",
+        "rom_sha256": "a540a7b8c3ebbde22567911a114598a9794d6b34c904deedaeb31eafbbe99a16",
+        "static_findings": [
+          {
+            "map": "MAP_SALTMERE",
+            "code": "seam-mismatch",
+            "detail": {
+              "direction": "up",
+              "tile": [
+                7,
+                0
+              ],
+              "faces": [
+                "MAP_COASTALMEADOW",
+                [
+                  7,
+                  31
+                ]
+              ]
+            }
+          }
+        ],
+        "save_before": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_SALTMERE",
+              [
+                19,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_SALTMERE",
+              [
+                19,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "44cd2e2d651128b18439e9f9763705beee6ae32e6c901fc3f24d982328512f9d",
+        "verdict": "PASS"
+      }
+    }
+  },
+  "native_ci": {
+    "status_at_capture": "PASS",
+    "run": 40423377720,
+    "job": 121923006076,
+    "source_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
+    "prior_322_pass": "Historical cdbbd490 evidence only; not substituted for this pending head.",
+    "passed": 322,
+    "total": 322,
+    "failed": 0,
+    "job_url": "https://github.com/kioconnor24-sketch/PokemonGame/actions/runs/40423377720/job/121923006076",
+    "verified_summary": "Tests PASSED322; Tests TOTAL322 from completed actual job log"
+  },
+  "limitations": [
+    "Initial Sinnoh arrival uses existing Continue-warp fixture on private copies, not natural progression acceptance.",
+    "Original legacy flash remains byte-identical; original and all game-written flash files stay private.",
+    "Retain original Saltmere north(7,0) to CoastalMeadow(7,31) static warning; legacy3/3 is load/state proof, not world seam acceptance.",
+    "Generic map_qa menu assertion is weak; separate actual native task/action-list and rendered menu checks each passed3/3.",
+    "Two initial no-window attempts retained; SDL renderer0 succeeds with emulation synchronization unchanged.",
+    "No final owner/Delta, audio-listening, story, encounters or permanent new identities accepted."
+  ],
+  "toolchain": "ARM GCC14.2.1 20241119; GNU Make4.4.1",
+  "qa_source_blobs": {
+    "Pokemon Game/scripts/claude_play/map_qa.py": "a8f652a519944db0471cdc19d26953b41c0aa2f6",
+    "Pokemon Game/scripts/coordination/codex_cry_gameplay.py": "841e8c116fca63b2cfb4a7d9978d4cc3ad272f87"
+  },
+  "production_integration": {
+    "pr": 306,
+    "merge_sha": "284503e76145052f420ec1d2debe8e1611093f09",
+    "executed_by": "Claude resumed session, acknowledged by live Issue15 comments6430352466 and6430514421",
+    "tested_head": "0e3d74d6faabfb79f828176dff08637493b9439b",
+    "post_merge_main_ci": "Running at update; not substituted for completed PR-head checks"
+  },
+  "independent_build_identity_note": "These GCC14.2.1 isolated-archive ROMs are separately tested artifacts; they are not claimed byte-identical to Claude exact-head ROMs37081295.../4f20f376.... Both report the same verified Git engine tree. Archive source has no Git metadata; no cross-environment byte-reproducibility conclusion inferred."
+}

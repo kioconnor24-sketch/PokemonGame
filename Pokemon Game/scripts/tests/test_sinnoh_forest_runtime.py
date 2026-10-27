@@ -21,9 +21,9 @@ class ForestRuntimeTest(unittest.TestCase):
 
     def test_all_existing_map_layout_and_include_prefixes_survive(self):
         before=json.loads(self.before['data/maps/map_groups.json']);after=json.loads(self.files['data/maps/map_groups.json'])
-        self.assertEqual(len(before['gMapGroup_Sinnoh']),19)
+        self.assertEqual(len(before['gMapGroup_Sinnoh']),22)
         for k,v in before.items():self.assertEqual(after[k][:len(v)] if k=='gMapGroup_Sinnoh' else after[k],v)
-        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(19,25))))
+        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(22,28))))
         before=json.loads(self.before['data/layouts/layouts.json'])['layouts'];after=json.loads(self.files['data/layouts/layouts.json'])['layouts']
         self.assertEqual(before,after[:len(before)])
         for p in ('data/event_scripts.s','include/tilesets.h','src/data/tilesets/headers.h','src/data/tilesets/metatiles.h'):
