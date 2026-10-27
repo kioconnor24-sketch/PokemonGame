@@ -135,6 +135,16 @@ def compose(repo):
         existing["connections"] = hdr["connections"]
         files[path] = encode(existing)
         files[f"data/layouts/{name}/map.bin"] = struct.pack("<%dH" % len(cells), *cells)
+    # The historical Eterna fixture predates the accepted appended maps.
+    # Keep its source immutable and pin this generated expectation to the
+    # independently verified production prefix, not the temporary map list.
+    path = "test/averon_eterna_runtime.c"
+    native = files[path].decode()
+    expected = "EXPECT_EQ(MAP_NUM(maps[i]), 19+i);"
+    if native.count(expected) != 1:
+        raise ValueError("Eterna native fixture precondition changed")
+    count = len(json.loads(current_inputs(repo)[GROUPS])["gMapGroup_Sinnoh"])
+    files[path] = native.replace(expected, f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);").encode()
     # Adapt only the generated fixture, preserving its immutable source.
     path = "test/averon_oreburgh_candidate.c"
     native = files[path].decode()

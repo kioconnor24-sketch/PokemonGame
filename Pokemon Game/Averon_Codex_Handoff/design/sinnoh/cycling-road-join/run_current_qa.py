@@ -13,6 +13,7 @@ HERE = Path(__file__).resolve().parent
 SCRIPTS = HERE.parents[3] / "scripts/claude_play"
 sys.path.insert(0, str(SCRIPTS))
 import map_qa as qa
+import driver  # Load the same source tree's driver before the engine wrapper.
 
 MAPS = ("MAP_ETERNA_CITY", "MAP_ROUTE211_WEST", "MAP_ROUTE206_NORTH", "MAP_ROUTE206",
         "MAP_ROUTE206_SOUTH", "MAP_ROUTE207", "MAP_OREBURGH_CITY", "MAP_OREBURGH_GATE_1F",
@@ -79,6 +80,7 @@ def main():
                       host_probe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                       mapdata_sha256=hashlib.sha256((SCRIPTS / "mapdata.py").read_bytes()).hexdigest(),
                       map_qa_sha256=hashlib.sha256((SCRIPTS / "map_qa.py").read_bytes()).hexdigest(),
+                      driver_sha256=hashlib.sha256((SCRIPTS / "driver.py").read_bytes()).hexdigest(),
                       source_maps=MAPS, source_gate="Route207 muddy slope requires bike speed northward")
     (out / "scenario.json").write_text(json.dumps(provenance, indent=2) + "\n")
     return code

@@ -63,6 +63,19 @@ class CyclingCurrentRuntimeTest(unittest.TestCase):
         self.assertIn("EXPECT_EQ(city->warps[0].warpId, 2)", raw)
         self.assertIn("MAP_OREBURGH_GATE_B1F", raw)
         self.assertIn("EXPECT_EQ(route->count, 2)", raw)
+        count = len(json.loads(self.current[m.GROUPS])["gMapGroup_Sinnoh"])
+        self.assertIn(f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);",
+                      self.files["test/averon_eterna_runtime.c"].decode())
+        self.assertIn("19+i", (HERE.parent / "eterna-cycle/native-runtime.c").read_text())
+
+    def test_unknown_eterna_native_fixture_is_rejected(self):
+        original = Path.read_bytes
+        target = HERE.parent / "eterna-cycle/native-runtime.c"
+        def read(p):
+            raw = original(p)
+            return raw.replace(b"19+i", b"999+i") if p == target else raw
+        with mock.patch.object(Path, "read_bytes", read), self.assertRaises(ValueError):
+            m.compose(ROOT)
 
     def reject_change(self, path, transform):
         current = dict(self.current)
