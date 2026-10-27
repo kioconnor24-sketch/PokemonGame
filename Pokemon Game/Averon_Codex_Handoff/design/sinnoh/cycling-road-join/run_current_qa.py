@@ -29,7 +29,7 @@ def validate(engine, receipt):
     engine = Path(engine).resolve()
     if not (engine / ".map_qa_throwaway").is_file():
         raise ValueError("marked disposable source required")
-    if len(receipt["files"]) != 63:
+    if len(receipt["files"]) not in (61, 63):
         raise ValueError("exact W25 source receipt required")
     for path, expected in receipt["files"].items():
         p = Path(path)
@@ -38,6 +38,28 @@ def validate(engine, receipt):
             raise ValueError("source path escapes engine")
         if hashlib.sha256(target.read_bytes()).hexdigest() != expected:
             raise ValueError("source differs: " + path)
+    if len(receipt["files"]) == 61:
+        # Post-packet-C retains production City's scripts/border and overlays only
+        # its header/blocks. Accept this explicit contract, not any smaller receipt.
+        groups_path = "data/maps/map_groups.json"
+        city_path = "data/maps/OreburghCity/map.json"
+        required = {groups_path, city_path, "data/layouts/OreburghCity/map.bin"}
+        retained = {"data/maps/OreburghCity/scripts.inc", "data/layouts/OreburghCity/border.bin"}
+        if not required <= receipt["files"].keys() or retained & receipt["files"].keys():
+            raise ValueError("post-C production City preservation contract differs")
+        try:
+            groups = json.loads((engine / groups_path).read_text())["gMapGroup_Sinnoh"]
+            city = json.loads((engine / city_path).read_text())
+            suffix = ["EternaCity", "Route206_North", "Route206", "Route206_South", "Route211_West",
+                      "Route207", "OreburghMine_B1F", "OreburghMine_B2F"]
+            valid = (len(groups) == 49 and groups[30] == "OreburghCity"
+                     and groups.count("OreburghCity") == 1 and groups[41:] == suffix
+                     and city["region_map_section"] == "MAPSEC_OREBURGH_CITY"
+                     and len(city["warp_events"]) == 15)
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError("invalid post-C source metadata") from error
+        if not valid:
+            raise ValueError("post-C production City identity contract differs")
 
 
 class W25Runner(qa.Runner):
