@@ -13747,7 +13747,2028 @@
     "Route228 overall 3/4 FAIL is retained separately from the successful three-trial enter-and-slide observation."
   ],
   "native": {
-    "status": "RUNNING; no PASS claim",
-    "scope": "Averon-prefix native build/execution in progress separately"
+    "status": "322 distinct Averon identities PASS across split executions; original full attempt INTERRUPTED, not an uninterrupted full-suite pass",
+    "compiled_identity_inventory": {
+      "scope": "Compiled identity inventory only; no execution or acceptance claim",
+      "elf_sha256": "f3982213ab36c3a41f311d75a53f690e2f2d43a0ae8355231db2bf330f123e41",
+      "prefix": "Averon",
+      "count": 322,
+      "ambiguous_log_names": [],
+      "tests": [
+        {
+          "name": "Averon Mega Evolution still works",
+          "filename": "test/averon_battle_rules.c",
+          "line": 42
+        },
+        {
+          "name": "Averon orb holders switched in mid-battle do not undergo Primal Reversion",
+          "filename": "test/averon_battle_rules.c",
+          "line": 27
+        },
+        {
+          "name": "Averon Groudon and Kyogre holding their orbs do not undergo Primal Reversion",
+          "filename": "test/averon_battle_rules.c",
+          "line": 7
+        },
+        {
+          "name": "Averon every breedable species hatches from a real base species",
+          "filename": "test/averon_breeding.c",
+          "line": 20
+        },
+        {
+          "name": "Averon Rare Candy respects the cap and becomes usable after the badge",
+          "filename": "test/averon_candy.c",
+          "line": 8
+        },
+        {
+          "name": "Averon clinic union-room check without InitUnionRoom copies nothing",
+          "filename": "test/averon_clinic_union_room.c",
+          "line": 13
+        },
+        {
+          "name": "Averon connection contract Sinnoh RAM header selects only overlapping signed offset edges",
+          "filename": "test/averon_connection_contract.c",
+          "line": 68
+        },
+        {
+          "name": "Averon connection contract actual reciprocal boundary preserves party and region state",
+          "filename": "test/averon_connection_contract.c",
+          "line": 16
+        },
+        {
+          "name": "Averon corridor approved origins have names and survive boxed summary reads",
+          "filename": "test/averon_corridor_location.c",
+          "line": 16
+        },
+        {
+          "name": "Averon cry safety ducking calls lower music only when cries are enabled",
+          "filename": "test/averon_cry_safety.c",
+          "line": 214
+        },
+        {
+          "name": "Averon cry safety menu and field effects still start",
+          "filename": "test/averon_cry_safety.c",
+          "line": 184
+        },
+        {
+          "name": "Averon cry safety title town route battle victory heal music starts",
+          "filename": "test/averon_cry_safety.c",
+          "line": 165
+        },
+        {
+          "name": "Averon cry safety absent species completes without a previous player",
+          "filename": "test/averon_cry_safety.c",
+          "line": 153
+        },
+        {
+          "name": "Averon cry safety real playmoncry waitmoncry bytecode resumes",
+          "filename": "test/averon_cry_safety.c",
+          "line": 124
+        },
+        {
+          "name": "Averon cry safety normal and by-mode cleanup preserve music and effects",
+          "filename": "test/averon_cry_safety.c",
+          "line": 107
+        },
+        {
+          "name": "Averon cry safety silent unpaired duck never lowers music",
+          "filename": "test/averon_cry_safety.c",
+          "line": 88
+        },
+        {
+          "name": "Averon cry safety all modes and Mega stop without a seeded player",
+          "filename": "test/averon_cry_safety.c",
+          "line": 72
+        },
+        {
+          "name": "Averon cry safety script wait and replay restore music",
+          "filename": "test/averon_cry_safety.c",
+          "line": 55
+        },
+        {
+          "name": "Averon cry safety cold stop and completion before any cry",
+          "filename": "test/averon_cry_safety.c",
+          "line": 43
+        },
+        {
+          "name": "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+          "filename": "test/averon_egg_hatch_ot.c",
+          "line": 43
+        },
+        {
+          "name": "Averon Linking Cord evolves Karrablast and Shelmet without a trade partner",
+          "filename": "test/averon_evolution.c",
+          "line": 57
+        },
+        {
+          "name": "Averon starter evolution can be postponed with Everstone and resumes after removal",
+          "filename": "test/averon_evolution.c",
+          "line": 36
+        },
+        {
+          "name": "Averon starters reach their first evolution only after the first badge opens the cap",
+          "filename": "test/averon_evolution.c",
+          "line": 8
+        },
+        {
+          "name": "Averon every conditional evolution Averon can meet produces exactly its own form",
+          "filename": "test/averon_evolution_conditions.c",
+          "line": 275
+        },
+        {
+          "name": "Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 103
+        },
+        {
+          "name": "Averon extended location experiment cannot infer a version from checksum-valid legacy unused bits",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 83
+        },
+        {
+          "name": "Averon extended location experiment preserves candidate bits across all 24 permutations PC and OT rekey",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 57
+        },
+        {
+          "name": "Averon harvest fair reward survives a full pocket and can be reclaimed",
+          "filename": "test/averon_fair.c",
+          "line": 30
+        },
+        {
+          "name": "Averon harvest fair reward requires delivery and cannot be duplicated",
+          "filename": "test/averon_fair.c",
+          "line": 7
+        },
+        {
+          "name": "Averon developer Fly destination lands both player genders safely in Saltmere",
+          "filename": "test/averon_field_licenses.c",
+          "line": 568
+        },
+        {
+          "name": "Averon field lab Dive connections preserve coordinates party and licenses in both directions",
+          "filename": "test/averon_field_licenses.c",
+          "line": 539
+        },
+        {
+          "name": "Averon independent field licenses persist through actual flash save and load",
+          "filename": "test/averon_field_licenses.c",
+          "line": 517
+        },
+        {
+          "name": "Averon licensed field actions refuse empty fainted and egg-only parties",
+          "filename": "test/averon_field_licenses.c",
+          "line": 499
+        },
+        {
+          "name": "Averon field licenses gate all seven native script actions without learned HMs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 464
+        },
+        {
+          "name": "Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing",
+          "filename": "test/averon_field_licenses.c",
+          "line": 432
+        },
+        {
+          "name": "Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower",
+          "filename": "test/averon_field_licenses.c",
+          "line": 389
+        },
+        {
+          "name": "Averon Pokemon follower visibility recovers on land after water traversal modes",
+          "filename": "test/averon_field_licenses.c",
+          "line": 369
+        },
+        {
+          "name": "Averon native Dive preparation uses real surface and underwater tiles and refuses land",
+          "filename": "test/averon_field_licenses.c",
+          "line": 352
+        },
+        {
+          "name": "Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction",
+          "filename": "test/averon_field_licenses.c",
+          "line": 330
+        },
+        {
+          "name": "Averon licensed Field Kit refuses unusable terrain without trapping the party menu",
+          "filename": "test/averon_field_licenses.c",
+          "line": 295
+        },
+        {
+          "name": "Averon native obstacle preparation selects the facing object without learned HMs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 238
+        },
+        {
+          "name": "Averon traversal respects configured follower policy and Fly map-type rules",
+          "filename": "test/averon_field_licenses.c",
+          "line": 204
+        },
+        {
+          "name": "Averon Field Kit is unavailable on fainted partners and eggs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 187
+        },
+        {
+          "name": "Averon Field Kit fits alongside four learned actions and survives Back",
+          "filename": "test/averon_field_licenses.c",
+          "line": 163
+        },
+        {
+          "name": "Averon Fly map B returns to the same party and Field Kit can reopen",
+          "filename": "test/averon_field_licenses.c",
+          "line": 132
+        },
+        {
+          "name": "Averon locked Field Kit actions return safely without changing map or licenses",
+          "filename": "test/averon_field_licenses.c",
+          "line": 99
+        },
+        {
+          "name": "Averon Field Kit B returns to actions then party selection and exits cleanly",
+          "filename": "test/averon_field_licenses.c",
+          "line": 74
+        },
+        {
+          "name": "Averon Fly bounds rejects invalid sections without replacing prepared warp or progress",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 100
+        },
+        {
+          "name": "Averon Fly bounds preserves route and last-table-row map-warp fallback",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 82
+        },
+        {
+          "name": "Averon Fly bounds preserves League flag and position selection",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 63
+        },
+        {
+          "name": "Averon Fly bounds retains explicit island and Frontier destinations",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 52
+        },
+        {
+          "name": "Averon Fly bounds preserves both home genders and mapped legacy healing",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 38
+        },
+        {
+          "name": "Averon location Fly preserves all 154 explicit legacy destinations including Petalburg",
+          "filename": "test/averon_fly_safety.c",
+          "line": 50
+        },
+        {
+          "name": "Averon location Fly zero-filled gaps cannot replace a prepared warp with Petalburg",
+          "filename": "test/averon_fly_safety.c",
+          "line": 22
+        },
+        {
+          "name": "Averon follower is hidden while surfing or underwater",
+          "filename": "test/averon_followers.c",
+          "line": 213
+        },
+        {
+          "name": "Averon follower after a flash save and load is the saved lead",
+          "filename": "test/averon_followers.c",
+          "line": 189
+        },
+        {
+          "name": "Averon follower graphics carry the lead's shiny and female variants",
+          "filename": "test/averon_followers.c",
+          "line": 155
+        },
+        {
+          "name": "Averon follower is respawned with the right species after each warp",
+          "filename": "test/averon_followers.c",
+          "line": 140
+        },
+        {
+          "name": "Averon follower: a large one walks outdoors but not indoors; a small one does both",
+          "filename": "test/averon_followers.c",
+          "line": 111
+        },
+        {
+          "name": "Averon follower is removed for an empty party or while hidden by script",
+          "filename": "test/averon_followers.c",
+          "line": 94
+        },
+        {
+          "name": "Averon follower changes when the party order or health changes",
+          "filename": "test/averon_followers.c",
+          "line": 70
+        },
+        {
+          "name": "Averon follower is the first party Pokemon that is not fainted or an egg",
+          "filename": "test/averon_followers.c",
+          "line": 58
+        },
+        {
+          "name": "Averon grouped origin experiment loses distinct runtime detail across real PC flash and summary",
+          "filename": "test/averon_grouped_origin_experiment.c",
+          "line": 53
+        },
+        {
+          "name": "Averon grouped origin experiment preserves all legacy bytes without modifying encryption",
+          "filename": "test/averon_grouped_origin_experiment.c",
+          "line": 29
+        },
+        {
+          "name": "Averon full TM pocket preserves the badge and allows a reward retry",
+          "filename": "test/averon_gym_reward.c",
+          "line": 28
+        },
+        {
+          "name": "Averon Gym TM requires a badge and is granted only once",
+          "filename": "test/averon_gym_reward.c",
+          "line": 8
+        },
+        {
+          "name": "Averon Gym reward link flash preserves full-Bag retry and nonduplication with regional badges",
+          "filename": "test/averon_gym_reward_flash.c",
+          "line": 163
+        },
+        {
+          "name": "Averon Gym reward normal flash preserves full-Bag retry and nonduplication with regional badges",
+          "filename": "test/averon_gym_reward_flash.c",
+          "line": 158
+        },
+        {
+          "name": "Averon home clinic and rival healing restores HP status and PP",
+          "filename": "test/averon_healing.c",
+          "line": 8
+        },
+        {
+          "name": "Averon Verity flash reload preserves the new map position origin and regional return destination",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 100
+        },
+        {
+          "name": "Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 76
+        },
+        {
+          "name": "Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 64
+        },
+        {
+          "name": "Averon Lake Verity origin survives the real summary formatter unchanged",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 44
+        },
+        {
+          "name": "Averon Lake Verity is section 220 in Sinnoh with its own name and popup",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 28
+        },
+        {
+          "name": "Averon legend a player loss leaves the encounter available",
+          "filename": "test/averon_legend.c",
+          "line": 308
+        },
+        {
+          "name": "Averon legend a capture is recorded as caught",
+          "filename": "test/averon_legend.c",
+          "line": 287
+        },
+        {
+          "name": "Averon legend a knockout records a defeat, not a capture",
+          "filename": "test/averon_legend.c",
+          "line": 264
+        },
+        {
+          "name": "Averon legend a wild Pokemon escaping by Emergency Exit leaves it available",
+          "filename": "test/averon_legend.c",
+          "line": 244
+        },
+        {
+          "name": "Averon legend a wild legendary's Whirlwind leaves it available",
+          "filename": "test/averon_legend.c",
+          "line": 223
+        },
+        {
+          "name": "Averon legend caught and defeated states survive a flash save and load",
+          "filename": "test/averon_legend.c",
+          "line": 185
+        },
+        {
+          "name": "Averon legend check and retry macros report and restore availability",
+          "filename": "test/averon_legend.c",
+          "line": 166
+        },
+        {
+          "name": "Averon legend a stale capture from an earlier battle is never recorded",
+          "filename": "test/averon_legend.c",
+          "line": 151
+        },
+        {
+          "name": "Averon legend battle macro clears the old outcome, fights, then records",
+          "filename": "test/averon_legend.c",
+          "line": 138
+        },
+        {
+          "name": "Averon legend the upstream script pattern marks a teleported legendary caught",
+          "filename": "test/averon_legend.c",
+          "line": 107
+        },
+        {
+          "name": "Averon legend defeat is retryable only by the caller's policy or an explicit retry",
+          "filename": "test/averon_legend.c",
+          "line": 91
+        },
+        {
+          "name": "Averon legend capture is final and replaces an earlier defeat",
+          "filename": "test/averon_legend.c",
+          "line": 74
+        },
+        {
+          "name": "Averon legend outcomes without a capture or knockout record nothing",
+          "filename": "test/averon_legend.c",
+          "line": 58
+        },
+        {
+          "name": "Averon legend only a capture counts as caught and only a knockout as defeated",
+          "filename": "test/averon_legend.c",
+          "line": 45
+        },
+        {
+          "name": "Averon legend party: a captured legendary, its record and the party survive flash together",
+          "filename": "test/averon_legend_party.c",
+          "line": 17
+        },
+        {
+          "name": "Averon location flash reload preserves all 256 PC origins party TV specials and region state",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 258
+        },
+        {
+          "name": "Averon location battle controller preserves all legacy bytes but not a new 13-bit identity",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 194
+        },
+        {
+          "name": "Averon location 13-bit experiment exposes legacy API truncation and special aliases",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 151
+        },
+        {
+          "name": "Averon location every 8-bit origin survives encryption PC withdrawal and rekeying",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 90
+        },
+        {
+          "name": "Averon location legacy names and region identities remain unchanged",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 40
+        },
+        {
+          "name": "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+          "filename": "test/averon_m1_codex_pc_slot_recovery.c",
+          "line": 159
+        },
+        {
+          "name": "Averon map registry IDs round trip through the actual signed warp fields",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 81
+        },
+        {
+          "name": "Averon map registry resolves every linked numeric ID within its original group",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 63
+        },
+        {
+          "name": "Averon map registry preserves group slots and disabled-region null entries",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 50
+        },
+        {
+          "name": "Averon northern flash reload preserves party PC legacy special origins and regional position",
+          "filename": "test/averon_northern_location.c",
+          "line": 102
+        },
+        {
+          "name": "Averon northern summary names caught hatched and traded origins without changing encrypted data",
+          "filename": "test/averon_northern_location.c",
+          "line": 72
+        },
+        {
+          "name": "Averon northern map headers share only the three approved origin names",
+          "filename": "test/averon_northern_location.c",
+          "line": 53
+        },
+        {
+          "name": "Averon developer gift rejects missing prerequisite and full party without PC delivery",
+          "filename": "test/averon_optional_events.c",
+          "line": 175
+        },
+        {
+          "name": "Averon tree observation needs the artist and cannot reset recorded progress",
+          "filename": "test/averon_optional_events.c",
+          "line": 159
+        },
+        {
+          "name": "Averon optional event stages survive native flash and transient field reset",
+          "filename": "test/averon_optional_events.c",
+          "line": 105
+        },
+        {
+          "name": "Averon optional event full pocket keeps the real script reward retryable",
+          "filename": "test/averon_optional_events.c",
+          "line": 63
+        },
+        {
+          "name": "Averon optional event rewards require both prerequisites and cannot repeat",
+          "filename": "test/averon_optional_events.c",
+          "line": 32
+        },
+        {
+          "name": "Averon foreign OT delivery preserves encrypted data when the party has space",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 227
+        },
+        {
+          "name": "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 222
+        },
+        {
+          "name": "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 215
+        },
+        {
+          "name": "Averon PC items remain plaintext and unchanged when the Bag encryption key rotates",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 127
+        },
+        {
+          "name": "Averon PC direct removal compacts an exhausted first middle or last slot in order",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 91
+        },
+        {
+          "name": "Averon PC items preserve adjacent entries through partial removal and exhausted-slot compaction",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 66
+        },
+        {
+          "name": "Averon PC items reject a partly fitting deposit atomically and allow retry after space is freed",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 39
+        },
+        {
+          "name": "Averon PC items split a large deposit across bounded stacks without changing the Bag",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 23
+        },
+        {
+          "name": "Averon with every level cap lifted a Pokemon grows to level 100 and no further",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 837
+        },
+        {
+          "name": "Averon a Mega Evolved Pokemon is back in its base form in the party after battle",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 811
+        },
+        {
+          "name": "Averon every form reached in battle has an end-of-battle revert",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 781
+        },
+        {
+          "name": "Averon every enabled species survives the PC boxes and a flash save and load",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 684
+        },
+        {
+          "name": "Averon every conditional evolution satisfiable from the Pokemon's own data triggers",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 586
+        },
+        {
+          "name": "Averon lists the evolution targets that only another region or an upstream map can reach",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 481
+        },
+        {
+          "name": "Averon every growth rate reaches level 100 and stops there",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 402
+        },
+        {
+          "name": "Averon every Mega Evolution by held stone uses a real Mega Stone",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 373
+        },
+        {
+          "name": "Averon every unconditional level and item evolution actually triggers",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 313
+        },
+        {
+          "name": "Averon every enabled species has usable follower graphics and paired palettes",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 271
+        },
+        {
+          "name": "Averon every species fits in a follower graphics ID",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 261
+        },
+        {
+          "name": "Averon every enabled species has valid types, abilities and nonzero base stats",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 225
+        },
+        {
+          "name": "Averon every enabled species learns only real, non-gimmick moves at valid levels",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 181
+        },
+        {
+          "name": "Averon a complete national dex is counted, stays inside its flags and survives a flash save",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 145
+        },
+        {
+          "name": "Averon every enabled species has a national dex number inside the save's dex flags",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 108
+        },
+        {
+          "name": "Averon every allowed form change of an enabled species leads to an enabled species",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 75
+        },
+        {
+          "name": "Averon every evolution of an enabled species leads to an enabled species",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 34
+        },
+        {
+          "name": "Averon region map access PokeNav still schedules the legacy map feature",
+          "filename": "test/averon_region_map_access.c",
+          "line": 69
+        },
+        {
+          "name": "Averon region map access PokeNav refuses before changing or freeing the main menu",
+          "filename": "test/averon_region_map_access.c",
+          "line": 61
+        },
+        {
+          "name": "Averon region map access wall map returns without replacing VBlank or allocating",
+          "filename": "test/averon_region_map_access.c",
+          "line": 48
+        },
+        {
+          "name": "Averon region map access preserves legacy Fly map type restrictions",
+          "filename": "test/averon_region_map_access.c",
+          "line": 30
+        },
+        {
+          "name": "Averon region map access retains every legacy section and rejects explicit Sinnoh",
+          "filename": "test/averon_region_map_access.c",
+          "line": 22
+        },
+        {
+          "name": "Averon region map access refuses Fly from Sinnoh without an approved grid",
+          "filename": "test/averon_region_map_access.c",
+          "line": 14
+        },
+        {
+          "name": "Averon region progression: the badge rule decides whiteout money in Sinnoh",
+          "filename": "test/averon_region_progression.c",
+          "line": 422
+        },
+        {
+          "name": "Averon region progression: the badge rule decides the badge-unlocked field move",
+          "filename": "test/averon_region_progression.c",
+          "line": 404
+        },
+        {
+          "name": "Averon region progression: the badge rule decides which badges count",
+          "filename": "test/averon_region_progression.c",
+          "line": 371
+        },
+        {
+          "name": "Averon region progression: Rare Candy stops at the active region's cap",
+          "filename": "test/averon_region_progression.c",
+          "line": 335
+        },
+        {
+          "name": "Averon region progression: cap and obedience follow the player through travel, flash and whiteout",
+          "filename": "test/averon_region_progression.c",
+          "line": 273
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile's obedience level is the one the battle uses",
+          "filename": "test/averon_region_progression.c",
+          "line": 203
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile's cap limits EXP in a real battle",
+          "filename": "test/averon_region_progression.c",
+          "line": 172
+        },
+        {
+          "name": "Averon region progression: the active region and Sinnoh badges survive a flash save",
+          "filename": "test/averon_region_progression.c",
+          "line": 147
+        },
+        {
+          "name": "Averon region progression: out-of-range profiles are refused and the previous one stays",
+          "filename": "test/averon_region_progression.c",
+          "line": 115
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile reads only the Sinnoh badge bank",
+          "filename": "test/averon_region_progression.c",
+          "line": 88
+        },
+        {
+          "name": "Averon region progression: with no regional profile both regions keep today's level caps",
+          "filename": "test/averon_region_progression.c",
+          "line": 66
+        },
+        {
+          "name": "Averon region adapters keep both badge banks independent and fail closed",
+          "filename": "test/averon_region_save.c",
+          "line": 720
+        },
+        {
+          "name": "Averon region adapters reject disabled map groups without changing the return warp",
+          "filename": "test/averon_region_save.c",
+          "line": 694
+        },
+        {
+          "name": "Averon region save power loss at any sector write keeps the last whole slot",
+          "filename": "test/averon_region_save.c",
+          "line": 641
+        },
+        {
+          "name": "Averon region save refuses a newer format: loads nothing and never overwrites it",
+          "filename": "test/averon_region_save.c",
+          "line": 597
+        },
+        {
+          "name": "Averon region save rolls back across save counter wrap",
+          "filename": "test/averon_region_save.c",
+          "line": 572
+        },
+        {
+          "name": "Averon region save reports both slots corrupt instead of mixing them",
+          "filename": "test/averon_region_save.c",
+          "line": 553
+        },
+        {
+          "name": "Averon region save rejects a slot whose sectors come from two different saves",
+          "filename": "test/averon_region_save.c",
+          "line": 510
+        },
+        {
+          "name": "Averon region save rejects a record copied from the other slot",
+          "filename": "test/averon_region_save.c",
+          "line": 487
+        },
+        {
+          "name": "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+          "filename": "test/averon_region_save.c",
+          "line": 433
+        },
+        {
+          "name": "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+          "filename": "test/averon_region_save.c",
+          "line": 378
+        },
+        {
+          "name": "Averon region save rejects every single-bit flip in the record and loads the older slot",
+          "filename": "test/averon_region_save.c",
+          "line": 344
+        },
+        {
+          "name": "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+          "filename": "test/averon_region_save.c",
+          "line": 305
+        },
+        {
+          "name": "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+          "filename": "test/averon_region_save.c",
+          "line": 283
+        },
+        {
+          "name": "Averon region save round-trips both regions through flash without writing on load",
+          "filename": "test/averon_region_save.c",
+          "line": 260
+        },
+        {
+          "name": "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+          "filename": "test/averon_region_save.c",
+          "line": 249
+        },
+        {
+          "name": "Averon region save paths: power loss during a link save never mixes two saves",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 196
+        },
+        {
+          "name": "Averon region save paths: a link save rewrites the newest slot in place and reloads it",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 174
+        },
+        {
+          "name": "Averon region save paths: overwriting a different file seals and reloads the region state",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 163
+        },
+        {
+          "name": "Averon region save paths: a Hall of Fame save seals and reloads the region state",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 152
+        },
+        {
+          "name": "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 470
+        },
+        {
+          "name": "Averon region save refusal: the save failed screen never wipes the refused save",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 424
+        },
+        {
+          "name": "Averon region save refusal: no save type or special sector write reaches flash",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 391
+        },
+        {
+          "name": "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 359
+        },
+        {
+          "name": "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 307
+        },
+        {
+          "name": "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 210
+        },
+        {
+          "name": "Averon region travel runs from an overworld script through the registered special",
+          "filename": "test/averon_region_travel.c",
+          "line": 338
+        },
+        {
+          "name": "Averon region travel power loss while saving keeps region and location together",
+          "filename": "test/averon_region_travel.c",
+          "line": 297
+        },
+        {
+          "name": "Averon region travel survives a save and load through flash",
+          "filename": "test/averon_region_travel.c",
+          "line": 272
+        },
+        {
+          "name": "Averon region travel special validates script values before narrowing",
+          "filename": "test/averon_region_travel.c",
+          "line": 214
+        },
+        {
+          "name": "Averon region travel rejects invalid requests and changes nothing",
+          "filename": "test/averon_region_travel.c",
+          "line": 178
+        },
+        {
+          "name": "Averon region travel whiteout uses the healer of the region the player is in",
+          "filename": "test/averon_region_travel.c",
+          "line": 144
+        },
+        {
+          "name": "Averon region travel stores the departure and arms the target region's warps",
+          "filename": "test/averon_region_travel.c",
+          "line": 119
+        },
+        {
+          "name": "Averon whiteout selects the local home or Alderfield clinic healer",
+          "filename": "test/averon_respawn.c",
+          "line": 8
+        },
+        {
+          "name": "Averon respawn contract unregistered arrival stays local without selecting a nurse",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 71
+        },
+        {
+          "name": "Averon respawn contract healing alone preserves the previous respawn anchor",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 53
+        },
+        {
+          "name": "Averon respawn contract valid script anchors preserve the regional record",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 30
+        },
+        {
+          "name": "Averon respawn contract rejects invalid script healer IDs before narrowing",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 14
+        },
+        {
+          "name": "Averon Route 201 origin survives the real summary formatter unchanged",
+          "filename": "test/averon_route201_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Route 201 is section 217 in Sinnoh with its own name and popup",
+          "filename": "test/averon_route201_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon Route 202 origin survives the real summary formatter unchanged",
+          "filename": "test/averon_route202_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Route 202 is section 219 in Sinnoh with its own name and popup",
+          "filename": "test/averon_route202_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon resource real party and Field Kit menus restore heap across repeated regional visits",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 243
+        },
+        {
+          "name": "Averon resource reserved sprite palette banks survive exhaustion and free tag reuse",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 178
+        },
+        {
+          "name": "Averon resource sprite slot exhaustion preserves live sprites and permits exact slot reuse",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 151
+        },
+        {
+          "name": "Averon resource linked field tilesets decompress within paired buffers and release heap",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 95
+        },
+        {
+          "name": "Averon resource heap fragmented capacity refuses oversized requests and coalesces after free",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem popup theme stays in bounds with fixed NONE and future codes",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 110
+        },
+        {
+          "name": "Averon Sandgem summary keeps NONE unassigned and special met values unnamed",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 77
+        },
+        {
+          "name": "Averon Sandgem real summary formatter names caught hatched and traded origins",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 32
+        },
+        {
+          "name": "Averon Sandgem healer survives leaving Sinnoh, a flash save and the return trip",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem setrespawn whites out in front of the Sandgem nurse",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 31
+        },
+        {
+          "name": "Averon Sandgem heal anchor is the tile below the Center door",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 20
+        },
+        {
+          "name": "Averon recovers the previous progression when the newest flash slot is incomplete",
+          "filename": "test/averon_save.c",
+          "line": 159
+        },
+        {
+          "name": "Averon unclaimed rewards survive saving with a full pocket and remain retryable",
+          "filename": "test/averon_save.c",
+          "line": 101
+        },
+        {
+          "name": "Averon opening and Gym progression survive two native flash save and load cycles",
+          "filename": "test/averon_save.c",
+          "line": 12
+        },
+        {
+          "name": "Averon save bounds handle erased and invalid-ID slots without a backup",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 202
+        },
+        {
+          "name": "Averon save bounds ID65535 unsigned primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 193
+        },
+        {
+          "name": "Averon save bounds ID65535 unsigned unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 186
+        },
+        {
+          "name": "Averon save bounds ID14 unsigned primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 179
+        },
+        {
+          "name": "Averon save bounds ID14 unsigned unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 172
+        },
+        {
+          "name": "Averon save bounds ID65535 signed primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 165
+        },
+        {
+          "name": "Averon save bounds ID65535 signed unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 158
+        },
+        {
+          "name": "Averon save bounds ID14 signed primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 151
+        },
+        {
+          "name": "Averon save bounds ID14 signed unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 144
+        },
+        {
+          "name": "Averon save bounds healthy slots retain old format and alternate normally",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 74
+        },
+        {
+          "name": "Averon RAM-only special flag is not restored from a save but the badge is",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 286
+        },
+        {
+          "name": "Averon a low-level save load alone leaves the RAM-only flag as it was",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 268
+        },
+        {
+          "name": "Averon no-whiteout flag lives in RAM outside every saved block",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 238
+        },
+        {
+          "name": "Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 203
+        },
+        {
+          "name": "Averon scripted battle never reports a stale defeat from an earlier battle",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 192
+        },
+        {
+          "name": "Averon scripted battle macro wraps one trainer battle between Begin and Finish",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 175
+        },
+        {
+          "name": "Averon stale no-whiteout state is cleared before ordinary battles",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 156
+        },
+        {
+          "name": "Averon scripted battles cannot be forfeited but ordinary trainer battles can",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 144
+        },
+        {
+          "name": "Averon ambush loss respawns at the last heal location and keeps the badge",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 116
+        },
+        {
+          "name": "Averon story loss recovers in place with the party healed and money kept",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 105
+        },
+        {
+          "name": "Averon scripted battle finish does not heal between chain battles",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 87
+        },
+        {
+          "name": "Averon scripted battle finish clears no-whiteout on a win or a loss",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 73
+        },
+        {
+          "name": "Averon scripted battle outcomes count losses, draws and forfeits as defeats",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 63
+        },
+        {
+          "name": "Averon scripted battle tests run with a real no-whiteout flag",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 53
+        },
+        {
+          "name": "Averon scripted battle ended by the player's Explosion still counts as a safe defeat",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 153
+        },
+        {
+          "name": "Averon an ordinary loss after a scripted battle whites out and pays money again",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 121
+        },
+        {
+          "name": "Averon chain battle damage and status carry back for every Pokemon the player switched in",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 97
+        },
+        {
+          "name": "Averon chain battle damage and status carry back into the party",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 78
+        },
+        {
+          "name": "Averon scripted battle natives around a real battle report the result and clear the flag",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 43
+        },
+        {
+          "name": "Averon scripted loss skips the whiteout and keeps the player's money",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 14
+        },
+        {
+          "name": "Averon starter awards respect party capacity and cannot be duplicated",
+          "filename": "test/averon_scripts.c",
+          "line": 71
+        },
+        {
+          "name": "Averon reaccepting errands preserves active and completed progress",
+          "filename": "test/averon_scripts.c",
+          "line": 43
+        },
+        {
+          "name": "Averon first accepted errand survives all six household orders",
+          "filename": "test/averon_scripts.c",
+          "line": 18
+        },
+        {
+          "name": "Averon Sinnoh resume refuses unallocated sections NONE and special met aliases",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 325
+        },
+        {
+          "name": "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 266
+        },
+        {
+          "name": "Averon Sinnoh resume reloads real endpoints and refuses all three map interfaces",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 218
+        },
+        {
+          "name": "Averon Sinnoh resume validates each linked layout boundary and indexed warp limit",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 186
+        },
+        {
+          "name": "Averon a TM move is taught only to a species whose teachable learnset has it",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 63
+        },
+        {
+          "name": "Averon every TM and HM move can be learned by at least one enabled species",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 33
+        },
+        {
+          "name": "Averon every TM and HM item is in the TM pocket and teaches its own real move",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 15
+        },
+        {
+          "name": "Averon trade save refusal: a supported full-save task still initializes",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 194
+        },
+        {
+          "name": "Averon trade save refusal: wireless callback enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 189
+        },
+        {
+          "name": "Averon trade save refusal: wired callback enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 184
+        },
+        {
+          "name": "Averon trade save refusal: full-save task enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 179
+        },
+        {
+          "name": "Averon transport saved return validation remains usable after an actual flash reload",
+          "filename": "test/averon_transport.c",
+          "line": 274
+        },
+        {
+          "name": "Averon transport refuses a physically wrong departing healer before caching its return",
+          "filename": "test/averon_transport.c",
+          "line": 254
+        },
+        {
+          "name": "Averon transport refuses an indexed departure even with matching inconsistent player coordinates",
+          "filename": "test/averon_transport.c",
+          "line": 240
+        },
+        {
+          "name": "Averon transport refuses a wrong region cached healer without changing the transaction",
+          "filename": "test/averon_transport.c",
+          "line": 212
+        },
+        {
+          "name": "Averon transport accepts an indexed first arrival without substituting coordinates",
+          "filename": "test/averon_transport.c",
+          "line": 197
+        },
+        {
+          "name": "Averon transport saved return selects the recorded point instead of the configured first arrival",
+          "filename": "test/averon_transport.c",
+          "line": 178
+        },
+        {
+          "name": "Averon transport refuses missing or physically wrong region saved returns before mutation",
+          "filename": "test/averon_transport.c",
+          "line": 158
+        },
+        {
+          "name": "Averon transport rejects invalid activation descriptors and leaves all travel state unchanged",
+          "filename": "test/averon_transport.c",
+          "line": 128
+        },
+        {
+          "name": "Averon transport first arrival and saved return use the existing regional transaction",
+          "filename": "test/averon_transport.c",
+          "line": 107
+        },
+        {
+          "name": "Averon transport points validate physical region identity and indexed arrivals",
+          "filename": "test/averon_transport.c",
+          "line": 79
+        },
+        {
+          "name": "Averon transport rejects invalid section metadata before Hoenn display fallback",
+          "filename": "test/averon_transport_metadata.c",
+          "line": 34
+        },
+        {
+          "name": "Averon travel boundaries flash Continue preserves Sandgem origins PC and both badge banks",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 96
+        },
+        {
+          "name": "Averon travel boundaries indexed arrivals resolve the real map warp for Teleport and respawn",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 73
+        },
+        {
+          "name": "Averon travel boundaries refusal preserves an already armed destination",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 39
+        },
+        {
+          "name": "Averon Twinleaf origin survives the real summary formatter unchanged",
+          "filename": "test/averon_twinleaf_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Twinleaf Town is section 218 in Sinnoh with its own name and popup",
+          "filename": "test/averon_twinleaf_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon native whiteout heals and restores the clinic follower through flash with regional badges",
+          "filename": "test/averon_whiteout_follower_flash.c",
+          "line": 215
+        },
+        {
+          "name": "Averon native whiteout heals and restores the home follower through flash with regional badges",
+          "filename": "test/averon_whiteout_follower_flash.c",
+          "line": 210
+        },
+        {
+          "name": "Averon wild encounters: an existing map without a table reports no encounter header",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 118
+        },
+        {
+          "name": "Averon wild encounters: Repel blocks Pokemon below the lead's level on every Averon table",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 92
+        },
+        {
+          "name": "Averon wild encounters: each existing Averon table generates only its own species and levels",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 49
+        },
+        {
+          "name": "Averon a large EXP reward stops exactly at the cap without banking excess",
+          "filename": "test/battle/averon_exp.c",
+          "line": 55
+        },
+        {
+          "name": "Averon six-member party respects held EXP Share and the first cap",
+          "filename": "test/battle/averon_exp.c",
+          "line": 5
+        },
+        {
+          "name": "Averon EXP options: the Gen 6+ unevolved bonus applies only after the evolution level",
+          "filename": "test/battle/averon_exp_gen5_options.c",
+          "line": 71
+        },
+        {
+          "name": "Averon EXP options: Gen 5 trainer bonus is 1.5x and reaches the EXP Share holder",
+          "filename": "test/battle/averon_exp_gen5_options.c",
+          "line": 39
+        },
+        {
+          "name": "Averon EXP Share: both Pokemon on the field in a double battle share the EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 225
+        },
+        {
+          "name": "Averon EXP Share: a holder at level 100 or above the cap gains nothing",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 202
+        },
+        {
+          "name": "Averon EXP Share: EXP is scaled by the level difference",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 175
+        },
+        {
+          "name": "Averon EXP Share: a trainer's Pokemon gives the same EXP as a wild one",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 154
+        },
+        {
+          "name": "Averon EXP Share: a participant that fainted gets no EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 131
+        },
+        {
+          "name": "Averon EXP Share: Pokemon switched in against the opponent share its EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 93
+        },
+        {
+          "name": "Averon EXP Share: only participants and holders gain, split half and half",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 44
+        },
+        {
+          "name": "Averon EXP Share lifecycle: EXP and held items survive two flash save and load cycles",
+          "filename": "test/battle/averon_exp_share_lifecycle.c",
+          "line": 91
+        },
+        {
+          "name": "Averon EXP Share lifecycle: a switched-in holder participates in both Gen 5 pools",
+          "filename": "test/battle/averon_exp_share_lifecycle.c",
+          "line": 42
+        },
+        {
+          "name": "Averon held items: Bestow to an uncaptured trainer Pokemon restores the player's non-Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 448
+        },
+        {
+          "name": "Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 402
+        },
+        {
+          "name": "Averon held items: a newly found item cannot replace or duplicate the borrowed original",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 376
+        },
+        {
+          "name": "Averon held items: capture cannot duplicate a player's same-ID donated item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 347
+        },
+        {
+          "name": "Averon held items: capture returns both original items after Trick",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 323
+        },
+        {
+          "name": "Averon held items: Harvest remembers the donor of a consumed Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 301
+        },
+        {
+          "name": "Averon held items: Recycle remembers the donor of a consumed Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 277
+        },
+        {
+          "name": "Averon held items: wild Magician loot is kept when a teammate started with the same item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 257
+        },
+        {
+          "name": "Averon held items: allied Trick preserves a Berry and restores a non-Berry in either slot order",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 233
+        },
+        {
+          "name": "Averon held items: returning a donated Berry never overwrites a different held Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 205
+        },
+        {
+          "name": "Averon held items: Bestow after eating an original Berry does not duplicate its gift",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 181
+        },
+        {
+          "name": "Averon held items: Symbiosis after eating an original Berry does not duplicate its gift",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 161
+        },
+        {
+          "name": "Averon held items: an item taken from a wild Pokemon with Magician is kept",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 143
+        },
+        {
+          "name": "Averon held items: a Berry given to a partner with Bestow goes back to the giver",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 123
+        },
+        {
+          "name": "Averon held items: Bestow to a partner does not duplicate the item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 102
+        },
+        {
+          "name": "Averon held items: an item the player steals from a trainer is not kept",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 82
+        },
+        {
+          "name": "Averon held items: Trick returns each side's own item after the battle",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 63
+        },
+        {
+          "name": "Averon held items: a Berry eaten in battle stays eaten",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 46
+        },
+        {
+          "name": "Averon held items: a non-Berry item lost to a trainer is back after the battle",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 16
+        },
+        {
+          "name": "Averon Mega: Rayquaza Mega Evolves through Dragon Ascent without a stone",
+          "filename": "test/battle/averon_mega.c",
+          "line": 62
+        },
+        {
+          "name": "Averon Mega: a Mega Evolved Pokemon stays Mega after switching out and back",
+          "filename": "test/battle/averon_mega.c",
+          "line": 45
+        },
+        {
+          "name": "Averon Mega: only one Pokemon per trainer can Mega Evolve in a battle",
+          "filename": "test/battle/averon_mega.c",
+          "line": 23
+        },
+        {
+          "name": "Averon Mega: a Mega Stone for another species does nothing",
+          "filename": "test/battle/averon_mega.c",
+          "line": 9
+        },
+        {
+          "name": "Averon Mega endings: no second Mega Evolution after the first Mega Pokemon faints",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 82
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when the player loses the battle",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 66
+        },
+        {
+          "name": "Averon Mega endings: a Mega Evolved Pokemon that faints is in base form after a win",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 46
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 30
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when the player Teleports away",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 15
+        },
+        {
+          "name": "Averon regional EXP Share keeps a capped holder's pool separate in a six-member party",
+          "filename": "test/battle/averon_region_exp_share.c",
+          "line": 36
+        },
+        {
+          "name": "Averon uses Set mode even when an old save requests Shift",
+          "filename": "test/battle/averon_rules.c",
+          "line": 65
+        },
+        {
+          "name": "Averon rejects all excluded gimmicks for both battlers",
+          "filename": "test/battle/averon_rules.c",
+          "line": 46
+        },
+        {
+          "name": "Averon Dark physical and Ghost special moves use separate attack stats",
+          "filename": "test/battle/averon_rules.c",
+          "line": 27
+        },
+        {
+          "name": "Averon permits a legal held-stone Mega Evolution",
+          "filename": "test/battle/averon_rules.c",
+          "line": 7
+        },
+        {
+          "name": "Averon coast trainer reuses the unused slot without expanding save flags",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 73
+        },
+        {
+          "name": "Averon Elio generates the approved team with Work Up and a healing berry",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 49
+        },
+        {
+          "name": "Averon Gym TM01 reward resolves to Work Up",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 41
+        },
+        {
+          "name": "Averon Gym preview generates two normal Pokemon for a double battle",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 23
+        },
+        {
+          "name": "Averon whiteout money: losing to a wild Pokemon also drops badge-based money",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 63
+        },
+        {
+          "name": "Averon whiteout money: a loss never takes more money than the player has",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 47
+        },
+        {
+          "name": "Averon whiteout money: a loss drops badge rate times the highest party level",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 23
+        }
+      ]
+    },
+    "completed_identities": [
+      "Averon Dark physical and Ghost special moves use separate attack stats",
+      "Averon EXP Share lifecycle: EXP and held items survive two flash save and load cycles",
+      "Averon EXP Share lifecycle: a switched-in holder participates in both Gen 5 pools",
+      "Averon EXP Share: EXP is scaled by the level difference",
+      "Averon EXP Share: Pokemon switched in against the opponent share its EXP",
+      "Averon EXP Share: a holder at level 100 or above the cap gains nothing",
+      "Averon EXP Share: a participant that fainted gets no EXP",
+      "Averon EXP Share: a trainer's Pokemon gives the same EXP as a wild one",
+      "Averon EXP Share: both Pokemon on the field in a double battle share the EXP",
+      "Averon EXP Share: only participants and holders gain, split half and half",
+      "Averon EXP options: Gen 5 trainer bonus is 1.5x and reaches the EXP Share holder",
+      "Averon EXP options: the Gen 6+ unevolved bonus applies only after the evolution level",
+      "Averon Elio generates the approved team with Work Up and a healing berry",
+      "Averon Field Kit B returns to actions then party selection and exits cleanly",
+      "Averon Field Kit fits alongside four learned actions and survives Back",
+      "Averon Field Kit is unavailable on fainted partners and eggs",
+      "Averon Fly bounds preserves League flag and position selection",
+      "Averon Fly bounds preserves both home genders and mapped legacy healing",
+      "Averon Fly bounds preserves route and last-table-row map-warp fallback",
+      "Averon Fly bounds rejects invalid sections without replacing prepared warp or progress",
+      "Averon Fly bounds retains explicit island and Frontier destinations",
+      "Averon Fly map B returns to the same party and Field Kit can reopen",
+      "Averon Groudon and Kyogre holding their orbs do not undergo Primal Reversion",
+      "Averon Gym TM requires a badge and is granted only once",
+      "Averon Gym TM01 reward resolves to Work Up",
+      "Averon Gym preview generates two normal Pokemon for a double battle",
+      "Averon Gym reward link flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon Gym reward normal flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon Lake Verity is section 220 in Sinnoh with its own name and popup",
+      "Averon Lake Verity origin survives the real summary formatter unchanged",
+      "Averon Linking Cord evolves Karrablast and Shelmet without a trade partner",
+      "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+      "Averon Mega Evolution still works",
+      "Averon Mega endings: a Mega Evolved Pokemon that faints is in base form after a win",
+      "Averon Mega endings: no second Mega Evolution after the first Mega Pokemon faints",
+      "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+      "Averon Mega endings: the Pokemon reverts when the player Teleports away",
+      "Averon Mega endings: the Pokemon reverts when the player loses the battle",
+      "Averon Mega: Rayquaza Mega Evolves through Dragon Ascent without a stone",
+      "Averon Mega: a Mega Evolved Pokemon stays Mega after switching out and back",
+      "Averon Mega: a Mega Stone for another species does nothing",
+      "Averon Mega: only one Pokemon per trainer can Mega Evolve in a battle",
+      "Averon PC direct removal compacts an exhausted first middle or last slot in order",
+      "Averon PC items preserve adjacent entries through partial removal and exhausted-slot compaction",
+      "Averon PC items reject a partly fitting deposit atomically and allow retry after space is freed",
+      "Averon PC items remain plaintext and unchanged when the Bag encryption key rotates",
+      "Averon PC items split a large deposit across bounded stacks without changing the Bag",
+      "Averon Pokemon follower visibility recovers on land after water traversal modes",
+      "Averon RAM-only special flag is not restored from a save but the badge is",
+      "Averon Rare Candy respects the cap and becomes usable after the badge",
+      "Averon Route 201 is section 217 in Sinnoh with its own name and popup",
+      "Averon Route 201 origin survives the real summary formatter unchanged",
+      "Averon Route 202 is section 219 in Sinnoh with its own name and popup",
+      "Averon Route 202 origin survives the real summary formatter unchanged",
+      "Averon Sandgem heal anchor is the tile below the Center door",
+      "Averon Sandgem healer survives leaving Sinnoh, a flash save and the return trip",
+      "Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names",
+      "Averon Sandgem popup theme stays in bounds with fixed NONE and future codes",
+      "Averon Sandgem real summary formatter names caught hatched and traded origins",
+      "Averon Sandgem setrespawn whites out in front of the Sandgem nurse",
+      "Averon Sandgem summary keeps NONE unassigned and special met values unnamed",
+      "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+      "Averon Sinnoh resume refuses unallocated sections NONE and special met aliases",
+      "Averon Sinnoh resume reloads real endpoints and refuses all three map interfaces",
+      "Averon Sinnoh resume validates each linked layout boundary and indexed warp limit",
+      "Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction",
+      "Averon Twinleaf Town is section 218 in Sinnoh with its own name and popup",
+      "Averon Twinleaf origin survives the real summary formatter unchanged",
+      "Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group",
+      "Averon Verity flash reload preserves the new map position origin and regional return destination",
+      "Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically",
+      "Averon a Mega Evolved Pokemon is back in its base form in the party after battle",
+      "Averon a TM move is taught only to a species whose teachable learnset has it",
+      "Averon a complete national dex is counted, stays inside its flags and survives a flash save",
+      "Averon a large EXP reward stops exactly at the cap without banking excess",
+      "Averon a low-level save load alone leaves the RAM-only flag as it was",
+      "Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing",
+      "Averon ambush loss respawns at the last heal location and keeps the badge",
+      "Averon an ordinary loss after a scripted battle whites out and pays money again",
+      "Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower",
+      "Averon chain battle damage and status carry back for every Pokemon the player switched in",
+      "Averon chain battle damage and status carry back into the party",
+      "Averon clinic union-room check without InitUnionRoom copies nothing",
+      "Averon coast trainer reuses the unused slot without expanding save flags",
+      "Averon connection contract Sinnoh RAM header selects only overlapping signed offset edges",
+      "Averon connection contract actual reciprocal boundary preserves party and region state",
+      "Averon corridor approved origins have names and survive boxed summary reads",
+      "Averon cry safety absent species completes without a previous player",
+      "Averon cry safety all modes and Mega stop without a seeded player",
+      "Averon cry safety cold stop and completion before any cry",
+      "Averon cry safety ducking calls lower music only when cries are enabled",
+      "Averon cry safety menu and field effects still start",
+      "Averon cry safety normal and by-mode cleanup preserve music and effects",
+      "Averon cry safety real playmoncry waitmoncry bytecode resumes",
+      "Averon cry safety script wait and replay restore music",
+      "Averon cry safety silent unpaired duck never lowers music",
+      "Averon cry safety title town route battle victory heal music starts",
+      "Averon developer Fly destination lands both player genders safely in Saltmere",
+      "Averon developer gift rejects missing prerequisite and full party without PC delivery",
+      "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+      "Averon every Mega Evolution by held stone uses a real Mega Stone",
+      "Averon every TM and HM item is in the TM pocket and teaches its own real move",
+      "Averon every TM and HM move can be learned by at least one enabled species",
+      "Averon every allowed form change of an enabled species leads to an enabled species",
+      "Averon every breedable species hatches from a real base species",
+      "Averon every conditional evolution Averon can meet produces exactly its own form",
+      "Averon every conditional evolution satisfiable from the Pokemon's own data triggers",
+      "Averon every enabled species has a national dex number inside the save's dex flags",
+      "Averon every enabled species has usable follower graphics and paired palettes",
+      "Averon every enabled species has valid types, abilities and nonzero base stats",
+      "Averon every enabled species learns only real, non-gimmick moves at valid levels",
+      "Averon every enabled species survives the PC boxes and a flash save and load",
+      "Averon every evolution of an enabled species leads to an enabled species",
+      "Averon every form reached in battle has an end-of-battle revert",
+      "Averon every growth rate reaches level 100 and stops there",
+      "Averon every species fits in a follower graphics ID",
+      "Averon every unconditional level and item evolution actually triggers",
+      "Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits",
+      "Averon extended location experiment cannot infer a version from checksum-valid legacy unused bits",
+      "Averon extended location experiment preserves candidate bits across all 24 permutations PC and OT rekey",
+      "Averon field lab Dive connections preserve coordinates party and licenses in both directions",
+      "Averon field licenses gate all seven native script actions without learned HMs",
+      "Averon first accepted errand survives all six household orders",
+      "Averon follower after a flash save and load is the saved lead",
+      "Averon follower changes when the party order or health changes",
+      "Averon follower graphics carry the lead's shiny and female variants",
+      "Averon follower is hidden while surfing or underwater",
+      "Averon follower is removed for an empty party or while hidden by script",
+      "Averon follower is respawned with the right species after each warp",
+      "Averon follower is the first party Pokemon that is not fainted or an egg",
+      "Averon follower: a large one walks outdoors but not indoors; a small one does both",
+      "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+      "Averon foreign OT delivery preserves encrypted data when the party has space",
+      "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+      "Averon full TM pocket preserves the badge and allows a reward retry",
+      "Averon grouped origin experiment loses distinct runtime detail across real PC flash and summary",
+      "Averon grouped origin experiment preserves all legacy bytes without modifying encryption",
+      "Averon harvest fair reward requires delivery and cannot be duplicated",
+      "Averon harvest fair reward survives a full pocket and can be reclaimed",
+      "Averon held items: Bestow after eating an original Berry does not duplicate its gift",
+      "Averon held items: Bestow to a partner does not duplicate the item",
+      "Averon held items: Bestow to an uncaptured trainer Pokemon restores the player's non-Berry",
+      "Averon held items: Harvest remembers the donor of a consumed Berry",
+      "Averon held items: Recycle remembers the donor of a consumed Berry",
+      "Averon held items: Symbiosis after eating an original Berry does not duplicate its gift",
+      "Averon held items: Trick returns each side's own item after the battle",
+      "Averon held items: a Berry eaten in battle stays eaten",
+      "Averon held items: a Berry given to a partner with Bestow goes back to the giver",
+      "Averon held items: a newly found item cannot replace or duplicate the borrowed original",
+      "Averon held items: a non-Berry item lost to a trainer is back after the battle",
+      "Averon held items: allied Trick preserves a Berry and restores a non-Berry in either slot order",
+      "Averon held items: an item taken from a wild Pokemon with Magician is kept",
+      "Averon held items: an item the player steals from a trainer is not kept",
+      "Averon held items: capture cannot duplicate a player's same-ID donated item",
+      "Averon held items: capture returns both original items after Trick",
+      "Averon held items: returning a donated Berry never overwrites a different held Berry",
+      "Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries",
+      "Averon held items: wild Magician loot is kept when a teammate started with the same item",
+      "Averon home clinic and rival healing restores HP status and PP",
+      "Averon independent field licenses persist through actual flash save and load",
+      "Averon legend a capture is recorded as caught",
+      "Averon legend a knockout records a defeat, not a capture",
+      "Averon legend a player loss leaves the encounter available",
+      "Averon legend a stale capture from an earlier battle is never recorded",
+      "Averon legend a wild Pokemon escaping by Emergency Exit leaves it available",
+      "Averon legend a wild legendary's Whirlwind leaves it available",
+      "Averon legend battle macro clears the old outcome, fights, then records",
+      "Averon legend capture is final and replaces an earlier defeat",
+      "Averon legend caught and defeated states survive a flash save and load",
+      "Averon legend check and retry macros report and restore availability",
+      "Averon legend defeat is retryable only by the caller's policy or an explicit retry",
+      "Averon legend only a capture counts as caught and only a knockout as defeated",
+      "Averon legend outcomes without a capture or knockout record nothing",
+      "Averon legend party: a captured legendary, its record and the party survive flash together",
+      "Averon legend the upstream script pattern marks a teleported legendary caught",
+      "Averon licensed Field Kit refuses unusable terrain without trapping the party menu",
+      "Averon licensed field actions refuse empty fainted and egg-only parties",
+      "Averon lists the evolution targets that only another region or an upstream map can reach",
+      "Averon location 13-bit experiment exposes legacy API truncation and special aliases",
+      "Averon location Fly preserves all 154 explicit legacy destinations including Petalburg",
+      "Averon location Fly zero-filled gaps cannot replace a prepared warp with Petalburg",
+      "Averon location battle controller preserves all legacy bytes but not a new 13-bit identity",
+      "Averon location every 8-bit origin survives encryption PC withdrawal and rekeying",
+      "Averon location flash reload preserves all 256 PC origins party TV specials and region state",
+      "Averon location legacy names and region identities remain unchanged",
+      "Averon locked Field Kit actions return safely without changing map or licenses",
+      "Averon map registry IDs round trip through the actual signed warp fields",
+      "Averon map registry preserves group slots and disabled-region null entries",
+      "Averon map registry resolves every linked numeric ID within its original group",
+      "Averon native Dive preparation uses real surface and underwater tiles and refuses land",
+      "Averon native obstacle preparation selects the facing object without learned HMs",
+      "Averon native whiteout heals and restores the clinic follower through flash with regional badges",
+      "Averon native whiteout heals and restores the home follower through flash with regional badges",
+      "Averon no-whiteout flag lives in RAM outside every saved block",
+      "Averon northern flash reload preserves party PC legacy special origins and regional position",
+      "Averon northern map headers share only the three approved origin names",
+      "Averon northern summary names caught hatched and traded origins without changing encrypted data",
+      "Averon opening and Gym progression survive two native flash save and load cycles",
+      "Averon optional event full pocket keeps the real script reward retryable",
+      "Averon optional event rewards require both prerequisites and cannot repeat",
+      "Averon optional event stages survive native flash and transient field reset",
+      "Averon orb holders switched in mid-battle do not undergo Primal Reversion",
+      "Averon permits a legal held-stone Mega Evolution",
+      "Averon reaccepting errands preserves active and completed progress",
+      "Averon recovers the previous progression when the newest flash slot is incomplete",
+      "Averon region adapters keep both badge banks independent and fail closed",
+      "Averon region adapters reject disabled map groups without changing the return warp",
+      "Averon region map access PokeNav refuses before changing or freeing the main menu",
+      "Averon region map access PokeNav still schedules the legacy map feature",
+      "Averon region map access preserves legacy Fly map type restrictions",
+      "Averon region map access refuses Fly from Sinnoh without an approved grid",
+      "Averon region map access retains every legacy section and rejects explicit Sinnoh",
+      "Averon region map access wall map returns without replacing VBlank or allocating",
+      "Averon region progression: Rare Candy stops at the active region's cap",
+      "Averon region progression: a Sinnoh profile reads only the Sinnoh badge bank",
+      "Averon region progression: a Sinnoh profile's cap limits EXP in a real battle",
+      "Averon region progression: a Sinnoh profile's obedience level is the one the battle uses",
+      "Averon region progression: cap and obedience follow the player through travel, flash and whiteout",
+      "Averon region progression: out-of-range profiles are refused and the previous one stays",
+      "Averon region progression: the active region and Sinnoh badges survive a flash save",
+      "Averon region progression: the badge rule decides the badge-unlocked field move",
+      "Averon region progression: the badge rule decides which badges count",
+      "Averon region progression: the badge rule decides whiteout money in Sinnoh",
+      "Averon region progression: with no regional profile both regions keep today's level caps",
+      "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+      "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+      "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+      "Averon region save paths: a Hall of Fame save seals and reloads the region state",
+      "Averon region save paths: a link save rewrites the newest slot in place and reloads it",
+      "Averon region save paths: overwriting a different file seals and reloads the region state",
+      "Averon region save paths: power loss during a link save never mixes two saves",
+      "Averon region save power loss at any sector write keeps the last whole slot",
+      "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+      "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+      "Averon region save refusal: no save type or special sector write reaches flash",
+      "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+      "Averon region save refusal: the save failed screen never wipes the refused save",
+      "Averon region save refuses a newer format: loads nothing and never overwrites it",
+      "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+      "Averon region save rejects a record copied from the other slot",
+      "Averon region save rejects a slot whose sectors come from two different saves",
+      "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+      "Averon region save rejects every single-bit flip in the record and loads the older slot",
+      "Averon region save reports both slots corrupt instead of mixing them",
+      "Averon region save rolls back across save counter wrap",
+      "Averon region save round-trips both regions through flash without writing on load",
+      "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+      "Averon region travel power loss while saving keeps region and location together",
+      "Averon region travel rejects invalid requests and changes nothing",
+      "Averon region travel runs from an overworld script through the registered special",
+      "Averon region travel special validates script values before narrowing",
+      "Averon region travel stores the departure and arms the target region's warps",
+      "Averon region travel survives a save and load through flash",
+      "Averon region travel whiteout uses the healer of the region the player is in",
+      "Averon regional EXP Share keeps a capped holder's pool separate in a six-member party",
+      "Averon rejects all excluded gimmicks for both battlers",
+      "Averon resource heap fragmented capacity refuses oversized requests and coalesces after free",
+      "Averon resource linked field tilesets decompress within paired buffers and release heap",
+      "Averon resource real party and Field Kit menus restore heap across repeated regional visits",
+      "Averon resource reserved sprite palette banks survive exhaustion and free tag reuse",
+      "Averon resource sprite slot exhaustion preserves live sprites and permits exact slot reuse",
+      "Averon respawn contract healing alone preserves the previous respawn anchor",
+      "Averon respawn contract rejects invalid script healer IDs before narrowing",
+      "Averon respawn contract unregistered arrival stays local without selecting a nurse",
+      "Averon respawn contract valid script anchors preserve the regional record",
+      "Averon save bounds ID14 signed primed recovery",
+      "Averon save bounds ID14 signed unprimed recovery",
+      "Averon save bounds ID14 unsigned primed recovery",
+      "Averon save bounds ID14 unsigned unprimed recovery",
+      "Averon save bounds ID65535 signed primed recovery",
+      "Averon save bounds ID65535 signed unprimed recovery",
+      "Averon save bounds ID65535 unsigned primed recovery",
+      "Averon save bounds ID65535 unsigned unprimed recovery",
+      "Averon save bounds handle erased and invalid-ID slots without a backup",
+      "Averon save bounds healthy slots retain old format and alternate normally",
+      "Averon scripted battle ended by the player's Explosion still counts as a safe defeat",
+      "Averon scripted battle finish clears no-whiteout on a win or a loss",
+      "Averon scripted battle finish does not heal between chain battles",
+      "Averon scripted battle macro wraps one trainer battle between Begin and Finish",
+      "Averon scripted battle natives around a real battle report the result and clear the flag",
+      "Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin",
+      "Averon scripted battle never reports a stale defeat from an earlier battle",
+      "Averon scripted battle outcomes count losses, draws and forfeits as defeats",
+      "Averon scripted battle tests run with a real no-whiteout flag",
+      "Averon scripted battles cannot be forfeited but ordinary trainer battles can",
+      "Averon scripted loss skips the whiteout and keeps the player's money",
+      "Averon six-member party respects held EXP Share and the first cap",
+      "Averon stale no-whiteout state is cleared before ordinary battles",
+      "Averon starter awards respect party capacity and cannot be duplicated",
+      "Averon starter evolution can be postponed with Everstone and resumes after removal",
+      "Averon starters reach their first evolution only after the first badge opens the cap",
+      "Averon story loss recovers in place with the party healed and money kept",
+      "Averon trade save refusal: a supported full-save task still initializes",
+      "Averon trade save refusal: full-save task enters failure without writing",
+      "Averon trade save refusal: wired callback enters failure without writing",
+      "Averon trade save refusal: wireless callback enters failure without writing",
+      "Averon transport accepts an indexed first arrival without substituting coordinates",
+      "Averon transport first arrival and saved return use the existing regional transaction",
+      "Averon transport points validate physical region identity and indexed arrivals",
+      "Averon transport refuses a physically wrong departing healer before caching its return",
+      "Averon transport refuses a wrong region cached healer without changing the transaction",
+      "Averon transport refuses an indexed departure even with matching inconsistent player coordinates",
+      "Averon transport refuses missing or physically wrong region saved returns before mutation",
+      "Averon transport rejects invalid activation descriptors and leaves all travel state unchanged",
+      "Averon transport rejects invalid section metadata before Hoenn display fallback",
+      "Averon transport saved return selects the recorded point instead of the configured first arrival",
+      "Averon transport saved return validation remains usable after an actual flash reload",
+      "Averon travel boundaries flash Continue preserves Sandgem origins PC and both badge banks",
+      "Averon travel boundaries indexed arrivals resolve the real map warp for Teleport and respawn",
+      "Averon travel boundaries refusal preserves an already armed destination",
+      "Averon traversal respects configured follower policy and Fly map-type rules",
+      "Averon tree observation needs the artist and cannot reset recorded progress",
+      "Averon unclaimed rewards survive saving with a full pocket and remain retryable",
+      "Averon uses Set mode even when an old save requests Shift",
+      "Averon whiteout money: a loss drops badge rate times the highest party level",
+      "Averon whiteout money: a loss never takes more money than the player has",
+      "Averon whiteout money: losing to a wild Pokemon also drops badge-based money",
+      "Averon whiteout selects the local home or Alderfield clinic healer",
+      "Averon wild encounters: Repel blocks Pokemon below the lead's level on every Averon table",
+      "Averon wild encounters: an existing map without a table reports no encounter header",
+      "Averon wild encounters: each existing Averon table generates only its own species and levels",
+      "Averon with every level cap lifted a Pokemon grows to level 100 and no further"
+    ],
+    "initial_completed": 313,
+    "additional_targeted_completed": 8,
+    "exhaustive_recovery_test_completed": 1,
+    "exhaustive_parameter_cases": 2220,
+    "parameter_derivation": "74 Sinnoh maps x 2 save parities x 15 flash cuts, unchanged test/averon_sinnoh_resume.c:266",
+    "initial_interruption": {
+      "status": "INTERRUPTED_NOT_PASS",
+      "reason": "Seven workers exited; eighth remained CPU-active near20 minutes without whole-run completion. Preserve attempt and isolate the exact remaining worker rather than assuming PASS.",
+      "worker_elf_sha256": "1fbfa7294a8f4639f3d397f11742bcaca199dc8f281665c641ab58033793ad96",
+      "process_snapshot": "    PID    PPID     ELAPSED     TIME STAT COMMAND\n  34868   34865       28:58 00:00:17 S    make\n  50226   34868       20:03 00:00:00 S    mgba-rom-test-h\n  50234   50226       20:03 00:18:04 R    mgba-rom-test\n",
+      "time_utc": "2026-10-27T15:59:11Z"
+    },
+    "corrected_diagnosis": "Interruption was premature: normal exhaustive workload increased with map count, not a reproduced native hang or game defect.",
+    "bounded_diagnostic": {
+      "exit_code": 124,
+      "timeout_seconds": 180
+    },
+    "bounded_diagnostic_log_sha256": "10616452bc610543e48ed8358f87be67d8d6779744185c0887f45b3d0ff089b4",
+    "completed_targeted_runs": [
+      {
+        "name": "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "5358cb6f52383ece65bda179eebc45896aa68a8b91ce6882c03d906f31b8cfcc",
+        "elf_sha256": "d2fceb912475e0c714f87b264557ad2dd7b0ce61a0ce3f8f1324e4576d50527c"
+      },
+      {
+        "name": "Averon Twinleaf origin survives the real summary formatter unchanged",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "967b0cca06e531010c515cbe25749c0c9488879fba209a5e84664c899f5b9e4c",
+        "elf_sha256": "7f5f2128a797ffe087ec3609615b30a0dfee4e82ec502af511ff8e3740c98f23"
+      },
+      {
+        "name": "Averon coast trainer reuses the unused slot without expanding save flags",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "83e89bf1e1726b5165fe3f6573e2bfa1b721e191e3468bd8334b7d688d30e198",
+        "elf_sha256": "591cd0ec543f80160cbd34e31b0fea86a279555055ff303066503f991519971d"
+      },
+      {
+        "name": "Averon held items: an item the player steals from a trainer is not kept",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "71a6f6d91f56a3dddf2d580f42da0261ddbe9fec1434488e1bfa4dddaf04e4eb",
+        "elf_sha256": "4508cdcf510d1c33eb1e124edbe35d72aedeee4fe26fe0f4a9a131c8db4c790d"
+      },
+      {
+        "name": "Averon six-member party respects held EXP Share and the first cap",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "573a341692dab36f889d6a6cf42aaf1e4ac69d5ce29a692e905589513dab9d76",
+        "elf_sha256": "422974d642bc22100bb6a70d6f27e7f4f8dd5b03c51c6fbd817395d7b041581e"
+      },
+      {
+        "name": "Averon trade save refusal: wired callback enters failure without writing",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "98e6fdde652f1354a374a15cfb13d65cb3104f0fc9e778eba6af0a168b5ef49f",
+        "elf_sha256": "efba8c580e4de7cb17bb6638ae1a9fcb0e13f2e8675a60c9d2abddbddfb5fd24"
+      },
+      {
+        "name": "Averon transport refuses missing or physically wrong region saved returns before mutation",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "e9a55807a7fd0ef5ff35b9ca19d387a3e90aa0414c02768ce23e01c8bc52260a",
+        "elf_sha256": "c8c22702a909be7e4aaf4f9578cba8aad5aee560595b6475a5ff051ea7d25282"
+      },
+      {
+        "name": "Averon whiteout money: a loss never takes more money than the player has",
+        "exit_code": 0,
+        "pass_observed": true,
+        "log_sha256": "8a2d2db8d58f49c3b24e92c7496301f1de87fc4b70ec02b93c14ac926adfeb93",
+        "elf_sha256": "bc1e5c050912d01eb3937987a63ae302fc9d7d4e8690a7526bd6e7159989d05a"
+      }
+    ],
+    "exhaustive_log_sha256": "02dbf83e00fd863f2e54d74592d2eb4ec19610d6a81f383891b10a7e145cc63c",
+    "interrupted_prefix_log_sha256": "3ac1fbe7827a03b589962e72f3d492f63fab426742c8813639dbba38dd5a07c7",
+    "limitations": "Not the unfiltered upstream/M1 suite. No synthetic summary added to incomplete logs; strict baseline checker and expected-failure identities unchanged."
   }
 }
