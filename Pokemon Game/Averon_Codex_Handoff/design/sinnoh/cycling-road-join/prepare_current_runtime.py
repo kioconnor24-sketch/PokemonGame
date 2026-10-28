@@ -246,7 +246,14 @@ def compose(repo):
     if native.count(expected) != 1:
         raise ValueError("Eterna native fixture precondition changed")
     count = len(json.loads(current_inputs(repo)[GROUPS])["gMapGroup_Sinnoh"])
-    files[path] = native.replace(expected, f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);").encode()
+    native = native.replace(expected, f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);")
+    if production_city(current_inputs(repo)):   # approved section 227 is the one origin W25 itself does not add
+        old = "STATIC_ASSERT(MAPSEC_COUNT == 227, eterna_no_new_origins);"
+        if native.count(old) != 1:
+            raise ValueError("Eterna native section precondition changed")
+        native = native.replace(old, "STATIC_ASSERT(MAPSEC_OREBURGH_CITY == 227, eterna_only_oreburgh_added);\n"
+                                     "STATIC_ASSERT(MAPSEC_COUNT == 228, eterna_no_new_origins);")
+    files[path] = native.encode()
     # Adapt only the generated fixture, preserving its immutable source.
     path = "test/averon_oreburgh_candidate.c"
     native = files[path].decode()
