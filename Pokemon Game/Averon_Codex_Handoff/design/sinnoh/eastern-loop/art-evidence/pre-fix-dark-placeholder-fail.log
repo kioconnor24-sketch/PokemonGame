@@ -1,0 +1,14 @@
+test_no_solid_dark_placeholder_cells_remain_in_any_actual_preview (test_sinnoh_eastern_art.OutdoorArtTest.test_no_solid_dark_placeholder_cells_remain_in_any_actual_preview) ... FAIL
+
+======================================================================
+FAIL: test_no_solid_dark_placeholder_cells_remain_in_any_actual_preview (test_sinnoh_eastern_art.OutdoorArtTest.test_no_solid_dark_placeholder_cells_remain_in_any_actual_preview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/averon-oreburgh-corridor/Pokemon Game/scripts/tests/test_sinnoh_eastern_art.py", line 161, in test_no_solid_dark_placeholder_cells_remain_in_any_actual_preview
+    self.assertEqual(count,0,'unrendered dark cell examples: '+repr(examples))
+AssertionError: 206 != 0 : unrendered dark cell examples: [('Route214', 16, 5), ('Route214', 17, 5), ('ValorLakefront', 36, 47), ('ValorLakefront', 36, 48), ('ValorLakefront', 36, 49), ('ValorLakefront', 36, 50), ('ValorLakefront', 36, 51), ('ValorLakefront', 34, 52)]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.319s
+
+FAILED (failures=1)

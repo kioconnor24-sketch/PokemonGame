@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/averon-corridor-scratch/Pokemon Game/engine/../scripts/claude_play/map_qa.py", line 1043, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/engine/../scripts/claude_play/map_qa.py", line 1039, in main
+    return cmd_run(args)
+           ^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/engine/../scripts/claude_play/map_qa.py", line 838, in cmd_run
+    e = emu.Emulator(rom, out, audio=False)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 322, in __init__
+    self._attach(port)
+  File "/workspace/averon-corridor-scratch/Pokemon Game/scripts/claude_play/emu.py", line 337, in _attach
+    raise Blocked("no mGBA window")
+emu.Blocked: no mGBA window

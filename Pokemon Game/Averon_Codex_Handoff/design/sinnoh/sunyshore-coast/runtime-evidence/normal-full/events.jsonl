@@ -1,0 +1,110 @@
+{"t": 1792796149.05, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792796149.15, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792796152.7, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792796153.05, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792796155.11, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792796155.29, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792796156.06, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792796156.17, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792796156.9, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792796156.99, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792796158.37, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 12}
+{"t": 1792796158.48, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792796159.8, "event": "screen", "cb2": "CB2_MainMenu", "i": 13}
+{"t": 1792796159.96, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792796162.57, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792796162.8, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792796164.61, "event": "field", "map": "MAP_ROUTE222_ACCESS", "pos": [6, 5], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792796165.2, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE222_ACCESS", [6, 5]]}
+{"t": 1792796167.47, "event": "capture", "file": "0009-start.png"}
+{"t": 1792796167.47, "event": "observe", "label": "start", "problems": []}
+{"t": 1792796167.49, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796167.49, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796172.07, "event": "map", "map": "MAP_ROUTE222", "pos": [89, 23]}
+{"t": 1792796172.28, "event": "map-qa-check", "name": "reached MAP_ROUTE222", "ok": true, "at": ["MAP_ROUTE222", [89, 23]]}
+{"t": 1792796175.8, "event": "capture", "file": "0010-warp-MAP_ROUTE222-0.png"}
+{"t": 1792796179.05, "event": "capture", "file": "0011-MAP_ROUTE222_ACCESS via warp.png"}
+{"t": 1792796179.05, "event": "observe", "label": "MAP_ROUTE222_ACCESS via warp", "problems": []}
+{"t": 1792796179.06, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796179.07, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796179.28, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE222_ACCESS", "ok": true, "at": ["MAP_ROUTE222_ACCESS", [1, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796182.29, "event": "map-qa-check", "name": "MAP_ROUTE222 warp 0 (89, 23) -> MAP_ROUTE222_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE222", [[89, 23]]], "got": ["MAP_ROUTE222", [89, 23]]}
+{"t": 1792796186.15, "event": "capture", "file": "0012-MAP_ROUTE222 after warp round trip.png"}
+{"t": 1792796186.15, "event": "observe", "label": "MAP_ROUTE222 after warp round trip", "problems": []}
+{"t": 1792796186.16, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222 after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796186.16, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222 after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796188.65, "event": "map", "map": "MAP_ROUTE222_ACCESS", "pos": [1, 5]}
+{"t": 1792796188.79, "event": "map-qa-check", "name": "reached MAP_ROUTE222_ACCESS", "ok": true, "at": ["MAP_ROUTE222_ACCESS", [1, 5]]}
+{"t": 1792796192.1, "event": "capture", "file": "0013-warp-MAP_ROUTE222_ACCESS-0.png"}
+{"t": 1792796196.06, "event": "capture", "file": "0014-MAP_ROUTE222 via warp.png"}
+{"t": 1792796196.06, "event": "observe", "label": "MAP_ROUTE222 via warp", "problems": []}
+{"t": 1792796196.07, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222 via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796196.07, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222 via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796196.37, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE222", "ok": true, "at": ["MAP_ROUTE222", [89, 23]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796199.28, "event": "map-qa-check", "name": "MAP_ROUTE222_ACCESS warp 0 (1, 5) -> MAP_ROUTE222 and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE222_ACCESS", [[1, 5]]], "got": ["MAP_ROUTE222_ACCESS", [1, 5]]}
+{"t": 1792796201.87, "event": "capture", "file": "0015-MAP_ROUTE222_ACCESS after warp round trip.png"}
+{"t": 1792796201.87, "event": "observe", "label": "MAP_ROUTE222_ACCESS after warp round trip", "problems": []}
+{"t": 1792796201.88, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796201.88, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796208.81, "event": "capture", "file": "0016-warp-MAP_ROUTE222_ACCESS-1.png"}
+{"t": 1792796212.91, "event": "capture", "file": "0017-MAP_SUNYSHORE_CITY via warp.png"}
+{"t": 1792796212.91, "event": "observe", "label": "MAP_SUNYSHORE_CITY via warp", "problems": []}
+{"t": 1792796212.96, "event": "map-qa-check", "name": "follower visible (MAP_SUNYSHORE_CITY via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796212.98, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SUNYSHORE_CITY via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796213.59, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_SUNYSHORE_CITY", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [4, 48]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796216.78, "event": "map-qa-check", "name": "MAP_ROUTE222_ACCESS warp 1 (11, 5) -> MAP_SUNYSHORE_CITY and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE222_ACCESS", [[11, 5]]], "got": ["MAP_ROUTE222_ACCESS", [11, 5]]}
+{"t": 1792796220.06, "event": "capture", "file": "0018-MAP_ROUTE222_ACCESS after warp round trip.png"}
+{"t": 1792796220.06, "event": "observe", "label": "MAP_ROUTE222_ACCESS after warp round trip", "problems": []}
+{"t": 1792796220.07, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222_ACCESS after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796220.07, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796222.67, "event": "map", "map": "MAP_SUNYSHORE_CITY", "pos": [4, 48]}
+{"t": 1792796222.75, "event": "map-qa-check", "name": "reached MAP_SUNYSHORE_CITY", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [4, 48]]}
+{"t": 1792796226.86, "event": "capture", "file": "0019-warp-MAP_SUNYSHORE_CITY-0.png"}
+{"t": 1792796229.55, "event": "capture", "file": "0020-MAP_ROUTE222_ACCESS via warp.png"}
+{"t": 1792796229.55, "event": "observe", "label": "MAP_ROUTE222_ACCESS via warp", "problems": []}
+{"t": 1792796229.56, "event": "map-qa-check", "name": "follower visible (MAP_ROUTE222_ACCESS via warp)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796229.56, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS via warp)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796229.7, "event": "map-qa-check", "name": "an exit is reachable after warping into MAP_ROUTE222_ACCESS", "ok": true, "at": ["MAP_ROUTE222_ACCESS", [11, 5]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796232.77, "event": "map-qa-check", "name": "MAP_SUNYSHORE_CITY warp 0 (4, 48) -> MAP_ROUTE222_ACCESS and back", "ok": true, "leg": "back", "expected": ["MAP_SUNYSHORE_CITY", [[4, 48]]], "got": ["MAP_SUNYSHORE_CITY", [4, 48]]}
+{"t": 1792796237.28, "event": "capture", "file": "0021-MAP_SUNYSHORE_CITY after warp round trip.png"}
+{"t": 1792796237.28, "event": "observe", "label": "MAP_SUNYSHORE_CITY after warp round trip", "problems": []}
+{"t": 1792796237.3, "event": "map-qa-check", "name": "follower visible (MAP_SUNYSHORE_CITY after warp round trip)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796237.3, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (MAP_SUNYSHORE_CITY after warp round trip)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796282.19, "event": "map-qa-check", "name": "source elevated walkway reached (28, 11)", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [28, 11]], "elevations": {"player": 4, "follower": 4}}
+{"t": 1792796282.3, "event": "capture", "file": "0022-sunyshore-elevated-28-11.png"}
+{"t": 1792796286.66, "event": "capture", "file": "0023-elevated (28, 11).png"}
+{"t": 1792796286.66, "event": "observe", "label": "elevated (28, 11)", "problems": []}
+{"t": 1792796286.68, "event": "map-qa-check", "name": "follower visible (elevated (28, 11))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792796286.69, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (elevated (28, 11))", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796310.51, "event": "map-qa-check", "name": "source elevated walkway reached (25, 33)", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [25, 33]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796310.7, "event": "capture", "file": "0024-sunyshore-elevated-25-33.png"}
+{"t": 1792796314.37, "event": "capture", "file": "0025-elevated (25, 33).png"}
+{"t": 1792796314.37, "event": "observe", "label": "elevated (25, 33)", "problems": []}
+{"t": 1792796314.38, "event": "map-qa-check", "name": "follower visible (elevated (25, 33))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796314.38, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (elevated (25, 33))", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796324.21, "event": "map-qa-check", "name": "source elevated walkway reached (23, 44)", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [23, 44]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796324.35, "event": "capture", "file": "0026-sunyshore-elevated-23-44.png"}
+{"t": 1792796327.69, "event": "capture", "file": "0027-elevated (23, 44).png"}
+{"t": 1792796327.69, "event": "observe", "label": "elevated (23, 44)", "problems": []}
+{"t": 1792796327.76, "event": "map-qa-check", "name": "follower visible (elevated (23, 44))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796327.77, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (elevated (23, 44))", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796334.36, "event": "map-qa-check", "name": "source elevated walkway reached (30, 45)", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [30, 45]], "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796334.58, "event": "capture", "file": "0028-sunyshore-elevated-30-45.png"}
+{"t": 1792796338.86, "event": "capture", "file": "0029-elevated (30, 45).png"}
+{"t": 1792796338.86, "event": "observe", "label": "elevated (30, 45)", "problems": []}
+{"t": 1792796338.95, "event": "map-qa-check", "name": "follower visible (elevated (30, 45))", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792796338.95, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (elevated (30, 45))", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792796340.19, "event": "capture", "file": "0030-start-menu.png"}
+{"t": 1792796341.15, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792796348.19, "event": "capture", "file": "0031-save-confirm-coronet-six.png"}
+{"t": 1792796349.7, "event": "capture", "file": "0032-save-step-coronet-six-01.png"}
+{"t": 1792796351.15, "event": "capture", "file": "0033-save-step-coronet-six-02.png"}
+{"t": 1792796352.69, "event": "capture", "file": "0034-save-step-coronet-six-03.png"}
+{"t": 1792796353.96, "event": "capture", "file": "0035-save-step-coronet-six-04.png"}
+{"t": 1792796355.3, "event": "capture", "file": "0036-save-step-coronet-six-05.png"}
+{"t": 1792796357.18, "event": "capture", "file": "0037-save-step-coronet-six-06.png"}
+{"t": 1792796358.45, "event": "capture", "file": "0038-save-step-coronet-six-07.png"}
+{"t": 1792796359.91, "event": "capture", "file": "0039-save-step-coronet-six-08.png"}
+{"t": 1792796361.05, "event": "capture", "file": "0040-saved-coronet-six.png"}
+{"t": 1792796361.05, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792796361.18, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_SUNYSHORE_CITY", [30, 45]]}

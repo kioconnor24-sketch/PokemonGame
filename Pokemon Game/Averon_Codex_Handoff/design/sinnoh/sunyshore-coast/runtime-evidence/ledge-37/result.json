@@ -1,0 +1,118 @@
+{
+ "maps": [
+  "MAP_ROUTE222"
+ ],
+ "build": "normal",
+ "rom_sha256": "317deaa9a49aab59059c65ff1334b7b1e0de8ac2ebaeb9baeb35ef03c304935b",
+ "static_findings": [
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     36,
+     16
+    ],
+    "lands": [
+     36,
+     17
+    ]
+   }
+  },
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     37,
+     16
+    ],
+    "lands": [
+     37,
+     17
+    ]
+   }
+  }
+ ],
+ "save_before": "2f4f6812e1547405eddfed64e103a0afb7e7f8d634c1680186a76996d622fdb2",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached source ledge approach",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     15
+    ]
+   ]
+  },
+  {
+   "name": "source ledge does not land inside solid terrain",
+   "ok": false,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     17
+    ]
+   ],
+   "landing_collision": 1,
+   "source_ledge": [
+    37,
+    16
+   ]
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     37,
+     17
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "5aee5410688627a433a4026775e76faf2c924641de531ec539d17e2e34935dea",
+ "verdict": "FAIL"
+}

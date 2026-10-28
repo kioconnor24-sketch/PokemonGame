@@ -1,0 +1,88 @@
+{
+ "maps": [
+  "MAP_ROUTE222",
+  "MAP_ROUTE222_ACCESS",
+  "MAP_SUNYSHORE_CITY"
+ ],
+ "build": "release",
+ "rom_sha256": "3a9e01bb81cc445b7964ddaeaac33254a59172afe85452cc347029b92262246a",
+ "static_findings": [
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     36,
+     16
+    ],
+    "lands": [
+     36,
+     17
+    ]
+   }
+  },
+  {
+   "map": "MAP_ROUTE222",
+   "code": "ledge-landing",
+   "detail": {
+    "ledge": [
+     37,
+     16
+    ],
+    "lands": [
+     37,
+     17
+    ]
+   }
+  }
+ ],
+ "save_before": "74b21d43bcf1326edfc69733360948f35a12f7e18a686321a947f76726c56fd4",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "74b21d43bcf1326edfc69733360948f35a12f7e18a686321a947f76726c56fd4",
+ "verdict": "PASS"
+}

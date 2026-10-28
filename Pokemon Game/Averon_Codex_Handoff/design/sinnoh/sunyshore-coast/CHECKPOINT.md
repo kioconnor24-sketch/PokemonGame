@@ -1,0 +1,22 @@
+# Sunyshore coast package — source construction in progress, 2026-10-23
+
+Manager6374512946 assignment, executed after completed Canalave239. Branch codex/sunyshore-coast-20261023 preserves parent source237@e3663c8b86999f23442d366eb2379e22291d7332. Current production main056d881158aa87b48ef71fdd67c110d7015dbaa6 has identical engine/QA to the just-tested Canalave base; no production maps from this package installed.
+
+Implemented bounded five-map candidate from **immutable already converted** #237 stages: SunyshoreCity70×64, Route22292×32, Route22334×124, literal PokmonLeague33×69 and Route222_Access13×9.14,034 source cells; no donor reconversion or completed-map reconstruction. Existing fixed-point `eterna-cycle/stage_batch.py` sanitizer is called unchanged. Only21 PokmonLeague right-edge collision cells close the unbuilt Route224 connection; all other maps/cells, borders, metatile/elevation/full attribute words and retained reciprocal portal/connection facts remain unchanged. Exact before/after closures and warp translations are in source-receipt.json; no original stories/objects/encounters introduced. Saved origins remain MAPSEC_PENDING_OWNER, no IDs allocated.
+
+Actual gate proof: two retained source anchors(1,5),(11,5) link Route222/Sunyshore reciprocally. Reused existing #238@9d21973f94a5ffe6e4d77fad4a4ba69d682f76f4 gate binary/preview and four metadata banks **byte-for-byte**, not a regenerated converter/art family. Gate reuse receipt pins all six outputs and original42-map producer receipt. Shared Building/Shop secondary331/512 leaves181 slots. This is prior stock neutral gate art, not new final appearance or runtime acceptance.
+
+Focused host **7/7 PASS**: all5 candidate packets; exact immutable hashes/14,034 dimensions; reconstruct source after21 collision-only closures; unchanged full attrs/elevations; exact real gate pairs; all reciprocal final seams; every20-source-packet bit flip plus missing/extra negatives; exact reused gate physics/attrs and forbidden production/existing output.33 complete outputs independently reproduced twice byte-for-byte. Initial test compared Python integer dictionary keys/tuple dimensions directly with their JSON string/list representation; normalized only the expected serialized receipt, source/art unchanged. First run6PASS/1FAIL retained privately; final7PASS. Complete branch host **458/458 PASS, zero skips** (55.440s).
+
+**68 Sunyshore elevation15 cells survive unchanged.** This is important future upper/lower walkway/sprite-priority QA, not a claimed pass. Route223 is a water route; source preservation does not prove ordinary foot reachability or grant Surf. No normal/story arrival, final visuals, native/build/mGBA/Save acceptance yet for this new coast package. Stock art for four exteriors and actual current-main disposable tests are next. No donor pixels, palette or music imported; no 227+ location allocation, production registry or save changes.
+
+Reproduce with exact source objects fetched (a shallow checkout may need the two referenced existing branch heads):
+
+```sh
+python3 'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/sunyshore-coast/stage_cluster.py' --repo . --out /new/off-engine/output
+python3 -m unittest discover -s 'Pokemon Game/scripts/tests' -p 'test_sinnoh_sunyshore_source.py' -v
+```
+
+The production CLI reads Git objects at the two complete source revisions; pure unit fixtures are separately checked against20 pinned source SHA256 values. Output must be new/off-engine. Do not manually edit generated production headers or treat this source candidate as production. Source237 still requires a genuine owner handoff for its development inventory paths; that blocks its integration, not this disjoint source/art work. Snow235 visual issue remains unresolved. Next exact claim: four-map outdoor art adaptation using permitted existing General/Rustboro and the existing packer, preserving all water/layers/68 elevated cells and explicitly closed League east edge; then marked current-main runtime. Do not reconstruct any previously imported source or invent gameplay/rights/permanent identities.
+
+Permitted exterior art is now implemented: see ART_CHECKPOINT.md and outdoor-art-receipt.json. Art8/8 PASS, 13,933 cells and68 elevated cells exact; isolated secondary123/512. Static previews only, runtime next. Latest main refreshed d96ae4041cb955918801eea5dfb300f517000474; Canalave239 merged, unchanged engine.

@@ -1,0 +1,13 @@
+{
+  "status": "ACTUAL_NATIVE_FAILURE_REPRODUCTION",
+  "base_source_commit": "0e2cddf6d3e0c620a95dfb221cd046041246b56a",
+  "repository_tree": "a76af160a54ef3f72625be8101a9b5285f90270e",
+  "engine_tree": "8d9213516a27aaf1f051a92888bb40b4d89bda03",
+  "native_test_source_sha256": "f0f2b4dacfe517717c53f3ceacb8d5e775d26edd94d59ecf48dc9b7a68d1756a",
+  "test_filter": "Averon DEV eastern animated doors",
+  "actual_failed": 1,
+  "actual_total": 1,
+  "private_overlay_stash": "afcb96a91a714b5e853d2ee340211ee10e325584",
+  "private_test_elf_sha256": "12ee08307ed95b6f4000f034c415d0aa2864c0534daf137dc2771b7a00842dd7",
+  "explanation": "Exact0e2cddf6 duplicated-primary scene plus new pointer-identity native fixture; no protected engine source edits"
+}

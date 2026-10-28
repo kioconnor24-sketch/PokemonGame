@@ -1,0 +1,10 @@
+{
+  "original_coast_engine_tree": "eb74029471ea632cbd58f8cbabdbf348ed12d11c",
+  "corrected_engine_tree": "9e3db316117df080d1afb369c9bfe85ea93c3a59",
+  "changed_paths": [
+    "data/layouts/Route222/map.bin",
+    "test/averon_route222_safety_runtime.c"
+  ],
+  "game_payload_change": "Only Route222 map.bin: two cells0x487\u21920x491; all other original scene files byte-identical",
+  "new_native_fixture_only": "test/averon_route222_safety_runtime.c"
+}

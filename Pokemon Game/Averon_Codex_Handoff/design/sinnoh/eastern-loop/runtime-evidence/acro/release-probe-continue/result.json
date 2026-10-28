@@ -1,0 +1,24 @@
+{
+  "status": "DECLARED_ACRO_DEV_FIXTURE_NOT_PRODUCTION_OR_NATURAL_TRAVEL",
+  "profile": "release",
+  "rom_sha256": "4ae2996c67db4512526a7788f331f9d14db5338df1ae998c17c172cfe17a82a4",
+  "probe_sha256": "28351780a5c9e2de7e7928ea89877fd358bda9ccfbaaa84732ce5c2ccc91baa3",
+  "checks": [
+    {
+      "name": "explicit Acro grant quantity exactly one",
+      "ok": true
+    },
+    {
+      "name": "fresh-process Continue restores actual saved state",
+      "ok": true,
+      "at": [
+        "MAP_ROUTE212_SOUTH",
+        [
+          36,
+          12
+        ]
+      ]
+    }
+  ],
+  "verdict": "PASS"
+}

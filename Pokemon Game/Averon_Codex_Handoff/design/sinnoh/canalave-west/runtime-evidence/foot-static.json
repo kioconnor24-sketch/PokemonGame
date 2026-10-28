@@ -1,0 +1,125 @@
+{
+ "maps": [
+  "MAP_ROUTE218_EAST",
+  "MAP_ROUTE218",
+  "MAP_ROUTE218_WEST",
+  "MAP_CANALAVE_CITY"
+ ],
+ "findings": [],
+ "plan": {
+  "MAP_ROUTE218_EAST": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      1,
+      5
+     ],
+     "warp": [
+      1,
+      5
+     ],
+     "dest": "MAP_ROUTE218",
+     "dest_warp": 0,
+     "push": "left"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE218": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      59,
+      24
+     ],
+     "warp": [
+      59,
+      24
+     ],
+     "dest": "MAP_ROUTE218_EAST",
+     "dest_warp": 0,
+     "push": "right"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      4,
+      20
+     ],
+     "warp": [
+      4,
+      20
+     ],
+     "dest": "MAP_ROUTE218_WEST",
+     "dest_warp": 0,
+     "push": "left"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_ROUTE218_WEST": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      11,
+      5
+     ],
+     "warp": [
+      11,
+      5
+     ],
+     "dest": "MAP_ROUTE218",
+     "dest_warp": 1,
+     "push": "right"
+    },
+    {
+     "kind": "warp",
+     "index": 1,
+     "tile": [
+      1,
+      5
+     ],
+     "warp": [
+      1,
+      5
+     ],
+     "dest": "MAP_CANALAVE_CITY",
+     "dest_warp": 0,
+     "push": "left"
+    }
+   ],
+   "pocket": null
+  },
+  "MAP_CANALAVE_CITY": {
+   "closed": [],
+   "points": [
+    {
+     "kind": "warp",
+     "index": 0,
+     "tile": [
+      33,
+      50
+     ],
+     "warp": [
+      33,
+      50
+     ],
+     "dest": "MAP_ROUTE218_WEST",
+     "dest_warp": 1,
+     "push": "right"
+    }
+   ],
+   "pocket": null
+  }
+ }
+}

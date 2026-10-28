@@ -1,0 +1,60 @@
+{
+ "maps": [
+  "MAP_ROUTE218_EAST",
+  "MAP_ROUTE218",
+  "MAP_ROUTE218_WEST",
+  "MAP_CANALAVE_CITY"
+ ],
+ "build": "normal",
+ "rom_sha256": "d5aa56c5961939f8dfc24b6235a561fefbfd406a61874a074f24f699b18b7487",
+ "static_findings": [],
+ "save_before": "115106125c3a4c89fa0f3cce190290a034d6c2863c6e4fd5ab6b63a025cbf372",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_CANALAVE_CITY",
+    [
+     33,
+     50
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "115106125c3a4c89fa0f3cce190290a034d6c2863c6e4fd5ab6b63a025cbf372",
+ "verdict": "PASS"
+}

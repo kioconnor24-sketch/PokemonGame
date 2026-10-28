@@ -1,0 +1,37 @@
+{"t": 1792797008.92, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792797008.98, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792797009.6, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792797009.69, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792797011.95, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792797011.98, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792797013.95, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792797014.09, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792797014.67, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792797014.75, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792797015.27, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792797015.36, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792797016.47, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792797016.51, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792797020.28, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792797020.35, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792797020.98, "event": "field", "map": "MAP_POKMON_LEAGUE", "pos": [16, 35], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792797021.51, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_POKMON_LEAGUE", [16, 35]]}
+{"t": 1792797023.51, "event": "capture", "file": "0009-start.png"}
+{"t": 1792797023.51, "event": "observe", "label": "start", "problems": []}
+{"t": 1792797023.53, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792797023.55, "event": "map-qa-check", "name": "ordinary foot/no Surf at follower visible (start)", "ok": true, "avatar_flags": 1, "foot_mask": 1, "surf_mask": 8}
+{"t": 1792797023.62, "event": "map-qa-check", "name": "reached MAP_POKMON_LEAGUE", "ok": true, "at": ["MAP_POKMON_LEAGUE", [16, 35]]}
+{"t": 1792797024.66, "event": "capture", "file": "0010-start-menu.png"}
+{"t": 1792797025.48, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792797031.36, "event": "capture", "file": "0011-save-confirm-coronet-six.png"}
+{"t": 1792797032.45, "event": "capture", "file": "0012-save-step-coronet-six-01.png"}
+{"t": 1792797033.6, "event": "capture", "file": "0013-save-step-coronet-six-02.png"}
+{"t": 1792797034.65, "event": "capture", "file": "0014-save-step-coronet-six-03.png"}
+{"t": 1792797035.75, "event": "capture", "file": "0015-save-step-coronet-six-04.png"}
+{"t": 1792797036.79, "event": "capture", "file": "0016-save-step-coronet-six-05.png"}
+{"t": 1792797037.83, "event": "capture", "file": "0017-save-step-coronet-six-06.png"}
+{"t": 1792797038.93, "event": "capture", "file": "0018-save-step-coronet-six-07.png"}
+{"t": 1792797040.08, "event": "capture", "file": "0019-save-step-coronet-six-08.png"}
+{"t": 1792797040.95, "event": "capture", "file": "0020-saved-coronet-six.png"}
+{"t": 1792797040.95, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792797041.0, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_POKMON_LEAGUE", [16, 35]]}
