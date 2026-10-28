@@ -73,6 +73,18 @@ class CyclingQAOrderTest(unittest.TestCase):
             (engine / "input0").symlink_to(outside)
             with self.assertRaises(ValueError): m.validate(engine, receipt)
 
+    def test_unlisted_legacy_registry_symlink_cannot_escape(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            engine, receipt = self.fixture(root)
+            outside = root / "outside-groups.json"
+            outside.write_text(json.dumps({"gMapGroup_Sinnoh": ["legacy"] * 31}))
+            link = engine / "data/maps/map_groups.json"
+            link.parent.mkdir(parents=True)
+            link.symlink_to(outside)
+            with self.assertRaisesRegex(ValueError, "escapes"):
+                m.validate(engine, receipt)
+
     def test_other_receipt_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             engine, receipt = self.fixture(Path(tmp))
@@ -84,15 +96,13 @@ class CyclingQAOrderTest(unittest.TestCase):
         engine = root / "engine"
         engine.mkdir()
         (engine / ".map_qa_throwaway").touch()
-        groups = [f"Existing{i}" for i in range(41)]
-        groups[30] = "OreburghCity"
-        groups += ["EternaCity", "Route206_North", "Route206", "Route206_South", "Route211_West",
-                   "Route207", "OreburghMine_B1F", "OreburghMine_B2F"]
-        values = {"data/maps/map_groups.json": json.dumps({"gMapGroup_Sinnoh": groups}).encode(),
-                  "data/maps/OreburghCity/map.json": json.dumps({"region_map_section": "MAPSEC_OREBURGH_CITY",
-                                                                  "warp_events": [{}] * 15}).encode(),
-                  "data/layouts/OreburghCity/map.bin": b"source"}
-        values.update({f"input{i}": b"source" for i in range(58)})
+        contract = json.loads((HERE / "post-c-qa-contract.json").read_text())
+        document = json.loads((HERE.parents[4] / "Pokemon Game/engine/data/maps/map_groups.json").read_text())
+        document["gMapGroup_Sinnoh"] = contract["production_prefix"] + contract["temporary_suffix"]
+        values = dict.fromkeys(contract["payload_paths"], b"source")
+        values["data/maps/map_groups.json"] = json.dumps(document).encode()
+        values["data/maps/OreburghCity/map.json"] = json.dumps({
+            "region_map_section": "MAPSEC_OREBURGH_CITY", "warp_events": [{}] * 15}).encode()
         for path, raw in values.items():
             target = engine / path
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -125,6 +135,57 @@ class CyclingQAOrderTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "identity contract"):
                     m.validate(engine, receipt)
 
+    def test_other_production_slots_cannot_swap_with_updated_receipt_hash(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            def swap(value):
+                g = value["gMapGroup_Sinnoh"]
+                g[31], g[32] = g[32], g[31]
+            self.change_json(engine, receipt, "data/maps/map_groups.json", swap)
+            with self.assertRaisesRegex(ValueError, "identity contract"):
+                m.validate(engine, receipt)
+
+    def test_unrelated_payload_cannot_replace_expected_path(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            original = "data/layouts/Route207/map.bin"
+            receipt["files"].pop(original)
+            (engine / "unrelated").write_bytes(b"source")
+            receipt["files"]["unrelated"] = hashlib.sha256(b"source").hexdigest()
+            with self.assertRaisesRegex(ValueError, "path set"):
+                m.validate(engine, receipt)
+
+    def test_non_sinnoh_registry_change_is_rejected_by_existing_pin(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            def change(value):
+                group = next(k for k in value if k.startswith("gMapGroup_") and k != "gMapGroup_Sinnoh" and len(value[k]) > 1)
+                value[group][0], value[group][1] = value[group][1], value[group][0]
+            self.change_json(engine, receipt, "data/maps/map_groups.json", change)
+            with self.assertRaisesRegex(ValueError, "registry pin"):
+                m.validate(engine, receipt)
+
+    def test_post_c_cannot_pad_to_legacy_size(self):
+        with tempfile.TemporaryDirectory() as t:
+            engine, receipt = self.post_c_fixture(Path(t))
+            for name in ("extra0", "extra1"):
+                (engine / name).write_bytes(b"source")
+                receipt["files"][name] = hashlib.sha256(b"source").hexdigest()
+            with self.assertRaisesRegex(ValueError, "legacy63"):
+                m.validate(engine, receipt)
+
+    def test_legacy_31_and_39_map_profiles_still_pass(self):
+        for count in (31, 39):
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as t:
+                engine, receipt = self.fixture(Path(t))
+                receipt["files"].pop("input0")
+                name = "data/maps/map_groups.json"
+                path = engine / name
+                path.parent.mkdir(parents=True)
+                path.write_text(json.dumps({"gMapGroup_Sinnoh": [f"Legacy{i}" for i in range(count)]}))
+                receipt["files"][name] = hashlib.sha256(path.read_bytes()).hexdigest()
+                m.validate(engine, receipt)
+
     def test_post_c_alias_or_lost_production_warp_fails(self):
         for field, value in [("region_map_section", "MAPSEC_ROUTE_201"), ("warp_events", [{}] * 14)]:
             with self.subTest(field=field), tempfile.TemporaryDirectory() as t:
@@ -136,7 +197,7 @@ class CyclingQAOrderTest(unittest.TestCase):
     def test_post_c_cannot_replace_production_scripts_to_fill_receipt(self):
         with tempfile.TemporaryDirectory() as t:
             engine, receipt = self.post_c_fixture(Path(t))
-            receipt["files"].pop("input0")
+            receipt["files"].pop("data/layouts/Route207/map.bin")
             path = "data/maps/OreburghCity/scripts.inc"
             (engine / path).write_bytes(b"source")
             receipt["files"][path] = hashlib.sha256(b"source").hexdigest()
