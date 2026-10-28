@@ -20,8 +20,9 @@ def candidate(mode="construct", maps="NewRoute", sources="", number=355,
                 [dict(filename=STAGED + "NewRoute/map.json", status="added")])
 
 
-def check(pr, peers=(), main=()):
-    return guard.validate(dict(candidate=pr, other_open_prs=list(peers), main_maps=list(main)))
+def check(pr, peers=(), main=(), production=()):
+    return guard.validate(dict(candidate=pr, other_open_prs=list(peers),
+                               main_maps=list(main), main_engine_maps=list(production)))
 
 
 class SinnohWorkIdentityTests(unittest.TestCase):
@@ -84,6 +85,35 @@ class SinnohWorkIdentityTests(unittest.TestCase):
         p["number"] = 400
         p["files"] = [dict(filename="Pokemon Game/scripts/coordination/anything.py", status="added")]
         self.assertEqual(check(p), [])
+
+    def test_repair_cannot_introduce_new_geometry(self):
+        p = candidate(mode="repair", sources="#351")
+        self.assertTrue(any("repair cannot introduce" in e for e in check(p)))
+
+    def test_reuse_cannot_invent_existing_source(self):
+        p = candidate(mode="reuse", sources="main")
+        self.assertTrue(any("reuse source does not contain" in e for e in check(p)))
+        self.assertEqual(check(p, main=["NewRoute"]), [])
+
+    def test_reuse_source_must_contain_actual_map_file(self):
+        p = candidate(mode="reuse", sources="#351")
+        claimed_only = candidate(mode="construct", number=351, files=[
+            dict(filename=STAGED.replace("staged/", "stage.py"), status="added")])
+        self.assertTrue(any("reuse source does not contain" in e for e in
+                            check(p, peers=[claimed_only])))
+        with_map = dict(number=351, files=[
+            dict(filename=STAGED + "NewRoute/map.json", status="added")])
+        self.assertEqual(check(p, peers=[with_map]), [])
+
+    def test_production_requires_real_engine_output(self):
+        p = candidate(mode="integrate", sources="#351")
+        self.assertTrue(any("requires actual engine" in e for e in check(p)))
+
+    def test_cannot_reinstall_production_identity(self):
+        p = candidate(mode="integrate", sources="#351", files=[
+            dict(filename=ENGINE + "NewRoute/map.json", status="added")])
+        self.assertTrue(any("already installed in production" in e for e in
+                            check(p, production=["NewRoute"])))
 
     def test_dev_overlay_name_is_same_map(self):
         p = candidate(files=[dict(filename=STAGED+"NewRoute-dev-overlay/map.json",
