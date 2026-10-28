@@ -1,0 +1,541 @@
+{
+ "maps": [
+  "MAP_ROUTE222",
+  "MAP_ROUTE222_ACCESS",
+  "MAP_SUNYSHORE_CITY"
+ ],
+ "build": "normal",
+ "rom_sha256": "b19a190840535914bedda6f27875b28001096fcb5dfd7b5d89199c15e9aa1a73",
+ "static_findings": [],
+ "save_before": "e12a9e338204fc8bc226f75e803cf973667bb8145160edc38eb790cdf6429086",
+ "checks": [
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     6,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (start)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_ROUTE222",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     89,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222_ACCESS via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE222_ACCESS",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     1,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE222 warp 0 (89, 23) -> MAP_ROUTE222_ACCESS and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE222",
+    [
+     [
+      89,
+      23
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE222",
+    [
+     89,
+     23
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222 after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222 after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_ROUTE222_ACCESS",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     1,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222 via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222 via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE222",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222",
+    [
+     89,
+     23
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE222_ACCESS warp 0 (1, 5) -> MAP_ROUTE222 and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     [
+      1,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     1,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222_ACCESS after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "follower visible (MAP_SUNYSHORE_CITY via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SUNYSHORE_CITY via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_SUNYSHORE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     4,
+     48
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_ROUTE222_ACCESS warp 1 (11, 5) -> MAP_SUNYSHORE_CITY and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     [
+      11,
+      5
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     11,
+     5
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222_ACCESS after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "reached MAP_SUNYSHORE_CITY",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     4,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_ROUTE222_ACCESS via warp)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_ROUTE222_ACCESS via warp)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "an exit is reachable after warping into MAP_ROUTE222_ACCESS",
+   "ok": true,
+   "at": [
+    "MAP_ROUTE222_ACCESS",
+    [
+     11,
+     5
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "MAP_SUNYSHORE_CITY warp 0 (4, 48) -> MAP_ROUTE222_ACCESS and back",
+   "ok": true,
+   "leg": "back",
+   "expected": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     [
+      4,
+      48
+     ]
+    ]
+   ],
+   "got": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     4,
+     48
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (MAP_SUNYSHORE_CITY after warp round trip)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (MAP_SUNYSHORE_CITY after warp round trip)",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "source elevated walkway reached (28, 11)",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     28,
+     11
+    ]
+   ],
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "follower visible (elevated (28, 11))",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 4,
+    "follower": 4
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (elevated (28, 11))",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "source elevated walkway reached (25, 33)",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     25,
+     33
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (elevated (25, 33))",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (elevated (25, 33))",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "source elevated walkway reached (23, 44)",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     23,
+     44
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (elevated (23, 44))",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (elevated (23, 44))",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "source elevated walkway reached (30, 45)",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ],
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "follower visible (elevated (30, 45))",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  },
+  {
+   "name": "ordinary foot/no Surf at follower visible (elevated (30, 45))",
+   "ok": true,
+   "avatar_flags": 1,
+   "foot_mask": 1,
+   "surf_mask": 8
+  },
+  {
+   "name": "Start menu opens and returns to the field",
+   "ok": true
+  },
+  {
+   "name": "SAVE (coronet-six)",
+   "ok": true,
+   "at": [
+    "MAP_SUNYSHORE_CITY",
+    [
+     30,
+     45
+    ]
+   ]
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "flash_problems": [],
+ "save_after": "d47668582e9d78c5817584c3e07cd8895bc6a43599d8f354b982c7c8468862c9",
+ "verdict": "PASS"
+}

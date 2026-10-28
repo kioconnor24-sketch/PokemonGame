@@ -19,3 +19,14 @@ Disk is limited. Canonical paired ROMs/ELFs and exact recipe/source identity ret
 ## Next actual work
 
 Continue PR242 original Victory Road core shell: three source/art floors,7,472 cells,12 source-pinned reciprocal stairs,6/6 source tests,16/16 repeat outputs. Three-floor guarded runtime installer/host negatives prepared; paired build/native/mGBA/stair/follower/Save/fresh Continue/old-flash tests next. External League/side-room anchors remain closed. Source/DEV success never implies natural production integration.
+
+
+## LATEST — Route222 defect repaired in separate reviewed candidate (#245)
+
+The original source failure above remains true and its evidence is preserved. New route222-safety/corrected candidate changes ONLY36/37,16 from south-jump0x487 to solid stock cliff0x491. Every collision/elevation bit, all four boulder cells, remaining cells/borders/warps/banks and saved identities unchanged. Normal Git-tree comparison against original coast proves only Route222 map payload plus one added native test differ. This is an explicit authorized geography safety deviation, not global collision removal or a changed negative expectation.
+
+Actual new NORMAL+RELEASE142/142 GUI: four independent former-hazard probes10/10 each, ordinary coast/gateway/city44/profile, fresh Continue4/profile, unchanged legacy3/profile. Repaired faces block at36/37,15; adjacent unchanged35/38 jumps safely reach beach. Native30/30, original strict save goldens4/4, host9/9, static0. Final proof under design/sinnoh/route222-safety/runtime-evidence/. Engine tree9e3db316117df080d1afb369c9bfe85ea93c3a59, main871c46b6; repair+ZERO linked bytes/RAM versus original five-map scene. Owner visual review and genuine parent237 protected-path gate remain; no production merge or227+ identity inferred.
+
+Real issues resolved this session: isolated repair initially imported a downstream Victory renderer absent on parent241; changed to existing coast renderer, identical outputs9/9. An initial refusal-message assertion corrected only test wording. Generated caches accidentally committed then removed in normal follow-up. gh pr edit retired classic-Projects API error worked around with normal REST update, not a policy bypass. RELEASE legacy-only first graphical startup failed before gameplay (x11 not available); original stderr/trace retained, fresh graphical session with identical source/ROM/save passed3/3. Automatic review rejected posting unpublished evidence paths, so verified files were published before final links. No safeguards, baselines, save structures or acceptance standards weakened.
+
+Prior “Next actual work” is historical: Victory/League #242 already completed224/224 actual paired GUI/native31/strict4; original Coronet two-floor #243 completed100/100/native30/strict4. New Coronet outside/4F source package is distinct and still needs its own six-map runtime proof. Do not restart unchanged former stages or transfer those earlier results to new geography.
