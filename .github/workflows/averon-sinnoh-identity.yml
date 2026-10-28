@@ -35,7 +35,7 @@ jobs:
                 (f.filename.includes('/staged/') || /(?:\.py|source-pins\.json)$/.test(f.filename))));
             const snapshot = {candidate:{number, body:pr.body || '',
               files:own.map(f=>({filename:f.filename,status:f.status}))},
-              other_open_prs:[],main_maps:[]};
+              other_open_prs:[],main_maps:[],main_engine_maps:[]};
             if (number > 354 && relevant) {
               const {data: main} = await github.rest.repos.getBranch({owner,repo,branch:'main'});
               const {data: tree} = await github.rest.git.getTree({
@@ -43,15 +43,18 @@ jobs:
               });
               if (tree.truncated) throw Error('Cannot certify Sinnoh source identity: main tree truncated');
               const names = new Set();
+              const production = new Set();
               for (const item of tree.tree) {
                 if (item.type !== 'blob') continue;
                 const p = item.path;
                 const staged = p.match(/^Pokemon Game\/Averon_Codex_Handoff\/design\/sinnoh\/[^/]+\/staged\/([^/]+)\/map\.json$/);
                 const engine = p.match(/^Pokemon Game\/engine\/data\/maps\/([^/]+)\/map\.json$/);
                 if (staged || engine) names.add((staged || engine)[1].replace(/-dev-overlay$/, ''));
+                if (engine) production.add(engine[1]);
               }
               snapshot.main_maps = [...names];
-              const mode = (pr.body || '').match(/^Sinnoh-Work:\s*(construct|integrate)\s*$/im);
+              snapshot.main_engine_maps = [...production];
+              const mode = (pr.body || '').match(/^Sinnoh-Work:\s*(construct|integrate|reuse)\s*$/im);
               if (mode) {
                 const open = await github.paginate(github.rest.pulls.list, {
                   owner,repo,state:'open',per_page:100
