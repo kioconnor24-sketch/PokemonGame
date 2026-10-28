@@ -1,0 +1,73 @@
+name: Sinnoh duplicate map work guard
+# New PRs only: preserves existing stacked claims and does not execute PR code.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  unique-map-work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Read trusted main geography and live claims as data
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const {owner, repo} = context.repo;
+            const number = context.issue.number;
+            const {data: pr} = await github.rest.pulls.get({owner, repo, pull_number:number});
+            const own = await github.paginate(github.rest.pulls.listFiles, {
+              owner, repo, pull_number:number, per_page:100
+            });
+            const relevant = own.some(f =>
+              f.filename.startsWith('Pokemon Game/engine/data/maps/') ||
+              f.filename.startsWith('Pokemon Game/engine/data/layouts/') ||
+              (f.filename.startsWith('Pokemon Game/Averon_Codex_Handoff/design/sinnoh/') &&
+                (f.filename.includes('/staged/') || /(?:\.py|source-pins\.json)$/.test(f.filename))));
+            const snapshot = {candidate:{number, body:pr.body || '',
+              files:own.map(f=>({filename:f.filename,status:f.status}))},
+              other_open_prs:[],main_maps:[]};
+            if (number > 354 && relevant) {
+              const {data: main} = await github.rest.repos.getBranch({owner,repo,branch:'main'});
+              const {data: tree} = await github.rest.git.getTree({
+                owner,repo,tree_sha:main.commit.sha,recursive:'1'
+              });
+              if (tree.truncated) throw Error('Cannot certify Sinnoh source identity: main tree truncated');
+              const names = new Set();
+              for (const item of tree.tree) {
+                if (item.type !== 'blob') continue;
+                const p = item.path;
+                const staged = p.match(/^Pokemon Game\/Averon_Codex_Handoff\/design\/sinnoh\/[^/]+\/staged\/([^/]+)\/map\.json$/);
+                const engine = p.match(/^Pokemon Game\/engine\/data\/maps\/([^/]+)\/map\.json$/);
+                if (staged || engine) names.add((staged || engine)[1].replace(/-dev-overlay$/, ''));
+              }
+              snapshot.main_maps = [...names];
+              const mode = (pr.body || '').match(/^Sinnoh-Work:\s*(construct|integrate)\s*$/im);
+              if (mode) {
+                const open = await github.paginate(github.rest.pulls.list, {
+                  owner,repo,state:'open',per_page:100
+                });
+                for (const peer of open) {
+                  if (peer.number === number) continue;
+                  const files = await github.paginate(github.rest.pulls.listFiles, {
+                    owner,repo,pull_number:peer.number,per_page:100
+                  });
+                  snapshot.other_open_prs.push({number:peer.number,body:peer.body||'',
+                    files:files.map(f=>({filename:f.filename,status:f.status}))});
+                }
+              }
+              const {data: fresh} = await github.rest.pulls.get({owner,repo,pull_number:number});
+              if (fresh.head.sha !== pr.head.sha) throw Error('PR head moved during identity check');
+            }
+            fs.writeFileSync('/tmp/sinnoh-work-identity.json', JSON.stringify(snapshot));
+      - name: Reject newly duplicated map work
+        run: python3 "Pokemon Game/scripts/coordination/check_sinnoh_work_identity.py" /tmp/sinnoh-work-identity.json
