@@ -75,7 +75,9 @@ class PacketD(unittest.TestCase):
                 target=e/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(raw)
             world=mapdata.World(e);south=world.map(p.MAP_ID);route=world.map('MAP_ROUTE207')
             self.assertEqual(south.behavior(5,7),'MB_SOUTH_ARROW_WARP')
-            self.assertTrue(south.walkable(5,7));self.assertIn((5,7),mapdata.reach_states(south,(5,6)))
+            reachable=mapdata.reach_states(south,(5,6))
+            self.assertTrue(south.walkable(5,7));self.assertIn((5,7),reachable)
+            self.assertIn((36,19),reachable)  # real west-to-east passage approach for later packet E
             for tile in ((36,20),(29,2)):
                 self.assertEqual(south.behavior(*tile),'MB_NORMAL');self.assertFalse(south.walkable(*tile))
             self.assertEqual(route.behavior(52,5),'MB_NON_ANIMATED_DOOR')
