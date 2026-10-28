@@ -43,6 +43,8 @@ def validate(engine, receipt):
         # not route it around the stricter post-C contract.
         groups_file = engine / "data/maps/map_groups.json"
         if groups_file.is_file():
+            if not groups_file.resolve().is_relative_to(engine):
+                raise ValueError("source path escapes engine")
             groups = json.loads(groups_file.read_text())["gMapGroup_Sinnoh"]
             if len(groups) not in (31, 39):
                 raise ValueError("legacy63 receipt has an unsupported scene prefix")

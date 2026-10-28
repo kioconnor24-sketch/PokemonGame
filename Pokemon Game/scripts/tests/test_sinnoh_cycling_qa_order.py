@@ -73,6 +73,18 @@ class CyclingQAOrderTest(unittest.TestCase):
             (engine / "input0").symlink_to(outside)
             with self.assertRaises(ValueError): m.validate(engine, receipt)
 
+    def test_unlisted_legacy_registry_symlink_cannot_escape(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            engine, receipt = self.fixture(root)
+            outside = root / "outside-groups.json"
+            outside.write_text(json.dumps({"gMapGroup_Sinnoh": ["legacy"] * 31}))
+            link = engine / "data/maps/map_groups.json"
+            link.parent.mkdir(parents=True)
+            link.symlink_to(outside)
+            with self.assertRaisesRegex(ValueError, "escapes"):
+                m.validate(engine, receipt)
+
     def test_other_receipt_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             engine, receipt = self.fixture(Path(tmp))
