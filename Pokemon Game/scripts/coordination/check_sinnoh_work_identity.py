@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 CUTOFF = 354  # PRs already open when the identity contract was introduced
 ROOT = "Pokemon Game/"
@@ -143,11 +145,81 @@ def validate(snapshot: dict) -> list[str]:
     return errors
 
 
+def fetch_live(path: str) -> object:
+    """Public GitHub API; GH_TOKEN/GITHUB_TOKEN raises the public rate limit."""
+    token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "sinnoh-identity-preflight"}
+    if token:
+        headers["Authorization"] = "Bearer " + token
+    req = Request("https://api.github.com/repos/kioconnor24-sketch/PokemonGame/" + path,
+                  headers=headers)
+    with urlopen(req, timeout=20) as response:
+        return json.load(response)
+
+
+def pages(path: str) -> list[dict]:
+    items = []
+    for page in range(1, 30):
+        separator = "&" if "?" in path else "?"
+        part = fetch_live(path + f"{separator}per_page=100&page={page}")
+        if not isinstance(part, list):
+            raise ValueError("unexpected GitHub pagination response")
+        items.extend(part)
+        if len(part) < 100:
+            return items
+    raise ValueError("GitHub pagination limit reached; refusing incomplete claims")
+
+
+def preflight(mode: str, maps: str, sources: str) -> dict:
+    """Run before new map work, rather than wasting time writing a duplicate PR."""
+    names = [n.strip() for n in maps.split(",") if n.strip()]
+    root = SOURCE + "_preflight/staged/"
+    if mode == "integrate":
+        files = [{"filename": ENGINE_MAPS + n + "/map.json", "status": "added"} for n in names]
+    else:
+        files = [{"filename": root + n + "/map.json",
+                  "status": "added" if mode == "construct" else "modified"} for n in names]
+    candidate = {"number": CUTOFF + 1, "files": files,
+                 "body": f"Sinnoh-Work: {mode}\nSinnoh-Maps: {maps}\nSinnoh-Sources: {sources}\n"}
+    snapshot = {"candidate": candidate, "main_maps": [], "other_open_prs": []}
+    tree = fetch_live("git/trees/main?recursive=1")
+    if tree.get("truncated"):
+        raise ValueError("main tree truncated; map ownership cannot be checked")
+    snapshot["main_maps"] = [
+        name for row in tree["tree"] if row["type"] == "blob"
+        if row["path"].endswith("/map.json")
+        for name in [map_from_path(row["path"])] if name
+    ]
+    if mode in {"construct", "integrate"}:
+        for peer in pages("pulls?state=open"):
+            if peer["number"] == candidate["number"]:
+                continue
+            file_rows = pages(f"pulls/{peer['number']}/files")
+            snapshot["other_open_prs"].append({
+                "number": peer["number"], "body": peer.get("body", ""),
+                "files": [{"filename": f["filename"], "status": f["status"]} for f in file_rows],
+            })
+    return snapshot
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("snapshot", type=Path)
+    parser.add_argument("snapshot", type=Path, nargs="?")
+    parser.add_argument("--preflight", choices=sorted(MODES))
+    parser.add_argument("--maps", default="")
+    parser.add_argument("--sources", default="")
     args = parser.parse_args()
-    errors = validate(json.loads(args.snapshot.read_text(encoding="utf-8")))
+    if args.preflight:
+        try:
+            snapshot = preflight(args.preflight, args.maps, args.sources)
+        except Exception as err:
+            print("FAIL: live GitHub preflight unavailable; do not start duplicate work:", err)
+            return 1
+    elif args.snapshot:
+        snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
+    else:
+        parser.error("supply a trusted snapshot or --preflight with --maps")
+    errors = validate(snapshot)
     for e in errors:
         print("FAIL:", e)
     if errors:
