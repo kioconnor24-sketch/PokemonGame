@@ -98,6 +98,8 @@ def warp_arrive(m, x, y):
 def moves(m, x, y):
     """Tiles reachable in one press from (x, y): a walk or a ledge jump (no landing check, as in the engine)."""
     for d, (dx, dy) in DIRS.items():
+        if not mapdata.can_walk_direction(m, (x, y), d):
+            continue
         nx, ny = x + dx, y + dy
         if not m.inside(nx, ny):
             continue
@@ -107,36 +109,71 @@ def moves(m, x, y):
             yield nx + dx, ny + dy
 
 
-def edge_tiles(m, direction):
+def edge_tiles(m, direction, connection=None):
+    """Walkable tiles on one edge; with connection=(other_id, offset), only those that connection spans.
+
+    A map may have several connections on one side (Route 205 North opens down to two maps): the engine
+    (GetIncomingConnection) uses the one whose span contains the tile, so each seam owns only its own tiles.
+    """
     if direction in ("up", "down"):
         y = 0 if direction == "up" else m.height - 1
-        return [(x, y) for x in range(m.width) if m.walkable(x, y)]
-    x = 0 if direction == "left" else m.width - 1
-    return [(x, y) for y in range(m.height) if m.walkable(x, y)]
+        tiles = [(x, y) for x in range(m.width) if m.walkable(x, y)]
+    else:
+        x = 0 if direction == "left" else m.width - 1
+        tiles = [(x, y) for y in range(m.height) if m.walkable(x, y)]
+    world = getattr(m, "world", None)
+    if connection is None or world is None:
+        return tiles
+    other = world.map(connection[0])
+    return [t for t in tiles if other.inside(*across(m, other, direction, connection[1], t))]
+
+
+def uncovered_edge_tiles(m, direction):
+    """Walkable edge tiles no connection on that side spans: a closed edge for the player."""
+    spans = [(o, off) for d, o, off in m.connections if d == direction]
+    covered = {t for c in spans for t in edge_tiles(m, direction, c)}
+    return [t for t in edge_tiles(m, direction) if t not in covered]
 
 
 across = mapdata.across
 
 
+def state_moves(m, x, y, e):
+    """(tile, elevation) states reachable in one press from (x, y) at elevation e: a walk or a ledge jump,
+    with the engine's elevation rules (mapdata.step_elevation)."""
+    for t in moves(m, x, y):
+        if m.inside(*t) and m.walkable(*t):
+            ne = mapdata.step_elevation(m, e, (x, y), t)
+            if ne is not None:
+                yield t, ne
+
+
 def reach(m, starts, reverse=False):
+    """Tiles reachable from starts (or, reverse, tiles that can reach a start), honouring elevations."""
     starts = [s for s in starts if m.inside(*s) and m.walkable(*s)]
     if reverse:
+        levels = {mapdata.elevation_at(m, x, y) for y in range(m.height) for x in range(m.width)} | {0}
+        # The player's elevation is the tile's own, except on a 15 (bridge) tile, which keeps the previous one.
+        valid = lambda x, y: levels if mapdata.elevation_at(m, x, y) == 15 else {mapdata.elevation_at(m, x, y)}
         back = {}
         for y in range(m.height):
             for x in range(m.width):
                 if m.walkable(x, y):
-                    for t in moves(m, x, y):
-                        back.setdefault(t, []).append((x, y))
-        step = lambda t: back.get(t, [])
+                    for e in valid(x, y):
+                        for t in state_moves(m, x, y, e):
+                            back.setdefault(t, []).append(((x, y), e))
+        step = lambda s: back.get(s, [])
+        first = [(s, e) for s in starts for e in valid(*s)]
     else:
-        step = lambda t: [n for n in moves(m, *t) if m.inside(*n) and m.walkable(*n)]
-    seen, queue = set(starts), deque(starts)
+        step = lambda s: list(state_moves(m, *s[0], s[1]))
+        first = [(s, e) for s in starts for e in mapdata.start_elevations(m, s)]
+    seen, queue = set(first), deque(first)
     while queue:
         for n in step(queue.popleft()):
             if n not in seen:
                 seen.add(n)
                 queue.append(n)
-    return seen
+    return {s for s, _ in seen}
 
 
 def map_points(m):
@@ -144,10 +181,10 @@ def map_points(m):
     points = []
     for i, (x, y, dest, warp) in enumerate(m.warps):
         points.append(dict(kind="warp", index=i, tile=warp_stand(m, x, y), warp=(x, y), dest=dest, dest_warp=warp,
-                           push=warp_push(m, x, y)))
+                           push=warp_push(m, x, y), exit=mapdata.takeable(m, x, y)))
     for direction, other_id, offset in m.connections:
-        for t in edge_tiles(m, direction):
-            points.append(dict(kind="connection", tile=t, direction=direction, dest=other_id, offset=offset))
+        for t in edge_tiles(m, direction, (other_id, offset)):
+            points.append(dict(kind="connection", tile=t, direction=direction, dest=other_id, offset=offset, exit=True))
     return points
 
 
@@ -174,14 +211,15 @@ def batch_reach(world, map_ids, map_id, tile):
         region = reach(m, [start])
         seen |= {(mid, t) for t in region}
         for p in map_points(m):
-            if tuple(p["tile"]) not in region:
+            if tuple(p["tile"]) not in region or not p["exit"]:
                 continue
             if p["kind"] == "warp":
                 nxt = batch_arrival(world, map_ids, p)
             elif p["dest"] in map_ids:
                 other = world.map(p["dest"])
                 o = across(m, other, p["direction"], p["offset"], p["tile"])
-                nxt = (p["dest"], tuple(o)) if other.inside(*o) and other.walkable(*o) else None
+                ok = other.inside(*o) and other.walkable(*o) and mapdata.crossable(m, p["tile"], other, o)
+                nxt = (p["dest"], tuple(o)) if ok else None
             else:
                 nxt = None
             if nxt and nxt not in seen:
@@ -199,9 +237,12 @@ def static_audit(world, map_ids):
         m = world.map(map_id)
         points = map_points(m)
         tiles = [p["tile"] for p in points]
+        exits = [p for p in points if p["exit"]]        # arrival-only warps are entries, never exits
         for p in points:
             if not (m.inside(*p["tile"]) and m.walkable(*p["tile"])):
                 find(map_id, "exit-not-walkable", p)
+            if p["kind"] == "warp" and not p["exit"] and any(k in m.behavior(*p["warp"]) for k in ("DOOR", "LADDER")):
+                find(map_id, "warp-closed", dict(warp=p["warp"], behavior=m.behavior(*p["warp"]), dest=p["dest"]))
         # Ledges must land on walkable ground (PlayerJumpLedge never checks).
         for y in range(m.height):
             for x in range(m.width):
@@ -215,37 +256,39 @@ def static_audit(world, map_ids):
         # Seams: each walkable tile must face a walkable tile across the connection.
         for direction, other_id, offset in m.connections:
             other = world.map(other_id)
-            for t in edge_tiles(m, direction):
+            for t in edge_tiles(m, direction, (other_id, offset)):
                 o = across(m, other, direction, offset, t)
-                if not (other.inside(*o) and other.walkable(*o)):
+                if not (other.inside(*o) and other.walkable(*o)
+                        and mapdata.crossable(m, t, other, o)):
                     find(map_id, "seam-mismatch", dict(direction=direction, tile=t, faces=(other_id, o)))
         # Every entry must reach every exit inside the map (cross-map routes are run-time checks).
         cut = []
         for p in points:
             got = reach(m, [p["tile"]])
-            cut += [(p["tile"], q["tile"]) for q in points if q["tile"] not in got]
+            cut += [(p["tile"], q["tile"]) for q in exits if q["tile"] not in got]
         # A pair split inside this map is fine when the batch joins it (e.g. a route's halves through a cave).
         cut = [(a, b) for a, b in cut if (map_id, tuple(b)) not in batch_reach(world, map_ids, map_id, a)]
         if cut:
             find(map_id, "exit-unreachable", dict(pairs=cut[:8], count=len(cut)))
         # Pockets: tiles a player can get into but never back out of.
         fwd = reach(m, tiles)
-        back = reach(m, tiles, reverse=True)
+        back = reach(m, [p["tile"] for p in exits], reverse=True)
         pocket = sorted(fwd - back)
         if pocket:
             find(map_id, "one-way-pocket", dict(tiles=pocket[:12], count=len(pocket)))
-        # Runtime plan: closed edges (one tile per contiguous run), seams, warps, pockets.
-        connected = {d for d, _, _ in m.connections}
+        # Runtime plan: closed edges (one tile per contiguous run), seams, warps, pockets. A probe tile must be
+        # walkable to from where the player stands at an entry, never across a warp (behind a stair door is dead).
+        walk = set()
+        for p in points:
+            walk |= set(mapdata.reach_states(m, tuple(p["tile"])))
         closed = []
         for direction in DIRS:
-            if direction in connected:
-                continue
             run = []
-            plain = [t for t in edge_tiles(m, direction) if not m.warp_at(*t)]   # pressing out on a mat warps
+            plain = [t for t in uncovered_edge_tiles(m, direction) if not mapdata.takeable(m, *t)]   # a mat warps
             for t in plain + [None]:
                 if run and (t is None or abs(t[0] - run[-1][0]) + abs(t[1] - run[-1][1]) != 1):
                     middle = run[len(run) // 2]
-                    if middle in fwd:
+                    if middle in fwd and middle in walk:
                         closed.append(dict(tile=middle, direction=direction, span=[run[0], run[-1]]))
                     run = []
                 if t is not None:
@@ -428,10 +471,15 @@ class Runner:
         import run as play
         mid, (x, y) = self.d.here()
         m = self.w.map(mid)
+        # Standing on a step-on warp (coord trigger or ladder): stepping back onto it would take the warp again,
+        # so step off only (one step already places the follower).
+        on_step_warp = mapdata.trigger_entry(m, x, y) is not None
         for direction, (dx, dy) in DIRS.items():
+            if not mapdata.can_walk_direction(m, (x, y), direction):
+                continue
             n = (x + dx, y + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
-                if self.d.step(direction) is not None:
+                if self.d.step(direction) is not None and not on_step_warp:
                     self.d.step(OPPOSITE[direction])
                 break
         obs = play.observe(self.d, label)
@@ -441,20 +489,33 @@ class Runner:
     def can_leave(self, label):
         mid, pos = self.d.here()
         m = self.d.live_map(mid)
-        exits = {p["tile"] for p in map_points(m)}
+        exits = {p["tile"] for p in map_points(m) if p["exit"]}
         ok = bool(reach(m, [pos]) & exits)
         return self.check(f"an exit is reachable after {label}", ok, at=(mid, pos))
 
     def go(self, map_id, tile, _depth=0):
         """Walk to tile; an unreachable tile is a failed check for the caller, not a crashed run.
 
-        When the tile is in another part of the map than the player (a route split by a cliff and joined
-        by a cave), enter that part through a batch warp whose arrival can reach it, then walk.
+        When the player is on another map (after a one-way drop), travel back first. When the tile is in another
+        part of the map than the player (a route split by a cliff and joined
+        by a cave, or a plateau reached only across a seam), travel there through neighbouring maps with
+        elevation-aware routing; failing that, enter that part through a batch warp whose arrival can reach it.
         """
         from driver import Stuck
         tile = tuple(tile)
-        if self.d.here()[0] == map_id and tile not in reach(self.d.live_map(map_id), [self.d.here()[1]]) and _depth < 2:
-            self.enter_region(map_id, tile, _depth)
+        if self.d.here()[0] != map_id:      # e.g. left on the floor below by a one-way hole drop
+            try:
+                self.d.travel_to(map_id)
+            except Stuck as exc:
+                self.d.log("no-route-to-map", map=map_id, reason=str(exc))
+        here = self.d.here()
+        # On foot means without stepping onto a takeable warp (a strip behind stairs is reached by coming down them).
+        if here[0] == map_id and tile not in mapdata.reach_states(self.d.live_map(map_id), here[1]) and _depth < 2:
+            try:
+                self.d.go_map(self.d.map_route(map_id, map_id, here[1], target=tile))
+            except Stuck as exc:
+                self.d.log("no-route-to-tile", map=map_id, tile=tile, reason=str(exc))
+                self.enter_region(map_id, tile, _depth)
         try:
             self.d.walk_path(map_id, {tile})
         except Stuck as exc:
@@ -466,7 +527,7 @@ class Runner:
         target = self.w.map(map_id)
         for src in self.plan:
             for p in self.plan[src]["points"]:
-                if p["kind"] != "warp" or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
+                if p["kind"] != "warp" or not p["exit"] or p["dest"] != map_id or p["dest_warp"] >= len(target.warps):
                     continue
                 arrive = warp_arrive(target, *target.warps[p["dest_warp"]][:2])
                 if tile not in reach(target, [arrive]):
@@ -549,7 +610,10 @@ class Runner:
         if arrive is None or there != (p["dest"], arrive):
             return self.check(name, False, leg="in", expected=(p["dest"], arrive), got=there)
         self.follower(f"{p['dest']} via warp")
-        self.can_leave(f"warping into {p['dest']}")
+        left = self.can_leave(f"warping into {p['dest']}")
+        if not mapdata.takeable(dest, wx, wy):
+            # A one-way drop (a Mt. Pyre hole): the landing warp is an arrival point the engine never takes back.
+            return self.check(name.replace("and back", "(one-way)"), left, leg="in", at=there)
         self.go(p["dest"], dstand)
         # A same-map warp changes coordinates, not its map ID. Stop on the
         # exact accepted source-derived return group before another input moves
@@ -588,7 +652,7 @@ class Runner:
             return self.check(f"pocket probe landed at {tuple(entry['into'])} on {map_id}", False, got=landed)
         self.d.shot(f"pocket-{map_id}-in")
         # Escape attempt with real input: route to any warp/seam point, then push every direction.
-        exits = {tuple(p["tile"]) for p in map_points(self.d.live_map(map_id))}
+        exits = {tuple(p["tile"]) for p in map_points(self.d.live_map(map_id)) if p["exit"]}
         try:
             self.d.walk_path(map_id, exits)
         except Stuck as exc:
@@ -685,11 +749,15 @@ class Runner:
     def follower_step(self):
         mid, pos = self.d.here()
         m = self.d.live_map(mid)
+        on_step_warp = mapdata.trigger_entry(m, *pos) is not None   # never step back onto a step-on warp
         for direction, (dx, dy) in DIRS.items():
+            if not mapdata.can_walk_direction(m, pos, direction):
+                continue
             n = (pos[0] + dx, pos[1] + dy)
             if m.walkable(*n) and not m.warp_at(*n) and n not in {(o[0], o[1]) for o in m.objects}:
                 if self.d.step(direction) is not None:
-                    self.d.step(OPPOSITE[direction])
+                    if not on_step_warp:
+                        self.d.step(OPPOSITE[direction])
                     return True
         return False
 
@@ -801,7 +869,7 @@ class Runner:
             for p in {id(q): q for q in (run[0], run[len(run) // 2], run[-1])}.values():
                 self.seam(map_id, p)
         for p in plan["points"]:
-            if p["kind"] == "warp" and p["dest"] in self.plan:
+            if p["kind"] == "warp" and p["exit"] and p["dest"] in self.plan:
                 self.warp(map_id, p)
 
     def passable_seams(self, map_id, direction):

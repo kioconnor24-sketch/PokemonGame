@@ -19,13 +19,13 @@ class CanalaveRuntimeTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):cls.files,cls.receipt=runtime.assemble(ROOT)
 
-    def test_original_nineteen_slots_preserved_and_four_appended_without_saved_ids(self):
+    def test_original_thirty_slots_preserved_and_four_appended_without_saved_ids(self):
         original=json.loads((ROOT/runtime.ENGINE/'data/maps/map_groups.json').read_text())
         groups=json.loads(self.files['data/maps/map_groups.json'])
-        self.assertEqual(original['gMapGroup_Sinnoh'],groups['gMapGroup_Sinnoh'][:19])
-        self.assertEqual(23,len(groups['gMapGroup_Sinnoh']))
-        self.assertEqual(list(runtime.MAPS),groups['gMapGroup_Sinnoh'][19:])
-        self.assertEqual([19,20,21,22],list(self.receipt['temporary_map_slots'].values()))
+        self.assertEqual(original['gMapGroup_Sinnoh'],groups['gMapGroup_Sinnoh'][:30])
+        self.assertEqual(34,len(groups['gMapGroup_Sinnoh']))
+        self.assertEqual(list(runtime.MAPS),groups['gMapGroup_Sinnoh'][30:])
+        self.assertEqual([30,31,32,33],list(self.receipt['temporary_map_slots'].values()))
         self.assertFalse(any('region_map_sections' in path or 'pokemon' in path for path in self.files))
 
     def test_no_primary_copy_no_global_graphics_and_exact_original_map_inputs(self):

@@ -5,7 +5,7 @@
       "layout": "LAYOUT_IRON_ISLAND",
       "width": 40,
       "height": 32,
-      "map_sha256": "0b58863396a37c974045e9fc17543e41901e98b964e6b6e8f5623b11ce9879da",
+      "map_sha256": "7bc0838495bc58d161f6971b4fe6926acbbe70655052a7726fa282d47a8dace3",
       "border_sha256": "09e6b43c8549e711f19a59dea03683b6c42176bdc528bf60fc0b9a0629720fbb"
     },
     "IronIsland_House": {
@@ -22,24 +22,67 @@
       "layout": "LAYOUT_IRON_ISLAND_B1F",
       "width": 32,
       "height": 25,
-      "map_sha256": "fb60e7c08fe33d1c9a8e08971e45f6b404941d84188ac269c95b6ab5c0776be4",
+      "map_sha256": "b0ffcbb5f2e631b50e5085df5b9e2fa637470c16cc761d37406289c04a28ab55",
       "border_sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
     },
     "IronIsland_B2F": {
       "layout": "LAYOUT_IRON_ISLAND_B2F",
       "width": 30,
       "height": 22,
-      "map_sha256": "7955ed8a914840e0703ce0eadef87beb27c992364bea3c7f15ccbe4be3dbf520",
+      "map_sha256": "e4d036de28309c7147c0d21c5388bb9cc42eea4fcd40de221958806618861f0c",
       "border_sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
     },
-    "CanalaveCity_House1": {
-      "layout": "LAYOUT_HOUSE1"
+    "IronIsland_B3F": {
+      "layout": "LAYOUT_IRON_ISLAND_B3F",
+      "width": 36,
+      "height": 26,
+      "map_sha256": "50d45be70a23afc5174f37c9947e000062ab8b2f94ebe5e54bbb11a61662d507",
+      "border_sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+    },
+    "CanalaveCity_Library_1F": {
+      "layout": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F"
+    },
+    "CanalaveCity_Library_2F": {
+      "layout": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F"
     },
     "CanalaveCity_House2": {
       "layout": "LAYOUT_HOUSE1"
     },
+    "CanalaveCity_House3": {
+      "layout": "LAYOUT_HOUSE1"
+    },
+    "CanalaveCity_House4": {
+      "layout": "LAYOUT_HOUSE1"
+    },
+    "CanalaveCity_House5": {
+      "layout": "LAYOUT_HOUSE1"
+    },
+    "CanalaveCity_House6": {
+      "layout": "LAYOUT_HOUSE1"
+    },
+    "CanalaveCity_House7": {
+      "layout": "LAYOUT_HOUSE1"
+    },
     "CanalaveCity_Harbor": {
-      "layout": "LAYOUT_HARBOR"
+      "layout": "LAYOUT_CANALAVE_CITY_HARBOR",
+      "width": 24,
+      "height": 15,
+      "map_sha256": "f429549956c174616ad3e4b45edb4af5ba6e4a69277dd93fb12c56bbb687cf99",
+      "border_sha256": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d"
+    },
+    "NewmoonIsland": {
+      "layout": "LAYOUT_NEWMOON_ISLAND",
+      "width": 34,
+      "height": 34,
+      "map_sha256": "655f3519e8b8760fe575f4bbcf8b11def32299d5a7765a14d07a1aaf01eea884",
+      "border_sha256": "09e6b43c8549e711f19a59dea03683b6c42176bdc528bf60fc0b9a0629720fbb"
+    },
+    "FullmoonIsland": {
+      "layout": "LAYOUT_FULLMOON_ISLAND",
+      "width": 36,
+      "height": 30,
+      "map_sha256": "3d40edfe095cc8d8dce9bede6c2a1ebba397f0cae34626ac8ec4aeffb1667113",
+      "border_sha256": "09e6b43c8549e711f19a59dea03683b6c42176bdc528bf60fc0b9a0629720fbb"
     },
     "CanalaveCity_PokemonCenter_1F": {
       "layout": "LAYOUT_POKEMON_CENTER_1F"
@@ -49,6 +92,8 @@
     "data/layouts/DewfordTown/map.bin": "f99942a2f630ca1fc16d7d84f7f831485934962c4477e8b1fa88cfbe30c61f74",
     "data/layouts/GraniteCave_1F/map.bin": "6e8e5420747a9e2c18c9ecc04e43e028cac70e6030a8015a52edcac739459bbf",
     "data/layouts/GraniteCave_B1F/map.bin": "b9598bdd24ac4358679e255dc07052b2687c2babef091ff6174115c19409c7c5",
+    "data/layouts/Harbor/border.bin": "9ff63640fa3b4682056532b7924b03250ccc7a832f64ccec3dea79ea8595a24d",
+    "data/layouts/Harbor/map.bin": "ec418c60c4f5cac3eb4ee9e2a29e1f48709e552411f67086a5352945001afcbc",
     "data/layouts/LakeVerity/map.bin": "f7fd0e8a1acd247c123b67df78d06cccfaf47bce9cc524af9d0db7a43ad1864a",
     "data/layouts/OreburghGate_1F/map.bin": "03fb0288b064076c4eaaa530ca49070bca2d416e81d31a718fcb94973cd499e2",
     "data/layouts/Route105/map.bin": "3426db0bbeca5baeb3971d5d60345400d01fff229a60c28ebe3745fd81558b14",
@@ -57,11 +102,27 @@
   },
   "canalave_overlay": {
     "source_sha256": "1a6d0438b0ca4fae2166bbedd09cb27d29a04175c8bf9e0f36aaf5459ae87eb5",
-    "output_sha256": "6dbe1341a78eb1f615a2f7b2f9999b4585fc80c4d97351bd5e3e2de98d24f68b",
+    "output_sha256": "f4c271f27ecf014494849a913def18aeef12c83652e1961586c94f917fcb70e3",
     "changed_cells": [
       [
         29,
         13
+      ],
+      [
+        25,
+        31
+      ],
+      [
+        9,
+        39
+      ],
+      [
+        10,
+        45
+      ],
+      [
+        25,
+        45
       ]
     ]
   }

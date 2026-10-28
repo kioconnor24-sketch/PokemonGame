@@ -20,9 +20,9 @@ class RuntimeTest(unittest.TestCase):
 
     def test_all_existing_map_layout_and_include_prefixes_survive(self):
         before=json.loads(self.before['data/maps/map_groups.json']);after=json.loads(self.files['data/maps/map_groups.json'])
-        self.assertEqual(len(before['gMapGroup_Sinnoh']),19)
+        self.assertEqual(len(before['gMapGroup_Sinnoh']),30)
         for k,v in before.items():self.assertEqual(after[k][:len(v)] if k=='gMapGroup_Sinnoh' else after[k],v)
-        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(19,32))))
+        self.assertEqual(self.receipt['temporary_map_slots'],dict(zip(a.MAPS,range(30,43))))
         before=json.loads(self.before['data/layouts/layouts.json'])['layouts'];after=json.loads(self.files['data/layouts/layouts.json'])['layouts']
         self.assertEqual(before,after[:len(before)])
         for p in ('data/event_scripts.s','include/tilesets.h','src/data/tilesets/headers.h','src/data/tilesets/metatiles.h'):
@@ -32,7 +32,7 @@ class RuntimeTest(unittest.TestCase):
         for name in a.MAPS:
             folder=(HERE/'hotel-link/staged'/name) if name=='HotelGrandLake' else (HERE/'staged'/name)
             for p,suffix in [('map.bin','map'),('border.bin','border')]:
-                self.assertEqual(self.files[f'data/layouts/{name}/{p}'],(HERE/'hotel-link/valor-map.bin' if p=='map.bin' and name=='ValorLakefront' else HERE/'hotel-link/route213-map.bin' if p=='map.bin' and name=='Route213' else folder/('border.bin' if p=='border.bin' and (name.endswith('_Access') or name=='HotelGrandLake') else f'averon-{suffix}.bin')).read_bytes())
+                self.assertEqual(self.files[f'data/layouts/{name}/{p}'],(a.crossing.patch((folder/'averon-map.bin').read_bytes()) if p=='map.bin' and name=='Route212_South' else (HERE/'hotel-link/valor-map.bin' if p=='map.bin' and name=='ValorLakefront' else HERE/'hotel-link/route213-map.bin' if p=='map.bin' and name=='Route213' else folder/('border.bin' if p=='border.bin' and (name.endswith('_Access') or name=='HotelGrandLake') else f'averon-{suffix}.bin')).read_bytes()))
             source=json.loads((HERE/'hotel-link/route213-map.json' if name=='Route213' else folder/'map.json').read_text());target=json.loads(self.files[f'data/maps/{name}/map.json'])
             self.assertEqual(source,self.receipt['source_headers'][name]);source['region_map_section']='MAPSEC_ROUTE_201'
             self.assertEqual(source,target)
@@ -114,7 +114,7 @@ class RuntimeTest(unittest.TestCase):
             with self.subTest(filename=filename),mock.patch.object(Path,'read_bytes',new=read),self.assertRaisesRegex(ValueError,'native General primary metadata'):
                 a.assemble(ROOT)
 
-    def test_actual_route212_rails_are_not_foot_paths_even_at_elevation15(self):
+    def test_remaining_route212_rails_block_feet_and_single_ground_crossing_connects(self):
         path=HERE/'run_runtime_qa.py'
         spec=importlib.util.spec_from_file_location('eastern_foot_qa',path)
         qa=importlib.util.module_from_spec(spec);spec.loader.exec_module(qa)
@@ -132,17 +132,17 @@ class RuntimeTest(unittest.TestCase):
         with mock.patch.object(Path,'read_text',new=text),mock.patch.object(Path,'read_bytes',new=binary):
             m=md.World(engine).map('MAP_ROUTE212_SOUTH')
             for x in range(36,41):
-                self.assertEqual((m.collision(x,11),m.elevation(x,11),m.behavior(x,11)),(0,15,'MB_HORIZONTAL_RAIL'))
-                self.assertFalse(qa.foot_walkable(m,x,11))
-            # Exact real mGBA failure: collision-only planning promised a path
-            # through these rail tiles; native foot input refused every one.
-            self.assertIsNone(qa.elevation_path(m,(36,12),{(10,0)},start_elevation=3))
+                self.assertEqual((m.collision(x,11),m.elevation(x,11),m.behavior(x,11)),(0,15,'MB_NORMAL' if x==38 else 'MB_HORIZONTAL_RAIL'))
+                self.assertEqual(qa.foot_walkable(m,x,11),x==38)
+            # Original runtime failure is preserved by negative source fixtures;
+            # the sole new ground cell now allows an ordinary foot route.
+            self.assertIsNotNone(qa.elevation_path(m,(36,12),{(10,0)},start_elevation=3))
             self.assertIsNone(qa.elevation_path(m,(36,12),{(36,11)},start_elevation=3))
             self.assertIsNotNone(qa.elevation_path(m,(36,12),{(37,12)},start_elevation=3))
             self.assertNotIn(('up',(36,11)),list(qa.follower_neighbors(m,(36,12))))
             plan=qa.acro_crossing_plan(m,(129,15),(10,0),3)
-            self.assertEqual(plan,dict(approach=(36,12),rail=(36,11),landing=(36,10),direction='up'))
-            self.assertEqual(qa.acro_crossing_plan(m,(10,0),(129,15),3)['direction'],'down')
+            self.assertIsNone(plan)  # ordinary ground crossing makes Acro unnecessary
+            self.assertIsNone(qa.acro_crossing_plan(m,(10,0),(129,15),3))
             self.assertIsNone(qa.acro_crossing_plan(m,(36,12),(37,12),3))
             changed=list(m.blocks);changed[11*m.width+36]^=0x1000
             with self.assertRaisesRegex(ValueError,'rail portal changed'):
@@ -172,8 +172,8 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual(receipt['dev_fixture']['flag_grants'],[])
         self.assertEqual(set(files),set(before));self.assertEqual(len(files),66)
         self.assertEqual(a.assemble(ROOT),(self.files,self.receipt))
-        published=json.loads((HERE/'runtime-recipe.json').read_text())
-        self.assertEqual(self.receipt,published)  # exact previous no-grant contract, not a self-generated oracle
+        published=json.loads((HERE/'runtime-recipe-west30.json').read_text())
+        self.assertEqual(self.receipt,published)  # separate source-pinned30-slot no-grant contract; 19/22-slot recipes retained
         self.assertNotIn('dev_fixture',self.receipt)
         for bad in (1,'yes',None):
             with self.subTest(value=bad),self.assertRaises(ValueError):a.assemble(ROOT,acro_fixture=bad)

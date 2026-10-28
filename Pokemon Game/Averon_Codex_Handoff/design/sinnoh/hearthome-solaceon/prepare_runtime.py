@@ -13,7 +13,7 @@ import re
 import subprocess
 
 HERE=Path(__file__).resolve().parent
-BASE='c6ac2f967b02473741791eb24b5cc9b11bda3904'
+BASE='9a7d02d55a6fc65686088e30da56d4e2ae6f5657'
 ENGINE='Pokemon Game/engine/'
 MAPS={'HearthomeCity':(58,52),'Route208':(68,38),'Route208_Access':(13,9),
       'Route209':(68,72),'SolaceonTown':(66,44),'Route210_South':(42,94),'Route209_Access':(13,9)}
@@ -47,10 +47,10 @@ def assemble(repo):
     repo=Path(repo).resolve();before=inputs(repo)
     groups=json.loads(before['data/maps/map_groups.json']);layouts=json.loads(before['data/layouts/layouts.json'])
     names=groups['gMapGroup_Sinnoh'];prior=list(names);group=groups['group_order'].index('gMapGroup_Sinnoh')
-    if len(names)!=19 or len(set(names))!=19 or set(MAPS)&set(names):raise ValueError('exact current19-slot prefix required')
-    pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 19, 1)'
+    if len(names)!=30 or len(set(names))!=30 or set(MAPS)&set(names):raise ValueError('exact current30-slot prefix required')
+    pins=before['test/data/averon_map_registry_slots.inc'].decode();marker=f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 30, 1)'
     if pins.count(marker)!=1:raise ValueError('registry count mismatch')
-    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, 26, 1)')
+    pins=pins.replace(marker,f'REGISTRY_GROUP({group}, gMapGroup_Sinnoh, {30+len(MAPS)}, 1)')
     files={};symbols={};declarations='\n';headers='\n';metatiles='\n';includes=[]
     for family,secondary,graphics,folder in (
             ('OutdoorPrimary',False,'General','outdoor-family'),
@@ -67,7 +67,7 @@ def assemble(repo):
         metatiles+=f'const u16 gMetatiles_{symbol}[] = INCBIN_U16("{path}metatiles.bin");\nconst u16 gMetatileAttributes_{symbol}[] = INCBIN_U16("{path}metatile_attributes.bin");\n'
         headers+=f'const struct Tileset gTileset_{symbol} = {{ .isCompressed=TRUE, .isSecondary={"TRUE" if secondary else "FALSE"}, .tiles={bindings["tiles"]}, .palettes={bindings["palettes"]}, .metatiles=gMetatiles_{symbol}, .metatileAttributes = gMetatileAttributes_{symbol}, .callback={bindings["callback"]} }};\n'
     source_headers={};layout_ids={d['id'] for d in layouts['layouts']}
-    for slot,(name,(w,h)) in enumerate(MAPS.items(),19):
+    for slot,(name,(w,h)) in enumerate(MAPS.items(),30):
         folder=HERE/'staged'/name;header=json.loads((folder/'map.json').read_text());source_headers[name]=copy.deepcopy(header)
         if header['region_map_section']!='MAPSEC_PENDING_OWNER' or header['layout'] in layout_ids:
             raise ValueError('not an unregistered pending source map')
@@ -96,7 +96,7 @@ def assemble(repo):
     files['data/maps/map_groups.json']=encode(groups);files['data/layouts/layouts.json']=encode(layouts)
     files['test/data/averon_map_registry_slots.inc']=pins.encode();files['test/averon_central_runtime.c']=(HERE/'native-runtime.c').read_bytes()
     return files,dict(status='DEV_ONLY_NOT_PRODUCTION_OR_SAVED_ORIGIN_ACCEPTANCE',base=BASE,existing_map_names_preserved=prior,
-        temporary_map_slots={n:19+i for i,n in enumerate(MAPS)},source_headers=source_headers,
+        temporary_map_slots={n:30+i for i,n in enumerate(MAPS)},source_headers=source_headers,
         dev_surrogate='MAPSEC_ROUTE_201217 only in disposable ROM; never production met-origin acceptance',files={p:sha(d) for p,d in sorted(files.items())})
 
 
