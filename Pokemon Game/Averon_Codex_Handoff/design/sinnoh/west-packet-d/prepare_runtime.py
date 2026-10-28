@@ -110,7 +110,7 @@ def extend(files, data, pins, bindings):
     prefix = 'data/layouts/' + NAME + '/'
     result[prefix+'map.bin'], result[prefix+'border.bin'] = bytes(south), data['averon-border.bin']
     result['data/maps/'+NAME+'/map.json'] = encode(header)
-    result['data/maps/'+NAME+'/scripts.inc'] = (NAME+'_MapScripts:\n\t.byte 0\n').encode()
+    result['data/maps/'+NAME+'/scripts.inc'] = (NAME+'_MapScripts::\n\t.byte 0\n').encode()
     groups['gMapGroup_Sinnoh'] = names + [NAME]
     result[group_path] = encode(groups)
     layouts_path = 'data/layouts/layouts.json'

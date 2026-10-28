@@ -8,6 +8,7 @@ import shutil
 import struct
 import tempfile
 import sys
+import subprocess
 import unittest
 from unittest.mock import patch
 
@@ -112,6 +113,34 @@ class PacketD(unittest.TestCase):
                 if repin:
                     pins=json.loads((view/'source-pins.json').read_text());pins['files']['averon-map.bin']['sha256']=p.sha(raw);(view/'source-pins.json').write_text(json.dumps(pins))
                 with patch.object(p,'HERE',view),self.assertRaises(ValueError):p.south_inputs(ROOT)
+
+    def test_real_preprocessor_and_linker_require_the_emitted_global_script_table(self):
+        # Double-colon exports are processed by the real engine tool. Both GNU
+        # ARM and host binutils can verify this architecture-independent ABI.
+        assembler=shutil.which('arm-none-eabi-as') or shutil.which('as')
+        self.assertIsNotNone(assembler)
+        linker=shutil.which('arm-none-eabi-ld') if 'arm-none-eabi' in assembler else shutil.which('ld')
+        self.assertIsNotNone(linker)
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);tool=root/'tools/preproc'
+            shutil.copytree(ROOT/'Pokemon Game/engine/tools/preproc',tool,ignore=shutil.ignore_patterns('preproc','preproc.exe'))
+            chars=root/'include/constants/characters.h';chars.parent.mkdir(parents=True);shutil.copyfile(ROOT/'Pokemon Game/engine/include/constants/characters.h',chars)
+            built=subprocess.run(['make','-C',str(tool)],capture_output=True,text=True)
+            self.assertEqual(built.returncode,0,built.stderr)
+            reference=root/'reference.s';reference.write_text('.global _start\n_start:\n.long MtCoronet_1F_South_MapScripts\n')
+            subprocess.run([assembler,str(reference),'-o',str(root/'reference.o')],check=True,capture_output=True)
+            table=self.files['data/maps/'+p.NAME+'/scripts.inc']
+            outcomes=[]
+            for label,raw in [('generated',table),('local-regression',table.replace(b'::',b':'))]:
+                script=root/(label+'.s');script.write_bytes(raw)
+                processed=subprocess.run([str(tool/'preproc'),'-ie',str(script),str(ROOT/'Pokemon Game/engine/charmap.txt')],input=raw,capture_output=True,check=True).stdout
+                output=root/(label+'-processed.s');output.write_bytes(processed)
+                obj=root/(label+'.o');subprocess.run([assembler,str(output),'-o',str(obj)],capture_output=True,check=True)
+                linked=subprocess.run([linker,'--no-undefined','-e','_start','-Ttext=0x08000000',str(root/'reference.o'),str(obj),'-o',str(root/(label+'.elf'))],capture_output=True,text=True)
+                outcomes.append(linked)
+            self.assertEqual(outcomes[0].returncode,0,outcomes[0].stderr)
+            self.assertNotEqual(outcomes[1].returncode,0)
+            self.assertIn('undefined reference',outcomes[1].stderr)
 
     def test_palette_checkout_crlf_is_not_a_color_waiver(self):
         original=Path.read_bytes
