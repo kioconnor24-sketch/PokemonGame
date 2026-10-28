@@ -70,6 +70,28 @@ class CyclingCurrentRuntimeTest(unittest.TestCase):
                       self.files["test/averon_eterna_runtime.c"].decode())
         self.assertIn("19+i", (HERE.parent / "eterna-cycle/native-runtime.c").read_text())
 
+    def test_generated_eterna_section_count_matches_the_profile(self):
+        raw = self.files["test/averon_eterna_runtime.c"].decode()
+        self.assertIn("MAPSEC_COUNT == 227", (HERE.parent / "eterna-cycle/native-runtime.c").read_text())
+        if m.production_city(self.current):
+            self.assertIn("STATIC_ASSERT(MAPSEC_COUNT == 228, eterna_no_new_origins);", raw)
+            self.assertIn("STATIC_ASSERT(MAPSEC_OREBURGH_CITY == 227,", raw)
+            self.assertNotIn("MAPSEC_COUNT == 227", raw)
+        else:
+            self.assertIn("STATIC_ASSERT(MAPSEC_COUNT == 227, eterna_no_new_origins);", raw)
+            self.assertNotIn("MAPSEC_OREBURGH_CITY", raw)
+
+    def test_unknown_eterna_section_assert_is_rejected_after_packet_c(self):
+        if not m.production_city(self.current):
+            self.skipTest("legacy profiles keep the historical count")
+        original = Path.read_bytes
+        target = HERE.parent / "eterna-cycle/native-runtime.c"
+        def read(p):
+            raw = original(p)
+            return raw.replace(b"MAPSEC_COUNT == 227", b"MAPSEC_COUNT == 226") if p == target else raw
+        with mock.patch.object(Path, "read_bytes", read), self.assertRaises(ValueError):
+            m.compose(ROOT)
+
     def test_unknown_eterna_native_fixture_is_rejected(self):
         original = Path.read_bytes
         target = HERE.parent / "eterna-cycle/native-runtime.c"
