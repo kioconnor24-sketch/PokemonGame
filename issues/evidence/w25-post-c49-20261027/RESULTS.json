@@ -1,5 +1,5 @@
 {
-  "status": "IN_PROGRESS_NOT_PRODUCTION_ACCEPTANCE",
+  "status": "DEV_BUILD_NATIVE_RENDERED_GATES_PASS_PRODUCTION_AUTHORIZATION_STILL_BLOCKED",
   "scope": "Final337-base49-map DEV W25 qualification; source/ROM identities are distinct from production registration",
   "feature_merge": {
     "feature_merge": "0cdccf0da96d2dca2389c33f6e7d974087936972",
@@ -9331,16 +9331,5270 @@
       "raw_result_sha256": "e095f3be7dba6c29b6897eab2d7573f0fa805cc1b92447d2c4d635f1d312d480"
     },
     "normal_interiors": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 181,
+      "result": {
+        "maps": [
+          "MAP_OREBURGH_CITY",
+          "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+          "MAP_OREBURGH_CITY_MART",
+          "MAP_OREBURGH_CITY_MUSEUM_1F",
+          "MAP_OREBURGH_CITY_MUSEUM_2F",
+          "MAP_OREBURGH_CITY_CONDO",
+          "MAP_OREBURGH_CITY_HOUSE1",
+          "MAP_OREBURGH_CITY_HOUSE2",
+          "MAP_OREBURGH_CITY_HOUSE3",
+          "MAP_OREBURGH_CITY_HOUSE4",
+          "MAP_OREBURGH_CITY_HOUSE5"
+        ],
+        "build": "normal",
+        "rom_sha256": "99375c5e800a6ca4ede34f3564714ea122f40dc147e6ad80dcc4b28a7d3e16f9",
+        "static_findings": [],
+        "save_before": "e2e054fb8d65668ebf77e9424153cf72e1e098d7a37c4d0fddf134c92109ad0c",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (44, 0) -> MAP_ROUTE207 (9, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (47, 0) -> MAP_ROUTE207 (12, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (50, 0) -> MAP_ROUTE207 (15, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 1 (62, 12) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  62,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                62,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE1",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 2 (18, 13) -> MAP_OREBURGH_CITY_HOUSE1 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  18,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE2",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 3 (25, 13) -> MAP_OREBURGH_CITY_HOUSE2 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  25,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MART",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 4 (31, 13) -> MAP_OREBURGH_CITY_MART and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  31,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                9,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 5 (54, 14) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  54,
+                  15
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                54,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_CONDO",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 6 (40, 19) -> MAP_OREBURGH_CITY_CONDO and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  40,
+                  20
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE3",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 7 (20, 21) -> MAP_OREBURGH_CITY_HOUSE3 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  20,
+                  22
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 8 (51, 22) -> MAP_OREBURGH_CITY_POKEMON_CENTER_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  51,
+                  23
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE4",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 9 (59, 29) -> MAP_OREBURGH_CITY_HOUSE4 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  59,
+                  30
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE5",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 10 (56, 37) -> MAP_OREBURGH_CITY_HOUSE5 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  56,
+                  38
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed down edge at (3, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                3,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed down edge at (10, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                10,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed left edge at (0, 4) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                4
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed left edge at (0, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed right edge at (13, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                13,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                13,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F warp 0 (7, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                [
+                  6,
+                  8
+                ],
+                [
+                  7,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F warp 1 (6, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                [
+                  6,
+                  8
+                ],
+                [
+                  7,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MART",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed down edge at (1, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                1,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                1,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed down edge at (8, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                8,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                8,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed left edge at (0, 6) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                0,
+                6
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed right edge at (10, 2) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                2
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed right edge at (10, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART warp 0 (3, 7) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART warp 1 (4, 7) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (0, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (8, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                8,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                8,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (16, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed left edge at (0, 3) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                3
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed left edge at (0, 10) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                10
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                10
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed right edge at (20, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                20,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                20,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                54,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 0 (9, 13) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  9,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                9,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                62,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 1 (10, 13) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  10,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 2 (16, 1) -> MAP_OREBURGH_CITY_MUSEUM_2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  16,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MUSEUM_2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed down edge at (11, 12) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                11,
+                12
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                11,
+                12
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed left edge at (0, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                0,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                0,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed right edge at (21, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                21,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                21,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F warp 0 (13, 1) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                [
+                  13,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_2F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_CONDO",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE1",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE2",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE3",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE4",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE5",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (post-c-interiors)",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "9eee7ef952dfdd853010ca4c0cd4a90068197d3122ea88ef3dbaba423c9ba4f7",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "ea33ebedcd87b220486a08b59e0c22da50bd5afdb9d1d65aeb7ddaf609487e3b"
     },
     "normal_interiors_fresh_continue": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 3,
+      "result": {
+        "maps": [
+          "MAP_OREBURGH_CITY_HOUSE5"
+        ],
+        "build": "normal",
+        "rom_sha256": "99375c5e800a6ca4ede34f3564714ea122f40dc147e6ad80dcc4b28a7d3e16f9",
+        "static_findings": [],
+        "save_before": "9eee7ef952dfdd853010ca4c0cd4a90068197d3122ea88ef3dbaba423c9ba4f7",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "9eee7ef952dfdd853010ca4c0cd4a90068197d3122ea88ef3dbaba423c9ba4f7",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "52ec1b028b7ee82899b34c1c8b2fd1fd5fc96bb52901a156b73a29b0e47fc933"
     },
     "release_interiors": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 181,
+      "result": {
+        "maps": [
+          "MAP_OREBURGH_CITY",
+          "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+          "MAP_OREBURGH_CITY_MART",
+          "MAP_OREBURGH_CITY_MUSEUM_1F",
+          "MAP_OREBURGH_CITY_MUSEUM_2F",
+          "MAP_OREBURGH_CITY_CONDO",
+          "MAP_OREBURGH_CITY_HOUSE1",
+          "MAP_OREBURGH_CITY_HOUSE2",
+          "MAP_OREBURGH_CITY_HOUSE3",
+          "MAP_OREBURGH_CITY_HOUSE4",
+          "MAP_OREBURGH_CITY_HOUSE5"
+        ],
+        "build": "release",
+        "rom_sha256": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+        "static_findings": [],
+        "save_before": "e2e054fb8d65668ebf77e9424153cf72e1e098d7a37c4d0fddf134c92109ad0c",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (44, 0) -> MAP_ROUTE207 (9, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (47, 0) -> MAP_ROUTE207 (12, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (50, 0) -> MAP_ROUTE207 (15, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 1 (62, 12) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  62,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                62,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE1",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 2 (18, 13) -> MAP_OREBURGH_CITY_HOUSE1 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  18,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE2",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 3 (25, 13) -> MAP_OREBURGH_CITY_HOUSE2 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  25,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MART",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 4 (31, 13) -> MAP_OREBURGH_CITY_MART and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  31,
+                  14
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                9,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 5 (54, 14) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  54,
+                  15
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                54,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_CONDO",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 6 (40, 19) -> MAP_OREBURGH_CITY_CONDO and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  40,
+                  20
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE3",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 7 (20, 21) -> MAP_OREBURGH_CITY_HOUSE3 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  20,
+                  22
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 8 (51, 22) -> MAP_OREBURGH_CITY_POKEMON_CENTER_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  51,
+                  23
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE4",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 9 (59, 29) -> MAP_OREBURGH_CITY_HOUSE4 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  59,
+                  30
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_HOUSE5",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 10 (56, 37) -> MAP_OREBURGH_CITY_HOUSE5 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  56,
+                  38
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed down edge at (3, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                3,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed down edge at (10, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                10,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                10,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed left edge at (0, 4) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                4
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed left edge at (0, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                0,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F closed right edge at (13, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                13,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                13,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F warp 0 (7, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                [
+                  6,
+                  8
+                ],
+                [
+                  7,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                51,
+                23
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_POKEMON_CENTER_1F warp 1 (6, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                [
+                  6,
+                  8
+                ],
+                [
+                  7,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_POKEMON_CENTER_1F",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_POKEMON_CENTER_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MART",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed down edge at (1, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                1,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                1,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed down edge at (8, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                8,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                8,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed left edge at (0, 6) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                0,
+                6
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                0,
+                6
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed right edge at (10, 2) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                2
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART closed right edge at (10, 7) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                7
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                10,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART warp 0 (3, 7) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                31,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MART warp 1 (4, 7) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  7
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MART",
+              [
+                3,
+                7
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MART after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (0, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (8, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                8,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                8,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed down edge at (16, 13) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                13
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed left edge at (0, 3) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                3
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed left edge at (0, 10) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                10
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                0,
+                10
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F closed right edge at (20, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                20,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                20,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                54,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 0 (9, 13) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  9,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                9,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                62,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 1 (10, 13) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  10,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                10,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_1F warp 2 (16, 1) -> MAP_OREBURGH_CITY_MUSEUM_2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                [
+                  16,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_MUSEUM_2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed down edge at (11, 12) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                11,
+                12
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                11,
+                12
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed left edge at (0, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                0,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                0,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F closed right edge at (21, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                21,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                21,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY_MUSEUM_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_MUSEUM_1F",
+              [
+                16,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_MUSEUM_2F warp 0 (13, 1) -> MAP_OREBURGH_CITY_MUSEUM_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                [
+                  13,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_MUSEUM_2F",
+              [
+                13,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_MUSEUM_2F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_CONDO",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                40,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_CONDO warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_CONDO",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_CONDO after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE1",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                18,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE1 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE1",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE1 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE2",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                25,
+                14
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE2 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE2",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE2 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE3",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                20,
+                22
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE3 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE3",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE3 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE4",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                59,
+                30
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE4 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE4",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE4 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY_HOUSE5",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed down edge at (1, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                1,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                1,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed down edge at (7, 8) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                7,
+                8
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                7,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed left edge at (0, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                0,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 closed right edge at (9, 5) blocks",
+            "ok": true,
+            "before": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                9,
+                5
+              ]
+            ],
+            "after": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                9,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 warp 0 (3, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                56,
+                38
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY_HOUSE5 warp 1 (4, 8) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                [
+                  3,
+                  8
+                ],
+                [
+                  4,
+                  8
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY_HOUSE5 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (post-c-interiors)",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "b0c6e742cf96c7c41d22f4436e4585e51433c5942a516bae404c4c23b3302c27",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "ad09be0406a7c0d5d32021555b506972c09d637cf21ff7d22b5ce321874e5d35"
     },
     "release_interiors_fresh_continue": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 3,
+      "result": {
+        "maps": [
+          "MAP_OREBURGH_CITY_HOUSE5"
+        ],
+        "build": "release",
+        "rom_sha256": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+        "static_findings": [],
+        "save_before": "b0c6e742cf96c7c41d22f4436e4585e51433c5942a516bae404c4c23b3302c27",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY_HOUSE5",
+              [
+                3,
+                8
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "b0c6e742cf96c7c41d22f4436e4585e51433c5942a516bae404c4c23b3302c27",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "3f03146ff2747b5f0d581492809c25e82748caddd1d08ca977727babe200b22c"
     }
   },
   "limitations": [
@@ -9378,8 +14632,383 @@
     },
     "workflow307": "BLOCKED_AUTHORIZATION_AND_REVIEW_UNDISPATCHED"
   },
+  "preservation": {
+    "scope": "Unique completed49-map build/native artifacts preserved before any future50-map reuse; GUI remains running on unchanged source",
+    "temporary_engine_tree": "b15987b7804fe8b428542d7067b295a9022d59e5",
+    "artifact_sha256": {
+      "pokeemerald-cries-off.gba": "99375c5e800a6ca4ede34f3564714ea122f40dc147e6ad80dcc4b28a7d3e16f9",
+      "pokeemerald-cries-off.elf": "0a7c19866fbd4b8ceaeb365745b37a89594dc9e01abac8b13d83e3f7f8d69507",
+      "pokeemerald-cries-off.map": "af3ca90217fb518ae66ea399c5da78aaa2f22d5864d839858835600dec806a1c",
+      "pokeemerald-cries-off-release.gba": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+      "pokeemerald-cries-off-release.elf": "4fabbf3179e7cad024251fdda6e594c2f07e76e70b4b410561abc34ff1ae6ec3",
+      "pokeemerald-cries-off-release.map": "6ae5afddcd1789abe22f341fea789098369aac2e78098a5808d9de819a69a98f",
+      "pokeemerald-cries-off-test.elf": "6b792c65bc13166d6aa893ee039b6f99ac8fa137fb6bf442433000ac3b06be5e",
+      "pokeemerald-cries-off-test-headless.elf": "c3080fe443d8457f1d42fb837af52ccf60d72dc730ba2010bdd0a1287b0c2102"
+    },
+    "archive_sha256": "9482179611f69239df54b8c23cd7805a7c3941d8e2e92ebab574205998f7b2ba",
+    "source_archive": "/workspace/averon-session-evidence/w25-post-c49-20261027/payloads.tar",
+    "source_archive_sha256": "8dc07cd26b5bc12daf666eff2b4a570754eb054509bbd5e3c9b54284ba0a0fc1",
+    "private_saves_and_runtime_directories_preserved": true
+  },
+  "saved_state_snapshots": {
+    "normal-traversal": {
+      "label": "w25-current",
+      "state": {
+        "map": "MAP_OREBURGH_MINE_B2F",
+        "cb2": "CB2_Overworld",
+        "mapGroup": 76,
+        "mapNum": 48,
+        "x": 15,
+        "y": 2,
+        "frame": null,
+        "flags": {
+          "FLAG_BADGE01_GET": false,
+          "FLAG_BADGE02_GET": false,
+          "FLAG_AVERON_STARTER": true,
+          "FLAG_AVERON_WEST_SLUICE": false,
+          "FLAG_AVERON_EAST_SLUICE": false,
+          "FLAG_AVERON_GYM1_TM": false,
+          "FLAG_AVERON_NOTES_STARTED": false,
+          "FLAG_AVERON_NOTES_RECORDED": false,
+          "FLAG_AVERON_NOTES_REWARDED": false,
+          "FLAG_AVERON_EXP_SHARE": false,
+          "FLAG_AVERON_SKETCH_STARTED": false,
+          "FLAG_AVERON_SKETCH_FOUND": false,
+          "FLAG_AVERON_SKETCH_REWARDED": false,
+          "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+        },
+        "party": [
+          {
+            "species": 393,
+            "status": 0,
+            "moves": [
+              1,
+              45,
+              0,
+              0
+            ],
+            "pp": [
+              35,
+              40,
+              0,
+              0
+            ],
+            "ppBonuses": 0,
+            "level": 5,
+            "hp": 20,
+            "maxhp": 20
+          }
+        ],
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        },
+        "pokeBalls": [
+          [
+            1,
+            5
+          ]
+        ],
+        "berries": [],
+        "money": 3000,
+        "stack": {
+          "regionBytes": 3928,
+          "usedBytes": 2612,
+          "freeBytes": 1316
+        },
+        "saveAttemptStatus": 0
+      },
+      "callbacks": [
+        "SaveConfirmInputCallback",
+        "SaveConfirmOverwriteCallback",
+        "SaveDoSaveCallback",
+        "SaveSuccessCallback",
+        "SaveReturnSuccessCallback"
+      ],
+      "flash_before": [
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 2
+        },
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 1
+        }
+      ]
+    },
+    "normal-interiors": {
+      "label": "post-c-interiors",
+      "state": {
+        "map": "MAP_OREBURGH_CITY_HOUSE5",
+        "cb2": "CB2_Overworld",
+        "mapGroup": 76,
+        "mapNum": 40,
+        "x": 3,
+        "y": 8,
+        "frame": null,
+        "flags": {
+          "FLAG_BADGE01_GET": false,
+          "FLAG_BADGE02_GET": false,
+          "FLAG_AVERON_STARTER": true,
+          "FLAG_AVERON_WEST_SLUICE": false,
+          "FLAG_AVERON_EAST_SLUICE": false,
+          "FLAG_AVERON_GYM1_TM": false,
+          "FLAG_AVERON_NOTES_STARTED": false,
+          "FLAG_AVERON_NOTES_RECORDED": false,
+          "FLAG_AVERON_NOTES_REWARDED": false,
+          "FLAG_AVERON_EXP_SHARE": false,
+          "FLAG_AVERON_SKETCH_STARTED": false,
+          "FLAG_AVERON_SKETCH_FOUND": false,
+          "FLAG_AVERON_SKETCH_REWARDED": false,
+          "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+        },
+        "party": [
+          {
+            "species": 393,
+            "status": 0,
+            "moves": [
+              1,
+              45,
+              0,
+              0
+            ],
+            "pp": [
+              35,
+              40,
+              0,
+              0
+            ],
+            "ppBonuses": 0,
+            "level": 5,
+            "hp": 20,
+            "maxhp": 20
+          }
+        ],
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        },
+        "pokeBalls": [
+          [
+            1,
+            5
+          ]
+        ],
+        "berries": [],
+        "money": 3000,
+        "stack": {
+          "regionBytes": 3928,
+          "usedBytes": 2612,
+          "freeBytes": 1316
+        },
+        "saveAttemptStatus": 0
+      },
+      "callbacks": [
+        "SaveConfirmInputCallback",
+        "SaveConfirmOverwriteCallback",
+        "SaveOverwriteInputCallback",
+        "SaveDoSaveCallback",
+        "SaveSuccessCallback",
+        "SaveReturnSuccessCallback"
+      ],
+      "flash_before": [
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 2
+        },
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 1
+        }
+      ]
+    },
+    "release-retry1-traversal": {
+      "label": "w25-current",
+      "state": {
+        "map": "MAP_OREBURGH_MINE_B2F",
+        "cb2": "CB2_Overworld",
+        "mapGroup": 76,
+        "mapNum": 48,
+        "x": 15,
+        "y": 2,
+        "frame": null,
+        "flags": {
+          "FLAG_BADGE01_GET": false,
+          "FLAG_BADGE02_GET": false,
+          "FLAG_AVERON_STARTER": true,
+          "FLAG_AVERON_WEST_SLUICE": false,
+          "FLAG_AVERON_EAST_SLUICE": false,
+          "FLAG_AVERON_GYM1_TM": false,
+          "FLAG_AVERON_NOTES_STARTED": false,
+          "FLAG_AVERON_NOTES_RECORDED": false,
+          "FLAG_AVERON_NOTES_REWARDED": false,
+          "FLAG_AVERON_EXP_SHARE": false,
+          "FLAG_AVERON_SKETCH_STARTED": false,
+          "FLAG_AVERON_SKETCH_FOUND": false,
+          "FLAG_AVERON_SKETCH_REWARDED": false,
+          "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+        },
+        "party": [
+          {
+            "species": 393,
+            "status": 0,
+            "moves": [
+              1,
+              45,
+              0,
+              0
+            ],
+            "pp": [
+              35,
+              40,
+              0,
+              0
+            ],
+            "ppBonuses": 0,
+            "level": 5,
+            "hp": 20,
+            "maxhp": 20
+          }
+        ],
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        },
+        "pokeBalls": [
+          [
+            1,
+            5
+          ]
+        ],
+        "berries": [],
+        "money": 3000,
+        "stack": {
+          "regionBytes": 3984,
+          "usedBytes": 2952,
+          "freeBytes": 1032
+        },
+        "saveAttemptStatus": 0
+      },
+      "callbacks": [
+        "SaveConfirmInputCallback",
+        "SaveConfirmOverwriteCallback",
+        "SaveOverwriteInputCallback",
+        "SaveDoSaveCallback",
+        "SaveSuccessCallback",
+        "SaveReturnSuccessCallback"
+      ],
+      "flash_before": [
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 2
+        },
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 1
+        }
+      ]
+    },
+    "release-interiors": {
+      "label": "post-c-interiors",
+      "state": {
+        "map": "MAP_OREBURGH_CITY_HOUSE5",
+        "cb2": "CB2_Overworld",
+        "mapGroup": 76,
+        "mapNum": 40,
+        "x": 3,
+        "y": 8,
+        "frame": null,
+        "flags": {
+          "FLAG_BADGE01_GET": false,
+          "FLAG_BADGE02_GET": false,
+          "FLAG_AVERON_STARTER": true,
+          "FLAG_AVERON_WEST_SLUICE": false,
+          "FLAG_AVERON_EAST_SLUICE": false,
+          "FLAG_AVERON_GYM1_TM": false,
+          "FLAG_AVERON_NOTES_STARTED": false,
+          "FLAG_AVERON_NOTES_RECORDED": false,
+          "FLAG_AVERON_NOTES_REWARDED": false,
+          "FLAG_AVERON_EXP_SHARE": false,
+          "FLAG_AVERON_SKETCH_STARTED": false,
+          "FLAG_AVERON_SKETCH_FOUND": false,
+          "FLAG_AVERON_SKETCH_REWARDED": false,
+          "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+        },
+        "party": [
+          {
+            "species": 393,
+            "status": 0,
+            "moves": [
+              1,
+              45,
+              0,
+              0
+            ],
+            "pp": [
+              35,
+              40,
+              0,
+              0
+            ],
+            "ppBonuses": 0,
+            "level": 5,
+            "hp": 20,
+            "maxhp": 20
+          }
+        ],
+        "follower": {
+          "species": 393,
+          "graphicsId": 16777,
+          "invisible": false
+        },
+        "pokeBalls": [
+          [
+            1,
+            5
+          ]
+        ],
+        "berries": [],
+        "money": 3000,
+        "stack": {
+          "regionBytes": 3984,
+          "usedBytes": 2892,
+          "freeBytes": 1092
+        },
+        "saveAttemptStatus": 0
+      },
+      "callbacks": [
+        "SaveConfirmInputCallback",
+        "SaveConfirmOverwriteCallback",
+        "SaveOverwriteInputCallback",
+        "SaveDoSaveCallback",
+        "SaveSuccessCallback",
+        "SaveReturnSuccessCallback"
+      ],
+      "flash_before": [
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 2
+        },
+        {
+          "status": "valid",
+          "problems": [],
+          "counter": 1
+        }
+      ]
+    }
+  },
   "screenshots": {
-    "NORMAL_SAVED.png": "909f770334cf3cb7cba63b4a52b8f422b63dde20effa3e9f99486bec42b335e5",
+    "NORMAL_SAVED.png": "2d9972179432edb7611532a94be98bece1d4e2821d433346900e371ee1c2fd7b",
     "RELEASE_FRESH_CONTINUE.png": "be9e9ebef457a600e236767ccca52c4cf3778f78dfee99c1e00dbca449540eda"
   }
 }
