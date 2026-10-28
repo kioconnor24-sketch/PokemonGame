@@ -41,6 +41,31 @@ class PacketEStageTest(unittest.TestCase):
         errors = self.edited("city-shells/staged/SolaceonTown_Mart/map.json", change)
         self.assertTrue(any("does not lead back" in x for x in errors), errors)
 
+    def test_wrong_return_entrance_is_rejected(self):
+        def change(h):
+            # West Hearthome door would return through the eastern door.
+            h["warp_events"][2]["dest_warp_id"] = "1"
+        errors = self.edited("amity-square/staged/HearthomeCity-dev-overlay/map.json", change)
+        self.assertTrue(any("wrong entrance" in x for x in errors), errors)
+
+    def test_negative_destination_index_is_rejected(self):
+        def change(h):
+            h["warp_events"][2]["dest_warp_id"] = "-1"
+        errors = self.edited("amity-square/staged/HearthomeCity-dev-overlay/map.json", change)
+        self.assertTrue(any("does not lead back" in x for x in errors), errors)
+
+    def test_duplicate_internal_connection_is_rejected(self):
+        def change(h):
+            h["connections"].append(dict(h["connections"][0]))
+        errors = self.edited("city-shells/staged/Route208-dev-overlay/map.json", change)
+        self.assertTrue(any("duplicate" in x for x in errors), errors)
+
+    def test_adjacent_door_tile_aliases_remain_valid(self):
+        hearthome = e.headers(self.files)["HearthomeCity"]
+        self.assertEqual(hearthome["warp_events"][2]["dest_warp_id"], "0")
+        self.assertEqual(hearthome["warp_events"][3]["dest_warp_id"], "0")
+        self.assertEqual(e.graph_errors(e.headers(self.files)), [])
+
     def test_one_sided_connection_offset_is_rejected(self):
         def change(h):
             h["connections"][0]["offset"] += 1
