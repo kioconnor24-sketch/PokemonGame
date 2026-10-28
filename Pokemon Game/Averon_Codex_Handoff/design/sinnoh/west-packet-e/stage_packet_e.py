@@ -94,10 +94,37 @@ def graph_errors(hdrs):
                 errors.append(f"{m} warp {i}: leaves the packet ({w['dest_map']})")
                 continue
             back = hdrs[dest]["warp_events"]
-            k = int(w["dest_warp_id"])
-            if k >= len(back) or back[k]["dest_map"] != h["id"]:
+            try:
+                k = int(w["dest_warp_id"])
+            except (TypeError, ValueError):
+                errors.append(f"{m} warp {i}: invalid destination warp index")
+                continue
+            if not 0 <= k < len(back) or back[k]["dest_map"] != h["id"]:
                 errors.append(f"{m} warp {i}: {dest} warp {k} does not lead back")
+                continue
+            try:
+                return_index = int(back[k]["dest_warp_id"])
+            except (TypeError, ValueError):
+                errors.append(f"{m} warp {i}: {dest} warp {k} has invalid return index")
+                continue
+            # Adjacent door tiles legitimately share one destination warp. A return to
+            # the partner tile is valid; a return to another entrance is not.
+            alias = (0 <= return_index < len(h["warp_events"])
+                     and h["warp_events"][return_index]["dest_map"] == w["dest_map"]
+                     and h["warp_events"][return_index]["dest_warp_id"] == w["dest_warp_id"]
+                     and h["warp_events"][return_index]["elevation"] == w["elevation"]
+                     and abs(h["warp_events"][return_index]["x"] - w["x"])
+                         + abs(h["warp_events"][return_index]["y"] - w["y"]) == 1)
+            if return_index != i and not alias:
+                errors.append(f"{m} warp {i}: {dest} warp {k} returns to wrong entrance {return_index}")
+        seen_connections = set()
         for c in h.get("connections") or []:
+            # A second edge to the same map in the same direction cannot be
+            # matched one-to-one, including when the destination is external.
+            edge = (c["map"], c["direction"])
+            if edge in seen_connections:
+                errors.append(f"{m}: duplicate {c['direction']} connection to {c['map']}")
+            seen_connections.add(edge)
             dest = ids.get(c["map"])
             if dest is None:
                 errors.append(f"{m}: connection leaves the packet ({c['map']})")
