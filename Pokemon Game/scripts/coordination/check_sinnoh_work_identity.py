@@ -103,6 +103,29 @@ def validate(snapshot: dict) -> list[str]:
     unknown = touched - maps
     if unknown:
         errors.append("changed map identities missing from Sinnoh-Maps: " + ", ".join(sorted(unknown)))
+    added_staged = {
+        map_from_path(row["filename"]) for row in pr.get("files", [])
+        if isinstance(row, dict) and row.get("status") == "added"
+        and row.get("filename", "").startswith(SOURCE)
+        and "/staged/" in row["filename"]
+    } - {None}
+    if mode == "repair" and added_staged:
+        errors.append("repair cannot introduce new staged maps; use construct or source-backed reuse")
+    if mode == "reuse" and added_staged:
+        # A claimed upstream must actually contain each reused identity. A mere
+        # Sinnoh-Sources label is not evidence that geometry already exists.
+        proved = set()
+        if "main" in spec["sources"]:
+            proved |= {canonical(m) for m in snapshot.get("main_maps", [])}
+        for peer in snapshot.get("other_open_prs", []):
+            if f"#{peer['number']}" in spec["sources"]:
+                proved |= map_files(peer)
+                peer_spec, peer_errors = claim(peer.get("body", ""))
+                if not peer_errors:
+                    proved |= peer_spec["maps"]
+        missing = added_staged - proved
+        if missing:
+            errors.append("reuse source does not contain staged maps: " + ", ".join(sorted(missing)))
     if mode == "construct":
         new_maps = map_files(pr, added_only=True)
         if not new_maps:
@@ -125,6 +148,18 @@ def validate(snapshot: dict) -> list[str]:
                 errors.append("map identity already in open PR #{}: {}".format(
                     peer["number"], ", ".join(sorted(shared))))
     elif mode == "integrate":
+        engine_maps = {
+            map_from_path(row["filename"]) for row in pr.get("files", [])
+            if isinstance(row, dict) and row.get("status") != "removed"
+            and row.get("filename", "").startswith(ENGINE_MAPS)
+        } - {None}
+        if not engine_maps:
+            errors.append("integrate requires actual engine/data/maps output; a DEV scene is not production")
+        already_production = maps & {
+            canonical(m) for m in snapshot.get("main_engine_maps", [])
+        }
+        if already_production:
+            errors.append("already installed in production: " + ", ".join(sorted(already_production)))
         # Two independently open production installs for the same map are not
         # disjoint work. A child repair uses the explicit 'repair' mode instead.
         for peer in snapshot.get("other_open_prs", []):
@@ -181,7 +216,8 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
                   "status": "added" if mode == "construct" else "modified"} for n in names]
     candidate = {"number": CUTOFF + 1, "files": files,
                  "body": f"Sinnoh-Work: {mode}\nSinnoh-Maps: {maps}\nSinnoh-Sources: {sources}\n"}
-    snapshot = {"candidate": candidate, "main_maps": [], "other_open_prs": []}
+    snapshot = {"candidate": candidate, "main_maps": [], "main_engine_maps": [],
+                "other_open_prs": []}
     tree = fetch_live("git/trees/main?recursive=1")
     if tree.get("truncated"):
         raise ValueError("main tree truncated; map ownership cannot be checked")
@@ -190,15 +226,22 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
         if row["path"].endswith("/map.json")
         for name in [map_from_path(row["path"])] if name
     ]
-    if mode in {"construct", "integrate"}:
+    snapshot["main_engine_maps"] = [
+        row["path"][len(ENGINE_MAPS):].split("/")[0]
+        for row in tree["tree"] if row["type"] == "blob"
+        and row["path"].startswith(ENGINE_MAPS) and row["path"].endswith("/map.json")
+    ]
+    if mode in {"construct", "integrate", "reuse"}:
         for peer in pages("pulls?state=open"):
-            if peer["number"] == candidate["number"]:
-                continue
             file_rows = pages(f"pulls/{peer['number']}/files")
             snapshot["other_open_prs"].append({
                 "number": peer["number"], "body": peer.get("body", ""),
                 "files": [{"filename": f["filename"], "status": f["status"]} for f in file_rows],
             })
+        # There is no pull request for this CLI proposal. Give it a number
+        # outside the current live PR inventory, not an existing PR's number.
+        candidate["number"] = max([CUTOFF] + [
+            int(peer["number"]) for peer in snapshot["other_open_prs"]]) + 1
     return snapshot
 
 
