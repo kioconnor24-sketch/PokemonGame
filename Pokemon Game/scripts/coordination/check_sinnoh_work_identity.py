@@ -119,10 +119,9 @@ def validate(snapshot: dict) -> list[str]:
             proved |= {canonical(m) for m in snapshot.get("main_maps", [])}
         for peer in snapshot.get("other_open_prs", []):
             if f"#{peer['number']}" in spec["sources"]:
+                # Proof needs a real map file in that PR, not an unverified
+                # map name listed in its description.
                 proved |= map_files(peer)
-                peer_spec, peer_errors = claim(peer.get("body", ""))
-                if not peer_errors:
-                    proved |= peer_spec["maps"]
         missing = added_staged - proved
         if missing:
             errors.append("reuse source does not contain staged maps: " + ", ".join(sorted(missing)))
