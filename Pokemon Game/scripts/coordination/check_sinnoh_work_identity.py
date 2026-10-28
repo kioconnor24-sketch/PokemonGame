@@ -109,6 +109,13 @@ def validate(snapshot: dict) -> list[str]:
         and row.get("filename", "").startswith(SOURCE)
         and "/staged/" in row["filename"]
     } - {None}
+    added_engine = {
+        map_from_path(row["filename"]) for row in pr.get("files", [])
+        if isinstance(row, dict) and row.get("status") == "added"
+        and row.get("filename", "").startswith(ENGINE_MAPS)
+    } - {None}
+    if mode != "integrate" and added_engine:
+        errors.append("added engine map output requires integrate mode")
     if mode == "repair" and added_staged:
         errors.append("repair cannot introduce new staged maps; use construct or source-backed reuse")
     if mode == "reuse" and added_staged:
@@ -126,7 +133,7 @@ def validate(snapshot: dict) -> list[str]:
         if missing:
             errors.append("reuse source does not contain staged maps: " + ", ".join(sorted(missing)))
     if mode == "construct":
-        new_maps = map_files(pr, added_only=True)
+        new_maps = added_staged
         if not new_maps:
             errors.append("construct requires added staged map outputs; scripts/plans are not constructed maps")
         if new_maps - maps:
@@ -272,3 +279,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

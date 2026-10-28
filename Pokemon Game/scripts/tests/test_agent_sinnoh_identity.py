@@ -120,6 +120,22 @@ class SinnohWorkIdentityTests(unittest.TestCase):
                                   status="added")])
         self.assertEqual(check(p), [])
 
+    def test_engine_additions_cannot_bypass_integration_classification(self):
+        for mode in ("construct", "reuse", "repair"):
+            with self.subTest(mode=mode):
+                p = candidate(mode=mode, sources="#351", files=[
+                    dict(filename=ENGINE + "NewRoute/map.json", status="added")])
+                self.assertTrue(any("requires integrate mode" in e for e in check(p)))
+                if mode == "construct":
+                    self.assertTrue(any("requires added staged" in e for e in check(p)))
+
+    def test_staged_output_cannot_hide_added_engine_map(self):
+        p = candidate(files=[
+            dict(filename=STAGED + "NewRoute/map.json", status="added"),
+            dict(filename=ENGINE + "NewRoute/map.json", status="added")])
+        self.assertTrue(any("requires integrate mode" in e for e in check(p)))
+
 
 if __name__ == "__main__":
     unittest.main()
+
