@@ -13,7 +13,7 @@ This is a design document only. It installs nothing, allocates no section, slot 
   - The owner answered "full permission" in a Claude session on 2026-10-28. The relayed #15 comment is pending; posting it was blocked by the permission system.
   - Packet E may not use a value until that record exists on #15.
 
-## The 26 maps, in proposed slot order
+## The 37 maps, in proposed slot order
 
 P is the first slot after packet D's last production slot.
 
@@ -21,7 +21,7 @@ P is the first slot after packet D's last production slot.
 | --- | --- | --- | --- |
 | P+0 | Route208 | Codex `hearthome-solaceon` + Claude `city-shells` Route208 overlay | 0 Access, 1 House1, **2 Coronet South (new, see below)** |
 | P+1 | Route208_Access | `hearthome-solaceon` (neutral gate art) | 0 Route208, 1 Hearthome |
-| P+2 | HearthomeCity | `hearthome-solaceon` | 0 Route208_Access, 1 Route209_Access |
+| P+2 | HearthomeCity | `hearthome-solaceon` + Claude W11 `amity-square` overlay (#269; derived `map.bin` opens the two door-picture houses) | 0 Route208_Access, 1 Route209_Access, 2–5 Amity Square, 6 Contest Lobby, 7 Center, 8 House3, 9 House4, 10 Mart, 11 House6, 12 House7, 13 House8, 14 House9 |
 | P+3 | Route209_Access | `hearthome-solaceon` | 0 Hearthome, 1 Route209 |
 | P+4 | Route209 | `hearthome-solaceon` + Claude `lost-tower` Route209 overlay | 0 Access, 1 Lost Tower, 2 Ruins A, 3 Ruins B, 4 Ruins C |
 | P+5 | SolaceonTown | `hearthome-solaceon` + Claude `solaceon-ruins-entrance` overlay | 0 Center, 1 Mart, 2 House1, 3–4 Ruins Entrance |
@@ -38,6 +38,8 @@ P is the first slot after packet D's last production slot.
 | P+23 | SolaceonRuins_B2F_West | `solaceon-depths` | B1F, Sanctum |
 | P+24 | SolaceonRuins_B2F_East | **`solaceon-depths`** (2 warps, no Maniac Tunnel warp) | B1F, Sanctum |
 | P+25 | SolaceonRuins_B3F_Sanctum | `solaceon-depths` | B2F W/E |
+| P+26 | AmitySquare | W11 `amity-square` (#269) | two gates → Hearthome 2–5 |
+| P+27…36 | HearthomeCity_PokemonCenter_1F, _Mart, _ContestLobby, _ContestHall, _House3, _House4, _House6, _House7, _House8, _House9 | W11 `amity-square` (#269): stock Center/Mart, contest lobby→hall stair pair, house shells | each → its Hearthome door |
 
 Use `solaceon-depths`' B2F_East, not `maniac-ruins-link`'s. The latter carries a third warp at (24,16) to `MANIAC_TUNNEL_B1F`, which belongs to packet G. With the depths variant, nothing has to be closed by hand.
 
@@ -63,13 +65,16 @@ Both sides already exist; each was closed on purpose because the other side wasn
 | Map | Exit | Opens in |
 | --- | --- | --- |
 | HearthomeCity | Route 212 Access door (8–9,46), `central-joins` overlay | F |
-| HearthomeCity | every building door: no Hearthome interiors are staged anywhere on main | gap: needs a new interiors batch |
 | HearthomeCity | the clipped south gateway (already drawn as rail by Codex) | — |
 | Route210_South | north connection to Route210_North (−57) and east to Route215 (+26), `central-joins` | later |
 | SolaceonRuins_B2F_East | Maniac Tunnel | G (by choosing the `solaceon-depths` variant) |
 | Route208 | the 9 other `closure_changes` cells (top and bottom edges, east seam endpoint) | unchanged |
 
-Hearthome without interiors is the one honest gap. The doors stay closed, as Oreburgh's mine stayed closed in packet C. A Hearthome interiors batch (Center, Mart, houses, Contest Hall, Gym shells) could be staged under the same `city-shells` rules before or after packet E.
+**Hearthome interiors:** these are staged in Claude's W11 PR #269, retargeted to main on 2026-10-28. The rebuild on main `e0d6df4a` is byte-identical to the committed staging and receipt.
+- DEV evidence is already on #269: NORMAL 167/167 + Continue 3/3 and RELEASE 328/328 + Continue 3/3, on the hearthome-solaceon scene with W8/W12/W15/W20.
+- W11's Hearthome overlay keeps the Route 212 Access doors (8–9,46) closed. Packet F then appends them at indices 15–16. `central-joins`' overlay numbers them 2–3, so packet F must use W11's order rather than central-joins'.
+- Before packet E, #269 needs peer review and a merge to main.
+- If #269 isn't on main when packet E is built, packet E drops P+26…36 and keeps the doors closed, as Oreburgh's mine was in packet C.
 
 ## Traversal facts to re-check in the packet E gate
 
@@ -85,20 +90,21 @@ Packet D goes first: Route 206 = 228, Route 207 = 229, Mt. Coronet = 230. Packet
 | Value | Section | Maps |
 | --- | --- | --- |
 | 231 | ROUTE 208 | Route208, Route208_Access, Route208_House1 |
-| 232 | HEARTHOME CITY | HearthomeCity |
+| 232 | HEARTHOME CITY | HearthomeCity and its 10 interiors |
 | 233 | ROUTE 209 | Route209, Route209_Access |
 | 234 | SOLACEON TOWN | SolaceonTown and its 3 interiors |
 | 235 | SOLACEON RUINS | Entrance, B1F, A–C, B2F W/E, B3F |
 | 236 | LOST TOWER | LostTower_1F…6F |
 | 237 | ROUTE 210 | Route210_South, Route210_South_House1 |
+| 238 | AMITY SQUARE | AmitySquare. It's a named place, like Oreburgh Gate; the owner may instead fold it into 232. |
 
 Access gates take their route's section. Oreburgh Gate has its own (223) only because Oreburgh Gate is a named place. The values follow the C48 order and are append-only. They are a proposal until the owner record is on #15. 237 is beyond the originally proposed 228–236.
 
 ## Installer checklist (same as packet C)
 
 1. One combined installer at `west-packet-e/install_packet_e.py`:
-   - It reads the sources above read-only and appends 26 slots, 26 layouts and the registry entries.
-   - It adds sections 231–237 to `region_map_sections.json` and `scripts/averon-mapsec-pins.json` together.
+   - It reads the sources above read-only and appends 37 slots, the registry entries, and only the layouts that are new. Stock Center, Mart, house and Lost Tower layouts are reused, not duplicated.
+   - It adds sections 231–238 (or 231–237 if Amity Square folds into Hearthome) to `region_map_sections.json` and `scripts/averon-mapsec-pins.json` together.
    - It replaces each header's `MAPSEC_PENDING_OWNER` with the section above.
    - It applies the two-cell Coronet join, and changes nothing else.
    - It refuses to run twice, and `--check` reports any tampered file.
@@ -107,7 +113,7 @@ Access gates take their route's section. Oreburgh Gate has its own (223) only be
 4. Re-pin the Codex DEV families to the new prefix. `hearthome-solaceon`'s own DEV assembler appends these same seven maps, so after packet E it needs a production profile like W25's `rebase_on_production_city`, or retirement. That is Codex's file: claim it on #15 and coordinate.
 5. Gate on the exact head:
    - NORMAL/RELEASE builds and native suite equal to the baseline;
-   - full traversal of all 26 maps plus the Route 207 / Coronet South entry, both mud directions and the bridge;
+   - full traversal of all 37 maps plus the Route 207 / Coronet South entry, both mud directions and the bridge;
    - Save → fresh Continue 3/3 in both profiles.
 6. Owner exact-path handoff on #15 for the engine paths and the two identity files, then merge with `--match-head-commit`.
 
