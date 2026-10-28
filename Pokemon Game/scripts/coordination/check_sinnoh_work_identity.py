@@ -212,7 +212,7 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
         files = [{"filename": ENGINE_MAPS + n + "/map.json", "status": "added"} for n in names]
     else:
         files = [{"filename": root + n + "/map.json",
-                  "status": "added" if mode == "construct" else "modified"} for n in names]
+                  "status": "added" if mode in {"construct", "reuse"} else "modified"} for n in names]
     candidate = {"number": CUTOFF + 1, "files": files,
                  "body": f"Sinnoh-Work: {mode}\nSinnoh-Maps: {maps}\nSinnoh-Sources: {sources}\n"}
     snapshot = {"candidate": candidate, "main_maps": [], "main_engine_maps": [],
