@@ -5074,6 +5074,23 @@
       "recovery": "Private launcher waits for actual xdotool display readiness before starting the same software-rendered mGBA; no game/helper source or expectations changed",
       "original_launcher_sha256": "4f8aa3d190cdde29339d2afb500be52ca35efbe216f37d84aad26eb4aeeac52c",
       "ready_launcher_sha256": "94819f40f769d9232124ddf4cf5932789ebad74e5e442e54e9cd1b7a96ba535a"
+    },
+    {
+      "status": "REPORT_WRAPPER_ERROR_AFTER_DRIVER_PASS",
+      "proof": {
+        "status": "ACTUAL_DRIVER_RESULTS_PASS",
+        "traversal_checks": 134,
+        "fresh_continue_checks": 3,
+        "rom_sha256": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+        "flash_unchanged_on_fresh_continue": true,
+        "outer_wrapper_status": "ERROR_AFTER_BOTH_GAME_RUNS_PASSED: read original instead of retry fresh-continue report path",
+        "wrapper_log_sha256": "8aabce232c836d53db6c7913977982007a5a90d77c89d40d0e5169c934add51f",
+        "game_results_sha256": {
+          "release-retry1-traversal": "3ae8d3a4d6860cb795e5f0657c7bc5e78b5e164b651bda71bf08a3c9323a32dc",
+          "release-retry1-fresh-continue": "e095f3be7dba6c29b6897eab2d7573f0fa805cc1b92447d2c4d635f1d312d480"
+        }
+      },
+      "effect": "Old serial queue correctly stopped on wrapper traceback; verified real134/134 and3/3 result hashes before starting the disjoint interior probe, no gameplay rerun"
     }
   ],
   "runtime": {
@@ -7196,10 +7213,2122 @@
       "raw_result_sha256": "25487a9d50891608e162c6c0f524336320eed08f4527e90ed0c029ad7d5f16e8"
     },
     "release_w25": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 134,
+      "result": {
+        "maps": [
+          "MAP_ETERNA_CITY",
+          "MAP_ROUTE211_WEST",
+          "MAP_ROUTE206_NORTH",
+          "MAP_ROUTE206",
+          "MAP_ROUTE206_SOUTH",
+          "MAP_ROUTE207",
+          "MAP_OREBURGH_CITY",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F",
+          "MAP_OREBURGH_MINE_B1F",
+          "MAP_OREBURGH_MINE_B2F"
+        ],
+        "build": "release",
+        "rom_sha256": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE207",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    13,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    14,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    15,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    16,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    17,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    18,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    19,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    20,
+                    0
+                  ]
+                ]
+              ],
+              "count": 54
+            }
+          }
+        ],
+        "save_before": "4e255a69c5856474d94418e232f6d4b55bc4914077b829d671c1b258f442c723",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE207",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ETERNA_CITY",
+            "ok": true,
+            "at": [
+              "MAP_ETERNA_CITY",
+              [
+                15,
+                48
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ETERNA_CITY right seam (59, 18) -> MAP_ROUTE211_WEST (0, 18) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                18
+              ]
+            ],
+            "got": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                18
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ETERNA_CITY right seam (59, 19) -> MAP_ROUTE211_WEST (0, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ETERNA_CITY right seam (59, 20) -> MAP_ROUTE211_WEST (0, 20) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                20
+              ]
+            ],
+            "got": [
+              "MAP_ETERNA_CITY",
+              [
+                59,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_NORTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_NORTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_NORTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ETERNA_CITY warp 0 (15, 48) -> MAP_ROUTE206_NORTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ETERNA_CITY",
+              [
+                [
+                  15,
+                  48
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ETERNA_CITY",
+              [
+                15,
+                48
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ETERNA_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE211_WEST",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                18
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE211_WEST left seam (0, 18) -> MAP_ETERNA_CITY (59, 18) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                18
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                18
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE211_WEST left seam (0, 19) -> MAP_ETERNA_CITY (59, 19) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                19
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                19
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE211_WEST left seam (0, 20) -> MAP_ETERNA_CITY (59, 20) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                20
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE211_WEST",
+              [
+                0,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "reached MAP_ROUTE206_NORTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_NORTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ETERNA_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ETERNA_CITY",
+            "ok": true,
+            "at": [
+              "MAP_ETERNA_CITY",
+              [
+                15,
+                48
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206_NORTH warp 0 (4, 1) -> MAP_ETERNA_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206_NORTH",
+              [
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206_NORTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_NORTH after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206",
+              [
+                14,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206_NORTH warp 1 (4, 9) -> MAP_ROUTE206 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206_NORTH",
+              [
+                [
+                  4,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206_NORTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_NORTH after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE206",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206",
+              [
+                14,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 down seam (11, 119) -> MAP_ROUTE207 (13, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                11,
+                119
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                11,
+                119
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 down seam (15, 119) -> MAP_ROUTE207 (17, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                15,
+                119
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                15,
+                119
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 down seam (19, 119) -> MAP_ROUTE207 (21, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                19,
+                119
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                19,
+                119
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_NORTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_NORTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_NORTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 warp 0 (14, 5) -> MAP_ROUTE206_NORTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                [
+                  14,
+                  5
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                14,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 warp 1 (12, 96) -> MAP_ROUTE206_SOUTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                [
+                  12,
+                  96
+                ],
+                [
+                  13,
+                  96
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                12,
+                96
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 warp 2 (13, 96) -> MAP_ROUTE206_SOUTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                [
+                  12,
+                  96
+                ],
+                [
+                  13,
+                  96
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                12,
+                96
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 warp 3 (12, 102) -> MAP_ROUTE206_SOUTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                [
+                  12,
+                  102
+                ],
+                [
+                  13,
+                  102
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                12,
+                102
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206_SOUTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206 warp 4 (13, 102) -> MAP_ROUTE206_SOUTH and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206",
+              [
+                [
+                  12,
+                  102
+                ],
+                [
+                  13,
+                  102
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206",
+              [
+                12,
+                102
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE206_SOUTH",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206",
+              [
+                12,
+                96
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206_SOUTH warp 0 (4, 1) -> MAP_ROUTE206 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                [
+                  4,
+                  1
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206 via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_ROUTE206",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE206",
+              [
+                12,
+                102
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE206_SOUTH warp 1 (4, 9) -> MAP_ROUTE206 and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                [
+                  4,
+                  9
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE206_SOUTH",
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_ROUTE206_SOUTH after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_ROUTE207",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE207",
+              [
+                13,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 up seam (13, 0) -> MAP_ROUTE206 (11, 119) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                13,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                13,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 up seam (17, 0) -> MAP_ROUTE206 (15, 119) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                17,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                17,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 up seam (21, 0) -> MAP_ROUTE206 (19, 119) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                21,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                21,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 down seam (9, 31) -> MAP_OREBURGH_CITY (44, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                9,
+                31
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                9,
+                31
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 down seam (12, 31) -> MAP_OREBURGH_CITY (47, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                12,
+                31
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                12,
+                31
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 down seam (15, 31) -> MAP_OREBURGH_CITY (50, 0) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_ROUTE207",
+              [
+                15,
+                31
+              ]
+            ],
+            "got": [
+              "MAP_ROUTE207",
+              [
+                15,
+                31
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE207 (18, 16) pushing up is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE207",
+              [
+                18,
+                16
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE207",
+              [
+                18,
+                16
+              ]
+            ]
+          },
+          {
+            "name": "reached MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (44, 0) -> MAP_ROUTE207 (9, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                44,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (47, 0) -> MAP_ROUTE207 (12, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                47,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY up seam (50, 0) -> MAP_ROUTE207 (15, 31) and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                25,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 0 (6, 12) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  6,
+                  13
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 11 (50, 57) -> MAP_OREBURGH_MINE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  50,
+                  57
+                ],
+                [
+                  51,
+                  57
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 12 (51, 57) -> MAP_OREBURGH_MINE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  50,
+                  57
+                ],
+                [
+                  51,
+                  57
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                12,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 13 (52, 57) -> MAP_OREBURGH_MINE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  52,
+                  57
+                ],
+                [
+                  53,
+                  57
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                53,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                12,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_CITY warp 14 (53, 57) -> MAP_OREBURGH_MINE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_CITY",
+              [
+                [
+                  52,
+                  57
+                ],
+                [
+                  53,
+                  57
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_CITY",
+              [
+                53,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                25,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                3
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 1 (18, 5) -> MAP_OREBURGH_GATE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  18,
+                  5
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                5
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                6,
+                13
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_1F warp 2 (25, 20) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                [
+                  25,
+                  20
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                25,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_GATE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_GATE_1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_GATE_1F",
+              [
+                18,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_GATE_B1F warp 0 (5, 4) -> MAP_OREBURGH_GATE_1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                [
+                  5,
+                  4
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_GATE_B1F",
+              [
+                5,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_GATE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                50,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 0 (11, 1) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  11,
+                  1
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_CITY via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_CITY",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_CITY",
+              [
+                53,
+                57
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 1 (12, 1) -> MAP_OREBURGH_CITY and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  12,
+                  1
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                12,
+                1
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 2 (11, 21) -> MAP_OREBURGH_MINE_B2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  10,
+                  21
+                ],
+                [
+                  11,
+                  21
+                ],
+                [
+                  12,
+                  21
+                ],
+                [
+                  13,
+                  21
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 3 (12, 21) -> MAP_OREBURGH_MINE_B2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  10,
+                  21
+                ],
+                [
+                  11,
+                  21
+                ],
+                [
+                  12,
+                  21
+                ],
+                [
+                  13,
+                  21
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 4 (10, 21) -> MAP_OREBURGH_MINE_B2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  10,
+                  21
+                ],
+                [
+                  11,
+                  21
+                ],
+                [
+                  12,
+                  21
+                ],
+                [
+                  13,
+                  21
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B2F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B1F warp 5 (13, 21) -> MAP_OREBURGH_MINE_B2F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                [
+                  10,
+                  21
+                ],
+                [
+                  11,
+                  21
+                ],
+                [
+                  12,
+                  21
+                ],
+                [
+                  13,
+                  21
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "reached MAP_OREBURGH_MINE_B2F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B1F via warp)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "an exit is reachable after warping into MAP_OREBURGH_MINE_B1F",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B1F",
+              [
+                11,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_OREBURGH_MINE_B2F warp 0 (15, 1) -> MAP_OREBURGH_MINE_B1F and back",
+            "ok": true,
+            "leg": "back",
+            "expected": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                [
+                  15,
+                  2
+                ]
+              ]
+            ],
+            "got": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (MAP_OREBURGH_MINE_B2F after warp round trip)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (w25-current)",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "42b171d74d7abccf4d38ca54c57d21190edc07df02965a171a7ca608718d3edd",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "3ae8d3a4d6860cb795e5f0657c7bc5e78b5e164b651bda71bf08a3c9323a32dc"
     },
     "release_w25_fresh_continue": {
-      "status": "PENDING_NO_RESULT"
+      "status": "PASS",
+      "checks": 3,
+      "result": {
+        "maps": [
+          "MAP_ETERNA_CITY",
+          "MAP_ROUTE211_WEST",
+          "MAP_ROUTE206_NORTH",
+          "MAP_ROUTE206",
+          "MAP_ROUTE206_SOUTH",
+          "MAP_ROUTE207",
+          "MAP_OREBURGH_CITY",
+          "MAP_OREBURGH_GATE_1F",
+          "MAP_OREBURGH_GATE_B1F",
+          "MAP_OREBURGH_MINE_B1F",
+          "MAP_OREBURGH_MINE_B2F"
+        ],
+        "build": "release",
+        "rom_sha256": "500176f0778411d3cb42cf13a8bcbdd8988f4d74bbe5e154e1d740c0f40d9037",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE207",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    13,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    14,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    15,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    16,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    17,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    18,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    19,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    31
+                  ],
+                  [
+                    20,
+                    0
+                  ]
+                ]
+              ],
+              "count": 54
+            }
+          }
+        ],
+        "save_before": "42b171d74d7abccf4d38ca54c57d21190edc07df02965a171a7ca608718d3edd",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_OREBURGH_MINE_B2F",
+              [
+                15,
+                2
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "42b171d74d7abccf4d38ca54c57d21190edc07df02965a171a7ca608718d3edd",
+        "verdict": "PASS"
+      },
+      "raw_result_sha256": "e095f3be7dba6c29b6897eab2d7573f0fa805cc1b92447d2c4d635f1d312d480"
     },
     "normal_interiors": {
       "status": "PENDING_NO_RESULT"
@@ -7228,7 +9357,8 @@
   "scripts": {
     "run-rendered.py": "from pathlib import Path\nimport subprocess,sys,json,hashlib,shutil\nrepo=Path('/workspace/averon-packet-c-native-20261027');root=repo/'Pokemon Game';engine=root/'engine';out=Path(__file__).parent\nrunner=root/'Averon_Codex_Handoff/design/sinnoh/cycling-road-join/run_current_qa.py';receipt=json.loads((out/'receipt.json').read_text());rows=[]\nfor profile in ('normal','release'):\n for path,h in receipt['files'].items():assert hashlib.sha256((engine/path).read_bytes()).hexdigest()==h,path\n scratch=Path('/workspace/scratch')/('w25-post-c49-'+profile+'-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,str(root/'scripts/claude_play/map_qa.py'),'fixture-save','--engine',str(engine),'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_ROUTE207','15','2'],check=True)\n target=out/(profile+'-traversal');cmd=[sys.executable,str(runner),'--engine',str(engine),'--receipt',str(out/'receipt.json'),'--scratch',str(scratch),'--out',str(target),'--profile',profile]\n with (out/(profile+'-traversal.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n result=json.loads((target/'result.json').read_text());rows.append(dict(profile=profile,scope='traversal',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n if code:continue\n saved=target/'saved-w25-current.json';assert saved.is_file();fresh=Path('/workspace/scratch')/('w25-post-c49-continue-'+profile+'-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n cmd=[sys.executable,str(runner),'--engine',str(engine),'--receipt',str(out/'receipt.json'),'--scratch',str(fresh),'--out',str(out/(profile+'-fresh-continue')),'--profile',profile,'--expect',str(saved)]\n with (out/(profile+'-fresh-continue.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n result=json.loads((out/(profile+'-fresh-continue/result.json')).read_text());rows.append(dict(profile=profile,scope='fresh Continue',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n(out/'runtime-summary.json').write_text(json.dumps(rows,indent=2)+'\\n')\nraise SystemExit(int(len(rows)!=4 or any(x['exit_code'] or x['verdict']!='PASS' for x in rows)))\n",
     "run-release-retry1.py": "from pathlib import Path\nimport subprocess,sys,json,hashlib,shutil\nrepo=Path('/workspace/averon-packet-c-native-20261027');root=repo/'Pokemon Game';engine=root/'engine';out=Path(__file__).parent\nrunner=root/'Averon_Codex_Handoff/design/sinnoh/cycling-road-join/run_current_qa.py';receipt=json.loads((out/'receipt.json').read_text());rows=[]\nfor profile in ('release',):\n for path,h in receipt['files'].items():assert hashlib.sha256((engine/path).read_bytes()).hexdigest()==h,path\n scratch=Path('/workspace/scratch')/('w25-post-c49-'+profile+'-retry1-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,str(root/'scripts/claude_play/map_qa.py'),'fixture-save','--engine',str(engine),'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_ROUTE207','15','2'],check=True)\n target=out/(profile+'-retry1-traversal');cmd=[sys.executable,str(runner),'--engine',str(engine),'--receipt',str(out/'receipt.json'),'--scratch',str(scratch),'--out',str(target),'--profile',profile]\n with (out/(profile+'-retry1-traversal.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n result=json.loads((target/'result.json').read_text());rows.append(dict(profile=profile,scope='traversal',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n if code:continue\n saved=target/'saved-w25-current.json';assert saved.is_file();fresh=Path('/workspace/scratch')/('w25-post-c49-continue-'+profile+'-retry1-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n cmd=[sys.executable,str(runner),'--engine',str(engine),'--receipt',str(out/'receipt.json'),'--scratch',str(fresh),'--out',str(out/(profile+'-retry1-fresh-continue')),'--profile',profile,'--expect',str(saved)]\n with (out/(profile+'-retry1-fresh-continue.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n result=json.loads((out/(profile+'-fresh-continue/result.json')).read_text());rows.append(dict(profile=profile,scope='fresh Continue',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n(out/'release-retry1-summary.json').write_text(json.dumps(rows,indent=2)+'\\n')\nraise SystemExit(int(len(rows)!=2 or any(x['exit_code'] or x['verdict']!='PASS' for x in rows)))\n",
-    "run-interiors-after-release.py": "\"\"\"Serial follow-up: never launch alongside the existing RELEASE traversal.\"\"\"\nfrom pathlib import Path\nimport json,time,subprocess,sys,hashlib,shutil\nout=Path(__file__).parent;repo=Path('/workspace/averon-packet-c-native-20261027');engine=repo/'Pokemon Game/engine';qa=repo/'Pokemon Game/scripts/claude_play/map_qa.py'\ndeadline=time.monotonic()+2400\nwhile not (out/'release-retry1-summary.json').exists():\n if time.monotonic()>deadline:raise SystemExit('BLOCKED: prior RELEASE traversal has not completed; no competing emulator launched')\n if 'Traceback' in (out/'run-release-retry1.log').read_text():raise SystemExit('BLOCKED: prior RELEASE traversal failed; no competing emulator launched')\n time.sleep(1)\nprior=json.loads((out/'release-retry1-summary.json').read_text());assert len(prior)==2 and all(x['exit_code']==0 and x['verdict']=='PASS' for x in prior)\nreceipt=json.loads((out/'receipt.json').read_text());groups=json.loads((engine/'data/maps/map_groups.json').read_text())['gMapGroup_Sinnoh'];assert len(groups)==49 and len(groups[31:41])==10\nnames=['OreburghCity']+groups[31:41];maps=[json.loads((engine/'data/maps'/n/'map.json').read_text())['id'] for n in names];rows=[]\nfor profile in ('normal','release'):\n for path,h in receipt['files'].items():assert hashlib.sha256((engine/path).read_bytes()).hexdigest()==h,path\n scratch=Path('/workspace/scratch')/('post-c49-interiors-'+profile+'-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,str(qa),'fixture-save','--engine',str(engine),'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_OREBURGH_CITY','6','13'],check=True)\n rom=engine/('pokeemerald-cries-off'+('-release' if profile=='release' else '')+'.gba');target=out/(profile+'-interiors');cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(scratch),'--out',str(target),'--build',profile,'--save','post-c-interiors']\n for name in maps:cmd+=['--map',name]\n with (out/(profile+'-interiors.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n if not (target/'result.json').exists():rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT'));break\n result=json.loads((target/'result.json').read_text());rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n if code:continue\n saved=target/'saved-post-c-interiors.json';fresh=Path('/workspace/scratch')/('post-c49-interiors-continue-'+profile+'-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(fresh),'--out',str(out/(profile+'-interiors-fresh-continue')),'--build',profile,'--map',maps[-1],'--expect',str(saved)]\n with (out/(profile+'-interiors-fresh-continue.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n path=out/(profile+'-interiors-fresh-continue/result.json');result=json.loads(path.read_text()) if path.exists() else dict(verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT',checks=[])\n rows.append(dict(profile=profile,scope='interiors fresh Continue',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n(out/'interiors-summary.json').write_text(json.dumps(rows,indent=2)+'\\n')\nraise SystemExit(int(len(rows)!=4 or any(x['exit_code'] or x['verdict']!='PASS' for x in rows)))\n"
+    "run-interiors-after-release.py": "\"\"\"Serial follow-up: never launch alongside the existing RELEASE traversal.\"\"\"\nfrom pathlib import Path\nimport json,time,subprocess,sys,hashlib,shutil\nout=Path(__file__).parent;repo=Path('/workspace/averon-packet-c-native-20261027');engine=repo/'Pokemon Game/engine';qa=repo/'Pokemon Game/scripts/claude_play/map_qa.py'\ndeadline=time.monotonic()+2400\nwhile not (out/'release-retry1-summary.json').exists():\n if time.monotonic()>deadline:raise SystemExit('BLOCKED: prior RELEASE traversal has not completed; no competing emulator launched')\n if 'Traceback' in (out/'run-release-retry1.log').read_text():raise SystemExit('BLOCKED: prior RELEASE traversal failed; no competing emulator launched')\n time.sleep(1)\nprior=json.loads((out/'release-retry1-summary.json').read_text());assert len(prior)==2 and all(x['exit_code']==0 and x['verdict']=='PASS' for x in prior)\nreceipt=json.loads((out/'receipt.json').read_text());groups=json.loads((engine/'data/maps/map_groups.json').read_text())['gMapGroup_Sinnoh'];assert len(groups)==49 and len(groups[31:41])==10\nnames=['OreburghCity']+groups[31:41];maps=[json.loads((engine/'data/maps'/n/'map.json').read_text())['id'] for n in names];rows=[]\nfor profile in ('normal','release'):\n for path,h in receipt['files'].items():assert hashlib.sha256((engine/path).read_bytes()).hexdigest()==h,path\n scratch=Path('/workspace/scratch')/('post-c49-interiors-'+profile+'-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,str(qa),'fixture-save','--engine',str(engine),'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_OREBURGH_CITY','6','13'],check=True)\n rom=engine/('pokeemerald-cries-off'+('-release' if profile=='release' else '')+'.gba');target=out/(profile+'-interiors');cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(scratch),'--out',str(target),'--build',profile,'--save','post-c-interiors']\n for name in maps:cmd+=['--map',name]\n with (out/(profile+'-interiors.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n if not (target/'result.json').exists():rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT'));break\n result=json.loads((target/'result.json').read_text());rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n if code:continue\n saved=target/'saved-post-c-interiors.json';fresh=Path('/workspace/scratch')/('post-c49-interiors-continue-'+profile+'-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(fresh),'--out',str(out/(profile+'-interiors-fresh-continue')),'--build',profile,'--map',maps[-1],'--expect',str(saved)]\n with (out/(profile+'-interiors-fresh-continue.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n path=out/(profile+'-interiors-fresh-continue/result.json');result=json.loads(path.read_text()) if path.exists() else dict(verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT',checks=[])\n rows.append(dict(profile=profile,scope='interiors fresh Continue',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n(out/'interiors-summary.json').write_text(json.dumps(rows,indent=2)+'\\n')\nraise SystemExit(int(len(rows)!=4 or any(x['exit_code'] or x['verdict']!='PASS' for x in rows)))\n",
+    "run-interiors-after-verified-release.py": "\"\"\"Serial follow-up: never launch alongside the existing RELEASE traversal.\"\"\"\nfrom pathlib import Path\nimport json,time,subprocess,sys,hashlib,shutil\nout=Path(__file__).parent;repo=Path('/workspace/averon-packet-c-native-20261027');engine=repo/'Pokemon Game/engine';qa=repo/'Pokemon Game/scripts/claude_play/map_qa.py'\nproof=json.loads((out/'release-completed-proof.json').read_text());assert proof['status']=='ACTUAL_DRIVER_RESULTS_PASS'\nfor folder,h in proof['game_results_sha256'].items():\n assert hashlib.sha256((out/folder/'result.json').read_bytes()).hexdigest()==h\n d=json.loads((out/folder/'result.json').read_text());assert d['verdict']=='PASS' and all(c['ok'] for c in d['checks'])\nreceipt=json.loads((out/'receipt.json').read_text());groups=json.loads((engine/'data/maps/map_groups.json').read_text())['gMapGroup_Sinnoh'];assert len(groups)==49 and len(groups[31:41])==10\nnames=['OreburghCity']+groups[31:41];maps=[json.loads((engine/'data/maps'/n/'map.json').read_text())['id'] for n in names];rows=[]\nfor profile in ('normal','release'):\n for path,h in receipt['files'].items():assert hashlib.sha256((engine/path).read_bytes()).hexdigest()==h,path\n scratch=Path('/workspace/scratch')/('post-c49-interiors-'+profile+'-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,str(qa),'fixture-save','--engine',str(engine),'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_OREBURGH_CITY','6','13'],check=True)\n rom=engine/('pokeemerald-cries-off'+('-release' if profile=='release' else '')+'.gba');target=out/(profile+'-interiors');cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(scratch),'--out',str(target),'--build',profile,'--save','post-c-interiors']\n for name in maps:cmd+=['--map',name]\n with (out/(profile+'-interiors.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n if not (target/'result.json').exists():rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT'));break\n result=json.loads((target/'result.json').read_text());rows.append(dict(profile=profile,scope='interiors',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n if code:continue\n saved=target/'saved-post-c-interiors.json';fresh=Path('/workspace/scratch')/('post-c49-interiors-continue-'+profile+'-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n cmd=[sys.executable,str(qa),'run','--engine',str(engine),'--rom',str(rom),'--scratch',str(fresh),'--out',str(out/(profile+'-interiors-fresh-continue')),'--build',profile,'--map',maps[-1],'--expect',str(saved)]\n with (out/(profile+'-interiors-fresh-continue.log')).open('w') as log:code=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT).returncode\n path=out/(profile+'-interiors-fresh-continue/result.json');result=json.loads(path.read_text()) if path.exists() else dict(verdict='STARTUP_BLOCKED_NO_GAMEPLAY_RESULT',checks=[])\n rows.append(dict(profile=profile,scope='interiors fresh Continue',exit_code=code,verdict=result['verdict'],checks=len(result['checks'])));print(rows[-1],flush=True)\n(out/'interiors-summary.json').write_text(json.dumps(rows,indent=2)+'\\n')\nraise SystemExit(int(len(rows)!=4 or any(x['exit_code'] or x['verdict']!='PASS' for x in rows)))\n"
   },
   "parallel_queue": {
     "stark": {
@@ -7249,6 +9379,7 @@
     "workflow307": "BLOCKED_AUTHORIZATION_AND_REVIEW_UNDISPATCHED"
   },
   "screenshots": {
-    "NORMAL_SAVED.png": "909f770334cf3cb7cba63b4a52b8f422b63dde20effa3e9f99486bec42b335e5"
+    "NORMAL_SAVED.png": "909f770334cf3cb7cba63b4a52b8f422b63dde20effa3e9f99486bec42b335e5",
+    "RELEASE_FRESH_CONTINUE.png": "be9e9ebef457a600e236767ccca52c4cf3778f78dfee99c1e00dbca449540eda"
   }
 }
