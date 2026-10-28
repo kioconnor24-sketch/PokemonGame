@@ -1,4 +1,4 @@
-# Packet D — existing South passage, source preparation
+# Packet D — existing South passage, completed temporary runtime gate
 
 Based on #337 final feature `0cdccf0da96d2dca2389c33f6e7d974087936972`, engine `b06114f532e98f331dcdf64481fd01e726073fdf`. No production installation or permanent origin allocation. The five-map packet is Route206 North/road/South, Route207 and MtCoronet1FSouth. This adapter extends the already composed49-map W25 DEV context to50, retaining Eterna and the mines as test context; it does not authorize those as additional production content.
 
@@ -16,8 +16,23 @@ Actual50-map mapjson generation preserves992 baseline map definitions and adds n
 
 Commands: `python3 -m unittest discover -s 'Pokemon Game/scripts/tests' -p test_sinnoh_packet_d.py`; call `prepare_runtime.assemble(Path(repo))` for the isolated payload dictionary. There is deliberately no production installer.
 
-Next: finish the separate unchanged49-map NORMAL/RELEASE native/rendered/Save→fresh Continue gate, then use this70-file50-map payload in a separately qualified throwaway scene for actual west-door traversal/followers/menu/Save/Continue. Do not pass it to the existing strict61-file W25 consumer or weaken that consumer. Route208 and2F remain closed until their own source integration. Production packet D still needs the owner’s Route206/207/Coronet section policy and exact-path handoffs, plus final builds/native/runtime proof. Packets E–G remain dependent; no IDs228+ allocated. #307 remains undispatched.
+Current next action: the49-map gate is already complete in #348, and the50-map gate below is now complete. Do not repeat either unchanged gate. Preserve this source PR without merging into #337. Wait for #337's genuine owner exact-path authorization and eligible integration; then retarget/reconcile #347 onto accepted main and prepare the production installer only with explicit section228–230 policy/path authority. Route208 and2F remain closed. #307 stays undispatched.
 
 [Deterministic source preview](SOURCE_PREVIEW.png) uses the existing dual-bank renderer and only current General/Cave palettes0,1,3,6,10. Visually inspected: east/upper closures render as solid native wall rather than inert arrow/ladder art. This static render does not prove animation or mGBA acceptance.
 
 The first actual50-map NORMAL link caught an emitter defect: the new MapScripts label was local (`:`), so maps.o could not resolve it across objects. Fixed to the engine’s exported `::` syntax. A real preprocessor +GNU assembler/linker test reproduces the old undefined reference, links the emitted table successfully, and rejects a local-label regression. The temporary test tool build includes the unchanged characters.h dependency; its first incomplete-copy error is retained separately. The failed full link is not counted as a ROM build. Rebuild/native/runtime50 evidence follows separately.
+
+
+## Actual50-map completion — 2026-10-28
+
+[Machine-readable evidence](runtime-evidence/RESULTS.json) records exact identities, all335 native identities/source locations, all six GUI result rows and failures. Producer remains `1ace5b9ff6e962d79b35be16e11c07eff32cb439`; temporary engine `a57bd128b0c823b16388f619d01b9dd2bca4000b`. All70 payloads were verified against the live engine and read back from the private archive.
+
+NORMAL and RELEASE actual links PASS: **17,524,764 B /17,643,892 B**, respectively **+12,748 B /+12,756 B** against matching49 builds. ROM SHA256 NORMAL `a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456`; RELEASE `47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014`. Save free remains SB1=304 B,SB2=84 B,SB3=1556 B,PC=1568 B. ARM GCC14.2.1; criesOFF.
+
+**Native335/335 PASS**, complete filtered `TESTS=Averon` execution,335 unique PASS names exactly match compiled test inventory, no failure/skip outcome. Completed raw log retained and hashed; old execution session expired, so no exit code is invented. This is not the full unfiltered upstream suite. Existing9+45 host PASS and6 ARM syntax PASS are reused.
+
+**Actual mGBA NORMAL and RELEASE each:16/16 passage +3/3 fresh-process Continue +6/6 separate upper-fixture checks PASS**. Reciprocal original west ports, east wall, visible follower, menu and game-written Save verified. Fresh Continue restores party/flags/bag/money/follower/map/coordinates. Upper wall test is a separate placement in the disconnected upper component, not ordinary movement or Surf acceptance. The temporary popup reads Route201 because217 is explicitly a DEV surrogate; no permanent Coronet origin is allocated. Both published PNGs inspected.
+
+Six ROM/ELF build artifacts are privately archived/readback-verified in `/workspace/averon-session-evidence/packet-d50-20261027/completed-build-artifacts.tar.gz`; SHA256 `b0bf5d1f3d74b2c2fd5ec4026e9935a317f46b783ef02ad3e7ca735d6a4db92e`. Manifest,70-file source archive, raw logs, scripts, screenshots and saves remain owner-private in that evidence root and the existing runtime worktree. Workspace-private storage is not a public GitHub artifact; preserve/copy it before replacing the environment. No ROM/ELF/save uploaded.
+
+The first real local-label link failure and host harness dependency failure remain recorded. Earlier49 cache/X11/reporting failures and Route226 startup/recovery are retained; all33 Frontier findings and Route228 FAIL3/4 remain open. Current main `43d8ad3363ef850d412c888dff2077403e05ad86` still has30 production slots: **+0 production maps from this DEV gate**. #337 head8343882a still fails exclusive-files; owner authorization resolves this, further unchanged tests do not.
