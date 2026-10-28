@@ -72,6 +72,20 @@ class PacketGTunnelStageTest(unittest.TestCase):
         self.assertIn("declared external exit missing: Route214: connection leaves the packet (MAP_SPRING_PATH)",
                       errors)
 
+    def test_a_changed_dev_context_byte_is_reported(self):
+        files = dict(self.files)
+        path = "sendoff-spring/staged/SpringPath/map.json"
+        files[path] = files[path] + b"\n"
+        self.assertIn("pin mismatch: " + path, g.check(files))
+
+    def test_a_declared_exit_repeated_in_another_direction_is_rejected(self):
+        def change(h):
+            extra = dict(next(c for c in h["connections"] if c["map"] == "MAP_SPRING_PATH"), direction="up")
+            h["connections"].append(extra)
+        errors = self.edited("sendoff-spring/staged/Route214-dev-overlay/map.json", change)
+        self.assertIn("declared external exit repeated 2 times: "
+                      "Route214: connection leaves the packet (MAP_SPRING_PATH)", errors)
+
     def test_batch_swaps_b2f_east_and_carries_spring_context(self):
         with tempfile.TemporaryDirectory() as out:
             g.write_batch(self.files, out)

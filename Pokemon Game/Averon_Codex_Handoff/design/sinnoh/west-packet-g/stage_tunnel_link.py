@@ -11,6 +11,7 @@ lead to packet G's outdoors (Veilstone, Valor Lakefront, the Route 214 gate) and
   stage_tunnel_link.py --check | --pin | --out DIR    (DIR: static_scene batch for hearthome-solaceon+eastern-loop)
 """
 import argparse
+import collections
 import importlib.util
 import json
 import pathlib
@@ -46,9 +47,14 @@ def source_dirs():
     return dirs
 
 
+def context_dirs():
+    return [f"sendoff-spring/staged/{m}" for m in CONTEXT]
+
+
 def read_sources(dirs=None):
+    """Packet sources and the DEV context the batch carries: everything written anywhere is pinned."""
     files = {}
-    for d in dirs or source_dirs():
+    for d in dirs or source_dirs() + context_dirs():
         root = SINNOH / d
         if not root.is_dir():
             raise ValueError("missing staged source: " + d)
@@ -70,9 +76,16 @@ def headers(files):
 
 
 def graph_errors(hdrs):
-    errors = set(e.graph_errors(hdrs))
-    missing = EXTERNAL - errors
-    return sorted(errors - EXTERNAL) + [f"declared external exit missing: {x}" for x in sorted(missing)]
+    """Packet E's checks; each declared external exit must occur exactly once, everything else is an error."""
+    errors = collections.Counter(e.graph_errors(hdrs))
+    out = []
+    for exit_ in sorted(EXTERNAL):
+        count = errors.pop(exit_, 0)
+        if count == 0:
+            out.append(f"declared external exit missing: {exit_}")
+        elif count > 1:
+            out.append(f"declared external exit repeated {count} times: {exit_}")
+    return sorted(errors.elements()) + out
 
 
 def check(files=None):
@@ -85,8 +98,7 @@ def check(files=None):
 
 def write_batch(files, out):
     """Packet E's batch with the swapped B2F East, the tunnel, Route 214's overlay and the Spring Path context."""
-    context = [f"sendoff-spring/staged/{m}" for m in CONTEXT]
-    everything = {**files, **read_sources(context)}
+    context = context_dirs()
     staged = pathlib.Path(out) / "staged"
     if staged.exists():
         shutil.rmtree(staged)
@@ -95,7 +107,7 @@ def write_batch(files, out):
     for d in keep:
         target = staged / d.split("/staged/", 1)[1]
         target.mkdir(parents=True)
-        for path, raw in everything.items():
+        for path, raw in files.items():
             if path.rsplit("/", 1)[0] == d:
                 (target / path.rsplit("/", 1)[1]).write_bytes(raw)
     (pathlib.Path(out) / "SOURCES.txt").write_text(

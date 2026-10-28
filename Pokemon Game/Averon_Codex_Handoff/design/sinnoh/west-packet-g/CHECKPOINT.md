@@ -9,15 +9,15 @@ This is source only. It is stacked on packet E's stage (C51, #351) and touches n
 
 **The chain**, reciprocal index for index: Route214 w2 ↔ ManiacTunnel w0; ManiacTunnel w1 ↔ B1F w0; B1F w1 ↔ Ruins B2F East w2.
 
-It pins all 182 source files. Every warp and connection inside the 40 maps is reciprocal, and every Ruins stair returns to its source floor. Route 214's other exits are an exact declared-external list:
+It pins all 212 input files: the 182 packet sources plus the 30 files of the five Spring Path / Sendoff Spring / Turnback Cave context directories, which the DEV batch writes. Every warp and connection inside the 40 maps is reciprocal, and every Ruins stair returns to its source floor. Route 214's other exits are an exact declared-external list:
 - gate warps 0/1 → Route214_Access;
 - Veilstone (up), Valor Lakefront (down), Spring Path (right).
 
-An undeclared exit fails, and so does a declared exit that disappears.
+An undeclared exit fails, a declared exit that disappears fails, and so does a declared exit that occurs twice (in any direction).
 
 ## Evidence
 
-- `test_sinnoh_packet_g_tunnel_stage`: 8/8, run together with packet E's 9/9.
+- `test_sinnoh_packet_g_tunnel_stage`: 10/10, run together with packet E's tests, which include #354's shared validator. The two review regressions (a changed context byte, an external exit repeated in another direction) fail on the previous head and pass now.
 - **Static audit:** installed with `static_scene.py REPO hearthome-solaceon+eastern-loop BATCH <40 maps>`. The batch carries the Spring Path / Sendoff Spring / Turnback Cave maps as DEV context only. Result: **PASS, 0 findings**, nothing skipped.
 - **Live NORMAL/RELEASE traversal with Save → fresh Continue:** see the PR thread. It runs after the C51 gate.
 
