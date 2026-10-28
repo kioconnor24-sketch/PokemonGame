@@ -53,7 +53,7 @@ class SinnohWorkIdentityTests(unittest.TestCase):
     def test_reuse_with_actual_upstream_allowed(self):
         p = candidate(mode="reuse", sources="#351")
         self.assertEqual(check(p, main=["NewRoute"], peers=[
-            dict(number=351, files=[dict(filename=STAGED+"NewRoute/map.json", status="added")])]))
+            dict(number=351, files=[dict(filename=STAGED+"NewRoute/map.json", status="added")])]), [])
 
     def test_reuse_without_source_ref_refused(self):
         self.assertTrue(any("Sinnoh-Sources" in e for e in check(candidate(mode="reuse"))))
