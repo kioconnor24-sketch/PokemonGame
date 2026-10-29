@@ -148,11 +148,34 @@ def install(engine):
     return names
 
 
+# West packet C appends the Oreburgh City return to the gate and opens these east cells; nothing else may change.
+LATER_GATE_CELLS = {(25, 20), (24, 21), (25, 21), (26, 21)}
+
+
+def later_gate_edit(engine, rel, value):
+    """True when the engine's gate file is this packet's output plus only west packet C's documented additions."""
+    if rel == "data/maps/OreburghGate_1F/map.json":
+        have = json.loads((engine / rel).read_text())
+        extra = have["warp_events"][len(value["warp_events"]):]
+        return ({**have, "warp_events": have["warp_events"][:len(value["warp_events"])]} == value
+                and [w["dest_map"] for w in extra] == ["MAP_OREBURGH_CITY"])
+    if rel == "data/layouts/OreburghGate_1F/map.bin":
+        have, want = (engine / rel).read_bytes(), encode(value)
+        if len(have) != len(want):
+            return False
+        width = json.loads((engine / "data/layouts/layouts.json").read_text())
+        width = next(l["width"] for l in width["layouts"] if l.get("id") == "LAYOUT_OREBURGH_GATE_1F")
+        changed = {(i // 2 % width, i // 2 // width) for i in range(0, len(have), 2) if have[i:i + 2] != want[i:i + 2]}
+        return changed <= LATER_GATE_CELLS
+    return False
+
+
 def check(engine):
     """Recompute the install against the base snapshot and the pre-packet prefixes; compare with the engine."""
     engine = pathlib.Path(engine)
     names, files, cv = plan(engine)
-    bad = [rel for rel, value in files.items() if (engine / rel).read_bytes() != encode(value)]
+    bad = [rel for rel, value in files.items()
+           if (engine / rel).read_bytes() != encode(value) and not later_gate_edit(engine, rel, value)]
     groups = json.loads((engine / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
     if groups[PRIOR_SLOTS:PRIOR_SLOTS + len(names)] != names:      # later packets append after slot 21
         bad.append("data/maps/map_groups.json")

@@ -60,8 +60,11 @@ class CatalogueTests(unittest.TestCase):
 
     def test_real_engine_catalogue_is_emerald_only(self):
         cat = art.tileset_catalogue()
-        self.assertEqual(sorted(k for k, v in cat.items() if not v['secondary']),
-                         ['gTileset_Building', 'gTileset_General', 'gTileset_SecretBase'])
+        stock = ['gTileset_Building', 'gTileset_General', 'gTileset_SecretBase']
+        primaries = sorted(k for k, v in cat.items() if not v['secondary'])
+        self.assertEqual([k for k in primaries if not k.startswith('gTileset_Averon')], stock)
+        for name in primaries:                      # Averon primaries reuse a stock Emerald primary's tiles
+            self.assertIn(cat[name]['tiles'], {cat[k]['tiles'] for k in stock}, name)
         self.assertFalse([k for k in cat if k.endswith('Frlg')])
         self.assertIn('gTileset_Dewford', cat)
         self.assertTrue(cat['gTileset_General']['tiles'].endswith('primary/general/tiles.png'))

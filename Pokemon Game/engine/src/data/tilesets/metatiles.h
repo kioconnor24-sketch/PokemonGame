@@ -414,3 +414,7 @@ const u16 gMetatiles_AveronCorridorRustboro[] = INCBIN_U16("data/tilesets/second
 const u16 gMetatileAttributes_AveronCorridorRustboro[] = INCBIN_U16("data/tilesets/secondary/averon_corridor_rustboro/metatile_attributes.bin");
 const u16 gMetatiles_AveronFloaromaInteriorSecondary[] = INCBIN_U16("data/tilesets/secondary/averon_floaroma_interior_secondary/metatiles.bin");
 const u16 gMetatileAttributes_AveronFloaromaInteriorSecondary[] = INCBIN_U16("data/tilesets/secondary/averon_floaroma_interior_secondary/metatile_attributes.bin");
+const u16 gMetatiles_AveronOreburghCityPrimary[] = INCBIN_U16("data/tilesets/primary/averon_oreburgh_city_primary/metatiles.bin");
+const u16 gMetatileAttributes_AveronOreburghCityPrimary[] = INCBIN_U16("data/tilesets/primary/averon_oreburgh_city_primary/metatile_attributes.bin");
+const u16 gMetatiles_AveronOreburghCitySecondary[] = INCBIN_U16("data/tilesets/secondary/averon_oreburgh_city_secondary/metatiles.bin");
+const u16 gMetatileAttributes_AveronOreburghCitySecondary[] = INCBIN_U16("data/tilesets/secondary/averon_oreburgh_city_secondary/metatile_attributes.bin");

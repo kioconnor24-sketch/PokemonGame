@@ -114,11 +114,113 @@ def rebase(files, old, current):
     return result
 
 
+CITY = "data/maps/OreburghCity/map.json"
+CITY_BLOCKS = "data/layouts/OreburghCity/map.bin"
+CITY_WIDTH = 70
+MINE_CELLS = [(50, 57), (51, 57), (52, 57), (53, 57)]
+
+
+def production_city(current):
+    """True once west packet C (#337) made Oreburgh City a production map."""
+    return "OreburghCity" in json.loads(current[GROUPS])["gMapGroup_Sinnoh"]
+
+
+def rebase_on_production_city(files, old, current):
+    """Post-packet-C adaptation: production already holds the City, its Gate east return and the B1F ladder.
+
+    W25 then appends only Route207 and the two mine floors; a DEV-only overlay of the production City
+    restores the Route207 connection and the four mine doors (appended after production's warps)."""
+    result = dict(files)
+    before_gate, patched_gate, live_gate = (json.loads(x[GATE]) for x in (old, files, current))
+    baseline = before_gate["warp_events"]
+    ladder = dict(x=18, y=5, elevation=0, dest_map="MAP_OREBURGH_GATE_B1F", dest_warp_id="0")
+    east = dict(x=25, y=20, elevation=0, dest_map="MAP_OREBURGH_CITY", dest_warp_id="0")
+    if live_gate != dict(before_gate, warp_events=baseline + [ladder, east]):
+        raise ValueError("unexpected production Gate header change")
+    if patched_gate != dict(before_gate, warp_events=baseline + [east]):
+        raise ValueError("unexpected staged Gate header change")
+    block = "data/layouts/OreburghGate_1F/map.bin"
+    words = lambda raw: list(struct.unpack("<%dH" % (len(raw) // 2), raw))
+    a, b, dev = (words(x[block]) for x in (old, current, files))
+    if len(a) != len(b) or len(a) != len(dev):
+        raise ValueError("production Gate dimensions changed")
+    opened = [i for i, (x, y) in enumerate(zip(a, dev)) if x != y]
+    if ([i for i, (x, y) in enumerate(zip(a, b)) if x != y] != sorted([163] + opened)
+            or b[163] != 0x323F or any(b[i] != dev[i] for i in opened)):
+        raise ValueError("unexpected production/DEV Gate geometry change")
+    result[GATE], result[block] = current[GATE], current[block]   # production already equals the W25 Gate
+    city, staged = json.loads(current[CITY]), json.loads(files[CITY])
+    if city["connections"] or [w["dest_map"] for w in staged["warp_events"]] != ["MAP_OREBURGH_GATE_1F"] + ["MAP_OREBURGH_MINE_B1F"] * 4:
+        raise ValueError("unexpected production or staged City")
+    if city["warp_events"][0] != dict(staged["warp_events"][0], dest_warp_id="2"):
+        raise ValueError("unexpected production City return")
+    first = len(city["warp_events"])
+    city["connections"] = staged["connections"]
+    city["warp_events"] += staged["warp_events"][1:]
+    result[CITY] = encode(city)
+    prod_cells, staged_cells = words(current[CITY_BLOCKS]), words(files[CITY_BLOCKS])
+    for x, y in MINE_CELLS:
+        prod_cells[y * CITY_WIDTH + x] = staged_cells[y * CITY_WIDTH + x]   # DEV-only reopened mine doors
+    result[CITY_BLOCKS] = struct.pack("<%dH" % len(prod_cells), *prod_cells)
+    for path in ("data/layouts/OreburghCity/border.bin", "data/maps/OreburghCity/scripts.inc"):
+        result.pop(path)                                                       # production keeps its own
+    b1f = json.loads(files["data/maps/OreburghMine_B1F/map.json"])
+    for w in b1f["warp_events"]:
+        if w["dest_map"] == "MAP_OREBURGH_CITY":
+            w["dest_warp_id"] = str(first - 1 + int(w["dest_warp_id"]))
+    result["data/maps/OreburghMine_B1F/map.json"] = encode(b1f)
+    include = '\t.include "data/maps/OreburghCity/scripts.inc"\n'
+    for path in APPENDS:
+        if not files[path].startswith(old[path]):
+            raise ValueError("legacy index is not append-only: " + path)
+        tail = files[path][len(old[path]):]
+        if path == "data/event_scripts.s":
+            if tail.decode().count(include) != 1:
+                raise ValueError("unexpected legacy City include")
+            tail = tail.decode().replace(include, "").encode()
+        result[path] = current[path] + tail
+    old_groups, new_groups, live = (json.loads(x[GROUPS]) for x in (old, files, current))
+    group = "gMapGroup_Sinnoh"
+    if any(live[k] != v for k, v in old_groups.items() if k != group):
+        raise ValueError("non-Sinnoh registry changed")
+    if live[group][:len(old_groups[group])] != old_groups[group]:
+        raise ValueError("legacy slot prefix changed")
+    added = new_groups[group][len(old_groups[group]):]
+    if added[0] != "OreburghCity" or len(added) != 4:
+        raise ValueError("unexpected legacy additions")
+    added = added[1:]
+    if set(added) & set(live[group]) or len(live[group]) + len(added) > 256:
+        raise ValueError("temporary map identity collision/capacity")
+    start = len(live[group])
+    live[group] += added
+    result[GROUPS] = encode(live)
+    old_layouts, new_layouts, layouts = (json.loads(x[LAYOUTS]) for x in (old, files, current))
+    n = len(old_layouts["layouts"])
+    if layouts["layouts"][:n] != old_layouts["layouts"]:
+        raise ValueError("layout prefix changed")
+    extra = [l for l in new_layouts["layouts"][n:] if l["id"] != "LAYOUT_OREBURGH_CITY"]
+    if len(extra) != 3 or {l["id"] for l in extra} & {l["id"] for l in layouts["layouts"]}:
+        raise ValueError("layout identity collision")
+    layouts["layouts"] += extra
+    result[LAYOUTS] = encode(layouts)
+    index = live["group_order"].index(group)
+    marker = f"REGISTRY_GROUP({index}, {group}, {start}, 1)"
+    pins = current[REGISTRY].decode()
+    if pins.count(marker) != 1:
+        raise ValueError("registry count mismatch")
+    pins = pins.replace(marker, f"REGISTRY_GROUP({index}, {group}, {start + len(added)}, 1)")
+    for slot, name in enumerate(added, start):
+        pins += f"REGISTRY_SLOT({index}, {slot}, {legacy.frozen.IDS[name]}, {name}, 1)\n"
+    result[REGISTRY] = pins.encode()
+    return result
+
+
 def assemble(repo):
     """Oreburgh family for the existing compose_scene tool; does not write."""
     current = current_inputs(repo)
     files, _ = legacy.assemble(repo)
-    files = rebase(files, legacy.current_inputs(), current)
+    adapt = rebase_on_production_city if production_city(current) else rebase
+    files = adapt(files, legacy.current_inputs(), current)
     return files, dict(status="DEV_ONLY_NOT_BUILD_OR_GAMEPLAY_ACCEPTANCE",
                        files={p: sha(b) for p, b in sorted(files.items())})
 
@@ -144,7 +246,14 @@ def compose(repo):
     if native.count(expected) != 1:
         raise ValueError("Eterna native fixture precondition changed")
     count = len(json.loads(current_inputs(repo)[GROUPS])["gMapGroup_Sinnoh"])
-    files[path] = native.replace(expected, f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);").encode()
+    native = native.replace(expected, f"EXPECT_EQ(MAP_NUM(maps[i]), {count}+i);")
+    if production_city(current_inputs(repo)):   # approved section 227 is the one origin W25 itself does not add
+        old = "STATIC_ASSERT(MAPSEC_COUNT == 227, eterna_no_new_origins);"
+        if native.count(old) != 1:
+            raise ValueError("Eterna native section precondition changed")
+        native = native.replace(old, "STATIC_ASSERT(MAPSEC_OREBURGH_CITY == 227, eterna_only_oreburgh_added);\n"
+                                     "STATIC_ASSERT(MAPSEC_COUNT == 228, eterna_no_new_origins);")
+    files[path] = native.encode()
     # Adapt only the generated fixture, preserving its immutable source.
     path = "test/averon_oreburgh_candidate.c"
     native = files[path].decode()
@@ -154,6 +263,18 @@ def compose(repo):
         "EXPECT_EQ(city->warps[0].warpId, 1)": "EXPECT_EQ(city->warps[0].warpId, 2)",
         "EXPECT_EQ(route->count, 1)": "EXPECT_EQ(route->count, 2)",
     }
+    if production_city(current_inputs(repo)):   # production City: 11 warps, mine doors appended at 11-14
+        replacements.update({
+            "static const u8 ids[] = {1,4,0,0,0,0};": "static const u8 ids[] = {11,14,0,0,0,0};",
+            "EXPECT_EQ(city->warpCount, 5);": "EXPECT_EQ(city->warpCount, 15);",
+            "for (u32 i = 1; i < 5; i++)": "for (u32 i = 11; i < 15; i++)",
+            "EXPECT_EQ(city->warps[i].x, 49+i);": "EXPECT_EQ(city->warps[i].x, 39+i);",
+            "EXPECT_EQ(city->warps[i].warpId, i < 3 ? 0 : 1);": "EXPECT_EQ(city->warps[i].warpId, i < 13 ? 0 : 1);",
+            "static const u16 maps[] = {MAP_OREBURGH_CITY,MAP_ROUTE207,": "static const u16 maps[] = {MAP_ROUTE207,",
+            "EXPECT_EQ(HEADER(MAP_OREBURGH_GATE_1F)->regionMapSectionId, MAPSEC_OREBURGH_GATE);":
+                "EXPECT_EQ(HEADER(MAP_OREBURGH_GATE_1F)->regionMapSectionId, MAPSEC_OREBURGH_GATE);\n"
+                "    EXPECT_EQ(HEADER(MAP_OREBURGH_CITY)->regionMapSectionId, MAPSEC_OREBURGH_CITY);",
+        })
     for old, new in replacements.items():
         if old not in native:
             raise ValueError("native fixture precondition changed: " + old)

@@ -14,7 +14,7 @@ class BattleFrontierDEV(unittest.TestCase):
   self.assertEqual(before['group_order'],after['group_order'])
   for k,v in before.items():
    if k!='gMapGroup_Sinnoh':self.assertEqual(v,after[k])
-  self.assertEqual(after['gMapGroup_Sinnoh'][:30],before['gMapGroup_Sinnoh']);self.assertEqual(len(after['gMapGroup_Sinnoh']),74)
+  self.assertEqual(after['gMapGroup_Sinnoh'][:41],before['gMapGroup_Sinnoh']);self.assertEqual(len(after['gMapGroup_Sinnoh']),85)
   old=json.loads(self.before['data/layouts/layouts.json'])['layouts'];new=json.loads(self.files['data/layouts/layouts.json'])['layouts']
   self.assertEqual(new[:len(old)],old);self.assertEqual(len(new),len(old)+44)
   oldslots=[x for x in self.before['test/data/averon_map_registry_slots.inc'].decode().splitlines() if x.startswith('REGISTRY_SLOT(')]
@@ -24,10 +24,11 @@ class BattleFrontierDEV(unittest.TestCase):
    self.assertTrue(self.files[path].startswith(self.before[path]))
  def test_merged_west_production_maps_precede_every_temporary_slot(self):
   names=self.recipe['existing_map_names_preserved']
-  self.assertEqual(len(names),30)
+  self.assertEqual(len(names),41)
   self.assertEqual(names[19:22],['JubilifeCity_GlobalTerminal_1F','JubilifeCity_GlobalTerminal_2F','OreburghGate_B1F'])
-  self.assertEqual(names[-2:],['ValleyWindworks','ValleyWindworks_Inside'])   # west packet B, slots 22-29
-  self.assertEqual(sorted(p['num'] for p in self.recipe['scene'].values()),list(range(30,74)))
+  self.assertEqual(names[28:30],['ValleyWindworks','ValleyWindworks_Inside'])   # west packet B, slots 22-29
+  self.assertEqual(names[30],'OreburghCity')   # west packet C, slots 30-40
+  self.assertEqual(sorted(p['num'] for p in self.recipe['scene'].values()),list(range(41,85)))
   # Only the four newly exported files per temporary map may replace map/layout data.
   self.assertFalse(any(p.startswith(('data/maps/'+name+'/', 'data/layouts/'+name+'/'))
                        for name in names for p in self.files))
@@ -40,9 +41,9 @@ class BattleFrontierDEV(unittest.TestCase):
    else:groups['gMapGroup_Sinnoh'].append('UnapprovedFutureMap')
    before['data/maps/map_groups.json']=m.encode(groups)
    with self.subTest(delta=delta),patch.object(m,'inputs',return_value=before):
-    with self.assertRaisesRegex(ValueError,'exact30-map prefix required'):m.assemble(ROOT)
+    with self.assertRaisesRegex(ValueError,'exact41-map prefix required'):m.assemble(ROOT)
  def test_changed_baseline_hash_is_rejected(self):
-  target=HERE/'runtime-base-input-hashes-main30.json';original=Path.read_text
+  target=HERE/'runtime-base-input-hashes-main41.json';original=Path.read_text
   def changed(path,*args,**kwargs):
    raw=original(path,*args,**kwargs)
    if path==target:

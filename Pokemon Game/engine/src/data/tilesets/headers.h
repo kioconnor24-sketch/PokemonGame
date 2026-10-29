@@ -1559,3 +1559,21 @@ const struct Tileset gTileset_AveronFloaromaInteriorSecondary =
  .metatileAttributes = gMetatileAttributes_AveronFloaromaInteriorSecondary,
  .callback=NULL,
 };
+
+const struct Tileset gTileset_AveronOreburghCityPrimary =
+{
+ .isCompressed=TRUE, .isSecondary=FALSE,
+ .tiles=gTilesetTiles_General, .palettes=gTilesetPalettes_General,
+ .metatiles=gMetatiles_AveronOreburghCityPrimary,
+ .metatileAttributes = gMetatileAttributes_AveronOreburghCityPrimary,
+ .callback=InitTilesetAnim_General,
+};
+
+const struct Tileset gTileset_AveronOreburghCitySecondary =
+{
+ .isCompressed=TRUE, .isSecondary=TRUE,
+ .tiles=gTilesetTiles_Rustboro, .palettes=gTilesetPalettes_Rustboro,
+ .metatiles=gMetatiles_AveronOreburghCitySecondary,
+ .metatileAttributes = gMetatileAttributes_AveronOreburghCitySecondary,
+ .callback=InitTilesetAnim_Rustboro,
+};

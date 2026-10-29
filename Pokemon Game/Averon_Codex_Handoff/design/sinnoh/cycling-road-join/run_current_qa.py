@@ -29,7 +29,7 @@ def validate(engine, receipt):
     engine = Path(engine).resolve()
     if not (engine / ".map_qa_throwaway").is_file():
         raise ValueError("marked disposable source required")
-    if len(receipt["files"]) != 63:
+    if len(receipt["files"]) not in (61, 63):
         raise ValueError("exact W25 source receipt required")
     for path, expected in receipt["files"].items():
         p = Path(path)
@@ -38,6 +38,53 @@ def validate(engine, receipt):
             raise ValueError("source path escapes engine")
         if hashlib.sha256(target.read_bytes()).hexdigest() != expected:
             raise ValueError("source differs: " + path)
+    if len(receipt["files"]) == 63:
+        # Keep supported legacy31/39-map scenes; padding a post-C receipt must
+        # not route it around the stricter post-C contract.
+        groups_file = engine / "data/maps/map_groups.json"
+        if groups_file.is_file():
+            if not groups_file.resolve().is_relative_to(engine):
+                raise ValueError("source path escapes engine")
+            groups = json.loads(groups_file.read_text())["gMapGroup_Sinnoh"]
+            if len(groups) not in (31, 39):
+                raise ValueError("legacy63 receipt has an unsupported scene prefix")
+    if len(receipt["files"]) == 61:
+        # Post-packet-C retains production City's scripts/border and overlays only
+        # its header/blocks. Accept this explicit contract, not any smaller receipt.
+        groups_path = "data/maps/map_groups.json"
+        city_path = "data/maps/OreburghCity/map.json"
+        required = {groups_path, city_path, "data/layouts/OreburghCity/map.bin"}
+        retained = {"data/maps/OreburghCity/scripts.inc", "data/layouts/OreburghCity/border.bin"}
+        if not required <= receipt["files"].keys() or retained & receipt["files"].keys():
+            raise ValueError("post-C production City preservation contract differs")
+        contract = json.loads((HERE / "post-c-qa-contract.json").read_text())
+        if set(receipt["files"]) != set(contract["payload_paths"]):
+            raise ValueError("post-C source path set differs")
+        try:
+            document = json.loads((engine / groups_path).read_text())
+            groups = document["gMapGroup_Sinnoh"]
+            city = json.loads((engine / city_path).read_text())
+            suffix = ["EternaCity", "Route206_North", "Route206", "Route206_South", "Route211_West",
+                      "Route207", "OreburghMine_B1F", "OreburghMine_B2F"]
+            valid = (len(groups) == 49 and groups[:41] == contract["production_prefix"]
+                     and groups[30] == "OreburghCity"
+                     and groups.count("OreburghCity") == 1 and groups[41:] == suffix
+                     and city["region_map_section"] == "MAPSEC_OREBURGH_CITY"
+                     and len(city["warp_events"]) == 15)
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError("invalid post-C source metadata") from error
+        if not valid:
+            raise ValueError("post-C production City identity contract differs")
+        # Bind the whole reconstructed baseline to the existing immutable profile
+        # pin, rather than trusting a prefix or digest supplied by the receipt.
+        profiles = json.loads((HERE / "current-runtime-base-pins.json").read_text())["profiles"]
+        matching = [p for p in profiles if p["engine_tree"] == contract["engine_tree"]]
+        if len(matching) != 1:
+            raise ValueError("post-C pinned profile missing or ambiguous")
+        document["gMapGroup_Sinnoh"] = groups[:41]
+        baseline = (json.dumps(document, indent=2) + "\n").encode()
+        if hashlib.sha256(baseline).hexdigest() != matching[0]["files"][groups_path]:
+            raise ValueError("post-C full production registry pin differs")
 
 
 class W25Runner(qa.Runner):
