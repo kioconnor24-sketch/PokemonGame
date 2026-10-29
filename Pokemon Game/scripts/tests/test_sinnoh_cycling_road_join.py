@@ -24,7 +24,7 @@ class CyclingRoadJoinTest(unittest.TestCase):
             fresh = sorted(p.relative_to(tmp) for p in pathlib.Path(tmp).rglob("*") if p.is_file())
             committed = sorted(p.relative_to(HERE) for p in HERE.rglob("*") if p.is_file() and p.suffix != ".py"
                                and "__pycache__" not in p.parts
-                               and p.name not in ("CHECKPOINT.md", "current-runtime-base-pins.json"))
+                               and p.name not in ("CHECKPOINT.md", "current-runtime-base-pins.json", "post-c-qa-contract.json"))
             self.assertEqual(fresh, committed)
             for rel in fresh:
                 self.assertEqual((pathlib.Path(tmp) / rel).read_bytes(), (HERE / rel).read_bytes(), rel)

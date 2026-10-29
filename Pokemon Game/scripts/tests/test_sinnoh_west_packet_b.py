@@ -60,11 +60,11 @@ class WestPacketBTest(unittest.TestCase):
 
     def test_slots_0_to_21_unchanged_and_eight_appended(self):
         sinnoh = json.loads((self.eng / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-        self.assertEqual(len(sinnoh), 30)
+        self.assertGreaterEqual(len(sinnoh), 30)                    # later packets append after slot 29
         self.assertEqual(sinnoh[21], "OreburghGate_B1F")
-        self.assertEqual(sinnoh[22:], p.SLOTS)
+        self.assertEqual(sinnoh[22:30], p.SLOTS)
         registry = (self.eng / p.REGISTRY).read_text()
-        self.assertIn("REGISTRY_GROUP(76, gMapGroup_Sinnoh, 30, 1)", registry)
+        self.assertIn(f"REGISTRY_GROUP(76, gMapGroup_Sinnoh, {len(sinnoh)}, 1)", registry)
         slots = re.findall(r"REGISTRY_SLOT\(76, (\d+), (\w+), (\w+), 1\)", registry)
         self.assertEqual([(int(i), n) for i, _, n in slots], list(enumerate(sinnoh)))
         self.assertIn(("22", "MAP_FLOAROMA_TOWN_FLOWER_SHOP", "FloaromaTown_FlowerShop"), slots)

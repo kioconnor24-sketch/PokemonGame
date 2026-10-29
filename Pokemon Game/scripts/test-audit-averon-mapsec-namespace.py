@@ -208,14 +208,15 @@ class RepositoryPinTests(unittest.TestCase):
     def test_production_fixed_sentinel_and_explicit_sinnoh_sections(self):
         engine = SCRIPT.resolve().parents[1] / "engine"
         report = audit.inventory(engine)
-        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (226, 215, 26))
+        self.assertEqual((report['sections'], report['mapsec_none'], report['spare_codes_before_reserved']), (227, 215, 25))
         for ident, value, name in (('MAPSEC_SANDGEM_TOWN', 216, 'SANDGEM TOWN'), ('MAPSEC_ROUTE_201', 217, 'ROUTE 201'),
                                    ('MAPSEC_TWINLEAF_TOWN', 218, 'TWINLEAF TOWN'), ('MAPSEC_ROUTE_202', 219, 'ROUTE 202'),
                                    ('MAPSEC_LAKE_VERITY', 220, 'LAKE VERITY'),
                                    ('MAPSEC_JUBILIFE_CITY', 221, 'JUBILIFE CITY'), ('MAPSEC_ROUTE_203', 222, 'ROUTE 203'),
                                    ('MAPSEC_OREBURGH_GATE', 223, 'OREBURGH GATE'),
                                    ('MAPSEC_ROUTE_204', 224, 'ROUTE 204'), ('MAPSEC_FLOAROMA_TOWN', 225, 'FLOAROMA TOWN'),
-                                   ('MAPSEC_ROUTE_205', 226, 'ROUTE 205')):
+                                   ('MAPSEC_ROUTE_205', 226, 'ROUTE 205'),
+                                   ('MAPSEC_OREBURGH_CITY', 227, 'OREBURGH CITY')):
             row = next(r for r in report['rows'] if r['id'] == ident)
             self.assertEqual((row['value'], row['name'], row['engine_region']), (value, name, 'REGION_SINNOH'))
             self.assertFalse(row['fly_row'])

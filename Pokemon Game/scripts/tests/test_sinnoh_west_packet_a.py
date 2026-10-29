@@ -68,7 +68,8 @@ class WestPacketATest(unittest.TestCase):
                          [(19, 13, "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F"), (20, 13, "MAP_JUBILIFE_CITY_GLOBAL_TERMINAL_1F")])
         base_gate = json.loads((p.BASE / "data/maps/OreburghGate_1F/map.json").read_text())
         gate = json.loads((ENGINE / "data/maps/OreburghGate_1F/map.json").read_text())
-        self.assertEqual(gate["warp_events"][:-1], base_gate["warp_events"])
+        self.assertEqual(gate["warp_events"][:len(base_gate["warp_events"])], base_gate["warp_events"])
+        self.assertEqual(gate["warp_events"][len(base_gate["warp_events"])]["dest_map"], "MAP_OREBURGH_GATE_B1F")
 
     def test_only_the_west_hall_door_cells_change(self):
         def cells(path):
