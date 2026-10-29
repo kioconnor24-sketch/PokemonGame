@@ -197,7 +197,8 @@ def tileset_sources(engine):
     engine = pathlib.Path(engine)
     tilesets = (engine / "include/tilesets.h").read_text()
     end = "\n#endif //GUARD_tilesets_H"
-    if not tilesets.rstrip().endswith(end.strip()) or "AveronCentral" in tilesets:
+    # Inside the include guard, wherever it closes (earlier installers may have appended after it).
+    if tilesets.count(end) != 1 or "AveronCentral" in tilesets:
         raise ValueError("tilesets.h is not in the expected pre-packet form")
     decls = "".join(f"extern const struct Tileset gTileset_{s};\n" for s, _, _, _ in TILESETS.values())
     out = {"include/tilesets.h": tilesets.replace(end, "\n" + decls.rstrip("\n") + "\n" + end, 1)}
