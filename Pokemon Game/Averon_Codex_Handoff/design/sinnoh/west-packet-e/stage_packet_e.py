@@ -94,10 +94,51 @@ def graph_errors(hdrs):
                 errors.append(f"{m} warp {i}: leaves the packet ({w['dest_map']})")
                 continue
             back = hdrs[dest]["warp_events"]
-            k = int(w["dest_warp_id"])
-            if k >= len(back) or back[k]["dest_map"] != h["id"]:
+            try:
+                k = int(w["dest_warp_id"])
+            except (TypeError, ValueError):
+                errors.append(f"{m} warp {i}: invalid destination warp index")
+                continue
+            if not 0 <= k < len(back) or back[k]["dest_map"] != h["id"]:
                 errors.append(f"{m} warp {i}: {dest} warp {k} does not lead back")
+                continue
+            try:
+                return_index = int(back[k]["dest_warp_id"])
+            except (TypeError, ValueError):
+                errors.append(f"{m} warp {i}: {dest} warp {k} has invalid return index")
+                continue
+            # Adjacent door tiles legitimately share one destination warp. A return to
+            # the partner tile is valid; a return to another entrance is not.
+            alias = (0 <= return_index < len(h["warp_events"])
+                     and h["warp_events"][return_index]["dest_map"] == w["dest_map"]
+                     and h["warp_events"][return_index]["dest_warp_id"] == w["dest_warp_id"]
+                     and h["warp_events"][return_index]["elevation"] == w["elevation"]
+                     and abs(h["warp_events"][return_index]["x"] - w["x"])
+                         + abs(h["warp_events"][return_index]["y"] - w["y"]) == 1)
+            # build_lost_tower.py intentionally collapses Mt. Pyre's four
+            # exterior mats to Route209's single (61,15) portal, arriving at
+            # 1F warp 0. Preserve exactly that source contract, not arbitrary
+            # nonreciprocal entrances. check() separately verifies source pins.
+            tower_exit = (
+                m == "LostTower_1F" and h["id"] == "MAP_LOST_TOWER_1F"
+                and h["layout"] == "LAYOUT_MT_PYRE_1F"
+                and i in (1, 3) and dest == "Route209" and k == 1
+                and w == dict(x=3 if i == 1 else 4, y=6, elevation=0,
+                              dest_map="MAP_ROUTE209", dest_warp_id="1")
+                and back[k] == dict(x=61, y=15, elevation=0,
+                                    dest_map="MAP_LOST_TOWER_1F", dest_warp_id="0")
+                and h["warp_events"][0] == dict(x=17, y=18, elevation=0,
+                                               dest_map="MAP_ROUTE209", dest_warp_id="1"))
+            if return_index != i and not alias and not tower_exit:
+                errors.append(f"{m} warp {i}: {dest} warp {k} returns to wrong entrance {return_index}")
+        seen_connections = set()
         for c in h.get("connections") or []:
+            # A second edge to the same map in the same direction cannot be
+            # matched one-to-one, including when the destination is external.
+            edge = (c["map"], c["direction"])
+            if edge in seen_connections:
+                errors.append(f"{m}: duplicate {c['direction']} connection to {c['map']}")
+            seen_connections.add(edge)
             dest = ids.get(c["map"])
             if dest is None:
                 errors.append(f"{m}: connection leaves the packet ({c['map']})")
@@ -162,3 +203,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -41,11 +41,56 @@ class PacketEStageTest(unittest.TestCase):
         errors = self.edited("city-shells/staged/SolaceonTown_Mart/map.json", change)
         self.assertTrue(any("does not lead back" in x for x in errors), errors)
 
+    def test_wrong_return_entrance_is_rejected(self):
+        def change(h):
+            # West Hearthome door would return through the eastern door.
+            h["warp_events"][2]["dest_warp_id"] = "1"
+        errors = self.edited("amity-square/staged/HearthomeCity-dev-overlay/map.json", change)
+        self.assertTrue(any("wrong entrance" in x for x in errors), errors)
+
+    def test_negative_destination_index_is_rejected(self):
+        def change(h):
+            h["warp_events"][2]["dest_warp_id"] = "-1"
+        errors = self.edited("amity-square/staged/HearthomeCity-dev-overlay/map.json", change)
+        self.assertTrue(any("does not lead back" in x for x in errors), errors)
+
+    def test_duplicate_internal_connection_is_rejected(self):
+        def change(h):
+            h["connections"].append(dict(h["connections"][0]))
+        errors = self.edited("city-shells/staged/Route208-dev-overlay/map.json", change)
+        self.assertTrue(any("duplicate" in x for x in errors), errors)
+
+    def test_adjacent_door_tile_aliases_remain_valid(self):
+        hearthome = e.headers(self.files)["HearthomeCity"]
+        self.assertEqual(hearthome["warp_events"][2]["dest_warp_id"], "0")
+        self.assertEqual(hearthome["warp_events"][3]["dest_warp_id"], "0")
+        self.assertEqual(e.graph_errors(e.headers(self.files)), [])
+
     def test_one_sided_connection_offset_is_rejected(self):
         def change(h):
             h["connections"][0]["offset"] += 1
         errors = self.edited("lost-tower/staged/Route209-dev-overlay/map.json", change)
         self.assertTrue(any("not reciprocal" in x for x in errors), errors)
+
+    def test_stock_tower_exterior_exits_share_the_source_portal(self):
+        hdrs = e.headers(self.files)
+        self.assertEqual(e.graph_errors(hdrs), [])
+        stock = json.loads((ROOT / "engine/data/maps/MtPyre_1F/map.json").read_text())
+        for i in range(4):
+            w = hdrs["LostTower_1F"]["warp_events"][i]
+            self.assertEqual((w["x"], w["y"]), (stock["warp_events"][i]["x"], stock["warp_events"][i]["y"]))
+            self.assertEqual((w["dest_map"], w["dest_warp_id"]), ("MAP_ROUTE209", "1"))
+
+    def test_tower_exception_rejects_changed_exit_and_return(self):
+        for index, field, value in ((1, "x", 5), (3, "elevation", 3),
+                                    (0, "x", 16)):
+            with self.subTest(index=index, field=field):
+                errors = self.edited("lost-tower/staged/LostTower_1F/map.json",
+                                     lambda h: h["warp_events"][index].update({field: value}))
+                self.assertTrue(any("wrong entrance" in x for x in errors), errors)
+        errors = self.edited("lost-tower/staged/Route209-dev-overlay/map.json",
+                             lambda h: h["warp_events"][1].update(dest_warp_id="1"))
+        self.assertTrue(any("wrong entrance" in x for x in errors), errors)
 
     def test_the_tunnel_variant_of_b2f_east_would_leave_the_packet(self):
         files = dict(self.files)
@@ -81,3 +126,4 @@ class PacketEStageTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
