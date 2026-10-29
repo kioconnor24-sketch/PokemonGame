@@ -60,6 +60,29 @@ class PacketFStageTest(unittest.TestCase):
         north = self.hdrs["Route212_North"]["warp_events"]
         self.assertEqual(north[2]["dest_map"], "MAP_ROUTE212_NORTH_MANSION_1F")
 
+    def test_pastoria_external_boundary_mutations_are_rejected(self):
+        path = "great-marsh/staged/PastoriaCity-dev-overlay/map.json"
+        cases = ("duplicate", "duplicate_other_direction", "wrong_direction", "wrong_offset", "wrong_return")
+        for case in cases:
+            with self.subTest(case=case):
+                files = dict(self.files)
+                h = json.loads(files[path])
+                connection = next(c for c in h["connections"] if c["map"] == "MAP_ROUTE213")
+                if case.startswith("duplicate"):
+                    extra = dict(connection)
+                    if case == "duplicate_other_direction":
+                        extra["direction"] = "up"
+                    h["connections"].append(extra)
+                elif case == "wrong_direction":
+                    connection["direction"] = "up"
+                elif case == "wrong_offset":
+                    connection["offset"] += 1
+                else:
+                    h["warp_events"][0]["dest_warp_id"] = "0"
+                files[path] = json.dumps(h).encode()
+                errors = f.graph_errors(f.headers(files))
+                self.assertTrue(errors, errors)
+
     def test_batch_carries_the_derived_files(self):
         with tempfile.TemporaryDirectory() as out:
             f.write_batch(self.files, out)

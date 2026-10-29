@@ -117,6 +117,18 @@ class PacketEStageTest(unittest.TestCase):
         errors = self.edited("amity-square/staged/AmitySquare/map.json", change)
         self.assertIn("AmitySquare: has object or bg events", errors)
 
+    def test_swapped_valid_trigger_script_is_rejected(self):
+        def change(h):
+            h["coord_events"][0]["script"] = h["coord_events"][3]["script"]
+        errors = self.edited("lost-tower/staged/Route209-dev-overlay/map.json", change)
+        self.assertIn("Route209: unexpected coord events (signature or multiplicity)", errors)
+
+    def test_duplicate_trigger_at_an_existing_coordinate_is_rejected(self):
+        def change(h):
+            h["coord_events"].append(dict(h["coord_events"][0]))
+        errors = self.edited("lost-tower/staged/Route209-dev-overlay/map.json", change)
+        self.assertIn("Route209: unexpected coord events (signature or multiplicity)", errors)
+
     def test_batch_contains_overlays_and_new_maps_only(self):
         with tempfile.TemporaryDirectory() as out:
             e.write_batch(self.files, out)

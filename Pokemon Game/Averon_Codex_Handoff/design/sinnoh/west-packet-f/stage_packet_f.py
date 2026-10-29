@@ -16,6 +16,7 @@ Pastoria's Route 213 exits lead to packet G and are declared in EXTERNAL.
   stage_packet_f.py --check | --pin | --out DIR    (DIR: static_scene batch for hearthome-solaceon+eastern-loop)
 """
 import argparse
+import collections
 import importlib.util
 import json
 import pathlib
@@ -49,6 +50,8 @@ EXTERNAL = {
     "PastoriaCity warp 0: leaves the packet (MAP_ROUTE213_ACCESS)",
     "PastoriaCity: connection leaves the packet (MAP_ROUTE213)",
 }
+PASTORIA_EXTERNAL_CONNECTION = dict(map="MAP_ROUTE213", direction="right", offset=2)
+PASTORIA_EXTERNAL_WARP = dict(x=63, y=11, elevation=0, dest_map="MAP_ROUTE213_ACCESS", dest_warp_id="1")
 W11 = "amity-square/staged/HearthomeCity-dev-overlay"
 CJ_HEARTHOME = f"{JOINS}/staged/HearthomeCity-dev-overlay"
 CJ_ACCESS = f"{JOINS}/staged/Route212_Access-dev-overlay"
@@ -124,8 +127,22 @@ def headers(files):
 
 
 def graph_errors(hdrs):
-    errors = set(e.graph_errors(hdrs))
-    return sorted(errors - EXTERNAL) + [f"declared external exit missing: {x}" for x in sorted(EXTERNAL - errors)]
+    errors = collections.Counter(e.graph_errors(hdrs))
+    out = []
+    for exit_ in sorted(EXTERNAL):
+        count = errors.pop(exit_, 0)
+        if count == 0:
+            out.append(f"declared external exit missing: {exit_}")
+        elif count > 1:
+            out.append(f"declared external exit repeated {count} times: {exit_}")
+    pastoria = hdrs["PastoriaCity"]
+    external_connections = [c for c in pastoria.get("connections") or [] if c["map"] == "MAP_ROUTE213"]
+    if external_connections != [PASTORIA_EXTERNAL_CONNECTION]:
+        out.append("PastoriaCity: external Route213 connection signature or multiplicity changed")
+    warps = pastoria.get("warp_events") or []
+    if not warps or warps[0] != PASTORIA_EXTERNAL_WARP:
+        out.append("PastoriaCity: external Route213_Access warp 0 signature changed")
+    return sorted(errors.elements()) + out
 
 
 def check(files=None):

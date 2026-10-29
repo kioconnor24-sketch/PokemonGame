@@ -14,6 +14,7 @@ The Route 208 (8,19) <-> Mt. Coronet 1F South (36,20) join stays closed until pa
                                          hearthome-solaceon DEV family
 """
 import argparse
+import collections
 import hashlib
 import json
 import pathlib
@@ -43,7 +44,15 @@ INTERIORS = {
 }
 MAPS = OUTDOORS + list(INTERIORS)
 # Only coord events allowed: Lost Tower's Route 209 trigger warps (the donor draws these buildings without doors).
-TRIGGERS = {"Route209": {(61, 15), (45, 16), (54, 28), (47, 38)}}
+TRIGGERS = {"Route209": [
+    dict(type="trigger", x=x, y=y, elevation=0, var="VAR_TEMP_1", var_value="0", script=script)
+    for x, y, script in (
+        (61, 15, "Route209_EventScript_ToLostTower"),
+        (45, 16, "Route209_EventScript_ToSolaceonRuins_A"),
+        (54, 28, "Route209_EventScript_ToSolaceonRuins_B"),
+        (47, 38, "Route209_EventScript_ToSolaceonRuins_C"),
+    )
+]}
 OPPOSITE = {"up": "down", "down": "up", "left": "right", "right": "left"}
 sha = lambda b: hashlib.sha256(b).hexdigest()
 
@@ -149,9 +158,14 @@ def graph_errors(hdrs):
                 errors.append(f"{m}: connection {c['direction']} to {dest} is not reciprocal")
         if h.get("object_events") or h.get("bg_events"):
             errors.append(f"{m}: has object or bg events")
-        coords = {(e["x"], e["y"]) for e in h.get("coord_events") or []}
-        if coords != TRIGGERS.get(m, set()):
-            errors.append(f"{m}: unexpected coord events {sorted(coords)}")
+        # Preserve the source-backed scripts and activation fields as well as
+        # event multiplicity. A set of coordinates hid swapped/duplicate triggers.
+        events = collections.Counter(json.dumps(event, sort_keys=True)
+                                     for event in h.get("coord_events") or [])
+        expected = collections.Counter(json.dumps(event, sort_keys=True)
+                                       for event in TRIGGERS.get(m, []))
+        if events != expected:
+            errors.append(f"{m}: unexpected coord events (signature or multiplicity)")
     return errors
 
 
