@@ -1,0 +1,86 @@
+{
+  "reused_commit": "fa567c009311f7abc08705b9c3b57752a264166e",
+  "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+  "files": {
+    "source-map.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/map.bin",
+      "sha256": "bbedf27924b73dac44bbf523738962b9f87f76426ab22a4bc46b70d6162d7cd3"
+    },
+    "source-border.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/border.bin",
+      "sha256": "0718b9fb98d3a7d4c879db2469770d6b077be9b9c51c54db153daea54a2860ce"
+    },
+    "source-attributes.json": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/attributes.json",
+      "sha256": "7c6d6817300f418260464beb869f4ad05e0a25ca18ae9292b736630da88f6fc8"
+    },
+    "averon-map.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/MtCoronet_1F_South/averon-map.bin",
+      "sha256": "0995d182a42cc4c8bba42062c3dcdad32c1e0452ffd4d68ade8cbe5ed7090c79"
+    },
+    "averon-border.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/MtCoronet_1F_South/averon-border.bin",
+      "sha256": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248"
+    },
+    "cave-art-receipt.json": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/cave-art-receipt.json",
+      "sha256": "424f7bbe0edb3c48d6f3302760b6d4d1e1b12685cba2a086d93a97597df459db"
+    },
+    "primary-metatiles.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/cave-family/primary-metatiles.bin",
+      "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910"
+    },
+    "primary-attributes.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/cave-family/primary-attributes.bin",
+      "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b"
+    },
+    "secondary-metatiles.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/cave-family/secondary-metatiles.bin",
+      "sha256": "1bd8f05be571c3c7339e32b1bfd440af09bcb36100b95e863cc3b0520357fdb4"
+    },
+    "secondary-attributes.bin": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/coronet-upper-floors/reused-south-art/cave-family/secondary-attributes.bin",
+      "sha256": "3f02c17bb3a3b82c65894b9230c1395322243cfbfa02ad31d1a7762bf662eb69"
+    },
+    "source-header.json": {
+      "path": "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/remaining-donor/staged/MtCoronet_1F_South/map.json",
+      "sha256": "4975cd7fc64d28df5d63591a9e87a48879b7f865bb772577055c8a42601bccff"
+    }
+  },
+  "donor_headers": {
+    "data/maps/Route207/map.json": {
+      "blob": "b81521d0e436f1a27999ac77aa3b4bcd351945a8",
+      "sha256": "17ba03a515f72741e50fe58783b0b7352d331b2087d99e63d3dccecabf218971",
+      "warp_events": [
+        {
+          "x": 52,
+          "y": 5,
+          "elevation": 0,
+          "dest_map": "MAP_MT_CORONET_1F_SOUTH",
+          "dest_warp_id": "0"
+        }
+      ]
+    },
+    "data/maps/MtCoronet_1F_South/map.json": {
+      "blob": "489af82440735a9545d4ec2baf60b3e21fca6984",
+      "sha256": "856453dcb10f57b7e61584d1cc69e9611bafe6fc8a13214ecedb4a5b529796ef",
+      "warp_events": [
+        {
+          "x": 5,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE207",
+          "dest_warp_id": "0"
+        },
+        {
+          "x": 36,
+          "y": 20,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE208",
+          "dest_warp_id": "0"
+        }
+      ]
+    }
+  },
+  "original_donor_map_sha256": "ddbbbbc018d1536a30bfce31b520ea0881bd216519f1cd66046096642475db6e"
+}

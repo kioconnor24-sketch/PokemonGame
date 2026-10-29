@@ -1,0 +1,4569 @@
+{
+  "scope": "ACTUAL 50-map temporary DEV build/native and bounded rendered acceptance; NOT production integration or ordinary story reachability",
+  "published_utc": "2026-10-28T23:19:58.327052+00:00",
+  "source": {
+    "producer_commit": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+    "production_engine_tree": "b06114f532e98f331dcdf64481fd01e726073fdf",
+    "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+    "donor_revision": "38228bb574a3557345852b758d5f1a65eb01bb22",
+    "south_reused_commit": "fa567c009311f7abc08705b9c3b57752a264166e",
+    "receipt": {
+      "status": "50_MAP_DEV_SOURCE_ONLY_NOT_PRODUCTION_OR_RUNTIME_ACCEPTANCE",
+      "production_engine_tree": "b06114f532e98f331dcdf64481fd01e726073fdf",
+      "reused_south_commit": "fa567c009311f7abc08705b9c3b57752a264166e",
+      "packet_d": [
+        "Route206_North",
+        "Route206",
+        "Route206_South",
+        "Route207",
+        "MtCoronet_1F_South"
+      ],
+      "original_49_maps_preserved": true,
+      "closed_dependencies": [
+        "Route208",
+        "MtCoronet2F"
+      ],
+      "dev_origin": "217 surrogate only; no production allocation or saved-format change",
+      "files": {
+        "data/event_scripts.s": "fa1ce48f88d9c1804c6fc64109c7228e7ea6f655dfdba500d8a986d68195acd0",
+        "data/layouts/EternaCity/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+        "data/layouts/EternaCity/map.bin": "d1690f9c42186a9cda7df5f6b42e7c235b6ef022e000f8bb59e174b709185782",
+        "data/layouts/MtCoronet_1F_South/border.bin": "8dfefa928bce3fc28b887e1959530be108e38fc46fb3c67a74529dee61007248",
+        "data/layouts/MtCoronet_1F_South/map.bin": "73d16fc2fe29afb6f129756fad002483d82a21e37fd2d1161a2a7731dc7014aa",
+        "data/layouts/OreburghCity/map.bin": "f7237759d69b0c9931cf3ede431add4454c46e7fbf81769c8496511a8e9e28cc",
+        "data/layouts/OreburghGate_1F/map.bin": "af315e5fce9cde49788647aa345914a53a72ef8dff4a413b1c4384455d041d50",
+        "data/layouts/OreburghMine_B1F/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+        "data/layouts/OreburghMine_B1F/map.bin": "b774ff7598b65ac8bb8b85f7f7ba1dc6e399690e495bb11d85d026df12145836",
+        "data/layouts/OreburghMine_B2F/border.bin": "a8fb987bcf19f3554623d70e41906b5eb019ae568cb1b0d5eed634c70b24f12a",
+        "data/layouts/OreburghMine_B2F/map.bin": "111b1152fd399dffaa83ee2747da807c225d1bafe460f57bfca52becdab3d828",
+        "data/layouts/Route206/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+        "data/layouts/Route206/map.bin": "e448c0880ddd9059693139f1531555f0b3d51f89dacbca93a92cf9388b49c9b5",
+        "data/layouts/Route206_North/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+        "data/layouts/Route206_North/map.bin": "5086591ec083ec54eecbba065abccc073fb9092c3043129a1a8dd70280617f3f",
+        "data/layouts/Route206_South/border.bin": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70",
+        "data/layouts/Route206_South/map.bin": "5086591ec083ec54eecbba065abccc073fb9092c3043129a1a8dd70280617f3f",
+        "data/layouts/Route207/border.bin": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079",
+        "data/layouts/Route207/map.bin": "d3ec098f8a52d1f5f4c922ee6d4d4df53837329ce2bc7a2dbdad5422ff6e647a",
+        "data/layouts/Route211_West/border.bin": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc",
+        "data/layouts/Route211_West/map.bin": "fe6dbd3c979859a0771b70134788d8419c17b9f830f042704fbff61262cea441",
+        "data/layouts/layouts.json": "4dfb32612af38ec6b667b12005743daabb92d40491377a45dace71f05018dc9d",
+        "data/maps/EternaCity/map.json": "28330c5ffee147068783775824566ba114ef441a310a0b4932f403d9d7879002",
+        "data/maps/EternaCity/scripts.inc": "1695a913751dffb0920e0e815d3d493bae36248b1b62e3fcdcfdf05712057fa9",
+        "data/maps/MtCoronet_1F_South/map.json": "90a2c425cd3e45b50391279d65f048a4e212a5821381389cae31d14853cd0879",
+        "data/maps/MtCoronet_1F_South/scripts.inc": "2fd99588edf6b19d4b1b7811aa057aeadcda62a72ce684cc4096f2593576aec8",
+        "data/maps/OreburghCity/map.json": "26b6c5570f4faae46ce6c003748589f8274a072443d3e537c8049ab318d9c703",
+        "data/maps/OreburghGate_1F/map.json": "91c8775ce50460e81bd4d4266a0368e09b5b14a7d98a729c0335e04adb098106",
+        "data/maps/OreburghMine_B1F/map.json": "62c1ce9cb4eba48305c762ad033c5c47e133ca7900ebd5fafe40f5895d588e6a",
+        "data/maps/OreburghMine_B1F/scripts.inc": "5b91e19a9891989b99af21efd24522d7e182735cd5de6e5a773f58662b856daa",
+        "data/maps/OreburghMine_B2F/map.json": "1c5e6ece21c2410ad2f070c5f18d02e3b6b3f3a2287b10f144820dc1a068fda4",
+        "data/maps/OreburghMine_B2F/scripts.inc": "0ea46a04203b311049a385cfb6e7439b6af255cb95da7d98192dccb3663ae087",
+        "data/maps/Route206/map.json": "8781f761215d4cb7de7dc3fef0f72e25ce56caefdd3380a9faa6523164cc4436",
+        "data/maps/Route206/scripts.inc": "50fbd0910881404fe68bc26b355bb4b73a9fcca153cd4859cd22fb973614eef6",
+        "data/maps/Route206_North/map.json": "28e686fb0ba73113b8ec0df7a764661d5921ae357d98926ed26e673061509d4b",
+        "data/maps/Route206_North/scripts.inc": "df23005c76300347a1484d7726b9ce695c9a70fb21f9f7c49a2e2821f590cafd",
+        "data/maps/Route206_South/map.json": "ce74c86ab0d3f007d51007b3d4ca4c392e3501d9d09a7704029cd69560bce466",
+        "data/maps/Route206_South/scripts.inc": "d4c6d19bb84f977dcb308375fcabef3345e5c93571293de47f356215611cd256",
+        "data/maps/Route207/map.json": "7c5ba56891e067c92d714e8a0b1bb42fc4b3da4286c0200422c09793a72f6d8e",
+        "data/maps/Route207/scripts.inc": "c1901d4efea76d0cf3b503ba8b988d67890f3c26dd0a47964cf053cdb32e813d",
+        "data/maps/Route211_West/map.json": "f80502075975dbd60e7de686e705b99dac3f632296c24b63e9b26c29ca8e8a68",
+        "data/maps/Route211_West/scripts.inc": "dafcc3fb19d1193033a8b01a12b1b1018ee60586b883b51a9baaaac3f756f1a9",
+        "data/maps/map_groups.json": "e89fb43ef4ff69172a14109eb4bed0d1ff9d61418124d1545a9b4834f80d5db8",
+        "data/tilesets/primary/eterna_dev_gateprimary/metatile_attributes.bin": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128",
+        "data/tilesets/primary/eterna_dev_gateprimary/metatiles.bin": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1",
+        "data/tilesets/primary/eterna_dev_outdoorprimary/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+        "data/tilesets/primary/eterna_dev_outdoorprimary/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+        "data/tilesets/primary/oreburgh_candidate_cityprimary/metatile_attributes.bin": "5d29d2955d8f86e187d3aa145f76747bfb9947d54f21c04bd9b9b890f265dcca",
+        "data/tilesets/primary/oreburgh_candidate_cityprimary/metatiles.bin": "a610df7e921699e100e7bbe5831492a552e8ef317d23963cac78fbf2875a5ea0",
+        "data/tilesets/primary/oreburgh_candidate_mineprimary/metatile_attributes.bin": "af06d5c5c3180a92cca5bb09ad6fe8a600f011ee456e6d770af76f7a387b5341",
+        "data/tilesets/primary/oreburgh_candidate_mineprimary/metatiles.bin": "9b8f5d59ccf68579e7bac13c2d77f7baa7457f799200c848dfb882467b31bfd2",
+        "data/tilesets/primary/packet_d_south/metatile_attributes.bin": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b",
+        "data/tilesets/primary/packet_d_south/metatiles.bin": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910",
+        "data/tilesets/secondary/eterna_dev_gatesecondary/metatile_attributes.bin": "5a66e041c7badcdf9fb84e60e30544e9ede6a4c0cf99dee1c6d2e433603b10ed",
+        "data/tilesets/secondary/eterna_dev_gatesecondary/metatiles.bin": "339e2584016ce4f7a7f6ae57e413dc2efa4962f789f61ece91e02beff7afbf90",
+        "data/tilesets/secondary/eterna_dev_outdoorsecondary/metatile_attributes.bin": "e4f78aa958f3fa23e7e1013a698822d6105417d94dc7c4086e6425ed7e2d9401",
+        "data/tilesets/secondary/eterna_dev_outdoorsecondary/metatiles.bin": "ca269824e8d5f58290b4308c3bd06a3bd69ddb7aea824e1c62b5b6d591ee4468",
+        "data/tilesets/secondary/oreburgh_candidate_citysecondary/metatile_attributes.bin": "858160b569ae7b127588e911422e95450d2b180b5de1acce6865b8a0d9a8c574",
+        "data/tilesets/secondary/oreburgh_candidate_citysecondary/metatiles.bin": "323a0684dbdbd2be3c60fb5cd318b328d55c6006fe472340a2cd74cdf9b57702",
+        "data/tilesets/secondary/oreburgh_candidate_minesecondary/metatile_attributes.bin": "60b72a04207a73a136c6ab139d928a6d49c87e63eddea8b9e91d9e97dfe55056",
+        "data/tilesets/secondary/oreburgh_candidate_minesecondary/metatiles.bin": "fd61e783aaaa3074bd82aabfd0f26b910aa531b5c70989079756bc1eb5dbdb83",
+        "data/tilesets/secondary/packet_d_south/metatile_attributes.bin": "3f02c17bb3a3b82c65894b9230c1395322243cfbfa02ad31d1a7762bf662eb69",
+        "data/tilesets/secondary/packet_d_south/metatiles.bin": "1bd8f05be571c3c7339e32b1bfd440af09bcb36100b95e863cc3b0520357fdb4",
+        "include/tilesets.h": "a7ab6f77760b28955275e971d019a70b61b0ce0717ea59f604785194855da99c",
+        "src/data/tilesets/headers.h": "aedcb91bc57edd9a482c6e929b35d401efb97d86991a2bb9c2e9993a47c4220c",
+        "src/data/tilesets/metatiles.h": "53695e16732f079a78f266b55e94623f2cf9c1c2128d08f080ecccfb7868e653",
+        "test/averon_eterna_runtime.c": "e019a7941f1e314fe66336e3ef33ef6b7dd6301f5cd462a62dc53cd7ec13e38c",
+        "test/averon_oreburgh_candidate.c": "0556919ffbd141f1e17fe5f932f4a07a5cd721205e5fef5a9bb9f09f28b4de99",
+        "test/averon_packet_d.c": "7581cdf91bfae82ae5fe1b4bad5aa54534af57d928a319d15f9ac5626ab72642",
+        "test/data/averon_map_registry_slots.inc": "b68dc30902d4f2a00b7e3e3a6a36a0e2cd4609ef20dd18933ace2c4409b4b374"
+      },
+      "producer_source_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+      "runtime_base_head": "d0f0d6632feec7b5e6da01aca84b7a6bbc9990cf",
+      "scope": "TEMPORARY50_MAP_DEV_NOT_PRODUCTION",
+      "repair": "One generated script-table export;69 other payloads byte-identical"
+    },
+    "payload_count": 70,
+    "all_payloads_verified_live_and_archive": true,
+    "current_main_at_publication": "43d8ad3363ef850d412c888dff2077403e05ad86"
+  },
+  "builds": {
+    "normal": {
+      "status": "PASS",
+      "linked_rom_bytes": 17524764,
+      "increment_vs_matching49_bytes": 12748,
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226480,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35664,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28392,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4376,
+          "used_percent": 86.65,
+          "linker_reported_percent": 86.65
+        },
+        "ROM": {
+          "used_bytes": 17524764,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 16029668,
+          "used_percent": 52.23,
+          "linker_reported_percent": 52.23
+        }
+      },
+      "rom": {
+        "size_bytes": 33554432,
+        "sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456"
+      },
+      "linked_artifact_verification": {
+        "elf_sha256": "a9654024088577c7ea27a97877e049c4b560bb6f541fad339cd258c14b4aff0b",
+        "rom_sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456",
+        "matched_load_segments": 3,
+        "matched_load_bytes": 17524764,
+        "linked_rom_extent_bytes": 17524764,
+        "scope": "ROM load bytes and linker ROM extent verified; gaps/padding, RAM, caller source/profile and gameplay are not certified"
+      },
+      "save_headroom": {
+        "SaveBlock1": {
+          "used_bytes": 15568,
+          "limit_bytes": 15872,
+          "free_bytes": 304
+        },
+        "SaveBlock2": {
+          "used_bytes": 3884,
+          "limit_bytes": 3968,
+          "free_bytes": 84
+        },
+        "SaveBlock3": {
+          "used_bytes": 68,
+          "limit_bytes": 1624,
+          "free_bytes": 1556
+        },
+        "PokemonStorage": {
+          "used_bytes": 34144,
+          "limit_bytes": 35712,
+          "free_bytes": 1568
+        }
+      },
+      "build_log_sha256": "7975f0e758879cc001c4425b33b6f91fa74d635d102ecddde123cfad494a9212",
+      "toolchain": "ARM GCC14.2.1 20241119, Make4.4.1; CRIES=off"
+    },
+    "release": {
+      "status": "PASS",
+      "linked_rom_bytes": 17643892,
+      "increment_vs_matching49_bytes": 12756,
+      "memory": {
+        "EWRAM": {
+          "used_bytes": 226482,
+          "capacity_bytes": 262144,
+          "remaining_bytes": 35662,
+          "used_percent": 86.4,
+          "linker_reported_percent": 86.4
+        },
+        "IWRAM": {
+          "used_bytes": 28336,
+          "capacity_bytes": 32768,
+          "remaining_bytes": 4432,
+          "used_percent": 86.47,
+          "linker_reported_percent": 86.47
+        },
+        "ROM": {
+          "used_bytes": 17643892,
+          "capacity_bytes": 33554432,
+          "remaining_bytes": 15910540,
+          "used_percent": 52.58,
+          "linker_reported_percent": 52.58
+        }
+      },
+      "rom": {
+        "size_bytes": 33554432,
+        "sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014"
+      },
+      "linked_artifact_verification": {
+        "elf_sha256": "6625259aae235cc9f7933c587cab50fa6d1ba5e235612f5ca8f0bd23030e449b",
+        "rom_sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014",
+        "matched_load_segments": 3,
+        "matched_load_bytes": 17643892,
+        "linked_rom_extent_bytes": 17643892,
+        "scope": "ROM load bytes and linker ROM extent verified; gaps/padding, RAM, caller source/profile and gameplay are not certified"
+      },
+      "save_headroom": {
+        "SaveBlock1": {
+          "used_bytes": 15568,
+          "limit_bytes": 15872,
+          "free_bytes": 304
+        },
+        "SaveBlock2": {
+          "used_bytes": 3884,
+          "limit_bytes": 3968,
+          "free_bytes": 84
+        },
+        "SaveBlock3": {
+          "used_bytes": 68,
+          "limit_bytes": 1624,
+          "free_bytes": 1556
+        },
+        "PokemonStorage": {
+          "used_bytes": 34144,
+          "limit_bytes": 35712,
+          "free_bytes": 1568
+        }
+      },
+      "build_log_sha256": "684d7d5eafd0af913cbf0dd64853b8a3e6fdaa3086a2f79512c8e6d278e8d681",
+      "toolchain": "ARM GCC14.2.1 20241119, Make4.4.1; CRIES=off"
+    }
+  },
+  "host_tests": {
+    "new_packet_d": {
+      "pass": 9,
+      "log_sha256": "7f4e8b16ca4b6eafd79fd80cd49e27141af273c9dfca50008e891b705eebf2b7"
+    },
+    "existing_cycling": {
+      "pass": 45,
+      "log_sha256": "1a0f48b307d31f6b0812f1f448e4edc4c1f0dad85a297ce161f035460d4f02ec"
+    },
+    "generated_arm_syntax_checks": {
+      "pass": 6,
+      "scope": "Eterna/Oreburgh/packet-D fixtures, NORMAL and RELEASE; not six executed native suites"
+    }
+  },
+  "native": {
+    "command": "make -j8 -O CRIES=off TESTS=Averon check",
+    "status": "COMPLETE_PASS",
+    "passed": 335,
+    "total": 335,
+    "unique_observed_pass_identities": 335,
+    "compiled_identity_set_exact_match": true,
+    "compiled_inventory": {
+      "scope": "Compiled identity inventory only; no execution or acceptance claim",
+      "elf_sha256": "5572a9dbfaecbf5c7ede395e2f4c7a0596ff3cc56158cae3f4ab42609a8315a2",
+      "prefix": "Averon",
+      "count": 335,
+      "ambiguous_log_names": [],
+      "tests": [
+        {
+          "name": "Averon Mega Evolution still works",
+          "filename": "test/averon_battle_rules.c",
+          "line": 42
+        },
+        {
+          "name": "Averon orb holders switched in mid-battle do not undergo Primal Reversion",
+          "filename": "test/averon_battle_rules.c",
+          "line": 27
+        },
+        {
+          "name": "Averon Groudon and Kyogre holding their orbs do not undergo Primal Reversion",
+          "filename": "test/averon_battle_rules.c",
+          "line": 7
+        },
+        {
+          "name": "Averon every breedable species hatches from a real base species",
+          "filename": "test/averon_breeding.c",
+          "line": 20
+        },
+        {
+          "name": "Averon Rare Candy respects the cap and becomes usable after the badge",
+          "filename": "test/averon_candy.c",
+          "line": 8
+        },
+        {
+          "name": "Averon clinic union-room check without InitUnionRoom copies nothing",
+          "filename": "test/averon_clinic_union_room.c",
+          "line": 13
+        },
+        {
+          "name": "Averon connection contract Sinnoh RAM header selects only overlapping signed offset edges",
+          "filename": "test/averon_connection_contract.c",
+          "line": 68
+        },
+        {
+          "name": "Averon connection contract actual reciprocal boundary preserves party and region state",
+          "filename": "test/averon_connection_contract.c",
+          "line": 16
+        },
+        {
+          "name": "Averon corridor approved origins have names and survive boxed summary reads",
+          "filename": "test/averon_corridor_location.c",
+          "line": 16
+        },
+        {
+          "name": "Averon cry safety ducking calls lower music only when cries are enabled",
+          "filename": "test/averon_cry_safety.c",
+          "line": 214
+        },
+        {
+          "name": "Averon cry safety menu and field effects still start",
+          "filename": "test/averon_cry_safety.c",
+          "line": 184
+        },
+        {
+          "name": "Averon cry safety title town route battle victory heal music starts",
+          "filename": "test/averon_cry_safety.c",
+          "line": 165
+        },
+        {
+          "name": "Averon cry safety absent species completes without a previous player",
+          "filename": "test/averon_cry_safety.c",
+          "line": 153
+        },
+        {
+          "name": "Averon cry safety real playmoncry waitmoncry bytecode resumes",
+          "filename": "test/averon_cry_safety.c",
+          "line": 124
+        },
+        {
+          "name": "Averon cry safety normal and by-mode cleanup preserve music and effects",
+          "filename": "test/averon_cry_safety.c",
+          "line": 107
+        },
+        {
+          "name": "Averon cry safety silent unpaired duck never lowers music",
+          "filename": "test/averon_cry_safety.c",
+          "line": 88
+        },
+        {
+          "name": "Averon cry safety all modes and Mega stop without a seeded player",
+          "filename": "test/averon_cry_safety.c",
+          "line": 72
+        },
+        {
+          "name": "Averon cry safety script wait and replay restore music",
+          "filename": "test/averon_cry_safety.c",
+          "line": 55
+        },
+        {
+          "name": "Averon cry safety cold stop and completion before any cry",
+          "filename": "test/averon_cry_safety.c",
+          "line": 43
+        },
+        {
+          "name": "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+          "filename": "test/averon_egg_hatch_ot.c",
+          "line": 43
+        },
+        {
+          "name": "Averon DEV Eterna streams City and both outdoor roads with one tileset family",
+          "filename": "test/averon_eterna_runtime.c",
+          "line": 33
+        },
+        {
+          "name": "Averon DEV Eterna appends five compiled headers after all northern slots",
+          "filename": "test/averon_eterna_runtime.c",
+          "line": 15
+        },
+        {
+          "name": "Averon Linking Cord evolves Karrablast and Shelmet without a trade partner",
+          "filename": "test/averon_evolution.c",
+          "line": 57
+        },
+        {
+          "name": "Averon starter evolution can be postponed with Everstone and resumes after removal",
+          "filename": "test/averon_evolution.c",
+          "line": 36
+        },
+        {
+          "name": "Averon starters reach their first evolution only after the first badge opens the cap",
+          "filename": "test/averon_evolution.c",
+          "line": 8
+        },
+        {
+          "name": "Averon every conditional evolution Averon can meet produces exactly its own form",
+          "filename": "test/averon_evolution_conditions.c",
+          "line": 275
+        },
+        {
+          "name": "Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 103
+        },
+        {
+          "name": "Averon extended location experiment cannot infer a version from checksum-valid legacy unused bits",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 83
+        },
+        {
+          "name": "Averon extended location experiment preserves candidate bits across all 24 permutations PC and OT rekey",
+          "filename": "test/averon_extended_location_experiment.c",
+          "line": 57
+        },
+        {
+          "name": "Averon harvest fair reward survives a full pocket and can be reclaimed",
+          "filename": "test/averon_fair.c",
+          "line": 30
+        },
+        {
+          "name": "Averon harvest fair reward requires delivery and cannot be duplicated",
+          "filename": "test/averon_fair.c",
+          "line": 7
+        },
+        {
+          "name": "Averon developer Fly destination lands both player genders safely in Saltmere",
+          "filename": "test/averon_field_licenses.c",
+          "line": 568
+        },
+        {
+          "name": "Averon field lab Dive connections preserve coordinates party and licenses in both directions",
+          "filename": "test/averon_field_licenses.c",
+          "line": 539
+        },
+        {
+          "name": "Averon independent field licenses persist through actual flash save and load",
+          "filename": "test/averon_field_licenses.c",
+          "line": 517
+        },
+        {
+          "name": "Averon licensed field actions refuse empty fainted and egg-only parties",
+          "filename": "test/averon_field_licenses.c",
+          "line": 499
+        },
+        {
+          "name": "Averon field licenses gate all seven native script actions without learned HMs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 464
+        },
+        {
+          "name": "Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing",
+          "filename": "test/averon_field_licenses.c",
+          "line": 432
+        },
+        {
+          "name": "Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower",
+          "filename": "test/averon_field_licenses.c",
+          "line": 389
+        },
+        {
+          "name": "Averon Pokemon follower visibility recovers on land after water traversal modes",
+          "filename": "test/averon_field_licenses.c",
+          "line": 369
+        },
+        {
+          "name": "Averon native Dive preparation uses real surface and underwater tiles and refuses land",
+          "filename": "test/averon_field_licenses.c",
+          "line": 352
+        },
+        {
+          "name": "Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction",
+          "filename": "test/averon_field_licenses.c",
+          "line": 330
+        },
+        {
+          "name": "Averon licensed Field Kit refuses unusable terrain without trapping the party menu",
+          "filename": "test/averon_field_licenses.c",
+          "line": 295
+        },
+        {
+          "name": "Averon native obstacle preparation selects the facing object without learned HMs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 238
+        },
+        {
+          "name": "Averon traversal respects configured follower policy and Fly map-type rules",
+          "filename": "test/averon_field_licenses.c",
+          "line": 204
+        },
+        {
+          "name": "Averon Field Kit is unavailable on fainted partners and eggs",
+          "filename": "test/averon_field_licenses.c",
+          "line": 187
+        },
+        {
+          "name": "Averon Field Kit fits alongside four learned actions and survives Back",
+          "filename": "test/averon_field_licenses.c",
+          "line": 163
+        },
+        {
+          "name": "Averon Fly map B returns to the same party and Field Kit can reopen",
+          "filename": "test/averon_field_licenses.c",
+          "line": 132
+        },
+        {
+          "name": "Averon locked Field Kit actions return safely without changing map or licenses",
+          "filename": "test/averon_field_licenses.c",
+          "line": 99
+        },
+        {
+          "name": "Averon Field Kit B returns to actions then party selection and exits cleanly",
+          "filename": "test/averon_field_licenses.c",
+          "line": 74
+        },
+        {
+          "name": "Averon Fly bounds rejects invalid sections without replacing prepared warp or progress",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 100
+        },
+        {
+          "name": "Averon Fly bounds preserves route and last-table-row map-warp fallback",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 82
+        },
+        {
+          "name": "Averon Fly bounds preserves League flag and position selection",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 63
+        },
+        {
+          "name": "Averon Fly bounds retains explicit island and Frontier destinations",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 52
+        },
+        {
+          "name": "Averon Fly bounds preserves both home genders and mapped legacy healing",
+          "filename": "test/averon_fly_destination_bounds.c",
+          "line": 38
+        },
+        {
+          "name": "Averon location Fly preserves all 154 explicit legacy destinations including Petalburg",
+          "filename": "test/averon_fly_safety.c",
+          "line": 50
+        },
+        {
+          "name": "Averon location Fly zero-filled gaps cannot replace a prepared warp with Petalburg",
+          "filename": "test/averon_fly_safety.c",
+          "line": 22
+        },
+        {
+          "name": "Averon follower is hidden while surfing or underwater",
+          "filename": "test/averon_followers.c",
+          "line": 213
+        },
+        {
+          "name": "Averon follower after a flash save and load is the saved lead",
+          "filename": "test/averon_followers.c",
+          "line": 189
+        },
+        {
+          "name": "Averon follower graphics carry the lead's shiny and female variants",
+          "filename": "test/averon_followers.c",
+          "line": 155
+        },
+        {
+          "name": "Averon follower is respawned with the right species after each warp",
+          "filename": "test/averon_followers.c",
+          "line": 140
+        },
+        {
+          "name": "Averon follower: a large one walks outdoors but not indoors; a small one does both",
+          "filename": "test/averon_followers.c",
+          "line": 111
+        },
+        {
+          "name": "Averon follower is removed for an empty party or while hidden by script",
+          "filename": "test/averon_followers.c",
+          "line": 94
+        },
+        {
+          "name": "Averon follower changes when the party order or health changes",
+          "filename": "test/averon_followers.c",
+          "line": 70
+        },
+        {
+          "name": "Averon follower is the first party Pokemon that is not fainted or an egg",
+          "filename": "test/averon_followers.c",
+          "line": 58
+        },
+        {
+          "name": "Averon grouped origin experiment loses distinct runtime detail across real PC flash and summary",
+          "filename": "test/averon_grouped_origin_experiment.c",
+          "line": 53
+        },
+        {
+          "name": "Averon grouped origin experiment preserves all legacy bytes without modifying encryption",
+          "filename": "test/averon_grouped_origin_experiment.c",
+          "line": 29
+        },
+        {
+          "name": "Averon full TM pocket preserves the badge and allows a reward retry",
+          "filename": "test/averon_gym_reward.c",
+          "line": 28
+        },
+        {
+          "name": "Averon Gym TM requires a badge and is granted only once",
+          "filename": "test/averon_gym_reward.c",
+          "line": 8
+        },
+        {
+          "name": "Averon Gym reward link flash preserves full-Bag retry and nonduplication with regional badges",
+          "filename": "test/averon_gym_reward_flash.c",
+          "line": 163
+        },
+        {
+          "name": "Averon Gym reward normal flash preserves full-Bag retry and nonduplication with regional badges",
+          "filename": "test/averon_gym_reward_flash.c",
+          "line": 158
+        },
+        {
+          "name": "Averon home clinic and rival healing restores HP status and PP",
+          "filename": "test/averon_healing.c",
+          "line": 8
+        },
+        {
+          "name": "Averon Verity flash reload preserves the new map position origin and regional return destination",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 100
+        },
+        {
+          "name": "Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 76
+        },
+        {
+          "name": "Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 64
+        },
+        {
+          "name": "Averon Lake Verity origin survives the real summary formatter unchanged",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 44
+        },
+        {
+          "name": "Averon Lake Verity is section 220 in Sinnoh with its own name and popup",
+          "filename": "test/averon_lake_verity_location.c",
+          "line": 28
+        },
+        {
+          "name": "Averon legend a player loss leaves the encounter available",
+          "filename": "test/averon_legend.c",
+          "line": 308
+        },
+        {
+          "name": "Averon legend a capture is recorded as caught",
+          "filename": "test/averon_legend.c",
+          "line": 287
+        },
+        {
+          "name": "Averon legend a knockout records a defeat, not a capture",
+          "filename": "test/averon_legend.c",
+          "line": 264
+        },
+        {
+          "name": "Averon legend a wild Pokemon escaping by Emergency Exit leaves it available",
+          "filename": "test/averon_legend.c",
+          "line": 244
+        },
+        {
+          "name": "Averon legend a wild legendary's Whirlwind leaves it available",
+          "filename": "test/averon_legend.c",
+          "line": 223
+        },
+        {
+          "name": "Averon legend caught and defeated states survive a flash save and load",
+          "filename": "test/averon_legend.c",
+          "line": 185
+        },
+        {
+          "name": "Averon legend check and retry macros report and restore availability",
+          "filename": "test/averon_legend.c",
+          "line": 166
+        },
+        {
+          "name": "Averon legend a stale capture from an earlier battle is never recorded",
+          "filename": "test/averon_legend.c",
+          "line": 151
+        },
+        {
+          "name": "Averon legend battle macro clears the old outcome, fights, then records",
+          "filename": "test/averon_legend.c",
+          "line": 138
+        },
+        {
+          "name": "Averon legend the upstream script pattern marks a teleported legendary caught",
+          "filename": "test/averon_legend.c",
+          "line": 107
+        },
+        {
+          "name": "Averon legend defeat is retryable only by the caller's policy or an explicit retry",
+          "filename": "test/averon_legend.c",
+          "line": 91
+        },
+        {
+          "name": "Averon legend capture is final and replaces an earlier defeat",
+          "filename": "test/averon_legend.c",
+          "line": 74
+        },
+        {
+          "name": "Averon legend outcomes without a capture or knockout record nothing",
+          "filename": "test/averon_legend.c",
+          "line": 58
+        },
+        {
+          "name": "Averon legend only a capture counts as caught and only a knockout as defeated",
+          "filename": "test/averon_legend.c",
+          "line": 45
+        },
+        {
+          "name": "Averon legend party: a captured legendary, its record and the party survive flash together",
+          "filename": "test/averon_legend_party.c",
+          "line": 17
+        },
+        {
+          "name": "Averon location flash reload preserves all 256 PC origins party TV specials and region state",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 258
+        },
+        {
+          "name": "Averon location battle controller preserves all legacy bytes but not a new 13-bit identity",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 194
+        },
+        {
+          "name": "Averon location 13-bit experiment exposes legacy API truncation and special aliases",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 151
+        },
+        {
+          "name": "Averon location every 8-bit origin survives encryption PC withdrawal and rekeying",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 90
+        },
+        {
+          "name": "Averon location legacy names and region identities remain unchanged",
+          "filename": "test/averon_location_compatibility.c",
+          "line": 40
+        },
+        {
+          "name": "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+          "filename": "test/averon_m1_codex_pc_slot_recovery.c",
+          "line": 159
+        },
+        {
+          "name": "Averon map registry IDs round trip through the actual signed warp fields",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 81
+        },
+        {
+          "name": "Averon map registry resolves every linked numeric ID within its original group",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 63
+        },
+        {
+          "name": "Averon map registry preserves group slots and disabled-region null entries",
+          "filename": "test/averon_map_registry_contract.c",
+          "line": 50
+        },
+        {
+          "name": "Averon northern flash reload preserves party PC legacy special origins and regional position",
+          "filename": "test/averon_northern_location.c",
+          "line": 102
+        },
+        {
+          "name": "Averon northern summary names caught hatched and traded origins without changing encrypted data",
+          "filename": "test/averon_northern_location.c",
+          "line": 72
+        },
+        {
+          "name": "Averon northern map headers share only the three approved origin names",
+          "filename": "test/averon_northern_location.c",
+          "line": 53
+        },
+        {
+          "name": "Averon developer gift rejects missing prerequisite and full party without PC delivery",
+          "filename": "test/averon_optional_events.c",
+          "line": 175
+        },
+        {
+          "name": "Averon tree observation needs the artist and cannot reset recorded progress",
+          "filename": "test/averon_optional_events.c",
+          "line": 159
+        },
+        {
+          "name": "Averon optional event stages survive native flash and transient field reset",
+          "filename": "test/averon_optional_events.c",
+          "line": 105
+        },
+        {
+          "name": "Averon optional event full pocket keeps the real script reward retryable",
+          "filename": "test/averon_optional_events.c",
+          "line": 63
+        },
+        {
+          "name": "Averon optional event rewards require both prerequisites and cannot repeat",
+          "filename": "test/averon_optional_events.c",
+          "line": 32
+        },
+        {
+          "name": "Averon DEV W25 retains the accepted Gate B1F ladder and northern join",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 83
+        },
+        {
+          "name": "Averon DEV Oreburgh uses explicit temporary origins and no gameplay objects",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 69
+        },
+        {
+          "name": "Averon DEV Oreburgh City and Route207 preserve reciprocal offsets",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 56
+        },
+        {
+          "name": "Averon DEV Oreburgh City and Gate use coupled compact return indices",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 42
+        },
+        {
+          "name": "Averon DEV Oreburgh B2 returns to the canonical B1 downstairs event",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 32
+        },
+        {
+          "name": "Averon DEV Oreburgh preserves all six individual mine B1 events",
+          "filename": "test/averon_oreburgh_candidate.c",
+          "line": 15
+        },
+        {
+          "name": "Averon Oreburgh flash reload preserves party PC legacy special origins and city position",
+          "filename": "test/averon_oreburgh_location.c",
+          "line": 86
+        },
+        {
+          "name": "Averon Oreburgh summary names caught hatched and traded origins without changing encrypted data",
+          "filename": "test/averon_oreburgh_location.c",
+          "line": 59
+        },
+        {
+          "name": "Averon Oreburgh City and its interiors share only the approved origin name",
+          "filename": "test/averon_oreburgh_location.c",
+          "line": 40
+        },
+        {
+          "name": "Averon DEV packet D opens only the original west port and visibly closes unbuilt dependencies",
+          "filename": "test/averon_packet_d.c",
+          "line": 30
+        },
+        {
+          "name": "Averon DEV packet D preserves reciprocal Route207 and Coronet South anchors",
+          "filename": "test/averon_packet_d.c",
+          "line": 14
+        },
+        {
+          "name": "Averon foreign OT delivery preserves encrypted data when the party has space",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 227
+        },
+        {
+          "name": "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 222
+        },
+        {
+          "name": "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+          "filename": "test/averon_pc_delivery_flash.c",
+          "line": 215
+        },
+        {
+          "name": "Averon PC items remain plaintext and unchanged when the Bag encryption key rotates",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 127
+        },
+        {
+          "name": "Averon PC direct removal compacts an exhausted first middle or last slot in order",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 91
+        },
+        {
+          "name": "Averon PC items preserve adjacent entries through partial removal and exhausted-slot compaction",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 66
+        },
+        {
+          "name": "Averon PC items reject a partly fitting deposit atomically and allow retry after space is freed",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 39
+        },
+        {
+          "name": "Averon PC items split a large deposit across bounded stacks without changing the Bag",
+          "filename": "test/averon_pc_item_transactions.c",
+          "line": 23
+        },
+        {
+          "name": "Averon with every level cap lifted a Pokemon grows to level 100 and no further",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 837
+        },
+        {
+          "name": "Averon a Mega Evolved Pokemon is back in its base form in the party after battle",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 811
+        },
+        {
+          "name": "Averon every form reached in battle has an end-of-battle revert",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 781
+        },
+        {
+          "name": "Averon every enabled species survives the PC boxes and a flash save and load",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 684
+        },
+        {
+          "name": "Averon every conditional evolution satisfiable from the Pokemon's own data triggers",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 586
+        },
+        {
+          "name": "Averon lists the evolution targets that only another region or an upstream map can reach",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 481
+        },
+        {
+          "name": "Averon every growth rate reaches level 100 and stops there",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 402
+        },
+        {
+          "name": "Averon every Mega Evolution by held stone uses a real Mega Stone",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 373
+        },
+        {
+          "name": "Averon every unconditional level and item evolution actually triggers",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 313
+        },
+        {
+          "name": "Averon every enabled species has usable follower graphics and paired palettes",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 271
+        },
+        {
+          "name": "Averon every species fits in a follower graphics ID",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 261
+        },
+        {
+          "name": "Averon every enabled species has valid types, abilities and nonzero base stats",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 225
+        },
+        {
+          "name": "Averon every enabled species learns only real, non-gimmick moves at valid levels",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 181
+        },
+        {
+          "name": "Averon a complete national dex is counted, stays inside its flags and survives a flash save",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 145
+        },
+        {
+          "name": "Averon every enabled species has a national dex number inside the save's dex flags",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 108
+        },
+        {
+          "name": "Averon every allowed form change of an enabled species leads to an enabled species",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 75
+        },
+        {
+          "name": "Averon every evolution of an enabled species leads to an enabled species",
+          "filename": "test/averon_pokemon_readiness.c",
+          "line": 34
+        },
+        {
+          "name": "Averon region map access PokeNav still schedules the legacy map feature",
+          "filename": "test/averon_region_map_access.c",
+          "line": 69
+        },
+        {
+          "name": "Averon region map access PokeNav refuses before changing or freeing the main menu",
+          "filename": "test/averon_region_map_access.c",
+          "line": 61
+        },
+        {
+          "name": "Averon region map access wall map returns without replacing VBlank or allocating",
+          "filename": "test/averon_region_map_access.c",
+          "line": 48
+        },
+        {
+          "name": "Averon region map access preserves legacy Fly map type restrictions",
+          "filename": "test/averon_region_map_access.c",
+          "line": 30
+        },
+        {
+          "name": "Averon region map access retains every legacy section and rejects explicit Sinnoh",
+          "filename": "test/averon_region_map_access.c",
+          "line": 22
+        },
+        {
+          "name": "Averon region map access refuses Fly from Sinnoh without an approved grid",
+          "filename": "test/averon_region_map_access.c",
+          "line": 14
+        },
+        {
+          "name": "Averon region progression: the badge rule decides whiteout money in Sinnoh",
+          "filename": "test/averon_region_progression.c",
+          "line": 422
+        },
+        {
+          "name": "Averon region progression: the badge rule decides the badge-unlocked field move",
+          "filename": "test/averon_region_progression.c",
+          "line": 404
+        },
+        {
+          "name": "Averon region progression: the badge rule decides which badges count",
+          "filename": "test/averon_region_progression.c",
+          "line": 371
+        },
+        {
+          "name": "Averon region progression: Rare Candy stops at the active region's cap",
+          "filename": "test/averon_region_progression.c",
+          "line": 335
+        },
+        {
+          "name": "Averon region progression: cap and obedience follow the player through travel, flash and whiteout",
+          "filename": "test/averon_region_progression.c",
+          "line": 273
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile's obedience level is the one the battle uses",
+          "filename": "test/averon_region_progression.c",
+          "line": 203
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile's cap limits EXP in a real battle",
+          "filename": "test/averon_region_progression.c",
+          "line": 172
+        },
+        {
+          "name": "Averon region progression: the active region and Sinnoh badges survive a flash save",
+          "filename": "test/averon_region_progression.c",
+          "line": 147
+        },
+        {
+          "name": "Averon region progression: out-of-range profiles are refused and the previous one stays",
+          "filename": "test/averon_region_progression.c",
+          "line": 115
+        },
+        {
+          "name": "Averon region progression: a Sinnoh profile reads only the Sinnoh badge bank",
+          "filename": "test/averon_region_progression.c",
+          "line": 88
+        },
+        {
+          "name": "Averon region progression: with no regional profile both regions keep today's level caps",
+          "filename": "test/averon_region_progression.c",
+          "line": 66
+        },
+        {
+          "name": "Averon region adapters keep both badge banks independent and fail closed",
+          "filename": "test/averon_region_save.c",
+          "line": 720
+        },
+        {
+          "name": "Averon region adapters reject disabled map groups without changing the return warp",
+          "filename": "test/averon_region_save.c",
+          "line": 694
+        },
+        {
+          "name": "Averon region save power loss at any sector write keeps the last whole slot",
+          "filename": "test/averon_region_save.c",
+          "line": 641
+        },
+        {
+          "name": "Averon region save refuses a newer format: loads nothing and never overwrites it",
+          "filename": "test/averon_region_save.c",
+          "line": 597
+        },
+        {
+          "name": "Averon region save rolls back across save counter wrap",
+          "filename": "test/averon_region_save.c",
+          "line": 572
+        },
+        {
+          "name": "Averon region save reports both slots corrupt instead of mixing them",
+          "filename": "test/averon_region_save.c",
+          "line": 553
+        },
+        {
+          "name": "Averon region save rejects a slot whose sectors come from two different saves",
+          "filename": "test/averon_region_save.c",
+          "line": 510
+        },
+        {
+          "name": "Averon region save rejects a record copied from the other slot",
+          "filename": "test/averon_region_save.c",
+          "line": 487
+        },
+        {
+          "name": "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+          "filename": "test/averon_region_save.c",
+          "line": 433
+        },
+        {
+          "name": "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+          "filename": "test/averon_region_save.c",
+          "line": 378
+        },
+        {
+          "name": "Averon region save rejects every single-bit flip in the record and loads the older slot",
+          "filename": "test/averon_region_save.c",
+          "line": 344
+        },
+        {
+          "name": "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+          "filename": "test/averon_region_save.c",
+          "line": 305
+        },
+        {
+          "name": "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+          "filename": "test/averon_region_save.c",
+          "line": 283
+        },
+        {
+          "name": "Averon region save round-trips both regions through flash without writing on load",
+          "filename": "test/averon_region_save.c",
+          "line": 260
+        },
+        {
+          "name": "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+          "filename": "test/averon_region_save.c",
+          "line": 249
+        },
+        {
+          "name": "Averon region save paths: power loss during a link save never mixes two saves",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 196
+        },
+        {
+          "name": "Averon region save paths: a link save rewrites the newest slot in place and reloads it",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 174
+        },
+        {
+          "name": "Averon region save paths: overwriting a different file seals and reloads the region state",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 163
+        },
+        {
+          "name": "Averon region save paths: a Hall of Fame save seals and reloads the region state",
+          "filename": "test/averon_region_save_paths.c",
+          "line": 152
+        },
+        {
+          "name": "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 470
+        },
+        {
+          "name": "Averon region save refusal: the save failed screen never wipes the refused save",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 424
+        },
+        {
+          "name": "Averon region save refusal: no save type or special sector write reaches flash",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 391
+        },
+        {
+          "name": "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 359
+        },
+        {
+          "name": "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 307
+        },
+        {
+          "name": "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+          "filename": "test/averon_region_save_refusal.c",
+          "line": 210
+        },
+        {
+          "name": "Averon region travel runs from an overworld script through the registered special",
+          "filename": "test/averon_region_travel.c",
+          "line": 338
+        },
+        {
+          "name": "Averon region travel power loss while saving keeps region and location together",
+          "filename": "test/averon_region_travel.c",
+          "line": 297
+        },
+        {
+          "name": "Averon region travel survives a save and load through flash",
+          "filename": "test/averon_region_travel.c",
+          "line": 272
+        },
+        {
+          "name": "Averon region travel special validates script values before narrowing",
+          "filename": "test/averon_region_travel.c",
+          "line": 214
+        },
+        {
+          "name": "Averon region travel rejects invalid requests and changes nothing",
+          "filename": "test/averon_region_travel.c",
+          "line": 178
+        },
+        {
+          "name": "Averon region travel whiteout uses the healer of the region the player is in",
+          "filename": "test/averon_region_travel.c",
+          "line": 144
+        },
+        {
+          "name": "Averon region travel stores the departure and arms the target region's warps",
+          "filename": "test/averon_region_travel.c",
+          "line": 119
+        },
+        {
+          "name": "Averon whiteout selects the local home or Alderfield clinic healer",
+          "filename": "test/averon_respawn.c",
+          "line": 8
+        },
+        {
+          "name": "Averon respawn contract unregistered arrival stays local without selecting a nurse",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 71
+        },
+        {
+          "name": "Averon respawn contract healing alone preserves the previous respawn anchor",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 53
+        },
+        {
+          "name": "Averon respawn contract valid script anchors preserve the regional record",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 30
+        },
+        {
+          "name": "Averon respawn contract rejects invalid script healer IDs before narrowing",
+          "filename": "test/averon_respawn_contract.c",
+          "line": 14
+        },
+        {
+          "name": "Averon Route 201 origin survives the real summary formatter unchanged",
+          "filename": "test/averon_route201_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Route 201 is section 217 in Sinnoh with its own name and popup",
+          "filename": "test/averon_route201_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon Route 202 origin survives the real summary formatter unchanged",
+          "filename": "test/averon_route202_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Route 202 is section 219 in Sinnoh with its own name and popup",
+          "filename": "test/averon_route202_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon resource real party and Field Kit menus restore heap across repeated regional visits",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 243
+        },
+        {
+          "name": "Averon resource reserved sprite palette banks survive exhaustion and free tag reuse",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 178
+        },
+        {
+          "name": "Averon resource sprite slot exhaustion preserves live sprites and permits exact slot reuse",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 151
+        },
+        {
+          "name": "Averon resource linked field tilesets decompress within paired buffers and release heap",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 95
+        },
+        {
+          "name": "Averon resource heap fragmented capacity refuses oversized requests and coalesces after free",
+          "filename": "test/averon_runtime_resources.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem popup theme stays in bounds with fixed NONE and future codes",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 110
+        },
+        {
+          "name": "Averon Sandgem summary keeps NONE unassigned and special met values unnamed",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 77
+        },
+        {
+          "name": "Averon Sandgem real summary formatter names caught hatched and traded origins",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names",
+          "filename": "test/averon_sandgem_location.c",
+          "line": 32
+        },
+        {
+          "name": "Averon Sandgem healer survives leaving Sinnoh, a flash save and the return trip",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 51
+        },
+        {
+          "name": "Averon Sandgem setrespawn whites out in front of the Sandgem nurse",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 31
+        },
+        {
+          "name": "Averon Sandgem heal anchor is the tile below the Center door",
+          "filename": "test/averon_sandgem_respawn.c",
+          "line": 20
+        },
+        {
+          "name": "Averon recovers the previous progression when the newest flash slot is incomplete",
+          "filename": "test/averon_save.c",
+          "line": 159
+        },
+        {
+          "name": "Averon unclaimed rewards survive saving with a full pocket and remain retryable",
+          "filename": "test/averon_save.c",
+          "line": 101
+        },
+        {
+          "name": "Averon opening and Gym progression survive two native flash save and load cycles",
+          "filename": "test/averon_save.c",
+          "line": 12
+        },
+        {
+          "name": "Averon save bounds handle erased and invalid-ID slots without a backup",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 202
+        },
+        {
+          "name": "Averon save bounds ID65535 unsigned primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 193
+        },
+        {
+          "name": "Averon save bounds ID65535 unsigned unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 186
+        },
+        {
+          "name": "Averon save bounds ID14 unsigned primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 179
+        },
+        {
+          "name": "Averon save bounds ID14 unsigned unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 172
+        },
+        {
+          "name": "Averon save bounds ID65535 signed primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 165
+        },
+        {
+          "name": "Averon save bounds ID65535 signed unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 158
+        },
+        {
+          "name": "Averon save bounds ID14 signed primed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 151
+        },
+        {
+          "name": "Averon save bounds ID14 signed unprimed recovery",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 144
+        },
+        {
+          "name": "Averon save bounds healthy slots retain old format and alternate normally",
+          "filename": "test/averon_save_sector_bounds.c",
+          "line": 74
+        },
+        {
+          "name": "Averon RAM-only special flag is not restored from a save but the badge is",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 286
+        },
+        {
+          "name": "Averon a low-level save load alone leaves the RAM-only flag as it was",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 268
+        },
+        {
+          "name": "Averon no-whiteout flag lives in RAM outside every saved block",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 238
+        },
+        {
+          "name": "Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 203
+        },
+        {
+          "name": "Averon scripted battle never reports a stale defeat from an earlier battle",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 192
+        },
+        {
+          "name": "Averon scripted battle macro wraps one trainer battle between Begin and Finish",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 175
+        },
+        {
+          "name": "Averon stale no-whiteout state is cleared before ordinary battles",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 156
+        },
+        {
+          "name": "Averon scripted battles cannot be forfeited but ordinary trainer battles can",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 144
+        },
+        {
+          "name": "Averon ambush loss respawns at the last heal location and keeps the badge",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 116
+        },
+        {
+          "name": "Averon story loss recovers in place with the party healed and money kept",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 105
+        },
+        {
+          "name": "Averon scripted battle finish does not heal between chain battles",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 87
+        },
+        {
+          "name": "Averon scripted battle finish clears no-whiteout on a win or a loss",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 73
+        },
+        {
+          "name": "Averon scripted battle outcomes count losses, draws and forfeits as defeats",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 63
+        },
+        {
+          "name": "Averon scripted battle tests run with a real no-whiteout flag",
+          "filename": "test/averon_scripted_battle.c",
+          "line": 53
+        },
+        {
+          "name": "Averon scripted battle ended by the player's Explosion still counts as a safe defeat",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 153
+        },
+        {
+          "name": "Averon an ordinary loss after a scripted battle whites out and pays money again",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 121
+        },
+        {
+          "name": "Averon chain battle damage and status carry back for every Pokemon the player switched in",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 97
+        },
+        {
+          "name": "Averon chain battle damage and status carry back into the party",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 78
+        },
+        {
+          "name": "Averon scripted battle natives around a real battle report the result and clear the flag",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 43
+        },
+        {
+          "name": "Averon scripted loss skips the whiteout and keeps the player's money",
+          "filename": "test/averon_scripted_battle_engine.c",
+          "line": 14
+        },
+        {
+          "name": "Averon starter awards respect party capacity and cannot be duplicated",
+          "filename": "test/averon_scripts.c",
+          "line": 71
+        },
+        {
+          "name": "Averon reaccepting errands preserves active and completed progress",
+          "filename": "test/averon_scripts.c",
+          "line": 43
+        },
+        {
+          "name": "Averon first accepted errand survives all six household orders",
+          "filename": "test/averon_scripts.c",
+          "line": 18
+        },
+        {
+          "name": "Averon Sinnoh resume refuses unallocated sections NONE and special met aliases",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 325
+        },
+        {
+          "name": "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 266
+        },
+        {
+          "name": "Averon Sinnoh resume reloads real endpoints and refuses all three map interfaces",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 218
+        },
+        {
+          "name": "Averon Sinnoh resume validates each linked layout boundary and indexed warp limit",
+          "filename": "test/averon_sinnoh_resume.c",
+          "line": 186
+        },
+        {
+          "name": "Averon a TM move is taught only to a species whose teachable learnset has it",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 63
+        },
+        {
+          "name": "Averon every TM and HM move can be learned by at least one enabled species",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 33
+        },
+        {
+          "name": "Averon every TM and HM item is in the TM pocket and teaches its own real move",
+          "filename": "test/averon_tm_tutor.c",
+          "line": 15
+        },
+        {
+          "name": "Averon trade save refusal: a supported full-save task still initializes",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 194
+        },
+        {
+          "name": "Averon trade save refusal: wireless callback enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 189
+        },
+        {
+          "name": "Averon trade save refusal: wired callback enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 184
+        },
+        {
+          "name": "Averon trade save refusal: full-save task enters failure without writing",
+          "filename": "test/averon_trade_save_refusal.c",
+          "line": 179
+        },
+        {
+          "name": "Averon transport saved return validation remains usable after an actual flash reload",
+          "filename": "test/averon_transport.c",
+          "line": 274
+        },
+        {
+          "name": "Averon transport refuses a physically wrong departing healer before caching its return",
+          "filename": "test/averon_transport.c",
+          "line": 254
+        },
+        {
+          "name": "Averon transport refuses an indexed departure even with matching inconsistent player coordinates",
+          "filename": "test/averon_transport.c",
+          "line": 240
+        },
+        {
+          "name": "Averon transport refuses a wrong region cached healer without changing the transaction",
+          "filename": "test/averon_transport.c",
+          "line": 212
+        },
+        {
+          "name": "Averon transport accepts an indexed first arrival without substituting coordinates",
+          "filename": "test/averon_transport.c",
+          "line": 197
+        },
+        {
+          "name": "Averon transport saved return selects the recorded point instead of the configured first arrival",
+          "filename": "test/averon_transport.c",
+          "line": 178
+        },
+        {
+          "name": "Averon transport refuses missing or physically wrong region saved returns before mutation",
+          "filename": "test/averon_transport.c",
+          "line": 158
+        },
+        {
+          "name": "Averon transport rejects invalid activation descriptors and leaves all travel state unchanged",
+          "filename": "test/averon_transport.c",
+          "line": 128
+        },
+        {
+          "name": "Averon transport first arrival and saved return use the existing regional transaction",
+          "filename": "test/averon_transport.c",
+          "line": 107
+        },
+        {
+          "name": "Averon transport points validate physical region identity and indexed arrivals",
+          "filename": "test/averon_transport.c",
+          "line": 79
+        },
+        {
+          "name": "Averon transport rejects invalid section metadata before Hoenn display fallback",
+          "filename": "test/averon_transport_metadata.c",
+          "line": 34
+        },
+        {
+          "name": "Averon travel boundaries flash Continue preserves Sandgem origins PC and both badge banks",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 96
+        },
+        {
+          "name": "Averon travel boundaries indexed arrivals resolve the real map warp for Teleport and respawn",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 73
+        },
+        {
+          "name": "Averon travel boundaries refusal preserves an already armed destination",
+          "filename": "test/averon_travel_boundaries.c",
+          "line": 39
+        },
+        {
+          "name": "Averon Twinleaf origin survives the real summary formatter unchanged",
+          "filename": "test/averon_twinleaf_location.c",
+          "line": 38
+        },
+        {
+          "name": "Averon Twinleaf Town is section 218 in Sinnoh with its own name and popup",
+          "filename": "test/averon_twinleaf_location.c",
+          "line": 22
+        },
+        {
+          "name": "Averon native whiteout heals and restores the clinic follower through flash with regional badges",
+          "filename": "test/averon_whiteout_follower_flash.c",
+          "line": 215
+        },
+        {
+          "name": "Averon native whiteout heals and restores the home follower through flash with regional badges",
+          "filename": "test/averon_whiteout_follower_flash.c",
+          "line": 210
+        },
+        {
+          "name": "Averon wild encounters: an existing map without a table reports no encounter header",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 118
+        },
+        {
+          "name": "Averon wild encounters: Repel blocks Pokemon below the lead's level on every Averon table",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 92
+        },
+        {
+          "name": "Averon wild encounters: each existing Averon table generates only its own species and levels",
+          "filename": "test/averon_wild_encounters.c",
+          "line": 49
+        },
+        {
+          "name": "Averon a large EXP reward stops exactly at the cap without banking excess",
+          "filename": "test/battle/averon_exp.c",
+          "line": 55
+        },
+        {
+          "name": "Averon six-member party respects held EXP Share and the first cap",
+          "filename": "test/battle/averon_exp.c",
+          "line": 5
+        },
+        {
+          "name": "Averon EXP options: the Gen 6+ unevolved bonus applies only after the evolution level",
+          "filename": "test/battle/averon_exp_gen5_options.c",
+          "line": 71
+        },
+        {
+          "name": "Averon EXP options: Gen 5 trainer bonus is 1.5x and reaches the EXP Share holder",
+          "filename": "test/battle/averon_exp_gen5_options.c",
+          "line": 39
+        },
+        {
+          "name": "Averon EXP Share: both Pokemon on the field in a double battle share the EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 225
+        },
+        {
+          "name": "Averon EXP Share: a holder at level 100 or above the cap gains nothing",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 202
+        },
+        {
+          "name": "Averon EXP Share: EXP is scaled by the level difference",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 175
+        },
+        {
+          "name": "Averon EXP Share: a trainer's Pokemon gives the same EXP as a wild one",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 154
+        },
+        {
+          "name": "Averon EXP Share: a participant that fainted gets no EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 131
+        },
+        {
+          "name": "Averon EXP Share: Pokemon switched in against the opponent share its EXP",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 93
+        },
+        {
+          "name": "Averon EXP Share: only participants and holders gain, split half and half",
+          "filename": "test/battle/averon_exp_share.c",
+          "line": 44
+        },
+        {
+          "name": "Averon EXP Share lifecycle: EXP and held items survive two flash save and load cycles",
+          "filename": "test/battle/averon_exp_share_lifecycle.c",
+          "line": 91
+        },
+        {
+          "name": "Averon EXP Share lifecycle: a switched-in holder participates in both Gen 5 pools",
+          "filename": "test/battle/averon_exp_share_lifecycle.c",
+          "line": 42
+        },
+        {
+          "name": "Averon held items: Bestow to an uncaptured trainer Pokemon restores the player's non-Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 448
+        },
+        {
+          "name": "Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 402
+        },
+        {
+          "name": "Averon held items: a newly found item cannot replace or duplicate the borrowed original",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 376
+        },
+        {
+          "name": "Averon held items: capture cannot duplicate a player's same-ID donated item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 347
+        },
+        {
+          "name": "Averon held items: capture returns both original items after Trick",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 323
+        },
+        {
+          "name": "Averon held items: Harvest remembers the donor of a consumed Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 301
+        },
+        {
+          "name": "Averon held items: Recycle remembers the donor of a consumed Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 277
+        },
+        {
+          "name": "Averon held items: wild Magician loot is kept when a teammate started with the same item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 257
+        },
+        {
+          "name": "Averon held items: allied Trick preserves a Berry and restores a non-Berry in either slot order",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 233
+        },
+        {
+          "name": "Averon held items: returning a donated Berry never overwrites a different held Berry",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 205
+        },
+        {
+          "name": "Averon held items: Bestow after eating an original Berry does not duplicate its gift",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 181
+        },
+        {
+          "name": "Averon held items: Symbiosis after eating an original Berry does not duplicate its gift",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 161
+        },
+        {
+          "name": "Averon held items: an item taken from a wild Pokemon with Magician is kept",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 143
+        },
+        {
+          "name": "Averon held items: a Berry given to a partner with Bestow goes back to the giver",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 123
+        },
+        {
+          "name": "Averon held items: Bestow to a partner does not duplicate the item",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 102
+        },
+        {
+          "name": "Averon held items: an item the player steals from a trainer is not kept",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 82
+        },
+        {
+          "name": "Averon held items: Trick returns each side's own item after the battle",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 63
+        },
+        {
+          "name": "Averon held items: a Berry eaten in battle stays eaten",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 46
+        },
+        {
+          "name": "Averon held items: a non-Berry item lost to a trainer is back after the battle",
+          "filename": "test/battle/averon_held_items.c",
+          "line": 16
+        },
+        {
+          "name": "Averon Mega: Rayquaza Mega Evolves through Dragon Ascent without a stone",
+          "filename": "test/battle/averon_mega.c",
+          "line": 62
+        },
+        {
+          "name": "Averon Mega: a Mega Evolved Pokemon stays Mega after switching out and back",
+          "filename": "test/battle/averon_mega.c",
+          "line": 45
+        },
+        {
+          "name": "Averon Mega: only one Pokemon per trainer can Mega Evolve in a battle",
+          "filename": "test/battle/averon_mega.c",
+          "line": 23
+        },
+        {
+          "name": "Averon Mega: a Mega Stone for another species does nothing",
+          "filename": "test/battle/averon_mega.c",
+          "line": 9
+        },
+        {
+          "name": "Averon Mega endings: no second Mega Evolution after the first Mega Pokemon faints",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 82
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when the player loses the battle",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 66
+        },
+        {
+          "name": "Averon Mega endings: a Mega Evolved Pokemon that faints is in base form after a win",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 46
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 30
+        },
+        {
+          "name": "Averon Mega endings: the Pokemon reverts when the player Teleports away",
+          "filename": "test/battle/averon_mega_endings.c",
+          "line": 15
+        },
+        {
+          "name": "Averon regional EXP Share keeps a capped holder's pool separate in a six-member party",
+          "filename": "test/battle/averon_region_exp_share.c",
+          "line": 36
+        },
+        {
+          "name": "Averon uses Set mode even when an old save requests Shift",
+          "filename": "test/battle/averon_rules.c",
+          "line": 65
+        },
+        {
+          "name": "Averon rejects all excluded gimmicks for both battlers",
+          "filename": "test/battle/averon_rules.c",
+          "line": 46
+        },
+        {
+          "name": "Averon Dark physical and Ghost special moves use separate attack stats",
+          "filename": "test/battle/averon_rules.c",
+          "line": 27
+        },
+        {
+          "name": "Averon permits a legal held-stone Mega Evolution",
+          "filename": "test/battle/averon_rules.c",
+          "line": 7
+        },
+        {
+          "name": "Averon coast trainer reuses the unused slot without expanding save flags",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 73
+        },
+        {
+          "name": "Averon Elio generates the approved team with Work Up and a healing berry",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 49
+        },
+        {
+          "name": "Averon Gym TM01 reward resolves to Work Up",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 41
+        },
+        {
+          "name": "Averon Gym preview generates two normal Pokemon for a double battle",
+          "filename": "test/battle/averon_trainers.c",
+          "line": 23
+        },
+        {
+          "name": "Averon whiteout money: losing to a wild Pokemon also drops badge-based money",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 63
+        },
+        {
+          "name": "Averon whiteout money: a loss never takes more money than the player has",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 47
+        },
+        {
+          "name": "Averon whiteout money: a loss drops badge rate times the highest party level",
+          "filename": "test/battle/averon_whiteout_money.c",
+          "line": 23
+        }
+      ]
+    },
+    "observed_pass_order": [
+      "Averon connection contract actual reciprocal boundary preserves party and region state",
+      "Averon Rare Candy respects the cap and becomes usable after the badge",
+      "Averon clinic union-room check without InitUnionRoom copies nothing",
+      "Averon cry safety silent unpaired duck never lowers music",
+      "Averon cry safety absent species completes without a previous player",
+      "Averon cry safety real playmoncry waitmoncry bytecode resumes",
+      "Averon starter evolution can be postponed with Everstone and resumes after removal",
+      "Averon DEV Eterna streams City and both outdoor roads with one tileset family",
+      "Averon DEV Eterna appends five compiled headers after all northern slots",
+      "Averon developer Fly destination lands both player genders safely in Saltmere",
+      "Averon native Dive preparation uses real surface and underwater tiles and refuses land",
+      "Averon harvest fair reward survives a full pocket and can be reclaimed",
+      "Averon bike modes preserve licensed Surf preparation and hide the Pokemon follower",
+      "Averon connection contract Sinnoh RAM header selects only overlapping signed offset edges",
+      "Averon cry safety normal and by-mode cleanup preserve music and effects",
+      "Averon Linking Cord evolves Karrablast and Shelmet without a trade partner",
+      "Averon harvest fair reward requires delivery and cannot be duplicated",
+      "Averon Pokemon follower visibility recovers on land after water traversal modes",
+      "Averon extended location experiment preserves candidate bits across all 24 permutations PC and OT rekey",
+      "Averon Mega Evolution still works",
+      "Averon corridor approved origins have names and survive boxed summary reads",
+      "Averon cry safety all modes and Mega stop without a seeded player",
+      "Averon starters reach their first evolution only after the first badge opens the cap",
+      "Averon field lab Dive connections preserve coordinates party and licenses in both directions",
+      "Averon Surf and Waterfall native preparation requires the actual fixture terrain and direction",
+      "Averon Field Kit fits alongside four learned actions and survives Back",
+      "Averon Fly bounds preserves both home genders and mapped legacy healing",
+      "Averon Fly map B returns to the same party and Field Kit can reopen",
+      "Averon follower is removed for an empty party or while hidden by script",
+      "Averon location Fly preserves all 154 explicit legacy destinations including Petalburg",
+      "Averon follower changes when the party order or health changes",
+      "Averon Field Kit B returns to actions then party selection and exits cleanly",
+      "Averon follower is hidden while surfing or underwater",
+      "Averon home clinic and rival healing restores HP status and PP",
+      "Averon actual Fly menu refuses an unvisited destination then selects the Saltmere landing",
+      "Averon orb holders switched in mid-battle do not undergo Primal Reversion",
+      "Averon Groudon and Kyogre holding their orbs do not undergo Primal Reversion",
+      "Averon cry safety menu and field effects still start",
+      "Averon cry safety cold stop and completion before any cry",
+      "Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits",
+      "Averon licensed field actions refuse empty fainted and egg-only parties",
+      "Averon native obstacle preparation selects the facing object without learned HMs",
+      "Averon cry safety ducking calls lower music only when cries are enabled",
+      "Averon Fly bounds preserves route and last-table-row map-warp fallback",
+      "Averon cry safety script wait and replay restore music",
+      "Averon follower graphics carry the lead's shiny and female variants",
+      "Averon Field Kit is unavailable on fainted partners and eggs",
+      "Averon full TM pocket preserves the badge and allows a reward retry",
+      "Averon Fly bounds retains explicit island and Frontier destinations",
+      "Averon Lake Verity origin survives the real summary formatter unchanged",
+      "Averon legend check and retry macros report and restore availability",
+      "Averon follower: a large one walks outdoors but not indoors; a small one does both",
+      "Averon legend a knockout records a defeat, not a capture",
+      "Averon legend defeat is retryable only by the caller's policy or an explicit retry",
+      "Averon location every 8-bit origin survives encryption PC withdrawal and rekeying",
+      "Averon northern map headers share only the three approved origin names",
+      "Averon DEV Oreburgh City and Route207 preserve reciprocal offsets",
+      "Averon DEV packet D preserves reciprocal Route207 and Coronet South anchors",
+      "Averon PC items split a large deposit across bounded stacks without changing the Bag",
+      "Averon every Mega Evolution by held stone uses a real Mega Stone",
+      "Averon locked Field Kit actions return safely without changing map or licenses",
+      "Averon every enabled species has a national dex number inside the save's dex flags",
+      "Averon location Fly zero-filled gaps cannot replace a prepared warp with Petalburg",
+      "Averon region map access retains every legacy section and rejects explicit Sinnoh",
+      "Averon follower is the first party Pokemon that is not fainted or an egg",
+      "Averon grouped origin experiment loses distinct runtime detail across real PC flash and summary",
+      "Averon Verity return warp accepts both real entrances and refuses an absent entrance atomically",
+      "Averon every conditional evolution Averon can meet produces exactly its own form",
+      "Averon legend a wild legendary's Whirlwind leaves it available",
+      "Averon legend outcomes without a capture or knockout record nothing",
+      "Averon region progression: a Sinnoh profile's cap limits EXP in a real battle",
+      "Averon legend party: a captured legendary, its record and the party survive flash together",
+      "Averon map registry resolves every linked numeric ID within its original group",
+      "Averon independent field licenses persist through actual flash save and load",
+      "Averon licensed Field Kit refuses unusable terrain without trapping the party menu",
+      "Averon Fly bounds rejects invalid sections without replacing prepared warp or progress",
+      "Averon optional event full pocket keeps the real script reward retryable",
+      "Averon follower after a flash save and load is the saved lead",
+      "Averon grouped origin experiment preserves all legacy bytes without modifying encryption",
+      "Averon Verity Lakefront and Lake Verity share section 220 and stay in the Sinnoh group",
+      "Averon Verity flash reload preserves the new map position origin and regional return destination",
+      "Averon Gym reward link flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon Oreburgh flash reload preserves party PC legacy special origins and city position",
+      "Averon PC items remain plaintext and unchanged when the Bag encryption key rotates",
+      "Averon legend a wild Pokemon escaping by Emergency Exit leaves it available",
+      "Averon legend capture is final and replaces an earlier defeat",
+      "Averon location legacy names and region identities remain unchanged",
+      "Averon legend a player loss leaves the encounter available",
+      "Averon legend battle macro clears the old outcome, fights, then records",
+      "Averon location battle controller preserves all legacy bytes but not a new 13-bit identity",
+      "Averon M1 torn PC sectors restore one coherent quest Bag party region and follower state",
+      "Averon tree observation needs the artist and cannot reset recorded progress",
+      "Averon DEV Oreburgh B2 returns to the canonical B1 downstairs event",
+      "Averon Gym reward normal flash preserves full-Bag retry and nonduplication with regional badges",
+      "Averon legend caught and defeated states survive a flash save and load",
+      "Averon legend only a capture counts as caught and only a knockout as defeated",
+      "Averon map registry IDs round trip through the actual signed warp fields",
+      "Averon legend a capture is recorded as caught",
+      "Averon legend the upstream script pattern marks a teleported legendary caught",
+      "Averon location 13-bit experiment exposes legacy API truncation and special aliases",
+      "Averon northern summary names caught hatched and traded origins without changing encrypted data",
+      "Averon DEV Oreburgh uses explicit temporary origins and no gameplay objects",
+      "Averon DEV packet D opens only the original west port and visibly closes unbuilt dependencies",
+      "Averon PC items reject a partly fitting deposit atomically and allow retry after space is freed",
+      "Averon foreign OT PC delivery preserves encrypted data on refusal retry and regional flash",
+      "Averon every growth rate reaches level 100 and stops there",
+      "Averon a Mega Evolved Pokemon is back in its base form in the party after battle",
+      "Averon every unconditional level and item evolution actually triggers",
+      "Averon every allowed form change of an enabled species leads to an enabled species",
+      "Averon developer gift rejects missing prerequisite and full party without PC delivery",
+      "Averon DEV Oreburgh City and Gate use coupled compact return indices",
+      "Averon foreign OT delivery preserves encrypted data when the party has space",
+      "Averon every breedable species hatches from a real base species",
+      "Averon cry safety title town route battle victory heal music starts",
+      "Averon a complete national dex is counted, stays inside its flags and survives a flash save",
+      "Averon region map access preserves legacy Fly map type restrictions",
+      "Averon region progression: the badge rule decides whiteout money in Sinnoh",
+      "Averon region progression: a Sinnoh profile's obedience level is the one the battle uses",
+      "Averon region adapters reject disabled map groups without changing the return warp",
+      "Averon every enabled species survives the PC boxes and a flash save and load",
+      "Averon every species fits in a follower graphics ID",
+      "Averon region map access PokeNav still schedules the legacy map feature",
+      "Averon region progression: the badge rule decides which badges count",
+      "Averon region progression: a Sinnoh profile reads only the Sinnoh badge bank",
+      "Averon egg hatch keeps the Pokemon intact whatever save made the egg",
+      "Averon extended location experiment cannot infer a version from checksum-valid legacy unused bits",
+      "Averon field licenses gate all seven native script actions without learned HMs",
+      "Averon traversal respects configured follower policy and Fly map-type rules",
+      "Averon Fly bounds preserves League flag and position selection",
+      "Averon follower is respawned with the right species after each warp",
+      "Averon Gym TM requires a badge and is granted only once",
+      "Averon Lake Verity is section 220 in Sinnoh with its own name and popup",
+      "Averon legend a stale capture from an earlier battle is never recorded",
+      "Averon with every level cap lifted a Pokemon grows to level 100 and no further",
+      "Averon region map access refuses Fly from Sinnoh without an approved grid",
+      "Averon optional event stages survive native flash and transient field reset",
+      "Averon DEV Oreburgh preserves all six individual mine B1 events",
+      "Averon location flash reload preserves all 256 PC origins party TV specials and region state",
+      "Averon map registry preserves group slots and disabled-region null entries",
+      "Averon optional event rewards require both prerequisites and cannot repeat",
+      "Averon Oreburgh summary names caught hatched and traded origins without changing encrypted data",
+      "Averon PC direct removal compacts an exhausted first middle or last slot in order",
+      "Averon every conditional evolution satisfiable from the Pokemon's own data triggers",
+      "Averon every enabled species has valid types, abilities and nonzero base stats",
+      "Averon region map access PokeNav refuses before changing or freeing the main menu",
+      "Averon region progression: Rare Candy stops at the active region's cap",
+      "Averon region progression: with no regional profile both regions keep today's level caps",
+      "Averon region progression: the active region and Sinnoh badges survive a flash save",
+      "Averon region save rejects a record copied from the other slot",
+      "Averon region save rolls back across save counter wrap",
+      "Averon region save reports both slots corrupt instead of mixing them",
+      "Averon region save round-trips both regions through flash without writing on load",
+      "Averon region save keeps SaveBlock1, SaveBlock2 and the PC byte-exact through flash",
+      "Averon full PC delivery refuses atomically then wraps into one free slot and survives regional flash",
+      "Averon every form reached in battle has an end-of-battle revert",
+      "Averon every enabled species has usable follower graphics and paired palettes",
+      "Averon every evolution of an enabled species leads to an enabled species",
+      "Averon region progression: the badge rule decides the badge-unlocked field move",
+      "Averon region progression: out-of-range profiles are refused and the previous one stays",
+      "Averon northern flash reload preserves party PC legacy special origins and regional position",
+      "Averon DEV W25 retains the accepted Gate B1F ladder and northern join",
+      "Averon Oreburgh City and its interiors share only the approved origin name",
+      "Averon PC items preserve adjacent entries through partial removal and exhausted-slot compaction",
+      "Averon lists the evolution targets that only another region or an upstream map can reach",
+      "Averon every enabled species learns only real, non-gimmick moves at valid levels",
+      "Averon region map access wall map returns without replacing VBlank or allocating",
+      "Averon region progression: cap and obedience follow the player through travel, flash and whiteout",
+      "Averon region adapters keep both badge banks independent and fail closed",
+      "Averon region save refusal: the save failed screen never wipes the refused save",
+      "Averon region travel special validates script values before narrowing",
+      "Averon respawn contract rejects invalid script healer IDs before narrowing",
+      "Averon region save refuses a newer format: loads nothing and never overwrites it",
+      "Averon region save refusal: no save type or special sector write reaches flash",
+      "Averon region travel rejects invalid requests and changes nothing",
+      "Averon Route 201 origin survives the real summary formatter unchanged",
+      "Averon resource heap fragmented capacity refuses oversized requests and coalesces after free",
+      "Averon resource linked field tilesets decompress within paired buffers and release heap",
+      "Averon Sandgem heal anchor is the tile below the Center door",
+      "Averon recovers the previous progression when the newest flash slot is incomplete",
+      "Averon region save loads a legacy save as Averon-only, in RAM, then upgrades on the next save",
+      "Averon region save rejects a slot whose sectors come from two different saves",
+      "Averon region save layout: anchor replaces filler_90 and the record fits sector 0",
+      "Averon region save: the early save-block pointer selector picks the slot the load falls back to",
+      "Averon region travel survives a save and load through flash",
+      "Averon respawn contract valid script anchors preserve the regional record",
+      "Averon resource sprite slot exhaustion preserves live sprites and permits exact slot reuse",
+      "Averon Sandgem setrespawn whites out in front of the Sandgem nurse",
+      "Averon region save refusal: TrySavingData touches no sector and skips the save failed screen",
+      "Averon region travel whiteout uses the healer of the region the player is in",
+      "Averon Route 201 is section 217 in Sinnoh with its own name and popup",
+      "Averon Sandgem popup theme stays in bounds with fixed NONE and future codes",
+      "Averon unclaimed rewards survive saving with a full pocket and remain retryable",
+      "Averon region save rejects CRC-valid semantic corruption and loads the older slot",
+      "Averon region save paths: a link save rewrites the newest slot in place and reloads it",
+      "Averon region save refusal: rejected slots publish no save blocks, party or objects",
+      "Averon whiteout selects the local home or Alderfield clinic healer",
+      "Averon Route 202 is section 219 in Sinnoh with its own name and popup",
+      "Averon Sandgem real summary formatter names caught hatched and traded origins",
+      "Averon save bounds ID65535 signed primed recovery",
+      "Averon scripted battle natives tolerate a repeated Begin and a Finish without Begin",
+      "Averon scripted battle finish clears no-whiteout on a win or a loss",
+      "Averon scripted loss skips the whiteout and keeps the player's money",
+      "Averon save bounds ID14 unsigned unprimed recovery",
+      "Averon no-whiteout flag lives in RAM outside every saved block",
+      "Averon scripted battle finish does not heal between chain battles",
+      "Averon trade save refusal: wireless callback enters failure without writing",
+      "Averon transport saved return selects the recorded point instead of the configured first arrival",
+      "Averon travel boundaries refusal preserves an already armed destination",
+      "Averon scripted battle natives around a real battle report the result and clear the flag",
+      "Averon a large EXP reward stops exactly at the cap without banking excess",
+      "Averon EXP Share: a participant that fainted gets no EXP",
+      "Averon trade save refusal: a supported full-save task still initializes",
+      "Averon transport accepts an indexed first arrival without substituting coordinates",
+      "Averon travel boundaries indexed arrivals resolve the real map warp for Teleport and respawn",
+      "Averon EXP Share lifecycle: EXP and held items survive two flash save and load cycles",
+      "Averon save bounds handle erased and invalid-ID slots without a backup",
+      "Averon wild encounters: each existing Averon table generates only its own species and levels",
+      "Averon held items: same-holder wild loot survives normal and full-Bag cleanup boundaries",
+      "Averon EXP Share: a trainer's Pokemon gives the same EXP as a wild one",
+      "Averon held items: wild Magician loot is kept when a teammate started with the same item",
+      "Averon held items: Bestow to a partner does not duplicate the item",
+      "Averon Mega: a Mega Evolved Pokemon stays Mega after switching out and back",
+      "Averon EXP Share: only participants and holders gain, split half and half",
+      "Averon Mega endings: a Mega Evolved Pokemon that faints is in base form after a win",
+      "Averon permits a legal held-stone Mega Evolution",
+      "Averon held items: a Berry given to a partner with Bestow goes back to the giver",
+      "Averon whiteout money: losing to a wild Pokemon also drops badge-based money",
+      "Averon Mega: Rayquaza Mega Evolves through Dragon Ascent without a stone",
+      "Averon Dark physical and Ghost special moves use separate attack stats",
+      "Averon save bounds ID65535 signed unprimed recovery",
+      "Averon scripted battle never reports a stale defeat from an earlier battle",
+      "Averon scripted battle outcomes count losses, draws and forfeits as defeats",
+      "Averon starter awards respect party capacity and cannot be duplicated",
+      "Averon region save paths: power loss during a link save never mixes two saves",
+      "Averon region save refusal: incremental entrypoints make zero flash calls and finish with an error",
+      "Averon region travel stores the departure and arms the target region's warps",
+      "Averon Route 202 origin survives the real summary formatter unchanged",
+      "Averon Sandgem summary keeps NONE unassigned and special met values unnamed",
+      "Averon opening and Gym progression survive two native flash save and load cycles",
+      "Averon save bounds ID14 signed unprimed recovery",
+      "Averon stale no-whiteout state is cleared before ordinary battles",
+      "Averon scripted battle ended by the player's Explosion still counts as a safe defeat",
+      "Averon Sinnoh resume validates each linked layout boundary and indexed warp limit",
+      "Averon save bounds ID14 unsigned primed recovery",
+      "Averon a low-level save load alone leaves the RAM-only flag as it was",
+      "Averon story loss recovers in place with the party healed and money kept",
+      "Averon transport saved return validation remains usable after an actual flash reload",
+      "Averon transport first arrival and saved return use the existing regional transaction",
+      "Averon chain battle damage and status carry back into the party",
+      "Averon Sinnoh resume refuses unallocated sections NONE and special met aliases",
+      "Averon every TM and HM item is in the TM pocket and teaches its own real move",
+      "Averon transport refuses a wrong region cached healer without changing the transaction",
+      "Averon native whiteout heals and restores the clinic follower through flash with regional badges",
+      "Averon travel boundaries flash Continue preserves Sandgem origins PC and both badge banks",
+      "Averon wild encounters: Repel blocks Pokemon below the lead's level on every Averon table",
+      "Averon EXP options: Gen 5 trainer bonus is 1.5x and reaches the EXP Share holder",
+      "Averon EXP Share: EXP is scaled by the level difference",
+      "Averon held items: capture returns both original items after Trick",
+      "Averon held items: an item taken from a wild Pokemon with Magician is kept",
+      "Averon EXP Share lifecycle: a switched-in holder participates in both Gen 5 pools",
+      "Averon held items: a non-Berry item lost to a trainer is back after the battle",
+      "Averon held items: returning a donated Berry never overwrites a different held Berry",
+      "Averon Mega: a Mega Stone for another species does nothing",
+      "Averon regional EXP Share keeps a capped holder's pool separate in a six-member party",
+      "Averon save bounds ID14 signed primed recovery",
+      "Averon scripted battle macro wraps one trainer battle between Begin and Finish",
+      "Averon scripted battle tests run with a real no-whiteout flag",
+      "Averon reaccepting errands preserves active and completed progress",
+      "Averon region save rejects every single-bit flip in the record and loads the older slot",
+      "Averon region save paths: a Hall of Fame save seals and reloads the region state",
+      "Averon region travel power loss while saving keeps region and location together",
+      "Averon respawn contract healing alone preserves the previous respawn anchor",
+      "Averon resource reserved sprite palette banks survive exhaustion and free tag reuse",
+      "Averon Sandgem healer survives leaving Sinnoh, a flash save and the return trip",
+      "Averon Sinnoh resume reloads real endpoints and refuses all three map interfaces",
+      "Averon trade save refusal: full-save task enters failure without writing",
+      "Averon transport rejects invalid activation descriptors and leaves all travel state unchanged",
+      "Averon Twinleaf Town is section 218 in Sinnoh with its own name and popup",
+      "Averon EXP options: the Gen 6+ unevolved bonus applies only after the evolution level",
+      "Averon held items: Harvest remembers the donor of a consumed Berry",
+      "Averon held items: allied Trick preserves a Berry and restores a non-Berry in either slot order",
+      "Averon Mega: only one Pokemon per trainer can Mega Evolve in a battle",
+      "Averon Mega endings: the Pokemon reverts when the player Teleports away",
+      "Averon Elio generates the approved team with Work Up and a healing berry",
+      "Averon whiteout money: a loss drops badge rate times the highest party level",
+      "Averon save bounds ID65535 unsigned unprimed recovery",
+      "Averon RAM-only special flag is not restored from a save but the badge is",
+      "Averon ambush loss respawns at the last heal location and keeps the badge",
+      "Averon chain battle damage and status carry back for every Pokemon the player switched in",
+      "Averon first accepted errand survives all six household orders",
+      "Averon every TM and HM move can be learned by at least one enabled species",
+      "Averon transport refuses an indexed departure even with matching inconsistent player coordinates",
+      "Averon transport rejects invalid section metadata before Hoenn display fallback",
+      "Averon wild encounters: an existing map without a table reports no encounter header",
+      "Averon EXP Share: a holder at level 100 or above the cap gains nothing",
+      "Averon held items: Bestow to an uncaptured trainer Pokemon restores the player's non-Berry",
+      "Averon held items: capture cannot duplicate a player's same-ID donated item",
+      "Averon held items: Symbiosis after eating an original Berry does not duplicate its gift",
+      "Averon held items: a Berry eaten in battle stays eaten",
+      "Averon Mega endings: the Pokemon reverts when the player loses the battle",
+      "Averon rejects all excluded gimmicks for both battlers",
+      "Averon Gym preview generates two normal Pokemon for a double battle",
+      "Averon region save power loss at any sector write keeps the last whole slot",
+      "Averon region save rejects every anchor bit flip even under a recomputed sector checksum",
+      "Averon region save paths: overwriting a different file seals and reloads the region state",
+      "Averon region travel runs from an overworld script through the registered special",
+      "Averon respawn contract unregistered arrival stays local without selecting a nurse",
+      "Averon resource real party and Field Kit menus restore heap across repeated regional visits",
+      "Averon Sandgem is section 216 in Sinnoh with no assigned sentinel or future names",
+      "Averon save bounds ID65535 unsigned primed recovery",
+      "Averon save bounds healthy slots retain old format and alternate normally",
+      "Averon scripted battles cannot be forfeited but ordinary trainer battles can",
+      "Averon an ordinary loss after a scripted battle whites out and pays money again",
+      "Averon a TM move is taught only to a species whose teachable learnset has it",
+      "Averon transport refuses a physically wrong departing healer before caching its return",
+      "Averon transport points validate physical region identity and indexed arrivals",
+      "Averon native whiteout heals and restores the home follower through flash with regional badges",
+      "Averon EXP Share: both Pokemon on the field in a double battle share the EXP",
+      "Averon EXP Share: Pokemon switched in against the opponent share its EXP",
+      "Averon held items: a newly found item cannot replace or duplicate the borrowed original",
+      "Averon held items: Recycle remembers the donor of a consumed Berry",
+      "Averon held items: Bestow after eating an original Berry does not duplicate its gift",
+      "Averon held items: Trick returns each side's own item after the battle",
+      "Averon Mega endings: no second Mega Evolution after the first Mega Pokemon faints",
+      "Averon uses Set mode even when an old save requests Shift",
+      "Averon Gym TM01 reward resolves to Work Up",
+      "Averon Sinnoh resume interrupted return never mixes real region healer party and PC slots",
+      "Averon trade save refusal: wired callback enters failure without writing",
+      "Averon transport refuses missing or physically wrong region saved returns before mutation",
+      "Averon Twinleaf origin survives the real summary formatter unchanged",
+      "Averon six-member party respects held EXP Share and the first cap",
+      "Averon held items: an item the player steals from a trainer is not kept",
+      "Averon Mega endings: the Pokemon reverts when a wild Pokemon blows the player away",
+      "Averon coast trainer reuses the unused slot without expanding save flags",
+      "Averon whiteout money: a loss never takes more money than the player has"
+    ],
+    "raw_log": "/workspace/averon-session-evidence/packet-d50-20261027/native-results.log",
+    "raw_log_sha256": "0dc3e4d43d773da4f6bfcd429534109c6faa7b28d835cfedea87757518b2860e",
+    "summary": ": PASS\n[4] Averon whiteout money: a loss never takes more money than the player has: PASS\n\n- Tests PASSED:          335\n- Tests TOTAL:           335\n\n",
+    "scope": "Complete filtered Averon suite in actual50-map test ROM; not the full unfiltered upstream test baseline; no expected-failure baseline changed",
+    "execution_exit_code": "Not recovered from expired execution session; completed log summary and all335 unique outcomes verified directly"
+  },
+  "graphical": {
+    "summary": [
+      {
+        "profile": "normal",
+        "scope": "passage",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 16
+      },
+      {
+        "profile": "normal",
+        "scope": "fresh Continue",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 3
+      },
+      {
+        "profile": "normal",
+        "scope": "disconnected upper approach closure; explicit fixture",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 6
+      },
+      {
+        "profile": "release",
+        "scope": "passage",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 16
+      },
+      {
+        "profile": "release",
+        "scope": "fresh Continue",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 3
+      },
+      {
+        "profile": "release",
+        "scope": "disconnected upper approach closure; explicit fixture",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 6
+      }
+    ],
+    "completed_checks_per_profile": 25,
+    "total_outcomes": 50,
+    "scope": "Reciprocal Route207/South warp0, west-to-east closed approach, followers, menus, game-written Save and separate-process Continue; disconnected upper closure uses separate placement fixture",
+    "fixture": "DEV_ONLY Continue-warp placement; South temporary group76 slot49, MAPSEC217 alias Route201; popup is not a new Coronet saved identity",
+    "profiles": {
+      "normal": {
+        "passage": {
+          "result": {
+            "maps": [
+              "MAP_ROUTE207",
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "normal",
+            "rom_sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456",
+            "static_findings": [
+              {
+                "map": "MAP_ROUTE207",
+                "code": "exit-unreachable",
+                "detail": {
+                  "pairs": [
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        52,
+                        6
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        13,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        14,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        15,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        16,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        17,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        18,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        19,
+                        0
+                      ]
+                    ]
+                  ],
+                  "count": 60
+                }
+              }
+            ],
+            "save_before": "bd9bff81c8a772948a0dbb6da8d1cb9a3c85b7de1628038ccabf0fd378914593",
+            "checks": [
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "reached bounded packet D map",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_MT_CORONET_1F_SOUTH via warp)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_SOUTH",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    7
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_ROUTE207 warp 0 (52, 5) -> MAP_MT_CORONET_1F_SOUTH and back",
+                "ok": true,
+                "leg": "back",
+                "expected": [
+                  "MAP_ROUTE207",
+                  [
+                    [
+                      52,
+                      6
+                    ]
+                  ]
+                ],
+                "got": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_ROUTE207 after warp round trip)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "reached bounded packet D map",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_ROUTE207 via warp)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "an exit is reachable after warping into MAP_ROUTE207",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH warp 0 (5, 7) -> MAP_ROUTE207 and back",
+                "ok": true,
+                "leg": "back",
+                "expected": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    [
+                      5,
+                      7
+                    ]
+                  ]
+                ],
+                "got": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    7
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH (36, 19) pushing down is blocked",
+                "ok": true,
+                "before": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ],
+                "after": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (packet D after actual west passage and east closure)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "Start menu opens and returns to the field",
+                "ok": true
+              },
+              {
+                "name": "SAVE (packet-d)",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "flash_problems": [],
+            "save_after": "0524c574a0bac66c65b95d5b85082a8cb323c01a356fa93ed72a52deff0b18be",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 380,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "46b7ff4f051bc21a99da9d1c477870dd2cab44066f288511912d2d1ea0ad1651",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986",
+          "saved-packet-d.json": {
+            "label": "packet-d",
+            "state": {
+              "map": "MAP_MT_CORONET_1F_SOUTH",
+              "cb2": "CB2_Overworld",
+              "mapGroup": 76,
+              "mapNum": 49,
+              "x": 36,
+              "y": 19,
+              "frame": null,
+              "flags": {
+                "FLAG_BADGE01_GET": false,
+                "FLAG_BADGE02_GET": false,
+                "FLAG_AVERON_STARTER": true,
+                "FLAG_AVERON_WEST_SLUICE": false,
+                "FLAG_AVERON_EAST_SLUICE": false,
+                "FLAG_AVERON_GYM1_TM": false,
+                "FLAG_AVERON_NOTES_STARTED": false,
+                "FLAG_AVERON_NOTES_RECORDED": false,
+                "FLAG_AVERON_NOTES_REWARDED": false,
+                "FLAG_AVERON_EXP_SHARE": false,
+                "FLAG_AVERON_SKETCH_STARTED": false,
+                "FLAG_AVERON_SKETCH_FOUND": false,
+                "FLAG_AVERON_SKETCH_REWARDED": false,
+                "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+              },
+              "party": [
+                {
+                  "species": 393,
+                  "status": 0,
+                  "moves": [
+                    1,
+                    45,
+                    0,
+                    0
+                  ],
+                  "pp": [
+                    35,
+                    40,
+                    0,
+                    0
+                  ],
+                  "ppBonuses": 0,
+                  "level": 5,
+                  "hp": 20,
+                  "maxhp": 20
+                }
+              ],
+              "follower": {
+                "species": 393,
+                "graphicsId": 16777,
+                "invisible": false
+              },
+              "pokeBalls": [
+                [
+                  1,
+                  5
+                ]
+              ],
+              "berries": [],
+              "money": 3000,
+              "stack": {
+                "regionBytes": 3928,
+                "usedBytes": 2372,
+                "freeBytes": 1556
+              },
+              "saveAttemptStatus": 0
+            },
+            "callbacks": [
+              "SaveConfirmInputCallback",
+              "SaveConfirmOverwriteCallback",
+              "SaveOverwriteInputCallback",
+              "SaveDoSaveCallback",
+              "SaveSuccessCallback",
+              "SaveReturnSuccessCallback"
+            ],
+            "flash_before": [
+              {
+                "status": "valid",
+                "problems": [],
+                "counter": 2
+              },
+              {
+                "status": "valid",
+                "problems": [],
+                "counter": 1
+              }
+            ]
+          }
+        },
+        "fresh-continue": {
+          "result": {
+            "maps": [
+              "MAP_ROUTE207",
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "normal",
+            "rom_sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456",
+            "static_findings": [
+              {
+                "map": "MAP_ROUTE207",
+                "code": "exit-unreachable",
+                "detail": {
+                  "pairs": [
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        52,
+                        6
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        13,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        14,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        15,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        16,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        17,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        18,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        19,
+                        0
+                      ]
+                    ]
+                  ],
+                  "count": 60
+                }
+              }
+            ],
+            "save_before": "0524c574a0bac66c65b95d5b85082a8cb323c01a356fa93ed72a52deff0b18be",
+            "checks": [
+              {
+                "name": "fresh CONTINUE restores the saved state",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "save_after": "0524c574a0bac66c65b95d5b85082a8cb323c01a356fa93ed72a52deff0b18be",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 381,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "5f9f2b43a3c79ccc81bf9211336911b57726309d2a531fb87810e6d4969a6fe9",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986",
+          "continue-check.json": {
+            "expected": "/workspace/averon-session-evidence/packet-d50-20261027/normal-passage/saved-packet-d.json",
+            "restored": {
+              "map": "MAP_MT_CORONET_1F_SOUTH",
+              "cb2": "CB2_Overworld",
+              "mapGroup": 76,
+              "mapNum": 49,
+              "x": 36,
+              "y": 19,
+              "frame": null,
+              "flags": {
+                "FLAG_BADGE01_GET": false,
+                "FLAG_BADGE02_GET": false,
+                "FLAG_AVERON_STARTER": true,
+                "FLAG_AVERON_WEST_SLUICE": false,
+                "FLAG_AVERON_EAST_SLUICE": false,
+                "FLAG_AVERON_GYM1_TM": false,
+                "FLAG_AVERON_NOTES_STARTED": false,
+                "FLAG_AVERON_NOTES_RECORDED": false,
+                "FLAG_AVERON_NOTES_REWARDED": false,
+                "FLAG_AVERON_EXP_SHARE": false,
+                "FLAG_AVERON_SKETCH_STARTED": false,
+                "FLAG_AVERON_SKETCH_FOUND": false,
+                "FLAG_AVERON_SKETCH_REWARDED": false,
+                "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+              },
+              "party": [
+                {
+                  "species": 393,
+                  "status": 0,
+                  "moves": [
+                    1,
+                    45,
+                    0,
+                    0
+                  ],
+                  "pp": [
+                    35,
+                    40,
+                    0,
+                    0
+                  ],
+                  "ppBonuses": 0,
+                  "level": 5,
+                  "hp": 20,
+                  "maxhp": 20
+                }
+              ],
+              "follower": {
+                "species": 393,
+                "graphicsId": 16777,
+                "invisible": false
+              },
+              "pokeBalls": [
+                [
+                  1,
+                  5
+                ]
+              ],
+              "berries": [],
+              "money": 3000,
+              "stack": {
+                "regionBytes": 3928,
+                "usedBytes": 2228,
+                "freeBytes": 1700
+              },
+              "saveAttemptStatus": 0
+            },
+            "problems": []
+          }
+        },
+        "upper-closure": {
+          "result": {
+            "maps": [
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "normal",
+            "rom_sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456",
+            "static_findings": [],
+            "save_before": "2e9323fa0b49b6e65b5c23bea775efc2ed51dc207e867ac731af3454e77756b9",
+            "checks": [
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "disclosed upper-component fixture at29,3",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH (29, 3) pushing up is blocked",
+                "ok": true,
+                "before": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ],
+                "after": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (isolated upper closure; no Surf or ordinary arrival claim)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "Start menu opens and returns to the field",
+                "ok": true
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "save_after": "2e9323fa0b49b6e65b5c23bea775efc2ed51dc207e867ac731af3454e77756b9",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 382,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "3c3e256b294b41d41646f3c41575203e17735f12c2302f749bf0d647f5f07c2b",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986"
+        }
+      },
+      "release": {
+        "passage": {
+          "result": {
+            "maps": [
+              "MAP_ROUTE207",
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "release",
+            "rom_sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014",
+            "static_findings": [
+              {
+                "map": "MAP_ROUTE207",
+                "code": "exit-unreachable",
+                "detail": {
+                  "pairs": [
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        52,
+                        6
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        13,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        14,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        15,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        16,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        17,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        18,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        19,
+                        0
+                      ]
+                    ]
+                  ],
+                  "count": 60
+                }
+              }
+            ],
+            "save_before": "bd9bff81c8a772948a0dbb6da8d1cb9a3c85b7de1628038ccabf0fd378914593",
+            "checks": [
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "reached bounded packet D map",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_MT_CORONET_1F_SOUTH via warp)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_SOUTH",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    7
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_ROUTE207 warp 0 (52, 5) -> MAP_MT_CORONET_1F_SOUTH and back",
+                "ok": true,
+                "leg": "back",
+                "expected": [
+                  "MAP_ROUTE207",
+                  [
+                    [
+                      52,
+                      6
+                    ]
+                  ]
+                ],
+                "got": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_ROUTE207 after warp round trip)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "reached bounded packet D map",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_ROUTE207 via warp)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "an exit is reachable after warping into MAP_ROUTE207",
+                "ok": true,
+                "at": [
+                  "MAP_ROUTE207",
+                  [
+                    52,
+                    6
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH warp 0 (5, 7) -> MAP_ROUTE207 and back",
+                "ok": true,
+                "leg": "back",
+                "expected": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    [
+                      5,
+                      7
+                    ]
+                  ]
+                ],
+                "got": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    5,
+                    7
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH (36, 19) pushing down is blocked",
+                "ok": true,
+                "before": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ],
+                "after": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (packet D after actual west passage and east closure)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "Start menu opens and returns to the field",
+                "ok": true
+              },
+              {
+                "name": "SAVE (packet-d)",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "flash_problems": [],
+            "save_after": "ba42c0047a2acda73bf43711e6c9339ec367d632bef662d048371b0a51423516",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 384,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "33f26ff54d420d485c21b3e6d2b0a17977eb9b1e2a556b889914f3192c1f44ef",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986",
+          "saved-packet-d.json": {
+            "label": "packet-d",
+            "state": {
+              "map": "MAP_MT_CORONET_1F_SOUTH",
+              "cb2": "CB2_Overworld",
+              "mapGroup": 76,
+              "mapNum": 49,
+              "x": 36,
+              "y": 19,
+              "frame": null,
+              "flags": {
+                "FLAG_BADGE01_GET": false,
+                "FLAG_BADGE02_GET": false,
+                "FLAG_AVERON_STARTER": true,
+                "FLAG_AVERON_WEST_SLUICE": false,
+                "FLAG_AVERON_EAST_SLUICE": false,
+                "FLAG_AVERON_GYM1_TM": false,
+                "FLAG_AVERON_NOTES_STARTED": false,
+                "FLAG_AVERON_NOTES_RECORDED": false,
+                "FLAG_AVERON_NOTES_REWARDED": false,
+                "FLAG_AVERON_EXP_SHARE": false,
+                "FLAG_AVERON_SKETCH_STARTED": false,
+                "FLAG_AVERON_SKETCH_FOUND": false,
+                "FLAG_AVERON_SKETCH_REWARDED": false,
+                "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+              },
+              "party": [
+                {
+                  "species": 393,
+                  "status": 0,
+                  "moves": [
+                    1,
+                    45,
+                    0,
+                    0
+                  ],
+                  "pp": [
+                    35,
+                    40,
+                    0,
+                    0
+                  ],
+                  "ppBonuses": 0,
+                  "level": 5,
+                  "hp": 20,
+                  "maxhp": 20
+                }
+              ],
+              "follower": {
+                "species": 393,
+                "graphicsId": 16777,
+                "invisible": false
+              },
+              "pokeBalls": [
+                [
+                  1,
+                  5
+                ]
+              ],
+              "berries": [],
+              "money": 3000,
+              "stack": {
+                "regionBytes": 3984,
+                "usedBytes": 2652,
+                "freeBytes": 1332
+              },
+              "saveAttemptStatus": 0
+            },
+            "callbacks": [
+              "SaveConfirmInputCallback",
+              "SaveConfirmOverwriteCallback",
+              "SaveDoSaveCallback",
+              "SaveSuccessCallback",
+              "SaveReturnSuccessCallback"
+            ],
+            "flash_before": [
+              {
+                "status": "valid",
+                "problems": [],
+                "counter": 2
+              },
+              {
+                "status": "valid",
+                "problems": [],
+                "counter": 1
+              }
+            ]
+          }
+        },
+        "fresh-continue": {
+          "result": {
+            "maps": [
+              "MAP_ROUTE207",
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "release",
+            "rom_sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014",
+            "static_findings": [
+              {
+                "map": "MAP_ROUTE207",
+                "code": "exit-unreachable",
+                "detail": {
+                  "pairs": [
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        52,
+                        6
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        13,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        14,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        15,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        16,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        17,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        18,
+                        0
+                      ]
+                    ],
+                    [
+                      [
+                        9,
+                        31
+                      ],
+                      [
+                        19,
+                        0
+                      ]
+                    ]
+                  ],
+                  "count": 60
+                }
+              }
+            ],
+            "save_before": "ba42c0047a2acda73bf43711e6c9339ec367d632bef662d048371b0a51423516",
+            "checks": [
+              {
+                "name": "fresh CONTINUE restores the saved state",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    36,
+                    19
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "save_after": "ba42c0047a2acda73bf43711e6c9339ec367d632bef662d048371b0a51423516",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 385,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "e2c41de2df950be2b33e793be484f7cd9c006f187f854e68f4bce05e9f71351b",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986",
+          "continue-check.json": {
+            "expected": "/workspace/averon-session-evidence/packet-d50-20261027/release-passage/saved-packet-d.json",
+            "restored": {
+              "map": "MAP_MT_CORONET_1F_SOUTH",
+              "cb2": "CB2_Overworld",
+              "mapGroup": 76,
+              "mapNum": 49,
+              "x": 36,
+              "y": 19,
+              "frame": null,
+              "flags": {
+                "FLAG_BADGE01_GET": false,
+                "FLAG_BADGE02_GET": false,
+                "FLAG_AVERON_STARTER": true,
+                "FLAG_AVERON_WEST_SLUICE": false,
+                "FLAG_AVERON_EAST_SLUICE": false,
+                "FLAG_AVERON_GYM1_TM": false,
+                "FLAG_AVERON_NOTES_STARTED": false,
+                "FLAG_AVERON_NOTES_RECORDED": false,
+                "FLAG_AVERON_NOTES_REWARDED": false,
+                "FLAG_AVERON_EXP_SHARE": false,
+                "FLAG_AVERON_SKETCH_STARTED": false,
+                "FLAG_AVERON_SKETCH_FOUND": false,
+                "FLAG_AVERON_SKETCH_REWARDED": false,
+                "FLAG_AVERON_DEV_GIFT_RECEIVED": false
+              },
+              "party": [
+                {
+                  "species": 393,
+                  "status": 0,
+                  "moves": [
+                    1,
+                    45,
+                    0,
+                    0
+                  ],
+                  "pp": [
+                    35,
+                    40,
+                    0,
+                    0
+                  ],
+                  "ppBonuses": 0,
+                  "level": 5,
+                  "hp": 20,
+                  "maxhp": 20
+                }
+              ],
+              "follower": {
+                "species": 393,
+                "graphicsId": 16777,
+                "invisible": false
+              },
+              "pokeBalls": [
+                [
+                  1,
+                  5
+                ]
+              ],
+              "berries": [],
+              "money": 3000,
+              "stack": {
+                "regionBytes": 3984,
+                "usedBytes": 2476,
+                "freeBytes": 1508
+              },
+              "saveAttemptStatus": 0
+            },
+            "problems": []
+          }
+        },
+        "upper-closure": {
+          "result": {
+            "maps": [
+              "MAP_MT_CORONET_1F_SOUTH"
+            ],
+            "build": "release",
+            "rom_sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014",
+            "static_findings": [],
+            "save_before": "2e9323fa0b49b6e65b5c23bea775efc2ed51dc207e867ac731af3454e77756b9",
+            "checks": [
+              {
+                "name": "starts inside the batch",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (start)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "disclosed upper-component fixture at29,3",
+                "ok": true,
+                "at": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "MAP_MT_CORONET_1F_SOUTH (29, 3) pushing up is blocked",
+                "ok": true,
+                "before": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ],
+                "after": [
+                  "MAP_MT_CORONET_1F_SOUTH",
+                  [
+                    29,
+                    3
+                  ]
+                ]
+              },
+              {
+                "name": "follower visible (isolated upper closure; no Surf or ordinary arrival claim)",
+                "ok": true,
+                "follower": {
+                  "species": 393,
+                  "graphicsId": 16777,
+                  "invisible": false
+                }
+              },
+              {
+                "name": "Start menu opens and returns to the field",
+                "ok": true
+              }
+            ],
+            "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+            "alive": true,
+            "save_after": "2e9323fa0b49b6e65b5c23bea775efc2ed51dc207e867ac731af3454e77756b9",
+            "verdict": "PASS"
+          },
+          "qualification": {
+            "scope": "Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition",
+            "producer_head": "1ace5b9ff6e962d79b35be16e11c07eff32cb439",
+            "temporary_engine_tree": "a57bd128b0c823b16388f619d01b9dd2bca4000b",
+            "trusted_producer_payloads_verified": 70,
+            "unique_x_display": 386,
+            "source_probe_sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50"
+          },
+          "result_sha256": "b9c40adf30da2ad47536e848c28eeb322a0e8b158403410d95bd586dddaccfeb",
+          "mgba_log_sha256": "1cb2ae5938e8f62ef172f7846737f83b09c60f21ed58393795590dc1b3a69986"
+        }
+      }
+    }
+  },
+  "failures_preserved": {
+    "first_real_link": {
+      "status": "LINK_FAIL_NOT_ROM_ACCEPTANCE",
+      "exit_code": 2,
+      "engine_tree": "def09c86dfe4d370389bfd9171980b053f7d1337",
+      "producer_source": "b2a547960d7794a590ad61b3ad2b347adba88b95",
+      "reason": "new MapScripts label local rather than exported; maps.o undefined reference",
+      "raw_log_sha256": "0b6b5bf016dec9edce86c881142551c2fc0cc2419826a5cdd23ee387032dbd91"
+    },
+    "fix": "Export MapScripts with ::; real assembler/linker positive and negative regression",
+    "harness_setup": "Initial host preprocessor copy omitted unchanged characters.h; fixed fixture hierarchy. qa.emu AttributeError in separate Route226 recovery before launch; corrected public Emulator import. These are not gameplay failures.",
+    "earlier_49_gate": "Inode exhaustion, X11 startup and reporting-path errors remain in merged #348 receipt; no source/private save was discarded"
+  },
+  "private_artifacts": {
+    "created_utc": "2026-10-28T23:18:12.399989+00:00",
+    "private_only": true,
+    "archive": "/workspace/averon-session-evidence/packet-d50-20261027/completed-build-artifacts.tar.gz",
+    "archive_sha256": "b0bf5d1f3d74b2c2fd5ec4026e9935a317f46b783ef02ad3e7ca735d6a4db92e",
+    "archive_bytes": 75493113,
+    "readback_verified": true,
+    "members": {
+      "pokeemerald-cries-off.gba": {
+        "bytes": 33554432,
+        "sha256": "a7f4d5f246772a9c6ea2562b2da1339e4d75ee6c211a6e5b97648ed588f84456"
+      },
+      "pokeemerald-cries-off.elf": {
+        "bytes": 26927184,
+        "sha256": "a9654024088577c7ea27a97877e049c4b560bb6f541fad339cd258c14b4aff0b"
+      },
+      "pokeemerald-cries-off-release.gba": {
+        "bytes": 33554432,
+        "sha256": "47f886a927fb3943d5051f712c6ed37a16c5da31bcf1e9e404f98f5125dca014"
+      },
+      "pokeemerald-cries-off-release.elf": {
+        "bytes": 27072832,
+        "sha256": "6625259aae235cc9f7933c587cab50fa6d1ba5e235612f5ca8f0bd23030e449b"
+      },
+      "pokeemerald-cries-off-test.elf": {
+        "bytes": 33934992,
+        "sha256": "5572a9dbfaecbf5c7ede395e2f4c7a0596ff3cc56158cae3f4ab42609a8315a2"
+      },
+      "pokeemerald-cries-off-test-headless.elf": {
+        "bytes": 33934992,
+        "sha256": "910dfda4a729f199998f176ffb76de68e4adccd18c21866cdaeda1563215d53b"
+      }
+    },
+    "payload_archive_sha256": "44e4035b341785c0d4a8264ba83d947734fd94405f1748e2b0cc794fee18d164",
+    "all_70_payloads_readback_and_live_verified": true
+  },
+  "reproduction": {
+    "engine": "/workspace/averon-packet-c-native-20261027/Pokemon Game/engine",
+    "evidence_root": "/workspace/averon-session-evidence/packet-d50-20261027",
+    "source_preparation": "prepare_runtime.assemble(repo) at pinned producer_commit, existing W25 composer; inspect receipt70 files before installing into marked throwaway engine only",
+    "normal_build": "make -j8 -O CRIES=off",
+    "release_build": "make -j8 -O CRIES=off RELEASE=1",
+    "private_runner_note": "Runners assert original producer HEAD1ace; use pinned original checkout rather than evidence-only later HEAD for rerun. Reuse existing finished results instead of rerunning unchanged gates.",
+    "runtime_scripts": {
+      "probe-packet-d.py": {
+        "sha256": "8c38a72d5d88e3e9ba1bc4c6e0dfd1529b88f7f3eb3c67a82497efb28c736d50",
+        "source": "from pathlib import Path\nimport sys,json,hashlib,argparse,importlib.util,subprocess\nsource=Path('/workspace/averon-oreburgh-geography');engine=Path('/workspace/averon-packet-c-native-20261027/Pokemon Game/engine');out=Path(__file__).parent\nassert subprocess.check_output(['git','rev-parse','HEAD'],cwd=source,text=True).strip()=='1ace5b9ff6e962d79b35be16e11c07eff32cb439'\np=source/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/west-packet-d/prepare_runtime.py';s=importlib.util.spec_from_file_location('packet_d_runtime_qualified',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);expected,_=m.assemble(source);assert len(expected)==70 and (engine/'.map_qa_throwaway').is_file()\nfor path,data in expected.items():assert (engine/path).read_bytes()==data,path\nsys.path.insert(0,str(source/'Pokemon Game/scripts/claude_play'));import map_qa as qa\nqa._wrapper(engine);from codex_cry_gameplay import emu\noriginal=emu.Emulator\nparser=argparse.ArgumentParser();parser.add_argument('--profile',choices=['normal','release'],required=True);parser.add_argument('--scratch',required=True);parser.add_argument('--out',required=True);parser.add_argument('--expect');parser.add_argument('--upper-only',action='store_true');a=parser.parse_args()\ndisplay=380+(a.profile=='release')*4+bool(a.expect)+2*a.upper_only;emu.Emulator=lambda *args,**kw:original(*args,**dict(kw,display=display))\nclass Passage(qa.Runner):\n def go(self,map_id,tile,_depth=0):\n  ok=super().go(map_id,tile,_depth)\n  if ok:self.d.settle()\n  return ok and self.d.here()==(map_id,tuple(tile))\n def run_map(self,map_id):\n  if a.upper_only:\n   self.check('disclosed upper-component fixture at29,3',self.d.here()==(m.MAP_ID,(29,3)),at=self.d.here())\n   self.blocked(map_id,29,3,'up');self.follower('isolated upper closure; no Surf or ordinary arrival claim');return\n  self.check('reached bounded packet D map',self.d.here()[0]==map_id or self.go(map_id,(5,6) if map_id==m.MAP_ID else (52,6)),at=self.d.here())\n  point=next(x for x in self.plan[map_id]['points'] if x['kind']=='warp' and x['index']==0)\n  self.warp(map_id,point)\n  if map_id==m.MAP_ID:\n   self.blocked(map_id,36,19,'down')\n   self.follower('packet D after actual west passage and east closure')\nqa.Runner=Passage\nrom=engine/('pokeemerald-cries-off'+('-release' if a.profile=='release' else '')+'.gba');config=argparse.Namespace(engine=str(engine),rom=str(rom),scratch=a.scratch,out=a.out,build=a.profile,map=[m.MAP_ID] if a.upper_only else ['MAP_ROUTE207',m.MAP_ID],expect=a.expect,save=None if a.expect or a.upper_only else 'packet-d',blocked=None,region_ui=None,region_ui_map=None,whiteout=None,whiteout_npc=None)\ncode=qa.cmd_run(config);Path(a.out,'qualification.json').write_text(json.dumps(dict(scope='Two affected maps, reciprocal west door, existing east/2F wall closures; no global49-map rerun or ordinary bike acquisition',producer_head='1ace5b9ff6e962d79b35be16e11c07eff32cb439',temporary_engine_tree='a57bd128b0c823b16388f619d01b9dd2bca4000b',trusted_producer_payloads_verified=70,unique_x_display=display,source_probe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()),indent=2)+'\\n');raise SystemExit(code)\n"
+      },
+      "run-packet-d.py": {
+        "sha256": "6ae663271cd0c321dff2b09a6ecbd14b45d32757641312a5fa13bbdb12bee279",
+        "source": "from pathlib import Path\nimport subprocess,sys,json,shutil\np=Path(__file__).parent;qa='/workspace/averon-oreburgh-geography/Pokemon Game/scripts/claude_play/map_qa.py';engine='/workspace/averon-packet-c-native-20261027/Pokemon Game/engine';rows=[]\nfor profile in ('normal','release'):\n scratch=Path('/workspace/scratch')/('packet-d50-'+profile+'-20261027');scratch.mkdir(exist_ok=False)\n subprocess.run([sys.executable,qa,'fixture-save','--engine',engine,'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(scratch/'game.sav'),'MAP_ROUTE207','52','6'],check=True)\n target=p/(profile+'-passage')\n with (p/(profile+'-passage.log')).open('w') as log:code=subprocess.run([sys.executable,str(p/'probe-packet-d.py'),'--profile',profile,'--scratch',str(scratch),'--out',str(target)],stdout=log,stderr=subprocess.STDOUT).returncode\n f=target/'result.json';d=json.loads(f.read_text()) if f.exists() else dict(verdict='BLOCKED_BEFORE_GAME_RESULT',checks=[]);rows.append(dict(profile=profile,scope='passage',exit_code=code,verdict=d['verdict'],checks=len(d['checks'])));print(rows[-1],flush=True)\n if code:continue\n fresh=Path('/workspace/scratch')/('packet-d50-continue-'+profile+'-20261027');fresh.mkdir(exist_ok=False);shutil.copyfile(scratch/'game.sav',fresh/'game.sav')\n with (p/(profile+'-fresh-continue.log')).open('w') as log:code=subprocess.run([sys.executable,str(p/'probe-packet-d.py'),'--profile',profile,'--scratch',str(fresh),'--out',str(p/(profile+'-fresh-continue')),'--expect',str(target/'saved-packet-d.json')],stdout=log,stderr=subprocess.STDOUT).returncode\n f=p/(profile+'-fresh-continue/result.json');d=json.loads(f.read_text()) if f.exists() else dict(verdict='BLOCKED_BEFORE_GAME_RESULT',checks=[]);rows.append(dict(profile=profile,scope='fresh Continue',exit_code=code,verdict=d['verdict'],checks=len(d['checks'])));print(rows[-1],flush=True)\n upper=Path('/workspace/scratch')/('packet-d50-upper-'+profile+'-20261027');upper.mkdir(exist_ok=False)\n subprocess.run([sys.executable,qa,'fixture-save','--engine',engine,'/workspace/averon-session-evidence/west-final-game-written-normal.sav',str(upper/'game.sav'),'MAP_MT_CORONET_1F_SOUTH','29','3'],check=True)\n with (p/(profile+'-upper-closure.log')).open('w') as log:code=subprocess.run([sys.executable,str(p/'probe-packet-d.py'),'--profile',profile,'--scratch',str(upper),'--out',str(p/(profile+'-upper-closure')),'--upper-only'],stdout=log,stderr=subprocess.STDOUT).returncode\n f=p/(profile+'-upper-closure/result.json');d=json.loads(f.read_text()) if f.exists() else dict(verdict='BLOCKED_BEFORE_GAME_RESULT',checks=[]);rows.append(dict(profile=profile,scope='disconnected upper approach closure; explicit fixture',exit_code=code,verdict=d['verdict'],checks=len(d['checks'])));print(rows[-1],flush=True)\n(p/'runtime-summary.json').write_text(json.dumps(rows,indent=2)+'\\n');raise SystemExit(int(len(rows)!=6 or any(r['exit_code'] or r['verdict']!='PASS' for r in rows)))\n"
+      }
+    }
+  },
+  "limitations": [
+    "No50-map production registration, no new saved ID/format, no story/encounters/new donor art. All49 old slots/layouts preserved.",
+    "Route208 and2F remain solid walls. No ordinary access to disconnected upper closure, Surf acquisition or uphill mud/bike acceptance claimed.",
+    "Route207 static exit-unreachable findings remain in full per-run result; no speculative terrain flattening.",
+    "Human listening/Delta and whole-region acceptance unverified. Cries remain OFF.",
+    "#337 requires genuine owner exact-path authorization; #347 must not merge into337 or retarget before337 legitimately lands. Production D requires explicit228\u2013230 identity/path authority.",
+    "#307 and#355 owner-reserved workflow approvals remain pending; neither is dispatched or bypassed."
+  ],
+  "prior_parallel_route226_observation": {
+    "scope": "Existing unchanged74-map scene, bounded western on-foot shore negative checks only; NOT all33 findings or Surf/whole-route acceptance",
+    "root": "/workspace/averon-session-evidence/frontier74-main30-20261027/route226-shore",
+    "initial_summary_preserved": [
+      {
+        "profile": "normal",
+        "scope": "three western shore pushes",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 9
+      },
+      {
+        "profile": "normal",
+        "scope": "fresh Continue",
+        "exit_code": 1,
+        "verdict": "STARTUP_BLOCKED_NO_GAME_RESULT",
+        "checks": 0
+      },
+      {
+        "profile": "release",
+        "scope": "three western shore pushes",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 9
+      },
+      {
+        "profile": "release",
+        "scope": "fresh Continue",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "checks": 3
+      }
+    ],
+    "results": {
+      "normal-probe": {
+        "maps": [
+          "MAP_ROUTE226"
+        ],
+        "build": "normal",
+        "rom_sha256": "c1279decfd288888b9a53e52a8324f2fea5f5e1bb144948e74f6052ef7e6c377",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE226",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    76,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    77,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    78,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    79,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    80,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    81,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    82,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    83,
+                    0
+                  ]
+                ]
+              ],
+              "count": 120
+            }
+          }
+        ],
+        "save_before": "994567ad11bddfdfcbce4acc915b50719bb11000a3c6fd91bcc0801178596c0f",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "bounded western Route226 on-foot fixture",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (50, 20) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                50,
+                20
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                50,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (50, 21) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                50,
+                21
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                50,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (56, 15) pushing down is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (Route226 western shore, no Surf grant)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (route226-west-shore)",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "193a21ebc3dd2a01541c14e4f22d08a5924005631fa63589b099a0e0f7f72550",
+        "verdict": "PASS"
+      },
+      "release-probe": {
+        "maps": [
+          "MAP_ROUTE226"
+        ],
+        "build": "release",
+        "rom_sha256": "6d12a0530a77f3e0ca5be1705d72c139e1075e1e699b7bf484214d2c2a5705c4",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE226",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    76,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    77,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    78,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    79,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    80,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    81,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    82,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    83,
+                    0
+                  ]
+                ]
+              ],
+              "count": 120
+            }
+          }
+        ],
+        "save_before": "994567ad11bddfdfcbce4acc915b50719bb11000a3c6fd91bcc0801178596c0f",
+        "checks": [
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "bounded western Route226 on-foot fixture",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                0,
+                4
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (50, 20) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                50,
+                20
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                50,
+                20
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (50, 21) pushing right is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                50,
+                21
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                50,
+                21
+              ]
+            ]
+          },
+          {
+            "name": "MAP_ROUTE226 (56, 15) pushing down is blocked",
+            "ok": true,
+            "before": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ],
+            "after": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (Route226 western shore, no Surf grant)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          },
+          {
+            "name": "Start menu opens and returns to the field",
+            "ok": true
+          },
+          {
+            "name": "SAVE (route226-west-shore)",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "flash_problems": [],
+        "save_after": "68ae4ceab156e7e08f648bce1d6963a4b2bf6ee07684b38dd46572baa893f301",
+        "verdict": "PASS"
+      },
+      "release-fresh-continue": {
+        "maps": [
+          "MAP_ROUTE226"
+        ],
+        "build": "release",
+        "rom_sha256": "6d12a0530a77f3e0ca5be1705d72c139e1075e1e699b7bf484214d2c2a5705c4",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE226",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    76,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    77,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    78,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    79,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    80,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    81,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    82,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    83,
+                    0
+                  ]
+                ]
+              ],
+              "count": 120
+            }
+          }
+        ],
+        "save_before": "68ae4ceab156e7e08f648bce1d6963a4b2bf6ee07684b38dd46572baa893f301",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "68ae4ceab156e7e08f648bce1d6963a4b2bf6ee07684b38dd46572baa893f301",
+        "verdict": "PASS"
+      },
+      "normal-fresh-continue-distinct-display": {
+        "maps": [
+          "MAP_ROUTE226"
+        ],
+        "build": "normal",
+        "rom_sha256": "c1279decfd288888b9a53e52a8324f2fea5f5e1bb144948e74f6052ef7e6c377",
+        "static_findings": [
+          {
+            "map": "MAP_ROUTE226",
+            "code": "exit-unreachable",
+            "detail": {
+              "pairs": [
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    76,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    77,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    78,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    79,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    80,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    81,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    82,
+                    0
+                  ]
+                ],
+                [
+                  [
+                    0,
+                    4
+                  ],
+                  [
+                    83,
+                    0
+                  ]
+                ]
+              ],
+              "count": 120
+            }
+          }
+        ],
+        "save_before": "193a21ebc3dd2a01541c14e4f22d08a5924005631fa63589b099a0e0f7f72550",
+        "checks": [
+          {
+            "name": "fresh CONTINUE restores the saved state",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "starts inside the batch",
+            "ok": true,
+            "at": [
+              "MAP_ROUTE226",
+              [
+                56,
+                15
+              ]
+            ]
+          },
+          {
+            "name": "follower visible (start)",
+            "ok": true,
+            "follower": {
+              "species": 393,
+              "graphicsId": 16777,
+              "invisible": false
+            }
+          }
+        ],
+        "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+        "alive": true,
+        "save_after": "193a21ebc3dd2a01541c14e4f22d08a5924005631fa63589b099a0e0f7f72550",
+        "verdict": "PASS"
+      }
+    },
+    "interpretation": "9/9 shore checks and3/3 fresh Continue per profile; initial NORMAL X11 startup failed, distinct-display retry passed. Both elevation3\u21921 and water behavior differ; do not assert water alone caused blocked movement. All33 findings and Route228 FAIL3/4 remain open."
+  },
+  "published_screenshots": {
+    "NORMAL_PASSAGE.png": {
+      "sha256": "31a683130969ad48f30dc42c5a20b8b4ba28b2bee3eac19da2ac27bc32490f8d",
+      "source": "normal-passage/0017-blocked-MAP_MT_CORONET_1F_SOUTH-36-19-down.png",
+      "visually_inspected": true,
+      "note": "Actual mGBA0.10.5 SDL software rendering; Route201 popup is disclosed temporary section217 surrogate"
+    },
+    "RELEASE_FRESH_CONTINUE.png": {
+      "sha256": "27f2ea8d8b9a0013eae65e57cece34bccbf6beed339396ed798482e8b49f837a",
+      "source": "release-fresh-continue/0009-continued.png",
+      "visually_inspected": true,
+      "note": "Actual mGBA0.10.5 SDL software rendering; Route201 popup is disclosed temporary section217 surrogate"
+    }
+  }
+}
