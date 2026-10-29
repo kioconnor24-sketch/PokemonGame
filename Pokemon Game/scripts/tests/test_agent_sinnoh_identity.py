@@ -135,6 +135,28 @@ class SinnohWorkIdentityTests(unittest.TestCase):
             dict(filename=ENGINE + "NewRoute/map.json", status="added")])
         self.assertTrue(any("requires integrate mode" in e for e in check(p)))
 
+    def test_renamed_maps_cannot_hide_new_source_or_engine_identities(self):
+        for root, expected in ((STAGED, "repair cannot introduce"),
+                               (ENGINE, "requires integrate mode")):
+            with self.subTest(root=root):
+                p = candidate(mode="repair", sources="main", files=[
+                    dict(filename=root + "NewRoute/map.json", status="renamed",
+                         previous_filename=root + "OldRoute/map.json")])
+                self.assertTrue(any(expected in e for e in check(p)))
+
+    def test_readme_only_upstream_cannot_prove_reused_geometry(self):
+        p = candidate(mode="reuse", sources="#351")
+        peer = dict(number=351, files=[
+            dict(filename=STAGED + "NewRoute/README.md", status="added")])
+        self.assertTrue(any("reuse source does not contain" in e for e in
+                            check(p, peers=[peer])))
+
+    def test_file_rename_inside_existing_map_remains_a_repair(self):
+        p = candidate(mode="repair", sources="main", files=[
+            dict(filename=ENGINE + "NewRoute/movement.inc", status="renamed",
+                 previous_filename=ENGINE + "NewRoute/scripts.inc")])
+        self.assertEqual(check(p), [])
+
 
 if __name__ == "__main__":
     unittest.main()

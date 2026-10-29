@@ -39,7 +39,8 @@ def map_from_path(path: str) -> str | None:
     return None
 
 
-def map_files(pr: dict, *, added_only: bool = False) -> set[str]:
+def map_files(pr: dict, *, added_only: bool = False,
+              definitions_only: bool = False) -> set[str]:
     ids = set()
     for entry in pr.get("files", []):
         if isinstance(entry, str):
@@ -48,10 +49,21 @@ def map_files(pr: dict, *, added_only: bool = False) -> set[str]:
             path, status = entry.get("filename", ""), entry.get("status", "")
         if status == "removed" or (added_only and status != "added"):
             continue
+        if definitions_only and not path.endswith("/map.json"):
+            continue
         found = map_from_path(path)
         if found:
             ids.add(found)
     return ids
+
+
+def adds_identity(row: dict) -> bool:
+    # GitHub reports a moved map definition as "renamed", not "added".
+    # Renaming a file inside the same map remains an ordinary repair.
+    return row.get("status") == "added" or (
+        row.get("status") == "renamed"
+        and map_from_path(row.get("previous_filename") or "")
+            != map_from_path(row.get("filename", "")))
 
 
 def is_geography(pr: dict) -> bool:
@@ -105,13 +117,13 @@ def validate(snapshot: dict) -> list[str]:
         errors.append("changed map identities missing from Sinnoh-Maps: " + ", ".join(sorted(unknown)))
     added_staged = {
         map_from_path(row["filename"]) for row in pr.get("files", [])
-        if isinstance(row, dict) and row.get("status") == "added"
+        if isinstance(row, dict) and adds_identity(row)
         and row.get("filename", "").startswith(SOURCE)
         and "/staged/" in row["filename"]
     } - {None}
     added_engine = {
         map_from_path(row["filename"]) for row in pr.get("files", [])
-        if isinstance(row, dict) and row.get("status") == "added"
+        if isinstance(row, dict) and adds_identity(row)
         and row.get("filename", "").startswith(ENGINE_MAPS)
     } - {None}
     if mode != "integrate" and added_engine:
@@ -128,7 +140,7 @@ def validate(snapshot: dict) -> list[str]:
             if f"#{peer['number']}" in spec["sources"]:
                 # Proof needs a real map file in that PR, not an unverified
                 # map name listed in its description.
-                proved |= map_files(peer)
+                proved |= map_files(peer, definitions_only=True)
         missing = added_staged - proved
         if missing:
             errors.append("reuse source does not contain staged maps: " + ", ".join(sorted(missing)))
@@ -242,7 +254,8 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
             file_rows = pages(f"pulls/{peer['number']}/files")
             snapshot["other_open_prs"].append({
                 "number": peer["number"], "body": peer.get("body", ""),
-                "files": [{"filename": f["filename"], "status": f["status"]} for f in file_rows],
+                "files": [{"filename": f["filename"], "status": f["status"],
+                           "previous_filename": f.get("previous_filename")} for f in file_rows],
             })
         # There is no pull request for this CLI proposal. Give it a number
         # outside the current live PR inventory, not an existing PR's number.

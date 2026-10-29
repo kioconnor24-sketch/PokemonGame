@@ -34,7 +34,8 @@ jobs:
               (f.filename.startsWith('Pokemon Game/Averon_Codex_Handoff/design/sinnoh/') &&
                 (f.filename.includes('/staged/') || /(?:\.py|source-pins\.json)$/.test(f.filename))));
             const snapshot = {candidate:{number, body:pr.body || '',
-              files:own.map(f=>({filename:f.filename,status:f.status}))},
+              files:own.map(f=>({filename:f.filename,status:f.status,
+                previous_filename:f.previous_filename}))},
               other_open_prs:[],main_maps:[],main_engine_maps:[]};
             if (number > 354 && relevant) {
               const {data: main} = await github.rest.repos.getBranch({owner,repo,branch:'main'});
@@ -65,7 +66,8 @@ jobs:
                     owner,repo,pull_number:peer.number,per_page:100
                   });
                   snapshot.other_open_prs.push({number:peer.number,body:peer.body||'',
-                    files:files.map(f=>({filename:f.filename,status:f.status}))});
+                    files:files.map(f=>({filename:f.filename,status:f.status,
+                      previous_filename:f.previous_filename}))});
                 }
               }
               const {data: fresh} = await github.rest.pulls.get({owner,repo,pull_number:number});
