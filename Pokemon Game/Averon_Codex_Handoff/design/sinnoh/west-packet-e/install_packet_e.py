@@ -19,6 +19,7 @@ Nothing else of D is assumed. No healer, flag, var, NPC, service, encounter or s
   install_packet_e.py --engine ENGINE --check   verify the engine equals a fresh install (exit 1 otherwise)
 """
 import argparse
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -56,6 +57,10 @@ SOUTH_ARROW = ((36, 20), 0x3604, 0x321A, 42)
 SOUTH = "MtCoronet_1F_South"
 REGISTRY = "test/data/averon_map_registry_slots.inc"
 SECTIONS = "src/data/region_map/region_map_sections.json"
+# The exact pre-E production baseline (41 production maps + packet D): see prefix-pins.json.
+BASELINE = json.loads((HERE / "prefix-pins.json").read_text())
+SECTIONS_THROUGH_227 = 227          # entries covered by sections_through_227_sha256
+sha = lambda b: hashlib.sha256(b).hexdigest()
 
 
 def section_of(name):
@@ -120,8 +125,8 @@ def plan(engine, before=None):
     # Coronet South (packet D's production map): append the east arrow back to Route 208's appended door.
     south, south_bin, south_raw = before or south_before(engine)
     south = json.loads(json.dumps(south))
-    if [(w["x"], w["y"], w["dest_map"]) for w in south["warp_events"]] != [(5, 7, "MAP_ROUTE207")]:
-        raise ValueError("packet D's Coronet South warps are not the expected single Route 207 return")
+    if south["warp_events"] != BASELINE["coronet_south"]["warp_events"]:
+        raise ValueError("packet D's Coronet South warps differ from the pinned single Route 207 return")
     route208 = hdrs["Route208"]
     door = dict(x=8, y=19, elevation=0, dest_map=const(SOUTH), dest_warp_id=str(len(south["warp_events"])))
     south["warp_events"].append(dict(x=36, y=20, elevation=0, dest_map="MAP_ROUTE208",
@@ -221,14 +226,53 @@ def tileset_sources(engine):
     return {k: v.encode() for k, v in out.items()}
 
 
-def prior(engine):
-    """The production Sinnoh group before this packet; refuses anything but 'packet D installed, packet E not'."""
-    sinnoh = read_json(pathlib.Path(engine) / "data/maps/map_groups.json")["gMapGroup_Sinnoh"]
+def baseline_errors(engine, installed):
+    """Differences from the pinned pre-E baseline (prefix-pins.json): the exact ordered Sinnoh prefix and its
+    registry slots, sections through 227 and packet D's 228-230, and Coronet South's complete warps and blockdata.
+    installed: the engine should additionally hold exactly this packet's appended part."""
+    engine = pathlib.Path(engine)
+    prefix = BASELINE["sinnoh_prefix"]
+    errors = []
+    sinnoh = read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"]
     if not PACKET_D <= set(sinnoh):
-        raise ValueError("packet D is not installed: " + ", ".join(sorted(PACKET_D - set(sinnoh))))
-    if set(SLOTS) & set(sinnoh):
-        raise ValueError("packet E is already (partly) installed")
-    return sinnoh
+        errors.append("packet D is not installed: " + ", ".join(sorted(PACKET_D - set(sinnoh))))
+    if sinnoh != prefix + (SLOTS if installed else []):
+        errors.append("gMapGroup_Sinnoh is not the pinned prefix" + (" followed by packet E" if installed else ""))
+    registry = (engine / REGISTRY).read_text()
+    total = len(prefix) + (len(SLOTS) if installed else 0)
+    if f"REGISTRY_GROUP(76, gMapGroup_Sinnoh, {total}, 1)" not in registry or any(
+            f"REGISTRY_SLOT(76, {i}, {const(m)}, {m}, 1)\n" not in registry for i, m in enumerate(prefix)):
+        errors.append("registry slots differ from the pinned prefix")
+    entries = read_json(engine / SECTIONS)["map_sections"]
+    d = BASELINE["packet_d_sections"]
+    if (sha(json.dumps(entries[:SECTIONS_THROUGH_227], sort_keys=True).encode())
+            != BASELINE["sections_through_227_sha256"]
+            or entries[SECTIONS_THROUGH_227:SECTIONS_THROUGH_227 + len(d)] != d
+            or len(entries) != SECTIONS_THROUGH_227 + len(d) + (len(SECTIONS_NEW) if installed else 0)):
+        errors.append("sections differ from the pinned 0-227 and packet D's 228-230")
+    if not (engine / f"data/maps/{SOUTH}/map.json").exists():
+        return errors + ["packet D's Coronet South is missing"]
+    south, _, raw = south_before(engine)
+    pinned = BASELINE["coronet_south"]["warp_events"]
+    if south["warp_events"][:len(pinned)] != pinned or (not installed and len(south["warp_events"]) != len(pinned)):
+        errors.append("Coronet South's packet D warps differ from the pinned baseline")
+    values = cells(raw)
+    (x, y), closed, opened, width = SOUTH_ARROW
+    if installed:
+        if values[y * width + x] != opened:
+            errors.append("Coronet South's east arrow is not reopened")
+        values[y * width + x] = closed
+    if sha(pack(values)) != BASELINE["coronet_south"]["blockdata_sha256"]:
+        errors.append("Coronet South's blockdata differs from packet D's pinned baseline")
+    return errors
+
+
+def prior(engine):
+    """The production Sinnoh group before this packet; refuses anything but the exact pinned packet D baseline."""
+    errors = baseline_errors(engine, installed=False)
+    if errors:
+        raise ValueError("; ".join(errors))
+    return read_json(pathlib.Path(engine) / "data/maps/map_groups.json")["gMapGroup_Sinnoh"]
 
 
 def appended(engine, layouts):
@@ -270,9 +314,9 @@ def check(engine):
     """Recompute the packet's own files and confirm every appended entry; lists every mismatching path."""
     engine = pathlib.Path(engine)
     sinnoh = read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"]
-    if sinnoh[-len(SLOTS):] != SLOTS:
-        return ["data/maps/map_groups.json"]
-    bad = []
+    bad = baseline_errors(engine, installed=True)
+    if bad:
+        return bad
     files, layouts = plan_installed(engine)
     bad += [rel for rel, value in files.items()
             if not (engine / rel).exists() or (engine / rel).read_bytes() != encode(value)]
@@ -304,9 +348,8 @@ def plan_installed(engine):
     south, path, raw = south_before(engine)
     (x, y), closed, opened, width = SOUTH_ARROW
     values = cells(raw)
-    if values[y * width + x] == opened:
-        values[y * width + x] = closed
-    return plan(engine, (dict(south, warp_events=south["warp_events"][:1]), path, pack(values)))
+    values[y * width + x] = closed          # baseline_errors() has already proved the rest equals the pin
+    return plan(engine, (dict(south, warp_events=BASELINE["coronet_south"]["warp_events"]), path, pack(values)))
 
 
 def encode(value):

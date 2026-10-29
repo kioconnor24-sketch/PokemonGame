@@ -168,6 +168,54 @@ class WestPacketETest(unittest.TestCase):
             tiles = existing.split(".tiles", 1)[1].split("=", 1)[1].split(",", 1)[0].strip()
             self.assertIn(f".tiles={tiles},", block)
 
+    def mutated(self, rel, change):
+        """check() with one engine file changed in place, then restored."""
+        target = self.eng / rel
+        original = target.read_bytes()
+        try:
+            target.write_bytes(change(original))
+            return p.check(self.eng)
+        finally:
+            target.write_bytes(original)
+
+    def test_a_changed_non_seam_coronet_south_cell_is_reported(self):
+        def change(raw):
+            values = cells(raw)
+            values[10 * 42 + 10] ^= 0x400
+            return struct.pack("<%dH" % len(values), *values)
+        self.assertIn("Coronet South's blockdata differs from packet D's pinned baseline",
+                      self.mutated(f"data/layouts/{p.SOUTH}/map.bin", change))
+
+    def test_a_changed_coronet_south_return_index_is_reported(self):
+        def change(raw):
+            header = json.loads(raw)
+            header["warp_events"][0]["dest_warp_id"] = "3"
+            return json.dumps(header).encode()
+        self.assertIn("Coronet South's packet D warps differ from the pinned baseline",
+                      self.mutated(f"data/maps/{p.SOUTH}/map.json", change))
+
+    def test_a_reordered_existing_slot_is_reported(self):
+        def change(raw):
+            groups = json.loads(raw)
+            s = groups["gMapGroup_Sinnoh"]
+            s[3], s[4] = s[4], s[3]
+            return json.dumps(groups).encode()
+        self.assertIn("gMapGroup_Sinnoh is not the pinned prefix followed by packet E",
+                      self.mutated("data/maps/map_groups.json", change))
+
+    def test_install_refuses_a_reordered_or_changed_packet_d_baseline(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = pathlib.Path(tmp) / "engine"
+            for rel in INPUTS:
+                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(ENGINE / rel, eng / rel)
+            simulate_packet_d(eng)
+            header = json.loads((eng / f"data/maps/{p.SOUTH}/map.json").read_text())
+            header["warp_events"][0]["dest_warp_id"] = "1"
+            (eng / f"data/maps/{p.SOUTH}/map.json").write_text(json.dumps(header))
+            with self.assertRaises(SystemExit):
+                p.install(eng)
+
     def test_a_tampered_engine_file_is_reported(self):
         target = self.eng / "data/maps/LostTower_3F/map.json"
         original = target.read_bytes()
