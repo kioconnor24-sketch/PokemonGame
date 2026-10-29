@@ -66,6 +66,16 @@ def adds_identity(row: dict) -> bool:
             != map_from_path(row.get("filename", "")))
 
 
+def new_definitions(pr: dict, prefix: str) -> set[str]:
+    # Supporting files and modified return doors do not allocate map identities.
+    return {
+        map_from_path(row["filename"]) for row in pr.get("files", [])
+        if isinstance(row, dict) and adds_identity(row)
+        and row.get("filename", "").startswith(prefix)
+        and row["filename"].endswith("/map.json")
+    } - {None}
+
+
 def is_geography(pr: dict) -> bool:
     for entry in pr.get("files", []):
         name = entry if isinstance(entry, str) else entry.get("filename", "")
@@ -115,17 +125,8 @@ def validate(snapshot: dict) -> list[str]:
     unknown = touched - maps
     if unknown:
         errors.append("changed map identities missing from Sinnoh-Maps: " + ", ".join(sorted(unknown)))
-    added_staged = {
-        map_from_path(row["filename"]) for row in pr.get("files", [])
-        if isinstance(row, dict) and adds_identity(row)
-        and row.get("filename", "").startswith(SOURCE)
-        and "/staged/" in row["filename"]
-    } - {None}
-    added_engine = {
-        map_from_path(row["filename"]) for row in pr.get("files", [])
-        if isinstance(row, dict) and adds_identity(row)
-        and row.get("filename", "").startswith(ENGINE_MAPS)
-    } - {None}
+    added_staged = new_definitions(pr, SOURCE)
+    added_engine = new_definitions(pr, ENGINE_MAPS)
     if mode != "integrate" and added_engine:
         errors.append("added engine map output requires integrate mode")
     if mode == "repair" and added_staged:
@@ -166,16 +167,12 @@ def validate(snapshot: dict) -> list[str]:
                 errors.append("map identity already in open PR #{}: {}".format(
                     peer["number"], ", ".join(sorted(shared))))
     elif mode == "integrate":
-        engine_maps = {
-            map_from_path(row["filename"]) for row in pr.get("files", [])
-            if isinstance(row, dict) and row.get("status") != "removed"
-            and row.get("filename", "").startswith(ENGINE_MAPS)
-        } - {None}
-        if not engine_maps:
+        if not added_engine:
             errors.append("integrate requires actual engine/data/maps output; a DEV scene is not production")
-        already_production = maps & {
+        production = {
             canonical(m) for m in snapshot.get("main_engine_maps", [])
         }
+        already_production = added_engine & production
         if already_production:
             errors.append("already installed in production: " + ", ".join(sorted(already_production)))
         # Two independently open production installs for the same map are not
@@ -183,15 +180,11 @@ def validate(snapshot: dict) -> list[str]:
         for peer in snapshot.get("other_open_prs", []):
             if int(peer["number"]) == number:
                 continue
-            old_engine = {
-                map_from_path(f["filename"] if isinstance(f, dict) else f)
-                for f in peer.get("files", [])
-                if (f["filename"] if isinstance(f, dict) else f).startswith(ENGINE_MAPS)
-            }
+            old_engine = new_definitions(peer, ENGINE_MAPS)
             peer_spec, peer_errors = claim(peer.get("body", ""))
             if not peer_errors and peer_spec["mode"] == "integrate":
-                old_engine |= peer_spec["maps"]
-            shared = maps & (old_engine - {None})
+                old_engine |= peer_spec["maps"] - production
+            shared = added_engine & old_engine
             if shared:
                 errors.append("production registration already proposed in PR #{}: {}".format(
                     peer["number"], ", ".join(sorted(shared))))

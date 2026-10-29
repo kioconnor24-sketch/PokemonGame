@@ -157,6 +157,24 @@ class SinnohWorkIdentityTests(unittest.TestCase):
                  previous_filename=ENGINE + "NewRoute/scripts.inc")])
         self.assertEqual(check(p), [])
 
+    def test_integration_can_update_an_existing_neighbours_return(self):
+        p = candidate(mode="integrate", maps="NewRoute,OldTown", sources="main",
+                      files=[
+                          dict(filename=ENGINE + "NewRoute/map.json", status="added"),
+                          dict(filename=ENGINE + "OldTown/map.json", status="modified")])
+        peer = candidate(mode="integrate", maps="OtherRoute,OldTown",
+                         sources="main", number=400, files=[
+                             dict(filename=ENGINE + "OtherRoute/map.json", status="added"),
+                             dict(filename=ENGINE + "OldTown/map.json", status="modified")])
+        self.assertEqual(check(p, production=["OldTown"], peers=[peer]), [])
+
+    def test_adding_scripts_to_existing_maps_remains_a_repair(self):
+        for root in (STAGED, ENGINE):
+            with self.subTest(root=root):
+                p = candidate(mode="repair", sources="main", files=[
+                    dict(filename=root + "NewRoute/scripts.inc", status="added")])
+                self.assertEqual(check(p, main=["NewRoute"], production=["NewRoute"]), [])
+
 
 if __name__ == "__main__":
     unittest.main()
