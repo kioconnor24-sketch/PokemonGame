@@ -60,10 +60,12 @@ def map_files(pr: dict, *, added_only: bool = False,
 def adds_identity(row: dict) -> bool:
     # GitHub reports a moved map definition as "renamed", not "added".
     # Renaming a file inside the same map remains an ordinary repair.
+    path = row.get("filename", "")
+    previous = row.get("previous_filename") or ""
     return row.get("status") == "added" or (
         row.get("status") == "renamed"
-        and map_from_path(row.get("previous_filename") or "")
-            != map_from_path(row.get("filename", "")))
+        and (map_from_path(previous) != map_from_path(path)
+             or previous.startswith(ENGINE_MAPS) != path.startswith(ENGINE_MAPS)))
 
 
 def new_definitions(pr: dict, prefix: str) -> set[str]:
@@ -73,6 +75,15 @@ def new_definitions(pr: dict, prefix: str) -> set[str]:
         if isinstance(row, dict) and adds_identity(row)
         and row.get("filename", "").startswith(prefix)
         and row["filename"].endswith("/map.json")
+    } - {None}
+
+
+def added_payload_maps(pr: dict, prefix: str) -> set[str]:
+    """Map identities touched by added/moved files, including partial payloads."""
+    return {
+        map_from_path(row["filename"]) for row in pr.get("files", [])
+        if isinstance(row, dict) and adds_identity(row)
+        and row.get("filename", "").startswith(prefix)
     } - {None}
 
 
@@ -127,22 +138,32 @@ def validate(snapshot: dict) -> list[str]:
         errors.append("changed map identities missing from Sinnoh-Maps: " + ", ".join(sorted(unknown)))
     added_staged = new_definitions(pr, SOURCE)
     added_engine = new_definitions(pr, ENGINE_MAPS)
-    if mode != "integrate" and added_engine:
+    staged_payloads = added_payload_maps(pr, SOURCE)
+    engine_payloads = added_payload_maps(pr, ENGINE_MAPS)
+    existing = {canonical(m) for m in snapshot.get("main_maps", [])}
+    production = {canonical(m) for m in snapshot.get("main_engine_maps", [])}
+    cited_source, cited_engine = set(), set()
+    for peer in snapshot.get("other_open_prs", []):
+        if int(peer["number"]) == number or f"#{peer['number']}" not in spec["sources"]:
+            continue
+        cited_source |= map_files(peer, definitions_only=True)
+        engine_only = {"files": [
+            row for row in peer.get("files", [])
+            if (row if isinstance(row, str) else row.get("filename", "")).startswith(ENGINE_MAPS)
+        ]}
+        cited_engine |= map_files(engine_only, definitions_only=True)
+    # A new directory cannot evade classification by omitting map.json.
+    # A supporting file for a real main/cited definition remains a repair.
+    new_engine_payloads = engine_payloads - production - cited_engine
+    if mode != "integrate" and (added_engine or new_engine_payloads):
         errors.append("added engine map output requires integrate mode")
-    if mode == "repair" and added_staged:
+    if mode == "repair" and (added_staged or staged_payloads - existing - cited_source):
         errors.append("repair cannot introduce new staged maps; use construct or source-backed reuse")
-    if mode == "reuse" and added_staged:
+    if mode == "reuse" and staged_payloads:
         # A claimed upstream must actually contain each reused identity. A mere
         # Sinnoh-Sources label is not evidence that geometry already exists.
-        proved = set()
-        if "main" in spec["sources"]:
-            proved |= {canonical(m) for m in snapshot.get("main_maps", [])}
-        for peer in snapshot.get("other_open_prs", []):
-            if f"#{peer['number']}" in spec["sources"]:
-                # Proof needs a real map file in that PR, not an unverified
-                # map name listed in its description.
-                proved |= map_files(peer, definitions_only=True)
-        missing = added_staged - proved
+        proved = cited_source | (existing if "main" in spec["sources"] else set())
+        missing = staged_payloads - proved
         if missing:
             errors.append("reuse source does not contain staged maps: " + ", ".join(sorted(missing)))
     if mode == "construct":
@@ -151,8 +172,7 @@ def validate(snapshot: dict) -> list[str]:
             errors.append("construct requires added staged map outputs; scripts/plans are not constructed maps")
         if new_maps - maps:
             errors.append("undeclared newly staged map identities: " + ", ".join(sorted(new_maps - maps)))
-        existing = {canonical(m) for m in snapshot.get("main_maps", [])}
-        conflict = maps & existing
+        conflict = new_maps & existing
         if conflict:
             errors.append("already on main; reuse rather than reconstruct: " + ", ".join(sorted(conflict)))
         for peer in snapshot.get("other_open_prs", []):
@@ -162,16 +182,13 @@ def validate(snapshot: dict) -> list[str]:
             peer_spec, peer_errors = claim(peer.get("body", ""))
             if not peer_errors and peer_spec["mode"] in {"construct", "integrate"}:
                 occupied |= peer_spec["maps"]
-            shared = maps & occupied
+            shared = new_maps & occupied
             if shared:
                 errors.append("map identity already in open PR #{}: {}".format(
                     peer["number"], ", ".join(sorted(shared))))
     elif mode == "integrate":
         if not added_engine:
             errors.append("integrate requires actual engine/data/maps output; a DEV scene is not production")
-        production = {
-            canonical(m) for m in snapshot.get("main_engine_maps", [])
-        }
         already_production = added_engine & production
         if already_production:
             errors.append("already installed in production: " + ", ".join(sorted(already_production)))
@@ -242,8 +259,12 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
         for row in tree["tree"] if row["type"] == "blob"
         and row["path"].startswith(ENGINE_MAPS) and row["path"].endswith("/map.json")
     ]
-    if mode in {"construct", "integrate", "reuse"}:
-        for peer in pages("pulls?state=open"):
+    if mode in MODES:
+        open_prs = pages("pulls?state=open")
+        cited = {ref.strip() for ref in sources.split(",")}
+        for peer in open_prs:
+            if mode == "repair" and f"#{peer['number']}" not in cited:
+                continue
             file_rows = pages(f"pulls/{peer['number']}/files")
             snapshot["other_open_prs"].append({
                 "number": peer["number"], "body": peer.get("body", ""),
@@ -253,7 +274,7 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
         # There is no pull request for this CLI proposal. Give it a number
         # outside the current live PR inventory, not an existing PR's number.
         candidate["number"] = max([CUTOFF] + [
-            int(peer["number"]) for peer in snapshot["other_open_prs"]]) + 1
+            int(peer["number"]) for peer in open_prs]) + 1
     return snapshot
 
 
