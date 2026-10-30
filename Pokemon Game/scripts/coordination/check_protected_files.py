@@ -62,6 +62,7 @@ def normalize(path: str) -> str:
 # Owner-decided names and values, not a blanket grant to allocate new saved IDs.
 # Only an exact, append-only matched registry+pin extension may use manager consent.
 # Changing this list is a consequential governance change, never a routine handoff.
+# D/E names and codes: owner-authorized decision in Issue #15 comment 6484040222.
 IDENTITY_REGISTRY = "Pokemon Game/engine/src/data/region_map/region_map_sections.json"
 IDENTITY_PINS = "Pokemon Game/scripts/averon-mapsec-pins.json"
 PREAPPROVED_IDENTITY_APPEND = (
@@ -71,6 +72,18 @@ PREAPPROVED_IDENTITY_APPEND = (
     ("MAPSEC_ROUTE_204", 224, "ROUTE 204"),
     ("MAPSEC_FLOAROMA_TOWN", 225, "FLOAROMA TOWN"),
     ("MAPSEC_ROUTE_205", 226, "ROUTE 205"),
+    ("MAPSEC_OREBURGH_CITY", 227, "OREBURGH CITY"),
+    ("MAPSEC_ROUTE_206", 228, "ROUTE 206"),
+    ("MAPSEC_ROUTE_207", 229, "ROUTE 207"),
+    ("MAPSEC_MT_CORONET", 230, "MT. CORONET"),
+    ("MAPSEC_ROUTE_208", 231, "ROUTE 208"),
+    ("MAPSEC_HEARTHOME_CITY", 232, "HEARTHOME CITY"),
+    ("MAPSEC_ROUTE_209", 233, "ROUTE 209"),
+    ("MAPSEC_SOLACEON_TOWN", 234, "SOLACEON TOWN"),
+    ("MAPSEC_SOLACEON_RUINS", 235, "SOLACEON RUINS"),
+    ("MAPSEC_LOST_TOWER", 236, "LOST TOWER"),
+    ("MAPSEC_ROUTE_210", 237, "ROUTE 210"),
+    ("MAPSEC_AMITY_SQUARE", 238, "AMITY SQUARE"),
 )
 
 

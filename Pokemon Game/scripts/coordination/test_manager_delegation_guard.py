@@ -1,5 +1,6 @@
 """Fail-closed tests for owner-delegated, explicitly labeled manager handoffs."""
 import importlib.util
+import json
 from pathlib import Path
 import unittest
 
@@ -286,12 +287,66 @@ class ApprovedIdentityAppendTest(unittest.TestCase):
         del data["identity_files"]
         self.assert_rejected(data)
 
-    def test_new_unapproved_227_cannot_be_added(self):
+    def test_new_unapproved_or_misnamed_identity_cannot_be_added(self):
         data = self.make_data()
         data["identity_files"][REGION_IDS]["head"]["map_sections"].append(
             {"id": "MAPSEC_NEW", "value": 227, "name": "NEW",
              "region": "REGION_SINNOH"})
         data["identity_files"][PINS]["head"]["pins"]["MAPSEC_NEW"] = 227
+        self.assert_rejected(data)
+
+    def packet_data(self, first, last):
+        """Start from the real installed prefix for D, then the approved D prefix for E."""
+        import copy
+        data = self.make_data()
+        production = Path(__file__).resolve().parents[2] / "engine/src/data/region_map/region_map_sections.json"
+        baseline = json.loads(production.read_text())
+        end = next(i for i, r in enumerate(baseline["map_sections"]) if r.get("value") == 227)
+        baseline["map_sections"] = baseline["map_sections"][:end + 1]
+        for symbol, value, name in guard.PREAPPROVED_IDENTITY_APPEND:
+            if 228 <= value < first:
+                baseline["map_sections"].append(dict(
+                    id=symbol, value=value, name=name, region="REGION_SINNOH"))
+        pins = json.loads((production.parents[4] / "scripts/averon-mapsec-pins.json").read_text())
+        pins["pins"] = {k: v for k, v in pins["pins"].items() if v <= 227}
+        after, after_pins = copy.deepcopy(baseline), copy.deepcopy(pins)
+        for symbol, value, name in guard.PREAPPROVED_IDENTITY_APPEND:
+            if first <= value <= last:
+                after["map_sections"].append(dict(
+                    id=symbol, value=value, name=name, region="REGION_SINNOH"))
+                after_pins["pins"][symbol] = value
+        data["identity_files"] = {
+            REGION_IDS: {"base": baseline, "head": after},
+            PINS: {"base": pins, "head": after_pins},
+        }
+        return data
+
+    def test_owner_decided_d_and_e_append_pairs_are_delegatable(self):
+        for first, last in ((228, 230), (231, 238)):
+            with self.subTest(first=first):
+                self.assertEqual(guard.validate(self.packet_data(first, last))[0], [])
+
+    def test_new_codes_or_changed_approved_names_still_need_owner_decision(self):
+        data = self.packet_data(231, 238)
+        data["identity_files"][REGION_IDS]["head"]["map_sections"].append(
+            dict(id="MAPSEC_NEW", value=239, name="NEW", region="REGION_SINNOH"))
+        data["identity_files"][PINS]["head"]["pins"]["MAPSEC_NEW"] = 239
+        self.assert_rejected(data)
+        for field, value in (("id", "MAPSEC_OTHER"), ("name", "CORONET"),
+                             ("value", 231), ("region", "REGION_AVERON")):
+            with self.subTest(field=field):
+                data = self.packet_data(228, 230)
+                data["identity_files"][REGION_IDS]["head"]["map_sections"][-1][field] = value
+                self.assert_rejected(data)
+
+    def test_preapproved_d_still_requires_exact_head_and_unchanged_old_meanings(self):
+        data = self.packet_data(228, 230)
+        data["manager_handoffs"][0]["head_sha"] = "b" * 40
+        self.assertTrue(guard.validate(data)[0])
+        data = self.packet_data(228, 230)
+        old = next(r for r in data["identity_files"][REGION_IDS]["head"]["map_sections"]
+                   if r.get("value") == 227)
+        old["name"] = "CHANGED"
         self.assert_rejected(data)
 
     def test_existing_identity_changed_or_reordered_fails(self):
