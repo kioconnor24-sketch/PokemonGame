@@ -309,6 +309,8 @@ class ApprovedIdentityAppendTest(unittest.TestCase):
                     id=symbol, value=value, name=name, region="REGION_SINNOH"))
         pins = json.loads((production.parents[4] / "scripts/averon-mapsec-pins.json").read_text())
         pins["pins"] = {k: v for k, v in pins["pins"].items() if v <= 227}
+        pins["pins"].update({symbol: value for symbol, value, _ in
+                             guard.PREAPPROVED_IDENTITY_APPEND if 228 <= value < first})
         after, after_pins = copy.deepcopy(baseline), copy.deepcopy(pins)
         for symbol, value, name in guard.PREAPPROVED_IDENTITY_APPEND:
             if first <= value <= last:
