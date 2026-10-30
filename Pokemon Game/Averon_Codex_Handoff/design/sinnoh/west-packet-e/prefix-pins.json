@@ -79,6 +79,37 @@
         "dest_warp_id": "0"
       }
     ],
-    "blockdata_sha256": "73d16fc2fe29afb6f129756fad002483d82a21e37fd2d1161a2a7731dc7014aa"
+    "blockdata_sha256": "73d16fc2fe29afb6f129756fad002483d82a21e37fd2d1161a2a7731dc7014aa",
+    "header": {
+      "id": "MAP_MT_CORONET_1F_SOUTH",
+      "name": "MtCoronet_1F_South",
+      "layout": "LAYOUT_MT_CORONET_1F_SOUTH",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 5,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE207",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "header_sha256": "bc59c1e3599e412b57e08e304e26cc4ddd8cf0ae0023f91d9283bef6cb6a07e2",
+    "header_provenance": "Reviewed packet-D production contract: accepted #347 producer 1ace5b9ff6e962d79b35be16e11c07eff32cb439 header, with only owner-approved MAPSEC_MT_CORONET (230) replacing its DEV section; exact D installer emission must match before production acceptance."
   }
 }

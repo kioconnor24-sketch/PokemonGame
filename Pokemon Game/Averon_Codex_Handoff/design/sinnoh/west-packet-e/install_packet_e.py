@@ -119,6 +119,19 @@ def south_before(engine):
     return south, path, (engine / path).read_bytes()
 
 
+def expected_south_header(installed=False):
+    """The actual packet-D header, with only E's documented east warp added after installation."""
+    expected = json.loads(json.dumps(BASELINE["coronet_south"]["header"]))
+    if (expected["region"] != "REGION_SINNOH" or expected["region_map_section"] != "MAPSEC_MT_CORONET"
+            or expected["warp_events"] != BASELINE["coronet_south"]["warp_events"]
+            or sha(encode(expected)) != BASELINE["coronet_south"]["header_sha256"]):
+        raise ValueError("Coronet South's pinned production header is inconsistent")
+    if installed:
+        # Route208's existing gate/house remain indices0/1; the new South door is2.
+        expected["warp_events"].append(dict(x=36, y=20, elevation=0, dest_map="MAP_ROUTE208", dest_warp_id="2"))
+    return expected
+
+
 def plan(engine, before=None):
     """Every engine file this packet writes or adds, as {relative path: bytes or JSON}, plus the new layouts.
     before: Coronet South's pre-packet (header, path, blockdata); read from the engine when not given."""
@@ -133,8 +146,8 @@ def plan(engine, before=None):
     # Coronet South (packet D's production map): append the east arrow back to Route 208's appended door.
     south, south_bin, south_raw = before or south_before(engine)
     south = json.loads(json.dumps(south))
-    if south["warp_events"] != BASELINE["coronet_south"]["warp_events"]:
-        raise ValueError("packet D's Coronet South warps differ from the pinned single Route 207 return")
+    if south != expected_south_header():
+        raise ValueError("packet D's complete Coronet South header differs from the pinned baseline")
     route208 = hdrs["Route208"]
     door = dict(x=8, y=19, elevation=0, dest_map=const(SOUTH), dest_warp_id=str(len(south["warp_events"])))
     south["warp_events"].append(dict(x=36, y=20, elevation=0, dest_map="MAP_ROUTE208",
@@ -274,7 +287,7 @@ def tileset_source_errors(engine):
 
 def baseline_errors(engine, installed):
     """Differences from the pinned pre-E baseline (prefix-pins.json): the exact ordered Sinnoh prefix and its
-    registry slots, sections through 227 and packet D's 228-230, and Coronet South's complete warps and blockdata.
+    registry slots, sections through 227 and packet D's 228-230, and Coronet South's complete header and blockdata.
     installed: the engine should additionally hold exactly this packet's appended part."""
     engine = pathlib.Path(engine)
     prefix = BASELINE["sinnoh_prefix"]
@@ -298,10 +311,14 @@ def baseline_errors(engine, installed):
         errors.append("sections differ from the pinned 0-227 and packet D's 228-230")
     if not (engine / f"data/maps/{SOUTH}/map.json").exists():
         return errors + ["packet D's Coronet South is missing"]
-    south, _, raw = south_before(engine)
+    south = read_json(engine / f"data/maps/{SOUTH}/map.json")
     pinned = BASELINE["coronet_south"]["warp_events"]
     if south["warp_events"][:len(pinned)] != pinned or (not installed and len(south["warp_events"]) != len(pinned)):
         errors.append("Coronet South's packet D warps differ from the pinned baseline")
+    if south != expected_south_header(installed):
+        # Reject an altered layout/identity before following its live layout pointer.
+        return errors + ["Coronet South's complete header differs from the pinned production baseline"]
+    _, _, raw = south_before(engine)
     values = cells(raw)
     (x, y), closed, opened, width = SOUTH_ARROW
     if installed:

@@ -26,8 +26,8 @@ def cells(raw):
 
 
 def simulate_packet_d(eng):
-    """Until packet D is on main: its five slots, sections 228-230 and Coronet South exactly as #347 builds it
-    (west-packet-d inputs; west port reopened, east port and 2F ladder walled). Only what packet E reads."""
+    """Synthetic pre-E consumer fixture from the reviewed actual D header contract, not production acceptance.
+    The west port is reopened; the east port and 2F ladder stay walled. Only what packet E reads."""
     groups = json.loads((eng / "data/maps/map_groups.json").read_text())
     last = groups["gMapGroup_Sinnoh"][-1]
     n = len(groups["gMapGroup_Sinnoh"])
@@ -44,9 +44,7 @@ def simulate_packet_d(eng):
     sections = json.loads((eng / p.SECTIONS).read_text())
     sections["map_sections"] += [dict(id=i, value=v, name=t, region="REGION_SINNOH") for i, v, t in D_SECTIONS]
     (eng / p.SECTIONS).write_text(json.dumps(sections, indent=2) + "\n")
-    header = json.loads((D_INPUTS / "source-header.json").read_text())
-    header.update(warp_events=[dict(x=5, y=7, elevation=0, dest_map="MAP_ROUTE207", dest_warp_id="0")],
-                  region_map_section="MAPSEC_MT_CORONET")
+    header = p.expected_south_header()
     (eng / f"data/maps/{p.SOUTH}").mkdir(parents=True)
     (eng / f"data/maps/{p.SOUTH}/map.json").write_text(json.dumps(header, indent=2) + "\n")
     raw = cells((D_INPUTS / "averon-map.bin").read_bytes())
@@ -216,6 +214,33 @@ class WestPacketETest(unittest.TestCase):
             return json.dumps(header).encode()
         self.assertIn("Coronet South's packet D warps differ from the pinned baseline",
                       self.mutated(f"data/maps/{p.SOUTH}/map.json", change))
+
+    def test_changed_coronet_south_non_warp_header_fields_are_reported(self):
+        rel = f"data/maps/{p.SOUTH}/map.json"
+        for field, value in (("region_map_section", "MAPSEC_ROUTE_201"), ("region", "REGION_HOENN"),
+                             ("layout", "LAYOUT_OTHER"), ("map_type", "MAP_TYPE_ROUTE"),
+                             ("music", "MUS_ROUTE110")):
+            with self.subTest(field=field):
+                def change(raw, field=field, value=value):
+                    header = json.loads(raw)
+                    header[field] = value
+                    return json.dumps(header).encode()
+                self.assertIn("Coronet South's complete header differs from the pinned production baseline",
+                              self.mutated(rel, change))
+
+    def test_install_refuses_wrong_south_section_with_warps_and_cells_unchanged(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = pathlib.Path(tmp) / "engine"
+            for rel in INPUTS:
+                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(ENGINE / rel, eng / rel)
+            simulate_packet_d(eng)
+            target = eng / f"data/maps/{p.SOUTH}/map.json"
+            header = json.loads(target.read_text())
+            header["region_map_section"] = "MAPSEC_ROUTE_201"
+            target.write_text(json.dumps(header))
+            with self.assertRaisesRegex(SystemExit, "complete header"):
+                p.install(eng)
 
     def test_a_reordered_existing_slot_is_reported(self):
         def change(raw):
