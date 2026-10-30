@@ -168,6 +168,29 @@ class WestPacketETest(unittest.TestCase):
             tiles = existing.split(".tiles", 1)[1].split("=", 1)[1].split(",", 1)[0].strip()
             self.assertIn(f".tiles={tiles},", block)
 
+    def test_changed_tileset_bindings_and_declarations_are_reported(self):
+        symbol = "AveronCentralOutdoorPrimary"
+        headers = "src/data/tilesets/headers.h"
+        for field, changed in (("tiles", "gTilesetTiles_Rustboro"),
+                               ("palettes", "gTilesetPalettes_Rustboro"),
+                               ("callback", "NULL")):
+            with self.subTest(field=field):
+                original = p.tileset_fields(symbol, False, "General")[field]
+                def change(raw, field=field, original=original, changed=changed):
+                    text = raw.decode()
+                    start = text.index(f"const struct Tileset gTileset_{symbol} =")
+                    return (text[:start] + text[start:].replace(f".{field}={original},",
+                                                              f".{field}={changed},", 1)).encode()
+                self.assertIn(headers, self.mutated(headers, change))
+        declarations = "src/data/tilesets/metatiles.h"
+        for declaration in p.metatile_declarations(symbol, False):
+            with self.subTest(declaration=declaration):
+                self.assertIn(declarations, self.mutated(declarations, lambda raw: raw.replace(
+                    declaration.encode(), declaration.replace(".bin", "-wrong.bin").encode(), 1)))
+        include = "include/tilesets.h"
+        declaration = f"extern const struct Tileset gTileset_{symbol};"
+        self.assertIn(include, self.mutated(include, lambda raw: raw.replace(declaration.encode(), b"", 1)))
+
     def mutated(self, rel, change):
         """check() with one engine file changed in place, then restored."""
         target = self.eng / rel

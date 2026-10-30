@@ -51,6 +51,14 @@ TILESETS = {"OutdoorPrimary": ("AveronCentralOutdoorPrimary", False, "General", 
             "OutdoorSecondary": ("AveronCentralOutdoorSecondary", True, "Rustboro", "outdoor-family"),
             "GatePrimary": ("AveronCentralGatePrimary", False, "Building", "gate-art"),
             "GateSecondary": ("AveronCentralGateSecondary", True, "Shop", "gate-art")}
+# Exact stock graphics bindings used by the accepted central source families.
+# Do not derive check expectations from a potentially changed installed header.
+GRAPHICS_BINDINGS = {
+    "General": ("gTilesetTiles_General", "gTilesetPalettes_General", "InitTilesetAnim_General"),
+    "Rustboro": ("gTilesetTiles_Rustboro", "gTilesetPalettes_Rustboro", "InitTilesetAnim_Rustboro"),
+    "Building": ("gTilesetTiles_InsideBuilding", "gTilesetPalettes_InsideBuilding", "InitTilesetAnim_Building"),
+    "Shop": ("gTilesetTiles_Shop", "gTilesetPalettes_Shop", "NULL"),
+}
 # Route 208 <-> Coronet South: (map, cell, closed word, reopened word, width)
 ROUTE208_DOOR = ((8, 19), 0x04A7, 0x00A7, 68)
 SOUTH_ARROW = ((36, 20), 0x3604, 0x321A, 42)
@@ -197,6 +205,20 @@ def check_links(headers):
                     raise ValueError(f"{mid} warp to {w['dest_map']} {w['dest_warp_id']} does not lead back")
 
 
+def tileset_fields(symbol, secondary, graphics):
+    tiles, palettes, callback = GRAPHICS_BINDINGS[graphics]
+    return dict(isCompressed="TRUE", isSecondary="TRUE" if secondary else "FALSE",
+                tiles=tiles, palettes=palettes, metatiles="gMetatiles_" + symbol,
+                metatileAttributes="gMetatileAttributes_" + symbol, callback=callback)
+
+
+def metatile_declarations(symbol, secondary):
+    bank = "secondary" if secondary else "primary"
+    return [f'const u16 {prefix}_{symbol}[] = INCBIN_U16("data/tilesets/{bank}/{folder(symbol)}/{filename}");'
+            for prefix, filename in (("gMetatiles", "metatiles.bin"),
+                                     ("gMetatileAttributes", "metatile_attributes.bin"))]
+
+
 def tileset_sources(engine):
     """include/tilesets.h, headers.h and metatiles.h with the four central banks declared (packet C's style)."""
     engine = pathlib.Path(engine)
@@ -210,20 +232,44 @@ def tileset_sources(engine):
     headers = (engine / "src/data/tilesets/headers.h").read_text()
     metatiles = (engine / "src/data/tilesets/metatiles.h").read_text()
     for symbol, secondary, graphics, _ in TILESETS.values():
-        block = re.search(r"const struct Tileset gTileset_" + graphics + r" =\s*\{(.*?)\};", headers, re.S)[1]
-        bind = {f: re.search(r"\." + f + r"\s*=\s*(\w+)\s*,", block)[1] for f in ("tiles", "palettes", "callback")}
-        bank = "secondary" if secondary else "primary"
+        bind = tileset_fields(symbol, secondary, graphics)
         headers += (f"\nconst struct Tileset gTileset_{symbol} =\n{{\n .isCompressed=TRUE, "
                     f".isSecondary={'TRUE' if secondary else 'FALSE'},\n"
                     f" .tiles={bind['tiles']}, .palettes={bind['palettes']},\n"
                     f" .metatiles=gMetatiles_{symbol},\n .metatileAttributes = gMetatileAttributes_{symbol},\n"
                     f" .callback={bind['callback']},\n}};\n")
-        metatiles += (f'const u16 gMetatiles_{symbol}[] = INCBIN_U16("data/tilesets/{bank}/{folder(symbol)}/metatiles.bin");\n'
-                      f'const u16 gMetatileAttributes_{symbol}[] = '
-                      f'INCBIN_U16("data/tilesets/{bank}/{folder(symbol)}/metatile_attributes.bin");\n')
+        metatiles += "\n".join(metatile_declarations(symbol, secondary)) + "\n"
     out["src/data/tilesets/headers.h"] = headers
     out["src/data/tilesets/metatiles.h"] = metatiles
     return {k: v.encode() for k, v in out.items()}
+
+
+def tileset_source_errors(engine):
+    """Check complete central structs and declarations, not merely their symbol names."""
+    paths = ("include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h")
+    text = {p: re.sub(r"/\*.*?\*/|//[^\n]*", "", (engine / p).read_text(), flags=re.S) for p in paths}
+    bad = set()
+    field_pattern = r"\.(\w+)\s*=\s*([^,{}]+?)\s*,"
+    for symbol, secondary, graphics, _ in TILESETS.values():
+        declaration = f"extern const struct Tileset gTileset_{symbol};"
+        include = text[paths[0]]
+        if include.count(declaration) != 1 or declaration not in include.split("#endif", 1)[0]:
+            bad.add(paths[0])
+        blocks = re.findall(r"const\s+struct\s+Tileset\s+gTileset_" + re.escape(symbol)
+                            + r"\s*=\s*\{(.*?)\};", text[paths[1]], re.S)
+        if len(blocks) != 1:
+            bad.add(paths[1])
+        else:
+            fields = re.findall(field_pattern, blocks[0])
+            values = {key: value.strip() for key, value in fields}
+            if (len(fields) != len(values) or values != tileset_fields(symbol, secondary, graphics)
+                    or re.sub(field_pattern, "", blocks[0]).strip()):
+                bad.add(paths[1])
+        for declaration in metatile_declarations(symbol, secondary):
+            prefix = declaration.split(" =", 1)[0]
+            if text[paths[2]].count(declaration) != 1 or text[paths[2]].count(prefix) != 1:
+                bad.add(paths[2])
+    return sorted(bad)
 
 
 def baseline_errors(engine, installed):
@@ -333,12 +379,7 @@ def check(engine):
     entries = read_json(engine / SECTIONS)["map_sections"]
     if entries[-len(SECTIONS_NEW):] != [dict(id=i, value=v, name=t, region="REGION_SINNOH") for i, v, t in SECTIONS_NEW]:
         bad.append(SECTIONS)
-    for path, sym in (("include/tilesets.h", "extern const struct Tileset gTileset_{}"),
-                      ("src/data/tilesets/headers.h", "const struct Tileset gTileset_{} ="),
-                      ("src/data/tilesets/metatiles.h", "const u16 gMetatiles_{}[]")):
-        text = (engine / path).read_text()
-        if any(text.count(sym.format(s)) != 1 for s, _, _, _ in TILESETS.values()):
-            bad.append(path)
+    bad += tileset_source_errors(engine)
     return bad
 
 
