@@ -17,6 +17,11 @@ import subprocess
 import sys
 
 ROM_LIMIT = 32 * 1024 * 1024
+PREFLIGHT_TOOLS = {
+    "source": ("git",),
+    "native": ("git", "arm-none-eabi-gcc", "arm-none-eabi-ld", "make"),
+    "runtime": ("git", "mgba"),
+}
 
 
 def run_output(argv: list[str], cwd: Path | None = None) -> str:
@@ -35,6 +40,25 @@ def command_info(name: str, version_args: list[str] | None = None) -> dict:
         return {"available": True, "version": first}
     except (OSError, ValueError, subprocess.CalledProcessError, subprocess.TimeoutExpired, IndexError):
         return {"available": True, "version": None}
+
+
+def preflight(scope: str, extra_tools: list[str] | None = None) -> dict:
+    """Cheap task-specific availability check; never build or install anything."""
+    required = sorted(set(PREFLIGHT_TOOLS[scope]) | set(extra_tools or []))
+    tools = {name: command_info(name) for name in required}
+    missing = [name for name in required if not tools[name]["available"]]
+    return {
+        "schema": "averon-tool-preflight-v1",
+        "scope": scope,
+        "python": sys.version.splitlines()[0],
+        "tools": tools,
+        "missing": missing,
+        "status": "MISSING_REQUIRED_TOOLS" if missing else "TOOLS_AVAILABLE",
+        "limitations": [
+            "Tool availability does not prove a successful build, working display, source compatibility or gameplay",
+            "Native, rendered and save acceptance still require actual execution on the recorded source",
+        ],
+    }
 
 
 def sha256_file(path: Path) -> str:
@@ -117,13 +141,29 @@ def collect(root: Path, engine: Path, rom: Path | None = None) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo", type=Path, required=True)
-    parser.add_argument("--engine", type=Path, required=True)
+    parser.add_argument("--repo", type=Path)
+    parser.add_argument("--engine", type=Path)
     parser.add_argument("--rom", type=Path)
-    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--preflight", choices=tuple(PREFLIGHT_TOOLS),
+                        help="check only tools needed by this task; no ROM/build/install")
+    parser.add_argument("--require-tool", action="append", default=[],
+                        choices=("node", "jq", "Xvfb"),
+                        help="additional caller dependency, e.g. node/jq for coordination tests")
     parser.add_argument("--strict", action="store_true",
                         help="fail if source dirty, tools unknown or ROM absent")
     args = parser.parse_args()
+    if args.preflight:
+        report = preflight(args.preflight, args.require_tool)
+        if args.out:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+        print(json.dumps(report, indent=2))
+        return 2 if report["missing"] else 0
+    if args.require_tool:
+        parser.error("--require-tool requires --preflight")
+    if not all((args.repo, args.engine, args.out)):
+        parser.error("provenance mode requires --repo, --engine and --out")
     try:
         result = collect(args.repo, args.engine, args.rom)
         args.out.parent.mkdir(parents=True, exist_ok=True)
