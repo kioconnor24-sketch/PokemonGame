@@ -8,7 +8,8 @@ delegated decision of #15 comment 6434228501: one new saved-location code, 227 =
   gTileset_AveronOreburghCity{Primary,Secondary}) and its restoration of Oreburgh Gate 1F's east doorway.
 - Route 207 and Oreburgh Mine stay out (separate places, no section): the city keeps no Route 207 connection and
   its four mine-entrance cells (50-53, 57) are closed (collision 1, same metatile/elevation), as Codex closes other
-  unbuilt destinations. Coronet stays closed as in the candidate.
+  unbuilt destinations. Coronet stays closed as in the candidate. The preservation checker also recognizes
+  packet D's later registered, reciprocal Route207 seam; this original installer does not open it.
 - W21 (oreburgh-civic, #311): ten neutral interiors behind the city's doors on stock layouts (Gym and Galactic stay
   closed) and its one museum street-door collision change (54, 14). Their city returns are renumbered: the four
   mine warps before them are dropped.
@@ -51,6 +52,8 @@ REGISTRY = "test/data/averon_map_registry_slots.inc"
 SECTIONS = "src/data/region_map/region_map_sections.json"
 HEADER_FIELDS = ("region", "weather", "map_type", "allow_cycling", "allow_escaping", "allow_running",
                  "show_map_name", "requires_flash", "battle_scene")
+D_SLOTS = ["Route206_North", "Route206", "Route206_South", "Route207", "MtCoronet_1F_South"]
+CITY_ROUTE207_JOIN = {"map": "MAP_ROUTE207", "offset": 35, "direction": "up"}
 
 
 def load(name, path):
@@ -227,10 +230,32 @@ def appended(engine, layouts):
     return out
 
 
+def has_production_route207_join(engine):
+    """Recognize only packet D's appended, reciprocal City/Route207 seam.
+
+    C's original install remains closed. A later packet may open this precise
+    boundary without making arbitrary connections or edits to the C header
+    acceptable to C's preservation check.
+    """
+    engine = pathlib.Path(engine)
+    names = read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"]
+    route = engine / "data/maps/Route207/map.json"
+    if names[41:46] != D_SLOTS or not route.is_file():
+        return False
+    header = read_json(route)
+    return (header.get("id") == "MAP_ROUTE207"
+            and header.get("region") == "REGION_SINNOH"
+            and header.get("region_map_section") == "MAPSEC_ROUTE_207"
+            and header.get("connections", []).count(
+                {"map": "MAP_OREBURGH_CITY", "offset": -35, "direction": "down"}) == 1)
+
+
 def check(engine):
     """Recompute the install against base/ and the pre-packet prefixes; compare with the engine."""
     engine = pathlib.Path(engine)
     files, layouts = plan(engine)
+    if has_production_route207_join(engine):
+        files[f"data/maps/{CITY}/map.json"]["connections"] = [dict(CITY_ROUTE207_JOIN)]
     bad = [rel for rel, value in files.items() if not (engine / rel).exists() or (engine / rel).read_bytes() != encode(value)]
     if read_json(engine / "data/maps/map_groups.json")["gMapGroup_Sinnoh"][PRIOR_SLOTS:PRIOR_SLOTS + len(SLOTS)] != SLOTS:
         bad.append("data/maps/map_groups.json")

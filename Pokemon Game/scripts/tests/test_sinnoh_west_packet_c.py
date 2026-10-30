@@ -55,18 +55,20 @@ class WestPacketCTest(unittest.TestCase):
 
     def test_slots_0_to_29_unchanged_and_eleven_appended(self):
         sinnoh = json.loads((self.eng / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-        self.assertEqual((len(sinnoh), sinnoh[29], sinnoh[30:]), (41, "ValleyWindworks_Inside", p.SLOTS))
+        self.assertGreaterEqual(len(sinnoh), 41)
+        self.assertEqual((sinnoh[29], sinnoh[30:41]), ("ValleyWindworks_Inside", p.SLOTS))
         registry = (self.eng / p.REGISTRY).read_text()
-        self.assertIn("REGISTRY_GROUP(76, gMapGroup_Sinnoh, 41, 1)", registry)
+        self.assertIn(f"REGISTRY_GROUP(76, gMapGroup_Sinnoh, {len(sinnoh)}, 1)", registry)
         slots = re.findall(r"REGISTRY_SLOT\(76, (\d+), (\w+), (\w+), 1\)", registry)
         self.assertEqual([(int(i), n) for i, _, n in slots], list(enumerate(sinnoh)))
         self.assertIn(("30", "MAP_OREBURGH_CITY", "OreburghCity"), slots)
 
     def test_section_227_is_the_only_new_code(self):
         sections = json.loads((self.eng / p.SECTIONS).read_text())["map_sections"]
-        before = json.loads((ENGINE / p.SECTIONS).read_text())["map_sections"] if self.eng != ENGINE else sections[:-1]
-        self.assertEqual(sections[:len(before)], before)
-        self.assertEqual(sections[len(before):], [p.SECTION])
+        index = next(i for i, section in enumerate(sections) if section["id"] == p.SECTION["id"])
+        self.assertEqual(sections[index], p.SECTION)
+        self.assertEqual(sections[index - 1]["id"], "MAPSEC_ROUTE_205")
+        self.assertEqual(sections[index - 1]["value"], 226)
         for name in p.SLOTS:
             hdr = self.header(name)
             self.assertEqual(hdr["region_map_section"], "MAPSEC_OREBURGH_CITY")
@@ -74,7 +76,7 @@ class WestPacketCTest(unittest.TestCase):
 
     def test_route207_and_mine_stay_closed(self):
         city = self.header("OreburghCity")
-        self.assertEqual(city["connections"], [])
+        self.assertEqual(city["connections"], [p.CITY_ROUTE207_JOIN] if p.has_production_route207_join(self.eng) else [])
         self.assertFalse(any("MINE" in w["dest_map"] or "ROUTE207" in w["dest_map"] for w in city["warp_events"]))
         raw = cells((self.eng / "data/layouts/OreburghCity/map.bin").read_bytes())
         for x, y in p.MINE_CELLS:
@@ -118,6 +120,38 @@ class WestPacketCTest(unittest.TestCase):
             self.assertIn("data/maps/OreburghCity_Mart/scripts.inc", p.check(self.eng))
         finally:
             target.write_bytes(original)
+
+    def test_only_the_registered_reciprocal_later_route207_join_is_accepted(self):
+        # A disposable copy exercises C's consumer after D without mutating
+        # production or pretending the synthetic headers are D acceptance.
+        with tempfile.TemporaryDirectory() as tmp:
+            engine = pathlib.Path(tmp) / "engine"
+            payload, _ = p.plan(self.eng)
+            for rel in set(INPUTS) | set(payload):
+                target = engine / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(self.eng / rel, target)
+            groups = json.loads((engine / "data/maps/map_groups.json").read_text())
+            groups["gMapGroup_Sinnoh"] = groups["gMapGroup_Sinnoh"][:41] + p.D_SLOTS
+            (engine / "data/maps/map_groups.json").write_text(json.dumps(groups))
+            route = engine / "data/maps/Route207/map.json"
+            route.parent.mkdir(exist_ok=True)
+            header = dict(id="MAP_ROUTE207", region="REGION_SINNOH", region_map_section="MAPSEC_ROUTE_207",
+                          connections=[dict(map="MAP_OREBURGH_CITY", offset=-35, direction="down")])
+            route.write_text(json.dumps(header))
+            city_path = engine / "data/maps/OreburghCity/map.json"
+            city = json.loads(city_path.read_text())
+            city["connections"] = [dict(p.CITY_ROUTE207_JOIN)]
+            city_path.write_bytes(p.encode(city))
+            self.assertEqual(p.check(engine), [])
+            header["connections"][0]["offset"] = -34
+            route.write_text(json.dumps(header))
+            self.assertIn("data/maps/OreburghCity/map.json", p.check(engine))
+            header["connections"][0]["offset"] = -35
+            route.write_text(json.dumps(header))
+            city["connections"].append(dict(map="MAP_ROUTE208", offset=0, direction="right"))
+            city_path.write_bytes(p.encode(city))
+            self.assertIn("data/maps/OreburghCity/map.json", p.check(engine))
 
 
 if __name__ == "__main__":
