@@ -34,21 +34,10 @@
 // corresponding to each of these underlying types, and each typedef has a
 // name which indicates the underlying type.
 //
-// For a given family of typedefs, the smallest one should be considered
-// the "real" or "canonical" type. Continuing with Map Sections as our
-// example, the smallest type is an 8-bit integer, and so any values that
-// can't fit in an 8-bit integer will be truncated and lost at some point
-// within the codebase. Therefore mapsec_u8_t is the "canonical" type for
-// Map Sections, and the larger typedefs just exist to describe situations
-// where the game handles Map Sections inconsistently with that "canon."
-//
-
-// Map Sections are named areas that can appear in the region map. Each
-// individual map can be assigned to a Map Section as appropriate. The
-// possible values are in constants/region_map_sections.h.
-//
-// If you choose to widen Map Sections, be aware that Met Locations (below)
-// are based on Map Sections and will also be widened.
+// Map sections in ROM/runtime use 16 bits. The byte type remains explicit for
+// legacy saved records (including TV); changing it would change their ABI.
+// Named section values fit the versioned 13-bit Pokemon origin representation.
+// Possible values are generated in constants/region_map_sections.h.
 typedef u8  mapsec_u8_t;
 typedef u16 mapsec_u16_t;
 typedef s16 mapsec_s16_t;
@@ -57,11 +46,10 @@ typedef s32 mapsec_s32_t;
 // Met Locations for caught Pokemon use the same values as Map Sections,
 // except that 0xFD, 0xFE, and 0xFF have special meanings.
 //
-// Because this value appears inside every Pokemon's data, widening it will
-// consume a lot more space within flash memory. The space usage will be
-// greater than you expect due to how Pokemon substructs are laid out; you
-// would have to rearrange the substructs' contents in order to minimize
-// how much more space a wider Met Location would consume.
+// The byte alias remains the legacy MON_DATA/met-location protocol. Full-width
+// production consumers use metloc_u16_t and the versioned extended accessors;
+// neither alias changes the physical Pokemon structure sizes.
 typedef mapsec_u8_t metloc_u8_t;
+typedef mapsec_u16_t metloc_u16_t;
 
 #endif //GUARD_GAMETYPES_H

@@ -165,7 +165,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     text << "\t.2byte " << json_to_string(map_data, "music") << "\n";
 
     text << "\t.2byte " << json_to_string(layout, "id") << "\n"
-         << "\t.byte "  << json_to_string(map_data, "region_map_section") << "\n"
+         << "\t.2byte " << json_to_string(map_data, "region_map_section") << "\n"
          << "\t.byte "  << json_to_string(map_data, "weather") << "\n"
          << "\t.byte "  << json_to_string(map_data, "map_type") << "\n";
 
@@ -174,6 +174,9 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "\t.byte 0\n";
     else
         text << "\t.byte " << floor_number << "\n";
+
+    // MapHeader aligns its 16-bit nightMusic after the signed floor byte.
+    text << "\t.byte 0\n";
 
     if (!map_data["night_music"].is_null())
         text << "\t.2byte " << json_to_string(map_data, "night_music") << "\n";
@@ -196,7 +199,8 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "requires_flash=" << json_to_string(map_data, "requires_flash") << "\n";
     }
 
-     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
+     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n"
+          << "\t.space 2\n\n"; // sizeof(MapHeader) is 32 bytes on ARM.
 
     return text.str();
 }

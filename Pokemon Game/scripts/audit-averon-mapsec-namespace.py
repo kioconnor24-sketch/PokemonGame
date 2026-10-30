@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Inventory the 8-bit map-section / met-location namespace (read-only).
+"""Inventory the versioned map-section / met-location namespace (read-only).
 
 Legacy map sections (MAPSEC_*) retain their original order in
 src/data/region_map/region_map_sections.json. The numeric value is what a
-saved Pokemon keeps in its 8-bit metLocation and what MapHeader stores in its
-8-bit regionMapSectionId; 0xFD-0xFF are reserved met-location codes
-(gametypes.h, constants/region_map_sections.h). MAPSEC_NONE stays 215; approved new sections explicitly allocate 216..252.
+ROM MapHeader stores in 16 bits; versioned Pokemon origins retain their legacy
+low byte with a checked 13-bit extension. NONE215 and the exact special
+met-location codes253..255 remain holes. Approved new names append216..252,
+then256..8191; this inventory allocates none.
 
 For every section this reports which maps use it (Averon's registered group
 versus upstream maps), and which source files name it. It allocates nothing,
@@ -62,10 +63,10 @@ def sections(engine):
     manifest = engine / "src/data/region_map/region_map_sections.legacy.json"
     if manifest.is_file():
         legacy = read_json(manifest)
-        if not isinstance(legacy, list) or len(legacy) != 215 or not 215 <= len(entries) <= 252:
-            raise ValueError("expected 215 legacy entries and at most 37 new named sections")
+        if not isinstance(legacy, list) or len(legacy) != 215 or not 215 <= len(entries) <= 8188:
+            raise ValueError("expected 215 legacy entries and at most 8188 total named sections")
         for index, entry in enumerate(entries):
-            expected = index if index < 215 else index + 1
+            expected = index if index < 215 else index + 1 if index < 252 else index + 4
             value = entry.get("value", expected)
             if type(value) is not int or value != expected:
                 raise ValueError(f"{entry['id']}: duplicate, sparse, reserved or moved value")
@@ -208,7 +209,8 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
         averon_engine_regions=sorted({r["engine_region"] for r in averon_rows}),
         region_conditioned_evolutions=region_conditioned_evolutions(engine),
         sections=len(entries), mapsec_none=none_value,
-        spare_codes_before_reserved=max(0, FIRST_RESERVED - len(entries) - 1),
+        spare_codes_before_reserved=sum(v not in values.values() for v in range(216, FIRST_RESERVED)),
+        remaining_extended_codes=max(0, 8192 - max(256, max(values.values(), default=255) + 1)),
         reserved_met_codes={f"0x{k:02X}": v for k, v in sorted(RESERVED_MET_CODES.items())},
         averon_group=group,
         averon_map_count=sum(1 for _, mine in maps.values() if mine),
@@ -224,11 +226,12 @@ def inventory(engine, group=DEFAULT_MAP_GROUP):
 
 def check_pins(engine, pins):
     """Errors if a pinned (saved) section value moved, or the namespace would
-    reach the reserved met-location codes."""
+    change an existing saved identity. Explicit namespaces validate their reserved holes separately."""
     values = {entry["id"]: entry["value"] for entry in sections(engine)}
     errors = [f"{ident}: pinned {want}, now {values.get(ident, 'missing')}"
               for ident, want in sorted(pins.items()) if values.get(ident) != want]
-    if len(values) >= FIRST_RESERVED:  # Historical implicit-only namespaces too.
+    if not (engine / "src/data/region_map/region_map_sections.legacy.json").is_file() and len(values) >= FIRST_RESERVED:
+        # Historical implicit-only namespaces still place NONE after their rows.
         errors.append(f"MAPSEC_NONE would be {len(values)}, colliding with reserved met codes 0xFD-0xFF")
     return errors
 
