@@ -1,0 +1,49 @@
+{
+  "id": "MAP_ROUTE208",
+  "name": "Route208",
+  "layout": "LAYOUT_ROUTE208",
+  "map_type": "MAP_TYPE_ROUTE",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_ROUTE_208",
+  "music": "MUS_ROUTE110",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [
+    {
+      "map": "MAP_HEARTHOME_CITY",
+      "offset": -21,
+      "direction": "right"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 63,
+      "y": 24,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE208_ACCESS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 57,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE208_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 8,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_MT_CORONET_1F_SOUTH",
+      "dest_warp_id": "1"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
