@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import struct
 import tempfile
+import sys
 import zlib
 import unittest
 from unittest.mock import patch
@@ -35,6 +36,39 @@ def valid_one_pixel_png():
             + png_chunk(b"IDAT", zlib.compress(b"\x00\x00\x00\x00"))
             + png_chunk(b"IEND"))
 
+
+
+class ToolPreflightTests(unittest.TestCase):
+    def test_source_work_does_not_require_a_compiler_or_emulator(self):
+        with patch.object(TOOL, "command_info", return_value={"available": True, "version": "fixture"}) as info:
+            result = TOOL.preflight("source")
+        self.assertEqual(result["missing"], [])
+        self.assertEqual([call.args[0] for call in info.call_args_list], ["git"])
+
+    def test_missing_coordination_dependencies_fail_early(self):
+        with patch.object(TOOL, "command_info", side_effect=lambda name: {
+                "available": name == "git", "version": None}):
+            result = TOOL.preflight("source", ["node", "jq"])
+        self.assertEqual(result["status"], "MISSING_REQUIRED_TOOLS")
+        self.assertEqual(result["missing"], ["jq", "node"])
+
+    def test_runtime_availability_is_not_display_acceptance(self):
+        with patch.object(TOOL, "command_info", return_value={"available": True, "version": None}):
+            result = TOOL.preflight("runtime", ["Xvfb"])
+        self.assertEqual(result["status"], "TOOLS_AVAILABLE")
+        self.assertIn("mgba", result["tools"])
+        self.assertTrue(any("working display" in limit for limit in result["limitations"]))
+
+    def test_preflight_cli_needs_no_rom_or_build_checkout(self):
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "preflight.json"
+            run = subprocess.run([sys.executable, str(COORDINATION / "toolchain_manifest.py"),
+                                  "--preflight", "source", "--out", str(out)],
+                                 capture_output=True, text=True, timeout=15)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            result = json.loads(out.read_text())
+        self.assertEqual(result["status"], "TOOLS_AVAILABLE")
+        self.assertNotIn("rom", result)
 
 
 class BuildProvenanceTests(unittest.TestCase):

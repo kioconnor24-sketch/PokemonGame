@@ -1,0 +1,29 @@
+{
+  "id": "MAP_MT_CORONET_1F_SOUTH",
+  "name": "MtCoronet_1F_South",
+  "layout": "LAYOUT_MT_CORONET_1F_SOUTH",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_MT_CORONET",
+  "music": "MUS_PETALBURG_WOODS",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE207",
+      "dest_warp_id": "0"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

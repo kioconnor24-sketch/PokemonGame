@@ -2,6 +2,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 MODULE = Path(__file__).resolve().parents[1] / "coordination/check_sinnoh_work_identity.py"
 spec = importlib.util.spec_from_file_location("sinnoh_identity", MODULE)
@@ -156,6 +157,75 @@ class SinnohWorkIdentityTests(unittest.TestCase):
             dict(filename=ENGINE + "NewRoute/movement.inc", status="renamed",
                  previous_filename=ENGINE + "NewRoute/scripts.inc")])
         self.assertEqual(check(p), [])
+
+    def test_integration_can_update_an_existing_neighbours_return(self):
+        p = candidate(mode="integrate", maps="NewRoute,OldTown", sources="main",
+                      files=[
+                          dict(filename=ENGINE + "NewRoute/map.json", status="added"),
+                          dict(filename=ENGINE + "OldTown/map.json", status="modified")])
+        peer = candidate(mode="integrate", maps="OtherRoute,OldTown",
+                         sources="main", number=400, files=[
+                             dict(filename=ENGINE + "OtherRoute/map.json", status="added"),
+                             dict(filename=ENGINE + "OldTown/map.json", status="modified")])
+        self.assertEqual(check(p, production=["OldTown"], peers=[peer]), [])
+
+    def test_adding_scripts_to_existing_maps_remains_a_repair(self):
+        for root in (STAGED, ENGINE):
+            with self.subTest(root=root):
+                p = candidate(mode="repair", sources="main", files=[
+                    dict(filename=root + "NewRoute/scripts.inc", status="added")])
+                self.assertEqual(check(p, main=["NewRoute"], production=["NewRoute"]), [])
+
+    def test_repair_rejects_unregistered_payload_without_definition(self):
+        for root in (STAGED, ENGINE):
+            for status in ("added", "renamed"):
+                with self.subTest(root=root, status=status):
+                    p = candidate(mode="repair", sources="main", files=[
+                        dict(filename=root + "NewRoute/map.bin", status=status,
+                             previous_filename=root + "OldRoute/map.bin")])
+                    self.assertTrue(check(p))
+
+    def test_cited_definition_allows_supporting_payload_repair(self):
+        for root in (STAGED, ENGINE):
+            with self.subTest(root=root):
+                p = candidate(mode="repair", sources="#400", files=[
+                    dict(filename=root + "NewRoute/map.bin", status="added")])
+                peer = dict(number=400, files=[
+                    dict(filename=root + "NewRoute/map.json", status="added")])
+                self.assertEqual(check(p, peers=[peer]), [])
+                peer["files"][0]["filename"] = root + "NewRoute/README.md"
+                self.assertTrue(check(p, peers=[peer]))
+
+    def test_moving_same_map_from_source_to_engine_is_an_integration(self):
+        for filename in ("map.json", "map.bin"):
+            with self.subTest(filename=filename):
+                p = candidate(mode="repair", sources="main", files=[
+                    dict(filename=ENGINE + "NewRoute/" + filename, status="renamed",
+                         previous_filename=STAGED + "NewRoute/" + filename)])
+                self.assertTrue(any("requires integrate mode" in e for e in
+                                    check(p, main=["NewRoute"])))
+
+    def test_construction_can_update_an_existing_neighbours_return(self):
+        p = candidate(maps="NewRoute,OldTown", files=[
+            dict(filename=STAGED + "NewRoute/map.json", status="added"),
+            dict(filename=STAGED + "OldTown/map.json", status="modified")])
+        self.assertEqual(check(p, main=["OldTown"]), [])
+
+    def test_live_repair_fetches_cited_definition_without_scanning_unrelated_files(self):
+        def pages(path):
+            if path == "pulls?state=open":
+                return [dict(number=400), dict(number=500)]
+            if path == "pulls/400/files":
+                return [dict(filename=ENGINE + "NewRoute/map.json", status="added")]
+            self.fail("unexpected unrelated file request: " + path)
+        with patch.object(guard, "fetch_live", return_value={"tree": []}), \
+                patch.object(guard, "pages", side_effect=pages):
+            snapshot = guard.preflight("repair", "NewRoute", "#400")
+        self.assertEqual(snapshot["candidate"]["number"], 501)
+        self.assertEqual([p["number"] for p in snapshot["other_open_prs"]], [400])
+        snapshot["candidate"]["files"] = [
+            dict(filename=ENGINE + "NewRoute/map.bin", status="added")]
+        self.assertEqual(guard.validate(snapshot), [])
 
 
 if __name__ == "__main__":

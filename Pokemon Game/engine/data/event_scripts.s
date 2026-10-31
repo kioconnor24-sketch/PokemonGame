@@ -1835,3 +1835,8 @@ AveronFieldLab_TryGift::
 	.include "data/maps/OreburghCity_House3/scripts.inc"
 	.include "data/maps/OreburghCity_House4/scripts.inc"
 	.include "data/maps/OreburghCity_House5/scripts.inc"
+	.include "data/maps/Route206_North/scripts.inc"
+	.include "data/maps/Route206/scripts.inc"
+	.include "data/maps/Route206_South/scripts.inc"
+	.include "data/maps/Route207/scripts.inc"
+	.include "data/maps/MtCoronet_1F_South/scripts.inc"

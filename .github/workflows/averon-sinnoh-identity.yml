@@ -55,13 +55,16 @@ jobs:
               }
               snapshot.main_maps = [...names];
               snapshot.main_engine_maps = [...production];
-              const mode = (pr.body || '').match(/^Sinnoh-Work:\s*(construct|integrate|reuse)\s*$/im);
+              const mode = (pr.body || '').match(/^Sinnoh-Work:\s*(construct|integrate|reuse|repair)\s*$/im);
               if (mode) {
+                const cited = new Set(((pr.body || '').match(/^Sinnoh-Sources:[ \t]*(.*)$/im)?.[1] || '')
+                  .split(',').map(s => s.trim()));
                 const open = await github.paginate(github.rest.pulls.list, {
                   owner,repo,state:'open',per_page:100
                 });
                 for (const peer of open) {
                   if (peer.number === number) continue;
+                  if (mode[1].toLowerCase() === 'repair' && !cited.has('#' + peer.number)) continue;
                   const files = await github.paginate(github.rest.pulls.listFiles, {
                     owner,repo,pull_number:peer.number,per_page:100
                   });

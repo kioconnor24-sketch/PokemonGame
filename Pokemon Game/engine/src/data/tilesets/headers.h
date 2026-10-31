@@ -1577,3 +1577,8 @@ const struct Tileset gTileset_AveronOreburghCitySecondary =
  .metatileAttributes = gMetatileAttributes_AveronOreburghCitySecondary,
  .callback=InitTilesetAnim_Rustboro,
 };
+const struct Tileset gTileset_AveronRoute206Primary = { .isCompressed=TRUE, .isSecondary=FALSE, .tiles=gTilesetTiles_General, .palettes=gTilesetPalettes_General, .metatiles=gMetatiles_AveronRoute206Primary, .metatileAttributes = gMetatileAttributes_AveronRoute206Primary, .callback=InitTilesetAnim_General };
+const struct Tileset gTileset_AveronRoute206Secondary = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles=gTilesetTiles_Rustboro, .palettes=gTilesetPalettes_Rustboro, .metatiles=gMetatiles_AveronRoute206Secondary, .metatileAttributes = gMetatileAttributes_AveronRoute206Secondary, .callback=InitTilesetAnim_Rustboro };
+const struct Tileset gTileset_AveronRoute206GatePrimary = { .isCompressed=TRUE, .isSecondary=FALSE, .tiles=gTilesetTiles_InsideBuilding, .palettes=gTilesetPalettes_InsideBuilding, .metatiles=gMetatiles_AveronRoute206GatePrimary, .metatileAttributes = gMetatileAttributes_AveronRoute206GatePrimary, .callback=InitTilesetAnim_Building };
+const struct Tileset gTileset_AveronRoute206GateSecondary = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles=gTilesetTiles_Shop, .palettes=gTilesetPalettes_Shop, .metatiles=gMetatiles_AveronRoute206GateSecondary, .metatileAttributes = gMetatileAttributes_AveronRoute206GateSecondary, .callback=NULL };
+const struct Tileset gTileset_AveronCoronetSouthSecondary = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles=gTilesetTiles_Cave, .palettes=gTilesetPalettes_Cave, .metatiles=gMetatiles_AveronCoronetSouthSecondary, .metatileAttributes = gMetatileAttributes_AveronCoronetSouthSecondary, .callback=InitTilesetAnim_Cave };
