@@ -3,6 +3,8 @@
 #include "event_data.h"
 #include "fieldmap.h"
 #include "overworld.h"
+#include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "save.h"
 #include "gba/flash_internal.h"
 #include "constants/heal_locations.h"
@@ -55,6 +57,7 @@ STATIC_ASSERT(NUM_BADGES == AVERON_REGION_BADGES, AveronRegionBadgeCount);
 
 static EWRAM_DATA u8 sLoadIssue = AVERON_REGION_LOAD_OK;
 static EWRAM_DATA bool8 sWriteBlocked = FALSE;
+static EWRAM_DATA bool8 sWideOriginsReady = FALSE;
 
 static u16 ReadU16(const u8 *p)
 {
@@ -182,7 +185,8 @@ static u8 CurrentAveronBadgeMask(void)
 static bool32 IsRecordInitialized(const u8 *record)
 {
     return memcmp(&record[REC_TAG], sRecordTag, sizeof(sRecordTag)) == 0
-        && ReadU16(&record[REC_FORMAT]) == AVERON_REGION_SAVE_FORMAT
+        && ReadU16(&record[REC_FORMAT]) >= 1
+        && ReadU16(&record[REC_FORMAT]) <= AVERON_REGION_SAVE_FORMAT
         && ReadU16(&record[REC_LENGTH]) == AVERON_REGION_RECORD_SIZE;
 }
 
@@ -348,6 +352,7 @@ void AveronRegionSave_InitNewGame(void)
 {
     InitRecordDefaults();
     memset(gSaveBlock2Ptr->averonRegionAnchor, 0, AVERON_REGION_ANCHOR_SIZE);
+    sWideOriginsReady = TRUE;
 }
 
 // Called by save.c just before logical sector 0 is copied for writing, with
@@ -454,6 +459,7 @@ enum AveronRegionSlotClass AveronRegionSave_ClassifySlot(u32 slot, u32 saveCount
 
     // With an anchor, a missing or damaged record is corrupt, never legacy.
     if (!IsRecordInitialized(record)
+     || ReadU16(&record[REC_FORMAT]) != format
      || ReadU32(&record[REC_CRC]) != AveronRegionSave_RecordCrc(record)
      || ReadU32(&record[REC_COUNTER]) != sectorCounter
      || sectorCounter != saveCounter
@@ -475,6 +481,7 @@ void AveronRegionSave_BeginLoad(void)
 {
     sLoadIssue = AVERON_REGION_LOAD_OK;
     sWriteBlocked = FALSE;
+    sWideOriginsReady = FALSE;
 }
 
 void AveronRegionSave_NoteRejectedSlot(enum AveronRegionSlotClass slotClass)
@@ -491,12 +498,34 @@ void AveronRegionSave_NoteRejectedSlot(enum AveronRegionSlotClass slotClass)
     }
 }
 
-// Called after a slot has been copied to RAM.
+static void NormalizeLegacyPokemonContainers(void)
+{
+    // FinishLoad precedes CopyPartyAndObjectsFromSave: normalize the saved
+    // party, not the stale global party. All these containers were loaded
+    // from the same validated full save slot. Do not touch flash here.
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+        NormalizeMonLegacyOrigin(&gSaveBlock1Ptr->playerParty[i]);
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            NormalizeBoxMonLegacyOrigin(&gPokemonStoragePtr->boxes[box][slot]);
+    for (u32 i = 0; i < DAYCARE_MON_COUNT; i++)
+        NormalizeBoxMonLegacyOrigin(&gSaveBlock1Ptr->daycare.mons[i].mon);
+#if IS_FRLG
+    NormalizeBoxMonLegacyOrigin(&gSaveBlock1Ptr->route5DayCareMon.mon);
+#endif
+    for (u32 i = 0; i < MAX_FUSION_STORAGE; i++)
+        NormalizeMonLegacyOrigin(&gPokemonStoragePtr->fusions[i]);
+}
+
+// Called after a complete validated slot has been copied to RAM. Format 2
+// changes no structure sizes. Its anchor and record seal atomically in sector
+// 0 on the next ordinary save; older binaries refuse that unsupported format.
 void AveronRegionSave_FinishLoad(u8 saveStatus)
 {
     if (saveStatus != SAVE_STATUS_OK && saveStatus != SAVE_STATUS_ERROR)
     {
         InitRecordDefaults(); // nothing usable was loaded
+        sWideOriginsReady = FALSE;
         return;
     }
     if (IsZero(gSaveBlock2Ptr->averonRegionAnchor, AVERON_REGION_ANCHOR_SIZE))
@@ -504,9 +533,27 @@ void AveronRegionSave_FinishLoad(u8 saveStatus)
         // Legacy save: derive the defaults in RAM. Flash is untouched until
         // the player's next ordinary save writes the anchor and record.
         InitRecordDefaults();
+        NormalizeLegacyPokemonContainers();
         if (sLoadIssue == AVERON_REGION_LOAD_OK)
             sLoadIssue = AVERON_REGION_LOAD_LEGACY_MIGRATED;
     }
+    else if (ReadU16(&Record()[REC_FORMAT]) == 1)
+    {
+        NormalizeLegacyPokemonContainers();
+        WriteU16(&Record()[REC_FORMAT], AVERON_REGION_SAVE_FORMAT);
+        // Keep the loaded anchor unchanged in RAM until the normal writer
+        // seals both fields together. No pre-upgrade flash bytes are changed.
+        if (sLoadIssue == AVERON_REGION_LOAD_OK)
+            sLoadIssue = AVERON_REGION_LOAD_LEGACY_MIGRATED;
+    }
+    sWideOriginsReady = !sWriteBlocked
+        && ReadU16(&Record()[REC_FORMAT]) == AVERON_REGION_SAVE_FORMAT;
+}
+
+bool32 AveronRegionSave_UsesWideOrigins(void)
+{
+    return sWideOriginsReady
+        && ReadU16(&Record()[REC_FORMAT]) == AVERON_REGION_SAVE_FORMAT;
 }
 
 u32 AveronRegionSave_GetLoadIssue(void)

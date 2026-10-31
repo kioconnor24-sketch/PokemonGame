@@ -100,7 +100,7 @@ TEST("Averon extended location experiment cannot infer a version from checksum-v
     }
 }
 
-TEST("Averon extended location experiment actual egg hatch replaces only the byte and retains stale candidate high bits")
+TEST("Averon extended location production egg hatch clears stale candidate high bits")
 {
     StringCopy(gSaveBlock2Ptr->playerName, COMPOUND_STRING("CODEX"));
     ZeroPlayerPartyMons();
@@ -118,12 +118,12 @@ TEST("Averon extended location experiment actual egg hatch replaces only the byt
     EXPECT_EQ(GetMonData(mon, MON_DATA_IS_EGG), FALSE);
     EXPECT_EQ(GetMonData(mon, MON_DATA_MET_LEVEL), 0);
     EXPECT_EQ(GetMonData(mon, MON_DATA_MET_LOCATION), MAPSEC_SALTMERE);
-    EXPECT_EQ(ReadCandidate(&mon->box), MAPSEC_SALTMERE | (1 << 8));
+    EXPECT_EQ(ReadCandidate(&mon->box), MAPSEC_SALTMERE);
     EXPECT_EQ(GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG), FALSE);
     u8 text[1024];
     EXPECT(TestSummaryBufferTrainerMemo(mon, text));
     EXPECT(Contains(text, COMPOUND_STRING("SALTMERE")));
     EXPECT(Contains(text, COMPOUND_STRING("hatched at")));
-    // Current byte semantics are correct; adoption of C would need a real
-    // hatch setter and a separately approved tag/legacy interpretation policy.
+    // Production hatch now replaces the complete origin, including any stale
+    // candidate bits; original failing research evidence remains in history.
 }

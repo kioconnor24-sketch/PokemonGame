@@ -874,6 +874,13 @@ void GabbyAndTyBeforeInterview(void)
 
 void GabbyAndTyAfterInterview(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        TakeGabbyAndTyOffTheAir();
+        return;
+    }
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2 = gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn;
     gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2 = gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon;
     gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem2 = gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem;
@@ -1056,6 +1063,12 @@ void TryPutPokemonTodayOnAir(void)
 // either triggered or deleted at the end of the day by ResolveWorldOfMastersShow
 static void InitWorldOfMastersShowAttempt(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     TVShow *show = &gSaveBlock1Ptr->tvShows[LAST_TVSHOW_IDX];
     if (show->common.kind != TVSHOW_WORLD_OF_MASTERS)
     {
@@ -1071,6 +1084,12 @@ static void InitWorldOfMastersShowAttempt(void)
 
 static void TryPutPokemonTodayFailedOnTheAir(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     u16 ballsUsed;
     u8 i;
     TVShow *show;
@@ -1391,6 +1410,12 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 
 void TryPutSmartShopperOnAir(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     TVShow *show;
     u8 i;
 
@@ -1675,6 +1700,12 @@ static void TryPutWorldOfMastersOnAir(void)
 
 void TryPutTodaysRivalTrainerOnAir(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     TVShow *show;
     u32 i;
     u8 nBadges;
@@ -1736,6 +1767,12 @@ void TryPutTrendWatcherOnAir(const u16 *words)
 
 void TryPutTreasureInvestigatorsOnAir(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     TVShow *show;
 
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
@@ -1944,6 +1981,12 @@ void TryPutSecretBaseVisitOnAir(void)
 
 void TryPutBreakingNewsOnAir(void)
 {
+    // TV records retain their legacy byte ABI. Skip an optional report
+    // instead of truncating a wide location into an unrelated old place.
+    if (gMapHeader.regionMapSectionId > 252)
+    {
+        return;
+    }
     TVShow *show;
     u8 i;
     u16 balls;

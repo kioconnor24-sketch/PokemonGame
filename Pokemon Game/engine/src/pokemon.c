@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "apprentice.h"
+#include "averon_region_save.h"
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_anim.h"
@@ -2202,7 +2203,8 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_MET_LOCATION_EXTENDED:
             retVal = GetSubstruct3(boxMon)->metLocation;
-            if (GetSubstruct0(boxMon)->unused_0A == AVERON_MET_LOCATION_MARKER)
+            if (AveronRegionSave_UsesWideOrigins()
+                && GetSubstruct0(boxMon)->unused_0A == AVERON_MET_LOCATION_MARKER)
                 retVal |= GetSubstruct1(boxMon)->unused_04 << 8;
             break;
         case MON_DATA_MET_LEVEL:
@@ -2725,7 +2727,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_MET_LOCATION_EXTENDED:
         {
             u32 location = data[0] | (data[1] << 8);
-            if (location <= AVERON_MET_LOCATION_MAX)
+            if (location <= AVERON_MET_LOCATION_MAX
+                && (location <= 0xFF || AveronRegionSave_UsesWideOrigins()))
             {
                 GetSubstruct3(boxMon)->metLocation = location & 0xFF;
                 GetSubstruct1(boxMon)->unused_04 = location >> 8;
