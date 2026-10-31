@@ -14,7 +14,7 @@
 
 #define AVERON_REGION_ANCHOR_SIZE   8
 #define AVERON_REGION_RECORD_SIZE   64
-#define AVERON_REGION_SAVE_FORMAT   1
+#define AVERON_REGION_SAVE_FORMAT   2
 
 // Region codes stored in the record. Not the engine's enum Region.
 enum
@@ -75,6 +75,11 @@ void AveronRegionSave_NoteRejectedSlot(enum AveronRegionSlotClass slotClass);
 void AveronRegionSave_FinishLoad(u8 saveStatus);
 u32 AveronRegionSave_GetLoadIssue(void);
 bool32 AveronRegionSave_IsWriteBlocked(void);
+// Full origins are read only after a known format has been initialized or
+// every legacy Pokemon container has been normalized during load.
+bool32 AveronRegionSave_UsesWideOrigins(void);
+bool32 AveronRegionSave_RequiresFullOriginSave(void);
+void AveronRegionSave_FullOriginSaveComplete(void);
 
 // Exposed for tests.
 u32 AveronRegionSave_Crc32(const u8 *data, u32 size);

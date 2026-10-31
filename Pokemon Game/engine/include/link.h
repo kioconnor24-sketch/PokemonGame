@@ -188,6 +188,16 @@ struct LinkPlayerBlock
     char magic2[16];
 };
 
+// The unused stable LinkPlayer halfword identifies this exact protocol:
+// A6 identifies the extension, 02 is the origin version. It is a compatibility
+// declaration, not authentication, and changes neither cable nor RFU ABI.
+#define AVERON_ORIGIN_LINK_SIGNATURE 0xA602
+struct Pokemon;
+bool32 AveronLink_PeerUsesWideOrigins(u32 playerId);
+bool32 AveronLink_CanExportMon(struct Pokemon *mon, u32 playerId);
+void AveronLink_CopyPartyPreview(struct Pokemon *dest, const struct Pokemon *src, u32 count, u32 playerId);
+void AveronLink_CopyReceivedParty(struct Pokemon *dest, const void *src, u32 count, u32 playerId);
+
 // circular queues
 
 struct SendQueue

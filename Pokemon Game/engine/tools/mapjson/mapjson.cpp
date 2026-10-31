@@ -124,6 +124,15 @@ string get_include_guard_end(const string &name) {
 }
 
 string generate_map_header_text(Json map_data, Json layouts_data) {
+    // Symbolic sections are range-checked by the section generator. Numeric
+    // fixture/custom headers must not silently truncate or occupy met specials.
+    const Json &section = map_data["region_map_section"];
+    if (section.is_number()) {
+        const double value = section.number_value();
+        if (value < 0 || value > 8191 || value != section.int_value()
+            || (value >= 253 && value <= 255))
+            FATAL_ERROR("Invalid map section: expected 0..8191 excluding reserved 253..255.\n");
+    }
     string map_layout_id = json_to_string(map_data, "layout");
 
     vector<Json> matched;
@@ -165,7 +174,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     text << "\t.2byte " << json_to_string(map_data, "music") << "\n";
 
     text << "\t.2byte " << json_to_string(layout, "id") << "\n"
-         << "\t.byte "  << json_to_string(map_data, "region_map_section") << "\n"
+         << "\t.2byte " << json_to_string(map_data, "region_map_section") << "\n"
          << "\t.byte "  << json_to_string(map_data, "weather") << "\n"
          << "\t.byte "  << json_to_string(map_data, "map_type") << "\n";
 
@@ -174,6 +183,9 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "\t.byte 0\n";
     else
         text << "\t.byte " << floor_number << "\n";
+
+    // MapHeader aligns its 16-bit nightMusic after the signed floor byte.
+    text << "\t.byte 0\n";
 
     if (!map_data["night_music"].is_null())
         text << "\t.2byte " << json_to_string(map_data, "night_music") << "\n";
@@ -196,7 +208,8 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
         text << "requires_flash=" << json_to_string(map_data, "requires_flash") << "\n";
     }
 
-     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
+     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n"
+          << "\t.space 2\n\n"; // sizeof(MapHeader) is 32 bytes on ARM.
 
     return text.str();
 }

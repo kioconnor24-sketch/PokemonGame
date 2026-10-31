@@ -278,6 +278,18 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
         return TRUE;
 }
 
+bool32 RecordedBattle_CanPersistOrigins(void)
+{
+    // The separate recording sector has no versioned origin boundary. Keep
+    // existing recordings readable, but never persist a wide origin there
+    // where an old recording and a new encoding could be indistinguishable.
+    for (u32 trainer = 0; trainer < MAX_BATTLE_TRAINERS; trainer++)
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            if (GetMonData(&gParties[trainer][i], MON_DATA_MET_LOCATION_EXTENDED) > 255)
+                return FALSE;
+    return TRUE;
+}
+
 bool32 MoveRecordedBattleToSaveData(void)
 {
     s32 i, j;
@@ -285,6 +297,8 @@ bool32 MoveRecordedBattleToSaveData(void)
     struct RecordedBattleSave *battleSave, *savSection;
     u8 saveAttempts;
 
+    if (!RecordedBattle_CanPersistOrigins())
+        return FALSE;
     saveAttempts = 0;
     battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     savSection = AllocZeroed(SECTOR_SIZE);
@@ -489,7 +503,12 @@ void SetPartiesFromRecordedSave(struct RecordedBattleSave *src)
     {
         ZeroPartyMons(gParties[trainer]);
         for (s32 i = 0; i < PARTY_SIZE; i++)
+        {
             gParties[trainer][i] = src->parties[trainer][i];
+            // Byte-format recordings are immutable legacy inputs. Normalize
+            // only the live copy; never reinterpret their old unused bits.
+            NormalizeMonLegacyOrigin(&gParties[trainer][i]);
+        }
     }
 }
 
