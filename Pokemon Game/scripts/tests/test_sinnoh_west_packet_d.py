@@ -1,5 +1,6 @@
 """Production D: preserve installed identities, actual reused source and closed boundaries."""
 import copy
+from functools import lru_cache
 import importlib.util
 import json
 from pathlib import Path
@@ -19,10 +20,38 @@ def cells(raw):
     return struct.unpack('<%dH' % (len(raw) // 2), raw)
 
 
+
+@lru_cache(maxsize=1)
+def production_d_input_fixture():
+    """Keep the D installer regressions valid after E's exact verified append.
+
+    Reuse E's test-only inverse, then require D's original baseline hashes.
+    Actual E production checks stay on the live engine, never this fixture.
+    """
+    names = json.loads(p.target(p.ENGINE, p.GROUPS).read_text())['gMapGroup_Sinnoh']
+    if len(names) <= 46:
+        return None, p.ENGINE
+    from test_sinnoh_west_packet_e import pre_e_fixture
+    temp = tempfile.TemporaryDirectory(prefix='sinnoh-verified-pre-e-')
+    engine = Path(temp.name) / 'engine'
+    try:
+        pre_e_fixture(engine)  # refuses an unverified/unknown E profile
+        for rel in set(p.BASE_HASHES) | set(p.ASSET_HASHES):
+            path = p.target(engine, rel)
+            if not path.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(p.target(p.ENGINE, rel), path)
+        p.baseline(engine)  # original production41/installed46 hashes, unchanged
+    except BaseException:
+        temp.cleanup()
+        raise
+    return temp, engine
+
+
 def fixture(engine):
     # The real checkout may already carry D. Reuse only the verifier's exact,
     # hash-proven original inputs instead of assuming current files are pre-D.
-    before = p.baseline(p.ENGINE)
+    before = p.baseline(production_d_input_fixture()[1])
     for rel in set(p.BASE_HASHES) | set(p.ASSET_HASHES):
         path = p.target(engine, rel)
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -87,7 +116,7 @@ class WestPacketDTest(unittest.TestCase):
         # The removed external road connection was already blocked by its whole
         # solid roof/edge. Do not invent an additional terrain change there.
         self.assertTrue(all((word >> 10) & 3 == 1 for word in cells(files['data/layouts/Route206/map.bin'])[:28]))
-        city_before = json.loads(p.baseline(p.ENGINE)[p.CITY])
+        city_before = json.loads(p.baseline(production_d_input_fixture()[1])[p.CITY])
         city_after = json.loads(files[p.CITY])
         city_after['connections'] = []
         self.assertEqual(city_after, city_before)

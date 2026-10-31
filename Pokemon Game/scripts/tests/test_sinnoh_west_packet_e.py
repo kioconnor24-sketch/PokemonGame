@@ -270,6 +270,24 @@ class WestPacketETest(unittest.TestCase):
             self.assertEqual(existing.read_text(), "preserve existing work")
             self.assertFalse((eng / "data/maps/Route208/map.json").exists())
 
+    def test_installed_new_interior_layout_and_blockdata_tampering_are_rejected(self):
+        _, added = p.plan_installed(self.eng)
+        layout = next(l for l in added if l["name"].removesuffix("_Layout") not in p.stage.OUTDOORS)
+        rel = layout["blockdata_filepath"]
+        self.assertIn(rel, self.mutated(rel, lambda raw: bytes([raw[0] ^ 1]) + raw[1:]))
+        path = "data/layouts/layouts.json"
+        for mode in ("width", "duplicate"):
+            with self.subTest(mode=mode):
+                def change(raw):
+                    data = json.loads(raw)
+                    if mode == "duplicate":
+                        data["layouts"].append(dict(data["layouts"][-1]))
+                    else:
+                        target = next(l for l in data["layouts"] if l["id"] == layout["id"])
+                        target["width"] += 1
+                    return p.encode(data)
+                self.assertIn(path, self.mutated(path, change))
+
     def mutated(self, rel, change):
         """check() with one engine file changed in place, then restored."""
         target = self.eng / rel

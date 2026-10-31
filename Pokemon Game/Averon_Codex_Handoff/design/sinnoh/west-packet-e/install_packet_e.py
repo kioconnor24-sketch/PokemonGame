@@ -132,6 +132,15 @@ def expected_south_header(installed=False):
     return expected
 
 
+def pre_e_layouts(engine):
+    """Use only the hash-pinned D prefix as stock, even after E is installed."""
+    data = read_json(pathlib.Path(engine) / "data/layouts/layouts.json")
+    data["layouts"] = data["layouts"][:BASELINE["layouts_count"]]
+    if sha(encode(data)) != BASELINE["layouts_sha256"]:
+        raise ValueError("packet D layout prefix differs from the pinned baseline")
+    return data["layouts"]
+
+
 def plan(engine, before=None):
     """Every engine file this packet writes or adds, as {relative path: bytes or JSON}, plus the new layouts.
     before: Coronet South's pre-packet (header, path, blockdata); read from the engine when not given."""
@@ -141,7 +150,7 @@ def plan(engine, before=None):
     if errors:
         raise ValueError("packet E stage is not clean: " + "; ".join(errors[:5]))
     hdrs = stage.headers(src)
-    stock = {l.get("id") for l in read_json(engine / "data/layouts/layouts.json")["layouts"]}
+    stock = {l["id"] for l in pre_e_layouts(engine)}
     out, layouts = {}, []
     # Coronet South (packet D's production map): append the east arrow back to Route 208's appended door.
     south, south_bin, south_raw = before or south_before(engine)
@@ -504,8 +513,8 @@ def check(engine):
     files, layouts = plan_installed(engine)
     bad += [rel for rel, value in files.items()
             if not (engine / rel).exists() or (engine / rel).read_bytes() != encode(value)]
-    have = {l.get("id"): l for l in read_json(engine / "data/layouts/layouts.json")["layouts"]}
-    if any(have.get(l["id"]) != l for l in layouts):
+    have = read_json(engine / "data/layouts/layouts.json")["layouts"]
+    if have != pre_e_layouts(engine) + layouts:
         bad.append("data/layouts/layouts.json")
     scripts = (engine / "data/event_scripts.s").read_text()
     if any(scripts.count(f'\t.include "data/maps/{m}/scripts.inc"\n') != 1 for m in SLOTS):
