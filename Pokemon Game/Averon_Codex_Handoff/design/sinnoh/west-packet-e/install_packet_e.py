@@ -387,6 +387,22 @@ COMPAT_HASHES = {
     "../scripts/averon-mapsec-pins.json": "23a6c9dd0b0d9d1c97e51806177d04ccca24543101694ef0359bf8fe6e6ef582",
 }
 NATIVE_FILE = "test/averon_packet_e_location.c"
+D_NATIVE_UPDATES = (
+    ("EXPECT_EQ(s->events->warpCount,1);", """#ifdef MAPSEC_ROUTE_208
+    EXPECT_EQ(s->events->warpCount,2);
+    EXPECT_EQ(s->events->warps[1].mapNum,MAP_NUM(MAP_ROUTE208));
+    EXPECT_EQ(s->events->warps[1].warpId,2);
+#else
+    EXPECT_EQ(s->events->warpCount,1);
+#endif
+    """),
+    ("EXPECT_EQ(s->mapLayout->map[876],0x3604);", """#ifdef MAPSEC_ROUTE_208
+    EXPECT_EQ(s->mapLayout->map[876],0x321a);
+#else
+    EXPECT_EQ(s->mapLayout->map[876],0x3604);
+#endif
+    """),
+)
 
 
 def compatibility_baseline(engine, installed=False):
@@ -398,6 +414,11 @@ def compatibility_baseline(engine, installed=False):
             if baseline[rel].count(b"MAPSEC_COUNT == 239") != 1:
                 raise ValueError("installed E section-count fixture differs: " + rel)
             baseline[rel] = baseline[rel].replace(b"MAPSEC_COUNT == 239", b"MAPSEC_COUNT == 231")
+        d_native = "test/averon_packet_d_location.c"
+        for old, new in D_NATIVE_UPDATES:
+            if baseline[d_native].count(new.encode()) != 1:
+                raise ValueError("installed E must preserve D's exact later-join assertion: " + old)
+            baseline[d_native] = baseline[d_native].replace(new.encode(), old.encode(), 1)
         extra = "".join(" || section == " + symbol for symbol, _, _ in SECTIONS_NEW).encode()
         if baseline[COMPAT_FILE].count(extra) != 2:
             raise ValueError("installed E location whitelist differs")
@@ -418,6 +439,11 @@ def compatibility_outputs(engine, installed=False):
     for rel in COUNT_FILES:
         if baseline[rel].count(b"MAPSEC_COUNT == 231") != 1:
             raise ValueError("the D section-count fixture differs: " + rel)
+    d_native = "test/averon_packet_d_location.c"
+    for old, new in D_NATIVE_UPDATES:
+        if out[d_native].count(old.encode()) != 1:
+            raise ValueError("the D closed-east assertion differs")
+        out[d_native] = out[d_native].replace(old.encode(), new.encode(), 1)
     needle = b"|| section == MAPSEC_MT_CORONET"
     if baseline[COMPAT_FILE].count(needle) != 2:
         raise ValueError("the D valid/nonblank-name whitelist differs")

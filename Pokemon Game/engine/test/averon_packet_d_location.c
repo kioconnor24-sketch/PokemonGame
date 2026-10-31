@@ -22,8 +22,20 @@ TEST("Averon packet D retains west Coronet return and closes unbuilt north east 
 {
     const struct MapHeader *s=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_MT_CORONET_1F_SOUTH),MAP_NUM(MAP_MT_CORONET_1F_SOUTH));
     const struct MapHeader *n=Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE206_NORTH),MAP_NUM(MAP_ROUTE206_NORTH));
-    EXPECT_EQ(s->events->warpCount,1); EXPECT_EQ(s->events->warps[0].mapNum,MAP_NUM(MAP_ROUTE207));
+    #ifdef MAPSEC_ROUTE_208
+    EXPECT_EQ(s->events->warpCount,2);
+    EXPECT_EQ(s->events->warps[1].mapNum,MAP_NUM(MAP_ROUTE208));
+    EXPECT_EQ(s->events->warps[1].warpId,2);
+#else
+    EXPECT_EQ(s->events->warpCount,1);
+#endif
+     EXPECT_EQ(s->events->warps[0].mapNum,MAP_NUM(MAP_ROUTE207));
     EXPECT_EQ(s->events->warps[0].warpId,0); EXPECT_EQ(s->mapLayout->map[299],0x321a);
-    EXPECT_EQ(s->mapLayout->map[876],0x3604); EXPECT_EQ(s->mapLayout->map[113],0x3604);
+    #ifdef MAPSEC_ROUTE_208
+    EXPECT_EQ(s->mapLayout->map[876],0x321a);
+#else
+    EXPECT_EQ(s->mapLayout->map[876],0x3604);
+#endif
+     EXPECT_EQ(s->mapLayout->map[113],0x3604);
     EXPECT_EQ(n->events->warpCount,1); EXPECT_EQ(n->mapLayout->map[13],0x3721);
 }
