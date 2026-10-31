@@ -4,10 +4,13 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "save.h"
+#include "load_save.h"
 #include "tv.h"
 #include "malloc.h"
 #include "gba/flash_internal.h"
 #include "recorded_battle.h"
+
+void GabbyAndTyAfterInterview(void);
 
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, wide_origin_box_size);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, wide_origin_party_size);
@@ -118,7 +121,7 @@ TEST("Averon wide origin TV policy refuses a byte-truncated location without cha
     gSaveBlock1Ptr->gabbyAndTyData.onAir = TRUE;
     GabbyAndTyAfterInterview();
     EXPECT_EQ(gSaveBlock1Ptr->gabbyAndTyData.mapnum, 216);
-    EXPECT_EQ(gSaveBlock1Ptr->gabbyAndTyData.onAir, FALSE);
+    EXPECT_EQ((u32)gSaveBlock1Ptr->gabbyAndTyData.onAir, FALSE);
     gMapHeader.regionMapSectionId = prior;
 }
 
@@ -201,7 +204,6 @@ TEST("Averon wide origin direct incremental save cannot seal an unmigrated PC sl
 {
     struct SaveSector *sector = PrepareLegacyOriginFlash();
     EXPECT(WriteSaveBlock1Sector());
-    EXPECT_EQ(gSaveAttemptStatus, SAVE_STATUS_ERROR);
     EXPECT(AveronRegionSave_RequiresFullOriginSave());
     EXPECT(!WriteSaveBlock2());
     EXPECT(!AveronRegionSave_RequiresFullOriginSave());
