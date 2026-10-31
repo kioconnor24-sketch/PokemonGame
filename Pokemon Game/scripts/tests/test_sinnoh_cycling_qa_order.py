@@ -8,7 +8,12 @@ import tempfile
 import unittest
 from unittest import mock
 
-HERE = Path(__file__).resolve().parents[2] / "Averon_Codex_Handoff/design/sinnoh/cycling-road-join"
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+HERE = (ROOT / 'Pokemon Game') / "Averon_Codex_Handoff/design/sinnoh/cycling-road-join"
 spec = importlib.util.spec_from_file_location("w25_qa_order", HERE / "run_current_qa.py")
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
@@ -97,7 +102,7 @@ class CyclingQAOrderTest(unittest.TestCase):
         engine.mkdir()
         (engine / ".map_qa_throwaway").touch()
         contract = json.loads((HERE / "post-c-qa-contract.json").read_text())
-        document = json.loads((HERE.parents[4] / "Pokemon Game/engine/data/maps/map_groups.json").read_text())
+        document = json.loads((ROOT / "Pokemon Game/engine/data/maps/map_groups.json").read_text())
         document["gMapGroup_Sinnoh"] = contract["production_prefix"] + contract["temporary_suffix"]
         values = dict.fromkeys(contract["payload_paths"], b"source")
         values["data/maps/map_groups.json"] = json.dumps(document).encode()
@@ -208,7 +213,7 @@ class CyclingQAOrderTest(unittest.TestCase):
         spec = importlib.util.spec_from_file_location("qa_receipt_composer", HERE / "prepare_current_runtime.py")
         composer = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(composer)
-        files, receipt = composer.compose(HERE.parents[4])
+        files, receipt = composer.compose(ROOT)
         with tempfile.TemporaryDirectory() as t:
             engine = Path(t)
             (engine / ".map_qa_throwaway").touch()

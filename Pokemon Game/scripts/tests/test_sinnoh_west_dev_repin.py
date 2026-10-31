@@ -5,7 +5,11 @@ from pathlib import Path
 import unittest
 from unittest import mock
 
-ROOT = Path(__file__).resolve().parents[3]
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
 SINNOH = ROOT / 'Pokemon Game/Averon_Codex_Handoff/design/sinnoh'
 FAMILIES = ('canalave-west', 'celestic-north', 'eastern-loop', 'eterna-cycle', 'forest-chateau', 'hearthome-solaceon')
 ADDED = ['JubilifeCity_GlobalTerminal_1F', 'JubilifeCity_GlobalTerminal_2F', 'OreburghGate_B1F']

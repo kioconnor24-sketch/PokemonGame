@@ -12,7 +12,11 @@ import subprocess
 import unittest
 from unittest.mock import patch
 
-ROOT = Path(__file__).resolve().parents[3]
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
 HERE = ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/west-packet-d'
 spec = importlib.util.spec_from_file_location('packet_d_test', HERE/'prepare_runtime.py')
 p = importlib.util.module_from_spec(spec)

@@ -2,9 +2,15 @@
 import copy,importlib.util,json,struct,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
-ROOT=Path(__file__).resolve().parents[3]
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
 HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-frontier-dev'
 s=importlib.util.spec_from_file_location('battle_dev_tests',HERE/'prepare_scene.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+
+
 class BattleFrontierDEV(unittest.TestCase):
  @classmethod
  def setUpClass(cls):

@@ -2,9 +2,16 @@
 import importlib.util,json,struct,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
-ROOT=Path(__file__).resolve().parents[3];HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+ROOT=post_c_source_root(Path(__file__).resolve().parents[3]);HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-center-shells'
 s=importlib.util.spec_from_file_location('battle_center_tests',HERE/'build.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 ENGINE=ROOT/'Pokemon Game/engine'
+
+
 class BattleCenters(unittest.TestCase):
  def test_all_four_exteriors_immutable_geometry_and_existing_gateway_prefix(self):
   for name,cfg in m.AREAS.items():
