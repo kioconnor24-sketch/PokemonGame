@@ -9,7 +9,12 @@ import unittest
 from unittest import mock
 from contextlib import contextmanager
 
-HERE=Path(__file__).resolve().parents[2]/'Averon_Codex_Handoff/design/sinnoh/eastern-loop'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+HERE=(ROOT/'Pokemon Game')/'Averon_Codex_Handoff/design/sinnoh/eastern-loop'
 spec=importlib.util.spec_from_file_location('hotel_runtime_contract',HERE/'prepare_runtime.py')
 a=importlib.util.module_from_spec(spec);spec.loader.exec_module(a)
 ROOT=HERE.parents[4];ENGINE=ROOT/a.ENGINE;LINK=HERE/'hotel-link'

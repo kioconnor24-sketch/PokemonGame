@@ -18,7 +18,7 @@
 STATIC_ASSERT(MAPSEC_OREBURGH_CITY == 227, oreburgh_owner_value);
 STATIC_ASSERT(MAPSEC_ROUTE_205 == 226, oreburgh_prior_codes_unchanged);
 STATIC_ASSERT(MAPSEC_NONE == 215, oreburgh_none_preserved);
-STATIC_ASSERT(MAPSEC_COUNT == 228, oreburgh_no_unapproved_allocations);
+STATIC_ASSERT(MAPSEC_COUNT == 231, oreburgh_no_unapproved_allocations);
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, oreburgh_box_format_preserved);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, oreburgh_party_format_preserved);
 

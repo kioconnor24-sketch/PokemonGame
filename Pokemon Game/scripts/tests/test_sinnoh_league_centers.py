@@ -2,9 +2,16 @@
 import importlib.util,json,struct,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
-ROOT=Path(__file__).resolve().parents[3];HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+ROOT=post_c_source_root(Path(__file__).resolve().parents[3]);HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/league-neutral-centers'
 s=importlib.util.spec_from_file_location('league_centers_tests',HERE/'build.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 ENGINE=ROOT/'Pokemon Game/engine'
+
+
 class LeagueCenters(unittest.TestCase):
  def test_unchanged_exterior_prefix_and_native_door_approaches(self):
   old=HERE.parent/'victory-road-shell/connected/PokmonLeague';new=HERE/'staged/League'

@@ -10,10 +10,16 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-ROOT=Path(__file__).resolve().parents[3];ENGINE=ROOT/'Pokemon Game/engine'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+ROOT=post_c_source_root(Path(__file__).resolve().parents[3]);ENGINE=ROOT/'Pokemon Game/engine'
 HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/battle-zone-north'
 s=importlib.util.spec_from_file_location('battle_zone_test',HERE/'adapt_art.py')
 m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+
 
 class NorthernArtTests(unittest.TestCase):
     @classmethod
