@@ -1,0 +1,29 @@
+{
+  "id": "MAP_ETERNA_CITY_POKEMON_CENTER_F2",
+  "name": "EternaCity_PokemonCenter_F2",
+  "layout": "LAYOUT_ETERNA_CITY_POKEMON_CENTER_F2",
+  "map_type": "MAP_TYPE_INDOOR",
+  "requires_flash": false,
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "music": "MUS_ROUTE110",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [],
+  "warp_events": [
+    {
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ETERNA_CITY_POKEMON_CENTER_F1",
+      "dest_warp_id": "0"
+    }
+  ],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
