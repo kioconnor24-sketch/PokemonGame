@@ -388,19 +388,25 @@ COMPAT_HASHES = {
 }
 NATIVE_FILE = "test/averon_packet_e_location.c"
 D_NATIVE_UPDATES = (
-    ("EXPECT_EQ(s->events->warpCount,1);", """#ifdef MAPSEC_ROUTE_208
+    ("EXPECT_EQ(s->events->warpCount,1);", """if (MAPSEC_COUNT > 231)
+    {
     EXPECT_EQ(s->events->warpCount,2);
     EXPECT_EQ(s->events->warps[1].mapNum,MAP_NUM(MAP_ROUTE208));
     EXPECT_EQ(s->events->warps[1].warpId,2);
-#else
+    }
+    else
+    {
     EXPECT_EQ(s->events->warpCount,1);
-#endif
+    }
     """),
-    ("EXPECT_EQ(s->mapLayout->map[876],0x3604);", """#ifdef MAPSEC_ROUTE_208
+    ("EXPECT_EQ(s->mapLayout->map[876],0x3604);", """if (MAPSEC_COUNT > 231)
+    {
     EXPECT_EQ(s->mapLayout->map[876],0x321a);
-#else
+    }
+    else
+    {
     EXPECT_EQ(s->mapLayout->map[876],0x3604);
-#endif
+    }
     """),
 )
 
