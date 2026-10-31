@@ -1480,13 +1480,19 @@ static void Task_StartUnionRoomTrade(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
+        if (!AveronLink_CanExportMon(&gParties[B_TRAINER_PLAYER][monId], GetMultiplayerId() ^ 1))
+        {
+            SetMainCallback2(CB2_LinkError);
+            DestroyTask(taskId);
+            return;
+        }
         gTasks[taskId].data[0]++;
         SendBlock(0, &gParties[B_TRAINER_PLAYER][monId], sizeof(struct Pokemon));
         break;
     case 1:
         if (GetBlockReceivedStatus() == 3)
         {
-            gParties[B_TRAINER_OPPONENT_A][0] = *(struct Pokemon *)(gBlockRecvBuffer[GetMultiplayerId() ^ 1]);
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][0], gBlockRecvBuffer[GetMultiplayerId() ^ 1], 1, GetMultiplayerId() ^ 1);
             IncrementGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES);
             ResetBlockReceivedFlags();
             gTasks[taskId].data[0]++;

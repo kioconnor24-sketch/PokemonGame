@@ -79,6 +79,28 @@
 #include "constants/weather.h"
 #include "cable_club.h"
 
+// A battle exchange can copy the sender's party back into its own saveable
+// party. Do not send a lossy version; refuse an incompatible wide-origin
+// transfer before exposing those bytes to a legacy peer.
+static bool32 SendOriginCompatibleBattleParty(struct Pokemon *mons, u32 count)
+{
+    u8 recipients = BitmaskAllOtherLinkPlayers();
+    for (u32 player = 0; player < MAX_RFU_PLAYERS; player++)
+    {
+        if (!(recipients & (1 << player)))
+            continue;
+        for (u32 i = 0; i < count; i++)
+        {
+            if (!AveronLink_CanExportMon(&mons[i], player))
+            {
+                SetMainCallback2(CB2_LinkError);
+                return FALSE;
+            }
+        }
+    }
+    return SendBlock(recipients, mons, count * sizeof(*mons));
+}
+
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
@@ -944,8 +966,8 @@ static void CB2_HandleStartBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send Pokémon 1-2
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_PLAYER], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_PLAYER], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 4:
@@ -953,7 +975,7 @@ static void CB2_HandleStartBattle(void)
         {
             // Recv Pokémon 1-2
             ResetBlockReceivedFlags();
-            memcpy(gParties[B_TRAINER_OPPONENT_A], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
+            AveronLink_CopyReceivedParty(gParties[B_TRAINER_OPPONENT_A], gBlockRecvBuffer[enemyMultiplayerId], 2, enemyMultiplayerId);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -961,8 +983,8 @@ static void CB2_HandleStartBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send Pokémon 3-4
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_PLAYER][2], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_PLAYER][2], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 8:
@@ -970,7 +992,7 @@ static void CB2_HandleStartBattle(void)
         {
             // Recv Pokémon 3-4
             ResetBlockReceivedFlags();
-            memcpy(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[enemyMultiplayerId], 2, enemyMultiplayerId);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -978,8 +1000,8 @@ static void CB2_HandleStartBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send Pokémon 5-6
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_PLAYER][4], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_PLAYER][4], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 12:
@@ -987,7 +1009,7 @@ static void CB2_HandleStartBattle(void)
         {
             // Recv Pokémon 5-6
             ResetBlockReceivedFlags();
-            memcpy(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[enemyMultiplayerId], 2, enemyMultiplayerId);
 
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1150,8 +1172,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send Pokémon 1-2
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_PLAYER], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_PLAYER], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 4:
@@ -1159,8 +1181,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         {
             // Recv partner's Pokémon 1-2, put each player's mons in their own party
             ResetBlockReceivedFlags();
-            memcpy(gParties[B_TRAINER_PLAYER], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
-            memcpy(gParties[B_TRAINER_PARTNER], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon) * 2);
+            AveronLink_CopyReceivedParty(gParties[B_TRAINER_PLAYER], gBlockRecvBuffer[playerMultiplayerId], 2, playerMultiplayerId);
+            AveronLink_CopyReceivedParty(gParties[B_TRAINER_PARTNER], gBlockRecvBuffer[partnerMultiplayerId], 2, partnerMultiplayerId);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1168,8 +1190,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send Pokémon 3
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_PLAYER][2], sizeof(struct Pokemon));
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_PLAYER][2], 1))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 6:
@@ -1177,8 +1199,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         {
             // Recv partner's Pokémon 3, put each player's mon in their own party
             ResetBlockReceivedFlags();
-            memcpy(&gParties[B_TRAINER_PLAYER][2], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
-            memcpy(&gParties[B_TRAINER_PARTNER][2], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon));
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_PLAYER][2], gBlockRecvBuffer[playerMultiplayerId], 1, playerMultiplayerId);
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_PARTNER][2], gBlockRecvBuffer[partnerMultiplayerId], 1, partnerMultiplayerId);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1186,8 +1208,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent A Pokémon 1-2 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_OPPONENT_A], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_OPPONENT_A], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 8:
@@ -1196,7 +1218,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent A Pokémon 1-2 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(gParties[B_TRAINER_OPPONENT_A], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(gParties[B_TRAINER_OPPONENT_A], gBlockRecvBuffer[0], 2, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1204,8 +1226,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent A Pokémon 3-4 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_OPPONENT_A][2], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_OPPONENT_A][2], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 10:
@@ -1214,7 +1236,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent A Pokémon 3-4 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[0], 2, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1222,8 +1244,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent A Pokémon 5-6 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_OPPONENT_A][4], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_OPPONENT_A][4], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 12:
@@ -1232,7 +1254,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent A Pokémon 5-6 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[0], 2, 0);
 
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1241,8 +1263,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent B Pokémon 1-2 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_OPPONENT_B], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_OPPONENT_B], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 14:
@@ -1251,7 +1273,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent B Pokémon 1-2 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(gParties[B_TRAINER_OPPONENT_B], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(gParties[B_TRAINER_OPPONENT_B], gBlockRecvBuffer[0], 2, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1259,8 +1281,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent B Pokémon 3-4 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_OPPONENT_B][2], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_OPPONENT_B][2], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 16:
@@ -1269,7 +1291,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent B Pokémon 3-4 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(&gParties[B_TRAINER_OPPONENT_B][2], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_B][2], gBlockRecvBuffer[0], 2, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1277,8 +1299,8 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         if (IsLinkTaskFinished())
         {
             // Send opponent B Pokémon 5-6 to partner
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gParties[B_TRAINER_OPPONENT_B][4], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(&gParties[B_TRAINER_OPPONENT_B][4], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 18:
@@ -1287,7 +1309,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             // Recv opponent B Pokémon 5-6 (if not master)
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() != 0)
-                memcpy(&gParties[B_TRAINER_OPPONENT_B][4], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_B][4], gBlockRecvBuffer[0], 2, 0);
 
             for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
             {
@@ -1598,8 +1620,8 @@ static void CB2_HandleStartMultiBattle(void)
     case 3:
         if (IsLinkTaskFinished())
         {
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_PLAYER], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_PLAYER], 2))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 4:
@@ -1620,7 +1642,7 @@ static void CB2_HandleStartMultiBattle(void)
                     trainer = B_TRAINER_OPPONENT_A;
                 else
                     trainer = B_TRAINER_OPPONENT_B;
-                memcpy(gParties[trainer], gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
+                AveronLink_CopyReceivedParty(gParties[trainer], gBlockRecvBuffer[id], 2, id);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1628,8 +1650,8 @@ static void CB2_HandleStartMultiBattle(void)
     case 5:
         if (IsLinkTaskFinished())
         {
-            SendBlock(BitmaskAllOtherLinkPlayers(), gParties[B_TRAINER_PLAYER] + 2, sizeof(struct Pokemon));
-            gBattleCommunication[MULTIUSE_STATE]++;
+            if (SendOriginCompatibleBattleParty(gParties[B_TRAINER_PLAYER] + 2, 1))
+                gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 6:
@@ -1650,7 +1672,7 @@ static void CB2_HandleStartMultiBattle(void)
                     trainer = B_TRAINER_OPPONENT_A;
                 else
                     trainer = B_TRAINER_OPPONENT_B;
-                memcpy(&gParties[trainer][2], gBlockRecvBuffer[id], sizeof(struct Pokemon));
+                AveronLink_CopyReceivedParty(&gParties[trainer][2], gBlockRecvBuffer[id], 1, id);
             }
 
             for (enum BattleTrainer trainerParty = B_TRAINER_PLAYER; trainerParty < MAX_BATTLE_TRAINERS; trainerParty++)
