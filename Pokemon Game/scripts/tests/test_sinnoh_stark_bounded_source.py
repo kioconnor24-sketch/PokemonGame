@@ -2,9 +2,16 @@
 import importlib.util,json,struct,tempfile,unittest
 from pathlib import Path
 from PIL import Image
-ROOT=Path(__file__).resolve().parents[3];HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-bounded-source'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+ROOT=post_c_source_root(Path(__file__).resolve().parents[3]);HERE=ROOT/'Pokemon Game/Averon_Codex_Handoff/design/sinnoh/stark-bounded-source'
 s=importlib.util.spec_from_file_location('stark_bounded_tests',HERE/'build.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 ENGINE=ROOT/'Pokemon Game/engine'
+
+
 class BoundedStark(unittest.TestCase):
  def test_original_room2_cells_and_all_rgba_pixels_reassemble_exactly(self):
   old=HERE.parent/'stark-mountain/staged/Room2'

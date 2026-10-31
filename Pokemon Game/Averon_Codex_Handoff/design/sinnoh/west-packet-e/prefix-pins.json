@@ -1,0 +1,117 @@
+{
+  "comment": "Pre-packet-E production baseline. The 41 names and sections through 227 are main at the time of writing; packet D's five maps, sections 228-230 and Coronet South (blockdata as #347 builds it from west-packet-d/inputs) are its recorded, owner-decided shape. Update the D part only if D's production install differs, and say so in the PR.",
+  "sinnoh_prefix": [
+    "SandgemTown",
+    "SandgemTown_PokemonCenter_1F",
+    "Route201",
+    "TwinleafTown",
+    "Route202",
+    "VerityLakefront",
+    "LakeVerity",
+    "JubilifeCity",
+    "Route203",
+    "OreburghGate_1F",
+    "JubilifeCity_PokemonCenter_1F",
+    "JubilifeCity_Mart",
+    "JubilifeCity_PokemonSchool",
+    "Route204",
+    "RavagedPath",
+    "FloaromaTown",
+    "FloaromaMeadow",
+    "Route205_South",
+    "Route205_North",
+    "JubilifeCity_GlobalTerminal_1F",
+    "JubilifeCity_GlobalTerminal_2F",
+    "OreburghGate_B1F",
+    "FloaromaTown_FlowerShop",
+    "FloaromaTown_House1",
+    "FloaromaTown_Mart",
+    "FloaromaTown_House2",
+    "FloaromaMeadow_House",
+    "Route205_South_House",
+    "ValleyWindworks",
+    "ValleyWindworks_Inside",
+    "OreburghCity",
+    "OreburghCity_PokemonCenter_1F",
+    "OreburghCity_Mart",
+    "OreburghCity_Museum_1F",
+    "OreburghCity_Museum_2F",
+    "OreburghCity_Condo",
+    "OreburghCity_House1",
+    "OreburghCity_House2",
+    "OreburghCity_House3",
+    "OreburghCity_House4",
+    "OreburghCity_House5",
+    "Route206_North",
+    "Route206",
+    "Route206_South",
+    "Route207",
+    "MtCoronet_1F_South"
+  ],
+  "sections_through_227_sha256": "8e1e1832c86eb174c14b5bfc1966a9693ae0f248af1f66c3ab8489caf655d154",
+  "packet_d_sections": [
+    {
+      "id": "MAPSEC_ROUTE_206",
+      "value": 228,
+      "name": "ROUTE 206",
+      "region": "REGION_SINNOH"
+    },
+    {
+      "id": "MAPSEC_ROUTE_207",
+      "value": 229,
+      "name": "ROUTE 207",
+      "region": "REGION_SINNOH"
+    },
+    {
+      "id": "MAPSEC_MT_CORONET",
+      "value": 230,
+      "name": "MT. CORONET",
+      "region": "REGION_SINNOH"
+    }
+  ],
+  "coronet_south": {
+    "warp_events": [
+      {
+        "x": 5,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_ROUTE207",
+        "dest_warp_id": "0"
+      }
+    ],
+    "blockdata_sha256": "73d16fc2fe29afb6f129756fad002483d82a21e37fd2d1161a2a7731dc7014aa",
+    "header": {
+      "id": "MAP_MT_CORONET_1F_SOUTH",
+      "name": "MtCoronet_1F_South",
+      "layout": "LAYOUT_MT_CORONET_1F_SOUTH",
+      "map_type": "MAP_TYPE_UNDERGROUND",
+      "requires_flash": false,
+      "allow_cycling": true,
+      "allow_escaping": true,
+      "allow_running": true,
+      "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+      "region": "REGION_SINNOH",
+      "region_map_section": "MAPSEC_MT_CORONET",
+      "music": "MUS_PETALBURG_WOODS",
+      "weather": "WEATHER_NONE",
+      "show_map_name": true,
+      "connections": [],
+      "warp_events": [
+        {
+          "x": 5,
+          "y": 7,
+          "elevation": 0,
+          "dest_map": "MAP_ROUTE207",
+          "dest_warp_id": "0"
+        }
+      ],
+      "object_events": [],
+      "coord_events": [],
+      "bg_events": []
+    },
+    "header_sha256": "bc59c1e3599e412b57e08e304e26cc4ddd8cf0ae0023f91d9283bef6cb6a07e2",
+    "header_provenance": "Reviewed packet-D production contract: accepted #347 producer 1ace5b9ff6e962d79b35be16e11c07eff32cb439 header, with only owner-approved MAPSEC_MT_CORONET (230) replacing its DEV section; exact D installer emission must match before production acceptance."
+  },
+  "layouts_count": 832,
+  "layouts_sha256": "dc578617087eae341c9546212c786a0a4e4c138af2f93468ffbbf853b49d6940"
+}

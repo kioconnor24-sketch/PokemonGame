@@ -6,7 +6,11 @@ import struct
 import unittest
 from unittest import mock
 
-ROOT = Path(__file__).resolve().parents[3]
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
 HERE = ROOT / "Pokemon Game/Averon_Codex_Handoff/design/sinnoh/cycling-road-join"
 spec = importlib.util.spec_from_file_location("cycling_current", HERE / "prepare_current_runtime.py")
 m = importlib.util.module_from_spec(spec)

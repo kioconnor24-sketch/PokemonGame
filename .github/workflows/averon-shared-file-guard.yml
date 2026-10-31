@@ -40,11 +40,15 @@ jobs:
             const open = await github.paginate(github.rest.pulls.list,{
               owner,repo,state:'open',per_page:100});
             const other_open_prs=[];
+            const identity_peers=[];
             for (const p of open.filter(p => p.number !== number)) {
               const other = await github.paginate(github.rest.pulls.listFiles,{
                 owner,repo,pull_number:p.number,per_page:100});
               other_open_prs.push({number:p.number,files:other.filter(f=>f.status!=='removed')
                 .map(f=>f.filename)});
+              identity_peers.push({number:p.number,body:p.body||'',
+                files:other.map(f=>({filename:f.filename,status:f.status,
+                  previous_filename:f.previous_filename}))});
             }
             const comments = await github.paginate(github.rest.issues.listComments,{
               owner,repo,issue_number:15,per_page:100});
@@ -97,10 +101,15 @@ jobs:
                 identity_files[path]={base:parseFile(mainFile),head:parseFile(proposedFile)};
               }
             }
+            const {data: fresh} = await github.rest.pulls.get({owner,repo,pull_number:number});
+            if (fresh.head.sha !== pr.head.sha || (fresh.body||'') !== (pr.body||''))
+              throw Error('PR head or identity claim changed during required guard');
             fs.writeFileSync('/tmp/averon-guard.json',JSON.stringify({
-              pull_request:{number,head_sha:pr.head.sha,
+              pull_request:{number,head_sha:pr.head.sha,body:pr.body||'',
                 files:own.map(f=>({filename:f.filename,status:f.status,previous_filename:f.previous_filename}))},
-              other_open_prs,handoffs,manager_delegation_active,manager_handoffs,identity_files
+              other_open_prs,identity_peers,handoffs,manager_delegation_active,manager_handoffs,identity_files
             },null,2));
       - name: Enforce exclusive handoffs, prevent overlap and freeze violations
         run: python3 "Pokemon Game/scripts/coordination/check_protected_files.py" /tmp/averon-guard.json
+      - name: Enforce unique map work inside the required check
+        run: python3 "Pokemon Game/scripts/coordination/check_sinnoh_work_identity.py" --guard-snapshot /tmp/averon-guard.json

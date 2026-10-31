@@ -1,0 +1,2992 @@
+{
+  "schema": "averon-production-e-completed-runtime-v1",
+  "tested_source": "ec54de482eb683f553602d5e6eabb25cb2825d34",
+  "engine_tree": "3d10de2c7b682ea99d30e0d2b28913d4bd4a3acc",
+  "scope": "Completed checks only. Final complete RELEASE traversal and whole native/CI acceptance are recorded in PR358 before merge; they are not attested by this partial-scope receipt.",
+  "production_prefix": 46,
+  "candidate_total": 83,
+  "new_source_geometry": false,
+  "runtime": {
+    "normal-boundary-run": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_MT_CORONET_1F_SOUTH",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY"
+      ],
+      "build": "normal",
+      "rom_sha256": "5d1cf3f8da52d160f72f1d43b2ffeff5940f6ae53db61d6def7a420cdfc5562c",
+      "static_findings": [],
+      "save_before": "5b14bb444ae3974f4f0d222c0c29127dad4dc07c33171a0cf8993fe54da62244",
+      "checks": [
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208 warp 0 (63, 24) -> MAP_ROUTE208_ACCESS and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208",
+            [
+              [
+                63,
+                24
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208",
+            [
+              63,
+              24
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "follower visible (MAP_MT_CORONET_1F_SOUTH via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208 warp 2 (8, 19) -> MAP_MT_CORONET_1F_SOUTH and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208",
+            [
+              [
+                8,
+                20
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_MT_CORONET_1F_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "MAP_MT_CORONET_1F_SOUTH warp 1 (36, 20) -> MAP_ROUTE208 and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              [
+                36,
+                20
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              63,
+              24
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208_ACCESS warp 0 (1, 5) -> MAP_ROUTE208 and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              [
+                1,
+                5
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "follower visible (MAP_HEARTHOME_CITY via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208_ACCESS warp 1 (11, 5) -> MAP_HEARTHOME_CITY and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              [
+                11,
+                5
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              11,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              11,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "MAP_HEARTHOME_CITY warp 0 (4, 45) -> MAP_ROUTE208_ACCESS and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_HEARTHOME_CITY",
+            [
+              [
+                4,
+                45
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_HEARTHOME_CITY after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "Start menu opens and returns to the field",
+          "ok": true
+        },
+        {
+          "name": "SAVE (production-e)",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "flash_problems": [],
+      "save_after": "52e27f4d250de02584c8c828c51ceb6f3da66eb9b3c57ec500fc23431e9f1db3",
+      "verdict": "PASS"
+    },
+    "normal-boundary-continue": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_MT_CORONET_1F_SOUTH",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY"
+      ],
+      "build": "normal",
+      "rom_sha256": "5d1cf3f8da52d160f72f1d43b2ffeff5940f6ae53db61d6def7a420cdfc5562c",
+      "static_findings": [],
+      "save_before": "52e27f4d250de02584c8c828c51ceb6f3da66eb9b3c57ec500fc23431e9f1db3",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "52e27f4d250de02584c8c828c51ceb6f3da66eb9b3c57ec500fc23431e9f1db3",
+      "verdict": "PASS"
+    },
+    "release-boundary-run": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_MT_CORONET_1F_SOUTH",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY"
+      ],
+      "build": "release",
+      "rom_sha256": "53d088ac7533933e180853b5ea630442962601bb6b4442841a7919f05935437a",
+      "static_findings": [],
+      "save_before": "5b14bb444ae3974f4f0d222c0c29127dad4dc07c33171a0cf8993fe54da62244",
+      "checks": [
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208 warp 0 (63, 24) -> MAP_ROUTE208_ACCESS and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208",
+            [
+              [
+                63,
+                24
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208",
+            [
+              63,
+              24
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "follower visible (MAP_MT_CORONET_1F_SOUTH via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_MT_CORONET_1F_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208 warp 2 (8, 19) -> MAP_MT_CORONET_1F_SOUTH and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208",
+            [
+              [
+                8,
+                20
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_MT_CORONET_1F_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "MAP_MT_CORONET_1F_SOUTH warp 1 (36, 20) -> MAP_ROUTE208 and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              [
+                36,
+                20
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_MT_CORONET_1F_SOUTH",
+            [
+              36,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_MT_CORONET_1F_SOUTH after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208 via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              63,
+              24
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208_ACCESS warp 0 (1, 5) -> MAP_ROUTE208 and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              [
+                1,
+                5
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "follower visible (MAP_HEARTHOME_CITY via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "MAP_ROUTE208_ACCESS warp 1 (11, 5) -> MAP_HEARTHOME_CITY and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              [
+                11,
+                5
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              11,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_ROUTE208_ACCESS via warp)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after warping into MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              11,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "MAP_HEARTHOME_CITY warp 0 (4, 45) -> MAP_ROUTE208_ACCESS and back",
+          "ok": true,
+          "leg": "back",
+          "expected": [
+            "MAP_HEARTHOME_CITY",
+            [
+              [
+                4,
+                45
+              ]
+            ]
+          ],
+          "got": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (MAP_HEARTHOME_CITY after warp round trip)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "Start menu opens and returns to the field",
+          "ok": true
+        },
+        {
+          "name": "SAVE (production-e)",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "flash_problems": [],
+      "save_after": "4e70e127e3a534774a590463c177d6356c346d8e5d7bb7b69510e70c12f576f3",
+      "verdict": "PASS"
+    },
+    "release-boundary-continue": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_MT_CORONET_1F_SOUTH",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY"
+      ],
+      "build": "release",
+      "rom_sha256": "53d088ac7533933e180853b5ea630442962601bb6b4442841a7919f05935437a",
+      "static_findings": [],
+      "save_before": "4e70e127e3a534774a590463c177d6356c346d8e5d7bb7b69510e70c12f576f3",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "4e70e127e3a534774a590463c177d6356c346d8e5d7bb7b69510e70c12f576f3",
+      "verdict": "PASS"
+    },
+    "normal-full-boundary-run": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY",
+        "MAP_ROUTE209_ACCESS",
+        "MAP_ROUTE209",
+        "MAP_SOLACEON_TOWN",
+        "MAP_ROUTE210_SOUTH",
+        "MAP_ROUTE208_HOUSE1",
+        "MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+        "MAP_SOLACEON_TOWN_MART",
+        "MAP_SOLACEON_TOWN_HOUSE1",
+        "MAP_ROUTE210_SOUTH_HOUSE1",
+        "MAP_LOST_TOWER_1F",
+        "MAP_LOST_TOWER_2F",
+        "MAP_LOST_TOWER_3F",
+        "MAP_LOST_TOWER_4F",
+        "MAP_LOST_TOWER_5F",
+        "MAP_LOST_TOWER_6F",
+        "MAP_SOLACEON_RUINS_ENTRANCE",
+        "MAP_SOLACEON_RUINS_B1F",
+        "MAP_SOLACEON_RUINS_A",
+        "MAP_SOLACEON_RUINS_B",
+        "MAP_SOLACEON_RUINS_C",
+        "MAP_SOLACEON_RUINS_B2F_WEST",
+        "MAP_SOLACEON_RUINS_B2F_EAST",
+        "MAP_SOLACEON_RUINS_B3F_SANCTUM",
+        "MAP_AMITY_SQUARE",
+        "MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+        "MAP_HEARTHOME_CITY_MART",
+        "MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+        "MAP_HEARTHOME_CITY_CONTEST_HALL",
+        "MAP_HEARTHOME_CITY_HOUSE3",
+        "MAP_HEARTHOME_CITY_HOUSE4",
+        "MAP_HEARTHOME_CITY_HOUSE6",
+        "MAP_HEARTHOME_CITY_HOUSE7",
+        "MAP_HEARTHOME_CITY_HOUSE8",
+        "MAP_HEARTHOME_CITY_HOUSE9"
+      ],
+      "build": "normal",
+      "rom_sha256": "5d1cf3f8da52d160f72f1d43b2ffeff5940f6ae53db61d6def7a420cdfc5562c",
+      "static_findings": [],
+      "save_before": "5b14bb444ae3974f4f0d222c0c29127dad4dc07c33171a0cf8993fe54da62244",
+      "checks": [
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "reached MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE208)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE208",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208",
+            [
+              8,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE208_ACCESS)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE208_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY",
+            [
+              4,
+              45
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE209_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE209_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE209_ACCESS)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE209_ACCESS",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE209_ACCESS",
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE209",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE209",
+            [
+              4,
+              62
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE209)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE209",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE209",
+            [
+              4,
+              62
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_TOWN",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN",
+            [
+              15,
+              43
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_TOWN)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_TOWN",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN",
+            [
+              15,
+              43
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE210_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE210_SOUTH",
+            [
+              20,
+              93
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE210_SOUTH)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE210_SOUTH",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE210_SOUTH",
+            [
+              20,
+              93
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE208_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE208_HOUSE1)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE208_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE208_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+            [
+              7,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_TOWN_POKEMON_CENTER_1F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+            [
+              7,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_TOWN_MART",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_MART",
+            [
+              3,
+              7
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_TOWN_MART)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_TOWN_MART",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_MART",
+            [
+              3,
+              7
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_TOWN_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_TOWN_HOUSE1)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_TOWN_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_TOWN_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_ROUTE210_SOUTH_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE210_SOUTH_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_ROUTE210_SOUTH_HOUSE1)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_ROUTE210_SOUTH_HOUSE1",
+          "ok": true,
+          "at": [
+            "MAP_ROUTE210_SOUTH_HOUSE1",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_1F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_1F",
+            [
+              17,
+              18
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_1F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_1F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_1F",
+            [
+              17,
+              18
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_2F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_2F",
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_2F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_2F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_2F",
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_3F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_3F",
+            [
+              10,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_3F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_3F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_3F",
+            [
+              10,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_4F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_4F",
+            [
+              2,
+              6
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_4F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_4F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_4F",
+            [
+              2,
+              6
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_5F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_5F",
+            [
+              10,
+              6
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_5F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_5F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_5F",
+            [
+              10,
+              6
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_LOST_TOWER_6F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_6F",
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_LOST_TOWER_6F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_LOST_TOWER_6F",
+          "ok": true,
+          "at": [
+            "MAP_LOST_TOWER_6F",
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_ENTRANCE",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_ENTRANCE",
+            [
+              14,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_ENTRANCE)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_ENTRANCE",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_ENTRANCE",
+            [
+              14,
+              3
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_B1F",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B1F",
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_B1F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_B1F",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B1F",
+            [
+              21,
+              3
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_A",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_A",
+            [
+              8,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_A)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_A",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_A",
+            [
+              8,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_B",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B",
+            [
+              8,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_B)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_B",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B",
+            [
+              8,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_C",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_C",
+            [
+              8,
+              5
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_C)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_C",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_C",
+            [
+              8,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_B2F_WEST",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B2F_WEST",
+            [
+              5,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_B2F_WEST)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_B2F_WEST",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B2F_WEST",
+            [
+              5,
+              3
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_B2F_EAST",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B2F_EAST",
+            [
+              24,
+              4
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_B2F_EAST)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_B2F_EAST",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B2F_EAST",
+            [
+              24,
+              3
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_SOLACEON_RUINS_B3F_SANCTUM",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B3F_SANCTUM",
+            [
+              30,
+              18
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_SOLACEON_RUINS_B3F_SANCTUM)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_SOLACEON_RUINS_B3F_SANCTUM",
+          "ok": true,
+          "at": [
+            "MAP_SOLACEON_RUINS_B3F_SANCTUM",
+            [
+              30,
+              17
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_AMITY_SQUARE",
+          "ok": true,
+          "at": [
+            "MAP_AMITY_SQUARE",
+            [
+              8,
+              35
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_AMITY_SQUARE)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_AMITY_SQUARE",
+          "ok": true,
+          "at": [
+            "MAP_AMITY_SQUARE",
+            [
+              8,
+              35
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+            [
+              7,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_POKEMON_CENTER_1F)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+            [
+              7,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_MART",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_MART",
+            [
+              3,
+              7
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_MART)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_MART",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_MART",
+            [
+              3,
+              7
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_CONTEST_LOBBY)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+            [
+              14,
+              11
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_CONTEST_HALL",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_CONTEST_HALL",
+            [
+              19,
+              32
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_CONTEST_HALL)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_CONTEST_HALL",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_CONTEST_HALL",
+            [
+              19,
+              32
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE3",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE3",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE3)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE3",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE3",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE4",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE4",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE4)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE4",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE4",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE6",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE6",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE6)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE6",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE6",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE7",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE7",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE7)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE7",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE7",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE8",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE8",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE8)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE8",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE8",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "reached MAP_HEARTHOME_CITY_HOUSE9",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE9",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (production traversal MAP_HEARTHOME_CITY_HOUSE9)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        },
+        {
+          "name": "an exit is reachable after production traversal MAP_HEARTHOME_CITY_HOUSE9",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE9",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "Start menu opens and returns to the field",
+          "ok": true
+        },
+        {
+          "name": "SAVE (production-e)",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE9",
+            [
+              3,
+              8
+            ]
+          ]
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "flash_problems": [],
+      "save_after": "e1eb7c23bb6f802f5da0b86d0a73cee52e423d5c9af7171bf3607232a6840c70",
+      "verdict": "PASS"
+    },
+    "normal-full-boundary-continue": {
+      "maps": [
+        "MAP_ROUTE208",
+        "MAP_ROUTE208_ACCESS",
+        "MAP_HEARTHOME_CITY",
+        "MAP_ROUTE209_ACCESS",
+        "MAP_ROUTE209",
+        "MAP_SOLACEON_TOWN",
+        "MAP_ROUTE210_SOUTH",
+        "MAP_ROUTE208_HOUSE1",
+        "MAP_SOLACEON_TOWN_POKEMON_CENTER_1F",
+        "MAP_SOLACEON_TOWN_MART",
+        "MAP_SOLACEON_TOWN_HOUSE1",
+        "MAP_ROUTE210_SOUTH_HOUSE1",
+        "MAP_LOST_TOWER_1F",
+        "MAP_LOST_TOWER_2F",
+        "MAP_LOST_TOWER_3F",
+        "MAP_LOST_TOWER_4F",
+        "MAP_LOST_TOWER_5F",
+        "MAP_LOST_TOWER_6F",
+        "MAP_SOLACEON_RUINS_ENTRANCE",
+        "MAP_SOLACEON_RUINS_B1F",
+        "MAP_SOLACEON_RUINS_A",
+        "MAP_SOLACEON_RUINS_B",
+        "MAP_SOLACEON_RUINS_C",
+        "MAP_SOLACEON_RUINS_B2F_WEST",
+        "MAP_SOLACEON_RUINS_B2F_EAST",
+        "MAP_SOLACEON_RUINS_B3F_SANCTUM",
+        "MAP_AMITY_SQUARE",
+        "MAP_HEARTHOME_CITY_POKEMON_CENTER_1F",
+        "MAP_HEARTHOME_CITY_MART",
+        "MAP_HEARTHOME_CITY_CONTEST_LOBBY",
+        "MAP_HEARTHOME_CITY_CONTEST_HALL",
+        "MAP_HEARTHOME_CITY_HOUSE3",
+        "MAP_HEARTHOME_CITY_HOUSE4",
+        "MAP_HEARTHOME_CITY_HOUSE6",
+        "MAP_HEARTHOME_CITY_HOUSE7",
+        "MAP_HEARTHOME_CITY_HOUSE8",
+        "MAP_HEARTHOME_CITY_HOUSE9"
+      ],
+      "build": "normal",
+      "rom_sha256": "5d1cf3f8da52d160f72f1d43b2ffeff5940f6ae53db61d6def7a420cdfc5562c",
+      "static_findings": [],
+      "save_before": "e1eb7c23bb6f802f5da0b86d0a73cee52e423d5c9af7171bf3607232a6840c70",
+      "checks": [
+        {
+          "name": "fresh CONTINUE restores the saved state",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE9",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "starts inside the batch",
+          "ok": true,
+          "at": [
+            "MAP_HEARTHOME_CITY_HOUSE9",
+            [
+              3,
+              8
+            ]
+          ]
+        },
+        {
+          "name": "follower visible (start)",
+          "ok": true,
+          "follower": {
+            "species": 393,
+            "graphicsId": 16777,
+            "invisible": false
+          }
+        }
+      ],
+      "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+      "alive": true,
+      "save_after": "e1eb7c23bb6f802f5da0b86d0a73cee52e423d5c9af7171bf3607232a6840c70",
+      "verdict": "PASS"
+    }
+  },
+  "capacity": {
+    "normal": {
+      "EWRAM": {
+        "used_bytes": 226480,
+        "capacity_bytes": 262144,
+        "remaining_bytes": 35664,
+        "used_percent": 86.4,
+        "linker_reported_percent": 86.4
+      },
+      "IWRAM": {
+        "used_bytes": 28392,
+        "capacity_bytes": 32768,
+        "remaining_bytes": 4376,
+        "used_percent": 86.65,
+        "linker_reported_percent": 86.65
+      },
+      "ROM": {
+        "used_bytes": 17541276,
+        "capacity_bytes": 33554432,
+        "remaining_bytes": 16013156,
+        "used_percent": 52.28,
+        "linker_reported_percent": 52.28
+      }
+    },
+    "release": {
+      "EWRAM": {
+        "used_bytes": 226482,
+        "capacity_bytes": 262144,
+        "remaining_bytes": 35662,
+        "used_percent": 86.4,
+        "linker_reported_percent": 86.4
+      },
+      "IWRAM": {
+        "used_bytes": 28336,
+        "capacity_bytes": 32768,
+        "remaining_bytes": 4432,
+        "used_percent": 86.47,
+        "linker_reported_percent": 86.47
+      },
+      "ROM": {
+        "used_bytes": 17660420,
+        "capacity_bytes": 33554432,
+        "remaining_bytes": 15894012,
+        "used_percent": 52.63,
+        "linker_reported_percent": 52.63
+      }
+    }
+  },
+  "save_headroom": {
+    "SaveBlock1": {
+      "used_bytes": 15568,
+      "limit_bytes": 15872,
+      "free_bytes": 304
+    },
+    "SaveBlock2": {
+      "used_bytes": 3884,
+      "limit_bytes": 3968,
+      "free_bytes": 84
+    },
+    "SaveBlock3": {
+      "used_bytes": 68,
+      "limit_bytes": 1624,
+      "free_bytes": 1556
+    },
+    "PokemonStorage": {
+      "used_bytes": 34144,
+      "limit_bytes": 35712,
+      "free_bytes": 1568
+    }
+  },
+  "source_equivalence": {
+    "source_head": "035c972885542799b324d44352506cc92f211a83",
+    "candidate_head": "b55fabbc1922f82b782c01b476784ed062e961e1",
+    "maps": [
+      "Route208",
+      "Route208_Access",
+      "HearthomeCity",
+      "Route209_Access",
+      "Route209",
+      "SolaceonTown",
+      "Route210_South",
+      "Route208_House1",
+      "SolaceonTown_PokemonCenter_1F",
+      "SolaceonTown_Mart",
+      "SolaceonTown_House1",
+      "Route210_South_House1",
+      "LostTower_1F",
+      "LostTower_2F",
+      "LostTower_3F",
+      "LostTower_4F",
+      "LostTower_5F",
+      "LostTower_6F",
+      "SolaceonRuins_Entrance",
+      "SolaceonRuins_B1F",
+      "SolaceonRuins_A",
+      "SolaceonRuins_B",
+      "SolaceonRuins_C",
+      "SolaceonRuins_B2F_West",
+      "SolaceonRuins_B2F_East",
+      "SolaceonRuins_B3F_Sanctum",
+      "AmitySquare",
+      "HearthomeCity_PokemonCenter_1F",
+      "HearthomeCity_Mart",
+      "HearthomeCity_ContestLobby",
+      "HearthomeCity_ContestHall",
+      "HearthomeCity_House3",
+      "HearthomeCity_House4",
+      "HearthomeCity_House6",
+      "HearthomeCity_House7",
+      "HearthomeCity_House8",
+      "HearthomeCity_House9"
+    ],
+    "identical_map_script_block_border_banks": [
+      {
+        "path": "data/maps/MtCoronet_1F_South/map.json",
+        "sha256": "1b0fb8d0f694f2acb25b35868943824861f4671a49369ada7fc31c593f5414a4"
+      },
+      {
+        "path": "data/layouts/MtCoronet_1F_South/map.bin",
+        "sha256": "b8e9d9f1e5e262a098d67f4b4a1a5005527d90316eda7ce0b3c17a14911bbb37"
+      },
+      {
+        "path": "data/maps/Route208/map.json",
+        "sha256": "fd38d20f12a76609dd3f8d0b30ed5cfe99bd21fc34810e9781dbfcffab3192ee"
+      },
+      {
+        "path": "data/layouts/Route208/map.bin",
+        "sha256": "d32988e3035500c044b64cb4faaf5e1d57bec9e9b8ff76ef3159fadc7fbbe89d"
+      },
+      {
+        "path": "data/layouts/Route208/border.bin",
+        "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc"
+      },
+      {
+        "path": "data/maps/Route208/scripts.inc",
+        "sha256": "29e4ef1d798c4e7326684c49bea31ff1f4cb87bdeca012ecfc9053ece8c94af9"
+      },
+      {
+        "path": "data/maps/Route208_Access/map.json",
+        "sha256": "8a2144560258ebfbd3c0aceab11177a0494736ccfaaf0d5dce46a052626a40c7"
+      },
+      {
+        "path": "data/layouts/Route208_Access/map.bin",
+        "sha256": "3006b2c5accf749a75222bfa68024352a88f559c8202613786fcf5cbbb1526ee"
+      },
+      {
+        "path": "data/layouts/Route208_Access/border.bin",
+        "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70"
+      },
+      {
+        "path": "data/maps/Route208_Access/scripts.inc",
+        "sha256": "00703f62e7d2941914e14cedd957c3a859972c7f71b8e7daab252363f3dd8022"
+      },
+      {
+        "path": "data/maps/HearthomeCity/map.json",
+        "sha256": "43218398df72d6ff5cf4fd3fe2ad5d1683bddd74cc9765624fe60dfa658ba1ce"
+      },
+      {
+        "path": "data/layouts/HearthomeCity/map.bin",
+        "sha256": "b92ca698159dca582181c743eafbf7eb39684b151491aad427a825500e9e5936"
+      },
+      {
+        "path": "data/layouts/HearthomeCity/border.bin",
+        "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079"
+      },
+      {
+        "path": "data/maps/HearthomeCity/scripts.inc",
+        "sha256": "862a45cea6dad0d3dc1d20dedb5b738c775d7c97a86e6047aef27490c9782007"
+      },
+      {
+        "path": "data/maps/Route209_Access/map.json",
+        "sha256": "f31142d29d795806c7e7f1954a6b82b6920a217f5256e8abc71704b18e8b8908"
+      },
+      {
+        "path": "data/layouts/Route209_Access/map.bin",
+        "sha256": "3006b2c5accf749a75222bfa68024352a88f559c8202613786fcf5cbbb1526ee"
+      },
+      {
+        "path": "data/layouts/Route209_Access/border.bin",
+        "sha256": "efef8d5a9f8dbe5bb218e6b0cc452583eb9d1452b615b1c7ab66ad49c82e9d70"
+      },
+      {
+        "path": "data/maps/Route209_Access/scripts.inc",
+        "sha256": "9ce71f98a563775f69b69331aca55f46bfd1af8deeba223bee722c0c8224dc37"
+      },
+      {
+        "path": "data/maps/Route209/map.json",
+        "sha256": "38d00d1a90f42da9e146d5cdd8746cd9136dbab89201bac1261622ed05f97adc"
+      },
+      {
+        "path": "data/layouts/Route209/map.bin",
+        "sha256": "4c998e6de09c55643ed4a34226ad931bba8ce01689752cd1b625f532a14c5ab5"
+      },
+      {
+        "path": "data/layouts/Route209/border.bin",
+        "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079"
+      },
+      {
+        "path": "data/maps/Route209/scripts.inc",
+        "sha256": "eff10b3ae74cb6628b8b024226f72d83381c6a4d3847a3925ce95fbe5eec9dee"
+      },
+      {
+        "path": "data/maps/SolaceonTown/map.json",
+        "sha256": "9e87531d6142d7cbebd3afeef0dc962f877d6175b042351463dcef762a6e319d"
+      },
+      {
+        "path": "data/layouts/SolaceonTown/map.bin",
+        "sha256": "59ed5ebcb5c58bfed6cf0eedd7c3796c0d3bb6359eda6c71b61547af6040b650"
+      },
+      {
+        "path": "data/layouts/SolaceonTown/border.bin",
+        "sha256": "79b69203a110e809fc15c473032143cb8861764ce3c1959dba6bbba7b60f1079"
+      },
+      {
+        "path": "data/maps/SolaceonTown/scripts.inc",
+        "sha256": "3ebc8dd5ee2e9362870fcad1b9e4e0c485488f706d91907a97f31300075663b7"
+      },
+      {
+        "path": "data/maps/Route210_South/map.json",
+        "sha256": "06592f81371f4cb8bd43329298c57c317e670c1536d691bd8e9969f0f96777f9"
+      },
+      {
+        "path": "data/layouts/Route210_South/map.bin",
+        "sha256": "d50cb98c3645ffa2744b6f3596f85e4580866d998fe65c13797c9fecf65df449"
+      },
+      {
+        "path": "data/layouts/Route210_South/border.bin",
+        "sha256": "b17588a0759ba33914dd907b908b7070de1672ebf7efb8b36156c9b4d93d47dc"
+      },
+      {
+        "path": "data/maps/Route210_South/scripts.inc",
+        "sha256": "3baa15c494395398aad73e049ad9e2426a3eca1fe07c963551ded9a4e6dee186"
+      },
+      {
+        "path": "data/maps/Route208_House1/map.json",
+        "sha256": "ed2387f7305977f657601e76a83520592240062bb7ebd75ac0916a5b662cf392"
+      },
+      {
+        "path": "data/maps/Route208_House1/scripts.inc",
+        "sha256": "cdaa2f654bbf275e6bb8c1ca8e8f1acf2d1c6f7c4f8b6ad4b85659bc63522c09"
+      },
+      {
+        "path": "data/maps/SolaceonTown_PokemonCenter_1F/map.json",
+        "sha256": "001164cc5e3e15156b8769d32ba6634dfb091b05c2dfad63cc6ce4d7596d034d"
+      },
+      {
+        "path": "data/maps/SolaceonTown_PokemonCenter_1F/scripts.inc",
+        "sha256": "956420cc8e400b887444f7ce0ccf09609015486df8a16d945c9c91f5855a11bc"
+      },
+      {
+        "path": "data/maps/SolaceonTown_Mart/map.json",
+        "sha256": "02577b2c6a935bb0a181191f816e7013b3d0f3b74cb1b5703fb8679bd13d4fd8"
+      },
+      {
+        "path": "data/maps/SolaceonTown_Mart/scripts.inc",
+        "sha256": "9d3b7bba845b2eacbda5a3db8abf3132cd679990af3bc0aecce5b372fd92bbb4"
+      },
+      {
+        "path": "data/maps/SolaceonTown_House1/map.json",
+        "sha256": "f5d299435f669dce1ad4674613ed4bca3d3d5e042d590a97857540a3add27be1"
+      },
+      {
+        "path": "data/maps/SolaceonTown_House1/scripts.inc",
+        "sha256": "2de4748ba7920562fca7fd0b1c47d53d70784a5c793b81b4757a4b5312ef5bcf"
+      },
+      {
+        "path": "data/maps/Route210_South_House1/map.json",
+        "sha256": "5489f1be95be8dd70ae037e008901db1d0fa907de395a6143f80f4514222366f"
+      },
+      {
+        "path": "data/maps/Route210_South_House1/scripts.inc",
+        "sha256": "3802bc408bba77bec63b2b70979e3ef96cc7fd9d96f15a7a085bdd7fdefb09af"
+      },
+      {
+        "path": "data/maps/LostTower_1F/map.json",
+        "sha256": "ded64cd550d1c1b6ea711d8498e2789c1b98bd7266b1d08c68a285458dc450ad"
+      },
+      {
+        "path": "data/maps/LostTower_1F/scripts.inc",
+        "sha256": "a4255a9e593440b480351052b0a0f68a535ac717d3eec783c0a31c720dd375a4"
+      },
+      {
+        "path": "data/maps/LostTower_2F/map.json",
+        "sha256": "07998aa4bac88c281fd42dd716ee6c4b546b962d6c77fce8a6d49af3e773243e"
+      },
+      {
+        "path": "data/maps/LostTower_2F/scripts.inc",
+        "sha256": "85989b6dda51a6a382c7a4f48108582b3dfcc4e2898e16b080e55bec0b398ce5"
+      },
+      {
+        "path": "data/maps/LostTower_3F/map.json",
+        "sha256": "9e694fe54872d2d4e501e1d0f2000aac4b604a588d68aac2d6a2d6623cbb4937"
+      },
+      {
+        "path": "data/maps/LostTower_3F/scripts.inc",
+        "sha256": "357982d8b7987e93a3f0cc9217f2b51b8e6bb4823117d31e7c98991352da751e"
+      },
+      {
+        "path": "data/maps/LostTower_4F/map.json",
+        "sha256": "058e88399bf6c4290450d631984d744023545069d6074c661c90e56ce3d5d9b4"
+      },
+      {
+        "path": "data/maps/LostTower_4F/scripts.inc",
+        "sha256": "2579176d3babdad76e4024d0fbc73ae9317918becd1c4742e6b5c6d9e751bf18"
+      },
+      {
+        "path": "data/maps/LostTower_5F/map.json",
+        "sha256": "b1891530546111d684523683281cae6a38d5b19e2f32b9422d2806a01f219118"
+      },
+      {
+        "path": "data/maps/LostTower_5F/scripts.inc",
+        "sha256": "061d8c577dddd061fe1e4b1d758fae4b904dad1e54cf66147e16a1b1b391c910"
+      },
+      {
+        "path": "data/maps/LostTower_6F/map.json",
+        "sha256": "8d1881519888534b9e199d61b61d4f054a5dc185edbdfeada913a5f9d10c3c0d"
+      },
+      {
+        "path": "data/maps/LostTower_6F/scripts.inc",
+        "sha256": "34331e14a5c43436ea6a06d305b4d932fe53fd0c3018195f035bac9a19369cdb"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_Entrance/map.json",
+        "sha256": "dba0b8960aafed88f3ff7ee1baf8df8b7c0a8888e630b09daadc23b9f27fece4"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_Entrance/scripts.inc",
+        "sha256": "5a2db2853ec4a1c57b9ad3cdf61f295dc59d66bcf765f907411b34d1a31e6bc7"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_Entrance/map.bin",
+        "sha256": "0171227f7f61b95e88a79744dc2960ee32723349ecbbaf1cfa7983e7d50bd742"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_Entrance/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B1F/map.json",
+        "sha256": "8a2910857f80c695069d732bcaddda942ac50e4df5490cc813e33cbf65b5804c"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B1F/scripts.inc",
+        "sha256": "af58bf149ba4b7303a26586c46bdec0040a4495d5f86385f0a0203d41411f3f0"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B1F/map.bin",
+        "sha256": "2cccf564bc2cb0c91914beda82aca37892447f65abae9baf93c6d2ec6d0ab33c"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B1F/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_A/map.json",
+        "sha256": "836606aca57937ef4228a030b819403e9035e35aadf0d04db26bb49a81a50b07"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_A/scripts.inc",
+        "sha256": "688d17e8d51bd172970966f8263bdbd9d5057b068274e407cf5d3890dcc8a6dd"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_A/map.bin",
+        "sha256": "e2ad8f443fbb26d51419f27d0b7317e35eff0361822fddbc9677c5caea216877"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_A/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B/map.json",
+        "sha256": "dfb7cd94fa82a9b4a06d62270660184c6975531f25a2551b18b9888836c12740"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B/scripts.inc",
+        "sha256": "0cc3af8cf6b7dcfbfe290185dca2a3a753d8c630d23d9d42ecf90d3fb293f0c6"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B/map.bin",
+        "sha256": "d812336919c44738086be66056d55ea1192f6142667d107e5560c5ae9e470a8d"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_C/map.json",
+        "sha256": "656892f1d9d1da197f27b5f915fed882bb1299f58d931612b57d5f562fa24d3d"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_C/scripts.inc",
+        "sha256": "2940635462a3bae060e37a2daf9138d8b78803599119d290d7917ac170407a13"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_C/map.bin",
+        "sha256": "e2ad8f443fbb26d51419f27d0b7317e35eff0361822fddbc9677c5caea216877"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_C/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B2F_West/map.json",
+        "sha256": "89b89fe2c6f3bc32a5d3e0108f961c30e191a6cc0693c8563efcd1c89484d854"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B2F_West/scripts.inc",
+        "sha256": "2549fef6c073ca74147470051532c8b6e1c33d039be026ad2e93dc7a07e05e1d"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B2F_West/map.bin",
+        "sha256": "af883551f2c06202171f427185a7ba8764360feaef497c9b588aa56322753f73"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B2F_West/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B2F_East/map.json",
+        "sha256": "842c871f971916a54e8c42216e6c2d381e4ba92fdd78092d457324b88503f0f5"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B2F_East/scripts.inc",
+        "sha256": "e08e5fd23b92cbdd7043fadd538969ae7d0630c3d2fbf2614c1e38434b5f1f5a"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B2F_East/map.bin",
+        "sha256": "b1e6b651305b098a4319a75401af86ebaa2f58062e46eb16da3b62d44f3026e0"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B2F_East/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B3F_Sanctum/map.json",
+        "sha256": "a295b257997a4c8a2a0aab0eea103535fde9ca157d9b92157ac1fd272182a472"
+      },
+      {
+        "path": "data/maps/SolaceonRuins_B3F_Sanctum/scripts.inc",
+        "sha256": "8a63ef4bb5effe805896a0049f5db1a0df9273fa59bddcdb6a1b243eb6c537ef"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B3F_Sanctum/map.bin",
+        "sha256": "e5e3006ff2ee1ddec63da908026d5b46e9664d40d2528bbfa255227ce333b35f"
+      },
+      {
+        "path": "data/layouts/SolaceonRuins_B3F_Sanctum/border.bin",
+        "sha256": "7602874dc9bffd5b2d8bed96db1e02d6fcc885e9713efb570d72b190593bde18"
+      },
+      {
+        "path": "data/maps/AmitySquare/map.json",
+        "sha256": "32ec1ee4e26a539f1bef335c4d324e21aff4e770bdb6bc9cb04e61cecdb83bdd"
+      },
+      {
+        "path": "data/maps/AmitySquare/scripts.inc",
+        "sha256": "4c0e37f22cf03aa52c315df5f95e6e0f8f45409f721dd7f746d80bcf3c3c030e"
+      },
+      {
+        "path": "data/layouts/AmitySquare/map.bin",
+        "sha256": "a7a1bcee718fbc535fa8af491424bf18d4bfc2b39b3afe272afbd6d4dd843413"
+      },
+      {
+        "path": "data/layouts/AmitySquare/border.bin",
+        "sha256": "3647d2287b2d104d8c621e0b676c535ff145fa21c46ec4aefd9e0ffc5e3b3bdf"
+      },
+      {
+        "path": "data/maps/HearthomeCity_PokemonCenter_1F/map.json",
+        "sha256": "8e6bb16ddf22f93f827bba702729aa6530abae0d00bec860ad7fb63426bfbd45"
+      },
+      {
+        "path": "data/maps/HearthomeCity_PokemonCenter_1F/scripts.inc",
+        "sha256": "32e57697989f93ef6c21cde28d4b40229dea785d2de975d250227bcabb3ccfc8"
+      },
+      {
+        "path": "data/maps/HearthomeCity_Mart/map.json",
+        "sha256": "a99d1e23d719e8090bf4ec9c3bb3d8e4c99566d35903df5c25aa2194c66c37c7"
+      },
+      {
+        "path": "data/maps/HearthomeCity_Mart/scripts.inc",
+        "sha256": "656b2b8ac9279cc4d11f86d090906b422b5399e40544df4f75f156a0dd42052b"
+      },
+      {
+        "path": "data/maps/HearthomeCity_ContestLobby/map.json",
+        "sha256": "aebbca5e5e5454b932bfd5841e873963ad7d94da7e1cde1ebecf10ae2f4de819"
+      },
+      {
+        "path": "data/maps/HearthomeCity_ContestLobby/scripts.inc",
+        "sha256": "c956a33a53a2232fa4bf3ea90c99384d0ab56e1dd371507372f923ccb496660a"
+      },
+      {
+        "path": "data/maps/HearthomeCity_ContestHall/map.json",
+        "sha256": "3462a66c19bd2563e75dc8c98578cb2517005d0b8ffc378a086b1b86a959c404"
+      },
+      {
+        "path": "data/maps/HearthomeCity_ContestHall/scripts.inc",
+        "sha256": "22d3f65ed2976b21f9d5508fc5d23f2d61ae0bb0b91ef8548997a897793092f3"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House3/map.json",
+        "sha256": "73fd75112108801caff0f587f5710b754d59a45641edcb180ba03dd9c79dddba"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House3/scripts.inc",
+        "sha256": "d7fe3e3839841f33a9ab945d43e4196d86faa2d82d94c97bd921bfa8584a1251"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House4/map.json",
+        "sha256": "f7186ed01600b0b265657b2712b93cd93f604851983e883f646f5f69eb1feeb4"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House4/scripts.inc",
+        "sha256": "e513b697ba27e157cd54a28e6bdc5cb6a09c4712fec1f8f740c9c596dd21acaa"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House6/map.json",
+        "sha256": "b988e6504867c196afc9502376f55ac7776d5a1e2f407917c57f8b909cbcc780"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House6/scripts.inc",
+        "sha256": "0549c73313620d8f2dd456c05cadef7205ab5ef782ccbd6fc67a3afca9e1b5f1"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House7/map.json",
+        "sha256": "9e7baa5162e1aa0fe8a5e1abef1f463c1e3e123c53d853e31cea968fe01f4e2b"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House7/scripts.inc",
+        "sha256": "85eea3599c9636c9d47b2e9462a55853a3c0a3fa856225cbf671670c7e104c43"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House8/map.json",
+        "sha256": "919cdd37b03da1d461978d293e1c03170a0bde5fd3216efdfbd192b246b9ef63"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House8/scripts.inc",
+        "sha256": "0f3cbdf9ba1edefe82dbe8f07b3f232f3e146af8a8992245ff3455909a76b248"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House9/map.json",
+        "sha256": "56686d10bca2ecf44be8375ef879617a9b5dc3313e3b67a0606a97b2ae39de8d"
+      },
+      {
+        "path": "data/maps/HearthomeCity_House9/scripts.inc",
+        "sha256": "cad935143326f393166dd3b5c48610c0f559c413d34c3af6bedb76d6c52a1ad4"
+      },
+      {
+        "path": "data/tilesets/primary/averon_central_outdoor_primary/metatiles.bin",
+        "sha256": "17974b0ba1bb9d105d5ba255c69a3b80d8484a26ea0b8ff22c6c6567c6c22910"
+      },
+      {
+        "path": "data/tilesets/primary/averon_central_outdoor_primary/metatile_attributes.bin",
+        "sha256": "06c9548a6c70d133b6d47638090f5d36f3fec92aace3d90deca758a4404cfa9b"
+      },
+      {
+        "path": "data/tilesets/secondary/averon_central_outdoor_secondary/metatiles.bin",
+        "sha256": "db2398fd968480a01618e6dac021f7b6daf4c9f153347f0635e7d6a7f93c5b7a"
+      },
+      {
+        "path": "data/tilesets/secondary/averon_central_outdoor_secondary/metatile_attributes.bin",
+        "sha256": "6c9976394d68efe8a1135bf6ad78f2bc87ef4d176b7568dafe70f6299c84a924"
+      },
+      {
+        "path": "data/tilesets/primary/averon_central_gate_primary/metatiles.bin",
+        "sha256": "65e40fece49f8ed09a82b33c3d590716d9740581f087acd1359665331e4683f1"
+      },
+      {
+        "path": "data/tilesets/primary/averon_central_gate_primary/metatile_attributes.bin",
+        "sha256": "7a153a1748dc4bd03e621acad6c6b7e90c2d3acfc467a928ad23d21f34e73128"
+      },
+      {
+        "path": "data/tilesets/secondary/averon_central_gate_secondary/metatiles.bin",
+        "sha256": "18e2a4499c4580380efaa6e4f40ab25bc2d07a218f40569efe9c1ddf8c0ee56e"
+      },
+      {
+        "path": "data/tilesets/secondary/averon_central_gate_secondary/metatile_attributes.bin",
+        "sha256": "9bf7f1aa18002250ae48c68c0be36577ca794b29b79a9af7a9c39f0e2dc1a9d5"
+      }
+    ],
+    "identical_new_layouts": [
+      {
+        "id": "LAYOUT_ROUTE208",
+        "name": "Route208_Layout",
+        "width": 68,
+        "height": 38,
+        "primary_tileset": "gTileset_AveronCentralOutdoorPrimary",
+        "secondary_tileset": "gTileset_AveronCentralOutdoorSecondary",
+        "border_filepath": "data/layouts/Route208/border.bin",
+        "blockdata_filepath": "data/layouts/Route208/map.bin"
+      },
+      {
+        "id": "LAYOUT_ROUTE208_ACCESS",
+        "name": "Route208_Access_Layout",
+        "width": 13,
+        "height": 9,
+        "primary_tileset": "gTileset_AveronCentralGatePrimary",
+        "secondary_tileset": "gTileset_AveronCentralGateSecondary",
+        "border_filepath": "data/layouts/Route208_Access/border.bin",
+        "blockdata_filepath": "data/layouts/Route208_Access/map.bin"
+      },
+      {
+        "id": "LAYOUT_HEARTHOME_CITY",
+        "name": "HearthomeCity_Layout",
+        "width": 58,
+        "height": 52,
+        "primary_tileset": "gTileset_AveronCentralOutdoorPrimary",
+        "secondary_tileset": "gTileset_AveronCentralOutdoorSecondary",
+        "border_filepath": "data/layouts/HearthomeCity/border.bin",
+        "blockdata_filepath": "data/layouts/HearthomeCity/map.bin"
+      },
+      {
+        "id": "LAYOUT_ROUTE209_ACCESS",
+        "name": "Route209_Access_Layout",
+        "width": 13,
+        "height": 9,
+        "primary_tileset": "gTileset_AveronCentralGatePrimary",
+        "secondary_tileset": "gTileset_AveronCentralGateSecondary",
+        "border_filepath": "data/layouts/Route209_Access/border.bin",
+        "blockdata_filepath": "data/layouts/Route209_Access/map.bin"
+      },
+      {
+        "id": "LAYOUT_ROUTE209",
+        "name": "Route209_Layout",
+        "width": 68,
+        "height": 72,
+        "primary_tileset": "gTileset_AveronCentralOutdoorPrimary",
+        "secondary_tileset": "gTileset_AveronCentralOutdoorSecondary",
+        "border_filepath": "data/layouts/Route209/border.bin",
+        "blockdata_filepath": "data/layouts/Route209/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_TOWN",
+        "name": "SolaceonTown_Layout",
+        "width": 66,
+        "height": 44,
+        "primary_tileset": "gTileset_AveronCentralOutdoorPrimary",
+        "secondary_tileset": "gTileset_AveronCentralOutdoorSecondary",
+        "border_filepath": "data/layouts/SolaceonTown/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonTown/map.bin"
+      },
+      {
+        "id": "LAYOUT_ROUTE210_SOUTH",
+        "name": "Route210_South_Layout",
+        "width": 42,
+        "height": 94,
+        "primary_tileset": "gTileset_AveronCentralOutdoorPrimary",
+        "secondary_tileset": "gTileset_AveronCentralOutdoorSecondary",
+        "border_filepath": "data/layouts/Route210_South/border.bin",
+        "blockdata_filepath": "data/layouts/Route210_South/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_ENTRANCE",
+        "name": "SolaceonRuins_Entrance_Layout",
+        "width": 30,
+        "height": 20,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_Entrance/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_Entrance/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_B1F",
+        "name": "SolaceonRuins_B1F_Layout",
+        "width": 44,
+        "height": 30,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_B1F/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_B1F/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_A",
+        "name": "SolaceonRuins_A_Layout",
+        "width": 17,
+        "height": 33,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_A/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_A/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_B",
+        "name": "SolaceonRuins_B_Layout",
+        "width": 17,
+        "height": 33,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_B/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_B/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_C",
+        "name": "SolaceonRuins_C_Layout",
+        "width": 17,
+        "height": 33,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_C/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_C/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_B2F_WEST",
+        "name": "SolaceonRuins_B2F_West_Layout",
+        "width": 30,
+        "height": 22,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_B2F_West/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_B2F_West/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_B2F_EAST",
+        "name": "SolaceonRuins_B2F_East_Layout",
+        "width": 30,
+        "height": 22,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_B2F_East/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_B2F_East/map.bin"
+      },
+      {
+        "id": "LAYOUT_SOLACEON_RUINS_B3F_SANCTUM",
+        "name": "SolaceonRuins_B3F_Sanctum_Layout",
+        "width": 36,
+        "height": 24,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Cave",
+        "border_filepath": "data/layouts/SolaceonRuins_B3F_Sanctum/border.bin",
+        "blockdata_filepath": "data/layouts/SolaceonRuins_B3F_Sanctum/map.bin"
+      },
+      {
+        "id": "LAYOUT_AMITY_SQUARE",
+        "name": "AmitySquare_Layout",
+        "width": 52,
+        "height": 40,
+        "primary_tileset": "gTileset_General",
+        "secondary_tileset": "gTileset_Dewford",
+        "border_filepath": "data/layouts/AmitySquare/border.bin",
+        "blockdata_filepath": "data/layouts/AmitySquare/map.bin"
+      }
+    ],
+    "runtime_c_changes": [],
+    "scope": "Production payload equals repaired original E source installer on actual D. Source equivalence alone is not runtime acceptance."
+  },
+  "checker_defect": {
+    "old_source": "b55fabbc",
+    "mutated_private_fixture_path": "data/layouts/SolaceonRuins_Entrance/map.bin",
+    "old_errors": [],
+    "fixed_errors": [
+      "data/layouts/SolaceonRuins_Entrance/map.bin"
+    ],
+    "live_engine_unchanged": true
+  },
+  "host": {
+    "E_pass": 18,
+    "D_pass": 7,
+    "fail": 0,
+    "skip": 0
+  },
+  "runtime_input_equivalence": {
+    "actual_link_source": "fadd455f",
+    "later_engine_changes": [
+      "test/averon_packet_d_location.c"
+    ],
+    "explanation": "Only native-test source changed; NORMAL/RELEASE ROM code/data inputs stay identical."
+  },
+  "limits": [
+    "Continue-warp save fixture; natural story access not proven.",
+    "All37 maps visited with real controller travel, follower and reachable-exit checks; not an exhaustive new traversal of every prior DEV warp.",
+    "Initial fixture/startup/expected-file errors are retained privately; no geometry changed to hide them.",
+    "Delta/human audio not verified. Private binaries/saves are excluded."
+  ]
+}

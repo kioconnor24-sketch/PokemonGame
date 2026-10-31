@@ -3,16 +3,23 @@ import copy,importlib.util
 from pathlib import Path
 from unittest import mock
 import unittest
-HERE=Path(__file__).resolve().parents[2]/'Averon_Codex_Handoff/design/sinnoh/eastern-loop'
+# Historical DEV/source receipt replay uses its exact accepted checkout.
+# Production installer tests remain bound to the current checkout.
+from sinnoh_replay_fixture import post_c_source_root
+ROOT = post_c_source_root(Path(__file__).resolve().parents[3])
+
+HERE=(ROOT/'Pokemon Game')/'Averon_Codex_Handoff/design/sinnoh/eastern-loop'
 def load(name,path):
  s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 upper=load('upper_scenario',HERE/'run_upper_rail_probe.py');a=load('upper_assembler',HERE/'prepare_runtime.py')
+
+
 class UpperTest(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
-  cls.files,_=a.assemble(HERE.parents[4]);cls.md=load('upper_maps',HERE.parents[3]/'scripts/claude_play/mapdata.py')
+  cls.files,_=a.assemble(ROOT);cls.md=load('upper_maps',HERE.parents[3]/'scripts/claude_play/mapdata.py')
  def world(self):
-  e=HERE.parents[4]/a.ENGINE;read_text=Path.read_text;read_bytes=Path.read_bytes
+  e=ROOT/a.ENGINE;read_text=Path.read_text;read_bytes=Path.read_bytes
   def lookup(p):
    try:return self.files.get(str(p.relative_to(e)))
    except ValueError:return None
