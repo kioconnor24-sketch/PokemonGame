@@ -1,4 +1,5 @@
 """West packet C: production Oreburgh City (section 227) and W21's ten interiors at slots 30-40."""
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -63,10 +64,14 @@ class WestPacketCTest(unittest.TestCase):
         self.assertEqual([(int(i), n) for i, _, n in slots], list(enumerate(sinnoh)))
         self.assertIn(("30", "MAP_OREBURGH_CITY", "OreburghCity"), slots)
 
-    def test_section_227_is_the_only_new_code(self):
-        sections = json.loads((self.eng / p.SECTIONS).read_text())["map_sections"]
+    def test_section_227_and_complete_installed_prefix_stay_fixed(self):
+        document = json.loads((self.eng / p.SECTIONS).read_text())
+        sections = document["map_sections"]
         index = next(i for i, section in enumerate(sections) if section["id"] == p.SECTION["id"])
         self.assertEqual(sections[index], p.SECTION)
+        prefix = dict(document, map_sections=sections[:index + 1])
+        self.assertEqual(hashlib.sha256(p.encode(prefix)).hexdigest(),
+                         "89c14b9186efc42f345c49b84481b6448432458825fde3a2f4b58073b426db82")
         self.assertEqual(sections[index - 1]["id"], "MAPSEC_ROUTE_205")
         self.assertEqual(sections[index - 1]["value"], 226)
         for name in p.SLOTS:

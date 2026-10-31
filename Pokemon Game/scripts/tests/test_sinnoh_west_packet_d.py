@@ -20,10 +20,16 @@ def cells(raw):
 
 
 def fixture(engine):
+    # The real checkout may already carry D. Reuse only the verifier's exact,
+    # hash-proven original inputs instead of assuming current files are pre-D.
+    before = p.baseline(p.ENGINE)
     for rel in set(p.BASE_HASHES) | set(p.ASSET_HASHES):
         path = p.target(engine, rel)
         path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(p.target(p.ENGINE, rel), path)
+        if rel in before:
+            path.write_bytes(before[rel])
+        else:
+            shutil.copy(p.target(p.ENGINE, rel), path)
 
 
 class WestPacketDTest(unittest.TestCase):
@@ -81,7 +87,7 @@ class WestPacketDTest(unittest.TestCase):
         # The removed external road connection was already blocked by its whole
         # solid roof/edge. Do not invent an additional terrain change there.
         self.assertTrue(all((word >> 10) & 3 == 1 for word in cells(files['data/layouts/Route206/map.bin'])[:28]))
-        city_before = json.loads(p.target(p.ENGINE, p.CITY).read_text())
+        city_before = json.loads(p.baseline(p.ENGINE)[p.CITY])
         city_after = json.loads(files[p.CITY])
         city_after['connections'] = []
         self.assertEqual(city_after, city_before)
