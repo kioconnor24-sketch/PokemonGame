@@ -62,7 +62,7 @@ def adds_identity(row: dict) -> bool:
     # Renaming a file inside the same map remains an ordinary repair.
     path = row.get("filename", "")
     previous = row.get("previous_filename") or ""
-    return row.get("status") == "added" or (
+    return row.get("status") in {"added", "copied"} or (
         row.get("status") == "renamed"
         and (map_from_path(previous) != map_from_path(path)
              or previous.startswith(ENGINE_MAPS) != path.startswith(ENGINE_MAPS)))
@@ -208,6 +208,61 @@ def validate(snapshot: dict) -> list[str]:
     return errors
 
 
+def guard_snapshot(data: dict, main_root: Path) -> dict:
+    """Reuse the required file guard's read-only metadata and trusted checkout.
+
+    The legacy file guard retains its own snapshot fields and validator. Raw
+    identity metadata comes from the same already-fetched GitHub file rows;
+    source definitions are inventoried only from the trusted-main checkout.
+    """
+    def metadata(pr: dict, *, head: bool = False) -> dict:
+        if (not isinstance(pr, dict) or type(pr.get("number")) is not int
+                or pr["number"] <= 0 or not isinstance(pr.get("body"), str)
+                or not isinstance(pr.get("files"), list)):
+            raise ValueError("required guard identity metadata is missing or malformed")
+        if head and not re.fullmatch(r"[a-f0-9]{40}", pr.get("head_sha", "")):
+            raise ValueError("required guard is missing the exact PR head")
+        for row in pr["files"]:
+            if (not isinstance(row, dict) or not isinstance(row.get("filename"), str)
+                    or not row["filename"] or row.get("status") not in {
+                        "added", "removed", "modified", "renamed", "copied", "changed", "unchanged"}
+                    or (row["status"] == "renamed" and not row.get("previous_filename"))
+                    or (row.get("previous_filename") is not None
+                        and not isinstance(row["previous_filename"], str))):
+                raise ValueError("required guard file status/rename metadata is incomplete")
+        return pr
+
+    own = metadata(data["pull_request"], head=True)
+    peers = data["identity_peers"]
+    if not isinstance(peers, list):
+        raise ValueError("required guard identity peer inventory is missing")
+    peers = [metadata(peer) for peer in peers]
+    peer_numbers = [peer["number"] for peer in peers]
+    legacy_peers = data["other_open_prs"]
+    if (not isinstance(legacy_peers, list) or len(peer_numbers) != len(set(peer_numbers))
+            or set(peer_numbers) != {peer["number"] for peer in legacy_peers}):
+        raise ValueError("required guard identity peer inventory is incomplete")
+    for peer in peers:
+        legacy = next(p for p in legacy_peers if p["number"] == peer["number"])
+        if set(legacy["files"]) != {
+                row["filename"] for row in peer["files"] if row["status"] != "removed"}:
+            raise ValueError("required guard peer file inventory is incomplete")
+
+    main_root = main_root.resolve()
+    definitions = []
+    for relative in (SOURCE, ENGINE_MAPS):
+        directory = main_root / relative
+        if not directory.is_dir():
+            raise ValueError("trusted-main geography directory is missing: " + relative)
+        definitions.extend(p.relative_to(main_root).as_posix()
+                           for p in directory.rglob("map.json") if p.is_file())
+    return {
+        "candidate": own, "other_open_prs": peers,
+        "main_maps": [name for p in definitions for name in [map_from_path(p)] if name],
+        "main_engine_maps": [map_from_path(p) for p in definitions if p.startswith(ENGINE_MAPS)],
+    }
+
+
 def fetch_live(path: str) -> object:
     """Public GitHub API; GH_TOKEN/GITHUB_TOKEN raises the public rate limit."""
     token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
@@ -281,15 +336,26 @@ def preflight(mode: str, maps: str, sources: str) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("snapshot", type=Path, nargs="?")
+    parser.add_argument("--guard-snapshot", type=Path,
+                        help="reuse required file-guard metadata with this trusted-main checkout")
     parser.add_argument("--preflight", choices=sorted(MODES))
     parser.add_argument("--maps", default="")
     parser.add_argument("--sources", default="")
     args = parser.parse_args()
+    if sum(bool(x) for x in (args.snapshot, args.guard_snapshot, args.preflight)) > 1:
+        parser.error("choose one snapshot, --guard-snapshot or --preflight")
     if args.preflight:
         try:
             snapshot = preflight(args.preflight, args.maps, args.sources)
         except Exception as err:
             print("FAIL: live GitHub preflight unavailable; do not start duplicate work:", err)
+            return 1
+    elif args.guard_snapshot:
+        try:
+            snapshot = guard_snapshot(json.loads(args.guard_snapshot.read_text(encoding="utf-8")),
+                                      Path(__file__).resolve().parents[3])
+        except (OSError, ValueError, KeyError, TypeError) as err:
+            print("FAIL: required guard identity snapshot unavailable:", err)
             return 1
     elif args.snapshot:
         snapshot = json.loads(args.snapshot.read_text(encoding="utf-8"))
