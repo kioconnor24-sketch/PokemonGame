@@ -1,0 +1,77 @@
+{"t": 1792780550.65, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792780550.85, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792780554.66, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792780554.77, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792780556.8, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792780556.91, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792780557.65, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792780557.76, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792780558.39, "event": "screen", "cb2": "MainCB2", "i": 11}
+{"t": 1792780558.55, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792780559.87, "event": "screen", "cb2": "CB2_InitMainMenu", "i": 13}
+{"t": 1792780559.99, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792780561.47, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792780561.68, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792780564.17, "event": "screen", "cb2": "CB2_LoadMap2", "i": 16}
+{"t": 1792780564.3, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792780564.95, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792780565.06, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792780566.37, "event": "field", "map": "MAP_ROUTE217", "pos": [18, 60], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792780567.01, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE217", [18, 60]]}
+{"t": 1792780570.55, "event": "capture", "file": "0010-start.png"}
+{"t": 1792780570.55, "event": "observe", "label": "start", "problems": []}
+{"t": 1792780570.58, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792780598.08, "event": "map", "map": "MAP_ROUTE216", "pos": [14, 0]}
+{"t": 1792780598.25, "event": "map-qa-check", "name": "reached MAP_ROUTE216", "ok": true, "at": ["MAP_ROUTE216", [14, 0]]}
+{"t": 1792780600.1, "event": "capture", "file": "0011-seam-MAP_ROUTE216-up.png"}
+{"t": 1792780601.05, "event": "map-qa-check", "name": "MAP_ROUTE216 up seam (14, 0) -> MAP_ROUTE217 (16, 117) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE216", [14, 0]], "got": ["MAP_ROUTE216", [14, 0]]}
+{"t": 1792780603.47, "event": "capture", "file": "0012-seam-MAP_ROUTE216-up.png"}
+{"t": 1792780604.27, "event": "map-qa-check", "name": "MAP_ROUTE216 up seam (15, 0) -> MAP_ROUTE217 (17, 117) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE216", [15, 0]], "got": ["MAP_ROUTE216", [15, 0]]}
+{"t": 1792780604.57, "event": "map-qa-check", "name": "actual initialized snow sprites MAP_ROUTE216", "ok": true, "weather": {"current": 4, "loaded": 1, "count": 16, "target": 16}, "compiled": {"count": 548, "current": 528, "expected": 16, "loaded": 530, "snow": 4, "target": 549}}
+{"t": 1792780604.69, "event": "capture", "file": "0013-snow-MAP_ROUTE216.png"}
+{"t": 1792780606.01, "event": "map", "map": "MAP_ROUTE217", "pos": [16, 117]}
+{"t": 1792780606.12, "event": "map-qa-check", "name": "reached MAP_ROUTE217", "ok": true, "at": ["MAP_ROUTE217", [16, 117]]}
+{"t": 1792780668.5, "event": "capture", "file": "0014-seam-MAP_ROUTE217-up.png"}
+{"t": 1792780669.48, "event": "map-qa-check", "name": "MAP_ROUTE217 up seam (24, 0) -> MAP_ACUITY_LAKEFRONT (22, 65) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE217", [24, 0]], "got": ["MAP_ROUTE217", [24, 0]]}
+{"t": 1792780673.8, "event": "capture", "file": "0015-seam-MAP_ROUTE217-up.png"}
+{"t": 1792780674.76, "event": "map-qa-check", "name": "MAP_ROUTE217 up seam (25, 0) -> MAP_ACUITY_LAKEFRONT (23, 65) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE217", [25, 0]], "got": ["MAP_ROUTE217", [25, 0]]}
+{"t": 1792780741.11, "event": "capture", "file": "0016-seam-MAP_ROUTE217-down.png"}
+{"t": 1792780742.01, "event": "map-qa-check", "name": "MAP_ROUTE217 down seam (16, 117) -> MAP_ROUTE216 (14, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE217", [16, 117]], "got": ["MAP_ROUTE217", [16, 117]]}
+{"t": 1792780745.86, "event": "capture", "file": "0017-seam-MAP_ROUTE217-down.png"}
+{"t": 1792780746.81, "event": "map-qa-check", "name": "MAP_ROUTE217 down seam (17, 117) -> MAP_ROUTE216 (15, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ROUTE217", [17, 117]], "got": ["MAP_ROUTE217", [17, 117]]}
+{"t": 1792780747.15, "event": "map-qa-check", "name": "actual initialized snow sprites MAP_ROUTE217", "ok": true, "weather": {"current": 4, "loaded": 1, "count": 16, "target": 16}, "compiled": {"count": 548, "current": 528, "expected": 16, "loaded": 530, "snow": 4, "target": 549}}
+{"t": 1792780747.37, "event": "capture", "file": "0018-snow-MAP_ROUTE217.png"}
+{"t": 1792780813.29, "event": "map", "map": "MAP_ACUITY_LAKEFRONT", "pos": [22, 65]}
+{"t": 1792780813.57, "event": "map-qa-check", "name": "reached MAP_ACUITY_LAKEFRONT", "ok": true, "at": ["MAP_ACUITY_LAKEFRONT", [22, 65]]}
+{"t": 1792780816.17, "event": "capture", "file": "0019-seam-MAP_ACUITY_LAKEFRONT-down.png"}
+{"t": 1792780817.58, "event": "map-qa-check", "name": "MAP_ACUITY_LAKEFRONT down seam (22, 65) -> MAP_ROUTE217 (24, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ACUITY_LAKEFRONT", [22, 65]], "got": ["MAP_ACUITY_LAKEFRONT", [22, 65]]}
+{"t": 1792780820.3, "event": "capture", "file": "0020-seam-MAP_ACUITY_LAKEFRONT-down.png"}
+{"t": 1792780821.28, "event": "map-qa-check", "name": "MAP_ACUITY_LAKEFRONT down seam (23, 65) -> MAP_ROUTE217 (25, 0) and back", "ok": true, "leg": "back", "expected": ["MAP_ACUITY_LAKEFRONT", [23, 65]], "got": ["MAP_ACUITY_LAKEFRONT", [23, 65]]}
+{"t": 1792780849.39, "event": "capture", "file": "0021-seam-MAP_ACUITY_LAKEFRONT-right.png"}
+{"t": 1792780850.41, "event": "map-qa-check", "name": "MAP_ACUITY_LAKEFRONT right seam (63, 48) -> MAP_SNOWPOINT_CITY (0, 50) and back", "ok": true, "leg": "back", "expected": ["MAP_ACUITY_LAKEFRONT", [63, 48]], "got": ["MAP_ACUITY_LAKEFRONT", [63, 48]]}
+{"t": 1792780854.9, "event": "capture", "file": "0022-seam-MAP_ACUITY_LAKEFRONT-right.png"}
+{"t": 1792780855.9, "event": "map-qa-check", "name": "MAP_ACUITY_LAKEFRONT right seam (63, 49) -> MAP_SNOWPOINT_CITY (0, 51) and back", "ok": true, "leg": "back", "expected": ["MAP_ACUITY_LAKEFRONT", [63, 49]], "got": ["MAP_ACUITY_LAKEFRONT", [63, 49]]}
+{"t": 1792780856.37, "event": "map-qa-check", "name": "actual initialized snow sprites MAP_ACUITY_LAKEFRONT", "ok": true, "weather": {"current": 4, "loaded": 1, "count": 16, "target": 16}, "compiled": {"count": 548, "current": 528, "expected": 16, "loaded": 530, "snow": 4, "target": 549}}
+{"t": 1792780856.55, "event": "capture", "file": "0023-snow-MAP_ACUITY_LAKEFRONT.png"}
+{"t": 1792780859.08, "event": "map", "map": "MAP_SNOWPOINT_CITY", "pos": [0, 50]}
+{"t": 1792780859.29, "event": "map-qa-check", "name": "reached MAP_SNOWPOINT_CITY", "ok": true, "at": ["MAP_SNOWPOINT_CITY", [0, 50]]}
+{"t": 1792780861.51, "event": "capture", "file": "0024-seam-MAP_SNOWPOINT_CITY-left.png"}
+{"t": 1792780862.68, "event": "map-qa-check", "name": "MAP_SNOWPOINT_CITY left seam (0, 50) -> MAP_ACUITY_LAKEFRONT (63, 48) and back", "ok": true, "leg": "back", "expected": ["MAP_SNOWPOINT_CITY", [0, 50]], "got": ["MAP_SNOWPOINT_CITY", [0, 50]]}
+{"t": 1792780866.07, "event": "capture", "file": "0025-seam-MAP_SNOWPOINT_CITY-left.png"}
+{"t": 1792780867.01, "event": "map-qa-check", "name": "MAP_SNOWPOINT_CITY left seam (0, 51) -> MAP_ACUITY_LAKEFRONT (63, 49) and back", "ok": true, "leg": "back", "expected": ["MAP_SNOWPOINT_CITY", [0, 51]], "got": ["MAP_SNOWPOINT_CITY", [0, 51]]}
+{"t": 1792780867.38, "event": "map-qa-check", "name": "actual initialized snow sprites MAP_SNOWPOINT_CITY", "ok": true, "weather": {"current": 4, "loaded": 1, "count": 16, "target": 16}, "compiled": {"count": 548, "current": 528, "expected": 16, "loaded": 530, "snow": 4, "target": 549}}
+{"t": 1792780867.56, "event": "capture", "file": "0026-snow-MAP_SNOWPOINT_CITY.png"}
+{"t": 1792780868.85, "event": "capture", "file": "0027-start-menu.png"}
+{"t": 1792780869.75, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792780876.49, "event": "capture", "file": "0028-save-confirm-coronet-six.png"}
+{"t": 1792780877.7, "event": "capture", "file": "0029-save-step-coronet-six-01.png"}
+{"t": 1792780878.87, "event": "capture", "file": "0030-save-step-coronet-six-02.png"}
+{"t": 1792780880.1, "event": "capture", "file": "0031-save-step-coronet-six-03.png"}
+{"t": 1792780881.19, "event": "capture", "file": "0032-save-step-coronet-six-04.png"}
+{"t": 1792780882.35, "event": "capture", "file": "0033-save-step-coronet-six-05.png"}
+{"t": 1792780883.45, "event": "capture", "file": "0034-save-step-coronet-six-06.png"}
+{"t": 1792780884.45, "event": "capture", "file": "0035-save-step-coronet-six-07.png"}
+{"t": 1792780885.41, "event": "capture", "file": "0036-save-step-coronet-six-08.png"}
+{"t": 1792780888.36, "event": "capture", "file": "0037-saved-coronet-six.png"}
+{"t": 1792780888.36, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792780888.38, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_SNOWPOINT_CITY", [0, 51]]}

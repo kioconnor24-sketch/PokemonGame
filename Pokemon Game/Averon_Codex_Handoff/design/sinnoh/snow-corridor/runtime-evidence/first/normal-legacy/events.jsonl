@@ -1,0 +1,22 @@
+{"t": 1792780916.1, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792780916.16, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792780918.88, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792780918.92, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792780920.64, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792780920.7, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792780921.2, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792780921.26, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792780921.8, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792780921.88, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792780922.99, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792780923.06, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792780926.7, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792780926.75, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792780927.42, "event": "field", "map": "MAP_SALTMERE", "pos": [19, 16], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792780927.85, "event": "capture", "file": "0008-continued.png"}
+{"t": 1792780927.85, "event": "continue-check", "problems": []}
+{"t": 1792780927.95, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792780928.5, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_SALTMERE", [19, 16]]}
+{"t": 1792780929.11, "event": "capture", "file": "0009-start.png"}
+{"t": 1792780929.11, "event": "observe", "label": "start", "problems": []}
+{"t": 1792780929.11, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}}

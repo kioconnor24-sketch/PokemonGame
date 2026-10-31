@@ -1,0 +1,25 @@
+{"t": 1792782422.61, "event": "screen", "cb2": "0x00000000", "i": 0}
+{"t": 1792782422.65, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792782423.23, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 1}
+{"t": 1792782423.26, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792782425.36, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 5}
+{"t": 1792782425.4, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792782427.13, "event": "screen", "cb2": "MainCB2_Intro", "i": 8}
+{"t": 1792782427.2, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792782427.73, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 9}
+{"t": 1792782427.77, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792782428.33, "event": "screen", "cb2": "MainCB2", "i": 10}
+{"t": 1792782428.38, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792782429.43, "event": "screen", "cb2": "CB2_MainMenu", "i": 12}
+{"t": 1792782429.46, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792782433.09, "event": "screen", "cb2": "CB2_Overworld", "i": 15}
+{"t": 1792782433.13, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792782433.76, "event": "field", "map": "MAP_ROUTE216", "pos": [46, 25], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792782433.9, "event": "capture", "file": "0009-continued.png"}
+{"t": 1792782433.9, "event": "continue-check", "problems": []}
+{"t": 1792782433.92, "event": "map-qa-check", "name": "fresh CONTINUE restores the saved state", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792782434.43, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792782436.35, "event": "capture", "file": "0010-start.png"}
+{"t": 1792782436.35, "event": "observe", "label": "start", "problems": []}
+{"t": 1792782436.35, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792782436.51, "event": "map-qa-check", "name": "all actual bridge grid cells equal ROM after Continue", "ok": true, "differences": []}

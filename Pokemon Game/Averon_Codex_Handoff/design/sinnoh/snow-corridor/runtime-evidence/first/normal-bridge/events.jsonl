@@ -1,0 +1,76 @@
+{"t": 1792780999.85, "event": "screen", "cb2": "CB2_InitCopyrightScreenAfterBootup", "i": 0}
+{"t": 1792780999.9, "event": "capture", "file": "0001-boot-01.png"}
+{"t": 1792781003.76, "event": "screen", "cb2": "CB2_ExpansionIntro", "i": 6}
+{"t": 1792781003.8, "event": "capture", "file": "0002-boot-02.png"}
+{"t": 1792781005.8, "event": "screen", "cb2": "MainCB2_Intro", "i": 9}
+{"t": 1792781006.15, "event": "capture", "file": "0003-boot-03.png"}
+{"t": 1792781006.75, "event": "screen", "cb2": "CB2_InitTitleScreen", "i": 10}
+{"t": 1792781006.88, "event": "capture", "file": "0004-boot-04.png"}
+{"t": 1792781008.2, "event": "screen", "cb2": "MainCB2", "i": 12}
+{"t": 1792781008.69, "event": "capture", "file": "0005-boot-05.png"}
+{"t": 1792781009.29, "event": "screen", "cb2": "CB2_GoToMainMenu", "i": 13}
+{"t": 1792781009.46, "event": "capture", "file": "0006-boot-06.png"}
+{"t": 1792781010.67, "event": "screen", "cb2": "CB2_MainMenu", "i": 14}
+{"t": 1792781010.77, "event": "capture", "file": "0007-boot-07.png"}
+{"t": 1792781013.29, "event": "screen", "cb2": "CB2_LoadMap2", "i": 16}
+{"t": 1792781013.4, "event": "capture", "file": "0008-boot-08.png"}
+{"t": 1792781014.07, "event": "screen", "cb2": "CB2_Overworld", "i": 17}
+{"t": 1792781014.21, "event": "capture", "file": "0009-boot-09.png"}
+{"t": 1792781014.91, "event": "field", "map": "MAP_ROUTE216", "pos": [46, 25], "party": [{"species": 393, "status": 0, "moves": [1, 45, 0, 0], "pp": [35, 40, 0, 0], "ppBonuses": 0, "level": 5, "hp": 20, "maxhp": 20}]}
+{"t": 1792781015.5, "event": "map-qa-check", "name": "starts inside the batch", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792781019.09, "event": "capture", "file": "0010-start.png"}
+{"t": 1792781019.09, "event": "observe", "label": "start", "problems": []}
+{"t": 1792781019.15, "event": "map-qa-check", "name": "follower visible (start)", "ok": true, "follower": {"species": 393, "graphicsId": 16777, "invisible": false}, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781019.2, "event": "map-qa-check", "name": "bridge probe starts on original Route216", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792781024.37, "event": "map-qa-check", "name": "upper bridge foot travel (47, 18)", "ok": true, "at": ["MAP_ROUTE216", [47, 18]]}
+{"t": 1792781024.45, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 18)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781028.96, "event": "map-qa-check", "name": "upper bridge foot travel (47, 23)", "ok": true, "at": ["MAP_ROUTE216", [47, 23]]}
+{"t": 1792781029.0, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 23)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781031.61, "event": "map-qa-check", "name": "upper bridge foot travel (47, 25)", "ok": true, "at": ["MAP_ROUTE216", [47, 25]]}
+{"t": 1792781031.67, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 25)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781031.79, "event": "capture", "file": "0011-upper-bridge.png"}
+{"t": 1792781034.45, "event": "map-qa-check", "name": "upper bridge foot travel (47, 28)", "ok": true, "at": ["MAP_ROUTE216", [47, 28]]}
+{"t": 1792781034.46, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 28)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781037.67, "event": "map-qa-check", "name": "upper bridge foot travel (47, 32)", "ok": true, "at": ["MAP_ROUTE216", [47, 32]]}
+{"t": 1792781037.68, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 32)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781041.1, "event": "map-qa-check", "name": "upper bridge foot travel (47, 28)", "ok": true, "at": ["MAP_ROUTE216", [47, 28]]}
+{"t": 1792781041.15, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 28)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781044.4, "event": "map-qa-check", "name": "upper bridge foot travel (47, 25)", "ok": true, "at": ["MAP_ROUTE216", [47, 25]]}
+{"t": 1792781044.4, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 25)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781044.58, "event": "capture", "file": "0012-upper-bridge.png"}
+{"t": 1792781046.76, "event": "map-qa-check", "name": "upper bridge foot travel (47, 23)", "ok": true, "at": ["MAP_ROUTE216", [47, 23]]}
+{"t": 1792781046.77, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 23)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781050.58, "event": "map-qa-check", "name": "upper bridge foot travel (47, 18)", "ok": true, "at": ["MAP_ROUTE216", [47, 18]]}
+{"t": 1792781050.6, "event": "map-qa-check", "name": "upper player and follower remain4 (47, 18)", "ok": true, "elevations": {"player": 4, "follower": 4}}
+{"t": 1792781057.36, "event": "map-qa-check", "name": "original stairs reach lower3", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792781057.38, "event": "map-qa-check", "name": "lower approach player3", "ok": true}
+{"t": 1792781058.06, "event": "map-qa-check", "name": "ordinary lower underpass (47, 25)", "ok": true, "at": ["MAP_ROUTE216", [47, 25]]}
+{"t": 1792781058.08, "event": "map-qa-check", "name": "lower player and follower remain3 (47, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781058.26, "event": "capture", "file": "0013-lower-underpass.png"}
+{"t": 1792781058.9, "event": "map-qa-check", "name": "ordinary lower underpass (48, 25)", "ok": true, "at": ["MAP_ROUTE216", [48, 25]]}
+{"t": 1792781058.95, "event": "map-qa-check", "name": "lower player and follower remain3 (48, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781059.58, "event": "map-qa-check", "name": "ordinary lower underpass (49, 25)", "ok": true, "at": ["MAP_ROUTE216", [49, 25]]}
+{"t": 1792781059.6, "event": "map-qa-check", "name": "lower player and follower remain3 (49, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781060.5, "event": "map-qa-check", "name": "ordinary lower underpass (48, 25)", "ok": true, "at": ["MAP_ROUTE216", [48, 25]]}
+{"t": 1792781060.5, "event": "map-qa-check", "name": "lower player and follower remain3 (48, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781061.27, "event": "map-qa-check", "name": "ordinary lower underpass (47, 25)", "ok": true, "at": ["MAP_ROUTE216", [47, 25]]}
+{"t": 1792781061.28, "event": "map-qa-check", "name": "lower player and follower remain3 (47, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781061.51, "event": "capture", "file": "0014-lower-underpass.png"}
+{"t": 1792781062.37, "event": "map-qa-check", "name": "ordinary lower underpass (46, 25)", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}
+{"t": 1792781062.37, "event": "map-qa-check", "name": "lower player and follower remain3 (46, 25)", "ok": true, "elevations": {"player": 3, "follower": 3}}
+{"t": 1792781062.77, "event": "map-qa-check", "name": "actual initialized snow sprites MAP_ROUTE216", "ok": true, "weather": {"current": 4, "loaded": 1, "count": 16, "target": 16}, "compiled": {"count": 548, "current": 528, "expected": 16, "loaded": 530, "snow": 4, "target": 549}}
+{"t": 1792781063.29, "event": "capture", "file": "0015-snow-MAP_ROUTE216.png"}
+{"t": 1792781064.48, "event": "capture", "file": "0016-start-menu.png"}
+{"t": 1792781065.28, "event": "map-qa-check", "name": "Start menu opens and returns to the field", "ok": true}
+{"t": 1792781072.09, "event": "capture", "file": "0017-save-confirm-coronet-six.png"}
+{"t": 1792781073.41, "event": "capture", "file": "0018-save-step-coronet-six-01.png"}
+{"t": 1792781074.67, "event": "capture", "file": "0019-save-step-coronet-six-02.png"}
+{"t": 1792781075.95, "event": "capture", "file": "0020-save-step-coronet-six-03.png"}
+{"t": 1792781077.17, "event": "capture", "file": "0021-save-step-coronet-six-04.png"}
+{"t": 1792781078.88, "event": "capture", "file": "0022-save-step-coronet-six-05.png"}
+{"t": 1792781080.08, "event": "capture", "file": "0023-save-step-coronet-six-06.png"}
+{"t": 1792781081.3, "event": "capture", "file": "0024-save-step-coronet-six-07.png"}
+{"t": 1792781082.46, "event": "capture", "file": "0025-save-step-coronet-six-08.png"}
+{"t": 1792781085.88, "event": "capture", "file": "0026-saved-coronet-six.png"}
+{"t": 1792781085.88, "event": "release-save", "label": "coronet-six", "callbacks": ["SaveConfirmInputCallback", "SaveConfirmOverwriteCallback", "SaveOverwriteInputCallback", "SaveDoSaveCallback", "SaveSuccessCallback", "SaveReturnSuccessCallback"], "problems": []}
+{"t": 1792781085.91, "event": "map-qa-check", "name": "SAVE (coronet-six)", "ok": true, "at": ["MAP_ROUTE216", [46, 25]]}

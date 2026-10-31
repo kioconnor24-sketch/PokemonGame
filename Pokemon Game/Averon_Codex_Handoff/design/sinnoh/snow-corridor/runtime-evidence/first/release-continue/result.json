@@ -1,0 +1,53 @@
+{
+ "maps": [
+  "MAP_ROUTE216",
+  "MAP_ROUTE217",
+  "MAP_ACUITY_LAKEFRONT",
+  "MAP_SNOWPOINT_CITY"
+ ],
+ "build": "release",
+ "rom_sha256": "ecbcc4cfdcc8debae8487a918e44a45bd55a4e95d933372a365821b10da79d59",
+ "static_findings": [],
+ "save_before": "9a15bde515b5033ff6c917d03358a32b740a5bc54d1a60e756b395bcade654a4",
+ "checks": [
+  {
+   "name": "fresh CONTINUE restores the saved state",
+   "ok": true,
+   "at": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     51
+    ]
+   ]
+  },
+  {
+   "name": "starts inside the batch",
+   "ok": true,
+   "at": [
+    "MAP_SNOWPOINT_CITY",
+    [
+     0,
+     51
+    ]
+   ]
+  },
+  {
+   "name": "follower visible (start)",
+   "ok": true,
+   "follower": {
+    "species": 393,
+    "graphicsId": 16777,
+    "invisible": false
+   },
+   "elevations": {
+    "player": 3,
+    "follower": 3
+   }
+  }
+ ],
+ "dev_entry": "continue-warp save fixture (DEV-only) unless --expect",
+ "alive": true,
+ "save_after": "9a15bde515b5033ff6c917d03358a32b740a5bc54d1a60e756b395bcade654a4",
+ "verdict": "PASS"
+}
