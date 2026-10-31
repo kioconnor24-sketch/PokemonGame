@@ -124,6 +124,15 @@ string get_include_guard_end(const string &name) {
 }
 
 string generate_map_header_text(Json map_data, Json layouts_data) {
+    // Symbolic sections are range-checked by the section generator. Numeric
+    // fixture/custom headers must not silently truncate or occupy met specials.
+    const Json &section = map_data["region_map_section"];
+    if (section.is_number()) {
+        const double value = section.number_value();
+        if (value < 0 || value > 8191 || value != section.int_value()
+            || (value >= 253 && value <= 255))
+            FATAL_ERROR("Invalid map section: expected 0..8191 excluding reserved 253..255.\n");
+    }
     string map_layout_id = json_to_string(map_data, "layout");
 
     vector<Json> matched;

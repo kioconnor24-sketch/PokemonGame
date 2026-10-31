@@ -268,6 +268,84 @@ class MapjsonInclusionTests(unittest.TestCase):
                 self.assertEqual(struct.unpack_from('<3I', data, symbols['Sinnoh'] - 0x08000000),
                                  tuple(symbols[s] for s in ('Fixture_Layout', 'Sinnoh_MapEvents', 'Sinnoh_MapScripts')))
 
+    def test_wide_header_generation_matches_actual_arm_c_layout(self):
+        commands = ('arm-none-eabi-gcc', 'arm-none-eabi-as', 'arm-none-eabi-ld',
+                    'arm-none-eabi-objcopy', 'arm-none-eabi-nm')
+        preproc = ENGINE / 'tools/preproc/preproc'
+        if not all(shutil.which(command) for command in commands) or not preproc.is_file():
+            self.skipTest('ARM compiler/binutils and built preproc required')
+        # Use the actual production C definition. Unrelated fieldmap definitions
+        # need the whole generated game include tree; this isolated ABI probe does not.
+        source = (ENGINE / 'include/global.fieldmap.h').read_text()
+        start = source.index('struct MapHeader\n{')
+        definition = source[start:source.index('\n};', start) + 3]
+        fields = ('regionMapSectionId', 'weather', 'mapType', 'floorNumber', 'nightMusic', 'battleType')
+        probe = self.root / 'abi.c'
+        probe.write_text('#include <stddef.h>\n#include "gametypes.h"\n' + definition
+                         + '\nconst u32 header_abi[] = { sizeof(struct MapHeader), '
+                         + ', '.join(f'offsetof(struct MapHeader, {field})' for field in fields)
+                         + ' };\n')
+        subprocess.run(['arm-none-eabi-gcc', '-mthumb', '-mthumb-interwork', '-O2',
+                        '-mabi=apcs-gnu', '-mtune=arm7tdmi', '-march=armv4t', '-std=gnu17',
+                        '-I', str(ENGINE / 'include'), '-c', str(probe), '-o', 'abi.o'],
+                       cwd=self.root, check=True, capture_output=True, timeout=30)
+        subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', '--only-section=.rodata',
+                        'abi.o', 'abi.bin'], cwd=self.root, check=True, timeout=30)
+        size, *offsets = struct.unpack('<7I', (self.root / 'abi.bin').read_bytes())
+        self.assertEqual((size, *offsets), (32, 20, 22, 23, 24, 26, 29))
+
+        # 0x12FD must remain a wide named-location value rather than aliasing
+        # the exact egg special 0xFD. Distinct adjacent fields expose misalignment.
+        self.map('Wide', region='REGION_SINNOH', music=0x1234, region_map_section=0x12FD,
+                 weather=7, map_type=4, floor_number=-2, night_music=0xABCD,
+                 battle_scene=6, allow_cycling=True, allow_escaping=False,
+                 allow_running=True, show_map_name=True, requires_flash=False)
+        self.groups(gWide=['Wide'])
+        self.write('data/layouts/layouts.json', {'layouts_table_label': 'gMapLayouts',
+                                              'layouts': [self.layout()]})
+        self.run_tool('map', 'emerald', self.map_paths[0], 'data/layouts/layouts.json', 'data/maps/Wide')
+        fixture = (f'.include "{ENGINE}/asm/macros/map.inc"\n'
+                   '.equ NULL,0\n.equ TRUE,1\n.equ FALSE,0\n.equ LAYOUT_FIXTURE,0x2345\n'
+                   '.global Wide\n.include "data/maps/Wide/header.inc"\n'
+                   '.global WideEnd\nWideEnd:\n'
+                   'Fixture_Layout: .4byte 0\nWide_MapEvents: .4byte 0\nWide_MapScripts: .byte 0\n')
+        (self.root / 'fixture.s').write_text(fixture)
+        processed = subprocess.check_output([str(preproc), '-s', 'fixture.s', str(ENGINE / 'charmap.txt')],
+                                            cwd=self.root, timeout=30)
+        (self.root / 'fixture.preprocessed.s').write_bytes(processed)
+        subprocess.run(['arm-none-eabi-as', '-mcpu=arm7tdmi', '-o', 'fixture.o', 'fixture.preprocessed.s'],
+                       cwd=self.root, check=True, capture_output=True, timeout=30)
+        subprocess.run(['arm-none-eabi-ld', '-Ttext=0x08000000', '-e', 'Wide', '-o', 'fixture.elf', 'fixture.o'],
+                       cwd=self.root, check=True, capture_output=True, timeout=30)
+        listing = subprocess.check_output(['arm-none-eabi-nm', '-n', 'fixture.elf'], cwd=self.root, text=True, timeout=30)
+        symbols = {fields[2]: int(fields[0], 16) for line in listing.splitlines()
+                   if len(fields := line.split()) == 3 and fields[1] not in ('U', 'u')}
+        self.assertEqual(symbols['WideEnd'] - symbols['Wide'], size)
+        subprocess.run(['arm-none-eabi-objcopy', '-O', 'binary', 'fixture.elf', 'fixture.bin'],
+                       cwd=self.root, check=True, timeout=30)
+        raw = (self.root / 'fixture.bin').read_bytes()[symbols['Wide'] - 0x08000000:][:size]
+        self.assertEqual(struct.unpack_from('<HHHBBb', raw, 16), (0x1234, 0x2345, 0x12FD, 7, 4, -2))
+        self.assertEqual(struct.unpack_from('<H', raw, offsets[4])[0], 0xABCD)
+        self.assertEqual((raw[28], raw[offsets[5]], raw[30:32]), (13, 6, b'\0\0'))
+
+    def test_numeric_sections_cannot_truncate_or_use_exact_met_specials(self):
+        self.map('Numeric', region='REGION_SINNOH', region_map_section=256)
+        self.groups(gNumeric=['Numeric'])
+        self.write('data/layouts/layouts.json', {'layouts_table_label': 'gMapLayouts',
+                                              'layouts': [self.layout()]})
+        args = ('map', 'emerald', self.map_paths[0], 'data/layouts/layouts.json', 'data/maps/Numeric')
+        self.run_tool(*args)
+        self.assertIn('.2byte 256', self.text('data/maps/Numeric/header.inc'))
+        original = self.text('data/maps/Numeric/header.inc')
+        for invalid in (-1, 253, 254, 255, 8192, 65536, 256.5):
+            with self.subTest(invalid=invalid):
+                header = json.loads(self.text(self.map_paths[0]))
+                header['region_map_section'] = invalid
+                self.write(self.map_paths[0], header)
+                result = self.run_tool(*args, success=False)
+                self.assertIn('Invalid map section', result.stderr)
+                self.assertEqual(self.text('data/maps/Numeric/header.inc'), original)
+
 
 if __name__ == '__main__':
     unittest.main()
