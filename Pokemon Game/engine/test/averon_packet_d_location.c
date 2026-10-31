@@ -6,7 +6,7 @@
 STATIC_ASSERT(MAPSEC_ROUTE_206 == 228, packet_d_route206_fixed);
 STATIC_ASSERT(MAPSEC_ROUTE_207 == 229, packet_d_route207_fixed);
 STATIC_ASSERT(MAPSEC_MT_CORONET == 230, packet_d_coronet_fixed);
-STATIC_ASSERT(MAPSEC_COUNT == 231, packet_d_only_approved_origins);
+STATIC_ASSERT(MAPSEC_COUNT == 239, packet_d_only_approved_origins);
 TEST("Averon packet D production map slots and section meanings are append only")
 {
     const u32 maps[] = {MAP_ROUTE206_NORTH,MAP_ROUTE206,MAP_ROUTE206_SOUTH,MAP_ROUTE207,MAP_MT_CORONET_1F_SOUTH};

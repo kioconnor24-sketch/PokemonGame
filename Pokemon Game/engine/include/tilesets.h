@@ -74,4 +74,9 @@ extern const struct Tileset gTileset_AveronRoute206GatePrimary;
 extern const struct Tileset gTileset_AveronRoute206GateSecondary;
 extern const struct Tileset gTileset_AveronCoronetSouthSecondary;
 
+extern const struct Tileset gTileset_AveronCentralOutdoorPrimary;
+extern const struct Tileset gTileset_AveronCentralOutdoorSecondary;
+extern const struct Tileset gTileset_AveronCentralGatePrimary;
+extern const struct Tileset gTileset_AveronCentralGateSecondary;
+
 #endif //GUARD_tilesets_H

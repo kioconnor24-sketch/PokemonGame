@@ -64,23 +64,66 @@ def simulate_packet_d(eng):
     (eng / "data/layouts/layouts.json").write_text(json.dumps(layouts, indent=2) + "\n")
 
 
+def pre_e_fixture(eng):
+    """Test only: copy a real D tree, or undo only verified E appends in a private fixture.
+
+    This keeps installer regression tests usable after E is actually committed;
+    it never rewrites production and does not relabel fixture results as runtime QA.
+    """
+    for rel in INPUTS:
+        (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(ENGINE / rel, eng / rel)
+    names = json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
+    if names != p.BASELINE["sinnoh_prefix"] + p.SLOTS:
+        simulate_packet_d(eng)
+        return
+    if p.check(ENGINE):
+        raise AssertionError("actual installed E must verify before making the pre-E test fixture")
+    _, added_layouts = p.plan_installed(ENGINE)
+    groups = json.loads((eng / "data/maps/map_groups.json").read_text())
+    groups["gMapGroup_Sinnoh"] = p.BASELINE["sinnoh_prefix"]
+    (eng / "data/maps/map_groups.json").write_bytes(p.encode(groups))
+    layouts = json.loads((eng / "data/layouts/layouts.json").read_text())
+    new_ids = {layout["id"] for layout in added_layouts}
+    layouts["layouts"] = [layout for layout in layouts["layouts"] if layout["id"] not in new_ids]
+    (eng / "data/layouts/layouts.json").write_bytes(p.encode(layouts))
+    sections = json.loads((eng / p.SECTIONS).read_text())
+    sections["map_sections"] = sections["map_sections"][:-len(p.SECTIONS_NEW)]
+    (eng / p.SECTIONS).write_bytes(p.encode(sections))
+    registry = (eng / p.REGISTRY).read_text()
+    registry = registry.replace("REGISTRY_GROUP(76, gMapGroup_Sinnoh, 83, 1)",
+                                "REGISTRY_GROUP(76, gMapGroup_Sinnoh, 46, 1)")
+    scripts = (eng / "data/event_scripts.s").read_text()
+    for index, name in enumerate(p.SLOTS, 46):
+        registry = registry.replace(f"REGISTRY_SLOT(76, {index}, {p.const(name)}, {name}, 1)\n", "")
+        scripts = scripts.replace(f'\t.include "data/maps/{name}/scripts.inc"\n', "")
+    (eng / p.REGISTRY).write_text(registry)
+    (eng / "data/event_scripts.s").write_text(scripts)
+    for rel, marker in (("src/data/tilesets/headers.h", "\nconst struct Tileset gTileset_AveronCentralOutdoorPrimary ="),
+                        ("src/data/tilesets/metatiles.h", "const u16 gMetatiles_AveronCentralOutdoorPrimary[] =")):
+        (eng / rel).write_text((eng / rel).read_text().split(marker, 1)[0])
+    include = (eng / "include/tilesets.h").read_text()
+    decls = "".join(f"extern const struct Tileset gTileset_{symbol};\n" for symbol, _, _, _ in p.TILESETS.values())
+    (eng / "include/tilesets.h").write_text(include.replace("\n" + decls + "\n#endif", "\n#endif", 1))
+    for rel, raw in p.compatibility_baseline(ENGINE, installed=True).items():
+        (eng / rel).write_bytes(raw)
+    for rel in (f"data/maps/{p.SOUTH}/map.json", f"data/layouts/{p.SOUTH}/map.bin"):
+        (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(ENGINE / rel, eng / rel)
+    (eng / f"data/maps/{p.SOUTH}/map.json").write_bytes(p.encode(p.expected_south_header()))
+    path = eng / f"data/layouts/{p.SOUTH}/map.bin"
+    values = cells(path.read_bytes())
+    values[876] = 0x3604
+    path.write_bytes(p.pack(values))
+
+
 class WestPacketETest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         cls.eng = pathlib.Path(cls.tmp.name) / "engine"
-        for rel in INPUTS:
-            (cls.eng / rel).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy(ENGINE / rel, cls.eng / rel)
-        sinnoh = json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-        cls.simulated = not p.PACKET_D <= set(sinnoh)
-        if cls.simulated:
-            simulate_packet_d(cls.eng)
-        else:                                          # real packet D on main: copy its Coronet South
-            for rel in (f"data/maps/{p.SOUTH}/map.json",
-                        p.layout_of(ENGINE, json.loads((ENGINE / f"data/maps/{p.SOUTH}/map.json").read_text())["layout"])["blockdata_filepath"]):
-                (cls.eng / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(ENGINE / rel, cls.eng / rel)
+        pre_e_fixture(cls.eng)
+        cls.simulated = not p.PACKET_D <= set(json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"])
         cls.before = json.loads((cls.eng / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
         cls.south_before = (cls.eng / f"data/layouts/{p.SOUTH}/map.bin").read_bytes() if cls.simulated else None
         p.install(cls.eng)
@@ -210,10 +253,7 @@ class WestPacketETest(unittest.TestCase):
     def test_install_refuses_changed_legacy_assertions_and_existing_untracked_work(self):
         with tempfile.TemporaryDirectory() as tmp:
             eng = pathlib.Path(tmp) / "engine"
-            for rel in INPUTS:
-                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(ENGINE / rel, eng / rel)
-            simulate_packet_d(eng)
+            pre_e_fixture(eng)
             target = eng / p.COMPAT_FILE
             original = target.read_bytes()
             self.assertIn(b"MAPSEC_NONE == 215", original)
@@ -272,10 +312,7 @@ class WestPacketETest(unittest.TestCase):
     def test_install_refuses_wrong_south_section_with_warps_and_cells_unchanged(self):
         with tempfile.TemporaryDirectory() as tmp:
             eng = pathlib.Path(tmp) / "engine"
-            for rel in INPUTS:
-                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(ENGINE / rel, eng / rel)
-            simulate_packet_d(eng)
+            pre_e_fixture(eng)
             target = eng / f"data/maps/{p.SOUTH}/map.json"
             header = json.loads(target.read_text())
             header["region_map_section"] = "MAPSEC_ROUTE_201"
@@ -295,10 +332,7 @@ class WestPacketETest(unittest.TestCase):
     def test_install_refuses_a_reordered_or_changed_packet_d_baseline(self):
         with tempfile.TemporaryDirectory() as tmp:
             eng = pathlib.Path(tmp) / "engine"
-            for rel in INPUTS:
-                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(ENGINE / rel, eng / rel)
-            simulate_packet_d(eng)
+            pre_e_fixture(eng)
             header = json.loads((eng / f"data/maps/{p.SOUTH}/map.json").read_text())
             header["warp_events"][0]["dest_warp_id"] = "1"
             (eng / f"data/maps/{p.SOUTH}/map.json").write_text(json.dumps(header))
