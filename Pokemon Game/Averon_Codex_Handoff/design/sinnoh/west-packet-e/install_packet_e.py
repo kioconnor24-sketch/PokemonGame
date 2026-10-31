@@ -373,6 +373,95 @@ def appended(engine, layouts):
     return out
 
 
+# Mechanical compatibility inputs from the frozen actual D production candidate.
+COMPAT_PINS = "../scripts/averon-mapsec-pins.json"
+COUNT_FILES = ("test/averon_northern_location.c", "test/averon_sandgem_location.c",
+               "test/averon_oreburgh_location.c", "test/averon_packet_d_location.c")
+COMPAT_FILE = "test/averon_location_compatibility.c"
+COMPAT_HASHES = {
+    "test/averon_northern_location.c": "c800b336386e235b93fb5993919b4c6d6fd828f963ae99e27e94ce7d4d8eb5ef",
+    "test/averon_sandgem_location.c": "7798521236ff7f7a5c7297567e1ba03c3a65f30acd483c2f54719ad57e857972",
+    "test/averon_oreburgh_location.c": "d774c59e79579505e361ba7f6c3b19b996a62a55a9c2809d41e490c7872dec56",
+    "test/averon_packet_d_location.c": "d16f50f54b00d8be63fa7d4b1704a5e3ffe476f84e35010adcd5dc304b0e0d02",
+    "test/averon_location_compatibility.c": "fb84bdfcdafa5088e4708128a8f27d2cd0d09580d49769d91cd13f6551440d57",
+    "../scripts/averon-mapsec-pins.json": "23a6c9dd0b0d9d1c97e51806177d04ccca24543101694ef0359bf8fe6e6ef582",
+}
+NATIVE_FILE = "test/averon_packet_e_location.c"
+
+
+def compatibility_baseline(engine, installed=False):
+    """Recover only the exact hash-proven D native/pin inputs, preserving every old assertion and pin."""
+    engine = pathlib.Path(engine)
+    baseline = {rel: (engine / rel).read_bytes() for rel in COMPAT_HASHES}
+    if installed:
+        for rel in COUNT_FILES:
+            if baseline[rel].count(b"MAPSEC_COUNT == 239") != 1:
+                raise ValueError("installed E section-count fixture differs: " + rel)
+            baseline[rel] = baseline[rel].replace(b"MAPSEC_COUNT == 239", b"MAPSEC_COUNT == 231")
+        extra = "".join(" || section == " + symbol for symbol, _, _ in SECTIONS_NEW).encode()
+        if baseline[COMPAT_FILE].count(extra) != 2:
+            raise ValueError("installed E location whitelist differs")
+        baseline[COMPAT_FILE] = baseline[COMPAT_FILE].replace(extra, b"")
+        pins = json.loads(baseline[COMPAT_PINS])
+        for symbol, value, _ in SECTIONS_NEW:
+            if pins["pins"].pop(symbol, None) != value:
+                raise ValueError("installed E saved-origin pin differs: " + symbol)
+        baseline[COMPAT_PINS] = encode(pins)
+    if any(sha(baseline[rel]) != digest for rel, digest in COMPAT_HASHES.items()):
+        raise ValueError("the exact pre-E native assertions or saved-origin pins changed")
+    return baseline
+
+
+def compatibility_outputs(engine, installed=False):
+    baseline = compatibility_baseline(engine, installed)
+    out = {rel: baseline[rel].replace(b"MAPSEC_COUNT == 231", b"MAPSEC_COUNT == 239") for rel in COUNT_FILES}
+    for rel in COUNT_FILES:
+        if baseline[rel].count(b"MAPSEC_COUNT == 231") != 1:
+            raise ValueError("the D section-count fixture differs: " + rel)
+    needle = b"|| section == MAPSEC_MT_CORONET"
+    if baseline[COMPAT_FILE].count(needle) != 2:
+        raise ValueError("the D valid/nonblank-name whitelist differs")
+    extra = "".join(" || section == " + symbol for symbol, _, _ in SECTIONS_NEW).encode()
+    out[COMPAT_FILE] = baseline[COMPAT_FILE].replace(needle, needle + extra)
+    pins = json.loads(baseline[COMPAT_PINS])
+    pins["pins"].update({symbol: value for symbol, value, _ in SECTIONS_NEW})
+    out[COMPAT_PINS] = encode(pins)
+    records = "\n".join(f"    {{{const(name)}, {section_of(name)}}}," for name in SLOTS)
+    fixed = "\n".join(f"STATIC_ASSERT({symbol} == {value}, packet_e_{value}_fixed);" for symbol, value, _ in SECTIONS_NEW)
+    out[NATIVE_FILE] = ('''#include "global.h"
+#include "test/test.h"
+#include "overworld.h"
+#include "constants/maps.h"
+#include "constants/region_map_sections.h"
+''' + fixed + '''
+STATIC_ASSERT(MAPSEC_COUNT == 239, packet_e_only_decided_origins);
+TEST("Averon packet E production slots and saved origins are exact append-only records")
+{
+    static const struct {u32 map; u32 section;} expected[] = {
+''' + records + '''
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(expected); i++)
+    {
+        const struct MapHeader *h = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(expected[i].map), MAP_NUM(expected[i].map));
+        EXPECT_EQ(MAP_GROUP(expected[i].map), 76); EXPECT_EQ(MAP_NUM(expected[i].map), 46 + i);
+        EXPECT_EQ(h->regionMapSectionId, expected[i].section);
+    }
+}
+TEST("Averon packet E preserves the original South return and appends only the reciprocal east join")
+{
+    const struct MapHeader *s = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_MT_CORONET_1F_SOUTH), MAP_NUM(MAP_MT_CORONET_1F_SOUTH));
+    const struct MapHeader *r = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE208), MAP_NUM(MAP_ROUTE208));
+    EXPECT_EQ(s->regionMapSectionId, MAPSEC_MT_CORONET); EXPECT_EQ(s->events->warpCount, 2);
+    EXPECT_EQ(s->events->warps[0].mapNum, MAP_NUM(MAP_ROUTE207)); EXPECT_EQ(s->events->warps[0].warpId, 0);
+    EXPECT_EQ(s->events->warps[1].mapNum, MAP_NUM(MAP_ROUTE208)); EXPECT_EQ(s->events->warps[1].warpId, 2);
+    EXPECT_EQ(r->events->warps[2].mapNum, MAP_NUM(MAP_MT_CORONET_1F_SOUTH)); EXPECT_EQ(r->events->warps[2].warpId, 1);
+    EXPECT_EQ(s->mapLayout->map[876], 0x321a); EXPECT_EQ(s->mapLayout->map[113], 0x3604);
+    EXPECT_EQ(r->mapLayout->map[19 * 68 + 8], 0x00a7);
+}
+''').encode()
+    return out
+
+
 def check(engine):
     """Recompute the packet's own files and confirm every appended entry; lists every mismatching path."""
     engine = pathlib.Path(engine)
@@ -397,6 +486,12 @@ def check(engine):
     if entries[-len(SECTIONS_NEW):] != [dict(id=i, value=v, name=t, region="REGION_SINNOH") for i, v, t in SECTIONS_NEW]:
         bad.append(SECTIONS)
     bad += tileset_source_errors(engine)
+    try:
+        expected = compatibility_outputs(engine, installed=True)
+        bad += [rel for rel, raw in expected.items() if not (engine / rel).is_file()
+                or (engine / rel).read_bytes() != raw]
+    except ValueError as err:
+        bad.append(str(err))
     return bad
 
 
@@ -420,6 +515,14 @@ def install(engine):
         prior(engine)
         files, layouts = plan(engine)
         files.update(appended(engine, layouts))
+        files.update(compatibility_outputs(engine))
+        existing = {"data/maps/map_groups.json", "data/layouts/layouts.json", "data/event_scripts.s",
+                    REGISTRY, SECTIONS, "include/tilesets.h", "src/data/tilesets/headers.h",
+                    "src/data/tilesets/metatiles.h", f"data/maps/{SOUTH}/map.json",
+                    "data/layouts/" + SOUTH + "/map.bin"} | set(COMPAT_HASHES)
+        for rel in files:
+            if rel not in existing and (engine / rel).exists():
+                raise ValueError("refusing existing/untracked E output: " + rel)
     except ValueError as err:
         sys.exit("refusing: " + str(err))
     for rel, value in files.items():

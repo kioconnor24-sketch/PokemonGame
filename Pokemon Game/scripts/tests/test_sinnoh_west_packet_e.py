@@ -15,7 +15,7 @@ spec = importlib.util.spec_from_file_location("packet_e_install", HERE / "instal
 p = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(p)
 INPUTS = ["data/maps/map_groups.json", "data/layouts/layouts.json", "data/event_scripts.s", p.REGISTRY, p.SECTIONS,
-          "include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h"]
+          "include/tilesets.h", "src/data/tilesets/headers.h", "src/data/tilesets/metatiles.h"] + list(p.COMPAT_HASHES)
 D_ORDER = ["Route206_North", "Route206", "Route206_South", "Route207", p.SOUTH]
 D_SECTIONS = [("MAPSEC_ROUTE_206", 228, "ROUTE 206"), ("MAPSEC_ROUTE_207", 229, "ROUTE 207"),
               ("MAPSEC_MT_CORONET", 230, "MT. CORONET")]
@@ -29,6 +29,11 @@ def simulate_packet_d(eng):
     """Synthetic pre-E consumer fixture from the reviewed actual D header contract, not production acceptance.
     The west port is reopened; the east port and 2F ladder stay walled. Only what packet E reads."""
     groups = json.loads((eng / "data/maps/map_groups.json").read_text())
+    if p.PACKET_D <= set(groups["gMapGroup_Sinnoh"]):
+        for rel in (f"data/maps/{p.SOUTH}/map.json", f"data/layouts/{p.SOUTH}/map.bin"):
+            (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(ENGINE / rel, eng / rel)
+        return
     last = groups["gMapGroup_Sinnoh"][-1]
     n = len(groups["gMapGroup_Sinnoh"])
     groups["gMapGroup_Sinnoh"] += D_ORDER
@@ -188,6 +193,42 @@ class WestPacketETest(unittest.TestCase):
         include = "include/tilesets.h"
         declaration = f"extern const struct Tileset gTileset_{symbol};"
         self.assertIn(include, self.mutated(include, lambda raw: raw.replace(declaration.encode(), b"", 1)))
+
+    def test_paired_origin_pins_preserve_old_values_and_reject_reassignment(self):
+        pins = json.loads((self.eng / p.COMPAT_PINS).read_text())["pins"]
+        baseline = json.loads(p.compatibility_baseline(self.eng, installed=True)[p.COMPAT_PINS])["pins"]
+        self.assertEqual({key: pins[key] for key in baseline}, baseline)
+        self.assertEqual({key: value for key, value in pins.items() if key not in baseline},
+                         {symbol: value for symbol, value, _ in p.SECTIONS_NEW})
+        def change(raw):
+            data = json.loads(raw)
+            data["pins"]["MAPSEC_AMITY_SQUARE"] = 237
+            return p.encode(data)
+        self.assertTrue(any("saved-origin pin differs" in error
+                            for error in self.mutated(p.COMPAT_PINS, change)))
+
+    def test_install_refuses_changed_legacy_assertions_and_existing_untracked_work(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            eng = pathlib.Path(tmp) / "engine"
+            for rel in INPUTS:
+                (eng / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(ENGINE / rel, eng / rel)
+            simulate_packet_d(eng)
+            target = eng / p.COMPAT_FILE
+            original = target.read_bytes()
+            self.assertIn(b"MAPSEC_NONE == 215", original)
+            target.write_bytes(original.replace(b"MAPSEC_NONE == 215", b"MAPSEC_NONE == 214", 1))
+            with self.assertRaisesRegex(SystemExit, "native assertions or saved-origin pins"):
+                p.install(eng)
+            self.assertFalse((eng / "data/maps/Route208/map.json").exists())
+            target.write_bytes(original)
+            existing = eng / "data/maps/Route208/scripts.inc"
+            existing.parent.mkdir(parents=True)
+            existing.write_text("preserve existing work")
+            with self.assertRaisesRegex(SystemExit, "existing/untracked E output"):
+                p.install(eng)
+            self.assertEqual(existing.read_text(), "preserve existing work")
+            self.assertFalse((eng / "data/maps/Route208/map.json").exists())
 
     def mutated(self, rel, change):
         """check() with one engine file changed in place, then restored."""
