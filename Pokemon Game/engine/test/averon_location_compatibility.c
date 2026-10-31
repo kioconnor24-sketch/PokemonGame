@@ -42,7 +42,7 @@ TEST("Averon location legacy names and region identities remain unchanged")
     for (u32 section = 0; section <= 0xFF; section++)
     {
         bool32 sinnoh = section == MAPSEC_SANDGEM_TOWN || section == MAPSEC_ROUTE_201 || section == MAPSEC_TWINLEAF_TOWN
-            || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE || section == MAPSEC_ROUTE_204 || section == MAPSEC_FLOAROMA_TOWN || section == MAPSEC_ROUTE_205 || section == MAPSEC_OREBURGH_CITY || section == MAPSEC_ROUTE_206 || section == MAPSEC_ROUTE_207 || section == MAPSEC_MT_CORONET;
+            || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE || section == MAPSEC_ROUTE_204 || section == MAPSEC_FLOAROMA_TOWN || section == MAPSEC_ROUTE_205 || section == MAPSEC_OREBURGH_CITY || section == MAPSEC_ROUTE_206 || section == MAPSEC_ROUTE_207 || section == MAPSEC_MT_CORONET || section == MAPSEC_ROUTE_208 || section == MAPSEC_HEARTHOME_CITY || section == MAPSEC_ROUTE_209 || section == MAPSEC_SOLACEON_TOWN || section == MAPSEC_SOLACEON_RUINS || section == MAPSEC_LOST_TOWER || section == MAPSEC_ROUTE_210 || section == MAPSEC_AMITY_SQUARE;
         EXPECT_EQ(IsRegionMapSectionIdValid(section), section < 215 || sinnoh);
         EXPECT_EQ(GetRegionForSectionId(section), sinnoh ? REGION_SINNOH : section >= KANTO_MAPSEC_START && section < MAPSEC_SPECIAL_AREA
             ? REGION_KANTO : REGION_HOENN);
@@ -71,7 +71,7 @@ TEST("Averon location legacy names and region identities remain unchanged")
     for (u32 section = MAPSEC_NONE; section <= 0xFF; section++)
     {
         if (section == MAPSEC_SANDGEM_TOWN || section == MAPSEC_ROUTE_201 || section == MAPSEC_TWINLEAF_TOWN
-         || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE || section == MAPSEC_ROUTE_204 || section == MAPSEC_FLOAROMA_TOWN || section == MAPSEC_ROUTE_205 || section == MAPSEC_OREBURGH_CITY || section == MAPSEC_ROUTE_206 || section == MAPSEC_ROUTE_207 || section == MAPSEC_MT_CORONET)
+         || section == MAPSEC_ROUTE_202 || section == MAPSEC_LAKE_VERITY || section == MAPSEC_JUBILIFE_CITY || section == MAPSEC_ROUTE_203 || section == MAPSEC_OREBURGH_GATE || section == MAPSEC_ROUTE_204 || section == MAPSEC_FLOAROMA_TOWN || section == MAPSEC_ROUTE_205 || section == MAPSEC_OREBURGH_CITY || section == MAPSEC_ROUTE_206 || section == MAPSEC_ROUTE_207 || section == MAPSEC_MT_CORONET || section == MAPSEC_ROUTE_208 || section == MAPSEC_HEARTHOME_CITY || section == MAPSEC_ROUTE_209 || section == MAPSEC_SOLACEON_TOWN || section == MAPSEC_SOLACEON_RUINS || section == MAPSEC_LOST_TOWER || section == MAPSEC_ROUTE_210 || section == MAPSEC_AMITY_SQUARE)
             continue; // the owner-approved ordinary codes (216 Sandgem, 217 Route 201, 218 Twinleaf, 219 Route 202, 220 Lake Verity, 221 Jubilife, 222 Route 203, 223 Oreburgh Gate, 224 Route204/Ravaged Path, 225 Floaroma/Meadow, 226 Route205, 227 Oreburgh City)
         GetMapName(name, section, 0);
         for (u32 i = 0; i < 18; i++)

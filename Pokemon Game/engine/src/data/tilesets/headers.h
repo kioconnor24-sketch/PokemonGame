@@ -1582,3 +1582,39 @@ const struct Tileset gTileset_AveronRoute206Secondary = { .isCompressed=TRUE, .i
 const struct Tileset gTileset_AveronRoute206GatePrimary = { .isCompressed=TRUE, .isSecondary=FALSE, .tiles=gTilesetTiles_InsideBuilding, .palettes=gTilesetPalettes_InsideBuilding, .metatiles=gMetatiles_AveronRoute206GatePrimary, .metatileAttributes = gMetatileAttributes_AveronRoute206GatePrimary, .callback=InitTilesetAnim_Building };
 const struct Tileset gTileset_AveronRoute206GateSecondary = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles=gTilesetTiles_Shop, .palettes=gTilesetPalettes_Shop, .metatiles=gMetatiles_AveronRoute206GateSecondary, .metatileAttributes = gMetatileAttributes_AveronRoute206GateSecondary, .callback=NULL };
 const struct Tileset gTileset_AveronCoronetSouthSecondary = { .isCompressed=TRUE, .isSecondary=TRUE, .tiles=gTilesetTiles_Cave, .palettes=gTilesetPalettes_Cave, .metatiles=gMetatiles_AveronCoronetSouthSecondary, .metatileAttributes = gMetatileAttributes_AveronCoronetSouthSecondary, .callback=InitTilesetAnim_Cave };
+
+const struct Tileset gTileset_AveronCentralOutdoorPrimary =
+{
+ .isCompressed=TRUE, .isSecondary=FALSE,
+ .tiles=gTilesetTiles_General, .palettes=gTilesetPalettes_General,
+ .metatiles=gMetatiles_AveronCentralOutdoorPrimary,
+ .metatileAttributes = gMetatileAttributes_AveronCentralOutdoorPrimary,
+ .callback=InitTilesetAnim_General,
+};
+
+const struct Tileset gTileset_AveronCentralOutdoorSecondary =
+{
+ .isCompressed=TRUE, .isSecondary=TRUE,
+ .tiles=gTilesetTiles_Rustboro, .palettes=gTilesetPalettes_Rustboro,
+ .metatiles=gMetatiles_AveronCentralOutdoorSecondary,
+ .metatileAttributes = gMetatileAttributes_AveronCentralOutdoorSecondary,
+ .callback=InitTilesetAnim_Rustboro,
+};
+
+const struct Tileset gTileset_AveronCentralGatePrimary =
+{
+ .isCompressed=TRUE, .isSecondary=FALSE,
+ .tiles=gTilesetTiles_InsideBuilding, .palettes=gTilesetPalettes_InsideBuilding,
+ .metatiles=gMetatiles_AveronCentralGatePrimary,
+ .metatileAttributes = gMetatileAttributes_AveronCentralGatePrimary,
+ .callback=InitTilesetAnim_Building,
+};
+
+const struct Tileset gTileset_AveronCentralGateSecondary =
+{
+ .isCompressed=TRUE, .isSecondary=TRUE,
+ .tiles=gTilesetTiles_Shop, .palettes=gTilesetPalettes_Shop,
+ .metatiles=gMetatiles_AveronCentralGateSecondary,
+ .metatileAttributes = gMetatileAttributes_AveronCentralGateSecondary,
+ .callback=NULL,
+};
