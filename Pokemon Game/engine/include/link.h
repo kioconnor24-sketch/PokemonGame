@@ -188,10 +188,10 @@ struct LinkPlayerBlock
     char magic2[16];
 };
 
-// Capability bytes occupy existing, otherwise unused LinkPlayer fields. They
-// describe this exact origin protocol without changing the cable/RFU ABI.
+// The unused stable LinkPlayer halfword identifies this exact protocol:
+// A6 identifies the extension, 02 is the origin version. It is a compatibility
+// declaration, not authentication, and changes neither cable nor RFU ABI.
 #define AVERON_ORIGIN_LINK_SIGNATURE 0xA602
-#define AVERON_ORIGIN_LINK_REVISION  0xD3
 struct Pokemon;
 bool32 AveronLink_PeerUsesWideOrigins(u32 playerId);
 bool32 AveronLink_CanExportMon(struct Pokemon *mon, u32 playerId);

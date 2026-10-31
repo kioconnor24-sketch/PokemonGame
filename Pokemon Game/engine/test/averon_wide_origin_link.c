@@ -4,6 +4,7 @@
 #include "link.h"
 #include "pokemon.h"
 #include "constants/region_map_sections.h"
+#include "constants/characters.h"
 
 STATIC_ASSERT(sizeof(struct LinkPlayer) == 28, origin_link_player_abi_unchanged);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, origin_link_party_abi_unchanged);
@@ -14,7 +15,8 @@ static void SetCompatiblePeer(u32 id)
     memset(&gLinkPlayers[id], 0, sizeof(gLinkPlayers[id]));
     gLinkPlayers[id].version = VERSION_EMERALD | 0x4000;
     gLinkPlayers[id].lp_field_2 = AVERON_ORIGIN_LINK_SIGNATURE;
-    gLinkPlayers[id].neverRead = AVERON_ORIGIN_LINK_REVISION;
+    gLinkPlayers[id].language = LANGUAGE_ENGLISH;
+    ConvertLinkPlayerName(&gLinkPlayers[id]);
 }
 
 TEST("Averon origin link requires the exact compatible protocol without changing player ABI")
@@ -26,12 +28,35 @@ TEST("Averon origin link requires the exact compatible protocol without changing
     gLinkPlayers[peer].lp_field_2 = 0x8000;
     EXPECT(!AveronLink_PeerUsesWideOrigins(peer));
     SetCompatiblePeer(peer);
-    gLinkPlayers[peer].neverRead ^= 1;
+    gLinkPlayers[peer].lp_field_2 = 0xA603;
+    ConvertLinkPlayerName(&gLinkPlayers[peer]);
     EXPECT(!AveronLink_PeerUsesWideOrigins(peer));
     SetCompatiblePeer(peer);
     gLinkPlayers[peer].version = VERSION_RUBY;
     EXPECT(!AveronLink_PeerUsesWideOrigins(peer));
     EXPECT(!AveronLink_PeerUsesWideOrigins(MAX_RFU_PLAYERS));
+    gLinkPlayers[peer] = previous;
+}
+
+TEST("Averon origin link capability survives Japanese names and the converted RFU relay")
+{
+    u32 peer = GetMultiplayerId() ^ 1;
+    struct LinkPlayer previous = gLinkPlayers[peer];
+    SetCompatiblePeer(peer);
+    for (u32 i = 0; i < 5; i++)
+        gLinkPlayers[peer].name[i] = 0xBB;
+    gLinkPlayers[peer].name[5] = EOS;
+    gLinkPlayers[peer].language = LANGUAGE_JAPANESE;
+    ConvertLinkPlayerName(&gLinkPlayers[peer]);
+    EXPECT(AveronLink_PeerUsesWideOrigins(peer));
+    // RFU late-join relays copy the already converted LinkPlayer and invoke
+    // this same conversion again. The capability halfword stays untouched.
+    struct LinkPlayer relayed = gLinkPlayers[peer];
+    gLinkPlayers[peer] = relayed;
+    ConvertLinkPlayerName(&gLinkPlayers[peer]);
+    EXPECT(AveronLink_PeerUsesWideOrigins(peer));
+    gLinkPlayers[peer].lp_field_2 = 0xA603;
+    EXPECT(!AveronLink_PeerUsesWideOrigins(peer));
     gLinkPlayers[peer] = previous;
 }
 

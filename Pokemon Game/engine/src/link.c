@@ -319,7 +319,6 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = AVERON_ORIGIN_LINK_SIGNATURE;
-    gLocalLinkPlayer.neverRead = AVERON_ORIGIN_LINK_REVISION;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
@@ -331,8 +330,7 @@ bool32 AveronLink_PeerUsesWideOrigins(u32 playerId)
 {
     return playerId < MAX_RFU_PLAYERS
         && (gLinkPlayers[playerId].version & 0xFF) == VERSION_EMERALD
-        && gLinkPlayers[playerId].lp_field_2 == AVERON_ORIGIN_LINK_SIGNATURE
-        && gLinkPlayers[playerId].neverRead == AVERON_ORIGIN_LINK_REVISION;
+        && gLinkPlayers[playerId].lp_field_2 == AVERON_ORIGIN_LINK_SIGNATURE;
 }
 
 bool32 AveronLink_CanExportMon(struct Pokemon *mon, u32 playerId)
