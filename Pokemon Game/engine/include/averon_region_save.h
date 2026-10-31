@@ -78,6 +78,8 @@ bool32 AveronRegionSave_IsWriteBlocked(void);
 // Full origins are read only after a known format has been initialized or
 // every legacy Pokemon container has been normalized during load.
 bool32 AveronRegionSave_UsesWideOrigins(void);
+bool32 AveronRegionSave_RequiresFullOriginSave(void);
+void AveronRegionSave_FullOriginSaveComplete(void);
 
 // Exposed for tests.
 u32 AveronRegionSave_Crc32(const u8 *data, u32 size);

@@ -7,6 +7,10 @@
 
 #define BATTLER_RECORD_SIZE 388
 
+// Saved recordings remain byte-format. Wide parties cannot be recorded until
+// that separate sector has an explicitly versioned encoding.
+bool32 RecordedBattle_CanPersistOrigins(void);
+
 struct RecordedBattleSave
 {
     struct Pokemon parties[MAX_BATTLE_TRAINERS][PARTY_SIZE];

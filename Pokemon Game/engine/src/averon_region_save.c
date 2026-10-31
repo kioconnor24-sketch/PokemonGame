@@ -58,6 +58,7 @@ STATIC_ASSERT(NUM_BADGES == AVERON_REGION_BADGES, AveronRegionBadgeCount);
 static EWRAM_DATA u8 sLoadIssue = AVERON_REGION_LOAD_OK;
 static EWRAM_DATA bool8 sWriteBlocked = FALSE;
 static EWRAM_DATA bool8 sWideOriginsReady = FALSE;
+static EWRAM_DATA bool8 sOriginsNeedFullSave = FALSE;
 
 static u16 ReadU16(const u8 *p)
 {
@@ -353,6 +354,7 @@ void AveronRegionSave_InitNewGame(void)
     InitRecordDefaults();
     memset(gSaveBlock2Ptr->averonRegionAnchor, 0, AVERON_REGION_ANCHOR_SIZE);
     sWideOriginsReady = TRUE;
+    sOriginsNeedFullSave = FALSE;
 }
 
 // Called by save.c just before logical sector 0 is copied for writing, with
@@ -482,6 +484,7 @@ void AveronRegionSave_BeginLoad(void)
     sLoadIssue = AVERON_REGION_LOAD_OK;
     sWriteBlocked = FALSE;
     sWideOriginsReady = FALSE;
+    sOriginsNeedFullSave = FALSE;
 }
 
 void AveronRegionSave_NoteRejectedSlot(enum AveronRegionSlotClass slotClass)
@@ -534,12 +537,14 @@ void AveronRegionSave_FinishLoad(u8 saveStatus)
         // the player's next ordinary save writes the anchor and record.
         InitRecordDefaults();
         NormalizeLegacyPokemonContainers();
+        sOriginsNeedFullSave = TRUE;
         if (sLoadIssue == AVERON_REGION_LOAD_OK)
             sLoadIssue = AVERON_REGION_LOAD_LEGACY_MIGRATED;
     }
     else if (ReadU16(&Record()[REC_FORMAT]) == 1)
     {
         NormalizeLegacyPokemonContainers();
+        sOriginsNeedFullSave = TRUE;
         WriteU16(&Record()[REC_FORMAT], AVERON_REGION_SAVE_FORMAT);
         // Keep the loaded anchor unchanged in RAM until the normal writer
         // seals both fields together. No pre-upgrade flash bytes are changed.
@@ -554,6 +559,18 @@ bool32 AveronRegionSave_UsesWideOrigins(void)
 {
     return sWideOriginsReady
         && ReadU16(&Record()[REC_FORMAT]) == AVERON_REGION_SAVE_FORMAT;
+}
+
+bool32 AveronRegionSave_RequiresFullOriginSave(void)
+{
+    return sOriginsNeedFullSave;
+}
+
+void AveronRegionSave_FullOriginSaveComplete(void)
+{
+    // Called only after all fourteen sectors of a complete slot, including
+    // the normalized PC/fusion containers, have committed successfully.
+    sOriginsNeedFullSave = FALSE;
 }
 
 u32 AveronRegionSave_GetLoadIssue(void)

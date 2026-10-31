@@ -7,6 +7,7 @@
 #include "tv.h"
 #include "malloc.h"
 #include "gba/flash_internal.h"
+#include "recorded_battle.h"
 
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, wide_origin_box_size);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, wide_origin_party_size);
@@ -121,7 +122,7 @@ TEST("Averon wide origin TV policy refuses a byte-truncated location without cha
     gMapHeader.regionMapSectionId = prior;
 }
 
-TEST("Averon wide origin validated format 1 flash save upgrades to 2 without reinterpreting old unused bits")
+static struct SaveSector *PrepareLegacyOriginFlash(void)
 {
     CheckForFlashMemory();
     EXPECT(gFlashMemoryPresent);
@@ -132,6 +133,7 @@ TEST("Averon wide origin validated format 1 flash save upgrades to 2 without rei
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIPLUP, 12, 0, OTID_STRUCT_PLAYER_ID);
     u16 ambiguous = 216 + 256;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION_EXTENDED, &ambiguous);
+    gPokemonStoragePtr->boxes[0][0] = gParties[B_TRAINER_PLAYER][0].box;
     CalculatePlayerPartyCount();
     EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
     struct SaveSector *sector = Alloc(sizeof(*sector));
@@ -163,12 +165,70 @@ TEST("Averon wide origin validated format 1 flash save upgrades to 2 without rei
     EXPECT_EQ(AveronRegionSave_GetLoadIssue(), AVERON_REGION_LOAD_LEGACY_MIGRATED);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
     EXPECT_EQ(gSaveBlock3Ptr->averonRegionRecord[4], 2);
-    // RAM migration leaves the flash version unchanged until normal saving.
-    ReadFlash(physical, 0, (u8 *)sector, sizeof(*sector));
-    EXPECT_EQ(sector->data[offsetof(struct SaveBlock2, averonRegionAnchor) + 4], 1);
+    return sector;
+}
+
+TEST("Averon wide origin validated format 1 flash save upgrades to 2 without reinterpreting old unused bits")
+{
+    struct SaveSector *sector = PrepareLegacyOriginFlash();
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
+    EXPECT(AveronRegionSave_RequiresFullOriginSave());
     EXPECT_EQ(TrySavingData(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT(!AveronRegionSave_RequiresFullOriginSave());
     EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
     EXPECT_EQ(AveronRegionSave_GetLoadIssue(), AVERON_REGION_LOAD_OK);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
     Free(sector);
+}
+
+TEST("Averon wide origin partial link and ereader saves commit migrated PC data with format 2")
+{
+    const u8 modes[] = {SAVE_LINK, SAVE_EREADER};
+    for (u32 i = 0; i < ARRAY_COUNT(modes); i++)
+    {
+        struct SaveSector *sector = PrepareLegacyOriginFlash();
+        EXPECT(AveronRegionSave_RequiresFullOriginSave());
+        EXPECT_EQ(TrySavingData(modes[i]), SAVE_STATUS_OK);
+        EXPECT(!AveronRegionSave_RequiresFullOriginSave());
+        EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
+        Free(sector);
+    }
+}
+
+TEST("Averon wide origin direct incremental save cannot seal an unmigrated PC slot")
+{
+    struct SaveSector *sector = PrepareLegacyOriginFlash();
+    EXPECT(WriteSaveBlock1Sector());
+    EXPECT_EQ(gSaveAttemptStatus, SAVE_STATUS_ERROR);
+    EXPECT(AveronRegionSave_RequiresFullOriginSave());
+    EXPECT(!WriteSaveBlock2());
+    EXPECT(!AveronRegionSave_RequiresFullOriginSave());
+    bool32 finished = FALSE;
+    for (u32 i = 0; i < 8 && !finished; i++)
+        finished = WriteSaveBlock1Sector();
+    EXPECT(finished);
+    EXPECT_EQ(LoadGameSave(SAVE_NORMAL), SAVE_STATUS_OK);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
+    Free(sector);
+}
+
+TEST("Averon wide origin recorded legacy copies normalize without changing the recording")
+{
+    AveronRegionSave_InitNewGame();
+    struct RecordedBattleSave *record = AllocZeroed(sizeof(*record));
+    struct Pokemon mon;
+    CreateMon(&mon, SPECIES_PIPLUP, 12, 0, OTID_STRUCT_PLAYER_ID);
+    u16 ambiguous = 216 + 256;
+    SetMonData(&mon, MON_DATA_MET_LOCATION_EXTENDED, &ambiguous);
+    record->parties[B_TRAINER_PLAYER][0] = mon;
+    SetPartiesFromRecordedSave(record);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION_EXTENDED), 216);
+    EXPECT_EQ(memcmp(&record->parties[B_TRAINER_PLAYER][0], &mon, sizeof(mon)), 0);
+    EXPECT(RecordedBattle_CanPersistOrigins());
+    gParties[B_TRAINER_PLAYER][0] = mon;
+    EXPECT(!RecordedBattle_CanPersistOrigins());
+    EXPECT(!MoveRecordedBattleToSaveData());
+    Free(record);
 }
