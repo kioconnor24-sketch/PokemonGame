@@ -1,3 +1,12 @@
+# Integration navigation
+
+Use the [single current delivery record in Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6482868742), actual main/open PR heads and the [operating contract](CURRENT_PHASE_AND_HANDOFF.md) for executable assignments, ownership, dependencies and merge eligibility. This file is a historical index, not another active queue. Resume the existing owning PR and reuse accepted source/evidence.
+
+The October 21 snapshot below is retained for provenance. Its former “current” lane, pending approvals, ID limits and next actions describe that date only; they must not restart completed work or request resolved permissions again.
+
+<details>
+<summary>Historical October 21 integration snapshot — not current assignments</summary>
+
 # Live integration queue — Codex-only execution (2026-10-21)
 
 **Read this first, but refresh GitHub.** This is a concise operational snapshot, not an approval or a session launcher. The [operating contract](CURRENT_PHASE_AND_HANDOFF.md), [live Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15), and real PR heads/checks supersede any stale dates. Codex remains the only active developer; Claude is paused. The [large Codex assignment](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6310701355) remains the engineering work package. Do not redo accepted source conversions or previously merged tasks.
@@ -32,3 +41,5 @@ Main after manager cleanup: `f78928fc18a799699cf628ae1876ea86ebc03c52` (merge #1
 - While PR #194 awaits genuine reserved-path authorization, Codex continues disjoint/off-engine Oreburgh and northern construction instead of waiting. Post one substantial checkpoint when a state changes; no duplicate no-op reviews, micro-PRs or unnecessary replays of M1 acceptance. Owner's ChatGPT-manager cadence and any agent scans do not automatically launch a Codex session.
 
 **Next executable manager action:** resolve only #194's genuine protected owner-reserved paths without bypass, then integrate; reassess #184 after its production successor is merged. The repository is otherwise ready for substantial Codex forward engineering.
+
+</details>
