@@ -9,6 +9,8 @@ on:
       - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
       - "Pokemon Game/scripts/report-averon-save-headroom.py"
       - "Pokemon Game/scripts/tests/test_averon_save_headroom.py"
+      - "Pokemon Game/scripts/native-test-evidence.py"
+      - "Pokemon Game/scripts/tests/test_native_test_evidence.py"
   push:
     branches: [main]
     paths:
@@ -18,10 +20,18 @@ on:
       - "Pokemon Game/scripts/tests/test_averon_resource_budget.py"
       - "Pokemon Game/scripts/report-averon-save-headroom.py"
       - "Pokemon Game/scripts/tests/test_averon_save_headroom.py"
+      - "Pokemon Game/scripts/native-test-evidence.py"
+      - "Pokemon Game/scripts/tests/test_native_test_evidence.py"
   workflow_dispatch:
+    inputs:
+      force_native:
+        description: "Execute a fresh complete native suite"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: averon-native-${{ github.workflow }}-${{ github.ref }}
@@ -31,18 +41,48 @@ jobs:
   native-build:
     runs-on: ubuntu-latest
     timeout-minutes: 50
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@v4
-      - name: Verify budget parser fixtures
-        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_resource_budget.py" -v
-      - name: Verify save-headroom report fixtures
-        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_save_headroom.py" -v
+        with:
+          persist-credentials: false
       - name: Install engine toolchain documented by pinned source
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
             build-essential binutils-arm-none-eabi gcc-arm-none-eabi \
             libnewlib-arm-none-eabi git libpng-dev python3
+      - name: Select identical-input native evidence using trusted main
+        id: evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
+          FORCE_NATIVE: ${{ github.event_name == 'workflow_dispatch' && inputs.force_native || false }}
+        run: |
+          # Run only deployed main's selector before any candidate code.
+          if [ "$FORCE_NATIVE" = 'true' ]; then
+            echo 'reused=false' >> "$GITHUB_OUTPUT"
+          elif git fetch --no-tags --depth=1 origin '+refs/heads/main:refs/remotes/origin/main' && \
+             git show 'origin/main:Pokemon Game/scripts/native-test-evidence.py' > "$RUNNER_TEMP/trusted-native-evidence.py"; then
+            echo "trusted_main=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
+            if ! python3 "$RUNNER_TEMP/trusted-native-evidence.py" select \
+              --checkout "$GITHUB_SHA" --source-head "$SOURCE_HEAD" \
+              --run-id "$GITHUB_RUN_ID" --run-attempt "$GITHUB_RUN_ATTEMPT" --repo "$GITHUB_REPOSITORY" \
+              --branch "$SOURCE_BRANCH" --trusted-main origin/main \
+              --out "$RUNNER_TEMP/native-reuse.json" >> "$GITHUB_OUTPUT"; then
+              echo 'reused=false' >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo 'reused=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Verify budget parser fixtures
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_resource_budget.py" -v
+      - name: Verify save-headroom report fixtures
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_averon_save_headroom.py" -v
+      - name: Verify native evidence rejection and reuse rules
+        run: python3 -m unittest discover -s "Pokemon Game/scripts/tests" -p "test_native_test_evidence.py" -v
       - name: Compile actual Emerald-derived game
         working-directory: "Pokemon Game/engine"
         run: |
@@ -62,7 +102,41 @@ jobs:
           python3 "../scripts/report-averon-save-headroom.py" --elf pokeemerald.elf --json "$RUNNER_TEMP/averon-save-headroom.json"
           test -s "$RUNNER_TEMP/averon-save-headroom.json"
           echo "::notice title=Save-block headroom::$(jq -r 'to_entries | map("\(.key) \(.value.free_bytes) B free") | join("; ")' "$RUNNER_TEMP/averon-save-headroom.json")"
+      - name: Confirm native inputs after candidate compilation
+        id: confirm
+        if: steps.evidence.outputs.reused == 'true'
+        env:
+          TRUSTED_MAIN: ${{ steps.evidence.outputs.trusted_main }}
+          EXPECTED_INPUTS: ${{ steps.evidence.outputs.fingerprint }}
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          if git show "$TRUSTED_MAIN:Pokemon Game/scripts/native-test-evidence.py" > "$RUNNER_TEMP/confirm-native-evidence.py" && \
+             python3 "$RUNNER_TEMP/confirm-native-evidence.py" confirm \
+               --checkout "$GITHUB_SHA" --source-head "$SOURCE_HEAD" \
+               --run-id "$GITHUB_RUN_ID" --run-attempt "$GITHUB_RUN_ATTEMPT" --repo "$GITHUB_REPOSITORY" \
+               --branch "$SOURCE_BRANCH" --fingerprint "$EXPECTED_INPUTS" \
+               --out "$RUNNER_TEMP/native-confirm.json" >> "$GITHUB_OUTPUT"; then
+            :
+          else
+            echo 'reused=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Capture inputs before full native execution
+        id: native_inputs
+        if: steps.confirm.outputs.reused != 'true'
+        # An unavailable optional proof must still execute the real suite.
+        continue-on-error: true
+        env:
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git show "$GITHUB_SHA:Pokemon Game/scripts/native-test-evidence.py" > "$RUNNER_TEMP/capture-native-evidence.py"
+          python3 "$RUNNER_TEMP/capture-native-evidence.py" capture \
+            --checkout "$GITHUB_SHA" --source-head "$SOURCE_HEAD" \
+            --run-id "$GITHUB_RUN_ID" --run-attempt "$GITHUB_RUN_ATTEMPT" --repo "$GITHUB_REPOSITORY" \
+            --branch "$SOURCE_BRANCH" --out "$RUNNER_TEMP/native-inputs-before.json" >> "$GITHUB_OUTPUT"
       - name: Run native Averon regression tests through the bundled headless runner
+        if: steps.confirm.outputs.reused != 'true'
         working-directory: "Pokemon Game/engine"
         run: |
           test -x tools/mgba/mgba-rom-test || { echo "Bundled mGBA runner is not executable"; exit 1; }
@@ -75,16 +149,48 @@ jobs:
             echo "Native tests were not discovered/executed"
             exit 1
           fi
+      - name: Record full native execution proof
+        if: success() && steps.confirm.outputs.reused != 'true'
+        # A cache-recording failure must not invalidate a real passing suite.
+        continue-on-error: true
+        env:
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          SOURCE_BRANCH: ${{ github.head_ref || github.ref_name }}
+          EXECUTION_FINGERPRINT: ${{ steps.native_inputs.outputs.fingerprint }}
+        run: |
+          # Reload immutable source after native Make has run. Do not execute
+          # a workspace copy which candidate build commands could have edited.
+          rm -f "$RUNNER_TEMP/averon-native-evidence.json"
+          git show "$GITHUB_SHA:Pokemon Game/scripts/native-test-evidence.py" > "$RUNNER_TEMP/record-native-evidence.py"
+          python3 "$RUNNER_TEMP/record-native-evidence.py" record \
+            --checkout "$GITHUB_SHA" --source-head "$SOURCE_HEAD" \
+            --run-id "$GITHUB_RUN_ID" --run-attempt "$GITHUB_RUN_ATTEMPT" --repo "$GITHUB_REPOSITORY" \
+            --branch "$SOURCE_BRANCH" --fingerprint "$EXECUTION_FINGERPRINT" \
+            --native-log "$RUNNER_TEMP/averon-native-tests.log" \
+            --out "$RUNNER_TEMP/averon-native-evidence.json"
+      - name: Report reused full native execution
+        if: steps.confirm.outputs.reused == 'true'
+        env:
+          SOURCE_RUN: ${{ steps.evidence.outputs.source_run }}
+        run: |
+          rm -f "$RUNNER_TEMP/averon-native-evidence.json"
+          echo "::notice title=Native evidence reused::Identical engine, scripts, workflow and toolchain; full successful run https://github.com/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN"
+          echo "Full native execution reused from run $SOURCE_RUN; this run compiled and measured the current game. No new native execution is claimed." > "$RUNNER_TEMP/native-reuse-receipt.txt"
       - name: Do not distribute full copyrighted ROM
         run: echo "Build output remains ephemeral in CI; only textual logs are uploaded."
       - name: Attach build log, not ROM
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: averon-native-build-log
+          name: averon-native-build-log-attempt-${{ github.run_attempt }}
           if-no-files-found: warn
           path: |
             ${{ runner.temp }}/averon-build.log
             ${{ runner.temp }}/averon-memory-budget.json
             ${{ runner.temp }}/averon-save-headroom.json
             ${{ runner.temp }}/averon-native-tests.log
+            ${{ runner.temp }}/averon-native-evidence.json
+            ${{ runner.temp }}/native-reuse.json
+            ${{ runner.temp }}/native-reuse-receipt.txt
+            ${{ runner.temp }}/native-confirm.json
+            ${{ runner.temp }}/native-inputs-before.json
