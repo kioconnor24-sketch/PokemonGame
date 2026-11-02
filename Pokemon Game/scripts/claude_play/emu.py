@@ -298,21 +298,50 @@ class Emulator:
     # mGBA's -g always listens on 2345; one emulator per machine at a time.
     def __init__(self, rom, outdir, display=77, port=2345, scale=2, fps_target=None, save=None,
                  audio=False):
+        if not shutil.which("xdpyinfo"):
+            raise Blocked("Graphical QA requires xdpyinfo from x11-utils before display startup")
         self.rom = pathlib.Path(rom)
         self.outdir = pathlib.Path(outdir)
         self.outdir.mkdir(parents=True, exist_ok=True)
         self.display = f":{display}"
         self.port = port
         self.env = dict(os.environ, DISPLAY=self.display, SDL_AUDIODRIVER="dummy")
+        runtime_dir = self.outdir / "runtime"
+        runtime_dir.mkdir(mode=0o700, exist_ok=True)
+        cache_dir = self.outdir / "cache"
+        cache_dir.mkdir(exist_ok=True)
+        self.env.update(XDG_RUNTIME_DIR=str(runtime_dir), XDG_CACHE_HOME=str(cache_dir),
+                        LIBGL_ALWAYS_SOFTWARE="1")
         self.audio_raw = None
         if audio:
             # SDL2's "disk" driver writes the emulator's real mixed output to a
             # file: genuine audio capture without a sound server.
             self.audio_raw = self.outdir / "audio.raw"
             self.env.update(SDL_AUDIODRIVER="disk", SDL_DISKAUDIOFILE=str(self.audio_raw))
+        self.xvfb_log = open(self.outdir / "xvfb.log", "a")
         self.xvfb = subprocess.Popen(["Xvfb", self.display, "-screen", "0", "800x600x24", "-nolisten", "tcp"],
-                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        time.sleep(1.0)
+                                     stdout=subprocess.DEVNULL, stderr=self.xvfb_log)
+        # A fixed sleep races display startup on busy builders. Wait for a
+        # real X client handshake and stop this environment failure before
+        # starting the emulator; keep the original failure diagnosable.
+        for _ in range(100):
+            if self.xvfb.poll() is not None:
+                self.close()
+                raise Blocked("Xvfb exited before display readiness; see xvfb.log")
+            try:
+                ready = subprocess.run(["xdpyinfo", "-display", self.display],
+                                       capture_output=True, timeout=2).returncode == 0
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                self.close()
+                raise Blocked("X display readiness probe failed") from exc
+            if ready:
+                break
+            time.sleep(0.1)
+        else:
+            self.close()
+            raise Blocked("Xvfb did not become ready; see xvfb.log")
+        # This driver always uses Xvfb. LIBGL_ALWAYS_SOFTWARE above avoids
+        # requiring a physical GPU for its actual graphical checks.
         args = ["mgba", "-g", f"-{scale}"]
         if fps_target:
             args += ["-C", f"fpsTarget={fps_target}"]
@@ -385,5 +414,7 @@ class Emulator:
                     p.kill()
         if getattr(self, "log", None):
             self.log.close()
+        if getattr(self, "xvfb_log", None):
+            self.xvfb_log.close()
         if getattr(self, "trace", None):
             self.trace.close()
