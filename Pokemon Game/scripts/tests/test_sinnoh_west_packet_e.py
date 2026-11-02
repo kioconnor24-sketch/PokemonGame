@@ -65,56 +65,18 @@ def simulate_packet_d(eng):
 
 
 def pre_e_fixture(eng):
-    """Test only: copy a real D tree, or undo only verified E appends in a private fixture.
+    """Current E producer tested on exact accepted D input, never rewritten main.
 
-    This keeps installer regression tests usable after E is actually committed;
-    it never rewrites production and does not relabel fixture results as runtime QA.
+    Current production integrity is verified by the current consumer/native and
+    runtime gates. A later codec/packet must not masquerade as the older input.
     """
-    for rel in INPUTS:
+    from sinnoh_replay_fixture import post_d_source_root
+    source = post_d_source_root(ROOT.parent) / "Pokemon Game/engine"
+    for rel in INPUTS + [f"data/maps/{p.SOUTH}/map.json", f"data/layouts/{p.SOUTH}/map.bin"]:
         (eng / rel).parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(ENGINE / rel, eng / rel)
-    names = json.loads((ENGINE / "data/maps/map_groups.json").read_text())["gMapGroup_Sinnoh"]
-    if names != p.BASELINE["sinnoh_prefix"] + p.SLOTS:
-        simulate_packet_d(eng)
-        return
-    if p.check(ENGINE):
-        raise AssertionError("actual installed E must verify before making the pre-E test fixture")
-    _, added_layouts = p.plan_installed(ENGINE)
-    groups = json.loads((eng / "data/maps/map_groups.json").read_text())
-    groups["gMapGroup_Sinnoh"] = p.BASELINE["sinnoh_prefix"]
-    (eng / "data/maps/map_groups.json").write_bytes(p.encode(groups))
-    layouts = json.loads((eng / "data/layouts/layouts.json").read_text())
-    new_ids = {layout["id"] for layout in added_layouts}
-    layouts["layouts"] = [layout for layout in layouts["layouts"] if layout["id"] not in new_ids]
-    (eng / "data/layouts/layouts.json").write_bytes(p.encode(layouts))
-    sections = json.loads((eng / p.SECTIONS).read_text())
-    sections["map_sections"] = sections["map_sections"][:-len(p.SECTIONS_NEW)]
-    (eng / p.SECTIONS).write_bytes(p.encode(sections))
-    registry = (eng / p.REGISTRY).read_text()
-    registry = registry.replace("REGISTRY_GROUP(76, gMapGroup_Sinnoh, 83, 1)",
-                                "REGISTRY_GROUP(76, gMapGroup_Sinnoh, 46, 1)")
-    scripts = (eng / "data/event_scripts.s").read_text()
-    for index, name in enumerate(p.SLOTS, 46):
-        registry = registry.replace(f"REGISTRY_SLOT(76, {index}, {p.const(name)}, {name}, 1)\n", "")
-        scripts = scripts.replace(f'\t.include "data/maps/{name}/scripts.inc"\n', "")
-    (eng / p.REGISTRY).write_text(registry)
-    (eng / "data/event_scripts.s").write_text(scripts)
-    for rel, marker in (("src/data/tilesets/headers.h", "\nconst struct Tileset gTileset_AveronCentralOutdoorPrimary ="),
-                        ("src/data/tilesets/metatiles.h", "const u16 gMetatiles_AveronCentralOutdoorPrimary[] =")):
-        (eng / rel).write_text((eng / rel).read_text().split(marker, 1)[0])
-    include = (eng / "include/tilesets.h").read_text()
-    decls = "".join(f"extern const struct Tileset gTileset_{symbol};\n" for symbol, _, _, _ in p.TILESETS.values())
-    (eng / "include/tilesets.h").write_text(include.replace("\n" + decls + "\n#endif", "\n#endif", 1))
-    for rel, raw in p.compatibility_baseline(ENGINE, installed=True).items():
-        (eng / rel).write_bytes(raw)
-    for rel in (f"data/maps/{p.SOUTH}/map.json", f"data/layouts/{p.SOUTH}/map.bin"):
-        (eng / rel).parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(ENGINE / rel, eng / rel)
-    (eng / f"data/maps/{p.SOUTH}/map.json").write_bytes(p.encode(p.expected_south_header()))
-    path = eng / f"data/layouts/{p.SOUTH}/map.bin"
-    values = cells(path.read_bytes())
-    values[876] = 0x3604
-    path.write_bytes(p.pack(values))
+        shutil.copy(source / rel, eng / rel)
+    if p.baseline_errors(eng, installed=False):
+        raise AssertionError("accepted D input differs from E's hash-pinned baseline")
 
 
 class WestPacketETest(unittest.TestCase):
