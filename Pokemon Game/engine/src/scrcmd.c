@@ -2989,12 +2989,12 @@ bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
 bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-    u8 location = ScriptReadByte(ctx);
+    u16 location = ScriptReadByte(ctx); // Legacy bytecode remains byte-sized.
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
     if (partyIndex < PARTY_SIZE)
-        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MET_LOCATION, &location);
+        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MET_LOCATION_EXTENDED, &location);
     return FALSE;
 }
 

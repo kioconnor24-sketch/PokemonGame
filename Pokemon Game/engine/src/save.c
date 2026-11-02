@@ -170,6 +170,10 @@ static u8 WriteSaveSectorOrSlot(u16 sectorId, const struct SaveSectorLocation *l
             gLastWrittenSector = gLastKnownGoodSector;
             gSaveCounter = gLastSaveCounter;
         }
+        else
+        {
+            AveronRegionSave_FullOriginSaveComplete();
+        }
     }
 
     return status;
@@ -810,6 +814,11 @@ u8 HandleSavingData(u8 saveType)
         gTrainerHillVBlankCounter = backupVar;
         return 0;
     }
+    // The first format-2 save must commit the normalized PC/fusion sectors
+    // with the new marker. Byte-only link saves normally skip those sectors.
+    if (AveronRegionSave_RequiresFullOriginSave()
+        && (saveType == SAVE_LINK || saveType == SAVE_EREADER))
+        saveType = SAVE_NORMAL;
     switch (saveType)
     {
     case SAVE_HALL_OF_FAME_ERASE_BEFORE:
@@ -958,6 +967,8 @@ bool8 LinkFullSave_SetLastSectorSignature(void)
     CopySectorSignatureByte(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(SAVE_NORMAL);
+    else
+        AveronRegionSave_FullOriginSaveComplete();
     return FALSE;
 }
 
@@ -966,6 +977,12 @@ bool8 WriteSaveBlock2(void)
     if (RefuseBlockedIncrementalSave())
         return TRUE;
     if (gFlashMemoryPresent != TRUE)
+        return TRUE;
+
+    // This legacy incremental writer cannot persist PC data. Upgrade once
+    // through the full writer before beginning its ordinary partial cycle.
+    if (AveronRegionSave_RequiresFullOriginSave()
+        && TrySavingData(SAVE_NORMAL) != SAVE_STATUS_OK)
         return TRUE;
 
     UpdateSaveAddresses();
@@ -985,6 +1002,13 @@ bool8 WriteSaveBlock1Sector(void)
 {
     if (RefuseBlockedIncrementalSave())
         return TRUE;
+    // A caller that skipped/failed WriteSaveBlock2 must not seal a partial
+    // upgrade. The ordinary paired caller has completed its full save above.
+    if (AveronRegionSave_RequiresFullOriginSave())
+    {
+        gSaveAttemptStatus = SAVE_STATUS_ERROR;
+        return TRUE;
+    }
     bool32 finished = FALSE;
     u16 sectorId = ++gIncrementalSectorId; // Because WriteSaveBlock2 will have been called prior, this will be SECTOR_ID_SAVEBLOCK1_START
     if (sectorId <= SECTOR_ID_SAVEBLOCK1_END)

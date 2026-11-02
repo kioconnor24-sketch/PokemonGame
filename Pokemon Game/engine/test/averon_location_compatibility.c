@@ -29,7 +29,7 @@ STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, box_format_changed);
 STATIC_ASSERT(sizeof(struct Pokemon) == 100, party_format_changed);
 STATIC_ASSERT(offsetof(struct BoxPokemon, secure) == 32, encrypted_data_offset_changed);
 STATIC_ASSERT(sizeof(((struct PokemonSubstruct3 *)0)->metLocation) == 1, met_width_changed);
-STATIC_ASSERT(sizeof(((struct MapHeader *)0)->regionMapSectionId) == 1, runtime_header_width_changed);
+STATIC_ASSERT(sizeof(((struct MapHeader *)0)->regionMapSectionId) == 2, runtime_header_width_changed);
 
 static const struct {u16 id; const u8 *name;} sLegacySectionNames[] = {
 #define LEGACY_LOCATION(symbol, value, name) {symbol, name},

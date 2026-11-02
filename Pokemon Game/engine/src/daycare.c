@@ -1023,7 +1023,7 @@ void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLoc
     u8 metLevel;
     enum PokeBall ball;
     enum Language language;
-    metloc_u8_t metLocation;
+    metloc_u16_t metLocation;
     u8 isEgg;
 
     CreateRandomMonWithIVs(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS);
@@ -1038,7 +1038,7 @@ void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLoc
     if (setHotSpringsLocation)
     {
         metLocation = METLOC_SPECIAL_EGG;
-        SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+        SetMonData(mon, MON_DATA_MET_LOCATION_EXTENDED, &metLocation);
     }
 
     isEgg = TRUE;

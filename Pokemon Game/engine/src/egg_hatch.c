@@ -311,7 +311,7 @@ static void AddHatchedMonToParty(u8 id)
     u8 name[POKEMON_NAME_LENGTH + 1];
     u32 metLevel, friendship;
     enum Language language;
-    metloc_u8_t metLocation;
+    metloc_u16_t metLocation;
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][id];
 
     bool32 isEgg = FALSE;
@@ -338,7 +338,7 @@ static void AddHatchedMonToParty(u8 id)
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
 
     metLocation = GetCurrentRegionMapSectionId();
-    SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(mon, MON_DATA_MET_LOCATION_EXTENDED, &metLocation);
 
     SetMonData(mon, MON_DATA_MET_GAME, &gGameVersion);
 

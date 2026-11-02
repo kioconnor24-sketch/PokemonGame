@@ -14,7 +14,8 @@ inline void prepare_map_sections(nlohmann::json &data, const std::string &input)
     if (!data.is_object() || !data.contains("map_sections"))
         return;
     auto fail = [](const std::string &why) { throw std::runtime_error("map sections: " + why); };
-    const unsigned none = 215, first_special = 253;
+    const unsigned none = 215, first_special = 253, max_section = 8191;
+    const unsigned max_entries = max_section + 1 - 4; // NONE and three met specials stay holes.
     const auto slash = input.find_last_of("/\\");
     const auto baseline_path = input.substr(0, slash == std::string::npos ? 0 : slash + 1)
         + "region_map_sections.legacy.json";
@@ -26,8 +27,8 @@ inline void prepare_map_sections(nlohmann::json &data, const std::string &input)
     auto &entries = data.at("map_sections");
     if (!baseline.is_array() || baseline.size() != none)
         fail("legacy manifest must contain exactly 215 entries");
-    if (!entries.is_array() || entries.size() < none || entries.size() > first_special - 1)
-        fail("expected 215 legacy entries and at most 37 new named sections");
+    if (!entries.is_array() || entries.size() < none || entries.size() > max_entries)
+        fail("expected 215 legacy entries and at most 8188 total named sections");
     const std::set<std::string> regions = {"REGION_NONE", "REGION_KANTO", "REGION_JOHTO", "REGION_HOENN",
         "REGION_SINNOH", "REGION_UNOVA", "REGION_KALOS", "REGION_ALOLA", "REGION_GALAR", "REGION_HISUI", "REGION_PALDEA"};
     std::set<std::string> identifiers;
@@ -41,7 +42,9 @@ inline void prepare_map_sections(nlohmann::json &data, const std::string &input)
         if (!std::regex_match(id, std::regex("MAPSEC_[A-Z0-9_]+")) || id == "MAPSEC_NONE" || id == "MAPSEC_COUNT"
             || !identifiers.insert(id).second)
             fail("invalid, reserved or duplicate identifier: " + id);
-        const unsigned value = i < none ? i : i + 1; // 215 stays the sentinel hole.
+        // Append through the old byte pool, then skip the three exact specials.
+        // This retains every previous value and never assigns 215/253/254/255.
+        const unsigned value = i < none ? i : i < first_special - 1 ? i + 1 : i + 4;
         if (entry.contains("value") && (!entry.at("value").is_number_integer()
             || entry.at("value").get<long long>() != value))
             fail(id + ": duplicate, sparse, reserved or moved value (expected " + std::to_string(value) + ")");
@@ -61,6 +64,7 @@ inline void prepare_map_sections(nlohmann::json &data, const std::string &input)
         entry["value"] = value;
     }
     data["mapsec_none"] = none;
-    data["mapsec_count"] = entries.size() == none ? none + 1 : entries.size() + 1;
+    data["mapsec_count"] = entries.size() == none ? none + 1
+        : entries.back().at("value").get<unsigned>() + 1;
 }
 #endif

@@ -439,5 +439,59 @@ class TrustedWorkflowRegistryReadTest(WorkflowDelegationTest):
 
 
 
+class WideIdentityPolicyTest(unittest.TestCase):
+    def make_data(self, *, last=238, value=239):
+        import copy
+        baseline = {"map_sections": [dict(id="MAPSEC_AMITY_SQUARE", value=last,
+            name="AMITY SQUARE", region="REGION_SINNOH")]}
+        pins = {"pins": {"MAPSEC_AMITY_SQUARE": last}, "allocation_policy": {
+            "schema": 1, "mode": "canonical-sinnoh-wide-v2", "max_origin": 8191,
+            "reserved_values": [253, 254, 255], "approved_names": {
+                "MAPSEC_VEILSTONE_CITY": "VEILSTONE CITY", "MAPSEC_ROUTE_211": "ROUTE 211"}}}
+        after, after_pins = copy.deepcopy(baseline), copy.deepcopy(pins)
+        after["map_sections"].append(dict(id="MAPSEC_VEILSTONE_CITY", value=value,
+            name="VEILSTONE CITY", region="REGION_SINNOH"))
+        after_pins["pins"]["MAPSEC_VEILSTONE_CITY"] = value
+        data = snapshot([MAP, REGION_IDS, PINS])
+        data["identity_files"] = {REGION_IDS: {"base": baseline, "head": after},
+                                   PINS: {"base": pins, "head": after_pins}}
+        return data
+
+    def test_deployed_policy_admits_exact_name_and_skips_legacy_specials(self):
+        for last, value in ((238, 239), (252, 256), (8190, 8191)):
+            with self.subTest(last=last):
+                self.assertEqual(guard.validate(self.make_data(last=last, value=value))[0], [])
+
+    def test_candidate_cannot_create_or_modify_its_own_policy(self):
+        data = self.make_data()
+        del data["identity_files"][PINS]["base"]["allocation_policy"]
+        self.assertTrue(guard.validate(data)[0])
+        data = self.make_data()
+        data["identity_files"][PINS]["head"]["allocation_policy"]["approved_names"]["MAPSEC_NEW"] = "NEW"
+        self.assertTrue(guard.validate(data)[0])
+
+    def test_unlisted_renamed_misnumbered_and_non_sinnoh_records_fail(self):
+        for field, value in (("id", "MAPSEC_NEW"), ("name", "RENAMED"),
+                             ("value", 240), ("value", 253), ("region", "REGION_AVERON")):
+            with self.subTest(field=field, value=value):
+                data = self.make_data()
+                data["identity_files"][REGION_IDS]["head"]["map_sections"][-1][field] = value
+                self.assertTrue(guard.validate(data)[0])
+        self.assertTrue(guard.validate(self.make_data(last=8191, value=8192))[0])
+
+    def test_reused_name_and_changed_legacy_prefix_or_pin_fail(self):
+        data = self.make_data()
+        data["identity_files"][REGION_IDS]["head"]["map_sections"][0]["name"] = "RENAMED"
+        self.assertTrue(guard.validate(data)[0])
+        data = self.make_data()
+        data["identity_files"][PINS]["head"]["pins"]["MAPSEC_AMITY_SQUARE"] = 237
+        self.assertTrue(guard.validate(data)[0])
+        data = self.make_data()
+        row = dict(id="MAPSEC_ROUTE_211", value=240, name="ROUTE 211", region="REGION_SINNOH")
+        data["identity_files"][REGION_IDS]["head"]["map_sections"].extend([row, dict(row, value=241)])
+        data["identity_files"][PINS]["head"]["pins"]["MAPSEC_ROUTE_211"] = 240
+        self.assertTrue(guard.validate(data)[0])
+
+
 if __name__ == "__main__":
     unittest.main()

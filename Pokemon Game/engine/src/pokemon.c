@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "apprentice.h"
+#include "averon_region_save.h"
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_anim.h"
@@ -1006,7 +1007,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
     value = GetCurrentRegionMapSectionId();
-    SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
+    SetBoxMonData(boxMon, MON_DATA_MET_LOCATION_EXTENDED, &value);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
     value = BALL_POKE;
@@ -2200,6 +2201,12 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_MET_LOCATION:
             retVal = GetSubstruct3(boxMon)->metLocation;
             break;
+        case MON_DATA_MET_LOCATION_EXTENDED:
+            retVal = GetSubstruct3(boxMon)->metLocation;
+            if (AveronRegionSave_UsesWideOrigins()
+                && GetSubstruct0(boxMon)->unused_0A == AVERON_MET_LOCATION_MARKER)
+                retVal |= GetSubstruct1(boxMon)->unused_04 << 8;
+            break;
         case MON_DATA_MET_LEVEL:
             retVal = GetSubstruct3(boxMon)->metLevel;
             break;
@@ -2714,7 +2721,22 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_MET_LOCATION:
             SET8(GetSubstruct3(boxMon)->metLocation);
+            GetSubstruct1(boxMon)->unused_04 = 0;
+            GetSubstruct0(boxMon)->unused_0A = 0;
             break;
+        case MON_DATA_MET_LOCATION_EXTENDED:
+        {
+            u32 location = data[0] | (data[1] << 8);
+            if (location <= AVERON_MET_LOCATION_MAX
+                && (location <= 0xFF || AveronRegionSave_UsesWideOrigins()))
+            {
+                GetSubstruct3(boxMon)->metLocation = location & 0xFF;
+                GetSubstruct1(boxMon)->unused_04 = location >> 8;
+                GetSubstruct0(boxMon)->unused_0A = location > 0xFF
+                    ? AVERON_MET_LOCATION_MARKER : 0;
+            }
+            break;
+        }
         case MON_DATA_MET_LEVEL:
             SET8(GetSubstruct3(boxMon)->metLevel);
             break;
@@ -2936,6 +2958,26 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
 void CopyMon(void *dest, void *src, size_t size)
 {
     memcpy(dest, src, size);
+}
+
+void NormalizeBoxMonLegacyOrigin(struct BoxPokemon *boxMon)
+{
+    // Legacy/imported Pokemon may have checksum-valid arbitrary unused bits.
+    // Their sole origin is the byte; clear only our newly owned extension bits.
+    // Preserve corrupt input byte-for-byte rather than 'repairing' its checksum.
+    DecryptBoxMon(boxMon);
+    if (CalculateBoxMonChecksum(boxMon) == boxMon->checksum)
+    {
+        GetSubstruct1(boxMon)->unused_04 = 0;
+        GetSubstruct0(boxMon)->unused_0A = 0;
+        boxMon->checksum = CalculateBoxMonChecksum(boxMon);
+    }
+    EncryptBoxMon(boxMon);
+}
+
+void NormalizeMonLegacyOrigin(struct Pokemon *mon)
+{
+    NormalizeBoxMonLegacyOrigin(&mon->box);
 }
 
 // OT_ID is part of the secure-data key (personality ^ OT ID), and the raw
@@ -4906,7 +4948,7 @@ s32 CalculateFriendshipBonuses(struct Pokemon *mon, s32 modifier, enum HoldEffec
     if (GetMonData(mon, MON_DATA_POKEBALL) == BALL_LUXURY)
         bonus += ITEM_FRIENDSHIP_LUXURY_BONUS;
 
-    if (GetMonData(mon, MON_DATA_MET_LOCATION) == GetCurrentRegionMapSectionId())
+    if (GetMonData(mon, MON_DATA_MET_LOCATION_EXTENDED) == GetCurrentRegionMapSectionId())
         bonus += ITEM_FRIENDSHIP_MAPSEC_BONUS;
 
     return bonus;

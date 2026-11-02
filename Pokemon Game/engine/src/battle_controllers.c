@@ -1617,6 +1617,14 @@ static u32 GetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32 
         dst[0] = GetMonData(&party[monId], MON_DATA_MET_LOCATION);
         size = 1;
         break;
+    case REQUEST_MET_LOCATION_EXTENDED_BATTLE:
+    {
+        u32 location = GetMonData(&party[monId], MON_DATA_MET_LOCATION_EXTENDED);
+        dst[0] = location;
+        dst[1] = location >> 8;
+        size = 2;
+        break;
+    }
     case REQUEST_MET_LEVEL_BATTLE:
         dst[0] = GetMonData(&party[monId], MON_DATA_MET_LEVEL);
         size = 1;
@@ -1890,6 +1898,9 @@ static void SetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32
         break;
     case REQUEST_MET_LOCATION_BATTLE:
         SetMonData(&party[monId], MON_DATA_MET_LOCATION, &gBattleResources->bufferA[battler][3]);
+        break;
+    case REQUEST_MET_LOCATION_EXTENDED_BATTLE:
+        SetMonData(&party[monId], MON_DATA_MET_LOCATION_EXTENDED, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MET_LEVEL_BATTLE:
         SetMonData(&party[monId], MON_DATA_MET_LEVEL, &gBattleResources->bufferA[battler][3]);

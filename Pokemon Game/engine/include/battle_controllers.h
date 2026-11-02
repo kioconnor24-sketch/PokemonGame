@@ -64,6 +64,8 @@ enum {
     REQUEST_CUTE_RIBBON_BATTLE,
     REQUEST_SMART_RIBBON_BATTLE,
     REQUEST_TOUGH_RIBBON_BATTLE,
+    // Explicit new local request: legacy MET_LOCATION remains a byte payload.
+    REQUEST_MET_LOCATION_EXTENDED_BATTLE,
 };
 
 enum BattleController

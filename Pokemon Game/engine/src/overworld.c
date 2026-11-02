@@ -1545,7 +1545,7 @@ enum MapType GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-mapsec_u8_t GetLastUsedWarpMapSectionId(void)
+mapsec_u16_t GetLastUsedWarpMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gLastUsedWarp.mapGroup, gLastUsedWarp.mapNum)->regionMapSectionId;
 }
@@ -1582,12 +1582,12 @@ bool8 IsMapTypeIndoors(enum MapType mapType)
         return FALSE;
 }
 
-mapsec_u8_t GetSavedWarpRegionMapSectionId(void)
+mapsec_u16_t GetSavedWarpRegionMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->dynamicWarp.mapGroup, gSaveBlock1Ptr->dynamicWarp.mapNum)->regionMapSectionId;
 }
 
-mapsec_u8_t GetCurrentRegionMapSectionId(void)
+mapsec_u16_t GetCurrentRegionMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
 }

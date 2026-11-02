@@ -128,15 +128,57 @@ def approved_identity_append(snapshot: dict, changed_paths: set[str]) -> bool:
         if not additions or not isinstance(baseline[-1], dict):
             return False
         next_value = baseline[-1].get("value", -1) + 1
-        # The whitelist begins only after the already merged last section.
-        known = [row for row in PREAPPROVED_IDENTITY_APPEND if row[1] >= next_value]
-        expected = [
-            {"id": symbol, "value": number, "name": name, "region": "REGION_SINNOH"}
-            for symbol, number, name in known[:len(additions)]
-        ]
-        if (len(additions) > len(known) or additions != expected
-                or expected[0]["value"] != next_value):
-            return False
+        if next_value >= 239:
+            # This immutable policy is read from deployed MAIN, never from
+            # the candidate. It is introduced atomically with the reviewed
+            # wide-origin-v2 codec. A PR cannot authorize its own names,
+            # change the policy, or activate it on the old byte codec.
+            policy = old_pins.get("allocation_policy")
+            if (not isinstance(policy, dict)
+                    or set(policy) != {"schema", "mode", "max_origin",
+                                       "reserved_values", "approved_names"}
+                    or type(policy["schema"]) is not int or policy["schema"] != 1
+                    or policy["mode"] != "canonical-sinnoh-wide-v2"
+                    or policy["max_origin"] != 8191
+                    or policy["reserved_values"] != [253, 254, 255]
+                    or not isinstance(policy["approved_names"], dict)):
+                return False
+            names = policy["approved_names"]
+            existing_ids = {row["id"] for row in baseline}
+            existing_names = {row["name"] for row in baseline
+                              if row.get("region") == "REGION_SINNOH"}
+            expected = []
+            for row in additions:
+                if not isinstance(row, dict):
+                    return False
+                symbol = row.get("id")
+                if not isinstance(symbol, str) or symbol not in names:
+                    return False
+                name = names[symbol]
+                if (not isinstance(name, str) or symbol in existing_ids
+                        or symbol in original_pins or name in existing_names):
+                    return False
+                while next_value in policy["reserved_values"]:
+                    next_value += 1
+                if next_value > policy["max_origin"]:
+                    return False
+                expected.append({"id": symbol, "value": next_value,
+                                 "name": name, "region": "REGION_SINNOH"})
+                existing_ids.add(symbol)
+                existing_names.add(name)
+                next_value += 1
+            if additions != expected:
+                return False
+        else:
+            # Original owner-decided values remain exact and unchanged.
+            known = [row for row in PREAPPROVED_IDENTITY_APPEND if row[1] >= next_value]
+            expected = [
+                {"id": symbol, "value": number, "name": name, "region": "REGION_SINNOH"}
+                for symbol, number, name in known[:len(additions)]
+            ]
+            if (len(additions) > len(known) or additions != expected
+                    or expected[0]["value"] != next_value):
+                return False
         if any(proposed_pins.get(k) != value for k, value in original_pins.items()):
             return False
         expected_new_pins = {row["id"]: row["value"] for row in expected}

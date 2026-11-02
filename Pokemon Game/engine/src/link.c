@@ -27,6 +27,8 @@
 #include "link_rfu.h"
 #include "constants/rgb.h"
 #include "constants/trade.h"
+#include "pokemon.h"
+#include "constants/region_map_sections.h"
 
 // Window IDs for the link error screens
 enum {
@@ -316,12 +318,54 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.linkType = gLinkType;
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
-    gLocalLinkPlayer.lp_field_2 = 0x8000;
+    gLocalLinkPlayer.lp_field_2 = AVERON_ORIGIN_LINK_SIGNATURE;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
         gLocalLinkPlayer.progressFlags |= 0x10;
     }
+}
+
+bool32 AveronLink_PeerUsesWideOrigins(u32 playerId)
+{
+    return playerId < MAX_RFU_PLAYERS
+        && (gLinkPlayers[playerId].version & 0xFF) == VERSION_EMERALD
+        && gLinkPlayers[playerId].lp_field_2 == AVERON_ORIGIN_LINK_SIGNATURE;
+}
+
+bool32 AveronLink_CanExportMon(struct Pokemon *mon, u32 playerId)
+{
+    return AveronLink_PeerUsesWideOrigins(playerId)
+        || GetMonData(mon, MON_DATA_MET_LOCATION_EXTENDED) <= 0xFF;
+}
+
+void AveronLink_CopyPartyPreview(struct Pokemon *dest, const struct Pokemon *src, u32 count, u32 playerId)
+{
+    memcpy(dest, src, count * sizeof(*dest));
+    if (!AveronLink_PeerUsesWideOrigins(playerId))
+    {
+        for (u32 i = 0; i < count; i++)
+        {
+            // Only the temporary preview is lossy. The original Pokemon is
+            // untouched, and selection/export of this Pokemon is refused.
+            if (GetMonData(&dest[i], MON_DATA_MET_LOCATION_EXTENDED) > 0xFF)
+            {
+                u8 none = MAPSEC_NONE;
+                SetMonData(&dest[i], MON_DATA_MET_LOCATION, &none);
+            }
+            NormalizeMonLegacyOrigin(&dest[i]);
+        }
+    }
+}
+
+void AveronLink_CopyReceivedParty(struct Pokemon *dest, const void *src, u32 count, u32 playerId)
+{
+    memcpy(dest, src, count * sizeof(*dest));
+    // Multiplayer exchanges copy our own send buffer back into the player
+    // party. Never interpret that self-copy as an unrecognized import.
+    if (playerId != GetMultiplayerId() && !AveronLink_PeerUsesWideOrigins(playerId))
+        for (u32 i = 0; i < count; i++)
+            NormalizeMonLegacyOrigin(&dest[i]);
 }
 
 static void VBlankCB_LinkError(void)

@@ -1,0 +1,456 @@
+{
+  "engine_tree": "1e8eb84f8434c9d1d15065ec3dc4b4bb515ccaea",
+  "phases": [
+    {
+      "profile": "normal",
+      "mode": "legacy",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33639436
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 238
+        },
+        {
+          "name": "ordinary save writes valid newer flash",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          238,
+          253,
+          216
+        ],
+        "pc": 238,
+        "daycare": 216
+      },
+      "rom_sha256": "bf586067e0882382315d420bfa106a2bbce5f24661b020ac0d498b5fa63a4a58",
+      "elf_sha256": "9fdc7b4543c3755088a92367967cfaef8a560dabb6b90bcbe23274d21524c3c7",
+      "source_save_sha256": "e1eb7c23bb6f802f5da0b86d0a73cee52e423d5c9af7171bf3607232a6840c70",
+      "harness_sha256": "20818860eae261a54bed470191b493d3018b39db5a79e2ed6c722701e18b3bf6",
+      "framework_emu_sha256": "3d83d1ae833430d5ae17178ad57942e86128c7187c7edd15577741b69da4658f"
+    },
+    {
+      "profile": "normal",
+      "mode": "continue",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33639436
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 238
+        },
+        {
+          "name": "trainer memo renders exact place name",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          238,
+          253,
+          216
+        ],
+        "pc": 238,
+        "daycare": 216
+      },
+      "rom_sha256": "bf586067e0882382315d420bfa106a2bbce5f24661b020ac0d498b5fa63a4a58",
+      "elf_sha256": "9fdc7b4543c3755088a92367967cfaef8a560dabb6b90bcbe23274d21524c3c7",
+      "source_save_sha256": "43e74c9816dbabf06fdb15394081d6f5ce0ab91289826dd88616fa895a90cc89",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "ef18106af97353a4b6d5c9427ca44e6fa132bf9810673888854cc9fd1327d491"
+    },
+    {
+      "profile": "normal",
+      "mode": "wide",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33639436
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 1021
+        },
+        {
+          "name": "ordinary save writes valid newer flash",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          1021,
+          8191,
+          238
+        ],
+        "pc": 1021,
+        "daycare": 8191
+      },
+      "rom_sha256": "bf586067e0882382315d420bfa106a2bbce5f24661b020ac0d498b5fa63a4a58",
+      "elf_sha256": "9fdc7b4543c3755088a92367967cfaef8a560dabb6b90bcbe23274d21524c3c7",
+      "source_save_sha256": "43e74c9816dbabf06fdb15394081d6f5ce0ab91289826dd88616fa895a90cc89",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    },
+    {
+      "profile": "normal",
+      "mode": "continue",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33639436
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 1021
+        }
+      ],
+      "expected": {
+        "party": [
+          1021,
+          8191,
+          238
+        ],
+        "pc": 1021,
+        "daycare": 8191
+      },
+      "rom_sha256": "bf586067e0882382315d420bfa106a2bbce5f24661b020ac0d498b5fa63a4a58",
+      "elf_sha256": "9fdc7b4543c3755088a92367967cfaef8a560dabb6b90bcbe23274d21524c3c7",
+      "source_save_sha256": "0460ac8f96d1151545e3d172026fc25ec1aa0a6cc36f0410beec1eb5e69f411d",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    },
+    {
+      "profile": "release",
+      "mode": "legacy",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33560884
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 238
+        },
+        {
+          "name": "trainer memo renders exact place name",
+          "ok": true
+        },
+        {
+          "name": "ordinary save writes valid newer flash",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          238,
+          253,
+          216
+        ],
+        "pc": 238,
+        "daycare": 216
+      },
+      "rom_sha256": "efacba810ba669694c02e511c99918bd30c5bd4aa1efefb7ca56c28b1b4de4b0",
+      "elf_sha256": "0510ee9478712e2cd45c6241fbb6cb767831b6310596983197a64f3f8b91a9f7",
+      "source_save_sha256": "4e70e127e3a534774a590463c177d6356c346d8e5d7bb7b69510e70c12f576f3",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    },
+    {
+      "profile": "release",
+      "mode": "continue",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33560884
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 238
+        },
+        {
+          "name": "trainer memo renders exact place name",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          238,
+          253,
+          216
+        ],
+        "pc": 238,
+        "daycare": 216
+      },
+      "rom_sha256": "efacba810ba669694c02e511c99918bd30c5bd4aa1efefb7ca56c28b1b4de4b0",
+      "elf_sha256": "0510ee9478712e2cd45c6241fbb6cb767831b6310596983197a64f3f8b91a9f7",
+      "source_save_sha256": "23cc91354a1fbdd574cb47755a53ec2f852bcd1c7277fef3fe00199f74a0340f",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    },
+    {
+      "profile": "release",
+      "mode": "wide",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33560884
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 1021
+        },
+        {
+          "name": "ordinary save writes valid newer flash",
+          "ok": true
+        }
+      ],
+      "expected": {
+        "party": [
+          1021,
+          8191,
+          238
+        ],
+        "pc": 1021,
+        "daycare": 8191
+      },
+      "rom_sha256": "efacba810ba669694c02e511c99918bd30c5bd4aa1efefb7ca56c28b1b4de4b0",
+      "elf_sha256": "0510ee9478712e2cd45c6241fbb6cb767831b6310596983197a64f3f8b91a9f7",
+      "source_save_sha256": "23cc91354a1fbdd574cb47755a53ec2f852bcd1c7277fef3fe00199f74a0340f",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    },
+    {
+      "profile": "release",
+      "mode": "continue",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "loaded/migrated format2",
+          "ok": true,
+          "version": 2
+        },
+        {
+          "name": "party exact origins",
+          "ok": true
+        },
+        {
+          "name": "PC exact origin",
+          "ok": true
+        },
+        {
+          "name": "daycare exact origin",
+          "ok": true
+        },
+        {
+          "name": "all observed mon checksums valid",
+          "ok": true
+        },
+        {
+          "name": "real summary opened",
+          "ok": true,
+          "pointer": 33560884
+        },
+        {
+          "name": "summary cache retains full origin",
+          "ok": true,
+          "shown": 1021
+        }
+      ],
+      "expected": {
+        "party": [
+          1021,
+          8191,
+          238
+        ],
+        "pc": 1021,
+        "daycare": 8191
+      },
+      "rom_sha256": "efacba810ba669694c02e511c99918bd30c5bd4aa1efefb7ca56c28b1b4de4b0",
+      "elf_sha256": "0510ee9478712e2cd45c6241fbb6cb767831b6310596983197a64f3f8b91a9f7",
+      "source_save_sha256": "e39cb42d9ad61ab99b09a339aabcf5f0f92da0a861b57f3aa429f4041017ffb1",
+      "harness_sha256": "408fe1a750dd4acf17c44159829d29b57b260a7f629e1304835ba0874284a4fa",
+      "framework_emu_sha256": "09a09fa8808279ef392a0cf8b2ef2a528f0c59cc455032b826b922676bb246e4"
+    }
+  ],
+  "passed_checks": 63,
+  "limitations": [
+    "Disclosed offline DEV save fixtures clone an existing valid mon into party, PC and daycare and modify encrypted origin bits/checksums; no memory writes or production IDs allocated.",
+    "238 AMITY SQUARE is the real named-location case. Unallocated1021/8191 test full-width persistence and low-byte-special collision, not rendered names for future allocated places.",
+    "Actual cable-session trade remains pending; these are save/summary/runtime checks, not link, Delta or human acceptance.",
+    "Private source saves, ROMs, ELFs and captures remain in the originating workspace; external backup is not claimed."
+  ]
+}

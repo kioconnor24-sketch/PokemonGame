@@ -336,6 +336,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     else
     {
         memcpy(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
+        NormalizeMonLegacyOrigin(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1]);
         memcpy(&mail, mailPtr, sizeof(struct Mail));
 
         if (species != SPECIES_EGG)

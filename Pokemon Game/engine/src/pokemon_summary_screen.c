@@ -142,7 +142,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 ribbonCount; // 0x6
         u8 ailment; // 0x7
         u8 abilityNum; // 0x8
-        metloc_u8_t metLocation; // 0x9
+        metloc_u16_t metLocation; // Runtime cache; not a saved Pokemon field.
         u8 metLevel; // 0xA
         u8 metGame; // 0xB
         u32 pid; // 0xC
@@ -1558,7 +1558,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->ailment = GetMonAilment(mon);
         sum->OTGender = GetMonData(mon, MON_DATA_OT_GENDER);
         sum->OTID = GetMonData(mon, MON_DATA_OT_ID);
-        sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
+        sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION_EXTENDED);
         sum->metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
         sum->metGame = GetMonData(mon, MON_DATA_MET_GAME);
         sum->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
@@ -3554,7 +3554,9 @@ static void BufferMonTrainerMemo(void)
     {
         u8 *metLevelString = Alloc(32);
         u8 *metLocationString = Alloc(32);
-        bool32 knownMetLocation = sum->metLocation < METLOC_SPECIAL_EGG
+        bool32 knownMetLocation = sum->metLocation != METLOC_SPECIAL_EGG
+            && sum->metLocation != METLOC_IN_GAME_TRADE
+            && sum->metLocation != METLOC_FATEFUL_ENCOUNTER
             && IsRegionMapSectionIdValid(sum->metLocation);
         GetMetLevelString(metLevelString);
 

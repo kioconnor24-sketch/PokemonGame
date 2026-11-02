@@ -125,7 +125,12 @@ enum MonData {
     MON_DATA_GIGANTAMAX_FACTOR,
     MON_DATA_TERA_TYPE,
     MON_DATA_EVOLUTION_TRACKER,
+    // Append, never renumber the legacy byte API or existing data requests.
+    MON_DATA_MET_LOCATION_EXTENDED,
 };
+
+#define AVERON_MET_LOCATION_MAX 8191
+#define AVERON_MET_LOCATION_MARKER 2
 
 #define BLOCK_AI_DYNAMAX 15 // Used as dynamax level value by the AI to indicate this mon shouldn't dynamax
 
@@ -831,6 +836,10 @@ u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field);
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
+// For pre-format-2 saves and unrecognized external imports only. Never apply
+// to a compatible wide-origin peer's Pokemon or an already upgraded save.
+void NormalizeBoxMonLegacyOrigin(struct BoxPokemon *boxMon);
+void NormalizeMonLegacyOrigin(struct Pokemon *mon);
 void CopyMon(void *dest, void *src, size_t size);
 void SetBoxMonOtIdKeepingData(struct BoxPokemon *boxMon, u32 otId);
 u8 GiveCapturedMonToPlayer(struct Pokemon *mon);

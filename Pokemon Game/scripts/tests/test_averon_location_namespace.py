@@ -31,6 +31,7 @@ class LocationNamespaceTests(unittest.TestCase):
         subprocess.run(['make', '-C', str(cls.jsonproc.parent)], check=True, capture_output=True, timeout=120)
         cls.production = json.loads((SOURCE / 'region_map_sections.json').read_text())
         cls.legacy = json.loads((SOURCE / 'region_map_sections.legacy.json').read_text())
+        cls.current_count = max(entry.get('value', i) for i, entry in enumerate(cls.production['map_sections'])) + 1
         source = (ENGINE / 'src/region_map.c').read_text()
         cls.runtime = '\n'.join(c_function(source, signature) for signature in (
             'bool32 IsRegionMapSectionIdValid(u32 sectionId)',
@@ -97,8 +98,13 @@ struct RegionMapLocation {u8 x, y, width, height; const u8 *name;};
             self.assertEqual(run.returncode, 0, run.stdout + run.stderr)
 
     def test_production_sinnoh_sections_and_all_legacy_runtime_values(self):
+        valid = [entry.get('value', i) for i, entry in enumerate(self.production['map_sections'])]
+        sinnoh = [entry['value'] for entry in self.production['map_sections']
+                  if entry.get('region') == 'REGION_SINNOH']
+        valid_condition = ' || '.join(f'id == {value}' for value in valid)
+        sinnoh_condition = ' || '.join(f'id == {value}' for value in sinnoh)
         self.fixture(body='''
-assert(MAPSEC_SANDGEM_TOWN == 216 && MAPSEC_ROUTE_201 == 217 && MAPSEC_TWINLEAF_TOWN == 218 && MAPSEC_ROUTE_202 == 219 && MAPSEC_LAKE_VERITY == 220 && MAPSEC_JUBILIFE_CITY == 221 && MAPSEC_ROUTE_203 == 222 && MAPSEC_OREBURGH_GATE == 223 && MAPSEC_ROUTE_204 == 224 && MAPSEC_FLOAROMA_TOWN == 225 && MAPSEC_ROUTE_205 == 226 && MAPSEC_OREBURGH_CITY == 227 && MAPSEC_COUNT == 228);
+assert(MAPSEC_SANDGEM_TOWN == 216 && MAPSEC_ROUTE_201 == 217 && MAPSEC_TWINLEAF_TOWN == 218 && MAPSEC_ROUTE_202 == 219 && MAPSEC_LAKE_VERITY == 220 && MAPSEC_JUBILIFE_CITY == 221 && MAPSEC_ROUTE_203 == 222 && MAPSEC_OREBURGH_GATE == 223 && MAPSEC_ROUTE_204 == 224 && MAPSEC_FLOAROMA_TOWN == 225 && MAPSEC_ROUTE_205 == 226 && MAPSEC_OREBURGH_CITY == 227 && MAPSEC_COUNT == CURRENT_COUNT);
 assert(!strcmp((const char *)gRegionMapEntries[216].name, "SANDGEM TOWN"));
 assert(!strcmp((const char *)gRegionMapEntries[217].name, "ROUTE 201"));
 assert(!strcmp((const char *)gRegionMapEntries[218].name, "TWINLEAF TOWN"));
@@ -112,11 +118,12 @@ assert(!strcmp((const char *)gRegionMapEntries[225].name, "FLOAROMA TOWN"));
 assert(!strcmp((const char *)gRegionMapEntries[226].name, "ROUTE 205"));
 assert(!strcmp((const char *)gRegionMapEntries[227].name, "OREBURGH CITY"));
 for (u32 id = 0; id < 256; id++) {
- assert(IsRegionMapSectionIdValid(id) == (id < 215 || id == 216 || id == 217 || id == 218 || id == 219 || id == 220 || id == 221 || id == 222 || id == 223 || id == 224 || id == 225 || id == 226 || id == 227));
- assert(GetRegionForSectionId(id) == (id == 216 || id == 217 || id == 218 || id == 219 || id == 220 || id == 221 || id == 222 || id == 223 || id == 224 || id == 225 || id == 226 || id == 227 ? REGION_SINNOH : id >= KANTO_MAPSEC_START && id < MAPSEC_SPECIAL_AREA ? REGION_KANTO : REGION_HOENN));
+ assert(IsRegionMapSectionIdValid(id) == (CURRENT_VALID));
+ assert(GetRegionForSectionId(id) == (CURRENT_SINNOH ? REGION_SINNOH : id >= KANTO_MAPSEC_START && id < MAPSEC_SPECIAL_AREA ? REGION_KANTO : REGION_HOENN));
 }
 assert(!IsRegionMapSectionIdValid(UINT32_MAX));
-''')
+'''.replace('CURRENT_COUNT', str(self.current_count)).replace('CURRENT_VALID', valid_condition)
+          .replace('CURRENT_SINNOH', sinnoh_condition))
 
     def test_legacy_only_generation_preserves_the_empty_sentinel(self):
         data = deepcopy(self.production); data['map_sections'] = data['map_sections'][:215]
@@ -124,15 +131,48 @@ assert(!IsRegionMapSectionIdValid(UINT32_MAX));
 
     def test_next_explicit_allocation_works_without_generated_file_edits(self):
         data = deepcopy(self.production)
-        data['map_sections'].append(dict(id='MAPSEC_FIXTURE', name='Fixture', value=228, region='REGION_SINNOH'))
-        self.fixture(data, body='assert(MAPSEC_FIXTURE == 228 && GetRegionForSectionId(228) == REGION_SINNOH && !IsRegionMapSectionIdValid(215));')
+        value = 256 if self.current_count == 253 else self.current_count
+        data['map_sections'].append(dict(id='MAPSEC_FIXTURE', name='Fixture', value=value, region='REGION_SINNOH'))
+        self.fixture(data, body=f'assert(MAPSEC_FIXTURE == {value} && GetRegionForSectionId({value}) == REGION_SINNOH && !IsRegionMapSectionIdValid(215));')
 
-    def test_37th_code_works_and_38th_is_rejected(self):
-        data = deepcopy(self.production)
+    def test_byte_pool_ends_at_252_and_exact_specials_stay_reserved(self):
+        data = self.frozen_oreburgh_fixture()
         for value in range(228, 253):
             data['map_sections'].append(dict(id=f'MAPSEC_FIXTURE_{value}', name='Fixture', value=value, region='REGION_SINNOH'))
         self.fixture(data, body='assert(MAPSEC_COUNT == 253 && MAPSEC_FIXTURE_252 == 252); assert(!IsRegionMapSectionIdValid(253));')
         data['map_sections'].append(dict(id='MAPSEC_BAD', name='Bad', value=253, region='REGION_SINNOH'))
+        self.fixture(data, rejected=True)
+
+    def frozen_oreburgh_fixture(self):
+        # A historical 0..227 prefix for capacity fixtures, regardless of later
+        # approved production append-only entries. No actual registry is edited.
+        data = deepcopy(self.production)
+        end = next(i for i, entry in enumerate(data['map_sections']) if entry.get('value') == 227)
+        data['map_sections'] = data['map_sections'][:end + 1]
+        return data
+
+    def test_extended_namespace_skips_special_holes_and_stops_at_13_bits(self):
+        data = self.frozen_oreburgh_fixture()
+        for value in (*range(228, 253), 256, 257):
+            data['map_sections'].append(dict(id=f'MAPSEC_FIXTURE_{value}', name='Fixture',
+                                            value=value, region='REGION_SINNOH'))
+        self.fixture(data, body='''assert(MAPSEC_FIXTURE_256 == 256 && MAPSEC_FIXTURE_257 == 257);
+assert(MAPSEC_COUNT == 258 && IsRegionMapSectionIdValid(256));
+assert(GetRegionForSectionId(256) == REGION_SINNOH);
+for (u32 id = 253; id <= 255; id++) assert(!IsRegionMapSectionIdValid(id));
+assert(!IsRegionMapSectionIdValid(215));''')
+        for reserved in (253, 254, 255):
+            bad = deepcopy(data)
+            bad['map_sections'][-2]['value'] = reserved
+            with self.subTest(reserved=reserved):
+                self.fixture(bad, rejected=True)
+        # The upper boundary exercises the real generator/audit, not a type-size assertion.
+        for value in range(258, 8192):
+            data['map_sections'].append(dict(id=f'MAPSEC_FIXTURE_{value}', name='Fixture',
+                                            value=value, region='REGION_SINNOH'))
+        self.fixture(data, body='assert(MAPSEC_FIXTURE_8191 == 8191 && MAPSEC_COUNT == 8192 && IsRegionMapSectionIdValid(8191));')
+        data['map_sections'].append(dict(id='MAPSEC_TOO_WIDE', name='Too wide', value=8192,
+                                        region='REGION_SINNOH'))
         self.fixture(data, rejected=True)
 
     def test_legacy_ids_names_regions_and_order_cannot_be_changed(self):
@@ -151,7 +191,7 @@ assert(!IsRegionMapSectionIdValid(UINT32_MAX));
     def test_invalid_duplicate_sparse_special_and_wide_values_are_rejected(self):
         # The last production entry is Oreburgh City (227): its value can't be moved, duplicated or widened.
         for value in (None, True, '227', 227.0, -1, 0, 214, 215, 226, 228, 252, 253, 255, 0x1234):
-            data = deepcopy(self.production); data['map_sections'][-1]['value'] = value
+            data = self.frozen_oreburgh_fixture(); data['map_sections'][-1]['value'] = value
             with self.subTest(value=value): self.fixture(data, rejected=True)
 
     def test_new_sections_require_explicit_value_name_and_region(self):
@@ -191,8 +231,8 @@ assert(!IsRegionMapSectionIdValid(UINT32_MAX));
                 input=translated.stdout, capture_output=True, check=True, timeout=30)
             # Real native build caught this: C alone accepts the missing comma.
             h = root/'constants.h'
-            self.assertIn('MAPSEC_COUNT = 228,', h.read_text())  # the mutation below must really apply
-            h.write_text(h.read_text().replace('MAPSEC_COUNT = 228,', 'MAPSEC_COUNT = 228'))
+            self.assertIn(f'MAPSEC_COUNT = {self.current_count},', h.read_text())  # the mutation below must really apply
+            h.write_text(h.read_text().replace(f'MAPSEC_COUNT = {self.current_count},', f'MAPSEC_COUNT = {self.current_count}'))
             text = subprocess.run(['cc', '-E', '-x', 'assembler-with-cpp', str(fixture)],
                 check=True, capture_output=True, timeout=30).stdout
             bad = subprocess.run([str(preproc), '-ie', str(fixture), str(ENGINE/'charmap.txt')],

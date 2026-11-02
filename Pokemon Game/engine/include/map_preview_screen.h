@@ -46,7 +46,7 @@ enum MapPreviewScreenType
 
 struct MapPreviewScreen
 {
-    mapsec_u8_t mapsec;
+    mapsec_u16_t mapsec;
     enum MapPreviewScreenType type:2;
     u8 usesAllPalettes:1;
     u8 nameDisabled:1;
@@ -58,16 +58,16 @@ struct MapPreviewScreen
 };
 
 bool32 ShouldRunMapPreview(void);
-u16 MapPreview_CreateMapNameWindow(mapsec_u8_t mapsec);
-u16 MapPreview_GetDuration(mapsec_u8_t mapsec);
+u16 MapPreview_CreateMapNameWindow(mapsec_u16_t mapsec);
+u16 MapPreview_GetDuration(mapsec_u16_t mapsec);
 bool32 CurrentMapHasPreviewScreen(enum MapPreviewScreenType type);
 bool32 FadeInMapPreviewScreenIsRunning(void);
 void MapPreview_InitBgs(void);
-void MapPreview_LoadGfx(mapsec_u8_t mapsec);
+void MapPreview_LoadGfx(mapsec_u16_t mapsec);
 bool32 MapPreview_IsGfxLoadFinished(void);
 void MapPreview_Unload(s32 windowId);
-void RunMapPreviewScreenNonFade(u8 mapSecId);
-void RunMapPreviewScreenFadeIn(mapsec_u8_t mapsec);
+void RunMapPreviewScreenNonFade(mapsec_u16_t mapSecId);
+void RunMapPreviewScreenFadeIn(mapsec_u16_t mapsec);
 void Task_MapPreviewScreen_NonFade(u8 taskId);
 void MapPreview_SetFlag(u16 flagId);
 

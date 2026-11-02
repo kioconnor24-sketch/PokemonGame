@@ -1063,7 +1063,7 @@ static bool8 BufferTradeParties(void)
     {
     case 0:
         // The parties are sent in pairs rather than all at once
-        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][0], 2 * sizeof(struct Pokemon));
+        AveronLink_CopyPartyPreview((struct Pokemon *)gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][0], 2, id ^ 1);
         sTradeMenu->bufferPartyState++;
         sTradeMenu->timer = 0;
         break;
@@ -1089,13 +1089,13 @@ static bool8 BufferTradeParties(void)
     case 4:
         if (_GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][0], gBlockRecvBuffer[id ^ 1], 2, id ^ 1);
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 5:
-        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][2], 2 * sizeof(struct Pokemon));
+        AveronLink_CopyPartyPreview((struct Pokemon *)gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][2], 2, id ^ 1);
         sTradeMenu->bufferPartyState++;
         break;
     case 7:
@@ -1106,13 +1106,13 @@ static bool8 BufferTradeParties(void)
     case 8:
         if (_GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[id ^ 1],  2 * sizeof(struct Pokemon));
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[id ^ 1], 2, id ^ 1);
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 9:
-        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][4], 2 * sizeof(struct Pokemon));
+        AveronLink_CopyPartyPreview((struct Pokemon *)gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][4], 2, id ^ 1);
         sTradeMenu->bufferPartyState++;
         break;
     case 11:
@@ -1123,7 +1123,7 @@ static bool8 BufferTradeParties(void)
     case 12:
         if (_GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
+            AveronLink_CopyReceivedParty(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[id ^ 1], 2, id ^ 1);
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
@@ -2401,6 +2401,9 @@ static enum CanTradeMon CanTradeSelectedMon(struct Pokemon *playerParty, int par
         species2[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES_OR_EGG);
         species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
     }
+
+    if (!AveronLink_CanExportMon(&playerParty[monIdx], GetMultiplayerId() ^ 1))
+        return CANT_TRADE_INVALID_MON;
 
     // Cant trade Eggs or non-Hoenn mons if player doesn't have National Dex
     if (!IsNationalPokedexEnabled())
@@ -4651,6 +4654,14 @@ void CreateInGameTradePokemon(void)
 
 static void CB2_UpdateLinkTrade(void)
 {
+    u8 index = gSelectedTradeMonPositions[TRADE_PLAYER];
+    struct Pokemon *outgoing = index == PC_MON_CHOSEN
+        ? &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC] : &gParties[B_TRAINER_PLAYER][index];
+    if (!AveronLink_CanExportMon(outgoing, GetMultiplayerId() ^ 1))
+    {
+        SetMainCallback2(CB2_LinkError);
+        return;
+    }
     if (DoTradeAnim() == TRUE)
     {
         DestroySprite(&gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]]);
