@@ -1,6 +1,5 @@
 """Production D: preserve installed identities, actual reused source and closed boundaries."""
 import copy
-from functools import lru_cache
 import importlib.util
 import json
 from pathlib import Path
@@ -21,31 +20,11 @@ def cells(raw):
 
 
 
-@lru_cache(maxsize=1)
 def production_d_input_fixture():
-    """Keep the D installer regressions valid after E's exact verified append.
-
-    Reuse E's test-only inverse, then require D's original baseline hashes.
-    Actual E production checks stay on the live engine, never this fixture.
-    """
-    names = json.loads(p.target(p.ENGINE, p.GROUPS).read_text())['gMapGroup_Sinnoh']
-    if len(names) <= 46:
-        return None, p.ENGINE
-    from test_sinnoh_west_packet_e import pre_e_fixture
-    temp = tempfile.TemporaryDirectory(prefix='sinnoh-verified-pre-e-')
-    engine = Path(temp.name) / 'engine'
-    try:
-        pre_e_fixture(engine)  # refuses an unverified/unknown E profile
-        for rel in set(p.BASE_HASHES) | set(p.ASSET_HASHES):
-            path = p.target(engine, rel)
-            if not path.exists():
-                path.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(p.target(p.ENGINE, rel), path)
-        p.baseline(engine)  # original production41/installed46 hashes, unchanged
-    except BaseException:
-        temp.cleanup()
-        raise
-    return temp, engine
+    # Current D producer, immutable accepted pre-D data. Never reverse a later
+    # package or require its native test source to retain an old codec ABI.
+    from sinnoh_replay_fixture import post_c_source_root
+    return None, post_c_source_root(ROOT) / 'Pokemon Game/engine'
 
 
 def fixture(engine):
