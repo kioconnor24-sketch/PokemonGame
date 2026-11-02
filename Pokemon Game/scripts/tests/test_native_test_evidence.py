@@ -192,6 +192,29 @@ class Selection(unittest.TestCase):
         args = self.args();args.run_attempt = 2
         self.assertIsNone(m.select(args, {})[0])
 
+    def test_newer_failure_with_unavailable_history_cannot_reuse_older_success(self):
+        api = m.GitHub(REPO)
+        failed = run()
+        failed.update(id=3, head_sha="f" * 40, conclusion="failure",
+                      updated_at="2026-11-02T01:00:00Z")
+        passed = run()
+        passed["updated_at"] = "2026-11-02T00:00:00Z"
+
+        def response(path, **kwargs):
+            if path.startswith("/compare/" + failed["head_sha"]):
+                raise OSError("newer run ancestry is temporarily unavailable")
+            if path.startswith("/compare/"):
+                return {"status": "ahead"}
+            return {"workflow_runs": [passed, failed]}
+
+        with patch.object(m, "inputs", return_value=proof()["inputs"]), \
+             patch.object(m, "object_id", side_effect=lambda ref, path, optional=False: path), \
+             patch.object(m, "ensure_commit"), patch.object(m, "GitHub", return_value=api), \
+             patch.object(api, "get", side_effect=response), \
+             patch.object(api, "proof", return_value=proof()) as older_proof:
+            self.assertIsNone(m.select(self.args(), {})[0])
+            older_proof.assert_not_called()
+
     def test_lookup_budget_falls_back_without_waiting_for_old_runs(self):
         with patch.object(m.time, "monotonic", side_effect=[0, 31]):
             self.assertIsNone(self.select()[0])

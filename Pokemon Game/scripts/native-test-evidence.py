@@ -240,7 +240,10 @@ def select(args, compiler):
                 if inputs(proof["checkout"], compiler) == current:
                     return run["id"], "identical inputs and successful full native execution"
         except Exception:
-            continue
+            # An unavailable lookup may hide a newer matching failure. It
+            # cannot justify accepting an older success whose freshness is
+            # now unproven; cache uncertainty means real native execution.
+            return None, "evidence lookup incomplete; fresh native execution required"
     return None, "no matching successful full native proof"
 
 
