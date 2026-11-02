@@ -1,4 +1,4 @@
-# Sinnoh — executable Claude/Codex developer work packages
+# Sinnoh — strategic Claude/Codex coverage work packages
 
 **Planning backlog, 2026-10-19.** Companion to the [master roadmap](SINNOH_MASTER_PRODUCTION_ROADMAP.md), [complete coverage](SINNOH_FULL_AREA_COVERAGE.md), [area register](SINNOH_AREA_REGISTER.csv), and [live Issue #15](https://github.com/kioconnor24-sketch/PokemonGame/issues/15). **Read live main/PR heads/claims first**; this backlog is not a permanent agent task lock or proof of a finished feature. Owner product direction is [6261800483](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6261800483). Short-term queue at issue #15 takes precedence for unfinished work already claimed by an agent.
 
@@ -15,9 +15,11 @@
 
 **Standard engineering acceptance ("ENGINE-QA"):** reproducible before/after defect or justified feature contract, affected native positive+negative regression, legitimate Save→flash→Continue across both regions where needed, byte IDs/old saves preserved, relevant profiles and resource measurement, current applicable CI, explicit unverified graphical limitations, exact SHA/file/evidence. High-risk production changes have the independent peer and/or owner decision required by the live contract.
 
-## Active handoff, not repeated work
+## Historical October 19 checkpoints
 
-| Item | Current known checkpoint | Agent next useful action |
+The following table records the original roadmap date. Its open/draft, reference-shortage and next-action statements are historical, including #150/#151/#154 and Route202. They are not current assignments. Check actual main and the [one live delivery record](https://github.com/kioconnor24-sketch/PokemonGame/issues/15#issuecomment-6482868742); do not repeat covered work or reopen resolved decisions.
+
+| Item | October 19 checkpoint | Action recorded at that date (historical) |
 | --- | --- | --- |
 | Route201/section217 (#150) | Owner approved geometry, 64×22, Sandgem reciprocal offsets -4/+4, endpoints closed, no encounters; was draft awaiting last Route201 fresh Continue evidence | Claude: finish real proof, confirm current checks/merge eligibility, integrate; Codex only finds material compatibility defect |
 | Sandgem healer44 (#151) | Owner approved append-only ID44, exterior (15,10), nurse indoor (7,4), on-enter trigger; was draft awaiting real mGBA whiteout, negative and handoff | Claude: genuine whiteout & Save/Continue, exact-path permission, merge if eligible |
@@ -28,6 +30,8 @@
 | Route202 | Explicit trusted-reference shortage in #139 | Research original source thoroughly; if unresolved, queue it and do other geographically disjoint sites |
 
 ## Claude map and authentic gameplay work packages
+
+These packages define regional coverage and acceptance scope, not a fresh task list. Subtract work already consumed by accepted source or production before selecting a bounded delivery. Completed D/E integrations are not reassigned by older package descriptions; active ownership and any next F/G consumer come from the live record.
 
 ### C01 — Complete the connected Sandgem wedge (P0, G0)
 - Rebase/finish #150 and #151 without source collisions or changing owner-approved decisions. Audit actual signed handoffs, complete Route201 real Continue + healer whiteout/negative/Continue.
