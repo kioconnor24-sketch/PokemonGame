@@ -1,0 +1,32 @@
+{
+  "id": "MAP_ROUTE223",
+  "name": "Route223",
+  "layout": "LAYOUT_ROUTE223",
+  "map_type": "MAP_TYPE_ROUTE",
+  "requires_flash": false,
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "region": "REGION_SINNOH",
+  "region_map_section": "MAPSEC_PENDING_OWNER",
+  "music": "MUS_ROUTE110",
+  "weather": "WEATHER_NONE",
+  "show_map_name": true,
+  "connections": [
+    {
+      "map": "MAP_SUNYSHORE_CITY",
+      "offset": 2,
+      "direction": "down"
+    },
+    {
+      "map": "MAP_POKMON_LEAGUE",
+      "offset": -1,
+      "direction": "up"
+    }
+  ],
+  "warp_events": [],
+  "object_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
