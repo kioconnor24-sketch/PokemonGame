@@ -31,8 +31,9 @@ def run():
 
 def proof():
     inputs = {"engine": "engine", "scripts": "scripts", "toolchain": {"arm": "12"}}
-    return dict(schema=1, run_id=1, run_attempt=1, source_head=BEFORE, checkout=MERGE,
+    return dict(schema=2, run_id=1, run_attempt=1, source_head=BEFORE, checkout=MERGE,
                 executed=True, reusable=True, inputs=inputs, source_inputs=inputs,
+                worktree_unchanged=True, execution_inputs_match_capture=True,
                 native=m.native_counts(LOG.decode()), native_log_sha256=hashlib.sha256(LOG).hexdigest())
 
 
@@ -55,7 +56,8 @@ class ProofRules(unittest.TestCase):
     def test_wrong_run_source_checkout_or_execution_claim_is_rejected(self):
         for key, value in (("run_id", 2), ("run_attempt", 2), ("source_head", HEAD),
                            ("checkout", "not-a-sha"), ("executed", False),
-                           ("reusable", False), ("native_log_sha256", ""), ("schema", 2)):
+                           ("reusable", False), ("native_log_sha256", ""), ("schema", 1),
+                           ("worktree_unchanged", False), ("execution_inputs_match_capture", False)):
             with self.subTest(key=key):
                 item = proof(); item[key] = value
                 self.assertFalse(self.valid(item))
@@ -303,6 +305,38 @@ class RealGitInputs(unittest.TestCase):
             self.assertFalse(check())
             extra.unlink()
             self.assertFalse(check({"flags": "changed"}))
+
+    def test_full_run_recorder_rejects_mutation_or_changed_execution_flags(self):
+        with contextlib.chdir(self.root):
+            expected = m.digest(m.inputs(self.head, {}))
+            log = self.root / "native.log"
+            log.write_bytes(LOG)
+            out = self.root / "proof.json"
+            args = ["evidence", "record", "--checkout", self.head, "--source-head", self.head,
+                    "--run-id", "2", "--repo", REPO, "--branch", "codex/work",
+                    "--fingerprint", expected, "--native-log", str(log), "--out", str(out)]
+            def record(compiler=None):
+                with patch("sys.argv", args), patch.object(m, "toolchain", return_value=compiler or {}):
+                    m.main()
+                return json.loads(out.read_text())
+            args[1] = "capture"
+            with patch("sys.argv", args), patch.object(m, "toolchain", return_value={}), \
+                 patch("sys.stdout", new=io.StringIO()) as captured:
+                m.main()
+            self.assertIn("fingerprint=" + expected, captured.getvalue())
+            args[1] = "record"
+            self.assertTrue(record()["reusable"])
+            native = self.root / "Pokemon Game/engine/input.c"
+            native.write_text("changed during native execution\n")
+            self.assertFalse(record()["reusable"])
+            native.write_text("accepted input\n")
+            extra = self.root / "Pokemon Game/engine/new.c"
+            extra.write_text("added during native execution\n")
+            self.assertFalse(record()["reusable"])
+            extra.unlink()
+            self.assertFalse(record({"flags": "changed after execution"})["reusable"])
+            args[args.index("--fingerprint") + 1] = ""
+            self.assertFalse(record()["reusable"])
 
 
 if __name__ == "__main__":

@@ -126,13 +126,15 @@ def valid_proof(proof, run, current, source_inputs, trusted_blobs):
     if not isinstance(counts, dict):
         return False
     return (
-        type(proof.get("schema")) is int and proof["schema"] == 1
+        type(proof.get("schema")) is int and proof["schema"] == 2
         and type(proof.get("run_id")) is int and proof["run_id"] == run["id"]
         and type(proof.get("run_attempt")) is int
         and proof["run_attempt"] == run.get("run_attempt", 1)
         and proof.get("source_head") == run["head_sha"]
         and proof.get("executed") is True
         and proof.get("reusable") is True
+        and proof.get("worktree_unchanged") is True
+        and proof.get("execution_inputs_match_capture") is True
         and bool(SHA.fullmatch(proof.get("checkout", "")))
         and bool(re.fullmatch(r"[0-9a-f]{64}", proof.get("native_log_sha256", "")))
         and proof.get("inputs") == current == source_inputs
@@ -260,7 +262,7 @@ def native_counts(text):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("mode", choices=("select", "confirm", "record"))
+    p.add_argument("mode", choices=("select", "confirm", "capture", "record"))
     p.add_argument("--checkout", required=True)
     p.add_argument("--source-head", required=True)
     p.add_argument("--run-id", type=int, required=True)
@@ -288,12 +290,25 @@ def main():
             good = good and digest(inputs(args.checkout, compiler)) == args.fingerprint
             result = {"reused": good, "reason": "post-build input confirmation"}
             outputs = {"reused": "true" if good else "false"}
+        elif args.mode == "capture":
+            # Captured in a separate Actions step before native Make runs.
+            # The server-retained output, not a mutable workspace receipt,
+            # is passed back to the recorder after actual execution.
+            ready = unchanged_worktree(args.checkout)
+            result = {"ready": ready, "inputs": inputs(args.checkout, compiler)}
+            outputs = {"fingerprint": digest(result["inputs"]) if ready else ""}
         else:
             ensure_commit(args.checkout)
             ensure_commit(args.source_head)
             current, source = inputs(args.checkout, compiler), inputs(args.source_head, compiler)
             log = args.native_log.read_bytes()
-            result = {"schema": 1, "executed": True, "reusable": current == source,
+            clean = unchanged_worktree(args.checkout)
+            same_execution = bool(re.fullmatch(r"[0-9a-f]{64}", args.fingerprint)) \
+                and digest(current) == args.fingerprint
+            result = {"schema": 2, "executed": True,
+                      "reusable": current == source and clean and same_execution,
+                      "worktree_unchanged": clean,
+                      "execution_inputs_match_capture": same_execution,
                       "run_id": args.run_id, "checkout": args.checkout,
                       "run_attempt": args.run_attempt,
                       "source_head": args.source_head, "inputs": current,
@@ -302,8 +317,8 @@ def main():
     except Exception:
         # An unavailable cache must never hold up or replace native execution.
         result = {"reused": False, "reason": "evidence unavailable; full native run required"}
-        if args.mode in ("select", "confirm"):
-            outputs = {"reused": "false"}
+        if args.mode in ("select", "confirm", "capture"):
+            outputs = {"fingerprint": ""} if args.mode == "capture" else {"reused": "false"}
         else:
             raise
     args.out.write_text(json.dumps(result, indent=2) + "\n")
